@@ -3,6 +3,7 @@ import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useNavigate, useLocation } from "react-router-dom";
+import logo from "@/assets/logo.png";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
@@ -29,7 +30,8 @@ const Navbar = () => {
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 border-b border-border/60 bg-background/90 backdrop-blur-xl">
       <div className="container flex h-20 items-center justify-between">
-        <a href="/" className="flex items-center gap-2" onClick={() => navigate("/")}>
+        <a href="/" className="flex items-center gap-2.5" onClick={() => navigate("/")}>
+          <img src={logo} alt="Buildfluence" className="h-8 w-auto" />
           <span className="font-serif text-xl font-bold tracking-tight text-foreground">
             Build<span className="text-gradient-gold">fluence</span>
           </span>
