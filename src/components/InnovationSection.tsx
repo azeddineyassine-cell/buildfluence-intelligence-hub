@@ -1,35 +1,51 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { Radar, BarChart3, BookOpen } from "lucide-react";
-
-const platforms = [
-  {
-    icon: Radar,
-    title: "AI-Powered Monitoring",
-    description:
-      "Veille stratégique multicanale alimentée par l'IA. Une sentinelle 24/7 qui scanne le web profond, les signaux faibles et les ruptures technologiques avant qu'elles ne deviennent publiques.",
-  },
-  {
-    icon: BarChart3,
-    title: "Competitive Intelligence",
-    description:
-      "Mapping dynamique de votre écosystème : concurrents, R&D, opportunités de marché et alliances cachées.",
-  },
-  {
-    icon: BookOpen,
-    title: "Knowledge Management",
-    description:
-      "Capitalisation sur votre intelligence collective pour éliminer les silos et accélérer l'exécution.",
-  },
-];
+import { Radar, BarChart3, BookOpen, Brain } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const InnovationSection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const { t } = useLanguage();
+
+  const platforms = [
+    {
+      icon: Radar,
+      title: t("Veille Stratégique Augmentée", "Augmented Strategic Monitoring"),
+      description: t(
+        "Système de veille multicanale alimenté par l'intelligence artificielle. Surveillance continue du web profond, des signaux faibles et des ruptures technologiques avant qu'ils ne deviennent publics.",
+        "Multichannel monitoring system powered by artificial intelligence. Continuous surveillance of the deep web, weak signals and technological disruptions before they become public."
+      ),
+    },
+    {
+      icon: BarChart3,
+      title: t("Intelligence Concurrentielle", "Competitive Intelligence"),
+      description: t(
+        "Cartographie dynamique de votre écosystème : concurrents, recherche et développement, opportunités de marché et alliances non documentées.",
+        "Dynamic mapping of your ecosystem: competitors, R&D, market opportunities and undocumented alliances."
+      ),
+    },
+    {
+      icon: BookOpen,
+      title: t("Capitalisation des Connaissances", "Knowledge Capitalization"),
+      description: t(
+        "Structuration de l'intelligence collective de votre organisation pour éliminer les silos informationnels et accélérer l'exécution stratégique.",
+        "Structuring your organization's collective intelligence to eliminate information silos and accelerate strategic execution."
+      ),
+    },
+    {
+      icon: Brain,
+      title: t("Approche HumTech", "HumTech Approach"),
+      description: t(
+        "L'alliance systématique des technologies de pointe (OSINT, NLP, IA) et de l'expertise humaine pour une vision stratégique sans angle mort.",
+        "The systematic alliance of cutting-edge technologies (OSINT, NLP, AI) and human expertise for a strategic vision without blind spots."
+      ),
+    },
+  ];
 
   return (
     <section id="strategic-innovation" className="relative py-28" ref={ref}>
-      <div className="absolute inset-x-0 top-0 h-px line-gold opacity-20" />
+      <div className="absolute inset-x-0 top-0 h-px bg-border" />
       <div className="container">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -37,46 +53,43 @@ const InnovationSection = () => {
           transition={{ duration: 0.6 }}
           className="mx-auto max-w-3xl text-center"
         >
-          <span className="text-xs font-semibold uppercase tracking-widest text-accent">
+          <span className="text-xs font-semibold uppercase tracking-[0.2em] text-primary">
             Strategic Innovation
           </span>
           <h2 className="mt-4 font-serif text-3xl font-bold leading-tight sm:text-4xl md:text-5xl">
-            De la donnée à la suprématie{" "}
-            <span className="text-gradient-gold">décisionnelle</span>
+            {t(
+              "De la donnée à la suprématie décisionnelle",
+              "From data to decision-making supremacy"
+            )}
           </h2>
           <p className="mt-4 text-lg text-muted-foreground">
-            Transformez votre organisation en machine à décider plus vite que
-            vos concurrents.
+            {t(
+              "Les infrastructures technologiques et méthodologiques qui transforment l'information en avantage stratégique.",
+              "The technological and methodological infrastructures that transform information into strategic advantage."
+            )}
           </p>
         </motion.div>
 
-        <div className="mt-16 grid gap-6 lg:grid-cols-3">
+        <div className="mt-16 grid gap-6 md:grid-cols-2">
           {platforms.map((p, i) => (
             <motion.div
               key={p.title}
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: i * 0.12 }}
-              className="rounded-lg border border-border bg-gradient-card p-8 transition-all hover:border-glow-gold hover:shadow-gold"
+              className="flex gap-5 rounded border border-border bg-card p-8 transition-all hover:border-primary/30 hover:shadow-navy"
             >
-              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-accent/10">
-                <p.icon className="h-6 w-6 text-accent" />
+              <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded bg-primary/10">
+                <p.icon className="h-6 w-6 text-primary" />
               </div>
-              <h3 className="font-serif text-xl font-bold">{p.title}</h3>
-              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                {p.description}
-              </p>
+              <div>
+                <h3 className="font-serif text-xl font-bold">{p.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                  {p.description}
+                </p>
+              </div>
             </motion.div>
           ))}
-        </div>
-
-        <div className="mt-12 text-center">
-          <a
-            href="#contact"
-            className="rounded-sm border border-accent px-8 py-3.5 text-sm font-semibold text-accent transition-all hover:bg-accent hover:text-accent-foreground"
-          >
-            Demander une démo
-          </a>
         </div>
       </div>
     </section>
