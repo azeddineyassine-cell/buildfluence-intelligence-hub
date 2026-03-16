@@ -1,5 +1,6 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
+import { ArrowRight } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const SuccessStoriesSection = () => {
@@ -47,8 +48,7 @@ const SuccessStoriesSection = () => {
   ];
 
   return (
-    <section id="success-stories" className="relative py-28" ref={ref}>
-      <div className="absolute inset-x-0 top-0 h-px bg-border" />
+    <section id="success-stories" className="relative bg-secondary py-28" ref={ref}>
       <div className="container">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -75,21 +75,25 @@ const SuccessStoriesSection = () => {
 
         <div className="mt-16 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {stories.map((s, i) => (
-            <motion.div
+            <motion.a
               key={s.client}
+              href="#"
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="group rounded border border-border bg-card p-6 transition-all hover:border-primary/30 hover:shadow-navy"
+              className="group block cursor-pointer rounded border border-border bg-background p-6 transition-all hover:border-primary/30 hover:shadow-navy"
             >
-              <span className="text-[11px] font-semibold uppercase tracking-[0.15em] text-accent">{s.sector}</span>
-              <h3 className="mt-2 font-serif text-lg font-bold">{s.client}</h3>
-              <p className="mt-1 text-xs text-muted-foreground">{s.context}</p>
-              <div className="mt-4 h-px w-full bg-border" />
-              <p className="mt-3 text-sm font-medium text-primary">
+              <span className="text-[11px] font-semibold uppercase tracking-[0.15em] text-accent-foreground">{s.sector}</span>
+              <h3 className="mt-3 font-serif text-xl font-bold leading-snug">{s.client}</h3>
+              <p className="mt-2 text-sm text-muted-foreground">{s.context}</p>
+              <div className="mt-5 h-px w-full bg-border" />
+              <p className="mt-4 text-sm font-semibold text-primary">
                 → {s.result}
               </p>
-            </motion.div>
+              <div className="mt-3 flex items-center gap-1 text-xs font-medium text-primary opacity-0 transition-opacity group-hover:opacity-100">
+                {t("Lire l'étude de cas", "Read case study")} <ArrowRight className="h-3 w-3" />
+              </div>
+            </motion.a>
           ))}
         </div>
       </div>

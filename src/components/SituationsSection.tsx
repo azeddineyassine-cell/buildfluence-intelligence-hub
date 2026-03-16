@@ -1,6 +1,6 @@
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { Shield, Eye, Target, Flame, Zap, Globe, Search } from "lucide-react";
+import { Shield, Eye, Target, Flame, Zap, Globe, Search, Tv } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const SituationsSection = () => {
@@ -86,10 +86,21 @@ const SituationsSection = () => {
       statLabel: t("des M&A échouent", "of M&A operations fail"),
       source: "CFA Institute",
     },
+    {
+      icon: Tv,
+      title: t("Gouverner sous pression médiatique et émotionnelle", "Governing under media and emotional pressure"),
+      description: t(
+        "Décider avec lucidité lorsque l'espace médiatique impose l'urgence et l'émotion.",
+        "Deciding with clarity when the media space imposes urgency and emotion."
+      ),
+      stat: "",
+      statLabel: t("La pression médiatique transforme la décision publique en réaction émotionnelle.", "Media pressure transforms public decision-making into emotional reaction."),
+      source: "",
+    },
   ];
 
   return (
-    <section id="situations-critiques" className="relative py-28" ref={ref}>
+    <section id="situations-critiques" className="relative bg-secondary py-28" ref={ref}>
       <div className="container">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -116,20 +127,21 @@ const SituationsSection = () => {
 
         <div className="mt-16 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {situations.map((s, i) => (
-            <motion.div
+            <motion.a
               key={s.title}
+              href="#"
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: i * 0.08 }}
-              className="group rounded border border-border bg-card p-6 transition-all hover:border-primary/30 hover:shadow-navy"
+              className="group block cursor-pointer rounded border border-border bg-background p-6 transition-all hover:border-primary/30 hover:shadow-navy"
             >
               <s.icon className="mb-4 h-7 w-7 text-primary opacity-70" />
               <h3 className="font-serif text-lg font-bold leading-snug">{s.title}</h3>
               <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{s.description}</p>
-              {s.stat && (
+              {(s.stat || s.statLabel) && (
                 <div className="mt-4 border-t border-border pt-3">
-                  <span className="font-serif text-2xl font-bold text-primary">{s.stat}</span>
-                  <p className="mt-1 text-xs text-muted-foreground">{s.statLabel}</p>
+                  {s.stat && <span className="font-serif text-2xl font-bold text-primary">{s.stat}</span>}
+                  {s.statLabel && <p className="mt-1 text-xs text-muted-foreground">{s.statLabel}</p>}
                   {s.source && (
                     <p className="mt-1 text-[10px] uppercase tracking-wider text-steel">
                       Source : {s.source}
@@ -137,7 +149,10 @@ const SituationsSection = () => {
                   )}
                 </div>
               )}
-            </motion.div>
+              <div className="mt-4 text-xs font-medium text-primary opacity-0 transition-opacity group-hover:opacity-100">
+                {t("En savoir plus →", "Learn more →")}
+              </div>
+            </motion.a>
           ))}
         </div>
       </div>

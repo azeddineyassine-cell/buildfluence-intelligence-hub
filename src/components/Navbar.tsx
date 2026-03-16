@@ -14,9 +14,9 @@ const Navbar = () => {
   const navItems = [
     { label: t("Situations critiques", "Critical Situations"), href: "#situations-critiques" },
     { label: t("Nos Solutions", "Our Solutions"), href: "#nos-solutions" },
-    { label: t("Strategic Innovation", "Strategic Innovation"), href: "#strategic-innovation" },
-    { label: t("Success Stories", "Success Stories"), href: "#success-stories" },
-    { label: t("Insights", "Insights"), href: "#insights" },
+    { label: t("Capacités avancées", "Advanced Capabilities"), href: "#advanced-capabilities" },
+    { label: "Success Stories", href: "#success-stories" },
+    { label: "Insights", href: "#insights" },
     { label: t("Pourquoi Buildfluence", "Why Buildfluence"), href: "#pourquoi-buildfluence" },
   ];
 
@@ -30,11 +30,16 @@ const Navbar = () => {
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 border-b border-border/60 bg-background/90 backdrop-blur-xl">
       <div className="container flex h-20 items-center justify-between">
-        <a href="/" className="flex items-center gap-2.5" onClick={() => navigate("/")}>
-          <img src={logo} alt="Buildfluence" className="h-8 w-auto" />
-          <span className="font-serif text-xl font-bold tracking-tight text-foreground">
-            Build<span className="text-gradient-gold">fluence</span>
-          </span>
+        <a href="/" className="flex items-center gap-3" onClick={() => navigate("/")}>
+          <img src={logo} alt="Buildfluence" className="h-9 w-auto" />
+          <div className="flex flex-col">
+            <span className="font-serif text-xl font-bold tracking-tight text-foreground">
+              Build<span className="text-gradient-gold">fluence</span>
+            </span>
+            <span className="text-[10px] font-medium uppercase tracking-[0.15em] text-muted-foreground">
+              Infrastructure décisionnelle souveraine
+            </span>
+          </div>
         </a>
 
         {/* Desktop */}

@@ -49,7 +49,7 @@ const SolutionsSection = () => {
         "Ceux qui n'écrivent pas leur propre récit sont condamnés à subir celui des autres.",
         "Those who don't write their own narrative are condemned to suffer that of others."
       ),
-      services: ["Intelligence d'Influence", "Political Intelligence", t("Attractivité Territoriale", "Territorial Attractiveness")],
+      services: [t("Intelligence d'Influence", "Influence Intelligence"), "Political Intelligence", t("Attractivité Territoriale", "Territorial Attractiveness")],
       capabilities: [
         t("Construction et protection du narratif stratégique", "Strategic narrative construction and protection"),
         t("Intelligence politique et cartographie des cercles décisionnels", "Political intelligence and decision circle mapping"),
@@ -60,8 +60,7 @@ const SolutionsSection = () => {
   ];
 
   return (
-    <section id="nos-solutions" className="relative py-28" ref={ref}>
-      <div className="absolute inset-x-0 top-0 h-px bg-border" />
+    <section id="nos-solutions" className="relative bg-secondary py-28" ref={ref}>
       <div className="container">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -88,49 +87,63 @@ const SolutionsSection = () => {
 
         <div className="mt-16 grid gap-6 lg:grid-cols-3">
           {pillars.map((p, i) => (
-            <motion.div
+            <motion.a
               key={p.title}
+              href="#"
               initial={{ opacity: 0, y: 40 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: i * 0.15 }}
-              className="group flex flex-col rounded border border-border bg-card p-8 transition-all hover:border-primary/30 hover:shadow-navy"
+              className="group flex cursor-pointer flex-col overflow-hidden rounded border border-border bg-background transition-all hover:border-primary/30 hover:shadow-navy"
             >
-              <div className="mb-6 flex items-center gap-3">
-                <div className="flex h-12 w-12 items-center justify-center rounded bg-primary/10">
-                  <p.icon className="h-6 w-6 text-primary" />
-                </div>
-                <span className="text-xs font-bold uppercase tracking-[0.2em] text-muted-foreground">
-                  {p.label}
-                </span>
+              {/* Placeholder image area */}
+              <div className="flex h-48 items-center justify-center bg-muted">
+                <p.icon className="h-12 w-12 text-primary/30" />
               </div>
 
-              <h3 className="font-serif text-2xl font-bold">{p.title}</h3>
-              <p className="mt-3 text-sm italic text-muted-foreground">
-                {p.punchline}
-              </p>
-
-              <ul className="mt-6 flex-1 space-y-2.5">
-                {p.capabilities.map((c) => (
-                  <li key={c} className="flex items-start gap-2.5 text-sm text-foreground/80">
-                    <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-primary/50" />
-                    {c}
-                  </li>
-                ))}
-              </ul>
-
-              <div className="mt-6 h-px w-full bg-border" />
-
-              <div className="mt-4 space-y-1">
-                {p.services.map((s) => (
-                  <span
-                    key={s}
-                    className="mr-2 inline-block rounded border border-border px-2.5 py-1 text-[11px] font-medium text-muted-foreground"
-                  >
-                    {s}
+              <div className="flex flex-1 flex-col p-8">
+                <div className="mb-4 flex items-center gap-3">
+                  <div className="flex h-10 w-10 items-center justify-center rounded bg-primary/10">
+                    <p.icon className="h-5 w-5 text-primary" />
+                  </div>
+                  <span className="text-xs font-bold uppercase tracking-[0.2em] text-muted-foreground">
+                    {p.label}
                   </span>
-                ))}
+                </div>
+
+                <h3 className="font-serif text-2xl font-bold">{p.title}</h3>
+                <p className="mt-3 text-sm italic text-muted-foreground">
+                  {p.punchline}
+                </p>
+
+                <ul className="mt-6 flex-1 space-y-2.5">
+                  {p.capabilities.map((c) => (
+                    <li key={c} className="flex items-start gap-2.5 text-sm text-foreground/80">
+                      <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-accent" />
+                      {c}
+                    </li>
+                  ))}
+                </ul>
+
+                <div className="mt-6 h-px w-full bg-border" />
+
+                <div className="mt-4 space-y-1">
+                  {p.services.map((s) => (
+                    <span
+                      key={s}
+                      className="mr-2 inline-block rounded border border-border px-2.5 py-1 text-[11px] font-medium text-muted-foreground"
+                    >
+                      {s}
+                    </span>
+                  ))}
+                </div>
+
+                <div className="mt-6">
+                  <span className="inline-block rounded bg-accent px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-accent-foreground transition-all group-hover:shadow-gold">
+                    {t("Explorer →", "Explore →")}
+                  </span>
+                </div>
               </div>
-            </motion.div>
+            </motion.a>
           ))}
         </div>
       </div>

@@ -52,7 +52,7 @@ const WhySection = () => {
   ];
 
   return (
-    <section id="pourquoi-buildfluence" className="relative py-28" ref={ref}>
+    <section id="pourquoi-buildfluence" className="relative bg-secondary py-28" ref={ref}>
       <div className="absolute inset-x-0 top-0 h-px bg-border" />
       <div className="container">
         <motion.div
