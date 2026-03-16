@@ -11,8 +11,7 @@ const CTAFooter = () => {
 
   return (
     <>
-      <section className="relative py-28" ref={ref}>
-        <div className="absolute inset-x-0 top-0 h-px bg-border" />
+      <section className="bg-gradient-navy py-28" ref={ref}>
         <div className="container">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -20,13 +19,16 @@ const CTAFooter = () => {
             transition={{ duration: 0.7 }}
             className="mx-auto max-w-2xl text-center"
           >
-            <h2 className="font-serif text-3xl font-bold leading-tight sm:text-4xl md:text-5xl">
+            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-primary-foreground/60">
+              Infrastructure décisionnelle souveraine
+            </span>
+            <h2 className="mt-6 font-serif text-3xl font-bold leading-tight text-primary-foreground sm:text-4xl md:text-5xl">
               {t(
                 "Votre prochaine décision stratégique mérite une infrastructure à la hauteur.",
                 "Your next strategic decision deserves infrastructure to match."
               )}
             </h2>
-            <p className="mt-6 text-lg text-muted-foreground">
+            <p className="mt-6 text-lg text-primary-foreground/70">
               {t(
                 "Échangeons en toute confidentialité sur votre situation.",
                 "Let's discuss your situation in complete confidentiality."
@@ -35,7 +37,7 @@ const CTAFooter = () => {
             <div className="mt-10">
               <button
                 onClick={() => navigate("/contact")}
-                className="rounded bg-primary px-10 py-4 text-sm font-semibold uppercase tracking-wider text-primary-foreground transition-all hover:shadow-navy"
+                className="rounded bg-accent px-10 py-4 text-sm font-semibold uppercase tracking-wider text-accent-foreground transition-all hover:shadow-gold"
               >
                 {t("Réserver mon échange stratégique", "Book my strategic discussion")}
               </button>
@@ -44,7 +46,7 @@ const CTAFooter = () => {
         </div>
       </section>
 
-      <footer className="border-t border-border py-12">
+      <footer className="border-t border-border bg-background py-12">
         <div className="container">
           <div className="flex flex-col items-center justify-between gap-6 md:flex-row">
             <div>
@@ -52,7 +54,7 @@ const CTAFooter = () => {
                 Build<span className="text-gradient-gold">fluence</span>
               </span>
               <p className="mt-1 text-xs text-muted-foreground">
-                Sovereign Decision Infrastructure
+                Infrastructure décisionnelle souveraine
               </p>
             </div>
             <div className="flex gap-8 text-xs text-muted-foreground">
