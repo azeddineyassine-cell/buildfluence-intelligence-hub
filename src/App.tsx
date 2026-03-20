@@ -23,6 +23,12 @@ import StrategicIntelligenceLab from "./pages/solutions/StrategicIntelligenceLab
 import DeepDueDiligence from "./pages/solutions/DeepDueDiligence";
 import SoftPowerInfluence from "./pages/solutions/SoftPowerInfluence";
 
+// Capability pages
+import AIPoweredMonitor from "./pages/capacites/AIPoweredMonitor";
+import StrategicWorkflow from "./pages/capacites/StrategicWorkflow";
+import KnowledgeCapitalization from "./pages/capacites/KnowledgeCapitalization";
+import CompetitiveVelocityEngine from "./pages/capacites/CompetitiveVelocityEngine";
+
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -50,6 +56,12 @@ const App = () => (
             <Route path="/solutions/strategic-intelligence-lab" element={<StrategicIntelligenceLab />} />
             <Route path="/solutions/deep-due-diligence" element={<DeepDueDiligence />} />
             <Route path="/solutions/soft-power-influence" element={<SoftPowerInfluence />} />
+
+            {/* Capabilities */}
+            <Route path="/capacites/ai-powered-monitor" element={<AIPoweredMonitor />} />
+            <Route path="/capacites/strategic-workflow" element={<StrategicWorkflow />} />
+            <Route path="/capacites/knowledge-capitalization" element={<KnowledgeCapitalization />} />
+            <Route path="/capacites/competitive-velocity-engine" element={<CompetitiveVelocityEngine />} />
 
             <Route path="*" element={<NotFound />} />
           </Routes>
