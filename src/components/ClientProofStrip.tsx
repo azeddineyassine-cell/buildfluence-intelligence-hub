@@ -8,12 +8,15 @@ const ClientProofStrip = () => {
   const { t } = useLanguage();
 
   const clients = [
-    t("Présidence du Sénégal", "Presidency of Senegal"),
+    "Avisa Partners",
+    "Ginger International",
+    "ADD",
     "Centrale Danone",
-    "OCP Group",
-    "CIDC (OCI)",
-    t("Ministère de la Santé", "Ministry of Health"),
-    t("Fonds d'Investissement International", "International Investment Fund"),
+    "OCP",
+    "UM6SS",
+    "HUI Mohammed VI",
+    "CEIS",
+    t("Présidence du Sénégal", "Presidency of Senegal"),
   ];
 
   return (
@@ -25,14 +28,17 @@ const ClientProofStrip = () => {
           transition={{ duration: 0.8 }}
           className="flex flex-col items-center gap-6"
         >
-          <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
-            {t("Ils nous font confiance", "They trust us")}
+          <p className="max-w-2xl text-center text-[11px] font-semibold uppercase tracking-[0.15em] text-muted-foreground">
+            {t(
+              "Buildfluence leur a transformé l'incertitude en avantage décisionnel souverain :",
+              "Buildfluence transformed their uncertainty into sovereign decision advantage:"
+            )}
           </p>
           <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-4">
             {clients.map((client) => (
               <span
                 key={client}
-                className="text-sm font-semibold tracking-wide text-foreground/60 transition-colors hover:text-foreground"
+                className="text-sm font-semibold tracking-wide text-foreground/40 transition-colors hover:text-foreground grayscale hover:grayscale-0"
               >
                 {client}
               </span>

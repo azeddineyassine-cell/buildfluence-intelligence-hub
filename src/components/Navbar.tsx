@@ -16,7 +16,7 @@ const Navbar = () => {
     { label: t("Nos Solutions", "Our Solutions"), href: "#nos-solutions" },
     { label: t("Capacités avancées", "Advanced Capabilities"), href: "#advanced-capabilities" },
     { label: "Success Stories", href: "#success-stories" },
-    { label: "Insights", href: "#insights" },
+    { label: "Insights & Resources", href: "#insights" },
     { label: t("Pourquoi Buildfluence", "Why Buildfluence"), href: "#pourquoi-buildfluence" },
   ];
 
