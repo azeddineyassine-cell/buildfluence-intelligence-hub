@@ -1,21 +1,29 @@
 import Navbar from "@/components/Navbar";
 import CTAFooter from "@/components/CTAFooter";
 import { useNavigate } from "react-router-dom";
-import { useLanguage } from "@/contexts/LanguageContext";
 import { ArrowLeft } from "lucide-react";
 import { motion } from "framer-motion";
-import { ReactNode } from "react";
+import { ReactNode, useState } from "react";
+import { FormStrategicExchange, FormDiagnostic } from "@/components/FormModals";
 
 interface DetailPageLayoutProps {
   title: string;
   chapeau: string;
   children: ReactNode;
-  ctas?: { label: string; action: string }[];
+  ctas?: { label: string; action: string; formType?: "f1" | "f2" }[];
+  situationContext?: string;
 }
 
-const DetailPageLayout = ({ title, chapeau, children, ctas }: DetailPageLayoutProps) => {
+const DetailPageLayout = ({ title, chapeau, children, ctas, situationContext }: DetailPageLayoutProps) => {
   const navigate = useNavigate();
-  const { t } = useLanguage();
+  const [f1Open, setF1Open] = useState(false);
+  const [f2Open, setF2Open] = useState(false);
+
+  const handleCta = (cta: { label: string; action: string; formType?: "f1" | "f2" }) => {
+    if (cta.formType === "f1") setF1Open(true);
+    else if (cta.formType === "f2") setF2Open(true);
+    else { navigate(cta.action); window.scrollTo(0, 0); }
+  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -27,13 +35,13 @@ const DetailPageLayout = ({ title, chapeau, children, ctas }: DetailPageLayoutPr
             className="mb-8 inline-flex items-center gap-2 text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
           >
             <ArrowLeft className="h-4 w-4" />
-            {t("Retour", "Back")}
+            Retour
           </button>
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
             className="mx-auto max-w-4xl"
           >
             <h1 className="font-serif text-3xl font-bold leading-tight sm:text-4xl md:text-5xl">
@@ -49,11 +57,11 @@ const DetailPageLayout = ({ title, chapeau, children, ctas }: DetailPageLayoutPr
 
             {ctas && ctas.length > 0 && (
               <div className="mt-16 flex flex-wrap gap-4">
-                {ctas.map((cta) => (
+                {ctas.map((cta, i) => (
                   <button
                     key={cta.label}
-                    onClick={() => navigate(cta.action)}
-                    className="rounded bg-primary px-8 py-3 text-sm font-semibold uppercase tracking-wider text-primary-foreground transition-all hover:shadow-navy"
+                    onClick={() => handleCta(cta)}
+                    className={i === 0 ? "btn-gold" : "btn-ghost-gold"}
                   >
                     {cta.label}
                   </button>
@@ -64,6 +72,9 @@ const DetailPageLayout = ({ title, chapeau, children, ctas }: DetailPageLayoutPr
         </div>
       </section>
       <CTAFooter />
+
+      <FormStrategicExchange open={f1Open} onClose={() => setF1Open(false)} />
+      <FormDiagnostic open={f2Open} onClose={() => setF2Open(false)} situation={situationContext || title} />
     </div>
   );
 };
@@ -81,7 +92,7 @@ export const DetailList = ({ items }: { items: string[] }) => (
   <ul className="mt-3 space-y-2">
     {items.map((item) => (
       <li key={item} className="flex items-start gap-2.5 text-sm text-foreground/80">
-        <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-accent" />
+        <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-primary" />
         {item}
       </li>
     ))}
@@ -89,7 +100,7 @@ export const DetailList = ({ items }: { items: string[] }) => (
 );
 
 export const CaseStudy = ({ title, context, intervention, result }: { title: string; context: string; intervention: string[]; result: string }) => (
-  <div className="rounded border border-border bg-secondary p-8">
+  <div className="card-glass p-8">
     <h3 className="font-serif text-xl font-bold">{title}</h3>
     <p className="mt-3 text-sm text-muted-foreground">{context}</p>
     <h4 className="mt-4 text-xs font-bold uppercase tracking-wider text-primary">Notre intervention</h4>
