@@ -1,0 +1,63 @@
+import DetailPageLayout, { DetailBlock, DetailList, CaseStudy } from "@/components/DetailPageLayout";
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const CrisesNonMaitrisees = () => {
+  const { t } = useLanguage();
+  return (
+    <DetailPageLayout
+      title={t("Sombrer dans une crise non maîtrisée", "Sinking into an uncontrolled crisis")}
+      chapeau={t("Ignorer les étincelles mène à l'incendie", "Ignoring sparks leads to fire")}
+      ctas={[
+        { label: t("Lire le cas complet", "Read full case"), action: "/contact" },
+        { label: t("Évaluer ma situation — GRATUIT", "Evaluate my situation — FREE"), action: "/contact" },
+      ]}
+    >
+      <DetailBlock title={t("Votre réalité", "Your reality")}>
+        <p className="mt-2">
+          {t(
+            "48 heures pour tout perdre. Effondrement progressif où chaque décision tardive ou inadéquate amplifie les dégâts et accélère la chute.",
+            "48 hours to lose everything. Progressive collapse where every late or inadequate decision amplifies the damage and accelerates the fall."
+          )}
+        </p>
+      </DetailBlock>
+
+      <DetailBlock title={t("Vous risquez", "You risk")}>
+        <DetailList items={[
+          t("Contagion sur réseaux sociaux puis amplification médiatique (TV, radio, presse)", "Social media contagion then media amplification (TV, radio, press)"),
+          t("L'embrasement puis perte de contrôle face à l'enchaînement des événements", "Conflagration then loss of control facing the chain of events"),
+          t("L'effondrement : boycott, sanctions, démissions, chute des ventes/CA", "Collapse: boycott, sanctions, resignations, drop in sales/revenue"),
+        ]} />
+      </DetailBlock>
+
+      <DetailBlock title={t("Les chiffres qui font peur", "Frightening numbers")}>
+        <DetailList items={[
+          t("60% des entreprises touchées par des crises majeures ne s'en remettent jamais complètement (Cleartail Marketing, 2025)", "60% of companies hit by major crises never fully recover (Cleartail Marketing, 2025)"),
+          t("30% des board members ayant vécu une crise ont vu leur réputation récupérer en moins d'un an, tandis que 16% ont mis 4 ans ou plus (Deloitte Survey)", "30% of board members who experienced a crisis saw their reputation recover in less than a year, while 16% took 4+ years (Deloitte Survey)"),
+        ]} />
+      </DetailBlock>
+
+      <DetailBlock title={t("Solution Buildfluence", "Buildfluence Solution")}>
+        <p className="mt-2 font-semibold text-primary">Crisis Management</p>
+      </DetailBlock>
+
+      <CaseStudy
+        title={t("Cas client : Ministère de la Santé", "Case study: Ministry of Health")}
+        context={t(
+          "2018, virus H1N1, 40 décès au Maroc. Psychose nationale, désinformation massive, silence du Ministère.",
+          "2018, H1N1 virus, 40 deaths in Morocco. National psychosis, massive disinformation, Ministry silence."
+        )}
+        intervention={[
+          t("Digital Investigation et Fact-checking en temps réel", "Digital Investigation and real-time Fact-checking"),
+          t("Identification des sources de désinformation", "Identification of disinformation sources"),
+          "War room de crise",
+        ]}
+        result={t(
+          "Crise atténuée en 2 semaines. Dispositif de veille structuré. Le Ministère a depuis géré le COVID-19 avec bien plus d'efficacité.",
+          "Crisis mitigated in 2 weeks. Structured monitoring system. The Ministry has since managed COVID-19 much more effectively."
+        )}
+      />
+    </DetailPageLayout>
+  );
+};
+
+export default CrisesNonMaitrisees;

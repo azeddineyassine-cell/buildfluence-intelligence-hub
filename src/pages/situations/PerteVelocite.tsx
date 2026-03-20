@@ -1,0 +1,78 @@
+import DetailPageLayout, { DetailBlock, DetailList, CaseStudy } from "@/components/DetailPageLayout";
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const PerteVelocite = () => {
+  const { t } = useLanguage();
+  return (
+    <DetailPageLayout
+      title={t("Perdre en vélocité face aux concurrents", "Losing velocity against competitors")}
+      chapeau={t(
+        "Naviguer sans radar pendant que d'autres tracent leur route grâce aux signaux du marché",
+        "Navigating without radar while others chart their course using market signals"
+      )}
+      ctas={[
+        { label: t("Lire le cas complet", "Read full case"), action: "/contact" },
+        { label: t("Évaluer ma situation — GRATUIT", "Evaluate my situation — FREE"), action: "/contact" },
+      ]}
+    >
+      <DetailBlock title={t("Votre réalité", "Your reality")}>
+        <p className="mt-2">
+          {t(
+            "Vous analysez des rapports volumineux ou obsolètes pendant que vos concurrents captent les données d'opportunités émergentes.",
+            "You analyze voluminous or obsolete reports while your competitors capture emerging opportunity data."
+          )}
+        </p>
+      </DetailBlock>
+
+      <DetailBlock title={t("Vous risquez", "You risk")}>
+        <DetailList items={[
+          t("Manquer systématiquement les tendances porteuses", "Systematically missing emerging trends"),
+          t("Arriver trop tard sur les marchés en croissance", "Arriving too late in growing markets"),
+          t("Érosion progressive de votre chiffre d'affaires", "Progressive erosion of your revenue"),
+        ]} />
+      </DetailBlock>
+
+      <DetailBlock title={t("Les chiffres des bons élèves", "Numbers from top performers")}>
+        <DetailList items={[
+          t("Les entreprises performantes prennent des décisions plus rapidement et les exécutent plus rapidement que leurs concurrents moins performants (Bain & Company, étude 10 ans, 1000+ entreprises)", "High-performing companies make decisions faster and execute them faster than their less performant competitors (Bain & Company, 10-year study, 1000+ companies)"),
+          t("78% disent que les données et insights en temps réel créent un avantage concurrentiel (KX Research, 2021)", "78% say real-time data and insights create a competitive advantage (KX Research, 2021)"),
+        ]} />
+      </DetailBlock>
+
+      <DetailBlock title={t("Solution Buildfluence", "Buildfluence Solution")}>
+        <p className="mt-2 font-semibold text-primary">Competitive Velocity Engine</p>
+      </DetailBlock>
+
+      <DetailBlock title={t("Ce que nous faisons", "What we do")}>
+        <DetailList items={[
+          t("Un système d'intelligence concurrentielle en temps réel", "A real-time competitive intelligence system"),
+          t("Une veille sur les signaux faibles d'innovation (brevets, startups, recherches, financements)", "Monitoring weak innovation signals (patents, startups, research, funding)"),
+          t("Veille prédictive sur les mouvements stratégiques de la concurrence", "Predictive monitoring of competitive strategic movements"),
+          t("Une culture de décision rapide : data + analyse + exécution", "A fast decision culture: data + analysis + execution"),
+          t("Cartographie des levées de fonds et des nouveaux entrants disruptifs", "Mapping of fundraising and disruptive new entrants"),
+          t("Analyse des signaux d'innovation avant qu'ils ne deviennent des produits", "Analysis of innovation signals before they become products"),
+          t("Dashboard d'alerte avec scoring Go/No-Go automatisé", "Alert dashboard with automated Go/No-Go scoring"),
+        ]} />
+      </DetailBlock>
+
+      <CaseStudy
+        title={t("Cas client : OCP Group", "Case study: OCP Group")}
+        context={t(
+          "Cartographie de l'écosystème concurrentiel sur 10 ans (2004–2014) face à des campagnes de boycott orchestrées par divers acteurs.",
+          "Mapping the competitive ecosystem over 10 years (2004-2014) facing boycott campaigns orchestrated by various actors."
+        )}
+        intervention={[
+          t("Analyse par échiquiers : Géopolitique, Concurrentiel, Sociétal", "Analysis by chessboards: Geopolitical, Competitive, Societal"),
+          t("Cartographie et Matrice dynamique des parties prenantes", "Mapping and dynamic stakeholder matrix"),
+          t("Tableau de bord décisionnel au cabinet du Président", "Decision dashboard at the President's office"),
+        ]}
+        result={t(
+          "Protection des milliards de dollars de CA et renforcement de la position de leader mondial.",
+          "Protection of billions of dollars in revenue and strengthening of world leader position."
+        )}
+      />
+    </DetailPageLayout>
+  );
+};
+
+export default PerteVelocite;

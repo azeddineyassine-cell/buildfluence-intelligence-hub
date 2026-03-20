@@ -8,8 +8,9 @@ const HeroSection = () => {
 
   const stats = [
     { value: "25+", label: t("Années d'expertise", "Years of expertise") },
-    { value: "15+", label: t("Mandats stratégiques", "Strategic mandates") },
     { value: "59", label: t("Pays couverts", "Countries covered") },
+    { value: "19M$", label: t("Généré dans politiques publiques", "Generated in public policies") },
+    { value: "400M$", label: t("Investissements sécurisés", "Secured investments") },
   ];
 
   return (
@@ -33,9 +34,13 @@ const HeroSection = () => {
             className="font-serif text-4xl font-bold leading-[1.1] tracking-tight sm:text-5xl md:text-6xl lg:text-7xl"
           >
             {t(
-              "Révéler l'architecture dissimulée du pouvoir décisionnel",
-              "Revealing the hidden architecture of decision-making power"
+              "Révéler l'architecture dissimulée du",
+              "Revealing the hidden architecture of"
             )}
+            <br />
+            <span className="text-gradient-gold">
+              {t("pouvoir décisionnel", "decision-making power")}
+            </span>
           </motion.h1>
 
           <motion.div
@@ -76,10 +81,10 @@ const HeroSection = () => {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.7 }}
-            className="mx-auto mt-24 grid max-w-2xl grid-cols-3 gap-px overflow-hidden rounded border border-border bg-border"
+            className="mx-auto mt-24 grid max-w-3xl grid-cols-2 gap-px overflow-hidden rounded border border-border bg-border sm:grid-cols-4"
           >
             {stats.map((stat) => (
-              <div key={stat.label} className="bg-background px-6 py-5 text-center">
+              <div key={stat.label} className="bg-background px-5 py-5 text-center">
                 <div className="font-serif text-2xl font-bold text-primary">
                   {stat.value}
                 </div>

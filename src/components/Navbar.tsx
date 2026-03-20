@@ -12,11 +12,11 @@ const Navbar = () => {
   const location = useLocation();
 
   const navItems = [
-    { label: t("Situations critiques", "Critical Situations"), href: "#situations-critiques" },
+    { label: t("Vos Situations critiques", "Your Critical Situations"), href: "#situations-critiques" },
     { label: t("Nos Solutions", "Our Solutions"), href: "#nos-solutions" },
     { label: t("Capacités avancées", "Advanced Capabilities"), href: "#advanced-capabilities" },
     { label: "Success Stories", href: "#success-stories" },
-    { label: "Insights", href: "#insights" },
+    { label: "Insights & Resources", href: "#insights" },
     { label: t("Pourquoi Buildfluence", "Why Buildfluence"), href: "#pourquoi-buildfluence" },
   ];
 
