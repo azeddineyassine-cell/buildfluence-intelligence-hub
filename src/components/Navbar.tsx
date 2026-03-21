@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate, useLocation } from "react-router-dom";
 import { FormStrategicExchange } from "./FormModals";
 
-const megaMenuCols = [
+const solutionsCols = [
   {
     icon: "🔬",
     title: "STRATEGIC INTELLIGENCE LAB",
@@ -37,9 +37,27 @@ const megaMenuCols = [
   },
 ];
 
+const situationsItems = [
+  { label: "Décider sans visibilité", route: "/situations/decider-sans-visibilite" },
+  { label: "Subir des attaques", route: "/situations/attaques-informationnelles" },
+  { label: "Perdre de l'attractivité", route: "/situations/deficit-attractivite" },
+  { label: "Sombrer dans une crise", route: "/situations/crises-non-maitrisees" },
+  { label: "Perdre en vélocité", route: "/situations/perte-velocite" },
+  { label: "Déficit d'influence", route: "/situations/deficit-influence" },
+  { label: "Investir sous risque invisible", route: "/situations/investir-sous-risque" },
+  { label: "Gouverner sous pression", route: "/situations/gouverner-sous-pression" },
+];
+
+const innovationItems = [
+  { label: "AI Powered Monitor", route: "/capacites/ai-powered-monitor" },
+  { label: "Strategic Workflow", route: "/capacites/strategic-workflow" },
+  { label: "Knowledge Capitalization", route: "/capacites/knowledge-capitalization" },
+  { label: "Competitive Velocity Engine", route: "/capacites/competitive-velocity-engine" },
+];
+
 const Navbar = () => {
   const [open, setOpen] = useState(false);
-  const [megaOpen, setMegaOpen] = useState(false);
+  const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [scrolled, setScrolled] = useState(false);
   const [formOpen, setFormOpen] = useState(false);
   const navigate = useNavigate();
@@ -52,9 +70,9 @@ const Navbar = () => {
   }, []);
 
   const navItems = [
-    { label: "Vos Situations Critiques", href: "#situations-critiques" },
-    { label: "Nos Solutions", href: "#nos-solutions", hasMega: true },
-    { label: "Strategic Innovation", href: "#strategic-innovation" },
+    { label: "Vos Situations Critiques", href: "#situations-critiques", dropdown: "situations" },
+    { label: "Nos Solutions", href: "#nos-solutions", dropdown: "solutions" },
+    { label: "Strategic Innovation", href: "#strategic-innovation", dropdown: "innovation" },
     { label: "Success Stories", href: "#success-stories" },
     { label: "Insights & Resources", href: "#insights" },
     { label: "Pourquoi Buildfluence", href: "#pourquoi-buildfluence" },
@@ -62,14 +80,17 @@ const Navbar = () => {
 
   const handleNavClick = (href: string) => {
     setOpen(false);
-    setMegaOpen(false);
+    setActiveDropdown(null);
     if (location.pathname !== "/") {
       navigate("/" + href);
+    } else {
+      const el = document.querySelector(href);
+      el?.scrollIntoView({ behavior: "smooth" });
     }
   };
 
   const goTo = (route: string) => {
-    setMegaOpen(false);
+    setActiveDropdown(null);
     setOpen(false);
     navigate(route);
     window.scrollTo(0, 0);
@@ -77,53 +98,109 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? "bg-background/90 backdrop-blur-xl border-b border-border/40" : "bg-transparent"}`}>
+      <nav
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+          scrolled
+            ? "border-b shadow-sm"
+            : "bg-transparent"
+        }`}
+        style={{
+          background: scrolled ? 'hsla(0, 0%, 100%, 0.92)' : 'transparent',
+          backdropFilter: scrolled ? 'blur(16px)' : 'none',
+          borderColor: scrolled ? 'hsl(220 10% 90%)' : 'transparent',
+        }}
+      >
         <div className="container flex h-20 items-center justify-between">
           {/* Logo */}
           <a href="/" onClick={(e) => { e.preventDefault(); navigate("/"); }} className="flex items-center gap-4">
-            <span className="font-serif text-xl font-bold tracking-tight text-primary">
+            <span className="font-serif text-xl font-bold tracking-tight" style={{ color: 'hsl(43 50% 54%)' }}>
               BUILDFLUENCE
             </span>
-            <span className="hidden text-[10px] font-medium uppercase tracking-[0.12em] text-muted-foreground sm:inline">
+            <span className="hidden text-[10px] font-medium uppercase tracking-[0.12em] sm:inline" style={{ color: '#8A8F9E' }}>
               Strategic Intelligence & Influence
             </span>
           </a>
 
-          {/* Desktop */}
-          <div className="hidden items-center gap-6 xl:flex">
+          {/* Desktop nav */}
+          <div className="hidden items-center gap-5 xl:flex">
             {navItems.map((item) => (
               <div
                 key={item.label}
                 className="relative"
-                onMouseEnter={() => item.hasMega && setMegaOpen(true)}
-                onMouseLeave={() => item.hasMega && setMegaOpen(false)}
+                onMouseEnter={() => item.dropdown && setActiveDropdown(item.dropdown)}
+                onMouseLeave={() => item.dropdown && setActiveDropdown(null)}
               >
                 <a
                   href={item.href}
                   onClick={(e) => { e.preventDefault(); handleNavClick(item.href); }}
-                  className="flex items-center gap-1 text-[13px] font-medium text-muted-foreground transition-colors hover:text-primary"
+                  className="flex items-center gap-1 text-[13px] font-medium transition-colors"
+                  style={{ color: '#4A5568' }}
+                  onMouseOver={(e) => (e.currentTarget.style.color = '#0D1B2A')}
+                  onMouseOut={(e) => (e.currentTarget.style.color = '#4A5568')}
                 >
                   {item.label}
-                  {item.hasMega && <ChevronDown className="h-3 w-3" />}
+                  {item.dropdown && <ChevronDown className="h-3 w-3" />}
                 </a>
 
-                {/* Mega menu */}
-                {item.hasMega && (
+                {/* Situations dropdown */}
+                {item.dropdown === "situations" && (
                   <AnimatePresence>
-                    {megaOpen && (
+                    {activeDropdown === "situations" && (
                       <motion.div
                         initial={{ opacity: 0, y: 8 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: 8 }}
                         transition={{ duration: 0.2 }}
-                        className="absolute left-1/2 top-full mt-2 w-[680px] -translate-x-1/2 rounded-sm border border-border bg-card p-6 shadow-xl"
+                        className="absolute left-1/2 top-full mt-2 w-[480px] -translate-x-1/2 rounded-sm border p-5 shadow-xl"
+                        style={{ background: '#F5F5F5', borderColor: '#E5E7EB' }}
+                      >
+                        <div className="grid grid-cols-2 gap-2">
+                          {situationsItems.map((s, idx) => (
+                            <button
+                              key={s.label}
+                              onClick={() => goTo(s.route)}
+                              className="rounded-sm px-3 py-2.5 text-left text-[13px] font-medium transition-all"
+                              style={{
+                                background: idx === 0 ? 'hsl(213 40% 18%)' : 'transparent',
+                                color: idx === 0 ? '#FFFFFF' : '#4A5568',
+                              }}
+                              onMouseOver={(e) => {
+                                if (idx !== 0) { e.currentTarget.style.background = '#EAEAEA'; }
+                              }}
+                              onMouseOut={(e) => {
+                                if (idx !== 0) { e.currentTarget.style.background = 'transparent'; }
+                              }}
+                            >
+                              {s.label}
+                            </button>
+                          ))}
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                )}
+
+                {/* Solutions mega menu */}
+                {item.dropdown === "solutions" && (
+                  <AnimatePresence>
+                    {activeDropdown === "solutions" && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 8 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: 8 }}
+                        transition={{ duration: 0.2 }}
+                        className="absolute left-1/2 top-full mt-2 w-[680px] -translate-x-1/2 rounded-sm border p-6 shadow-xl"
+                        style={{ background: '#F5F5F5', borderColor: '#E5E7EB' }}
                       >
                         <div className="grid grid-cols-3 gap-6">
-                          {megaMenuCols.map((col) => (
+                          {solutionsCols.map((col) => (
                             <div key={col.title}>
                               <button
                                 onClick={() => goTo(col.route)}
-                                className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-primary hover:text-primary/80"
+                                className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider transition-colors"
+                                style={{ color: 'hsl(213 40% 18%)' }}
+                                onMouseOver={(e) => (e.currentTarget.style.color = 'hsl(43 50% 54%)')}
+                                onMouseOut={(e) => (e.currentTarget.style.color = 'hsl(213 40% 18%)')}
                               >
                                 <span>{col.icon}</span> {col.title}
                               </button>
@@ -132,7 +209,10 @@ const Navbar = () => {
                                   <button
                                     key={sub.label}
                                     onClick={() => goTo(sub.route)}
-                                    className="block w-full text-left text-[13px] text-muted-foreground transition-colors hover:text-foreground"
+                                    className="block w-full text-left text-[13px] transition-colors"
+                                    style={{ color: '#6B7280' }}
+                                    onMouseOver={(e) => (e.currentTarget.style.color = '#0D1B2A')}
+                                    onMouseOut={(e) => (e.currentTarget.style.color = '#6B7280')}
                                   >
                                     · {sub.label}
                                   </button>
@@ -140,7 +220,10 @@ const Navbar = () => {
                               </div>
                               <button
                                 onClick={() => goTo(col.route)}
-                                className="mt-3 text-[11px] font-medium text-primary/70 transition-colors hover:text-primary"
+                                className="mt-3 text-[11px] font-medium transition-colors"
+                                style={{ color: 'hsl(43 50% 54% / 0.7)' }}
+                                onMouseOver={(e) => (e.currentTarget.style.color = 'hsl(43 50% 54%)')}
+                                onMouseOut={(e) => (e.currentTarget.style.color = 'hsl(43 50% 54% / 0.7)')}
                               >
                                 → Voir toute l'offre
                               </button>
@@ -151,22 +234,67 @@ const Navbar = () => {
                     )}
                   </AnimatePresence>
                 )}
+
+                {/* Innovation dropdown */}
+                {item.dropdown === "innovation" && (
+                  <AnimatePresence>
+                    {activeDropdown === "innovation" && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 8 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: 8 }}
+                        transition={{ duration: 0.2 }}
+                        className="absolute left-1/2 top-full mt-2 w-[400px] -translate-x-1/2 rounded-sm border p-5 shadow-xl"
+                        style={{ background: '#F5F5F5', borderColor: '#E5E7EB' }}
+                      >
+                        <div className="grid grid-cols-2 gap-2">
+                          {innovationItems.map((item) => (
+                            <button
+                              key={item.label}
+                              onClick={() => goTo(item.route)}
+                              className="rounded-sm px-3 py-2.5 text-left text-[13px] font-medium transition-all"
+                              style={{ color: '#4A5568' }}
+                              onMouseOver={(e) => { e.currentTarget.style.background = '#EAEAEA'; }}
+                              onMouseOut={(e) => { e.currentTarget.style.background = 'transparent'; }}
+                            >
+                              {item.label}
+                            </button>
+                          ))}
+                        </div>
+                        <div className="mt-4 text-center">
+                          <a
+                            href="#strategic-innovation"
+                            onClick={(e) => { e.preventDefault(); handleNavClick("#strategic-innovation"); }}
+                            className="btn-gold inline-block px-5 py-2 text-[11px]"
+                          >
+                            Explorer...
+                          </a>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                )}
               </div>
             ))}
+
+            {/* EN flag */}
+            <span className="flex items-center gap-1 text-[12px] font-medium" style={{ color: '#8A8F9E' }}>
+              🇬🇧 EN
+            </span>
+
             <button
               onClick={() => setFormOpen(true)}
-              className="btn-gold px-6 py-2.5 text-[12px]"
+              className="px-6 py-2.5 text-[12px] font-semibold uppercase tracking-wider transition-all"
+              style={{ background: 'hsl(213 40% 18%)', color: '#FFFFFF' }}
+              onMouseOver={(e) => { e.currentTarget.style.background = 'hsl(213 40% 22%)'; }}
+              onMouseOut={(e) => { e.currentTarget.style.background = 'hsl(213 40% 18%)'; }}
             >
-              Réserver mon échange stratégique
+              Échange Stratégique
             </button>
           </div>
 
           {/* Mobile toggle */}
-          <button
-            onClick={() => setOpen(!open)}
-            className="text-foreground xl:hidden"
-            aria-label="Menu"
-          >
+          <button onClick={() => setOpen(!open)} className="xl:hidden" style={{ color: '#0D1B2A' }} aria-label="Menu">
             {open ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
@@ -178,7 +306,8 @@ const Navbar = () => {
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
-              className="border-t border-border bg-card xl:hidden"
+              className="border-t xl:hidden"
+              style={{ background: '#FFFFFF', borderColor: '#E5E7EB' }}
             >
               <div className="container flex flex-col gap-4 py-6">
                 {navItems.map((item) => (
@@ -186,16 +315,18 @@ const Navbar = () => {
                     key={item.label}
                     href={item.href}
                     onClick={(e) => { e.preventDefault(); handleNavClick(item.href); }}
-                    className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+                    className="text-sm font-medium transition-colors"
+                    style={{ color: '#4A5568' }}
                   >
                     {item.label}
                   </a>
                 ))}
                 <button
                   onClick={() => { setOpen(false); setFormOpen(true); }}
-                  className="btn-gold mt-2 w-full text-center"
+                  className="mt-2 w-full py-3 text-center text-sm font-semibold uppercase tracking-wider"
+                  style={{ background: 'hsl(213 40% 18%)', color: '#FFFFFF' }}
                 >
-                  Réserver mon échange stratégique
+                  Échange Stratégique
                 </button>
               </div>
             </motion.div>
