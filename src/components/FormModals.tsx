@@ -23,6 +23,12 @@ const platforms = [
   "Knowledge Capitalization",
 ];
 
+const darkInputStyle = {
+  background: 'hsl(210 40% 12%)',
+  borderColor: 'hsl(220 20% 20%)',
+  color: '#F0EDE6',
+};
+
 /* ── FORM 1: Strategic Exchange ── */
 export const FormStrategicExchange = ({ open, onClose }: { open: boolean; onClose: () => void }) => {
   const { toast } = useToast();
@@ -40,24 +46,29 @@ export const FormStrategicExchange = ({ open, onClose }: { open: boolean; onClos
 
   return (
     <Dialog open={open} onOpenChange={onClose}>
-      <DialogContent className="border-border bg-card sm:max-w-lg">
+      <DialogContent className="sm:max-w-lg" style={{ background: '#0D1B2A', border: '1px solid hsl(220 20% 20%)', color: '#F0EDE6' }}>
         <DialogHeader>
-          <DialogTitle className="font-serif text-xl text-foreground">Réserver mon échange stratégique</DialogTitle>
+          <DialogTitle className="font-serif text-xl" style={{ color: '#F0EDE6' }}>Réserver mon échange stratégique</DialogTitle>
         </DialogHeader>
-        <div className="mt-1 flex items-center gap-2 text-xs text-muted-foreground">
+        <div className="mt-1 flex items-center gap-2 text-xs" style={{ color: '#8A8F9E' }}>
           <Lock className="h-3 w-3" /> Communication sécurisée et confidentielle
         </div>
         <form onSubmit={handleSubmit} className="mt-4 space-y-4">
           <div className="grid gap-4 sm:grid-cols-2">
-            <Input required name="name" placeholder="Nom" maxLength={100} className="border-border bg-background text-foreground" />
-            <Input required name="org" placeholder="Organisation" maxLength={100} className="border-border bg-background text-foreground" />
+            <Input required name="name" placeholder="Nom" maxLength={100} style={darkInputStyle} />
+            <Input required name="org" placeholder="Organisation" maxLength={100} style={darkInputStyle} />
           </div>
           <div className="grid gap-4 sm:grid-cols-2">
-            <Input required name="poste" placeholder="Poste / Fonction" maxLength={100} className="border-border bg-background text-foreground" />
-            <Input required type="email" name="email" placeholder="Email professionnel" maxLength={255} className="border-border bg-background text-foreground" />
+            <Input required name="poste" placeholder="Poste / Fonction" maxLength={100} style={darkInputStyle} />
+            <Input required type="email" name="email" placeholder="Email professionnel" maxLength={255} style={darkInputStyle} />
           </div>
-          <Input type="tel" name="phone" placeholder="Téléphone" maxLength={20} className="border-border bg-background text-foreground" />
-          <select required name="enjeu" className="w-full rounded-sm border border-border bg-background px-3 py-2.5 text-sm text-foreground">
+          <Input type="tel" name="phone" placeholder="Téléphone" maxLength={20} style={darkInputStyle} />
+          <select
+            required
+            name="enjeu"
+            className="w-full rounded-sm px-3 py-2.5 text-sm"
+            style={{ ...darkInputStyle, appearance: 'auto' }}
+          >
             <option value="">Enjeu stratégique principal</option>
             {situations.map(s => <option key={s} value={s}>{s}</option>)}
           </select>
@@ -87,14 +98,14 @@ export const FormDiagnostic = ({ open, onClose, situation = "" }: { open: boolea
 
   return (
     <Dialog open={open} onOpenChange={onClose}>
-      <DialogContent className="border-border bg-card sm:max-w-md">
+      <DialogContent className="sm:max-w-md" style={{ background: '#0D1B2A', border: '1px solid hsl(220 20% 20%)', color: '#F0EDE6' }}>
         <DialogHeader>
-          <DialogTitle className="font-serif text-xl text-foreground">Évaluer ma situation — GRATUIT</DialogTitle>
+          <DialogTitle className="font-serif text-xl" style={{ color: '#F0EDE6' }}>Évaluer ma situation — GRATUIT</DialogTitle>
         </DialogHeader>
         <form onSubmit={handleSubmit} className="mt-4 space-y-4">
-          <Input required name="name" placeholder="Nom" maxLength={100} className="border-border bg-background text-foreground" />
-          <Input required type="email" name="email" placeholder="Email professionnel" maxLength={255} className="border-border bg-background text-foreground" />
-          <Input name="situation" defaultValue={situation} placeholder="Situation critique" readOnly={!!situation} className="border-border bg-background text-foreground" />
+          <Input required name="name" placeholder="Nom" maxLength={100} style={darkInputStyle} />
+          <Input required type="email" name="email" placeholder="Email professionnel" maxLength={255} style={darkInputStyle} />
+          <Input name="situation" defaultValue={situation} placeholder="Situation critique" readOnly={!!situation} style={darkInputStyle} />
           <button type="submit" disabled={submitting} className="btn-gold w-full disabled:opacity-50">
             {submitting ? "Envoi..." : "Envoyer"}
           </button>
@@ -121,19 +132,19 @@ export const FormDemo = ({ open, onClose }: { open: boolean; onClose: () => void
 
   return (
     <Dialog open={open} onOpenChange={onClose}>
-      <DialogContent className="border-border bg-card sm:max-w-md">
+      <DialogContent className="sm:max-w-md" style={{ background: '#0D1B2A', border: '1px solid hsl(220 20% 20%)', color: '#F0EDE6' }}>
         <DialogHeader>
-          <DialogTitle className="font-serif text-xl text-foreground">Demander une démo</DialogTitle>
+          <DialogTitle className="font-serif text-xl" style={{ color: '#F0EDE6' }}>Demander une démo</DialogTitle>
         </DialogHeader>
         <form onSubmit={handleSubmit} className="mt-4 space-y-4">
-          <Input required name="name" placeholder="Nom" maxLength={100} className="border-border bg-background text-foreground" />
-          <Input required name="org" placeholder="Organisation" maxLength={100} className="border-border bg-background text-foreground" />
-          <Input required type="email" name="email" placeholder="Email professionnel" maxLength={255} className="border-border bg-background text-foreground" />
-          <select required name="platform" className="w-full rounded-sm border border-border bg-background px-3 py-2.5 text-sm text-foreground">
+          <Input required name="name" placeholder="Nom" maxLength={100} style={darkInputStyle} />
+          <Input required name="org" placeholder="Organisation" maxLength={100} style={darkInputStyle} />
+          <Input required type="email" name="email" placeholder="Email professionnel" maxLength={255} style={darkInputStyle} />
+          <select required name="platform" className="w-full rounded-sm px-3 py-2.5 text-sm" style={{ ...darkInputStyle, appearance: 'auto' }}>
             <option value="">Plateforme d'intérêt</option>
             {platforms.map(p => <option key={p} value={p}>{p}</option>)}
           </select>
-          <textarea name="message" placeholder="Message (optionnel)" maxLength={500} rows={3} className="w-full rounded-sm border border-border bg-background px-3 py-2.5 text-sm text-foreground" />
+          <textarea name="message" placeholder="Message (optionnel)" maxLength={500} rows={3} className="w-full rounded-sm px-3 py-2.5 text-sm" style={darkInputStyle} />
           <button type="submit" disabled={submitting} className="btn-gold w-full disabled:opacity-50">
             {submitting ? "Envoi..." : "Demander une démo"}
           </button>

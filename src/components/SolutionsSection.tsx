@@ -52,7 +52,7 @@ const SolutionsSection = () => {
       route: "/solutions/soft-power-influence",
       punchline: "Ceux qui n'écrivent pas leur propre récit sont condamnés à subir celui des autres.",
       services: [
-        { label: "Intelligence d'Influence", route: "/solutions/soft-power-influence" },
+        { label: "Intelligence d'influence", route: "/solutions/soft-power-influence" },
         { label: "Political Intelligence", route: "/solutions/soft-power-influence" },
         { label: "Attractivité Territoriale", route: "/solutions/soft-power-influence" },
       ],
@@ -68,7 +68,7 @@ const SolutionsSection = () => {
   const goTo = (route: string) => { navigate(route); window.scrollTo(0, 0); };
 
   return (
-    <section id="nos-solutions" className="relative bg-background py-28" ref={ref}>
+    <section id="nos-solutions" className="relative py-28" ref={ref} style={{ background: '#FFFFFF' }}>
       <div className="container">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -77,10 +77,10 @@ const SolutionsSection = () => {
           className="mx-auto max-w-3xl text-center"
         >
           <span className="label-accent">Nos Solutions</span>
-          <h2 className="mt-4 font-serif text-3xl font-bold leading-tight sm:text-4xl md:text-5xl">
+          <h2 className="mt-4 font-serif text-3xl font-bold leading-tight sm:text-4xl md:text-5xl" style={{ color: '#0D1B2A' }}>
             Trois piliers au service de votre compétitivité et votre attractivité
           </h2>
-          <p className="mt-4 text-lg text-muted-foreground">
+          <p className="mt-4 text-lg" style={{ color: '#5A6170' }}>
             Nous bâtissons des écosystèmes décisionnels au service de la compétitivité, de l'attractivité et de la souveraineté.
           </p>
         </motion.div>
@@ -93,44 +93,50 @@ const SolutionsSection = () => {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: i * 0.12, ease: [0.16, 1, 0.3, 1] }}
               onClick={() => goTo(p.route)}
-              className="card-glass group flex cursor-pointer flex-col overflow-hidden transition-all hover:shadow-gold-hover"
+              className="group flex cursor-pointer flex-col overflow-hidden rounded-sm border transition-all hover:shadow-lg"
+              style={{ background: '#FFFFFF', borderColor: '#E5E7EB', borderTop: '2px solid hsl(43 50% 54% / 0.3)' }}
+              onMouseOver={(e) => { (e.currentTarget.style as any).borderTopColor = 'hsl(43 50% 54%)'; }}
+              onMouseOut={(e) => { (e.currentTarget.style as any).borderTopColor = 'hsl(43 50% 54% / 0.3)'; }}
             >
-              <div className="flex h-44 items-center justify-center bg-muted/30">
-                <p.icon className="h-12 w-12 text-primary/20" />
+              <div className="flex h-44 items-center justify-center" style={{ background: '#F8F8FA' }}>
+                <p.icon className="h-12 w-12" style={{ color: 'hsl(43 50% 54% / 0.2)' }} />
               </div>
               <div className="flex flex-1 flex-col p-7">
                 <div className="mb-3 flex items-center gap-3">
-                  <div className="flex h-9 w-9 items-center justify-center rounded-sm bg-primary/10">
-                    <p.icon className="h-4 w-4 text-primary" />
+                  <div className="flex h-9 w-9 items-center justify-center rounded-sm" style={{ background: 'hsl(43 50% 54% / 0.1)' }}>
+                    <p.icon className="h-4 w-4" style={{ color: 'hsl(43 50% 54%)' }} />
                   </div>
-                  <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-muted-foreground">{p.label}</span>
+                  <span className="text-[11px] font-bold uppercase tracking-[0.2em]" style={{ color: '#8A8F9E' }}>{p.label}</span>
                 </div>
-                <h3 className="font-serif text-xl font-bold">{p.title}</h3>
-                <p className="mt-2 text-[13px] italic text-muted-foreground">{p.punchline}</p>
+                <h3 className="font-serif text-xl font-bold" style={{ color: '#0D1B2A' }}>{p.title}</h3>
+                <p className="mt-2 text-[13px] italic" style={{ color: '#6B7280' }}>{p.punchline}</p>
 
                 <ul className="mt-5 flex-1 space-y-2">
                   {p.capabilities.map((c) => (
-                    <li key={c} className="flex items-start gap-2 text-[13px] text-foreground/70">
-                      <span className="mt-1.5 h-1 w-1 flex-shrink-0 rounded-full bg-primary" />
+                    <li key={c} className="flex items-start gap-2 text-[13px]" style={{ color: '#4A5568' }}>
+                      <span className="mt-1.5 h-1 w-1 flex-shrink-0 rounded-full" style={{ background: 'hsl(43 50% 54%)' }} />
                       {c}
                     </li>
                   ))}
                 </ul>
 
-                <div className="mt-5 h-px w-full bg-border" />
+                <div className="mt-5 h-px w-full" style={{ background: '#E5E7EB' }} />
                 <div className="mt-3 flex flex-wrap gap-1.5">
                   {p.services.map((s) => (
                     <span
                       key={s.label}
                       onClick={(e) => { e.stopPropagation(); goTo(s.route); }}
-                      className="cursor-pointer rounded-sm border border-border px-2 py-0.5 text-[10px] font-medium text-muted-foreground transition-colors hover:border-primary hover:text-primary"
+                      className="cursor-pointer rounded-full px-3 py-1 text-[11px] font-bold transition-all"
+                      style={{ background: 'hsl(43 50% 54% / 0.12)', color: 'hsl(43 50% 44%)', border: '1px solid hsl(43 50% 54% / 0.25)' }}
+                      onMouseOver={(e) => { e.currentTarget.style.background = 'hsl(43 50% 54% / 0.22)'; }}
+                      onMouseOut={(e) => { e.currentTarget.style.background = 'hsl(43 50% 54% / 0.12)'; }}
                     >
                       {s.label}
                     </span>
                   ))}
                 </div>
                 <div className="mt-5">
-                  <span className="btn-gold inline-block px-5 py-2 text-[11px] group-hover:shadow-gold">
+                  <span className="btn-gold inline-block px-5 py-2 text-[11px]">
                     Explorer →
                   </span>
                 </div>

@@ -9,84 +9,20 @@ const SituationsSection = () => {
   const navigate = useNavigate();
 
   const situations = [
-    {
-      icon: Eye,
-      title: "Décider sans visibilité",
-      description: "L'absence d'intelligence stratégique conduit à des arbitrages tardifs et à l'érosion de l'avantage concurrentiel.",
-      stat: "20%",
-      statLabel: "des dirigeants estiment exceller en prise de décision",
-      source: "McKinsey",
-      route: "/situations/decider-sans-visibilite",
-    },
-    {
-      icon: Shield,
-      title: "Subir des attaques informationnelles",
-      description: "Les campagnes de déstabilisation réputationnelle peuvent détruire en quelques heures ce qui a été construit en décennies.",
-      stat: "90%",
-      statLabel: "des parties prenantes sanctionnent les entités à réputation dégradée",
-      source: "SurveySparrow",
-      route: "/situations/attaques-informationnelles",
-    },
-    {
-      icon: Target,
-      title: "Perdre la bataille de l'attractivité",
-      description: "L'incapacité à projeter une image de puissance et de fiabilité entraîne un décrochage territorial et la fuite des capitaux.",
-      stat: "",
-      statLabel: "",
-      source: "",
-      route: "/situations/deficit-attractivite",
-    },
-    {
-      icon: Flame,
-      title: "Sombrer dans une crise non maîtrisée",
-      description: "60% des organisations ne se remettent jamais d'une crise majeure. L'anticipation est la seule protection structurelle.",
-      stat: "60%",
-      statLabel: "ne survivent pas à une crise majeure",
-      source: "Cleartail Marketing",
-      route: "/situations/crises-non-maitrisees",
-    },
-    {
-      icon: Zap,
-      title: "Perdre en vélocité face aux concurrents",
-      description: "Les organisations agiles surpassent les autres de 2,5× en croissance. La lenteur décisionnelle est une menace existentielle.",
-      stat: "2.5×",
-      statLabel: "croissance des organisations agiles",
-      source: "Bain & Company",
-      route: "/situations/perte-velocite",
-    },
-    {
-      icon: Globe,
-      title: "Déficit d'influence institutionnel",
-      description: "85% des normes sont dictées par ceux qui occupent le terrain. L'absence d'influence conduit à l'exclusion des cercles de pouvoir.",
-      stat: "85%",
-      statLabel: "des normes dictées par les acteurs présents",
-      source: "",
-      route: "/situations/deficit-influence",
-    },
-    {
-      icon: Search,
-      title: "Investir sous risque invisible",
-      description: "70 à 90% des opérations de M&A échouent par manque de due diligence approfondie. Le risque réside dans l'angle mort.",
-      stat: "70-90%",
-      statLabel: "des M&A échouent",
-      source: "CFA Institute",
-      route: "/situations/investir-sous-risque",
-    },
-    {
-      icon: Tv,
-      title: "Gouverner sous pression médiatique et émotionnelle",
-      description: "Décider avec lucidité lorsque l'espace médiatique impose l'urgence et l'émotion.",
-      stat: "",
-      statLabel: "La pression médiatique transforme la décision publique en réaction émotionnelle.",
-      source: "",
-      route: "/situations/gouverner-sous-pression",
-    },
+    { icon: Eye, title: "Décider sans visibilité", description: "L'absence d'intelligence stratégique conduit à des arbitrages tardifs et à l'érosion de l'avantage concurrentiel.", stat: "20%", statLabel: "des dirigeants estiment exceller en prise de décision", source: "McKinsey", route: "/situations/decider-sans-visibilite" },
+    { icon: Shield, title: "Subir des attaques informationnelles", description: "Les campagnes de déstabilisation réputationnelle peuvent détruire en quelques heures ce qui a été construit en décennies.", stat: "90%", statLabel: "des parties prenantes sanctionnent les entités à réputation dégradée", source: "SurveySparrow", route: "/situations/attaques-informationnelles" },
+    { icon: Target, title: "Perdre la bataille de l'attractivité", description: "L'incapacité à projeter une image de puissance et de fiabilité entraîne un décrochage territorial et la fuite des capitaux.", stat: "", statLabel: "", source: "", route: "/situations/deficit-attractivite" },
+    { icon: Flame, title: "Sombrer dans une crise non maîtrisée", description: "60% des organisations ne se remettent jamais d'une crise majeure. L'anticipation est la seule protection structurelle.", stat: "60%", statLabel: "ne survivent pas à une crise majeure", source: "Cleartail Marketing", route: "/situations/crises-non-maitrisees" },
+    { icon: Zap, title: "Perdre en vélocité face aux concurrents", description: "Les organisations agiles surpassent les autres de 2,5× en croissance. La lenteur décisionnelle est une menace existentielle.", stat: "2.5×", statLabel: "croissance des organisations agiles", source: "Bain & Company", route: "/situations/perte-velocite" },
+    { icon: Globe, title: "Déficit d'influence institutionnel", description: "85% des normes sont dictées par ceux qui occupent le terrain. L'absence d'influence conduit à l'exclusion des cercles de pouvoir.", stat: "85%", statLabel: "des normes dictées par les acteurs présents", source: "", route: "/situations/deficit-influence" },
+    { icon: Search, title: "Investir sous risque invisible", description: "70 à 90% des opérations de M&A échouent par manque de due diligence approfondie. Le risque réside dans l'angle mort.", stat: "70-90%", statLabel: "des M&A échouent", source: "CFA Institute", route: "/situations/investir-sous-risque" },
+    { icon: Tv, title: "Gouverner sous pression médiatique et émotionnelle", description: "Décider avec lucidité lorsque l'espace médiatique impose l'urgence et l'émotion.", stat: "", statLabel: "La pression médiatique transforme la décision publique en réaction émotionnelle.", source: "", route: "/situations/gouverner-sous-pression" },
   ];
 
   const goTo = (route: string) => { navigate(route); window.scrollTo(0, 0); };
 
   return (
-    <section id="situations-critiques" className="relative bg-section-alt py-28" ref={ref}>
+    <section id="situations-critiques" className="relative py-28" ref={ref} style={{ background: '#F4F4F4' }}>
       <div className="container">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -95,10 +31,10 @@ const SituationsSection = () => {
           className="mx-auto max-w-3xl text-center"
         >
           <span className="label-accent">Vos Situations Critiques</span>
-          <h2 className="mt-4 font-serif text-3xl font-bold leading-tight sm:text-4xl md:text-5xl">
+          <h2 className="mt-4 font-serif text-3xl font-bold leading-tight sm:text-4xl md:text-5xl" style={{ color: '#0D1B2A' }}>
             Les menaces que vous ne voyez pas sont les plus destructrices
           </h2>
-          <p className="mt-4 text-lg text-muted-foreground">
+          <p className="mt-4 text-lg" style={{ color: '#5A6170' }}>
             Identifier la nature de votre exposition aux risques est déjà le premier acte de souveraineté décisionnelle.
           </p>
         </motion.div>
@@ -111,19 +47,22 @@ const SituationsSection = () => {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: i * 0.07, ease: [0.16, 1, 0.3, 1] }}
               onClick={() => goTo(s.route)}
-              className="card-glass group cursor-pointer p-6 transition-all hover:shadow-gold-hover"
+              className="group cursor-pointer rounded-sm border p-6 transition-all hover:shadow-lg"
+              style={{ background: '#FFFFFF', borderColor: '#E5E7EB', borderTop: '2px solid hsl(43 50% 54% / 0.3)' }}
+              onMouseOver={(e) => { (e.currentTarget.style as any).borderTopColor = 'hsl(43 50% 54%)'; }}
+              onMouseOut={(e) => { (e.currentTarget.style as any).borderTopColor = 'hsl(43 50% 54% / 0.3)'; }}
             >
-              <s.icon className="mb-4 h-6 w-6 text-primary opacity-70" />
-              <h3 className="font-serif text-base font-bold leading-snug">{s.title}</h3>
-              <p className="mt-2 text-[13px] leading-relaxed text-muted-foreground">{s.description}</p>
+              <s.icon className="mb-4 h-6 w-6 opacity-70" style={{ color: 'hsl(43 50% 54%)' }} />
+              <h3 className="font-serif text-base font-bold leading-snug" style={{ color: '#0D1B2A' }}>{s.title}</h3>
+              <p className="mt-2 text-[13px] leading-relaxed" style={{ color: '#6B7280' }}>{s.description}</p>
               {(s.stat || s.statLabel) && (
-                <div className="mt-4 border-t border-border pt-3">
-                  {s.stat && <span className="font-serif text-xl font-bold text-primary">{s.stat}</span>}
-                  {s.statLabel && <p className="mt-1 text-[11px] text-muted-foreground">{s.statLabel}</p>}
-                  {s.source && <p className="mt-1 text-[10px] uppercase tracking-wider text-muted-foreground">Source : {s.source}</p>}
+                <div className="mt-4 border-t pt-3" style={{ borderColor: '#E5E7EB' }}>
+                  {s.stat && <span className="font-serif text-xl font-bold" style={{ color: 'hsl(43 50% 54%)' }}>{s.stat}</span>}
+                  {s.statLabel && <p className="mt-1 text-[11px]" style={{ color: '#8A8F9E' }}>{s.statLabel}</p>}
+                  {s.source && <p className="mt-1 text-[10px] uppercase tracking-wider" style={{ color: '#A0A5B0' }}>Source : {s.source}</p>}
                 </div>
               )}
-              <div className="mt-4 text-xs font-medium text-primary opacity-0 transition-opacity group-hover:opacity-100">
+              <div className="mt-4 text-xs font-medium opacity-0 transition-opacity group-hover:opacity-100" style={{ color: 'hsl(43 50% 54%)' }}>
                 En savoir plus →
               </div>
             </motion.div>
