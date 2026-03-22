@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { Menu, X, ChevronDown, Eye, Shield, TrendingDown, AlertTriangle, Zap, Building2, DollarSign, Radio, FlaskConical, Search, Satellite, Brain, Workflow, Database, Gauge } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -56,6 +57,7 @@ const innovationItems = [
 ];
 
 const Navbar = () => {
+  const { lang, setLang } = useLanguage();
   const [open, setOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [scrolled, setScrolled] = useState(false);
@@ -280,8 +282,12 @@ const Navbar = () => {
             ))}
 
             {/* EN flag */}
-            <button className="flex items-center gap-1.5 text-[12px] font-medium cursor-pointer" style={{ color: '#8A8F9E' }}>
-              🇬🇧 EN
+            <button
+              onClick={() => setLang(lang === "fr" ? "en" : "fr")}
+              className="flex items-center gap-1.5 text-[12px] font-medium cursor-pointer transition-colors"
+              style={{ color: '#8A8F9E' }}
+            >
+              {lang === "fr" ? "🇬🇧 EN" : "🇫🇷 FR"}
             </button>
 
             <button
