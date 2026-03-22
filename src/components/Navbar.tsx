@@ -282,8 +282,12 @@ const Navbar = () => {
             ))}
 
             {/* EN flag */}
-            <button className="flex items-center gap-1.5 text-[12px] font-medium cursor-pointer" style={{ color: '#8A8F9E' }}>
-              🇬🇧 EN
+            <button
+              onClick={() => setLang(lang === "fr" ? "en" : "fr")}
+              className="flex items-center gap-1.5 text-[12px] font-medium cursor-pointer transition-colors"
+              style={{ color: '#8A8F9E' }}
+            >
+              {lang === "fr" ? "🇬🇧 EN" : "🇫🇷 FR"}
             </button>
 
             <button
