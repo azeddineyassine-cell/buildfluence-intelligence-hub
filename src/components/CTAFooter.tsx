@@ -1,6 +1,7 @@
 import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { FormStrategicExchange } from "./FormModals";
 
 const CTAFooter = () => {
@@ -8,12 +9,12 @@ const CTAFooter = () => {
   const isInView = useInView(ref, { once: true, amount: 0.2 });
   const navigate = useNavigate();
   const [formOpen, setFormOpen] = useState(false);
+  const { t } = useLanguage();
 
   const goTo = (route: string) => { navigate(route); window.scrollTo(0, 0); };
 
   return (
     <>
-      {/* CTA section */}
       <section className="relative py-28" ref={ref} style={{ background: '#050D1A' }}>
         <div className="container">
           <motion.div
@@ -24,33 +25,32 @@ const CTAFooter = () => {
             style={{ border: '1px solid hsl(43 50% 54% / 0.2)' }}
           >
             <h2 className="font-serif text-3xl font-bold leading-tight sm:text-4xl" style={{ color: '#F0EDE6' }}>
-              Votre prochaine grande décision mérite mieux qu'un pari.
+              {t("Votre prochaine grande décision mérite mieux qu'un pari.", "Your next big decision deserves better than a gamble.")}
             </h2>
             <p className="mt-4 text-base" style={{ color: '#8A8F9E' }}>
-              Vous êtes exposés à quelle situation ?
+              {t("Vous êtes exposés à quelle situation ?", "What situation are you exposed to?")}
             </p>
             <button onClick={() => setFormOpen(true)} className="btn-gold mt-8">
-              Réserver mon échange stratégique
+              {t("Réserver mon échange stratégique", "Book my strategic exchange")}
             </button>
           </motion.div>
         </div>
       </section>
 
-      {/* Footer */}
       <footer className="py-16" style={{ background: '#050D1A', borderTop: '1px solid hsl(220 20% 16%)' }}>
         <div className="container">
           <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
             <div>
               <h4 className="text-xs font-bold uppercase tracking-wider" style={{ color: 'hsl(43 50% 54%)' }}>Buildfluence</h4>
               <nav className="mt-4 flex flex-col gap-2">
-                <a href="#pourquoi-buildfluence" className="text-[13px] transition-colors" style={{ color: '#8A8F9E' }}>Pourquoi Buildfluence</a>
-                <a href="#pourquoi-buildfluence" className="text-[13px] transition-colors" style={{ color: '#8A8F9E' }}>Approche HumTech</a>
+                <a href="#pourquoi-buildfluence" className="text-[13px] transition-colors" style={{ color: '#8A8F9E' }}>{t("Pourquoi Buildfluence", "Why Buildfluence")}</a>
+                <a href="#pourquoi-buildfluence" className="text-[13px] transition-colors" style={{ color: '#8A8F9E' }}>{t("Approche HumTech", "HumTech Approach")}</a>
                 <a href="#pourquoi-buildfluence" className="text-[13px] transition-colors" style={{ color: '#8A8F9E' }}>Track Record</a>
-                <a href="#pourquoi-buildfluence" className="text-[13px] transition-colors" style={{ color: '#8A8F9E' }}>Confidentialité</a>
+                <a href="#pourquoi-buildfluence" className="text-[13px] transition-colors" style={{ color: '#8A8F9E' }}>{t("Confidentialité", "Confidentiality")}</a>
               </nav>
             </div>
             <div>
-              <h4 className="text-xs font-bold uppercase tracking-wider" style={{ color: 'hsl(43 50% 54%)' }}>Nos Solutions</h4>
+              <h4 className="text-xs font-bold uppercase tracking-wider" style={{ color: 'hsl(43 50% 54%)' }}>{t("Nos Solutions", "Our Solutions")}</h4>
               <nav className="mt-4 flex flex-col gap-2">
                 <button onClick={() => goTo("/solutions/strategic-intelligence-lab")} className="text-left text-[13px]" style={{ color: '#8A8F9E' }}>Strategic Intelligence Lab</button>
                 <button onClick={() => goTo("/solutions/deep-due-diligence")} className="text-left text-[13px]" style={{ color: '#8A8F9E' }}>Deep Due Diligence</button>
@@ -58,7 +58,7 @@ const CTAFooter = () => {
               </nav>
             </div>
             <div>
-              <h4 className="text-xs font-bold uppercase tracking-wider" style={{ color: 'hsl(43 50% 54%)' }}>Capacités</h4>
+              <h4 className="text-xs font-bold uppercase tracking-wider" style={{ color: 'hsl(43 50% 54%)' }}>{t("Capacités", "Capabilities")}</h4>
               <nav className="mt-4 flex flex-col gap-2">
                 <button onClick={() => goTo("/capacites/ai-powered-monitor")} className="text-left text-[13px]" style={{ color: '#8A8F9E' }}>AI Powered Monitor</button>
                 <button onClick={() => goTo("/capacites/strategic-workflow")} className="text-left text-[13px]" style={{ color: '#8A8F9E' }}>Strategic Workflow</button>
@@ -70,7 +70,7 @@ const CTAFooter = () => {
               <h4 className="text-xs font-bold uppercase tracking-wider" style={{ color: 'hsl(43 50% 54%)' }}>Contact</h4>
               <nav className="mt-4 flex flex-col gap-2">
                 <a href="mailto:info@buildfluence.ai" className="text-[13px]" style={{ color: '#8A8F9E' }}>info@buildfluence.ai</a>
-                <button onClick={() => setFormOpen(true)} className="text-left text-[13px]" style={{ color: '#8A8F9E' }}>Réserver un échange</button>
+                <button onClick={() => setFormOpen(true)} className="text-left text-[13px]" style={{ color: '#8A8F9E' }}>{t("Réserver un échange", "Book an exchange")}</button>
               </nav>
             </div>
           </div>
@@ -79,10 +79,16 @@ const CTAFooter = () => {
 
           <div className="mt-6 flex flex-col items-center gap-3">
             <p className="text-center text-xs" style={{ color: '#6B7280' }}>
-              © 2025 Buildfluence · Tous droits réservés · Politique de confidentialité · Mentions légales
+              {t(
+                "© 2025 Buildfluence · Tous droits réservés · Politique de confidentialité · Mentions légales",
+                "© 2025 Buildfluence · All rights reserved · Privacy policy · Legal notice"
+              )}
             </p>
             <p className="font-serif text-sm italic" style={{ color: 'hsl(43 50% 54% / 0.7)' }}>
-              "L'intelligence au service du pouvoir décisionnel."
+              {t(
+                "\"L'intelligence au service du pouvoir décisionnel.\"",
+                "\"Intelligence at the service of decision-making power.\""
+              )}
             </p>
           </div>
         </div>

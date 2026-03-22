@@ -1,33 +1,74 @@
 import DetailPageLayout, { DetailBlock, DetailList, CaseStudy } from "@/components/DetailPageLayout";
+import { useLanguage } from "@/contexts/LanguageContext";
 
-const SoftPowerInfluence = () => (
-  <DetailPageLayout
-    title="Soft Power & Influence"
-    chapeau="Ne laissez pas les autres écrire votre histoire. Façonnez votre perception. Imposez votre narratif."
-    ctas={[{ label: "Parler de mon projet", action: "#", formType: "f1" }]}
-  >
-    <div className="card-glass p-8">
-      <h3 className="font-serif text-xl font-bold text-primary">SERVICE 1 — Intelligence d'Influence</h3>
-      <DetailList items={["Mapping des leaders d'opinion, investisseurs, relais médiatiques","Identification des nœuds d'amplification","Qui façonne les récits dominants ? Alliances, rivalités narratives","Choix des circuits d'amplification légitimes","Synchronisation messages / relais / timing"]} />
-      <div className="mt-4 border-t border-border pt-3">
-        <p className="text-xs font-bold uppercase tracking-wider text-muted-foreground">Méthodologie</p>
-        <p className="mt-1 text-sm text-foreground/80">OSINT renforcé, Social Graphing, NLP, Graphe sémantique</p>
-        <p className="mt-2 text-sm font-semibold text-primary">Résultat : Vous orientez les perceptions avant qu'elles ne deviennent des décisions.</p>
+const SoftPowerInfluence = () => {
+  const { t } = useLanguage();
+  return (
+    <DetailPageLayout
+      title="Soft Power & Influence"
+      chapeau={t("Ne laissez pas les autres écrire votre histoire. Façonnez votre perception. Imposez votre narratif.", "Don't let others write your story. Shape your perception. Impose your narrative.")}
+      ctas={[{ label: t("Parler de mon projet", "Discuss my project"), action: "#", formType: "f1" }]}
+    >
+      <div className="card-glass p-8">
+        <h3 className="font-serif text-xl font-bold text-primary">{t("SERVICE 1 — Intelligence d'Influence", "SERVICE 1 — Influence Intelligence")}</h3>
+        <DetailList items={[
+          t("Mapping des leaders d'opinion, investisseurs, relais médiatiques", "Mapping of opinion leaders, investors, media relays"),
+          t("Identification des nœuds d'amplification", "Identification of amplification nodes"),
+          t("Qui façonne les récits dominants ? Alliances, rivalités narratives", "Who shapes dominant narratives? Alliances, narrative rivalries"),
+          t("Choix des circuits d'amplification légitimes", "Choice of legitimate amplification circuits"),
+          t("Synchronisation messages / relais / timing", "Message / relay / timing synchronization"),
+        ]} />
+        <div className="mt-4 border-t border-border pt-3">
+          <p className="text-xs font-bold uppercase tracking-wider text-muted-foreground">{t("Méthodologie", "Methodology")}</p>
+          <p className="mt-1 text-sm text-foreground/80">OSINT {t("renforcé", "enhanced")}, Social Graphing, NLP, {t("Graphe sémantique", "Semantic graph")}</p>
+          <p className="mt-2 text-sm font-semibold text-primary">{t("Résultat : Vous orientez les perceptions avant qu'elles ne deviennent des décisions.", "Result: You shape perceptions before they become decisions.")}</p>
+        </div>
       </div>
-    </div>
-    <div className="card-glass p-8">
-      <h3 className="font-serif text-xl font-bold text-primary">SERVICE 2 — Political Intelligence</h3>
-      <DetailList items={["Mapping des décideurs publics clés","Lecture des chaînes de décision formelles et informelles","Identification des points de blocage réglementaires","Monitoring des sentiments politiques structurants","Identification des opposants et analyse de leur capacité de nuisance","Design d'un narratif d'utilité publique","Production de contenus d'autorité pour décideurs"]} />
-      <div className="mt-4 border-t border-border pt-3">
-        <p className="text-sm text-foreground/80">Valeur : Longueur d'avance réglementaire. Réduction du risque politique. Influence mesurable (KPIs).</p>
+      <div className="card-glass p-8">
+        <h3 className="font-serif text-xl font-bold text-primary">SERVICE 2 — Political Intelligence</h3>
+        <DetailList items={[
+          t("Mapping des décideurs publics clés", "Mapping of key public decision-makers"),
+          t("Lecture des chaînes de décision formelles et informelles", "Reading formal and informal decision chains"),
+          t("Identification des points de blocage réglementaires", "Identification of regulatory blocking points"),
+          t("Monitoring des sentiments politiques structurants", "Monitoring of structuring political sentiments"),
+          t("Identification des opposants et analyse de leur capacité de nuisance", "Identification of opponents and analysis of their harmful capacity"),
+          t("Design d'un narratif d'utilité publique", "Design of a public utility narrative"),
+          t("Production de contenus d'autorité pour décideurs", "Production of authority content for decision-makers"),
+        ]} />
+        <div className="mt-4 border-t border-border pt-3">
+          <p className="text-sm text-foreground/80">{t("Valeur : Longueur d'avance réglementaire. Réduction du risque politique. Influence mesurable (KPIs).", "Value: Regulatory head start. Political risk reduction. Measurable influence (KPIs).")}</p>
+        </div>
       </div>
-    </div>
-    <CaseStudy title="Cas client : Livre Blanc e-Santé" context="2 ans après, le Ministère de la Santé lance un appel d'offres de 180M MAD reprenant la recommandation principale." intervention={["Rédaction du Livre Blanc stratégique","Positionnement auprès des décideurs publics"]} result="Recommandation reprise dans l'appel d'offres national de 180M MAD." />
-    <div className="card-glass p-8">
-      <h3 className="font-serif text-xl font-bold text-primary">SERVICE 3 — Attractivité Territoriale</h3>
-      <DetailList items={["Cartographie de votre écosystème territorial","Construction de narratifs territoriaux crédibles et différenciants","Benchmark pays/régions concurrentes","Captation de l'intérêt des investisseurs","Stratégie de présence dans les forums internationaux","Activation de think tanks et leaders d'opinion"]} />
-    </div>
-    <CaseStudy title="Cas client : CIDC (OCI) — 57 pays" context="Notoriété en déclin." intervention={["Doing Business Platform déployée","Repositionnement stratégique"]} result="Notoriété restaurée immédiatement." />
-  </DetailPageLayout>
-);
+      <CaseStudy
+        title={t("Cas client : Livre Blanc e-Santé", "Client case: e-Health White Paper")}
+        context={t("2 ans après, le Ministère de la Santé lance un appel d'offres de 180M MAD reprenant la recommandation principale.", "2 years later, the Ministry of Health launches a 180M MAD tender incorporating the main recommendation.")}
+        intervention={[
+          t("Rédaction du Livre Blanc stratégique", "Strategic White Paper drafting"),
+          t("Positionnement auprès des décideurs publics", "Positioning with public decision-makers"),
+        ]}
+        result={t("Recommandation reprise dans l'appel d'offres national de 180M MAD.", "Recommendation incorporated into the 180M MAD national tender.")}
+      />
+      <div className="card-glass p-8">
+        <h3 className="font-serif text-xl font-bold text-primary">{t("SERVICE 3 — Attractivité Territoriale", "SERVICE 3 — Territorial Attractiveness")}</h3>
+        <DetailList items={[
+          t("Cartographie de votre écosystème territorial", "Mapping of your territorial ecosystem"),
+          t("Construction de narratifs territoriaux crédibles et différenciants", "Construction of credible and differentiating territorial narratives"),
+          t("Benchmark pays/régions concurrentes", "Competing countries/regions benchmark"),
+          t("Captation de l'intérêt des investisseurs", "Capturing investor interest"),
+          t("Stratégie de présence dans les forums internationaux", "Strategy for presence in international forums"),
+          t("Activation de think tanks et leaders d'opinion", "Activation of think tanks and opinion leaders"),
+        ]} />
+      </div>
+      <CaseStudy
+        title={t("Cas client : CIDC (OCI) — 57 pays", "Client case: ICDT (OIC) — 57 countries")}
+        context={t("Notoriété en déclin.", "Declining visibility.")}
+        intervention={[
+          t("Doing Business Platform déployée", "Doing Business Platform deployed"),
+          t("Repositionnement stratégique", "Strategic repositioning"),
+        ]}
+        result={t("Notoriété restaurée immédiatement.", "Visibility restored immediately.")}
+      />
+    </DetailPageLayout>
+  );
+};
 export default SoftPowerInfluence;

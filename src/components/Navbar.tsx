@@ -5,59 +5,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate, useLocation } from "react-router-dom";
 import { FormStrategicExchange } from "./FormModals";
 
-const situationsItems = [
-  { label: "Décider sans visibilité", desc: "Manque d'information fiable pour décider", icon: Eye, route: "/situations/decider-sans-visibilite" },
-  { label: "Subir des attaques", desc: "Manipulations et désinformation", icon: Shield, route: "/situations/attaques-informationnelles" },
-  { label: "Perdre de l'attractivité", desc: "Déficit de rayonnement territorial", icon: TrendingDown, route: "/situations/deficit-attractivite" },
-  { label: "Sombrer dans une crise", desc: "Effondrement progressif non maîtrisé", icon: AlertTriangle, route: "/situations/crises-non-maitrisees" },
-  { label: "Perdre en vélocité", desc: "Retard face aux concurrents", icon: Zap, route: "/situations/perte-velocite" },
-  { label: "Déficit d'influence", desc: "Marginalisation institutionnelle", icon: Building2, route: "/situations/deficit-influence" },
-  { label: "Investir sous risque invisible", desc: "Due diligence insuffisante", icon: DollarSign, route: "/situations/investir-sous-risque" },
-  { label: "Gouverner sous pression", desc: "Pression médiatique et émotionnelle", icon: Radio, route: "/situations/gouverner-sous-pression" },
-];
-
-const solutionsCols = [
-  {
-    icon: FlaskConical,
-    title: "STRATEGIC\nINTELLIGENCE LAB",
-    route: "/solutions/strategic-intelligence-lab",
-    items: [
-      { label: "Strategic Foresight", desc: "Veille et anticipation stratégique", route: "/solutions/strategic-intelligence-lab" },
-      { label: "Threat Intelligence", desc: "Détection et neutralisation des menaces", route: "/solutions/strategic-intelligence-lab" },
-      { label: "Expérimentations & POCs", desc: "Prototypes et modèles prédictifs", route: "/solutions/strategic-intelligence-lab" },
-    ],
-  },
-  {
-    icon: Search,
-    title: "DEEP\nDUE DILIGENCE",
-    route: "/solutions/deep-due-diligence",
-    items: [
-      { label: "Level 1: Integrity Check", desc: "Screening PEP et signaux faibles", route: "/solutions/deep-due-diligence" },
-      { label: "Level 2: Strategic Risk Profiling", desc: "Cartographie et analyse géopolitique", route: "/solutions/deep-due-diligence" },
-      { label: "Level 3: Regulatory Compliance", desc: "Audit KYC, KYS, LCB-FT, ESG", route: "/solutions/deep-due-diligence" },
-    ],
-  },
-  {
-    icon: Satellite,
-    title: "SOFT POWER\n& INFLUENCE",
-    route: "/solutions/soft-power-influence",
-    items: [
-      { label: "Intelligence d'Influence", desc: "Cartographie des réseaux de pouvoir", route: "/solutions/soft-power-influence" },
-      { label: "Political Intelligence", desc: "Mapping des décideurs publics", route: "/solutions/soft-power-influence" },
-      { label: "Territorial Influence Lab", desc: "Attractivité et compétitivité", route: "/solutions/soft-power-influence" },
-    ],
-  },
-];
-
-const innovationItems = [
-  { label: "AI Powered Monitor", desc: "Veille stratégique augmentée par l'IA", icon: Brain, route: "/capacites/ai-powered-monitor" },
-  { label: "Strategic Workflow", desc: "Culture de décision augmentée", icon: Workflow, route: "/capacites/strategic-workflow" },
-  { label: "Knowledge Capitalization", desc: "Intelligence collective structurée", icon: Database, route: "/capacites/knowledge-capitalization" },
-  { label: "Competitive Velocity Engine", desc: "Mapping dynamique concurrentiel", icon: Gauge, route: "/capacites/competitive-velocity-engine" },
-];
-
 const Navbar = () => {
-  const { lang, setLang } = useLanguage();
+  const { lang, setLang, t } = useLanguage();
   const [open, setOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [scrolled, setScrolled] = useState(false);
@@ -71,13 +20,64 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  const situationsItems = [
+    { label: t("Décider sans visibilité", "Deciding without visibility"), desc: t("Manque d'information fiable pour décider", "Lack of reliable information for decision-making"), icon: Eye, route: "/situations/decider-sans-visibilite" },
+    { label: t("Subir des attaques", "Suffering information attacks"), desc: t("Manipulations et désinformation", "Manipulation and disinformation"), icon: Shield, route: "/situations/attaques-informationnelles" },
+    { label: t("Perdre de l'attractivité", "Losing attractiveness"), desc: t("Déficit de rayonnement territorial", "Territorial influence deficit"), icon: TrendingDown, route: "/situations/deficit-attractivite" },
+    { label: t("Sombrer dans une crise", "Sinking into a crisis"), desc: t("Effondrement progressif non maîtrisé", "Uncontrolled progressive collapse"), icon: AlertTriangle, route: "/situations/crises-non-maitrisees" },
+    { label: t("Perdre en vélocité", "Losing velocity"), desc: t("Retard face aux concurrents", "Falling behind competitors"), icon: Zap, route: "/situations/perte-velocite" },
+    { label: t("Déficit d'influence", "Influence deficit"), desc: t("Marginalisation institutionnelle", "Institutional marginalization"), icon: Building2, route: "/situations/deficit-influence" },
+    { label: t("Investir sous risque invisible", "Investing under invisible risk"), desc: t("Due diligence insuffisante", "Insufficient due diligence"), icon: DollarSign, route: "/situations/investir-sous-risque" },
+    { label: t("Gouverner sous pression", "Governing under pressure"), desc: t("Pression médiatique et émotionnelle", "Media and emotional pressure"), icon: Radio, route: "/situations/gouverner-sous-pression" },
+  ];
+
+  const solutionsCols = [
+    {
+      icon: FlaskConical,
+      title: "STRATEGIC\nINTELLIGENCE LAB",
+      route: "/solutions/strategic-intelligence-lab",
+      items: [
+        { label: "Strategic Foresight", desc: t("Veille et anticipation stratégique", "Strategic monitoring and foresight"), route: "/solutions/strategic-intelligence-lab" },
+        { label: "Threat Intelligence", desc: t("Détection et neutralisation des menaces", "Threat detection and neutralization"), route: "/solutions/strategic-intelligence-lab" },
+        { label: t("Expérimentations & POCs", "Experiments & POCs"), desc: t("Prototypes et modèles prédictifs", "Prototypes and predictive models"), route: "/solutions/strategic-intelligence-lab" },
+      ],
+    },
+    {
+      icon: Search,
+      title: "DEEP\nDUE DILIGENCE",
+      route: "/solutions/deep-due-diligence",
+      items: [
+        { label: "Level 1: Integrity Check", desc: t("Screening PEP et signaux faibles", "PEP screening and weak signals"), route: "/solutions/deep-due-diligence" },
+        { label: "Level 2: Strategic Risk Profiling", desc: t("Cartographie et analyse géopolitique", "Mapping and geopolitical analysis"), route: "/solutions/deep-due-diligence" },
+        { label: "Level 3: Regulatory Compliance", desc: t("Audit KYC, KYS, LCB-FT, ESG", "KYC, KYS, AML-CFT, ESG Audit"), route: "/solutions/deep-due-diligence" },
+      ],
+    },
+    {
+      icon: Satellite,
+      title: "SOFT POWER\n& INFLUENCE",
+      route: "/solutions/soft-power-influence",
+      items: [
+        { label: t("Intelligence d'Influence", "Influence Intelligence"), desc: t("Cartographie des réseaux de pouvoir", "Power network mapping"), route: "/solutions/soft-power-influence" },
+        { label: "Political Intelligence", desc: t("Mapping des décideurs publics", "Public decision-maker mapping"), route: "/solutions/soft-power-influence" },
+        { label: "Territorial Influence Lab", desc: t("Attractivité et compétitivité", "Attractiveness and competitiveness"), route: "/solutions/soft-power-influence" },
+      ],
+    },
+  ];
+
+  const innovationItems = [
+    { label: "AI Powered Monitor", desc: t("Veille stratégique augmentée par l'IA", "AI-augmented strategic monitoring"), icon: Brain, route: "/capacites/ai-powered-monitor" },
+    { label: "Strategic Workflow", desc: t("Culture de décision augmentée", "Augmented decision culture"), icon: Workflow, route: "/capacites/strategic-workflow" },
+    { label: "Knowledge Capitalization", desc: t("Intelligence collective structurée", "Structured collective intelligence"), icon: Database, route: "/capacites/knowledge-capitalization" },
+    { label: "Competitive Velocity Engine", desc: t("Mapping dynamique concurrentiel", "Dynamic competitive mapping"), icon: Gauge, route: "/capacites/competitive-velocity-engine" },
+  ];
+
   const navItems = [
-    { label: "Vos Situations Critiques", href: "#situations-critiques", dropdown: "situations" },
-    { label: "Nos Solutions", href: "#nos-solutions", dropdown: "solutions" },
+    { label: t("Vos Situations Critiques", "Your Critical Situations"), href: "#situations-critiques", dropdown: "situations" },
+    { label: t("Nos Solutions", "Our Solutions"), href: "#nos-solutions", dropdown: "solutions" },
     { label: "Strategic Innovation", href: "#strategic-innovation", dropdown: "innovation" },
     { label: "Success Stories", href: "#success-stories" },
     { label: "Insights & Resources", href: "#insights" },
-    { label: "Pourquoi Buildfluence", href: "#pourquoi-buildfluence" },
+    { label: t("Pourquoi Buildfluence", "Why Buildfluence"), href: "#pourquoi-buildfluence" },
   ];
 
   const handleNavClick = (href: string) => {
@@ -111,7 +111,6 @@ const Navbar = () => {
         }}
       >
         <div className="container flex h-20 items-center justify-between">
-          {/* Logo — Build in navy, fluence in yellow */}
           <a href="/" onClick={(e) => { e.preventDefault(); navigate("/"); }} className="flex items-center">
             <span className="font-serif text-xl tracking-tight">
               <span className="font-bold" style={{ color: '#103E8C' }}>Build</span>
@@ -119,7 +118,6 @@ const Navbar = () => {
             </span>
           </a>
 
-          {/* Desktop nav */}
           <div className="hidden items-center gap-5 xl:flex">
             {navItems.map((item) => (
               <div
@@ -140,7 +138,6 @@ const Navbar = () => {
                   {item.dropdown && <ChevronDown className="h-3 w-3" />}
                 </a>
 
-                {/* ─── Situations dropdown (cision-style) ─── */}
                 {item.dropdown === "situations" && (
                   <AnimatePresence>
                     {activeDropdown === "situations" && (
@@ -157,12 +154,10 @@ const Navbar = () => {
                             const Icon = s.icon;
                             return (
                               <button
-                                key={s.label}
+                                key={s.route}
                                 onClick={() => goTo(s.route)}
                                 className="flex items-start gap-3 rounded-lg px-3 py-3 text-left transition-all hover:bg-gray-50"
-                                style={{
-                                  background: idx === 0 ? 'hsl(213 40% 96%)' : 'transparent',
-                                }}
+                                style={{ background: idx === 0 ? 'hsl(213 40% 96%)' : 'transparent' }}
                               >
                                 <Icon className="mt-0.5 h-4 w-4 shrink-0" style={{ color: '#103E8C' }} />
                                 <div>
@@ -178,7 +173,6 @@ const Navbar = () => {
                   </AnimatePresence>
                 )}
 
-                {/* ─── Solutions mega menu (cision-style) ─── */}
                 {item.dropdown === "solutions" && (
                   <AnimatePresence>
                     {activeDropdown === "solutions" && (
@@ -224,7 +218,7 @@ const Navbar = () => {
                                   onMouseOver={(e) => (e.currentTarget.style.color = '#e6c84e')}
                                   onMouseOut={(e) => (e.currentTarget.style.color = '#FFDE59')}
                                 >
-                                  → Voir toute l'offre
+                                  → {t("Voir toute l'offre", "View full offering")}
                                 </button>
                               </div>
                             );
@@ -235,7 +229,6 @@ const Navbar = () => {
                   </AnimatePresence>
                 )}
 
-                {/* ─── Innovation dropdown (cision-style) ─── */}
                 {item.dropdown === "innovation" && (
                   <AnimatePresence>
                     {activeDropdown === "innovation" && (
@@ -271,7 +264,7 @@ const Navbar = () => {
                             onClick={(e) => { e.preventDefault(); handleNavClick("#strategic-innovation"); }}
                             className="btn-gold inline-block px-6 py-2 text-[11px]"
                           >
-                            Explorer...
+                            {t("Explorer...", "Explore...")}
                           </a>
                         </div>
                       </motion.div>
@@ -281,7 +274,6 @@ const Navbar = () => {
               </div>
             ))}
 
-            {/* EN flag */}
             <button
               onClick={() => setLang(lang === "fr" ? "en" : "fr")}
               className="flex items-center gap-1.5 text-[12px] font-medium cursor-pointer transition-colors"
@@ -297,17 +289,15 @@ const Navbar = () => {
               onMouseOver={(e) => { e.currentTarget.style.background = 'hsl(213 40% 22%)'; }}
               onMouseOut={(e) => { e.currentTarget.style.background = 'hsl(213 40% 18%)'; }}
             >
-              Échange Stratégique
+              {t("Échange Stratégique", "Strategic Exchange")}
             </button>
           </div>
 
-          {/* Mobile toggle */}
           <button onClick={() => setOpen(!open)} className="xl:hidden" style={{ color: '#0D1B2A' }} aria-label="Menu">
             {open ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
 
-        {/* Mobile menu */}
         <AnimatePresence>
           {open && (
             <motion.div
@@ -334,7 +324,7 @@ const Navbar = () => {
                   className="mt-2 w-full py-3 text-center text-sm font-semibold uppercase tracking-wider"
                   style={{ background: 'hsl(213 40% 18%)', color: '#FFFFFF' }}
                 >
-                  Échange Stratégique
+                  {t("Échange Stratégique", "Strategic Exchange")}
                 </button>
               </div>
             </motion.div>
