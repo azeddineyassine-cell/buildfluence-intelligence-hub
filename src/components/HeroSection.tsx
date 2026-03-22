@@ -1,15 +1,17 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { FormStrategicExchange } from "./FormModals";
 
 const HeroSection = () => {
   const [formOpen, setFormOpen] = useState(false);
+  const { t } = useLanguage();
 
   const stats = [
-    { value: "25+", label: "Années d'expertise" },
-    { value: "59", label: "Pays couverts" },
-    { value: "19M$", label: "Politiques publiques" },
-    { value: "400M$", label: "Investissements sécurisés" },
+    { value: "25+", label: t("Années d'expertise", "Years of expertise") },
+    { value: "59", label: t("Pays couverts", "Countries covered") },
+    { value: "19M$", label: t("Politiques publiques", "Public policies") },
+    { value: "400M$", label: t("Investissements sécurisés", "Secured investments") },
   ];
 
   return (
@@ -17,7 +19,6 @@ const HeroSection = () => {
       <section className="relative flex min-h-screen items-center overflow-hidden" style={{ background: '#FFFFFF' }}>
         <div className="container relative z-10 pt-20">
           <div className="mx-auto max-w-4xl text-center">
-            {/* Eyebrow */}
             <motion.div
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
@@ -27,7 +28,6 @@ const HeroSection = () => {
               <span style={{ color: '#000000' }}>SOVEREIGN DECISION INFRASTRUCTURE</span>
             </motion.div>
 
-            {/* H1 */}
             <motion.h1
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
@@ -35,12 +35,11 @@ const HeroSection = () => {
               className="font-serif font-bold leading-[1.08]"
               style={{ fontSize: 'clamp(2rem, 5vw, 4rem)', lineHeight: 1.08, color: '#0D1B2A', maxWidth: '800px', margin: '0 auto' }}
             >
-              Révéler l'architecture dissimulée du
+              {t("Révéler l'architecture dissimulée du", "Revealing the hidden architecture of")}
               <br />
-              <span style={{ color: '#FFDE59' }}>pouvoir décisionnel</span>
+              <span style={{ color: '#FFDE59' }}>{t("pouvoir décisionnel", "decision-making power")}</span>
             </motion.h1>
 
-            {/* Quote */}
             <motion.p
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
@@ -48,10 +47,12 @@ const HeroSection = () => {
               className="mx-auto mt-10 max-w-xl text-lg italic"
               style={{ color: '#5A6170' }}
             >
-              "Les crises ne naissent pas du chaos, mais de l'illusion du contrôle."
+              {t(
+                "\"Les crises ne naissent pas du chaos, mais de l'illusion du contrôle.\"",
+                "\"Crises do not arise from chaos, but from the illusion of control.\""
+              )}
             </motion.p>
 
-            {/* CTAs */}
             <motion.div
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
@@ -59,14 +60,13 @@ const HeroSection = () => {
               className="mt-12 flex flex-col items-center justify-center gap-4 sm:flex-row"
             >
               <button onClick={() => setFormOpen(true)} className="btn-gold">
-                Réserver mon échange stratégique
+                {t("Réserver mon échange stratégique", "Book my strategic exchange")}
               </button>
               <a href="#nos-solutions" className="btn-ghost-gold" style={{ color: '#0D1B2A', borderColor: 'hsl(43 50% 54% / 0.5)' }}>
-                DÉCOUVRIR NOS SOLUTIONS
+                {t("DÉCOUVRIR NOS SOLUTIONS", "DISCOVER OUR SOLUTIONS")}
               </a>
             </motion.div>
 
-            {/* Trust bar */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -75,11 +75,13 @@ const HeroSection = () => {
             >
               <div className="h-px w-full" style={{ background: 'linear-gradient(90deg, transparent, hsl(43 50% 54% / 0.3), transparent)' }} />
               <p className="mt-4 text-[11px] font-medium uppercase tracking-[0.15em]" style={{ color: '#8A8F9E' }}>
-                Gouvernements · Institutions Internationales · Multinationales · Fonds d'Investissement
+                {t(
+                  "Gouvernements · Institutions Internationales · Multinationales · Fonds d'Investissement",
+                  "Governments · International Institutions · Multinationals · Investment Funds"
+                )}
               </p>
             </motion.div>
 
-            {/* Stats */}
             <motion.div
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}

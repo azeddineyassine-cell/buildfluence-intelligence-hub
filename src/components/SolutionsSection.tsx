@@ -2,65 +2,67 @@ import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { FlaskConical, SearchCheck, Radio } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const SolutionsSection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.15 });
   const navigate = useNavigate();
+  const { t } = useLanguage();
 
   const pillars = [
     {
       icon: FlaskConical,
-      label: "Pilier I",
+      label: t("Pilier I", "Pillar I"),
       title: "Strategic Intelligence Lab",
       route: "/solutions/strategic-intelligence-lab",
-      punchline: "Anticiper les ruptures, neutraliser les menaces, saisir les opportunités avant qu'elles ne deviennent visibles.",
+      punchline: t("Anticiper les ruptures, neutraliser les menaces, saisir les opportunités avant qu'elles ne deviennent visibles.", "Anticipate disruptions, neutralize threats, seize opportunities before they become visible."),
       services: [
         { label: "Strategic Foresight", route: "/solutions/strategic-intelligence-lab" },
         { label: "Threat Intelligence", route: "/solutions/strategic-intelligence-lab" },
         { label: "Competitive Mapping", route: "/solutions/strategic-intelligence-lab" },
       ],
       capabilities: [
-        "Veille stratégique multicanale augmentée par l'IA",
-        "Détection de signaux faibles et ruptures technologiques",
-        "Cartographie dynamique des écosystèmes concurrentiels",
-        "Recommandations tactiques actionnables",
+        t("Veille stratégique multicanale augmentée par l'IA", "AI-augmented multi-channel strategic monitoring"),
+        t("Détection de signaux faibles et ruptures technologiques", "Weak signal detection and technological disruptions"),
+        t("Cartographie dynamique des écosystèmes concurrentiels", "Dynamic mapping of competitive ecosystems"),
+        t("Recommandations tactiques actionnables", "Actionable tactical recommendations"),
       ],
     },
     {
       icon: SearchCheck,
-      label: "Pilier II",
+      label: t("Pilier II", "Pillar II"),
       title: "Deep Due Diligence",
       route: "/solutions/deep-due-diligence",
-      punchline: "Le risque n'est jamais visible. Il se loge dans l'angle mort de ceux qui ne vérifient pas assez profondément.",
+      punchline: t("Le risque n'est jamais visible. Il se loge dans l'angle mort de ceux qui ne vérifient pas assez profondément.", "Risk is never visible. It hides in the blind spot of those who don't verify deeply enough."),
       services: [
         { label: "Integrity Check", route: "/solutions/deep-due-diligence" },
         { label: "Risk Profiling", route: "/solutions/deep-due-diligence" },
         { label: "Regulatory Compliance", route: "/solutions/deep-due-diligence" },
       ],
       capabilities: [
-        "Vérification d'intégrité des contreparties",
-        "Analyse des structures offshore et montages complexes",
-        "Profilage de risque stratégique",
-        "Conformité réglementaire et sanctions",
+        t("Vérification d'intégrité des contreparties", "Counterparty integrity verification"),
+        t("Analyse des structures offshore et montages complexes", "Offshore structures and complex schemes analysis"),
+        t("Profilage de risque stratégique", "Strategic risk profiling"),
+        t("Conformité réglementaire et sanctions", "Regulatory compliance and sanctions"),
       ],
     },
     {
       icon: Radio,
-      label: "Pilier III",
+      label: t("Pilier III", "Pillar III"),
       title: "Soft Power & Influence",
       route: "/solutions/soft-power-influence",
-      punchline: "Ceux qui n'écrivent pas leur propre récit sont condamnés à subir celui des autres.",
+      punchline: t("Ceux qui n'écrivent pas leur propre récit sont condamnés à subir celui des autres.", "Those who don't write their own narrative are condemned to endure that of others."),
       services: [
-        { label: "Intelligence d'influence", route: "/solutions/soft-power-influence" },
+        { label: t("Intelligence d'influence", "Influence Intelligence"), route: "/solutions/soft-power-influence" },
         { label: "Political Intelligence", route: "/solutions/soft-power-influence" },
-        { label: "Attractivité Territoriale", route: "/solutions/soft-power-influence" },
+        { label: t("Attractivité Territoriale", "Territorial Attractiveness"), route: "/solutions/soft-power-influence" },
       ],
       capabilities: [
-        "Construction et protection du narratif stratégique",
-        "Intelligence politique et cartographie des cercles décisionnels",
-        "Stratégies d'attractivité territoriale et de marque pays",
-        "Positionnement dans les cercles de pouvoir",
+        t("Construction et protection du narratif stratégique", "Strategic narrative construction and protection"),
+        t("Intelligence politique et cartographie des cercles décisionnels", "Political intelligence and decision-making circles mapping"),
+        t("Stratégies d'attractivité territoriale et de marque pays", "Territorial attractiveness and nation branding strategies"),
+        t("Positionnement dans les cercles de pouvoir", "Positioning within power circles"),
       ],
     },
   ];
@@ -76,12 +78,12 @@ const SolutionsSection = () => {
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
           className="mx-auto max-w-3xl text-center"
         >
-          <span className="label-accent">Nos Solutions</span>
+          <span className="label-accent">{t("Nos Solutions", "Our Solutions")}</span>
           <h2 className="mt-4 font-serif text-3xl font-bold leading-tight sm:text-4xl md:text-5xl" style={{ color: '#0D1B2A' }}>
-            Trois piliers au service de votre compétitivité et votre attractivité
+            {t("Trois piliers au service de votre compétitivité et votre attractivité", "Three pillars serving your competitiveness and attractiveness")}
           </h2>
           <p className="mt-4 text-lg" style={{ color: '#5A6170' }}>
-            Nous bâtissons des écosystèmes décisionnels au service de la compétitivité, de l'attractivité et de la souveraineté.
+            {t("Nous bâtissons des écosystèmes décisionnels au service de la compétitivité, de l'attractivité et de la souveraineté.", "We build decision-making ecosystems serving competitiveness, attractiveness and sovereignty.")}
           </p>
         </motion.div>
 
@@ -137,7 +139,7 @@ const SolutionsSection = () => {
                 </div>
                 <div className="mt-5">
                   <span className="btn-gold inline-block px-5 py-2 text-[11px]">
-                    Explorer →
+                    {t("Explorer →", "Explore →")}
                   </span>
                 </div>
               </div>

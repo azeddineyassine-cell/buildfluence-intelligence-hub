@@ -4,22 +4,24 @@ import { FileText } from "lucide-react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
-
-const insights = [
-  { type: "Baromètre d'investissement", title: "Guerre informationnelle : les nouvelles armes de déstabilisation", description: "Décryptage des mécanismes de désinformation utilisés contre les institutions souveraines et les grands groupes industriels.", summary: "Résumé de l'analyse — contenu détaillé à définir selon les spécifications du projet." },
-  { type: "Baromètre d'investissement", title: "Due diligence approfondie : au-delà de la conformité", description: "Pourquoi les méthodologies classiques de due diligence laissent 70% des risques dans l'angle mort des décideurs.", summary: "Résumé de la note — contenu détaillé à définir selon les spécifications du projet." },
-  { type: "Baromètre d'investissement", title: "Souveraineté décisionnelle à l'ère de l'IA", description: "Intervention sur les enjeux de souveraineté informationnelle et la transformation des infrastructures décisionnelles.", summary: "Résumé de la conférence — contenu détaillé à définir selon les spécifications du projet." },
-];
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const InsightsSection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.2 });
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const { toast } = useToast();
+  const { t } = useLanguage();
+
+  const insights = [
+    { type: t("Baromètre d'investissement", "Investment barometer"), title: t("Guerre informationnelle : les nouvelles armes de déstabilisation", "Information warfare: the new weapons of destabilization"), description: t("Décryptage des mécanismes de désinformation utilisés contre les institutions souveraines et les grands groupes industriels.", "Decoding disinformation mechanisms used against sovereign institutions and major industrial groups."), summary: t("Résumé de l'analyse — contenu détaillé à définir selon les spécifications du projet.", "Analysis summary — detailed content to be defined per project specifications.") },
+    { type: t("Baromètre d'investissement", "Investment barometer"), title: t("Due diligence approfondie : au-delà de la conformité", "Deep due diligence: beyond compliance"), description: t("Pourquoi les méthodologies classiques de due diligence laissent 70% des risques dans l'angle mort des décideurs.", "Why traditional due diligence methodologies leave 70% of risks in decision-makers' blind spots."), summary: t("Résumé de la note — contenu détaillé à définir selon les spécifications du projet.", "Note summary — detailed content to be defined per project specifications.") },
+    { type: t("Baromètre d'investissement", "Investment barometer"), title: t("Souveraineté décisionnelle à l'ère de l'IA", "Decision-making sovereignty in the age of AI"), description: t("Intervention sur les enjeux de souveraineté informationnelle et la transformation des infrastructures décisionnelles.", "Addressing informational sovereignty challenges and the transformation of decision-making infrastructures."), summary: t("Résumé de la conférence — contenu détaillé à définir selon les spécifications du projet.", "Conference summary — detailed content to be defined per project specifications.") },
+  ];
 
   const handleDownload = (e: React.FormEvent) => {
     e.preventDefault();
-    toast({ title: "Demande envoyée", description: "Vous recevrez l'étude par email." });
+    toast({ title: t("Demande envoyée", "Request sent"), description: t("Vous recevrez l'étude par email.", "You will receive the study by email.") });
     setOpenIndex(null);
   };
 
@@ -34,10 +36,10 @@ const InsightsSection = () => {
         >
           <span className="label-accent">Insights & Resources</span>
           <h2 className="mt-4 font-serif text-3xl font-bold leading-tight sm:text-4xl md:text-5xl" style={{ color: '#0D1B2A' }}>
-            Éclairages stratégiques
+            {t("Éclairages stratégiques", "Strategic insights")}
           </h2>
           <p className="mt-4 text-base" style={{ color: '#5A6170' }}>
-            Analyses, guides et notes stratégiques au service de la compréhension des enjeux majeurs
+            {t("Analyses, guides et notes stratégiques au service de la compréhension des enjeux majeurs", "Analyses, guides and strategic notes serving the understanding of major challenges")}
           </p>
         </motion.div>
 
@@ -59,7 +61,7 @@ const InsightsSection = () => {
               <h3 className="font-serif text-base font-bold leading-snug" style={{ color: '#0D1B2A' }}>{item.title}</h3>
               <p className="mt-2 flex-1 text-[13px] leading-relaxed" style={{ color: '#6B7280' }}>{item.description}</p>
               <span className="mt-4 text-xs font-medium transition-colors" style={{ color: 'hsl(43 50% 54%)' }}>
-                Lire & télécharger →
+                {t("Lire & télécharger →", "Read & download →")}
               </span>
             </motion.button>
           ))}
@@ -78,11 +80,11 @@ const InsightsSection = () => {
                 <p className="mt-2 text-sm" style={{ color: '#8A8F9E' }}>{insights[openIndex].summary}</p>
               </div>
               <form onSubmit={handleDownload} className="space-y-3">
-                <Input required name="name" placeholder="Nom" style={{ background: 'hsl(210 40% 12%)', borderColor: 'hsl(220 20% 20%)', color: '#F0EDE6' }} />
+                <Input required name="name" placeholder={t("Nom", "Name")} style={{ background: 'hsl(210 40% 12%)', borderColor: 'hsl(220 20% 20%)', color: '#F0EDE6' }} />
                 <Input required type="email" name="email" placeholder="Email" style={{ background: 'hsl(210 40% 12%)', borderColor: 'hsl(220 20% 20%)', color: '#F0EDE6' }} />
                 <Input name="org" placeholder="Organisation" style={{ background: 'hsl(210 40% 12%)', borderColor: 'hsl(220 20% 20%)', color: '#F0EDE6' }} />
-                <Input name="fonction" placeholder="Fonction" style={{ background: 'hsl(210 40% 12%)', borderColor: 'hsl(220 20% 20%)', color: '#F0EDE6' }} />
-                <button type="submit" className="btn-gold w-full text-[11px]">Télécharger l'étude</button>
+                <Input name="fonction" placeholder={t("Fonction", "Position")} style={{ background: 'hsl(210 40% 12%)', borderColor: 'hsl(220 20% 20%)', color: '#F0EDE6' }} />
+                <button type="submit" className="btn-gold w-full text-[11px]">{t("Télécharger l'étude", "Download the study")}</button>
               </form>
             </div>
           </DialogContent>

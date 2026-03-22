@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import { motion } from "framer-motion";
 import { ReactNode, useState } from "react";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { FormStrategicExchange, FormDiagnostic } from "@/components/FormModals";
 
 interface DetailPageLayoutProps {
@@ -16,6 +17,7 @@ interface DetailPageLayoutProps {
 
 const DetailPageLayout = ({ title, chapeau, children, ctas, situationContext }: DetailPageLayoutProps) => {
   const navigate = useNavigate();
+  const { t } = useLanguage();
   const [f1Open, setF1Open] = useState(false);
   const [f2Open, setF2Open] = useState(false);
 
@@ -35,7 +37,7 @@ const DetailPageLayout = ({ title, chapeau, children, ctas, situationContext }: 
             className="mb-8 inline-flex items-center gap-2 text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
           >
             <ArrowLeft className="h-4 w-4" />
-            Retour
+            {t("Retour", "Back")}
           </button>
 
           <motion.div
