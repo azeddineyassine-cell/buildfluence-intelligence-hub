@@ -4,18 +4,6 @@ import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
 import { Lock } from "lucide-react";
 
-const situations = [
-  "Décider sans visibilité",
-  "Subir des attaques informationnelles",
-  "Perdre la bataille de l'attractivité",
-  "Sombrer dans une crise non maîtrisée",
-  "Perdre en vélocité face aux concurrents",
-  "Déficit d'influence institutionnel",
-  "Investir sous risque invisible",
-  "Gouverner sous pression médiatique",
-  "Autre",
-];
-
 const platforms = [
   "AI Powered Monitor",
   "Strategic Workflow",
@@ -29,10 +17,15 @@ const darkInputStyle = {
   color: '#F0EDE6',
 };
 
+const thematiques = ["Solution", "Strategic Innovation", "Situation critique"];
+const priorites = ["Priorité basse", "Priorité normale", "Haute Priorité"];
+
 /* ── FORM 1: Strategic Exchange ── */
 export const FormStrategicExchange = ({ open, onClose }: { open: boolean; onClose: () => void }) => {
   const { toast } = useToast();
   const [submitting, setSubmitting] = useState(false);
+  const [thematique, setThematique] = useState("");
+  const [priorite, setPriorite] = useState("Priorité normale");
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -46,7 +39,7 @@ export const FormStrategicExchange = ({ open, onClose }: { open: boolean; onClos
 
   return (
     <Dialog open={open} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-lg" style={{ background: '#0D1B2A', border: '1px solid hsl(220 20% 20%)', color: '#F0EDE6' }}>
+      <DialogContent className="sm:max-w-2xl" style={{ background: '#1a1a2e', border: '1px solid hsl(220 20% 20%)', color: '#F0EDE6' }}>
         <DialogHeader>
           <DialogTitle className="font-serif text-xl" style={{ color: '#F0EDE6' }}>Réserver mon échange stratégique</DialogTitle>
         </DialogHeader>
@@ -63,18 +56,64 @@ export const FormStrategicExchange = ({ open, onClose }: { open: boolean; onClos
             <Input required type="email" name="email" placeholder="Email professionnel" maxLength={255} style={darkInputStyle} />
           </div>
           <Input type="tel" name="phone" placeholder="Téléphone" maxLength={20} style={darkInputStyle} />
-          <select
-            required
-            name="enjeu"
+
+          {/* Thématique + Priorité side by side */}
+          <div className="grid gap-4 sm:grid-cols-2">
+            <div>
+              <label className="mb-2 block text-xs font-semibold uppercase tracking-wider" style={{ color: '#8A8F9E' }}>Thématique choisie</label>
+              <div className="space-y-2">
+                {thematiques.map((t) => (
+                  <label key={t} className="flex items-center gap-2 cursor-pointer text-sm" style={{ color: '#F0EDE6' }}>
+                    <input
+                      type="radio"
+                      name="thematique"
+                      value={t}
+                      checked={thematique === t}
+                      onChange={() => setThematique(t)}
+                      className="accent-yellow-400"
+                    />
+                    {t}
+                  </label>
+                ))}
+              </div>
+            </div>
+            <div>
+              <label className="mb-2 block text-xs font-semibold uppercase tracking-wider" style={{ color: '#8A8F9E' }}>Priorité</label>
+              <div className="space-y-2">
+                {priorites.map((p) => (
+                  <label key={p} className="flex items-center gap-2 cursor-pointer text-sm" style={{ color: '#F0EDE6' }}>
+                    <input
+                      type="radio"
+                      name="priorite"
+                      value={p}
+                      checked={priorite === p}
+                      onChange={() => setPriorite(p)}
+                      className="accent-yellow-400"
+                    />
+                    {p}
+                  </label>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Textarea */}
+          <textarea
+            name="message"
+            placeholder="Tapez votre texte..."
+            maxLength={1000}
+            rows={4}
             className="w-full rounded-sm px-3 py-2.5 text-sm"
-            style={{ ...darkInputStyle, appearance: 'auto' }}
-          >
-            <option value="">Enjeu stratégique principal</option>
-            {situations.map(s => <option key={s} value={s}>{s}</option>)}
-          </select>
+            style={darkInputStyle}
+          />
+
           <button type="submit" disabled={submitting} className="btn-gold w-full disabled:opacity-50">
-            {submitting ? "Envoi..." : "Soumettre ma demande"}
+            {submitting ? "Envoi..." : "SOUMETTRE MA DEMANDE"}
           </button>
+
+          <div className="flex items-center justify-center gap-2 text-[11px]" style={{ color: '#8A8F9E' }}>
+            <Lock className="h-3 w-3" /> Communication sécurisée et confidentielle
+          </div>
         </form>
       </DialogContent>
     </Dialog>
@@ -98,7 +137,7 @@ export const FormDiagnostic = ({ open, onClose, situation = "" }: { open: boolea
 
   return (
     <Dialog open={open} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-md" style={{ background: '#0D1B2A', border: '1px solid hsl(220 20% 20%)', color: '#F0EDE6' }}>
+      <DialogContent className="sm:max-w-md" style={{ background: '#1a1a2e', border: '1px solid hsl(220 20% 20%)', color: '#F0EDE6' }}>
         <DialogHeader>
           <DialogTitle className="font-serif text-xl" style={{ color: '#F0EDE6' }}>Évaluer ma situation — GRATUIT</DialogTitle>
         </DialogHeader>
@@ -132,7 +171,7 @@ export const FormDemo = ({ open, onClose }: { open: boolean; onClose: () => void
 
   return (
     <Dialog open={open} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-md" style={{ background: '#0D1B2A', border: '1px solid hsl(220 20% 20%)', color: '#F0EDE6' }}>
+      <DialogContent className="sm:max-w-md" style={{ background: '#1a1a2e', border: '1px solid hsl(220 20% 20%)', color: '#F0EDE6' }}>
         <DialogHeader>
           <DialogTitle className="font-serif text-xl" style={{ color: '#F0EDE6' }}>Demander une démo</DialogTitle>
         </DialogHeader>

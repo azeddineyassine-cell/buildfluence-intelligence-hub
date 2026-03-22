@@ -62,7 +62,7 @@ const HeroSection = () => {
                 Réserver mon échange stratégique
               </button>
               <a href="#nos-solutions" className="btn-ghost-gold" style={{ color: '#0D1B2A', borderColor: 'hsl(43 50% 54% / 0.5)' }}>
-                Découvrir nos solutions
+                DÉCOUVRIR NOS SOLUTIONS
               </a>
             </motion.div>
 
