@@ -57,6 +57,7 @@ const innovationItems = [
 ];
 
 const Navbar = () => {
+  const { lang, setLang } = useLanguage();
   const [open, setOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [scrolled, setScrolled] = useState(false);
