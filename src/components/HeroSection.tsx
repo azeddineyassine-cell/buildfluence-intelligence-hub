@@ -24,7 +24,7 @@ const HeroSection = () => {
               transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
               className="label-accent mb-8 inline-block"
             >
-              SOVEREIGN DECISION INFRASTRUCTURE
+              <span style={{ color: '#000000' }}>SOVEREIGN DECISION INFRASTRUCTURE</span>
             </motion.div>
 
             {/* H1 */}
