@@ -37,7 +37,7 @@ const HeroSection = () => {
             >
               Révéler l'architecture dissimulée du
               <br />
-              <span style={{ color: 'hsl(43 50% 54%)' }}>pouvoir décisionnel</span>
+              <span style={{ color: '#FFDE59' }}>pouvoir décisionnel</span>
             </motion.h1>
 
             {/* Quote */}
