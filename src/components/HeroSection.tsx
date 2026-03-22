@@ -24,7 +24,7 @@ const HeroSection = () => {
               transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
               className="label-accent mb-8 inline-block"
             >
-              SOVEREIGN DECISION INFRASTRUCTURE
+              <span style={{ color: '#000000' }}>SOVEREIGN DECISION INFRASTRUCTURE</span>
             </motion.div>
 
             {/* H1 */}
@@ -37,7 +37,7 @@ const HeroSection = () => {
             >
               Révéler l'architecture dissimulée du
               <br />
-              <span style={{ color: 'hsl(43 50% 54%)' }}>pouvoir décisionnel</span>
+              <span style={{ color: '#FFDE59' }}>pouvoir décisionnel</span>
             </motion.h1>
 
             {/* Quote */}
@@ -62,7 +62,7 @@ const HeroSection = () => {
                 Réserver mon échange stratégique
               </button>
               <a href="#nos-solutions" className="btn-ghost-gold" style={{ color: '#0D1B2A', borderColor: 'hsl(43 50% 54% / 0.5)' }}>
-                Découvrir nos solutions
+                DÉCOUVRIR NOS SOLUTIONS
               </a>
             </motion.div>
 
