@@ -19,31 +19,32 @@
     --popover: 220 10% 96%;
     --popover-foreground: 220 20% 10%;
 
-    --primary: 43 50% 54%;
+    --primary: 40 66% 47%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 213 40% 18%;
+    --secondary: 218 42% 18%;
     --secondary-foreground: 0 0% 100%;
 
     --muted: 220 10% 92%;
     --muted-foreground: 220 10% 45%;
 
-    --accent: 43 50% 54%;
+    --accent: 40 66% 47%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 50% 35%;
     --destructive-foreground: 0 85% 97%;
 
-    --border: 220 10% 88%;
-    --input: 220 10% 88%;
-    --ring: 43 50% 54%;
+    --border: 30 10% 88%;
+    --input: 30 10% 88%;
+    --ring: 40 66% 47%;
 
     --radius: 0.125rem;
 
-    --gold: 43 50% 54%;
-    --gold-dim: 43 35% 40%;
-    --navy: 210 50% 8%;
-    --navy-deep: 210 40% 12%;
+    --gold: 40 66% 47%;
+    --gold-light: 38 76% 60%;
+    --gold-dim: 40 50% 38%;
+    --navy: 218 42% 18%;
+    --navy-deep: 218 50% 13%;
     --steel: 213 40% 18%;
     --danger: 0 50% 35%;
 
