@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import logoBuildfluence from "@/assets/Logo_Buildfluence.png";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Menu, X, ChevronDown, Eye, Shield, TrendingDown, AlertTriangle, Zap, Building2, DollarSign, Radio, FlaskConical, Search, Satellite, Brain, Workflow, Database, Gauge } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
