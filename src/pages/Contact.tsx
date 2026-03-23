@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
 import { Lock } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { supabase } from "@/integrations/supabase/client";
 
 const Contact = () => {
   const { toast } = useToast();
@@ -24,17 +25,32 @@ const Contact = () => {
     t("Autre", "Other"),
   ];
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
-    setTimeout(() => {
-      setIsSubmitting(false);
-      toast({
-        title: t("Demande envoyée", "Request sent"),
-        description: t("Un conseiller Buildfluence vous contactera dans les 24 heures.", "A Buildfluence advisor will contact you within 24 hours."),
-      });
-      (e.target as HTMLFormElement).reset();
-    }, 1500);
+    const form = e.target as HTMLFormElement;
+    const fd = new FormData(form);
+
+    const { error } = await supabase.from("contact_submissions").insert({
+      form_type: "contact",
+      name: fd.get("name") as string,
+      email: fd.get("email") as string,
+      organization: (fd.get("organization") as string) || null,
+      position: (fd.get("position") as string) || null,
+      phone: (fd.get("phone") as string) || null,
+      situation: (fd.get("enjeu") as string) || null,
+    });
+
+    setIsSubmitting(false);
+    if (error) {
+      toast({ title: t("Erreur", "Error"), description: t("Une erreur est survenue. Veuillez réessayer.", "An error occurred. Please try again."), variant: "destructive" });
+      return;
+    }
+    toast({
+      title: t("Demande envoyée", "Request sent"),
+      description: t("Un conseiller Buildfluence vous contactera dans les 24 heures.", "A Buildfluence advisor will contact you within 24 hours."),
+    });
+    form.reset();
   };
 
   return (

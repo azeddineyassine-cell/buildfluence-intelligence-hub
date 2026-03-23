@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
 import { Lock } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { supabase } from "@/integrations/supabase/client";
 
 const platforms = [
   "AI Powered Monitor",
@@ -12,7 +13,7 @@ const platforms = [
   "Knowledge Capitalization",
 ];
 
-const darkInputStyle = {
+const lightInputStyle = {
   background: '#FFFFFF',
   borderColor: '#D1D5DB',
   color: '#1a2744',
@@ -28,19 +29,39 @@ export const FormStrategicExchange = ({ open, onClose }: { open: boolean; onClos
   const thematiques = ["Solution", "Strategic Innovation", t("Situation critique", "Critical situation")];
   const priorites = [t("Priorité basse", "Low priority"), t("Priorité normale", "Normal priority"), t("Haute Priorité", "High priority")];
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setSubmitting(true);
-    setTimeout(() => {
-      setSubmitting(false);
-      toast({ title: t("Demande envoyée", "Request sent"), description: t("Un conseiller vous contactera sous 24h.", "An advisor will contact you within 24h.") });
-      onClose();
-    }, 1200);
+    const form = e.target as HTMLFormElement;
+    const fd = new FormData(form);
+
+    const { error } = await supabase.from("contact_submissions").insert({
+      form_type: "strategic_exchange",
+      name: fd.get("name") as string,
+      email: fd.get("email") as string,
+      organization: fd.get("org") as string,
+      position: fd.get("poste") as string,
+      phone: (fd.get("phone") as string) || null,
+      topic: thematique || null,
+      priority: priorite,
+      message: (fd.get("message") as string) || null,
+    });
+
+    setSubmitting(false);
+    if (error) {
+      toast({ title: t("Erreur", "Error"), description: t("Une erreur est survenue. Veuillez réessayer.", "An error occurred. Please try again."), variant: "destructive" });
+      return;
+    }
+    toast({ title: t("Demande envoyée", "Request sent"), description: t("Un conseiller vous contactera sous 24h.", "An advisor will contact you within 24h.") });
+    form.reset();
+    setThematique("");
+    setPriorite(t("Priorité normale", "Normal priority"));
+    onClose();
   };
 
   return (
     <Dialog open={open} onOpenChange={onClose}>
-        <DialogContent className="sm:max-w-2xl" style={{ background: '#F4F4F4', border: '1px solid #D1D5DB', color: '#1a2744' }}>
+      <DialogContent className="sm:max-w-2xl" style={{ background: '#F4F4F4', border: '1px solid #D1D5DB', color: '#1a2744' }}>
         <DialogHeader>
           <DialogTitle className="font-serif text-xl" style={{ color: '#1a2744' }}>{t("Demander mon échange stratégique", "Request my strategic exchange")}</DialogTitle>
         </DialogHeader>
@@ -49,14 +70,14 @@ export const FormStrategicExchange = ({ open, onClose }: { open: boolean; onClos
         </div>
         <form onSubmit={handleSubmit} className="mt-4 space-y-4">
           <div className="grid gap-4 sm:grid-cols-2">
-            <Input required name="name" placeholder={t("Nom", "Name")} maxLength={100} style={darkInputStyle} />
-            <Input required name="org" placeholder="Organisation" maxLength={100} style={darkInputStyle} />
+            <Input required name="name" placeholder={t("Nom", "Name")} maxLength={100} style={lightInputStyle} />
+            <Input required name="org" placeholder="Organisation" maxLength={100} style={lightInputStyle} />
           </div>
           <div className="grid gap-4 sm:grid-cols-2">
-            <Input required name="poste" placeholder={t("Poste / Fonction", "Position / Role")} maxLength={100} style={darkInputStyle} />
-            <Input required type="email" name="email" placeholder={t("Email professionnel", "Professional email")} maxLength={255} style={darkInputStyle} />
+            <Input required name="poste" placeholder={t("Poste / Fonction", "Position / Role")} maxLength={100} style={lightInputStyle} />
+            <Input required type="email" name="email" placeholder={t("Email professionnel", "Professional email")} maxLength={255} style={lightInputStyle} />
           </div>
-          <Input type="tel" name="phone" placeholder={t("Téléphone", "Phone")} maxLength={20} style={darkInputStyle} />
+          <Input type="tel" name="phone" placeholder={t("Téléphone", "Phone")} maxLength={20} style={lightInputStyle} />
 
           <div className="grid gap-4 sm:grid-cols-2">
             <div>
@@ -89,7 +110,7 @@ export const FormStrategicExchange = ({ open, onClose }: { open: boolean; onClos
             maxLength={1000}
             rows={4}
             className="w-full rounded-sm px-3 py-2.5 text-sm"
-            style={darkInputStyle}
+            style={lightInputStyle}
           />
 
           <button type="submit" disabled={submitting} className="btn-gold w-full disabled:opacity-50">
@@ -110,14 +131,27 @@ export const FormDiagnostic = ({ open, onClose, situation = "" }: { open: boolea
   const { t } = useLanguage();
   const [submitting, setSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setSubmitting(true);
-    setTimeout(() => {
-      setSubmitting(false);
-      toast({ title: t("Demande envoyée", "Request sent"), description: t("Diagnostic gratuit en cours de traitement.", "Free diagnostic being processed.") });
-      onClose();
-    }, 1200);
+    const form = e.target as HTMLFormElement;
+    const fd = new FormData(form);
+
+    const { error } = await supabase.from("contact_submissions").insert({
+      form_type: "diagnostic",
+      name: fd.get("name") as string,
+      email: fd.get("email") as string,
+      situation: (fd.get("situation") as string) || null,
+    });
+
+    setSubmitting(false);
+    if (error) {
+      toast({ title: t("Erreur", "Error"), description: t("Une erreur est survenue.", "An error occurred."), variant: "destructive" });
+      return;
+    }
+    toast({ title: t("Demande envoyée", "Request sent"), description: t("Diagnostic gratuit en cours de traitement.", "Free diagnostic being processed.") });
+    form.reset();
+    onClose();
   };
 
   return (
@@ -127,9 +161,9 @@ export const FormDiagnostic = ({ open, onClose, situation = "" }: { open: boolea
           <DialogTitle className="font-serif text-xl" style={{ color: '#F0EDE6' }}>{t("Évaluer ma situation — GRATUIT", "Evaluate my situation — FREE")}</DialogTitle>
         </DialogHeader>
         <form onSubmit={handleSubmit} className="mt-4 space-y-4">
-          <Input required name="name" placeholder={t("Nom", "Name")} maxLength={100} style={darkInputStyle} />
-          <Input required type="email" name="email" placeholder={t("Email professionnel", "Professional email")} maxLength={255} style={darkInputStyle} />
-          <Input name="situation" defaultValue={situation} placeholder={t("Situation critique", "Critical situation")} readOnly={!!situation} style={darkInputStyle} />
+          <Input required name="name" placeholder={t("Nom", "Name")} maxLength={100} style={lightInputStyle} />
+          <Input required type="email" name="email" placeholder={t("Email professionnel", "Professional email")} maxLength={255} style={lightInputStyle} />
+          <Input name="situation" defaultValue={situation} placeholder={t("Situation critique", "Critical situation")} readOnly={!!situation} style={lightInputStyle} />
           <button type="submit" disabled={submitting} className="btn-gold w-full disabled:opacity-50">
             {submitting ? t("Envoi...", "Sending...") : t("Envoyer", "Send")}
           </button>
@@ -144,14 +178,29 @@ export const FormDemo = ({ open, onClose }: { open: boolean; onClose: () => void
   const { t } = useLanguage();
   const [submitting, setSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setSubmitting(true);
-    setTimeout(() => {
-      setSubmitting(false);
-      toast({ title: t("Demande envoyée", "Request sent"), description: t("Nous vous contacterons pour organiser la démo.", "We will contact you to schedule the demo.") });
-      onClose();
-    }, 1200);
+    const form = e.target as HTMLFormElement;
+    const fd = new FormData(form);
+
+    const { error } = await supabase.from("contact_submissions").insert({
+      form_type: "demo",
+      name: fd.get("name") as string,
+      email: fd.get("email") as string,
+      organization: fd.get("org") as string,
+      platform: (fd.get("platform") as string) || null,
+      message: (fd.get("message") as string) || null,
+    });
+
+    setSubmitting(false);
+    if (error) {
+      toast({ title: t("Erreur", "Error"), description: t("Une erreur est survenue.", "An error occurred."), variant: "destructive" });
+      return;
+    }
+    toast({ title: t("Demande envoyée", "Request sent"), description: t("Nous vous contacterons pour organiser la démo.", "We will contact you to schedule the demo.") });
+    form.reset();
+    onClose();
   };
 
   return (
@@ -161,14 +210,14 @@ export const FormDemo = ({ open, onClose }: { open: boolean; onClose: () => void
           <DialogTitle className="font-serif text-xl" style={{ color: '#F0EDE6' }}>{t("Demander une démo", "Request a demo")}</DialogTitle>
         </DialogHeader>
         <form onSubmit={handleSubmit} className="mt-4 space-y-4">
-          <Input required name="name" placeholder={t("Nom", "Name")} maxLength={100} style={darkInputStyle} />
-          <Input required name="org" placeholder="Organisation" maxLength={100} style={darkInputStyle} />
-          <Input required type="email" name="email" placeholder={t("Email professionnel", "Professional email")} maxLength={255} style={darkInputStyle} />
-          <select required name="platform" className="w-full rounded-sm px-3 py-2.5 text-sm" style={{ ...darkInputStyle, appearance: 'auto' }}>
+          <Input required name="name" placeholder={t("Nom", "Name")} maxLength={100} style={lightInputStyle} />
+          <Input required name="org" placeholder="Organisation" maxLength={100} style={lightInputStyle} />
+          <Input required type="email" name="email" placeholder={t("Email professionnel", "Professional email")} maxLength={255} style={lightInputStyle} />
+          <select required name="platform" className="w-full rounded-sm px-3 py-2.5 text-sm" style={{ ...lightInputStyle, appearance: 'auto' }}>
             <option value="">{t("Plateforme d'intérêt", "Platform of interest")}</option>
             {platforms.map(p => <option key={p} value={p}>{p}</option>)}
           </select>
-          <textarea name="message" placeholder={t("Message (optionnel)", "Message (optional)")} maxLength={500} rows={3} className="w-full rounded-sm px-3 py-2.5 text-sm" style={darkInputStyle} />
+          <textarea name="message" placeholder={t("Message (optionnel)", "Message (optional)")} maxLength={500} rows={3} className="w-full rounded-sm px-3 py-2.5 text-sm" style={lightInputStyle} />
           <button type="submit" disabled={submitting} className="btn-gold w-full disabled:opacity-50">
             {submitting ? t("Envoi...", "Sending...") : t("Demander une démo", "Request a demo")}
           </button>
