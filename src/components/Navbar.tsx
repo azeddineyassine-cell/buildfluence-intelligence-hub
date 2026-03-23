@@ -112,7 +112,8 @@ const Navbar = () => {
         }}
       >
         <div className="container flex h-20 items-center justify-between">
-          <a href="/" onClick={(e) => { e.preventDefault(); navigate("/"); }} className="flex items-center">
+          <a href="/" onClick={(e) => { e.preventDefault(); navigate("/"); }} className="flex items-center gap-2">
+            <img src={logoBuildfluence} alt="Buildfluence" className="h-10 w-auto" />
             <span className="font-serif text-xl tracking-tight">
               <span className="font-bold" style={{ color: '#103E8C' }}>Build</span>
               <span className="font-bold" style={{ color: '#FFDE59' }}>fluence</span>
