@@ -285,15 +285,6 @@ const Navbar = () => {
                             );
                           })}
                         </div>
-                        <div className="mt-4 border-t pt-4 text-center" style={{ borderColor: '#E5E7EB' }}>
-                          <a
-                            href="#strategic-innovation"
-                            onClick={(e) => { e.preventDefault(); handleNavClick("#strategic-innovation"); }}
-                            className="btn-gold inline-block px-6 py-2 text-[11px]"
-                          >
-                            {t("Explorer...", "Explore...")}
-                          </a>
-                        </div>
                       </motion.div>
                     )}
                   </AnimatePresence>
