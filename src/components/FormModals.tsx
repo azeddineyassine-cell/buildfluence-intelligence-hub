@@ -60,7 +60,7 @@ export const FormStrategicExchange = ({ open, onClose }: { open: boolean; onClos
 
           <div className="grid gap-4 sm:grid-cols-2">
             <div>
-              <label className="mb-2 block text-xs font-semibold uppercase tracking-wider" style={{ color: '#8A8F9E' }}>{t("Thématique choisie", "Chosen topic")}</label>
+              <label className="mb-2 block text-xs font-semibold uppercase tracking-wider" style={{ color: '#6B7280' }}>{t("Thématique choisie", "Chosen topic")}</label>
               <div className="space-y-2">
                 {thematiques.map((th) => (
                   <label key={th} className="flex items-center gap-2 cursor-pointer text-sm" style={{ color: '#F0EDE6' }}>
