@@ -71,7 +71,7 @@ export const FormStrategicExchange = ({ open, onClose }: { open: boolean; onClos
               </div>
             </div>
             <div>
-              <label className="mb-2 block text-xs font-semibold uppercase tracking-wider" style={{ color: '#8A8F9E' }}>{t("Priorité", "Priority")}</label>
+              <label className="mb-2 block text-xs font-semibold uppercase tracking-wider" style={{ color: '#6B7280' }}>{t("Priorité", "Priority")}</label>
               <div className="space-y-2">
                 {priorites.map((p) => (
                   <label key={p} className="flex items-center gap-2 cursor-pointer text-sm" style={{ color: '#F0EDE6' }}>
