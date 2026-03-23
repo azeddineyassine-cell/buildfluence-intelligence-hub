@@ -150,19 +150,39 @@ const Navbar = () => {
                         style={{ borderColor: '#E5E7EB' }}
                       >
                         <div className="grid grid-cols-2 gap-1">
-                          {situationsItems.map((s, idx) => {
+                          {situationsItems.map((s) => {
                             const Icon = s.icon;
                             return (
                               <button
                                 key={s.route}
                                 onClick={() => goTo(s.route)}
-                                className="flex items-start gap-3 rounded-lg px-3 py-3 text-left transition-all hover:bg-gray-50"
-                                style={{ background: idx === 0 ? 'hsl(213 40% 96%)' : 'transparent' }}
+                                className="flex items-start gap-3 rounded-lg px-3 py-3 text-left"
+                                style={{ background: 'transparent', border: '1px solid #e5e7eb', transition: 'all 0.15s ease' }}
+                                onMouseEnter={(e) => {
+                                  e.currentTarget.style.background = '#0f1f3d';
+                                  e.currentTarget.style.borderColor = '#0f1f3d';
+                                  const title = e.currentTarget.querySelector('[data-title]') as HTMLElement;
+                                  const desc = e.currentTarget.querySelector('[data-desc]') as HTMLElement;
+                                  const icon = e.currentTarget.querySelector('[data-icon]') as HTMLElement;
+                                  if (title) title.style.color = '#ffffff';
+                                  if (desc) desc.style.color = 'rgba(255,255,255,0.7)';
+                                  if (icon) icon.style.color = '#ffffff';
+                                }}
+                                onMouseLeave={(e) => {
+                                  e.currentTarget.style.background = 'transparent';
+                                  e.currentTarget.style.borderColor = '#e5e7eb';
+                                  const title = e.currentTarget.querySelector('[data-title]') as HTMLElement;
+                                  const desc = e.currentTarget.querySelector('[data-desc]') as HTMLElement;
+                                  const icon = e.currentTarget.querySelector('[data-icon]') as HTMLElement;
+                                  if (title) title.style.color = '#1a1a2e';
+                                  if (desc) desc.style.color = '#8A8F9E';
+                                  if (icon) icon.style.color = '#103E8C';
+                                }}
                               >
-                                <Icon className="mt-0.5 h-4 w-4 shrink-0" style={{ color: '#103E8C' }} />
+                                <Icon data-icon className="mt-0.5 h-4 w-4 shrink-0" style={{ color: '#103E8C', transition: 'color 0.15s ease' }} />
                                 <div>
-                                  <div className="text-[13px] font-semibold" style={{ color: '#1a1a2e' }}>{s.label}</div>
-                                  <div className="mt-0.5 text-[11px]" style={{ color: '#8A8F9E' }}>{s.desc}</div>
+                                  <div data-title className="text-[13px] font-semibold" style={{ color: '#1a1a2e', transition: 'color 0.15s ease' }}>{s.label}</div>
+                                  <div data-desc className="mt-0.5 text-[11px]" style={{ color: '#8A8F9E', transition: 'color 0.15s ease' }}>{s.desc}</div>
                                 </div>
                               </button>
                             );
