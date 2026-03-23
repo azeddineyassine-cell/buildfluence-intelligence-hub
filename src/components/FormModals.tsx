@@ -96,7 +96,7 @@ export const FormStrategicExchange = ({ open, onClose }: { open: boolean; onClos
             {submitting ? t("Envoi...", "Sending...") : t("SOUMETTRE MA DEMANDE", "SUBMIT MY REQUEST")}
           </button>
 
-          <div className="flex items-center justify-center gap-2 text-[11px]" style={{ color: '#8A8F9E' }}>
+          <div className="flex items-center justify-center gap-2 text-[11px]" style={{ color: '#6B7280' }}>
             <Lock className="h-3 w-3" /> {t("Communication sécurisée et confidentielle", "Secure and confidential communication")}
           </div>
         </form>
