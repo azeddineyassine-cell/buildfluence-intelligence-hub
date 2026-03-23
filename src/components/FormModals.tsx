@@ -44,7 +44,7 @@ export const FormStrategicExchange = ({ open, onClose }: { open: boolean; onClos
         <DialogHeader>
           <DialogTitle className="font-serif text-xl" style={{ color: '#1a2744' }}>{t("Demander mon échange stratégique", "Request my strategic exchange")}</DialogTitle>
         </DialogHeader>
-        <div className="mt-1 flex items-center gap-2 text-xs" style={{ color: '#8A8F9E' }}>
+        <div className="mt-1 flex items-center gap-2 text-xs" style={{ color: '#6B7280' }}>
           <Lock className="h-3 w-3" /> {t("Communication sécurisée et confidentielle", "Secure and confidential communication")}
         </div>
         <form onSubmit={handleSubmit} className="mt-4 space-y-4">
