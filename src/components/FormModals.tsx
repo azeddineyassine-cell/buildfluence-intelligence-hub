@@ -74,7 +74,7 @@ export const FormStrategicExchange = ({ open, onClose }: { open: boolean; onClos
               <label className="mb-2 block text-xs font-semibold uppercase tracking-wider" style={{ color: '#6B7280' }}>{t("Priorité", "Priority")}</label>
               <div className="space-y-2">
                 {priorites.map((p) => (
-                  <label key={p} className="flex items-center gap-2 cursor-pointer text-sm" style={{ color: '#F0EDE6' }}>
+                  <label key={p} className="flex items-center gap-2 cursor-pointer text-sm" style={{ color: '#1a2744' }}>
                     <input type="radio" name="priorite" value={p} checked={priorite === p} onChange={() => setPriorite(p)} className="accent-yellow-400" />
                     {p}
                   </label>
