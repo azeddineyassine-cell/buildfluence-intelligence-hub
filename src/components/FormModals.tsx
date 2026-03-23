@@ -13,9 +13,9 @@ const platforms = [
 ];
 
 const darkInputStyle = {
-  background: 'hsl(210 40% 12%)',
-  borderColor: 'hsl(220 20% 20%)',
-  color: '#F0EDE6',
+  background: '#FFFFFF',
+  borderColor: '#D1D5DB',
+  color: '#1a2744',
 };
 
 export const FormStrategicExchange = ({ open, onClose }: { open: boolean; onClose: () => void }) => {
@@ -40,11 +40,11 @@ export const FormStrategicExchange = ({ open, onClose }: { open: boolean; onClos
 
   return (
     <Dialog open={open} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-2xl" style={{ background: '#1a1a2e', border: '1px solid hsl(220 20% 20%)', color: '#F0EDE6' }}>
+        <DialogContent className="sm:max-w-2xl" style={{ background: '#F4F4F4', border: '1px solid #D1D5DB', color: '#1a2744' }}>
         <DialogHeader>
-          <DialogTitle className="font-serif text-xl" style={{ color: '#F0EDE6' }}>{t("Réserver mon échange stratégique", "Book my strategic exchange")}</DialogTitle>
+          <DialogTitle className="font-serif text-xl" style={{ color: '#1a2744' }}>{t("Demander mon échange stratégique", "Request my strategic exchange")}</DialogTitle>
         </DialogHeader>
-        <div className="mt-1 flex items-center gap-2 text-xs" style={{ color: '#8A8F9E' }}>
+        <div className="mt-1 flex items-center gap-2 text-xs" style={{ color: '#6B7280' }}>
           <Lock className="h-3 w-3" /> {t("Communication sécurisée et confidentielle", "Secure and confidential communication")}
         </div>
         <form onSubmit={handleSubmit} className="mt-4 space-y-4">
@@ -60,10 +60,10 @@ export const FormStrategicExchange = ({ open, onClose }: { open: boolean; onClos
 
           <div className="grid gap-4 sm:grid-cols-2">
             <div>
-              <label className="mb-2 block text-xs font-semibold uppercase tracking-wider" style={{ color: '#8A8F9E' }}>{t("Thématique choisie", "Chosen topic")}</label>
+              <label className="mb-2 block text-xs font-semibold uppercase tracking-wider" style={{ color: '#6B7280' }}>{t("Thématique choisie", "Chosen topic")}</label>
               <div className="space-y-2">
                 {thematiques.map((th) => (
-                  <label key={th} className="flex items-center gap-2 cursor-pointer text-sm" style={{ color: '#F0EDE6' }}>
+                  <label key={th} className="flex items-center gap-2 cursor-pointer text-sm" style={{ color: '#1a2744' }}>
                     <input type="radio" name="thematique" value={th} checked={thematique === th} onChange={() => setThematique(th)} className="accent-yellow-400" />
                     {th}
                   </label>
@@ -71,10 +71,10 @@ export const FormStrategicExchange = ({ open, onClose }: { open: boolean; onClos
               </div>
             </div>
             <div>
-              <label className="mb-2 block text-xs font-semibold uppercase tracking-wider" style={{ color: '#8A8F9E' }}>{t("Priorité", "Priority")}</label>
+              <label className="mb-2 block text-xs font-semibold uppercase tracking-wider" style={{ color: '#6B7280' }}>{t("Priorité", "Priority")}</label>
               <div className="space-y-2">
                 {priorites.map((p) => (
-                  <label key={p} className="flex items-center gap-2 cursor-pointer text-sm" style={{ color: '#F0EDE6' }}>
+                  <label key={p} className="flex items-center gap-2 cursor-pointer text-sm" style={{ color: '#1a2744' }}>
                     <input type="radio" name="priorite" value={p} checked={priorite === p} onChange={() => setPriorite(p)} className="accent-yellow-400" />
                     {p}
                   </label>
@@ -96,7 +96,7 @@ export const FormStrategicExchange = ({ open, onClose }: { open: boolean; onClos
             {submitting ? t("Envoi...", "Sending...") : t("SOUMETTRE MA DEMANDE", "SUBMIT MY REQUEST")}
           </button>
 
-          <div className="flex items-center justify-center gap-2 text-[11px]" style={{ color: '#8A8F9E' }}>
+          <div className="flex items-center justify-center gap-2 text-[11px]" style={{ color: '#6B7280' }}>
             <Lock className="h-3 w-3" /> {t("Communication sécurisée et confidentielle", "Secure and confidential communication")}
           </div>
         </form>
