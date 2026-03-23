@@ -57,9 +57,9 @@ const Navbar = () => {
       title: "SOFT POWER\n& INFLUENCE",
       route: "/solutions/soft-power-influence",
       items: [
-        { label: t("Intelligence d'Influence", "Influence Intelligence"), desc: t("Cartographie des réseaux de pouvoir", "Power network mapping"), route: "/solutions/soft-power-influence" },
-        { label: "Political Intelligence", desc: t("Mapping des décideurs publics", "Public decision-maker mapping"), route: "/solutions/soft-power-influence" },
-        { label: "Territorial Influence Lab", desc: t("Attractivité et compétitivité", "Attractiveness and competitiveness"), route: "/solutions/soft-power-influence" },
+        { label: t("Intelligence d'Influence", "Influence Intelligence"), desc: t("Cartographie des réseaux de pouvoir", "Power network mapping"), route: "/solutions/soft-power-influence/intelligence-influence" },
+        { label: "Political Intelligence", desc: t("Mapping des décideurs publics", "Public decision-maker mapping"), route: "/solutions/soft-power-influence/political-intelligence" },
+        { label: "Territorial Influence Lab", desc: t("Attractivité et compétitivité", "Attractiveness and competitiveness"), route: "/solutions/soft-power-influence/territorial-influence-lab" },
       ],
     },
   ];

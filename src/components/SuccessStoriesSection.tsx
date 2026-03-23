@@ -21,13 +21,34 @@ const SuccessStoriesSection = () => {
   ];
 
   const stories = [
-    { topic: "audit", tag: "Audit & Benchmark", client: "ADD", desc: t("Audit stratégique et benchmark des pratiques de l'Agence de Développement du Digital.", "Strategic audit and benchmark of the Digital Development Agency's practices.") },
-    { topic: "audit", tag: "Audit & Benchmark", client: "CIDC", desc: t("Benchmark institutionnel et évaluation de la performance décisionnelle.", "Institutional benchmark and decision performance evaluation.") },
-    { topic: "audit", tag: "Audit & Benchmark", client: "UM6SS", desc: t("Audit de positionnement et analyse comparative internationale.", "Positioning audit and international comparative analysis.") },
-    { topic: "audit", tag: "Audit & Benchmark", client: "Raja Club Athletic", desc: t("Benchmark stratégique et analyse de l'écosystème concurrentiel sportif.", "Strategic benchmark and sports competitive ecosystem analysis.") },
-    { topic: "communication", tag: t("Stratégie de communication", "Communication strategy"), client: "OCP Group", desc: t("Stratégie de communication institutionnelle et positionnement narratif international.", "Institutional communication strategy and international narrative positioning.") },
-    { topic: "communication", tag: t("Stratégie de communication", "Communication strategy"), client: t("Ministère de la Santé", "Ministry of Health"), desc: t("Pilotage de la communication de crise et gestion du narratif institutionnel.", "Crisis communication management and institutional narrative steering.") },
-    { topic: "communication", tag: t("Stratégie de communication", "Communication strategy"), client: "ADD", desc: t("Stratégie de communication digitale et renforcement de la visibilité institutionnelle.", "Digital communication strategy and institutional visibility strengthening.") },
+    // Gestion de crise
+    { topic: "crise", tag: t("Gestion de crise", "Crisis management"), client: t("Présidence Sénégalaise", "Senegalese Presidency"), desc: t("Gestion d'une crise institutionnelle majeure avec protocole de communication en temps réel et coordination des parties prenantes.", "Management of a major institutional crisis with real-time communication protocol and stakeholder coordination.") },
+    { topic: "crise", tag: t("Gestion de crise", "Crisis management"), client: "Centrale Danone", desc: t("Accompagnement dans la gestion d'une crise de confiance consommateurs avec stratégie de réponse multicanale.", "Support in managing a consumer confidence crisis with multichannel response strategy.") },
+    { topic: "crise", tag: t("Gestion de crise", "Crisis management"), client: t("Ministère de la Santé", "Ministry of Health"), desc: t("Gestion de crise sanitaire et communication institutionnelle à destination du grand public et des médias.", "Health crisis management and institutional communication for the public and media.") },
+    // Attaques & Désinformation
+    { topic: "desinformation", tag: t("Attaques & Désinformation", "Attacks & Disinformation"), client: "Centrale Danone", desc: t("Neutralisation d'une campagne de désinformation coordonnée sur les réseaux sociaux.", "Neutralization of a coordinated disinformation campaign on social media.") },
+    { topic: "desinformation", tag: t("Attaques & Désinformation", "Attacks & Disinformation"), client: "OCP Group", desc: t("Détection et neutralisation d'attaques informationnelles ciblant la crédibilité institutionnelle.", "Detection and neutralization of information attacks targeting institutional credibility.") },
+    { topic: "desinformation", tag: t("Attaques & Désinformation", "Attacks & Disinformation"), client: "Raja Club Athletic", desc: t("Protection de l'image du club face à des campagnes de manipulation médiatique.", "Protection of the club's image against media manipulation campaigns.") },
+    // Due Diligence & Investissement
+    { topic: "diligence", tag: t("Due Diligence & Investissement", "Due Diligence & Investment"), client: t("Fond Capital-Risque", "Venture Capital Fund"), desc: t("Due diligence approfondie sur des cibles d'investissement en Afrique subsaharienne avec analyse des risques géopolitiques.", "In-depth due diligence on investment targets in sub-Saharan Africa with geopolitical risk analysis.") },
+    // Attractivité & Rayonnement
+    { topic: "attractivite", tag: t("Attractivité & Rayonnement", "Attractiveness & Influence"), client: "ADD", desc: t("Stratégie globale d'attractivité des investissements directs étrangers et de rayonnement de la destination.", "Global strategy for foreign direct investment attractiveness and destination influence.") },
+    { topic: "attractivite", tag: t("Attractivité & Rayonnement", "Attractiveness & Influence"), client: "CIDC", desc: t("Positionnement de la marque territoriale et développement de la compétitivité régionale.", "Territorial brand positioning and regional competitiveness development.") },
+    // Influence & Soft Power
+    { topic: "influence", tag: t("Influence & Soft Power", "Influence & Soft Power"), client: "UM6SS", desc: t("Construction d'une stratégie de soft power académique et positionnement dans les réseaux d'influence internationaux.", "Building an academic soft power strategy and positioning within international influence networks.") },
+    { topic: "influence", tag: t("Influence & Soft Power", "Influence & Soft Power"), client: "ADD", desc: t("Développement de l'influence institutionnelle et cartographie des décideurs clés.", "Institutional influence development and key decision-maker mapping.") },
+    // Écosystème Concurrentiel
+    { topic: "ecosysteme", tag: t("Écosystème Concurrentiel", "Competitive Ecosystem"), client: "OCP Group", desc: t("Cartographie stratégique des acteurs mondiaux du secteur phosphatier et veille concurrentielle dynamique.", "Strategic mapping of global phosphate sector players and dynamic competitive intelligence.") },
+    { topic: "ecosysteme", tag: t("Écosystème Concurrentiel", "Competitive Ecosystem"), client: "Centrale Danone", desc: t("Analyse de l'écosystème concurrentiel agroalimentaire et identification des opportunités de différenciation.", "Agri-food competitive ecosystem analysis and differentiation opportunity identification.") },
+    // Audit & Benchmark
+    { topic: "audit", tag: "Audit & Benchmark", client: "ADD", desc: t("Audit stratégique complet et benchmark des meilleures pratiques internationales.", "Complete strategic audit and benchmark of international best practices.") },
+    { topic: "audit", tag: "Audit & Benchmark", client: "CIDC", desc: t("Benchmark des dispositifs de compétitivité territoriale et recommandations d'optimisation.", "Benchmark of territorial competitiveness systems and optimization recommendations.") },
+    { topic: "audit", tag: "Audit & Benchmark", client: "UM6SS", desc: t("Audit de gouvernance académique et benchmarking des standards d'excellence universitaire.", "Academic governance audit and benchmarking of university excellence standards.") },
+    { topic: "audit", tag: "Audit & Benchmark", client: "Raja Club Athletic", desc: t("Audit des pratiques de gouvernance sportive et benchmark des clubs leaders africains.", "Sports governance practices audit and benchmark of leading African clubs.") },
+    // Stratégie de communication
+    { topic: "communication", tag: t("Stratégie de communication", "Communication strategy"), client: "OCP Group", desc: t("Stratégie de communication institutionnelle à destination des marchés internationaux.", "Institutional communication strategy targeting international markets.") },
+    { topic: "communication", tag: t("Stratégie de communication", "Communication strategy"), client: t("Ministère de la Santé", "Ministry of Health"), desc: t("Stratégie de communication publique autour des politiques de santé nationales.", "Public communication strategy around national health policies.") },
+    { topic: "communication", tag: t("Stratégie de communication", "Communication strategy"), client: "ADD", desc: t("Stratégie de communication d'attractivité pour les investisseurs et partenaires internationaux.", "Attractiveness communication strategy for international investors and partners.") },
   ];
 
   const filtered = activeTopic === "tous" ? stories : stories.filter(s => s.topic === activeTopic);
@@ -54,8 +75,10 @@ const SuccessStoriesSection = () => {
             <button
               key={tp.value}
               onClick={() => setActiveTopic(tp.value)}
-              className="flex items-center gap-2 px-4 py-[9px] text-[13px] font-medium rounded-[2px] transition-all"
+              className="flex items-center gap-2 py-[9px] font-medium rounded-[2px] transition-all"
               style={{
+                fontSize: '13px',
+                padding: '9px 16px',
                 border: activeTopic === tp.value ? '1px solid hsl(var(--gold))' : '1px solid rgba(255,255,255,0.2)',
                 background: activeTopic === tp.value ? 'hsl(var(--gold))' : 'transparent',
                 color: activeTopic === tp.value ? '#fff' : 'rgba(255,255,255,0.65)',
