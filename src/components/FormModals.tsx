@@ -40,9 +40,9 @@ export const FormStrategicExchange = ({ open, onClose }: { open: boolean; onClos
 
   return (
     <Dialog open={open} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-2xl" style={{ background: '#1a1a2e', border: '1px solid hsl(220 20% 20%)', color: '#F0EDE6' }}>
+        <DialogContent className="sm:max-w-2xl" style={{ background: '#F4F4F4', border: '1px solid #D1D5DB', color: '#1a2744' }}>
         <DialogHeader>
-          <DialogTitle className="font-serif text-xl" style={{ color: '#F0EDE6' }}>{t("Réserver mon échange stratégique", "Book my strategic exchange")}</DialogTitle>
+          <DialogTitle className="font-serif text-xl" style={{ color: '#1a2744' }}>{t("Demander mon échange stratégique", "Request my strategic exchange")}</DialogTitle>
         </DialogHeader>
         <div className="mt-1 flex items-center gap-2 text-xs" style={{ color: '#8A8F9E' }}>
           <Lock className="h-3 w-3" /> {t("Communication sécurisée et confidentielle", "Secure and confidential communication")}
