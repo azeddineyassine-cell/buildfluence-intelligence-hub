@@ -37,9 +37,9 @@ const Navbar = () => {
       title: "STRATEGIC\nINTELLIGENCE LAB",
       route: "/solutions/strategic-intelligence-lab",
       items: [
-        { label: "Strategic Foresight", desc: t("Veille et anticipation stratégique", "Strategic monitoring and foresight"), route: "/solutions/strategic-intelligence-lab" },
-        { label: "Threat Intelligence", desc: t("Détection et neutralisation des menaces", "Threat detection and neutralization"), route: "/solutions/strategic-intelligence-lab" },
-        { label: t("Expérimentations & POCs", "Experiments & POCs"), desc: t("Prototypes et modèles prédictifs", "Prototypes and predictive models"), route: "/solutions/strategic-intelligence-lab" },
+        { label: "Strategic Foresight", desc: t("Veille et anticipation stratégique", "Strategic monitoring and foresight"), route: "/solutions/strategic-intelligence-lab/strategic-foresight" },
+        { label: "Threat Intelligence", desc: t("Détection et neutralisation des menaces", "Threat detection and neutralization"), route: "/solutions/strategic-intelligence-lab/threat-intelligence" },
+        { label: t("Expérimentations & POCs", "Experiments & POCs"), desc: t("Prototypes et modèles prédictifs", "Prototypes and predictive models"), route: "/solutions/strategic-intelligence-lab/experimentations-pocs" },
       ],
     },
     {
@@ -47,9 +47,9 @@ const Navbar = () => {
       title: "DEEP\nDUE DILIGENCE",
       route: "/solutions/deep-due-diligence",
       items: [
-        { label: "Level 1: Integrity Check", desc: t("Screening PEP et signaux faibles", "PEP screening and weak signals"), route: "/solutions/deep-due-diligence" },
-        { label: "Level 2: Strategic Risk Profiling", desc: t("Cartographie et analyse géopolitique", "Mapping and geopolitical analysis"), route: "/solutions/deep-due-diligence" },
-        { label: "Level 3: Regulatory Compliance", desc: t("Audit KYC, KYS, LCB-FT, ESG", "KYC, KYS, AML-CFT, ESG Audit"), route: "/solutions/deep-due-diligence" },
+        { label: "Level 1: Integrity Check", desc: t("Screening PEP et signaux faibles", "PEP screening and weak signals"), route: "/solutions/deep-due-diligence/integrity-check" },
+        { label: "Level 2: Strategic Risk Profiling", desc: t("Cartographie et analyse géopolitique", "Mapping and geopolitical analysis"), route: "/solutions/deep-due-diligence/strategic-risk-profiling" },
+        { label: "Level 3: Regulatory Compliance", desc: t("Audit KYC, KYS, LCB-FT, ESG", "KYC, KYS, AML-CFT, ESG Audit"), route: "/solutions/deep-due-diligence/regulatory-compliance" },
       ],
     },
     {
@@ -57,9 +57,9 @@ const Navbar = () => {
       title: "SOFT POWER\n& INFLUENCE",
       route: "/solutions/soft-power-influence",
       items: [
-        { label: t("Intelligence d'Influence", "Influence Intelligence"), desc: t("Cartographie des réseaux de pouvoir", "Power network mapping"), route: "/solutions/soft-power-influence" },
-        { label: "Political Intelligence", desc: t("Mapping des décideurs publics", "Public decision-maker mapping"), route: "/solutions/soft-power-influence" },
-        { label: "Territorial Influence Lab", desc: t("Attractivité et compétitivité", "Attractiveness and competitiveness"), route: "/solutions/soft-power-influence" },
+        { label: t("Intelligence d'Influence", "Influence Intelligence"), desc: t("Cartographie des réseaux de pouvoir", "Power network mapping"), route: "/solutions/soft-power-influence/intelligence-influence" },
+        { label: "Political Intelligence", desc: t("Mapping des décideurs publics", "Public decision-maker mapping"), route: "/solutions/soft-power-influence/political-intelligence" },
+        { label: "Territorial Influence Lab", desc: t("Attractivité et compétitivité", "Attractiveness and competitiveness"), route: "/solutions/soft-power-influence/territorial-influence-lab" },
       ],
     },
   ];
@@ -150,19 +150,39 @@ const Navbar = () => {
                         style={{ borderColor: '#E5E7EB' }}
                       >
                         <div className="grid grid-cols-2 gap-1">
-                          {situationsItems.map((s, idx) => {
+                          {situationsItems.map((s) => {
                             const Icon = s.icon;
                             return (
                               <button
                                 key={s.route}
                                 onClick={() => goTo(s.route)}
-                                className="flex items-start gap-3 rounded-lg px-3 py-3 text-left transition-all hover:bg-gray-50"
-                                style={{ background: idx === 0 ? 'hsl(213 40% 96%)' : 'transparent' }}
+                                className="flex items-start gap-3 rounded-lg px-3 py-3 text-left"
+                                style={{ background: 'transparent', border: '1px solid #e5e7eb', transition: 'all 0.15s ease' }}
+                                onMouseEnter={(e) => {
+                                  e.currentTarget.style.background = '#0f1f3d';
+                                  e.currentTarget.style.borderColor = '#0f1f3d';
+                                  const title = e.currentTarget.querySelector('[data-title]') as HTMLElement;
+                                  const desc = e.currentTarget.querySelector('[data-desc]') as HTMLElement;
+                                  const icon = e.currentTarget.querySelector('[data-icon]') as HTMLElement;
+                                  if (title) title.style.color = '#ffffff';
+                                  if (desc) desc.style.color = 'rgba(255,255,255,0.7)';
+                                  if (icon) icon.style.color = '#ffffff';
+                                }}
+                                onMouseLeave={(e) => {
+                                  e.currentTarget.style.background = 'transparent';
+                                  e.currentTarget.style.borderColor = '#e5e7eb';
+                                  const title = e.currentTarget.querySelector('[data-title]') as HTMLElement;
+                                  const desc = e.currentTarget.querySelector('[data-desc]') as HTMLElement;
+                                  const icon = e.currentTarget.querySelector('[data-icon]') as HTMLElement;
+                                  if (title) title.style.color = '#1a1a2e';
+                                  if (desc) desc.style.color = '#8A8F9E';
+                                  if (icon) icon.style.color = '#103E8C';
+                                }}
                               >
-                                <Icon className="mt-0.5 h-4 w-4 shrink-0" style={{ color: '#103E8C' }} />
+                                <Icon data-icon className="mt-0.5 h-4 w-4 shrink-0" style={{ color: '#103E8C', transition: 'color 0.15s ease' }} />
                                 <div>
-                                  <div className="text-[13px] font-semibold" style={{ color: '#1a1a2e' }}>{s.label}</div>
-                                  <div className="mt-0.5 text-[11px]" style={{ color: '#8A8F9E' }}>{s.desc}</div>
+                                  <div data-title className="text-[13px] font-semibold" style={{ color: '#1a1a2e', transition: 'color 0.15s ease' }}>{s.label}</div>
+                                  <div data-desc className="mt-0.5 text-[11px]" style={{ color: '#8A8F9E', transition: 'color 0.15s ease' }}>{s.desc}</div>
                                 </div>
                               </button>
                             );
@@ -184,39 +204,46 @@ const Navbar = () => {
                         className="absolute left-0 top-full w-[720px] rounded-lg border bg-white p-6 shadow-2xl"
                         style={{ borderColor: '#E5E7EB' }}
                       >
-                        <div className="grid grid-cols-3 gap-8">
+                        <div className="grid grid-cols-3 gap-0">
                           {solutionsCols.map((col) => {
                             const ColIcon = col.icon;
                             return (
-                              <div key={col.title}>
+                              <div key={col.title} className="flex flex-col border-r last:border-r-0" style={{ borderColor: '#E5E7EB' }}>
                                 <button
                                   onClick={() => goTo(col.route)}
-                                  className="flex items-center gap-2 transition-colors"
-                                  onMouseOver={(e) => (e.currentTarget.style.color = '#103E8C')}
-                                  onMouseOut={(e) => (e.currentTarget.style.color = '#1a1a2e')}
-                                  style={{ color: '#1a1a2e' }}
+                                  className="flex items-center gap-2 px-4 py-3 rounded-none"
+                                  style={{ background: '#0f1f3d', color: '#ffffff' }}
                                 >
-                                  <ColIcon className="h-4 w-4 shrink-0" style={{ color: '#103E8C' }} />
-                                  <span className="text-[11px] font-bold uppercase tracking-wider whitespace-pre-line leading-tight">{col.title}</span>
+                                  <ColIcon className="h-4 w-4 shrink-0" style={{ color: '#ffffff' }} />
+                                  <span className="text-[11px] font-bold uppercase tracking-wider whitespace-pre-line leading-tight text-white">{col.title}</span>
                                 </button>
-                                <div className="mt-4 space-y-1">
+                                <div className="px-4 pt-3 pb-2 space-y-1 flex-1">
                                   {col.items.map((sub) => (
                                     <button
                                       key={sub.label}
                                       onClick={() => goTo(sub.route)}
-                                      className="block w-full rounded-md px-2 py-2 text-left transition-all hover:bg-gray-50"
+                                      className="block w-full rounded-md px-2 py-2 text-left"
+                                      style={{ transition: 'all 0.15s ease' }}
+                                      onMouseEnter={(e) => {
+                                        const label = e.currentTarget.querySelector('[data-sublabel]') as HTMLElement;
+                                        if (label) { label.style.color = '#c9a84c'; label.style.textDecoration = 'underline'; }
+                                      }}
+                                      onMouseLeave={(e) => {
+                                        const label = e.currentTarget.querySelector('[data-sublabel]') as HTMLElement;
+                                        if (label) { label.style.color = '#1a1a2e'; label.style.textDecoration = 'none'; }
+                                      }}
                                     >
-                                      <div className="text-[12px] font-semibold" style={{ color: '#1a1a2e' }}>{sub.label}</div>
+                                      <div data-sublabel className="text-[12px] font-semibold" style={{ color: '#1a1a2e', transition: 'all 0.15s ease' }}>{sub.label}</div>
                                       <div className="mt-0.5 text-[11px]" style={{ color: '#8A8F9E' }}>{sub.desc}</div>
                                     </button>
                                   ))}
                                 </div>
                                 <button
                                   onClick={() => goTo(col.route)}
-                                  className="mt-3 text-[11px] font-semibold transition-colors"
-                                  style={{ color: '#FFDE59' }}
-                                  onMouseOver={(e) => (e.currentTarget.style.color = '#e6c84e')}
-                                  onMouseOut={(e) => (e.currentTarget.style.color = '#FFDE59')}
+                                  className="mx-4 mb-3 text-[11px] font-semibold text-left"
+                                  style={{ color: '#c9a84c', transition: 'color 0.15s ease' }}
+                                  onMouseOver={(e) => (e.currentTarget.style.color = '#FFDE59')}
+                                  onMouseOut={(e) => (e.currentTarget.style.color = '#c9a84c')}
                                 >
                                   → {t("Voir toute l'offre", "View full offering")}
                                 </button>
