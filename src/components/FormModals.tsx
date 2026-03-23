@@ -13,9 +13,9 @@ const platforms = [
 ];
 
 const darkInputStyle = {
-  background: 'hsl(210 40% 12%)',
-  borderColor: 'hsl(220 20% 20%)',
-  color: '#F0EDE6',
+  background: '#FFFFFF',
+  borderColor: '#D1D5DB',
+  color: '#1a2744',
 };
 
 export const FormStrategicExchange = ({ open, onClose }: { open: boolean; onClose: () => void }) => {
