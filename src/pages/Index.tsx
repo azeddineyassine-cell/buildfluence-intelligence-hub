@@ -6,6 +6,8 @@ import StatsSection from "@/components/StatsSection";
 import SituationsSection from "@/components/SituationsSection";
 import SolutionsSection from "@/components/SolutionsSection";
 import SuccessStoriesSection from "@/components/SuccessStoriesSection";
+import InsightsSection from "@/components/InsightsSection";
+import WhySection from "@/components/WhySection";
 import CTAFooter from "@/components/CTAFooter";
 
 const Index = () => (
@@ -18,6 +20,8 @@ const Index = () => (
     <SituationsSection />
     <SolutionsSection />
     <SuccessStoriesSection />
+    <InsightsSection />
+    <WhySection />
     <CTAFooter />
   </div>
 );
