@@ -1,112 +1,90 @@
 import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
-import { ArrowRight, Building2, Cog, Leaf, ShieldCheck, Landmark, Target as TargetIcon, Globe2 } from "lucide-react";
-import { useNavigate } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
-
-const sectorIcons: Record<string, React.ElementType> = {
-  "GOUVERNEMENT": Landmark, "GOVERNMENT": Landmark, "INDUSTRIE": Cog, "INDUSTRY": Cog,
-  "AGRO-INDUSTRIE": Leaf, "AGRO-INDUSTRY": Leaf,
-  "FINANCE SOUVERAINE": ShieldCheck, "SOVEREIGN FINANCE": ShieldCheck,
-  "INSTITUTION PUBLIQUE": Building2, "PUBLIC INSTITUTION": Building2,
-  "INDUSTRIE STRATÉGIQUE": TargetIcon, "STRATEGIC INDUSTRY": TargetIcon,
-  "ORGANISATION INTERNATIONALE": Globe2, "INTERNATIONAL ORGANIZATION": Globe2,
-  "SPORT PROFESSIONNEL": TargetIcon, "PROFESSIONAL SPORTS": TargetIcon,
-};
 
 const SuccessStoriesSection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.1 });
-  const navigate = useNavigate();
   const { t } = useLanguage();
-  const [activeFilter, setActiveFilter] = useState("all");
+  const [activeTopic, setActiveTopic] = useState("tous");
 
-  const filters = [
-    { label: t("Tous", "All"), value: "all" },
+  const topics = [
+    { label: t("Tous", "All"), value: "tous" },
     { label: t("🔥 Gestion de crise", "🔥 Crisis management"), value: "crise" },
-    { label: t("⚔ Attaques & Désinformation", "⚔ Attacks & Disinformation"), value: "attaque" },
-    { label: t("💰 Due Diligence & Investissement", "💰 Due Diligence & Investment"), value: "dd" },
-    { label: t("☞ Attractivité & Rayonnement", "☞ Attractiveness & Influence"), value: "attractivite" },
-    { label: t("📡 Influence & Soft Power", "📡 Influence & Soft Power"), value: "influence" },
-    { label: t("🌍 Écosystème Concurrentiel", "🌍 Competitive Ecosystem"), value: "concurrence" },
+    { label: t("✕ Attaques & Désinformation", "✕ Attacks & Disinformation"), value: "desinformation" },
+    { label: t("🔒 Due Diligence & Investissement", "🔒 Due Diligence & Investment"), value: "diligence" },
+    { label: t("⇌ Attractivité & Rayonnement", "⇌ Attractiveness & Influence"), value: "attractivite" },
+    { label: t("🏛 Influence & Soft Power", "🏛 Influence & Soft Power"), value: "influence" },
+    { label: t("🌐 Écosystème Concurrentiel", "🌐 Competitive Ecosystem"), value: "ecosysteme" },
+    { label: t("📊 Audit & Benchmark", "📊 Audit & Benchmark"), value: "audit" },
+    { label: t("📣 Stratégie de communication", "📣 Communication strategy"), value: "communication" },
   ];
 
   const stories = [
-    { client: t("Présidence du Sénégal", "Presidency of Senegal"), sector: t("GOUVERNEMENT", "GOVERNMENT"), tags: ["crise", "influence"], context: t("Crise majeure • Baromètre politique • Réputation", "Major crisis • Political barometer • Reputation"), result: t("Stabilisation institutionnelle en période de haute tension", "Institutional stabilization during high tension"), route: "/situations/decider-sans-visibilite" },
-    { client: "Centrale Danone", sector: t("AGRO-INDUSTRIE", "AGRO-INDUSTRY"), tags: ["attaque", "crise"], context: t("Crise réputationnelle • 120M MAD de pertes", "Reputational crisis • 120M MAD in losses"), result: t("+14% de parts de marché après reconquête", "+14% market share after recovery"), route: "/situations/attaques-informationnelles" },
-    { client: t("Fonds d'Investissement (confidentiel)", "Investment Fund (confidential)"), sector: t("FINANCE SOUVERAINE", "SOVEREIGN FINANCE"), tags: ["dd"], context: t("Capital-risque • 400M$ en jeu", "Venture capital • $400M at stake"), result: t("Investissement sécurisé, partenariat verrouillé", "Investment secured, partnership locked"), route: "/situations/investir-sous-risque" },
-    { client: t("Ministère de la Santé", "Ministry of Health"), sector: t("INSTITUTION PUBLIQUE", "PUBLIC INSTITUTION"), tags: ["crise", "attaque"], context: t("Crise H1N1 • Désinformation massive", "H1N1 crisis • Massive disinformation"), result: t("Crise résolue en 2 semaines", "Crisis resolved in 2 weeks"), route: "/situations/crises-non-maitrisees" },
-    { client: "OCP Group", sector: t("INDUSTRIE STRATÉGIQUE", "STRATEGIC INDUSTRY"), tags: ["concurrence"], context: t("10 ans de guerre informationnelle", "10 years of information warfare"), result: t("Réputation restaurée, parts de marché protégées", "Reputation restored, market share protected"), route: "/situations/perte-velocite" },
-    { client: "CIDC (OCI)", sector: t("ORGANISATION INTERNATIONALE", "INTERNATIONAL ORGANIZATION"), tags: ["influence", "attractivite"], context: t("Déficit de notoriété • 57 pays", "Visibility deficit • 57 countries"), result: t("Doing Business Platform déployée", "Doing Business Platform deployed"), route: "/situations/deficit-influence" },
-    { client: "ADD", sector: t("INSTITUTION PUBLIQUE", "PUBLIC INSTITUTION"), tags: ["influence"], context: t("Impact institutionnel limité", "Limited institutional impact"), result: t("Veille IA déployée • GITEX Africa", "AI monitoring deployed • GITEX Africa"), route: "/situations/deficit-influence" },
-    { client: "UM6SS", sector: t("INSTITUTION PUBLIQUE", "PUBLIC INSTITUTION"), tags: ["attractivite", "influence"], context: t("Positionnement institutionnel", "Institutional positioning"), result: t("Visibilité renforcée", "Visibility strengthened"), route: "/situations/deficit-influence" },
-    { client: "Raja Club Athletic", sector: t("SPORT PROFESSIONNEL", "PROFESSIONAL SPORTS"), tags: ["crise", "influence"], context: t("Pression médiatique et émotionnelle constante", "Constant media and emotional pressure"), result: t("Culture d'intelligence stratégique installée", "Strategic intelligence culture installed"), route: "/situations/gouverner-sous-pression" },
+    { topic: "audit", tag: "Audit & Benchmark", client: "ADD", desc: t("Audit stratégique et benchmark des pratiques de l'Agence de Développement du Digital.", "Strategic audit and benchmark of the Digital Development Agency's practices.") },
+    { topic: "audit", tag: "Audit & Benchmark", client: "CIDC", desc: t("Benchmark institutionnel et évaluation de la performance décisionnelle.", "Institutional benchmark and decision performance evaluation.") },
+    { topic: "audit", tag: "Audit & Benchmark", client: "UM6SS", desc: t("Audit de positionnement et analyse comparative internationale.", "Positioning audit and international comparative analysis.") },
+    { topic: "audit", tag: "Audit & Benchmark", client: "Raja Club Athletic", desc: t("Benchmark stratégique et analyse de l'écosystème concurrentiel sportif.", "Strategic benchmark and sports competitive ecosystem analysis.") },
+    { topic: "communication", tag: t("Stratégie de communication", "Communication strategy"), client: "OCP Group", desc: t("Stratégie de communication institutionnelle et positionnement narratif international.", "Institutional communication strategy and international narrative positioning.") },
+    { topic: "communication", tag: t("Stratégie de communication", "Communication strategy"), client: t("Ministère de la Santé", "Ministry of Health"), desc: t("Pilotage de la communication de crise et gestion du narratif institutionnel.", "Crisis communication management and institutional narrative steering.") },
+    { topic: "communication", tag: t("Stratégie de communication", "Communication strategy"), client: "ADD", desc: t("Stratégie de communication digitale et renforcement de la visibilité institutionnelle.", "Digital communication strategy and institutional visibility strengthening.") },
   ];
 
-  const filtered = activeFilter === "all" ? stories : stories.filter(s => s.tags.includes(activeFilter));
-  const goTo = (route: string) => { navigate(route); window.scrollTo(0, 0); };
+  const filtered = activeTopic === "tous" ? stories : stories.filter(s => s.topic === activeTopic);
 
   return (
-    <section id="success-stories" className="relative py-28" ref={ref} style={{ background: '#0D1B2A' }}>
-      <div className="container">
+    <section id="success-stories" ref={ref} className="py-[88px]" style={{ background: 'hsl(var(--navy))' }}>
+      <div className="mx-auto max-w-[1100px] px-12">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="mx-auto max-w-3xl text-center"
+          className="mb-11"
         >
-          <span className="label-accent">Success Stories</span>
-          <h2 className="mt-4 font-serif text-3xl font-bold leading-tight sm:text-4xl md:text-5xl" style={{ color: '#F0EDE6' }}>
-            {t("Des mandats à la mesure des enjeux stratégiques", "Mandates matching the scale of strategic challenges")}
-          </h2>
-          <p className="mt-4 text-base" style={{ color: '#8A8F9E' }}>
-            {t("Gouvernements, multinationales, institutions internationales : quand les enjeux sont critiques, ils nous font confiance.", "Governments, multinationals, international institutions: when the stakes are critical, they trust us.")}
+          <p className="text-[11px] font-bold uppercase tracking-[0.18em] mb-[18px]" style={{ color: 'hsl(var(--gold-light))' }}>
+            Success Stories
           </p>
+          <h2 className="font-serif text-[36px] font-black text-white">
+            {t("Résultats prouvés, mandats renouvelés", "Proven results, renewed mandates")}
+          </h2>
         </motion.div>
 
-        <div className="mt-10 flex flex-wrap justify-center gap-2">
-          {filters.map((f) => (
+        <div className="flex flex-wrap gap-2 mb-10">
+          {topics.map((tp) => (
             <button
-              key={f.value}
-              onClick={() => setActiveFilter(f.value)}
-              className="rounded-sm px-3 py-1.5 text-[11px] font-medium transition-all"
+              key={tp.value}
+              onClick={() => setActiveTopic(tp.value)}
+              className="flex items-center gap-2 px-4 py-[9px] text-[13px] font-medium rounded-[2px] transition-all"
               style={{
-                background: activeFilter === f.value ? 'hsl(43 50% 54%)' : 'transparent',
-                color: activeFilter === f.value ? '#0D1B2A' : '#8A8F9E',
-                border: activeFilter === f.value ? '1px solid hsl(43 50% 54%)' : '1px solid hsl(220 20% 20%)',
+                border: activeTopic === tp.value ? '1px solid hsl(var(--gold))' : '1px solid rgba(255,255,255,0.2)',
+                background: activeTopic === tp.value ? 'hsl(var(--gold))' : 'transparent',
+                color: activeTopic === tp.value ? '#fff' : 'rgba(255,255,255,0.65)',
               }}
             >
-              {f.label}
+              {tp.label}
             </button>
           ))}
         </div>
 
-        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {filtered.map((s, i) => {
-            const SectorIcon = sectorIcons[s.sector] || Building2;
-            return (
-              <motion.div
-                key={s.client}
-                initial={{ opacity: 0, y: 20 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5, delay: i * 0.08 }}
-                onClick={() => goTo(s.route)}
-                className="card-dark group cursor-pointer p-6 transition-all hover:shadow-gold-hover"
-              >
-                <div className="flex items-center gap-2">
-                  <SectorIcon className="h-3.5 w-3.5" style={{ color: 'hsl(43 50% 54%)' }} />
-                  <span className="text-[10px] font-semibold uppercase tracking-[0.15em]" style={{ color: 'hsl(43 50% 54%)' }}>{s.sector}</span>
-                </div>
-                <h3 className="mt-3 font-serif text-lg font-bold leading-snug" style={{ color: '#F0EDE6' }}>{s.client}</h3>
-                <p className="mt-2 text-[13px]" style={{ color: '#8A8F9E' }}>{s.context}</p>
-                <div className="mt-4 h-px w-full" style={{ background: 'hsl(220 20% 20%)' }} />
-                <p className="mt-3 text-[13px] font-semibold" style={{ color: 'hsl(43 50% 54%)' }}>→ {s.result}</p>
-                <div className="mt-3 flex items-center gap-1 text-xs font-medium opacity-0 transition-opacity group-hover:opacity-100" style={{ color: 'hsl(43 50% 54%)' }}>
-                  {t("Lire l'étude de cas", "Read the case study")} <ArrowRight className="h-3 w-3" />
-                </div>
-              </motion.div>
-            );
-          })}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[2px]" style={{ background: 'rgba(255,255,255,0.08)' }}>
+          {filtered.map((s, i) => (
+            <motion.div
+              key={`${s.client}-${s.topic}-${i}`}
+              initial={{ opacity: 0 }}
+              animate={isInView ? { opacity: 1 } : {}}
+              transition={{ duration: 0.4, delay: i * 0.05 }}
+              className="p-[28px] transition-colors"
+              style={{ background: 'rgba(255,255,255,0.05)' }}
+              onMouseOver={(e) => (e.currentTarget.style.background = 'rgba(255,255,255,0.1)')}
+              onMouseOut={(e) => (e.currentTarget.style.background = 'rgba(255,255,255,0.05)')}
+            >
+              <div className="text-[10px] font-bold uppercase tracking-[0.12em] mb-3" style={{ color: 'hsl(var(--gold-light))' }}>
+                {s.tag}
+              </div>
+              <div className="text-[16px] font-bold text-white mb-2">{s.client}</div>
+              <div className="text-[13px] leading-[1.6]" style={{ color: 'rgba(255,255,255,0.55)' }}>{s.desc}</div>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>

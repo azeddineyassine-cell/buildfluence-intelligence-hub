@@ -7,100 +7,114 @@ const HeroSection = () => {
   const [formOpen, setFormOpen] = useState(false);
   const { t } = useLanguage();
 
-  const stats = [
-    { value: "25+", label: t("Années d'expertise", "Years of expertise") },
-    { value: "59", label: t("Pays couverts", "Countries covered") },
-    { value: "19M$", label: t("Politiques publiques", "Public policies") },
-    { value: "400M$", label: t("Investissements sécurisés", "Secured investments") },
-  ];
-
   return (
     <>
-      <section className="relative flex min-h-screen items-center overflow-hidden" style={{ background: '#FFFFFF' }}>
-        <div className="container relative z-10 pt-20">
-          <div className="mx-auto max-w-4xl text-center">
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-              className="label-accent mb-8 inline-block"
-            >
-              <span style={{ color: '#000000' }}>SOVEREIGN DECISION INFRASTRUCTURE</span>
-            </motion.div>
+      <section className="pt-20" style={{ background: '#fff' }}>
+        <div className="mx-auto max-w-[1100px] px-12 pb-[72px] pt-[88px]">
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.55 }}
+            className="text-[11px] font-bold uppercase tracking-[0.18em] mb-7"
+            style={{ color: 'hsl(var(--navy))' }}
+          >
+            Sovereign Decision Infrastructure
+          </motion.p>
 
-            <motion.h1
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.12, ease: [0.16, 1, 0.3, 1] }}
-              className="font-serif font-bold leading-[1.08]"
-              style={{ fontSize: 'clamp(2rem, 5vw, 4rem)', lineHeight: 1.08, color: '#0D1B2A', maxWidth: '800px', margin: '0 auto' }}
-            >
-              {t("Révéler l'architecture dissimulée du", "Revealing the hidden architecture of")}
-              <br />
-              <span style={{ color: '#FFDE59' }}>{t("pouvoir décisionnel", "decision-making power")}</span>
-            </motion.h1>
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.65, delay: 0.08 }}
+            className="font-serif font-black leading-[1.08] mb-8"
+            style={{
+              fontSize: 'clamp(42px, 5.2vw, 68px)',
+              color: 'hsl(var(--navy))',
+              maxWidth: '860px',
+              letterSpacing: '-1px',
+            }}
+          >
+            {t(
+              "Construire l'architecture qui sécurise vos ",
+              "Building the architecture that secures your "
+            )}
+            <em className="not-italic" style={{ color: 'hsl(var(--gold))' }}>
+              {t("décisions stratégiques", "strategic decisions")}
+            </em>
+          </motion.h1>
 
-            <motion.p
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
-              className="mx-auto mt-10 max-w-xl text-lg italic"
-              style={{ color: '#5A6170' }}
-            >
-              {t(
-                "\"Les crises ne naissent pas du chaos, mais de l'illusion du contrôle.\"",
-                "\"Crises do not arise from chaos, but from the illusion of control.\""
-              )}
-            </motion.p>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.65, delay: 0.16 }}
+            className="text-[17px] leading-[1.75] mb-12"
+            style={{ color: 'hsl(var(--navy))', maxWidth: '700px', opacity: 0.88 }}
+          >
+            {t(
+              "Nous bâtissons des écosystèmes décisionnels souverains permettant d'anticiper les ruptures, neutraliser les menaces et prendre ",
+              "We build sovereign decision-making ecosystems enabling anticipation of disruptions, neutralization of threats and gaining "
+            )}
+            <strong className="font-bold italic">
+              {t("l'ascendant stratégique", "the strategic edge")}
+            </strong>
+            {t(
+              ", même dans des espaces instables, hostiles ou hyper-concurrentiels.",
+              ", even in unstable, hostile or hyper-competitive environments."
+            )}
+          </motion.p>
 
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.45, ease: [0.16, 1, 0.3, 1] }}
-              className="mt-12 flex flex-col items-center justify-center gap-4 sm:flex-row"
-            >
-              <button onClick={() => setFormOpen(true)} className="btn-gold">
-                {t("Réserver mon échange stratégique", "Book my strategic exchange")}
-              </button>
-              <a href="#nos-solutions" className="btn-ghost-gold" style={{ color: '#0D1B2A', borderColor: 'hsl(43 50% 54% / 0.5)' }}>
-                {t("DÉCOUVRIR NOS SOLUTIONS", "DISCOVER OUR SOLUTIONS")}
-              </a>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.8, delay: 0.6 }}
-              className="mx-auto mt-16 max-w-2xl"
-            >
-              <div className="h-px w-full" style={{ background: 'linear-gradient(90deg, transparent, hsl(43 50% 54% / 0.3), transparent)' }} />
-              <p className="mt-4 text-[11px] font-medium uppercase tracking-[0.15em]" style={{ color: '#8A8F9E' }}>
-                {t(
-                  "Gouvernements · Institutions Internationales · Multinationales · Fonds d'Investissement",
-                  "Governments · International Institutions · Multinationals · Investment Funds"
-                )}
-              </p>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.75, ease: [0.16, 1, 0.3, 1] }}
-              className="mx-auto mt-12 flex max-w-3xl items-center justify-center"
-              style={{ borderColor: '#E5E7EB' }}
-            >
-              {stats.map((stat, i) => (
-                <div key={stat.label} className="px-6 py-3 text-center sm:px-8" style={{ borderLeft: i > 0 ? '1px solid #E5E7EB' : 'none' }}>
-                  <div className="font-serif text-2xl font-bold sm:text-3xl" style={{ color: 'hsl(43 50% 54%)' }}>
-                    {stat.value}
-                  </div>
-                  <div className="mt-1 text-[11px]" style={{ color: '#8A8F9E' }}>
-                    {stat.label}
-                  </div>
-                </div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.65, delay: 0.22 }}
+            className="flex items-center gap-10 pb-10 mb-10"
+            style={{ borderBottom: '1px solid hsl(var(--border))' }}
+          >
+            <span className="text-[11px] font-bold uppercase tracking-[0.14em] whitespace-nowrap" style={{ color: 'hsl(var(--muted-foreground))' }}>
+              Clients
+            </span>
+            <div className="flex flex-wrap gap-7">
+              {[
+                t("Gouvernements", "Governments"),
+                t("Institutions Internationales", "International Institutions"),
+                t("Multinationales", "Multinationals"),
+                t("Fonds d'Investissement", "Investment Funds"),
+              ].map((c) => (
+                <span key={c} className="text-[12px] font-semibold uppercase tracking-[0.1em]" style={{ color: 'hsl(var(--muted-foreground))', opacity: 0.65 }}>
+                  {c}
+                </span>
               ))}
-            </motion.div>
-          </div>
+            </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.65, delay: 0.28 }}
+            className="flex items-center gap-8"
+          >
+            <button
+              onClick={() => setFormOpen(true)}
+              className="inline-block px-[34px] py-[15px] text-[14px] font-semibold tracking-[0.03em] transition-colors"
+              style={{ background: 'hsl(var(--navy))', color: '#fff' }}
+              onMouseOver={(e) => (e.currentTarget.style.background = 'hsl(218 50% 13%)')}
+              onMouseOut={(e) => (e.currentTarget.style.background = 'hsl(var(--navy))')}
+            >
+              {t("Demander un échange stratégique", "Request a strategic exchange")}
+            </button>
+            <a
+              href="#nos-solutions"
+              onClick={(e) => {
+                e.preventDefault();
+                document.querySelector('#nos-solutions')?.scrollIntoView({ behavior: 'smooth' });
+              }}
+              className="text-[14px] font-semibold tracking-[0.03em] pb-[2px] transition-colors"
+              style={{ color: 'hsl(var(--navy))', borderBottom: '1.5px solid hsl(var(--gold))' }}
+              onMouseOver={(e) => (e.currentTarget.style.color = 'hsl(var(--gold))')}
+              onMouseOut={(e) => (e.currentTarget.style.color = 'hsl(var(--navy))')}
+            >
+              {t("Découvrir nos solutions →", "Discover our solutions →")}
+            </a>
+          </motion.div>
         </div>
       </section>
 
