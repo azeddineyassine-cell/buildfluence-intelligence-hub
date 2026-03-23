@@ -1,5 +1,5 @@
 import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
 
@@ -8,6 +8,7 @@ const SituationsSection = () => {
   const isInView = useInView(ref, { once: true, amount: 0.1 });
   const navigate = useNavigate();
   const { t } = useLanguage();
+  const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
 
   const situations = [
     { icon: "🎯", title: t("Décider sans visibilité", "Deciding without visibility"), desc: t("L'absence d'intelligence stratégique conduit à des arbitrages tardifs et à l'érosion de l'avantage concurrentiel.", "The absence of strategic intelligence leads to delayed decisions and erosion of competitive advantage."), pct: "20%", stat: t("des dirigeants estiment exceller en prise de décision", "of leaders believe they excel at decision-making"), source: "McKinsey", route: "/situations/decider-sans-visibilite" },
@@ -48,39 +49,63 @@ const SituationsSection = () => {
         </motion.div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-[2px]" style={{ background: 'hsl(var(--border))' }}>
-          {situations.map((s, i) => (
-            <motion.div
-              key={s.route}
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: i * 0.06 }}
-              onClick={() => goTo(s.route)}
-              className="group cursor-pointer p-[28px] transition-colors duration-200 bg-white hover:bg-[hsl(218,42%,18%)]"
-            >
-              <span className="text-[32px] mb-4 block transition-colors">{s.icon}</span>
-              <div className="text-[15px] font-bold mb-[10px] leading-[1.3] transition-colors duration-200 group-hover:text-white" style={{ color: 'hsl(var(--navy))' }}>
-                {s.title}
-              </div>
-              <p className="text-[13px] leading-[1.6] mb-4 transition-colors duration-200 group-hover:text-white/90" style={{ color: '#374151' }}>
-                {s.desc}
-              </p>
-              {s.pct && (
-                <>
-                  <div className="font-serif text-[26px] font-black leading-none mb-1 transition-colors duration-200 group-hover:text-[hsl(38,76%,60%)]" style={{ color: 'hsl(var(--gold))' }}>
-                    {s.pct}
-                  </div>
-                  <div className="text-[11.5px] transition-colors duration-200 group-hover:text-white/90" style={{ color: 'hsl(var(--muted-foreground))' }}>
-                    {s.stat}
-                  </div>
-                  {s.source && (
-                    <div className="text-[10px] font-bold uppercase tracking-[0.08em] mt-[2px] opacity-60 transition-colors duration-200 group-hover:text-white/90" style={{ color: 'hsl(var(--muted-foreground))' }}>
-                      Source : {s.source}
+          {situations.map((s, i) => {
+            const isHovered = hoveredIdx === i;
+            return (
+              <motion.div
+                key={s.route}
+                initial={{ opacity: 0, y: 20 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.5, delay: i * 0.06 }}
+                onClick={() => goTo(s.route)}
+                onMouseEnter={() => setHoveredIdx(i)}
+                onMouseLeave={() => setHoveredIdx(null)}
+                className="cursor-pointer p-[28px]"
+                style={{
+                  background: isHovered ? '#0f1f3d' : '#ffffff',
+                  transition: 'all 0.15s ease',
+                }}
+              >
+                <span className="text-[32px] mb-4 block">{s.icon}</span>
+                <div
+                  className="text-[15px] font-bold mb-[10px] leading-[1.3]"
+                  style={{ color: isHovered ? '#ffffff' : 'hsl(var(--navy))', transition: 'color 0.15s ease' }}
+                >
+                  {s.title}
+                </div>
+                <p
+                  className="text-[13px] leading-[1.6] mb-4"
+                  style={{ color: isHovered ? 'rgba(255,255,255,0.7)' : '#374151', transition: 'color 0.15s ease' }}
+                >
+                  {s.desc}
+                </p>
+                {s.pct && (
+                  <>
+                    <div
+                      className="font-serif text-[26px] font-black leading-none mb-1"
+                      style={{ color: isHovered ? 'hsl(38 76% 60%)' : 'hsl(var(--gold))', transition: 'color 0.15s ease' }}
+                    >
+                      {s.pct}
                     </div>
-                  )}
-                </>
-              )}
-            </motion.div>
-          ))}
+                    <div
+                      className="text-[11.5px]"
+                      style={{ color: isHovered ? 'rgba(255,255,255,0.9)' : 'hsl(var(--muted-foreground))', transition: 'color 0.15s ease' }}
+                    >
+                      {s.stat}
+                    </div>
+                    {s.source && (
+                      <div
+                        className="text-[10px] font-bold uppercase tracking-[0.08em] mt-[2px] opacity-60"
+                        style={{ color: isHovered ? 'rgba(255,255,255,0.9)' : 'hsl(var(--muted-foreground))', transition: 'color 0.15s ease' }}
+                      >
+                        Source : {s.source}
+                      </div>
+                    )}
+                  </>
+                )}
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </section>
