@@ -56,7 +56,7 @@ const SuccessStoriesSection = () => {
   const filtered = activeTopic === "tous" ? stories : stories.filter(s => s.topic === activeTopic);
 
   return (
-    <section id="success-stories" ref={ref} className="py-[88px]" style={{ background: 'hsl(var(--navy))' }}>
+    <section id="success-stories" ref={ref} className="py-[88px]" style={{ background: '#103e8c' }}>
       <div className="mx-auto max-w-[1100px] px-12">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
