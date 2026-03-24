@@ -1,5 +1,6 @@
 import DetailPageLayout, { DetailBlock, DetailList, CaseStudy } from "@/components/DetailPageLayout";
 import { useLanguage } from "@/contexts/LanguageContext";
+import presidenceSenegalLogo from "@/assets/clients/presidence-senegal.jpg";
 
 const DeciderSansVisibilite = () => {
   const { t } = useLanguage();
