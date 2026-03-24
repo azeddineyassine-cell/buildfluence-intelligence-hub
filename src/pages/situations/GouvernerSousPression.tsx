@@ -1,5 +1,6 @@
 import DetailPageLayout, { DetailBlock, DetailList, CaseStudy } from "@/components/DetailPageLayout";
 import { useLanguage } from "@/contexts/LanguageContext";
+import rajaLogo from "@/assets/clients/raja-club-athletic.jpg";
 
 const GouvernerSousPression = () => {
   const { t } = useLanguage();
