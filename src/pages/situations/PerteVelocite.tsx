@@ -1,5 +1,6 @@
 import DetailPageLayout, { DetailBlock, DetailList, CaseStudy } from "@/components/DetailPageLayout";
 import { useLanguage } from "@/contexts/LanguageContext";
+import ocpLogo from "@/assets/clients/ocp.png";
 
 const PerteVelocite = () => {
   const { t } = useLanguage();
