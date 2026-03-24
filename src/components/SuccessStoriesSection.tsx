@@ -91,7 +91,7 @@ const SuccessStoriesSection = () => {
           ))}
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[2px]" style={{ background: 'rgba(255,255,255,0.08)' }}>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[6px]">
           {filtered.map((s, i) => (
             <motion.div
               key={`${s.client}-${s.topic}-${i}`}
