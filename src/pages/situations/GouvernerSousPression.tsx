@@ -46,6 +46,7 @@ const GouvernerSousPression = () => {
         <p className="mt-2 font-semibold text-primary">Crisis Command Center + {t("Intelligence d'Influence", "Influence Intelligence")}</p>
       </DetailBlock>
       <CaseStudy
+        logo={rajaLogo}
         title={t("Cas client : Raja Club Athletic", "Client case: Raja Club Athletic")}
         context={t("Club historique à forte base populaire, exposé à une pression médiatique et émotionnelle constante. Enjeu : Sécuriser la prise de décision dans un environnement hyper-réactif et structurer une intelligence stratégique interne.", "Historic club with a strong popular base, exposed to constant media and emotional pressure. Challenge: Securing decision-making in a hyper-reactive environment and structuring internal strategic intelligence.")}
         intervention={[
