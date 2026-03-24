@@ -1,5 +1,6 @@
 import DetailPageLayout, { DetailBlock, DetailList, CaseStudy } from "@/components/DetailPageLayout";
 import { useLanguage } from "@/contexts/LanguageContext";
+import centraleDanoneLogo from "@/assets/clients/centrale-danone.jpg";
 
 const AttaquesInformationnelles = () => {
   const { t } = useLanguage();
