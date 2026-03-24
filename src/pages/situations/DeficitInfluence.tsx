@@ -1,5 +1,7 @@
 import DetailPageLayout, { DetailBlock, DetailList, CaseStudy } from "@/components/DetailPageLayout";
 import { useLanguage } from "@/contexts/LanguageContext";
+import cidcLogo from "@/assets/clients/cidc.jpg";
+import addLogo from "@/assets/clients/add.png";
 
 const DeficitInfluence = () => {
   const { t } = useLanguage();

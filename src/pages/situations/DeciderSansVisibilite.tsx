@@ -43,6 +43,7 @@ const DeciderSansVisibilite = () => {
         <p className="mt-2 font-semibold text-primary">Strategic Foresight Lab</p>
       </DetailBlock>
       <CaseStudy
+        logo={presidenceSenegalLogo}
         title={t("Cas client : Présidence de la République du Sénégal", "Client case: Presidency of the Republic of Senegal")}
         context={t("Annonce de la 3e candidature présidentielle dans un climat tendu. Montée des appels à la rébellion, désinformation et polarisation numérique.", "Announcement of the 3rd presidential candidacy in a tense climate. Rise of calls for rebellion, disinformation and digital polarization.")}
         intervention={[
