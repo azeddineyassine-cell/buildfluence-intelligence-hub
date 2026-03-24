@@ -105,12 +105,12 @@ export const CaseStudy = ({ title, context, intervention, result, logo }: { titl
   <div className="card-glass p-8">
     <div className="flex items-center gap-4">
       {logo && <img src={logo} alt="" className="h-12 w-auto object-contain" />}
-      <h3 className="detail-subtitle text-xl font-bold">{title}</h3>
+      {!logo && <h3 className="detail-subtitle text-xl font-bold">{title}</h3>}
     </div>
     <p className="mt-3 text-sm text-muted-foreground">{context}</p>
-    <h4 className="mt-4 text-xs font-bold uppercase tracking-wider text-primary">Notre intervention</h4>
+    <h4 className="detail-subtitle mt-4 text-xs font-bold uppercase tracking-wider text-primary">Notre intervention</h4>
     <DetailList items={intervention} />
-    <h4 className="mt-4 text-xs font-bold uppercase tracking-wider text-primary">Résultat</h4>
+    <h4 className="detail-subtitle mt-4 text-xs font-bold uppercase tracking-wider text-primary">Résultat</h4>
     <p className="mt-2 text-sm text-foreground/80">{result}</p>
   </div>
 );
