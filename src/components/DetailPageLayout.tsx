@@ -72,6 +72,23 @@ const DetailPageLayout = ({ title, chapeau, children, ctas, situationContext, pr
                 ))}
               </div>
             )}
+
+            {(prevSituation || nextSituation) && (
+              <div className="mt-16 flex items-center justify-between">
+                {prevSituation ? (
+                  <Link to={prevSituation.path} onClick={() => window.scrollTo(0, 0)} className="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground transition-colors hover:text-primary">
+                    <ArrowLeft className="h-4 w-4" />
+                    {t("Situation précédente", "Previous situation")}
+                  </Link>
+                ) : <span />}
+                {nextSituation ? (
+                  <Link to={nextSituation.path} onClick={() => window.scrollTo(0, 0)} className="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground transition-colors hover:text-primary">
+                    {t("Situation suivante", "Next situation")}
+                    <ArrowRight className="h-4 w-4" />
+                  </Link>
+                ) : <span />}
+              </div>
+            )}
           </motion.div>
         </div>
       </section>
