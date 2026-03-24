@@ -9,6 +9,8 @@ const PerteVelocite = () => {
     <DetailPageLayout
       title={t("Perdre en vélocité face aux concurrents", "Losing velocity against competitors")}
       chapeau={t("Naviguer sans radar pendant que d'autres tracent leur route grâce aux signaux du marché", "Navigating without radar while others chart their course using market signals")}
+      prevSituation={{ label: "Crises non maîtrisées", path: "/situations/crises-non-maitrisees" }}
+      nextSituation={{ label: "Déficit d'influence", path: "/situations/deficit-influence" }}
       ctas={[
         { label: t("Évaluer ma situation — GRATUIT", "Evaluate my situation — FREE"), action: "#", formType: "f2" },
       ]}

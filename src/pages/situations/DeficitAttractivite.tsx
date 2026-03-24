@@ -8,6 +8,8 @@ const DeficitAttractivite = () => {
     <DetailPageLayout
       title={t("Perdre la bataille de l'attractivité", "Losing the battle for attractiveness")}
       chapeau={t("Avoir des atouts sans rayonnement, c'est laisser les autres capter la valeur à votre place.", "Having assets without influence means letting others capture value in your place.")}
+      prevSituation={{ label: "Attaques informationnelles", path: "/situations/attaques-informationnelles" }}
+      nextSituation={{ label: "Crises non maîtrisées", path: "/situations/crises-non-maitrisees" }}
       ctas={[{ label: t("Évaluer ma situation — GRATUIT", "Evaluate my situation — FREE"), action: "#", formType: "f2" }]}
     >
       <DetailBlock title={t("Votre réalité", "Your reality")}>

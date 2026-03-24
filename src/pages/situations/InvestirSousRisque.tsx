@@ -8,6 +8,8 @@ const InvestirSousRisque = () => {
     <DetailPageLayout
       title={t("Investir sous risque invisible", "Investing under invisible risk")}
       chapeau={t("Miser sans connaissance profonde : chaque investissement devient une loterie", "Betting without deep knowledge: every investment becomes a lottery")}
+      prevSituation={{ label: "Déficit d'influence", path: "/situations/deficit-influence" }}
+      nextSituation={{ label: "Gouverner sous pression", path: "/situations/gouverner-sous-pression" }}
       ctas={[
         { label: t("Évaluer ma situation — GRATUIT", "Evaluate my situation — FREE"), action: "#", formType: "f2" },
       ]}
