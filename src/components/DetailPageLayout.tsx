@@ -1,7 +1,7 @@
 import Navbar from "@/components/Navbar";
 import CTAFooter from "@/components/CTAFooter";
-import { useNavigate } from "react-router-dom";
-import { ArrowLeft } from "lucide-react";
+import { useNavigate, Link } from "react-router-dom";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { ReactNode, useState } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -13,6 +13,8 @@ interface DetailPageLayoutProps {
   children: ReactNode;
   ctas?: { label: string; action: string; formType?: "f1" | "f2" }[];
   situationContext?: string;
+  prevSituation?: { label: string; path: string };
+  nextSituation?: { label: string; path: string };
 }
 
 const DetailPageLayout = ({ title, chapeau, children, ctas, situationContext }: DetailPageLayoutProps) => {
