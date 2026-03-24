@@ -50,8 +50,8 @@ const HeroSection = () => {
             style={{ color: 'hsl(var(--navy))', maxWidth: '700px', opacity: 0.88 }}
           >
             {t(
-              "Nous bâtissons des écosystèmes décisionnels souverains permettant d'anticiper les ruptures, neutraliser les menaces et prendre ",
-              "We build sovereign decision-making ecosystems enabling anticipation of disruptions, neutralization of threats and gaining "
+              "Nous bâtissons des écosystèmes géo-décisionnels souverains permettant d'anticiper les ruptures, neutraliser les menaces et prendre ",
+              "We build sovereign geo-decisional ecosystems enabling anticipation of disruptions, neutralization of threats and gaining "
             )}
             <strong className="font-bold italic">
               {t("l'ascendant stratégique", "the strategic edge")}

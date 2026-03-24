@@ -103,11 +103,11 @@ const SuccessStoriesSection = () => {
               onMouseOver={(e) => (e.currentTarget.style.background = '#f0f4ff')}
               onMouseOut={(e) => (e.currentTarget.style.background = '#ffffff')}
             >
-              <div className="text-[10px] font-bold uppercase tracking-[0.12em] mb-3" style={{ color: 'hsl(var(--gold-light))' }}>
+              <div className="text-[10px] font-bold uppercase tracking-[0.12em] mb-3" style={{ color: '#103e8c' }}>
                 {s.tag}
               </div>
-              <div className="text-[16px] font-bold text-white mb-2">{s.client}</div>
-              <div className="text-[13px] leading-[1.6]" style={{ color: 'rgba(255,255,255,0.55)' }}>{s.desc}</div>
+              <div className="text-[16px] font-bold mb-2" style={{ color: '#0f1f3d' }}>{s.client}</div>
+              <div className="text-[13px] leading-[1.6]" style={{ color: '#4A5568' }}>{s.desc}</div>
             </motion.div>
           ))}
         </div>
