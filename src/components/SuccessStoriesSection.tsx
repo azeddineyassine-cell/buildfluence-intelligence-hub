@@ -98,10 +98,10 @@ const SuccessStoriesSection = () => {
               initial={{ opacity: 0 }}
               animate={isInView ? { opacity: 1 } : {}}
               transition={{ duration: 0.4, delay: i * 0.05 }}
-              className="p-[28px] transition-colors"
-              style={{ background: 'rgba(255,255,255,0.05)' }}
-              onMouseOver={(e) => (e.currentTarget.style.background = 'rgba(255,255,255,0.1)')}
-              onMouseOut={(e) => (e.currentTarget.style.background = 'rgba(255,255,255,0.05)')}
+              className="p-[28px] transition-colors rounded-sm"
+              style={{ background: '#ffffff' }}
+              onMouseOver={(e) => (e.currentTarget.style.background = '#f0f4ff')}
+              onMouseOut={(e) => (e.currentTarget.style.background = '#ffffff')}
             >
               <div className="text-[10px] font-bold uppercase tracking-[0.12em] mb-3" style={{ color: 'hsl(var(--gold-light))' }}>
                 {s.tag}
