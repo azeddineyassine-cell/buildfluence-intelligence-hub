@@ -17,7 +17,7 @@ interface DetailPageLayoutProps {
   nextSituation?: { label: string; path: string };
 }
 
-const DetailPageLayout = ({ title, chapeau, children, ctas, situationContext }: DetailPageLayoutProps) => {
+const DetailPageLayout = ({ title, chapeau, children, ctas, situationContext, prevSituation, nextSituation }: DetailPageLayoutProps) => {
   const navigate = useNavigate();
   const { t } = useLanguage();
   const [f1Open, setF1Open] = useState(false);
