@@ -1,5 +1,6 @@
 import DetailPageLayout, { DetailBlock, DetailList, CaseStudy } from "@/components/DetailPageLayout";
 import { useLanguage } from "@/contexts/LanguageContext";
+import ocpLogo from "@/assets/clients/ocp.png";
 
 const PerteVelocite = () => {
   const { t } = useLanguage();
@@ -43,6 +44,7 @@ const PerteVelocite = () => {
         ]} />
       </DetailBlock>
       <CaseStudy
+        logo={ocpLogo}
         title={t("Cas client : OCP Group", "Client case: OCP Group")}
         context={t("Cartographie de l'écosystème concurrentiel sur 10 ans (2004–2014) face à des campagnes de boycott orchestrées par divers acteurs.", "Mapping of the competitive ecosystem over 10 years (2004-2014) facing boycott campaigns orchestrated by various actors.")}
         intervention={[

@@ -85,7 +85,7 @@ export default DetailPageLayout;
 
 export const DetailBlock = ({ title, children }: { title: string; children: ReactNode }) => (
   <div>
-    <h2 className="font-serif text-2xl font-bold">{title}</h2>
+    <h2 className="detail-subtitle text-2xl font-bold">{title}</h2>
     <div className="mt-4 text-sm leading-relaxed text-foreground/80">{children}</div>
   </div>
 );
@@ -101,9 +101,12 @@ export const DetailList = ({ items }: { items: string[] }) => (
   </ul>
 );
 
-export const CaseStudy = ({ title, context, intervention, result }: { title: string; context: string; intervention: string[]; result: string }) => (
+export const CaseStudy = ({ title, context, intervention, result, logo }: { title: string; context: string; intervention: string[]; result: string; logo?: string }) => (
   <div className="card-glass p-8">
-    <h3 className="font-serif text-xl font-bold">{title}</h3>
+    <div className="flex items-center gap-4">
+      {logo && <img src={logo} alt="" className="h-12 w-auto object-contain" />}
+      <h3 className="detail-subtitle text-xl font-bold">{title}</h3>
+    </div>
     <p className="mt-3 text-sm text-muted-foreground">{context}</p>
     <h4 className="mt-4 text-xs font-bold uppercase tracking-wider text-primary">Notre intervention</h4>
     <DetailList items={intervention} />

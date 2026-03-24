@@ -1,5 +1,6 @@
 import DetailPageLayout, { DetailBlock, DetailList, CaseStudy } from "@/components/DetailPageLayout";
 import { useLanguage } from "@/contexts/LanguageContext";
+import centraleDanoneLogo from "@/assets/clients/centrale-danone.jpg";
 
 const AttaquesInformationnelles = () => {
   const { t } = useLanguage();
@@ -39,6 +40,7 @@ const AttaquesInformationnelles = () => {
         <p className="mt-2 font-semibold text-primary">Threat Intelligence</p>
       </DetailBlock>
       <CaseStudy
+        logo={centraleDanoneLogo}
         title={t("Cas client : Centrale Danone", "Client case: Centrale Danone")}
         context={t("2015, décès de 2 enfants après consommation du yaourt Raïbi Jamila. Campagne de dénigrement pendant 2 ans. Conséquence : perte de 120M MAD (11,2M€).", "2015, death of 2 children after consuming Raïbi Jamila yogurt. Smear campaign for 2 years. Consequence: loss of 120M MAD (€11.2M).")}
         intervention={[

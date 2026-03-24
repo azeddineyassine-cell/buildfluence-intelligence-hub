@@ -1,5 +1,6 @@
 import DetailPageLayout, { DetailBlock, DetailList, CaseStudy } from "@/components/DetailPageLayout";
 import { useLanguage } from "@/contexts/LanguageContext";
+import ministereSanteLogo from "@/assets/clients/ministere-sante.jpg";
 
 const CrisesNonMaitrisees = () => {
   const { t } = useLanguage();
@@ -32,6 +33,7 @@ const CrisesNonMaitrisees = () => {
         <p className="mt-2 font-semibold text-primary">Crisis Management</p>
       </DetailBlock>
       <CaseStudy
+        logo={ministereSanteLogo}
         title={t("Cas client : Ministère de la Santé", "Client case: Ministry of Health")}
         context={t("2018, virus H1N1, 40 décès au Maroc. Psychose nationale, désinformation massive, silence du Ministère.", "2018, H1N1 virus, 40 deaths in Morocco. National psychosis, massive disinformation, Ministry silence.")}
         intervention={[

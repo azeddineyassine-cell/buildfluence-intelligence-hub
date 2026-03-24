@@ -1,5 +1,7 @@
 import DetailPageLayout, { DetailBlock, DetailList, CaseStudy } from "@/components/DetailPageLayout";
 import { useLanguage } from "@/contexts/LanguageContext";
+import cidcLogo from "@/assets/clients/cidc.jpg";
+import addLogo from "@/assets/clients/add.png";
 
 const DeficitInfluence = () => {
   const { t } = useLanguage();
@@ -40,6 +42,7 @@ const DeficitInfluence = () => {
         <p className="mt-2 font-semibold text-primary">Political Intelligence</p>
       </DetailBlock>
       <CaseStudy
+        logo={cidcLogo}
         title={t("Cas client 1 : CIDC — Organisation de la Coopération Islamique", "Client case 1: ICDT — Organisation of Islamic Cooperation")}
         context={t("Après plusieurs décennies d'existence, le CIDC souffrait d'un déficit de visibilité et d'influence économique au sein de l'écosystème des 57 pays membres.", "After several decades of existence, the ICDT suffered from a deficit of visibility and economic influence within the 57-member country ecosystem.")}
         intervention={[
@@ -51,6 +54,7 @@ const DeficitInfluence = () => {
         result={t("Repositionnement du CIDC comme hub d'opportunités économiques intra-OCI. Passage d'un rôle institutionnel passif à une plateforme d'orchestration économique insight-driven.", "Repositioning of ICDT as an intra-OIC economic opportunities hub. Transition from a passive institutional role to an insight-driven economic orchestration platform.")}
       />
       <CaseStudy
+        logo={addLogo}
         title={t("Cas client 2 : ADD — Agence de Développement du Digital", "Client case 2: ADD — Digital Development Agency")}
         context={t("Malgré un mandat stratégique dans la transformation digitale nationale, l'agence souffrait d'un impact institutionnel limité et d'une faible empreinte dans l'écosystème digital marocain.", "Despite a strategic mandate in national digital transformation, the agency suffered from limited institutional impact and a weak footprint in the Moroccan digital ecosystem.")}
         intervention={[

@@ -17,7 +17,7 @@ const SuccessStoriesSection = () => {
     { label: t("🏛 Influence & Soft Power", "🏛 Influence & Soft Power"), value: "influence" },
     { label: t("🌐 Écosystème Concurrentiel", "🌐 Competitive Ecosystem"), value: "ecosysteme" },
     { label: t("📊 Audit & Benchmark", "📊 Audit & Benchmark"), value: "audit" },
-    { label: t("📣 Stratégie de communication", "📣 Communication strategy"), value: "communication" },
+    { label: t("📣 Ingénierie de communication", "📣 Communication engineering"), value: "communication" },
   ];
 
   const stories = [
@@ -46,15 +46,17 @@ const SuccessStoriesSection = () => {
     { topic: "audit", tag: "Audit & Benchmark", client: "UM6SS", desc: t("Audit de gouvernance académique et benchmarking des standards d'excellence universitaire.", "Academic governance audit and benchmarking of university excellence standards.") },
     { topic: "audit", tag: "Audit & Benchmark", client: "Raja Club Athletic", desc: t("Audit des pratiques de gouvernance sportive et benchmark des clubs leaders africains.", "Sports governance practices audit and benchmark of leading African clubs.") },
     // Stratégie de communication
-    { topic: "communication", tag: t("Stratégie de communication", "Communication strategy"), client: "OCP Group", desc: t("Stratégie de communication institutionnelle à destination des marchés internationaux.", "Institutional communication strategy targeting international markets.") },
-    { topic: "communication", tag: t("Stratégie de communication", "Communication strategy"), client: t("Ministère de la Santé", "Ministry of Health"), desc: t("Stratégie de communication publique autour des politiques de santé nationales.", "Public communication strategy around national health policies.") },
-    { topic: "communication", tag: t("Stratégie de communication", "Communication strategy"), client: "ADD", desc: t("Stratégie de communication d'attractivité pour les investisseurs et partenaires internationaux.", "Attractiveness communication strategy for international investors and partners.") },
+    { topic: "communication", tag: t("Ingénierie de communication", "Communication engineering"), client: "OCP Group", desc: t("Stratégie de communication Corporate, Veille et Renforcement d'image institutionnelle", "Corporate communication strategy, Monitoring and Institutional image strengthening") },
+    { topic: "communication", tag: t("Ingénierie de communication", "Communication engineering"), client: t("Ministère de la Santé", "Ministry of Health"), desc: t("Participation à l'élaboration de la stratégie de communication publique autour des politiques de santé nationale", "Participation in developing the public communication strategy around national health policies") },
+    { topic: "communication", tag: t("Ingénierie de communication", "Communication engineering"), client: "ADD", desc: t("Appui à la communication d'attractivité pour le renforcement institutionnel de l'agence", "Attractiveness communication support for the institutional strengthening of the agency") },
+    { topic: "communication", tag: t("Ingénierie de communication", "Communication engineering"), client: "GINGER INTERNATIONAL", desc: t("Ingénierie de communication d'image et de processus d'attractivité auprès des clients institutionnels", "Image communication engineering and attractiveness processes for institutional clients") },
+    { topic: "communication", tag: t("Ingénierie de communication", "Communication engineering"), client: t("Hôpital Universitaire International Mohammed VI", "Mohammed VI International University Hospital"), desc: t("Feuille de route pour la communication d'attractivité et le raffermissement réputationnel", "Roadmap for attractiveness communication and reputational strengthening") },
   ];
 
   const filtered = activeTopic === "tous" ? stories : stories.filter(s => s.topic === activeTopic);
 
   return (
-    <section id="success-stories" ref={ref} className="py-[88px]" style={{ background: 'hsl(var(--navy))' }}>
+    <section id="success-stories" ref={ref} className="py-[88px]" style={{ background: '#103e8c' }}>
       <div className="mx-auto max-w-[1100px] px-12">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -89,23 +91,23 @@ const SuccessStoriesSection = () => {
           ))}
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[2px]" style={{ background: 'rgba(255,255,255,0.08)' }}>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[6px]">
           {filtered.map((s, i) => (
             <motion.div
               key={`${s.client}-${s.topic}-${i}`}
               initial={{ opacity: 0 }}
               animate={isInView ? { opacity: 1 } : {}}
               transition={{ duration: 0.4, delay: i * 0.05 }}
-              className="p-[28px] transition-colors"
-              style={{ background: 'rgba(255,255,255,0.05)' }}
-              onMouseOver={(e) => (e.currentTarget.style.background = 'rgba(255,255,255,0.1)')}
-              onMouseOut={(e) => (e.currentTarget.style.background = 'rgba(255,255,255,0.05)')}
+              className="p-[28px] transition-colors rounded-sm"
+              style={{ background: '#ffffff' }}
+              onMouseOver={(e) => (e.currentTarget.style.background = '#f0f4ff')}
+              onMouseOut={(e) => (e.currentTarget.style.background = '#ffffff')}
             >
-              <div className="text-[10px] font-bold uppercase tracking-[0.12em] mb-3" style={{ color: 'hsl(var(--gold-light))' }}>
+              <div className="text-[10px] font-bold uppercase tracking-[0.12em] mb-3" style={{ color: '#103e8c' }}>
                 {s.tag}
               </div>
-              <div className="text-[16px] font-bold text-white mb-2">{s.client}</div>
-              <div className="text-[13px] leading-[1.6]" style={{ color: 'rgba(255,255,255,0.55)' }}>{s.desc}</div>
+              <div className="text-[16px] font-bold mb-2" style={{ color: '#0f1f3d' }}>{s.client}</div>
+              <div className="text-[13px] leading-[1.6]" style={{ color: '#4A5568' }}>{s.desc}</div>
             </motion.div>
           ))}
         </div>
