@@ -28,18 +28,18 @@ const clients = [
 
 const ClientProofStrip = () => {
   return (
-    <div
-      className="flex flex-wrap items-center justify-center gap-10 px-12 py-6"
-      style={{ background: "hsl(var(--navy))" }}
-    >
-      {clients.map((client) => (
-        <img
-          key={client.name}
-          src={client.logo}
-          alt={client.name}
-          className="h-10 w-auto object-contain opacity-60 grayscale transition-all duration-300 hover:opacity-100 hover:grayscale-0"
-        />
-      ))}
+    <div className="overflow-hidden bg-white py-8">
+      <div className="marquee-track flex w-max items-center gap-16">
+        {/* Render logos twice for seamless loop */}
+        {[...clients, ...clients].map((client, i) => (
+          <img
+            key={`${client.name}-${i}`}
+            src={client.logo}
+            alt={client.name}
+            className="h-10 w-auto flex-shrink-0 object-contain opacity-50 grayscale transition-all duration-300 hover:opacity-100 hover:grayscale-0"
+          />
+        ))}
+      </div>
     </div>
   );
 };
