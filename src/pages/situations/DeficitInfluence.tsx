@@ -1,5 +1,6 @@
 import DetailPageLayout, { DetailBlock, DetailList, CaseStudy } from "@/components/DetailPageLayout";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { Link } from "react-router-dom";
 import cidcLogo from "@/assets/clients/cidc.jpg";
 import addLogo from "@/assets/clients/add.png";
 
@@ -10,7 +11,6 @@ const DeficitInfluence = () => {
       title={t("Déficit d'influence institutionnel", "Institutional influence deficit")}
       chapeau={t("Quand certains écrivent l'histoire, d'autres la subissent.", "When some write history, others endure it.")}
       ctas={[
-        { label: t("Lire le cas complet", "Read the full case"), action: "#", formType: "f1" },
         { label: t("Évaluer ma situation — GRATUIT", "Evaluate my situation — FREE"), action: "#", formType: "f2" },
       ]}
     >
@@ -39,7 +39,7 @@ const DeficitInfluence = () => {
         ]} />
       </DetailBlock>
       <DetailBlock title={t("Solution Buildfluence", "Buildfluence Solution")}>
-        <p className="mt-2 font-semibold text-primary">Political Intelligence</p>
+        <Link to="/solutions/soft-power-influence" className="mt-2 inline-block font-semibold text-primary hover:underline">Political Intelligence</Link>
       </DetailBlock>
       <CaseStudy
         logo={cidcLogo}

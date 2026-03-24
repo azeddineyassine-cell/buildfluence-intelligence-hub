@@ -1,5 +1,6 @@
 import DetailPageLayout, { DetailBlock, DetailList, CaseStudy } from "@/components/DetailPageLayout";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { Link } from "react-router-dom";
 
 const InvestirSousRisque = () => {
   const { t } = useLanguage();
@@ -8,7 +9,6 @@ const InvestirSousRisque = () => {
       title={t("Investir sous risque invisible", "Investing under invisible risk")}
       chapeau={t("Miser sans connaissance profonde : chaque investissement devient une loterie", "Betting without deep knowledge: every investment becomes a lottery")}
       ctas={[
-        { label: t("Lire le cas complet", "Read the full case"), action: "#", formType: "f1" },
         { label: t("Évaluer ma situation — GRATUIT", "Evaluate my situation — FREE"), action: "#", formType: "f2" },
       ]}
     >

@@ -1,5 +1,6 @@
 import DetailPageLayout, { DetailBlock, DetailList, CaseStudy } from "@/components/DetailPageLayout";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { Link } from "react-router-dom";
 import centraleDanoneLogo from "@/assets/clients/centrale-danone.jpg";
 
 const AttaquesInformationnelles = () => {
@@ -9,7 +10,6 @@ const AttaquesInformationnelles = () => {
       title={t("Subir des attaques informationnelles", "Suffering information attacks")}
       chapeau={t("Vulnérabilité aux manipulations et désinformations qui altèrent la perception de la réalité et sabotent les décisions stratégiques", "Vulnerability to manipulations and disinformation that alter the perception of reality and sabotage strategic decisions")}
       ctas={[
-        { label: t("Lire le cas complet", "Read the full case"), action: "#", formType: "f1" },
         { label: t("Évaluer ma situation — GRATUIT", "Evaluate my situation — FREE"), action: "#", formType: "f2" },
       ]}
     >
@@ -37,7 +37,7 @@ const AttaquesInformationnelles = () => {
         ]} />
       </DetailBlock>
       <DetailBlock title={t("Solution Buildfluence", "Buildfluence Solution")}>
-        <p className="mt-2 font-semibold text-primary">Threat Intelligence</p>
+        <Link to="/solutions/strategic-intelligence-lab" className="mt-2 inline-block font-semibold text-primary hover:underline">Threat Intelligence</Link>
       </DetailBlock>
       <CaseStudy
         logo={centraleDanoneLogo}

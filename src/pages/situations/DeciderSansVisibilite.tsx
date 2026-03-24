@@ -1,5 +1,6 @@
 import DetailPageLayout, { DetailBlock, DetailList, CaseStudy } from "@/components/DetailPageLayout";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { Link } from "react-router-dom";
 import presidenceSenegalLogo from "@/assets/clients/presidence-senegal.jpg";
 
 const DeciderSansVisibilite = () => {
@@ -9,7 +10,6 @@ const DeciderSansVisibilite = () => {
       title={t("Décider sans visibilité", "Deciding without visibility")}
       chapeau={t("Manque d'information fiable transformant chaque décision stratégique en pari hasardeux", "Lack of reliable information turning every strategic decision into a hazardous gamble")}
       ctas={[
-        { label: t("Lire le cas complet", "Read the full case"), action: "#", formType: "f1" },
         { label: t("Évaluer ma situation — GRATUIT", "Evaluate my situation — FREE"), action: "#", formType: "f2" },
       ]}
     >
@@ -40,7 +40,7 @@ const DeciderSansVisibilite = () => {
         ]} />
       </DetailBlock>
       <DetailBlock title={t("Solution Buildfluence", "Buildfluence Solution")}>
-        <p className="mt-2 font-semibold text-primary">Strategic Foresight Lab</p>
+        <Link to="/solutions/strategic-intelligence-lab" className="mt-2 inline-block font-semibold text-primary hover:underline">Strategic Foresight Lab</Link>
       </DetailBlock>
       <CaseStudy
         logo={presidenceSenegalLogo}

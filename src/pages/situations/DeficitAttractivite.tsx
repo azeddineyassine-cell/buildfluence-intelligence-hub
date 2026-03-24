@@ -1,5 +1,6 @@
 import DetailPageLayout, { DetailBlock, DetailList, CaseStudy } from "@/components/DetailPageLayout";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { Link } from "react-router-dom";
 
 const DeficitAttractivite = () => {
   const { t } = useLanguage();
@@ -28,7 +29,7 @@ const DeficitAttractivite = () => {
         ]} />
       </DetailBlock>
       <DetailBlock title={t("Solution Buildfluence", "Buildfluence Solution")}>
-        <p className="mt-2 font-semibold text-primary">Territorial Influence Lab</p>
+        <Link to="/solutions/soft-power-influence" className="mt-2 inline-block font-semibold text-primary hover:underline">Territorial Influence Lab</Link>
       </DetailBlock>
       <CaseStudy
         title={t("Cas client : Territoire confidentiel (mandat sous NDA strict)", "Client case: Confidential territory (strict NDA mandate)")}
