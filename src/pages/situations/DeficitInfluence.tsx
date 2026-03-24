@@ -42,6 +42,7 @@ const DeficitInfluence = () => {
         <p className="mt-2 font-semibold text-primary">Political Intelligence</p>
       </DetailBlock>
       <CaseStudy
+        logo={cidcLogo}
         title={t("Cas client 1 : CIDC — Organisation de la Coopération Islamique", "Client case 1: ICDT — Organisation of Islamic Cooperation")}
         context={t("Après plusieurs décennies d'existence, le CIDC souffrait d'un déficit de visibilité et d'influence économique au sein de l'écosystème des 57 pays membres.", "After several decades of existence, the ICDT suffered from a deficit of visibility and economic influence within the 57-member country ecosystem.")}
         intervention={[
