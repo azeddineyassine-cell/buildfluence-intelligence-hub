@@ -101,11 +101,14 @@ export const DetailList = ({ items }: { items: string[] }) => (
   </ul>
 );
 
-export const CaseStudy = ({ title, context, intervention, result, logo }: { title: string; context: string; intervention: string[]; result: string; logo?: string }) => (
+export const CaseStudy = ({ title, context, intervention, result, logo }: { title: string; context: string; intervention: string[]; result: string; logo?: string }) => {
+  const { t } = useLanguage();
+  return (
   <div className="card-glass p-8">
-    <div className="flex items-center gap-4">
-      {logo && <img src={logo} alt="" className="h-12 w-auto object-contain" />}
-      {!logo && <h3 className="detail-subtitle text-xl font-bold">{title}</h3>}
+    <div>
+      <p className="detail-subtitle text-lg font-bold">{t("Cas client :", "Client case:")}</p>
+      {logo && <img src={logo} alt="" className="mt-3 h-20 w-auto object-contain" />}
+      {!logo && <h3 className="detail-subtitle text-xl font-bold mt-2">{title}</h3>}
     </div>
     <p className="mt-3 text-sm text-muted-foreground">{context}</p>
     <h4 className="detail-subtitle mt-4 text-xs font-bold uppercase tracking-wider text-primary">Notre intervention</h4>
