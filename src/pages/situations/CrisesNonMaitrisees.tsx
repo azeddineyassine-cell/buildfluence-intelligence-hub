@@ -1,5 +1,6 @@
 import DetailPageLayout, { DetailBlock, DetailList, CaseStudy } from "@/components/DetailPageLayout";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { Link } from "react-router-dom";
 import ministereSanteLogo from "@/assets/clients/ministere-sante.jpg";
 
 const CrisesNonMaitrisees = () => {
@@ -9,7 +10,6 @@ const CrisesNonMaitrisees = () => {
       title={t("Sombrer dans une crise non maîtrisée", "Sinking into an uncontrolled crisis")}
       chapeau={t("Ignorer les étincelles mène à l'incendie", "Ignoring sparks leads to fire")}
       ctas={[
-        { label: t("Lire le cas complet", "Read the full case"), action: "#", formType: "f1" },
         { label: t("Évaluer ma situation — GRATUIT", "Evaluate my situation — FREE"), action: "#", formType: "f2" },
       ]}
     >
@@ -30,7 +30,7 @@ const CrisesNonMaitrisees = () => {
         ]} />
       </DetailBlock>
       <DetailBlock title={t("Solution Buildfluence", "Buildfluence Solution")}>
-        <p className="mt-2 font-semibold text-primary">Crisis Management</p>
+        <Link to="/solutions/strategic-intelligence-lab" className="mt-2 inline-block font-semibold text-primary hover:underline">Crisis Management</Link>
       </DetailBlock>
       <CaseStudy
         logo={ministereSanteLogo}

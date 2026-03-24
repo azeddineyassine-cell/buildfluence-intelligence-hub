@@ -1,5 +1,6 @@
 import DetailPageLayout, { DetailBlock, DetailList, CaseStudy } from "@/components/DetailPageLayout";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { Link } from "react-router-dom";
 import ocpLogo from "@/assets/clients/ocp.png";
 
 const PerteVelocite = () => {
@@ -9,7 +10,6 @@ const PerteVelocite = () => {
       title={t("Perdre en vélocité face aux concurrents", "Losing velocity against competitors")}
       chapeau={t("Naviguer sans radar pendant que d'autres tracent leur route grâce aux signaux du marché", "Navigating without radar while others chart their course using market signals")}
       ctas={[
-        { label: t("Lire le cas complet", "Read the full case"), action: "#", formType: "f1" },
         { label: t("Évaluer ma situation — GRATUIT", "Evaluate my situation — FREE"), action: "#", formType: "f2" },
       ]}
     >
@@ -30,7 +30,7 @@ const PerteVelocite = () => {
         ]} />
       </DetailBlock>
       <DetailBlock title={t("Solution Buildfluence", "Buildfluence Solution")}>
-        <p className="mt-2 font-semibold text-primary">Competitive Velocity Engine</p>
+        <Link to="/capacites/competitive-velocity-engine" className="mt-2 inline-block font-semibold text-primary hover:underline">Competitive Velocity Engine</Link>
       </DetailBlock>
       <DetailBlock title={t("Ce que nous faisons", "What we do")}>
         <DetailList items={[

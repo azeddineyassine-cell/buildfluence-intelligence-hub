@@ -1,5 +1,6 @@
 import DetailPageLayout, { DetailBlock, DetailList, CaseStudy } from "@/components/DetailPageLayout";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { Link } from "react-router-dom";
 import rajaLogo from "@/assets/clients/raja-club-athletic.jpg";
 
 const GouvernerSousPression = () => {
@@ -9,7 +10,6 @@ const GouvernerSousPression = () => {
       title={t("Gouverner sous pression médiatique et émotionnelle", "Governing under media and emotional pressure")}
       chapeau={t("Dans un environnement sur-exposé, ne laissez pas l'émotion dicter vos décisions", "In an over-exposed environment, don't let emotion dictate your decisions")}
       ctas={[
-        { label: t("Lire le cas complet", "Read the full case"), action: "#", formType: "f1" },
         { label: t("Réserver mon échange stratégique", "Book my strategic exchange"), action: "#", formType: "f1" },
       ]}
     >
@@ -43,7 +43,7 @@ const GouvernerSousPression = () => {
         ]} />
       </DetailBlock>
       <DetailBlock title={t("Solution Buildfluence", "Buildfluence Solution")}>
-        <p className="mt-2 font-semibold text-primary">Crisis Command Center + {t("Intelligence d'Influence", "Influence Intelligence")}</p>
+        <Link to="/solutions/strategic-intelligence-lab" className="mt-2 inline-block font-semibold text-primary hover:underline">Crisis Command Center + {t("Intelligence d'Influence", "Influence Intelligence")}</Link>
       </DetailBlock>
       <CaseStudy
         logo={rajaLogo}
