@@ -17,7 +17,7 @@ const SuccessStoriesSection = () => {
     { label: t("🏛 Influence & Soft Power", "🏛 Influence & Soft Power"), value: "influence" },
     { label: t("🌐 Écosystème Concurrentiel", "🌐 Competitive Ecosystem"), value: "ecosysteme" },
     { label: t("📊 Audit & Benchmark", "📊 Audit & Benchmark"), value: "audit" },
-    { label: t("📣 Stratégie de communication", "📣 Communication strategy"), value: "communication" },
+    { label: t("📣 Ingénierie de communication", "📣 Communication engineering"), value: "communication" },
   ];
 
   const stories = [
