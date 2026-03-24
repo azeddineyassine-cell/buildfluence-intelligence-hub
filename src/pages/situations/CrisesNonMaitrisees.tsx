@@ -1,5 +1,6 @@
 import DetailPageLayout, { DetailBlock, DetailList, CaseStudy } from "@/components/DetailPageLayout";
 import { useLanguage } from "@/contexts/LanguageContext";
+import ministereSanteLogo from "@/assets/clients/ministere-sante.jpg";
 
 const CrisesNonMaitrisees = () => {
   const { t } = useLanguage();
