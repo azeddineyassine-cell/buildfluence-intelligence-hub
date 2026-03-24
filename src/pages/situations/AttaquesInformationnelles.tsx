@@ -9,6 +9,8 @@ const AttaquesInformationnelles = () => {
     <DetailPageLayout
       title={t("Subir des attaques informationnelles", "Suffering information attacks")}
       chapeau={t("Vulnérabilité aux manipulations et désinformations qui altèrent la perception de la réalité et sabotent les décisions stratégiques", "Vulnerability to manipulations and disinformation that alter the perception of reality and sabotage strategic decisions")}
+      prevSituation={{ label: "Décider sans visibilité", path: "/situations/decider-sans-visibilite" }}
+      nextSituation={{ label: "Déficit d'attractivité", path: "/situations/deficit-attractivite" }}
       ctas={[
         { label: t("Évaluer ma situation — GRATUIT", "Evaluate my situation — FREE"), action: "#", formType: "f2" },
       ]}

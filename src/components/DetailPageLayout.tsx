@@ -1,7 +1,7 @@
 import Navbar from "@/components/Navbar";
 import CTAFooter from "@/components/CTAFooter";
-import { useNavigate } from "react-router-dom";
-import { ArrowLeft } from "lucide-react";
+import { useNavigate, Link } from "react-router-dom";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { ReactNode, useState } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -13,9 +13,11 @@ interface DetailPageLayoutProps {
   children: ReactNode;
   ctas?: { label: string; action: string; formType?: "f1" | "f2" }[];
   situationContext?: string;
+  prevSituation?: { label: string; path: string };
+  nextSituation?: { label: string; path: string };
 }
 
-const DetailPageLayout = ({ title, chapeau, children, ctas, situationContext }: DetailPageLayoutProps) => {
+const DetailPageLayout = ({ title, chapeau, children, ctas, situationContext, prevSituation, nextSituation }: DetailPageLayoutProps) => {
   const navigate = useNavigate();
   const { t } = useLanguage();
   const [f1Open, setF1Open] = useState(false);
@@ -70,6 +72,23 @@ const DetailPageLayout = ({ title, chapeau, children, ctas, situationContext }: 
                 ))}
               </div>
             )}
+
+            {(prevSituation || nextSituation) && (
+              <div className="mt-16 flex items-center justify-between">
+                {prevSituation ? (
+                  <Link to={prevSituation.path} onClick={() => window.scrollTo(0, 0)} className="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground transition-colors hover:text-primary">
+                    <ArrowLeft className="h-4 w-4" />
+                    {t("Situation précédente", "Previous situation")}
+                  </Link>
+                ) : <span />}
+                {nextSituation ? (
+                  <Link to={nextSituation.path} onClick={() => window.scrollTo(0, 0)} className="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground transition-colors hover:text-primary">
+                    {t("Situation suivante", "Next situation")}
+                    <ArrowRight className="h-4 w-4" />
+                  </Link>
+                ) : <span />}
+              </div>
+            )}
           </motion.div>
         </div>
       </section>
@@ -101,11 +120,14 @@ export const DetailList = ({ items }: { items: string[] }) => (
   </ul>
 );
 
-export const CaseStudy = ({ title, context, intervention, result, logo }: { title: string; context: string; intervention: string[]; result: string; logo?: string }) => (
+export const CaseStudy = ({ title, context, intervention, result, logo }: { title: string; context: string; intervention: string[]; result: string; logo?: string }) => {
+  const { t } = useLanguage();
+  return (
   <div className="card-glass p-8">
-    <div className="flex items-center gap-4">
-      {logo && <img src={logo} alt="" className="h-12 w-auto object-contain" />}
-      {!logo && <h3 className="detail-subtitle text-xl font-bold">{title}</h3>}
+    <div>
+      <p className="detail-subtitle text-lg font-bold">{t("Cas client :", "Client case:")}</p>
+      {logo && <img src={logo} alt="" className="mt-3 h-20 w-auto object-contain" />}
+      {!logo && <h3 className="detail-subtitle text-xl font-bold mt-2">{title}</h3>}
     </div>
     <p className="mt-3 text-sm text-muted-foreground">{context}</p>
     <h4 className="detail-subtitle mt-4 text-xs font-bold uppercase tracking-wider text-primary">Notre intervention</h4>
@@ -113,4 +135,5 @@ export const CaseStudy = ({ title, context, intervention, result, logo }: { titl
     <h4 className="detail-subtitle mt-4 text-xs font-bold uppercase tracking-wider text-primary">Résultat</h4>
     <p className="mt-2 text-sm text-foreground/80">{result}</p>
   </div>
-);
+  );
+};

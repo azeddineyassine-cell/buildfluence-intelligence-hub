@@ -9,6 +9,8 @@ const CrisesNonMaitrisees = () => {
     <DetailPageLayout
       title={t("Sombrer dans une crise non maîtrisée", "Sinking into an uncontrolled crisis")}
       chapeau={t("Ignorer les étincelles mène à l'incendie", "Ignoring sparks leads to fire")}
+      prevSituation={{ label: "Déficit d'attractivité", path: "/situations/deficit-attractivite" }}
+      nextSituation={{ label: "Perte de vélocité", path: "/situations/perte-velocite" }}
       ctas={[
         { label: t("Évaluer ma situation — GRATUIT", "Evaluate my situation — FREE"), action: "#", formType: "f2" },
       ]}

@@ -9,6 +9,7 @@ const DeciderSansVisibilite = () => {
     <DetailPageLayout
       title={t("Décider sans visibilité", "Deciding without visibility")}
       chapeau={t("Manque d'information fiable transformant chaque décision stratégique en pari hasardeux", "Lack of reliable information turning every strategic decision into a hazardous gamble")}
+      nextSituation={{ label: "Attaques informationnelles", path: "/situations/attaques-informationnelles" }}
       ctas={[
         { label: t("Évaluer ma situation — GRATUIT", "Evaluate my situation — FREE"), action: "#", formType: "f2" },
       ]}

@@ -9,6 +9,7 @@ const GouvernerSousPression = () => {
     <DetailPageLayout
       title={t("Gouverner sous pression médiatique et émotionnelle", "Governing under media and emotional pressure")}
       chapeau={t("Dans un environnement sur-exposé, ne laissez pas l'émotion dicter vos décisions", "In an over-exposed environment, don't let emotion dictate your decisions")}
+      prevSituation={{ label: "Investir sous risque", path: "/situations/investir-sous-risque" }}
       ctas={[
         { label: t("Réserver mon échange stratégique", "Book my strategic exchange"), action: "#", formType: "f1" },
       ]}

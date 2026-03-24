@@ -10,6 +10,8 @@ const DeficitInfluence = () => {
     <DetailPageLayout
       title={t("Déficit d'influence institutionnel", "Institutional influence deficit")}
       chapeau={t("Quand certains écrivent l'histoire, d'autres la subissent.", "When some write history, others endure it.")}
+      prevSituation={{ label: "Perte de vélocité", path: "/situations/perte-velocite" }}
+      nextSituation={{ label: "Investir sous risque", path: "/situations/investir-sous-risque" }}
       ctas={[
         { label: t("Évaluer ma situation — GRATUIT", "Evaluate my situation — FREE"), action: "#", formType: "f2" },
       ]}
