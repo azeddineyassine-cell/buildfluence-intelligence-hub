@@ -116,4 +116,5 @@ export const CaseStudy = ({ title, context, intervention, result, logo }: { titl
     <h4 className="detail-subtitle mt-4 text-xs font-bold uppercase tracking-wider text-primary">Résultat</h4>
     <p className="mt-2 text-sm text-foreground/80">{result}</p>
   </div>
-);
+  );
+};
