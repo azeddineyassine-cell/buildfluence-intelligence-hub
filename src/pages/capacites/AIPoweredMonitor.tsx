@@ -1,5 +1,8 @@
 import DetailPageLayout, { DetailBlock, DetailList, CaseStudy } from "@/components/DetailPageLayout";
 import { useLanguage } from "@/contexts/LanguageContext";
+import presidenceSenegalLogo from "@/assets/clients/presidence-senegal.jpg";
+import imgSenegal1 from "@/assets/sections/ai-monitor-senegal-1.jpg";
+import imgSenegal2 from "@/assets/sections/ai-monitor-senegal-2.png";
 
 const AIPoweredMonitor = () => {
   const { t } = useLanguage();
@@ -46,6 +49,7 @@ const AIPoweredMonitor = () => {
         ]} />
       </DetailBlock>
       <CaseStudy
+        logo={presidenceSenegalLogo}
         title={t("Cas client : Présidence du Sénégal", "Client case: Presidency of Senegal")}
         context={t("Plateforme de veille dédiée pour surveiller l'image de l'État en temps réel. Solution Fact-Checking. Alertes pour le cabinet présidentiel.", "Dedicated monitoring platform to track the State's image in real time. Fact-checking solution. Alerts for the presidential cabinet.")}
         intervention={[
@@ -54,6 +58,8 @@ const AIPoweredMonitor = () => {
           t("Solution de Fact-Checking en temps réel", "Real-time fact-checking solution"),
         ]}
         result={t("Monitoring continu de l'image de l'État. Capacité de réaction accélérée du cabinet.", "Continuous monitoring of the State's image. Accelerated cabinet reaction capability.")}
+        image={imgSenegal1}
+        image2={imgSenegal2}
       />
     </DetailPageLayout>
   );
