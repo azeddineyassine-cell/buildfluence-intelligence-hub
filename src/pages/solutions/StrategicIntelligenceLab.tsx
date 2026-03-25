@@ -1,5 +1,7 @@
 import DetailPageLayout, { DetailBlock, DetailList, CaseStudy } from "@/components/DetailPageLayout";
 import { useLanguage } from "@/contexts/LanguageContext";
+import ocpLogo from "@/assets/clients/ocp.png";
+import ministereSanteLogo from "@/assets/clients/ministere-sante.jpg";
 
 const StrategicIntelligenceLab = () => {
   const { t } = useLanguage();
@@ -8,12 +10,13 @@ const StrategicIntelligenceLab = () => {
       title="Strategic Intelligence Lab"
       chapeau={t("Voir avant. Comprendre mieux. Décider plus vite que tous.", "See first. Understand better. Decide faster than everyone.")}
       ctas={[{ label: t("Parler de mon projet", "Discuss my project"), action: "#", formType: "f1" }]}
+      situationContext="Strategic Intelligence Lab"
     >
-      <DetailBlock title="Introduction">
-        <p className="mt-2">{t("Le pouvoir appartient à ceux qui voient les ruptures avant qu'elles ne soient évidentes. Le Strategic Intelligence Lab transforme l'incertain en décidable.", "Power belongs to those who see disruptions before they become obvious. The Strategic Intelligence Lab transforms uncertainty into decidable.")}</p>
+      <DetailBlock title="">
+        <p>{t("Le pouvoir appartient à ceux qui voient les ruptures avant qu'elles ne soient évidentes. Le Strategic Intelligence Lab transforme l'incertain en décidable.", "Power belongs to those who see disruptions before they become obvious. The Strategic Intelligence Lab transforms uncertainty into decidable.")}</p>
       </DetailBlock>
       <div className="card-glass p-8">
-        <h3 className="font-serif text-xl font-bold text-primary">SERVICE 1 — Strategic Foresight</h3>
+        <h3 className="detail-subtitle text-xl font-bold text-primary">Strategic Foresight</h3>
         <h4 className="mt-6 text-xs font-bold uppercase tracking-wider text-primary">Market & Competitive Intelligence</h4>
         <DetailList items={[
           t("Veille multicanale : marchés, concurrents, brevets, réglementaire", "Multi-channel monitoring: markets, competitors, patents, regulatory"),
@@ -46,6 +49,7 @@ const StrategicIntelligenceLab = () => {
         ]} />
       </div>
       <CaseStudy
+        logo={ocpLogo}
         title={t("Cas client : OCP Group", "Client case: OCP Group")}
         context={t("Cartographie de l'écosystème concurrentiel. Tableau de bord décisionnel au cabinet du Président.", "Competitive ecosystem mapping. Decision-making dashboard for the President's office.")}
         intervention={[
@@ -56,7 +60,7 @@ const StrategicIntelligenceLab = () => {
         result={t("Protection de milliards de dollars de CA.", "Protection of billions of dollars in revenue.")}
       />
       <div className="card-glass p-8">
-        <h3 className="font-serif text-xl font-bold text-primary">SERVICE 2 — Threat Intelligence</h3>
+        <h3 className="detail-subtitle text-xl font-bold text-primary">Threat Intelligence</h3>
         <h4 className="mt-6 text-xs font-bold uppercase tracking-wider text-primary">OSINT & Fact-Checking</h4>
         <DetailList items={[
           t("Veille ciblée appuyée par l'IA", "AI-supported targeted monitoring"),
@@ -72,6 +76,7 @@ const StrategicIntelligenceLab = () => {
         ]} />
       </div>
       <CaseStudy
+        logo={ministereSanteLogo}
         title={t("Cas client : Ministère de la Santé", "Client case: Ministry of Health")}
         context={t("Crise H1N1, 40 décès, désinformation massive.", "H1N1 crisis, 40 deaths, massive disinformation.")}
         intervention={[
@@ -82,7 +87,7 @@ const StrategicIntelligenceLab = () => {
         result={t("Crise atténuée en 2 semaines.", "Crisis mitigated in 2 weeks.")}
       />
       <div className="card-glass p-8">
-        <h3 className="font-serif text-xl font-bold text-primary">{t("SERVICE 3 — Expérimentations & POCs", "SERVICE 3 — Experiments & POCs")}</h3>
+        <h3 className="detail-subtitle text-xl font-bold text-primary">{t("Expérimentations & POCs", "Experiments & POCs")}</h3>
         <DetailList items={[
           t("Intégration de vos enjeux stratégiques", "Integration of your strategic challenges"),
           t("Modèles d'analyse prédictive", "Predictive analysis models"),

@@ -38,9 +38,9 @@ const Navbar = () => {
       title: "STRATEGIC\nINTELLIGENCE LAB",
       route: "/solutions/strategic-intelligence-lab",
       items: [
-        { label: "Strategic Foresight", desc: t("Veille et anticipation stratégique", "Strategic monitoring and foresight"), route: "/solutions/strategic-intelligence-lab/strategic-foresight" },
-        { label: "Threat Intelligence", desc: t("Détection et neutralisation des menaces", "Threat detection and neutralization"), route: "/solutions/strategic-intelligence-lab/threat-intelligence" },
-        { label: t("Expérimentations & POCs", "Experiments & POCs"), desc: t("Prototypes et modèles prédictifs", "Prototypes and predictive models"), route: "/solutions/strategic-intelligence-lab/experimentations-pocs" },
+        { label: "Strategic Foresight", desc: t("Veille et anticipation stratégique", "Strategic monitoring and foresight"), route: "/solutions/strategic-intelligence-lab" },
+        { label: "Threat Intelligence", desc: t("Détection et neutralisation des menaces", "Threat detection and neutralization"), route: "/solutions/strategic-intelligence-lab" },
+        { label: t("Expérimentations & POCs", "Experiments & POCs"), desc: t("Prototypes et modèles prédictifs", "Prototypes and predictive models"), route: "/solutions/strategic-intelligence-lab" },
       ],
     },
     {
@@ -48,9 +48,9 @@ const Navbar = () => {
       title: "DEEP\nDUE DILIGENCE",
       route: "/solutions/deep-due-diligence",
       items: [
-        { label: "Level 1: Integrity Check", desc: t("Screening PEP et signaux faibles", "PEP screening and weak signals"), route: "/solutions/deep-due-diligence/integrity-check" },
-        { label: "Level 2: Strategic Risk Profiling", desc: t("Cartographie et analyse géopolitique", "Mapping and geopolitical analysis"), route: "/solutions/deep-due-diligence/strategic-risk-profiling" },
-        { label: "Level 3: Regulatory Compliance", desc: t("Audit KYC, KYS, LCB-FT, ESG", "KYC, KYS, AML-CFT, ESG Audit"), route: "/solutions/deep-due-diligence/regulatory-compliance" },
+        { label: "Level 1: Integrity Check", desc: t("Screening PEP et signaux faibles", "PEP screening and weak signals"), route: "/solutions/deep-due-diligence" },
+        { label: "Level 2: Strategic Risk Profiling", desc: t("Cartographie et analyse géopolitique", "Mapping and geopolitical analysis"), route: "/solutions/deep-due-diligence" },
+        { label: "Level 3: Regulatory Compliance", desc: t("Audit KYC, KYS, LCB-FT, ESG", "KYC, KYS, AML-CFT, ESG Audit"), route: "/solutions/deep-due-diligence" },
       ],
     },
     {
@@ -58,9 +58,9 @@ const Navbar = () => {
       title: "SOFT POWER\n& INFLUENCE",
       route: "/solutions/soft-power-influence",
       items: [
-        { label: t("Intelligence d'Influence", "Influence Intelligence"), desc: t("Cartographie des réseaux de pouvoir", "Power network mapping"), route: "/solutions/soft-power-influence/intelligence-influence" },
-        { label: "Political Intelligence", desc: t("Mapping des décideurs publics", "Public decision-maker mapping"), route: "/solutions/soft-power-influence/political-intelligence" },
-        { label: "Territorial Influence Lab", desc: t("Attractivité et compétitivité", "Attractiveness and competitiveness"), route: "/solutions/soft-power-influence/territorial-influence-lab" },
+        { label: t("Intelligence d'Influence", "Influence Intelligence"), desc: t("Cartographie des réseaux de pouvoir", "Power network mapping"), route: "/solutions/soft-power-influence" },
+        { label: "Political Intelligence", desc: t("Mapping des décideurs publics", "Public decision-maker mapping"), route: "/solutions/soft-power-influence" },
+        { label: "Territorial Influence Lab", desc: t("Attractivité et compétitivité", "Attractiveness and competitiveness"), route: "/solutions/soft-power-influence" },
       ],
     },
   ];
