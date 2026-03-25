@@ -48,9 +48,9 @@ const Navbar = () => {
       title: "DEEP\nDUE DILIGENCE",
       route: "/solutions/deep-due-diligence",
       items: [
-        { label: "Level 1: Integrity Check", desc: t("Screening PEP et signaux faibles", "PEP screening and weak signals"), route: "/solutions/deep-due-diligence/integrity-check" },
-        { label: "Level 2: Strategic Risk Profiling", desc: t("Cartographie et analyse géopolitique", "Mapping and geopolitical analysis"), route: "/solutions/deep-due-diligence/strategic-risk-profiling" },
-        { label: "Level 3: Regulatory Compliance", desc: t("Audit KYC, KYS, LCB-FT, ESG", "KYC, KYS, AML-CFT, ESG Audit"), route: "/solutions/deep-due-diligence/regulatory-compliance" },
+        { label: "Level 1: Integrity Check", desc: t("Screening PEP et signaux faibles", "PEP screening and weak signals"), route: "/solutions/deep-due-diligence" },
+        { label: "Level 2: Strategic Risk Profiling", desc: t("Cartographie et analyse géopolitique", "Mapping and geopolitical analysis"), route: "/solutions/deep-due-diligence" },
+        { label: "Level 3: Regulatory Compliance", desc: t("Audit KYC, KYS, LCB-FT, ESG", "KYC, KYS, AML-CFT, ESG Audit"), route: "/solutions/deep-due-diligence" },
       ],
     },
     {
