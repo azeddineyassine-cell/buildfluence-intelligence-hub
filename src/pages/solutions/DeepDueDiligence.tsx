@@ -8,6 +8,7 @@ const DeepDueDiligence = () => {
       title="Deep Due Diligence"
       chapeau={t("Le risque n'est jamais visible. Il se loge dans l'angle mort de ceux qui ne vérifient pas assez profondément.", "Risk is never visible. It hides in the blind spot of those who don't verify deeply enough.")}
       ctas={[{ label: t("Parler de mon projet", "Discuss my project"), action: "#", formType: "f1" }]}
+      situationContext="Deep Due Diligence"
     >
       <div className="grid gap-5 md:grid-cols-3">
         {[
@@ -16,7 +17,7 @@ const DeepDueDiligence = () => {
           { level: t("Niveau 3", "Level 3"), name: "Regulatory Compliance", items: [t("Décryptage actionnariats offshore", "Offshore shareholding decryption"), t("Audit KYC, KYS, LCB-FT, ESG", "KYC, KYS, AML-CFT, ESG audit")], deliverable: t("Livrable : Dossier forensique + Dashboard", "Deliverable: Forensic file + Dashboard") },
         ].map(l => (
           <div key={l.level} className="card-glass p-6">
-            <h3 className="font-serif text-lg font-bold">{l.level}</h3>
+            <h3 className="detail-subtitle text-lg font-bold">{l.level}</h3>
             <p className="mt-1 text-xs font-bold uppercase tracking-wider text-primary">{l.name}</p>
             <DetailList items={l.items} />
             <p className="mt-4 text-xs font-semibold text-primary">{l.deliverable}</p>

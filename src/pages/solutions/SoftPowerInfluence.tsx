@@ -1,5 +1,6 @@
 import DetailPageLayout, { DetailBlock, DetailList, CaseStudy } from "@/components/DetailPageLayout";
 import { useLanguage } from "@/contexts/LanguageContext";
+import cidcLogo from "@/assets/clients/cidc.jpg";
 
 const SoftPowerInfluence = () => {
   const { t } = useLanguage();
@@ -8,9 +9,10 @@ const SoftPowerInfluence = () => {
       title="Soft Power & Influence"
       chapeau={t("Ne laissez pas les autres écrire votre histoire. Façonnez votre perception. Imposez votre narratif.", "Don't let others write your story. Shape your perception. Impose your narrative.")}
       ctas={[{ label: t("Parler de mon projet", "Discuss my project"), action: "#", formType: "f1" }]}
+      situationContext="Soft Power & Influence"
     >
       <div className="card-glass p-8">
-        <h3 className="font-serif text-xl font-bold text-primary">{t("SERVICE 1 — Intelligence d'Influence", "SERVICE 1 — Influence Intelligence")}</h3>
+        <h3 className="detail-subtitle text-xl font-bold text-primary">{t("Intelligence d'Influence", "Influence Intelligence")}</h3>
         <DetailList items={[
           t("Mapping des leaders d'opinion, investisseurs, relais médiatiques", "Mapping of opinion leaders, investors, media relays"),
           t("Identification des nœuds d'amplification", "Identification of amplification nodes"),
@@ -25,7 +27,7 @@ const SoftPowerInfluence = () => {
         </div>
       </div>
       <div className="card-glass p-8">
-        <h3 className="font-serif text-xl font-bold text-primary">SERVICE 2 — Political Intelligence</h3>
+        <h3 className="detail-subtitle text-xl font-bold text-primary">Political Intelligence</h3>
         <DetailList items={[
           t("Mapping des décideurs publics clés", "Mapping of key public decision-makers"),
           t("Lecture des chaînes de décision formelles et informelles", "Reading formal and informal decision chains"),
@@ -49,7 +51,7 @@ const SoftPowerInfluence = () => {
         result={t("Recommandation reprise dans l'appel d'offres national de 180M MAD.", "Recommendation incorporated into the 180M MAD national tender.")}
       />
       <div className="card-glass p-8">
-        <h3 className="font-serif text-xl font-bold text-primary">{t("SERVICE 3 — Attractivité Territoriale", "SERVICE 3 — Territorial Attractiveness")}</h3>
+        <h3 className="detail-subtitle text-xl font-bold text-primary">{t("Territorial Influence Lab", "Territorial Influence Lab")}</h3>
         <DetailList items={[
           t("Cartographie de votre écosystème territorial", "Mapping of your territorial ecosystem"),
           t("Construction de narratifs territoriaux crédibles et différenciants", "Construction of credible and differentiating territorial narratives"),
@@ -60,6 +62,7 @@ const SoftPowerInfluence = () => {
         ]} />
       </div>
       <CaseStudy
+        logo={cidcLogo}
         title={t("Cas client : CIDC (OCI) — 57 pays", "Client case: ICDT (OIC) — 57 countries")}
         context={t("Notoriété en déclin.", "Declining visibility.")}
         intervention={[
