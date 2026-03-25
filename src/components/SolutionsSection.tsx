@@ -82,7 +82,7 @@ const SolutionsSection = () => {
           <p className="text-[11px] font-bold uppercase tracking-[0.18em] mb-[18px]" style={{ color: 'hsl(var(--gold))' }}>
             {t("Nos solutions", "Our solutions")}
           </p>
-          <h2 className="font-serif text-[40px] font-black leading-[1.12] mb-[14px]" style={{ color: 'hsl(var(--navy))', letterSpacing: '-0.5px' }}>
+          <h2 className="detail-subtitle text-[40px] font-black leading-[1.12] mb-[14px]" style={{ color: 'hsl(var(--navy))', letterSpacing: '-0.5px' }}>
             {t("Trois piliers au service de votre", "Three pillars serving your")}
             <br />
             {t("compétitivité et votre attractivité", "competitiveness and attractiveness")}
