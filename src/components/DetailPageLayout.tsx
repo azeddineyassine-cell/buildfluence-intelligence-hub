@@ -120,7 +120,7 @@ export const DetailList = ({ items }: { items: string[] }) => (
   </ul>
 );
 
-export const CaseStudy = ({ title, context, intervention, result, logo }: { title: string; context: string; intervention: string[]; result: string; logo?: string }) => {
+export const CaseStudy = ({ title, context, intervention, result, logo, image, image2 }: { title: string; context: string; intervention: string[]; result: string; logo?: string; image?: string; image2?: string }) => {
   const { t } = useLanguage();
   return (
   <div className="card-glass p-8">
