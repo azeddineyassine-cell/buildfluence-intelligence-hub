@@ -134,6 +134,8 @@ export const CaseStudy = ({ title, context, intervention, result, logo, image, i
     <DetailList items={intervention} />
     <h4 className="detail-subtitle mt-4 text-xs font-bold uppercase tracking-wider text-primary">Résultat</h4>
     <p className="mt-2 text-sm text-foreground/80">{result}</p>
+    {image && <img src={image} alt="" className="mt-6 w-full rounded-sm" />}
+    {image2 && <img src={image2} alt="" className="mt-4 w-full rounded-sm" />}
   </div>
   );
 };
