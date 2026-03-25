@@ -120,6 +120,20 @@ export const DetailList = ({ items }: { items: string[] }) => (
   </ul>
 );
 
+export const SectionBlock = ({ title, children, image, imageAlt, reverse = false }: { title?: string; children: ReactNode; image?: string; imageAlt?: string; reverse?: boolean }) => (
+  <div className={`flex flex-col gap-8 md:flex-row md:items-start ${reverse ? 'md:flex-row-reverse' : ''}`}>
+    <div className="flex-1 min-w-0">
+      {title && <h3 className="detail-subtitle text-xl font-bold text-primary mb-4">{title}</h3>}
+      {children}
+    </div>
+    {image && (
+      <div className="flex-1 min-w-0">
+        <img src={image} alt={imageAlt || ""} className="w-full rounded-sm" />
+      </div>
+    )}
+  </div>
+);
+
 export const CaseStudy = ({ title, context, intervention, result, logo, image, image2 }: { title: string; context: string; intervention: string[]; result: string; logo?: string; image?: string; image2?: string }) => {
   const { t } = useLanguage();
   return (
