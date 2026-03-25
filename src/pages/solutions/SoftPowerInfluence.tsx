@@ -1,4 +1,4 @@
-import DetailPageLayout, { DetailBlock, DetailList, CaseStudy } from "@/components/DetailPageLayout";
+import DetailPageLayout, { DetailBlock, DetailList, CaseStudy, SectionBlock } from "@/components/DetailPageLayout";
 import { useLanguage } from "@/contexts/LanguageContext";
 import cidcLogo from "@/assets/clients/cidc.jpg";
 import imgSoftPower from "@/assets/sections/soft-power-influence.jpg";
@@ -12,10 +12,13 @@ const SoftPowerInfluence = () => {
       ctas={[{ label: t("Parler de mon projet", "Discuss my project"), action: "#", formType: "f1" }]}
       situationContext="Soft Power & Influence"
     >
+      <DetailBlock title="">
+        <p>{t("Ne laissez pas les autres écrire votre histoire. Façonnez votre perception. Imposez votre narratif.", "Don't let others write your story. Shape your perception. Impose your narrative.")}</p>
+      </DetailBlock>
+
       <img src={imgSoftPower} alt="Soft Power & Influence" className="w-full rounded-sm" />
 
-      <div className="card-glass p-8">
-        <h3 className="detail-subtitle text-xl font-bold text-primary">{t("Intelligence d'Influence", "Influence Intelligence")}</h3>
+      <SectionBlock title={t("Intelligence d'Influence", "Influence Intelligence")}>
         <DetailList items={[
           t("Mapping des leaders d'opinion, investisseurs, relais médiatiques", "Mapping of opinion leaders, investors, media relays"),
           t("Identification des nœuds d'amplification", "Identification of amplification nodes"),
@@ -28,9 +31,9 @@ const SoftPowerInfluence = () => {
           <p className="mt-1 text-sm text-foreground/80">OSINT {t("renforcé", "enhanced")}, Social Graphing, NLP, {t("Graphe sémantique", "Semantic graph")}</p>
           <p className="mt-2 text-sm font-semibold text-primary">{t("Résultat : Vous orientez les perceptions avant qu'elles ne deviennent des décisions.", "Result: You shape perceptions before they become decisions.")}</p>
         </div>
-      </div>
-      <div className="card-glass p-8">
-        <h3 className="detail-subtitle text-xl font-bold text-primary">Political Intelligence</h3>
+      </SectionBlock>
+
+      <SectionBlock title="Political Intelligence">
         <DetailList items={[
           t("Mapping des décideurs publics clés", "Mapping of key public decision-makers"),
           t("Lecture des chaînes de décision formelles et informelles", "Reading formal and informal decision chains"),
@@ -43,7 +46,8 @@ const SoftPowerInfluence = () => {
         <div className="mt-4 border-t border-border pt-3">
           <p className="text-sm text-foreground/80">{t("Valeur : Longueur d'avance réglementaire. Réduction du risque politique. Influence mesurable (KPIs).", "Value: Regulatory head start. Political risk reduction. Measurable influence (KPIs).")}</p>
         </div>
-      </div>
+      </SectionBlock>
+
       <CaseStudy
         title={t("Cas client : Livre Blanc e-Santé", "Client case: e-Health White Paper")}
         context={t("2 ans après, le Ministère de la Santé lance un appel d'offres de 180M MAD reprenant la recommandation principale.", "2 years later, the Ministry of Health launches a 180M MAD tender incorporating the main recommendation.")}
@@ -53,8 +57,8 @@ const SoftPowerInfluence = () => {
         ]}
         result={t("Recommandation reprise dans l'appel d'offres national de 180M MAD.", "Recommendation incorporated into the 180M MAD national tender.")}
       />
-      <div className="card-glass p-8">
-        <h3 className="detail-subtitle text-xl font-bold text-primary">{t("Territorial Influence Lab", "Territorial Influence Lab")}</h3>
+
+      <SectionBlock title={t("Territorial Influence Lab", "Territorial Influence Lab")}>
         <DetailList items={[
           t("Cartographie de votre écosystème territorial", "Mapping of your territorial ecosystem"),
           t("Construction de narratifs territoriaux crédibles et différenciants", "Construction of credible and differentiating territorial narratives"),
@@ -63,7 +67,8 @@ const SoftPowerInfluence = () => {
           t("Stratégie de présence dans les forums internationaux", "Strategy for presence in international forums"),
           t("Activation de think tanks et leaders d'opinion", "Activation of think tanks and opinion leaders"),
         ]} />
-      </div>
+      </SectionBlock>
+
       <CaseStudy
         logo={cidcLogo}
         title={t("Cas client : CIDC (OCI) — 57 pays", "Client case: ICDT (OIC) — 57 countries")}
