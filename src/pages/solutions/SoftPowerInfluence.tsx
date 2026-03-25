@@ -1,6 +1,7 @@
 import DetailPageLayout, { DetailBlock, DetailList, CaseStudy } from "@/components/DetailPageLayout";
 import { useLanguage } from "@/contexts/LanguageContext";
 import cidcLogo from "@/assets/clients/cidc.jpg";
+import imgSoftPower from "@/assets/sections/soft-power-influence.jpg";
 
 const SoftPowerInfluence = () => {
   const { t } = useLanguage();
@@ -11,6 +12,8 @@ const SoftPowerInfluence = () => {
       ctas={[{ label: t("Parler de mon projet", "Discuss my project"), action: "#", formType: "f1" }]}
       situationContext="Soft Power & Influence"
     >
+      <img src={imgSoftPower} alt="Soft Power & Influence" className="w-full rounded-sm" />
+
       <div className="card-glass p-8">
         <h3 className="detail-subtitle text-xl font-bold text-primary">{t("Intelligence d'Influence", "Influence Intelligence")}</h3>
         <DetailList items={[
@@ -21,7 +24,7 @@ const SoftPowerInfluence = () => {
           t("Synchronisation messages / relais / timing", "Message / relay / timing synchronization"),
         ]} />
         <div className="mt-4 border-t border-border pt-3">
-          <p className="text-xs font-bold uppercase tracking-wider text-muted-foreground">{t("Méthodologie", "Methodology")}</p>
+          <p className="detail-subtitle text-xs font-bold uppercase tracking-wider text-muted-foreground">{t("Méthodologie", "Methodology")}</p>
           <p className="mt-1 text-sm text-foreground/80">OSINT {t("renforcé", "enhanced")}, Social Graphing, NLP, {t("Graphe sémantique", "Semantic graph")}</p>
           <p className="mt-2 text-sm font-semibold text-primary">{t("Résultat : Vous orientez les perceptions avant qu'elles ne deviennent des décisions.", "Result: You shape perceptions before they become decisions.")}</p>
         </div>

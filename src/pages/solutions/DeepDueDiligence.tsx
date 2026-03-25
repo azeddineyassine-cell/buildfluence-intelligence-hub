@@ -1,5 +1,6 @@
 import DetailPageLayout, { DetailBlock, DetailList, CaseStudy } from "@/components/DetailPageLayout";
 import { useLanguage } from "@/contexts/LanguageContext";
+import imgDDD from "@/assets/sections/deep-due-diligence.jpg";
 
 const DeepDueDiligence = () => {
   const { t } = useLanguage();
@@ -10,6 +11,8 @@ const DeepDueDiligence = () => {
       ctas={[{ label: t("Parler de mon projet", "Discuss my project"), action: "#", formType: "f1" }]}
       situationContext="Deep Due Diligence"
     >
+      <img src={imgDDD} alt="Deep Due Diligence" className="w-full rounded-sm" />
+
       <div className="grid gap-5 md:grid-cols-3">
         {[
           { level: t("Niveau 1", "Level 1"), name: "Integrity Check", items: [t("Mapping express des acteurs", "Express stakeholder mapping"), t("Screening PEP et affiliations", "PEP screening and affiliations"), t("Signaux faibles : sanctions, litiges", "Weak signals: sanctions, litigation")], deliverable: t("Livrable : Fiche Go/Vigilance/No-Go", "Deliverable: Go/Vigilance/No-Go sheet") },
@@ -18,7 +21,7 @@ const DeepDueDiligence = () => {
         ].map(l => (
           <div key={l.level} className="card-glass p-6">
             <h3 className="detail-subtitle text-lg font-bold">{l.level}</h3>
-            <p className="mt-1 text-xs font-bold uppercase tracking-wider text-primary">{l.name}</p>
+            <p className="detail-subtitle mt-1 text-xs font-bold uppercase tracking-wider text-primary">{l.name}</p>
             <DetailList items={l.items} />
             <p className="mt-4 text-xs font-semibold text-primary">{l.deliverable}</p>
           </div>

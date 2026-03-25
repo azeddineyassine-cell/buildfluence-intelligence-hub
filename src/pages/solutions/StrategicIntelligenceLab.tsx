@@ -2,6 +2,14 @@ import DetailPageLayout, { DetailBlock, DetailList, CaseStudy } from "@/componen
 import { useLanguage } from "@/contexts/LanguageContext";
 import ocpLogo from "@/assets/clients/ocp.png";
 import ministereSanteLogo from "@/assets/clients/ministere-sante.jpg";
+import imgStrategicLab from "@/assets/sections/strategic-intelligence-lab.jpg";
+import imgMarketIntel from "@/assets/sections/market-competitive-intelligence.jpg";
+import imgTerritorial from "@/assets/sections/attractivite-territoriale.png";
+import imgInnovation from "@/assets/sections/innovation-mapping.jpg";
+import imgStakeholders from "@/assets/sections/stakeholders-intelligence.jpg";
+import imgOcpCase from "@/assets/sections/cas-client-ocp.png";
+import imgOsint from "@/assets/sections/osint-fact-checking.jpg";
+import imgMinistereSante from "@/assets/sections/cas-client-ministere-sante.png";
 
 const StrategicIntelligenceLab = () => {
   const { t } = useLanguage();
@@ -15,9 +23,12 @@ const StrategicIntelligenceLab = () => {
       <DetailBlock title="">
         <p>{t("Le pouvoir appartient à ceux qui voient les ruptures avant qu'elles ne soient évidentes. Le Strategic Intelligence Lab transforme l'incertain en décidable.", "Power belongs to those who see disruptions before they become obvious. The Strategic Intelligence Lab transforms uncertainty into decidable.")}</p>
       </DetailBlock>
+
+      <img src={imgStrategicLab} alt="Strategic Intelligence Lab" className="w-full rounded-sm" />
+
       <div className="card-glass p-8">
         <h3 className="detail-subtitle text-xl font-bold text-primary">Strategic Foresight</h3>
-        <h4 className="mt-6 text-xs font-bold uppercase tracking-wider text-primary">Market & Competitive Intelligence</h4>
+        <h4 className="detail-subtitle mt-6 text-xs font-bold uppercase tracking-wider text-primary">Market & Competitive Intelligence</h4>
         <DetailList items={[
           t("Veille multicanale : marchés, concurrents, brevets, réglementaire", "Multi-channel monitoring: markets, competitors, patents, regulatory"),
           t("Mapping concurrentiel dynamique", "Dynamic competitive mapping"),
@@ -26,14 +37,18 @@ const StrategicIntelligenceLab = () => {
           t("Études prospectives, benchmarks internationaux", "Prospective studies, international benchmarks"),
           t("Cartographie des acteurs clés : Alliés / Réfractaires / Idiots utiles", "Key stakeholder mapping: Allies / Opponents / Useful idiots"),
         ]} />
-        <h4 className="mt-6 text-xs font-bold uppercase tracking-wider text-primary">{t("Attractivité & Compétitivité Territoriale", "Territorial Attractiveness & Competitiveness")}</h4>
+        <img src={imgMarketIntel} alt="Market & Competitive Intelligence" className="mt-6 w-full rounded-sm" />
+
+        <h4 className="detail-subtitle mt-6 text-xs font-bold uppercase tracking-wider text-primary">{t("Attractivité & Compétitivité Territoriale", "Territorial Attractiveness & Competitiveness")}</h4>
         <DetailList items={[
           t("Guerre économique de l'investissement", "Economic investment warfare"),
           t("Benchmark pays/régions concurrentes", "Competing countries/regions benchmark"),
           t("Politiques publiques comparées", "Compared public policies"),
           t("Narratifs d'attractivité et crédibilité internationale", "Attractiveness narratives and international credibility"),
         ]} />
-        <h4 className="mt-6 text-xs font-bold uppercase tracking-wider text-primary">Innovation Mapping</h4>
+        <img src={imgTerritorial} alt="Attractivité & Compétitivité Territoriale" className="mt-6 w-full rounded-sm" />
+
+        <h4 className="detail-subtitle mt-6 text-xs font-bold uppercase tracking-wider text-primary">Innovation Mapping</h4>
         <DetailList items={[
           t("Cartographie des technologies émergentes et startups", "Emerging technologies and startups mapping"),
           t("Écosystèmes d'innovation (Deeptech, AI, biotech)", "Innovation ecosystems (Deeptech, AI, biotech)"),
@@ -41,13 +56,17 @@ const StrategicIntelligenceLab = () => {
           t("Opportunités d'Open Innovation et M&A stratégiques", "Open Innovation and strategic M&A opportunities"),
           t("Veille brevets (WIPO, EPO, USPTO)", "Patent monitoring (WIPO, EPO, USPTO)"),
         ]} />
-        <h4 className="mt-6 text-xs font-bold uppercase tracking-wider text-primary">Stakeholder Intelligence</h4>
+        <img src={imgInnovation} alt="Innovation Mapping" className="mt-6 w-full rounded-sm" />
+
+        <h4 className="detail-subtitle mt-6 text-xs font-bold uppercase tracking-wider text-primary">Stakeholder Intelligence</h4>
         <DetailList items={[
           t("Mapping des stratégies adverses et des réseaux d'influence", "Adverse strategies and influence networks mapping"),
           t("Cartographie des leaders d'opinion, investisseurs, think tanks, ONG", "Opinion leaders, investors, think tanks, NGO mapping"),
           t("Analyse des alliances et antagonismes", "Alliance and antagonism analysis"),
         ]} />
+        <img src={imgStakeholders} alt="Stakeholder Intelligence" className="mt-6 w-full rounded-sm" />
       </div>
+
       <CaseStudy
         logo={ocpLogo}
         title={t("Cas client : OCP Group", "Client case: OCP Group")}
@@ -58,23 +77,28 @@ const StrategicIntelligenceLab = () => {
           t("Tableau de bord décisionnel", "Decision-making dashboard"),
         ]}
         result={t("Protection de milliards de dollars de CA.", "Protection of billions of dollars in revenue.")}
+        image={imgOcpCase}
       />
+
       <div className="card-glass p-8">
         <h3 className="detail-subtitle text-xl font-bold text-primary">Threat Intelligence</h3>
-        <h4 className="mt-6 text-xs font-bold uppercase tracking-wider text-primary">OSINT & Fact-Checking</h4>
+        <h4 className="detail-subtitle mt-6 text-xs font-bold uppercase tracking-wider text-primary">OSINT & Fact-Checking</h4>
         <DetailList items={[
           t("Veille ciblée appuyée par l'IA", "AI-supported targeted monitoring"),
           t("Analyse de polarisation narrative", "Narrative polarization analysis"),
           t("Tracking des sources hostiles", "Hostile source tracking"),
           t("Stratégie de contre-influence", "Counter-influence strategy"),
         ]} />
-        <h4 className="mt-6 text-xs font-bold uppercase tracking-wider text-primary">{t("Gestion de Crise", "Crisis Management")}</h4>
+        <img src={imgOsint} alt="OSINT & Fact-Checking" className="mt-6 w-full rounded-sm" />
+
+        <h4 className="detail-subtitle mt-6 text-xs font-bold uppercase tracking-wider text-primary">{t("Gestion de Crise", "Crisis Management")}</h4>
         <DetailList items={[
           t("War room — Délai d'activation : 2h", "War room — Activation time: 2h"),
           t("Fact-checking en temps réel", "Real-time fact-checking"),
           t("Reconquête réputationnelle accélérée", "Accelerated reputational recovery"),
         ]} />
       </div>
+
       <CaseStudy
         logo={ministereSanteLogo}
         title={t("Cas client : Ministère de la Santé", "Client case: Ministry of Health")}
@@ -85,7 +109,9 @@ const StrategicIntelligenceLab = () => {
           t("War room de crise", "Crisis war room"),
         ]}
         result={t("Crise atténuée en 2 semaines.", "Crisis mitigated in 2 weeks.")}
+        image={imgMinistereSante}
       />
+
       <div className="card-glass p-8">
         <h3 className="detail-subtitle text-xl font-bold text-primary">{t("Expérimentations & POCs", "Experiments & POCs")}</h3>
         <DetailList items={[
