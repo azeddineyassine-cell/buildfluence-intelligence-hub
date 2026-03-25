@@ -24,7 +24,7 @@ const StrategicWorkflow = () => {
                 {step.num}
               </div>
               <div>
-                <h4 className="text-sm font-bold">{step.title}</h4>
+                <h4 className="detail-subtitle text-sm font-bold">{step.title}</h4>
                 <p className="mt-1 text-[13px] text-muted-foreground">{step.desc}</p>
               </div>
             </div>
