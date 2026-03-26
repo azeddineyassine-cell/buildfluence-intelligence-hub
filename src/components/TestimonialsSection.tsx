@@ -25,6 +25,7 @@ interface Testimonial {
   logo: string;
   photo: string;
   text: string;
+  logoSize?: number;
 }
 
 const TestimonialsSection = () => {
@@ -40,6 +41,7 @@ const TestimonialsSection = () => {
       title: t("Secrétaire Générale", "Secretary General"),
       logo: centraleDanoneLogo,
       photo: samiaPhoto,
+      logoSize: 64,
       text: t(
         "Prestataire de référence depuis 2016 ayant réalisé avec succès de multiples missions grâce à un professionnalisme et une rigueur à toute épreuve. La qualité constante des livrables a instauré une relation de confiance durable pour le traitement de thématiques variées au sein du groupe. Une expertise éprouvée au service de la performance.",
         "Reference service provider since 2016 having successfully completed multiple missions with unwavering professionalism and rigor. The consistent quality of deliverables has established a lasting relationship of trust for handling various topics within the group. Proven expertise at the service of performance."
@@ -60,6 +62,7 @@ const TestimonialsSection = () => {
       title: t("Cheffe de la Division de Communication", "Head of Communication Division"),
       logo: ministereSanteLogo,
       photo: hananPhoto,
+      logoSize: 64,
       text: t(
         "Conseiller stratégique lors de la crise H1N1, Azeddine Yassine a apporté une vision exceptionnelle en gestion & communication de crise et data intelligence. Son accompagnement du Ministre et de la Division de Communication a durablement renforcé la stratégie institutionnelle grâce à une analyse fine et une méthodologie rigoureuse.",
         "Strategic advisor during the H1N1 crisis, Azeddine Yassine brought an exceptional vision in crisis management & communication and data intelligence. His support of the Minister and the Communication Division has lastingly strengthened the institutional strategy through fine analysis and rigorous methodology."
@@ -70,6 +73,7 @@ const TestimonialsSection = () => {
       title: t("Président", "President"),
       logo: ceisLogo,
       photo: guillaumePhoto,
+      logoSize: 64,
       text: t(
         "Partenaire de confiance depuis 2011, spécialisé dans la mise en place de dispositif de veille spécifiques et le management de ressources transverses. Ses capacités d'analyse, de synthèse et ses investigations digitales à haute valeur ajoutée en font un conseiller parfait pour le décryptage de thématiques complexes.",
         "Trusted partner since 2011, specialized in setting up specific monitoring systems and managing cross-functional resources. His analytical and synthesis capabilities and high value-added digital investigations make him a perfect advisor for decrypting complex topics."
@@ -171,8 +175,8 @@ const TestimonialsSection = () => {
                 <img
                   src={tm.logo}
                   alt=""
-                  className="h-10 w-auto object-contain hidden md:block"
-                  style={{ filter: "grayscale(30%)" }}
+                  className="w-auto object-contain hidden md:block"
+                  style={{ filter: "grayscale(30%)", height: tm.logoSize || 40 }}
                 />
               </div>
 
