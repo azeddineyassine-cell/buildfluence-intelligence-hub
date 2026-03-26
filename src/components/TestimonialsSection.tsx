@@ -25,6 +25,7 @@ interface Testimonial {
   logo: string;
   photo: string;
   text: string;
+  logoSize?: number;
 }
 
 const TestimonialsSection = () => {
