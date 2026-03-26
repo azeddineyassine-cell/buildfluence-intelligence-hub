@@ -107,7 +107,7 @@ const StrategicIntelligenceLab = () => {
         </p>
       </DetailBlock>
 
-      <h3 className="detail-subtitle text-2xl font-bold text-primary">Strategic Foresight</h3>
+      <h3 id="strategic-foresight" className="detail-subtitle text-2xl font-bold text-primary scroll-mt-24">Strategic Foresight</h3>
 
       <SectionBlock
         title="Market & Competitive Intelligence"
