@@ -41,6 +41,7 @@ const TestimonialsSection = () => {
       title: t("Secrétaire Générale", "Secretary General"),
       logo: centraleDanoneLogo,
       photo: samiaPhoto,
+      logoSize: 64,
       text: t(
         "Prestataire de référence depuis 2016 ayant réalisé avec succès de multiples missions grâce à un professionnalisme et une rigueur à toute épreuve. La qualité constante des livrables a instauré une relation de confiance durable pour le traitement de thématiques variées au sein du groupe. Une expertise éprouvée au service de la performance.",
         "Reference service provider since 2016 having successfully completed multiple missions with unwavering professionalism and rigor. The consistent quality of deliverables has established a lasting relationship of trust for handling various topics within the group. Proven expertise at the service of performance."
