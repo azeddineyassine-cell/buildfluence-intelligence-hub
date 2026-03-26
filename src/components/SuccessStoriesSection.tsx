@@ -48,6 +48,20 @@ const SuccessStoriesSection = () => {
     return () => window.removeEventListener("set-success-filter", handler);
   }, []);
 
+  // Handle filter from sessionStorage (cross-page navigation)
+  useEffect(() => {
+    const storedFilter = sessionStorage.getItem("success-stories-filter");
+    if (storedFilter) {
+      setActiveTopic(storedFilter);
+      sessionStorage.removeItem("success-stories-filter");
+      // Scroll to this section
+      setTimeout(() => {
+        const el = document.getElementById("success-stories");
+        if (el) el.scrollIntoView({ behavior: "smooth" });
+      }, 300);
+    }
+  }, []);
+
   const topics = [
     { label: t("Tous", "All"), value: "tous" },
     { label: t("🔥 Gestion de crise", "🔥 Crisis management"), value: "crise" },
