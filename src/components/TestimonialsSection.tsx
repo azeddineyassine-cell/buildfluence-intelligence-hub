@@ -171,8 +171,8 @@ const TestimonialsSection = () => {
                 <img
                   src={tm.logo}
                   alt=""
-                  className="h-10 w-auto object-contain hidden md:block"
-                  style={{ filter: "grayscale(30%)" }}
+                  className="w-auto object-contain hidden md:block"
+                  style={{ filter: "grayscale(30%)", height: tm.logoSize || 40 }}
                 />
               </div>
 
