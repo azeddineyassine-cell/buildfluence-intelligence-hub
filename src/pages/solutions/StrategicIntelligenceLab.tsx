@@ -16,8 +16,17 @@ import imgMinistereSante from "@/assets/sections/cas-client-ministere-sante.png"
 
 const StrategicIntelligenceLab = () => {
   const { t } = useLanguage();
-
   const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.hash) {
+      setTimeout(() => {
+        const el = document.getElementById(location.hash.slice(1));
+        el?.scrollIntoView({ behavior: "smooth" });
+      }, 300);
+    }
+  }, [location.hash]);
 
   const scrollToSuccessStories = (filter: string) => {
     // Store filter in sessionStorage so Index page can pick it up
