@@ -102,8 +102,8 @@ const DetailPageLayout = ({ title, chapeau, children, ctas, situationContext, pr
 
 export default DetailPageLayout;
 
-export const DetailBlock = ({ title, children }: { title: string; children: ReactNode }) => (
-  <div>
+export const DetailBlock = ({ title, children, id, className }: { title: string; children: ReactNode; id?: string; className?: string }) => (
+  <div id={id} className={className}>
     {title && <h2 className="detail-subtitle text-2xl font-bold">{title}</h2>}
     <div className={`${title ? 'mt-4' : ''} text-sm leading-relaxed text-foreground/80`}>{children}</div>
   </div>
