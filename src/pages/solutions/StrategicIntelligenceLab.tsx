@@ -178,7 +178,7 @@ const StrategicIntelligenceLab = () => {
         image={imgOcpCase}
       />
 
-      <h3 className="detail-subtitle text-2xl font-bold text-primary">Threat Intelligence</h3>
+      <h3 id="threat-intelligence" className="detail-subtitle text-2xl font-bold text-primary scroll-mt-24">Threat Intelligence</h3>
 
       <SectionBlock
         title="OSINT & Fact-Checking"
