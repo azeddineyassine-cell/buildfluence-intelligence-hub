@@ -19,12 +19,6 @@ const WhySection = () => {
     { icon: ShieldCheck, num: "⑦", title: t("INFRASTRUCTURE DÉCISIONNELLE EXTERNE", "EXTERNAL DECISION-MAKING INFRASTRUCTURE"), content: t("Buildfluence ne fournit pas des recommandations ponctuelles, mais une architecture permettant de structurer durablement la décision.", "Buildfluence doesn't provide one-off recommendations, but an architecture to sustainably structure decision-making."), detail: t("• Intégration Intelligence — Influence — Due Diligence dans une même architecture\n• Lecture systémique : géopolitique, économique, médiatique et institutionnel\n• Neutralité stratégique absolue\n• Transfert de supériorité décisionnelle au client\n• Conçu pour les environnements sensibles", "• Integration of Intelligence — Influence — Due Diligence in a single architecture\n• Systemic reading: geopolitical, economic, media and institutional\n• Absolute strategic neutrality\n• Transfer of decision-making superiority to the client\n• Designed for sensitive environments") },
   ];
 
-  const levels = [
-    { num: "1", title: t("Diagnostic stratégique", "Strategic diagnosis"), time: t("48h à 72h", "48h to 72h") },
-    { num: "2", title: t("Projet ponctuel", "One-off project"), time: "" },
-    { num: "3", title: t("Accompagnement récurrent", "Recurring support"), time: "" },
-    { num: "4", title: t("Transformation stratégique", "Strategic transformation"), time: "" },
-  ];
 
   return (
     <section id="pourquoi-buildfluence" className="relative py-28" ref={ref} style={{ background: '#F4F4F4' }}>
