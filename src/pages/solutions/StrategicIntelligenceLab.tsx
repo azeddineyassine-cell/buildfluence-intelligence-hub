@@ -1,6 +1,7 @@
+import { useEffect } from "react";
 import DetailPageLayout, { DetailBlock, DetailList, CaseStudy, SectionBlock } from "@/components/DetailPageLayout";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import ocpLogo from "@/assets/clients/ocp.png";
 import ministereSanteLogo from "@/assets/clients/ministere-sante.jpg";
 import imgWheel from "@/assets/sections/buildfluence-wheel.jpg";
@@ -15,8 +16,17 @@ import imgMinistereSante from "@/assets/sections/cas-client-ministere-sante.png"
 
 const StrategicIntelligenceLab = () => {
   const { t } = useLanguage();
-
   const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.hash) {
+      setTimeout(() => {
+        const el = document.getElementById(location.hash.slice(1));
+        el?.scrollIntoView({ behavior: "smooth" });
+      }, 300);
+    }
+  }, [location.hash]);
 
   const scrollToSuccessStories = (filter: string) => {
     // Store filter in sessionStorage so Index page can pick it up
@@ -107,7 +117,7 @@ const StrategicIntelligenceLab = () => {
         </p>
       </DetailBlock>
 
-      <h3 className="detail-subtitle text-2xl font-bold text-primary">Strategic Foresight</h3>
+      <h3 id="strategic-foresight" className="detail-subtitle text-2xl font-bold text-primary scroll-mt-24">Strategic Foresight</h3>
 
       <SectionBlock
         title="Market & Competitive Intelligence"
@@ -178,7 +188,7 @@ const StrategicIntelligenceLab = () => {
         image={imgOcpCase}
       />
 
-      <h3 className="detail-subtitle text-2xl font-bold text-primary">Threat Intelligence</h3>
+      <h3 id="threat-intelligence" className="detail-subtitle text-2xl font-bold text-primary scroll-mt-24">Threat Intelligence</h3>
 
       <SectionBlock
         title="OSINT & Fact-Checking"
@@ -214,7 +224,7 @@ const StrategicIntelligenceLab = () => {
         image={imgMinistereSante}
       />
 
-      <DetailBlock title={t("Expérimentations & POCs", "Experiments & POCs")}>
+      <DetailBlock id="experimentations-pocs" title={t("Expérimentations & POCs", "Experiments & POCs")} className="scroll-mt-24">
         <DetailList items={[
           t("Intégration de vos enjeux stratégiques", "Integration of your strategic challenges"),
           t("Modèles d'analyse prédictive", "Predictive analysis models"),
