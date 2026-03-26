@@ -85,25 +85,6 @@ const WhySection = () => {
           ))}
         </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.5 }}
-          className="mt-16"
-        >
-          <h3 className="text-center font-serif text-xl font-bold" style={{ color: '#0D1B2A' }}>{t("Accompagnement sur-mesure", "Tailored support")}</h3>
-          <div className="mt-8 grid gap-4 sm:grid-cols-4">
-            {levels.map((l) => (
-              <div key={l.num} className="rounded-sm border p-5 text-center" style={{ background: '#FFFFFF', borderColor: '#E5E7EB' }}>
-                <div className="mx-auto mb-2 flex h-8 w-8 items-center justify-center rounded-sm font-serif text-sm font-bold" style={{ background: 'hsl(43 50% 54% / 0.1)', color: 'hsl(43 50% 54%)' }}>
-                  {l.num}
-                </div>
-                <p className="text-sm font-semibold" style={{ color: '#0D1B2A' }}>{l.title}</p>
-                {l.time && <p className="mt-1 text-[11px]" style={{ color: '#8A8F9E' }}>{l.time}</p>}
-              </div>
-            ))}
-          </div>
-        </motion.div>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
