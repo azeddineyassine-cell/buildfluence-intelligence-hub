@@ -19,12 +19,6 @@ const WhySection = () => {
     { icon: ShieldCheck, num: "⑦", title: t("INFRASTRUCTURE DÉCISIONNELLE EXTERNE", "EXTERNAL DECISION-MAKING INFRASTRUCTURE"), content: t("Buildfluence ne fournit pas des recommandations ponctuelles, mais une architecture permettant de structurer durablement la décision.", "Buildfluence doesn't provide one-off recommendations, but an architecture to sustainably structure decision-making."), detail: t("• Intégration Intelligence — Influence — Due Diligence dans une même architecture\n• Lecture systémique : géopolitique, économique, médiatique et institutionnel\n• Neutralité stratégique absolue\n• Transfert de supériorité décisionnelle au client\n• Conçu pour les environnements sensibles", "• Integration of Intelligence — Influence — Due Diligence in a single architecture\n• Systemic reading: geopolitical, economic, media and institutional\n• Absolute strategic neutrality\n• Transfer of decision-making superiority to the client\n• Designed for sensitive environments") },
   ];
 
-  const levels = [
-    { num: "1", title: t("Diagnostic stratégique", "Strategic diagnosis"), time: t("48h à 72h", "48h to 72h") },
-    { num: "2", title: t("Projet ponctuel", "One-off project"), time: "" },
-    { num: "3", title: t("Accompagnement récurrent", "Recurring support"), time: "" },
-    { num: "4", title: t("Transformation stratégique", "Strategic transformation"), time: "" },
-  ];
 
   return (
     <section id="pourquoi-buildfluence" className="relative py-28" ref={ref} style={{ background: '#F4F4F4' }}>
@@ -85,25 +79,6 @@ const WhySection = () => {
           ))}
         </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.5 }}
-          className="mt-16"
-        >
-          <h3 className="text-center font-serif text-xl font-bold" style={{ color: '#0D1B2A' }}>{t("Accompagnement sur-mesure", "Tailored support")}</h3>
-          <div className="mt-8 grid gap-4 sm:grid-cols-4">
-            {levels.map((l) => (
-              <div key={l.num} className="rounded-sm border p-5 text-center" style={{ background: '#FFFFFF', borderColor: '#E5E7EB' }}>
-                <div className="mx-auto mb-2 flex h-8 w-8 items-center justify-center rounded-sm font-serif text-sm font-bold" style={{ background: 'hsl(43 50% 54% / 0.1)', color: 'hsl(43 50% 54%)' }}>
-                  {l.num}
-                </div>
-                <p className="text-sm font-semibold" style={{ color: '#0D1B2A' }}>{l.title}</p>
-                {l.time && <p className="mt-1 text-[11px]" style={{ color: '#8A8F9E' }}>{l.time}</p>}
-              </div>
-            ))}
-          </div>
-        </motion.div>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}

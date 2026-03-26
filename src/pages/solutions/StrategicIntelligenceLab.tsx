@@ -2,10 +2,11 @@ import DetailPageLayout, { DetailBlock, DetailList, CaseStudy, SectionBlock } fr
 import { useLanguage } from "@/contexts/LanguageContext";
 import ocpLogo from "@/assets/clients/ocp.png";
 import ministereSanteLogo from "@/assets/clients/ministere-sante.jpg";
-import imgStrategicLab from "@/assets/sections/strategic-intelligence-lab.jpg";
+import imgWheel from "@/assets/sections/buildfluence-wheel.jpg";
+import imgDataBubbles from "@/assets/sections/buildfluence-data-bubbles.jpg";
 import imgMarketIntel from "@/assets/sections/market-competitive-intelligence.jpg";
 import imgTerritorial from "@/assets/sections/attractivite-territoriale.png";
-import imgInnovation from "@/assets/sections/innovation-mapping.jpg";
+import imgInnovation from "@/assets/sections/innovation-mapping-new.jpg";
 import imgStakeholders from "@/assets/sections/stakeholders-intelligence.jpg";
 import imgOcpCase from "@/assets/sections/cas-client-ocp.png";
 import imgOsint from "@/assets/sections/osint-fact-checking.jpg";
@@ -13,18 +14,98 @@ import imgMinistereSante from "@/assets/sections/cas-client-ministere-sante.png"
 
 const StrategicIntelligenceLab = () => {
   const { t } = useLanguage();
+
+  const scrollToSuccessStories = (filter: string) => {
+    const section = document.getElementById("success-stories");
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth" });
+      // Dispatch custom event to set the filter
+      window.dispatchEvent(new CustomEvent("set-success-filter", { detail: filter }));
+    }
+  };
+
   return (
     <DetailPageLayout
       title="Strategic Intelligence Lab"
-      chapeau={t("Voir avant. Comprendre mieux. Décider plus vite que tous.", "See first. Understand better. Decide faster than everyone.")}
+      chapeau={t(
+        "Le pouvoir appartient à ceux qui voient les ruptures avant qu'elles ne soient évidentes. Le Strategic Intelligence Lab transforme l'incertain en actionnable.",
+        "Power belongs to those who see disruptions before they become obvious. The Strategic Intelligence Lab transforms uncertainty into actionable."
+      )}
       ctas={[{ label: t("Parler de mon projet", "Discuss my project"), action: "#", formType: "f1" }]}
       situationContext="Strategic Intelligence Lab"
     >
-      <DetailBlock title="">
-        <p>{t("Le pouvoir appartient à ceux qui voient les ruptures avant qu'elles ne soient évidentes. Le Strategic Intelligence Lab transforme l'incertain en décidable.", "Power belongs to those who see disruptions before they become obvious. The Strategic Intelligence Lab transforms uncertainty into decidable.")}</p>
-      </DetailBlock>
+      {/* Correction 2: Intro text + wheel image side by side */}
+      <SectionBlock image={imgWheel} imageAlt="Buildfluence Wheel">
+        <p className="text-sm leading-relaxed text-foreground/80">
+          {t(
+            "L'influence stratégique ne résulte pas de l'accumulation d'informations ou de la cacophonie médiatique, mais de la capacité à transformer des données invisibles et dispersées en leviers exploitables dans les rapports de force.",
+            "Strategic influence does not result from the accumulation of information or media cacophony, but from the ability to transform invisible and dispersed data into exploitable levers in power dynamics."
+          )}
+        </p>
+        <p className="mt-4 text-sm leading-relaxed text-foreground/80">
+          {t(
+            "Dans un environnement complexe, saturé et où la compétition est intense, l'avantage décisif appartient aux acteurs capables d'anticiper plutôt que de réagir.",
+            "In a complex, saturated and intensely competitive environment, the decisive advantage belongs to those capable of anticipating rather than reacting."
+          )}
+        </p>
+      </SectionBlock>
 
-      <img src={imgStrategicLab} alt="Strategic Intelligence Lab" className="w-full rounded-sm" />
+      {/* Correction 2: Data bubbles image + 3 pillars */}
+      <SectionBlock image={imgDataBubbles} imageAlt="Data Intelligence" reverse>
+        <p className="text-sm leading-relaxed text-foreground/80 mb-4">
+          {t(
+            "Le processus élaboré par Buildfluence repose sur trois leviers complémentaires :",
+            "The process developed by Buildfluence is based on three complementary levers:"
+          )}
+        </p>
+        <ol className="space-y-3">
+          <li className="flex items-start gap-3 text-sm text-foreground/80">
+            <span className="font-bold text-primary flex-shrink-0">1.</span>
+            <span>{t(
+              "La captation et la corrélation en continue de signaux géopolitiques, économiques, technologiques, concurrentiels, jeux d'influence et dynamiques narratives.",
+              "The continuous capture and correlation of geopolitical, economic, technological, competitive signals, influence games and narrative dynamics."
+            )}</span>
+          </li>
+          <li className="flex items-start gap-3 text-sm text-foreground/80">
+            <span className="font-bold text-primary flex-shrink-0">2.</span>
+            <span>{t(
+              "L'identification précoce des dynamiques susceptibles d'activer l'attractivité et la crédibilité de nos clients.",
+              "The early identification of dynamics likely to activate our clients' attractiveness and credibility."
+            )}</span>
+          </li>
+          <li className="flex items-start gap-3 text-sm text-foreground/80">
+            <span className="font-bold text-primary flex-shrink-0">3.</span>
+            <span>{t("La transformation de l'information.", "The transformation of information.")}</span>
+          </li>
+        </ol>
+      </SectionBlock>
+
+      {/* Correction 3: Text with clickable links to Success Stories */}
+      <DetailBlock title="">
+        <p className="text-sm leading-relaxed text-foreground/80">
+          {t(
+            "Aujourd'hui, les outils de veille sont accessibles à tous. En revanche, produire une lecture intégrée, capable de renforcer la souveraineté, le positionnement et la capacité d'influence, demeure rare.",
+            "Today, monitoring tools are accessible to everyone. However, producing an integrated reading, capable of strengthening sovereignty, positioning and influence capacity, remains rare."
+          )}
+        </p>
+        <p className="mt-4 text-sm leading-relaxed text-foreground/80">
+          {t("Buildfluence ne vend pas seulement un outil ou des prestations de veille. Nous accompagnons nos clients sur plusieurs enjeux majeurs d'attractivité et de compétitivité : ", "Buildfluence doesn't just sell a tool or monitoring services. We support our clients on several major attractiveness and competitiveness challenges: ")}
+          <button onClick={() => scrollToSuccessStories("ecosysteme")} className="underline underline-offset-2 decoration-primary/40 hover:decoration-primary transition-colors text-foreground/90 font-medium">{t("Écosystème concurrentiel", "Competitive Ecosystem")}</button>
+          {", "}
+          <button onClick={() => scrollToSuccessStories("communication")} className="underline underline-offset-2 decoration-primary/40 hover:decoration-primary transition-colors text-foreground/90 font-medium">{t("Stratégie & Ingénierie de communication", "Strategy & Communication Engineering")}</button>
+          {", "}
+          <button onClick={() => scrollToSuccessStories("influence")} className="underline underline-offset-2 decoration-primary/40 hover:decoration-primary transition-colors text-foreground/90 font-medium">{t("Influence & Soft Power", "Influence & Soft Power")}</button>
+          {", "}
+          <button onClick={() => scrollToSuccessStories("diligence")} className="underline underline-offset-2 decoration-primary/40 hover:decoration-primary transition-colors text-foreground/90 font-medium">{t("Due Diligence & Investissement", "Due Diligence & Investment")}</button>
+          {", "}
+          <button onClick={() => scrollToSuccessStories("crise")} className="underline underline-offset-2 decoration-primary/40 hover:decoration-primary transition-colors text-foreground/90 font-medium">{t("Gestion de crise", "Crisis Management")}</button>
+          {" "}
+          {t("et", "and")}
+          {" "}
+          <button onClick={() => scrollToSuccessStories("audit")} className="underline underline-offset-2 decoration-primary/40 hover:decoration-primary transition-colors text-foreground/90 font-medium">{t("Benchmark & Études", "Benchmark & Studies")}</button>
+          {"."}
+        </p>
+      </DetailBlock>
 
       <h3 className="detail-subtitle text-2xl font-bold text-primary">Strategic Foresight</h3>
 
