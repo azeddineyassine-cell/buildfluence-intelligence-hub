@@ -214,7 +214,7 @@ const StrategicIntelligenceLab = () => {
         image={imgMinistereSante}
       />
 
-      <DetailBlock title={t("Expérimentations & POCs", "Experiments & POCs")}>
+      <DetailBlock id="experimentations-pocs" title={t("Expérimentations & POCs", "Experiments & POCs")} className="scroll-mt-24">
         <DetailList items={[
           t("Intégration de vos enjeux stratégiques", "Integration of your strategic challenges"),
           t("Modèles d'analyse prédictive", "Predictive analysis models"),
