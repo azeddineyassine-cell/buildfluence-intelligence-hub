@@ -2,12 +2,44 @@ import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { FormStrategicExchange } from "./FormModals";
+import { Link } from "react-router-dom";
 
 const CTAFooter = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.2 });
   const [formOpen, setFormOpen] = useState(false);
   const { t } = useLanguage();
+
+  const footerLinks = [
+    {
+      title: t("Nos Solutions", "Our Solutions"),
+      links: [
+        { label: "Strategic Intelligence Lab", href: "/solutions/strategic-intelligence-lab" },
+        { label: "Due Diligence", href: "/solutions/deep-due-diligence" },
+        { label: "Soft Power & Influence", href: "/solutions/soft-power-influence" },
+      ],
+    },
+    {
+      title: "Strategic Innovation",
+      links: [
+        { label: "AI Powered Monitor", href: "/capacites/ai-powered-monitor" },
+        { label: "Strategic Workflow", href: "/capacites/strategic-workflow" },
+        { label: "Knowledge Capitalization", href: "/capacites/knowledge-capitalization" },
+        { label: "Competitive Velocity Engine", href: "/capacites/competitive-velocity-engine" },
+      ],
+    },
+    {
+      title: "Success Stories",
+      links: [
+        { label: t("Écosystème concurrentiel", "Competitive Ecosystem"), href: "/#success-stories" },
+        { label: t("Gestion de crise", "Crisis Management"), href: "/#success-stories" },
+        { label: t("Strat. & Ingénierie de Communication", "Strat. & Communication Engineering"), href: "/#success-stories" },
+        { label: t("Influence & Soft Power", "Influence & Soft Power"), href: "/#success-stories" },
+        { label: t("Due Diligence & Investissement", "Due Diligence & Investment"), href: "/#success-stories" },
+        { label: t("Benchmark & Études", "Benchmark & Studies"), href: "/#success-stories" },
+      ],
+    },
+  ];
 
   return (
     <>
@@ -26,9 +58,9 @@ const CTAFooter = () => {
             {t("Passer à l'action", "Take action")}
           </p>
           <h2 className="font-serif text-[40px] font-black mb-[18px]" style={{ color: 'hsl(var(--navy))', letterSpacing: '-0.5px' }}>
-            {t("Votre situation critique", "Your critical situation")}
+            {t("Vos enjeux stratégiques", "Your strategic challenges")}
             <br />
-            {t("mérite une réponse souveraine", "deserves a sovereign response")}
+            {t("méritent une réponse souveraine", "deserve a sovereign response")}
           </h2>
           <p className="text-[16px] mx-auto mb-10 leading-[1.7]" style={{ color: 'hsl(var(--muted-foreground))', maxWidth: '500px' }}>
             {t(
@@ -50,38 +82,70 @@ const CTAFooter = () => {
 
       {/* Footer */}
       <footer
-        className="flex items-center justify-between flex-wrap gap-6 px-12 py-12"
+        className="px-12 py-16"
         style={{ background: 'hsl(218 60% 9%)' }}
       >
-        <a href="/" className="text-[18px] font-bold text-white no-underline">
-          Build<span style={{ color: 'hsl(var(--gold))' }}>fluence</span>
-        </a>
-        <ul className="flex flex-wrap gap-7 list-none">
-          {[
-            { label: t("Vos Situations critiques", "Your Critical Situations"), href: "#situations-critiques" },
-            { label: t("Nos Solutions", "Our Solutions"), href: "#nos-solutions" },
-            { label: "Strategic Innovation", href: "#strategic-innovation" },
-            { label: "Success Stories", href: "#success-stories" },
-            { label: "Insights & Resources", href: "#insights" },
-            { label: t("Pourquoi Buildfluence", "Why Buildfluence"), href: "#pourquoi-buildfluence" },
-            { label: "Contact", href: "/contact" },
-          ].map((link) => (
-            <li key={link.label}>
-              <a
-                href={link.href}
-                className="text-[13px] no-underline transition-colors"
-                style={{ color: 'rgba(255,255,255,0.4)' }}
-                onMouseOver={(e) => (e.currentTarget.style.color = 'rgba(255,255,255,0.8)')}
-                onMouseOut={(e) => (e.currentTarget.style.color = 'rgba(255,255,255,0.4)')}
-              >
-                {link.label}
+        <div className="mx-auto max-w-[1100px]">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+            {/* Brand */}
+            <div>
+              <a href="/" className="text-[18px] font-bold text-white no-underline">
+                Build<span style={{ color: 'hsl(var(--gold))' }}>fluence</span>
               </a>
-            </li>
-          ))}
-        </ul>
-        <span className="text-[12px]" style={{ color: 'rgba(255,255,255,0.22)' }}>
-          {t("© 2026 Buildfluence. Tous droits réservés.", "© 2026 Buildfluence. All rights reserved.")}
-        </span>
+              <p className="mt-3 text-[12px] leading-relaxed" style={{ color: 'rgba(255,255,255,0.35)' }}>
+                {t("Sovereign Decision Infrastructure", "Sovereign Decision Infrastructure")}
+              </p>
+            </div>
+
+            {/* Link columns */}
+            {footerLinks.map((col) => (
+              <div key={col.title}>
+                <p className="text-[11px] font-bold uppercase tracking-[0.15em] mb-4" style={{ color: 'rgba(255,255,255,0.5)' }}>
+                  {col.title}
+                </p>
+                <ul className="space-y-2">
+                  {col.links.map((link) => (
+                    <li key={link.label}>
+                      <Link
+                        to={link.href}
+                        className="text-[12px] no-underline transition-colors"
+                        style={{ color: 'rgba(255,255,255,0.35)' }}
+                        onMouseOver={(e) => (e.currentTarget.style.color = 'rgba(255,255,255,0.8)')}
+                        onMouseOut={(e) => (e.currentTarget.style.color = 'rgba(255,255,255,0.35)')}
+                      >
+                        {link.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+
+          <div className="border-t pt-6 flex items-center justify-between flex-wrap gap-4" style={{ borderColor: 'rgba(255,255,255,0.08)' }}>
+            <span className="text-[12px]" style={{ color: 'rgba(255,255,255,0.22)' }}>
+              {t("© 2026 Buildfluence. Tous droits réservés.", "© 2026 Buildfluence. All rights reserved.")}
+            </span>
+            <div className="flex gap-6">
+              {[
+                { label: t("Vos Situations critiques", "Your Critical Situations"), href: "#situations-critiques" },
+                { label: "Insights & Resources", href: "#insights" },
+                { label: "Contact", href: "/contact" },
+              ].map((link) => (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  className="text-[11px] no-underline transition-colors"
+                  style={{ color: 'rgba(255,255,255,0.3)' }}
+                  onMouseOver={(e) => (e.currentTarget.style.color = 'rgba(255,255,255,0.7)')}
+                  onMouseOut={(e) => (e.currentTarget.style.color = 'rgba(255,255,255,0.3)')}
+                >
+                  {link.label}
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
       </footer>
 
       <FormStrategicExchange open={formOpen} onClose={() => setFormOpen(false)} />
