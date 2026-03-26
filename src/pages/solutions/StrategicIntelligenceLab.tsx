@@ -16,13 +16,12 @@ import imgMinistereSante from "@/assets/sections/cas-client-ministere-sante.png"
 const StrategicIntelligenceLab = () => {
   const { t } = useLanguage();
 
+  const navigate = useNavigate();
+
   const scrollToSuccessStories = (filter: string) => {
-    const section = document.getElementById("success-stories");
-    if (section) {
-      section.scrollIntoView({ behavior: "smooth" });
-      // Dispatch custom event to set the filter
-      window.dispatchEvent(new CustomEvent("set-success-filter", { detail: filter }));
-    }
+    // Store filter in sessionStorage so Index page can pick it up
+    sessionStorage.setItem("success-stories-filter", filter);
+    navigate("/#success-stories");
   };
 
   return (
