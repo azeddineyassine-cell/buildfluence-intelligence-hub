@@ -38,9 +38,9 @@ const Navbar = () => {
       title: "STRATEGIC\nINTELLIGENCE LAB",
       route: "/solutions/strategic-intelligence-lab",
       items: [
-        { label: "Strategic Foresight", desc: t("Veille et anticipation stratégique", "Strategic monitoring and foresight"), route: "/solutions/strategic-intelligence-lab" },
-        { label: "Threat Intelligence", desc: t("Détection et neutralisation des menaces", "Threat detection and neutralization"), route: "/solutions/strategic-intelligence-lab" },
-        { label: t("Expérimentations & POCs", "Experiments & POCs"), desc: t("Prototypes et modèles prédictifs", "Prototypes and predictive models"), route: "/solutions/strategic-intelligence-lab" },
+        { label: "Strategic Foresight", desc: t("Veille et anticipation stratégique", "Strategic monitoring and foresight"), route: "/solutions/strategic-intelligence-lab#strategic-foresight" },
+        { label: "Threat Intelligence", desc: t("Détection et neutralisation des menaces", "Threat detection and neutralization"), route: "/solutions/strategic-intelligence-lab#threat-intelligence" },
+        { label: t("Expérimentations & POCs", "Experiments & POCs"), desc: t("Prototypes et modèles prédictifs", "Prototypes and predictive models"), route: "/solutions/strategic-intelligence-lab#experimentations-pocs" },
       ],
     },
     {
