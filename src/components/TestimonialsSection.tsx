@@ -62,6 +62,7 @@ const TestimonialsSection = () => {
       title: t("Cheffe de la Division de Communication", "Head of Communication Division"),
       logo: ministereSanteLogo,
       photo: hananPhoto,
+      logoSize: 64,
       text: t(
         "Conseiller stratégique lors de la crise H1N1, Azeddine Yassine a apporté une vision exceptionnelle en gestion & communication de crise et data intelligence. Son accompagnement du Ministre et de la Division de Communication a durablement renforcé la stratégie institutionnelle grâce à une analyse fine et une méthodologie rigoureuse.",
         "Strategic advisor during the H1N1 crisis, Azeddine Yassine brought an exceptional vision in crisis management & communication and data intelligence. His support of the Minister and the Communication Division has lastingly strengthened the institutional strategy through fine analysis and rigorous methodology."
