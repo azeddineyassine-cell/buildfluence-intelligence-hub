@@ -73,6 +73,7 @@ const TestimonialsSection = () => {
       title: t("Président", "President"),
       logo: ceisLogo,
       photo: guillaumePhoto,
+      logoSize: 64,
       text: t(
         "Partenaire de confiance depuis 2011, spécialisé dans la mise en place de dispositif de veille spécifiques et le management de ressources transverses. Ses capacités d'analyse, de synthèse et ses investigations digitales à haute valeur ajoutée en font un conseiller parfait pour le décryptage de thématiques complexes.",
         "Trusted partner since 2011, specialized in setting up specific monitoring systems and managing cross-functional resources. His analytical and synthesis capabilities and high value-added digital investigations make him a perfect advisor for decrypting complex topics."
