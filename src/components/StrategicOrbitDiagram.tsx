@@ -179,7 +179,7 @@ export default function StrategicOrbitDiagram() {
               }}
             >
               <span className="text-white font-bold text-center leading-tight"
-                style={{ fontSize: "clamp(5px, 1.5vw, 9px)", letterSpacing: "0.08em" }}>
+                style={{ fontSize: "clamp(8px, 2.2vw, 14px)", letterSpacing: "0.08em" }}>
                 BIG<br />DATA
               </span>
             </button>
@@ -201,14 +201,14 @@ export default function StrategicOrbitDiagram() {
                     boxShadow: active ? "0 0 0 3px rgba(14,165,201,0.15)" : "none",
                   }}
                 >
-                  <span className="font-semibold text-slate-400"
-                    style={{ fontSize: "clamp(5px, 1.1vw, 7px)" }}>
-                    {s.num}
-                  </span>
-                  <span className="font-semibold text-slate-700 text-center leading-tight"
-                    style={{ fontSize: "clamp(5px, 1.2vw, 7.5px)" }}>
-                    {s.label}
-                  </span>
+                <span className="font-semibold text-slate-400"
+                  style={{ fontSize: "clamp(7px, 1.6vw, 10px)" }}>
+                  {s.num}
+                </span>
+                <span className="font-semibold text-slate-700 text-center leading-tight"
+                  style={{ fontSize: "clamp(7px, 1.7vw, 11px)" }}>
+                  {s.label}
+                </span>
                 </button>
               );
             })}
@@ -230,10 +230,10 @@ export default function StrategicOrbitDiagram() {
                       boxShadow: active ? "0 4px 16px rgba(14,165,201,0.15)" : "0 1px 4px rgba(0,0,0,0.05)",
                     }}
                   >
-                    <span style={{ fontSize: "clamp(10px, 2.2vw, 16px)" }}>{d.icon}</span>
-                    <span className="font-semibold text-slate-700 text-center leading-tight mt-0.5 px-1"
-                      style={{ fontSize: "clamp(4px, 1.1vw, 7px)" }}>
-                      {d.short}
+                  <span style={{ fontSize: "clamp(14px, 3vw, 22px)" }}>{d.icon}</span>
+                  <span className="font-semibold text-slate-700 text-center leading-tight mt-0.5 px-1"
+                    style={{ fontSize: "clamp(6px, 1.5vw, 10px)" }}>
+                    {d.short}
                     </span>
                   </div>
                 </button>
