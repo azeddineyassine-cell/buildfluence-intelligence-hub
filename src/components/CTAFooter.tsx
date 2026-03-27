@@ -2,7 +2,7 @@ import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { FormStrategicExchange } from "./FormModals";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const CTAFooter = () => {
   const ref = useRef(null);
