@@ -120,7 +120,7 @@ const Navbar = () => {
             </span>
           </a>
 
-          <div className="hidden items-center gap-5 xl:flex">
+          <div className="hidden items-center gap-4 xl:flex">
             {navItems.map((item) => (
               <div
                 key={item.label}
@@ -131,8 +131,8 @@ const Navbar = () => {
                 <a
                   href={item.href}
                   onClick={(e) => { e.preventDefault(); handleNavClick(item.href); }}
-                  className="flex items-center gap-1 text-[13px] font-medium transition-colors"
-                  style={{ color: '#4A5568' }}
+                  className="flex items-center gap-1 text-[12.5px] font-medium transition-colors leading-tight"
+                  style={{ color: '#4A5568', maxWidth: '110px' }}
                   onMouseOver={(e) => (e.currentTarget.style.color = '#0D1B2A')}
                   onMouseOut={(e) => (e.currentTarget.style.color = '#4A5568')}
                 >
