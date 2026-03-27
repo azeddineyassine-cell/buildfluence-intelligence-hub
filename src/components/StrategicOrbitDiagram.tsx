@@ -104,7 +104,7 @@ export default function StrategicOrbitDiagram() {
       <div className="max-w-4xl mx-auto text-center mb-14">
         <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-slate-900 leading-tight mb-4">
           L'intelligence qui transforme la donnée brute en{" "}
-          <span className="text-cyan-500">décision souveraine</span>
+          <span style={{ color: "#D0A030" }}>décision souveraine</span>
         </h2>
         <p className="text-slate-500 text-base leading-relaxed max-w-xl mx-auto">
           Un moteur de veille stratégique en cycle continu.<br />
