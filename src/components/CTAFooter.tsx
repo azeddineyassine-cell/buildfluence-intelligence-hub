@@ -2,13 +2,25 @@ import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { FormStrategicExchange } from "./FormModals";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const CTAFooter = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.2 });
   const [formOpen, setFormOpen] = useState(false);
   const { t } = useLanguage();
+  const navigate = useNavigate();
+
+  const handleSuccessFilter = (filter: string) => {
+    sessionStorage.setItem("success-stories-filter", filter);
+    navigate("/#success-stories");
+    // If already on home page, dispatch event directly
+    setTimeout(() => {
+      window.dispatchEvent(new CustomEvent("set-success-filter", { detail: filter }));
+      const el = document.getElementById("success-stories");
+      if (el) el.scrollIntoView({ behavior: "smooth" });
+    }, 300);
+  };
 
   const footerLinks = [
     {
@@ -31,11 +43,11 @@ const CTAFooter = () => {
     {
       title: "SUCCESS STORIES",
       links: [
-        { label: t("Écosystème concurrentiel", "Competitive Ecosystem"), href: "/#success-stories" },
-        { label: t("Gestion de crise", "Crisis Management"), href: "/#success-stories" },
-        { label: t("Strat. & Ingénierie de Communication", "Strat. & Communication Engineering"), href: "/#success-stories" },
-        { label: t("Influence & Soft Power", "Influence & Soft Power"), href: "/#success-stories" },
-        { label: t("Due Diligence & Investissement", "Due Diligence & Investment"), href: "/#success-stories" },
+        { label: t("Écosystème concurrentiel", "Competitive Ecosystem"), filter: "ecosysteme" },
+        { label: t("Gestion de crise", "Crisis Management"), filter: "crise" },
+        { label: t("Strat. & Ingénierie de Communication", "Strat. & Communication Engineering"), filter: "communication" },
+        { label: t("Influence & Soft Power", "Influence & Soft Power"), filter: "influence" },
+        { label: t("Due Diligence & Investissement", "Due Diligence & Investment"), filter: "diligence" },
       ],
     },
   ];
@@ -102,17 +114,30 @@ const CTAFooter = () => {
                   {col.title}
                 </p>
                 <ul className="space-y-2">
-                  {col.links.map((link) => (
+                  {col.links.map((link: any) => (
                     <li key={link.label}>
-                      <Link
-                        to={link.href}
-                        className="text-[12px] no-underline transition-colors"
-                        style={{ color: 'rgba(255,255,255,0.35)' }}
-                        onMouseOver={(e) => (e.currentTarget.style.color = 'rgba(255,255,255,0.8)')}
-                        onMouseOut={(e) => (e.currentTarget.style.color = 'rgba(255,255,255,0.35)')}
-                      >
-                        {link.label}
-                      </Link>
+                      {link.filter ? (
+                        <button
+                          onClick={() => handleSuccessFilter(link.filter)}
+                          className="text-[12px] no-underline transition-colors text-left"
+                          style={{ color: 'rgba(255,255,255,0.35)', background: 'none', border: 'none', padding: 0, cursor: 'pointer' }}
+                          onMouseOver={(e) => (e.currentTarget.style.color = 'rgba(255,255,255,0.8)')}
+                          onMouseOut={(e) => (e.currentTarget.style.color = 'rgba(255,255,255,0.35)')}
+                        >
+                          {link.label}
+                        </button>
+                      ) : (
+                        <Link
+                          to={link.href}
+                          className="text-[12px] no-underline transition-colors"
+                          style={{ color: 'rgba(255,255,255,0.35)' }}
+                          onMouseOver={(e) => (e.currentTarget.style.color = 'rgba(255,255,255,0.8)')}
+                          onMouseOut={(e) => (e.currentTarget.style.color = 'rgba(255,255,255,0.35)')}
+                          onClick={() => window.scrollTo(0, 0)}
+                        >
+                          {link.label}
+                        </Link>
+                      )}
                     </li>
                   ))}
                 </ul>
