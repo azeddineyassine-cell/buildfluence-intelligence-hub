@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import DetailPageLayout, { DetailBlock, DetailList, CaseStudy, SectionBlock } from "@/components/DetailPageLayout";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useNavigate, useLocation } from "react-router-dom";
-import StrategicOrbitDiagram from "@/components/StrategicOrbitDiagram";
+
 import ocpLogo from "@/assets/clients/ocp.png";
 import ministereSanteLogo from "@/assets/clients/ministere-sante.jpg";
 import imgWheel from "@/assets/sections/buildfluence-wheel.jpg";
