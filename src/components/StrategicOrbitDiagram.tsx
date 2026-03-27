@@ -201,14 +201,14 @@ export default function StrategicOrbitDiagram() {
                     boxShadow: active ? "0 0 0 3px rgba(14,165,201,0.15)" : "none",
                   }}
                 >
-                  <span className="font-semibold text-slate-400"
-                    style={{ fontSize: "clamp(5px, 1.1vw, 7px)" }}>
-                    {s.num}
-                  </span>
-                  <span className="font-semibold text-slate-700 text-center leading-tight"
-                    style={{ fontSize: "clamp(5px, 1.2vw, 7.5px)" }}>
-                    {s.label}
-                  </span>
+                <span className="font-semibold text-slate-400"
+                  style={{ fontSize: "clamp(7px, 1.6vw, 10px)" }}>
+                  {s.num}
+                </span>
+                <span className="font-semibold text-slate-700 text-center leading-tight"
+                  style={{ fontSize: "clamp(7px, 1.7vw, 11px)" }}>
+                  {s.label}
+                </span>
                 </button>
               );
             })}
