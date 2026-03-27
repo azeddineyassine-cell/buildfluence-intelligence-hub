@@ -1,5 +1,6 @@
 import DetailPageLayout, { DetailBlock, DetailList, CaseStudy } from "@/components/DetailPageLayout";
 import { useLanguage } from "@/contexts/LanguageContext";
+import StrategicOrbitDiagram from "@/components/StrategicOrbitDiagram";
 import presidenceSenegalLogo from "@/assets/clients/presidence-senegal.jpg";
 import imgSenegal1 from "@/assets/sections/ai-monitor-senegal-1.jpg";
 import imgSenegal2 from "@/assets/sections/ai-monitor-senegal-2.png";
