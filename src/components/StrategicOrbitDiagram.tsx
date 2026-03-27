@@ -101,145 +101,146 @@ export default function StrategicOrbitDiagram() {
   return (
     <section className="w-full py-20 px-4 bg-white">
       {/* Header */}
-      <div className="max-w-3xl mx-auto text-center mb-14">
-        <p className="text-xs font-semibold tracking-widest uppercase text-slate-400 mb-3">
-          Buildfluence · Strategic Intelligence Lab
-        </p>
-        <h2 className="text-4xl font-bold tracking-tight text-slate-900 leading-tight mb-4">
-          L'intelligence qui transforme<br />
-          <span className="text-cyan-500">l'information en décision</span>
+      <div className="max-w-4xl mx-auto text-center mb-14">
+        <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-slate-900 leading-tight mb-4">
+          L'intelligence qui transforme la donnée brute en{" "}
+          <span className="text-cyan-500">décision souveraine</span>
         </h2>
         <p className="text-slate-500 text-base leading-relaxed max-w-xl mx-auto">
-          Un moteur de veille stratégique en cycle continu. Explorez les 4 phases et les 8 domaines métiers couverts.
+          Un moteur de veille stratégique en cycle continu.<br />
+          Explorez les 4 phases et les 8 domaines métiers couverts
         </p>
       </div>
 
-      <div className="max-w-2xl mx-auto">
-        {/* Orbit */}
-        <div className="relative w-full" style={{ aspectRatio: "1 / 1" }}>
-          {/* Rings */}
-          {[22, 46, 68, 90].map((size, i) => (
-            <div key={i} className="absolute rounded-full" style={{
-              width: `${size}%`, height: `${size}%`,
-              top: "50%", left: "50%", transform: "translate(-50%, -50%)",
-              border: i === 2
-                ? "1px dashed rgba(14,165,201,0.15)"
-                : "0.5px solid rgba(0,0,0,0.06)",
-            }} />
-          ))}
+      <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center gap-8">
+        {/* Detail Panel — LEFT */}
+        <div className="w-full md:w-[38%] order-2 md:order-1">
+          <div className="rounded-2xl overflow-hidden"
+            style={{ border: "0.5px solid rgba(0,0,0,0.08)", background: "#f8fafc" }}>
+            <div className="flex items-center gap-3 px-5 py-4"
+              style={{ borderBottom: "0.5px solid rgba(0,0,0,0.06)" }}>
+              <span className="text-2xl">{panel.icon}</span>
+              <div>
+                <p className="font-semibold text-slate-900 text-base">{panel.title}</p>
+                <p className="text-xs text-slate-400 uppercase tracking-wide mt-0.5">{panel.type}</p>
+              </div>
+            </div>
+            <div className="px-5 py-4">
+              <p className="text-sm text-slate-600 leading-relaxed mb-4">{panel.desc}</p>
+              <div className="flex flex-wrap gap-2">
+                {panel.tags.map((tag, i) => (
+                  <span key={tag} className="text-xs font-medium px-3 py-1 rounded-full"
+                    style={i < 2
+                      ? { background: "rgba(14,165,201,0.1)", color: "#0369a1", border: "0.5px solid rgba(14,165,201,0.25)" }
+                      : { background: "white", color: "#64748b", border: "0.5px solid rgba(0,0,0,0.1)" }
+                    }>
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+          <p className="text-center text-xs text-slate-400 mt-4">
+            Cliquez sur une phase ou un domaine pour explorer
+          </p>
+        </div>
 
-          {/* SVG connectors */}
-          <svg className="absolute inset-0 w-full h-full text-slate-800 pointer-events-none"
-            viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet">
-            {connectors}
-          </svg>
+        {/* Orbit — RIGHT */}
+        <div className="w-full md:w-[62%] order-1 md:order-2">
+          <div className="relative w-full" style={{ aspectRatio: "1 / 1" }}>
+            {/* Rings */}
+            {[22, 46, 68, 90].map((size, i) => (
+              <div key={i} className="absolute rounded-full" style={{
+                width: `${size}%`, height: `${size}%`,
+                top: "50%", left: "50%", transform: "translate(-50%, -50%)",
+                border: i === 2
+                  ? "1px dashed rgba(14,165,201,0.15)"
+                  : "0.5px solid rgba(0,0,0,0.06)",
+              }} />
+            ))}
 
-          {/* Core */}
-          <button
-            onClick={() => handleSelect("core", DEFAULT_PANEL, "core")}
-            className="absolute rounded-full flex flex-col items-center justify-center z-10 transition-transform duration-300 hover:scale-105"
-            style={{
-              width: "18%", height: "18%",
-              top: "50%", left: "50%", transform: "translate(-50%, -50%)",
-              background: "linear-gradient(135deg, #0a2d5e 0%, #0ea5c9 100%)",
-              boxShadow: isActive("core", "core")
-                ? "0 0 0 4px rgba(14,165,201,0.3)"
-                : "0 0 0 2px rgba(14,165,201,0.15)",
-            }}
-          >
-            <span className="text-white font-bold text-center leading-tight"
-              style={{ fontSize: "clamp(5px, 1.5vw, 9px)", letterSpacing: "0.08em" }}>
-              BIG<br />DATA
-            </span>
-          </button>
+            {/* SVG connectors */}
+            <svg className="absolute inset-0 w-full h-full text-slate-800 pointer-events-none"
+              viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet">
+              {connectors}
+            </svg>
 
-          {/* Steps — inner orbit */}
-          {CYCLE_STEPS.map((s) => {
-            const pos = polarToPercent(s.angle, 20);
-            const active = isActive("step", s.id);
-            return (
-              <button key={s.id}
-                onClick={() => handleSelect("step", { icon: s.icon, title: s.title, type: s.type, desc: s.desc, tags: s.tags }, s.id)}
-                className="absolute flex flex-col items-center justify-center rounded-full z-[8] transition-all duration-200 hover:scale-110"
-                style={{
-                  width: "14%", height: "14%",
-                  left: `${pos.x}%`, top: `${pos.y}%`,
-                  transform: "translate(-50%, -50%)",
-                  background: active ? "#f0f9ff" : "white",
-                  border: active ? "1.5px solid #0ea5c9" : "1px solid rgba(0,0,0,0.1)",
-                  boxShadow: active ? "0 0 0 3px rgba(14,165,201,0.15)" : "none",
-                }}
-              >
-                <span className="font-semibold text-slate-400"
-                  style={{ fontSize: "clamp(5px, 1.1vw, 7px)" }}>
-                  {s.num}
-                </span>
-                <span className="font-semibold text-slate-700 text-center leading-tight"
-                  style={{ fontSize: "clamp(5px, 1.2vw, 7.5px)" }}>
-                  {s.label}
-                </span>
-              </button>
-            );
-          })}
+            {/* Core */}
+            <button
+              onClick={() => handleSelect("core", DEFAULT_PANEL, "core")}
+              className="absolute rounded-full flex flex-col items-center justify-center z-10 transition-transform duration-300 hover:scale-105"
+              style={{
+                width: "18%", height: "18%",
+                top: "50%", left: "50%", transform: "translate(-50%, -50%)",
+                background: "linear-gradient(135deg, #0a2d5e 0%, #0ea5c9 100%)",
+                boxShadow: isActive("core", "core")
+                  ? "0 0 0 4px rgba(14,165,201,0.3)"
+                  : "0 0 0 2px rgba(14,165,201,0.15)",
+              }}
+            >
+              <span className="text-white font-bold text-center leading-tight"
+                style={{ fontSize: "clamp(5px, 1.5vw, 9px)", letterSpacing: "0.08em" }}>
+                BIG<br />DATA
+              </span>
+            </button>
 
-          {/* Domains — outer orbit */}
-          {DOMAINS.map((d) => {
-            const pos = polarToPercent(d.angle, 41);
-            const active = isActive("domain", d.id);
-            return (
-              <button key={d.id}
-                onClick={() => handleSelect("domain", { icon: d.icon, title: d.title, type: d.type, desc: d.desc, tags: d.tags }, d.id)}
-                className="absolute z-[9] transition-all duration-200 hover:scale-110"
-                style={{ width: "14%", height: "14%", left: `${pos.x}%`, top: `${pos.y}%`, transform: "translate(-50%, -50%)" }}
-              >
-                <div className="w-full h-full flex flex-col items-center justify-center rounded-xl transition-all duration-200"
+            {/* Steps — inner orbit */}
+            {CYCLE_STEPS.map((s) => {
+              const pos = polarToPercent(s.angle, 20);
+              const active = isActive("step", s.id);
+              return (
+                <button key={s.id}
+                  onClick={() => handleSelect("step", { icon: s.icon, title: s.title, type: s.type, desc: s.desc, tags: s.tags }, s.id)}
+                  className="absolute flex flex-col items-center justify-center rounded-full z-[8] transition-all duration-200 hover:scale-110"
                   style={{
+                    width: "14%", height: "14%",
+                    left: `${pos.x}%`, top: `${pos.y}%`,
+                    transform: "translate(-50%, -50%)",
                     background: active ? "#f0f9ff" : "white",
-                    border: active ? "1.5px solid #0ea5c9" : "0.5px solid rgba(0,0,0,0.1)",
-                    boxShadow: active ? "0 4px 16px rgba(14,165,201,0.15)" : "0 1px 4px rgba(0,0,0,0.05)",
+                    border: active ? "1.5px solid #0ea5c9" : "1px solid rgba(0,0,0,0.1)",
+                    boxShadow: active ? "0 0 0 3px rgba(14,165,201,0.15)" : "none",
                   }}
                 >
-                  <span style={{ fontSize: "clamp(10px, 2.2vw, 16px)" }}>{d.icon}</span>
-                  <span className="font-semibold text-slate-700 text-center leading-tight mt-0.5 px-1"
-                    style={{ fontSize: "clamp(4px, 1.1vw, 7px)" }}>
-                    {d.short}
+                  <span className="font-semibold text-slate-400"
+                    style={{ fontSize: "clamp(5px, 1.1vw, 7px)" }}>
+                    {s.num}
                   </span>
-                </div>
-              </button>
-            );
-          })}
-        </div>
+                  <span className="font-semibold text-slate-700 text-center leading-tight"
+                    style={{ fontSize: "clamp(5px, 1.2vw, 7.5px)" }}>
+                    {s.label}
+                  </span>
+                </button>
+              );
+            })}
 
-        {/* Detail Panel */}
-        <div className="mt-6 rounded-2xl overflow-hidden"
-          style={{ border: "0.5px solid rgba(0,0,0,0.08)", background: "#f8fafc" }}>
-          <div className="flex items-center gap-3 px-5 py-4"
-            style={{ borderBottom: "0.5px solid rgba(0,0,0,0.06)" }}>
-            <span className="text-2xl">{panel.icon}</span>
-            <div>
-              <p className="font-semibold text-slate-900 text-base">{panel.title}</p>
-              <p className="text-xs text-slate-400 uppercase tracking-wide mt-0.5">{panel.type}</p>
-            </div>
-          </div>
-          <div className="px-5 py-4">
-            <p className="text-sm text-slate-600 leading-relaxed mb-4">{panel.desc}</p>
-            <div className="flex flex-wrap gap-2">
-              {panel.tags.map((tag, i) => (
-                <span key={tag} className="text-xs font-medium px-3 py-1 rounded-full"
-                  style={i < 2
-                    ? { background: "rgba(14,165,201,0.1)", color: "#0369a1", border: "0.5px solid rgba(14,165,201,0.25)" }
-                    : { background: "white", color: "#64748b", border: "0.5px solid rgba(0,0,0,0.1)" }
-                  }>
-                  {tag}
-                </span>
-              ))}
-            </div>
+            {/* Domains — outer orbit */}
+            {DOMAINS.map((d) => {
+              const pos = polarToPercent(d.angle, 41);
+              const active = isActive("domain", d.id);
+              return (
+                <button key={d.id}
+                  onClick={() => handleSelect("domain", { icon: d.icon, title: d.title, type: d.type, desc: d.desc, tags: d.tags }, d.id)}
+                  className="absolute z-[9] transition-all duration-200 hover:scale-110"
+                  style={{ width: "14%", height: "14%", left: `${pos.x}%`, top: `${pos.y}%`, transform: "translate(-50%, -50%)" }}
+                >
+                  <div className="w-full h-full flex flex-col items-center justify-center rounded-xl transition-all duration-200"
+                    style={{
+                      background: active ? "#f0f9ff" : "white",
+                      border: active ? "1.5px solid #0ea5c9" : "0.5px solid rgba(0,0,0,0.1)",
+                      boxShadow: active ? "0 4px 16px rgba(14,165,201,0.15)" : "0 1px 4px rgba(0,0,0,0.05)",
+                    }}
+                  >
+                    <span style={{ fontSize: "clamp(10px, 2.2vw, 16px)" }}>{d.icon}</span>
+                    <span className="font-semibold text-slate-700 text-center leading-tight mt-0.5 px-1"
+                      style={{ fontSize: "clamp(4px, 1.1vw, 7px)" }}>
+                      {d.short}
+                    </span>
+                  </div>
+                </button>
+              );
+            })}
           </div>
         </div>
-
-        <p className="text-center text-xs text-slate-400 mt-4">
-          Cliquez sur une phase ou un domaine pour explorer
-        </p>
       </div>
     </section>
   );
