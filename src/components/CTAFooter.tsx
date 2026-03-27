@@ -12,15 +12,15 @@ const CTAFooter = () => {
 
   const footerLinks = [
     {
-      title: t("Nos Solutions", "Our Solutions"),
+      title: t("NOS SOLUTIONS", "OUR SOLUTIONS"),
       links: [
         { label: "Strategic Intelligence Lab", href: "/solutions/strategic-intelligence-lab" },
-        { label: "Due Diligence", href: "/solutions/deep-due-diligence" },
+        { label: "Deep Due Diligence", href: "/solutions/deep-due-diligence" },
         { label: "Soft Power & Influence", href: "/solutions/soft-power-influence" },
       ],
     },
     {
-      title: "Strategic Innovation",
+      title: "STRATEGIC INNOVATION",
       links: [
         { label: "AI Powered Monitor", href: "/capacites/ai-powered-monitor" },
         { label: "Strategic Workflow", href: "/capacites/strategic-workflow" },
@@ -29,14 +29,13 @@ const CTAFooter = () => {
       ],
     },
     {
-      title: "Success Stories",
+      title: "SUCCESS STORIES",
       links: [
         { label: t("Écosystème concurrentiel", "Competitive Ecosystem"), href: "/#success-stories" },
         { label: t("Gestion de crise", "Crisis Management"), href: "/#success-stories" },
         { label: t("Strat. & Ingénierie de Communication", "Strat. & Communication Engineering"), href: "/#success-stories" },
         { label: t("Influence & Soft Power", "Influence & Soft Power"), href: "/#success-stories" },
         { label: t("Due Diligence & Investissement", "Due Diligence & Investment"), href: "/#success-stories" },
-        { label: t("Benchmark & Études", "Benchmark & Studies"), href: "/#success-stories" },
       ],
     },
   ];
