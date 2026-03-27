@@ -196,16 +196,16 @@ export default function StrategicOrbitDiagram() {
                     width: "14%", height: "14%",
                     left: `${pos.x}%`, top: `${pos.y}%`,
                     transform: "translate(-50%, -50%)",
-                    background: active ? "#f0f9ff" : "white",
-                    border: active ? "1.5px solid #0ea5c9" : "1px solid rgba(0,0,0,0.1)",
-                    boxShadow: active ? "0 0 0 3px rgba(14,165,201,0.15)" : "none",
+                    background: active ? "white" : "#0a2d5e",
+                    border: active ? "1.5px solid #0ea5c9" : "1.5px solid #0a2d5e",
+                    boxShadow: active ? "0 0 0 3px rgba(14,165,201,0.25)" : "none",
                   }}
                 >
-                <span className="font-semibold text-slate-400"
+                <span className={`font-semibold ${active ? "text-slate-400" : "text-cyan-300/70"}`}
                   style={{ fontSize: "clamp(7px, 1.6vw, 10px)" }}>
                   {s.num}
                 </span>
-                <span className="font-semibold text-slate-700 text-center leading-tight"
+                <span className={`font-semibold text-center leading-tight ${active ? "text-slate-700" : "text-white"}`}
                   style={{ fontSize: "clamp(7px, 1.7vw, 11px)" }}>
                   {s.label}
                 </span>
