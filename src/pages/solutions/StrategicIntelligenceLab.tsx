@@ -61,8 +61,6 @@ const StrategicIntelligenceLab = () => {
         </p>
       </SectionBlock>
 
-      {/* Orbit Diagram */}
-      <StrategicOrbitDiagram />
 
       {/* Correction 2: Data bubbles image + 3 pillars */}
       <SectionBlock image={imgDataBubbles} imageAlt="Data Intelligence" reverse>

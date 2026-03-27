@@ -16,6 +16,7 @@ const AIPoweredMonitor = () => {
         { label: t("Demander une démo", "Request a demo"), action: "#", formType: "f1" },
       ]}
     >
+      <StrategicOrbitDiagram />
       <DetailBlock title={t("Veille Multicanale", "Multi-channel Monitoring")}>
         <DetailList items={[
           t("Web, médias, réseaux sociaux, bases sectorielles", "Web, media, social networks, sector databases"),
