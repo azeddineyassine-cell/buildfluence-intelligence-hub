@@ -124,9 +124,18 @@ const CTAFooter = () => {
               <p className="text-[11px] font-bold uppercase tracking-[0.15em] mb-4" style={{ color: 'rgba(255,255,255,0.5)' }}>
                 Sign up
               </p>
-              <p className="text-[12px] leading-relaxed" style={{ color: 'rgba(255,255,255,0.35)' }}>
+              <p className="text-[12px] leading-relaxed" style={{ color: '#FFFFFF' }}>
                 {t("Recevez la dernière analyse de Buildfluence", "Receive the latest Buildfluence analysis")}
               </p>
+              <button
+                onClick={() => setFormOpen(true)}
+                className="mt-5 inline-block px-6 py-2.5 text-[11px] font-bold uppercase tracking-wider transition-colors"
+                style={{ background: 'hsl(var(--gold))', color: '#fff' }}
+                onMouseOver={(e) => (e.currentTarget.style.opacity = '0.85')}
+                onMouseOut={(e) => (e.currentTarget.style.opacity = '1')}
+              >
+                {t("CLIQUEZ ICI POUR SIGN UP", "CLICK HERE TO SIGN UP")}
+              </button>
               <p className="mt-4 text-[12px]" style={{ color: 'rgba(255,255,255,0.35)' }}>
                 <Link to="/contact" className="no-underline underline-offset-2 hover:underline" style={{ color: 'rgba(255,255,255,0.5)' }}>
                   Privacy Policy
