@@ -1,0 +1,246 @@
+import { useState } from "react";
+
+// ─── Data ────────────────────────────────────────────────────────────────────
+
+const CYCLE_STEPS = [
+  {
+    id: "step-01", num: "01", label: "Collection", angle: 45, icon: "🌐",
+    title: "Collection & Analyse", type: "Capture continue",
+    desc: "Première étape du cycle : sources captées en continu, données fraîches extraites et analysées. Le moteur couvre l'ensemble de l'écosystème informationnel en temps réel.",
+    tags: ["Collection", "Extraction", "Analyse", "Multi-sources", "Temps réel"],
+  },
+  {
+    id: "step-02", num: "02", label: "Indexation", angle: 315, icon: "🔍",
+    title: "Indexation & Classement Sémantique", type: "Traitement automatisé",
+    desc: "La donnée brute est ingérée, débruitée et classée via des modèles sémantiques avancés. Chaque signal pertinent est identifié, balisé et préparé pour l'enrichissement contextuel.",
+    tags: ["Indexation", "Filtrage", "Classement sémantique", "NLP", "Extraction"],
+  },
+  {
+    id: "step-03", num: "03", label: "Cartographie", angle: 225, icon: "🗂️",
+    title: "Cartographie & Vérification", type: "Enrichissement contextuel",
+    desc: "Les données sont mises en contexte, croisées et vérifiées. La cartographie relationnelle révèle les connexions cachées entre acteurs, tendances et signaux faibles.",
+    tags: ["Cartographie", "Intégration", "Vérification", "Catégorisation"],
+  },
+  {
+    id: "step-04", num: "04", label: "Reporting", angle: 135, icon: "📊",
+    title: "Reporting & Data Visualisation", type: "Intelligence actionnable",
+    desc: "L'intelligence devient visible. Dashboards dynamiques, rapports exécutifs et visualisations transforment la complexité en clarté décisionnelle pour chaque niveau de l'organisation.",
+    tags: ["Reporting", "Dashboards", "Data Visualisation", "KPIs", "Alertes"],
+  },
+];
+
+const DOMAINS = [
+  { id: "rp", icon: "📡", short: "RP & Comm.", angle: 90, title: "RP & Communication", type: "Réputation & Influence médiatique", desc: "Médias Intelligence, surveillance de la notoriété, gestion des crises et pilotage des campagnes médiatiques. Transformez chaque mention en levier stratégique.", tags: ["Médias Intelligence", "Notoriété", "Crises", "Campagnes", "Newsletter"] },
+  { id: "biz", icon: "📈", short: "Business Dev", angle: 45, title: "Business Development", type: "Croissance & Opportunités", desc: "Surveillance concurrentielle, identification d'opportunités et d'appels d'offres, veille sur les salons et développement international. Ne manquez plus aucune fenêtre d'entrée.", tags: ["Concurrents", "Clients", "Partenaires", "Opportunités", "International"] },
+  { id: "rd", icon: "🔬", short: "R&D", angle: 0, title: "Recherche & Développement", type: "Innovation & Brevets", desc: "Veille sur les dernières innovations, nouveaux brevets et technologies émergentes. Benchmarkez les meilleures pratiques mondiales pour garder une longueur d'avance décisive.", tags: ["Innovations", "Brevets", "Nouvelles Technologies", "Best Practices"] },
+  { id: "achat", icon: "🛒", short: "Achat", angle: 315, title: "Achat & Supply", type: "Fournisseurs & Marché", desc: "Intelligence sur les fournisseurs, clients stratégiques et nouveaux produits entrants. Anticipez les évolutions du marché et optimisez votre chaîne de valeur.", tags: ["Fournisseurs", "Clients", "Nouveaux produits", "Supply chain"] },
+  { id: "mkt", icon: "📣", short: "Marketing", angle: 270, title: "Marketing & Consumer Insights", type: "Marché & Consommateurs", desc: "Positionnement stratégique, attentes consommateurs, benchmark marché et mesure d'impact des actions marketing en temps réel. Décidez avec des données, pas des intuitions.", tags: ["Positionnement", "Attentes consommateurs", "Benchmark", "Impact Metrics"] },
+  { id: "jur", icon: "⚖️", short: "Juridique", angle: 225, title: "Juridique & RH", type: "Conformité & Compétences", desc: "Veille réglementaire et juridique, suivi des législations et anticipation des évolutions. Identification des nouvelles compétences nécessaires à la transformation.", tags: ["Réglementation", "Veille juridique", "Législations", "New Skills"] },
+  { id: "lob", icon: "🏛️", short: "Lobbying", angle: 180, title: "Lobbying & Public Affairs", type: "Influence & Diplomatie", desc: "Rivalités géopolitiques, political intelligence, cartographie des leaders d'influence et diplomatie économique. Positionnez-vous là où les décisions se prennent réellement.", tags: ["Géopolitique", "Political Intelligence", "Diplomatie", "Stakeholders"] },
+  { id: "cm", icon: "👥", short: "Community", angle: 135, title: "Community Management", type: "Digital & e-Réputation", desc: "Empreinte digitale, e-Réputation, analyse des avis consommateurs et identification des leaders d'opinion. Maîtrisez votre image dans chaque conversation qui vous concerne.", tags: ["Empreinte Digitale", "e-Réputation", "Avis Consommateurs", "Activistes"] },
+];
+
+const DEFAULT_PANEL = {
+  icon: "⚡",
+  title: "Strategic Intelligence Lab",
+  type: "Vue d'ensemble",
+  desc: "Un moteur d'intelligence stratégique en cycle continu : 4 phases de traitement alimentent 8 domaines métiers en simultané. Chaque signal capturé dans l'écosystème devient une décision éclairée en temps réel.",
+  tags: ["Big Data", "Temps réel", "8 domaines", "4 phases", "Intelligence continue"],
+};
+
+// ─── Helper ───────────────────────────────────────────────────────────────────
+
+function polarToPercent(angleDeg: number, radiusPct: number) {
+  const rad = ((angleDeg - 90) * Math.PI) / 180;
+  return { x: 50 + radiusPct * Math.cos(rad), y: 50 + radiusPct * Math.sin(rad) };
+}
+
+type PanelData = typeof DEFAULT_PANEL;
+
+// ─── Component ───────────────────────────────────────────────────────────────
+
+export default function StrategicOrbitDiagram() {
+  const [selected, setSelected] = useState<{ type: string; id: string } | null>(null);
+  const [panel, setPanel] = useState<PanelData>(DEFAULT_PANEL);
+
+  function handleSelect(type: string, data: PanelData, id: string) {
+    setSelected({ type, id });
+    setPanel(data);
+  }
+
+  function isActive(type: string, id: string) {
+    return selected?.type === type && selected?.id === id;
+  }
+
+  // SVG connectors
+  const connectors: React.ReactNode[] = [];
+  CYCLE_STEPS.forEach((s) => {
+    const p = polarToPercent(s.angle, 20);
+    connectors.push(
+      <line key={`cs-${s.id}`} x1="50" y1="50" x2={p.x} y2={p.y}
+        stroke="currentColor" strokeOpacity="0.12" strokeWidth="0.4" strokeDasharray="1.5 2" />
+    );
+  });
+
+  DOMAINS.forEach((d, i) => {
+    const pInner = polarToPercent(d.angle, 25);
+    const pOuter = polarToPercent(d.angle, 40);
+    const pMid = polarToPercent(d.angle, 32.5);
+    connectors.push(
+      <line key={`dl-${d.id}`} x1={pInner.x} y1={pInner.y} x2={pOuter.x} y2={pOuter.y}
+        stroke="currentColor" strokeOpacity="0.1" strokeWidth="0.3" />
+    );
+    connectors.push(
+      <circle key={`dp-${d.id}`} cx={pMid.x} cy={pMid.y} r="1.5"
+        fill="#0ea5c9" opacity="0.6"
+        style={{ animationDelay: `${(i * 0.31).toFixed(2)}s` }}
+        className="animate-pulse" />
+    );
+  });
+
+  return (
+    <section className="w-full py-20 px-4 bg-white">
+      {/* Header */}
+      <div className="max-w-3xl mx-auto text-center mb-14">
+        <p className="text-xs font-semibold tracking-widest uppercase text-slate-400 mb-3">
+          Buildfluence · Strategic Intelligence Lab
+        </p>
+        <h2 className="text-4xl font-bold tracking-tight text-slate-900 leading-tight mb-4">
+          L'intelligence qui transforme<br />
+          <span className="text-cyan-500">l'information en décision</span>
+        </h2>
+        <p className="text-slate-500 text-base leading-relaxed max-w-xl mx-auto">
+          Un moteur de veille stratégique en cycle continu. Explorez les 4 phases et les 8 domaines métiers couverts.
+        </p>
+      </div>
+
+      <div className="max-w-2xl mx-auto">
+        {/* Orbit */}
+        <div className="relative w-full" style={{ aspectRatio: "1 / 1" }}>
+          {/* Rings */}
+          {[22, 46, 68, 90].map((size, i) => (
+            <div key={i} className="absolute rounded-full" style={{
+              width: `${size}%`, height: `${size}%`,
+              top: "50%", left: "50%", transform: "translate(-50%, -50%)",
+              border: i === 2
+                ? "1px dashed rgba(14,165,201,0.15)"
+                : "0.5px solid rgba(0,0,0,0.06)",
+            }} />
+          ))}
+
+          {/* SVG connectors */}
+          <svg className="absolute inset-0 w-full h-full text-slate-800 pointer-events-none"
+            viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet">
+            {connectors}
+          </svg>
+
+          {/* Core */}
+          <button
+            onClick={() => handleSelect("core", DEFAULT_PANEL, "core")}
+            className="absolute rounded-full flex flex-col items-center justify-center z-10 transition-transform duration-300 hover:scale-105"
+            style={{
+              width: "18%", height: "18%",
+              top: "50%", left: "50%", transform: "translate(-50%, -50%)",
+              background: "linear-gradient(135deg, #0a2d5e 0%, #0ea5c9 100%)",
+              boxShadow: isActive("core", "core")
+                ? "0 0 0 4px rgba(14,165,201,0.3)"
+                : "0 0 0 2px rgba(14,165,201,0.15)",
+            }}
+          >
+            <span className="text-white font-bold text-center leading-tight"
+              style={{ fontSize: "clamp(5px, 1.5vw, 9px)", letterSpacing: "0.08em" }}>
+              BIG<br />DATA
+            </span>
+          </button>
+
+          {/* Steps — inner orbit */}
+          {CYCLE_STEPS.map((s) => {
+            const pos = polarToPercent(s.angle, 20);
+            const active = isActive("step", s.id);
+            return (
+              <button key={s.id}
+                onClick={() => handleSelect("step", { icon: s.icon, title: s.title, type: s.type, desc: s.desc, tags: s.tags }, s.id)}
+                className="absolute flex flex-col items-center justify-center rounded-full z-[8] transition-all duration-200 hover:scale-110"
+                style={{
+                  width: "14%", height: "14%",
+                  left: `${pos.x}%`, top: `${pos.y}%`,
+                  transform: "translate(-50%, -50%)",
+                  background: active ? "#f0f9ff" : "white",
+                  border: active ? "1.5px solid #0ea5c9" : "1px solid rgba(0,0,0,0.1)",
+                  boxShadow: active ? "0 0 0 3px rgba(14,165,201,0.15)" : "none",
+                }}
+              >
+                <span className="font-semibold text-slate-400"
+                  style={{ fontSize: "clamp(5px, 1.1vw, 7px)" }}>
+                  {s.num}
+                </span>
+                <span className="font-semibold text-slate-700 text-center leading-tight"
+                  style={{ fontSize: "clamp(5px, 1.2vw, 7.5px)" }}>
+                  {s.label}
+                </span>
+              </button>
+            );
+          })}
+
+          {/* Domains — outer orbit */}
+          {DOMAINS.map((d) => {
+            const pos = polarToPercent(d.angle, 41);
+            const active = isActive("domain", d.id);
+            return (
+              <button key={d.id}
+                onClick={() => handleSelect("domain", { icon: d.icon, title: d.title, type: d.type, desc: d.desc, tags: d.tags }, d.id)}
+                className="absolute z-[9] transition-all duration-200 hover:scale-110"
+                style={{ width: "14%", height: "14%", left: `${pos.x}%`, top: `${pos.y}%`, transform: "translate(-50%, -50%)" }}
+              >
+                <div className="w-full h-full flex flex-col items-center justify-center rounded-xl transition-all duration-200"
+                  style={{
+                    background: active ? "#f0f9ff" : "white",
+                    border: active ? "1.5px solid #0ea5c9" : "0.5px solid rgba(0,0,0,0.1)",
+                    boxShadow: active ? "0 4px 16px rgba(14,165,201,0.15)" : "0 1px 4px rgba(0,0,0,0.05)",
+                  }}
+                >
+                  <span style={{ fontSize: "clamp(10px, 2.2vw, 16px)" }}>{d.icon}</span>
+                  <span className="font-semibold text-slate-700 text-center leading-tight mt-0.5 px-1"
+                    style={{ fontSize: "clamp(4px, 1.1vw, 7px)" }}>
+                    {d.short}
+                  </span>
+                </div>
+              </button>
+            );
+          })}
+        </div>
+
+        {/* Detail Panel */}
+        <div className="mt-6 rounded-2xl overflow-hidden"
+          style={{ border: "0.5px solid rgba(0,0,0,0.08)", background: "#f8fafc" }}>
+          <div className="flex items-center gap-3 px-5 py-4"
+            style={{ borderBottom: "0.5px solid rgba(0,0,0,0.06)" }}>
+            <span className="text-2xl">{panel.icon}</span>
+            <div>
+              <p className="font-semibold text-slate-900 text-base">{panel.title}</p>
+              <p className="text-xs text-slate-400 uppercase tracking-wide mt-0.5">{panel.type}</p>
+            </div>
+          </div>
+          <div className="px-5 py-4">
+            <p className="text-sm text-slate-600 leading-relaxed mb-4">{panel.desc}</p>
+            <div className="flex flex-wrap gap-2">
+              {panel.tags.map((tag, i) => (
+                <span key={tag} className="text-xs font-medium px-3 py-1 rounded-full"
+                  style={i < 2
+                    ? { background: "rgba(14,165,201,0.1)", color: "#0369a1", border: "0.5px solid rgba(14,165,201,0.25)" }
+                    : { background: "white", color: "#64748b", border: "0.5px solid rgba(0,0,0,0.1)" }
+                  }>
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <p className="text-center text-xs text-slate-400 mt-4">
+          Cliquez sur une phase ou un domaine pour explorer
+        </p>
+      </div>
+    </section>
+  );
+}
