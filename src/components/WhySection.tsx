@@ -89,16 +89,16 @@ const WhySection = () => {
         >
           <p className="font-serif text-lg italic" style={{ color: '#0D1B2A' }}>
             {t(
-              "\"Nous sécurisons vos décisions avec un niveau de lucidité rarement atteint dans le monde des affaires.\"",
-              "\"We secure your decisions with a level of clarity rarely achieved in the business world.\""
+              "Nous sécurisons vos décisions avec un niveau de lucidité rarement atteint dans le monde des affaires.",
+              "We secure your decisions with a level of clarity rarely achieved in the business world."
             )}
           </p>
-          <ul className="mt-4 space-y-1 text-[13px]" style={{ color: '#5A6170' }}>
-            <li>• {t("Nous détectons ce que vous ne voyez pas", "We detect what you don't see")}</li>
-            <li>• {t("Nous décryptons ce que vous ne comprenez pas", "We decipher what you don't understand")}</li>
-            <li>• {t("Nous anticipons ce que vous ne prévoyez pas", "We anticipate what you don't foresee")}</li>
-            <li>• {t("Nous neutralisons ce qui vous menace", "We neutralize what threatens you")}</li>
-            <li>• {t("Nous amplifions ce qui vous renforce", "We amplify what strengthens you")}</li>
+          <ul className="mt-6 space-y-2 text-[15px] font-medium text-left" style={{ color: '#0D1B2A' }}>
+            <li>{t("Nous détectons ce que vous ne voyez pas", "We detect what you don't see")}</li>
+            <li>{t("Nous décryptons ce que vous ne comprenez pas", "We decipher what you don't understand")}</li>
+            <li>{t("Nous anticipons ce que vous ne prévoyez pas", "We anticipate what you don't foresee")}</li>
+            <li>{t("Nous neutralisons ce qui vous menace", "We neutralize what threatens you")}</li>
+            <li>{t("Nous amplifions ce qui vous renforce", "We amplify what strengthens you")}</li>
           </ul>
         </motion.div>
       </div>
