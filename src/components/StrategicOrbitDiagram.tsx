@@ -1,52 +1,78 @@
 import { useState } from "react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
-// ─── Data ────────────────────────────────────────────────────────────────────
+// ─── Data (bilingual) ────────────────────────────────────────────────────────
 
-const CYCLE_STEPS = [
-  {
-    id: "step-01", num: "01", label: "Collection", angle: 45, icon: "🌐",
-    title: "Collection & Analyse", type: "Capture continue",
-    desc: "Première étape du cycle : sources captées en continu, données fraîches extraites et analysées. Le moteur couvre l'ensemble de l'écosystème informationnel en temps réel.",
-    tags: ["Collection", "Extraction", "Analyse", "Multi-sources", "Temps réel"],
-  },
-  {
-    id: "step-02", num: "02", label: "Indexation", angle: 315, icon: "🔍",
-    title: "Indexation & Classement Sémantique", type: "Traitement automatisé",
-    desc: "La donnée brute est ingérée, débruitée et classée via des modèles sémantiques avancés. Chaque signal pertinent est identifié, balisé et préparé pour l'enrichissement contextuel.",
-    tags: ["Indexation", "Filtrage", "Classement sémantique", "NLP", "Extraction"],
-  },
-  {
-    id: "step-03", num: "03", label: "Cartographie", angle: 225, icon: "🗂️",
-    title: "Cartographie & Vérification", type: "Enrichissement contextuel",
-    desc: "Les données sont mises en contexte, croisées et vérifiées. La cartographie relationnelle révèle les connexions cachées entre acteurs, tendances et signaux faibles.",
-    tags: ["Cartographie", "Intégration", "Vérification", "Catégorisation"],
-  },
-  {
-    id: "step-04", num: "04", label: "Reporting", angle: 135, icon: "📊",
-    title: "Reporting & Data Visualisation", type: "Intelligence actionnable",
-    desc: "L'intelligence devient visible. Dashboards dynamiques, rapports exécutifs et visualisations transforment la complexité en clarté décisionnelle pour chaque niveau de l'organisation.",
-    tags: ["Reporting", "Dashboards", "Data Visualisation", "KPIs", "Alertes"],
-  },
-];
+function getCycleSteps(t: (fr: string, en: string) => string) {
+  return [
+    {
+      id: "step-01", num: "01", label: "Collection", angle: 45, icon: "🌐",
+      title: t("Collection & Analyse", "Collection & Analysis"),
+      type: t("Capture continue", "Continuous Capture"),
+      desc: t(
+        "Première étape du cycle : sources captées en continu, données fraîches extraites et analysées. Le moteur couvre l'ensemble de l'écosystème informationnel en temps réel.",
+        "First step of the cycle: sources captured continuously, fresh data extracted and analyzed. The engine covers the entire information ecosystem in real time."
+      ),
+      tags: t("Collection,Extraction,Analyse,Multi-sources,Temps réel", "Collection,Extraction,Analysis,Multi-source,Real-time").split(","),
+    },
+    {
+      id: "step-02", num: "02", label: t("Indexation", "Indexing"), angle: 315, icon: "🔍",
+      title: t("Indexation & Classement Sémantique", "Indexing & Semantic Classification"),
+      type: t("Traitement automatisé", "Automated Processing"),
+      desc: t(
+        "La donnée brute est ingérée, débruitée et classée via des modèles sémantiques avancés. Chaque signal pertinent est identifié, balisé et préparé pour l'enrichissement contextuel.",
+        "Raw data is ingested, denoised and classified using advanced semantic models. Each relevant signal is identified, tagged and prepared for contextual enrichment."
+      ),
+      tags: t("Indexation,Filtrage,Classement sémantique,NLP,Extraction", "Indexing,Filtering,Semantic classification,NLP,Extraction").split(","),
+    },
+    {
+      id: "step-03", num: "03", label: t("Cartographie", "Mapping"), angle: 225, icon: "🗂️",
+      title: t("Cartographie & Vérification", "Mapping & Verification"),
+      type: t("Enrichissement contextuel", "Contextual Enrichment"),
+      desc: t(
+        "Les données sont mises en contexte, croisées et vérifiées. La cartographie relationnelle révèle les connexions cachées entre acteurs, tendances et signaux faibles.",
+        "Data is contextualized, cross-referenced and verified. Relational mapping reveals hidden connections between actors, trends and weak signals."
+      ),
+      tags: t("Cartographie,Intégration,Vérification,Catégorisation", "Mapping,Integration,Verification,Categorization").split(","),
+    },
+    {
+      id: "step-04", num: "04", label: "Reporting", angle: 135, icon: "📊",
+      title: t("Reporting & Data Visualisation", "Reporting & Data Visualization"),
+      type: t("Intelligence actionnable", "Actionable Intelligence"),
+      desc: t(
+        "L'intelligence devient visible. Dashboards dynamiques, rapports exécutifs et visualisations transforment la complexité en clarté décisionnelle pour chaque niveau de l'organisation.",
+        "Intelligence becomes visible. Dynamic dashboards, executive reports and visualizations transform complexity into decision-making clarity at every level of the organization."
+      ),
+      tags: t("Reporting,Dashboards,Data Visualisation,KPIs,Alertes", "Reporting,Dashboards,Data Visualization,KPIs,Alerts").split(","),
+    },
+  ];
+}
 
-const DOMAINS = [
-  { id: "rp", icon: "📡", short: "RP & Comm.", angle: 90, title: "RP & Communication", type: "Réputation & Influence médiatique", desc: "Médias Intelligence, surveillance de la notoriété, gestion des crises et pilotage des campagnes médiatiques. Transformez chaque mention en levier stratégique.", tags: ["Médias Intelligence", "Notoriété", "Crises", "Campagnes", "Newsletter"] },
-  { id: "biz", icon: "📈", short: "Business Dev", angle: 45, title: "Business Development", type: "Croissance & Opportunités", desc: "Surveillance concurrentielle, identification d'opportunités et d'appels d'offres, veille sur les salons et développement international. Ne manquez plus aucune fenêtre d'entrée.", tags: ["Concurrents", "Clients", "Partenaires", "Opportunités", "International"] },
-  { id: "rd", icon: "🔬", short: "R&D", angle: 0, title: "Recherche & Développement", type: "Innovation & Brevets", desc: "Veille sur les dernières innovations, nouveaux brevets et technologies émergentes. Benchmarkez les meilleures pratiques mondiales pour garder une longueur d'avance décisive.", tags: ["Innovations", "Brevets", "Nouvelles Technologies", "Best Practices"] },
-  { id: "achat", icon: "🛒", short: "Achat", angle: 315, title: "Achat & Supply", type: "Fournisseurs & Marché", desc: "Intelligence sur les fournisseurs, clients stratégiques et nouveaux produits entrants. Anticipez les évolutions du marché et optimisez votre chaîne de valeur.", tags: ["Fournisseurs", "Clients", "Nouveaux produits", "Supply chain"] },
-  { id: "mkt", icon: "📣", short: "Marketing", angle: 270, title: "Marketing & Consumer Insights", type: "Marché & Consommateurs", desc: "Positionnement stratégique, attentes consommateurs, benchmark marché et mesure d'impact des actions marketing en temps réel. Décidez avec des données, pas des intuitions.", tags: ["Positionnement", "Attentes consommateurs", "Benchmark", "Impact Metrics"] },
-  { id: "jur", icon: "⚖️", short: "Juridique", angle: 225, title: "Juridique & RH", type: "Conformité & Compétences", desc: "Veille réglementaire et juridique, suivi des législations et anticipation des évolutions. Identification des nouvelles compétences nécessaires à la transformation.", tags: ["Réglementation", "Veille juridique", "Législations", "New Skills"] },
-  { id: "lob", icon: "🏛️", short: "Lobbying", angle: 180, title: "Lobbying & Public Affairs", type: "Influence & Diplomatie", desc: "Rivalités géopolitiques, political intelligence, cartographie des leaders d'influence et diplomatie économique. Positionnez-vous là où les décisions se prennent réellement.", tags: ["Géopolitique", "Political Intelligence", "Diplomatie", "Stakeholders"] },
-  { id: "cm", icon: "👥", short: "Community", angle: 135, title: "Community Management", type: "Digital & e-Réputation", desc: "Empreinte digitale, e-Réputation, analyse des avis consommateurs et identification des leaders d'opinion. Maîtrisez votre image dans chaque conversation qui vous concerne.", tags: ["Empreinte Digitale", "e-Réputation", "Avis Consommateurs", "Activistes"] },
-];
+function getDomains(t: (fr: string, en: string) => string) {
+  return [
+    { id: "rp", icon: "📡", short: t("RP & Comm.", "PR & Comm."), angle: 90, title: t("RP & Communication", "PR & Communication"), type: t("Réputation & Influence médiatique", "Reputation & Media Influence"), desc: t("Médias Intelligence, surveillance de la notoriété, gestion des crises et pilotage des campagnes médiatiques. Transformez chaque mention en levier stratégique.", "Media Intelligence, brand monitoring, crisis management and media campaign steering. Turn every mention into a strategic lever."), tags: t("Médias Intelligence,Notoriété,Crises,Campagnes,Newsletter", "Media Intelligence,Brand Awareness,Crises,Campaigns,Newsletter").split(",") },
+    { id: "biz", icon: "📈", short: "Business Dev", angle: 45, title: "Business Development", type: t("Croissance & Opportunités", "Growth & Opportunities"), desc: t("Surveillance concurrentielle, identification d'opportunités et d'appels d'offres, veille sur les salons et développement international. Ne manquez plus aucune fenêtre d'entrée.", "Competitive monitoring, opportunity and tender identification, trade show intelligence and international development. Never miss a market entry window."), tags: t("Concurrents,Clients,Partenaires,Opportunités,International", "Competitors,Clients,Partners,Opportunities,International").split(",") },
+    { id: "rd", icon: "🔬", short: "R&D", angle: 0, title: t("Recherche & Développement", "Research & Development"), type: t("Innovation & Brevets", "Innovation & Patents"), desc: t("Veille sur les dernières innovations, nouveaux brevets et technologies émergentes. Benchmarkez les meilleures pratiques mondiales pour garder une longueur d'avance décisive.", "Monitor latest innovations, new patents and emerging technologies. Benchmark global best practices to maintain a decisive edge."), tags: t("Innovations,Brevets,Nouvelles Technologies,Best Practices", "Innovations,Patents,Emerging Technologies,Best Practices").split(",") },
+    { id: "achat", icon: "🛒", short: t("Achat", "Procurement"), angle: 315, title: t("Achat & Supply", "Procurement & Supply"), type: t("Fournisseurs & Marché", "Suppliers & Market"), desc: t("Intelligence sur les fournisseurs, clients stratégiques et nouveaux produits entrants. Anticipez les évolutions du marché et optimisez votre chaîne de valeur.", "Supplier intelligence, strategic clients and new market entrants. Anticipate market evolution and optimize your value chain."), tags: t("Fournisseurs,Clients,Nouveaux produits,Supply chain", "Suppliers,Clients,New products,Supply chain").split(",") },
+    { id: "mkt", icon: "📣", short: "Marketing", angle: 270, title: "Marketing & Consumer Insights", type: t("Marché & Consommateurs", "Market & Consumers"), desc: t("Positionnement stratégique, attentes consommateurs, benchmark marché et mesure d'impact des actions marketing en temps réel. Décidez avec des données, pas des intuitions.", "Strategic positioning, consumer expectations, market benchmarking and real-time marketing impact measurement. Decide with data, not intuition."), tags: t("Positionnement,Attentes consommateurs,Benchmark,Impact Metrics", "Positioning,Consumer expectations,Benchmark,Impact Metrics").split(",") },
+    { id: "jur", icon: "⚖️", short: t("Juridique", "Legal"), angle: 225, title: t("Juridique & RH", "Legal & HR"), type: t("Conformité & Compétences", "Compliance & Skills"), desc: t("Veille réglementaire et juridique, suivi des législations et anticipation des évolutions. Identification des nouvelles compétences nécessaires à la transformation.", "Regulatory and legal monitoring, legislation tracking and anticipation. Identification of new skills required for transformation."), tags: t("Réglementation,Veille juridique,Législations,New Skills", "Regulation,Legal monitoring,Legislation,New Skills").split(",") },
+    { id: "lob", icon: "🏛️", short: "Lobbying", angle: 180, title: "Lobbying & Public Affairs", type: t("Influence & Diplomatie", "Influence & Diplomacy"), desc: t("Rivalités géopolitiques, political intelligence, cartographie des leaders d'influence et diplomatie économique. Positionnez-vous là où les décisions se prennent réellement.", "Geopolitical rivalries, political intelligence, influence leader mapping and economic diplomacy. Position yourself where decisions are truly made."), tags: t("Géopolitique,Political Intelligence,Diplomatie,Stakeholders", "Geopolitics,Political Intelligence,Diplomacy,Stakeholders").split(",") },
+    { id: "cm", icon: "👥", short: "Community", angle: 135, title: "Community Management", type: t("Digital & e-Réputation", "Digital & e-Reputation"), desc: t("Empreinte digitale, e-Réputation, analyse des avis consommateurs et identification des leaders d'opinion. Maîtrisez votre image dans chaque conversation qui vous concerne.", "Digital footprint, e-Reputation, consumer review analysis and opinion leader identification. Master your image in every conversation that concerns you."), tags: t("Empreinte Digitale,e-Réputation,Avis Consommateurs,Activistes", "Digital Footprint,e-Reputation,Consumer Reviews,Activists").split(",") },
+  ];
+}
 
-const DEFAULT_PANEL = {
-  icon: "⚡",
-  title: "Strategic Intelligence Lab",
-  type: "Vue d'ensemble",
-  desc: "Un moteur d'intelligence stratégique en cycle continu : 4 phases de traitement alimentent 8 domaines métiers en simultané. Chaque signal capturé dans l'écosystème devient une décision éclairée en temps réel.",
-  tags: ["Big Data", "Temps réel", "8 domaines", "4 phases", "Intelligence continue"],
-};
+function getDefaultPanel(t: (fr: string, en: string) => string) {
+  return {
+    icon: "⚡",
+    title: "Strategic Intelligence Lab",
+    type: t("Vue d'ensemble", "Overview"),
+    desc: t(
+      "Un moteur d'intelligence stratégique en cycle continu : 4 phases de traitement alimentent 8 domaines métiers en simultané. Chaque signal capturé dans l'écosystème devient une décision éclairée en temps réel.",
+      "A strategic intelligence engine in continuous cycle: 4 processing phases feed 8 business domains simultaneously. Every signal captured in the ecosystem becomes an informed decision in real time."
+    ),
+    tags: t("Big Data,Temps réel,8 domaines,4 phases,Intelligence continue", "Big Data,Real-time,8 domains,4 phases,Continuous Intelligence").split(","),
+  };
+}
 
 // ─── Helper ───────────────────────────────────────────────────────────────────
 
@@ -55,11 +81,16 @@ function polarToPercent(angleDeg: number, radiusPct: number) {
   return { x: 50 + radiusPct * Math.cos(rad), y: 50 + radiusPct * Math.sin(rad) };
 }
 
-type PanelData = typeof DEFAULT_PANEL;
+type PanelData = { icon: string; title: string; type: string; desc: string; tags: string[] };
 
 // ─── Component ───────────────────────────────────────────────────────────────
 
 export default function StrategicOrbitDiagram() {
+  const { t } = useLanguage();
+  const CYCLE_STEPS = getCycleSteps(t);
+  const DOMAINS = getDomains(t);
+  const DEFAULT_PANEL = getDefaultPanel(t);
+
   const [selected, setSelected] = useState<{ type: string; id: string } | null>(null);
   const [panel, setPanel] = useState<PanelData>(DEFAULT_PANEL);
 
@@ -103,12 +134,12 @@ export default function StrategicOrbitDiagram() {
       {/* Header */}
       <div className="max-w-4xl mx-auto text-center mb-14">
         <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-slate-900 leading-tight mb-4">
-          L'intelligence qui transforme la donnée brute en{" "}
-          <span style={{ color: "#D0A030" }}>décision souveraine</span>
+          {t("L'intelligence qui transforme la donnée brute en", "The intelligence that transforms raw data into")}{" "}
+          <span style={{ color: "#D0A030" }}>{t("décision souveraine", "sovereign decision")}</span>
         </h2>
         <p className="text-slate-500 text-base leading-relaxed max-w-xl mx-auto">
-          Un moteur de veille stratégique en cycle continu.<br />
-          Explorez les 4 phases et les 8 domaines métiers couverts
+          {t("Un moteur de veille stratégique en cycle continu.", "A strategic monitoring engine in continuous cycle.")}<br />
+          {t("Explorez les 4 phases et les 8 domaines métiers couverts", "Explore the 4 phases and 8 business domains covered")}
         </p>
       </div>
 
@@ -141,7 +172,7 @@ export default function StrategicOrbitDiagram() {
             </div>
           </div>
           <p className="text-center text-xs text-slate-400 mt-4">
-            Cliquez sur une phase ou un domaine pour explorer
+            {t("Cliquez sur une phase ou un domaine pour explorer", "Click on a phase or domain to explore")}
           </p>
         </div>
 
