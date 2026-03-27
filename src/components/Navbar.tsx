@@ -73,12 +73,12 @@ const Navbar = () => {
   ];
 
   const navItems = [
-    { label: t("Vos Situations Critiques", "Your Critical Situations"), href: "#situations-critiques", dropdown: "situations" },
-    { label: t("Nos Solutions", "Our Solutions"), href: "#nos-solutions", dropdown: "solutions" },
-    { label: "Strategic Innovation", href: "#strategic-innovation", dropdown: "innovation" },
-    { label: "Success Stories", href: "#success-stories" },
-    { label: "Insights & Resources", href: "#insights" },
-    { label: t("Pourquoi Buildfluence", "Why Buildfluence"), href: "#pourquoi-buildfluence" },
+    { label: t("Vos Situations Critiques", "Your Critical Situations"), href: "#situations-critiques", dropdown: "situations", maxW: "120px" },
+    { label: t("Nos Solutions", "Our Solutions"), href: "#nos-solutions", dropdown: "solutions", maxW: "90px" },
+    { label: "Strategic Innovation", href: "#strategic-innovation", dropdown: "innovation", maxW: "90px" },
+    { label: "Success Stories", href: "#success-stories", maxW: "90px" },
+    { label: "Insights & Resources", href: "#insights", maxW: "90px" },
+    { label: t("Pourquoi Buildfluence", "Why Buildfluence"), href: "#pourquoi-buildfluence", maxW: "90px" },
   ];
 
   const handleNavClick = (href: string) => {
@@ -132,7 +132,7 @@ const Navbar = () => {
                   href={item.href}
                   onClick={(e) => { e.preventDefault(); handleNavClick(item.href); }}
                   className="flex items-center gap-1 text-[12.5px] font-medium transition-colors leading-tight"
-                  style={{ color: '#4A5568', maxWidth: '90px' }}
+                  style={{ color: '#4A5568', maxWidth: item.maxW || '90px' }}
                   onMouseOver={(e) => (e.currentTarget.style.color = '#0D1B2A')}
                   onMouseOut={(e) => (e.currentTarget.style.color = '#4A5568')}
                 >
