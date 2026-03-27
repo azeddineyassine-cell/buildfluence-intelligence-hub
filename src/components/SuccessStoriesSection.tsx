@@ -154,11 +154,7 @@ const SuccessStoriesSection = () => {
                 <div className="text-[10px] font-bold uppercase tracking-[0.12em] mb-3" style={{ color: 'hsl(var(--gold-light))' }}>
                   {s.tag}
                 </div>
-                {logo ? (
-                  <img src={logo} alt={s.client} className="h-8 w-auto object-contain mb-3" style={{ filter: 'brightness(0) invert(1)', opacity: 0.85 }} />
-                ) : (
-                  <div className="text-[16px] font-bold mb-2 text-white">{s.client}</div>
-                )}
+                <div className="text-[16px] font-bold mb-2 text-white">{s.client}</div>
                 <div className="text-[13px] leading-[1.6]" style={{ color: 'rgba(255,255,255,0.6)' }}>{s.desc}</div>
               </motion.div>
             );

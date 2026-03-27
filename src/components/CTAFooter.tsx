@@ -12,15 +12,15 @@ const CTAFooter = () => {
 
   const footerLinks = [
     {
-      title: t("Nos Solutions", "Our Solutions"),
+      title: t("NOS SOLUTIONS", "OUR SOLUTIONS"),
       links: [
         { label: "Strategic Intelligence Lab", href: "/solutions/strategic-intelligence-lab" },
-        { label: "Due Diligence", href: "/solutions/deep-due-diligence" },
+        { label: "Deep Due Diligence", href: "/solutions/deep-due-diligence" },
         { label: "Soft Power & Influence", href: "/solutions/soft-power-influence" },
       ],
     },
     {
-      title: "Strategic Innovation",
+      title: "STRATEGIC INNOVATION",
       links: [
         { label: "AI Powered Monitor", href: "/capacites/ai-powered-monitor" },
         { label: "Strategic Workflow", href: "/capacites/strategic-workflow" },
@@ -29,14 +29,13 @@ const CTAFooter = () => {
       ],
     },
     {
-      title: "Success Stories",
+      title: "SUCCESS STORIES",
       links: [
         { label: t("Écosystème concurrentiel", "Competitive Ecosystem"), href: "/#success-stories" },
         { label: t("Gestion de crise", "Crisis Management"), href: "/#success-stories" },
         { label: t("Strat. & Ingénierie de Communication", "Strat. & Communication Engineering"), href: "/#success-stories" },
         { label: t("Influence & Soft Power", "Influence & Soft Power"), href: "/#success-stories" },
         { label: t("Due Diligence & Investissement", "Due Diligence & Investment"), href: "/#success-stories" },
-        { label: t("Benchmark & Études", "Benchmark & Studies"), href: "/#success-stories" },
       ],
     },
   ];
@@ -80,21 +79,29 @@ const CTAFooter = () => {
         </motion.div>
       </section>
 
-      {/* Footer */}
       <footer
         className="px-12 py-16"
         style={{ background: 'hsl(218 60% 9%)' }}
       >
-        <div className="mx-auto max-w-[1100px]">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+        <div className="mx-auto max-w-[1200px]">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-10 mb-12">
             {/* Brand */}
             <div>
               <a href="/" className="text-[18px] font-bold text-white no-underline">
                 Build<span style={{ color: 'hsl(var(--gold))' }}>fluence</span>
               </a>
               <p className="mt-3 text-[12px] leading-relaxed" style={{ color: 'rgba(255,255,255,0.35)' }}>
-                {t("Sovereign Decision Infrastructure", "Sovereign Decision Infrastructure")}
+                Sovereign Decision Infrastructure
               </p>
+              <button
+                onClick={() => setFormOpen(true)}
+                className="mt-5 inline-block px-6 py-2.5 text-[11px] font-bold uppercase tracking-wider transition-colors"
+                style={{ background: 'hsl(var(--gold))', color: '#fff' }}
+                onMouseOver={(e) => (e.currentTarget.style.opacity = '0.85')}
+                onMouseOut={(e) => (e.currentTarget.style.opacity = '1')}
+              >
+                {t("CLIQUEZ ICI POUR SIGN UP", "CLICK HERE TO SIGN UP")}
+              </button>
             </div>
 
             {/* Link columns */}
@@ -120,6 +127,21 @@ const CTAFooter = () => {
                 </ul>
               </div>
             ))}
+
+            {/* Sign up column */}
+            <div>
+              <p className="text-[11px] font-bold uppercase tracking-[0.15em] mb-4" style={{ color: 'rgba(255,255,255,0.5)' }}>
+                Sign up
+              </p>
+              <p className="text-[12px] leading-relaxed" style={{ color: 'rgba(255,255,255,0.35)' }}>
+                {t("Recevez la dernière analyse de Buildfluence", "Receive the latest Buildfluence analysis")}
+              </p>
+              <p className="mt-4 text-[12px]" style={{ color: 'rgba(255,255,255,0.35)' }}>
+                <Link to="/contact" className="no-underline underline-offset-2 hover:underline" style={{ color: 'rgba(255,255,255,0.5)' }}>
+                  Privacy Policy
+                </Link>
+              </p>
+            </div>
           </div>
 
           <div className="border-t pt-6 flex items-center justify-between flex-wrap gap-4" style={{ borderColor: 'rgba(255,255,255,0.08)' }}>
@@ -128,7 +150,7 @@ const CTAFooter = () => {
             </span>
             <div className="flex gap-6">
               {[
-                { label: t("Vos Situations critiques", "Your Critical Situations"), href: "#situations-critiques" },
+                { label: t("Vos situations critiques", "Your Critical Situations"), href: "#situations-critiques" },
                 { label: "Insights & Resources", href: "#insights" },
                 { label: "Contact", href: "/contact" },
               ].map((link) => (
