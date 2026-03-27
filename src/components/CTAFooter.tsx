@@ -114,17 +114,30 @@ const CTAFooter = () => {
                   {col.title}
                 </p>
                 <ul className="space-y-2">
-                  {col.links.map((link) => (
+                  {col.links.map((link: any) => (
                     <li key={link.label}>
-                      <Link
-                        to={link.href}
-                        className="text-[12px] no-underline transition-colors"
-                        style={{ color: 'rgba(255,255,255,0.35)' }}
-                        onMouseOver={(e) => (e.currentTarget.style.color = 'rgba(255,255,255,0.8)')}
-                        onMouseOut={(e) => (e.currentTarget.style.color = 'rgba(255,255,255,0.35)')}
-                      >
-                        {link.label}
-                      </Link>
+                      {link.filter ? (
+                        <button
+                          onClick={() => handleSuccessFilter(link.filter)}
+                          className="text-[12px] no-underline transition-colors text-left"
+                          style={{ color: 'rgba(255,255,255,0.35)', background: 'none', border: 'none', padding: 0, cursor: 'pointer' }}
+                          onMouseOver={(e) => (e.currentTarget.style.color = 'rgba(255,255,255,0.8)')}
+                          onMouseOut={(e) => (e.currentTarget.style.color = 'rgba(255,255,255,0.35)')}
+                        >
+                          {link.label}
+                        </button>
+                      ) : (
+                        <Link
+                          to={link.href}
+                          className="text-[12px] no-underline transition-colors"
+                          style={{ color: 'rgba(255,255,255,0.35)' }}
+                          onMouseOver={(e) => (e.currentTarget.style.color = 'rgba(255,255,255,0.8)')}
+                          onMouseOut={(e) => (e.currentTarget.style.color = 'rgba(255,255,255,0.35)')}
+                          onClick={() => window.scrollTo(0, 0)}
+                        >
+                          {link.label}
+                        </Link>
+                      )}
                     </li>
                   ))}
                 </ul>
