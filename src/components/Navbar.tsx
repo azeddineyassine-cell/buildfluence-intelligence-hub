@@ -132,7 +132,7 @@ const Navbar = () => {
                   href={item.href}
                   onClick={(e) => { e.preventDefault(); handleNavClick(item.href); }}
                   className="flex items-center gap-1 text-[12.5px] font-medium transition-colors leading-tight"
-                  style={{ color: '#4A5568', maxWidth: '90px' }}
+                  style={{ color: '#4A5568', maxWidth: item.maxW || '90px' }}
                   onMouseOver={(e) => (e.currentTarget.style.color = '#0D1B2A')}
                   onMouseOut={(e) => (e.currentTarget.style.color = '#4A5568')}
                 >
