@@ -50,14 +50,24 @@ const StrategicIntelligenceLab = () => {
       <div className="rounded-lg border-l-4 px-6 py-5 space-y-4" style={{ borderColor: '#103E8C', background: 'rgba(16,62,140,0.04)' }}>
         <p className="text-sm leading-relaxed text-foreground/85">
           {t(
+            "Dans un monde où l'information est une arme et l'incertitude une constante, la capacité à anticiper les ruptures — avant qu'elles ne deviennent des crises — est devenue le premier avantage compétitif des organisations souveraines. Le Strategic Intelligence Lab est le dispositif que Buildfluence a conçu pour transformer cette capacité en infrastructure permanente.",
+            "In a world where information is a weapon and uncertainty a constant, the ability to anticipate disruptions — before they become crises — has become the primary competitive advantage of sovereign organizations. The Strategic Intelligence Lab is the system Buildfluence has designed to transform this capacity into a permanent infrastructure."
+          )}
+        </p>
+        <p className="text-sm leading-relaxed text-foreground/85">
+          {t(
+            "Nous ne produisons pas de rapports. Nous construisons des écosystèmes de décision : des dispositifs vivants, alimentés en temps réel, capables de capter les signaux faibles, de cartographier les menaces invisibles et de traduire l'intelligence brute en leviers d'action stratégique.",
+            "We don't produce reports. We build decision ecosystems: living systems, fed in real time, capable of capturing weak signals, mapping invisible threats and translating raw intelligence into strategic action levers."
+          )}
+        </p>
+        <p className="text-sm leading-relaxed text-foreground/85">
+          {t(
             "Aujourd'hui, les outils de veille sont accessibles à tous. En revanche, produire une lecture intégrée, capable de renforcer la souveraineté, le positionnement et la capacité d'influence, demeure rare.",
             "Today, monitoring tools are accessible to everyone. However, producing an integrated reading, capable of strengthening sovereignty, positioning and influence capacity, remains rare."
           )}
         </p>
-
         <p className="text-sm leading-relaxed text-foreground/85">
-          {t("Buildfluence ne vend pas seulement un outil ou des prestations de veille. Nous accompagnons nos clients sur plusieurs enjeux majeurs d'attractivité et de compétitivité : ",
-            "Buildfluence doesn't just sell a tool or monitoring services. We support our clients on several major attractiveness and competitiveness challenges: ")}
+          {t("Buildfluence ne vend pas seulement un outil ou des prestations de veille. Nous accompagnons nos clients sur plusieurs enjeux majeurs d'attractivité et de compétitivité : ", "Buildfluence doesn't just sell a tool or monitoring services. We support our clients on several major attractiveness and competitiveness challenges: ")}
           <button onClick={() => scrollToSuccessStories("ecosysteme")} className="underline underline-offset-2 decoration-primary/40 hover:decoration-primary transition-colors text-foreground/90 font-semibold">{t("Écosystème concurrentiel", "Competitive Ecosystem")}</button>
           {", "}
           <button onClick={() => scrollToSuccessStories("communication")} className="underline underline-offset-2 decoration-primary/40 hover:decoration-primary transition-colors text-foreground/90 font-semibold">{t("Stratégie & Ingénierie de communication", "Strategy & Communication Engineering")}</button>
@@ -73,7 +83,7 @@ const StrategicIntelligenceLab = () => {
         </p>
       </div>
 
-      {/* ==== SECTION 1 : STRATEGIC FORESIGHT — fond blanc ==== */}
+      {/* ═══ SECTION 1 : STRATEGIC FORESIGHT — fond blanc ═══ */}
       <div className="rounded-xl px-8 py-8" style={{ background: '#FFFFFF', border: '1px solid #E5E7EB' }}>
         <div className="flex items-center gap-3 mb-6 pb-4" style={{ borderBottom: '2px solid #103E8C' }}>
           <span className="text-xs font-bold uppercase tracking-[0.18em] px-3 py-1 rounded-full" style={{ background: '#103E8C', color: '#FFFFFF' }}>01</span>
@@ -157,7 +167,7 @@ const StrategicIntelligenceLab = () => {
         </div>
       </div>
 
-      {/* ==== SECTION 2 : THREAT INTELLIGENCE — fond bleu très léger ==== */}
+      {/* ═══ SECTION 2 : THREAT INTELLIGENCE — fond bleu très léger ═══ */}
       <div className="rounded-xl px-8 py-8" style={{ background: '#F0F4FB', border: '1px solid #D0DCF0' }}>
         <div className="flex items-center gap-3 mb-6 pb-4" style={{ borderBottom: '2px solid #103E8C' }}>
           <span className="text-xs font-bold uppercase tracking-[0.18em] px-3 py-1 rounded-full" style={{ background: '#103E8C', color: '#FFFFFF' }}>02</span>
@@ -226,7 +236,7 @@ const StrategicIntelligenceLab = () => {
         </div>
       </div>
 
-      {/* ==== SECTION 3 : EXPÉRIMENTATIONS & POCs — fond blanc ==== */}
+      {/* ═══ SECTION 3 : EXPÉRIMENTATIONS & POCs — fond blanc ═══ */}
       <div className="rounded-xl px-8 py-8" style={{ background: '#FFFFFF', border: '1px solid #E5E7EB' }}>
         <div className="flex items-center gap-3 mb-6 pb-4" style={{ borderBottom: '2px solid #103E8C' }}>
           <span className="text-xs font-bold uppercase tracking-[0.18em] px-3 py-1 rounded-full" style={{ background: '#103E8C', color: '#FFFFFF' }}>03</span>
