@@ -57,7 +57,7 @@ const CTAFooter = () => {
       {/* CTA */}
       <section
         ref={ref}
-        className="py-[88px] px-12 text-center"
+        className="py-10 px-12 text-center"
         style={{ background: 'hsl(30 20% 97%)', borderTop: '1px solid hsl(var(--border))' }}
       >
         <motion.div
