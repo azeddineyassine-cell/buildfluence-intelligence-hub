@@ -29,6 +29,7 @@ const StrategicIntelligenceLab = () => {
   }, [location.hash]);
 
   const scrollToSuccessStories = (filter: string) => {
+    // Store filter in sessionStorage so Index page can pick it up
     sessionStorage.setItem("success-stories-filter", filter);
     navigate("/#success-stories");
   };
@@ -46,15 +47,15 @@ const StrategicIntelligenceLab = () => {
       <ConstructionInfluence />
 
       {/* Paragraphes mis en valeur */}
-      <div className="space-y-4">
-        <p className="text-sm leading-relaxed text-foreground/80">
+      <div className="rounded-lg border-l-4 px-6 py-5 space-y-4" style={{ borderColor: '#103E8C', background: 'rgba(16,62,140,0.04)' }}>
+        <p className="text-sm leading-relaxed text-foreground/85">
           {t(
             "Aujourd'hui, les outils de veille sont accessibles à tous. En revanche, produire une lecture intégrée, capable de renforcer la souveraineté, le positionnement et la capacité d'influence, demeure rare.",
             "Today, monitoring tools are accessible to everyone. However, producing an integrated reading, capable of strengthening sovereignty, positioning and influence capacity, remains rare."
           )}
         </p>
 
-        <p className="text-sm leading-relaxed text-foreground/80">
+        <p className="text-sm leading-relaxed text-foreground/85">
           {t("Buildfluence ne vend pas seulement un outil ou des prestations de veille. Nous accompagnons nos clients sur plusieurs enjeux majeurs d'attractivité et de compétitivité : ", "Buildfluence doesn't just sell a tool or monitoring services. We support our clients on several major attractiveness and competitiveness challenges: ")}
           <button onClick={() => scrollToSuccessStories("ecosysteme")} className="underline underline-offset-2 decoration-primary/40 hover:decoration-primary transition-colors text-foreground/90 font-semibold">{t("Écosystème concurrentiel", "Competitive Ecosystem")}</button>
           {", "}
@@ -105,9 +106,11 @@ const StrategicIntelligenceLab = () => {
 
       <SectionBlock title="Stakeholder Intelligence" image={imgStakeholders} imageAlt="Stakeholder Intelligence" reverse>
         <DetailList items={[
-          t("Mapping des stratégies adverses et des réseaux d'influence", "Adverse strategies and influence networks mapping"),
-          t("Cartographie des leaders d'opinion, investisseurs, think tanks, ONG", "Opinion leaders, investors, think tanks, NGO mapping"),
-          t("Analyse des alliances et antagonismes", "Alliance and antagonism analysis"),
+          t("Mapping des stratégies adverses et des réseaux d'influence cachés", "Mapping of adverse strategies and hidden influence networks"),
+          t("Cartographie des leaders d'opinion, investisseurs, think tanks, ONG et relais médiatiques", "Mapping of opinion leaders, investors, think tanks, NGOs and media relays"),
+          t("Analyse des alliances, antagonismes et dynamiques de coalition", "Analysis of alliances, antagonisms and coalition dynamics"),
+          t("Identification des acteurs clés susceptibles de peser sur vos décisions stratégiques", "Identification of key players likely to influence your strategic decisions"),
+          t("Modélisation des scénarios de pression et de contre-influence", "Modeling of pressure and counter-influence scenarios"),
         ]} />
       </SectionBlock>
 
@@ -120,7 +123,10 @@ const StrategicIntelligenceLab = () => {
           t("Cartographie et Matrice dynamique des parties prenantes", "Dynamic stakeholder mapping and matrix"),
           t("Tableau de bord décisionnel", "Decision-making dashboard"),
         ]}
-        result={t("Protection de milliards de dollars de CA.", "Protection of billions of dollars in revenue.")}
+        result={t(
+          "Actions de sensibilisation et de contre-influence auprès des clients et partenaires. Maîtrise des menaces sociétales.",
+          "Awareness and counter-influence actions with clients and partners. Control of societal threats."
+        )}
         image={imgOcpCase}
       />
 
@@ -152,7 +158,10 @@ const StrategicIntelligenceLab = () => {
           t("Identification des sources de désinformation", "Identification of disinformation sources"),
           t("War room de crise", "Crisis war room"),
         ]}
-        result={t("Crise atténuée en 2 semaines.", "Crisis mitigated in 2 weeks.")}
+        result={t(
+          "Crise maîtrisée en 2 semaines. Renforcement de l'image digitale du Ministre. Accompagnement de l'équipe de communication et du Cabinet Ministériel.",
+          "Crisis controlled in 2 weeks. Strengthening of the Minister's digital image. Support for the communication team and Ministerial Cabinet."
+        )}
         image={imgMinistereSante}
       />
 
