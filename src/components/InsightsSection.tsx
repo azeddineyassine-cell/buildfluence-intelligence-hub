@@ -26,8 +26,8 @@ const InsightsSection = () => {
   };
 
   return (
-    <section id="insights" className="relative py-28" ref={ref} style={{ background: '#FFFFFF' }}>
-      <div className="container">
+    <section id="insights" className="relative py-10" ref={ref} style={{ background: '#FFFFFF' }}>
+      <div className="mx-auto max-w-[1600px] px-12">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
