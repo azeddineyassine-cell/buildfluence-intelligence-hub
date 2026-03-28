@@ -21,8 +21,8 @@ const WhySection = () => {
 
 
   return (
-    <section id="pourquoi-buildfluence" className="relative py-28" ref={ref} style={{ background: '#F4F4F4' }}>
-      <div className="container">
+    <section id="pourquoi-buildfluence" className="relative py-10" ref={ref} style={{ background: '#F4F4F4' }}>
+      <div className="mx-auto max-w-[1600px] px-12">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -41,7 +41,7 @@ const WhySection = () => {
           </p>
         </motion.div>
 
-        <div className="mt-16 space-y-3">
+        <div className="mt-8 space-y-3">
           {differentiators.map((d, i) => (
             <motion.div
               key={d.num}

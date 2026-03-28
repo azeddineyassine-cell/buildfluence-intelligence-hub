@@ -28,7 +28,7 @@ const clients = [
 
 const ClientProofStrip = () => {
   return (
-    <div className="overflow-hidden bg-white py-10">
+    <div className="overflow-hidden bg-white py-5">
       <div className="marquee-track flex w-max items-center gap-20">
         {[...clients, ...clients].map((client, i) => (
           <img

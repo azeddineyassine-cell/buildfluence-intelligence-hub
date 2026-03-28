@@ -26,8 +26,8 @@ const InsightsSection = () => {
   };
 
   return (
-    <section id="insights" className="relative py-28" ref={ref} style={{ background: '#FFFFFF' }}>
-      <div className="container">
+    <section id="insights" className="relative py-10" ref={ref} style={{ background: '#FFFFFF' }}>
+      <div className="mx-auto max-w-[1600px] px-12">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -43,7 +43,7 @@ const InsightsSection = () => {
           </p>
         </motion.div>
 
-        <div className="mt-16 grid gap-5 md:grid-cols-3">
+        <div className="mt-8 grid gap-5 md:grid-cols-3">
           {insights.map((item, i) => (
             <motion.button
               key={item.title}

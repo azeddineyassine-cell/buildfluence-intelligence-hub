@@ -9,8 +9,8 @@ const HeroSection = () => {
 
   return (
     <>
-      <section className="pt-20" style={{ background: '#fff' }}>
-        <div className="mx-auto max-w-[1100px] px-12 pb-[72px] pt-[88px]">
+      <section className="pt-16" style={{ background: '#fff' }}>
+        <div className="mx-auto max-w-[1600px] px-12 pb-10 pt-12">
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -46,7 +46,7 @@ const HeroSection = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.65, delay: 0.16 }}
-            className="text-[17px] leading-[1.75] mb-12"
+            className="text-[17px] leading-[1.75] mb-8"
             style={{ color: 'hsl(var(--navy))', maxWidth: '700px', opacity: 0.88 }}
           >
             {t(
@@ -66,7 +66,7 @@ const HeroSection = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.65, delay: 0.22 }}
-            className="flex items-center gap-10 pb-10 mb-10"
+            className="flex items-center gap-10 pb-5 mb-5"
             style={{ borderBottom: '1px solid hsl(var(--border))' }}
           >
             <span className="text-[11px] font-bold uppercase tracking-[0.14em] whitespace-nowrap" style={{ color: 'hsl(var(--muted-foreground))' }}>
