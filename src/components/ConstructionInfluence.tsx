@@ -226,31 +226,6 @@ export default function ConstructionInfluence() {
     <section className="w-full py-16 px-4 bg-white">
       <div className="max-w-5xl mx-auto">
 
-        {/* Action 2: Two intro paragraphs */}
-        <div className="mb-10">
-          <p className="text-sm text-slate-600 leading-relaxed">
-            {t(
-              "L'influence stratégique ne résulte pas de l'accumulation d'informations, mais de la capacité à transformer des",
-              "Strategic influence does not result from the accumulation of information, but from the ability to transform"
-            )}{" "}
-            <span className="font-semibold text-slate-800">
-              {t("données brutes et invisibles", "raw and invisible data")}
-            </span>{" "}
-            {t(
-              "en leviers exploitables dans les rapports de force.",
-              "into exploitable levers in power dynamics."
-            )}
-          </p>
-          <p className="text-sm text-slate-600 leading-relaxed mt-4">
-            {t(
-              "Dans un environnement saturé : Marché, Innovation, Concurrence, Rivalités géopolitiques, l'avantage décisif appartient aux acteurs capables d'",
-              "In a saturated environment: Market, Innovation, Competition, Geopolitical rivalries, the decisive advantage belongs to those capable of"
-            )}
-            <span className="font-semibold text-slate-800">
-              {t("anticiper plutôt que réagir", "anticipating rather than reacting")}
-            </span>.
-          </p>
-        </div>
 
         {/* Action 4: Interactive panel (left) + Orbit diagram (right) side by side */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
