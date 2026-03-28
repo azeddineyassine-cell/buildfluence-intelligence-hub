@@ -43,7 +43,7 @@ const InsightsSection = () => {
           </p>
         </motion.div>
 
-        <div className="mt-16 grid gap-5 md:grid-cols-3">
+        <div className="mt-8 grid gap-5 md:grid-cols-3">
           {insights.map((item, i) => (
             <motion.button
               key={item.title}

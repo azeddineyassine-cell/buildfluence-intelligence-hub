@@ -131,7 +131,7 @@ const TestimonialsSection = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="mb-11"
+          className="mb-6"
         >
           <p
             className="text-[11px] font-bold uppercase tracking-[0.18em] mb-[18px]"

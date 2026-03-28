@@ -41,7 +41,7 @@ const WhySection = () => {
           </p>
         </motion.div>
 
-        <div className="mt-16 space-y-3">
+        <div className="mt-8 space-y-3">
           {differentiators.map((d, i) => (
             <motion.div
               key={d.num}

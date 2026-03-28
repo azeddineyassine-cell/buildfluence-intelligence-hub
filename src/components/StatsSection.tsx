@@ -17,7 +17,7 @@ const StatsSection = () => {
 
   return (
     <div ref={ref} style={{ borderTop: '1px solid hsl(var(--border))', borderBottom: '1px solid hsl(var(--border))' }}>
-      <div className="mx-auto max-w-[1100px] px-12 py-16 grid grid-cols-2 md:grid-cols-5 gap-0">
+      <div className="mx-auto max-w-[1600px] px-12 py-8 grid grid-cols-2 md:grid-cols-5 gap-0">
         {stats.map((stat, i) => (
           <motion.div
             key={stat.num}

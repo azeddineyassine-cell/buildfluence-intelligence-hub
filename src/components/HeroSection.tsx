@@ -46,7 +46,7 @@ const HeroSection = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.65, delay: 0.16 }}
-            className="text-[17px] leading-[1.75] mb-12"
+            className="text-[17px] leading-[1.75] mb-8"
             style={{ color: 'hsl(var(--navy))', maxWidth: '700px', opacity: 0.88 }}
           >
             {t(

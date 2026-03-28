@@ -77,7 +77,7 @@ const SolutionsSection = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-center mb-[52px]"
+          className="text-center mb-8"
         >
           <p className="text-[11px] font-bold uppercase tracking-[0.18em] mb-[18px]" style={{ color: 'hsl(var(--gold))' }}>
             {t("Nos solutions", "Our solutions")}

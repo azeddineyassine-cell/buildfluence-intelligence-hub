@@ -8,8 +8,8 @@ const MissionSection = () => {
   const { t } = useLanguage();
 
   return (
-    <section ref={ref} className="mx-auto max-w-[1100px] px-12 py-[88px]">
-      <div className="grid grid-cols-1 gap-20 md:grid-cols-2 items-start">
+    <section ref={ref} className="mx-auto max-w-[1600px] px-12 py-10">
+      <div className="grid grid-cols-1 gap-14 md:grid-cols-2 items-start">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
