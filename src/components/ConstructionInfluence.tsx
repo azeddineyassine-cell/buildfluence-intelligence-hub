@@ -113,17 +113,6 @@ function getPhases(t: (fr: string, en: string) => string): Phase[] {
   ];
 }
 
-function getStaticItems(t: (fr: string, en: string) => string) {
-  return [
-    t("Captation et surveillance en continu des signaux géopolitiques, économiques, technologiques et concurrentiels", "Continuous capture and monitoring of geopolitical, economic, technological and competitive signals"),
-    t("Analyse et catégorisation des Stakeholders et des enjeux stratégiques", "Analysis and categorization of Stakeholders and strategic issues"),
-    t("Cartographie des risques inhérents, angles morts et dynamique des narratifs", "Mapping of inherent risks, blind spots and narrative dynamics"),
-    t("Identification précoce des dynamiques d'attractivité et de crédibilité", "Early identification of attractiveness and credibility dynamics"),
-    t("Détection des marchés, tendances et opportunités dissimulées", "Detection of markets, trends and hidden opportunities"),
-    t("Actions d'influence visant l'adhésion de l'opinion publique et des décideurs", "Influence actions aimed at gaining public opinion and decision-makers' support"),
-  ];
-}
-
 // ─── SVG Helpers ──────────────────────────────────────────────────────────────
 
 const CX = 170, CY = 170, INNER = 80, OUTER = 147;
@@ -203,11 +192,11 @@ function OrbitDiagram({
         );
       })}
 
-      {/* Center circle */}
+      {/* Center circle — Action 5: Build=#023982, fluence=#fac541 */}
       <circle cx={CX} cy={CY} r={INNER - 2} fill="white" stroke="rgba(0,0,0,0.08)" strokeWidth="0.5" />
-      <text x={CX} y={CY - 10} textAnchor="middle" fontSize="15" fontWeight="500" fill="#0f172a">
-        <tspan fill="#0f172a">Build</tspan>
-        <tspan fill="#0ea5c9">fluence</tspan>
+      <text x={CX} y={CY - 10} textAnchor="middle" fontSize="15" fontWeight="500">
+        <tspan fill="#023982">Build</tspan>
+        <tspan fill="#fac541">fluence</tspan>
       </text>
       <text x={CX} y={CY + 7} textAnchor="middle" fontSize="7.5" fill="#64748b" letterSpacing="0.5">
         Sovereign Decision
@@ -227,7 +216,6 @@ export default function ConstructionInfluence() {
   const [hoveredId, setHoveredId] = useState<string | null>(null);
 
   const phases = getPhases(t);
-  const staticItems = getStaticItems(t);
   const activePhase = phases.find((p) => p.id === activeId) ?? null;
 
   const handleClick = useCallback((id: string) => {
@@ -236,71 +224,40 @@ export default function ConstructionInfluence() {
 
   return (
     <section className="w-full py-16 px-4 bg-white">
-      <div className="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+      <div className="max-w-5xl mx-auto">
 
-        {/* ── LEFT COLUMN ── */}
-        <div className="flex flex-col gap-6">
-          {/* Header */}
-          <div>
-            <p className="text-xs font-semibold tracking-widest uppercase text-slate-400 mb-2">
-              Buildfluence · Strategic Intelligence Lab
-            </p>
-            <h2 className="text-3xl font-bold text-slate-900 leading-tight">
-              {t("Construction factuelle", "Factual construction")}<br />
-              <span className="text-cyan-500">{t("d'influence", "of influence")}</span>
-            </h2>
-          </div>
-
-          {/* Intro */}
-          <p className="text-sm text-slate-500 leading-relaxed">
+        {/* Action 2: Two intro paragraphs */}
+        <div className="mb-10">
+          <p className="text-sm text-slate-600 leading-relaxed">
             {t(
               "L'influence stratégique ne résulte pas de l'accumulation d'informations, mais de la capacité à transformer des",
               "Strategic influence does not result from the accumulation of information, but from the ability to transform"
             )}{" "}
-            <span className="font-medium text-slate-700">
+            <span className="font-semibold text-slate-800">
               {t("données brutes et invisibles", "raw and invisible data")}
             </span>{" "}
             {t(
               "en leviers exploitables dans les rapports de force.",
               "into exploitable levers in power dynamics."
             )}
-            <br /><br />
+          </p>
+          <p className="text-sm text-slate-600 leading-relaxed mt-4">
             {t(
-              "Dans un environnement saturé — Marché, Innovation, Concurrence, Écosystème — l'avantage décisif appartient aux acteurs capables d'",
-              "In a saturated environment — Market, Innovation, Competition, Ecosystem — the decisive advantage belongs to those capable of"
+              "Dans un environnement saturé : Marché, Innovation, Concurrence, Rivalités géopolitiques, l'avantage décisif appartient aux acteurs capables d'",
+              "In a saturated environment: Market, Innovation, Competition, Geopolitical rivalries, the decisive advantage belongs to those capable of"
             )}
-            <span className="font-medium text-slate-700">
+            <span className="font-semibold text-slate-800">
               {t("anticiper plutôt que réagir", "anticipating rather than reacting")}
             </span>.
           </p>
+        </div>
 
-          <div className="h-px bg-slate-100" />
+        {/* Action 4: Interactive panel (left) + Orbit diagram (right) side by side */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
 
-          {/* Static list */}
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-widest text-slate-400 mb-3">
-              {t("Les 6 leviers du processus", "The 6 process levers")}
-            </p>
-            <ol className="flex flex-col gap-2">
-              {staticItems.map((item, i) => (
-                <li key={i} className="flex gap-3 items-start text-xs text-slate-500 leading-relaxed">
-                  <span
-                    className="flex-shrink-0 w-5 h-5 rounded-full flex items-center justify-center text-white font-medium mt-0.5"
-                    style={{ fontSize: "10px", background: "#0ea5c9" }}
-                  >
-                    {i + 1}
-                  </span>
-                  {item}
-                </li>
-              ))}
-            </ol>
-          </div>
-
-          <div className="h-px bg-slate-100" />
-
-          {/* Detail panel */}
+          {/* LEFT — Detail panel */}
           <div
-            className="rounded-xl p-4 transition-all duration-300 min-h-[90px]"
+            className="rounded-xl p-5 transition-all duration-300 min-h-[180px]"
             style={{
               border: activePhase
                 ? `1.5px solid ${activePhase.borderColor}`
@@ -328,29 +285,29 @@ export default function ConstructionInfluence() {
                 </div>
               </>
             ) : (
-              <p className="text-xs text-slate-400 text-center py-2">
+              <p className="text-xs text-slate-400 text-center py-8">
                 {t("Cliquez sur une phase du diagramme pour en savoir plus", "Click on a phase of the diagram to learn more")}
               </p>
             )}
           </div>
-        </div>
 
-        {/* ── RIGHT COLUMN — Orbit ── */}
-        <div className="flex flex-col items-center gap-3">
-          <div className="w-full max-w-sm">
-            <OrbitDiagram
-              phases={phases}
-              activeId={activeId}
-              hoveredId={hoveredId}
-              onClickPhase={handleClick}
-              onHoverPhase={setHoveredId}
-            />
+          {/* RIGHT — Orbit diagram */}
+          <div className="flex flex-col items-center gap-3">
+            <div className="w-full max-w-sm">
+              <OrbitDiagram
+                phases={phases}
+                activeId={activeId}
+                hoveredId={hoveredId}
+                onClickPhase={handleClick}
+                onHoverPhase={setHoveredId}
+              />
+            </div>
+            <p className="text-xs text-slate-400">
+              {t("Cliquez sur chaque phase pour explorer", "Click on each phase to explore")}
+            </p>
           </div>
-          <p className="text-xs text-slate-400">
-            {t("Cliquez sur chaque phase pour explorer", "Click on each phase to explore")}
-          </p>
-        </div>
 
+        </div>
       </div>
     </section>
   );
