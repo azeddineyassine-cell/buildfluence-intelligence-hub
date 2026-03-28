@@ -32,16 +32,8 @@ const DetailPageLayout = ({ title, chapeau, children, ctas, situationContext, pr
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
-      <section className="pb-20 pt-32">
+      <section className="pb-10 pt-24">
         <div className="container">
-          <button
-            onClick={() => navigate(-1)}
-            className="mb-8 inline-flex items-center gap-2 text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
-          >
-            <ArrowLeft className="h-4 w-4" />
-            {t("Retour", "Back")}
-          </button>
-
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -51,16 +43,16 @@ const DetailPageLayout = ({ title, chapeau, children, ctas, situationContext, pr
             <h1 className="font-serif text-3xl font-bold leading-tight sm:text-4xl md:text-5xl">
               {title}
             </h1>
-            <p className="mt-4 text-lg italic text-muted-foreground">
+            <p className="mt-3 text-lg italic text-muted-foreground">
               {chapeau}
             </p>
 
-            <div className="mt-12 space-y-12">
+            <div className="mt-6 space-y-8">
               {children}
             </div>
 
             {ctas && ctas.length > 0 && (
-              <div className="mt-16 flex flex-wrap gap-4">
+              <div className="mt-8 flex flex-wrap gap-4">
                 {ctas.map((cta, i) => (
                   <button
                     key={cta.label}
@@ -74,7 +66,7 @@ const DetailPageLayout = ({ title, chapeau, children, ctas, situationContext, pr
             )}
 
             {(prevSituation || nextSituation) && (
-              <div className="mt-16 flex items-center justify-between">
+              <div className="mt-8 flex items-center justify-between">
                 {prevSituation ? (
                   <Link to={prevSituation.path} onClick={() => window.scrollTo(0, 0)} className="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground transition-colors hover:text-primary">
                     <ArrowLeft className="h-4 w-4" />
@@ -121,9 +113,9 @@ export const DetailList = ({ items }: { items: string[] }) => (
 );
 
 export const SectionBlock = ({ title, children, image, imageAlt, reverse = false }: { title?: string; children: ReactNode; image?: string; imageAlt?: string; reverse?: boolean }) => (
-  <div className={`flex flex-col gap-8 md:flex-row md:items-start ${reverse ? 'md:flex-row-reverse' : ''}`}>
+  <div className={`flex flex-col gap-6 md:flex-row md:items-start ${reverse ? 'md:flex-row-reverse' : ''}`}>
     <div className="flex-1 min-w-0">
-      {title && <h3 className="detail-subtitle text-xl font-bold text-primary mb-4">{title}</h3>}
+      {title && <h3 className="detail-subtitle text-xl font-bold text-primary mb-3">{title}</h3>}
       {children}
     </div>
     {image && (
@@ -137,19 +129,27 @@ export const SectionBlock = ({ title, children, image, imageAlt, reverse = false
 export const CaseStudy = ({ title, context, intervention, result, logo, image, image2 }: { title: string; context: string; intervention: string[]; result: string; logo?: string; image?: string; image2?: string }) => {
   const { t } = useLanguage();
   return (
-  <div className="card-glass p-8">
-    <div>
-      <p className="detail-subtitle text-lg font-bold">{t("Cas client :", "Client case:")}</p>
-      {logo && <img src={logo} alt="" className="mt-3 h-20 w-auto object-contain" />}
-      {!logo && <h3 className="detail-subtitle text-xl font-bold mt-2">{title}</h3>}
+  <div className="card-glass p-6">
+    <div className={`flex flex-col gap-6 ${image ? 'md:flex-row md:items-start' : ''}`}>
+      <div className="flex-1 min-w-0">
+        <div>
+          <p className="detail-subtitle text-lg font-bold">{t("Cas client :", "Client case:")}</p>
+          {logo && <img src={logo} alt="" className="mt-2 h-16 w-auto object-contain" />}
+          {!logo && <h3 className="detail-subtitle text-xl font-bold mt-2">{title}</h3>}
+        </div>
+        <p className="mt-2 text-sm text-muted-foreground">{context}</p>
+        <h4 className="detail-subtitle mt-3 text-xs font-bold uppercase tracking-wider text-primary">Notre intervention</h4>
+        <DetailList items={intervention} />
+        <h4 className="detail-subtitle mt-3 text-xs font-bold uppercase tracking-wider text-primary">Résultat</h4>
+        <p className="mt-1.5 text-sm text-foreground/80">{result}</p>
+      </div>
+      {image && (
+        <div className="flex-1 min-w-0">
+          <img src={image} alt="" className="w-full rounded-sm" />
+          {image2 && <img src={image2} alt="" className="mt-3 w-full rounded-sm" />}
+        </div>
+      )}
     </div>
-    <p className="mt-3 text-sm text-muted-foreground">{context}</p>
-    <h4 className="detail-subtitle mt-4 text-xs font-bold uppercase tracking-wider text-primary">Notre intervention</h4>
-    <DetailList items={intervention} />
-    <h4 className="detail-subtitle mt-4 text-xs font-bold uppercase tracking-wider text-primary">Résultat</h4>
-    <p className="mt-2 text-sm text-foreground/80">{result}</p>
-    {image && <img src={image} alt="" className="mt-6 w-full rounded-sm" />}
-    {image2 && <img src={image2} alt="" className="mt-4 w-full rounded-sm" />}
   </div>
   );
 };
