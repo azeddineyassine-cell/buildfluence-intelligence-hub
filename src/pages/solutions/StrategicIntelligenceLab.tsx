@@ -3,10 +3,9 @@ import DetailPageLayout, { DetailBlock, DetailList, CaseStudy, SectionBlock } fr
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useNavigate, useLocation } from "react-router-dom";
 
+import ConstructionInfluence from "@/components/ConstructionInfluence";
 import ocpLogo from "@/assets/clients/ocp.png";
 import ministereSanteLogo from "@/assets/clients/ministere-sante.jpg";
-import imgWheel from "@/assets/sections/buildfluence-wheel.jpg";
-import imgDataBubbles from "@/assets/sections/buildfluence-data-bubbles.jpg";
 import imgMarketIntel from "@/assets/sections/market-competitive-intelligence.jpg";
 import imgTerritorial from "@/assets/sections/attractivite-territoriale.png";
 import imgInnovation from "@/assets/sections/innovation-mapping-new.jpg";
