@@ -125,8 +125,8 @@ const TestimonialsSection = () => {
   };
 
   return (
-    <section ref={ref} className="py-[88px]" style={{ background: "#F4F4F4" }}>
-      <div className="mx-auto max-w-[1100px] px-6 md:px-12">
+    <section ref={ref} className="py-10" style={{ background: "#F4F4F4" }}>
+      <div className="mx-auto max-w-[1600px] px-6 md:px-12">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
