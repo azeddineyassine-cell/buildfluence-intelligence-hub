@@ -71,8 +71,8 @@ const SolutionsSection = () => {
   const goTo = (route: string) => { navigate(route); window.scrollTo(0, 0); };
 
   return (
-    <section id="nos-solutions" ref={ref} className="py-[88px]">
-      <div className="mx-auto max-w-[1100px] px-12">
+    <section id="nos-solutions" ref={ref} className="py-10">
+      <div className="mx-auto max-w-[1600px] px-12">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
