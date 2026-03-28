@@ -44,8 +44,6 @@ const StrategicIntelligenceLab = () => {
       ctas={[{ label: t("Parler de mon projet", "Discuss my project"), action: "#", formType: "f1" }]}
       situationContext="Strategic Intelligence Lab"
     >
-      <ConstructionInfluence />
-
       {/* Paragraphes mis en valeur */}
       <div className="rounded-lg border-l-4 px-6 py-5 space-y-4" style={{ borderColor: '#103E8C', background: 'rgba(16,62,140,0.04)' }}>
         <p className="text-sm leading-relaxed text-foreground/85">
@@ -82,6 +80,8 @@ const StrategicIntelligenceLab = () => {
           {"."}
         </p>
       </div>
+
+      <ConstructionInfluence />
 
       {/* ═══ SECTION 1 : STRATEGIC FORESIGHT — fond blanc ═══ */}
       <div className="rounded-xl px-8 py-8" style={{ background: '#FFFFFF', border: '1px solid #E5E7EB' }}>
