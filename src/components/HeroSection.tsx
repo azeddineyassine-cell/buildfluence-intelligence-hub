@@ -9,8 +9,8 @@ const HeroSection = () => {
 
   return (
     <>
-      <section className="pt-20" style={{ background: '#fff' }}>
-        <div className="mx-auto max-w-[1100px] px-12 pb-[72px] pt-[88px]">
+      <section className="pt-16" style={{ background: '#fff' }}>
+        <div className="mx-auto max-w-[1600px] px-12 pb-10 pt-12">
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
