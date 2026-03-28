@@ -29,7 +29,6 @@ const StrategicIntelligenceLab = () => {
   }, [location.hash]);
 
   const scrollToSuccessStories = (filter: string) => {
-    // Store filter in sessionStorage so Index page can pick it up
     sessionStorage.setItem("success-stories-filter", filter);
     navigate("/#success-stories");
   };
@@ -46,40 +45,35 @@ const StrategicIntelligenceLab = () => {
     >
       <ConstructionInfluence />
 
-      {/* Correction 3: Text with clickable links to Success Stories */}
-      <DetailBlock title="">
+      {/* Paragraphes mis en valeur */}
+      <div className="space-y-4">
         <p className="text-sm leading-relaxed text-foreground/80">
           {t(
             "Aujourd'hui, les outils de veille sont accessibles à tous. En revanche, produire une lecture intégrée, capable de renforcer la souveraineté, le positionnement et la capacité d'influence, demeure rare.",
             "Today, monitoring tools are accessible to everyone. However, producing an integrated reading, capable of strengthening sovereignty, positioning and influence capacity, remains rare."
           )}
         </p>
-        <p className="mt-4 text-sm leading-relaxed text-foreground/80">
+
+        <p className="text-sm leading-relaxed text-foreground/80">
           {t("Buildfluence ne vend pas seulement un outil ou des prestations de veille. Nous accompagnons nos clients sur plusieurs enjeux majeurs d'attractivité et de compétitivité : ", "Buildfluence doesn't just sell a tool or monitoring services. We support our clients on several major attractiveness and competitiveness challenges: ")}
-          <button onClick={() => scrollToSuccessStories("ecosysteme")} className="underline underline-offset-2 decoration-primary/40 hover:decoration-primary transition-colors text-foreground/90 font-medium">{t("Écosystème concurrentiel", "Competitive Ecosystem")}</button>
+          <button onClick={() => scrollToSuccessStories("ecosysteme")} className="underline underline-offset-2 decoration-primary/40 hover:decoration-primary transition-colors text-foreground/90 font-semibold">{t("Écosystème concurrentiel", "Competitive Ecosystem")}</button>
           {", "}
-          <button onClick={() => scrollToSuccessStories("communication")} className="underline underline-offset-2 decoration-primary/40 hover:decoration-primary transition-colors text-foreground/90 font-medium">{t("Stratégie & Ingénierie de communication", "Strategy & Communication Engineering")}</button>
+          <button onClick={() => scrollToSuccessStories("communication")} className="underline underline-offset-2 decoration-primary/40 hover:decoration-primary transition-colors text-foreground/90 font-semibold">{t("Stratégie & Ingénierie de communication", "Strategy & Communication Engineering")}</button>
           {", "}
-          <button onClick={() => scrollToSuccessStories("influence")} className="underline underline-offset-2 decoration-primary/40 hover:decoration-primary transition-colors text-foreground/90 font-medium">{t("Influence & Soft Power", "Influence & Soft Power")}</button>
+          <button onClick={() => scrollToSuccessStories("influence")} className="underline underline-offset-2 decoration-primary/40 hover:decoration-primary transition-colors text-foreground/90 font-semibold">{t("Influence & Soft Power", "Influence & Soft Power")}</button>
           {", "}
-          <button onClick={() => scrollToSuccessStories("diligence")} className="underline underline-offset-2 decoration-primary/40 hover:decoration-primary transition-colors text-foreground/90 font-medium">{t("Due Diligence & Investissement", "Due Diligence & Investment")}</button>
+          <button onClick={() => scrollToSuccessStories("diligence")} className="underline underline-offset-2 decoration-primary/40 hover:decoration-primary transition-colors text-foreground/90 font-semibold">{t("Due Diligence & Investissement", "Due Diligence & Investment")}</button>
           {", "}
-          <button onClick={() => scrollToSuccessStories("crise")} className="underline underline-offset-2 decoration-primary/40 hover:decoration-primary transition-colors text-foreground/90 font-medium">{t("Gestion de crise", "Crisis Management")}</button>
-          {" "}
-          {t("et", "and")}
-          {" "}
-          <button onClick={() => scrollToSuccessStories("audit")} className="underline underline-offset-2 decoration-primary/40 hover:decoration-primary transition-colors text-foreground/90 font-medium">{t("Benchmark & Études", "Benchmark & Studies")}</button>
+          <button onClick={() => scrollToSuccessStories("crise")} className="underline underline-offset-2 decoration-primary/40 hover:decoration-primary transition-colors text-foreground/90 font-semibold">{t("Gestion de crise", "Crisis Management")}</button>
+          {" "}{t("et", "and")}{" "}
+          <button onClick={() => scrollToSuccessStories("audit")} className="underline underline-offset-2 decoration-primary/40 hover:decoration-primary transition-colors text-foreground/90 font-semibold">{t("Benchmark & Études", "Benchmark & Studies")}</button>
           {"."}
         </p>
-      </DetailBlock>
+      </div>
 
       <h3 id="strategic-foresight" className="detail-subtitle text-2xl font-bold text-primary scroll-mt-24">Strategic Foresight</h3>
 
-      <SectionBlock
-        title="Market & Competitive Intelligence"
-        image={imgMarketIntel}
-        imageAlt="Market & Competitive Intelligence"
-      >
+      <SectionBlock title="Market & Competitive Intelligence" image={imgMarketIntel} imageAlt="Market & Competitive Intelligence">
         <DetailList items={[
           t("Veille multicanale : marchés, concurrents, brevets, réglementaire", "Multi-channel monitoring: markets, competitors, patents, regulatory"),
           t("Mapping concurrentiel dynamique", "Dynamic competitive mapping"),
@@ -90,12 +84,7 @@ const StrategicIntelligenceLab = () => {
         ]} />
       </SectionBlock>
 
-      <SectionBlock
-        title={t("Attractivité & Compétitivité Territoriale", "Territorial Attractiveness & Competitiveness")}
-        image={imgTerritorial}
-        imageAlt="Attractivité & Compétitivité Territoriale"
-        reverse
-      >
+      <SectionBlock title={t("Attractivité & Compétitivité Territoriale", "Territorial Attractiveness & Competitiveness")} image={imgTerritorial} imageAlt="Attractivité & Compétitivité Territoriale" reverse>
         <DetailList items={[
           t("Guerre économique de l'investissement", "Economic investment warfare"),
           t("Benchmark pays/régions concurrentes", "Competing countries/regions benchmark"),
@@ -104,11 +93,7 @@ const StrategicIntelligenceLab = () => {
         ]} />
       </SectionBlock>
 
-      <SectionBlock
-        title="Innovation Mapping"
-        image={imgInnovation}
-        imageAlt="Innovation Mapping"
-      >
+      <SectionBlock title="Innovation Mapping" image={imgInnovation} imageAlt="Innovation Mapping">
         <DetailList items={[
           t("Cartographie des technologies émergentes et startups", "Emerging technologies and startups mapping"),
           t("Écosystèmes d'innovation (Deeptech, AI, biotech)", "Innovation ecosystems (Deeptech, AI, biotech)"),
@@ -118,12 +103,7 @@ const StrategicIntelligenceLab = () => {
         ]} />
       </SectionBlock>
 
-      <SectionBlock
-        title="Stakeholder Intelligence"
-        image={imgStakeholders}
-        imageAlt="Stakeholder Intelligence"
-        reverse
-      >
+      <SectionBlock title="Stakeholder Intelligence" image={imgStakeholders} imageAlt="Stakeholder Intelligence" reverse>
         <DetailList items={[
           t("Mapping des stratégies adverses et des réseaux d'influence", "Adverse strategies and influence networks mapping"),
           t("Cartographie des leaders d'opinion, investisseurs, think tanks, ONG", "Opinion leaders, investors, think tanks, NGO mapping"),
@@ -146,11 +126,7 @@ const StrategicIntelligenceLab = () => {
 
       <h3 id="threat-intelligence" className="detail-subtitle text-2xl font-bold text-primary scroll-mt-24">Threat Intelligence</h3>
 
-      <SectionBlock
-        title="OSINT & Fact-Checking"
-        image={imgOsint}
-        imageAlt="OSINT & Fact-Checking"
-      >
+      <SectionBlock title="OSINT & Fact-Checking" image={imgOsint} imageAlt="OSINT & Fact-Checking">
         <DetailList items={[
           t("Veille ciblée appuyée par l'IA", "AI-supported targeted monitoring"),
           t("Analyse de polarisation narrative", "Narrative polarization analysis"),
