@@ -24,8 +24,8 @@ const SituationsSection = () => {
   const goTo = (route: string) => { navigate(route); window.scrollTo(0, 0); };
 
   return (
-    <section id="situations-critiques" ref={ref} className="py-[88px]" style={{ background: 'hsl(30 20% 97%)' }}>
-      <div className="mx-auto max-w-[1100px] px-12">
+    <section id="situations-critiques" ref={ref} className="py-10" style={{ background: 'hsl(30 20% 97%)' }}>
+      <div className="mx-auto max-w-[1600px] px-12">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
