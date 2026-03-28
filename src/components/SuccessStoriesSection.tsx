@@ -118,7 +118,7 @@ const SuccessStoriesSection = () => {
           </h2>
         </motion.div>
 
-        <div className="flex flex-wrap gap-2 mb-10">
+        <div className="flex flex-wrap gap-2 mb-6">
           {topics.map((tp) => (
             <button
               key={tp.value}
