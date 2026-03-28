@@ -29,7 +29,6 @@ const StrategicIntelligenceLab = () => {
   }, [location.hash]);
 
   const scrollToSuccessStories = (filter: string) => {
-    // Store filter in sessionStorage so Index page can pick it up
     sessionStorage.setItem("success-stories-filter", filter);
     navigate("/#success-stories");
   };
@@ -132,20 +131,41 @@ const StrategicIntelligenceLab = () => {
 
       <h3 id="threat-intelligence" className="detail-subtitle text-2xl font-bold text-primary scroll-mt-24">Threat Intelligence</h3>
 
-      <SectionBlock title="OSINT & Fact-Checking" image={imgOsint} imageAlt="OSINT & Fact-Checking">
+      <SectionBlock title="OSINT & Fact-Checking" image={imgOsint} imageAlt="OSINT & Fact-Checking" reverse>
+        <p className="text-sm leading-relaxed text-foreground/80 mb-4">
+          {t(
+            "Dans un environnement saturé de narratifs concurrents, savoir qui parle, depuis où, avec quels relais et quels objectifs est devenu un avantage décisif. Notre dispositif OSINT transforme les signaux numériques en intelligence opérationnelle.",
+            "In an environment saturated with competing narratives, knowing who speaks, from where, with which relays and what objectives has become a decisive advantage. Our OSINT system transforms digital signals into operational intelligence."
+          )}
+        </p>
         <DetailList items={[
-          t("Veille ciblée appuyée par l'IA", "AI-supported targeted monitoring"),
-          t("Analyse de polarisation narrative", "Narrative polarization analysis"),
-          t("Tracking des sources hostiles", "Hostile source tracking"),
-          t("Stratégie de contre-influence", "Counter-influence strategy"),
+          t("Veille multicanale augmentée par l'IA : presse, réseaux sociaux, dark web, forums spécialisés", "AI-enhanced multi-channel monitoring: press, social networks, dark web, specialized forums"),
+          t("Identification et cartographie des sources hostiles, trolls et comptes coordonnés", "Identification and mapping of hostile sources, trolls and coordinated accounts"),
+          t("Analyse de polarisation narrative et détection des campagnes de désinformation", "Narrative polarization analysis and disinformation campaign detection"),
+          t("Fact-checking en temps réel avec traçabilité des sources primaires", "Real-time fact-checking with primary source traceability"),
+          t("Tracking des influenceurs et relais d'amplification (organique vs coordonné)", "Influencer tracking and amplification relays (organic vs coordinated)"),
+          t("Analyse sémantique et détection des signaux faibles précurseurs de crise", "Semantic analysis and detection of weak signals preceding crises"),
+          t("Stratégie de contre-influence : production de contre-narratifs et plan de réponse", "Counter-influence strategy: counter-narrative production and response plan"),
+          t("Rapports d'intelligence périodiques pour les décideurs", "Periodic intelligence reports for decision-makers"),
         ]} />
       </SectionBlock>
 
       <DetailBlock title={t("Gestion de Crise", "Crisis Management")}>
+        <p className="text-sm leading-relaxed text-foreground/80 mb-4">
+          {t(
+            "Une crise mal gérée peut détruire en 48h ce qui a été construit en 20 ans. Buildfluence intervient en mode War Room pour neutraliser la menace, reprendre le contrôle du récit et protéger l'image de vos dirigeants et de vos institutions.",
+            "A poorly managed crisis can destroy in 48h what was built over 20 years. Buildfluence intervenes in War Room mode to neutralize the threat, regain control of the narrative and protect the image of your leaders and institutions."
+          )}
+        </p>
         <DetailList items={[
-          t("War room — Délai d'activation : 2h", "War room — Activation time: 2h"),
-          t("Fact-checking en temps réel", "Real-time fact-checking"),
-          t("Reconquête réputationnelle accélérée", "Accelerated reputational recovery"),
+          t("Activation War Room en moins de 2h — cellule de crise opérationnelle immédiate", "War Room activation in less than 2h — immediate operational crisis unit"),
+          t("Veille et monitoring en temps réel des flux médiatiques, sociaux et numériques", "Real-time monitoring of media, social and digital flows"),
+          t("Digital Investigation & OSINT — identification des sources hostiles et des relais de désinformation", "Digital Investigation & OSINT — identification of hostile sources and disinformation relays"),
+          t("Fact-checking en continu et production de contre-narratifs crédibles", "Continuous fact-checking and credible counter-narrative production"),
+          t("Stratégie de communication de crise : messages clés, porte-paroles, calendrier de prise de parole", "Crisis communication strategy: key messages, spokespersons, speaking calendar"),
+          t("Accompagnement des équipes dirigeantes et des cabinets sous pression médiatique", "Support for leadership teams and offices under media pressure"),
+          t("Reconquête réputationnelle accélérée post-crise", "Accelerated post-crisis reputational recovery"),
+          t("Rapport de sortie de crise et plan de résilience long terme", "Crisis exit report and long-term resilience plan"),
         ]} />
       </DetailBlock>
 
