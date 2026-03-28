@@ -3,10 +3,9 @@ import DetailPageLayout, { DetailBlock, DetailList, CaseStudy, SectionBlock } fr
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useNavigate, useLocation } from "react-router-dom";
 
+import ConstructionInfluence from "@/components/ConstructionInfluence";
 import ocpLogo from "@/assets/clients/ocp.png";
 import ministereSanteLogo from "@/assets/clients/ministere-sante.jpg";
-import imgWheel from "@/assets/sections/buildfluence-wheel.jpg";
-import imgDataBubbles from "@/assets/sections/buildfluence-data-bubbles.jpg";
 import imgMarketIntel from "@/assets/sections/market-competitive-intelligence.jpg";
 import imgTerritorial from "@/assets/sections/attractivite-territoriale.png";
 import imgInnovation from "@/assets/sections/innovation-mapping-new.jpg";
@@ -45,52 +44,7 @@ const StrategicIntelligenceLab = () => {
       ctas={[{ label: t("Parler de mon projet", "Discuss my project"), action: "#", formType: "f1" }]}
       situationContext="Strategic Intelligence Lab"
     >
-      {/* Correction 2: Intro text + wheel image side by side */}
-      <SectionBlock image={imgWheel} imageAlt="Buildfluence Wheel">
-        <p className="text-sm leading-relaxed text-foreground/80">
-          {t(
-            "L'influence stratégique ne résulte pas de l'accumulation d'informations ou de la cacophonie médiatique, mais de la capacité à transformer des données invisibles et dispersées en leviers exploitables dans les rapports de force.",
-            "Strategic influence does not result from the accumulation of information or media cacophony, but from the ability to transform invisible and dispersed data into exploitable levers in power dynamics."
-          )}
-        </p>
-        <p className="mt-4 text-sm leading-relaxed text-foreground/80">
-          {t(
-            "Dans un environnement complexe, saturé et où la compétition est intense, l'avantage décisif appartient aux acteurs capables d'anticiper plutôt que de réagir.",
-            "In a complex, saturated and intensely competitive environment, the decisive advantage belongs to those capable of anticipating rather than reacting."
-          )}
-        </p>
-      </SectionBlock>
-
-
-      {/* Correction 2: Data bubbles image + 3 pillars */}
-      <SectionBlock image={imgDataBubbles} imageAlt="Data Intelligence" reverse>
-        <p className="text-sm leading-relaxed text-foreground/80 mb-4">
-          {t(
-            "Le processus élaboré par Buildfluence repose sur trois leviers complémentaires :",
-            "The process developed by Buildfluence is based on three complementary levers:"
-          )}
-        </p>
-        <ol className="space-y-3">
-          <li className="flex items-start gap-3 text-sm text-foreground/80">
-            <span className="font-bold text-primary flex-shrink-0">1.</span>
-            <span>{t(
-              "La captation et la corrélation en continue de signaux géopolitiques, économiques, technologiques, concurrentiels, jeux d'influence et dynamiques narratives.",
-              "The continuous capture and correlation of geopolitical, economic, technological, competitive signals, influence games and narrative dynamics."
-            )}</span>
-          </li>
-          <li className="flex items-start gap-3 text-sm text-foreground/80">
-            <span className="font-bold text-primary flex-shrink-0">2.</span>
-            <span>{t(
-              "L'identification précoce des dynamiques susceptibles d'activer l'attractivité et la crédibilité de nos clients.",
-              "The early identification of dynamics likely to activate our clients' attractiveness and credibility."
-            )}</span>
-          </li>
-          <li className="flex items-start gap-3 text-sm text-foreground/80">
-            <span className="font-bold text-primary flex-shrink-0">3.</span>
-            <span>{t("La transformation de l'information.", "The transformation of information.")}</span>
-          </li>
-        </ol>
-      </SectionBlock>
+      <ConstructionInfluence />
 
       {/* Correction 3: Text with clickable links to Success Stories */}
       <DetailBlock title="">
