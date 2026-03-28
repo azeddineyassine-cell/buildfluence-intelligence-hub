@@ -66,7 +66,7 @@ const HeroSection = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.65, delay: 0.22 }}
-            className="flex items-center gap-10 pb-10 mb-10"
+            className="flex items-center gap-10 pb-5 mb-5"
             style={{ borderBottom: '1px solid hsl(var(--border))' }}
           >
             <span className="text-[11px] font-bold uppercase tracking-[0.14em] whitespace-nowrap" style={{ color: 'hsl(var(--muted-foreground))' }}>
