@@ -241,11 +241,11 @@ export default function ConstructionInfluence() {
           >
             {activePhase ? (
               <>
-                <p className="text-xs font-semibold uppercase tracking-widest text-slate-400 mb-1">
+            <p className="text-sm font-semibold uppercase tracking-widest text-slate-400 mb-1">
                   {activePhase.sub}
                 </p>
-                <p className="text-sm font-semibold text-slate-800 mb-2">{activePhase.title}</p>
-                <p className="text-xs text-slate-600 leading-relaxed mb-3">{activePhase.desc}</p>
+                <p className="text-base font-semibold text-slate-800 mb-2">{activePhase.title}</p>
+                <p className="text-sm text-slate-600 leading-relaxed mb-3">{activePhase.desc}</p>
                 <div className="flex flex-wrap gap-1.5">
                   {activePhase.tags.map((tag) => (
                     <span
