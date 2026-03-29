@@ -261,9 +261,9 @@ export default function StrategicOrbitDiagram() {
                       boxShadow: active ? "0 4px 16px rgba(14,165,201,0.15)" : "0 1px 4px rgba(0,0,0,0.05)",
                     }}
                   >
-                  <span style={{ fontSize: "clamp(14px, 3vw, 22px)" }}>{d.icon}</span>
+                  <span style={{ fontSize: "clamp(16px, 3.5vw, 26px)" }}>{d.icon}</span>
                   <span className="font-semibold text-slate-700 text-center leading-tight mt-0.5 px-1"
-                    style={{ fontSize: "clamp(6px, 1.5vw, 10px)" }}>
+                    style={{ fontSize: "clamp(7px, 1.8vw, 12px)" }}>
                     {d.short}
                     </span>
                   </div>
