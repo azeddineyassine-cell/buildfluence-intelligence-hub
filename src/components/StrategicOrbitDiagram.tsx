@@ -210,7 +210,7 @@ export default function StrategicOrbitDiagram() {
               }}
             >
               <span className="text-white font-bold text-center leading-tight"
-                style={{ fontSize: "clamp(8px, 2.2vw, 14px)", letterSpacing: "0.08em" }}>
+                style={{ fontSize: "clamp(10px, 2.8vw, 18px)", letterSpacing: "0.08em" }}>
                 BIG<br />DATA
               </span>
             </button>
