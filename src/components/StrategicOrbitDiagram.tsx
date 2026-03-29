@@ -233,11 +233,11 @@ export default function StrategicOrbitDiagram() {
                   }}
                 >
                 <span className={`font-semibold ${active ? "text-slate-400" : "text-cyan-300/70"}`}
-                  style={{ fontSize: "clamp(7px, 1.6vw, 10px)" }}>
+                  style={{ fontSize: "clamp(8px, 1.8vw, 12px)" }}>
                   {s.num}
                 </span>
                 <span className={`font-semibold text-center leading-tight ${active ? "text-slate-700" : "text-white"}`}
-                  style={{ fontSize: "clamp(7px, 1.7vw, 11px)" }}>
+                  style={{ fontSize: "clamp(8px, 2vw, 13px)" }}>
                   {s.label}
                 </span>
                 </button>
