@@ -143,9 +143,9 @@ export default function StrategicOrbitDiagram() {
         </p>
       </div>
 
-      <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center gap-8">
-        {/* Detail Panel — LEFT */}
-        <div className="w-full md:w-[38%] order-2 md:order-1">
+      <div className="max-w-[1600px] mx-auto flex flex-col md:flex-row items-center gap-6">
+        {/* Detail Panel — LEFT (25%) */}
+        <div className="w-full md:w-[25%] order-2 md:order-1">
           <div className="rounded-2xl overflow-hidden"
             style={{ border: "0.5px solid rgba(0,0,0,0.08)", background: "#f8fafc" }}>
             <div className="flex items-center gap-3 px-5 py-4"
