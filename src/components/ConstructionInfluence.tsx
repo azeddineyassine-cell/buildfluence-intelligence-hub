@@ -223,12 +223,11 @@ export default function ConstructionInfluence() {
   }, []);
 
   return (
-    <section className="w-full py-16 px-4 bg-white">
-      <div className="max-w-5xl mx-auto">
+    <section className="w-full py-6 px-4 bg-white">
+      <div className="max-w-[1600px] mx-auto">
 
-
-        {/* Action 4: Interactive panel (left) + Orbit diagram (right) side by side */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+        {/* Interactive panel (left 30%) + Orbit diagram (right 70%) */}
+        <div className="grid grid-cols-1 lg:grid-cols-[30%_70%] gap-6 items-center">
 
           {/* LEFT — Detail panel */}
           <div
