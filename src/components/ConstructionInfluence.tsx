@@ -180,7 +180,7 @@ function OrbitDiagram({
                 y={ly + (li - (p.label.length - 1) / 2) * 13}
                 textAnchor="middle"
                 dominantBaseline="central"
-                fontSize="10"
+                fontSize="13"
                 fontWeight="500"
                 fill="#1e3a5f"
                 style={{ pointerEvents: "none" }}
