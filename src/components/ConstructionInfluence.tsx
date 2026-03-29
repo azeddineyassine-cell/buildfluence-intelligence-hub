@@ -194,7 +194,7 @@ function OrbitDiagram({
 
       {/* Center circle — Action 5: Build=#023982, fluence=#fac541 */}
       <circle cx={CX} cy={CY} r={INNER - 2} fill="white" stroke="rgba(0,0,0,0.08)" strokeWidth="0.5" />
-      <text x={CX} y={CY - 10} textAnchor="middle" fontSize="15" fontWeight="500">
+      <text x={CX} y={CY - 10} textAnchor="middle" fontSize="18" fontWeight="600">
         <tspan fill="#023982">Build</tspan>
         <tspan fill="#fac541">fluence</tspan>
       </text>
