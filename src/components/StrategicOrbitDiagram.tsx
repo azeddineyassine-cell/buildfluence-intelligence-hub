@@ -176,8 +176,8 @@ export default function StrategicOrbitDiagram() {
           </p>
         </div>
 
-        {/* Orbit — RIGHT */}
-        <div className="w-full md:w-[62%] order-1 md:order-2">
+        {/* Orbit — RIGHT (75%) */}
+        <div className="w-full md:w-[75%] order-1 md:order-2">
           <div className="relative w-full" style={{ aspectRatio: "1 / 1" }}>
             {/* Rings */}
             {[22, 46, 68, 90].map((size, i) => (
