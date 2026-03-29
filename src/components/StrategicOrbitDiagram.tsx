@@ -152,8 +152,8 @@ export default function StrategicOrbitDiagram() {
               style={{ borderBottom: "0.5px solid rgba(0,0,0,0.06)" }}>
               <span className="text-2xl">{panel.icon}</span>
               <div>
-                <p className="font-semibold text-slate-900 text-base">{panel.title}</p>
-                <p className="text-xs text-slate-400 uppercase tracking-wide mt-0.5">{panel.type}</p>
+               <p className="font-semibold text-slate-900 text-lg">{panel.title}</p>
+                <p className="text-sm text-slate-400 uppercase tracking-wide mt-0.5">{panel.type}</p>
               </div>
             </div>
             <div className="px-5 py-4">
