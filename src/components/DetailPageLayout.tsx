@@ -52,7 +52,7 @@ const DetailPageLayout = ({ title, chapeau, children, ctas, situationContext, pr
             </div>
 
             {ctas && ctas.length > 0 && (
-              <div className="mt-8 flex flex-wrap gap-4">
+              <div className="mt-4 flex flex-wrap gap-4">
                 {ctas.map((cta, i) => (
                   <button
                     key={cta.label}
