@@ -180,7 +180,7 @@ function OrbitDiagram({
                 y={ly + (li - (p.label.length - 1) / 2) * 13}
                 textAnchor="middle"
                 dominantBaseline="central"
-                fontSize="10"
+                fontSize="13"
                 fontWeight="500"
                 fill="#1e3a5f"
                 style={{ pointerEvents: "none" }}
@@ -194,14 +194,14 @@ function OrbitDiagram({
 
       {/* Center circle — Action 5: Build=#023982, fluence=#fac541 */}
       <circle cx={CX} cy={CY} r={INNER - 2} fill="white" stroke="rgba(0,0,0,0.08)" strokeWidth="0.5" />
-      <text x={CX} y={CY - 10} textAnchor="middle" fontSize="15" fontWeight="500">
+      <text x={CX} y={CY - 10} textAnchor="middle" fontSize="18" fontWeight="600">
         <tspan fill="#023982">Build</tspan>
         <tspan fill="#fac541">fluence</tspan>
       </text>
-      <text x={CX} y={CY + 7} textAnchor="middle" fontSize="7.5" fill="#64748b" letterSpacing="0.5">
+      <text x={CX} y={CY + 9} textAnchor="middle" fontSize="9" fill="#64748b" letterSpacing="0.5">
         Sovereign Decision
       </text>
-      <text x={CX} y={CY + 18} textAnchor="middle" fontSize="7.5" fill="#64748b" letterSpacing="0.5">
+      <text x={CX} y={CY + 21} textAnchor="middle" fontSize="9" fill="#64748b" letterSpacing="0.5">
         Infrastructure
       </text>
     </svg>
@@ -223,12 +223,11 @@ export default function ConstructionInfluence() {
   }, []);
 
   return (
-    <section className="w-full py-16 px-4 bg-white">
-      <div className="max-w-5xl mx-auto">
+    <section className="w-full py-6 px-4 bg-white">
+      <div className="max-w-[1600px] mx-auto">
 
-
-        {/* Action 4: Interactive panel (left) + Orbit diagram (right) side by side */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+        {/* Interactive panel (left 30%) + Orbit diagram (right 70%) */}
+        <div className="grid grid-cols-1 lg:grid-cols-[30%_70%] gap-6 items-center">
 
           {/* LEFT — Detail panel */}
           <div
@@ -242,11 +241,11 @@ export default function ConstructionInfluence() {
           >
             {activePhase ? (
               <>
-                <p className="text-xs font-semibold uppercase tracking-widest text-slate-400 mb-1">
+            <p className="text-sm font-semibold uppercase tracking-widest text-slate-400 mb-1">
                   {activePhase.sub}
                 </p>
-                <p className="text-sm font-semibold text-slate-800 mb-2">{activePhase.title}</p>
-                <p className="text-xs text-slate-600 leading-relaxed mb-3">{activePhase.desc}</p>
+                <p className="text-base font-semibold text-slate-800 mb-2">{activePhase.title}</p>
+                <p className="text-sm text-slate-600 leading-relaxed mb-3">{activePhase.desc}</p>
                 <div className="flex flex-wrap gap-1.5">
                   {activePhase.tags.map((tag) => (
                     <span
@@ -266,9 +265,9 @@ export default function ConstructionInfluence() {
             )}
           </div>
 
-          {/* RIGHT — Orbit diagram */}
-          <div className="flex flex-col items-center gap-3">
-            <div className="w-full max-w-sm">
+          {/* RIGHT — Orbit diagram (70% width) */}
+          <div className="flex flex-col items-center gap-2">
+            <div className="w-full">
               <OrbitDiagram
                 phases={phases}
                 activeId={activeId}
