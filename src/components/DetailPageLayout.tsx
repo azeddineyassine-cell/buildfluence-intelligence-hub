@@ -32,13 +32,13 @@ const DetailPageLayout = ({ title, chapeau, children, ctas, situationContext, pr
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
-      <section className="pb-10 pt-24">
-        <div className="container">
+      <section className="pb-6 pt-20">
+        <div className="mx-auto max-w-[1600px] px-6 lg:px-12">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            className="mx-auto max-w-4xl"
+          
           >
             <h1 className="font-serif text-3xl font-bold leading-tight sm:text-4xl md:text-5xl">
               {title}
