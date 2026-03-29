@@ -47,28 +47,24 @@ const StrategicIntelligenceLab = () => {
       {/* Paragraphes mis en valeur */}
       <div className="rounded-lg border-l-4 px-6 py-5 space-y-4" style={{ borderColor: '#103E8C', background: 'rgba(16,62,140,0.04)' }}>
         <p className="text-sm leading-relaxed text-foreground/85">
-          {t(
-            "Dans un monde où l'information fiable est une cruciale et l'incertitude une constante, la capacité à anticiper les ruptures, avant qu'elles ne deviennent des crises, est devenue le premier avantage compétitif des organisations souveraines.",
-            "In a world where reliable information is crucial and uncertainty a constant, the ability to anticipate disruptions, before they become crises, has become the primary competitive advantage of sovereign organizations."
-          )}
+          {lang === "fr"
+            ? "Dans un monde où l'information fiable est une cruciale et l'incertitude une constante, la capacité à anticiper les ruptures, avant qu'elles ne deviennent des crises, est devenue le premier avantage compétitif des organisations souveraines."
+            : "In a world where reliable information is crucial and uncertainty a constant, the ability to anticipate disruptions, before they become crises, has become the primary competitive advantage of sovereign organizations."}
         </p>
         <p className="text-sm leading-relaxed text-foreground/85">
-          {t(
-            <>Le Strategic Intelligence Lab est le dispositif que Buildfluence a conçu pour transformer cette capacité en <strong>infrastructure décisionnelle permanente</strong>.</>,
-            <>The Strategic Intelligence Lab is the system Buildfluence has designed to transform this capacity into a <strong>permanent decision-making infrastructure</strong>.</>
-          )}
+          {lang === "fr"
+            ? <>Le Strategic Intelligence Lab est le dispositif que Buildfluence a conçu pour transformer cette capacité en <strong>infrastructure décisionnelle permanente</strong>.</>
+            : <>The Strategic Intelligence Lab is the system Buildfluence has designed to transform this capacity into a <strong>permanent decision-making infrastructure</strong>.</>}
         </p>
         <p className="text-sm leading-relaxed text-foreground/85">
-          {t(
-            <>Nous ne produisons pas de rapports volumineux; <strong>nous construisons des écosystèmes de décision</strong> : Des dispositifs factuels, alimentés en temps réel, capables de capter les signaux faibles, de cartographier les menaces invisibles et de <strong>traduire l'intelligence brute en leviers d'action stratégique</strong>.</>,
-            <>We don't produce bulky reports; <strong>we build decision ecosystems</strong>: Factual systems, fed in real time, capable of capturing weak signals, mapping invisible threats and <strong>translating raw intelligence into strategic action levers</strong>.</>
-          )}
+          {lang === "fr"
+            ? <>Nous ne produisons pas de rapports volumineux; <strong>nous construisons des écosystèmes de décision</strong> : Des dispositifs factuels, alimentés en temps réel, capables de capter les signaux faibles, de cartographier les menaces invisibles et de <strong>traduire l'intelligence brute en leviers d'action stratégique</strong>.</>
+            : <>We don't produce bulky reports; <strong>we build decision ecosystems</strong>: Factual systems, fed in real time, capable of capturing weak signals, mapping invisible threats and <strong>translating raw intelligence into strategic action levers</strong>.</>}
         </p>
         <p className="text-sm leading-relaxed text-foreground/85">
-          {t(
-            <>Aujourd'hui, <strong>les outils de veille sont accessibles à tous</strong>. En revanche, produire une lecture intégrée, un décryptage approfondi et une cartographie multidimensionnelle capables de <strong>renforcer la souveraineté, le positionnement et la capacité d'influence</strong>, demeure rare.</>,
-            <>Today, <strong>monitoring tools are accessible to everyone</strong>. However, producing an integrated reading, in-depth analysis and multidimensional mapping capable of <strong>strengthening sovereignty, positioning and influence capacity</strong>, remains rare.</>
-          )}
+          {lang === "fr"
+            ? <>Aujourd'hui, <strong>les outils de veille sont accessibles à tous</strong>. En revanche, produire une lecture intégrée, un décryptage approfondi et une cartographie multidimensionnelle capables de <strong>renforcer la souveraineté, le positionnement et la capacité d'influence</strong>, demeure rare.</>
+            : <>Today, <strong>monitoring tools are accessible to everyone</strong>. However, producing an integrated reading, in-depth analysis and multidimensional mapping capable of <strong>strengthening sovereignty, positioning and influence capacity</strong>, remains rare.</>}
         </p>
         <p className="text-sm leading-relaxed text-foreground/85">
           {t("Buildfluence ne vend pas seulement un outil ou des prestations de veille. Nous accompagnons nos clients sur plusieurs enjeux majeurs d'attractivité et de compétitivité : ", "Buildfluence doesn't just sell a tool or monitoring services. We support our clients on several major attractiveness and competitiveness challenges: ")}
