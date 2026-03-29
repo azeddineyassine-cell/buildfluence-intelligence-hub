@@ -93,29 +93,6 @@
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Playfair Display', serif;
   }
-
-  /* Global density: reduce all section spacing */
-  section {
-    padding-top: 1.5rem !important;
-    padding-bottom: 1.5rem !important;
-  }
-
-  h1 {
-    margin-bottom: 0.25rem;
-  }
-
-  h2 {
-    margin-bottom: 0.25rem;
-  }
-
-  h1 + p, h2 + p, h3 + p {
-    margin-top: 0.25rem;
-  }
-
-  /* Global container width enforcement */
-  .container, [class*="max-w-"] {
-    max-width: 1600px !important;
-  }
 }
 
 @layer utilities {

@@ -130,9 +130,9 @@ export default function StrategicOrbitDiagram() {
   });
 
   return (
-    <section className="w-full py-6 px-4 bg-white">
+    <section className="w-full py-20 px-4 bg-white">
       {/* Header */}
-      <div className="max-w-[1600px] mx-auto text-center mb-6">
+      <div className="max-w-4xl mx-auto text-center mb-14">
         <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-slate-900 leading-tight mb-4">
           {t("L'intelligence qui transforme la donnée brute en", "The intelligence that transforms raw data into")}{" "}
           <span style={{ color: "#D0A030" }}>{t("décision souveraine", "sovereign decision")}</span>
@@ -143,21 +143,21 @@ export default function StrategicOrbitDiagram() {
         </p>
       </div>
 
-      <div className="max-w-[1600px] mx-auto flex flex-col md:flex-row items-center gap-6">
-        {/* Detail Panel — LEFT (25%) */}
-        <div className="w-full md:w-[25%] order-2 md:order-1">
+      <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center gap-8">
+        {/* Detail Panel — LEFT */}
+        <div className="w-full md:w-[38%] order-2 md:order-1">
           <div className="rounded-2xl overflow-hidden"
             style={{ border: "0.5px solid rgba(0,0,0,0.08)", background: "#f8fafc" }}>
             <div className="flex items-center gap-3 px-5 py-4"
               style={{ borderBottom: "0.5px solid rgba(0,0,0,0.06)" }}>
               <span className="text-2xl">{panel.icon}</span>
               <div>
-               <p className="font-semibold text-slate-900 text-lg">{panel.title}</p>
-                <p className="text-sm text-slate-400 uppercase tracking-wide mt-0.5">{panel.type}</p>
+                <p className="font-semibold text-slate-900 text-base">{panel.title}</p>
+                <p className="text-xs text-slate-400 uppercase tracking-wide mt-0.5">{panel.type}</p>
               </div>
             </div>
             <div className="px-5 py-4">
-              <p className="text-base text-slate-600 leading-relaxed mb-4">{panel.desc}</p>
+              <p className="text-sm text-slate-600 leading-relaxed mb-4">{panel.desc}</p>
               <div className="flex flex-wrap gap-2">
                 {panel.tags.map((tag, i) => (
                   <span key={tag} className="text-xs font-medium px-3 py-1 rounded-full"
@@ -176,8 +176,8 @@ export default function StrategicOrbitDiagram() {
           </p>
         </div>
 
-        {/* Orbit — RIGHT (75%) */}
-        <div className="w-full md:w-[75%] order-1 md:order-2">
+        {/* Orbit — RIGHT */}
+        <div className="w-full md:w-[62%] order-1 md:order-2">
           <div className="relative w-full" style={{ aspectRatio: "1 / 1" }}>
             {/* Rings */}
             {[22, 46, 68, 90].map((size, i) => (
@@ -210,7 +210,7 @@ export default function StrategicOrbitDiagram() {
               }}
             >
               <span className="text-white font-bold text-center leading-tight"
-                style={{ fontSize: "clamp(10px, 2.8vw, 18px)", letterSpacing: "0.08em" }}>
+                style={{ fontSize: "clamp(8px, 2.2vw, 14px)", letterSpacing: "0.08em" }}>
                 BIG<br />DATA
               </span>
             </button>
@@ -233,11 +233,11 @@ export default function StrategicOrbitDiagram() {
                   }}
                 >
                 <span className={`font-semibold ${active ? "text-slate-400" : "text-cyan-300/70"}`}
-                  style={{ fontSize: "clamp(8px, 1.8vw, 12px)" }}>
+                  style={{ fontSize: "clamp(7px, 1.6vw, 10px)" }}>
                   {s.num}
                 </span>
                 <span className={`font-semibold text-center leading-tight ${active ? "text-slate-700" : "text-white"}`}
-                  style={{ fontSize: "clamp(8px, 2vw, 13px)" }}>
+                  style={{ fontSize: "clamp(7px, 1.7vw, 11px)" }}>
                   {s.label}
                 </span>
                 </button>
@@ -261,9 +261,9 @@ export default function StrategicOrbitDiagram() {
                       boxShadow: active ? "0 4px 16px rgba(14,165,201,0.15)" : "0 1px 4px rgba(0,0,0,0.05)",
                     }}
                   >
-                  <span style={{ fontSize: "clamp(16px, 3.5vw, 26px)" }}>{d.icon}</span>
+                  <span style={{ fontSize: "clamp(14px, 3vw, 22px)" }}>{d.icon}</span>
                   <span className="font-semibold text-slate-700 text-center leading-tight mt-0.5 px-1"
-                    style={{ fontSize: "clamp(7px, 1.8vw, 12px)" }}>
+                    style={{ fontSize: "clamp(6px, 1.5vw, 10px)" }}>
                     {d.short}
                     </span>
                   </div>
