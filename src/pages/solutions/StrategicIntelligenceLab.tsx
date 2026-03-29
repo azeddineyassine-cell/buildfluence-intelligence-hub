@@ -15,7 +15,7 @@ import imgOsint from "@/assets/sections/osint-fact-checking.jpg";
 import imgMinistereSante from "@/assets/sections/cas-client-ministere-sante.png";
 
 const StrategicIntelligenceLab = () => {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const navigate = useNavigate();
   const location = useLocation();
 
