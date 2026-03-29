@@ -47,7 +47,7 @@ const DetailPageLayout = ({ title, chapeau, children, ctas, situationContext, pr
               {chapeau}
             </p>
 
-            <div className="mt-6 space-y-8">
+            <div className="mt-3 space-y-4">
               {children}
             </div>
 
