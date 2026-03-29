@@ -265,9 +265,9 @@ export default function ConstructionInfluence() {
             )}
           </div>
 
-          {/* RIGHT — Orbit diagram */}
-          <div className="flex flex-col items-center gap-3">
-            <div className="w-full max-w-sm">
+          {/* RIGHT — Orbit diagram (70% width) */}
+          <div className="flex flex-col items-center gap-2">
+            <div className="w-full">
               <OrbitDiagram
                 phases={phases}
                 activeId={activeId}
