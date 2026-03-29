@@ -198,10 +198,10 @@ function OrbitDiagram({
         <tspan fill="#023982">Build</tspan>
         <tspan fill="#fac541">fluence</tspan>
       </text>
-      <text x={CX} y={CY + 7} textAnchor="middle" fontSize="7.5" fill="#64748b" letterSpacing="0.5">
+      <text x={CX} y={CY + 9} textAnchor="middle" fontSize="9" fill="#64748b" letterSpacing="0.5">
         Sovereign Decision
       </text>
-      <text x={CX} y={CY + 18} textAnchor="middle" fontSize="7.5" fill="#64748b" letterSpacing="0.5">
+      <text x={CX} y={CY + 21} textAnchor="middle" fontSize="9" fill="#64748b" letterSpacing="0.5">
         Infrastructure
       </text>
     </svg>

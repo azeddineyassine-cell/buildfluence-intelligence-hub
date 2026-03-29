@@ -66,7 +66,7 @@ const DetailPageLayout = ({ title, chapeau, children, ctas, situationContext, pr
             )}
 
             {(prevSituation || nextSituation) && (
-              <div className="mt-8 flex items-center justify-between">
+              <div className="mt-4 flex items-center justify-between">
                 {prevSituation ? (
                   <Link to={prevSituation.path} onClick={() => window.scrollTo(0, 0)} className="inline-flex items-center gap-2 text-sm font-medium text-muted-foreground transition-colors hover:text-primary">
                     <ArrowLeft className="h-4 w-4" />

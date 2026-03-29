@@ -157,7 +157,7 @@ export default function StrategicOrbitDiagram() {
               </div>
             </div>
             <div className="px-5 py-4">
-              <p className="text-sm text-slate-600 leading-relaxed mb-4">{panel.desc}</p>
+              <p className="text-base text-slate-600 leading-relaxed mb-4">{panel.desc}</p>
               <div className="flex flex-wrap gap-2">
                 {panel.tags.map((tag, i) => (
                   <span key={tag} className="text-xs font-medium px-3 py-1 rounded-full"
