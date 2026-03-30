@@ -232,7 +232,8 @@ const StrategicIntelligenceLab = () => {
               "Crise maîtrisée en 2 semaines. Renforcement de l'image digitale du Ministre. Accompagnement de l'équipe de communication et du Cabinet Ministériel.",
               "Crisis controlled in 2 weeks. Strengthening of the Minister's digital image. Support for the communication team and Ministerial Cabinet."
             )}
-            image={imgMinistereSante}
+            image={imgH1n1}
+            image2={imgMinistereSante}
           />
         </div>
       </div>
