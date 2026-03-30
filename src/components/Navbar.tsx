@@ -86,6 +86,11 @@ const Navbar = () => {
     setActiveDropdown(null);
     if (location.pathname !== "/") {
       navigate("/" + href);
+      // After navigation, scroll to the section
+      setTimeout(() => {
+        const el = document.querySelector(href);
+        el?.scrollIntoView({ behavior: "smooth" });
+      }, 400);
     } else {
       const el = document.querySelector(href);
       el?.scrollIntoView({ behavior: "smooth" });
