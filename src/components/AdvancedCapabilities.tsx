@@ -20,7 +20,7 @@ const AdvancedCapabilities = () => {
   const goTo = (route: string) => { navigate(route); window.scrollTo(0, 0); };
 
   return (
-    <section id="strategic-innovation" className="relative py-28" ref={ref} style={{ background: '#0D1B2A' }}>
+    <section id="strategic-innovation" className="relative py-14" ref={ref} style={{ background: '#0D1B2A' }}>
       <div className="container">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -29,10 +29,10 @@ const AdvancedCapabilities = () => {
           className="mx-auto max-w-3xl text-center"
         >
           <span className="label-accent">Strategic Innovation</span>
-          <h2 className="mt-4 font-serif text-3xl font-bold leading-tight sm:text-4xl md:text-5xl" style={{ color: '#F0EDE6' }}>
+          <h2 className="mt-2 font-serif text-3xl font-bold leading-tight sm:text-4xl md:text-5xl" style={{ color: '#F0EDE6' }}>
             {t("De la donnée à la suprématie décisionnelle.", "From data to decision-making supremacy.")}
           </h2>
-          <p className="mt-4 text-lg" style={{ color: '#8A8F9E' }}>
+          <p className="mt-2 text-lg" style={{ color: '#8A8F9E' }}>
             {t("Prenez de l'avance sur vos concurrents", "Stay ahead of your competitors")}
           </p>
         </motion.div>
