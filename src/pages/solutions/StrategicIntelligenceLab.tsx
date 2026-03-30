@@ -200,7 +200,7 @@ const StrategicIntelligenceLab = () => {
             ]} />
           </SectionBlock>
 
-          <DetailBlock title={t("Gestion de Crise", "Crisis Management")}>
+          <DetailBlock title={t("Gestion de Crise", "Crisis Management")} className="[&_.detail-subtitle]:text-primary [&_.detail-subtitle]:text-xl [&_.detail-subtitle]:font-bold">
             <p className="text-sm leading-relaxed text-foreground/80 mb-4">
               {t(
                 "Une crise mal gérée peut détruire en 48h ce qui a été construit en 20 ans. Buildfluence intervient en mode War Room pour neutraliser la menace, reprendre le contrôle du récit et protéger l'image de vos dirigeants et de vos institutions.",
