@@ -161,7 +161,9 @@ const StrategicIntelligenceLab = () => {
               "Actions de sensibilisation et de contre-influence auprès des clients et partenaires. Maîtrise des menaces sociétales.",
               "Awareness and counter-influence actions with clients and partners. Control of societal threats."
             )}
-            image={imgOcpCase}
+            image={imgOcpProtesters}
+            imageCaption={t("Agitation des idiots utiles manipulés par les ONG de l'Europe du Nord", "Agitation of useful idiots manipulated by Northern European NGOs")}
+            image2={imgOcpCase}
           />
         </div>
       </div>
