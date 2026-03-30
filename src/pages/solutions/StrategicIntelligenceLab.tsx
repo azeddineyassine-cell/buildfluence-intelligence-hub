@@ -244,15 +244,27 @@ const StrategicIntelligenceLab = () => {
           <span className="text-xs font-bold uppercase tracking-[0.18em] px-3 py-1 rounded-full" style={{ background: '#103E8C', color: '#FFFFFF' }}>03</span>
           <h3 id="experimentations-pocs" className="text-xl font-bold scroll-mt-24" style={{ color: '#103E8C' }}>{t("Expérimentations & POCs", "Experiments & POCs")}</h3>
         </div>
+        <p className="text-sm leading-relaxed text-foreground/80 mb-4">
+          {t(
+            "Avant de déployer une infrastructure décisionnelle complète, Buildfluence propose des phases d'expérimentation ciblées. En 1 semaine, nous prouvons la valeur de nos outils sur vos données réelles, avec des livrables concrets et mesurables.",
+            "Before deploying a complete decision-making infrastructure, Buildfluence offers targeted experimentation phases. In 1 week, we prove the value of our tools on your real data, with concrete and measurable deliverables."
+          )}
+        </p>
         <DetailList items={[
           t("Intégration de vos enjeux stratégiques", "Integration of your strategic challenges"),
-          t("Modèles d'analyse prédictive", "Predictive analysis models"),
-          t("Plateformes de détection de signaux faibles", "Weak signal detection platforms"),
-          t("Livrable POC : 1 semaine", "POC deliverable: 1 week"),
-          t("Baromètres d'image", "Image barometers"),
-          t("Tableaux de bord décisionnels", "Decision-making dashboards"),
-          "Strategic Business Reviews",
+          t("Audit de maturité décisionnelle (diagnostic initial)", "Decision maturity audit (initial diagnosis)"),
+          t("Modèles d'analyse prédictive sur données client", "Predictive analysis models on client data"),
+          t("Plateformes de détection de signaux faibles (POC live)", "Weak signal detection platforms (live POC)"),
+          t("Baromètres d'image et de réputation en temps réel", "Real-time image and reputation barometers"),
+          t("Tableaux de bord décisionnels interactifs", "Interactive decision-making dashboards"),
+          t("Strategic Business Reviews avec recommandations actionnables", "Strategic Business Reviews with actionable recommendations"),
+          t("Livrable garanti en 1 semaine", "Deliverable guaranteed in 1 week"),
         ]} />
+        <div className="mt-6 rounded-lg p-4 text-center" style={{ background: 'rgba(16,62,140,0.06)', borderLeft: '4px solid #103E8C' }}>
+          <p className="text-sm font-semibold italic text-foreground/85">
+            {t("« Un POC Buildfluence, c'est la preuve par l'action. Zéro théorie, 100% opérationnel. »", "\"A Buildfluence POC is proof by action. Zero theory, 100% operational.\"")}
+          </p>
+        </div>
       </div>
     </DetailPageLayout>
   );
