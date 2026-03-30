@@ -13,6 +13,8 @@ import imgStakeholders from "@/assets/sections/stakeholders-intelligence.jpg";
 import imgOcpCase from "@/assets/sections/cas-client-ocp.png";
 import imgOsint from "@/assets/sections/osint-fact-checking.jpg";
 import imgMinistereSante from "@/assets/sections/cas-client-ministere-sante.png";
+import imgH1n1 from "@/assets/sections/h1n1-vaccines.jpg";
+import imgOcpProtesters from "@/assets/sections/ocp-protesters.jpg";
 
 const StrategicIntelligenceLab = () => {
   const { t, lang } = useLanguage();
