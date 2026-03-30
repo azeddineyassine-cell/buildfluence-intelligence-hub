@@ -48,11 +48,6 @@ const StrategicIntelligenceLab = () => {
       <div className="rounded-lg border-l-4 px-6 py-5 space-y-4" style={{ borderColor: '#103E8C', background: 'rgba(16,62,140,0.04)' }}>
         <p className="text-sm leading-relaxed text-foreground/85">
           {lang === "fr"
-            ? "Dans un monde où l'information fiable est une cruciale et l'incertitude une constante, la capacité à anticiper les ruptures, avant qu'elles ne deviennent des crises, est devenue le premier avantage compétitif des organisations souveraines."
-            : "In a world where reliable information is crucial and uncertainty a constant, the ability to anticipate disruptions, before they become crises, has become the primary competitive advantage of sovereign organizations."}
-        </p>
-        <p className="text-sm leading-relaxed text-foreground/85">
-          {lang === "fr"
             ? <>Le Strategic Intelligence Lab est le dispositif que Buildfluence a conçu pour transformer cette capacité en <strong>infrastructure décisionnelle permanente</strong>.</>
             : <>The Strategic Intelligence Lab is the system Buildfluence has designed to transform this capacity into a <strong>permanent decision-making infrastructure</strong>.</>}
         </p>
