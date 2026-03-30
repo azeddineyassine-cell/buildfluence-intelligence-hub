@@ -223,12 +223,11 @@ export default function ConstructionInfluence() {
   }, []);
 
   return (
-    <section className="w-full py-16 px-4 bg-white">
+    <section className="w-full py-6 px-4 bg-white">
       <div className="max-w-5xl mx-auto">
 
-
-        {/* Action 4: Interactive panel (left) + Orbit diagram (right) side by side */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+        {/* Interactive panel (left) + Orbit diagram (right) side by side */}
+        <div className="grid grid-cols-1 lg:grid-cols-[30%_70%] gap-6 items-center">
 
           {/* LEFT — Detail panel */}
           <div
@@ -260,15 +259,18 @@ export default function ConstructionInfluence() {
                 </div>
               </>
             ) : (
-              <p className="text-xs text-slate-400 text-center py-8">
-                {t("Cliquez sur une phase du diagramme pour en savoir plus", "Click on a phase of the diagram to learn more")}
+              <p className="text-[13px] italic font-medium text-slate-600 leading-relaxed py-4">
+                {t(
+                  "Disposez de la capacité à anticiper les ruptures, avant qu'elles ne deviennent des crises — c'est devenu le premier avantage compétitif des organisations souveraines.",
+                  "Have the ability to anticipate disruptions, before they become crises — this has become the primary competitive advantage of sovereign organizations."
+                )}
               </p>
             )}
           </div>
 
-          {/* RIGHT — Orbit diagram */}
-          <div className="flex flex-col items-center gap-3">
-            <div className="w-full max-w-sm">
+          {/* RIGHT — Orbit diagram (enlarged ~+15-20%) */}
+          <div className="flex flex-col items-center gap-2">
+            <div className="w-full max-w-md">
               <OrbitDiagram
                 phases={phases}
                 activeId={activeId}

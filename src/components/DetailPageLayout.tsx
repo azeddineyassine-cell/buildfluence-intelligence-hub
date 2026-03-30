@@ -126,7 +126,7 @@ export const SectionBlock = ({ title, children, image, imageAlt, reverse = false
   </div>
 );
 
-export const CaseStudy = ({ title, context, intervention, result, logo, image, image2 }: { title: string; context: string; intervention: string[]; result: string; logo?: string; image?: string; image2?: string }) => {
+export const CaseStudy = ({ title, context, intervention, result, resultNode, logo, image, image2, imageCaption, image2Caption }: { title: string; context: string; intervention: string[]; result?: string; resultNode?: ReactNode; logo?: string; image?: string; image2?: string; imageCaption?: string; image2Caption?: string }) => {
   const { t } = useLanguage();
   return (
   <div className="card-glass p-6">
@@ -138,15 +138,23 @@ export const CaseStudy = ({ title, context, intervention, result, logo, image, i
           {!logo && <h3 className="detail-subtitle text-xl font-bold mt-2">{title}</h3>}
         </div>
         <p className="mt-2 text-sm text-muted-foreground">{context}</p>
-        <h4 className="detail-subtitle mt-3 text-xs font-bold uppercase tracking-wider text-primary">Notre intervention</h4>
+        <h4 className="detail-subtitle mt-3 text-xs font-bold uppercase tracking-wider text-primary">{t("Notre intervention", "Our intervention")}</h4>
         <DetailList items={intervention} />
-        <h4 className="detail-subtitle mt-3 text-xs font-bold uppercase tracking-wider text-primary">Résultat</h4>
-        <p className="mt-1.5 text-sm text-foreground/80">{result}</p>
+        <h4 className="detail-subtitle mt-3 text-xs font-bold uppercase tracking-wider" style={{ color: '#C0392B' }}>RÉSULTAT</h4>
+        {resultNode ? (
+          <div className="mt-2 rounded-lg p-4" style={{ background: 'rgba(16,62,140,0.06)', borderLeft: '4px solid #103E8C' }}>
+            {resultNode}
+          </div>
+        ) : (
+          <p className="mt-1.5 text-sm text-foreground/80">{result}</p>
+        )}
       </div>
       {image && (
         <div className="flex-1 min-w-0">
           <img src={image} alt="" className="w-full rounded-sm" />
+          {imageCaption && <p className="mt-1 text-xs italic text-muted-foreground">{imageCaption}</p>}
           {image2 && <img src={image2} alt="" className="mt-3 w-full rounded-sm" />}
+          {image2Caption && <p className="mt-1 text-xs italic text-muted-foreground">{image2Caption}</p>}
         </div>
       )}
     </div>

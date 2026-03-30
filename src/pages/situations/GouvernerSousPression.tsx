@@ -57,7 +57,22 @@ const GouvernerSousPression = () => {
           t("Mise en place d'un pilotage décisionnel assisté", "Implementation of assisted decision-making steering"),
           t("Appui au pilotage décisionnel par la création d'une cellule stratégique interne dédiée", "Support for decision-making steering through the creation of a dedicated internal strategic unit"),
         ]}
-        result={t("Professionnalisation de la veille stratégique. Cycles de décision significativement réduits. Silos d'information éliminés. Vision consolidée pour la direction. Culture d'intelligence stratégique installée. Positionnement pionnier dans le sport professionnel marocain.", "Professionalization of strategic monitoring. Decision cycles significantly reduced. Information silos eliminated. Consolidated vision for management. Strategic intelligence culture installed. Pioneer positioning in Moroccan professional sports.")}
+        resultNode={
+          <ul className="space-y-2">
+            {[
+              t("Installation d'une cellule de veille stratégique dédiée", "Installation of a dedicated strategic monitoring unit"),
+              t("Accompagnement en culture d'intelligence économique", "Support in economic intelligence culture"),
+              t("Cycles de décision significativement réduits", "Decision cycles significantly reduced"),
+              t("Silos d'information éliminés", "Information silos eliminated"),
+              t("Positionnement pionnier dans le sport professionnel marocain", "Pioneer positioning in Moroccan professional sports"),
+            ].map((item) => (
+              <li key={item} className="flex items-start gap-2 text-[15px] text-foreground/90 font-medium">
+                <span style={{ color: '#103E8C' }}>✓</span>
+                {item}
+              </li>
+            ))}
+          </ul>
+        }
       />
       <div className="rounded-sm border border-primary/20 bg-primary/5 p-6 text-center">
         <p className="font-serif text-lg italic text-foreground/80">

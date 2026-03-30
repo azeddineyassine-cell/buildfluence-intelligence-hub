@@ -5,6 +5,7 @@ import MissionSection from "@/components/MissionSection";
 import StatsSection from "@/components/StatsSection";
 import SituationsSection from "@/components/SituationsSection";
 import SolutionsSection from "@/components/SolutionsSection";
+import AdvancedCapabilities from "@/components/AdvancedCapabilities";
 import SuccessStoriesSection from "@/components/SuccessStoriesSection";
 import InsightsSection from "@/components/InsightsSection";
 import WhySection from "@/components/WhySection";
@@ -21,6 +22,7 @@ const Index = () => (
     <StatsSection />
     <SituationsSection />
     <SolutionsSection />
+    <AdvancedCapabilities />
     <SuccessStoriesSection />
     <TestimonialsSection />
     <InsightsSection />
