@@ -1,11 +1,11 @@
 import { motion, useInView } from "framer-motion";
 import { useRef, useState } from "react";
-import { Cpu, Target, BarChart3, Layers, Award, Lock } from "lucide-react";
+import { Cpu, Target, BarChart3, Layers, Award, Lock, Brain, Users, ClipboardCheck, FileCheck, CircleDot, LayoutDashboard, CheckCircle2, Globe, AlertTriangle, Radio, Theater } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const WhySection = () => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 0.1 });
+  const isInView = useInView(ref, { once: true, amount: 0.05 });
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const { t } = useLanguage();
 
@@ -17,10 +17,6 @@ const WhySection = () => {
         "Intelligence artificielle et expertise humaine fusionnées pour une lucidité décisionnelle inégalée.",
         "Artificial intelligence and human expertise fused for unmatched decision-making clarity."
       ),
-      detail: t(
-        "Technologies IA : OSINT premium · NLP · Études prédictives propriétaires · Plateformes IA sur-mesure\nExpertise humaine : Analystes géopolitiques · Stratèges d'influence · Fact-checkers · Experts sectoriels\nRésultat : Une lucidité décisionnelle que ni la tech seule, ni les humains seuls, ne peuvent produire.",
-        "AI Technologies: Premium OSINT · NLP · Proprietary predictive studies · Custom AI platforms\nHuman Expertise: Geopolitical analysts · Influence strategists · Fact-checkers · Sector experts\nResult: A decision-making clarity that neither technology alone, nor humans alone, can produce."
-      ),
     },
     {
       icon: Target,
@@ -28,10 +24,6 @@ const WhySection = () => {
       content: t(
         "Nous ne vendons pas de la veille. Nous vendons de la lucidité décisionnelle actionnable.",
         "We don't sell monitoring. We sell actionable decision-making clarity."
-      ),
-      detail: t(
-        "Synthèses actionnables · Scoring Go/No-Go · Dashboards interactifs · Recommandations concrètes. Chaque analyse produit des décisions, pas des rapports.",
-        "Actionable summaries · Go/No-Go scoring · Interactive dashboards · Concrete recommendations. Every analysis produces decisions, not reports."
       ),
     },
     {
@@ -41,10 +33,6 @@ const WhySection = () => {
         "Mois d'avance vs concurrents · Deals protégés · Risques détectés · Capital réputationnel renforcé.",
         "Months ahead vs competitors · Deals protected · Risks detected · Reputational capital strengthened."
       ),
-      detail: t(
-        "400M$ sécurisés en Due Diligence · 180M MAD générés via influence publique · +14% PDM après crise · Crise sanitaire nationale atténuée en 2 semaines.",
-        "$400M secured in Due Diligence · 180M MAD generated via public influence · +14% market share after crisis · National health crisis mitigated in 2 weeks."
-      ),
     },
     {
       icon: Layers,
@@ -52,10 +40,6 @@ const WhySection = () => {
       content: t(
         "Données économiques + Contexte géopolitique + Risques réputationnels + Dynamiques narratives = Lucidité totale.",
         "Economic data + Geopolitical context + Reputational risks + Narrative dynamics = Total clarity."
-      ),
-      detail: t(
-        "Intégration Intelligence — Influence — Due Diligence dans une même architecture. Lecture systémique : géopolitique, économique, médiatique et institutionnel.",
-        "Integration of Intelligence — Influence — Due Diligence in a single architecture. Systemic reading: geopolitical, economic, media and institutional."
       ),
     },
     {
@@ -65,10 +49,6 @@ const WhySection = () => {
         "Gouvernements, multinationales, organisations internationales sur 5 continents.",
         "Governments, multinationals, international organizations across 5 continents."
       ),
-      detail: t(
-        "25+ ans d'expérience · 59 pays couverts · Neutralité stratégique absolue · Transfert de supériorité décisionnelle.",
-        "25+ years of experience · 59 countries covered · Absolute strategic neutrality · Transfer of decision-making superiority."
-      ),
     },
     {
       icon: Lock,
@@ -77,17 +57,22 @@ const WhySection = () => {
         "NDA systématique · Serveurs sécurisés · Équipes formées au secret professionnel.",
         "Systematic NDA · Secured servers · Teams trained in professional secrecy."
       ),
-      detail: t(
-        "Nous ne travaillons jamais simultanément avec deux concurrents directs. Clauses d'exclusivité sectorielle possibles.",
-        "We never work simultaneously with two direct competitors. Sector exclusivity clauses available."
-      ),
     },
+  ];
+
+  const equationItems = [
+    { icon: BarChart3, label: t("Données économiques", "Economic data"), color: "#103E8C" },
+    { icon: Globe, label: t("Contexte géopolitique", "Geopolitical context"), color: "#0D1B2A" },
+    { icon: AlertTriangle, label: t("Risques réputationnels", "Reputational risks"), color: "#B45309" },
+    { icon: Radio, label: t("Dynamiques narratives", "Narrative dynamics"), color: "#6D28D9" },
+    { icon: Theater, label: t("Jeux d'influence", "Influence games"), color: "#0F766E" },
   ];
 
   return (
     <section id="pourquoi-buildfluence" className="relative py-14" ref={ref} style={{ background: '#F7F8FA' }}>
       <div className="mx-auto" style={{ maxWidth: '760px', padding: '0 24px' }}>
-        {/* Hero header */}
+
+        {/* ═══ HERO ═══ */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -106,8 +91,6 @@ const WhySection = () => {
               "Because a decision has value only if it shifts the balance of power in your favor."
             )}
           </p>
-
-          {/* Badge de confiance */}
           <div
             className="mx-auto mt-6 inline-block rounded-sm px-5 py-2.5 text-[13px] font-semibold tracking-wide"
             style={{ background: '#0D1B2A', color: '#FFDE59' }}
@@ -119,7 +102,7 @@ const WhySection = () => {
           </div>
         </motion.div>
 
-        {/* Grille 3x2 */}
+        {/* ═══ Grille 3x2 des piliers ═══ */}
         <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {pillars.map((p, i) => (
             <motion.div
@@ -128,9 +111,8 @@ const WhySection = () => {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.45, delay: i * 0.07 }}
             >
-              <button
-                onClick={() => setOpenIndex(openIndex === i ? null : i)}
-                className="group flex h-full w-full cursor-pointer flex-col rounded-sm border p-5 text-left transition-all hover:shadow-md"
+              <div
+                className="flex h-full flex-col rounded-sm border p-5"
                 style={{ background: '#FFFFFF', borderColor: '#E5E7EB' }}
               >
                 <div className="mb-3 flex items-center gap-3">
@@ -142,20 +124,174 @@ const WhySection = () => {
                 <p className="text-[12.5px] leading-relaxed" style={{ color: '#6B7280' }}>
                   {p.content}
                 </p>
-                {openIndex === i && p.detail && (
-                  <motion.div
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: "auto" }}
-                    className="mt-3 whitespace-pre-line border-t pt-3 text-[12px]"
-                    style={{ borderColor: '#E5E7EB', color: '#4A5568' }}
-                  >
-                    {p.detail}
-                  </motion.div>
-                )}
-              </button>
+              </div>
             </motion.div>
           ))}
         </div>
+
+        {/* ═══════════════════════════════════════════════════════════════
+            SECTION 1 — APPROCHE HUMTECH
+        ═══════════════════════════════════════════════════════════════ */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          className="mt-14"
+        >
+          <h3 className="font-serif text-xl font-bold sm:text-2xl" style={{ color: '#0D1B2A' }}>
+            {t(
+              "L'intelligence au carrefour de l'humain et de la technologie",
+              "Intelligence at the crossroads of human and technology"
+            )}
+          </h3>
+
+          <div className="mt-6 grid grid-cols-1 gap-5 sm:grid-cols-3">
+            {/* Col 1 — Technologies IA */}
+            <div className="rounded-sm border p-5" style={{ background: '#fff', borderColor: '#E5E7EB' }}>
+              <div className="mb-3 flex items-center gap-2">
+                <Brain className="h-4 w-4" style={{ color: '#103E8C' }} />
+                <h4 className="text-[13px] font-bold uppercase tracking-wider" style={{ color: '#0D1B2A' }}>
+                  {t("Technologies IA de pointe", "Cutting-edge AI Technologies")}
+                </h4>
+              </div>
+              <ul className="space-y-1.5 text-[12.5px] leading-relaxed" style={{ color: '#4A5568' }}>
+                <li>• {t("Veille augmentée & OSINT premium", "Augmented monitoring & premium OSINT")}</li>
+                <li>• {t("NLP & analyse sémantique avancée", "NLP & advanced semantic analysis")}</li>
+                <li>• {t("Études prédictives factuelles", "Factual predictive studies")}</li>
+                <li>• {t("Plateformes décisionnelles IA", "AI decision-making platforms")}</li>
+              </ul>
+            </div>
+
+            {/* Col 2 — Expertise humaine */}
+            <div className="rounded-sm border p-5" style={{ background: '#fff', borderColor: '#E5E7EB' }}>
+              <div className="mb-3 flex items-center gap-2">
+                <Users className="h-4 w-4" style={{ color: '#103E8C' }} />
+                <h4 className="text-[13px] font-bold uppercase tracking-wider" style={{ color: '#0D1B2A' }}>
+                  {t("Expertise humaine pointue", "Sharp Human Expertise")}
+                </h4>
+              </div>
+              <ul className="space-y-1.5 text-[12.5px] leading-relaxed" style={{ color: '#4A5568' }}>
+                <li>• {t("Analystes géopolitiques & géoéconomiques", "Geopolitical & geoeconomic analysts")}</li>
+                <li>• {t("Stratèges d'influence", "Influence strategists")}</li>
+                <li>• {t("Fact-checkers professionnels", "Professional fact-checkers")}</li>
+                <li>• {t("Experts sectoriels multidisciplinaires", "Multidisciplinary sector experts")}</li>
+              </ul>
+            </div>
+
+            {/* Col 3 — Méthodologie C-Level */}
+            <div className="rounded-sm border p-5" style={{ background: '#fff', borderColor: '#E5E7EB' }}>
+              <div className="mb-3 flex items-center gap-2">
+                <ClipboardCheck className="h-4 w-4" style={{ color: '#103E8C' }} />
+                <h4 className="text-[13px] font-bold uppercase tracking-wider" style={{ color: '#0D1B2A' }}>
+                  {t("Méthodologie C-Level", "C-Level Methodology")}
+                </h4>
+              </div>
+              <ul className="space-y-1.5 text-[12.5px] leading-relaxed" style={{ color: '#4A5568' }}>
+                <li>• {t("Audit organisationnel + Veille augmentée + Croisement de données + Signaux faibles + Narratifs institutionnels", "Organizational audit + Augmented monitoring + Data cross-referencing + Weak signals + Institutional narratives")}</li>
+                <li>• {t("Analyse multidimensionnelle, DataViz et infographies décisionnelles", "Multidimensional analysis, DataViz and decision-making infographics")}</li>
+                <li>• {t("Orientation décision systématique", "Systematic decision orientation")}</li>
+              </ul>
+            </div>
+          </div>
+
+          {/* Résultat mis en valeur */}
+          <div
+            className="mt-5 rounded-sm px-6 py-4 text-center text-[15px] font-semibold"
+            style={{ background: '#0D1B2A', color: '#FFDE59' }}
+          >
+            {t(
+              "Résultat : Une lucidité décisionnelle opérationnelle.",
+              "Result: Operational decision-making clarity."
+            )}
+          </div>
+        </motion.div>
+
+        {/* ═══════════════════════════════════════════════════════════════
+            SECTION 2 — ORIENTATION ACTION
+        ═══════════════════════════════════════════════════════════════ */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="mt-14"
+        >
+          <h3 className="font-serif text-xl font-bold sm:text-2xl" style={{ color: '#0D1B2A' }}>
+            {t(
+              "Nous ne vendons pas de la veille. Nous vendons de la lucidité décisionnelle actionnable.",
+              "We don't sell monitoring. We sell actionable decision-making clarity."
+            )}
+          </h3>
+
+          <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
+            {[
+              {
+                emoji: "✅",
+                text: t("Synthèses factuelles et actionnables", "Factual and actionable summaries"),
+              },
+              {
+                emoji: "🟢🟡🔴",
+                text: t("Scoring tricolore Go / Attention / No Go", "Tricolor scoring Go / Caution / No Go"),
+              },
+              {
+                emoji: "📊",
+                text: t("Dashboards interactifs et KPIs en temps réel", "Interactive dashboards and real-time KPIs"),
+              },
+              {
+                emoji: "✔",
+                text: t("Préconisations vérifiées et concrètes", "Verified and concrete recommendations"),
+              },
+            ].map((item, i) => (
+              <div
+                key={i}
+                className="flex items-center gap-4 rounded-sm border px-5 py-4"
+                style={{ background: '#fff', borderColor: '#E5E7EB' }}
+              >
+                <span className="text-xl flex-shrink-0">{item.emoji}</span>
+                <span className="text-[14px] font-medium" style={{ color: '#0D1B2A' }}>{item.text}</span>
+              </div>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* ═══════════════════════════════════════════════════════════════
+            SECTION 3 — VISION 360°
+        ═══════════════════════════════════════════════════════════════ */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.5 }}
+          className="mt-14 mb-2"
+        >
+          <h3 className="font-serif text-xl font-bold sm:text-2xl" style={{ color: '#0D1B2A' }}>
+            {t("Nous croisons ce que d'autres séparent", "We cross what others separate")}
+          </h3>
+
+          {/* Équation visuelle */}
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+            {equationItems.map((item, i) => (
+              <div key={i} className="flex items-center gap-2">
+                <div
+                  className="flex items-center gap-2 rounded-sm border px-4 py-3"
+                  style={{ background: '#fff', borderColor: '#E5E7EB' }}
+                >
+                  <item.icon className="h-5 w-5" style={{ color: item.color }} />
+                  <span className="text-[13px] font-semibold" style={{ color: '#0D1B2A' }}>{item.label}</span>
+                </div>
+                {i < equationItems.length - 1 && (
+                  <span className="text-xl font-bold" style={{ color: '#BFBFBF' }}>+</span>
+                )}
+              </div>
+            ))}
+            <span className="text-2xl font-black" style={{ color: '#0D1B2A' }}>=</span>
+            <div
+              className="rounded-sm px-5 py-3 text-[14px] font-bold uppercase tracking-wider"
+              style={{ background: '#0D1B2A', color: '#FFDE59' }}
+            >
+              {t("Lucidité totale", "Total Clarity")}
+            </div>
+          </div>
+        </motion.div>
+
       </div>
     </section>
   );
