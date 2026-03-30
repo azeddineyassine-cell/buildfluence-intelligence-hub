@@ -37,7 +37,7 @@ const AdvancedCapabilities = () => {
           </p>
         </motion.div>
 
-        <div className="mt-16 grid gap-5 md:grid-cols-2">
+        <div className="mt-8 grid gap-5 md:grid-cols-2">
           {capabilities.map((cap, i) => (
             <motion.div
               key={cap.title}
