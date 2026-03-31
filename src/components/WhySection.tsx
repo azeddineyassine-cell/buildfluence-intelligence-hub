@@ -282,12 +282,12 @@ const WhySection = () => {
                 )}
               </div>
             ))}
-            <span className="text-2xl font-black" style={{ color: '#0D1B2A' }}>=</span>
+            <span className="text-2xl font-black flex-shrink-0" style={{ color: '#0D1B2A' }}>=</span>
             <div
-              className="rounded-sm px-5 py-3 text-[14px] font-bold uppercase tracking-wider"
-              style={{ background: '#0D1B2A', color: '#FFDE59' }}
+              className="rounded-sm px-5 py-3 text-[14px] font-bold uppercase tracking-wider flex-shrink-0"
+              style={{ background: '#C9A84C', color: '#FFFFFF' }}
             >
-              {t("Lucidité totale", "Total Clarity")}
+              {t("Lucidité décisionnelle", "Decision-Making Clarity")}
             </div>
           </div>
         </motion.div>
