@@ -266,8 +266,8 @@ const WhySection = () => {
             {t("Nous croisons ce que d'autres séparent", "We cross what others separate")}
           </h3>
 
-          {/* Équation visuelle */}
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+          {/* Équation visuelle — single horizontal line */}
+          <div className="mt-8 flex flex-nowrap items-center justify-start gap-2 overflow-x-auto pb-2" style={{ scrollbarWidth: 'thin' }}>
             {equationItems.map((item, i) => (
               <div key={i} className="flex items-center gap-2">
                 <div
