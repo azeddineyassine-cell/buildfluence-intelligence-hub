@@ -112,12 +112,31 @@ const StrategicIntelligenceLab = () => {
             imageAlt="Attractivité & Compétitivité Territoriale"
             reverse
           >
-            <DetailList items={[
-              t("Guerre économique de l'investissement", "Economic investment warfare"),
-              t("Benchmark pays/régions concurrentes", "Competing countries/regions benchmark"),
-              t("Politiques publiques comparées", "Compared public policies"),
-              t("Narratifs d'attractivité et crédibilité internationale", "Attractiveness narratives and international credibility"),
-            ]} />
+            <p className="text-sm leading-relaxed text-foreground/80 mb-4">
+              {lang === "fr"
+                ? <>L'attractivité ne se décrète pas… Elle se mesure, se compare et se conquiert en temps réel dans une guerre économique d'allocation des flux d'investissement et l'analyse des dynamiques concurrentielles :</>
+                : <>Attractiveness cannot be decreed… It is measured, compared and won in real time in an economic war of investment flow allocation and competitive dynamics analysis:</>}
+            </p>
+            <ul className="space-y-2 text-sm text-foreground/80">
+              <li className="flex items-start gap-2">
+                <span className="flex-shrink-0">→</span>
+                {lang === "fr"
+                  ? <>Les <strong>secteurs stratégiques dominants</strong> qui captent l'intérêt des investisseurs</>
+                  : <>The <strong>dominant strategic sectors</strong> that capture investor interest</>}
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="flex-shrink-0">→</span>
+                {lang === "fr"
+                  ? <>Les <strong>pays / nouveaux entrants moteurs</strong> qui redessinent les équilibres d'attractivité</>
+                  : <>The <strong>driving countries / new entrants</strong> that reshape attractiveness balances</>}
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="flex-shrink-0">→</span>
+                {lang === "fr"
+                  ? <>Les <strong>stratégies d'hybridation sectorielle</strong> qui accélèrent les basculements et renforcent la compétitivité</>
+                  : <>The <strong>sectoral hybridization strategies</strong> that accelerate shifts and strengthen competitiveness</>}
+              </li>
+            </ul>
           </SectionBlock>
 
           <SectionBlock
