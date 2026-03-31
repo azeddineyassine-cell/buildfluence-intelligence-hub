@@ -1,4 +1,4 @@
-import DetailPageLayout, { DetailBlock, DetailList, CaseStudy } from "@/components/DetailPageLayout";
+import DetailPageLayout, { DetailBlock, DetailList } from "@/components/DetailPageLayout";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Link } from "react-router-dom";
 import ocpLogo from "@/assets/clients/ocp.png";
@@ -14,6 +14,24 @@ const PerteVelocite = () => {
       ctas={[
         { label: t("Évaluer ma situation — GRATUIT", "Evaluate my situation — FREE"), action: "#", formType: "f2" },
       ]}
+      stickyCase={{
+        logo: ocpLogo,
+        title: t("OCP Group", "OCP Group"),
+        sector: t("Industrie / Mines & Chimie", "Industry / Mining & Chemicals"),
+        context: [
+          t("Cartographie de l'écosystème concurrentiel sur 10 ans (2004–2014)", "Mapping of the competitive ecosystem over 10 years (2004-2014)"),
+          t("Campagnes de boycott orchestrées par divers acteurs", "Boycott campaigns orchestrated by various actors"),
+        ],
+        intervention: [
+          t("Analyse par échiquiers : Géopolitique, Concurrentiel, Sociétal", "Chessboard analysis: Geopolitical, Competitive, Societal"),
+          t("Cartographie et Matrice dynamique des parties prenantes", "Dynamic stakeholder mapping and matrix"),
+          t("Tableau de bord décisionnel au cabinet du Président", "Decision-making dashboard for the President's office"),
+        ],
+        impact: [
+          t("Protection des milliards de dollars de CA", "Protection of billions of dollars in revenue"),
+          t("Renforcement de la position de leader mondial", "Strengthening of global leadership position"),
+        ],
+      }}
     >
       <DetailBlock title={t("Votre réalité", "Your reality")}>
         <p className="mt-2">{t("Vous analysez des rapports volumineux ou obsolètes pendant que vos concurrents captent les données d'opportunités émergentes.", "You analyze bulky or obsolete reports while your competitors capture emerging opportunity data.")}</p>
@@ -45,17 +63,6 @@ const PerteVelocite = () => {
           t("Dashboard d'alerte avec scoring Go/No-Go automatisé", "Alert dashboard with automated Go/No-Go scoring"),
         ]} />
       </DetailBlock>
-      <CaseStudy
-        logo={ocpLogo}
-        title={t("Cas client : OCP Group", "Client case: OCP Group")}
-        context={t("Cartographie de l'écosystème concurrentiel sur 10 ans (2004–2014) face à des campagnes de boycott orchestrées par divers acteurs.", "Mapping of the competitive ecosystem over 10 years (2004-2014) facing boycott campaigns orchestrated by various actors.")}
-        intervention={[
-          t("Analyse par échiquiers : Géopolitique, Concurrentiel, Sociétal", "Chessboard analysis: Geopolitical, Competitive, Societal"),
-          t("Cartographie et Matrice dynamique des parties prenantes", "Dynamic stakeholder mapping and matrix"),
-          t("Tableau de bord décisionnel au cabinet du Président", "Decision-making dashboard for the President's office"),
-        ]}
-        result={t("Protection des milliards de dollars de CA et renforcement de la position de leader mondial.", "Protection of billions of dollars in revenue and strengthening of global leadership position.")}
-      />
     </DetailPageLayout>
   );
 };
