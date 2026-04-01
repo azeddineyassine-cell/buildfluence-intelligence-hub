@@ -11,13 +11,14 @@ interface DetailPageLayoutProps {
   title: string;
   chapeau: string;
   children: ReactNode;
+  sidebar?: ReactNode;
   ctas?: { label: string; action: string; formType?: "f1" | "f2" }[];
   situationContext?: string;
   prevSituation?: { label: string; path: string };
   nextSituation?: { label: string; path: string };
 }
 
-const DetailPageLayout = ({ title, chapeau, children, ctas, situationContext, prevSituation, nextSituation }: DetailPageLayoutProps) => {
+const DetailPageLayout = ({ title, chapeau, children, sidebar, ctas, situationContext, prevSituation, nextSituation }: DetailPageLayoutProps) => {
   const navigate = useNavigate();
   const { t } = useLanguage();
   const [f1Open, setF1Open] = useState(false);
@@ -33,12 +34,11 @@ const DetailPageLayout = ({ title, chapeau, children, ctas, situationContext, pr
     <div className="min-h-screen bg-background">
       <Navbar />
       <section className="pb-10 pt-24">
-        <div className="container">
+        <div className="w-full px-6 lg:px-12" style={{ maxWidth: '1600px', margin: '0 auto' }}>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            className="mx-auto max-w-4xl"
           >
             <h1 className="font-serif text-3xl font-bold leading-tight sm:text-4xl md:text-5xl">
               {title}
@@ -47,8 +47,20 @@ const DetailPageLayout = ({ title, chapeau, children, ctas, situationContext, pr
               {chapeau}
             </p>
 
-            <div className="mt-6 space-y-8">
-              {children}
+            <div className={`mt-6 ${sidebar ? 'flex flex-col lg:flex-row gap-8 lg:gap-12 items-start' : ''}`}>
+              {/* Main content - left column */}
+              <div className={`space-y-8 ${sidebar ? 'flex-1 min-w-0' : 'max-w-4xl'}`}>
+                {children}
+              </div>
+
+              {/* Sticky sidebar - right column */}
+              {sidebar && (
+                <div className="w-full lg:w-[420px] lg:flex-shrink-0">
+                  <div className="lg:sticky lg:top-24">
+                    {sidebar}
+                  </div>
+                </div>
+              )}
             </div>
 
             {ctas && ctas.length > 0 && (

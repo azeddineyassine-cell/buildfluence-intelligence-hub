@@ -1,4 +1,5 @@
-import DetailPageLayout, { DetailBlock, DetailList, CaseStudy } from "@/components/DetailPageLayout";
+import DetailPageLayout, { DetailBlock, DetailList } from "@/components/DetailPageLayout";
+import StickyClientCase from "@/components/StickyClientCase";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Link } from "react-router-dom";
 import presidenceSenegalLogo from "@/assets/clients/presidence-senegal.jpg";
@@ -13,6 +14,27 @@ const DeciderSansVisibilite = () => {
       ctas={[
         { label: t("Évaluer ma situation — GRATUIT", "Evaluate my situation — FREE"), action: "#", formType: "f2" },
       ]}
+      sidebar={
+        <StickyClientCase
+          logo={presidenceSenegalLogo}
+          title={t("Présidence de la République du Sénégal", "Presidency of the Republic of Senegal")}
+          sector={t("Politique — Cabinet Présidentiel", "Politics — Presidential Cabinet")}
+          context={t("Annonce de la 3e candidature présidentielle dans un climat tendu. Montée des appels à la rébellion, désinformation et polarisation numérique.", "Announcement of the 3rd presidential candidacy in a tense climate. Rise of calls for rebellion, disinformation and digital polarization.")}
+          intervention={[
+            t("Déploiement d'une plateforme de veille stratégique / IA en temps réel", "Deployment of a real-time strategic monitoring / AI platform"),
+            t("Analyse dynamique de l'évolution des mots-clés sensibles", "Dynamic analysis of sensitive keyword evolution"),
+            t("Cartographie des acteurs, alliances et oppositions", "Mapping of actors, alliances and oppositions"),
+            t("Détection précoce des narratifs à risque", "Early detection of at-risk narratives"),
+            t("Scénarios d'anticipation pour la communication présidentielle", "Anticipation scenarios for presidential communication"),
+          ]}
+          resultItems={[
+            t("Décision éclairée même sous forte pression", "Informed decision-making even under high pressure"),
+            t("Réduction des angles morts", "Blind spots reduced"),
+            t("Meilleure anticipation des risques narratifs", "Better anticipation of narrative risks"),
+            t("Restauration progressive de la lisibilité stratégique", "Progressive restoration of strategic readability"),
+          ]}
+        />
+      }
     >
       <DetailBlock title={t("Votre réalité", "Your reality")}>
         <DetailList items={[
@@ -43,19 +65,6 @@ const DeciderSansVisibilite = () => {
       <DetailBlock title={t("Solution Buildfluence", "Buildfluence Solution")}>
         <Link to="/solutions/strategic-intelligence-lab" className="mt-2 inline-block font-semibold text-primary hover:underline">Strategic Foresight Lab</Link>
       </DetailBlock>
-      <CaseStudy
-        logo={presidenceSenegalLogo}
-        title={t("Cas client : Présidence de la République du Sénégal", "Client case: Presidency of the Republic of Senegal")}
-        context={t("Annonce de la 3e candidature présidentielle dans un climat tendu. Montée des appels à la rébellion, désinformation et polarisation numérique.", "Announcement of the 3rd presidential candidacy in a tense climate. Rise of calls for rebellion, disinformation and digital polarization.")}
-        intervention={[
-          t("Déploiement d'une plateforme de veille stratégique / IA en temps réel", "Deployment of a real-time strategic monitoring / AI platform"),
-          t("Analyse dynamique de l'évolution des mots-clés sensibles", "Dynamic analysis of sensitive keyword evolution"),
-          t("Cartographie des acteurs, alliances et oppositions", "Mapping of actors, alliances and oppositions"),
-          t("Détection précoce des narratifs à risque", "Early detection of at-risk narratives"),
-          t("Scénarios d'anticipation pour la communication présidentielle", "Anticipation scenarios for presidential communication"),
-        ]}
-        result={t("Décision éclairée même sous forte pression. Réduction des angles morts. Meilleure anticipation des risques narratifs. Restauration progressive de la lisibilité stratégique.", "Informed decision-making even under high pressure. Blind spots reduced. Better anticipation of narrative risks. Progressive restoration of strategic readability.")}
-      />
     </DetailPageLayout>
   );
 };

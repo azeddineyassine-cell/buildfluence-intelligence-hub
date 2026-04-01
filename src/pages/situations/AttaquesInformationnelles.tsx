@@ -1,4 +1,5 @@
-import DetailPageLayout, { DetailBlock, DetailList, CaseStudy } from "@/components/DetailPageLayout";
+import DetailPageLayout, { DetailBlock, DetailList } from "@/components/DetailPageLayout";
+import StickyClientCase from "@/components/StickyClientCase";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Link } from "react-router-dom";
 import centraleDanoneLogo from "@/assets/clients/centrale-danone.jpg";
@@ -14,6 +15,24 @@ const AttaquesInformationnelles = () => {
       ctas={[
         { label: t("Évaluer ma situation — GRATUIT", "Evaluate my situation — FREE"), action: "#", formType: "f2" },
       ]}
+      sidebar={
+        <StickyClientCase
+          logo={centraleDanoneLogo}
+          title={t("Centrale Danone", "Centrale Danone")}
+          sector={t("Agroalimentaire — Grande distribution", "Food industry — Retail")}
+          context={t("2015, décès de 2 enfants après consommation du yaourt Raïbi Jamila. Campagne de dénigrement pendant 2 ans. Conséquence : perte de 120M MAD (11,2M€).", "2015, death of 2 children after consuming Raïbi Jamila yogurt. Smear campaign for 2 years. Consequence: loss of 120M MAD (€11.2M).")}
+          intervention={[
+            t("Digital investigation approfondie", "In-depth digital investigation"),
+            t("Analyse forensique des documents médicaux", "Forensic analysis of medical documents"),
+            t("Stratégie de contre-influence", "Counter-influence strategy"),
+          ]}
+          resultItems={[
+            t("Marque innocentée à 100%", "Brand 100% exonerated"),
+            t("Gain de +14% de parts de marché après la crise", "+14% market share gain after crisis"),
+            t("Confiance restaurée", "Trust restored"),
+          ]}
+        />
+      }
     >
       <DetailBlock title={t("Votre réalité", "Your reality")}>
         <DetailList items={[
@@ -41,17 +60,6 @@ const AttaquesInformationnelles = () => {
       <DetailBlock title={t("Solution Buildfluence", "Buildfluence Solution")}>
         <Link to="/solutions/strategic-intelligence-lab" className="mt-2 inline-block font-semibold text-primary hover:underline">Threat Intelligence</Link>
       </DetailBlock>
-      <CaseStudy
-        logo={centraleDanoneLogo}
-        title={t("Cas client : Centrale Danone", "Client case: Centrale Danone")}
-        context={t("2015, décès de 2 enfants après consommation du yaourt Raïbi Jamila. Campagne de dénigrement pendant 2 ans. Conséquence : perte de 120M MAD (11,2M€).", "2015, death of 2 children after consuming Raïbi Jamila yogurt. Smear campaign for 2 years. Consequence: loss of 120M MAD (€11.2M).")}
-        intervention={[
-          t("Digital investigation approfondie", "In-depth digital investigation"),
-          t("Analyse forensique des documents médicaux", "Forensic analysis of medical documents"),
-          t("Stratégie de contre-influence", "Counter-influence strategy"),
-        ]}
-        result={t("Marque innocentée à 100%. Gain de +14% de parts de marché après la crise. Confiance restaurée.", "Brand 100% exonerated. +14% market share gain after crisis. Trust restored.")}
-      />
     </DetailPageLayout>
   );
 };
