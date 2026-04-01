@@ -6,9 +6,8 @@ import { useNavigate, useLocation } from "react-router-dom";
 import ConstructionInfluence from "@/components/ConstructionInfluence";
 import ocpLogo from "@/assets/clients/ocp.png";
 import ministereSanteLogo from "@/assets/clients/ministere-sante.jpg";
-import imgMarketIntel from "@/assets/sections/mapping-secteurs-strategiques.png";
-import imgTerritorial from "@/assets/sections/flux-investissement-attractivite.png";
-import imgMedz from "@/assets/sections/medz-excellence-operationnelle.png";
+import imgMarketIntel from "@/assets/sections/market-competitive-intelligence.jpg";
+import imgTerritorial from "@/assets/sections/attractivite-territoriale.png";
 import imgInnovation from "@/assets/sections/innovation-mapping-new.jpg";
 import imgStakeholders from "@/assets/sections/stakeholders-intelligence.jpg";
 import imgOcpCase from "@/assets/sections/cas-client-ocp.png";
@@ -112,31 +111,12 @@ const StrategicIntelligenceLab = () => {
             imageAlt="Attractivité & Compétitivité Territoriale"
             reverse
           >
-            <p className="text-sm leading-relaxed text-foreground/80 mb-4">
-              {lang === "fr"
-                ? <>L'attractivité ne se décrète pas… Elle se mesure, se compare et se conquiert en temps réel dans une guerre économique d'allocation des flux d'investissement et l'analyse des dynamiques concurrentielles :</>
-                : <>Attractiveness cannot be decreed… It is measured, compared and won in real time in an economic war of investment flow allocation and competitive dynamics analysis:</>}
-            </p>
-            <ul className="space-y-2 text-sm text-foreground/80">
-              <li className="flex items-start gap-2">
-                <span className="flex-shrink-0">→</span>
-                {lang === "fr"
-                  ? <>Les <strong>secteurs stratégiques dominants</strong> qui captent l'intérêt des investisseurs</>
-                  : <>The <strong>dominant strategic sectors</strong> that capture investor interest</>}
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="flex-shrink-0">→</span>
-                {lang === "fr"
-                  ? <>Les <strong>pays / nouveaux entrants moteurs</strong> qui redessinent les équilibres d'attractivité</>
-                  : <>The <strong>driving countries / new entrants</strong> that reshape attractiveness balances</>}
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="flex-shrink-0">→</span>
-                {lang === "fr"
-                  ? <>Les <strong>stratégies d'hybridation sectorielle</strong> qui accélèrent les basculements et renforcent la compétitivité</>
-                  : <>The <strong>sectoral hybridization strategies</strong> that accelerate shifts and strengthen competitiveness</>}
-              </li>
-            </ul>
+            <DetailList items={[
+              t("Guerre économique de l'investissement", "Economic investment warfare"),
+              t("Benchmark pays/régions concurrentes", "Competing countries/regions benchmark"),
+              t("Politiques publiques comparées", "Compared public policies"),
+              t("Narratifs d'attractivité et crédibilité internationale", "Attractiveness narratives and international credibility"),
+            ]} />
           </SectionBlock>
 
           <SectionBlock
@@ -264,33 +244,26 @@ const StrategicIntelligenceLab = () => {
           <span className="text-xs font-bold uppercase tracking-[0.18em] px-3 py-1 rounded-full" style={{ background: '#103E8C', color: '#FFFFFF' }}>03</span>
           <h3 id="experimentations-pocs" className="text-xl font-bold scroll-mt-24" style={{ color: '#103E8C' }}>{t("Expérimentations & POCs", "Experiments & POCs")}</h3>
         </div>
-        <div className="flex flex-col gap-6 md:flex-row md:items-start">
-          <div className="flex-1 min-w-0" style={{ flex: '0 0 60%' }}>
-            <p className="text-sm leading-relaxed text-foreground/80 mb-4">
-              {t(
-                "Avant de déployer une infrastructure décisionnelle complète, Buildfluence propose des phases d'expérimentation ciblées. En 1 semaine, nous prouvons la valeur de nos outils sur vos données réelles, avec des livrables concrets et mesurables.",
-                "Before deploying a complete decision-making infrastructure, Buildfluence offers targeted experimentation phases. In 1 week, we prove the value of our tools on your real data, with concrete and measurable deliverables."
-              )}
-            </p>
-            <DetailList items={[
-              t("Intégration de vos enjeux stratégiques", "Integration of your strategic challenges"),
-              t("Audit de maturité décisionnelle (diagnostic initial)", "Decision maturity audit (initial diagnosis)"),
-              t("Modèles d'analyse prédictive sur données client", "Predictive analysis models on client data"),
-              t("Plateformes de détection de signaux faibles (POC live)", "Weak signal detection platforms (live POC)"),
-              t("Baromètres d'image et de réputation en temps réel", "Real-time image and reputation barometers"),
-              t("Tableaux de bord décisionnels interactifs", "Interactive decision-making dashboards"),
-              t("Strategic Business Reviews avec recommandations actionnables", "Strategic Business Reviews with actionable recommendations"),
-              t("Livrable garanti en 1 semaine", "Deliverable guaranteed in 1 week"),
-            ]} />
-            <div className="mt-6 rounded-lg p-4 text-center" style={{ background: 'rgba(16,62,140,0.06)', borderLeft: '4px solid #103E8C' }}>
-              <p className="text-sm font-semibold italic text-foreground/85">
-                {t("« Un POC Buildfluence, c'est la preuve par l'action. Zéro théorie, 100% opérationnel. »", "\"A Buildfluence POC is proof by action. Zero theory, 100% operational.\"")}
-              </p>
-            </div>
-          </div>
-          <div className="min-w-0" style={{ flex: '0 0 38%' }}>
-            <img src={imgMedz} alt="MEDZ - Excellence Opérationnelle" className="w-full rounded-sm" />
-          </div>
+        <p className="text-sm leading-relaxed text-foreground/80 mb-4">
+          {t(
+            "Avant de déployer une infrastructure décisionnelle complète, Buildfluence propose des phases d'expérimentation ciblées. En 1 semaine, nous prouvons la valeur de nos outils sur vos données réelles, avec des livrables concrets et mesurables.",
+            "Before deploying a complete decision-making infrastructure, Buildfluence offers targeted experimentation phases. In 1 week, we prove the value of our tools on your real data, with concrete and measurable deliverables."
+          )}
+        </p>
+        <DetailList items={[
+          t("Intégration de vos enjeux stratégiques", "Integration of your strategic challenges"),
+          t("Audit de maturité décisionnelle (diagnostic initial)", "Decision maturity audit (initial diagnosis)"),
+          t("Modèles d'analyse prédictive sur données client", "Predictive analysis models on client data"),
+          t("Plateformes de détection de signaux faibles (POC live)", "Weak signal detection platforms (live POC)"),
+          t("Baromètres d'image et de réputation en temps réel", "Real-time image and reputation barometers"),
+          t("Tableaux de bord décisionnels interactifs", "Interactive decision-making dashboards"),
+          t("Strategic Business Reviews avec recommandations actionnables", "Strategic Business Reviews with actionable recommendations"),
+          t("Livrable garanti en 1 semaine", "Deliverable guaranteed in 1 week"),
+        ]} />
+        <div className="mt-6 rounded-lg p-4 text-center" style={{ background: 'rgba(16,62,140,0.06)', borderLeft: '4px solid #103E8C' }}>
+          <p className="text-sm font-semibold italic text-foreground/85">
+            {t("« Un POC Buildfluence, c'est la preuve par l'action. Zéro théorie, 100% opérationnel. »", "\"A Buildfluence POC is proof by action. Zero theory, 100% operational.\"")}
+          </p>
         </div>
       </div>
     </DetailPageLayout>

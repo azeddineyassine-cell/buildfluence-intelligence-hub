@@ -266,28 +266,28 @@ const WhySection = () => {
             {t("Nous croisons ce que d'autres séparent", "We cross what others separate")}
           </h3>
 
-          {/* Équation visuelle — single horizontal line */}
-          <div className="mt-8 flex flex-nowrap items-center justify-start gap-2 overflow-x-auto pb-2" style={{ scrollbarWidth: 'thin' }}>
+          {/* Équation visuelle */}
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
             {equationItems.map((item, i) => (
-              <div key={i} className="flex items-center gap-1.5 flex-shrink-0">
+              <div key={i} className="flex items-center gap-2">
                 <div
-                  className="flex items-center gap-1.5 rounded-sm border px-3 py-2"
+                  className="flex items-center gap-2 rounded-sm border px-4 py-3"
                   style={{ background: '#fff', borderColor: '#E5E7EB' }}
                 >
-                  <item.icon className="h-4 w-4" style={{ color: item.color }} />
-                  <span className="text-[12px] font-semibold whitespace-nowrap" style={{ color: '#0D1B2A' }}>{item.label}</span>
+                  <item.icon className="h-5 w-5" style={{ color: item.color }} />
+                  <span className="text-[13px] font-semibold" style={{ color: '#0D1B2A' }}>{item.label}</span>
                 </div>
                 {i < equationItems.length - 1 && (
-                  <span className="text-lg font-bold flex-shrink-0" style={{ color: '#BFBFBF' }}>+</span>
+                  <span className="text-xl font-bold" style={{ color: '#BFBFBF' }}>+</span>
                 )}
               </div>
             ))}
-            <span className="text-2xl font-black flex-shrink-0" style={{ color: '#0D1B2A' }}>=</span>
+            <span className="text-2xl font-black" style={{ color: '#0D1B2A' }}>=</span>
             <div
-              className="rounded-sm px-5 py-3 text-[14px] font-bold uppercase tracking-wider flex-shrink-0"
-              style={{ background: '#C9A84C', color: '#FFFFFF' }}
+              className="rounded-sm px-5 py-3 text-[14px] font-bold uppercase tracking-wider"
+              style={{ background: '#0D1B2A', color: '#FFDE59' }}
             >
-              {t("Lucidité décisionnelle", "Decision-Making Clarity")}
+              {t("Lucidité totale", "Total Clarity")}
             </div>
           </div>
         </motion.div>

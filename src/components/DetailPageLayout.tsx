@@ -7,15 +7,6 @@ import { ReactNode, useState } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { FormStrategicExchange, FormDiagnostic } from "@/components/FormModals";
 
-interface CaseStudySidebarProps {
-  logo?: string;
-  title: string;
-  sector?: string;
-  context: string[];
-  intervention: string[];
-  impact: string[];
-}
-
 interface DetailPageLayoutProps {
   title: string;
   chapeau: string;
@@ -24,10 +15,9 @@ interface DetailPageLayoutProps {
   situationContext?: string;
   prevSituation?: { label: string; path: string };
   nextSituation?: { label: string; path: string };
-  stickyCase?: CaseStudySidebarProps;
 }
 
-const DetailPageLayout = ({ title, chapeau, children, ctas, situationContext, prevSituation, nextSituation, stickyCase }: DetailPageLayoutProps) => {
+const DetailPageLayout = ({ title, chapeau, children, ctas, situationContext, prevSituation, nextSituation }: DetailPageLayoutProps) => {
   const navigate = useNavigate();
   const { t } = useLanguage();
   const [f1Open, setF1Open] = useState(false);
@@ -43,13 +33,13 @@ const DetailPageLayout = ({ title, chapeau, children, ctas, situationContext, pr
     <div className="min-h-screen bg-background">
       <Navbar />
       <section className="pb-10 pt-24">
-        <div className="mx-auto max-w-[1600px] px-6 md:px-12">
+        <div className="container">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            className="mx-auto max-w-4xl"
           >
-            {/* Title + chapeau full width */}
             <h1 className="font-serif text-3xl font-bold leading-tight sm:text-4xl md:text-5xl">
               {title}
             </h1>
@@ -57,79 +47,9 @@ const DetailPageLayout = ({ title, chapeau, children, ctas, situationContext, pr
               {chapeau}
             </p>
 
-            {/* Two-column layout when stickyCase is provided */}
-            {stickyCase ? (
-              <div className="mt-6 flex flex-col gap-8 lg:flex-row lg:items-start">
-                {/* Left: main content */}
-                <div className="flex-1 min-w-0 space-y-8">
-                  {children}
-                </div>
-                {/* Right: sticky case study sidebar */}
-                <div className="lg:w-[380px] xl:w-[420px] flex-shrink-0">
-                  <div className="lg:sticky lg:top-28">
-                    <div className="rounded-lg border p-5 space-y-4" style={{ background: '#FAFBFD', borderColor: '#D0DCF0' }}>
-                      <p className="text-xs font-bold uppercase tracking-[0.15em]" style={{ color: '#C0392B' }}>
-                        {t("Cas client :", "Client case:")}
-                      </p>
-                      {stickyCase.logo && (
-                        <img src={stickyCase.logo} alt="" className="h-14 w-auto object-contain" />
-                      )}
-                      {!stickyCase.logo && (
-                        <p className="text-sm font-bold" style={{ color: '#0D1B2A' }}>{stickyCase.title}</p>
-                      )}
-                      {stickyCase.sector && (
-                        <p className="text-xs" style={{ color: '#6B7280' }}>
-                          <span className="font-semibold">{t("Secteur :", "Sector:")}</span> {stickyCase.sector}
-                        </p>
-                      )}
-                      <div>
-                        <p className="text-xs font-bold uppercase tracking-wider mb-1.5" style={{ color: '#103E8C' }}>
-                          {t("Contexte", "Context")}
-                        </p>
-                        <ul className="space-y-1">
-                          {stickyCase.context.map((item, i) => (
-                            <li key={i} className="flex items-start gap-2 text-xs text-foreground/80">
-                              <span className="mt-1 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-primary" />
-                              {item}
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                      <div>
-                        <p className="text-xs font-bold uppercase tracking-wider mb-1.5" style={{ color: '#103E8C' }}>
-                          {t("Notre intervention", "Our intervention")}
-                        </p>
-                        <ul className="space-y-1">
-                          {stickyCase.intervention.map((item, i) => (
-                            <li key={i} className="flex items-start gap-2 text-xs text-foreground/80">
-                              <span className="mt-1 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-primary" />
-                              {item}
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                      <div>
-                        <p className="text-xs font-bold uppercase tracking-wider mb-1.5" style={{ color: '#C0392B' }}>
-                          IMPACT
-                        </p>
-                        <ul className="space-y-1">
-                          {stickyCase.impact.map((item, i) => (
-                            <li key={i} className="flex items-start gap-2 text-xs font-medium text-foreground/90">
-                              <span style={{ color: '#103E8C' }}>→</span>
-                              {item}
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ) : (
-              <div className="mt-6 space-y-8">
-                {children}
-              </div>
-            )}
+            <div className="mt-6 space-y-8">
+              {children}
+            </div>
 
             {ctas && ctas.length > 0 && (
               <div className="mt-8 flex flex-wrap gap-4">

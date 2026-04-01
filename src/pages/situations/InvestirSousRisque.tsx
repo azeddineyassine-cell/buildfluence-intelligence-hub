@@ -1,4 +1,4 @@
-import DetailPageLayout, { DetailBlock, DetailList } from "@/components/DetailPageLayout";
+import DetailPageLayout, { DetailBlock, DetailList, CaseStudy } from "@/components/DetailPageLayout";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Link } from "react-router-dom";
 
@@ -13,22 +13,6 @@ const InvestirSousRisque = () => {
       ctas={[
         { label: t("Évaluer ma situation — GRATUIT", "Evaluate my situation — FREE"), action: "#", formType: "f2" },
       ]}
-      stickyCase={{
-        title: t("Société de Capital-Risque (NDA strict)", "Venture Capital Firm (strict NDA)"),
-        sector: t("Finance / Capital-Risque", "Finance / Venture Capital"),
-        context: [
-          t("Due diligence sur une société valorisée à 400M$ avant partenariat", "Due diligence on a firm valued at $400M before partnership"),
-          t("Novembre 2024", "November 2024"),
-        ],
-        intervention: [
-          t("Deep Due Diligence 3 niveaux", "3-level Deep Due Diligence"),
-          t("Vérifications sur plateformes de sanctions internationales (ONU, OFAC, EU)", "Checks on international sanctions platforms (UN, OFAC, EU)"),
-        ],
-        impact: [
-          t("Validation complète avec identification de points de vigilance", "Complete validation with identification of vigilance points"),
-          t("Partenariat verrouillé en toute sécurité", "Partnership securely locked"),
-        ],
-      }}
     >
       <DetailBlock title={t("Votre réalité", "Your reality")}>
         <DetailList items={[
@@ -74,6 +58,12 @@ const InvestirSousRisque = () => {
           </div>
         </div>
       </DetailBlock>
+      <CaseStudy
+        title={t("Cas client : Société de Capital-Risque (confidentiel — NDA strict)", "Client case: Venture Capital Firm (confidential — strict NDA)")}
+        context={t("Novembre 2024, due diligence sur une société de Capital Risque valorisée à 400M$ avant partenariat.", "November 2024, due diligence on a venture capital firm valued at $400M before partnership.")}
+        intervention={[t("Deep Due Diligence 3 niveaux comprenant vérifications sur plateformes de sanctions internationales (ONU, OFAC, EU)", "3-level Deep Due Diligence including checks on international sanctions platforms (UN, OFAC, EU)")]}
+        result={t("Validation complète avec identification de points de vigilance. Partenariat verrouillé en toute sécurité.", "Complete validation with identification of vigilance points. Partnership securely locked.")}
+      />
     </DetailPageLayout>
   );
 };
