@@ -1,4 +1,5 @@
-import DetailPageLayout, { DetailBlock, DetailList, CaseStudy } from "@/components/DetailPageLayout";
+import DetailPageLayout, { DetailBlock, DetailList } from "@/components/DetailPageLayout";
+import StickyClientCase from "@/components/StickyClientCase";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Link } from "react-router-dom";
 import ministereSanteLogo from "@/assets/clients/ministere-sante.jpg";
@@ -14,6 +15,24 @@ const CrisesNonMaitrisees = () => {
       ctas={[
         { label: t("Évaluer ma situation — GRATUIT", "Evaluate my situation — FREE"), action: "#", formType: "f2" },
       ]}
+      sidebar={
+        <StickyClientCase
+          logo={ministereSanteLogo}
+          title={t("Ministère de la Santé", "Ministry of Health")}
+          sector={t("Santé publique — Gouvernement", "Public health — Government")}
+          context={t("2018, virus H1N1, 40 décès au Maroc. Psychose nationale, désinformation massive, silence du Ministère.", "2018, H1N1 virus, 40 deaths in Morocco. National psychosis, massive disinformation, Ministry silence.")}
+          intervention={[
+            t("Digital Investigation et Fact-checking en temps réel", "Digital investigation and real-time fact-checking"),
+            t("Identification des sources de désinformation", "Identification of disinformation sources"),
+            t("War room de crise", "Crisis war room"),
+          ]}
+          resultItems={[
+            t("Crise atténuée en 2 semaines", "Crisis mitigated in 2 weeks"),
+            t("Dispositif de veille structuré", "Structured monitoring system"),
+            t("Le Ministère a depuis géré le COVID-19 avec bien plus d'efficacité", "The Ministry has since managed COVID-19 with much greater efficiency"),
+          ]}
+        />
+      }
     >
       <DetailBlock title={t("Votre réalité", "Your reality")}>
         <p className="mt-2">{t("48 heures pour tout perdre. Effondrement progressif où chaque décision tardive ou inadéquate amplifie les dégâts et accélère la chute.", "48 hours to lose everything. Progressive collapse where every late or inadequate decision amplifies the damage and accelerates the fall.")}</p>
@@ -34,17 +53,6 @@ const CrisesNonMaitrisees = () => {
       <DetailBlock title={t("Solution Buildfluence", "Buildfluence Solution")}>
         <Link to="/solutions/strategic-intelligence-lab" className="mt-2 inline-block font-semibold text-primary hover:underline">Crisis Management</Link>
       </DetailBlock>
-      <CaseStudy
-        logo={ministereSanteLogo}
-        title={t("Cas client : Ministère de la Santé", "Client case: Ministry of Health")}
-        context={t("2018, virus H1N1, 40 décès au Maroc. Psychose nationale, désinformation massive, silence du Ministère.", "2018, H1N1 virus, 40 deaths in Morocco. National psychosis, massive disinformation, Ministry silence.")}
-        intervention={[
-          t("Digital Investigation et Fact-checking en temps réel", "Digital investigation and real-time fact-checking"),
-          t("Identification des sources de désinformation", "Identification of disinformation sources"),
-          t("War room de crise", "Crisis war room"),
-        ]}
-        result={t("Crise atténuée en 2 semaines. Dispositif de veille structuré. Le Ministère a depuis géré le COVID-19 avec bien plus d'efficacité.", "Crisis mitigated in 2 weeks. Structured monitoring system. The Ministry has since managed COVID-19 with much greater efficiency.")}
-      />
     </DetailPageLayout>
   );
 };

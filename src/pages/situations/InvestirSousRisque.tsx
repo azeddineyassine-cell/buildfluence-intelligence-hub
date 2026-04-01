@@ -1,4 +1,5 @@
-import DetailPageLayout, { DetailBlock, DetailList, CaseStudy } from "@/components/DetailPageLayout";
+import DetailPageLayout, { DetailBlock, DetailList } from "@/components/DetailPageLayout";
+import StickyClientCase from "@/components/StickyClientCase";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Link } from "react-router-dom";
 
@@ -13,6 +14,18 @@ const InvestirSousRisque = () => {
       ctas={[
         { label: t("Évaluer ma situation — GRATUIT", "Evaluate my situation — FREE"), action: "#", formType: "f2" },
       ]}
+      sidebar={
+        <StickyClientCase
+          title={t("Société de Capital-Risque (confidentiel — NDA strict)", "Venture Capital Firm (confidential — strict NDA)")}
+          sector={t("Finance — Capital-Risque", "Finance — Venture Capital")}
+          context={t("Novembre 2024, due diligence sur une société de Capital Risque valorisée à 400M$ avant partenariat.", "November 2024, due diligence on a venture capital firm valued at $400M before partnership.")}
+          intervention={[t("Deep Due Diligence 3 niveaux comprenant vérifications sur plateformes de sanctions internationales (ONU, OFAC, EU)", "3-level Deep Due Diligence including checks on international sanctions platforms (UN, OFAC, EU)")]}
+          resultItems={[
+            t("Validation complète avec identification de points de vigilance", "Complete validation with identification of vigilance points"),
+            t("Partenariat verrouillé en toute sécurité", "Partnership securely locked"),
+          ]}
+        />
+      }
     >
       <DetailBlock title={t("Votre réalité", "Your reality")}>
         <DetailList items={[
@@ -58,12 +71,6 @@ const InvestirSousRisque = () => {
           </div>
         </div>
       </DetailBlock>
-      <CaseStudy
-        title={t("Cas client : Société de Capital-Risque (confidentiel — NDA strict)", "Client case: Venture Capital Firm (confidential — strict NDA)")}
-        context={t("Novembre 2024, due diligence sur une société de Capital Risque valorisée à 400M$ avant partenariat.", "November 2024, due diligence on a venture capital firm valued at $400M before partnership.")}
-        intervention={[t("Deep Due Diligence 3 niveaux comprenant vérifications sur plateformes de sanctions internationales (ONU, OFAC, EU)", "3-level Deep Due Diligence including checks on international sanctions platforms (UN, OFAC, EU)")]}
-        result={t("Validation complète avec identification de points de vigilance. Partenariat verrouillé en toute sécurité.", "Complete validation with identification of vigilance points. Partnership securely locked.")}
-      />
     </DetailPageLayout>
   );
 };

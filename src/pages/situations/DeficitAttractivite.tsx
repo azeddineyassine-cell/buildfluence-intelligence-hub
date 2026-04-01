@@ -1,4 +1,5 @@
-import DetailPageLayout, { DetailBlock, DetailList, CaseStudy } from "@/components/DetailPageLayout";
+import DetailPageLayout, { DetailBlock, DetailList } from "@/components/DetailPageLayout";
+import StickyClientCase from "@/components/StickyClientCase";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Link } from "react-router-dom";
 
@@ -11,6 +12,25 @@ const DeficitAttractivite = () => {
       prevSituation={{ label: "Attaques informationnelles", path: "/situations/attaques-informationnelles" }}
       nextSituation={{ label: "Crises non maîtrisées", path: "/situations/crises-non-maitrisees" }}
       ctas={[{ label: t("Évaluer ma situation — GRATUIT", "Evaluate my situation — FREE"), action: "#", formType: "f2" }]}
+      sidebar={
+        <StickyClientCase
+          title={t("Territoire confidentiel (mandat sous NDA strict)", "Confidential territory (strict NDA mandate)")}
+          sector={t("Secteur public — Attractivité territoriale", "Public sector — Territorial attractiveness")}
+          context={t("Territoire en concurrence directe avec plusieurs hubs régionaux pour attirer des investissements stratégiques internationaux. Malgré des atouts solides, perception internationale affaiblie.", "Territory in direct competition with several regional hubs to attract international strategic investments. Despite solid assets, weakened international perception.")}
+          intervention={[
+            t("Benchmark géoéconomique des territoires concurrents / Best Practices", "Geo-economic benchmark of competing territories / Best practices"),
+            t("Identification des secteurs stratégiques à fort potentiel d'attractivité", "Identification of strategic sectors with high attractiveness potential"),
+            t("Cartographie des flux d'investissements sectoriels & des relais d'influence", "Mapping of sectoral investment flows & influence relays"),
+            t("Identification des facteurs de perception défavorables", "Identification of unfavorable perception factors"),
+            t("Repositionnement stratégique du discours institutionnel", "Strategic repositioning of institutional discourse"),
+          ]}
+          resultItems={[
+            t("Clarification du positionnement différenciant", "Clarification of differentiating positioning"),
+            t("Renforcement de l'attractivité économique", "Strengthening of economic attractiveness"),
+            t("Réalignement des messages vers les investisseurs cibles", "Realignment of messages towards target investors"),
+          ]}
+        />
+      }
     >
       <DetailBlock title={t("Votre réalité", "Your reality")}>
         <p className="mt-2">{t("Votre territoire dispose d'atouts structurels. Infrastructures, stabilité relative, projets structurants. Mais dans l'arbitrage international, la perception précède la réalité. Les capitaux ne vont pas vers les territoires « objectivement solides ». Ils vont vers ceux qui maîtrisent leur narratif stratégique.", "Your territory has structural assets. Infrastructure, relative stability, structuring projects. But in international arbitration, perception precedes reality. Capital doesn't flow to \"objectively solid\" territories. It flows to those who master their strategic narrative.")}</p>
@@ -33,18 +53,6 @@ const DeficitAttractivite = () => {
       <DetailBlock title={t("Solution Buildfluence", "Buildfluence Solution")}>
         <Link to="/solutions/soft-power-influence" className="mt-2 inline-block font-semibold text-primary hover:underline">Territorial Influence Lab</Link>
       </DetailBlock>
-      <CaseStudy
-        title={t("Cas client : Territoire confidentiel (mandat sous NDA strict)", "Client case: Confidential territory (strict NDA mandate)")}
-        context={t("Territoire en concurrence directe avec plusieurs hubs régionaux pour attirer des investissements stratégiques internationaux. Malgré des atouts solides, perception internationale affaiblie.", "Territory in direct competition with several regional hubs to attract international strategic investments. Despite solid assets, weakened international perception.")}
-        intervention={[
-          t("Benchmark géoéconomique des territoires concurrents / Best Practices", "Geo-economic benchmark of competing territories / Best practices"),
-          t("Identification des secteurs stratégiques à fort potentiel d'attractivité", "Identification of strategic sectors with high attractiveness potential"),
-          t("Cartographie des flux d'investissements sectoriels & des relais d'influence", "Mapping of sectoral investment flows & influence relays"),
-          t("Identification des facteurs de perception défavorables", "Identification of unfavorable perception factors"),
-          t("Repositionnement stratégique du discours institutionnel", "Strategic repositioning of institutional discourse"),
-        ]}
-        result={t("Clarification du positionnement différenciant. Renforcement de l'attractivité économique. Réalignement des messages vers les investisseurs cibles.", "Clarification of differentiating positioning. Strengthening of economic attractiveness. Realignment of messages towards target investors.")}
-      />
     </DetailPageLayout>
   );
 };
