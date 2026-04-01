@@ -11,6 +11,7 @@ interface DetailPageLayoutProps {
   title: string;
   chapeau: string;
   children: ReactNode;
+  sidebar?: ReactNode;
   ctas?: { label: string; action: string; formType?: "f1" | "f2" }[];
   situationContext?: string;
   prevSituation?: { label: string; path: string };
