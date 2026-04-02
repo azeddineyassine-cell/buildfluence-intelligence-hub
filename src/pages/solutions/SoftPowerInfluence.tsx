@@ -1,8 +1,7 @@
 import DetailPageLayout, { DetailBlock, DetailList, CaseStudy, SectionBlock } from "@/components/DetailPageLayout";
 import { useLanguage } from "@/contexts/LanguageContext";
 import cidcLogo from "@/assets/clients/cidc.jpg";
-import imgSoftPower from "@/assets/sections/soft-power-influence.jpg";
-
+import RayonnementMechanism from "@/components/RayonnementMechanism";
 const SoftPowerInfluence = () => {
   const { t } = useLanguage();
   return (
@@ -12,11 +11,7 @@ const SoftPowerInfluence = () => {
       ctas={[{ label: t("Parler de mon projet", "Discuss my project"), action: "#", formType: "f1" }]}
       situationContext="Soft Power & Influence"
     >
-      <DetailBlock title="">
-        <p>{t("Ne laissez pas les autres écrire votre histoire. Façonnez votre perception. Imposez votre narratif.", "Don't let others write your story. Shape your perception. Impose your narrative.")}</p>
-      </DetailBlock>
-
-      <img src={imgSoftPower} alt="Soft Power & Influence" className="w-full rounded-sm" />
+      <RayonnementMechanism />
 
       <SectionBlock title={t("Intelligence d'Influence", "Influence Intelligence")}>
         <DetailList items={[
