@@ -1,8 +1,7 @@
 import DetailPageLayout, { DetailBlock, DetailList, CaseStudy, SectionBlock } from "@/components/DetailPageLayout";
 import { useLanguage } from "@/contexts/LanguageContext";
 import cidcLogo from "@/assets/clients/cidc.jpg";
-import imgSoftPower from "@/assets/sections/soft-power-influence.jpg";
-
+import RayonnementMechanism from "@/components/RayonnementMechanism";
 const SoftPowerInfluence = () => {
   const { t } = useLanguage();
   return (
