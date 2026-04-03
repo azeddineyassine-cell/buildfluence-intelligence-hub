@@ -39,6 +39,7 @@ const DetailPageLayout = ({ title, chapeau, children, sidebar, ctas, situationCo
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            className={sidebar ? '' : 'max-w-[75%] mx-auto'}
           >
             <h1 className="font-serif text-3xl font-bold leading-tight sm:text-4xl md:text-5xl">
               {title}
@@ -49,7 +50,7 @@ const DetailPageLayout = ({ title, chapeau, children, sidebar, ctas, situationCo
 
             <div className={`mt-6 ${sidebar ? 'flex flex-col lg:flex-row gap-8 lg:gap-12 items-start' : ''}`}>
               {/* Main content - left column */}
-              <div className={`space-y-8 ${sidebar ? 'flex-1 min-w-0' : 'max-w-[75%] mx-auto'}`}>
+              <div className={`space-y-8 ${sidebar ? 'flex-1 min-w-0' : ''}`}>
                 {children}
               </div>
 
