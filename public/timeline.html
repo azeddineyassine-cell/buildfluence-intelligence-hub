@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Buildfluence — Dispositif de Légitimation Durable</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Inter',sans-serif;background:#F0F7FF;color:#0D1B2A;min-height:100vh;overflow-x:hidden}
+
+  .hero{text-align:center;padding:56px 40px 36px}
+  .hero h1{font-size:clamp(26px,4vw,44px);font-weight:700;line-height:1.2;margin-bottom:10px;letter-spacing:-1px;color:#0D1B2A}
+  .hero h1 em{color:#C9A84C;font-style:normal}
+  .hero .sous-titre{font-size:15px;color:#6b7c93;max-width:680px;margin:0 auto 18px;line-height:1.6}
+  .hero .accroche{font-size:16px;font-weight:600;color:#C9A84C;margin-bottom:22px}
+  .hero .principe{font-size:14px;color:#4a5568;max-width:720px;margin:0 auto 44px;line-height:1.8;font-style:italic;border-left:3px solid #C9A84C;padding:14px 20px;text-align:left;background:rgba(201,168,76,.06);border-radius:0 8px 8px 0}
+  .hero .principe strong{font-style:normal;color:#0D1B2A}
+  .hero .principe em.or{color:#C9A84C;font-style:italic}
+
+  .hint{text-align:center;font-size:12px;color:#8899aa;margin-bottom:20px;letter-spacing:1px}
+
+  /* TIMELINE ICONS ROW */
+  .icons-row{display:grid;grid-template-columns:1fr 1.2fr 1.2fr 1.2fr 1.3fr;gap:0;max-width:1400px;margin:0 auto;padding:0 40px;margin-bottom:6px}
+  .seg-icon{display:flex;flex-direction:column;align-items:center;gap:4px}
+  .seg-icon .ico{font-size:26px;line-height:1}
+  .seg-icon .ico-label{font-size:10px;color:#8899aa;letter-spacing:1px}
+
+  /* TIMELINE TRACK */
+  .timeline-wrap{padding:0 40px 60px;max-width:1400px;margin:0 auto}
+  .track-bar{display:grid;grid-template-columns:1fr 1.2fr 1.2fr 1.2fr 1.3fr;gap:0;height:64px;border-radius:8px;overflow:hidden;margin-bottom:32px;cursor:pointer}
+
+  .seg{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:10px;transition:filter .2s;position:relative}
+  .seg:hover{filter:brightness(1.12)}
+  .seg.active{filter:brightness(1.2)}
+  .seg-label{font-size:15px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;color:#fff}
+  .seg-sub{font-size:9px;letter-spacing:1.5px;opacity:.8;margin-top:2px;text-transform:uppercase;color:#fff}
+  .seg-arrow{position:absolute;right:-14px;top:50%;transform:translateY(-50%);width:0;height:0;border-top:32px solid transparent;border-bottom:32px solid transparent;z-index:10}
+
+  .s0{background:#4a4a5a}.s0 .seg-arrow{border-left:14px solid #4a4a5a}
+  .s1{background:#1a6b5a}.s1 .seg-arrow{border-left:14px solid #1a6b5a}
+  .s2{background:#1a5580}.s2 .seg-arrow{border-left:14px solid #1a5580}
+  .s3{background:#4a3580}.s3 .seg-arrow{border-left:14px solid #4a3580}
+  .s4{background:#7a3060}.s4 .seg-arrow{display:none}
+
+  .seg.active.s0{background:#6a6a8a}
+  .seg.active.s1{background:#25907a}
+  .seg.active.s2{background:#2070a8}
+  .seg.active.s3{background:#6045a8}
+  .seg.active.s4{background:#a04080}
+
+  /* DOTS */
+  .dots{display:flex;justify-content:center;gap:10px;margin-bottom:24px}
+  .dot{width:8px;height:8px;border-radius:50%;background:rgba(13,27,42,.15);cursor:pointer;transition:background .2s,transform .2s}
+  .dot.active{background:#C9A84C;transform:scale(1.3)}
+
+  /* PANELS */
+  .panels{position:relative}
+  .panel{display:none;animation:fadeIn .35s ease}
+  .panel.active{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+  @keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+  .panel-top{grid-column:1/-1;display:flex;align-items:center;gap:16px;padding:20px 24px;border-radius:12px;border:1px solid rgba(13,27,42,.1);background:#fff}
+  .panel-icon{width:48px;height:48px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0}
+  .panel-top h2{font-size:19px;font-weight:700;margin-bottom:4px;color:#0D1B2A}
+  .panel-top p{font-size:13px;color:#6b7c93;line-height:1.5}
+  .badge-dest{font-size:10px;letter-spacing:2px;text-transform:uppercase;padding:3px 10px;border-radius:20px;margin-left:12px;vertical-align:middle}
+
+  .pub-card{background:#fff;border:1px solid rgba(13,27,42,.08);border-radius:12px;padding:20px 24px;transition:border-color .2s,box-shadow .2s}
+  .pub-card:hover{border-color:rgba(201,168,76,.5);box-shadow:0 4px 20px rgba(201,168,76,.1)}
+  .pub-tag{font-size:10px;letter-spacing:2px;text-transform:uppercase;font-weight:600;margin-bottom:10px}
+  .pub-card h3{font-size:15px;font-weight:700;margin-bottom:8px;color:#0D1B2A}
+  .pub-card p{font-size:13px;color:#6b7c93;line-height:1.6}
+  .pub-highlight{color:#C9A84C;font-style:italic;font-size:13px;margin-top:10px;display:block}
+
+  /* NAV */
+  .nav-row{display:flex;justify-content:center;gap:16px;margin-top:28px}
+  .btn-prev{background:#fff;border:1px solid rgba(13,27,42,.15);color:#0D1B2A;padding:10px 24px;border-radius:8px;cursor:pointer;font-family:inherit;font-size:13px;transition:background .2s}
+  .btn-prev:hover{background:#f0f0f0}
+  .btn-next{background:#C9A84C;border:none;color:#0D1B2A;padding:10px 24px;border-radius:8px;cursor:pointer;font-family:inherit;font-size:13px;font-weight:700;transition:background .2s}
+  .btn-next:hover{background:#dbb85c}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>Dispositif de <em>Légitimation Durable</em></h1>
+  <div class="sous-titre">Structurer, rythmer et contrôler votre narratif pour sceller durablement votre légitimité auprès des décideurs clés.</div>
+  <div class="accroche">L'influence ne se décrète pas. Elle se construit dans le temps long.</div>
+  <div class="principe">
+    « La légitimité ne repose ni sur des actions isolées, ni sur des campagnes ponctuelles.<br>
+    Elle résulte d'un dispositif structuré, combinant <strong>production du contenu, diffusion ciblée</strong> et <strong>maîtrise des temporalités d'influence</strong>. Le but est de transformer la visibilité en autorité, puis en <em class="or">pouvoir de décision</em>. »
+  </div>
+</div>
+
+<div class="hint">▸ Cliquez sur chaque segment pour explorer les publications</div>
+
+<!-- ICONS ROW -->
+<div class="icons-row">
+  <div class="seg-icon"><span class="ico">⚡</span></div>
+  <div class="seg-icon"><span class="ico">📊</span></div>
+  <div class="seg-icon"><span class="ico">📰</span></div>
+  <div class="seg-icon"><span class="ico">📈</span></div>
+  <div class="seg-icon"><span class="ico">📗</span></div>
+</div>
+
+<div class="timeline-wrap">
+  <div class="track-bar">
+    <div class="seg s0 active" onclick="activate(0)">
+      <span class="seg-label">Instantané</span>
+      <span class="seg-sub">Interne</span>
+      <span class="seg-arrow"></span>
+    </div>
+    <div class="seg s1" onclick="activate(1)">
+      <span class="seg-label">Hebdomadaire</span>
+      <span class="seg-sub">Interne</span>
+      <span class="seg-arrow"></span>
+    </div>
+    <div class="seg s2" onclick="activate(2)">
+      <span class="seg-label">Mensuel</span>
+      <span class="seg-sub">Écosystème externe</span>
+      <span class="seg-arrow"></span>
+    </div>
+    <div class="seg s3" onclick="activate(3)">
+      <span class="seg-label">Trimestriel</span>
+      <span class="seg-sub">National / International</span>
+      <span class="seg-arrow"></span>
+    </div>
+    <div class="seg s4" onclick="activate(4)">
+      <span class="seg-label">Annuel</span>
+      <span class="seg-sub">National / International</span>
+    </div>
+  </div>
+
+  <div class="dots">
+    <div class="dot active" onclick="activate(0)"></div>
+    <div class="dot" onclick="activate(1)"></div>
+    <div class="dot" onclick="activate(2)"></div>
+    <div class="dot" onclick="activate(3)"></div>
+    <div class="dot" onclick="activate(4)"></div>
+  </div>
+
+  <div class="panels">
+
+    <!-- PANEL 0 : INSTANTANÉ -->
+    <div class="panel active" id="p0">
+      <div class="panel-top">
+        <div class="panel-icon" style="background:#eef0f4">⚡</div>
+        <div>
+          <h2>Alertes Stratégiques <span class="badge-dest" style="background:#eef0f4;color:#4a4a5a">INTERNE</span></h2>
+          <p>Diffusion d'information stratégique urgente en temps réel : signaux faibles, ruptures, crises émergentes.</p>
+        </div>
+      </div>
+      <div class="pub-card">
+        <div class="pub-tag" style="color:#4a4a5a">Format : Dashboard live</div>
+        <h3>Système d'alerte temps réel</h3>
+        <p>Déclenchement immédiat sur signaux faibles critiques. Notification directe aux décideurs concernés. Fiche de synthèse Go / Vigilance / No-Go.</p>
+        <span class="pub-highlight">Zéro délai entre le signal et la décision.</span>
+      </div>
+      <div class="pub-card">
+        <div class="pub-tag" style="color:#4a4a5a">Destinataires</div>
+        <h3>Direction Générale & C-Level</h3>
+        <p>Flux réservé aux décideurs stratégiques. Diffusion sécurisée, confidentielle, avec traçabilité des lectures.</p>
+        <span class="pub-highlight">Infrastructure souveraine : niveau État.</span>
+      </div>
+    </div>
+
+    <!-- PANEL 1 : HEBDOMADAIRE -->
+    <div class="panel" id="p1">
+      <div class="panel-top">
+        <div class="panel-icon" style="background:#e6f5f0">📊</div>
+        <div>
+          <h2>Publications Hebdomadaires <span class="badge-dest" style="background:#e6f5f0;color:#1a6b5a">INTERNE</span></h2>
+          <p>Trois formats complémentaires pour alimenter la prise de décision chaque semaine sans surcharge informationnelle.</p>
+        </div>
+      </div>
+      <div class="pub-card">
+        <div class="pub-tag" style="color:#1D9E75">Dashboards DG</div>
+        <h3>Tableau de bord décisionnel</h3>
+        <p>Synthèse visuelle de l'environnement concurrentiel, géopolitique et réputationnel. KPIs en temps réel. DataViz actionnables.</p>
+        <span class="pub-highlight">Un outil d'aide à la prise de décision, pas un rapport.</span>
+      </div>
+      <div class="pub-card">
+        <div class="pub-tag" style="color:#1D9E75">Newsletter Business</div>
+        <h3>Intelligence sectorielle ciblée</h3>
+        <p>Tendances émergentes, marché, technologie, innovation, concurrence, réputation, événements clés de la semaine.</p>
+        <span class="pub-highlight">Renforcer la culture décisionnelle interne.</span>
+      </div>
+      <div class="pub-card" style="grid-column:1/-1">
+        <div class="pub-tag" style="color:#1D9E75">Veille Réglementaire</div>
+        <h3>Suivi législatif & normatif</h3>
+        <p>Dernières évolutions et publications réglementaires issues de l'OMC, institutions nationales et internationales. Analyse d'impact immédiat.</p>
+        <span class="pub-highlight">Anticiper avant que la règle s'impose.</span>
+      </div>
+    </div>
+
+    <!-- PANEL 2 : MENSUEL -->
+    <div class="panel" id="p2">
+      <div class="panel-top">
+        <div class="panel-icon" style="background:#e6eef5">📰</div>
+        <div>
+          <h2>Publications Mensuelles <span class="badge-dest" style="background:#e6eef5;color:#1a5580">EXTERNE</span></h2>
+          <p>Rayonnement vers l'écosystème externe : partenaires, prescripteurs, Leaders d'Opinion et acteurs clés de l'influence sectorielle.</p>
+        </div>
+      </div>
+      <div class="pub-card">
+        <div class="pub-tag" style="color:#1a5580">MDM Info</div>
+        <h3>Marocains Du Monde</h3>
+        <p>Renforcer les liens avec les prescripteurs, partenaires, Leaders d'Opinion, Diaspora Marocaine et acteurs clés internationaux. Lettre d'information ciblée.</p>
+        <span class="pub-highlight">Transformer la diaspora en levier d'influence.</span>
+      </div>
+      <div class="pub-card">
+        <div class="pub-tag" style="color:#1a5580">Business News</div>
+        <h3>Magazine sectoriel externe</h3>
+        <p>Analyses approfondies des thématiques de votre activité. Positionnement comme source d'autorité auprès de vos parties prenantes.</p>
+        <span class="pub-highlight">Renforcer la visibilité et la crédibilité de votre marque.</span>
+      </div>
+    </div>
+
+    <!-- PANEL 3 : TRIMESTRIEL -->
+    <div class="panel" id="p3">
+      <div class="panel-top">
+        <div class="panel-icon" style="background:#eeebf5">📈</div>
+        <div>
+          <h2>Publications Trimestrielles <span class="badge-dest" style="background:#eeebf5;color:#4a3580">NATIONAL / INTERNATIONAL</span></h2>
+          <p>Diffusion large à haute valeur institutionnelle : investisseurs, fédérations, instances publiques, médias spécialisés.</p>
+        </div>
+      </div>
+      <div class="pub-card">
+        <div class="pub-tag" style="color:#4a3580">Études Sectorielles</div>
+        <h3>Benchmark & Intelligence de marché</h3>
+        <p>Cartographie des secteurs stratégiques. Analyse des pays concurrents et pays cibles. Flux d'investissement et dynamiques concurrentielles.</p>
+        <span class="pub-highlight">Positionner votre organisation comme référence sectorielle.</span>
+      </div>
+      <div class="pub-card">
+        <div class="pub-tag" style="color:#4a3580">Baromètre</div>
+        <h3>Indicateurs de compétitivité</h3>
+        <p>Mise en lumière de votre expertise et vos atouts. Suivi de la perception nationale et internationale. Scoring d'attractivité comparatif.</p>
+        <span class="pub-highlight">Votre voix dans le débat économique national.</span>
+      </div>
+    </div>
+
+    <!-- PANEL 4 : ANNUEL -->
+    <div class="panel" id="p4">
+      <div class="panel-top">
+        <div class="panel-icon" style="background:#f5eaf0">📗</div>
+        <div>
+          <h2>Publications Annuelles <span class="badge-dest" style="background:#f5eaf0;color:#7a3060">NATIONAL / INTERNATIONAL</span></h2>
+          <p>Publications de référence à fort impact institutionnel : rapport d'autorité, livre blanc, rapport d'activité annuel.</p>
+        </div>
+      </div>
+      <div class="pub-card">
+        <div class="pub-tag" style="color:#C9A84C">Livre Blanc</div>
+        <h3>Rapport d'autorité sectorielle</h3>
+        <p>Rapport annuel portant des recommandations sur les enjeux économiques et d'investissement. Diffusion ciblée aux décideurs institutionnels.</p>
+        <span class="pub-highlight">Positionnez-vous comme expert et influent dans votre secteur.</span>
+      </div>
+      <div class="pub-card">
+        <div class="pub-tag" style="color:#C9A84C">Rapport d'Activité Annuelle</div>
+        <h3>Bilan & Perspectives</h3>
+        <p>Synthèse des réalisations, impact économique, KPIs clés. Interlocuteur transparent pour les décideurs institutionnels et partenaires stratégiques.</p>
+        <span class="pub-highlight">L'influence se construit sur la durée, pas sur l'événement.</span>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="nav-row">
+    <button class="btn-prev" onclick="prev()">← Précédent</button>
+    <button class="btn-next" onclick="next()">Suivant →</button>
+  </div>
+</div>
+
+<script>
+let cur=0;
+const total=5;
+function activate(i){
+  document.querySelectorAll('.seg').forEach((s,j)=>s.classList.toggle('active',j===i));
+  document.querySelectorAll('.panel').forEach((p,j)=>p.classList.toggle('active',j===i));
+  document.querySelectorAll('.dot').forEach((d,j)=>d.classList.toggle('active',j===i));
+  cur=i;
+}
+function next(){activate((cur+1)%total)}
+function prev(){activate((cur-1+total)%total)}
+document.addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight')next();
+  if(e.key==='ArrowLeft')prev();
+});
+</script>
+</body>
+</html>
