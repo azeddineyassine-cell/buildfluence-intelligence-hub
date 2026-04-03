@@ -142,7 +142,7 @@ export const SectionBlock = ({ title, children, image, imageAlt, reverse = false
 export const CaseStudy = ({ title, context, intervention, result, resultNode, logo, image, image2, imageCaption, image2Caption }: { title: string; context: string; intervention: string[]; result?: string; resultNode?: ReactNode; logo?: string; image?: string; image2?: string; imageCaption?: string; image2Caption?: string }) => {
   const { t } = useLanguage();
   return (
-  <div className="card-glass p-6">
+  <div className="p-6 rounded-sm border border-border" style={{ background: '#f3f4f6' }}>
     <div className={`flex flex-col gap-6 ${image ? 'md:flex-row md:items-start' : ''}`}>
       <div className="flex-1 min-w-0">
         <div>
