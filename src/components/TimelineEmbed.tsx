@@ -1,16 +1,18 @@
 const TimelineEmbed = () => {
   return (
-    <div style={{ 
+    <div style={{
       width: "100vw",
       position: "relative",
       left: "50%",
       right: "50%",
       marginLeft: "-50vw",
       marginRight: "-50vw",
-      margin: "40px 0"
+      marginTop: "40px",
+      marginBottom: "40px",
+      overflow: "hidden" // Empêche les débordements indésirables
     }}>
-      <iframe
-        src="/timeline.html"
+      <iframe 
+        src="/timeline.html" 
         style={{
           width: "100%",
           height: "1000px",
