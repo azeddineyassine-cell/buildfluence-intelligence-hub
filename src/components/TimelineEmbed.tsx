@@ -3,13 +3,10 @@ const TimelineEmbed = () => {
     <div style={{
       width: "100vw",
       position: "relative",
-      left: "50%",
-      right: "50%",
-      marginLeft: "-50vw",
-      marginRight: "-50vw",
+      left: "calc(-50vw + 50%)", // Centre parfaitement l'élément par rapport au viewport
       marginTop: "40px",
       marginBottom: "40px",
-      overflow: "hidden" // Empêche les débordements indésirables
+      overflow: "hidden"
     }}>
       <iframe 
         src="/timeline.html" 
