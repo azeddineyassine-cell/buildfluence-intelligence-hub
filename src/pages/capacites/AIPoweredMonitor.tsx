@@ -1,7 +1,7 @@
 import DetailPageLayout, { DetailBlock, DetailList, CaseStudy } from "@/components/DetailPageLayout";
 import { useLanguage } from "@/contexts/LanguageContext";
 import StrategicOrbitDiagram from "@/components/StrategicOrbitDiagram";
-import LegitimationDurable from "@/components/LegitimationDurable";
+import TimelineEmbed from "@/components/TimelineEmbed";
 import presidenceSenegalLogo from "@/assets/clients/presidence-senegal.jpg";
 import imgSenegal1 from "@/assets/sections/ai-monitor-senegal-1.jpg";
 import imgSenegal2 from "@/assets/sections/ai-monitor-senegal-2.png";
@@ -18,7 +18,7 @@ const AIPoweredMonitor = () => {
       ]}
     >
       <StrategicOrbitDiagram />
-      <LegitimationDurable />
+      <TimelineEmbed />
       <DetailBlock title={t("Veille Multicanale", "Multi-channel Monitoring")}>
         <DetailList items={[
           t("Web, médias, réseaux sociaux, bases sectorielles", "Web, media, social networks, sector databases"),
