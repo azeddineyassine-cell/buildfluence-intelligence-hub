@@ -49,7 +49,7 @@ const DetailPageLayout = ({ title, chapeau, children, sidebar, ctas, situationCo
 
             <div className={`mt-6 ${sidebar ? 'flex flex-col lg:flex-row gap-8 lg:gap-12 items-start' : ''}`}>
               {/* Main content - left column */}
-              <div className={`space-y-8 ${sidebar ? 'flex-1 min-w-0' : 'max-w-4xl'}`}>
+              <div className={`space-y-8 ${sidebar ? 'flex-1 min-w-0' : 'max-w-[75%] mx-auto'}`}>
                 {children}
               </div>
 

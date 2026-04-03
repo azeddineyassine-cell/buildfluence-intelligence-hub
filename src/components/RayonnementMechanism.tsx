@@ -166,7 +166,7 @@ const RayonnementMechanism = () => {
       {/* Hero */}
       <div className="text-center mb-6 px-4">
         <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-2">
-          {t("Mécanisme de ", "Mechanism of ")}<span className="text-[#C9A84C]">{t("Rayonnement", "Outreach")}</span>{t(" & d'Attractivité", " & Attractiveness")}
+          {t("Mécanisme de ", "Mechanism of ")}<span className="text-[#C9A84C]">{t("Rayonnement & d'Attractivité", "Outreach & Attractiveness")}</span>
         </h2>
         <p className="text-sm text-muted-foreground mb-1">{t("De la captation de la donnée à l'influence", "From data capture to influence")}</p>
         <p className="text-sm font-semibold text-[#C9A84C] mb-6">{t("Buildfluence opère une chaîne complète de transformation de l'information en pouvoir décisionnel.", "Buildfluence operates a complete chain transforming information into decision-making power.")}</p>
