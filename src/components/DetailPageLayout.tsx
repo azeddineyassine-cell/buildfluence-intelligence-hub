@@ -39,7 +39,7 @@ const DetailPageLayout = ({ title, chapeau, children, sidebar, ctas, situationCo
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            className={sidebar ? '' : 'max-w-[75%] mx-auto'}
+            className="max-w-[75%] mx-auto"
           >
             <h1 className="font-serif text-3xl font-bold leading-tight sm:text-4xl md:text-5xl">
               {title}
@@ -142,7 +142,7 @@ export const SectionBlock = ({ title, children, image, imageAlt, reverse = false
 export const CaseStudy = ({ title, context, intervention, result, resultNode, logo, image, image2, imageCaption, image2Caption }: { title: string; context: string; intervention: string[]; result?: string; resultNode?: ReactNode; logo?: string; image?: string; image2?: string; imageCaption?: string; image2Caption?: string }) => {
   const { t } = useLanguage();
   return (
-  <div className="card-glass p-6">
+  <div className="p-6 rounded-sm border border-border" style={{ background: '#f3f4f6' }}>
     <div className={`flex flex-col gap-6 ${image ? 'md:flex-row md:items-start' : ''}`}>
       <div className="flex-1 min-w-0">
         <div>
@@ -155,7 +155,7 @@ export const CaseStudy = ({ title, context, intervention, result, resultNode, lo
         <DetailList items={intervention} />
         <h4 className="detail-subtitle mt-3 text-xs font-bold uppercase tracking-wider" style={{ color: '#C0392B' }}>RÉSULTAT</h4>
         {resultNode ? (
-          <div className="mt-2 rounded-lg p-4" style={{ background: 'rgba(16,62,140,0.06)', borderLeft: '4px solid #103E8C' }}>
+          <div className="mt-2 rounded-lg p-4" style={{ background: '#ffffff', borderLeft: '4px solid #103E8C' }}>
             {resultNode}
           </div>
         ) : (
