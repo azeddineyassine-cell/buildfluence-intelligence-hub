@@ -155,7 +155,7 @@ export const CaseStudy = ({ title, context, intervention, result, resultNode, lo
         <DetailList items={intervention} />
         <h4 className="detail-subtitle mt-3 text-xs font-bold uppercase tracking-wider" style={{ color: '#C0392B' }}>RÉSULTAT</h4>
         {resultNode ? (
-          <div className="mt-2 rounded-lg p-4" style={{ background: 'rgba(16,62,140,0.06)', borderLeft: '4px solid #103E8C' }}>
+          <div className="mt-2 rounded-lg p-4" style={{ background: '#ffffff', borderLeft: '4px solid #103E8C' }}>
             {resultNode}
           </div>
         ) : (
