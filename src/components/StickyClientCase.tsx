@@ -17,12 +17,12 @@ interface StickyClientCaseProps {
 const StickyClientCase = ({ logo, title, sector, context, contextItems, intervention, result, resultItems, resultNode }: StickyClientCaseProps) => {
   const { t } = useLanguage();
   return (
-    <div className="rounded-lg border border-border/60 bg-card shadow-lg overflow-hidden">
+    <div className="rounded-lg border border-border/60 overflow-hidden" style={{ background: '#f3f4f6' }}>
       {/* Header */}
-      <div className="px-5 py-4" style={{ background: 'linear-gradient(135deg, #0D1B2A 0%, #103E8C 100%)' }}>
-        <p className="text-xs font-bold uppercase tracking-widest text-white/70">{t("Cas client", "Client case")}</p>
-        {logo && <img src={logo} alt="" className="mt-3 h-14 w-auto object-contain brightness-0 invert" />}
-        {!logo && <h3 className="mt-2 text-base font-bold text-white">{title}</h3>}
+      <div className="px-5 py-4" style={{ background: '#ffffff' }}>
+        <p className="text-xs font-bold uppercase tracking-widest text-foreground/70">{t("Cas client", "Client case")}</p>
+        {logo && <img src={logo} alt="" className="mt-3 h-14 w-auto object-contain" />}
+        {!logo && <h3 className="mt-2 text-base font-bold text-foreground">{title}</h3>}
       </div>
 
       <div className="px-5 py-4 space-y-4 text-sm">

@@ -146,6 +146,7 @@ export default function StrategicOrbitDiagram() {
       <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center gap-8">
         {/* Detail Panel — LEFT */}
         <div className="w-full md:w-[38%] order-2 md:order-1">
+          <p className="text-center text-sm font-bold text-slate-800 mb-3">{t("Architecture de Veille Décisionnelle par métier", "Decision Watch Architecture by Business Domain")}</p>
           <div className="rounded-2xl overflow-hidden"
             style={{ border: "0.5px solid rgba(0,0,0,0.08)", background: "#f8fafc" }}>
             <div className="flex items-center gap-3 px-5 py-4"
@@ -196,6 +197,17 @@ export default function StrategicOrbitDiagram() {
               {connectors}
             </svg>
 
+            {/* Buildfluence watermark arc */}
+            <svg className="absolute inset-0 w-full h-full pointer-events-none z-[5]"
+              viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet">
+              <defs>
+                <path id="watermarkArc" d="M 35,50 A 15,15 0 0,1 65,50" fill="none" />
+              </defs>
+              <text opacity="0.35" fill="#C9A84C" fontSize="3.5" fontWeight="700" letterSpacing="0.15">
+                <textPath href="#watermarkArc" startOffset="50%" textAnchor="middle">BUILDFLUENCE</textPath>
+              </text>
+            </svg>
+
             {/* Core */}
             <button
               onClick={() => handleSelect("core", DEFAULT_PANEL, "core")}
@@ -203,10 +215,10 @@ export default function StrategicOrbitDiagram() {
               style={{
                 width: "18%", height: "18%",
                 top: "50%", left: "50%", transform: "translate(-50%, -50%)",
-                background: "linear-gradient(135deg, #0a2d5e 0%, #0ea5c9 100%)",
+                background: "linear-gradient(135deg, #C9A84C 0%, #d4b366 100%)",
                 boxShadow: isActive("core", "core")
-                  ? "0 0 0 4px rgba(14,165,201,0.3)"
-                  : "0 0 0 2px rgba(14,165,201,0.15)",
+                  ? "0 0 0 4px rgba(201,168,76,0.3)"
+                  : "0 0 0 2px rgba(201,168,76,0.2)",
               }}
             >
               <span className="text-white font-bold text-center leading-tight"
@@ -256,13 +268,13 @@ export default function StrategicOrbitDiagram() {
                 >
                   <div className="w-full h-full flex flex-col items-center justify-center rounded-xl transition-all duration-200"
                     style={{
-                      background: active ? "#f0f9ff" : "white",
-                      border: active ? "1.5px solid #0ea5c9" : "0.5px solid rgba(0,0,0,0.1)",
-                      boxShadow: active ? "0 4px 16px rgba(14,165,201,0.15)" : "0 1px 4px rgba(0,0,0,0.05)",
+                      background: active ? "#e0f0ff" : "#1a5580",
+                      border: active ? "1.5px solid #1a5580" : "1.5px solid #1a5580",
+                      boxShadow: active ? "0 4px 16px rgba(26,85,128,0.25)" : "0 1px 4px rgba(0,0,0,0.1)",
                     }}
                   >
                   <span style={{ fontSize: "clamp(14px, 3vw, 22px)" }}>{d.icon}</span>
-                  <span className="font-semibold text-slate-700 text-center leading-tight mt-0.5 px-1"
+                  <span className={`font-semibold text-center leading-tight mt-0.5 px-1 ${active ? "text-slate-700" : "text-white"}`}
                     style={{ fontSize: "clamp(6px, 1.5vw, 10px)" }}>
                     {d.short}
                     </span>
