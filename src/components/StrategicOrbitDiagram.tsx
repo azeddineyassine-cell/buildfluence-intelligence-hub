@@ -274,7 +274,7 @@ export default function StrategicOrbitDiagram() {
                     }}
                   >
                   <span style={{ fontSize: "clamp(14px, 3vw, 22px)" }}>{d.icon}</span>
-                  <span className="font-semibold text-slate-700 text-center leading-tight mt-0.5 px-1"
+                  <span className={`font-semibold text-center leading-tight mt-0.5 px-1 ${active ? "text-slate-700" : "text-white"}`}
                     style={{ fontSize: "clamp(6px, 1.5vw, 10px)" }}>
                     {d.short}
                     </span>
