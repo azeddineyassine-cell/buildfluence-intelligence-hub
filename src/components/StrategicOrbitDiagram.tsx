@@ -197,6 +197,17 @@ export default function StrategicOrbitDiagram() {
               {connectors}
             </svg>
 
+            {/* Buildfluence watermark arc */}
+            <svg className="absolute inset-0 w-full h-full pointer-events-none z-[5]"
+              viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet">
+              <defs>
+                <path id="watermarkArc" d="M 35,50 A 15,15 0 0,1 65,50" fill="none" />
+              </defs>
+              <text opacity="0.35" fill="#C9A84C" fontSize="3.5" fontWeight="700" letterSpacing="0.15">
+                <textPath href="#watermarkArc" startOffset="50%" textAnchor="middle">BUILDFLUENCE</textPath>
+              </text>
+            </svg>
+
             {/* Core */}
             <button
               onClick={() => handleSelect("core", DEFAULT_PANEL, "core")}
@@ -204,10 +215,10 @@ export default function StrategicOrbitDiagram() {
               style={{
                 width: "18%", height: "18%",
                 top: "50%", left: "50%", transform: "translate(-50%, -50%)",
-                background: "linear-gradient(135deg, #0a2d5e 0%, #0ea5c9 100%)",
+                background: "linear-gradient(135deg, #C9A84C 0%, #d4b366 100%)",
                 boxShadow: isActive("core", "core")
-                  ? "0 0 0 4px rgba(14,165,201,0.3)"
-                  : "0 0 0 2px rgba(14,165,201,0.15)",
+                  ? "0 0 0 4px rgba(201,168,76,0.3)"
+                  : "0 0 0 2px rgba(201,168,76,0.2)",
               }}
             >
               <span className="text-white font-bold text-center leading-tight"
