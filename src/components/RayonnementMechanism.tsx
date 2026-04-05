@@ -318,7 +318,7 @@ const RayonnementMechanism = () => {
 
   const destBlocks = [
     {
-      id: "amdie" as BlockId, title: "AMDIE / MICEPP",
+      id: "amdie" as BlockId, title: "",
       sub: t("Agence de l'investissement & Ministère de tutelle", "Investment Agency & Supervisory Ministry"),
       desc: t("Mission : Développement des investissements et des exportations des produits et services au Maroc.", "Mission: Development of investments and exports of products and services in Morocco."),
       descDetails: [
@@ -326,9 +326,9 @@ const RayonnementMechanism = () => {
         t("Objectifs Stratégiques 2026 :", "Strategic Objectives 2026:"),
         t("   550 MMDH d'investissements", "   550 BMDH in investments"),
         t("   500 000 création d'emploi", "   500,000 job creation"),
-        t("Morocco Now : Site d'Attractivité & Nation Branding", "Morocco Now: Attractiveness Site & Nation Branding"),
       ],
       logos: [amdieLogo, miceppLogo],
+      moroccoNowLogo: moroccoNowLogo,
     },
     {
       id: "gouv" as BlockId, icon: "🇲🇦", title: t("Gouvernement Marocain", "Moroccan Government"),
@@ -355,12 +355,16 @@ const RayonnementMechanism = () => {
       sub: t("Financeurs de projets & missions", "Project funders & missions"),
       desc: "",
       cooperationLogos: [
+        { src: gizLogo, alt: "GIZ" },
         { src: afdLogo, alt: "AFD" },
-        { src: badLogo, alt: "BAD" },
+        { src: jicaLogo, alt: "JICA" },
+        { src: beiLogo, alt: "BEI" },
+        { src: pnudLogo, alt: "PNUD" },
         { src: worldBankLogo, alt: "Banque Mondiale" },
         { src: berdLogo, alt: "BERD" },
+        { src: isdbLogo, alt: "IsDB" },
+        { src: badLogo, alt: "BAD" },
       ],
-      tags: ["GIZ","JICA","USAID","BEI","PNUD","IsDB"],
     },
     {
       id: "medias" as BlockId, icon: "📡", title: t("Médias & Prescripteurs", "Media & Prescribers"),
