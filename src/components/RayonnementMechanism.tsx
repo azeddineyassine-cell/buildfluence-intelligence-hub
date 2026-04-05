@@ -512,7 +512,7 @@ const RayonnementMechanism = () => {
                   <span className="w-9 h-9 rounded-lg flex items-center justify-center text-lg bg-muted flex-shrink-0">{b.icon}</span>
                 )}
                 <div>
-                  <h4 className="text-[12px] font-sans font-bold text-foreground leading-tight">{b.title}</h4>
+                  {b.title && <h4 className="text-[12px] font-sans font-bold text-foreground leading-tight">{b.title}</h4>}
                   <p className="text-[10px] text-muted-foreground">{b.sub}</p>
                 </div>
               </div>
@@ -523,6 +523,12 @@ const RayonnementMechanism = () => {
                     <li key={i} className="text-[10px] text-muted-foreground leading-relaxed">{d}</li>
                   ))}
                 </ul>
+              )}
+              {'moroccoNowLogo' in b && b.moroccoNowLogo && (
+                <div className="flex items-center gap-2 mt-2">
+                  <img src={b.moroccoNowLogo as string} alt="Morocco Now" className="h-6 object-contain" />
+                  <span className="text-[10px] text-muted-foreground">Site d'Attractivité & Nation Branding</span>
+                </div>
               )}
               {b.cooperationLogos && (
                 <div className="flex flex-wrap items-center gap-2.5 mt-2">
@@ -536,9 +542,9 @@ const RayonnementMechanism = () => {
                   {b.flags.map((f, i) => <span key={i} className="text-lg leading-none p-0.5">{f}</span>)}
                 </div>
               )}
-              {b.tags && (
+              {'tags' in b && b.tags && (
                 <div className="flex flex-wrap gap-1.5 mt-2">
-                  {b.tags.map((tag, i) => (
+                  {(b.tags as string[]).map((tag, i) => (
                     <span key={i} className="text-[10px] px-2 py-1 rounded-md bg-blue-50 text-blue-700 border border-blue-100 font-semibold dark:bg-blue-950/30 dark:text-blue-300 dark:border-blue-800">{tag}</span>
                   ))}
                 </div>
