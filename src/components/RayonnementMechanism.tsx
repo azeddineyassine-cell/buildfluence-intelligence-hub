@@ -1,17 +1,23 @@
 import { useState, useRef, useEffect } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { motion, AnimatePresence } from "framer-motion";
-import buildfluenceLogo from "@/assets/Logo_Buildfluence.png";
+import buildfluenceLogo from "@/assets/Logo_Buildfluence_dark.png";
 import amdieLogo from "@/assets/clients/amdie.png";
 import miceppLogo from "@/assets/clients/micepp.png";
-import growthLabLogo from "@/assets/clients/growthlab.png";
+import growthLabLogo from "@/assets/clients/growthlab2.png";
 import statistaLogo from "@/assets/clients/statista.png";
 import itcLogo from "@/assets/clients/itc.png";
 import worldBankLogo from "@/assets/clients/worldbank.png";
 import afdLogo from "@/assets/clients/afd.png";
-import badLogo from "@/assets/clients/bad.png";
+import badLogo from "@/assets/clients/bad2.png";
 import berdLogo from "@/assets/clients/berd.png";
-import moroccoNowLogo from "@/assets/clients/morocco-now.png";
+import moroccoNowLogo from "@/assets/clients/morocco-now2.png";
+import beiLogo from "@/assets/clients/bei.png";
+import gizLogo from "@/assets/clients/giz.png";
+import isdbLogo from "@/assets/clients/isdb.png";
+import jicaLogo from "@/assets/clients/jica.png";
+import pnudLogo from "@/assets/clients/pnud.png";
+import harvardLogo from "@/assets/clients/harvard.png";
 
 type BlockId = "veille" | "duediligence" | "bi" | "humint" | "core" | "amdie" | "gouv" | "federations" | "api" | "pays" | "cooperation" | "medias" | null;
 
