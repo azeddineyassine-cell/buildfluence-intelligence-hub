@@ -146,7 +146,7 @@ export default function StrategicOrbitDiagram() {
       <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center gap-8">
         {/* Detail Panel — LEFT */}
         <div className="w-full md:w-[38%] order-2 md:order-1">
-          <p className="text-center text-sm font-bold text-slate-800 mb-3">{t("Architecture de Veille Décisionnelle par métier", "Decision Watch Architecture by Business Domain")}</p>
+          <p className="text-center text-sm font-bold text-slate-400 mb-3" style={{ fontVariant: 'small-caps', letterSpacing: '0.08em' }}>{t("Architecture de veille décisionnelle par métier", "Decision Watch Architecture by Business Domain")}</p>
           <div className="rounded-2xl overflow-hidden"
             style={{ border: "0.5px solid rgba(0,0,0,0.08)", background: "#f8fafc" }}>
             <div className="flex items-center gap-3 px-5 py-4"
@@ -222,8 +222,8 @@ export default function StrategicOrbitDiagram() {
               }}
             >
               <span className="text-white font-bold text-center leading-tight"
-                style={{ fontSize: "clamp(8px, 2.2vw, 14px)", letterSpacing: "0.08em" }}>
-                BIG<br />DATA
+                style={{ fontSize: "clamp(7px, 1.8vw, 11px)", letterSpacing: "0.08em" }}>
+                BIG DATA<br />INTELLIGENCE
               </span>
             </button>
 
