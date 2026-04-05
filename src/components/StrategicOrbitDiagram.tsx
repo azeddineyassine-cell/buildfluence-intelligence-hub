@@ -197,15 +197,10 @@ export default function StrategicOrbitDiagram() {
               {connectors}
             </svg>
 
-            {/* Buildfluence watermark arc */}
+            {/* Buildfluence watermark — centered above Big Data Intelligence */}
             <svg className="absolute inset-0 w-full h-full pointer-events-none z-[5]"
               viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet">
-              <defs>
-                <path id="watermarkArc" d="M 35,50 A 15,15 0 0,1 65,50" fill="none" />
-              </defs>
-              <text opacity="0.35" fill="#C9A84C" fontSize="3.5" fontWeight="700" letterSpacing="0.15">
-                <textPath href="#watermarkArc" startOffset="50%" textAnchor="middle">BUILDFLUENCE</textPath>
-              </text>
+              <text x="50" y="43" textAnchor="middle" opacity="0.35" fill="#C9A84C" fontSize="3.2" fontWeight="700" letterSpacing="0.2">BUILDFLUENCE</text>
             </svg>
 
             {/* Core */}
