@@ -1,6 +1,17 @@
 import { useState, useRef, useEffect } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { motion, AnimatePresence } from "framer-motion";
+import buildfluenceLogo from "@/assets/Logo_Buildfluence.png";
+import amdieLogo from "@/assets/clients/amdie.png";
+import miceppLogo from "@/assets/clients/micepp.png";
+import growthLabLogo from "@/assets/clients/growthlab.png";
+import statistaLogo from "@/assets/clients/statista.png";
+import itcLogo from "@/assets/clients/itc.png";
+import worldBankLogo from "@/assets/clients/worldbank.png";
+import afdLogo from "@/assets/clients/afd.png";
+import badLogo from "@/assets/clients/bad.png";
+import berdLogo from "@/assets/clients/berd.png";
+import moroccoNowLogo from "@/assets/clients/morocco-now.png";
 
 type BlockId = "veille" | "duediligence" | "bi" | "humint" | "core" | "amdie" | "gouv" | "federations" | "api" | "pays" | "cooperation" | "medias" | null;
 
@@ -282,7 +293,13 @@ const RayonnementMechanism = () => {
       id: "bi" as BlockId, icon: "📊", color: "#1a6b5a",
       label: t("Business Intelligence", "Business Intelligence"),
       desc: t("Sources de référence internationale pour l'analyse économique et sectorielle.", "International reference sources for economic and sector analysis."),
-      tags: ["Growth Lab", "Statista", "fDi Intelligence", "Factiva", "World Bank", "Harvard Kennedy", "ITC"],
+      tags: [],
+      logos: [
+        { src: growthLabLogo, alt: "Growth Lab" },
+        { src: statistaLogo, alt: "Statista" },
+        { src: itcLogo, alt: "ITC" },
+        { src: worldBankLogo, alt: "World Bank" },
+      ],
     },
     {
       id: "humint" as BlockId, icon: "🧠", color: "#c0392b",
@@ -294,13 +311,56 @@ const RayonnementMechanism = () => {
   ];
 
   const destBlocks = [
-    { id: "amdie" as BlockId, icon: "🏛", title: "AMDIE / MICEPP", sub: t("Agence de l'investissement & Ministère de tutelle", "Investment Agency & Supervisory Ministry"), desc: t("Site statique : Institutionnel. Aucune Newsletter externe pour des acteurs clés : Diaspora, Partenaires / investisseurs, Institutionnels. 6 secteurs affichés dans le site vs 8 dans la charte.", "Static site: Institutional. No external newsletter for key actors: Diaspora, Partners/investors, Institutional. 6 sectors displayed vs 8 in the charter.") },
-    { id: "gouv" as BlockId, icon: "🇲🇦", title: t("Gouvernement Marocain", "Moroccan Government"), sub: t("Agences d'État & Instances publiques & CRI", "State Agencies & Public Bodies & CRI"), desc: t("Pilotage des politiques publiques avec une longueur d'avance stratégique. Centres Régionaux de l'Investissement.", "Steering public policies with a strategic head start. Regional Investment Centers.") },
-    { id: "federations" as BlockId, icon: "🤝", title: t("Fédérations Sectorielles", "Sector Federations"), sub: t("Partenaires & Entreprises stratégiques", "Partners & Strategic Companies"), desc: "CGEM, ASMEX, FENAGRI, AMIT, UNICOP, AMICA" },
-    { id: "api" as BlockId, icon: "🌐", title: t("Agences de Promotion des Investissements", "Investment Promotion Agencies"), sub: t("IDE & Attractivité internationale", "FDI & International Attractiveness"), desc: t("Création d'un Observatoire de l'investissement. Accélération de l'attractivité des IDE.", "Creation of an investment observatory. Acceleration of FDI attractiveness.") },
-    { id: "pays" as BlockId, icon: "🗺", title: t("Pays Clés", "Key Countries"), sub: t("Partenariats solides & innovants", "Solid & innovative partnerships"), desc: "", flags: ["🇫🇷","🇯🇵","🇺🇸","🇬🇧","🇩🇪","🇨🇳","🇧🇪","🇳🇱","🇪🇸","🇰🇷"] },
-    { id: "cooperation" as BlockId, icon: "🌍", title: t("Coopération Internationale", "International Cooperation"), sub: t("Financeurs de projets & missions", "Project funders & missions"), desc: "", tags: ["GIZ","AFD","JICA","USAID","BEI","PNUD","Banque Mondiale","BERD","IsDB"] },
-    { id: "medias" as BlockId, icon: "📡", title: t("Médias & Prescripteurs", "Media & Prescribers"), sub: t("Leaders d'Opinion · Diaspora · Journalistes", "Opinion Leaders · Diaspora · Journalists"), desc: t("Positionnement comme source d'autorité dans les espaces informationnels clés.", "Positioning as an authority source in key information spaces.") },
+    {
+      id: "amdie" as BlockId, title: "AMDIE / MICEPP",
+      sub: t("Agence de l'investissement & Ministère de tutelle", "Investment Agency & Supervisory Ministry"),
+      desc: t("Mission : Développement des investissements et des exportations des produits et services au Maroc.", "Mission: Development of investments and exports of products and services in Morocco."),
+      descDetails: [
+        t("Charte de l'investissement : édition en 2023", "Investment charter: 2023 edition"),
+        t("Objectifs Stratégiques 2026 :", "Strategic Objectives 2026:"),
+        t("   550 MMDH d'investissements", "   550 BMDH in investments"),
+        t("   500 000 création d'emploi", "   500,000 job creation"),
+        t("Morocco Now : Site d'Attractivité & Nation Branding", "Morocco Now: Attractiveness Site & Nation Branding"),
+      ],
+      logos: [amdieLogo, miceppLogo],
+    },
+    {
+      id: "gouv" as BlockId, icon: "🇲🇦", title: t("Gouvernement Marocain", "Moroccan Government"),
+      sub: t("Agences d'État & Instances publiques & CRI", "State Agencies & Public Bodies & CRI"),
+      desc: t("Pilotage des politiques publiques avec une longueur d'avance stratégique. Centres Régionaux de l'Investissement.", "Steering public policies with a strategic head start. Regional Investment Centers."),
+    },
+    {
+      id: "federations" as BlockId, icon: "🤝", title: t("Fédérations Sectorielles", "Sector Federations"),
+      sub: t("Partenaires & Entreprises stratégiques", "Partners & Strategic Companies"),
+      desc: "CGEM, ASMEX, FENAGRI, AMIT, UNICOP, AMICA",
+    },
+    {
+      id: "api" as BlockId, icon: "🌐", title: t("Agences de Promotion des Investissements", "Investment Promotion Agencies"),
+      sub: t("IDE & Attractivité internationale", "FDI & International Attractiveness"),
+      desc: t("Création d'un Observatoire de l'investissement. Accélération de l'attractivité des IDE.", "Creation of an investment observatory. Acceleration of FDI attractiveness."),
+    },
+    {
+      id: "pays" as BlockId, icon: "🗺", title: t("Pays Clés", "Key Countries"),
+      sub: t("Partenariats solides & innovants", "Solid & innovative partnerships"),
+      desc: "", flags: ["🇫🇷","🇯🇵","🇺🇸","🇬🇧","🇩🇪","🇨🇳","🇧🇪","🇳🇱","🇪🇸","🇰🇷"],
+    },
+    {
+      id: "cooperation" as BlockId, icon: "🌍", title: t("Coopération Internationale", "International Cooperation"),
+      sub: t("Financeurs de projets & missions", "Project funders & missions"),
+      desc: "",
+      cooperationLogos: [
+        { src: afdLogo, alt: "AFD" },
+        { src: badLogo, alt: "BAD" },
+        { src: worldBankLogo, alt: "Banque Mondiale" },
+        { src: berdLogo, alt: "BERD" },
+      ],
+      tags: ["GIZ","JICA","USAID","BEI","PNUD","IsDB"],
+    },
+    {
+      id: "medias" as BlockId, icon: "📡", title: t("Médias & Prescripteurs", "Media & Prescribers"),
+      sub: t("Leaders d'Opinion · Diaspora · Journalistes", "Opinion Leaders · Diaspora · Journalists"),
+      desc: t("Positionnement comme source d'autorité dans les espaces informationnels clés.", "Positioning as an authority source in key information spaces."),
+    },
   ];
 
   const outputItems = [
@@ -314,7 +374,7 @@ const RayonnementMechanism = () => {
   const activeDetail = active && details[active] ? details[active] : null;
 
   return (
-    <section className="py-8 -mx-6 lg:-mx-12" style={{ background: '#F8FAFC' }}>
+    <section className="py-8" style={{ background: '#F8FAFC', marginLeft: 'calc(-50vw + 50%)', marginRight: 'calc(-50vw + 50%)', width: '100vw' }}>
       {/* Hero */}
       <div className="text-center mb-6 px-4">
         <h2 className="text-2xl md:text-3xl font-sans font-bold text-foreground mb-2">
@@ -358,11 +418,21 @@ const RayonnementMechanism = () => {
                 <h3 className={`text-[13px] font-sans font-bold leading-tight ${b.isHumint ? "text-red-600" : "text-[#3B82F6]"}`}>{b.label}</h3>
               </div>
               <p className="text-[11px] text-muted-foreground leading-relaxed mb-2">{b.desc}</p>
-              <div className="flex flex-wrap gap-1.5">
-                {b.tags.map((tag, i) => (
-                  <span key={i} className="text-[10px] px-2 py-1 rounded-md bg-blue-50 text-blue-700 border border-blue-100 font-medium cursor-pointer hover:bg-blue-100 transition-colors dark:bg-blue-950/30 dark:text-blue-300 dark:border-blue-800">{tag}</span>
-                ))}
-              </div>
+              {/* Logos for BI block */}
+              {b.logos && (
+                <div className="flex flex-wrap items-center gap-3 mb-1">
+                  {b.logos.map((logo, i) => (
+                    <img key={i} src={logo.src} alt={logo.alt} className="h-5 object-contain" />
+                  ))}
+                </div>
+              )}
+              {b.tags && b.tags.length > 0 && (
+                <div className="flex flex-wrap gap-1.5">
+                  {b.tags.map((tag, i) => (
+                    <span key={i} className="text-[10px] px-2 py-1 rounded-md bg-blue-50 text-blue-700 border border-blue-100 font-medium cursor-pointer hover:bg-blue-100 transition-colors dark:bg-blue-950/30 dark:text-blue-300 dark:border-blue-800">{tag}</span>
+                  ))}
+                </div>
+              )}
             </div>
           ))}
         </div>
@@ -383,8 +453,7 @@ const RayonnementMechanism = () => {
               }`}
             style={{ background: '#0F365F' }}
           >
-            <span className="text-[30px] mb-1">🇲🇦</span>
-            <span className="text-[18px] font-bold tracking-tight text-white">Build<span className="text-[#C9A84C]">fluence</span></span>
+            <img src={buildfluenceLogo} alt="Buildfluence" className="w-20 h-auto mb-1" />
             <span className="text-[8px] text-white/70 tracking-[1.5px] uppercase mt-1 text-center leading-snug">Sovereign Decision<br/>Infrastructure</span>
           </div>
 
@@ -423,13 +492,35 @@ const RayonnementMechanism = () => {
               style={{ background: active === b.id ? '#F0F7FF' : 'white' }}
             >
               <div className="flex items-center gap-2.5 mb-1.5">
-                <span className="w-9 h-9 rounded-lg flex items-center justify-center text-lg bg-muted flex-shrink-0">{b.icon}</span>
+                {b.logos ? (
+                  <div className="flex items-center gap-1.5 flex-shrink-0">
+                    {b.logos.map((logo, i) => (
+                      <img key={i} src={logo} alt="" className="h-7 object-contain" />
+                    ))}
+                  </div>
+                ) : (
+                  <span className="w-9 h-9 rounded-lg flex items-center justify-center text-lg bg-muted flex-shrink-0">{b.icon}</span>
+                )}
                 <div>
                   <h4 className="text-[12px] font-sans font-bold text-foreground leading-tight">{b.title}</h4>
                   <p className="text-[10px] text-muted-foreground">{b.sub}</p>
                 </div>
               </div>
               {b.desc && <p className="text-[11px] text-muted-foreground leading-relaxed">{b.desc}</p>}
+              {b.descDetails && (
+                <ul className="mt-1.5 space-y-0.5">
+                  {b.descDetails.map((d, i) => (
+                    <li key={i} className="text-[10px] text-muted-foreground leading-relaxed">{d}</li>
+                  ))}
+                </ul>
+              )}
+              {b.cooperationLogos && (
+                <div className="flex flex-wrap items-center gap-2.5 mt-2">
+                  {b.cooperationLogos.map((logo, i) => (
+                    <img key={i} src={logo.src} alt={logo.alt} className="h-6 object-contain" />
+                  ))}
+                </div>
+              )}
               {b.flags && (
                 <div className="flex flex-wrap gap-1.5 mt-2">
                   {b.flags.map((f, i) => <span key={i} className="text-lg leading-none p-0.5">{f}</span>)}
@@ -466,13 +557,22 @@ const RayonnementMechanism = () => {
                   <div key={i}>
                     <h4 className="text-[13px] font-sans font-bold text-[#C9A84C] mb-2.5">{col.heading}</h4>
                     <ul className="space-y-1">
-                      {col.items.map((item, j) => (
-                        <li key={j} className="text-xs pl-4 relative py-1 border-b border-border/30 leading-relaxed before:content-['→'] before:absolute before:left-0 before:text-[#C9A84C] before:text-[10px] before:top-1"
-                          style={{ color: item.color === 'red' ? '#DC2626' : item.color === 'green' ? '#16A34A' : undefined }}
-                        >
-                          <span className={!item.color ? 'text-foreground/70' : ''}>{item.text}</span>
-                        </li>
-                      ))}
+                      {col.items.map((item, j) => {
+                        // For constat actuel: keep ✗ color but text in normal color
+                        const isConstatItem = item.color && item.text.startsWith("✗");
+                        return (
+                          <li key={j} className="text-xs pl-4 relative py-1 border-b border-border/30 leading-relaxed before:content-['→'] before:absolute before:left-0 before:text-[#C9A84C] before:text-[10px] before:top-1">
+                            {isConstatItem ? (
+                              <span className="text-foreground/70">
+                                <span style={{ color: item.color === 'red' ? '#DC2626' : '#16A34A' }}>✗</span>
+                                {item.text.substring(1)}
+                              </span>
+                            ) : (
+                              <span className="text-foreground/70">{item.text}</span>
+                            )}
+                          </li>
+                        );
+                      })}
                     </ul>
                   </div>
                 ))}
