@@ -1,17 +1,23 @@
 import { useState, useRef, useEffect } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { motion, AnimatePresence } from "framer-motion";
-import buildfluenceLogo from "@/assets/Logo_Buildfluence.png";
+import buildfluenceLogo from "@/assets/Logo_Buildfluence_dark.png";
 import amdieLogo from "@/assets/clients/amdie.png";
 import miceppLogo from "@/assets/clients/micepp.png";
-import growthLabLogo from "@/assets/clients/growthlab.png";
+import growthLabLogo from "@/assets/clients/growthlab2.png";
 import statistaLogo from "@/assets/clients/statista.png";
 import itcLogo from "@/assets/clients/itc.png";
 import worldBankLogo from "@/assets/clients/worldbank.png";
 import afdLogo from "@/assets/clients/afd.png";
-import badLogo from "@/assets/clients/bad.png";
+import badLogo from "@/assets/clients/bad2.png";
 import berdLogo from "@/assets/clients/berd.png";
-import moroccoNowLogo from "@/assets/clients/morocco-now.png";
+import moroccoNowLogo from "@/assets/clients/morocco-now2.png";
+import beiLogo from "@/assets/clients/bei.png";
+import gizLogo from "@/assets/clients/giz.png";
+import isdbLogo from "@/assets/clients/isdb.png";
+import jicaLogo from "@/assets/clients/jica.png";
+import pnudLogo from "@/assets/clients/pnud.png";
+import harvardLogo from "@/assets/clients/harvard.png";
 
 type BlockId = "veille" | "duediligence" | "bi" | "humint" | "core" | "amdie" | "gouv" | "federations" | "api" | "pays" | "cooperation" | "medias" | null;
 
@@ -312,7 +318,7 @@ const RayonnementMechanism = () => {
 
   const destBlocks = [
     {
-      id: "amdie" as BlockId, title: "AMDIE / MICEPP",
+      id: "amdie" as BlockId, title: "",
       sub: t("Agence de l'investissement & Ministère de tutelle", "Investment Agency & Supervisory Ministry"),
       desc: t("Mission : Développement des investissements et des exportations des produits et services au Maroc.", "Mission: Development of investments and exports of products and services in Morocco."),
       descDetails: [
@@ -320,9 +326,9 @@ const RayonnementMechanism = () => {
         t("Objectifs Stratégiques 2026 :", "Strategic Objectives 2026:"),
         t("   550 MMDH d'investissements", "   550 BMDH in investments"),
         t("   500 000 création d'emploi", "   500,000 job creation"),
-        t("Morocco Now : Site d'Attractivité & Nation Branding", "Morocco Now: Attractiveness Site & Nation Branding"),
       ],
       logos: [amdieLogo, miceppLogo],
+      moroccoNowLogo: moroccoNowLogo,
     },
     {
       id: "gouv" as BlockId, icon: "🇲🇦", title: t("Gouvernement Marocain", "Moroccan Government"),
@@ -349,12 +355,16 @@ const RayonnementMechanism = () => {
       sub: t("Financeurs de projets & missions", "Project funders & missions"),
       desc: "",
       cooperationLogos: [
+        { src: gizLogo, alt: "GIZ" },
         { src: afdLogo, alt: "AFD" },
-        { src: badLogo, alt: "BAD" },
+        { src: jicaLogo, alt: "JICA" },
+        { src: beiLogo, alt: "BEI" },
+        { src: pnudLogo, alt: "PNUD" },
         { src: worldBankLogo, alt: "Banque Mondiale" },
         { src: berdLogo, alt: "BERD" },
+        { src: isdbLogo, alt: "IsDB" },
+        { src: badLogo, alt: "BAD" },
       ],
-      tags: ["GIZ","JICA","USAID","BEI","PNUD","IsDB"],
     },
     {
       id: "medias" as BlockId, icon: "📡", title: t("Médias & Prescripteurs", "Media & Prescribers"),
@@ -502,7 +512,7 @@ const RayonnementMechanism = () => {
                   <span className="w-9 h-9 rounded-lg flex items-center justify-center text-lg bg-muted flex-shrink-0">{b.icon}</span>
                 )}
                 <div>
-                  <h4 className="text-[12px] font-sans font-bold text-foreground leading-tight">{b.title}</h4>
+                  {b.title && <h4 className="text-[12px] font-sans font-bold text-foreground leading-tight">{b.title}</h4>}
                   <p className="text-[10px] text-muted-foreground">{b.sub}</p>
                 </div>
               </div>
@@ -513,6 +523,12 @@ const RayonnementMechanism = () => {
                     <li key={i} className="text-[10px] text-muted-foreground leading-relaxed">{d}</li>
                   ))}
                 </ul>
+              )}
+              {'moroccoNowLogo' in b && b.moroccoNowLogo && (
+                <div className="flex items-center gap-2 mt-2">
+                  <img src={b.moroccoNowLogo as string} alt="Morocco Now" className="h-6 object-contain" />
+                  <span className="text-[10px] text-muted-foreground">Site d'Attractivité & Nation Branding</span>
+                </div>
               )}
               {b.cooperationLogos && (
                 <div className="flex flex-wrap items-center gap-2.5 mt-2">
@@ -526,9 +542,9 @@ const RayonnementMechanism = () => {
                   {b.flags.map((f, i) => <span key={i} className="text-lg leading-none p-0.5">{f}</span>)}
                 </div>
               )}
-              {b.tags && (
+              {'tags' in b && b.tags && (
                 <div className="flex flex-wrap gap-1.5 mt-2">
-                  {b.tags.map((tag, i) => (
+                  {(b.tags as string[]).map((tag, i) => (
                     <span key={i} className="text-[10px] px-2 py-1 rounded-md bg-blue-50 text-blue-700 border border-blue-100 font-semibold dark:bg-blue-950/30 dark:text-blue-300 dark:border-blue-800">{tag}</span>
                   ))}
                 </div>
