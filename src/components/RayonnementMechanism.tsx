@@ -27,6 +27,9 @@ import usDojLogo from "@/assets/clients/us-doj.png";
 import gafiLogo from "@/assets/clients/gafi.png";
 import dunBradstreetLogo from "@/assets/clients/dun-bradstreet.png";
 import ofacLogo from "@/assets/clients/ofac.png";
+import fdiLogo from "@/assets/clients/fdi.png";
+import harvard2Logo from "@/assets/clients/harvard2.png";
+import pnud2Logo from "@/assets/clients/pnud2.png";
 
 type BlockId = "veille" | "duediligence" | "bi" | "humint" | "core" | "amdie" | "gouv" | "federations" | "api" | "pays" | "cooperation" | "medias" | null;
 
