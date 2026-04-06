@@ -18,6 +18,15 @@ import isdbLogo from "@/assets/clients/isdb.png";
 import jicaLogo from "@/assets/clients/jica.png";
 import pnudLogo from "@/assets/clients/pnud.png";
 import harvardLogo from "@/assets/clients/harvard.png";
+import euSanctionsLogo from "@/assets/clients/eu-sanctions.png";
+import pitchbookLogo from "@/assets/clients/pitchbook.png";
+import icijLogo from "@/assets/clients/icij.png";
+import cbondsLogo from "@/assets/clients/cbonds.png";
+import lawSocietyLogo from "@/assets/clients/law-society.png";
+import usDojLogo from "@/assets/clients/us-doj.png";
+import gafiLogo from "@/assets/clients/gafi.png";
+import dunBradstreetLogo from "@/assets/clients/dun-bradstreet.png";
+import ofacLogo from "@/assets/clients/ofac.png";
 
 type BlockId = "veille" | "duediligence" | "bi" | "humint" | "core" | "amdie" | "gouv" | "federations" | "api" | "pays" | "cooperation" | "medias" | null;
 
@@ -33,7 +42,6 @@ const RayonnementMechanism = () => {
 
   const toggle = (id: BlockId) => setActive(prev => prev === id ? null : id);
 
-  // Auto-scroll to detail panel when it appears
   useEffect(() => {
     if (active && detailRef.current) {
       setTimeout(() => {
@@ -282,23 +290,36 @@ const RayonnementMechanism = () => {
     },
   };
 
+  const ddLogos = [
+    { src: euSanctionsLogo, alt: "EU Sanctions Map" },
+    { src: pitchbookLogo, alt: "PitchBook" },
+    { src: icijLogo, alt: "ICIJ" },
+    { src: cbondsLogo, alt: "Cbonds" },
+    { src: ofacLogo, alt: "OFAC" },
+    { src: lawSocietyLogo, alt: "The Law Society" },
+    { src: usDojLogo, alt: "US Dept. of Justice" },
+    { src: gafiLogo, alt: "GAFI" },
+    { src: dunBradstreetLogo, alt: "Dun & Bradstreet" },
+  ];
+
   const sourceBlocks = [
     {
       id: "veille" as BlockId, icon: "🔭", color: "#103E8C",
       label: t("Veille & Intelligence Stratégique", "Strategic Watch & Intelligence"),
-      desc: t("Le moteur d'intelligence opère dans 6 espaces et extrait les interactions informationnelles : Organisations, lieux, personnes clés, concepts macroéconomiques, produits et événements.", "The intelligence engine operates in 6 spaces and extracts informational interactions: Organizations, places, key people, macroeconomic concepts, products and events."),
+      desc: t("Captation en temps réel des signaux faibles sectoriels, économiques et géopolitiques. Croisement multi-sources pour anticiper les ruptures et détecter les dynamiques invisibles aux approches classiques.\n\nLe moteur d'intelligence opère dans 6 espaces et extrait les interactions informationnelles", "Real-time capture of sector, economic and geopolitical weak signals. Multi-source cross-referencing to anticipate disruptions and detect dynamics invisible to classical approaches.\n\nThe intelligence engine operates in 6 spaces and extracts informational interactions"),
       tags: [t("Organisations", "Organizations"), t("Lieux", "Places"), t("Personnes clés", "Key people"), t("Concepts macro", "Macro concepts"), t("Produits", "Products"), t("Événements", "Events")],
     },
     {
       id: "duediligence" as BlockId, icon: "🔍", color: "#1a5580",
       label: "Deep Due Diligence",
-      desc: t("Analyse approfondie des parties prenantes et des risques cachés : 3 niveaux d'investigation.", "In-depth analysis of stakeholders and hidden risks: 3 levels of investigation."),
-      tags: ["EU Sanctions Map", "PitchBook", "ICIJ", "Cbonds", "OpenCorporates", "The Law Society", "US Dept. of Justice"],
+      desc: t("Sécuriser la décision dans des environnements incertains. Analyse approfondie des acteurs, réseaux d'influence et risques réputationnels. Identification des zones de fragilité et des leviers cachés avant toute prise de position stratégique.", "Securing decisions in uncertain environments. In-depth analysis of actors, influence networks and reputational risks. Identification of fragility zones and hidden levers before any strategic positioning."),
+      tags: [],
+      ddLogos: ddLogos,
     },
     {
       id: "bi" as BlockId, icon: "📊", color: "#1a6b5a",
       label: t("Business Intelligence", "Business Intelligence"),
-      desc: t("Sources de référence internationale pour l'analyse économique et sectorielle.", "International reference sources for economic and sector analysis."),
+      desc: t("Lire la compétition avant qu'elle ne s'impose. Décryptage des stratégies pays, secteurs et concurrents. Identification des axes de différenciation et des opportunités de positionnement à fort levier d'attractivité.", "Reading competition before it takes hold. Decryption of country, sector and competitor strategies. Identification of differentiation axes and positioning opportunities with high attractiveness leverage."),
       tags: [],
       logos: [
         { src: growthLabLogo, alt: "Growth Lab" },
@@ -310,7 +331,7 @@ const RayonnementMechanism = () => {
     {
       id: "humint" as BlockId, icon: "🧠", color: "#c0392b",
       label: t("HumInt : Intelligence Humaine", "HumInt: Human Intelligence"),
-      desc: t("Le renseignement humain que les outils ne peuvent pas remplacer : réseau, terrain, sources qualifiées.", "Human intelligence that tools cannot replace: network, field, qualified sources."),
+      desc: t("Activation de réseaux qualifiés pour comprendre les intentions réelles des décideurs. Apport de contexte, lecture fine des rapports de force et validation terrain des analyses.", "Activation of qualified networks to understand the real intentions of decision-makers. Context input, fine reading of power dynamics and field validation of analyses."),
       tags: [t("Analystes terrain", "Field analysts"), t("Réseau diplomatique", "Diplomatic network"), t("Sources primaires", "Primary sources")],
       isHumint: true,
     },
@@ -319,7 +340,7 @@ const RayonnementMechanism = () => {
   const destBlocks = [
     {
       id: "amdie" as BlockId, title: "",
-      sub: t("Agence de l'investissement & Ministère de tutelle", "Investment Agency & Supervisory Ministry"),
+      sub: "",
       desc: t("Mission : Développement des investissements et des exportations des produits et services au Maroc.", "Mission: Development of investments and exports of products and services in Morocco."),
       descDetails: [
         t("Charte de l'investissement : édition en 2023", "Investment charter: 2023 edition"),
@@ -328,6 +349,7 @@ const RayonnementMechanism = () => {
         t("   500 000 création d'emploi", "   500,000 job creation"),
       ],
       logos: [amdieLogo, miceppLogo],
+      logoSubtitle: t("Agence de l'investissement & Ministère de tutelle", "Investment Agency & Supervisory Ministry"),
       moroccoNowLogo: moroccoNowLogo,
     },
     {
@@ -374,11 +396,11 @@ const RayonnementMechanism = () => {
   ];
 
   const outputItems = [
-    t("Croisement OSINT + HumInt + Business Intelligence", "OSINT + HumInt + Business Intelligence cross-referencing"),
-    t("Veille / IA augmentée en continu", "Continuously augmented AI watch"),
-    t("Scoring Go / Vigilance / No-Go", "Go / Caution / No-Go scoring"),
-    t("Dashboards & DataViz actionnables", "Actionable dashboards & DataViz"),
-    "Doing Business Platform",
+    t("Voir ce que les autres ne voient pas.", "See what others don't see."),
+    t("Décider avec un temps d'avance.", "Decide with a head start."),
+    t("Neutraliser les risques invisibles.", "Neutralize invisible risks."),
+    t("Identifier les vrais leviers d'attractivité.", "Identify the real levers of attractiveness."),
+    t("Transformer la visibilité en influence réelle.", "Transform visibility into real influence."),
   ];
 
   const activeDetail = active && details[active] ? details[active] : null;
@@ -402,8 +424,8 @@ const RayonnementMechanism = () => {
 
       <p className="text-center text-xs text-muted-foreground tracking-widest mb-4">▸ {t("Cliquez sur un bloc pour explorer le mécanisme", "Click a block to explore the mechanism")}</p>
 
-      {/* 3-Column Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-[300px_1fr_300px] gap-5 max-w-[1600px] mx-auto px-4 md:px-8 mb-4">
+      {/* 3-Column Grid — 75% width */}
+      <div className="grid grid-cols-1 lg:grid-cols-[280px_1fr_280px] gap-5 mx-auto px-4 md:px-8 mb-4" style={{ maxWidth: '75%' }}>
         {/* LEFT — Back-Office */}
         <div className="flex flex-col relative z-10">
           <p className="text-[11px] font-sans font-bold tracking-[2.5px] uppercase text-muted-foreground text-center mb-3 pb-2 border-b border-border">Back-Office</p>
@@ -427,11 +449,19 @@ const RayonnementMechanism = () => {
                 <span className="w-9 h-9 rounded-lg flex items-center justify-center text-lg flex-shrink-0" style={{ background: `${b.color}18` }}>{b.icon}</span>
                 <h3 className={`text-[13px] font-sans font-bold leading-tight ${b.isHumint ? "text-red-600" : "text-[#3B82F6]"}`}>{b.label}</h3>
               </div>
-              <p className="text-[11px] text-muted-foreground leading-relaxed mb-2">{b.desc}</p>
+              <p className="text-[11px] text-muted-foreground leading-relaxed mb-2 whitespace-pre-line">{b.desc}</p>
               {/* Logos for BI block */}
               {b.logos && (
                 <div className="flex flex-wrap items-center gap-3 mb-1">
                   {b.logos.map((logo, i) => (
+                    <img key={i} src={logo.src} alt={logo.alt} className="h-5 object-contain" />
+                  ))}
+                </div>
+              )}
+              {/* DD Logos */}
+              {'ddLogos' in b && b.ddLogos && (
+                <div className="flex flex-wrap items-center gap-2.5 mb-1">
+                  {(b.ddLogos as {src:string;alt:string}[]).map((logo, i) => (
                     <img key={i} src={logo.src} alt={logo.alt} className="h-5 object-contain" />
                   ))}
                 </div>
@@ -469,10 +499,21 @@ const RayonnementMechanism = () => {
 
           <p className="text-[10px] text-[#C9A84C] tracking-[2px] uppercase opacity-70">↓ Transformation ↓</p>
 
-          {/* Output Box */}
+          {/* Output Box — Updated title & text */}
           <div className="w-full bg-card border border-border rounded-xl p-5 min-h-[160px]">
-            <p className="text-[13px] font-sans font-bold text-[#C9A84C] mb-2">{t("Infrastructure de décision souveraine intégrée", "Integrated sovereign decision infrastructure")}</p>
-            <p className="text-xs text-muted-foreground leading-relaxed mb-3">{t("Buildfluence est une infrastructure décisionnelle permanente qui transforme la donnée brute en lucidité décisionnelle opérationnelle, de la collecte à l'influence.", "Buildfluence is a permanent decision infrastructure that transforms raw data into operational decision-making clarity, from collection to influence.")}</p>
+            <p className="text-[13px] font-sans font-bold text-[#C9A84C] mb-2">{t("Une architecture conçue pour transformer l'information en pouvoir décisionnel efficace", "An architecture designed to transform information into effective decision-making power")}</p>
+            <p className="text-xs text-muted-foreground leading-relaxed mb-2">
+              {t(
+                "Buildfluence ne délivre pas des rapports volumineux, mais une capacité à comprendre, anticiper et influencer les dynamiques complexes qui façonnent votre environnement stratégique.",
+                "Buildfluence does not deliver bulky reports, but a capacity to understand, anticipate and influence the complex dynamics that shape your strategic environment."
+              )}
+            </p>
+            <p className="text-xs text-foreground/80 leading-relaxed mb-3 font-medium">
+              {t(
+                "Pour illustrer concrètement cette approche, prenons un cas réel :\n\nInvestissement au Maroc : Décryptage d'une guerre économique silencieuse entre puissances intercontinentales",
+                "To concretely illustrate this approach, let's take a real case:\n\nInvestment in Morocco: Decryption of a silent economic war between intercontinental powers"
+              )}
+            </p>
             <div className="flex flex-col gap-1.5">
               {outputItems.map((item, i) => (
                 <div key={i} className="text-[11px] text-foreground/80 py-1.5 px-2.5 bg-muted rounded border-l-2 border-[#C9A84C]">{item}</div>
@@ -482,6 +523,52 @@ const RayonnementMechanism = () => {
 
           <p className="text-[10px] text-[#C9A84C] tracking-[2px] uppercase opacity-70">↓ {t("Diffusion", "Distribution")} ↓</p>
           <p className="text-[10px] text-muted-foreground tracking-wider uppercase">{t("VISIBILITÉ - RAYONNEMENT - INFLUENCE", "VISIBILITY - OUTREACH - INFLUENCE")}</p>
+
+          {/* Detail Panel — NOW IN CENTER instead of bottom */}
+          <AnimatePresence mode="wait">
+            {activeDetail && (
+              <motion.div
+                ref={detailRef}
+                key={active}
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -8 }}
+                transition={{ duration: 0.3 }}
+                className="w-full"
+              >
+                <div className="bg-card border border-[#C9A84C]/30 rounded-xl p-6 shadow-sm">
+                  <h3 className="text-base font-sans font-bold text-[#3B82F6] mb-4">{activeDetail.title}</h3>
+                  <div className={`grid grid-cols-1 gap-5 mb-4 ${activeDetail.columns.length === 3 ? 'md:grid-cols-3' : 'md:grid-cols-2'}`}>
+                    {activeDetail.columns.map((col, i) => (
+                      <div key={i}>
+                        <h4 className="text-[13px] font-sans font-bold text-[#C9A84C] mb-2.5">{col.heading}</h4>
+                        <ul className="space-y-1">
+                          {col.items.map((item, j) => {
+                            const isConstatItem = item.color && item.text.startsWith("✗");
+                            return (
+                              <li key={j} className="text-xs pl-4 relative py-1 border-b border-border/30 leading-relaxed before:content-['→'] before:absolute before:left-0 before:text-[#C9A84C] before:text-[10px] before:top-1">
+                                {isConstatItem ? (
+                                  <span className="text-foreground/70">
+                                    <span style={{ color: item.color === 'red' ? '#DC2626' : '#16A34A' }}>✗</span>
+                                    {item.text.substring(1)}
+                                  </span>
+                                ) : (
+                                  <span className="text-foreground/70">{item.text}</span>
+                                )}
+                              </li>
+                            );
+                          })}
+                        </ul>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="text-center pt-2">
+                    <button onClick={() => setActive(null)} className="text-[11px] text-muted-foreground border border-border px-4 py-1.5 rounded hover:border-[#C9A84C] hover:text-[#C9A84C] transition-colors">{t("Fermer", "Close")} ✕</button>
+                  </div>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
 
         {/* RIGHT — Ecosystem */}
@@ -503,18 +590,25 @@ const RayonnementMechanism = () => {
             >
               <div className="flex items-center gap-2.5 mb-1.5">
                 {b.logos ? (
-                  <div className="flex items-center gap-1.5 flex-shrink-0">
-                    {b.logos.map((logo, i) => (
-                      <img key={i} src={logo} alt="" className="h-7 object-contain" />
-                    ))}
+                  <div className="flex flex-col items-start gap-1">
+                    <div className="flex items-center gap-1.5 flex-shrink-0">
+                      {b.logos.map((logo, i) => (
+                        <img key={i} src={logo} alt="" className="h-7 object-contain" />
+                      ))}
+                    </div>
+                    {'logoSubtitle' in b && b.logoSubtitle && (
+                      <p className="text-[10px] text-muted-foreground">{b.logoSubtitle as string}</p>
+                    )}
                   </div>
                 ) : (
                   <span className="w-9 h-9 rounded-lg flex items-center justify-center text-lg bg-muted flex-shrink-0">{b.icon}</span>
                 )}
-                <div>
-                  {b.title && <h4 className="text-[12px] font-sans font-bold text-foreground leading-tight">{b.title}</h4>}
-                  <p className="text-[10px] text-muted-foreground">{b.sub}</p>
-                </div>
+                {!b.logos && (
+                  <div>
+                    {b.title && <h4 className="text-[12px] font-sans font-bold text-foreground leading-tight">{b.title}</h4>}
+                    <p className="text-[10px] text-muted-foreground">{b.sub}</p>
+                  </div>
+                )}
               </div>
               {b.desc && <p className="text-[11px] text-muted-foreground leading-relaxed">{b.desc}</p>}
               {b.descDetails && (
@@ -542,67 +636,13 @@ const RayonnementMechanism = () => {
                   {b.flags.map((f, i) => <span key={i} className="text-lg leading-none p-0.5">{f}</span>)}
                 </div>
               )}
-              {'tags' in b && b.tags && (
-                <div className="flex flex-wrap gap-1.5 mt-2">
-                  {(b.tags as string[]).map((tag, i) => (
-                    <span key={i} className="text-[10px] px-2 py-1 rounded-md bg-blue-50 text-blue-700 border border-blue-100 font-semibold dark:bg-blue-950/30 dark:text-blue-300 dark:border-blue-800">{tag}</span>
-                  ))}
-                </div>
-              )}
             </div>
           ))}
         </div>
       </div>
 
-      {/* Detail Panel */}
-      <AnimatePresence mode="wait">
-        {activeDetail && (
-          <motion.div
-            ref={detailRef}
-            key={active}
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
-            transition={{ duration: 0.3 }}
-            className="max-w-[1600px] mx-auto px-4 md:px-8 mb-6"
-          >
-            <div className="bg-card border border-[#C9A84C]/30 rounded-xl p-6 shadow-sm">
-              <h3 className="text-base font-sans font-bold text-[#3B82F6] mb-4">{activeDetail.title}</h3>
-              <div className={`grid grid-cols-1 gap-5 mb-4 ${activeDetail.columns.length === 3 ? 'md:grid-cols-3' : 'md:grid-cols-2'}`}>
-                {activeDetail.columns.map((col, i) => (
-                  <div key={i}>
-                    <h4 className="text-[13px] font-sans font-bold text-[#C9A84C] mb-2.5">{col.heading}</h4>
-                    <ul className="space-y-1">
-                      {col.items.map((item, j) => {
-                        // For constat actuel: keep ✗ color but text in normal color
-                        const isConstatItem = item.color && item.text.startsWith("✗");
-                        return (
-                          <li key={j} className="text-xs pl-4 relative py-1 border-b border-border/30 leading-relaxed before:content-['→'] before:absolute before:left-0 before:text-[#C9A84C] before:text-[10px] before:top-1">
-                            {isConstatItem ? (
-                              <span className="text-foreground/70">
-                                <span style={{ color: item.color === 'red' ? '#DC2626' : '#16A34A' }}>✗</span>
-                                {item.text.substring(1)}
-                              </span>
-                            ) : (
-                              <span className="text-foreground/70">{item.text}</span>
-                            )}
-                          </li>
-                        );
-                      })}
-                    </ul>
-                  </div>
-                ))}
-              </div>
-              <div className="text-center pt-2">
-                <button onClick={() => setActive(null)} className="text-[11px] text-muted-foreground border border-border px-4 py-1.5 rounded hover:border-[#C9A84C] hover:text-[#C9A84C] transition-colors">{t("Fermer", "Close")} ✕</button>
-              </div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
       {/* Bottom Labels */}
-      <div className="grid grid-cols-1 lg:grid-cols-[300px_1fr_300px] gap-5 max-w-[1600px] mx-auto px-4 md:px-8">
+      <div className="grid grid-cols-1 lg:grid-cols-[280px_1fr_280px] gap-5 mx-auto px-4 md:px-8" style={{ maxWidth: '75%' }}>
         <p className="text-[10px] tracking-[2px] uppercase text-muted-foreground/60 text-center pt-2 border-t border-border/50">{t("Strategic Workflow : Veille & Intelligence", "Strategic Workflow: Watch & Intelligence")}</p>
         <p className="text-[10px] tracking-[2px] uppercase text-muted-foreground/60 text-center pt-2 border-t border-border/50">{t("Infrastructure Décisionnelle Souveraine", "Sovereign Decision Infrastructure")}</p>
         <p className="text-[10px] tracking-[2px] uppercase text-muted-foreground/60 text-center pt-2 border-t border-border/50">{t("Diffusion : Inter & Intra — National & International", "Distribution: Inter & Intra — National & International")}</p>
