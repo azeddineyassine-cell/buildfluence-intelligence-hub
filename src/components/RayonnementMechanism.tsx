@@ -27,6 +27,9 @@ import usDojLogo from "@/assets/clients/us-doj.png";
 import gafiLogo from "@/assets/clients/gafi.png";
 import dunBradstreetLogo from "@/assets/clients/dun-bradstreet.png";
 import ofacLogo from "@/assets/clients/ofac.png";
+import fdiLogo from "@/assets/clients/fdi.png";
+import harvard2Logo from "@/assets/clients/harvard2.png";
+import pnud2Logo from "@/assets/clients/pnud2.png";
 
 type BlockId = "veille" | "duediligence" | "bi" | "humint" | "core" | "amdie" | "gouv" | "federations" | "api" | "pays" | "cooperation" | "medias" | null;
 
@@ -326,6 +329,9 @@ const RayonnementMechanism = () => {
         { src: statistaLogo, alt: "Statista" },
         { src: itcLogo, alt: "ITC" },
         { src: worldBankLogo, alt: "World Bank" },
+        { src: fdiLogo, alt: "fDi Intelligence" },
+        { src: harvard2Logo, alt: "Harvard Kennedy School" },
+        { src: pnud2Logo, alt: "PNUD" },
       ],
     },
     {
@@ -360,7 +366,12 @@ const RayonnementMechanism = () => {
     {
       id: "federations" as BlockId, icon: "🤝", title: t("Fédérations Sectorielles", "Sector Federations"),
       sub: t("Partenaires & Entreprises stratégiques", "Partners & Strategic Companies"),
-      desc: "CGEM, ASMEX, FENAGRI, AMIT, UNICOP, AMICA",
+      desc: "",
+      cooperationLogos: [
+        { src: fdiLogo, alt: "fDi Intelligence" },
+        { src: harvard2Logo, alt: "Harvard Kennedy School" },
+        { src: pnud2Logo, alt: "PNUD" },
+      ],
     },
     {
       id: "api" as BlockId, icon: "🌐", title: t("Agences de Promotion des Investissements", "Investment Promotion Agencies"),
