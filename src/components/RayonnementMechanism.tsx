@@ -30,28 +30,103 @@ import ofacLogo from "@/assets/clients/ofac.png";
 import fdiLogo from "@/assets/clients/fdi.png";
 import harvard2Logo from "@/assets/clients/harvard2.png";
 import pnud2Logo from "@/assets/clients/pnud2.png";
+import cgemLogo from "@/assets/clients/cgem.png";
+import asmexLogo from "@/assets/clients/asmex.png";
+import amicaLogo from "@/assets/clients/amica.png";
+import amipLogo from "@/assets/clients/amip.png";
+import amithLogo from "@/assets/clients/amith.png";
+import cntLogo from "@/assets/clients/cnt.png";
+import fenagriLogo from "@/assets/clients/fenagri.png";
+import investHKLogo from "@/assets/clients/investhk.png";
+import edbSingaporeLogo from "@/assets/clients/edb-singapore.png";
+import carteCompetitivite from "@/assets/carte-competitivite.png";
 
-type BlockId = "veille" | "duediligence" | "bi" | "humint" | "core" | "amdie" | "gouv" | "federations" | "api" | "pays" | "cooperation" | "medias" | null;
+type BlockId = "veille" | "duediligence" | "bi" | "humint" | "core" | "amdie" | "gouv" | "federations" | "api" | "pays" | "pays_concurrent" | "cooperation" | "medias" | null;
+type CountryId = string | null;
 
 interface DetailData {
   title: string;
   columns: { heading: string; items: { text: string; color?: string }[] }[];
+  image?: string;
 }
+
+// ── Country data for Pays Clés ──
+interface CountryData {
+  flag: string;
+  name: string;
+  nameFr: string;
+  category: string;
+  sectors: string;
+  description: string;
+  opportunities: string[];
+}
+
+const keyCountries: CountryData[] = [
+  { flag: "🇫🇷", name: "France", nameFr: "France", category: "Pays Clé", sectors: "Automobile, Aéronautique, Énergie, Agro", description: "Premier partenaire commercial et investisseur historique du Maroc. Relation stratégique consolidée par des accords bilatéraux structurants.", opportunities: ["Cartographie des décideurs français influençant les flux d'IDE vers le Maroc","Veille des narratifs médiatiques sur l'attractivité du Maroc en France","Intelligence sur les fédérations patronales (MEDEF, AFEP) et leurs positions","Suivi des décisions politiques impactant les accords commerciaux Maroc-France","Identification des opportunités d'influence dans les médias économiques français"] },
+  { flag: "🇩🇪", name: "Germany", nameFr: "Allemagne", category: "Pays Clé", sectors: "Industrie automobile, Chimie, Énergie verte", description: "Deuxième partenaire européen du Maroc. Forte présence industrielle et intérêt croissant pour les énergies renouvelables marocaines.", opportunities: ["Veille sur les flux IDE allemands vers l'Afrique du Nord et position du Maroc","Cartographie des grands groupes industriels (BMW, Siemens, BASF) présents ou ciblés","Suivi des positions de la Chambre de commerce germano-marocaine","Intelligence sur les programmes GIZ actifs au Maroc","Identification des influenceurs économiques allemands sur le dossier Maroc"] },
+  { flag: "🇺🇸", name: "USA", nameFr: "États-Unis", category: "Pays Clé", sectors: "Tech, Finance, Défense, Agro-industrie", description: "Allié stratégique du Maroc avec un accord de libre-échange unique en Afrique. Partenariat de défense et coopération technologique croissante.", opportunities: ["Veille sur l'Accord de Libre-Échange Maroc-USA et son évolution","Cartographie des think tanks et lobbies influençant la politique US au Maghreb","Suivi des positions des grandes agences (USAID, MCC, DFC) sur le Maroc","Intelligence sur les décideurs du Congrès US sur les dossiers Maroc-Sahara","Identification des opportunités d'influence dans les médias économiques américains"] },
+  { flag: "🇬🇧", name: "United Kingdom", nameFr: "Royaume-Uni", category: "Pays Clé", sectors: "Finance, Services, Énergie, Agroalimentaire", description: "Partenaire historique avec un accord commercial post-Brexit. Le Maroc se positionne comme hub d'entrée vers l'Afrique pour les entreprises britanniques.", opportunities: ["Veille post-Brexit sur les opportunités commerciales Maroc-UK","Cartographie des fonds d'investissement britanniques actifs en Afrique","Suivi des accords de partenariat UK-Maroc en cours de négociation","Intelligence sur les décideurs du FCDO influençant la politique UK-Maroc","Identification des opportunités médiatiques dans la presse économique britannique"] },
+  { flag: "🇯🇵", name: "Japan", nameFr: "Japon", category: "Pays Clé", sectors: "Automobile, Robotique, Énergie, Chimie", description: "Partenaire technologique de premier plan. La coopération JICA finance des projets d'infrastructure majeurs. Intérêt croissant pour les phosphates et l'énergie verte.", opportunities: ["Veille sur les stratégies d'investissement JICA et JETRO au Maroc","Cartographie des groupes industriels japonais (Toyota, Sumitomo) présents au Maroc","Intelligence sur les positions japonaises sur l'accès aux matières premières africaines","Suivi des opportunités dans le cadre de la diplomatie économique japonaise en Afrique","Identification des influenceurs japonais sur le positionnement Maroc comme hub africain"] },
+  { flag: "🇨🇳", name: "China", nameFr: "Chine", category: "Pays Clé", sectors: "Infrastructure, Digital, Énergie, Industrie", description: "Investisseur massif en infrastructure africaine. La Chine développe une présence industrielle et diplomatique croissante au Maroc dans le cadre de la Route de la Soie.", opportunities: ["Veille sur les investissements chinois (Belt & Road) au Maroc et en Afrique du Nord","Due Diligence des partenaires et entreprises chinoises actives au Maroc","Cartographie des acteurs de l'influence chinoise (médias, think tanks, ambassade)","Intelligence sur les narratifs géopolitiques chinois sur la question du Sahara","Suivi des flux IDE chinois et identification des opportunités et risques pour le Maroc"] },
+  { flag: "🇧🇪", name: "Belgium", nameFr: "Belgique", category: "Pays Clé", sectors: "Logistique, Pharmaceutique, Finance, Agroalimentaire", description: "Porte d'entrée vers les institutions européennes. Forte diaspora marocaine. Hub logistique et financier européen clé pour les exportateurs marocains.", opportunities: ["Veille sur les décisions européennes (UE, Parlement) impactant le Maroc via Bruxelles","Cartographie des institutions européennes influençant les relations Maroc-UE","Intelligence sur les lobbies et ONG actifs à Bruxelles sur les dossiers marocains","Identification des décideurs belgo-européens favorables au partenariat Maroc-UE","Suivi des narratifs médiatiques belges sur l'attractivité du Maroc"] },
+  { flag: "🇳🇱", name: "Netherlands", nameFr: "Pays-Bas", category: "Pays Clé", sectors: "Logistique, Agro-industrie, Technologie, Finance", description: "Hub logistique européen via Rotterdam. Forte tradition d'investissement à l'international. Intérêt pour les exportations agricoles et la logistique marocaine.", opportunities: ["Veille sur les flux commerciaux et logistiques via le port de Rotterdam","Cartographie des fonds d'investissement néerlandais actifs en Afrique","Intelligence sur les entreprises néerlandaises (Shell, Philips, ASML) ciblées pour le Maroc","Suivi des décisions de la Chambre de commerce NL-Maroc","Identification des opportunités d'influence dans les médias économiques néerlandais"] },
+  { flag: "🇪🇸", name: "Spain", nameFr: "Espagne", category: "Pays Clé", sectors: "Tourisme, Énergie, Agroalimentaire, BTP", description: "Voisin géographique et premier partenaire commercial de proximité. Relations complexes mais complémentaires. Porte d'entrée naturelle vers l'Europe pour les exportations marocaines.", opportunities: ["Veille sur les tensions et opportunités de la relation bilatérale Maroc-Espagne","Cartographie des groupes espagnols (Inditex, Iberdrola, Telefónica) présents au Maroc","Intelligence sur les positions espagnoles sur le Sahara Marocain","Suivi des narratifs médiatiques espagnols sur le Maroc et les flux migratoires","Identification des influenceurs économiques et politiques espagnols pro-Maroc"] },
+  { flag: "🇰🇷", name: "South Korea", nameFr: "Corée du Sud", category: "Pays Clé", sectors: "Automobile, Électronique, Énergie, Chimie", description: "Puissance industrielle et technologique en forte croissance internationale. Intérêt stratégique pour les matières premières marocaines (phosphates, cobalt) et les zones industrielles.", opportunities: ["Veille sur les stratégies d'investissement coréennes en Afrique du Nord","Cartographie des Chaebols (Samsung, Hyundai, LG, POSCO) ciblés pour le Maroc","Intelligence sur les accords de coopération Corée-Maroc","Suivi des opportunités dans le cadre de la stratégie coréenne \"K-Africa\"","Identification des décideurs coréens influençant les investissements au Maroc"] },
+];
+
+// ── Country data for Pays Concurrents ──
+interface CompetitorData {
+  flag: string;
+  name: string;
+  nameFr: string;
+  sectors: string;
+  description: string;
+  score: number;
+}
+
+const competitorCountries: CompetitorData[] = [
+  { flag: "🇧🇬", name: "Bulgaria", nameFr: "Bulgarie", sectors: "Automobile, Textile, IT", description: "Membre UE à bas coûts, attractif pour les délocalisations européennes.", score: 4 },
+  { flag: "🇪🇬", name: "Egypt", nameFr: "Égypte", sectors: "Textile, Agroalimentaire, Énergie", description: "Grand marché intérieur et position stratégique sur le canal de Suez.", score: 6 },
+  { flag: "🇨🇱", name: "Chile", nameFr: "Chili", sectors: "Mines, Énergie verte, Agroalimentaire", description: "Leader sud-américain en stabilité économique et accords de libre-échange.", score: 5 },
+  { flag: "🇭🇺", name: "Hungary", nameFr: "Hongrie", sectors: "Automobile, Électronique, Pharma", description: "Hub manufacturier européen avec forte présence d'IDE asiatiques.", score: 5 },
+  { flag: "🇰🇪", name: "Kenya", nameFr: "Kenya", sectors: "Tech, Agro, Services financiers", description: "Hub technologique et financier de l'Afrique de l'Est.", score: 4 },
+  { flag: "🇱🇹", name: "Lithuania", nameFr: "Lituanie", sectors: "Fintech, IT, Logistique", description: "Centre fintech émergent de l'UE avec une main-d'œuvre qualifiée.", score: 4 },
+  { flag: "🇲🇽", name: "Mexico", nameFr: "Mexique", sectors: "Automobile, Aéro, Agroalimentaire", description: "Accès privilégié au marché nord-américain via l'USMCA.", score: 7 },
+  { flag: "🇵🇱", name: "Poland", nameFr: "Pologne", sectors: "Automobile, IT, BPO", description: "Plus grande économie d'Europe centrale, forte croissance des IDE.", score: 6 },
+  { flag: "🇷🇼", name: "Rwanda", nameFr: "Rwanda", sectors: "Tech, Tourisme, Services", description: "Modèle de gouvernance africain, attractif pour les startups.", score: 3 },
+  { flag: "🇨🇿", name: "Czech Republic", nameFr: "République Tchèque", sectors: "Automobile, Industrie, R&D", description: "Base industrielle mature au cœur de l'Europe.", score: 6 },
+  { flag: "🇸🇳", name: "Senegal", nameFr: "Sénégal", sectors: "Agro, Pêche, Énergie", description: "Porte d'entrée de l'Afrique de l'Ouest francophone.", score: 4 },
+  { flag: "🇸🇰", name: "Slovakia", nameFr: "Slovaquie", sectors: "Automobile, Électronique", description: "Premier producteur mondial de voitures par habitant.", score: 5 },
+  { flag: "🇹🇭", name: "Thailand", nameFr: "Thaïlande", sectors: "Automobile, Électronique, Tourisme", description: "Hub manufacturier de l'ASEAN avec infrastructure développée.", score: 6 },
+  { flag: "🇹🇳", name: "Tunisia", nameFr: "Tunisie", sectors: "Textile, Aéro, IT, Automobile", description: "Concurrent direct du Maroc sur les marchés européens.", score: 7 },
+  { flag: "🇹🇷", name: "Turkey", nameFr: "Turquie", sectors: "Automobile, Textile, BTP, Défense", description: "Puissance industrielle régionale avec accès aux marchés UE et Moyen-Orient.", score: 8 },
+  { flag: "🇻🇳", name: "Vietnam", nameFr: "Vietnam", sectors: "Textile, Électronique, Agro", description: "Destination privilégiée des délocalisations depuis la Chine.", score: 7 },
+  { flag: "🇿🇦", name: "South Africa", nameFr: "Afrique du Sud", sectors: "Mines, Finance, Automobile", description: "Première économie industrialisée d'Afrique.", score: 6 },
+  { flag: "🇮🇳", name: "India", nameFr: "Inde", sectors: "IT, Pharma, Automobile, Textile", description: "Géant démographique et technologique en forte croissance.", score: 8 },
+];
 
 const RayonnementMechanism = () => {
   const { t } = useLanguage();
   const [active, setActive] = useState<BlockId>(null);
+  const [selectedCountry, setSelectedCountry] = useState<CountryId>(null);
+  const [selectedCompetitor, setSelectedCompetitor] = useState<string | null>(null);
+  const [showCompetitivityMap, setShowCompetitivityMap] = useState(false);
   const detailRef = useRef<HTMLDivElement>(null);
 
-  const toggle = (id: BlockId) => setActive(prev => prev === id ? null : id);
+  const toggle = (id: BlockId) => {
+    setSelectedCountry(null);
+    setSelectedCompetitor(null);
+    setShowCompetitivityMap(false);
+    setActive(prev => prev === id ? null : id);
+  };
 
   useEffect(() => {
-    if (active && detailRef.current) {
+    if ((active || selectedCountry || selectedCompetitor || showCompetitivityMap) && detailRef.current) {
       setTimeout(() => {
         detailRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }, 100);
     }
-  }, [active]);
+  }, [active, selectedCountry, selectedCompetitor, showCompetitivityMap]);
 
   const details: Record<string, DetailData> = {
     veille: {
@@ -239,22 +314,6 @@ const RayonnementMechanism = () => {
         ]},
       ],
     },
-    pays: {
-      title: t("Pays Clés", "Key Countries"),
-      columns: [
-        { heading: t("Partenaires majeurs", "Major partners"), items: [
-          { text: "🇫🇷 France" }, { text: "🇯🇵 Japon" }, { text: "🇺🇸 États-Unis" }, { text: "🇬🇧 Royaume-Uni" },
-        ]},
-        { heading: t("Europe & Asie", "Europe & Asia"), items: [
-          { text: "🇩🇪 Allemagne" }, { text: "🇧🇪 Belgique" }, { text: "🇳🇱 Pays-Bas" }, { text: "🇰🇷 Corée du Sud" },
-        ]},
-        { heading: t("Stratégie", "Strategy"), items: [
-          { text: t("Partenariats bilatéraux", "Bilateral partnerships") },
-          { text: t("Co-investissement", "Co-investment") },
-          { text: t("Transfert technologique", "Technology transfer") },
-        ]},
-      ],
-    },
     cooperation: {
       title: t("Coopération Internationale", "International Cooperation"),
       columns: [
@@ -343,6 +402,21 @@ const RayonnementMechanism = () => {
     },
   ];
 
+  const federationLogos = [
+    { src: cgemLogo, alt: "CGEM" },
+    { src: asmexLogo, alt: "ASMEX" },
+    { src: amicaLogo, alt: "AMICA" },
+    { src: amipLogo, alt: "AMIP" },
+    { src: amithLogo, alt: "AMITH" },
+    { src: cntLogo, alt: "CNT" },
+    { src: fenagriLogo, alt: "FENAGRI" },
+  ];
+
+  const apiLogos = [
+    { src: investHKLogo, alt: "InvestHK" },
+    { src: edbSingaporeLogo, alt: "EDB Singapore" },
+  ];
+
   const destBlocks = [
     {
       id: "amdie" as BlockId, title: "",
@@ -367,21 +441,23 @@ const RayonnementMechanism = () => {
       id: "federations" as BlockId, icon: "🤝", title: t("Fédérations Sectorielles", "Sector Federations"),
       sub: t("Partenaires & Entreprises stratégiques", "Partners & Strategic Companies"),
       desc: "",
-      cooperationLogos: [
-        { src: fdiLogo, alt: "fDi Intelligence" },
-        { src: harvard2Logo, alt: "Harvard Kennedy School" },
-        { src: pnud2Logo, alt: "PNUD" },
-      ],
+      federationLogos: federationLogos,
     },
     {
       id: "api" as BlockId, icon: "🌐", title: t("Agences de Promotion des Investissements", "Investment Promotion Agencies"),
       sub: t("IDE & Attractivité internationale", "FDI & International Attractiveness"),
-      desc: t("Création d'un Observatoire de l'investissement. Accélération de l'attractivité des IDE.", "Creation of an investment observatory. Acceleration of FDI attractiveness."),
+      desc: "",
+      apiLogos: apiLogos,
     },
     {
       id: "pays" as BlockId, icon: "🗺", title: t("Pays Clés", "Key Countries"),
       sub: t("Partenariats solides & innovants", "Solid & innovative partnerships"),
-      desc: "", flags: ["🇫🇷","🇯🇵","🇺🇸","🇬🇧","🇩🇪","🇨🇳","🇧🇪","🇳🇱","🇪🇸","🇰🇷"],
+      desc: "", flags: keyCountries.map(c => ({ flag: c.flag, name: c.nameFr })),
+    },
+    {
+      id: "pays_concurrent" as BlockId, icon: "⚡", title: t("Pays Concurrents", "Competitor Countries"),
+      sub: t("18 pays en compétition avec le Maroc sur 9 secteurs prioritaires", "18 countries competing with Morocco on 9 priority sectors"),
+      desc: "", competitorFlags: competitorCountries.map(c => ({ flag: c.flag, name: c.nameFr })),
     },
     {
       id: "cooperation" as BlockId, icon: "🌍", title: t("Coopération Internationale", "International Cooperation"),
@@ -415,6 +491,37 @@ const RayonnementMechanism = () => {
   ];
 
   const activeDetail = active && details[active] ? details[active] : null;
+
+  // Check if we should show a country detail or competitor detail instead
+  const showCountryDetail = selectedCountry !== null;
+  const countryData = showCountryDetail ? keyCountries.find(c => c.flag === selectedCountry) : null;
+  const showCompetitorDetail = selectedCompetitor !== null;
+  const competitorData = showCompetitorDetail ? competitorCountries.find(c => c.flag === selectedCompetitor) : null;
+
+  const handleCountryClick = (flag: string) => {
+    setActive(null);
+    setSelectedCompetitor(null);
+    setShowCompetitivityMap(false);
+    setSelectedCountry(prev => prev === flag ? null : flag);
+  };
+
+  const handleCompetitorClick = (flag: string) => {
+    setActive(null);
+    setSelectedCountry(null);
+    setShowCompetitivityMap(false);
+    setSelectedCompetitor(prev => prev === flag ? null : flag);
+  };
+
+  const handleCompetitorTitleHover = (hovering: boolean) => {
+    if (hovering) {
+      setActive(null);
+      setSelectedCountry(null);
+      setSelectedCompetitor(null);
+      setShowCompetitivityMap(true);
+    }
+  };
+
+  const hasActivePanel = activeDetail || showCountryDetail || showCompetitorDetail || showCompetitivityMap;
 
   return (
     <section className="py-8" style={{ background: '#F8FAFC', marginLeft: 'calc(-50vw + 50%)', marginRight: 'calc(-50vw + 50%)', width: '100vw' }}>
@@ -461,7 +568,6 @@ const RayonnementMechanism = () => {
                 <h3 className={`text-[13px] font-sans font-bold leading-tight ${b.isHumint ? "text-red-600" : "text-[#3B82F6]"}`}>{b.label}</h3>
               </div>
               <p className="text-[11px] text-muted-foreground leading-relaxed mb-2 whitespace-pre-line">{b.desc}</p>
-              {/* Logos for BI block */}
               {b.logos && (
                 <div className="flex flex-wrap items-center gap-3 mb-1">
                   {b.logos.map((logo, i) => (
@@ -469,7 +575,6 @@ const RayonnementMechanism = () => {
                   ))}
                 </div>
               )}
-              {/* DD Logos */}
               {'ddLogos' in b && b.ddLogos && (
                 <div className="flex flex-wrap items-center gap-2.5 mb-1">
                   {(b.ddLogos as {src:string;alt:string}[]).map((logo, i) => (
@@ -480,7 +585,7 @@ const RayonnementMechanism = () => {
               {b.tags && b.tags.length > 0 && (
                 <div className="flex flex-wrap gap-1.5">
                   {b.tags.map((tag, i) => (
-                    <span key={i} className="text-[10px] px-2 py-1 rounded-md bg-blue-50 text-blue-700 border border-blue-100 font-medium cursor-pointer hover:bg-blue-100 transition-colors dark:bg-blue-950/30 dark:text-blue-300 dark:border-blue-800">{tag}</span>
+                    <span key={i} className="text-[10px] px-2 py-1 rounded-md bg-blue-50 text-blue-700 border border-blue-100 font-medium cursor-pointer hover:bg-blue-100 transition-colors">{tag}</span>
                   ))}
                 </div>
               )}
@@ -510,7 +615,7 @@ const RayonnementMechanism = () => {
 
           <p className="text-[10px] text-[#C9A84C] tracking-[2px] uppercase opacity-70">↓ Transformation ↓</p>
 
-          {/* Output Box — Updated title & text */}
+          {/* Output Box */}
           <div className="w-full bg-card border border-border rounded-xl p-5 min-h-[160px]">
             <p className="text-[13px] font-sans font-bold text-[#C9A84C] mb-2">{t("Une architecture conçue pour transformer l'information en pouvoir décisionnel efficace", "An architecture designed to transform information into effective decision-making power")}</p>
             <p className="text-xs text-muted-foreground leading-relaxed mb-2">
@@ -519,7 +624,7 @@ const RayonnementMechanism = () => {
                 "Buildfluence does not deliver bulky reports, but a capacity to understand, anticipate and influence the complex dynamics that shape your strategic environment."
               )}
             </p>
-            <p className="text-xs text-foreground/80 leading-relaxed mb-3 font-medium">
+            <p className="text-xs text-foreground/80 leading-relaxed mb-3 font-medium whitespace-pre-line">
               {t(
                 "Pour illustrer concrètement cette approche, prenons un cas réel :\n\nInvestissement au Maroc : Décryptage d'une guerre économique silencieuse entre puissances intercontinentales",
                 "To concretely illustrate this approach, let's take a real case:\n\nInvestment in Morocco: Decryption of a silent economic war between intercontinental powers"
@@ -535,12 +640,12 @@ const RayonnementMechanism = () => {
           <p className="text-[10px] text-[#C9A84C] tracking-[2px] uppercase opacity-70">↓ {t("Diffusion & Impact", "Distribution & Impact")} ↓</p>
           <p className="text-[10px] text-muted-foreground tracking-wider uppercase">{t("VISIBILITÉ - RAYONNEMENT - INFLUENCE", "VISIBILITY - OUTREACH - INFLUENCE")}</p>
 
-          {/* Detail Panel — NOW IN CENTER instead of bottom */}
+          {/* Detail Panel */}
           <AnimatePresence mode="wait">
-            {activeDetail && (
+            {hasActivePanel && (
               <motion.div
                 ref={detailRef}
-                key={active}
+                key={active || selectedCountry || selectedCompetitor || 'map'}
                 initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -8 }}
@@ -548,34 +653,119 @@ const RayonnementMechanism = () => {
                 className="w-full"
               >
                 <div className="border border-[#C9A84C]/30 rounded-xl p-6 shadow-sm" style={{ background: '#F0F7FF' }}>
-                  <h3 className="text-base font-sans font-bold text-[#3B82F6] mb-4">{activeDetail.title}</h3>
-                  <div className={`grid grid-cols-1 gap-5 mb-4 ${activeDetail.columns.length === 3 ? 'md:grid-cols-3' : 'md:grid-cols-2'}`}>
-                    {activeDetail.columns.map((col, i) => (
-                      <div key={i}>
-                        <h4 className="text-[13px] font-sans font-bold text-[#C9A84C] mb-2.5">{col.heading}</h4>
-                        <ul className="space-y-1">
-                          {col.items.map((item, j) => {
-                            const isConstatItem = item.color && item.text.startsWith("✗");
-                            return (
-                              <li key={j} className="text-xs pl-4 relative py-1 border-b border-border/30 leading-relaxed before:content-['→'] before:absolute before:left-0 before:text-[#C9A84C] before:text-[10px] before:top-1">
-                                {isConstatItem ? (
-                                  <span className="text-foreground/70">
-                                    <span style={{ color: item.color === 'red' ? '#DC2626' : '#16A34A' }}>✗</span>
-                                    {item.text.substring(1)}
-                                  </span>
-                                ) : (
-                                  <span className="text-foreground/70">{item.text}</span>
-                                )}
-                              </li>
-                            );
-                          })}
-                        </ul>
+                  {/* Competitivity Map */}
+                  {showCompetitivityMap && (
+                    <>
+                      <h3 className="text-base font-sans font-bold text-[#3B82F6] mb-3">{t("Carte de Compétitivité Mondiale", "World Competitiveness Map")}</h3>
+                      <img src={carteCompetitivite} alt="Carte de compétitivité" className="w-full rounded-lg mb-3" />
+                      <div className="text-center pt-2">
+                        <button onClick={() => setShowCompetitivityMap(false)} className="text-[11px] text-muted-foreground border border-border px-4 py-1.5 rounded hover:border-[#C9A84C] hover:text-[#C9A84C] transition-colors">{t("Fermer", "Close")} ✕</button>
                       </div>
-                    ))}
-                  </div>
-                  <div className="text-center pt-2">
-                    <button onClick={() => setActive(null)} className="text-[11px] text-muted-foreground border border-border px-4 py-1.5 rounded hover:border-[#C9A84C] hover:text-[#C9A84C] transition-colors">{t("Fermer", "Close")} ✕</button>
-                  </div>
+                    </>
+                  )}
+
+                  {/* Country Detail (Pays Clés) */}
+                  {countryData && (
+                    <>
+                      <h3 className="text-base font-sans font-bold text-[#3B82F6] mb-4">{countryData.flag} {countryData.nameFr}</h3>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-4">
+                        <div>
+                          <h4 className="text-[13px] font-sans font-bold text-[#C9A84C] mb-2.5">{t("Partenariat Stratégique", "Strategic Partnership")}</h4>
+                          <ul className="space-y-1.5 text-xs text-foreground/70">
+                            <li className="py-1 border-b border-border/30"><strong>{t("Nom", "Name")} :</strong> {countryData.nameFr}</li>
+                            <li className="py-1 border-b border-border/30"><strong>{t("Catégorie", "Category")} :</strong> {countryData.category}</li>
+                            <li className="py-1 border-b border-border/30"><strong>{t("Secteurs", "Sectors")} :</strong> {countryData.sectors}</li>
+                            <li className="py-1 leading-relaxed"><strong>Description :</strong> {countryData.description}</li>
+                          </ul>
+                        </div>
+                        <div>
+                          <h4 className="text-[13px] font-sans font-bold text-[#C9A84C] mb-2.5">{t("Opportunité Buildfluence", "Buildfluence Opportunity")}</h4>
+                          <ul className="space-y-1">
+                            {countryData.opportunities.map((opp, i) => (
+                              <li key={i} className="text-xs pl-4 relative py-1 border-b border-border/30 leading-relaxed before:content-['→'] before:absolute before:left-0 before:text-[#C9A84C] before:text-[10px] before:top-1">
+                                <span className="text-foreground/70">{opp}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      </div>
+                      <div className="text-center pt-2">
+                        <button onClick={() => setSelectedCountry(null)} className="text-[11px] text-muted-foreground border border-border px-4 py-1.5 rounded hover:border-[#C9A84C] hover:text-[#C9A84C] transition-colors">{t("Fermer", "Close")} ✕</button>
+                      </div>
+                    </>
+                  )}
+
+                  {/* Competitor Detail (Pays Concurrents) */}
+                  {competitorData && (
+                    <>
+                      <h3 className="text-base font-sans font-bold text-[#3B82F6] mb-4">{competitorData.flag} {competitorData.nameFr}</h3>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-4">
+                        <div>
+                          <h4 className="text-[13px] font-sans font-bold text-[#C9A84C] mb-2.5">{t("Fiche Compétitivité", "Competitiveness Profile")}</h4>
+                          <ul className="space-y-1.5 text-xs text-foreground/70">
+                            <li className="py-1 border-b border-border/30"><strong>{t("Nom", "Name")} :</strong> {competitorData.nameFr}</li>
+                            <li className="py-1 border-b border-border/30"><strong>{t("Catégorie", "Category")} :</strong> {t("Concurrent", "Competitor")}</li>
+                            <li className="py-1 border-b border-border/30"><strong>{t("Secteurs en compétition vs Maroc", "Sectors competing vs Morocco")} :</strong> {competitorData.sectors}</li>
+                            <li className="py-1 border-b border-border/30 leading-relaxed"><strong>Description :</strong> {competitorData.description}</li>
+                            <li className="py-1"><strong>{t("Note de compétitivité", "Competitiveness score")} :</strong> <span className="font-bold text-[#C9A84C]">{competitorData.score}/10</span></li>
+                          </ul>
+                        </div>
+                        <div>
+                          <h4 className="text-[13px] font-sans font-bold text-[#C9A84C] mb-2.5">{t("Opportunité Buildfluence", "Buildfluence Opportunity")}</h4>
+                          <ul className="space-y-1">
+                            {[
+                              t("Analyse comparative des atouts du Maroc vs ce pays concurrent", "Comparative analysis of Morocco's strengths vs this competitor"),
+                              t("Identification des secteurs où le Maroc peut reprendre l'avantage", "Identification of sectors where Morocco can regain advantage"),
+                              t("Veille des stratégies d'attractivité déployées par ce concurrent", "Monitoring of attractiveness strategies deployed by this competitor"),
+                              t("Intelligence sur les investisseurs ciblés simultanément par le Maroc et ce pays", "Intelligence on investors simultaneously targeted by Morocco and this country"),
+                              t("Recommandations pour renforcer le positionnement compétitif du Maroc", "Recommendations to strengthen Morocco's competitive positioning"),
+                            ].map((opp, i) => (
+                              <li key={i} className="text-xs pl-4 relative py-1 border-b border-border/30 leading-relaxed before:content-['→'] before:absolute before:left-0 before:text-[#C9A84C] before:text-[10px] before:top-1">
+                                <span className="text-foreground/70">{opp}</span>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      </div>
+                      <div className="text-center pt-2">
+                        <button onClick={() => setSelectedCompetitor(null)} className="text-[11px] text-muted-foreground border border-border px-4 py-1.5 rounded hover:border-[#C9A84C] hover:text-[#C9A84C] transition-colors">{t("Fermer", "Close")} ✕</button>
+                      </div>
+                    </>
+                  )}
+
+                  {/* Standard Detail Panel */}
+                  {activeDetail && (
+                    <>
+                      <h3 className="text-base font-sans font-bold text-[#3B82F6] mb-4">{activeDetail.title}</h3>
+                      <div className={`grid grid-cols-1 gap-5 mb-4 ${activeDetail.columns.length === 3 ? 'md:grid-cols-3' : 'md:grid-cols-2'}`}>
+                        {activeDetail.columns.map((col, i) => (
+                          <div key={i}>
+                            <h4 className="text-[13px] font-sans font-bold text-[#C9A84C] mb-2.5">{col.heading}</h4>
+                            <ul className="space-y-1">
+                              {col.items.map((item, j) => {
+                                const isConstatItem = item.color && item.text.startsWith("✗");
+                                return (
+                                  <li key={j} className="text-xs pl-4 relative py-1 border-b border-border/30 leading-relaxed before:content-['→'] before:absolute before:left-0 before:text-[#C9A84C] before:text-[10px] before:top-1">
+                                    {isConstatItem ? (
+                                      <span className="text-foreground/70">
+                                        <span style={{ color: item.color === 'red' ? '#DC2626' : '#16A34A' }}>✗</span>
+                                        {item.text.substring(1)}
+                                      </span>
+                                    ) : (
+                                      <span className="text-foreground/70">{item.text}</span>
+                                    )}
+                                  </li>
+                                );
+                              })}
+                            </ul>
+                          </div>
+                        ))}
+                      </div>
+                      <div className="text-center pt-2">
+                        <button onClick={() => setActive(null)} className="text-[11px] text-muted-foreground border border-border px-4 py-1.5 rounded hover:border-[#C9A84C] hover:text-[#C9A84C] transition-colors">{t("Fermer", "Close")} ✕</button>
+                      </div>
+                    </>
+                  )}
                 </div>
               </motion.div>
             )}
@@ -590,8 +780,10 @@ const RayonnementMechanism = () => {
               key={b.id}
               role="button"
               tabIndex={0}
-              onClick={() => toggle(b.id)}
-              onKeyDown={(e) => e.key === 'Enter' && toggle(b.id)}
+              onClick={() => {
+                if (b.id !== "pays" && b.id !== "pays_concurrent") toggle(b.id);
+              }}
+              onKeyDown={(e) => e.key === 'Enter' && b.id !== "pays" && b.id !== "pays_concurrent" && toggle(b.id)}
               className={`border rounded-xl p-3.5 cursor-pointer transition-all mb-2.5 select-none relative z-10
                 ${active === b.id
                   ? "border-[#1a6b5a]/50 shadow-lg shadow-[#1a6b5a]/10 ring-1 ring-[#1a6b5a]/20"
@@ -615,7 +807,10 @@ const RayonnementMechanism = () => {
                   <span className="w-9 h-9 rounded-lg flex items-center justify-center text-lg bg-muted flex-shrink-0">{b.icon}</span>
                 )}
                 {!b.logos && (
-                  <div>
+                  <div
+                    onMouseEnter={() => b.id === "pays_concurrent" && handleCompetitorTitleHover(true)}
+                    onMouseLeave={() => b.id === "pays_concurrent" && handleCompetitorTitleHover(false)}
+                  >
                     {b.title && <h4 className="text-[12px] font-sans font-bold text-foreground leading-tight">{b.title}</h4>}
                     <p className="text-[10px] text-muted-foreground">{b.sub}</p>
                   </div>
@@ -642,9 +837,56 @@ const RayonnementMechanism = () => {
                   ))}
                 </div>
               )}
+              {/* Federation Logos */}
+              {'federationLogos' in b && b.federationLogos && (
+                <div className="flex flex-wrap items-center gap-2.5 mt-2">
+                  {(b.federationLogos as {src:string;alt:string}[]).map((logo, i) => (
+                    <img key={i} src={logo.src} alt={logo.alt} className="h-6 object-contain" />
+                  ))}
+                </div>
+              )}
+              {/* API Logos */}
+              {'apiLogos' in b && b.apiLogos && (
+                <div className="flex flex-wrap items-center gap-3 mt-2">
+                  {(b.apiLogos as {src:string;alt:string}[]).map((logo, i) => (
+                    <img key={i} src={logo.src} alt={logo.alt} className="h-7 object-contain" />
+                  ))}
+                </div>
+              )}
+              {/* Pays Clés flags with tooltips */}
               {b.flags && (
                 <div className="flex flex-wrap gap-1.5 mt-2">
-                  {b.flags.map((f, i) => <span key={i} className="text-lg leading-none p-0.5">{f}</span>)}
+                  {(b.flags as {flag:string;name:string}[]).map((f, i) => (
+                    <span
+                      key={i}
+                      className="text-lg leading-none p-0.5 cursor-pointer hover:scale-125 transition-transform relative group"
+                      title={f.name}
+                      onClick={(e) => { e.stopPropagation(); handleCountryClick(f.flag); }}
+                    >
+                      {f.flag}
+                      <span className="absolute bottom-full left-1/2 -translate-x-1/2 mb-1 px-2 py-0.5 text-[9px] bg-gray-800 text-white rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-20">
+                        {f.name}
+                      </span>
+                    </span>
+                  ))}
+                </div>
+              )}
+              {/* Pays Concurrents flags with tooltips */}
+              {'competitorFlags' in b && b.competitorFlags && (
+                <div className="flex flex-wrap gap-1 mt-2">
+                  {(b.competitorFlags as {flag:string;name:string}[]).map((f, i) => (
+                    <span
+                      key={i}
+                      className="text-base leading-none p-0.5 cursor-pointer hover:scale-125 transition-transform relative group"
+                      title={f.name}
+                      onClick={(e) => { e.stopPropagation(); handleCompetitorClick(f.flag); }}
+                    >
+                      {f.flag}
+                      <span className="absolute bottom-full left-1/2 -translate-x-1/2 mb-1 px-2 py-0.5 text-[9px] bg-gray-800 text-white rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-20">
+                        {f.name}
+                      </span>
+                    </span>
+                  ))}
                 </div>
               )}
             </div>
