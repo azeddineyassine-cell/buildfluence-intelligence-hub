@@ -346,7 +346,15 @@ const Navbar = () => {
                   <a
                     key={item.label}
                     href={item.href}
-                    onClick={(e) => { e.preventDefault(); handleNavClick(item.href); }}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      if ((item as any).isModal) {
+                        setOpen(false);
+                        setEspaceClientOpen(true);
+                      } else {
+                        handleNavClick(item.href);
+                      }
+                    }}
                     className="text-sm font-medium transition-colors"
                     style={{ color: '#4A5568' }}
                   >
