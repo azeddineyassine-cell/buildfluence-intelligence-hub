@@ -145,7 +145,7 @@ const TestimonialsSection = () => {
         </motion.div>
 
         {/* Carousel card */}
-        <div className="relative overflow-hidden rounded-sm" style={{ background: "#ffffff", boxShadow: "0 4px 24px rgba(0,0,0,0.08)" }}>
+        <div className="relative overflow-hidden rounded-sm mx-auto w-full lg:w-[75%]" style={{ background: "#ffffff", boxShadow: "0 4px 24px rgba(0,0,0,0.08)" }}>
           <AnimatePresence custom={direction} mode="wait">
             <motion.div
               key={current}

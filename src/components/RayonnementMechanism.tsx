@@ -532,7 +532,7 @@ const RayonnementMechanism = () => {
             </div>
           </div>
 
-          <p className="text-[10px] text-[#C9A84C] tracking-[2px] uppercase opacity-70">↓ {t("Diffusion", "Distribution")} ↓</p>
+          <p className="text-[10px] text-[#C9A84C] tracking-[2px] uppercase opacity-70">↓ {t("Diffusion & Impact", "Distribution & Impact")} ↓</p>
           <p className="text-[10px] text-muted-foreground tracking-wider uppercase">{t("VISIBILITÉ - RAYONNEMENT - INFLUENCE", "VISIBILITY - OUTREACH - INFLUENCE")}</p>
 
           {/* Detail Panel — NOW IN CENTER instead of bottom */}
@@ -547,7 +547,7 @@ const RayonnementMechanism = () => {
                 transition={{ duration: 0.3 }}
                 className="w-full"
               >
-                <div className="bg-card border border-[#C9A84C]/30 rounded-xl p-6 shadow-sm">
+                <div className="border border-[#C9A84C]/30 rounded-xl p-6 shadow-sm" style={{ background: '#F0F7FF' }}>
                   <h3 className="text-base font-sans font-bold text-[#3B82F6] mb-4">{activeDetail.title}</h3>
                   <div className={`grid grid-cols-1 gap-5 mb-4 ${activeDetail.columns.length === 3 ? 'md:grid-cols-3' : 'md:grid-cols-2'}`}>
                     {activeDetail.columns.map((col, i) => (
