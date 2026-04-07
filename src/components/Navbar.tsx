@@ -137,7 +137,14 @@ const Navbar = () => {
               >
                 <a
                   href={item.href}
-                  onClick={(e) => { e.preventDefault(); handleNavClick(item.href); }}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    if ((item as any).isModal) {
+                      setEspaceClientOpen(true);
+                    } else {
+                      handleNavClick(item.href);
+                    }
+                  }}
                   className="flex items-center gap-1 text-[12.5px] font-medium transition-colors leading-tight"
                   style={{ color: '#4A5568', maxWidth: item.maxW || '90px' }}
                   onMouseOver={(e) => (e.currentTarget.style.color = '#0D1B2A')}
