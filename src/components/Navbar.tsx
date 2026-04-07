@@ -12,6 +12,7 @@ const Navbar = () => {
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [scrolled, setScrolled] = useState(false);
   const [formOpen, setFormOpen] = useState(false);
+  const [espaceClientOpen, setEspaceClientOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -79,6 +80,7 @@ const Navbar = () => {
     { label: "Success Stories", href: "#success-stories", maxW: "90px" },
     { label: "Insights & Resources", href: "#insights", maxW: "90px" },
     { label: t("Pourquoi Buildfluence", "Why Buildfluence"), href: "#pourquoi-buildfluence", maxW: "90px" },
+    { label: t("Espace Clients", "Client Area"), href: "#espace-clients", maxW: "90px", isModal: true },
   ];
 
   const handleNavClick = (href: string) => {
