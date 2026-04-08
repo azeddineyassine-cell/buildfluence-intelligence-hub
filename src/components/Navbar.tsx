@@ -45,16 +45,6 @@ const Navbar = () => {
       ],
     },
     {
-      icon: Search,
-      title: "DEEP\nDUE DILIGENCE",
-      route: "/solutions/deep-due-diligence",
-      items: [
-        { label: "Level 1: Integrity Check", desc: t("Screening PEP et signaux faibles", "PEP screening and weak signals"), route: "/solutions/deep-due-diligence" },
-        { label: "Level 2: Strategic Risk Profiling", desc: t("Cartographie et analyse géopolitique", "Mapping and geopolitical analysis"), route: "/solutions/deep-due-diligence" },
-        { label: "Level 3: Regulatory Compliance", desc: t("Audit KYC, KYS, LCB-FT, ESG", "KYC, KYS, AML-CFT, ESG Audit"), route: "/solutions/deep-due-diligence" },
-      ],
-    },
-    {
       icon: Satellite,
       title: "SOFT POWER\n& INFLUENCE",
       route: "/solutions/soft-power-influence",
@@ -62,6 +52,16 @@ const Navbar = () => {
         { label: t("Intelligence d'Influence", "Influence Intelligence"), desc: t("Cartographie des réseaux de pouvoir", "Power network mapping"), route: "/solutions/soft-power-influence" },
         { label: "Political Intelligence", desc: t("Mapping des décideurs publics", "Public decision-maker mapping"), route: "/solutions/soft-power-influence" },
         { label: "Territorial Influence Lab", desc: t("Attractivité et compétitivité", "Attractiveness and competitiveness"), route: "/solutions/soft-power-influence" },
+      ],
+    },
+    {
+      icon: Search,
+      title: "DEEP\nDUE DILIGENCE",
+      route: "/solutions/deep-due-diligence",
+      items: [
+        { label: "Level 1: Integrity Check", desc: t("Screening PEP et signaux faibles", "PEP screening and weak signals"), route: "/solutions/deep-due-diligence" },
+        { label: "Level 2: Strategic Risk Profiling", desc: t("Cartographie et analyse géopolitique", "Mapping and geopolitical analysis"), route: "/solutions/deep-due-diligence" },
+        { label: "Level 3: Regulatory Compliance", desc: t("Audit KYC, KYS, LCB-FT, ESG", "KYC, KYS, AML-CFT, ESG Audit"), route: "/solutions/deep-due-diligence" },
       ],
     },
   ];
@@ -80,7 +80,7 @@ const Navbar = () => {
     { label: "Success Stories", href: "#success-stories", maxW: "90px" },
     { label: "Insights & Resources", href: "#insights", maxW: "90px" },
     { label: t("Pourquoi Buildfluence", "Why Buildfluence"), href: "#pourquoi-buildfluence", maxW: "90px" },
-    { label: t("Espace Clients", "Client Area"), href: "#espace-clients", maxW: "90px", isModal: true },
+    { label: t("Espace\nClients", "Client\nArea"), href: "#espace-clients", maxW: "90px", isModal: true, isGold: true },
   ];
 
   const handleNavClick = (href: string) => {
@@ -145,10 +145,10 @@ const Navbar = () => {
                       handleNavClick(item.href);
                     }
                   }}
-                  className="flex items-center gap-1 text-[12.5px] font-medium transition-colors leading-tight"
-                  style={{ color: '#4A5568', maxWidth: item.maxW || '90px' }}
-                  onMouseOver={(e) => (e.currentTarget.style.color = '#0D1B2A')}
-                  onMouseOut={(e) => (e.currentTarget.style.color = '#4A5568')}
+                  className="flex items-center gap-1 text-[12.5px] font-medium transition-colors leading-tight whitespace-pre-line"
+                  style={{ color: (item as any).isGold ? '#C9A84C' : '#4A5568', maxWidth: item.maxW || '90px' }}
+                  onMouseOver={(e) => (e.currentTarget.style.color = (item as any).isGold ? '#FFDE59' : '#0D1B2A')}
+                  onMouseOut={(e) => (e.currentTarget.style.color = (item as any).isGold ? '#C9A84C' : '#4A5568')}
                 >
                   {item.label}
                   {item.dropdown && <ChevronDown className="h-3 w-3" />}

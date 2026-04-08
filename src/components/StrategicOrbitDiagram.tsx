@@ -1,19 +1,20 @@
 import { useState } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import logoFondBlanc from "@/assets/Logo_Buildfluence_FondBlanc.png";
 
 // ─── Data (bilingual) ────────────────────────────────────────────────────────
 
 function getCycleSteps(t: (fr: string, en: string) => string) {
   return [
     {
-      id: "step-01", num: "01", label: "Collection", angle: 45, icon: "🌐",
-      title: t("Collection & Analyse", "Collection & Analysis"),
+      id: "step-01", num: "01", label: t("Captation", "Capture"), angle: 45, icon: "📡",
+      title: t("Captation & Analyse", "Capture & Analysis"),
       type: t("Capture continue", "Continuous Capture"),
       desc: t(
         "Première étape du cycle : sources captées en continu, données fraîches extraites et analysées. Le moteur couvre l'ensemble de l'écosystème informationnel en temps réel.",
         "First step of the cycle: sources captured continuously, fresh data extracted and analyzed. The engine covers the entire information ecosystem in real time."
       ),
-      tags: t("Collection,Extraction,Analyse,Multi-sources,Temps réel", "Collection,Extraction,Analysis,Multi-source,Real-time").split(","),
+      tags: t("Captation,Extraction,Analyse,Multi-sources,Temps réel", "Capture,Extraction,Analysis,Multi-source,Real-time").split(","),
     },
     {
       id: "step-02", num: "02", label: t("Indexation", "Indexing"), angle: 315, icon: "🔍",
@@ -26,7 +27,7 @@ function getCycleSteps(t: (fr: string, en: string) => string) {
       tags: t("Indexation,Filtrage,Classement sémantique,NLP,Extraction", "Indexing,Filtering,Semantic classification,NLP,Extraction").split(","),
     },
     {
-      id: "step-03", num: "03", label: t("Cartographie", "Mapping"), angle: 225, icon: "🗂️",
+      id: "step-03", num: "03", label: t("Cartographie", "Mapping"), angle: 225, icon: "🗺",
       title: t("Cartographie & Vérification", "Mapping & Verification"),
       type: t("Enrichissement contextuel", "Contextual Enrichment"),
       desc: t(
@@ -36,14 +37,14 @@ function getCycleSteps(t: (fr: string, en: string) => string) {
       tags: t("Cartographie,Intégration,Vérification,Catégorisation", "Mapping,Integration,Verification,Categorization").split(","),
     },
     {
-      id: "step-04", num: "04", label: "Reporting", angle: 135, icon: "📊",
-      title: t("Reporting & Data Visualisation", "Reporting & Data Visualization"),
+      id: "step-04", num: "04", label: t("Transformation", "Transformation"), angle: 135, icon: "📊",
+      title: t("Transformation & Data Visualisation", "Transformation & Data Visualization"),
       type: t("Intelligence actionnable", "Actionable Intelligence"),
       desc: t(
         "L'intelligence devient visible. Dashboards dynamiques, rapports exécutifs et visualisations transforment la complexité en clarté décisionnelle pour chaque niveau de l'organisation.",
         "Intelligence becomes visible. Dynamic dashboards, executive reports and visualizations transform complexity into decision-making clarity at every level of the organization."
       ),
-      tags: t("Reporting,Dashboards,Data Visualisation,KPIs,Alertes", "Reporting,Dashboards,Data Visualization,KPIs,Alerts").split(","),
+      tags: t("Transformation,Dashboards,Data Visualisation,KPIs,Alertes", "Transformation,Dashboards,Data Visualization,KPIs,Alerts").split(","),
     },
   ];
 }
@@ -83,6 +84,14 @@ function polarToPercent(angleDeg: number, radiusPct: number) {
 
 type PanelData = { icon: string; title: string; type: string; desc: string; tags: string[] };
 
+// Icon mapping for step nodes
+const stepIcons: Record<string, string> = {
+  "step-01": "📡",
+  "step-02": "🔍",
+  "step-03": "🗺",
+  "step-04": "📊",
+};
+
 // ─── Component ───────────────────────────────────────────────────────────────
 
 export default function StrategicOrbitDiagram() {
@@ -97,6 +106,11 @@ export default function StrategicOrbitDiagram() {
   function handleSelect(type: string, data: PanelData, id: string) {
     setSelected({ type, id });
     setPanel(data);
+  }
+
+  function handleLogoClick() {
+    setSelected(null);
+    setPanel(DEFAULT_PANEL);
   }
 
   function isActive(type: string, id: string) {
@@ -129,12 +143,19 @@ export default function StrategicOrbitDiagram() {
     );
   });
 
+  // Compute positions for watermark placement (between Indexation, Captation, R&D)
+  const indexPos = polarToPercent(315, 20); // Indexation
+  const captPos = polarToPercent(45, 20);   // Captation
+  const rdPos = polarToPercent(0, 41);      // R&D domain
+  const wmX = (indexPos.x + captPos.x + rdPos.x) / 3;
+  const wmY = (indexPos.y + captPos.y + rdPos.y) / 3;
+
   return (
     <section className="w-full py-20 px-4 bg-white">
       {/* Header */}
       <div className="max-w-4xl mx-auto text-center mb-14">
         <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-slate-900 leading-tight mb-4">
-          {t("L'intelligence qui transforme la donnée brute en", "The intelligence that transforms raw data into")}{" "}
+          {t("L'intelligence qui transforme la donnée brute en", "The intelligence that transforms raw data into")}<br />
           <span style={{ color: "#D0A030" }}>{t("décision souveraine", "sovereign decision")}</span>
         </h2>
         <p className="text-slate-500 text-base leading-relaxed max-w-xl mx-auto">
@@ -146,6 +167,9 @@ export default function StrategicOrbitDiagram() {
       <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center gap-8">
         {/* Detail Panel — LEFT */}
         <div className="w-full md:w-[38%] order-2 md:order-1">
+          <p className="text-center text-[14px] font-bold mb-3" style={{ fontVariant: 'small-caps', letterSpacing: '0.08em', color: '#0D1B2A' }}>
+            {t("Anticiper - Décider - Influencer", "Anticipate - Decide - Influence")}
+          </p>
           <p className="text-center text-sm font-bold text-slate-400 mb-3" style={{ fontVariant: 'small-caps', letterSpacing: '0.08em' }}>{t("Architecture de veille décisionnelle par métier", "Decision Watch Architecture by Business Domain")}</p>
           <div className="rounded-2xl overflow-hidden"
             style={{ border: "0.5px solid rgba(0,0,0,0.08)", background: "#f8fafc" }}>
@@ -197,29 +221,27 @@ export default function StrategicOrbitDiagram() {
               {connectors}
             </svg>
 
-            {/* Buildfluence watermark — centered above Big Data Intelligence */}
+            {/* Buildfluence watermark — repositioned between Indexation, Captation, R&D */}
             <svg className="absolute inset-0 w-full h-full pointer-events-none z-[5]"
               viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet">
-              <text x="50" y="43" textAnchor="middle" opacity="0.35" fill="#C9A84C" fontSize="3.2" fontWeight="700" letterSpacing="0.2">BUILDFLUENCE</text>
+              <text x={wmX} y={wmY} textAnchor="middle" opacity="0.45" fill="#C9A84C" fontSize="3.2" fontWeight="700" letterSpacing="0.2">BUILDFLUENCE</text>
             </svg>
 
-            {/* Core */}
+            {/* Core — Logo Buildfluence clickable */}
             <button
-              onClick={() => handleSelect("core", DEFAULT_PANEL, "core")}
-              className="absolute rounded-full flex flex-col items-center justify-center z-10 transition-transform duration-300 hover:scale-105"
+              onClick={handleLogoClick}
+              className="absolute rounded-full flex flex-col items-center justify-center z-10 transition-transform duration-300 hover:scale-105 overflow-hidden"
               style={{
                 width: "18%", height: "18%",
                 top: "50%", left: "50%", transform: "translate(-50%, -50%)",
-                background: "linear-gradient(135deg, #C9A84C 0%, #d4b366 100%)",
-                boxShadow: isActive("core", "core")
+                background: "#ffffff",
+                boxShadow: !selected
                   ? "0 0 0 4px rgba(201,168,76,0.3)"
                   : "0 0 0 2px rgba(201,168,76,0.2)",
+                border: "2px solid #C9A84C",
               }}
             >
-              <span className="text-white font-bold text-center leading-tight"
-                style={{ fontSize: "clamp(7px, 1.8vw, 11px)", letterSpacing: "0.08em" }}>
-                BIG DATA<br />INTELLIGENCE
-              </span>
+              <img src={logoFondBlanc} alt="Buildfluence" className="w-[85%] h-[85%] object-contain" />
             </button>
 
             {/* Steps — inner orbit */}
@@ -239,6 +261,10 @@ export default function StrategicOrbitDiagram() {
                     boxShadow: active ? "0 0 0 3px rgba(14,165,201,0.25)" : "none",
                   }}
                 >
+                <span className={`${active ? "text-slate-600" : "text-cyan-300/80"}`}
+                  style={{ fontSize: "clamp(10px, 2vw, 16px)", lineHeight: 1 }}>
+                  {stepIcons[s.id]}
+                </span>
                 <span className={`font-semibold ${active ? "text-slate-400" : "text-cyan-300/70"}`}
                   style={{ fontSize: "clamp(7px, 1.6vw, 10px)" }}>
                   {s.num}

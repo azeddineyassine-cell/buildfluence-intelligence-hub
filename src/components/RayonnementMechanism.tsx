@@ -40,6 +40,13 @@ import fenagriLogo from "@/assets/clients/fenagri.png";
 import investHKLogo from "@/assets/clients/investhk.png";
 import edbSingaporeLogo from "@/assets/clients/edb-singapore.png";
 import carteCompetitivite from "@/assets/carte-competitivite.png";
+import apexbrasilLogo from "@/assets/clients/apexbrasil.png";
+import investLithuaniaLogo from "@/assets/clients/invest-lithuania.png";
+import investMexicoLogo from "@/assets/clients/invest-mexico.png";
+import investVietnamLogo from "@/assets/clients/invest-vietnam.png";
+import investChileLogo from "@/assets/clients/investchile.png";
+import investSALogo from "@/assets/clients/investsa.png";
+import czechInvestLogo from "@/assets/clients/czech-invest.png";
 
 type BlockId = "veille" | "duediligence" | "bi" | "humint" | "core" | "amdie" | "gouv" | "federations" | "api" | "pays" | "pays_concurrent" | "cooperation" | "medias" | null;
 type CountryId = string | null;
@@ -237,14 +244,13 @@ const RayonnementMechanism = () => {
     amdie: {
       title: "AMDIE / MICEPP",
       columns: [
-        { heading: t("Constat actuel", "Current observation"), items: [
-          { text: t("✗ Morocco Now : Site statique institutionnel", "✗ Morocco Now: Static institutional site"), color: "red" },
-          { text: t("✗ Manque de plateforme digitale interactive vs Investisseurs", "✗ Lack of interactive digital platform vs Investors"), color: "red" },
-          { text: t("✗ Aucune Newsletter externe par cible : Institutionnels, Diaspora, Investisseurs & Prescripteurs internationaux", "✗ No external newsletter by target: Institutional, Diaspora, Investors & International Prescribers"), color: "red" },
-          { text: t("✗ Aucune publication d'intelligence sectorielle", "✗ No sector intelligence publication"), color: "red" },
-          { text: t("✗ Dernière news : 2023", "✗ Last news: 2023"), color: "red" },
-          { text: t("✗ Source d'info : Factiva agrégateur de presse", "✗ Info source: Factiva press aggregator"), color: "green" },
-          { text: t("✗ Pas d'outils de veille professionnel", "✗ No professional monitoring tools"), color: "red" },
+        { heading: t("Mission & Objectifs", "Mission & Objectives"), items: [
+          { text: t("Mission : Développement des investissements et des exportations des produits et services au Maroc", "Mission: Development of investments and exports of products and services in Morocco") },
+          { text: t("Charte de l'investissement : édition 2023", "Investment Charter: 2023 edition") },
+          { text: t("Objectifs stratégiques 2026 :", "Strategic objectives 2026:") },
+          { text: t("   • 550 MMDH d'investissements", "   • 550 BMDH in investments") },
+          { text: t("   • 500 000 créations d'emploi", "   • 500,000 job creation") },
+          { text: t("Morocco Now : Site d'Attractivité & Nation Branding", "Morocco Now: Attractiveness Site & Nation Branding") },
         ]},
         { heading: t("Solutions Buildfluence", "Buildfluence Solutions"), items: [
           { text: t("Newsletter stratégique dédiée", "Dedicated strategic newsletter") },
@@ -415,6 +421,13 @@ const RayonnementMechanism = () => {
   const apiLogos = [
     { src: investHKLogo, alt: "InvestHK" },
     { src: edbSingaporeLogo, alt: "EDB Singapore" },
+    { src: apexbrasilLogo, alt: "ApexBrasil" },
+    { src: investLithuaniaLogo, alt: "Invest Lithuania" },
+    { src: investMexicoLogo, alt: "Invest Mexico" },
+    { src: investVietnamLogo, alt: "Invest Vietnam" },
+    { src: investChileLogo, alt: "InvestChile" },
+    { src: investSALogo, alt: "InvestSA" },
+    { src: czechInvestLogo, alt: "CzechInvest" },
   ];
 
   const destBlocks = [
@@ -512,13 +525,11 @@ const RayonnementMechanism = () => {
     setSelectedCompetitor(prev => prev === flag ? null : flag);
   };
 
-  const handleCompetitorTitleHover = (hovering: boolean) => {
-    if (hovering) {
-      setActive(null);
-      setSelectedCountry(null);
-      setSelectedCompetitor(null);
-      setShowCompetitivityMap(true);
-    }
+  const handleCompetitorTitleClick = () => {
+    setActive(null);
+    setSelectedCountry(null);
+    setSelectedCompetitor(null);
+    setShowCompetitivityMap(prev => !prev);
   };
 
   const hasActivePanel = activeDetail || showCountryDetail || showCompetitorDetail || showCompetitivityMap;
@@ -571,14 +582,14 @@ const RayonnementMechanism = () => {
               {b.logos && (
                 <div className="flex flex-wrap items-center gap-3 mb-1">
                   {b.logos.map((logo, i) => (
-                    <img key={i} src={logo.src} alt={logo.alt} className="h-5 object-contain" />
+                    <img key={i} src={logo.src} alt={logo.alt} className="h-7 object-contain" />
                   ))}
                 </div>
               )}
               {'ddLogos' in b && b.ddLogos && (
                 <div className="flex flex-wrap items-center gap-2.5 mb-1">
                   {(b.ddLogos as {src:string;alt:string}[]).map((logo, i) => (
-                    <img key={i} src={logo.src} alt={logo.alt} className="h-5 object-contain" />
+                    <img key={i} src={logo.src} alt={logo.alt} className="h-7 object-contain" />
                   ))}
                 </div>
               )}
@@ -602,15 +613,15 @@ const RayonnementMechanism = () => {
             tabIndex={0}
             onClick={() => toggle("core")}
             onKeyDown={(e) => e.key === 'Enter' && toggle("core")}
-            className={`border-2 rounded-full w-[180px] h-[180px] flex flex-col items-center justify-center cursor-pointer transition-all flex-shrink-0 select-none
+            className={`border-2 rounded-full w-[225px] h-[225px] flex flex-col items-center justify-center cursor-pointer transition-all flex-shrink-0 select-none
               ${active === "core"
                 ? "border-[#C9A84C] shadow-lg shadow-[#C9A84C]/15"
                 : "border-[#C9A84C]/35 hover:border-[#C9A84C] hover:shadow-md"
               }`}
             style={{ background: '#0F365F' }}
           >
-            <img src={buildfluenceLogo} alt="Buildfluence" className="w-20 h-auto mb-1" />
-            <span className="text-[8px] text-white/70 tracking-[1.5px] uppercase mt-1 text-center leading-snug">Sovereign Decision<br/>Infrastructure</span>
+            <img src={buildfluenceLogo} alt="Buildfluence" className="w-24 h-auto mb-1" />
+            <span className="text-[10px] text-white/70 tracking-[1.5px] uppercase mt-1 text-center leading-snug">Sovereign Decision<br/>Infrastructure</span>
           </div>
 
           <p className="text-[10px] text-[#C9A84C] tracking-[2px] uppercase opacity-70">↓ Transformation ↓</p>
@@ -736,7 +747,10 @@ const RayonnementMechanism = () => {
                   {/* Standard Detail Panel */}
                   {activeDetail && (
                     <>
-                      <h3 className="text-base font-sans font-bold text-[#3B82F6] mb-4">{activeDetail.title}</h3>
+                      <h3 className="text-base font-sans font-bold text-[#3B82F6] mb-4">
+                        {active && sourceBlocks.find(b => b.id === active)?.icon && <span className="mr-2">{sourceBlocks.find(b => b.id === active)?.icon}</span>}
+                        {activeDetail.title}
+                      </h3>
                       <div className={`grid grid-cols-1 gap-5 mb-4 ${activeDetail.columns.length === 3 ? 'md:grid-cols-3' : 'md:grid-cols-2'}`}>
                         {activeDetail.columns.map((col, i) => (
                           <div key={i}>
@@ -808,8 +822,7 @@ const RayonnementMechanism = () => {
                 )}
                 {!b.logos && (
                   <div
-                    onMouseEnter={() => b.id === "pays_concurrent" && handleCompetitorTitleHover(true)}
-                    onMouseLeave={() => b.id === "pays_concurrent" && handleCompetitorTitleHover(false)}
+                    onClick={(e) => { if (b.id === "pays_concurrent") { e.stopPropagation(); handleCompetitorTitleClick(); } }}
                   >
                     {b.title && <h4 className="text-[12px] font-sans font-bold text-foreground leading-tight">{b.title}</h4>}
                     <p className="text-[10px] text-muted-foreground">{b.sub}</p>
@@ -826,14 +839,14 @@ const RayonnementMechanism = () => {
               )}
               {'moroccoNowLogo' in b && b.moroccoNowLogo && (
                 <div className="flex items-center gap-2 mt-2">
-                  <img src={b.moroccoNowLogo as string} alt="Morocco Now" className="h-6 object-contain" />
+                  <img src={b.moroccoNowLogo as string} alt="Morocco Now" className="h-7 object-contain" />
                   <span className="text-[10px] text-muted-foreground">Site d'Attractivité & Nation Branding</span>
                 </div>
               )}
               {b.cooperationLogos && (
                 <div className="flex flex-wrap items-center gap-2.5 mt-2">
                   {b.cooperationLogos.map((logo, i) => (
-                    <img key={i} src={logo.src} alt={logo.alt} className="h-6 object-contain" />
+                    <img key={i} src={logo.src} alt={logo.alt} className="h-7 object-contain" />
                   ))}
                 </div>
               )}
@@ -841,7 +854,7 @@ const RayonnementMechanism = () => {
               {'federationLogos' in b && b.federationLogos && (
                 <div className="flex flex-wrap items-center gap-2.5 mt-2">
                   {(b.federationLogos as {src:string;alt:string}[]).map((logo, i) => (
-                    <img key={i} src={logo.src} alt={logo.alt} className="h-6 object-contain" />
+                    <img key={i} src={logo.src} alt={logo.alt} className="h-7 object-contain" />
                   ))}
                 </div>
               )}
