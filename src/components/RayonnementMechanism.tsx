@@ -40,6 +40,13 @@ import fenagriLogo from "@/assets/clients/fenagri.png";
 import investHKLogo from "@/assets/clients/investhk.png";
 import edbSingaporeLogo from "@/assets/clients/edb-singapore.png";
 import carteCompetitivite from "@/assets/carte-competitivite.png";
+import apexbrasilLogo from "@/assets/clients/apexbrasil.png";
+import investLithuaniaLogo from "@/assets/clients/invest-lithuania.png";
+import investMexicoLogo from "@/assets/clients/invest-mexico.png";
+import investVietnamLogo from "@/assets/clients/invest-vietnam.png";
+import investChileLogo from "@/assets/clients/investchile.png";
+import investSALogo from "@/assets/clients/investsa.png";
+import czechInvestLogo from "@/assets/clients/czech-invest.png";
 
 type BlockId = "veille" | "duediligence" | "bi" | "humint" | "core" | "amdie" | "gouv" | "federations" | "api" | "pays" | "pays_concurrent" | "cooperation" | "medias" | null;
 type CountryId = string | null;
