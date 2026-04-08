@@ -422,6 +422,13 @@ const RayonnementMechanism = () => {
   const apiLogos = [
     { src: investHKLogo, alt: "InvestHK" },
     { src: edbSingaporeLogo, alt: "EDB Singapore" },
+    { src: apexbrasilLogo, alt: "ApexBrasil" },
+    { src: investLithuaniaLogo, alt: "Invest Lithuania" },
+    { src: investMexicoLogo, alt: "Invest Mexico" },
+    { src: investVietnamLogo, alt: "Invest Vietnam" },
+    { src: investChileLogo, alt: "InvestChile" },
+    { src: investSALogo, alt: "InvestSA" },
+    { src: czechInvestLogo, alt: "CzechInvest" },
   ];
 
   const destBlocks = [
