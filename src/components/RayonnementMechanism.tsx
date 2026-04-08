@@ -526,13 +526,11 @@ const RayonnementMechanism = () => {
     setSelectedCompetitor(prev => prev === flag ? null : flag);
   };
 
-  const handleCompetitorTitleHover = (hovering: boolean) => {
-    if (hovering) {
-      setActive(null);
-      setSelectedCountry(null);
-      setSelectedCompetitor(null);
-      setShowCompetitivityMap(true);
-    }
+  const handleCompetitorTitleClick = () => {
+    setActive(null);
+    setSelectedCountry(null);
+    setSelectedCompetitor(null);
+    setShowCompetitivityMap(prev => !prev);
   };
 
   const hasActivePanel = activeDetail || showCountryDetail || showCompetitorDetail || showCompetitivityMap;
