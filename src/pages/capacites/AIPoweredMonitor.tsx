@@ -11,7 +11,9 @@ const AIPoweredMonitor = () => {
   return (
     <DetailPageLayout
       title={t("Des plateformes de pouvoir décisionnel", "Decision-making power platforms")}
+      titleClassName="text-center"
       chapeau={t("Surveillez vos marchés en temps réel, anticipez les signaux faibles et gardez toujours une longueur d'avance sur vos concurrents.", "Monitor your markets in real time, anticipate weak signals and always stay one step ahead of your competitors.")}
+      chapeauClassName="text-center"
       ctas={[
         { label: t("Lire le cas complet", "Read the full case"), action: "#", formType: "f1" },
         { label: t("Demander une démo", "Request a demo"), action: "#", formType: "f1" },
