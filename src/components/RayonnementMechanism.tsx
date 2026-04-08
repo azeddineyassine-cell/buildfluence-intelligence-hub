@@ -748,7 +748,10 @@ const RayonnementMechanism = () => {
                   {/* Standard Detail Panel */}
                   {activeDetail && (
                     <>
-                      <h3 className="text-base font-sans font-bold text-[#3B82F6] mb-4">{activeDetail.title}</h3>
+                      <h3 className="text-base font-sans font-bold text-[#3B82F6] mb-4">
+                        {active && sourceBlocks.find(b => b.id === active)?.icon && <span className="mr-2">{sourceBlocks.find(b => b.id === active)?.icon}</span>}
+                        {activeDetail.title}
+                      </h3>
                       <div className={`grid grid-cols-1 gap-5 mb-4 ${activeDetail.columns.length === 3 ? 'md:grid-cols-3' : 'md:grid-cols-2'}`}>
                         {activeDetail.columns.map((col, i) => (
                           <div key={i}>
@@ -820,8 +823,7 @@ const RayonnementMechanism = () => {
                 )}
                 {!b.logos && (
                   <div
-                    onMouseEnter={() => b.id === "pays_concurrent" && handleCompetitorTitleHover(true)}
-                    onMouseLeave={() => b.id === "pays_concurrent" && handleCompetitorTitleHover(false)}
+                    onClick={(e) => { if (b.id === "pays_concurrent") { e.stopPropagation(); handleCompetitorTitleClick(); } }}
                   >
                     {b.title && <h4 className="text-[12px] font-sans font-bold text-foreground leading-tight">{b.title}</h4>}
                     <p className="text-[10px] text-muted-foreground">{b.sub}</p>
