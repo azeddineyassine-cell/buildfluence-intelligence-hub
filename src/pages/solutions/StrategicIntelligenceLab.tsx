@@ -63,21 +63,6 @@ const StrategicIntelligenceLab = () => {
             ? <>Aujourd'hui, <strong>les outils de veille sont accessibles à tous</strong>. En revanche, produire une lecture intégrée, un décryptage approfondi et une cartographie multidimensionnelle capables de <strong>renforcer la souveraineté, le positionnement et la capacité d'influence</strong>, demeure rare.</>
             : <>Today, <strong>monitoring tools are accessible to everyone</strong>. However, producing an integrated reading, in-depth analysis and multidimensional mapping capable of <strong>strengthening sovereignty, positioning and influence capacity</strong>, remains rare.</>}
         </p>
-        <p className="text-sm leading-relaxed text-foreground/85">
-          {t("Buildfluence ne vend pas seulement un outil ou des prestations de veille. Nous accompagnons nos clients sur plusieurs enjeux majeurs d'attractivité et de compétitivité : ", "Buildfluence doesn't just sell a tool or monitoring services. We support our clients on several major attractiveness and competitiveness challenges: ")}
-          <button onClick={() => scrollToSuccessStories("ecosysteme")} className="underline underline-offset-2 decoration-primary/40 hover:decoration-primary transition-colors text-foreground/90 font-semibold">{t("Écosystème concurrentiel", "Competitive Ecosystem")}</button>
-          {", "}
-          <button onClick={() => scrollToSuccessStories("communication")} className="underline underline-offset-2 decoration-primary/40 hover:decoration-primary transition-colors text-foreground/90 font-semibold">{t("Stratégie & Ingénierie de communication", "Strategy & Communication Engineering")}</button>
-          {", "}
-          <button onClick={() => scrollToSuccessStories("influence")} className="underline underline-offset-2 decoration-primary/40 hover:decoration-primary transition-colors text-foreground/90 font-semibold">{t("Influence & Soft Power", "Influence & Soft Power")}</button>
-          {", "}
-          <button onClick={() => scrollToSuccessStories("diligence")} className="underline underline-offset-2 decoration-primary/40 hover:decoration-primary transition-colors text-foreground/90 font-semibold">{t("Due Diligence & Investissement", "Due Diligence & Investment")}</button>
-          {", "}
-          <button onClick={() => scrollToSuccessStories("crise")} className="underline underline-offset-2 decoration-primary/40 hover:decoration-primary transition-colors text-foreground/90 font-semibold">{t("Gestion de crise", "Crisis Management")}</button>
-          {" "}{t("et", "and")}{" "}
-          <button onClick={() => scrollToSuccessStories("audit")} className="underline underline-offset-2 decoration-primary/40 hover:decoration-primary transition-colors text-foreground/90 font-semibold">{t("Benchmark & Études", "Benchmark & Studies")}</button>
-          {"."}
-        </p>
       </div>
 
       <ConstructionInfluence />
