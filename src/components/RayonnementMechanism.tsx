@@ -616,15 +616,15 @@ const RayonnementMechanism = () => {
             tabIndex={0}
             onClick={() => toggle("core")}
             onKeyDown={(e) => e.key === 'Enter' && toggle("core")}
-            className={`border-2 rounded-full w-[180px] h-[180px] flex flex-col items-center justify-center cursor-pointer transition-all flex-shrink-0 select-none
+            className={`border-2 rounded-full w-[225px] h-[225px] flex flex-col items-center justify-center cursor-pointer transition-all flex-shrink-0 select-none
               ${active === "core"
                 ? "border-[#C9A84C] shadow-lg shadow-[#C9A84C]/15"
                 : "border-[#C9A84C]/35 hover:border-[#C9A84C] hover:shadow-md"
               }`}
             style={{ background: '#0F365F' }}
           >
-            <img src={buildfluenceLogo} alt="Buildfluence" className="w-20 h-auto mb-1" />
-            <span className="text-[8px] text-white/70 tracking-[1.5px] uppercase mt-1 text-center leading-snug">Sovereign Decision<br/>Infrastructure</span>
+            <img src={buildfluenceLogo} alt="Buildfluence" className="w-24 h-auto mb-1" />
+            <span className="text-[10px] text-white/70 tracking-[1.5px] uppercase mt-1 text-center leading-snug">Sovereign Decision<br/>Infrastructure</span>
           </div>
 
           <p className="text-[10px] text-[#C9A84C] tracking-[2px] uppercase opacity-70">↓ Transformation ↓</p>
