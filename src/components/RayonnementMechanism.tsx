@@ -244,14 +244,13 @@ const RayonnementMechanism = () => {
     amdie: {
       title: "AMDIE / MICEPP",
       columns: [
-        { heading: t("Constat actuel", "Current observation"), items: [
-          { text: t("✗ Morocco Now : Site statique institutionnel", "✗ Morocco Now: Static institutional site"), color: "red" },
-          { text: t("✗ Manque de plateforme digitale interactive vs Investisseurs", "✗ Lack of interactive digital platform vs Investors"), color: "red" },
-          { text: t("✗ Aucune Newsletter externe par cible : Institutionnels, Diaspora, Investisseurs & Prescripteurs internationaux", "✗ No external newsletter by target: Institutional, Diaspora, Investors & International Prescribers"), color: "red" },
-          { text: t("✗ Aucune publication d'intelligence sectorielle", "✗ No sector intelligence publication"), color: "red" },
-          { text: t("✗ Dernière news : 2023", "✗ Last news: 2023"), color: "red" },
-          { text: t("✗ Source d'info : Factiva agrégateur de presse", "✗ Info source: Factiva press aggregator"), color: "green" },
-          { text: t("✗ Pas d'outils de veille professionnel", "✗ No professional monitoring tools"), color: "red" },
+        { heading: t("Mission & Objectifs", "Mission & Objectives"), items: [
+          { text: t("Mission : Développement des investissements et des exportations des produits et services au Maroc", "Mission: Development of investments and exports of products and services in Morocco") },
+          { text: t("Charte de l'investissement : édition 2023", "Investment Charter: 2023 edition") },
+          { text: t("Objectifs stratégiques 2026 :", "Strategic objectives 2026:") },
+          { text: t("   • 550 MMDH d'investissements", "   • 550 BMDH in investments") },
+          { text: t("   • 500 000 créations d'emploi", "   • 500,000 job creation") },
+          { text: t("Morocco Now : Site d'Attractivité & Nation Branding", "Morocco Now: Attractiveness Site & Nation Branding") },
         ]},
         { heading: t("Solutions Buildfluence", "Buildfluence Solutions"), items: [
           { text: t("Newsletter stratégique dédiée", "Dedicated strategic newsletter") },
