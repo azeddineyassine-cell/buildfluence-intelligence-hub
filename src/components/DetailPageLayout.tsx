@@ -7,7 +7,7 @@ import { ReactNode, useState } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { FormStrategicExchange, FormDiagnostic } from "@/components/FormModals";
 
-interface DetailPageLayoutProps {
+export interface DetailPageLayoutProps {
   title: string;
   chapeau: string;
   children: ReactNode;
@@ -16,9 +16,11 @@ interface DetailPageLayoutProps {
   situationContext?: string;
   prevSituation?: { label: string; path: string };
   nextSituation?: { label: string; path: string };
+  titleClassName?: string;
+  chapeauClassName?: string;
 }
 
-const DetailPageLayout = ({ title, chapeau, children, sidebar, ctas, situationContext, prevSituation, nextSituation }: DetailPageLayoutProps) => {
+const DetailPageLayout = ({ title, chapeau, children, sidebar, ctas, situationContext, prevSituation, nextSituation, titleClassName, chapeauClassName }: DetailPageLayoutProps) => {
   const navigate = useNavigate();
   const { t } = useLanguage();
   const [f1Open, setF1Open] = useState(false);
@@ -41,10 +43,10 @@ const DetailPageLayout = ({ title, chapeau, children, sidebar, ctas, situationCo
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
             className="max-w-[75%] mx-auto"
           >
-            <h1 className="font-serif text-3xl font-bold leading-tight sm:text-4xl md:text-5xl">
+            <h1 className={`font-serif text-3xl font-bold leading-tight sm:text-4xl md:text-5xl ${titleClassName || ''}`}>
               {title}
             </h1>
-            <p className="mt-3 text-lg italic text-muted-foreground">
+            <p className={`mt-3 text-lg italic text-muted-foreground ${chapeauClassName || ''}`}>
               {chapeau}
             </p>
 
