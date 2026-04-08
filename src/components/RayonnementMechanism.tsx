@@ -583,14 +583,14 @@ const RayonnementMechanism = () => {
               {b.logos && (
                 <div className="flex flex-wrap items-center gap-3 mb-1">
                   {b.logos.map((logo, i) => (
-                    <img key={i} src={logo.src} alt={logo.alt} className="h-5 object-contain" />
+                    <img key={i} src={logo.src} alt={logo.alt} className="h-7 object-contain" />
                   ))}
                 </div>
               )}
               {'ddLogos' in b && b.ddLogos && (
                 <div className="flex flex-wrap items-center gap-2.5 mb-1">
                   {(b.ddLogos as {src:string;alt:string}[]).map((logo, i) => (
-                    <img key={i} src={logo.src} alt={logo.alt} className="h-5 object-contain" />
+                    <img key={i} src={logo.src} alt={logo.alt} className="h-7 object-contain" />
                   ))}
                 </div>
               )}
@@ -840,14 +840,14 @@ const RayonnementMechanism = () => {
               )}
               {'moroccoNowLogo' in b && b.moroccoNowLogo && (
                 <div className="flex items-center gap-2 mt-2">
-                  <img src={b.moroccoNowLogo as string} alt="Morocco Now" className="h-6 object-contain" />
+                  <img src={b.moroccoNowLogo as string} alt="Morocco Now" className="h-7 object-contain" />
                   <span className="text-[10px] text-muted-foreground">Site d'Attractivité & Nation Branding</span>
                 </div>
               )}
               {b.cooperationLogos && (
                 <div className="flex flex-wrap items-center gap-2.5 mt-2">
                   {b.cooperationLogos.map((logo, i) => (
-                    <img key={i} src={logo.src} alt={logo.alt} className="h-6 object-contain" />
+                    <img key={i} src={logo.src} alt={logo.alt} className="h-7 object-contain" />
                   ))}
                 </div>
               )}
@@ -855,7 +855,7 @@ const RayonnementMechanism = () => {
               {'federationLogos' in b && b.federationLogos && (
                 <div className="flex flex-wrap items-center gap-2.5 mt-2">
                   {(b.federationLogos as {src:string;alt:string}[]).map((logo, i) => (
-                    <img key={i} src={logo.src} alt={logo.alt} className="h-6 object-contain" />
+                    <img key={i} src={logo.src} alt={logo.alt} className="h-7 object-contain" />
                   ))}
                 </div>
               )}
