@@ -204,18 +204,15 @@ function OrbitDiagram({
         );
       })}
 
-      {/* Center circle — Action 5: Build=#023982, fluence=#fac541 */}
-      <circle cx={CX} cy={CY} r={INNER - 2} fill="white" stroke="rgba(0,0,0,0.08)" strokeWidth="0.5" />
-      <text x={CX} y={CY - 10} textAnchor="middle" fontSize="15" fontWeight="500">
-        <tspan fill="#023982">Build</tspan>
-        <tspan fill="#fac541">fluence</tspan>
-      </text>
-      <text x={CX} y={CY + 7} textAnchor="middle" fontSize="7.5" fill="#64748b" letterSpacing="0.5">
-        Sovereign Decision
-      </text>
-      <text x={CX} y={CY + 18} textAnchor="middle" fontSize="7.5" fill="#64748b" letterSpacing="0.5">
-        Infrastructure
-      </text>
+      {/* Center circle — Logo Buildfluence clickable */}
+      <circle cx={CX} cy={CY} r={INNER - 2} fill="white" stroke="rgba(0,0,0,0.08)" strokeWidth="0.5"
+        style={{ cursor: "pointer" }} onClick={onLogoClick} />
+      <foreignObject x={CX - (INNER - 4)} y={CY - (INNER - 4)} width={(INNER - 4) * 2} height={(INNER - 4) * 2}
+        style={{ pointerEvents: "none" }}>
+        <div style={{ width: "100%", height: "100%", display: "flex", alignItems: "center", justifyContent: "center", borderRadius: "50%", overflow: "hidden" }}>
+          <img src={logoFondBlanc} alt="Buildfluence" style={{ width: "85%", height: "85%", objectFit: "contain" }} />
+        </div>
+      </foreignObject>
     </svg>
   );
 }
@@ -273,8 +270,8 @@ export default function ConstructionInfluence() {
             ) : (
               <p className="text-[13px] italic font-medium text-slate-600 leading-relaxed py-4">
                 {t(
-                  "Disposez de la capacité à anticiper les ruptures, avant qu'elles ne deviennent des crises — c'est devenu le premier avantage compétitif des organisations souveraines.",
-                  "Have the ability to anticipate disruptions, before they become crises — this has become the primary competitive advantage of sovereign organizations."
+                  "Disposez de la capacité à anticiper les ruptures, avant qu'elles ne deviennent des crises, c'est devenu le premier avantage compétitif des organisations souveraines.",
+                  "Have the ability to anticipate disruptions, before they become crises, this has become the primary competitive advantage of sovereign organizations."
                 )}
               </p>
             )}
