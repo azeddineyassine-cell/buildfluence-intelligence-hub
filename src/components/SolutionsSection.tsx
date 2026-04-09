@@ -29,25 +29,8 @@ const SolutionsSection = () => {
       tags: ["Strategic Foresight", "Threat Intelligence", "Competitive Mapping"],
     },
     {
-      icon: "🔍",
-      label: t("Pilier II", "Pillar II"),
-      title: "Deep Due Diligence",
-      route: "/solutions/deep-due-diligence",
-      tagline: t(
-        "Le risque n'est jamais visible. Il se loge dans l'angle mort de ceux qui ne vérifient pas assez profondément.",
-        "Risk is never visible. It hides in the blind spot of those who don't verify deeply enough."
-      ),
-      items: [
-        t("Vérification d'intégrité des contreparties", "Counterparty integrity verification"),
-        t("Analyse des structures offshore et montages complexes", "Offshore structures and complex schemes analysis"),
-        t("Profilage de risque stratégique", "Strategic risk profiling"),
-        t("Conformité réglementaire et sanctions", "Regulatory compliance and sanctions"),
-      ],
-      tags: ["Integrity Check", "Risk Profiling", "Regulatory Compliance"],
-    },
-    {
       icon: "🌐",
-      label: t("Pilier III", "Pillar III"),
+      label: t("Pilier II", "Pillar II"),
       title: "Soft Power & Influence",
       route: "/solutions/soft-power-influence",
       tagline: t(
@@ -65,6 +48,23 @@ const SolutionsSection = () => {
         "Political Intelligence",
         t("Attractivité Territoriale", "Territorial Attractiveness"),
       ],
+    },
+    {
+      icon: "🔍",
+      label: t("Pilier III", "Pillar III"),
+      title: "Deep Due Diligence",
+      route: "/solutions/deep-due-diligence",
+      tagline: t(
+        "Le risque n'est jamais visible. Il se loge dans l'angle mort de ceux qui ne vérifient pas assez profondément.",
+        "Risk is never visible. It hides in the blind spot of those who don't verify deeply enough."
+      ),
+      items: [
+        t("Vérification d'intégrité des contreparties", "Counterparty integrity verification"),
+        t("Analyse des structures offshore et montages complexes", "Offshore structures and complex schemes analysis"),
+        t("Profilage de risque stratégique", "Strategic risk profiling"),
+        t("Conformité réglementaire et sanctions", "Regulatory compliance and sanctions"),
+      ],
+      tags: ["Integrity Check", "Risk Profiling", "Regulatory Compliance"],
     },
   ];
 

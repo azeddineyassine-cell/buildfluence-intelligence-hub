@@ -102,17 +102,17 @@ const HeroSection = () => {
               {t("Demander un échange stratégique", "Request a strategic exchange")}
             </button>
             <a
-              href="#nos-solutions"
+              href="/solutions/soft-power-influence"
               onClick={(e) => {
                 e.preventDefault();
-                document.querySelector('#nos-solutions')?.scrollIntoView({ behavior: 'smooth' });
+                window.location.href = '/solutions/soft-power-influence';
               }}
               className="text-[14px] font-semibold tracking-[0.03em] pb-[2px] transition-colors"
               style={{ color: 'hsl(var(--navy))', borderBottom: '1.5px solid hsl(var(--gold))' }}
               onMouseOver={(e) => (e.currentTarget.style.color = 'hsl(var(--gold))')}
               onMouseOut={(e) => (e.currentTarget.style.color = 'hsl(var(--navy))')}
             >
-              {t("Découvrir nos solutions →", "Discover our solutions →")}
+              {t("Découvrez notre Processus de Rayonnement →", "Discover our Outreach Process →")}
             </a>
           </motion.div>
         </div>
