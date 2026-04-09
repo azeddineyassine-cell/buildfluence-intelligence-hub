@@ -51,7 +51,7 @@ function getCycleSteps(t: (fr: string, en: string) => string) {
 
 function getDomains(t: (fr: string, en: string) => string) {
   return [
-    { id: "rp", icon: "📡", short: t("RP & Comm.", "PR & Comm."), angle: 90, title: t("RP & Communication", "PR & Communication"), type: t("Réputation & Influence médiatique", "Reputation & Media Influence"), desc: t("Médias Intelligence, surveillance de la notoriété, gestion des crises et pilotage des campagnes médiatiques. Transformez chaque mention en levier stratégique.", "Media Intelligence, brand monitoring, crisis management and media campaign steering. Turn every mention into a strategic lever."), tags: t("Médias Intelligence,Notoriété,Crises,Campagnes,Newsletter", "Media Intelligence,Brand Awareness,Crises,Campaigns,Newsletter").split(",") },
+    { id: "rp", icon: "📡", short: t("Communication", "Communication"), angle: 90, title: t("Communication", "Communication"), type: t("Réputation & Influence médiatique", "Reputation & Media Influence"), desc: t("Médias Intelligence, surveillance de la notoriété, gestion des crises et pilotage des campagnes médiatiques. Transformez chaque mention en levier stratégique.", "Media Intelligence, brand monitoring, crisis management and media campaign steering. Turn every mention into a strategic lever."), tags: t("Médias Intelligence,Notoriété,Crises,Campagnes,Newsletter", "Media Intelligence,Brand Awareness,Crises,Campaigns,Newsletter").split(",") },
     { id: "biz", icon: "📈", short: "Business Dev", angle: 45, title: "Business Development", type: t("Croissance & Opportunités", "Growth & Opportunities"), desc: t("Surveillance concurrentielle, identification d'opportunités et d'appels d'offres, veille sur les salons et développement international. Ne manquez plus aucune fenêtre d'entrée.", "Competitive monitoring, opportunity and tender identification, trade show intelligence and international development. Never miss a market entry window."), tags: t("Concurrents,Clients,Partenaires,Opportunités,International", "Competitors,Clients,Partners,Opportunities,International").split(",") },
     { id: "rd", icon: "🔬", short: "R&D", angle: 0, title: t("Recherche & Développement", "Research & Development"), type: t("Innovation & Brevets", "Innovation & Patents"), desc: t("Veille sur les dernières innovations, nouveaux brevets et technologies émergentes. Benchmarkez les meilleures pratiques mondiales pour garder une longueur d'avance décisive.", "Monitor latest innovations, new patents and emerging technologies. Benchmark global best practices to maintain a decisive edge."), tags: t("Innovations,Brevets,Nouvelles Technologies,Best Practices", "Innovations,Patents,Emerging Technologies,Best Practices").split(",") },
     { id: "achat", icon: "🛒", short: t("Achat", "Procurement"), angle: 315, title: t("Achat & Supply", "Procurement & Supply"), type: t("Fournisseurs & Marché", "Suppliers & Market"), desc: t("Intelligence sur les fournisseurs, clients stratégiques et nouveaux produits entrants. Anticipez les évolutions du marché et optimisez votre chaîne de valeur.", "Supplier intelligence, strategic clients and new market entrants. Anticipate market evolution and optimize your value chain."), tags: t("Fournisseurs,Clients,Nouveaux produits,Supply chain", "Suppliers,Clients,New products,Supply chain").split(",") },
@@ -167,9 +167,6 @@ export default function StrategicOrbitDiagram() {
       <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center gap-8">
         {/* Detail Panel — LEFT */}
         <div className="w-full md:w-[38%] order-2 md:order-1">
-          <p className="text-center text-[14px] font-bold mb-3" style={{ fontVariant: 'small-caps', letterSpacing: '0.08em', color: '#0D1B2A' }}>
-            {t("Anticiper - Décider - Influencer", "Anticipate - Decide - Influence")}
-          </p>
           <p className="text-center text-sm font-bold text-slate-400 mb-3" style={{ fontVariant: 'small-caps', letterSpacing: '0.08em' }}>{t("Architecture de veille décisionnelle par métier", "Decision Watch Architecture by Business Domain")}</p>
           <div className="rounded-2xl overflow-hidden"
             style={{ border: "0.5px solid rgba(0,0,0,0.08)", background: "#f8fafc" }}>
@@ -221,11 +218,7 @@ export default function StrategicOrbitDiagram() {
               {connectors}
             </svg>
 
-            {/* Buildfluence watermark — repositioned between Indexation, Captation, R&D */}
-            <svg className="absolute inset-0 w-full h-full pointer-events-none z-[5]"
-              viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet">
-              <text x={wmX} y={wmY} textAnchor="middle" opacity="0.45" fill="#C9A84C" fontSize="3.2" fontWeight="700" letterSpacing="0.2">BUILDFLUENCE</text>
-            </svg>
+            {/* Buildfluence watermark removed */}
 
             {/* Core — Logo Buildfluence clickable */}
             <button
