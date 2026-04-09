@@ -84,13 +84,7 @@ function polarToPercent(angleDeg: number, radiusPct: number) {
 
 type PanelData = { icon: string; title: string; type: string; desc: string; tags: string[] };
 
-// Icon mapping for step nodes
-const stepIcons: Record<string, string> = {
-  "step-01": "📡",
-  "step-02": "🔍",
-  "step-03": "🗺",
-  "step-04": "📊",
-};
+// Icons removed from step nodes per requirement
 
 // ─── Component ───────────────────────────────────────────────────────────────
 
@@ -140,15 +134,6 @@ export default function StrategicOrbitDiagram() {
         fill="#0ea5c9" opacity="0.6"
         style={{ animationDelay: `${(i * 0.31).toFixed(2)}s` }}
         className="animate-pulse" />
-    );
-  });
-
-  // Compute positions for watermark placement (between Indexation, Captation, R&D)
-  const indexPos = polarToPercent(315, 20); // Indexation
-  const captPos = polarToPercent(45, 20);   // Captation
-  const rdPos = polarToPercent(0, 41);      // R&D domain
-  const wmX = (indexPos.x + captPos.x + rdPos.x) / 3;
-  const wmY = (indexPos.y + captPos.y + rdPos.y) / 3;
 
   return (
     <section className="w-full py-20 px-4 bg-white">
