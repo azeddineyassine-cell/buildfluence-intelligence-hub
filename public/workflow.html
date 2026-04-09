@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Buildfluence — Strategic Workflow</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:#F0F7FF;color:#0D1B2A;min-height:100vh}
+
+/* HERO */
+.hero{text-align:center;padding:52px 40px 36px}
+.hero h1{font-size:clamp(26px,3.8vw,42px);font-weight:700;line-height:1.2;margin-bottom:14px;letter-spacing:-0.5px}
+.hero h1 em{color:#C9A84C;font-style:normal}
+.hero .tagline1{font-size:16px;font-weight:600;color:#0D1B2A;margin-bottom:6px}
+.hero .tagline2{font-size:15px;color:#6b7c93;margin-bottom:8px}
+.hero .sub{font-size:14px;color:#C9A84C;font-style:italic;max-width:680px;margin:0 auto 36px;line-height:1.7;font-weight:500}
+
+/* PILIERS */
+.piliers{display:grid;grid-template-columns:repeat(4,1fr);gap:0;max-width:1200px;margin:0 auto 48px;padding:0 32px;position:relative}
+.piliers::before{content:'';position:absolute;top:32px;left:calc(32px + 80px);right:calc(32px + 80px);height:3px;background:linear-gradient(90deg,#4a4a5a,#1a6b5a,#C9A84C,#0F365F);z-index:0;border-radius:2px}
+.pilier{display:flex;flex-direction:column;align-items:center;text-align:center;position:relative;z-index:1;padding:0 12px}
+.pilier-icon{width:64px;height:64px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:26px;margin-bottom:14px;border:3px solid #fff;box-shadow:0 4px 16px rgba(0,0,0,.1)}
+.pilier h3{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:8px}
+.pilier p{font-size:11px;color:#6b7c93;line-height:1.5}
+.p1 .pilier-icon{background:#4a4a5a}
+.p2 .pilier-icon{background:#1a6b5a}
+.p3 .pilier-icon{background:#C9A84C}
+.p4 .pilier-icon{background:#0F365F}
+.p1 h3{color:#4a4a5a}
+.p2 h3{color:#1a6b5a}
+.p3 h3{color:#C9A84C}
+.p4 h3{color:#0F365F}
+
+/* KPIs */
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;max-width:1200px;margin:0 auto 48px;padding:0 32px}
+.kpi{background:#fff;border:0.5px solid rgba(13,27,42,.08);border-radius:12px;padding:16px;text-align:center;transition:transform .2s,box-shadow .2s}
+.kpi:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(201,168,76,.12)}
+.kpi .val{font-size:26px;font-weight:700;color:#C9A84C;margin-bottom:4px}
+.kpi .lbl{font-size:11px;color:#6b7c93;line-height:1.4}
+
+/* PROCESS TITLE */
+.proc-title{text-align:center;padding:0 32px 28px;max-width:1200px;margin:0 auto}
+.proc-title h2{font-size:20px;font-weight:700;margin-bottom:8px}
+.proc-title p{font-size:13px;color:#6b7c93;line-height:1.6;max-width:700px;margin:0 auto}
+
+/* ÉTAPES */
+.etapes{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:1200px;margin:0 auto;padding:0 32px 48px}
+.etape{background:#fff;border:0.5px solid rgba(13,27,42,.08);border-radius:14px;padding:20px 22px;cursor:pointer;transition:all .25s;position:relative;overflow:hidden}
+.etape::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;border-radius:4px 0 0 4px}
+.etape:hover{box-shadow:0 8px 28px rgba(13,27,42,.08);transform:translateY(-2px)}
+.etape.active{box-shadow:0 8px 28px rgba(201,168,76,.15)}
+.e1::before{background:#4a9a6a}.e2::before{background:#1a6b5a}.e3::before{background:#1a5580}
+.e4::before{background:#C9A84C}.e5::before{background:#7a3060}.e6::before{background:#0F365F}
+.etape-head{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+.etape-num{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#fff;flex-shrink:0}
+.e1 .etape-num{background:#4a9a6a}.e2 .etape-num{background:#1a6b5a}.e3 .etape-num{background:#1a5580}
+.e4 .etape-num{background:#C9A84C}.e5 .etape-num{background:#7a3060}.e6 .etape-num{background:#0F365F}
+.etape-ico{font-size:20px}
+.etape h3{font-size:13px;font-weight:700;color:#0D1B2A;line-height:1.3}
+.etape .tagline{font-size:11px;color:#C9A84C;font-style:italic;margin-bottom:10px}
+.etape ul{list-style:none;padding:0}
+.etape ul li{font-size:11.5px;color:#4a5568;padding:4px 0;padding-left:14px;position:relative;border-bottom:0.5px solid rgba(13,27,42,.05);line-height:1.5}
+.etape ul li:last-child{border-bottom:none}
+.etape ul li::before{content:'→';position:absolute;left:0;color:#C9A84C;font-size:10px;top:5px}
+.etape .detail{display:none;margin-top:12px;padding-top:12px;border-top:0.5px solid rgba(13,27,42,.08)}
+.etape.active .detail{display:block}
+.detail-tag{display:inline-block;font-size:10px;padding:2px 8px;border-radius:10px;background:#F0F7FF;color:#1a5580;border:0.5px solid #1a5580;margin:4px 4px 0 0}
+
+/* BOTTOM CTA */
+.bottom{text-align:center;padding:20px 32px 52px}
+.bottom p{font-size:13px;color:#6b7c93;margin-bottom:16px;font-style:italic}
+.cta-btn{display:inline-block;background:#C9A84C;color:#0D1B2A;font-weight:700;font-size:13px;padding:12px 28px;border-radius:8px;text-decoration:none;letter-spacing:.5px;transition:background .2s}
+.cta-btn:hover{background:#dbb85c}
+
+@media(max-width:768px){
+  .piliers{grid-template-columns:repeat(2,1fr);gap:16px}
+  .piliers::before{display:none}
+  .kpis{grid-template-columns:repeat(2,1fr)}
+  .etapes{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <h1>Buildfluence <em>Process</em></h1>
+  <div class="tagline1">Une approche exclusive orientée résultat</div>
+  <div class="tagline2">De l'audit stratégique à l'impact décisionnel</div>
+  <div class="sub">Buildfluence co-construit avec vous l'infrastructure d'intelligence qui change les rapports de force.</div>
+</div>
+
+<!-- 4 PILIERS -->
+<div class="piliers">
+  <div class="pilier p1">
+    <div class="pilier-icon">🏆</div>
+    <h3>Expertise</h3>
+    <p>Expert en Intelligence Économique en France et au Maroc. +20 ans d'expérience en veille, influence, gestion des risques et Due Diligence.</p>
+  </div>
+  <div class="pilier p2">
+    <div class="pilier-icon">⚙️</div>
+    <h3>HumTech</h3>
+    <p>Croisement données géodécisionnelles · IA Premium · OSINT · NLP · DataViz · Advanced Semantics · Graphes d'interactions.</p>
+  </div>
+  <div class="pilier p3">
+    <div class="pilier-icon">🎯</div>
+    <h3>Engagement</h3>
+    <p>Transformation de la donnée en décisions à fort impact. Transfert de compétences pour l'autonomie de vos équipes.</p>
+  </div>
+  <div class="pilier p4">
+    <div class="pilier-icon">⚡</div>
+    <h3>Impact Immédiat</h3>
+    <p>Une décision n'a de sens que si elle change le rapport de force en votre faveur. Pas de discours. Des résultats.</p>
+  </div>
+</div>
+
+<!-- KPIs -->
+<div class="kpis">
+  <div class="kpi">
+    <div class="val">400M$</div>
+    <div class="lbl">sécurisés en Deep Due Diligence</div>
+  </div>
+  <div class="kpi">
+    <div class="val">180M MAD</div>
+    <div class="lbl">générés via politiques publiques</div>
+  </div>
+  <div class="kpi">
+    <div class="val">+14%</div>
+    <div class="lbl">de parts de marché après crise</div>
+  </div>
+  <div class="kpi">
+    <div class="val">2 sem.</div>
+    <div class="lbl">crise nationale maîtrisée</div>
+  </div>
+</div>
+
+<!-- PROCESS -->
+<div class="proc-title">
+  <h2>Le Process en 6 Étapes</h2>
+  <p>Buildfluence propose des prestations stratégiques visant à clarifier votre écosystème complexe, co-construire des solutions adaptées et favoriser la prise de décision éclairée.</p>
+</div>
+
+<div class="etapes">
+
+  <div class="etape e1" onclick="toggle(this)">
+    <div class="etape-head">
+      <div class="etape-num">01</div>
+      <div class="etape-ico">🔍</div>
+      <h3>Cadrage & Audit Stratégique</h3>
+    </div>
+    <div class="tagline">Comprendre avant d'agir</div>
+    <ul>
+      <li>Audit des besoins et attentes</li>
+      <li>Identification des enjeux stratégiques et priorités sensibles</li>
+      <li>Alignement avec les parties prenantes</li>
+    </ul>
+    <div class="detail">
+      <span class="detail-tag">Strategic Foresight</span>
+      <span class="detail-tag">Threat Intelligence</span>
+      <span class="detail-tag">Due Diligence</span>
+    </div>
+  </div>
+
+  <div class="etape e2" onclick="toggle(this)">
+    <div class="etape-head">
+      <div class="etape-num">02</div>
+      <div class="etape-ico">🤝</div>
+      <h3>Ateliers Collaboratifs & Structuration</h3>
+    </div>
+    <div class="tagline">Co-construire le Framework décisionnel</div>
+    <ul>
+      <li>Workshops de brainstorming stratégique</li>
+      <li>Analyse des périmètres de recherche</li>
+      <li>Segmentation et hiérarchisation des données</li>
+    </ul>
+    <div class="detail">
+      <span class="detail-tag">Change Management</span>
+      <span class="detail-tag">Framework décisionnel</span>
+    </div>
+  </div>
+
+  <div class="etape e3" onclick="toggle(this)">
+    <div class="etape-head">
+      <div class="etape-num">03</div>
+      <div class="etape-ico">🤖</div>
+      <h3>Implémentation Market Intelligence & IA</h3>
+    </div>
+    <div class="tagline">Déployer la puissance technologique</div>
+    <ul>
+      <li>Intégration des solutions IA de veille stratégique</li>
+      <li>Paramétrage Business Intelligence adapté</li>
+      <li>Installation de la "Market & Competitive Intelligence Unit"</li>
+    </ul>
+    <div class="detail">
+      <span class="detail-tag">IA augmentée</span>
+      <span class="detail-tag">OSINT Premium</span>
+      <span class="detail-tag">NLP</span>
+    </div>
+  </div>
+
+  <div class="etape e4" onclick="toggle(this)">
+    <div class="etape-head">
+      <div class="etape-num">04</div>
+      <div class="etape-ico">🗺️</div>
+      <h3>Ecosystem Builder & Deep Due Diligence</h3>
+    </div>
+    <div class="tagline">Cartographier pour mieux décider</div>
+    <ul>
+      <li>Construction des écosystèmes décisionnels</li>
+      <li>Cartographie dynamique des Stakeholders</li>
+      <li>Détection des signaux faibles</li>
+      <li>Due Diligence Advanced : évaluation de la fiabilité des sources et acteurs</li>
+    </ul>
+    <div class="detail">
+      <span class="detail-tag">Due Diligence</span>
+      <span class="detail-tag">Competitive Mapping</span>
+      <span class="detail-tag">Risk Profiling</span>
+    </div>
+  </div>
+
+  <div class="etape e5" onclick="toggle(this)">
+    <div class="etape-head">
+      <div class="etape-num">05</div>
+      <div class="etape-ico">📣</div>
+      <h3>Influence Builder & Strategic Decision</h3>
+    </div>
+    <div class="tagline">Transformer l'intelligence en pouvoir d'action</div>
+    <ul>
+      <li>Data Storytelling & Scrollytelling</li>
+      <li>Conception de plateformes d'attractivité</li>
+      <li>Création de narratifs à fort impact</li>
+      <li>Mise en œuvre de la stratégie d'influence ciblée</li>
+    </ul>
+    <div class="detail">
+      <span class="detail-tag">Soft Power</span>
+      <span class="detail-tag">Influence stratégique</span>
+      <span class="detail-tag">Nation Branding</span>
+    </div>
+  </div>
+
+  <div class="etape e6" onclick="toggle(this)">
+    <div class="etape-head">
+      <div class="etape-num">06</div>
+      <div class="etape-ico">🚀</div>
+      <h3>Accompagnement & Pilotage du Changement</h3>
+    </div>
+    <div class="tagline">Autonomiser pour durer</div>
+    <ul>
+      <li>Montée en compétences des équipes</li>
+      <li>Stratégies d'adoption et d'optimisation des solutions</li>
+      <li>Construction des Orientations et Plans d'action</li>
+      <li>Mise en place d'une boucle d'amélioration continue</li>
+    </ul>
+    <div class="detail">
+      <span class="detail-tag">Change Management</span>
+      <span class="detail-tag">Formation</span>
+      <span class="detail-tag">Autonomisation</span>
+    </div>
+  </div>
+
+</div>
+
+<!-- CTA -->
+<div class="bottom">
+  <p>« Une décision n'a de sens que si elle change le rapport de force en votre faveur. »</p>
+  <a href="#" class="cta-btn">RÉSERVER MON ÉCHANGE STRATÉGIQUE</a>
+</div>
+
+<script>
+function toggle(el){
+  const wasActive=el.classList.contains('active');
+  document.querySelectorAll('.etape').forEach(e=>e.classList.remove('active'));
+  if(!wasActive)el.classList.add('active');
+}
+</script>
+</body>
+</html>
