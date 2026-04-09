@@ -1,5 +1,6 @@
 import { useState, useCallback } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import logoFondBlanc from "@/assets/Logo_Buildfluence_FondBlanc2.png";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -138,12 +139,14 @@ function OrbitDiagram({
   hoveredId,
   onClickPhase,
   onHoverPhase,
+  onLogoClick,
 }: {
   phases: Phase[];
   activeId: string | null;
   hoveredId: string | null;
   onClickPhase: (id: string) => void;
   onHoverPhase: (id: string | null) => void;
+  onLogoClick: () => void;
 }) {
   return (
     <svg viewBox="0 0 340 340" width="100%" className="block">
@@ -173,37 +176,45 @@ function OrbitDiagram({
               onMouseEnter={() => onHoverPhase(p.id)}
               onMouseLeave={() => onHoverPhase(null)}
             />
-            {p.label.map((line, li) => (
-              <text
-                key={li}
-                x={lx}
-                y={ly + (li - (p.label.length - 1) / 2) * 13}
-                textAnchor="middle"
-                dominantBaseline="central"
-                fontSize="10"
-                fontWeight="500"
-                fill="#1e3a5f"
-                style={{ pointerEvents: "none" }}
-              >
-                {line}
-              </text>
-            ))}
+            {p.label.map((line, li) => {
+              const iconMap: Record<string, string> = {
+                collecter: "🛰️",
+                analyser: "🔍",
+                cartographier: "🗺️",
+                identifier: "🎯",
+                detecter: "⚡",
+                influencer: "📢",
+              };
+              const icon = li === 0 ? iconMap[p.id] || "" : "";
+              return (
+                <text
+                  key={li}
+                  x={lx}
+                  y={ly + (li - (p.label.length - 1) / 2) * 13 + (icon ? 3 : 0)}
+                  textAnchor="middle"
+                  dominantBaseline="central"
+                  fontSize="10"
+                  fontWeight="500"
+                  fill="#1e3a5f"
+                  style={{ pointerEvents: "none" }}
+                >
+                  {icon ? `${icon} ${line}` : line}
+                </text>
+              );
+            })}
           </g>
         );
       })}
 
-      {/* Center circle — Action 5: Build=#023982, fluence=#fac541 */}
-      <circle cx={CX} cy={CY} r={INNER - 2} fill="white" stroke="rgba(0,0,0,0.08)" strokeWidth="0.5" />
-      <text x={CX} y={CY - 10} textAnchor="middle" fontSize="15" fontWeight="500">
-        <tspan fill="#023982">Build</tspan>
-        <tspan fill="#fac541">fluence</tspan>
-      </text>
-      <text x={CX} y={CY + 7} textAnchor="middle" fontSize="7.5" fill="#64748b" letterSpacing="0.5">
-        Sovereign Decision
-      </text>
-      <text x={CX} y={CY + 18} textAnchor="middle" fontSize="7.5" fill="#64748b" letterSpacing="0.5">
-        Infrastructure
-      </text>
+      {/* Center circle — Logo Buildfluence clickable */}
+      <circle cx={CX} cy={CY} r={INNER - 2} fill="white" stroke="rgba(0,0,0,0.08)" strokeWidth="0.5"
+        style={{ cursor: "pointer" }} onClick={onLogoClick} />
+      <foreignObject x={CX - (INNER - 4)} y={CY - (INNER - 4)} width={(INNER - 4) * 2} height={(INNER - 4) * 2}
+        style={{ pointerEvents: "none" }}>
+        <div style={{ width: "100%", height: "100%", display: "flex", alignItems: "center", justifyContent: "center", borderRadius: "50%", overflow: "hidden" }}>
+          <img src={logoFondBlanc} alt="Buildfluence" style={{ width: "85%", height: "85%", objectFit: "contain" }} />
+        </div>
+      </foreignObject>
     </svg>
   );
 }
@@ -222,6 +233,10 @@ export default function ConstructionInfluence() {
     setActiveId((prev) => (prev === id ? null : id));
   }, []);
 
+  const handleLogoClick = useCallback(() => {
+    setActiveId(null);
+  }, []);
+
   return (
     <section className="w-full py-6 px-4 bg-white">
       <div className="max-w-5xl mx-auto">
@@ -230,42 +245,50 @@ export default function ConstructionInfluence() {
         <div className="grid grid-cols-1 lg:grid-cols-[30%_70%] gap-6 items-center">
 
           {/* LEFT — Detail panel */}
-          <div
-            className="rounded-xl p-5 transition-all duration-300 min-h-[180px]"
-            style={{
-              border: activePhase
-                ? `1.5px solid ${activePhase.borderColor}`
-                : "0.5px solid rgba(0,0,0,0.08)",
-              background: activePhase ? activePhase.color : "rgba(0,0,0,0.02)",
-            }}
-          >
-            {activePhase ? (
-              <>
-                <p className="text-xs font-semibold uppercase tracking-widest text-slate-400 mb-1">
-                  {activePhase.sub}
+          <div>
+            <p className="text-center text-[14px] font-bold mb-3" style={{ fontVariant: 'small-caps', letterSpacing: '0.08em', color: '#8e99a2' }}>
+              {t("Anticiper - Décider - Influencer", "Anticipate - Decide - Influence")}
+            </p>
+            <div
+              className="rounded-xl p-5 transition-all duration-300 min-h-[180px]"
+              style={{
+                border: activePhase
+                  ? `1.5px solid ${activePhase.borderColor}`
+                  : "0.5px solid rgba(0,0,0,0.08)",
+                background: activePhase ? activePhase.color : "rgba(0,0,0,0.02)",
+              }}
+            >
+              {activePhase ? (
+                <>
+                  <p className="text-xs font-semibold uppercase tracking-widest text-slate-400 mb-1">
+                    {activePhase.sub}
+                  </p>
+                  <p className="text-sm font-semibold text-slate-800 mb-2">{activePhase.title}</p>
+                  <p className="text-xs text-slate-600 leading-relaxed mb-3">{activePhase.desc}</p>
+                  <div className="flex flex-wrap gap-1.5">
+                    {activePhase.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="text-xs font-medium px-2 py-0.5 rounded-full bg-white text-slate-500"
+                        style={{ border: "0.5px solid rgba(0,0,0,0.1)" }}
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </>
+              ) : (
+                <p className="text-[13px] italic font-medium text-slate-600 leading-relaxed py-4">
+                  {t(
+                    "Disposez de la capacité à anticiper les ruptures, avant qu'elles ne deviennent des crises, c'est devenu le premier avantage compétitif des organisations souveraines.",
+                    "Have the ability to anticipate disruptions, before they become crises, this has become the primary competitive advantage of sovereign organizations."
+                  )}
                 </p>
-                <p className="text-sm font-semibold text-slate-800 mb-2">{activePhase.title}</p>
-                <p className="text-xs text-slate-600 leading-relaxed mb-3">{activePhase.desc}</p>
-                <div className="flex flex-wrap gap-1.5">
-                  {activePhase.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="text-xs font-medium px-2 py-0.5 rounded-full bg-white text-slate-500"
-                      style={{ border: "0.5px solid rgba(0,0,0,0.1)" }}
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </>
-            ) : (
-              <p className="text-[13px] italic font-medium text-slate-600 leading-relaxed py-4">
-                {t(
-                  "Disposez de la capacité à anticiper les ruptures, avant qu'elles ne deviennent des crises — c'est devenu le premier avantage compétitif des organisations souveraines.",
-                  "Have the ability to anticipate disruptions, before they become crises — this has become the primary competitive advantage of sovereign organizations."
-                )}
-              </p>
-            )}
+              )}
+            </div>
+            <p className="text-center text-xs text-slate-400 mt-3">
+              {t("Cliquez sur chaque phase pour explorer", "Click on each phase to explore")}
+            </p>
           </div>
 
           {/* RIGHT — Orbit diagram (enlarged ~+15-20%) */}
@@ -277,11 +300,9 @@ export default function ConstructionInfluence() {
                 hoveredId={hoveredId}
                 onClickPhase={handleClick}
                 onHoverPhase={setHoveredId}
+                onLogoClick={handleLogoClick}
               />
             </div>
-            <p className="text-xs text-slate-400">
-              {t("Cliquez sur chaque phase pour explorer", "Click on each phase to explore")}
-            </p>
           </div>
 
         </div>

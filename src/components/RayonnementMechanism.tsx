@@ -119,6 +119,28 @@ const RayonnementMechanism = () => {
   const [selectedCompetitor, setSelectedCompetitor] = useState<string | null>(null);
   const [showCompetitivityMap, setShowCompetitivityMap] = useState(false);
   const detailRef = useRef<HTMLDivElement>(null);
+  const competitorSectionRef = useRef<HTMLDivElement>(null);
+  const hasAutoShownMap = useRef(false);
+
+  // Auto-display competitivity map on scroll into view
+  useEffect(() => {
+    const el = competitorSectionRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !hasAutoShownMap.current) {
+          hasAutoShownMap.current = true;
+          setActive(null);
+          setSelectedCountry(null);
+          setSelectedCompetitor(null);
+          setShowCompetitivityMap(true);
+        }
+      },
+      { threshold: 0.3 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   const toggle = (id: BlockId) => {
     setSelectedCountry(null);
@@ -792,6 +814,7 @@ const RayonnementMechanism = () => {
           {destBlocks.map(b => (
             <div
               key={b.id}
+              ref={b.id === "pays_concurrent" ? competitorSectionRef : undefined}
               role="button"
               tabIndex={0}
               onClick={() => {

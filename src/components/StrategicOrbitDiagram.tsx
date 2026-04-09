@@ -51,14 +51,14 @@ function getCycleSteps(t: (fr: string, en: string) => string) {
 
 function getDomains(t: (fr: string, en: string) => string) {
   return [
-    { id: "rp", icon: "📡", short: t("RP & Comm.", "PR & Comm."), angle: 90, title: t("RP & Communication", "PR & Communication"), type: t("Réputation & Influence médiatique", "Reputation & Media Influence"), desc: t("Médias Intelligence, surveillance de la notoriété, gestion des crises et pilotage des campagnes médiatiques. Transformez chaque mention en levier stratégique.", "Media Intelligence, brand monitoring, crisis management and media campaign steering. Turn every mention into a strategic lever."), tags: t("Médias Intelligence,Notoriété,Crises,Campagnes,Newsletter", "Media Intelligence,Brand Awareness,Crises,Campaigns,Newsletter").split(",") },
+    { id: "rp", icon: "📡", short: t("Communication", "Communication"), angle: 90, title: t("Communication", "Communication"), type: t("Réputation & Influence médiatique", "Reputation & Media Influence"), desc: t("Médias Intelligence, surveillance de la notoriété, gestion des crises et pilotage des campagnes médiatiques. Transformez chaque mention en levier stratégique.", "Media Intelligence, brand monitoring, crisis management and media campaign steering. Turn every mention into a strategic lever."), tags: t("Médias Intelligence,Notoriété,Crises,Campagnes,Newsletter", "Media Intelligence,Brand Awareness,Crises,Campaigns,Newsletter").split(",") },
     { id: "biz", icon: "📈", short: "Business Dev", angle: 45, title: "Business Development", type: t("Croissance & Opportunités", "Growth & Opportunities"), desc: t("Surveillance concurrentielle, identification d'opportunités et d'appels d'offres, veille sur les salons et développement international. Ne manquez plus aucune fenêtre d'entrée.", "Competitive monitoring, opportunity and tender identification, trade show intelligence and international development. Never miss a market entry window."), tags: t("Concurrents,Clients,Partenaires,Opportunités,International", "Competitors,Clients,Partners,Opportunities,International").split(",") },
     { id: "rd", icon: "🔬", short: "R&D", angle: 0, title: t("Recherche & Développement", "Research & Development"), type: t("Innovation & Brevets", "Innovation & Patents"), desc: t("Veille sur les dernières innovations, nouveaux brevets et technologies émergentes. Benchmarkez les meilleures pratiques mondiales pour garder une longueur d'avance décisive.", "Monitor latest innovations, new patents and emerging technologies. Benchmark global best practices to maintain a decisive edge."), tags: t("Innovations,Brevets,Nouvelles Technologies,Best Practices", "Innovations,Patents,Emerging Technologies,Best Practices").split(",") },
     { id: "achat", icon: "🛒", short: t("Achat", "Procurement"), angle: 315, title: t("Achat & Supply", "Procurement & Supply"), type: t("Fournisseurs & Marché", "Suppliers & Market"), desc: t("Intelligence sur les fournisseurs, clients stratégiques et nouveaux produits entrants. Anticipez les évolutions du marché et optimisez votre chaîne de valeur.", "Supplier intelligence, strategic clients and new market entrants. Anticipate market evolution and optimize your value chain."), tags: t("Fournisseurs,Clients,Nouveaux produits,Supply chain", "Suppliers,Clients,New products,Supply chain").split(",") },
     { id: "mkt", icon: "📣", short: "Marketing", angle: 270, title: "Marketing & Consumer Insights", type: t("Marché & Consommateurs", "Market & Consumers"), desc: t("Positionnement stratégique, attentes consommateurs, benchmark marché et mesure d'impact des actions marketing en temps réel. Décidez avec des données, pas des intuitions.", "Strategic positioning, consumer expectations, market benchmarking and real-time marketing impact measurement. Decide with data, not intuition."), tags: t("Positionnement,Attentes consommateurs,Benchmark,Impact Metrics", "Positioning,Consumer expectations,Benchmark,Impact Metrics").split(",") },
     { id: "jur", icon: "⚖️", short: t("Juridique", "Legal"), angle: 225, title: t("Juridique & RH", "Legal & HR"), type: t("Conformité & Compétences", "Compliance & Skills"), desc: t("Veille réglementaire et juridique, suivi des législations et anticipation des évolutions. Identification des nouvelles compétences nécessaires à la transformation.", "Regulatory and legal monitoring, legislation tracking and anticipation. Identification of new skills required for transformation."), tags: t("Réglementation,Veille juridique,Législations,New Skills", "Regulation,Legal monitoring,Legislation,New Skills").split(",") },
     { id: "lob", icon: "🏛️", short: "Lobbying", angle: 180, title: "Lobbying & Public Affairs", type: t("Influence & Diplomatie", "Influence & Diplomacy"), desc: t("Rivalités géopolitiques, political intelligence, cartographie des leaders d'influence et diplomatie économique. Positionnez-vous là où les décisions se prennent réellement.", "Geopolitical rivalries, political intelligence, influence leader mapping and economic diplomacy. Position yourself where decisions are truly made."), tags: t("Géopolitique,Political Intelligence,Diplomatie,Stakeholders", "Geopolitics,Political Intelligence,Diplomacy,Stakeholders").split(",") },
-    { id: "cm", icon: "👥", short: "Community", angle: 135, title: "Community Management", type: t("Digital & e-Réputation", "Digital & e-Reputation"), desc: t("Empreinte digitale, e-Réputation, analyse des avis consommateurs et identification des leaders d'opinion. Maîtrisez votre image dans chaque conversation qui vous concerne.", "Digital footprint, e-Reputation, consumer review analysis and opinion leader identification. Master your image in every conversation that concerns you."), tags: t("Empreinte Digitale,e-Réputation,Avis Consommateurs,Activistes", "Digital Footprint,e-Reputation,Consumer Reviews,Activists").split(",") },
+    { id: "cm", icon: "👥", short: "Community", angle: 135, title: "Community Management", type: t("Digital & e-Réputation", "Digital & e-Reputation"), desc: t("Empreinte digitale, e-Réputation, analyse des avis consommateurs et identification des leaders d'opinion. Maîtrisez votre image dans chaque conversation qui vous concerne.", "Digital footprint, e-Reputation, consumer review analysis and opinion leader identification. Master your image in every conversation that concerns you."), tags: t("Empreinte Digitale,e-Réputation,Avis Consommateurs,Activistes", "Digital Footprint,e-Reputation,Consumer Reviews,Activists").split(","), lightColor: true },
   ];
 }
 
@@ -84,13 +84,7 @@ function polarToPercent(angleDeg: number, radiusPct: number) {
 
 type PanelData = { icon: string; title: string; type: string; desc: string; tags: string[] };
 
-// Icon mapping for step nodes
-const stepIcons: Record<string, string> = {
-  "step-01": "📡",
-  "step-02": "🔍",
-  "step-03": "🗺",
-  "step-04": "📊",
-};
+// Icons removed from step nodes per requirement
 
 // ─── Component ───────────────────────────────────────────────────────────────
 
@@ -143,13 +137,6 @@ export default function StrategicOrbitDiagram() {
     );
   });
 
-  // Compute positions for watermark placement (between Indexation, Captation, R&D)
-  const indexPos = polarToPercent(315, 20); // Indexation
-  const captPos = polarToPercent(45, 20);   // Captation
-  const rdPos = polarToPercent(0, 41);      // R&D domain
-  const wmX = (indexPos.x + captPos.x + rdPos.x) / 3;
-  const wmY = (indexPos.y + captPos.y + rdPos.y) / 3;
-
   return (
     <section className="w-full py-20 px-4 bg-white">
       {/* Header */}
@@ -167,9 +154,6 @@ export default function StrategicOrbitDiagram() {
       <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center gap-8">
         {/* Detail Panel — LEFT */}
         <div className="w-full md:w-[38%] order-2 md:order-1">
-          <p className="text-center text-[14px] font-bold mb-3" style={{ fontVariant: 'small-caps', letterSpacing: '0.08em', color: '#0D1B2A' }}>
-            {t("Anticiper - Décider - Influencer", "Anticipate - Decide - Influence")}
-          </p>
           <p className="text-center text-sm font-bold text-slate-400 mb-3" style={{ fontVariant: 'small-caps', letterSpacing: '0.08em' }}>{t("Architecture de veille décisionnelle par métier", "Decision Watch Architecture by Business Domain")}</p>
           <div className="rounded-2xl overflow-hidden"
             style={{ border: "0.5px solid rgba(0,0,0,0.08)", background: "#f8fafc" }}>
@@ -221,11 +205,7 @@ export default function StrategicOrbitDiagram() {
               {connectors}
             </svg>
 
-            {/* Buildfluence watermark — repositioned between Indexation, Captation, R&D */}
-            <svg className="absolute inset-0 w-full h-full pointer-events-none z-[5]"
-              viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet">
-              <text x={wmX} y={wmY} textAnchor="middle" opacity="0.45" fill="#C9A84C" fontSize="3.2" fontWeight="700" letterSpacing="0.2">BUILDFLUENCE</text>
-            </svg>
+            {/* Buildfluence watermark removed */}
 
             {/* Core — Logo Buildfluence clickable */}
             <button
@@ -261,10 +241,6 @@ export default function StrategicOrbitDiagram() {
                     boxShadow: active ? "0 0 0 3px rgba(14,165,201,0.25)" : "none",
                   }}
                 >
-                <span className={`${active ? "text-slate-600" : "text-cyan-300/80"}`}
-                  style={{ fontSize: "clamp(10px, 2vw, 16px)", lineHeight: 1 }}>
-                  {stepIcons[s.id]}
-                </span>
                 <span className={`font-semibold ${active ? "text-slate-400" : "text-cyan-300/70"}`}
                   style={{ fontSize: "clamp(7px, 1.6vw, 10px)" }}>
                   {s.num}
@@ -289,7 +265,7 @@ export default function StrategicOrbitDiagram() {
                 >
                   <div className="w-full h-full flex flex-col items-center justify-center rounded-xl transition-all duration-200"
                     style={{
-                      background: active ? "#e0f0ff" : "#1a5580",
+                      background: active ? "#e0f0ff" : (d as any).lightColor ? "#4a8ab5" : "#1a5580",
                       border: active ? "1.5px solid #1a5580" : "1.5px solid #1a5580",
                       boxShadow: active ? "0 4px 16px rgba(26,85,128,0.25)" : "0 1px 4px rgba(0,0,0,0.1)",
                     }}
