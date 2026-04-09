@@ -16,8 +16,8 @@ const StrategicWorkflow = () => {
             { num: "2", title: t("Ateliers Collaboratifs", "Collaborative Workshops"), desc: t("Co-construction du Framework décisionnel.", "Co-construction of the decision-making framework.") },
             { num: "3", title: t("Implémentation AI", "AI Implementation"), desc: t("Déploiement des outils de veille augmentée. Configuration IA.", "Deployment of augmented monitoring tools. AI configuration.") },
             { num: "4", title: t("Extraction des Tendances", "Trend Extraction"), desc: t("Analyse continue. Détection automatique des patterns.", "Continuous analysis. Automatic pattern detection.") },
-            { num: "5", title: "DataViz & Dashboards", desc: t("Tableaux de bord sur-mesure. Visualisations interactives.", "Custom dashboards. Interactive visualizations.") },
-            { num: "6", title: "Strategic Intelligence Empowerment", desc: t("Accompagnement continu. Autonomisation progressive.", "Continuous support. Progressive empowerment.") },
+            { num: "5", title: t("DataViz & Dashboards"), desc: t("Tableaux de bord sur-mesure. Visualisations interactives.", "Custom dashboards. Interactive visualizations.") },
+            { num: "6", title: t("Strategic Intelligence Empowerment"), desc: t("Accompagnement continu. Autonomisation progressive.", "Continuous support. Progressive empowerment.") },
           ].map((step) => (
             <div key={step.num} className="card-glass flex items-start gap-4 p-5">
               <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-sm bg-primary/10 font-serif text-sm font-bold text-primary">
@@ -46,4 +46,3 @@ const StrategicWorkflow = () => {
 };
 
 export default StrategicWorkflow;
-
