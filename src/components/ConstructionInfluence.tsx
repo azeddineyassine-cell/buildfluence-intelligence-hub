@@ -233,6 +233,10 @@ export default function ConstructionInfluence() {
     setActiveId((prev) => (prev === id ? null : id));
   }, []);
 
+  const handleLogoClick = useCallback(() => {
+    setActiveId(null);
+  }, []);
+
   return (
     <section className="w-full py-6 px-4 bg-white">
       <div className="max-w-5xl mx-auto">
@@ -241,42 +245,50 @@ export default function ConstructionInfluence() {
         <div className="grid grid-cols-1 lg:grid-cols-[30%_70%] gap-6 items-center">
 
           {/* LEFT — Detail panel */}
-          <div
-            className="rounded-xl p-5 transition-all duration-300 min-h-[180px]"
-            style={{
-              border: activePhase
-                ? `1.5px solid ${activePhase.borderColor}`
-                : "0.5px solid rgba(0,0,0,0.08)",
-              background: activePhase ? activePhase.color : "rgba(0,0,0,0.02)",
-            }}
-          >
-            {activePhase ? (
-              <>
-                <p className="text-xs font-semibold uppercase tracking-widest text-slate-400 mb-1">
-                  {activePhase.sub}
+          <div>
+            <p className="text-center text-[14px] font-bold mb-3" style={{ fontVariant: 'small-caps', letterSpacing: '0.08em', color: '#8e99a2' }}>
+              {t("Anticiper - Décider - Influencer", "Anticipate - Decide - Influence")}
+            </p>
+            <div
+              className="rounded-xl p-5 transition-all duration-300 min-h-[180px]"
+              style={{
+                border: activePhase
+                  ? `1.5px solid ${activePhase.borderColor}`
+                  : "0.5px solid rgba(0,0,0,0.08)",
+                background: activePhase ? activePhase.color : "rgba(0,0,0,0.02)",
+              }}
+            >
+              {activePhase ? (
+                <>
+                  <p className="text-xs font-semibold uppercase tracking-widest text-slate-400 mb-1">
+                    {activePhase.sub}
+                  </p>
+                  <p className="text-sm font-semibold text-slate-800 mb-2">{activePhase.title}</p>
+                  <p className="text-xs text-slate-600 leading-relaxed mb-3">{activePhase.desc}</p>
+                  <div className="flex flex-wrap gap-1.5">
+                    {activePhase.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="text-xs font-medium px-2 py-0.5 rounded-full bg-white text-slate-500"
+                        style={{ border: "0.5px solid rgba(0,0,0,0.1)" }}
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </>
+              ) : (
+                <p className="text-[13px] italic font-medium text-slate-600 leading-relaxed py-4">
+                  {t(
+                    "Disposez de la capacité à anticiper les ruptures, avant qu'elles ne deviennent des crises, c'est devenu le premier avantage compétitif des organisations souveraines.",
+                    "Have the ability to anticipate disruptions, before they become crises, this has become the primary competitive advantage of sovereign organizations."
+                  )}
                 </p>
-                <p className="text-sm font-semibold text-slate-800 mb-2">{activePhase.title}</p>
-                <p className="text-xs text-slate-600 leading-relaxed mb-3">{activePhase.desc}</p>
-                <div className="flex flex-wrap gap-1.5">
-                  {activePhase.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="text-xs font-medium px-2 py-0.5 rounded-full bg-white text-slate-500"
-                      style={{ border: "0.5px solid rgba(0,0,0,0.1)" }}
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </>
-            ) : (
-              <p className="text-[13px] italic font-medium text-slate-600 leading-relaxed py-4">
-                {t(
-                  "Disposez de la capacité à anticiper les ruptures, avant qu'elles ne deviennent des crises, c'est devenu le premier avantage compétitif des organisations souveraines.",
-                  "Have the ability to anticipate disruptions, before they become crises, this has become the primary competitive advantage of sovereign organizations."
-                )}
-              </p>
-            )}
+              )}
+            </div>
+            <p className="text-center text-xs text-slate-400 mt-3">
+              {t("Cliquez sur chaque phase pour explorer", "Click on each phase to explore")}
+            </p>
           </div>
 
           {/* RIGHT — Orbit diagram (enlarged ~+15-20%) */}
@@ -288,11 +300,9 @@ export default function ConstructionInfluence() {
                 hoveredId={hoveredId}
                 onClickPhase={handleClick}
                 onHoverPhase={setHoveredId}
+                onLogoClick={handleLogoClick}
               />
             </div>
-            <p className="text-xs text-slate-400">
-              {t("Cliquez sur chaque phase pour explorer", "Click on each phase to explore")}
-            </p>
           </div>
 
         </div>
