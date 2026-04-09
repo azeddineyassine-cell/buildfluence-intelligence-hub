@@ -173,21 +173,32 @@ function OrbitDiagram({
               onMouseEnter={() => onHoverPhase(p.id)}
               onMouseLeave={() => onHoverPhase(null)}
             />
-            {p.label.map((line, li) => (
-              <text
-                key={li}
-                x={lx}
-                y={ly + (li - (p.label.length - 1) / 2) * 13}
-                textAnchor="middle"
-                dominantBaseline="central"
-                fontSize="10"
-                fontWeight="500"
-                fill="#1e3a5f"
-                style={{ pointerEvents: "none" }}
-              >
-                {line}
-              </text>
-            ))}
+            {p.label.map((line, li) => {
+              const iconMap: Record<string, string> = {
+                collecter: "🛰️",
+                analyser: "🔍",
+                cartographier: "🗺️",
+                identifier: "🎯",
+                detecter: "⚡",
+                influencer: "📢",
+              };
+              const icon = li === 0 ? iconMap[p.id] || "" : "";
+              return (
+                <text
+                  key={li}
+                  x={lx}
+                  y={ly + (li - (p.label.length - 1) / 2) * 13 + (icon ? 3 : 0)}
+                  textAnchor="middle"
+                  dominantBaseline="central"
+                  fontSize="10"
+                  fontWeight="500"
+                  fill="#1e3a5f"
+                  style={{ pointerEvents: "none" }}
+                >
+                  {icon ? `${icon} ${line}` : line}
+                </text>
+              );
+            })}
           </g>
         );
       })}
