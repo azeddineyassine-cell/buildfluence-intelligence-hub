@@ -278,7 +278,7 @@ export default function StrategicOrbitDiagram() {
                 >
                   <div className="w-full h-full flex flex-col items-center justify-center rounded-xl transition-all duration-200"
                     style={{
-                      background: active ? "#e0f0ff" : "#1a5580",
+                      background: active ? "#e0f0ff" : (d as any).lightColor ? "#4a8ab5" : "#1a5580",
                       border: active ? "1.5px solid #1a5580" : "1.5px solid #1a5580",
                       boxShadow: active ? "0 4px 16px rgba(26,85,128,0.25)" : "0 1px 4px rgba(0,0,0,0.1)",
                     }}
