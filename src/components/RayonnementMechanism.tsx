@@ -814,6 +814,7 @@ const RayonnementMechanism = () => {
           {destBlocks.map(b => (
             <div
               key={b.id}
+              ref={b.id === "pays_concurrent" ? competitorSectionRef : undefined}
               role="button"
               tabIndex={0}
               onClick={() => {
