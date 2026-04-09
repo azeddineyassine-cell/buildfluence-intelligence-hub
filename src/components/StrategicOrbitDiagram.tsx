@@ -58,7 +58,7 @@ function getDomains(t: (fr: string, en: string) => string) {
     { id: "mkt", icon: "📣", short: "Marketing", angle: 270, title: "Marketing & Consumer Insights", type: t("Marché & Consommateurs", "Market & Consumers"), desc: t("Positionnement stratégique, attentes consommateurs, benchmark marché et mesure d'impact des actions marketing en temps réel. Décidez avec des données, pas des intuitions.", "Strategic positioning, consumer expectations, market benchmarking and real-time marketing impact measurement. Decide with data, not intuition."), tags: t("Positionnement,Attentes consommateurs,Benchmark,Impact Metrics", "Positioning,Consumer expectations,Benchmark,Impact Metrics").split(",") },
     { id: "jur", icon: "⚖️", short: t("Juridique", "Legal"), angle: 225, title: t("Juridique & RH", "Legal & HR"), type: t("Conformité & Compétences", "Compliance & Skills"), desc: t("Veille réglementaire et juridique, suivi des législations et anticipation des évolutions. Identification des nouvelles compétences nécessaires à la transformation.", "Regulatory and legal monitoring, legislation tracking and anticipation. Identification of new skills required for transformation."), tags: t("Réglementation,Veille juridique,Législations,New Skills", "Regulation,Legal monitoring,Legislation,New Skills").split(",") },
     { id: "lob", icon: "🏛️", short: "Lobbying", angle: 180, title: "Lobbying & Public Affairs", type: t("Influence & Diplomatie", "Influence & Diplomacy"), desc: t("Rivalités géopolitiques, political intelligence, cartographie des leaders d'influence et diplomatie économique. Positionnez-vous là où les décisions se prennent réellement.", "Geopolitical rivalries, political intelligence, influence leader mapping and economic diplomacy. Position yourself where decisions are truly made."), tags: t("Géopolitique,Political Intelligence,Diplomatie,Stakeholders", "Geopolitics,Political Intelligence,Diplomacy,Stakeholders").split(",") },
-    { id: "cm", icon: "👥", short: "Community", angle: 135, title: "Community Management", type: t("Digital & e-Réputation", "Digital & e-Reputation"), desc: t("Empreinte digitale, e-Réputation, analyse des avis consommateurs et identification des leaders d'opinion. Maîtrisez votre image dans chaque conversation qui vous concerne.", "Digital footprint, e-Reputation, consumer review analysis and opinion leader identification. Master your image in every conversation that concerns you."), tags: t("Empreinte Digitale,e-Réputation,Avis Consommateurs,Activistes", "Digital Footprint,e-Reputation,Consumer Reviews,Activists").split(",") },
+    { id: "cm", icon: "👥", short: "Community", angle: 135, title: "Community Management", type: t("Digital & e-Réputation", "Digital & e-Reputation"), desc: t("Empreinte digitale, e-Réputation, analyse des avis consommateurs et identification des leaders d'opinion. Maîtrisez votre image dans chaque conversation qui vous concerne.", "Digital footprint, e-Reputation, consumer review analysis and opinion leader identification. Master your image in every conversation that concerns you."), tags: t("Empreinte Digitale,e-Réputation,Avis Consommateurs,Activistes", "Digital Footprint,e-Reputation,Consumer Reviews,Activists").split(","), lightColor: true },
   ];
 }
 
@@ -254,10 +254,6 @@ export default function StrategicOrbitDiagram() {
                     boxShadow: active ? "0 0 0 3px rgba(14,165,201,0.25)" : "none",
                   }}
                 >
-                <span className={`${active ? "text-slate-600" : "text-cyan-300/80"}`}
-                  style={{ fontSize: "clamp(10px, 2vw, 16px)", lineHeight: 1 }}>
-                  {stepIcons[s.id]}
-                </span>
                 <span className={`font-semibold ${active ? "text-slate-400" : "text-cyan-300/70"}`}
                   style={{ fontSize: "clamp(7px, 1.6vw, 10px)" }}>
                   {s.num}
