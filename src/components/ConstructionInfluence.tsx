@@ -139,12 +139,14 @@ function OrbitDiagram({
   hoveredId,
   onClickPhase,
   onHoverPhase,
+  onLogoClick,
 }: {
   phases: Phase[];
   activeId: string | null;
   hoveredId: string | null;
   onClickPhase: (id: string) => void;
   onHoverPhase: (id: string | null) => void;
+  onLogoClick: () => void;
 }) {
   return (
     <svg viewBox="0 0 340 340" width="100%" className="block">
