@@ -134,6 +134,8 @@ export default function StrategicOrbitDiagram() {
         fill="#0ea5c9" opacity="0.6"
         style={{ animationDelay: `${(i * 0.31).toFixed(2)}s` }}
         className="animate-pulse" />
+    );
+  });
 
   return (
     <section className="w-full py-20 px-4 bg-white">
