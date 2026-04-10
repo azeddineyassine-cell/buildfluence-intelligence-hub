@@ -4,248 +4,212 @@ import DetailPageLayout from "@/components/DetailPageLayout";
 
 const CompetitiveVelocityEngine = () => {
   const { t } = useLanguage();
-  const [activeSector, setActiveSector] = useState<number | null>(null);
+  const [activeSector, setActiveSector] = useState<string | null>(null);
 
-  const sectors = [
-    {
-      id: 1,
-      title: "Décision accélérée",
-      icon: "⚡",
-      desc: "Hiérarchisation Go/No-Go, réduction de l'incertitude et logique d'action immédiate.",
+  const data = {
+    geo: {
+      sub: "Analyse des Risques",
+      title: "Conflits Géopolitiques",
+      list: [
+        "Analyse tensions internationales",
+        "Risques souverains & actifs",
+        "Impacts chaînes de valeur",
+        "Prospective zones instables",
+        "Cartographie des acteurs étatiques",
+      ],
     },
-    {
-      id: 2,
-      title: "Conflits géopolitiques",
-      icon: "🌍",
-      desc: "Analyse des risques souverains et des impacts des tensions internationales sur vos actifs.",
-    },
-    {
-      id: 3,
+    mkt: {
+      sub: "Competitive Monitoring",
       title: "Market Intelligence",
-      icon: "📊",
-      desc: "Veille concurrentielle profonde et lecture des stratégies implicites du marché.",
+      list: [
+        "Veille concurrentielle profonde",
+        "Analyse stratégies implicites",
+        "Parts de marché & positionnement",
+        "Benchmark offres & prix",
+        "Signaux faibles sectoriels",
+      ],
     },
-    {
-      id: 4,
-      title: "Signaux technologiques",
-      icon: "💡",
-      desc: "Identification des ruptures technologiques et anticipation des nouveaux standards.",
+    tec: {
+      sub: "Innovation Watch",
+      title: "Signaux Technologiques",
+      list: [
+        "Ruptures technologiques IA/Data",
+        "Mapping brevets & R&D",
+        "Standards émergents",
+        "Analyse maturité solutions",
+        "Veille deep-tech & hardware",
+      ],
     },
-    {
-      id: 5,
-      title: "Scénarios anticipés",
-      icon: "🔮",
-      desc: "Modélisation prospective pour ne jamais être pris au dépourvu par le futur.",
+    sce: {
+      sub: "Strategic Vision",
+      title: "Scénarios Anticipés",
+      list: [
+        "Modélisation prospective",
+        "Analyse de sensibilité",
+        "Scénarios noir/gris/rose",
+        "Aide à la planification",
+        "War Gaming & Simulations",
+      ],
     },
-    {
-      id: 6,
-      title: "Écosystème modélisé",
-      icon: "🗺️",
-      desc: "Mapping complet des acteurs, influenceurs et réseaux de pouvoir de votre secteur.",
+    eco: {
+      sub: "Network Mapping",
+      title: "Écosystème Modélisé",
+      list: [
+        "Mapping influenceurs & réseaux",
+        "Analyse alliances et oppositions",
+        "Identification nœuds d'amplification",
+        "Mise à jour selon signaux captés",
+      ],
     },
-  ];
+    dec: {
+      sub: "Output & Action",
+      title: "Décision Accélérée",
+      list: [
+        "Hiérarchisation Go/No-Go/Timing",
+        "Réduction incertitude décisionnelle",
+        "Logique d'action vs Description",
+        "Livrables : Fiches, Dashboards",
+        "Briefings C-Level en temps réel",
+      ],
+    },
+  };
 
   return (
     <DetailPageLayout
       title="Competitive Velocity Engine"
-      subtitle="Une nouvelle génération d'analyse stratégique pour accélérer la prise de décision."
+      subtitle="Une nouvelle génération d'analyse stratégique, conçue pour accélérer la prise de décision."
       category="Strategic Innovation"
     >
-      <div className="max-w-7xl mx-auto px-6 py-12">
-        <div className="grid lg:grid-cols-12 gap-10 items-center bg-white rounded-[50px] shadow-2xl p-8 md:p-16 border border-slate-50 mb-20">
-          {/* SVG DE LA ROUE (Ton Code exact) */}
-          <div className="lg:col-span-7 flex justify-center lg:scale-110">
-            <svg viewBox="0 0 500 500" className="w-full max-w-[480px] drop-shadow-2xl">
+      <div className="max-w-7xl mx-auto px-6 py-16">
+        <div className="bg-white rounded-[50px] shadow-2xl p-8 md:p-16 border border-slate-50 grid lg:grid-cols-12 gap-12 items-center mb-20">
+          {/* CERCLE INTERACTIF (SVG adapté de votre doc) */}
+          <div className="lg:col-span-7 flex justify-center">
+            <svg viewBox="0 0 500 500" className="w-full max-w-[450px] drop-shadow-xl">
               <path
-                onClick={() => setActiveSector(1)}
-                className="cursor-pointer hover:brightness-110 transition-all"
+                onClick={() => setActiveSector("dec")}
+                className="cursor-pointer transition-all hover:brightness-110"
                 d="M250,250 L77,150 A200,200 0 0,1 250,50 Z"
-                fill={activeSector === 1 ? "#C9A84C" : "#1B3E6A"}
+                fill={activeSector === "dec" ? "#C9A84C" : "#1B3E6A"}
                 stroke="white"
                 strokeWidth="3"
               />
-              <text x="175" y="115" className="fill-white text-[20px] pointer-events-none">
-                {" "}
-                ⚡{" "}
-              </text>
-              <text
-                x="175"
-                y="140"
-                className="fill-white font-bold text-[8px] uppercase pointer-events-none"
-                textAnchor="middle"
-              >
-                Décision accélérée
-              </text>
-
               <path
-                onClick={() => setActiveSector(2)}
-                className="cursor-pointer hover:brightness-110 transition-all"
+                onClick={() => setActiveSector("geo")}
+                className="cursor-pointer transition-all hover:brightness-110"
                 d="M250,250 L250,50 A200,200 0 0,1 423,150 Z"
-                fill={activeSector === 2 ? "#C9A84C" : "#1B3E6A"}
+                fill={activeSector === "geo" ? "#C9A84C" : "#1B3E6A"}
                 stroke="white"
                 strokeWidth="3"
               />
-              <text x="325" y="115" className="fill-white text-[20px] pointer-events-none">
-                {" "}
-                🌍{" "}
-              </text>
-              <text
-                x="325"
-                y="140"
-                className="fill-white font-bold text-[8px] uppercase pointer-events-none"
-                textAnchor="middle"
-              >
-                Géopolitique
-              </text>
-
               <path
-                onClick={() => setActiveSector(3)}
-                className="cursor-pointer hover:brightness-110 transition-all"
+                onClick={() => setActiveSector("mkt")}
+                className="cursor-pointer transition-all hover:brightness-110"
                 d="M250,250 L423,150 A200,200 0 0,1 423,350 Z"
-                fill={activeSector === 3 ? "#C9A84C" : "#1B3E6A"}
+                fill={activeSector === "mkt" ? "#C9A84C" : "#1B3E6A"}
                 stroke="white"
                 strokeWidth="3"
               />
-              <text x="390" y="240" className="fill-white text-[20px] pointer-events-none">
-                {" "}
-                📊{" "}
-              </text>
-              <text
-                x="390"
-                y="265"
-                className="fill-white font-bold text-[8px] uppercase pointer-events-none"
-                textAnchor="middle"
-              >
-                Market Intel
-              </text>
-
               <path
-                onClick={() => setActiveSector(4)}
-                className="cursor-pointer hover:brightness-110 transition-all"
+                onClick={() => setActiveSector("tec")}
+                className="cursor-pointer transition-all hover:brightness-110"
                 d="M250,250 L423,350 A200,200 0 0,1 250,450 Z"
-                fill={activeSector === 4 ? "#C9A84C" : "#1B3E6A"}
+                fill={activeSector === "tec" ? "#C9A84C" : "#1B3E6A"}
                 stroke="white"
                 strokeWidth="3"
               />
-              <text x="325" y="365" className="fill-white text-[20px] pointer-events-none">
-                {" "}
-                💡{" "}
-              </text>
-              <text
-                x="325"
-                y="390"
-                className="fill-white font-bold text-[8px] uppercase pointer-events-none"
-                textAnchor="middle"
-              >
-                Technologie
-              </text>
-
               <path
-                onClick={() => setActiveSector(5)}
-                className="cursor-pointer hover:brightness-110 transition-all"
+                onClick={() => setActiveSector("sce")}
+                className="cursor-pointer transition-all hover:brightness-110"
                 d="M250,250 L250,450 A200,200 0 0,1 77,350 Z"
-                fill={activeSector === 5 ? "#C9A84C" : "#1B3E6A"}
+                fill={activeSector === "sce" ? "#C9A84C" : "#1B3E6A"}
                 stroke="white"
                 strokeWidth="3"
               />
-              <text x="175" y="365" className="fill-white text-[20px] pointer-events-none">
-                {" "}
-                🔮{" "}
-              </text>
-              <text
-                x="175"
-                y="390"
-                className="fill-white font-bold text-[8px] uppercase pointer-events-none"
-                textAnchor="middle"
-              >
-                Scénarios
-              </text>
-
               <path
-                onClick={() => setActiveSector(6)}
-                className="cursor-pointer hover:brightness-110 transition-all"
+                onClick={() => setActiveSector("eco")}
+                className="cursor-pointer transition-all hover:brightness-110"
                 d="M250,250 L77,350 A200,200 0 0,1 77,150 Z"
-                fill={activeSector === 6 ? "#C9A84C" : "#1B3E6A"}
+                fill={activeSector === "eco" ? "#C9A84C" : "#1B3E6A"}
                 stroke="white"
                 strokeWidth="3"
               />
-              <text x="110" y="240" className="fill-white text-[20px] pointer-events-none">
-                {" "}
-                🗺️{" "}
-              </text>
-              <text
-                x="110"
-                y="265"
-                className="fill-white font-bold text-[8px] uppercase pointer-events-none"
-                textAnchor="middle"
-              >
-                Écosystème
-              </text>
 
-              <circle cx="250" cy="250" r="60" fill="white" stroke="#1B3E6A" strokeWidth="2" />
-              <text
-                x="250"
-                y="255"
-                fill="#1B3E6A"
-                fontSize="8"
-                fontWeight="900"
-                textAnchor="middle"
-                className="uppercase"
-              >
-                Buildfluence
+              <circle cx="250" cy="250" r="65" fill="white" stroke="#1B3E6A" strokeWidth="2" />
+              <text x="250" y="255" fill="#1B3E6A" fontSize="10" fontWeight="900" textAnchor="middle">
+                BUILDFLUENCE
               </text>
             </svg>
           </div>
 
-          {/* PANNEAU D'INFORMATION */}
-          <div className="lg:col-span-5 bg-[#F8FAFC] rounded-[35px] p-10 border-l-[10px] border-[#C9A84C] min-h-[450px] flex flex-col justify-center">
+          {/* PANNEAU DYNAMIQUE (Logique de votre doc) */}
+          <div className="lg:col-span-5 bg-[#F8FAFC] rounded-[40px] p-10 border-l-[12px] border-[#C9A84C] min-h-[480px] flex flex-col justify-center shadow-inner">
             {activeSector ? (
-              <div>
-                <div className="text-[#C9A84C] font-black uppercase tracking-widest text-[10px] mb-4">
-                  Focus Stratégique
-                </div>
-                <h2 className="text-3xl font-black text-[#1B3E6A] mb-6 uppercase leading-tight">
-                  {sectors[activeSector - 1].title}
+              <div className="animate-in fade-in slide-in-from-right-4 duration-300">
+                <span className="text-[#C9A84C] font-black uppercase tracking-widest text-[10px]">
+                  {data[activeSector].sub}
+                </span>
+                <h2 className="text-3xl font-black text-[#1B3E6A] mt-2 mb-8 uppercase leading-tight">
+                  {data[activeSector].title}
                 </h2>
-                <p className="text-slate-600 font-medium text-lg leading-relaxed">{sectors[activeSector - 1].desc}</p>
+                <ul className="space-y-4">
+                  {data[activeSector].list.map((item, index) => (
+                    <li key={index} className="flex items-center gap-3 text-slate-600 font-semibold text-lg">
+                      <span className="text-[#C9A84C]">→</span> {item}
+                    </li>
+                  ))}
+                </ul>
+                <button
+                  onClick={() => setActiveSector(null)}
+                  className="mt-10 text-[10px] font-bold text-slate-400 uppercase hover:text-[#1B3E6A] transition-colors"
+                >
+                  ← Retour au moteur
+                </button>
               </div>
             ) : (
-              <div className="text-center">
-                <h2 className="text-2xl font-black text-[#1B3E6A] mb-4 uppercase">Activez le Moteur</h2>
-                <p className="text-slate-500 italic">
-                  Cliquez sur un secteur pour explorer les données de votre avantage compétitif.
+              <div className="text-center py-10">
+                <span className="text-[#C9A84C] font-black uppercase tracking-[0.2em] text-[10px]">
+                  Dispositif Stratégique
+                </span>
+                <h2 className="text-3xl font-black text-[#1B3E6A] mt-4 mb-6 uppercase">Activez le Moteur</h2>
+                <p className="text-slate-500 font-medium text-lg leading-relaxed mb-8">
+                  Cliquez sur les secteurs du cercle pour explorer notre méthodologie d’Etude, d’Analyse et Benchmark.
+                </p>
+                <p className="text-[#1B3E6A] font-bold text-sm bg-white py-3 px-6 rounded-2xl shadow-sm inline-block border border-slate-100 italic">
+                  Chaque point est une brique de votre avantage compétitif.
                 </p>
               </div>
             )}
           </div>
         </div>
 
-        {/* CARTES DU BAS (Tes données exactes) */}
+        {/* SECTION FOOTER (Cartes premium) */}
         <div className="grid md:grid-cols-3 gap-8">
-          <div className="bg-[#1B3E6A] p-10 rounded-[40px] text-center text-white border border-slate-700 shadow-xl">
-            <div className="text-4xl mb-6">🔬</div>
-            <h4 className="font-black uppercase mb-4 tracking-tight">C'est plus qu'une étude</h4>
-            <p className="text-slate-300 text-sm italic font-medium">
-              Des écosystèmes de décision construits sur mesure, pas des rapports statiques livrés et oubliés.
-            </p>
-          </div>
-          <div className="bg-[#1B3E6A] p-10 rounded-[40px] text-center text-white border border-slate-700 shadow-xl">
-            <div className="text-4xl mb-6">📈</div>
-            <h4 className="font-black uppercase mb-4 tracking-tight">C'est plus qu'un benchmark</h4>
-            <p className="text-slate-300 text-sm italic font-medium">
-              Une lecture des stratégies implicites que les données seules ne révèlent jamais.
-            </p>
-          </div>
-          <div className="bg-[#334155] p-10 rounded-[40px] text-center text-white border border-slate-700 shadow-xl">
-            <div className="text-4xl mb-6">⚙️</div>
-            <h4 className="font-black uppercase mb-4 tracking-tight">C'est un moteur décisionnel</h4>
-            <p className="text-slate-300 text-sm italic font-medium mb-6">
-              Conçu pour inverser les rapports de force en votre faveur, avant que vos concurrents ne s'en aperçoivent.
-            </p>
-            <button className="bg-[#C9A84C] text-white px-6 py-2 rounded-full text-[10px] font-black uppercase tracking-widest">
-              Activer l'Engine
-            </button>
-          </div>
+          {[
+            {
+              icon: "🔬",
+              title: "C'est plus qu'une étude",
+              text: "Des écosystèmes de décision construits sur mesure, pas des rapports statiques.",
+            },
+            {
+              icon: "📈",
+              title: "C'est plus qu'un benchmark",
+              text: "Une lecture des stratégies implicites que les données seules ne révèlent jamais.",
+            },
+            {
+              icon: "⚙️",
+              title: "C'est un moteur décisionnel",
+              text: "Conçu pour inverser les rapports de force en votre faveur.",
+            },
+          ].map((card, i) => (
+            <div
+              key={i}
+              className={`p-10 rounded-[40px] text-center border shadow-xl transition-transform hover:-translate-y-2 ${i === 2 ? "bg-[#334155] text-white" : "bg-[#1B3E6A] text-white"}`}
+            >
+              <div className="text-4xl mb-6">{card.icon}</div>
+              <h4 className="font-black uppercase mb-4 tracking-tight">{card.title}</h4>
+              <p className="text-slate-300 text-sm italic font-medium">{card.text}</p>
+            </div>
+          ))}
         </div>
       </div>
     </DetailPageLayout>
