@@ -91,7 +91,7 @@ function getSegments(t: (fr: string, en: string) => string): Segment[] {
         {
           tag: "Newsletter Business",
           tagColor: "#1a6b5a",
-          title: t("Intelligence sectorielle ciblée", "Targeted sector intelligence"),
+          title: "Market Intelligence",
           desc: t(
             "Tendances émergentes, marché, technologie, innovation, concurrence, réputation, événements clés de la semaine.",
             "Emerging trends, market, technology, innovation, competition, reputation, key events of the week."

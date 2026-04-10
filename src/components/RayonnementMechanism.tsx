@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { motion, AnimatePresence } from "framer-motion";
 import buildfluenceLogo from "@/assets/Logo_Buildfluence_dark.png";
+import buildfluenceLogoFondBleu from "@/assets/Logo_Buildfluence_FondBleu.png";
 import amdieLogo from "@/assets/clients/amdie.png";
 import miceppLogo from "@/assets/clients/micepp.png";
 import growthLabLogo from "@/assets/clients/growthlab2.png";
@@ -473,6 +474,16 @@ const RayonnementMechanism = () => {
       desc: t("Pilotage des politiques publiques avec une longueur d'avance stratégique. Centres Régionaux de l'Investissement.", "Steering public policies with a strategic head start. Regional Investment Centers."),
     },
     {
+      id: "pays" as BlockId, icon: "🗺", title: t("Pays Clés", "Key Countries"),
+      sub: t("Partenariats solides & innovants", "Solid & innovative partnerships"),
+      desc: "", flags: keyCountries.map(c => ({ flag: c.flag, name: c.nameFr })),
+    },
+    {
+      id: "pays_concurrent" as BlockId, icon: "⚡", title: t("Pays Concurrents", "Competitor Countries"),
+      sub: t("18 pays en compétition avec le Maroc sur 9 secteurs prioritaires", "18 countries competing with Morocco on 9 priority sectors"),
+      desc: "", competitorFlags: competitorCountries.map(c => ({ flag: c.flag, name: c.nameFr })),
+    },
+    {
       id: "federations" as BlockId, icon: "🤝", title: t("Fédérations Sectorielles", "Sector Federations"),
       sub: t("Partenaires & Entreprises stratégiques", "Partners & Strategic Companies"),
       desc: "",
@@ -483,16 +494,6 @@ const RayonnementMechanism = () => {
       sub: t("IDE & Attractivité internationale", "FDI & International Attractiveness"),
       desc: "",
       apiLogos: apiLogos,
-    },
-    {
-      id: "pays" as BlockId, icon: "🗺", title: t("Pays Clés", "Key Countries"),
-      sub: t("Partenariats solides & innovants", "Solid & innovative partnerships"),
-      desc: "", flags: keyCountries.map(c => ({ flag: c.flag, name: c.nameFr })),
-    },
-    {
-      id: "pays_concurrent" as BlockId, icon: "⚡", title: t("Pays Concurrents", "Competitor Countries"),
-      sub: t("18 pays en compétition avec le Maroc sur 9 secteurs prioritaires", "18 countries competing with Morocco on 9 priority sectors"),
-      desc: "", competitorFlags: competitorCountries.map(c => ({ flag: c.flag, name: c.nameFr })),
     },
     {
       id: "cooperation" as BlockId, icon: "🌍", title: t("Coopération Internationale", "International Cooperation"),
@@ -564,7 +565,7 @@ const RayonnementMechanism = () => {
           {t("Mécanisme de ", "Mechanism of ")}<span className="text-[#C9A84C]">{t("Rayonnement & d'Attractivité", "Outreach & Attractiveness")}</span>
         </h2>
         <p className="text-sm text-muted-foreground mb-1">{t("De la captation de la donnée à l'influence", "From data capture to influence")}</p>
-        <p className="text-sm font-semibold text-[#C9A84C] mb-6">{t("Buildfluence opère une chaîne complète de transformation de l'information en pouvoir décisionnel.", "Buildfluence operates a complete chain transforming information into decision-making power.")}</p>
+        {/* Gold subtitle removed per request */}
         <div className="max-w-3xl mx-auto border-l-[3px] border-[#C9A84C] bg-[rgba(201,168,76,0.06)] rounded-r-lg p-4 text-left text-sm italic text-foreground/70 leading-relaxed">
           {t(
             "Maîtrisez le cycle total de l'intelligence : Capter, Transformer, Influencer. Notre Workflow propriétaire convertit l'information en pouvoir souverain, transformant vos environnements complexes en écosystèmes de décision maîtrisés et en vecteurs de rayonnement international.",
@@ -640,10 +641,9 @@ const RayonnementMechanism = () => {
                 ? "border-[#C9A84C] shadow-lg shadow-[#C9A84C]/15"
                 : "border-[#C9A84C]/35 hover:border-[#C9A84C] hover:shadow-md"
               }`}
-            style={{ background: '#0F365F' }}
+            style={{ background: '#0F365F', overflow: 'hidden' }}
           >
-            <img src={buildfluenceLogo} alt="Buildfluence" className="w-24 h-auto mb-1" />
-            <span className="text-[10px] text-white/70 tracking-[1.5px] uppercase mt-1 text-center leading-snug">Sovereign Decision<br/>Infrastructure</span>
+            <img src={buildfluenceLogoFondBleu} alt="Buildfluence" className="w-full h-full object-cover rounded-full" />
           </div>
 
           <p className="text-[10px] text-[#C9A84C] tracking-[2px] uppercase opacity-70">↓ Transformation ↓</p>
@@ -659,8 +659,8 @@ const RayonnementMechanism = () => {
             </p>
             <p className="text-xs text-foreground/80 leading-relaxed mb-3 font-medium whitespace-pre-line">
               {t(
-                "Pour illustrer concrètement cette approche, prenons un cas réel :\n\nInvestissement au Maroc : Décryptage d'une guerre économique silencieuse entre puissances intercontinentales",
-                "To concretely illustrate this approach, let's take a real case:\n\nInvestment in Morocco: Decryption of a silent economic war between intercontinental powers"
+                "Pour illustrer concrètement cette approche, prenons un cas réel :\nInvestissement au Maroc : Décryptage d'une guerre économique silencieuse entre puissances intercontinentales",
+                "To concretely illustrate this approach, let's take a real case:\nInvestment in Morocco: Decryption of a silent economic war between intercontinental powers"
               )}
             </p>
             <div className="flex flex-col gap-1.5">
