@@ -100,15 +100,15 @@ const SoftPowerInfluence = () => {
             key={idx}
             front={
               <div className="w-full h-full flex flex-col items-center justify-center rounded-xl shadow-xl" style={{ background: card.bg, minHeight: "420px" }}>
-                <span className="text-5xl mb-5">{card.icon}</span>
+                <span className="text-5xl mb-5" style={{ filter: 'brightness(1.6) saturate(0.8)' }}>{card.icon}</span>
                 <h3 className="text-xl font-bold text-white mb-3">{card.title}</h3>
                 <p className="text-sm text-white/70 leading-relaxed max-w-[240px] mb-6">{card.subtitle}</p>
                 <p className="text-[11px] text-white/40 uppercase tracking-wider">{t("Cliquer pour découvrir →", "Click to discover →")}</p>
               </div>
             }
             back={
-              <div className="w-full h-full flex flex-col rounded-xl shadow-xl" style={{ background: card.bg, minHeight: "420px" }}>
-                <h3 className="text-lg font-bold text-white mb-4">{card.title}</h3>
+              <div className="w-full h-full flex flex-col justify-center rounded-xl shadow-xl" style={{ background: card.bg, minHeight: "420px" }}>
+                <h3 className="text-lg font-bold text-white mb-4 text-center">{card.title}</h3>
                 <ul className="space-y-2.5 flex-1">
                   {card.items.map((item, i) => (
                     <li key={i} className="text-sm text-white/80 leading-relaxed pl-5 relative before:content-['→'] before:absolute before:left-0 before:text-[#C9A84C] before:text-sm">{item}</li>

@@ -176,7 +176,7 @@ function OrbitDiagram({
               onMouseEnter={() => onHoverPhase(p.id)}
               onMouseLeave={() => onHoverPhase(null)}
             />
-            {p.label.map((line, li) => {
+            {(() => {
               const iconMap: Record<string, string> = {
                 collecter: "🛰️",
                 analyser: "🔍",
@@ -185,23 +185,48 @@ function OrbitDiagram({
                 detecter: "⚡",
                 influencer: "📢",
               };
-              const icon = li === 0 ? iconMap[p.id] || "" : "";
-              return (
-                <text
-                  key={li}
-                  x={lx}
-                  y={ly + (li - (p.label.length - 1) / 2) * 13 + (icon ? 3 : 0)}
-                  textAnchor="middle"
-                  dominantBaseline="central"
-                  fontSize="10"
-                  fontWeight="500"
-                  fill="#1e3a5f"
-                  style={{ pointerEvents: "none" }}
-                >
-                  {icon ? `${icon} ${line}` : line}
-                </text>
-              );
-            })}
+              const icon = iconMap[p.id] || "";
+              const totalLines = p.label.length + (icon ? 1 : 0);
+              const lineHeight = 13;
+              const elements: React.ReactNode[] = [];
+              let lineIndex = 0;
+              // Icon ABOVE the title
+              if (icon) {
+                elements.push(
+                  <text
+                    key="icon"
+                    x={lx}
+                    y={ly + (lineIndex - (totalLines - 1) / 2) * lineHeight}
+                    textAnchor="middle"
+                    dominantBaseline="central"
+                    fontSize="12"
+                    style={{ pointerEvents: "none" }}
+                  >
+                    {icon}
+                  </text>
+                );
+                lineIndex++;
+              }
+              p.label.forEach((line, li) => {
+                elements.push(
+                  <text
+                    key={`label-${li}`}
+                    x={lx}
+                    y={ly + (lineIndex - (totalLines - 1) / 2) * lineHeight}
+                    textAnchor="middle"
+                    dominantBaseline="central"
+                    fontSize="10"
+                    fontWeight="500"
+                    fill="#1e3a5f"
+                    style={{ pointerEvents: "none" }}
+                  >
+                    {line}
+                  </text>
+                );
+                lineIndex++;
+              });
+              return elements;
+            })()}
           </g>
         );
       })}
@@ -246,7 +271,7 @@ export default function ConstructionInfluence() {
 
           {/* LEFT — Detail panel */}
           <div>
-            <p className="text-center text-[14px] font-bold mb-3" style={{ fontVariant: 'small-caps', letterSpacing: '0.08em', color: '#8e99a2' }}>
+            <p className="text-center text-[14px] font-bold mb-3" style={{ fontVariant: 'small-caps', letterSpacing: '0.08em', color: '#040606' }}>
               {t("Anticiper - Décider - Influencer", "Anticipate - Decide - Influence")}
             </p>
             <div
