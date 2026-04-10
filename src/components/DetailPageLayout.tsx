@@ -8,7 +8,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { FormStrategicExchange, FormDiagnostic } from "@/components/FormModals";
 
 export interface DetailPageLayoutProps {
-  title: string;
+  title: ReactNode;
   chapeau: string;
   children: ReactNode;
   sidebar?: ReactNode;
