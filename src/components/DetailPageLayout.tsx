@@ -102,7 +102,7 @@ const DetailPageLayout = ({ title, chapeau, children, sidebar, ctas, situationCo
       <CTAFooter />
 
       <FormStrategicExchange open={f1Open} onClose={() => setF1Open(false)} />
-      <FormDiagnostic open={f2Open} onClose={() => setF2Open(false)} situation={situationContext || title} />
+      <FormDiagnostic open={f2Open} onClose={() => setF2Open(false)} situation={situationContext || (typeof title === 'string' ? title : '')} />
     </div>
   );
 };
