@@ -2,182 +2,143 @@ import { useState } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import DetailPageLayout from "@/components/DetailPageLayout";
 
-interface SectorData {
-  id: string;
-  label: string;
-  icon: string;
-  color: string;
-  title: string;
-  desc: string;
-  tags: string[];
-}
-
 const CompetitiveVelocityEngine = () => {
   const { t } = useLanguage();
   const [activeSector, setActiveSector] = useState<string | null>(null);
 
-  const sectors: SectorData[] = [
-    {
-      id: "decision", label: t("Décision accélérée", "Accelerated decision"), icon: "⚡",
-      color: "#1B3E6A",
-      title: t("Décision accélérée", "Accelerated Decision"),
-      desc: t("Raccourcir le cycle décisionnel grâce à une intelligence concurrentielle consolidée et hiérarchisée. Chaque signal est traduit en recommandation Go / Vigilance / No-Go.", "Shorten the decision cycle with consolidated and prioritized competitive intelligence. Every signal is translated into Go / Caution / No-Go recommendation."),
-      tags: [t("Scoring", "Scoring"), t("Temps réel", "Real-time"), "Go/No-Go"],
+  const pillars: any = {
+    geo: {
+      title: "Conflits Géopolitiques",
+      sub: "CAPTATION & ANALYSE",
+      items: [
+        "Surveillance des tensions régionales et alliances émergentes",
+        "Détection des ruptures géopolitiques avant médiatisation",
+        "Analyse de l'impact sur vos marchés et partenaires stratégiques",
+        "Cartographie des acteurs d'influence politique et diplomatique",
+        "Anticipation des décisions réglementaires et politiques"
+      ]
     },
-    {
-      id: "geopolitique", label: t("Conflits géopolitiques", "Geopolitical conflicts"), icon: "🌍",
-      color: "#2d5a3d",
-      title: t("Conflits géopolitiques", "Geopolitical Conflicts"),
-      desc: t("Cartographie des tensions géopolitiques impactant votre secteur. Anticipation des embargos, sanctions et repositionnements stratégiques des puissances.", "Mapping of geopolitical tensions impacting your sector. Anticipation of embargoes, sanctions and strategic repositioning of powers."),
-      tags: [t("Géopolitique", "Geopolitics"), t("Sanctions", "Sanctions"), t("Risques pays", "Country risks")],
-    },
-    {
-      id: "market", label: "Market Intelligence", icon: "📊",
-      color: "#1a5580",
+    eco: {
       title: "Market Intelligence",
-      desc: t("Analyse des dynamiques de marché, des flux d'investissement et des stratégies concurrentielles. Identification des axes de différenciation et des opportunités de positionnement.", "Market dynamics analysis, investment flows and competitive strategies. Identification of differentiation axes and positioning opportunities."),
-      tags: [t("Marché", "Market"), t("Flux IDE", "FDI flows"), "Benchmark"],
+      sub: "FLUX & COMPÉTITIVITÉ",
+      items: [
+        "Suivi des flux d'IDE et des mouvements de capitaux",
+        "Analyse des positions concurrentielles par secteur et géographie",
+        "Détection des opportunités de marché à fort levier",
+        "Benchmarking international des stratégies d'attractivité",
+        "Scoring de compétitivité : Go / Vigilance / No-Go"
+      ]
     },
-    {
-      id: "techno", label: t("Signaux technologiques", "Technology signals"), icon: "💡",
-      color: "#7a3060",
-      title: t("Signaux technologiques", "Technology Signals"),
-      desc: t("Détection des innovations de rupture, brevets émergents et startups disruptives. Veille sur les technologies susceptibles de transformer votre secteur.", "Detection of breakthrough innovations, emerging patents and disruptive startups. Monitoring technologies that could transform your sector."),
-      tags: [t("Brevets", "Patents"), t("Startups", "Startups"), t("Innovation", "Innovation")],
+    tech: {
+      title: "Signaux Technologiques",
+      sub: "INNOVATION & DISRUPTION",
+      items: [
+        "Veille brevets et publications scientifiques sectorielles",
+        "Détection des disruptions technologiques avant adoption massive",
+        "Cartographie des acteurs de l'innovation dans votre écosystème",
+        "Analyse de l'impact technologique sur les rapports de force",
+        "Identification des partenariats technologiques stratégiques"
+      ]
     },
-    {
-      id: "scenarios", label: t("Scénarios anticipés", "Anticipated scenarios"), icon: "🔮",
-      color: "#4a3580",
-      title: t("Scénarios anticipés", "Anticipated Scenarios"),
-      desc: t("Modélisation de scénarios prospectifs pour chaque secteur prioritaire. Simulation des impacts concurrentiels et identification des fenêtres d'opportunité.", "Prospective scenario modeling for each priority sector. Simulation of competitive impacts and identification of opportunity windows."),
-      tags: [t("Prospective", "Foresight"), t("Simulation", "Simulation"), t("Scénarios", "Scenarios")],
+    sce: {
+      title: "Scénarios Anticipés",
+      sub: "PROJECTION & ANTICIPATION",
+      items: [
+        "Modélisation des scénarios probables à 3, 6 et 12 mois",
+        "Projection des mouvements concurrentiels avant matérialisation",
+        "Simulation d'impact des ruptures géopolitiques sur votre activité",
+        "Identification des fenêtres d'opportunité et timing optimal",
+        "Plans de contingence pour les scénarios à risque élevé"
+      ]
     },
-    {
-      id: "ecosysteme", label: t("Écosystème modélisé", "Modeled ecosystem"), icon: "🌐",
-      color: "#334155",
-      title: t("Écosystème modélisé", "Modeled Ecosystem"),
-      desc: t("Cartographie complète de votre écosystème concurrentiel : acteurs, alliances, rivalités et dynamiques de pouvoir. Vision 360° de votre environnement stratégique.", "Complete mapping of your competitive ecosystem: actors, alliances, rivalries and power dynamics. 360° view of your strategic environment."),
-      tags: [t("Cartographie", "Mapping"), t("Acteurs", "Actors"), t("Alliances", "Alliances")],
+    sys: {
+      title: "Écosystème Modélisé",
+      sub: "MAPPING & RAPPORTS DE FORCE",
+      items: [
+        "Mapping évolutif et interactif des acteurs clés",
+        "Visualisation des flux et rapports de force dynamiques",
+        "Cartographie des alliances, oppositions et neutralités",
+        "Identification des nœuds d'amplification et points de levier",
+        "Mise à jour en continu selon les signaux captés"
+      ]
     },
-  ];
-
-  const active = sectors.find(s => s.id === activeSector) || null;
-
-  const defaultPanel = {
-    title: t("Activez le Moteur", "Activate the Engine"),
-    desc: t("Cliquez sur les secteurs du cercle pour explorer notre méthodologie d'Étude, d'Analyse et Benchmark.", "Click on the circle sectors to explore our Study, Analysis and Benchmark methodology."),
-    quote: t("\"Chaque point est une brique de votre avantage compétitif.\"", "\"Each point is a building block of your competitive advantage.\""),
-    footer: t("Notre Track Record est multi sectoriel avec des résultats conformes aux attentes clients.", "Our Track Record is multi-sectoral with results meeting client expectations."),
+    dec: {
+      title: "Décision Accélérée",
+      sub: "OUTPUT & ACTION STRATÉGIQUE",
+      items: [
+        "Hiérarchisation claire : Go / No-Go / Timing optimal",
+        "Réduction drastique de l'incertitude décisionnelle",
+        "Passage de l'analyse descriptive à la logique d'action",
+        "Livrables actionnables : fiches de synthèse, dashboards, alertes",
+        "Briefings C-Level confidentiels en temps réel"
+      ]
+    }
   };
 
   return (
     <DetailPageLayout
-      title={<>COMPETITIVE <span className="text-[#C9A84C]">VELOCITY</span> ENGINE</>}
-      titleClassName="text-center"
-      chapeau={t(
-        "Une nouvelle génération d'analyse stratégique, conçue pour accélérer la prise de décision dans des environnements concurrentiels et hyper-complexes.",
-        "A new generation of strategic analysis, designed to accelerate decision-making in competitive and hyper-complex environments."
-      )}
-      chapeauClassName="text-center"
-      ctas={[{ label: t("Échange Stratégique →", "Strategic Exchange →"), action: "#", formType: "f1" }]}
+      title="Competitive Velocity Engine"
+      subtitle="Une nouvelle génération d'analyse stratégique pour accélérer la prise de décision."
+      category="Strategic Innovation"
     >
-      {/* Tags */}
-      <div className="flex flex-wrap justify-center gap-3 mb-10">
-        {["Benchmark", t("Analyse", "Analysis"), t("Anticipation", "Anticipation"), t("Décision", "Decision")].map(tag => (
-          <span key={tag} className="bg-[#C9A84C] text-white px-8 py-2.5 rounded-full font-bold text-xs uppercase tracking-widest shadow-lg shadow-yellow-500/20">{tag}</span>
-        ))}
-      </div>
+      <div className="max-w-7xl mx-auto px-6 py-12">
+        <div className="grid lg:grid-cols-12 gap-12 items-center bg-white rounded-[40px] shadow-xl p-8 md:p-12 border border-slate-50">
+          
+          {/* SVG INTERACTIF */}
+          <div className="lg:col-span-7 flex justify-center scale-110">
+            <svg viewBox="0 0 500 500" className="w-full max-w-[450px]">
+              <g className="cursor-pointer" onClick={() => setActiveSector('geo')}>
+                <path d="M250,250 L250,50 A200,200 0 0,1 423,150 Z" fill={activeSector === 'geo' ? '#C9A84C' : '#1B3E6A'} stroke="white" strokeWidth="4" />
+                <text x="330" y="115" className="fill-white text-[20px]">🌍</text>
+              </g>
+              <g className="cursor-pointer" onClick={() => setActiveSector('eco')}>
+                <path d="M250,250 L423,150 A200,200 0 0,1 423,350 Z" fill={activeSector === 'eco' ? '#C9A84C' : '#1B3E6A'} stroke="white" strokeWidth="4" />
+                <text x="390" y="240" className="fill-white text-[20px]">📊</text>
+              </g>
+              <g className="cursor-pointer" onClick={() => setActiveSector('tech')}>
+                <path d="M250,250 L423,350 A200,200 0 0,1 250,450 Z" fill={activeSector === 'tech' ? '#C9A84C' : '#1B3E6A'} stroke="white" strokeWidth="4" />
+                <text x="330" y="365" className="fill-white text-[20px]">💡</text>
+              </g>
+              <g className="cursor-pointer" onClick={() => setActiveSector('sce')}>
+                <path d="M250,250 L250,450 A200,200 0 0,1 77,350 Z" fill={activeSector === 'sce' ? '#C9A84C' : '#1B3E6A'} stroke="white" strokeWidth="4" />
+                <text x="170" y="365" className="fill-white text-[20px]">🔮</text>
+              </g>
+              <g className="cursor-pointer" onClick={() => setActiveSector('sys')}>
+                <path d="M250,250 L77,350 A200,200 0 0,1 77,150 Z" fill={activeSector === 'sys' ? '#C9A84C' : '#1B3E6A'} stroke="white" strokeWidth="4" />
+                <text x="110" y="240" className="fill-white text-[20px]">🗺️</text>
+              </g>
+              <g className="cursor-pointer" onClick={() => setActiveSector('dec')}>
+                <path d="M250,250 L77,150 A200,200 0 0,1 250,50 Z" fill={activeSector === 'dec' ? '#C9A84C' : '#1B3E6A'} stroke="white" strokeWidth="4" />
+                <text x="170" y="115" className="fill-white text-[20px]">⚡</text>
+              </g>
+              <circle cx="250" cy="250" r="70" fill="white" onClick={() => setActiveSector(null)} className="cursor-pointer" />
+              <text x="250" y="255" fill="#1B3E6A" fontSize="8" fontWeight="bold" textAnchor="middle" className="cursor-pointer">BUILDFLUENCE</text>
+            </svg>
+          </div>
 
-      {/* Interactive Wheel + Panel */}
-      <div className="grid lg:grid-cols-12 gap-10 items-center bg-white rounded-[50px] shadow-2xl shadow-slate-200/50 p-8 md:p-16 border border-slate-50 mb-20">
-        {/* SVG Wheel */}
-        <div className="lg:col-span-7 flex justify-center lg:scale-110">
-          <svg viewBox="0 0 500 500" className="w-full max-w-[480px] drop-shadow-2xl">
-            {sectors.map((sector, i) => {
-              const angle = (i * 60) - 90;
-              const endAngle = angle + 60;
-              const startRad = (angle * Math.PI) / 180;
-              const endRad = (endAngle * Math.PI) / 180;
-              const cx = 250, cy = 250, r = 200;
-              const x1 = cx + r * Math.cos(startRad);
-              const y1 = cy + r * Math.sin(startRad);
-              const x2 = cx + r * Math.cos(endRad);
-              const y2 = cy + r * Math.sin(endRad);
-
-              const midAngle = ((angle + 30) * Math.PI) / 180;
-              const labelR = 130;
-              const lx = cx + labelR * Math.cos(midAngle);
-              const ly = cy + labelR * Math.sin(midAngle);
-
-              const isActive = activeSector === sector.id;
-
-              return (
-                <g key={sector.id}
-                  className="cursor-pointer transition-all duration-200"
-                  style={{ filter: isActive ? "brightness(1.2)" : "none" }}
-                  onClick={() => setActiveSector(prev => prev === sector.id ? null : sector.id)}
-                >
-                  <path
-                    d={`M${cx},${cy} L${x1},${y1} A${r},${r} 0 0,1 ${x2},${y2} Z`}
-                    fill={sector.color}
-                    stroke="white"
-                    strokeWidth="3"
-                    className="hover:brightness-110 transition-all"
-                  />
-                  <text x={lx} y={ly - 10} textAnchor="middle" dominantBaseline="central" className="fill-white" style={{ fontSize: "20px" }}>{sector.icon}</text>
-                  <text x={lx} y={ly + 12} textAnchor="middle" dominantBaseline="central" className="fill-white font-bold" style={{ fontSize: "10px", textTransform: "uppercase", letterSpacing: "-0.02em" }}>{sector.label}</text>
-                </g>
-              );
-            })}
-            {/* Center */}
-            <circle cx="250" cy="250" r="55" fill="#F8FAFC" stroke="#C9A84C" strokeWidth="3" />
-            <text x="250" y="242" textAnchor="middle" dominantBaseline="central" className="fill-[#1B3E6A] font-black" style={{ fontSize: "11px" }}>Buildfluence</text>
-            <text x="250" y="260" textAnchor="middle" dominantBaseline="central" className="fill-[#C9A84C] font-bold" style={{ fontSize: "7px", textTransform: "uppercase", letterSpacing: "0.1em" }}>Velocity Engine</text>
-          </svg>
-        </div>
-
-        {/* Info Panel */}
-        <div className="lg:col-span-5 bg-[#F8FAFC] rounded-[35px] p-10 border-l-[10px] border-[#C9A84C] min-h-[520px] flex flex-col justify-center">
-          {active ? (
-            <div>
-              <div className="text-[#C9A84C] font-black uppercase tracking-widest text-[10px] mb-4">{t("Analyse Stratégique", "Strategic Analysis")}</div>
-              <h2 className="text-2xl font-black text-[#1B3E6A] mb-4 leading-tight uppercase">{active.icon} {active.title}</h2>
-              <p className="text-slate-600 mb-6 font-medium leading-relaxed">{active.desc}</p>
-              <div className="flex flex-wrap gap-2 mb-6">
-                {active.tags.map(tag => (
-                  <span key={tag} className="text-xs font-medium px-3 py-1 rounded-full bg-white text-slate-600 border border-slate-200">{tag}</span>
-                ))}
+          {/* PANNEAU INFOS */}
+          <div className="lg:col-span-5 bg-slate-50 rounded-3xl p-8 border-l-8 border-[#C9A84C] min-h-[450px] flex flex-col justify-center">
+            {!activeSector ? (
+              <div>
+                <span className="text-[#C9A84C] font-bold text-xs uppercase tracking-widest">Dispositif Stratégique</span>
+                <h2 className="text-2xl font-black text-[#1B3E6A] mt-2 mb-4 uppercase">Activez le Moteur</h2>
+                <p className="text-slate-600 font-medium">Cliquez sur les secteurs pour explorer notre méthodologie.</p>
+                <p className="text-[#1B3E6A] font-bold mt-6 italic">"Chaque point est une brique de votre avantage compétitif."</p>
               </div>
-              <button onClick={() => setActiveSector(null)} className="text-[11px] text-slate-400 border border-slate-200 px-4 py-1.5 rounded hover:border-[#C9A84C] hover:text-[#C9A84C] transition-colors">{t("Retour", "Back")} ✕</button>
-            </div>
-          ) : (
-            <div>
-              <div className="text-[#C9A84C] font-black uppercase tracking-widest text-[10px] mb-4">{t("Dispositif Stratégique", "Strategic Framework")}</div>
-              <h2 className="text-3xl font-black text-[#1B3E6A] mb-6 leading-tight uppercase">{defaultPanel.title}</h2>
-              <p className="text-slate-600 mb-6 font-medium leading-relaxed">{defaultPanel.desc}</p>
-              <p className="text-[#1B3E6A] font-bold text-lg mb-6 italic">{defaultPanel.quote}</p>
-              <div className="text-slate-400 text-sm border-t border-slate-200 pt-6 font-medium italic">{defaultPanel.footer}</div>
-            </div>
-          )}
-        </div>
-      </div>
-
-      {/* 3 Bottom Cards */}
-      <div className="grid md:grid-cols-3 gap-8 mb-20">
-        <div className="bg-[#1B3E6A] p-12 rounded-[40px] text-center border border-slate-100 shadow-xl">
-          <div className="text-4xl mb-8">🔬</div>
-          <h4 className="text-lg font-black text-white uppercase mb-5 tracking-tight">{t("C'est plus qu'une étude", "It's more than a study")}</h4>
-          <p className="text-slate-300 font-medium italic leading-relaxed">{t("Des écosystèmes de décision construits sur mesure, pas des rapports statiques livrés et oubliés.", "Custom-built decision ecosystems, not static reports delivered and forgotten.")}</p>
-        </div>
-        <div className="bg-[#1B3E6A] p-12 rounded-[40px] text-center border border-slate-100 shadow-xl">
-          <div className="text-4xl mb-8">📈</div>
-          <h4 className="text-lg font-black text-white uppercase mb-5 tracking-tight">{t("C'est plus qu'un benchmark", "It's more than a benchmark")}</h4>
-          <p className="text-slate-300 font-medium italic leading-relaxed">{t("Une lecture des stratégies implicites que les données seules ne révèlent jamais.", "A reading of implicit strategies that data alone never reveals.")}</p>
-        </div>
-        <div className="bg-[#334155] p-12 rounded-[40px] text-center border border-slate-100 shadow-xl">
-          <div className="text-4xl mb-8">⚙️</div>
-          <h4 className="text-lg font-black text-white uppercase mb-5 tracking-tight">{t("C'est un moteur décisionnel", "It's a decision engine")}</h4>
-          <p className="text-slate-300 font-medium italic leading-relaxed mb-8">{t("Conçu pour inverser les rapports de force en votre faveur, avant que vos concurrents ne s'en aperçoivent.", "Designed to reverse power dynamics in your favor, before your competitors even notice.")}</p>
+            ) : (
+              <div>
+                <span className="text-[#C9A84C] font-bold text-xs uppercase tracking-widest">{pillars[activeSector].sub}</span>
+                <h2 className="text-2xl font-black text-[#1B3E6A] mt-2 mb-6 uppercase">{pillars[activeSector].title}</h2>
+                <ul className="space-y-4">
+                  {pillars[activeSector].items.map((item: string, i: number) => (
+                    <li key={i} className="flex items-start gap-3 text-slate-700 text-sm font-medium">
+                      <span className="text-[#C9A84C] font-bold">→</span> {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </DetailPageLayout>
