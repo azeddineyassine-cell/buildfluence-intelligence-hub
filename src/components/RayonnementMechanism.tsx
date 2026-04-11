@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { motion, AnimatePresence } from "framer-motion";
 import buildfluenceLogo from "@/assets/Logo_Buildfluence_dark.png";
-import buildfluenceLogoFondBleu from "@/assets/Logo_Buildfluence_FondBleu.png";
+import buildfluenceLogoFondBleu from "@/assets/reseau_fond_bleu.png";
 import amdieLogo from "@/assets/clients/amdie.png";
 import miceppLogo from "@/assets/clients/micepp.png";
 import growthLabLogo from "@/assets/clients/growthlab2.png";
@@ -643,7 +643,9 @@ const RayonnementMechanism = () => {
               }`}
             style={{ background: '#0F365F', overflow: 'hidden' }}
           >
-            <img src={buildfluenceLogoFondBleu} alt="Buildfluence" className="w-1/2 h-1/2 object-contain rounded-full" />
+            <img src={buildfluenceLogoFondBleu} alt="Buildfluence" className="w-[100px] h-[100px] object-contain" />
+            <p className="text-white text-[13px] font-bold tracking-wide mt-1">Build<span className="text-[#FFDE59]">fluence</span></p>
+            <p className="text-white/60 text-[8px] tracking-wider uppercase">Strategic Intelligence & Influence</p>
           </div>
 
           <p className="text-[10px] text-[#C9A84C] tracking-[2px] uppercase opacity-70">↓ Transformation ↓</p>
