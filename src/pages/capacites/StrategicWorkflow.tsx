@@ -102,7 +102,7 @@ const StrategicWorkflow = () => {
   ];
 
   return (
-    <DetailPageLayout>
+    <DetailPageLayout title="Strategic Workflow" chapeau="Optimisez vos processus stratégiques avec des workflows intelligents.">
       <div className="w-full bg-[#F8FAFC] min-h-screen font-['Inter'] pb-20">
         {/* MODAL FORMULAIRE */}
         {isFormOpen && (
