@@ -9,7 +9,7 @@ import { FormStrategicExchange, FormDiagnostic } from "@/components/FormModals";
 
 export interface DetailPageLayoutProps {
   title: ReactNode;
-  chapeau: string;
+  chapeau: ReactNode;
   children: ReactNode;
   sidebar?: ReactNode;
   ctas?: { label: string; action: string; formType?: "f1" | "f2" }[];

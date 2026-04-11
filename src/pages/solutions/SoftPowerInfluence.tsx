@@ -44,7 +44,7 @@ const SoftPowerInfluence = () => {
       icon: "📣",
       title: t("Intelligence d'Influence", "Influence Intelligence"),
       subtitle: t("Orientez les perceptions avant qu'elles ne deviennent des décisions", "Shape perceptions before they become decisions"),
-      bg: "linear-gradient(135deg, #0D1B2A 0%, #1a3a5c 100%)",
+      bg: "linear-gradient(135deg, #1c75ba 0%, #155d94 100%)",
       items: [
         t("Mapping des leaders d'opinion, investisseurs, relais médiatiques", "Mapping of opinion leaders, investors, media relays"),
         t("Identification des nœuds d'amplification narrative", "Identification of narrative amplification nodes"),
