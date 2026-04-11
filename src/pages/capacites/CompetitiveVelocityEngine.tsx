@@ -1,14 +1,9 @@
 import { useState } from "react";
 import DetailPageLayout from "@/components/DetailPageLayout";
-import { Send, X, ArrowRight, ChevronDown } from "lucide-react";
+import { ArrowRight, ChevronDown, Target, Zap, Shield, BarChart3 } from "lucide-react";
 
 const StrategicWorkflow = () => {
-  const [openStep, setOpenStep] = useState<number | null>(null);
-  const [isFormOpen, setIsFormOpen] = useState(false);
-
-  const toggleStep = (i: number) => {
-    setOpenStep(openStep === i ? null : i);
-  };
+  const [openStep, setOpenStep] = useState<number | null>(0); // La première étape est ouverte par défaut
 
   const steps = [
     {
@@ -66,7 +61,7 @@ const StrategicWorkflow = () => {
         "Intégration de la solution IA de veille",
         "Tests et ajustements en conditions réelles",
         "Optimisation et mise en production",
-        "Installation Intelligence Unit",
+        "Installation Market & Competitive Intelligence Unit",
         "Détection automatique des signaux faibles",
         "Dashboards & KPIs temps réel",
       ],
@@ -120,110 +115,69 @@ const StrategicWorkflow = () => {
 
   return (
     <DetailPageLayout>
-      <div className="w-full bg-[#0F172A] text-white min-h-screen font-['Inter'] pb-32">
-        {/* MODAL FORMULAIRE */}
-        {isFormOpen && (
-          <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 backdrop-blur-md p-4 animate-in fade-in duration-300">
-            <div className="bg-white text-slate-900 w-full max-w-lg rounded-[40px] p-10 shadow-2xl relative">
-              <button
-                onClick={() => setIsFormOpen(false)}
-                className="absolute top-6 right-6 text-slate-300 hover:text-red-500 transition-colors"
-              >
-                <X size={32} />
-              </button>
-              <h3 className="text-3xl font-black mb-2 italic">
-                Ready to <span className="text-[#C9A84C]">scale</span>?
-              </h3>
-              <p className="text-slate-400 text-sm uppercase tracking-widest font-bold mb-8 italic text-center">
-                Competitive Velocity Engine
-              </p>
-              <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
-                <input
-                  type="text"
-                  placeholder="Nom et Entreprise"
-                  className="w-full p-4 rounded-2xl border border-slate-100 bg-slate-50 outline-none focus:ring-2 focus:ring-[#C9A84C]"
-                />
-                <input
-                  type="email"
-                  placeholder="Email professionnel"
-                  className="w-full p-4 rounded-2xl border border-slate-100 bg-slate-50 outline-none focus:ring-2 focus:ring-[#C9A84C]"
-                />
-                <textarea
-                  placeholder="Décrivez votre besoin stratégique..."
-                  className="w-full p-4 rounded-2xl border border-slate-100 bg-slate-50 h-32 outline-none focus:ring-2 focus:ring-[#C9A84C]"
-                ></textarea>
-                <button className="w-full bg-[#0D1B2A] text-white py-5 rounded-2xl font-black text-xs uppercase tracking-[0.2em] flex items-center justify-center gap-3 hover:bg-[#C9A84C] transition-all shadow-xl">
-                  Activer le Moteur <ArrowRight size={16} />
-                </button>
-              </form>
-            </div>
-          </div>
-        )}
-
-        {/* HERO SECTION */}
-        <div className="text-center py-24 px-6 animate-in fade-in slide-in-from-top-10 duration-700">
-          <span className="text-[10px] tracking-[5px] uppercase text-[#C9A84C] font-black mb-6 block">
-            Méthodologie de Précision
+      <div className="w-full bg-[#F8FAFC] min-h-screen font-['Inter'] text-[#0F172A]">
+        {/* TOP BADGE */}
+        <div className="flex justify-center pt-20">
+          <span className="bg-[#C9A84C]/10 text-[#C9A84C] px-4 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-[3px] border border-[#C9A84C]/20">
+            Méthodologie Exclusive
           </span>
-          <h1 className="text-4xl md:text-7xl font-black mb-8 italic uppercase leading-tight tracking-tighter">
-            Competitive <span className="text-[#C9A84C]">Velocity</span> Engine
+        </div>
+
+        {/* HERO SECTION - Style Institutionnel */}
+        <div className="text-center py-12 px-6">
+          <h1 className="text-5xl md:text-6xl font-serif font-bold mb-6 text-[#0F172A] leading-tight">
+            Competitive <span className="text-[#C9A84C] italic">velocity</span> engine
           </h1>
-          <p className="text-slate-400 max-w-3xl mx-auto text-lg md:text-xl font-medium italic leading-relaxed">
-            Propulsez votre organisation vers une souveraineté informationnelle totale en 36 semaines.
+          <p className="text-slate-500 max-w-3xl mx-auto text-lg md:text-xl font-medium leading-relaxed italic">
+            "Une nouvelle génération d'analyse stratégique, conçue pour accélérer la prise de décision dans des
+            environnements concurrentiels et hyper-complexes."
           </p>
         </div>
 
-        {/* TIMELINE VERTICALE */}
-        <div className="max-w-4xl mx-auto px-6 relative">
-          {/* Ligne de connexion centrale */}
-          <div className="absolute left-[47px] md:left-[51px] top-0 bottom-0 w-[2px] bg-gradient-to-b from-[#4a9a6a] via-[#C9A84C] to-[#0F365F] opacity-10 hidden md:block"></div>
+        {/* PILL LABELS (Comme sur ton image) */}
+        <div className="flex flex-wrap justify-center gap-3 mb-20">
+          {["Benchmark", "Analyse", "Anticipation", "Décision"].map((label) => (
+            <span
+              key={label}
+              className="px-8 py-2 border-2 border-[#C9A84C] text-[#C9A84C] rounded-full text-sm font-bold tracking-wide"
+            >
+              {label}
+            </span>
+          ))}
+        </div>
 
-          <div className="space-y-8">
+        {/* TIMELINE SECTION */}
+        <div className="max-w-5xl mx-auto px-6 pb-32">
+          <div className="grid gap-6">
             {steps.map((s, i) => (
-              <div
-                key={i}
-                className="relative z-10 animate-in fade-in slide-in-from-left-4 duration-500"
-                style={{ animationDelay: `${i * 100}ms` }}
-              >
+              <div key={i} className="group">
                 <button
-                  onClick={() => toggleStep(i)}
-                  className={`w-full flex items-center gap-6 p-6 rounded-[32px] transition-all duration-500 border-2 ${openStep === i ? "bg-white/10 border-[#C9A84C] shadow-[0_0_50px_rgba(201,168,76,0.1)]" : "bg-white/5 border-transparent hover:border-white/10"}`}
+                  onClick={() => setOpenStep(openStep === i ? null : i)}
+                  className={`w-full flex items-center gap-6 p-8 rounded-3xl transition-all duration-300 bg-white border ${openStep === i ? "border-[#C9A84C] shadow-xl" : "border-slate-100 hover:border-slate-200 shadow-sm"}`}
                 >
                   <div
                     style={{ background: s.color }}
-                    className="w-14 h-14 rounded-2xl flex items-center justify-center text-white font-black text-xl shrink-0 shadow-lg italic transition-transform group-hover:scale-110"
+                    className="w-12 h-12 rounded-xl flex items-center justify-center text-white font-bold text-lg shrink-0"
                   >
                     {s.num}
                   </div>
                   <div className="flex-1 text-left">
-                    <span className="text-[10px] font-black text-[#C9A84C] uppercase tracking-[4px]">{s.tag}</span>
-                    <h3 className="text-xl md:text-2xl font-bold uppercase italic tracking-tight leading-none">
-                      {s.title}
-                    </h3>
+                    <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest block mb-1">
+                      {s.tag}
+                    </span>
+                    <h3 className="text-xl font-serif font-bold text-[#0F172A]">{s.title}</h3>
                   </div>
-                  <div className="flex items-center gap-4">
-                    <span className="text-2xl opacity-80 hidden md:block">{s.icon}</span>
-                    <ChevronDown
-                      className={`text-white/20 transition-transform duration-500 ${openStep === i ? "rotate-180 text-[#C9A84C] opacity-100" : ""}`}
-                    />
-                  </div>
+                  <ChevronDown
+                    className={`text-slate-300 transition-transform duration-300 ${openStep === i ? "rotate-180 text-[#C9A84C]" : ""}`}
+                  />
                 </button>
 
                 {openStep === i && (
-                  <div
-                    className="md:ml-24 mt-6 p-8 bg-white/5 rounded-[32px] border-l-4 animate-in zoom-in-95 duration-500"
-                    style={{ borderColor: s.color }}
-                  >
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-4">
+                  <div className="mt-2 p-10 bg-white rounded-3xl border border-slate-100 shadow-inner animate-in slide-in-from-top-2 duration-300">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-4">
                       {s.items.map((item, j) => (
-                        <div
-                          key={j}
-                          className="text-sm text-slate-300 flex items-start gap-3 italic font-medium leading-tight"
-                        >
-                          <span
-                            className="w-1.5 h-1.5 rounded-full shrink-0 mt-1.5"
-                            style={{ background: s.color }}
-                          ></span>
+                        <div key={j} className="text-[15px] text-slate-600 flex items-center gap-3 font-medium">
+                          <div className="w-1.5 h-1.5 rounded-full bg-[#C9A84C] shrink-0" />
                           {item}
                         </div>
                       ))}
@@ -235,16 +189,10 @@ const StrategicWorkflow = () => {
           </div>
         </div>
 
-        {/* CTA FINAL */}
-        <div className="flex justify-center mt-32 px-6">
-          <button
-            onClick={() => setIsFormOpen(true)}
-            className="group relative bg-[#C9A84C] text-[#0F172A] px-16 py-7 rounded-full font-black uppercase text-sm tracking-[0.4em] overflow-hidden transition-all hover:scale-105 shadow-[0_20px_60px_rgba(201,168,76,0.25)]"
-          >
-            <div className="absolute inset-0 bg-white -translate-x-full group-hover:translate-x-0 transition-transform duration-500"></div>
-            <span className="relative z-10 flex items-center gap-4 group-hover:text-[#C9A84C] transition-colors">
-              Lancer le moteur <ArrowRight size={20} className="group-hover:translate-x-2 transition-transform" />
-            </span>
+        {/* CTA FINAL - Clean & Bold */}
+        <div className="fixed bottom-10 left-0 right-0 flex justify-center px-6 z-50">
+          <button className="bg-[#0F365F] text-white px-12 py-5 rounded-full font-bold uppercase text-xs tracking-[2px] flex items-center gap-4 hover:bg-[#C9A84C] transition-all shadow-2xl">
+            Activez votre Competitive Velocity Engine <ArrowRight size={18} />
           </button>
         </div>
       </div>
