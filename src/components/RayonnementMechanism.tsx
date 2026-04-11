@@ -643,7 +643,7 @@ const RayonnementMechanism = () => {
               }`}
             style={{ background: '#0F365F', overflow: 'hidden' }}
           >
-            <img src={buildfluenceLogoFondBleu} alt="Buildfluence" className="w-full h-full object-cover rounded-full" />
+            <img src={buildfluenceLogoFondBleu} alt="Buildfluence" className="w-1/2 h-1/2 object-contain rounded-full" />
           </div>
 
           <p className="text-[10px] text-[#C9A84C] tracking-[2px] uppercase opacity-70">↓ Transformation ↓</p>
