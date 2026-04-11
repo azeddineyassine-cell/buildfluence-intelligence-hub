@@ -1,10 +1,15 @@
 import { useState } from "react";
-import DetailPageLayout from "@/components/DetailPageLayout"; // L'import pour le menu
+import DetailPageLayout from "@/components/DetailPageLayout";
+import { Send, X, ArrowRight, ChevronDown } from "lucide-react";
 
 const StrategicWorkflow = () => {
   const [openStep, setOpenStep] = useState<number | null>(null);
+  const [isFormOpen, setIsFormOpen] = useState(false);
 
-  const toggleStep = (i: number) => setOpenStep(openStep === i ? null : i);
+  // Correction : Force la fermeture des autres quand on en ouvre un
+  const toggleStep = (i: number) => {
+    setOpenStep(openStep === i ? null : i);
+  };
 
   const steps = [
     {
@@ -18,8 +23,6 @@ const StrategicWorkflow = () => {
         "Analyse des exigences stratégiques",
         "Construction de l'écosystème informationnel",
         "Définition des objectifs et KPIs",
-        "Diagnostic de maturité décisionnelle",
-        "Cartographie des angles morts",
       ],
     },
     {
@@ -29,11 +32,9 @@ const StrategicWorkflow = () => {
       title: "Préparation de l'infrastructure",
       tag: "Semaines 6–10",
       items: [
-        "Ateliers, Brainstorming & Validation",
+        "Ateliers & Validation",
         "Setup : Requêtes, profils, livrables",
-        "Arborescence des dossiers & sous-dossiers",
         "Paramétrage de la solution IA",
-        "Démarche IES / Structuration de la recherche",
         "Sources décentralisées & bases de données",
       ],
     },
@@ -44,11 +45,9 @@ const StrategicWorkflow = () => {
       title: "Brainstorming & Structuration",
       tag: "Semaines 11–15",
       items: [
-        "Rédaction & formalisation des exigences",
+        "Rédaction des exigences",
         "Validation des axes stratégiques",
-        "Workshops collaboratifs de co-construction",
-        "Catégorisation des thématiques de veille",
-        "Définition des livrables & formats",
+        "Catégorisation thématique",
         "Élaboration du cahier des charges",
       ],
     },
@@ -59,11 +58,9 @@ const StrategicWorkflow = () => {
       title: "Déploiement & Implémentation IA",
       tag: "Semaines 16–20",
       items: [
-        "Intégration de la solution IA de veille",
-        "Tests et ajustements en conditions réelles",
-        "Optimisation et mise en production",
-        "Installation Market & Competitive Intelligence Unit",
-        "Détection automatique des signaux faibles",
+        "Intégration solution IA",
+        "Tests en conditions réelles",
+        "Installation Intelligence Unit",
         "Dashboards & KPIs temps réel",
       ],
     },
@@ -71,16 +68,9 @@ const StrategicWorkflow = () => {
       num: 5,
       color: "#C9A84C",
       icon: "🎓",
-      title: "Formation Strategic Empowerment",
+      title: "Formation Empowerment",
       tag: "Semaines 21–25",
-      items: [
-        "Formation sur-mesure Next-Level",
-        "Programme de montée en compétences",
-        "Méthodologie IES, OSINT, e-Lobbying",
-        "Sovereign Data & Competitive Intelligence 2.0",
-        "Groupe de 10 personnes / 10 jours",
-        "Transfert de compétences opérationnelles",
-      ],
+      items: ["Formation sur-mesure", "Méthodologie IES, OSINT", "Sovereign Data 2.0", "Transfert de compétences"],
     },
     {
       num: 6,
@@ -89,479 +79,139 @@ const StrategicWorkflow = () => {
       title: "Gestion du changement",
       tag: "Semaines 26–30",
       items: [
-        "Direction de Communication interne",
-        "Actions internes de conduite du changement",
-        "One&One interviews dirigeants",
-        "Culture de la résilience informationnelle",
-        "Accompagnement transverse communauté/user",
-        "Ateliers immersifs Leadership Digital",
+        "Communication interne",
+        "Conduite du changement",
+        "Interviews dirigeants",
+        "Ateliers Leadership Digital",
       ],
     },
     {
       num: 7,
       color: "#0F365F",
       icon: "🏅",
-      title: "Accompagnement continu & Autonomisation",
-      tag: "Semaines 31–36 et au-delà",
+      title: "Accompagnement & Autonomie",
+      tag: "Semaines 31–36+",
       items: [
-        "Support, suivi et visites sur site",
-        "Retour d'expérience & amélioration continue",
-        "Stratégies d'optimisation des solutions",
-        "Construction des Orientations & Plans d'action",
-        "Boucle d'amélioration continue",
-        "Influence Builder : narratifs & e-Lobbying",
+        "Support & suivi site",
+        "Amélioration continue",
+        "Optimisation des solutions",
+        "Influence Builder & e-Lobbying",
       ],
       full: true,
     },
   ];
 
-  const piliers = [
-    {
-      color: "#4a4a5a",
-      icon: "🏆",
-      title: "Expertise",
-      desc: "Expert en Intelligence Économique en France et au Maroc. +20 ans d'expérience.",
-    },
-    {
-      color: "#1a6b5a",
-      icon: "⚙️",
-      title: "HumTech",
-      desc: "IA Premium · OSINT · NLP · DataViz · Advanced Semantics · Graphes d'interactions.",
-    },
-    {
-      color: "#C9A84C",
-      icon: "🎯",
-      title: "Engagement",
-      desc: "Transformation de la donnée en décisions à fort impact. Transfert de compétences.",
-    },
-    {
-      color: "#0F365F",
-      icon: "⚡",
-      title: "Impact",
-      desc: "Une décision n'a de sens que si elle change le rapport de force en votre faveur.",
-    },
-  ];
-
-  const kpis = [
-    { val: "400M$", lbl: "sécurisés en Deep Due Diligence" },
-    { val: "180M MAD", lbl: "générés via politiques publiques" },
-    { val: "+14%", lbl: "de parts de marché après crise" },
-    { val: "2 sem.", lbl: "crise nationale maîtrisée" },
-  ];
-
-  const cycle = [
-    { letter: "D", label: "Définition", color: "#4a9a6a" },
-    { letter: "S", label: "Sourcing", color: "#1a7a5a" },
-    { letter: "C", label: "Collecte", color: "#1a5580" },
-    { letter: "A", label: "Analyse", color: "#2a6a9a" },
-    { letter: "D", label: "Diffusion", color: "#C9A84C" },
-    { letter: "C", label: "Capitalisation", color: "#0F365F" },
-  ];
-
-  const adn = [
-    {
-      icon: "📡",
-      title: "Geostrategic Monitoring",
-      items: [
-        "Web, Social Media, OSINT",
-        "Bases de données institutionnelles",
-        "Blog, Forum, News, Flux RSS",
-        "Fact-Checking & Sources ad hoc",
-        "Exploration Open Web",
-      ],
-    },
-    {
-      icon: "🔬",
-      title: "Ecosystem Analysis",
-      items: [
-        "Investisseurs & Fonds",
-        "Prescripteurs & Leaders d'Opinion",
-        "Pays concurrents & pays cibles",
-        "Géopolitique & Tendances",
-        "AI : NLP, Sémantique, DataViz",
-      ],
-    },
-    {
-      icon: "⚡",
-      title: "Impactful Influence",
-      items: [
-        "Prise de décision stratégique",
-        "e-Lobbying & Leadership thought",
-        "Création de contenu à fort impact",
-        "Communication & Événements",
-        "Livrables & Diffusion ciblée",
-      ],
-    },
-  ];
-
   return (
     <DetailPageLayout>
-      <div style={{ background: "#F0F7FF", minHeight: "100vh", fontFamily: "'Inter', sans-serif", color: "#0D1B2A" }}>
-        {/* HERO */}
-        <div style={{ textAlign: "center", padding: "52px 40px 32px" }}>
-          <div
-            style={{
-              fontSize: 11,
-              letterSpacing: 3,
-              textTransform: "uppercase",
-              color: "#C9A84C",
-              fontWeight: 600,
-              marginBottom: 12,
-            }}
-          >
-            Méthodologie Exclusive
-          </div>
-          <h1
-            style={{
-              fontSize: "clamp(24px, 3.5vw, 40px)",
-              fontWeight: 700,
-              lineHeight: 1.2,
-              marginBottom: 10,
-              letterSpacing: -0.5,
-            }}
-          >
-            Buildfluence <span style={{ color: "#C9A84C" }}>Strategic Workflow</span>
-          </h1>
-          <p style={{ fontSize: 14, color: "#6b7c93", maxWidth: 640, margin: "0 auto 8px", lineHeight: 1.7 }}>
-            Installer une culture d'intelligence stratégique et un système de décision augmentée au sein de votre
-            entité.
-          </p>
-          <p style={{ fontSize: 13, color: "#C9A84C", fontStyle: "italic", marginBottom: 36 }}>
-            Éviter les angles morts. Garder l'ascendant. Construire la souveraineté informationnelle.
-          </p>
-        </div>
-
-        {/* PILIERS */}
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(4, 1fr)",
-            maxWidth: 1100,
-            margin: "0 auto 44px",
-            padding: "0 32px",
-            gap: 12,
-          }}
-        >
-          {piliers.map((p, i) => (
-            <div
-              key={i}
-              style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center" }}
-            >
-              <div
-                style={{
-                  width: 56,
-                  height: 56,
-                  borderRadius: "50%",
-                  background: p.color,
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  fontSize: 22,
-                  marginBottom: 10,
-                  border: "3px solid #fff",
-                  boxShadow: "0 4px 14px rgba(0,0,0,.1)",
-                }}
+      <div className="w-full bg-[#F8FAFC] min-h-screen font-['Inter'] pb-20">
+        {/* MODAL FORMULAIRE */}
+        {isFormOpen && (
+          <div className="fixed inset-0 z-[100] flex items-center justify-center bg-slate-900/90 backdrop-blur-md p-4">
+            <div className="bg-white w-full max-w-lg rounded-[40px] p-10 shadow-2xl animate-in zoom-in duration-300 relative">
+              <button
+                onClick={() => setIsFormOpen(false)}
+                className="absolute top-6 right-6 text-slate-400 hover:text-red-500"
               >
-                {p.icon}
-              </div>
-              <h3
-                style={{
-                  fontSize: 11,
-                  fontWeight: 700,
-                  textTransform: "uppercase",
-                  letterSpacing: 1.5,
-                  color: p.color,
-                  marginBottom: 6,
-                }}
-              >
-                {p.title}
+                <X size={28} />
+              </button>
+              <h3 className="text-3xl font-black text-[#0D1B2A] mb-2 text-center italic">
+                Ready to <span className="text-[#C9A84C]">scale</span>?
               </h3>
-              <p style={{ fontSize: 11, color: "#6b7c93", lineHeight: 1.5 }}>{p.desc}</p>
+              <p className="text-center text-slate-500 mb-8 text-sm font-medium uppercase tracking-widest">
+                Échange Stratégique • Buildfluence
+              </p>
+              <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
+                <input
+                  type="text"
+                  placeholder="Nom complet"
+                  className="w-full p-4 rounded-2xl border border-slate-100 bg-slate-50 focus:ring-2 focus:ring-[#C9A84C] outline-none"
+                />
+                <input
+                  type="email"
+                  placeholder="Email professionnel"
+                  className="w-full p-4 rounded-2xl border border-slate-100 bg-slate-50 focus:ring-2 focus:ring-[#C9A84C] outline-none"
+                />
+                <textarea
+                  placeholder="Votre besoin..."
+                  className="w-full p-4 rounded-2xl border border-slate-100 bg-slate-50 h-32 outline-none focus:ring-2 focus:ring-[#C9A84C]"
+                ></textarea>
+                <button className="w-full bg-[#0D1B2A] text-white py-5 rounded-2xl font-black text-xs uppercase tracking-widest flex items-center justify-center gap-3 hover:bg-[#C9A84C] transition-all shadow-xl">
+                  Lancer la connexion <Send size={16} />
+                </button>
+              </form>
             </div>
-          ))}
-        </div>
+          </div>
+        )}
 
-        {/* KPIs */}
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(4, 1fr)",
-            gap: 12,
-            maxWidth: 1100,
-            margin: "0 auto 44px",
-            padding: "0 32px",
-          }}
-        >
-          {kpis.map((k, i) => (
-            <div
-              key={i}
-              style={{
-                background: "#fff",
-                border: "0.5px solid rgba(13,27,42,.08)",
-                borderRadius: 12,
-                padding: 16,
-                textAlign: "center",
-              }}
-            >
-              <div style={{ fontSize: 24, fontWeight: 700, color: "#C9A84C", marginBottom: 4 }}>{k.val}</div>
-              <div style={{ fontSize: 11, color: "#6b7c93", lineHeight: 1.4 }}>{k.lbl}</div>
-            </div>
-          ))}
-        </div>
-
-        {/* CYCLE VEILLE */}
-        <div style={{ textAlign: "center", maxWidth: 1100, margin: "0 auto 16px", padding: "0 32px" }}>
-          <h2 style={{ fontSize: 18, fontWeight: 700, marginBottom: 6 }}>De la Veille au Partage d'Intelligence</h2>
-          <p style={{ fontSize: 13, color: "#6b7c93" }}>
-            Le cycle complet de transformation de l'information en décision souveraine
+        {/* HERO */}
+        <div className="text-center py-20 px-4">
+          <span className="bg-[#C9A84C] text-white px-4 py-1 rounded-full text-[10px] font-black uppercase tracking-widest mb-6 inline-block">
+            Workflow Opérationnel
+          </span>
+          <h1 className="text-4xl md:text-6xl font-black text-[#0D1B2A] mb-6 leading-tight">
+            Buildfluence <span className="italic text-[#C9A84C]">Strategic</span> Workflow
+          </h1>
+          <p className="text-slate-500 max-w-3xl mx-auto text-lg md:text-xl font-medium leading-relaxed">
+            Un déploiement structuré pour transformer votre organisation en une puissance décisionnelle.
           </p>
         </div>
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            gap: 0,
-            maxWidth: 1100,
-            margin: "0 auto 44px",
-            padding: "0 32px",
-            flexWrap: "wrap",
-          }}
-        >
-          {cycle.map((c, i) => (
-            <div key={i} style={{ display: "flex", alignItems: "center" }}>
-              <div style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center" }}>
-                <div
-                  style={{
-                    width: 52,
-                    height: 52,
-                    borderRadius: "50%",
-                    background: c.color,
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    fontSize: 14,
-                    fontWeight: 700,
-                    color: "#fff",
-                    marginBottom: 6,
-                    border: "2px solid #fff",
-                    boxShadow: "0 3px 10px rgba(0,0,0,.12)",
-                  }}
-                >
-                  {c.letter}
-                </div>
-                <div
-                  style={{
-                    fontSize: 10,
-                    fontWeight: 600,
-                    color: "#4a5568",
-                    letterSpacing: 0.5,
-                    textTransform: "uppercase",
-                    maxWidth: 64,
-                  }}
-                >
-                  {c.label}
-                </div>
-              </div>
-              {i < cycle.length - 1 && (
-                <div style={{ fontSize: 16, color: "#C9A84C", margin: "0 8px", paddingBottom: 20, opacity: 0.7 }}>
-                  →
-                </div>
-              )}
-            </div>
-          ))}
-        </div>
 
-        {/* 7 ÉTAPES */}
-        <div style={{ textAlign: "center", maxWidth: 1100, margin: "0 auto 16px", padding: "0 32px" }}>
-          <h2 style={{ fontSize: 18, fontWeight: 700, marginBottom: 6 }}>Le Process en 7 Étapes</h2>
-          <p style={{ fontSize: 13, color: "#6b7c93" }}>
-            Cliquez sur chaque étape pour découvrir le détail de notre intervention
-          </p>
-        </div>
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(2, 1fr)",
-            gap: 14,
-            maxWidth: 1100,
-            margin: "0 auto 44px",
-            padding: "0 32px",
-          }}
-        >
+        {/* WORKFLOW GRID - Correction Marges & Lignes */}
+        <div className="w-full max-w-[1400px] mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-6">
           {steps.map((s, i) => (
-            <div
-              key={i}
-              onClick={() => toggleStep(i)}
-              style={{
-                background: "#fff",
-                border: "0.5px solid rgba(13,27,42,.08)",
-                borderLeft: `4px solid ${openStep === i ? s.color : "transparent"}`,
-                borderRadius: 14,
-                padding: "20px 22px",
-                cursor: "pointer",
-                gridColumn: s.full ? "1 / -1" : undefined,
-                boxShadow: openStep === i ? `0 6px 24px rgba(0,0,0,.07)` : "none",
-                transition: "all .25s",
-              }}
-            >
-              <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-                <div
-                  style={{
-                    width: 32,
-                    height: 32,
-                    borderRadius: 8,
-                    background: s.color,
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    fontSize: 12,
-                    fontWeight: 700,
-                    color: "#fff",
-                    flexShrink: 0,
-                  }}
-                >
-                  {s.num}
-                </div>
-                <span style={{ fontSize: 18 }}>{s.icon}</span>
-                <h3 style={{ fontSize: 13, fontWeight: 700, flex: 1 }}>{s.title}</h3>
-                <span
-                  style={{
-                    fontSize: 12,
-                    color: openStep === i ? s.color : "#aabbcc",
-                    transform: openStep === i ? "rotate(180deg)" : "none",
-                    transition: "transform .25s",
-                  }}
-                >
-                  ▼
-                </span>
-              </div>
-              <div style={{ fontSize: 10, color: "#C9A84C", fontStyle: "italic", marginTop: 6, marginLeft: 44 }}>
-                {s.tag}
-              </div>
-              {openStep === i && (
-                <div style={{ marginTop: 14, paddingTop: 14, borderTop: "0.5px solid rgba(13,27,42,.07)" }}>
-                  <ul
-                    style={{ listStyle: "none", padding: 0, display: "grid", gridTemplateColumns: "1fr 1fr", gap: 4 }}
+            <div key={i} className={`group transition-all duration-500 ${s.full ? "md:col-span-2" : ""}`}>
+              <div
+                onClick={() => toggleStep(i)}
+                className={`cursor-pointer bg-white rounded-[32px] p-8 border-2 transition-all ${openStep === i ? "border-[#C9A84C] shadow-2xl bg-white" : "border-transparent hover:border-slate-200 shadow-sm"}`}
+              >
+                <div className="flex items-center gap-6">
+                  <div
+                    style={{ background: s.color }}
+                    className="w-14 h-14 rounded-2xl flex items-center justify-center text-white text-xl font-black shadow-lg group-hover:rotate-6 transition-transform"
                   >
-                    {s.items.map((item, j) => (
-                      <li
-                        key={j}
-                        style={{
-                          fontSize: 11.5,
-                          color: "#4a5568",
-                          padding: "4px 0 4px 14px",
-                          position: "relative",
-                          lineHeight: 1.5,
-                        }}
-                      >
-                        <span style={{ position: "absolute", left: 0, color: "#C9A84C", fontSize: 10 }}>→</span>
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                  <span
-                    style={{
-                      display: "inline-block",
-                      marginTop: 10,
-                      fontSize: 10,
-                      padding: "3px 10px",
-                      borderRadius: 10,
-                      background: "#F0F7FF",
-                      color: "#1a5580",
-                      border: "0.5px solid #1a5580",
-                    }}
-                  >
-                    ⏱ Durée : {s.tag}
-                  </span>
+                    {s.num}
+                  </div>
+                  <div className="flex-1">
+                    <span className="text-[10px] font-black text-[#C9A84C] uppercase tracking-widest">{s.tag}</span>
+                    <h3 className="text-xl font-bold text-[#0D1B2A] group-hover:translate-x-1 transition-transform">
+                      {s.title}
+                    </h3>
+                  </div>
+                  <div className="text-3xl grayscale group-hover:grayscale-0 transition-all">{s.icon}</div>
+                  <ChevronDown
+                    className={`text-slate-300 transition-transform duration-300 ${openStep === i ? "rotate-180 text-[#C9A84C]" : ""}`}
+                  />
                 </div>
-              )}
+
+                {openStep === i && (
+                  <div className="mt-8 pt-8 border-t border-slate-50 animate-in slide-in-from-top duration-300">
+                    <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      {s.items.map((item, j) => (
+                        <li key={j} className="flex items-center gap-3 text-sm text-slate-600 font-medium italic">
+                          <span className="w-1.5 h-1.5 rounded-full" style={{ background: s.color }}></span>
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+              </div>
             </div>
           ))}
         </div>
 
-        {/* ADN */}
-        <div style={{ maxWidth: 1100, margin: "0 auto 44px", padding: "0 32px" }}>
-          <div
-            style={{
-              background: "#0D1B2A",
-              borderRadius: 16,
-              padding: 32,
-              display: "grid",
-              gridTemplateColumns: "repeat(3, 1fr)",
-              gap: 20,
-            }}
+        {/* CTA FINAL RÉPARÉ */}
+        <div className="flex justify-center mt-24 px-6">
+          <button
+            onClick={() => setIsFormOpen(true)}
+            className="group relative bg-[#0D1B2A] text-white px-12 py-6 rounded-full overflow-hidden shadow-2xl transition-all hover:scale-105"
           >
-            {adn.map((a, i) => (
-              <div
-                key={i}
-                style={{
-                  textAlign: "center",
-                  padding: 16,
-                  borderRight: i < 2 ? "0.5px solid rgba(255,255,255,.08)" : "none",
-                }}
-              >
-                <div style={{ fontSize: 28, marginBottom: 10 }}>{a.icon}</div>
-                <div style={{ fontSize: 14, fontWeight: 700, color: "#C9A84C", marginBottom: 8 }}>{a.title}</div>
-                <ul style={{ listStyle: "none", padding: 0, textAlign: "left" }}>
-                  {a.items.map((item, j) => (
-                    <li
-                      key={j}
-                      style={{
-                        fontSize: 11,
-                        color: "#8899aa",
-                        padding: "3px 0 3px 10px",
-                        position: "relative",
-                        borderBottom: "0.5px solid rgba(255,255,255,.05)",
-                      }}
-                    >
-                      <span style={{ position: "absolute", left: 0, color: "#C9A84C" }}>·</span>
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* CTA */}
-        <div style={{ textAlign: "center", padding: "0 32px 52px" }}>
-          <div
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: 16,
-              background: "#fff",
-              border: "1px solid rgba(201,168,76,.3)",
-              borderRadius: 12,
-              padding: "16px 28px",
-            }}
-          >
-            <span style={{ fontSize: 22 }}>🚀</span>
-            <div>
-              <div style={{ fontSize: 14, fontWeight: 700 }}>
-                Installez votre <span style={{ color: "#C9A84C" }}>cellule d'intelligence stratégique</span>
-              </div>
-              <div style={{ fontSize: 11, color: "#8899aa", marginTop: 2 }}>
-                Un accompagnement sur 36 semaines, de l'audit à l'autonomie
-              </div>
+            <div className="absolute inset-0 bg-[#C9A84C] translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
+            <div className="relative flex items-center gap-4">
+              <span className="text-sm font-black uppercase tracking-[0.2em]">Échange Stratégique</span>
+              <ArrowRight className="group-hover:translate-x-2 transition-transform" />
             </div>
-            <button
-              style={{
-                fontSize: 11,
-                padding: "7px 16px",
-                borderRadius: 20,
-                background: "#C9A84C",
-                color: "#0D1B2A",
-                fontWeight: 700,
-                cursor: "pointer",
-                border: "none",
-              }}
-            >
-              ÉCHANGE STRATÉGIQUE →
-            </button>
-          </div>
+          </button>
         </div>
       </div>
     </DetailPageLayout>
