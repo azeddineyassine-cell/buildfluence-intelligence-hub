@@ -1,9 +1,8 @@
 import { useState } from "react";
-import DetailPageLayout from "@/components/DetailPageLayout";
-import { ArrowRight, ChevronDown, Target, Zap, Shield, BarChart3 } from "lucide-react";
+import { ArrowRight, ChevronDown } from "lucide-react";
 
 const StrategicWorkflow = () => {
-  const [openStep, setOpenStep] = useState<number | null>(0); // La première étape est ouverte par défaut
+  const [openStep, setOpenStep] = useState<number | null>(null);
 
   const steps = [
     {
@@ -110,93 +109,105 @@ const StrategicWorkflow = () => {
         "Boucle d'amélioration continue",
         "Influence Builder : narratifs & e-Lobbying",
       ],
+      full: true,
     },
   ];
 
   return (
-    <DetailPageLayout>
-      <div className="w-full bg-[#F8FAFC] min-h-screen font-['Inter'] text-[#0F172A]">
-        {/* TOP BADGE */}
-        <div className="flex justify-center pt-20">
-          <span className="bg-[#C9A84C]/10 text-[#C9A84C] px-4 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-[3px] border border-[#C9A84C]/20">
-            Méthodologie Exclusive
-          </span>
-        </div>
+    <div className="w-full bg-[#F0F7FF] min-h-screen text-[#0D1B2A] font-sans">
+      {/* Header & Hero */}
+      <div className="text-center py-16 px-4">
+        <span className="text-[#C9A84C] text-[11px] font-bold uppercase tracking-[3px] mb-4 block">
+          Méthodologie Exclusive
+        </span>
+        <h1
+          className="text-4xl md:text-5xl font-bold mb-4"
+          style={{ fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif" }}
+        >
+          Buildfluence <span className="text-[#C9A84C]">Strategic Workflow</span>
+        </h1>
+        <p className="text-slate-500 max-w-2xl mx-auto text-sm leading-relaxed mb-10">
+          Installer une culture d'intelligence stratégique et un système de décision augmentée au sein de votre entité.
+        </p>
 
-        {/* HERO SECTION - Style Institutionnel */}
-        <div className="text-center py-12 px-6">
-          <h1 className="text-5xl md:text-6xl font-serif font-bold mb-6 text-[#0F172A] leading-tight">
-            Competitive <span className="text-[#C9A84C] italic">velocity</span> engine
-          </h1>
-          <p className="text-slate-500 max-w-3xl mx-auto text-lg md:text-xl font-medium leading-relaxed italic">
-            "Une nouvelle génération d'analyse stratégique, conçue pour accélérer la prise de décision dans des
-            environnements concurrentiels et hyper-complexes."
-          </p>
-        </div>
-
-        {/* PILL LABELS (Comme sur ton image) */}
-        <div className="flex flex-wrap justify-center gap-3 mb-20">
-          {["Benchmark", "Analyse", "Anticipation", "Décision"].map((label) => (
+        {/* Badges */}
+        <div className="flex flex-wrap justify-center gap-3 mb-16">
+          {["Benchmark", "Analyse", "Anticipation", "Décision"].map((b) => (
             <span
-              key={label}
-              className="px-8 py-2 border-2 border-[#C9A84C] text-[#C9A84C] rounded-full text-sm font-bold tracking-wide"
+              key={b}
+              className="px-6 py-2 border border-[#C9A84C]/50 text-[#C9A84C] rounded-full text-xs font-bold uppercase tracking-wider bg-white/50"
             >
-              {label}
+              {b}
             </span>
           ))}
         </div>
+      </div>
 
-        {/* TIMELINE SECTION */}
-        <div className="max-w-5xl mx-auto px-6 pb-32">
-          <div className="grid gap-6">
-            {steps.map((s, i) => (
-              <div key={i} className="group">
-                <button
-                  onClick={() => setOpenStep(openStep === i ? null : i)}
-                  className={`w-full flex items-center gap-6 p-8 rounded-3xl transition-all duration-300 bg-white border ${openStep === i ? "border-[#C9A84C] shadow-xl" : "border-slate-100 hover:border-slate-200 shadow-sm"}`}
+      {/* Process Grid - 2 colonnes */}
+      <div className="max-w-6xl mx-auto px-6 pb-40">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {steps.map((s, i) => (
+            <div
+              key={i}
+              className={`${s.full ? "md:col-span-2" : ""} bg-white rounded-xl border border-slate-200 overflow-hidden transition-all duration-300 ${openStep === i ? "shadow-lg border-[#C9A84C]/40" : "hover:border-slate-300"}`}
+            >
+              <button
+                onClick={() => setOpenStep(openStep === i ? null : i)}
+                className="w-full flex items-center p-5 gap-4 text-left"
+              >
+                <div
+                  style={{ background: s.color }}
+                  className="w-8 h-8 rounded-lg flex items-center justify-center text-white font-bold text-xs shrink-0"
                 >
-                  <div
-                    style={{ background: s.color }}
-                    className="w-12 h-12 rounded-xl flex items-center justify-center text-white font-bold text-lg shrink-0"
-                  >
-                    {s.num}
-                  </div>
-                  <div className="flex-1 text-left">
-                    <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest block mb-1">
-                      {s.tag}
-                    </span>
-                    <h3 className="text-xl font-serif font-bold text-[#0F172A]">{s.title}</h3>
-                  </div>
-                  <ChevronDown
-                    className={`text-slate-300 transition-transform duration-300 ${openStep === i ? "rotate-180 text-[#C9A84C]" : ""}`}
-                  />
-                </button>
+                  {s.num}
+                </div>
+                <div className="flex-1">
+                  <h3 className="text-[14px] font-bold" style={{ fontFamily: "'Segoe UI', sans-serif" }}>
+                    {s.title}
+                  </h3>
+                  <span className="text-[10px] text-[#C9A84C] italic font-medium">{s.tag}</span>
+                </div>
+                <ChevronDown
+                  size={16}
+                  className={`text-slate-400 transition-transform ${openStep === i ? "rotate-180" : ""}`}
+                />
+              </button>
 
-                {openStep === i && (
-                  <div className="mt-2 p-10 bg-white rounded-3xl border border-slate-100 shadow-inner animate-in slide-in-from-top-2 duration-300">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-4">
-                      {s.items.map((item, j) => (
-                        <div key={j} className="text-[15px] text-slate-600 flex items-center gap-3 font-medium">
-                          <div className="w-1.5 h-1.5 rounded-full bg-[#C9A84C] shrink-0" />
-                          {item}
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
+              {openStep === i && (
+                <div className="px-5 pb-6 pt-2 border-t border-slate-50 animate-in fade-in slide-in-from-top-1">
+                  <ul className="grid grid-cols-1 gap-2">
+                    {s.items.map((item, j) => (
+                      <li key={j} className="text-[12px] text-slate-600 flex items-start gap-2">
+                        <span className="text-[#C9A84C] mt-0.5">→</span>
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </div>
+          ))}
         </div>
+      </div>
 
-        {/* CTA FINAL - Clean & Bold */}
-        <div className="fixed bottom-10 left-0 right-0 flex justify-center px-6 z-50">
-          <button className="bg-[#0F365F] text-white px-12 py-5 rounded-full font-bold uppercase text-xs tracking-[2px] flex items-center gap-4 hover:bg-[#C9A84C] transition-all shadow-2xl">
-            Activez votre Competitive Velocity Engine <ArrowRight size={18} />
+      {/* Footer CTA */}
+      <div className="fixed bottom-8 left-0 right-0 flex justify-center px-4 z-50">
+        <div className="bg-white border border-[#C9A84C]/30 shadow-2xl rounded-2xl p-4 md:p-6 flex flex-col md:flex-row items-center gap-6 max-w-3xl w-full">
+          <div className="hidden md:flex w-12 h-12 bg-[#F0F7FF] items-center justify-center rounded-xl text-2xl">
+            🚀
+          </div>
+          <div className="flex-1 text-center md:text-left">
+            <h4 className="text-[14px] font-bold text-[#0D1B2A]">
+              Installez votre <span className="text-[#C9A84C]">cellule d'intelligence stratégique</span>
+            </h4>
+            <p className="text-[11px] text-slate-400">Accompagnement sur 36 semaines, de l'audit à l'autonomie</p>
+          </div>
+          <button className="bg-[#C9A84C] text-[#0D1B2A] px-6 py-3 rounded-full font-bold text-[11px] hover:scale-105 transition-transform whitespace-nowrap">
+            ÉCHANGE STRATÉGIQUE →
           </button>
         </div>
       </div>
-    </DetailPageLayout>
+    </div>
   );
 };
 
