@@ -60,7 +60,7 @@ const CompetitiveVelocityEngine = () => {
   };
 
   return (
-    <DetailPageLayout>
+    <DetailPageLayout title="Competitive Velocity Engine" chapeau="Accélérez votre compétitivité grâce à l'intelligence stratégique en temps réel.">
       <div className="w-full max-w-[1200px] mx-auto px-6 pt-4 pb-20 font-['Inter',sans-serif]">
         {/* HEADER */}
         <header className="text-center mb-12">

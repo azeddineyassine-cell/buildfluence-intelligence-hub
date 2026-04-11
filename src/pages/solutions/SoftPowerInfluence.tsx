@@ -57,7 +57,7 @@ const SoftPowerInfluence = () => {
       icon: "🏛",
       title: "Political Intelligence",
       subtitle: t("Prenez un temps d'avance sur votre écosystème décisionnel", "Stay one step ahead of your decision-making ecosystem"),
-      bg: "linear-gradient(135deg, #1a3a5c 0%, #0D1B2A 100%)",
+      bg: "linear-gradient(135deg, #155d94 0%, #1c75ba 100%)",
       items: [
         t("Cartographie des décideurs publics clés", "Mapping of key public decision-makers"),
         t("Lecture des chaînes de décision formelles et informelles", "Reading formal and informal decision chains"),
@@ -72,7 +72,7 @@ const SoftPowerInfluence = () => {
       icon: "🗺",
       title: "Territorial Influence Lab",
       subtitle: t("Pilotez votre territoire vers l'attractivité et l'influence", "Steer your territory towards attractiveness and influence"),
-      bg: "linear-gradient(135deg, #0D1B2A 0%, #1e2d4a 100%)",
+      bg: "linear-gradient(135deg, #1c75ba 0%, #155d94 100%)",
       items: [
         t("Captation de l'intérêt des investisseurs", "Capturing investor interest"),
         t("Cartographie de votre écosystème territorial", "Mapping of your territorial ecosystem"),
@@ -87,7 +87,7 @@ const SoftPowerInfluence = () => {
   return (
     <DetailPageLayout
       title="Soft Power & Influence"
-      chapeau={t("Ne laissez pas les autres écrire votre histoire. Façonnez votre perception. Imposez votre narratif.", "Don't let others write your story. Shape your perception. Impose your narrative.")}
+      chapeau={<span className="italic" style={{ color: '#6B7280' }}>{t("Structurer et piloter les dynamiques d'influence pour transformer votre position en avantage compétitif durable", "Structure and drive influence dynamics to transform your position into a lasting competitive advantage")}</span>}
       ctas={[{ label: t("Parler de mon projet", "Discuss my project"), action: "#", formType: "f1" }]}
       situationContext="Soft Power & Influence"
     >
