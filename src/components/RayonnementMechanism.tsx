@@ -641,7 +641,7 @@ const RayonnementMechanism = () => {
                 ? "border-[#C9A84C] shadow-lg shadow-[#C9A84C]/15"
                 : "border-[#C9A84C]/35 hover:border-[#C9A84C] hover:shadow-md"
               }`}
-            style={{ background: '#0F365F', overflow: 'hidden' }}
+            style={{ background: '#0A3161', overflow: 'hidden' }}
           >
             <img src={buildfluenceLogoFondBleu} alt="Buildfluence" className="w-[100px] h-[100px] object-contain" />
             <p className="text-white text-[13px] font-bold tracking-wide mt-1">Build<span className="text-[#FFDE59]">fluence</span></p>
