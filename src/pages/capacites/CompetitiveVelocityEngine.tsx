@@ -74,75 +74,117 @@ const CompetitiveVelocityEngine = () => {
   };
 
   return (
-    <DetailPageLayout
-      title="COMPETITIVE VELOCITY ENGINE"
-      subtitle="Une nouvelle génération d'analyse stratégique pour accélérer la prise de décision."
-      category="Strategic Innovation"
-    >
-      {/* Conteneur avec mise à l'échelle automatique pour éviter le zoom manuel */}
-      <div className="w-full max-w-[1200px] mx-auto px-4 py-8 overflow-hidden">
-        {/* ENGINE SECTION */}
+    <DetailPageLayout>
+      <div className="w-full max-w-[1200px] mx-auto px-6 py-12">
+        {/* NOUVELLE ENTÊTE (STYLE IMAGE 06541d) */}
+        <header className="text-center mb-16">
+          <div className="inline-block px-4 py-1.5 mb-6 text-[10px] font-black tracking-[0.2em] text-[#C9A84C] bg-white border border-slate-100 rounded-full shadow-sm uppercase">
+            Strategic Innovation
+          </div>
+          <h1 className="text-4xl md:text-6xl font-black text-[#1B3E6A] mb-6 tracking-tight">
+            COMPETITIVE <span className="text-[#C9A84C]">VELOCITY</span> ENGINE
+          </h1>
+          <p className="text-lg md:text-xl text-slate-600 max-w-3xl mx-auto font-medium leading-relaxed">
+            Une nouvelle génération d'analyse stratégique, conçue pour accélérer la prise de décision dans des
+            environnements concurrentiels et hyper-complexes.
+          </p>
+        </header>
+
+        {/* SECTION ENGINE */}
         <div className="grid lg:grid-cols-2 gap-10 bg-white p-8 md:p-12 rounded-[40px] shadow-2xl items-center mb-16 border border-slate-50">
           <div className="relative flex justify-center">
-            <svg viewBox="0 0 500 500" className="w-full max-w-[450px] drop-shadow-xl transition-all">
-              <path
-                onClick={() => setActiveSector("geo")}
-                className="cursor-pointer hover:brightness-110 transition-all"
-                d="M250,250 L250,50 A200,200 0 0,1 423,150 Z"
-                fill={activeSector === "geo" ? "#C9A84C" : "#1B3E6A"}
-                stroke="#FFF"
-                strokeWidth="3"
-              />
-              <path
-                onClick={() => setActiveSector("eco")}
-                className="cursor-pointer hover:brightness-110 transition-all"
-                d="M250,250 L423,150 A200,200 0 0,1 423,350 Z"
-                fill={activeSector === "eco" ? "#C9A84C" : "#1B3E6A"}
-                stroke="#FFF"
-                strokeWidth="3"
-                opacity="0.95"
-              />
-              <path
-                onClick={() => setActiveSector("tech")}
-                className="cursor-pointer hover:brightness-110 transition-all"
-                d="M250,250 L423,350 A200,200 0 0,1 250,450 Z"
-                fill={activeSector === "tech" ? "#C9A84C" : "#1B3E6A"}
-                stroke="#FFF"
-                strokeWidth="3"
-              />
-              <path
-                onClick={() => setActiveSector("sce")}
-                className="cursor-pointer hover:brightness-110 transition-all"
-                d="M250,250 L250,450 A200,200 0 0,1 77,350 Z"
-                fill={activeSector === "sce" ? "#C9A84C" : "#1B3E6A"}
-                stroke="#FFF"
-                strokeWidth="3"
-                opacity="0.95"
-              />
-              <path
-                onClick={() => setActiveSector("sys")}
-                className="cursor-pointer hover:brightness-110 transition-all"
-                d="M250,250 L77,350 A200,200 0 0,1 77,150 Z"
-                fill={activeSector === "sys" ? "#C9A84C" : "#1B3E6A"}
-                stroke="#FFF"
-                strokeWidth="3"
-              />
-              <path
-                onClick={() => setActiveSector("dec")}
-                className="cursor-pointer hover:brightness-110 transition-all"
-                d="M250,250 L77,150 A200,200 0 0,1 250,50 Z"
-                fill={activeSector === "dec" ? "#C9A84C" : "#1B3E6A"}
-                stroke="#FFF"
-                strokeWidth="3"
-                opacity="0.95"
-              />
-
+            <svg viewBox="0 0 500 500" className="w-full max-w-[450px] drop-shadow-2xl">
+              <g onClick={() => setActiveSector("geo")} className="cursor-pointer">
+                <path
+                  d="M250,250 L250,50 A200,200 0 0,1 423,150 Z"
+                  fill={activeSector === "geo" ? "#C9A84C" : "#1B3E6A"}
+                  stroke="#FFF"
+                  strokeWidth="3"
+                />
+                <text x="330" y="115" fill="white" fontSize="24" textAnchor="middle">
+                  🌍
+                </text>
+                <text x="330" y="140" fill="white" fontSize="9" fontWeight="bold" textAnchor="middle">
+                  GÉOPOLITIQUE
+                </text>
+              </g>
+              <g onClick={() => setActiveSector("eco")} className="cursor-pointer">
+                <path
+                  d="M250,250 L423,150 A200,200 0 0,1 423,350 Z"
+                  fill={activeSector === "eco" ? "#C9A84C" : "#1B3E6A"}
+                  stroke="#FFF"
+                  strokeWidth="3"
+                />
+                <text x="400" y="240" fill="white" fontSize="24" textAnchor="middle">
+                  📊
+                </text>
+                <text x="400" y="265" fill="white" fontSize="9" fontWeight="bold" textAnchor="middle">
+                  MARKET INTEL
+                </text>
+              </g>
+              <g onClick={() => setActiveSector("tech")} className="cursor-pointer">
+                <path
+                  d="M250,250 L423,350 A200,200 0 0,1 250,450 Z"
+                  fill={activeSector === "tech" ? "#C9A84C" : "#1B3E6A"}
+                  stroke="#FFF"
+                  strokeWidth="3"
+                />
+                <text x="330" y="375" fill="white" fontSize="24" textAnchor="middle">
+                  💡
+                </text>
+                <text x="330" y="400" fill="white" fontSize="9" fontWeight="bold" textAnchor="middle">
+                  TECHNOLOGIE
+                </text>
+              </g>
+              <g onClick={() => setActiveSector("sce")} className="cursor-pointer">
+                <path
+                  d="M250,250 L250,450 A200,200 0 0,1 77,350 Z"
+                  fill={activeSector === "sce" ? "#C9A84C" : "#1B3E6A"}
+                  stroke="#FFF"
+                  strokeWidth="3"
+                />
+                <text x="170" y="375" fill="white" fontSize="24" textAnchor="middle">
+                  🔮
+                </text>
+                <text x="170" y="400" fill="white" fontSize="9" fontWeight="bold" textAnchor="middle">
+                  SCÉNARIOS
+                </text>
+              </g>
+              <g onClick={() => setActiveSector("sys")} className="cursor-pointer">
+                <path
+                  d="M250,250 L77,350 A200,200 0 0,1 77,150 Z"
+                  fill={activeSector === "sys" ? "#C9A84C" : "#1B3E6A"}
+                  stroke="#FFF"
+                  strokeWidth="3"
+                />
+                <text x="110" y="240" fill="white" fontSize="24" textAnchor="middle">
+                  🗺️
+                </text>
+                <text x="110" y="265" fill="white" fontSize="9" fontWeight="bold" textAnchor="middle">
+                  ÉCOSYSTÈME
+                </text>
+              </g>
+              <g onClick={() => setActiveSector("dec")} className="cursor-pointer">
+                <path
+                  d="M250,250 L77,150 A200,200 0 0,1 250,50 Z"
+                  fill={activeSector === "dec" ? "#C9A84C" : "#1B3E6A"}
+                  stroke="#FFF"
+                  strokeWidth="3"
+                />
+                <text x="170" y="115" fill="white" fontSize="24" textAnchor="middle">
+                  ⚡
+                </text>
+                <text x="170" y="140" fill="white" fontSize="9" fontWeight="bold" textAnchor="middle">
+                  DÉCISION
+                </text>
+              </g>
               <circle
                 cx="250"
                 cy="250"
                 r="72"
                 fill="white"
-                className="shadow-lg"
+                stroke="#1B3E6A"
+                strokeWidth="1"
                 onClick={() => setActiveSector(null)}
               />
               <text
@@ -152,9 +194,9 @@ const CompetitiveVelocityEngine = () => {
                 fontSize="8"
                 fontWeight="900"
                 textAnchor="middle"
-                className="pointer-events-none"
+                className="pointer-events-none uppercase"
               >
-                BUILDFLUENCE
+                Buildfluence
               </text>
             </svg>
           </div>
@@ -162,7 +204,7 @@ const CompetitiveVelocityEngine = () => {
           <div className="bg-[#F8FAFC] p-10 rounded-[30px] border-l-[8px] border-[#C9A84C] min-h-[450px] flex flex-col justify-center shadow-inner">
             {activeSector ? (
               <div className="animate-in fade-in duration-300">
-                <span className="text-[#C9A84C] font-bold uppercase text-xs tracking-[0.2em] mb-4 block">
+                <span className="text-[#C9A84C] font-bold uppercase text-xs tracking-widest mb-4 block">
                   {data[activeSector].sub}
                 </span>
                 <h2 className="text-3xl font-black text-[#1B3E6A] uppercase mb-6 leading-tight">
@@ -171,54 +213,50 @@ const CompetitiveVelocityEngine = () => {
                 <ul className="space-y-4">
                   {data[activeSector].list.map((item, i) => (
                     <li key={i} className="flex items-start gap-3 text-slate-700 font-medium">
-                      <span className="text-[#C9A84C] font-bold">→</span> {item}
+                      <span className="text-[#C9A84C] font-black">→</span> {item}
                     </li>
                   ))}
                 </ul>
               </div>
             ) : (
               <div className="text-center animate-in fade-in">
-                <span className="text-[#C9A84C] font-bold uppercase text-xs tracking-[0.2em] mb-4 block">
-                  Dispositif Stratégique
-                </span>
-                <h2 className="text-3xl font-black text-[#1B3E6A] uppercase mb-4">Activez le Moteur</h2>
-                <p className="text-slate-500 font-medium mb-6">
-                  Cliquez sur les secteurs du cercle pour explorer notre méthodologie d’Etude, d’Analyse et Benchmark.
+                <h2 className="text-3xl font-black text-[#1B3E6A] uppercase mb-4 tracking-tighter">
+                  Activez le Moteur
+                </h2>
+                <p className="text-slate-500 font-medium italic mb-6">
+                  Cliquez sur un secteur du cercle pour explorer notre méthodologie.
                 </p>
                 <div className="pt-6 border-t border-slate-200 italic text-slate-400 text-sm">
-                  Notre Track Record est multi sectoriel avec des résultats conformes aux attentes clients.
+                  Résultats conformes aux attentes clients multi-sectoriels.
                 </div>
               </div>
             )}
           </div>
         </div>
 
-        {/* 3 CARDS - Mise à jour avec ton bleu #1c75ba */}
+        {/* CARTES DU BAS #1c75ba */}
         <div className="grid md:grid-cols-3 gap-8">
           {[
             {
               icon: "🔬",
               title: "C'est plus qu'une étude",
-              text: "Des écosystèmes de décision construits sur mesure, pas des rapports statiques.",
+              text: "Des écosystèmes de décision construits sur mesure.",
             },
             {
               icon: "📈",
               title: "C'est plus qu'un benchmark",
-              text: "Une lecture des stratégies implicites que les données seules ne révèlent jamais.",
+              text: "Une lecture des stratégies implicites invisibles.",
             },
             {
               icon: "⚙️",
               title: "C'est un moteur décisionnel",
-              text: "Inverser les rapports de force en votre faveur avant vos concurrents.",
+              text: "Inverser les rapports de force en votre faveur.",
             },
           ].map((card, i) => (
-            <div
-              key={i}
-              className="bg-[#1c75ba] p-10 rounded-[40px] text-center text-white shadow-xl transition-all hover:-translate-y-2"
-            >
+            <div key={i} className="bg-[#1c75ba] p-10 rounded-[40px] text-center text-white shadow-xl">
               <div className="text-4xl mb-6">{card.icon}</div>
               <h4 className="font-black uppercase mb-4 tracking-tight">{card.title}</h4>
-              <p className="text-slate-100 text-sm italic font-medium leading-relaxed">{card.text}</p>
+              <p className="text-slate-100 text-sm italic leading-relaxed">{card.text}</p>
             </div>
           ))}
         </div>
