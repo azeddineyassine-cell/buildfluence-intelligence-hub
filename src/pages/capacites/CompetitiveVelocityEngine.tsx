@@ -7,7 +7,7 @@ const CompetitiveVelocityEngine = () => {
   const data: Record<string, { sub: string; title: string; list: string[] }> = {
     geo: {
       sub: "Captation & Analyse",
-      title: "Conflits Géopolitiques",
+      title: "Conflits géopolitiques",
       list: [
         "Surveillance des tensions régionales",
         "Détection des ruptures avant médiatisation",
@@ -18,7 +18,7 @@ const CompetitiveVelocityEngine = () => {
     },
     eco: {
       sub: "Flux & Compétitivité",
-      title: "Market Intelligence",
+      title: "Market intelligence",
       list: [
         "Suivi des flux d'IDE et capitaux",
         "Analyse positions concurrentielles",
@@ -29,7 +29,7 @@ const CompetitiveVelocityEngine = () => {
     },
     tech: {
       sub: "Innovation & Disruption",
-      title: "Signaux Technologiques",
+      title: "Signaux technologiques",
       list: [
         "Veille brevets et publications",
         "Détection disruptions émergentes",
@@ -40,7 +40,7 @@ const CompetitiveVelocityEngine = () => {
     },
     sce: {
       sub: "Projection & Anticipation",
-      title: "Scénarios Anticipés",
+      title: "Scénarios anticipés",
       list: [
         "Modélisation 3, 6 et 12 mois",
         "Projection mouvements concurrentiels",
@@ -51,7 +51,7 @@ const CompetitiveVelocityEngine = () => {
     },
     sys: {
       sub: "Cartographie & Rapports",
-      title: "Écosystème Modélisé",
+      title: "Écosystème modélisé",
       list: [
         "Mapping évolutif des acteurs",
         "Visualisation flux et rapports force",
@@ -62,7 +62,7 @@ const CompetitiveVelocityEngine = () => {
     },
     dec: {
       sub: "Output & Action",
-      title: "Décision Accélérée",
+      title: "Décision accélérée",
       list: [
         "Hiérarchisation Go/No-Go/Timing",
         "Réduction incertitude décisionnelle",
@@ -75,16 +75,14 @@ const CompetitiveVelocityEngine = () => {
 
   return (
     <DetailPageLayout>
-      <div className="w-full max-w-[1200px] mx-auto px-6 py-12">
-        {/* NOUVELLE ENTÊTE (STYLE IMAGE 06541d) */}
-        <header className="text-center mb-16">
-          <div className="inline-block px-4 py-1.5 mb-6 text-[10px] font-black tracking-[0.2em] text-[#C9A84C] bg-white border border-slate-100 rounded-full shadow-sm uppercase">
-            Strategic Innovation
-          </div>
-          <h1 className="text-4xl md:text-6xl font-black text-[#1B3E6A] mb-6 tracking-tight">
-            COMPETITIVE <span className="text-[#C9A84C]">VELOCITY</span> ENGINE
+      {/* Réduction de l'espace avec pt-4 et mt-0 */}
+      <div className="w-full max-w-[1200px] mx-auto px-6 pt-4 pb-12 font-['Inter',sans-serif]">
+        {/* ENTÊTE ÉPURÉE */}
+        <header className="text-center mb-12">
+          <h1 className="text-4xl md:text-5xl font-extrabold text-[#1B3E6A] mb-6 tracking-tight leading-tight">
+            Competitive <span className="text-[#C9A84C]">velocity</span> engine
           </h1>
-          <p className="text-lg md:text-xl text-slate-600 max-w-3xl mx-auto font-medium leading-relaxed">
+          <p className="text-md md:text-lg text-slate-600 max-w-2xl mx-auto font-medium leading-relaxed">
             Une nouvelle génération d'analyse stratégique, conçue pour accélérer la prise de décision dans des
             environnements concurrentiels et hyper-complexes.
           </p>
@@ -93,19 +91,21 @@ const CompetitiveVelocityEngine = () => {
         {/* SECTION ENGINE */}
         <div className="grid lg:grid-cols-2 gap-10 bg-white p-8 md:p-12 rounded-[40px] shadow-2xl items-center mb-16 border border-slate-50">
           <div className="relative flex justify-center">
-            <svg viewBox="0 0 500 500" className="w-full max-w-[450px] drop-shadow-2xl">
-              <g onClick={() => setActiveSector("geo")} className="cursor-pointer">
+            <svg viewBox="0 0 500 500" className="w-full max-w-[420px] drop-shadow-2xl">
+              {/* SECTEURS AVEC TEXTE EN MINUSCULE */}
+              <g onClick={() => setActiveSector("geo")} className="cursor-pointer group">
                 <path
                   d="M250,250 L250,50 A200,200 0 0,1 423,150 Z"
                   fill={activeSector === "geo" ? "#C9A84C" : "#1B3E6A"}
                   stroke="#FFF"
                   strokeWidth="3"
+                  className="transition-all duration-300"
                 />
-                <text x="330" y="115" fill="white" fontSize="24" textAnchor="middle">
+                <text x="330" y="115" fill="white" fontSize="22" textAnchor="middle">
                   🌍
                 </text>
-                <text x="330" y="140" fill="white" fontSize="9" fontWeight="bold" textAnchor="middle">
-                  GÉOPOLITIQUE
+                <text x="330" y="140" fill="white" fontSize="9" fontWeight="600" textAnchor="middle">
+                  Géopolitique
                 </text>
               </g>
               <g onClick={() => setActiveSector("eco")} className="cursor-pointer">
@@ -115,11 +115,11 @@ const CompetitiveVelocityEngine = () => {
                   stroke="#FFF"
                   strokeWidth="3"
                 />
-                <text x="400" y="240" fill="white" fontSize="24" textAnchor="middle">
+                <text x="400" y="240" fill="white" fontSize="22" textAnchor="middle">
                   📊
                 </text>
-                <text x="400" y="265" fill="white" fontSize="9" fontWeight="bold" textAnchor="middle">
-                  MARKET INTEL
+                <text x="400" y="265" fill="white" fontSize="9" fontWeight="600" textAnchor="middle">
+                  Market Intel
                 </text>
               </g>
               <g onClick={() => setActiveSector("tech")} className="cursor-pointer">
@@ -129,11 +129,11 @@ const CompetitiveVelocityEngine = () => {
                   stroke="#FFF"
                   strokeWidth="3"
                 />
-                <text x="330" y="375" fill="white" fontSize="24" textAnchor="middle">
+                <text x="330" y="375" fill="white" fontSize="22" textAnchor="middle">
                   💡
                 </text>
-                <text x="330" y="400" fill="white" fontSize="9" fontWeight="bold" textAnchor="middle">
-                  TECHNOLOGIE
+                <text x="330" y="400" fill="white" fontSize="9" fontWeight="600" textAnchor="middle">
+                  Technologie
                 </text>
               </g>
               <g onClick={() => setActiveSector("sce")} className="cursor-pointer">
@@ -143,11 +143,11 @@ const CompetitiveVelocityEngine = () => {
                   stroke="#FFF"
                   strokeWidth="3"
                 />
-                <text x="170" y="375" fill="white" fontSize="24" textAnchor="middle">
+                <text x="170" y="375" fill="white" fontSize="22" textAnchor="middle">
                   🔮
                 </text>
-                <text x="170" y="400" fill="white" fontSize="9" fontWeight="bold" textAnchor="middle">
-                  SCÉNARIOS
+                <text x="170" y="400" fill="white" fontSize="9" fontWeight="600" textAnchor="middle">
+                  Scénarios
                 </text>
               </g>
               <g onClick={() => setActiveSector("sys")} className="cursor-pointer">
@@ -157,11 +157,11 @@ const CompetitiveVelocityEngine = () => {
                   stroke="#FFF"
                   strokeWidth="3"
                 />
-                <text x="110" y="240" fill="white" fontSize="24" textAnchor="middle">
+                <text x="110" y="240" fill="white" fontSize="22" textAnchor="middle">
                   🗺️
                 </text>
-                <text x="110" y="265" fill="white" fontSize="9" fontWeight="bold" textAnchor="middle">
-                  ÉCOSYSTÈME
+                <text x="110" y="265" fill="white" fontSize="9" fontWeight="600" textAnchor="middle">
+                  Écosystème
                 </text>
               </g>
               <g onClick={() => setActiveSector("dec")} className="cursor-pointer">
@@ -171,11 +171,11 @@ const CompetitiveVelocityEngine = () => {
                   stroke="#FFF"
                   strokeWidth="3"
                 />
-                <text x="170" y="115" fill="white" fontSize="24" textAnchor="middle">
+                <text x="170" y="115" fill="white" fontSize="22" textAnchor="middle">
                   ⚡
                 </text>
-                <text x="170" y="140" fill="white" fontSize="9" fontWeight="bold" textAnchor="middle">
-                  DÉCISION
+                <text x="170" y="140" fill="white" fontSize="9" fontWeight="600" textAnchor="middle">
+                  Décision
                 </text>
               </g>
               <circle
@@ -183,7 +183,7 @@ const CompetitiveVelocityEngine = () => {
                 cy="250"
                 r="72"
                 fill="white"
-                stroke="#1B3E6A"
+                stroke="#F1F5F9"
                 strokeWidth="1"
                 onClick={() => setActiveSector(null)}
               />
@@ -192,27 +192,27 @@ const CompetitiveVelocityEngine = () => {
                 y="255"
                 fill="#1B3E6A"
                 fontSize="8"
-                fontWeight="900"
+                fontWeight="800"
                 textAnchor="middle"
-                className="pointer-events-none uppercase"
+                className="pointer-events-none tracking-tighter"
               >
                 Buildfluence
               </text>
             </svg>
           </div>
 
-          <div className="bg-[#F8FAFC] p-10 rounded-[30px] border-l-[8px] border-[#C9A84C] min-h-[450px] flex flex-col justify-center shadow-inner">
+          <div className="bg-[#F8FAFC] p-10 rounded-[30px] border-l-[8px] border-[#C9A84C] min-h-[420px] flex flex-col justify-center">
             {activeSector ? (
               <div className="animate-in fade-in duration-300">
-                <span className="text-[#C9A84C] font-bold uppercase text-xs tracking-widest mb-4 block">
+                <span className="text-[#C9A84C] font-semibold text-xs tracking-widest mb-3 block uppercase">
                   {data[activeSector].sub}
                 </span>
-                <h2 className="text-3xl font-black text-[#1B3E6A] uppercase mb-6 leading-tight">
+                <h2 className="text-3xl font-bold text-[#1B3E6A] mb-6 leading-tight capitalize">
                   {data[activeSector].title}
                 </h2>
                 <ul className="space-y-4">
                   {data[activeSector].list.map((item, i) => (
-                    <li key={i} className="flex items-start gap-3 text-slate-700 font-medium">
+                    <li key={i} className="flex items-start gap-3 text-slate-700 font-medium text-sm">
                       <span className="text-[#C9A84C] font-black">→</span> {item}
                     </li>
                   ))}
@@ -220,21 +220,16 @@ const CompetitiveVelocityEngine = () => {
               </div>
             ) : (
               <div className="text-center animate-in fade-in">
-                <h2 className="text-3xl font-black text-[#1B3E6A] uppercase mb-4 tracking-tighter">
-                  Activez le Moteur
-                </h2>
-                <p className="text-slate-500 font-medium italic mb-6">
+                <h2 className="text-3xl font-bold text-[#1B3E6A] mb-4">Activez le moteur</h2>
+                <p className="text-slate-500 font-medium italic text-sm">
                   Cliquez sur un secteur du cercle pour explorer notre méthodologie.
                 </p>
-                <div className="pt-6 border-t border-slate-200 italic text-slate-400 text-sm">
-                  Résultats conformes aux attentes clients multi-sectoriels.
-                </div>
               </div>
             )}
           </div>
         </div>
 
-        {/* CARTES DU BAS #1c75ba */}
+        {/* CARTES DU BAS EN MINUSCULE AVEC BLEU #1c75ba */}
         <div className="grid md:grid-cols-3 gap-8">
           {[
             {
@@ -253,9 +248,12 @@ const CompetitiveVelocityEngine = () => {
               text: "Inverser les rapports de force en votre faveur.",
             },
           ].map((card, i) => (
-            <div key={i} className="bg-[#1c75ba] p-10 rounded-[40px] text-center text-white shadow-xl">
+            <div
+              key={i}
+              className="bg-[#1c75ba] p-10 rounded-[40px] text-center text-white shadow-lg transition-transform hover:-translate-y-1"
+            >
               <div className="text-4xl mb-6">{card.icon}</div>
-              <h4 className="font-black uppercase mb-4 tracking-tight">{card.title}</h4>
+              <h4 className="font-bold mb-4 tracking-tight text-lg">{card.title}</h4>
               <p className="text-slate-100 text-sm italic leading-relaxed">{card.text}</p>
             </div>
           ))}
