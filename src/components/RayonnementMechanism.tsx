@@ -643,7 +643,7 @@ const RayonnementMechanism = () => {
               }`}
             style={{ background: '#0F365F', overflow: 'hidden' }}
           >
-            <img src={buildfluenceLogoFondBleu} alt="Buildfluence" className="w-full h-full object-cover rounded-full" />
+            <img src={buildfluenceLogoFondBleu} alt="Buildfluence" className="w-[100px] h-[100px] object-contain" />
             <p className="text-white text-[13px] font-bold tracking-wide mt-1">Build<span className="text-[#FFDE59]">fluence</span></p>
             <p className="text-white/60 text-[8px] tracking-wider uppercase">Strategic Intelligence & Influence</p>
           </div>
