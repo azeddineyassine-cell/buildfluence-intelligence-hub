@@ -195,7 +195,7 @@ const StrategicWorkflow = () => {
   ];
 
   return (
-    <DetailPageLayout>
+    <DetailPageLayout title="" chapeau="">
       <div style={{ background: "#F0F7FF", minHeight: "100vh", fontFamily: "'Inter', sans-serif", color: "#0D1B2A" }}>
         {/* HERO */}
         <div style={{ textAlign: "center", padding: "52px 40px 32px" }}>
