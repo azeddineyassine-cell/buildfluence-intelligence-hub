@@ -244,7 +244,7 @@ const CompetitiveVelocityEngine = () => {
       </motion.div>
 
       <CTAFooter />
-      <FormStrategicExchange open={f1Open} onOpenChange={setF1Open} />
+      <FormStrategicExchange open={f1Open} onClose={() => setF1Open(false)} />
     </div>
   );
 };
