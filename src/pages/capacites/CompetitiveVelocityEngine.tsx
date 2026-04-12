@@ -1,137 +1,130 @@
 import { useState } from "react";
 
-const CompetitiveVelocityEngine = () => {
+const StrategicWorkflow = () => {
   const [activeSector, setActiveSector] = useState<string>("geo");
 
   const sectors = {
     geo: {
-      sub: "Captation & Analyse",
       title: "Conflits Géopolitiques",
       list: [
-        "Surveillance des tensions régionales",
-        "Détection des ruptures avant médiatisation",
-        "Analyse d'impact marchés stratégiques",
-        "Cartographie influence diplomatique",
-        "Anticipation décisions réglementaires",
+        "Surveillance des tensions régionales et alliances émergentes",
+        "Détection des ruptures géopolitiques avant médiatisation",
+        "Analyse de l'impact sur vos marchés stratégiques",
+        "Cartographie des acteurs d'influence politique",
+        "Anticipation des décisions réglementaires",
       ],
     },
     eco: {
-      sub: "Flux & Compétitivité",
-      title: "Market Intelligence",
+      title: "Économie & Marchés",
       list: [
-        "Suivi des flux d'IDE et capitaux",
-        "Analyse positions concurrentielles",
-        "Détection opportunités haut levier",
-        "Benchmarking attractivité international",
-        "Scoring de compétitivité dynamique",
+        "Analyse des flux financiers mondiaux",
+        "Veille concurrentielle sectorielle",
+        "Étude des barrières à l'entrée",
+        "Scoring d'attractivité des zones",
+        "Anticipation des cycles économiques",
       ],
     },
     tech: {
-      sub: "Innovation & Disruption",
-      title: "Signaux Technologiques",
+      title: "Technologie & Innovation",
       list: [
-        "Veille brevets et publications",
-        "Détection disruptions émergentes",
-        "Cartographie acteurs innovation",
-        "Analyse impact rapports de force",
-        "Partenariats technologiques clés",
+        "Veille brevets et R&D",
+        "Identification des technologies de rupture",
+        "Analyse de maturité technologique",
+        "Benchmarking des solutions IA",
+        "Cartographie des écosystèmes tech",
       ],
     },
     sce: {
-      sub: "Projection & Anticipation",
       title: "Scénarios Anticipés",
       list: [
-        "Modélisation 3, 6 et 12 mois",
-        "Projection mouvements concurrentiels",
-        "Simulation ruptures géopolitiques",
-        "Identification fenêtres opportunité",
-        "Plans de contingence stratégiques",
+        "Modélisation prospective",
+        "War-gaming stratégique",
+        "Analyse d'impact multicritères",
+        "Définition de plans de contingence",
+        "Signaux faibles et alertes précoces",
       ],
     },
     sys: {
-      sub: "Cartographie & Rapports",
-      title: "Écosystème Modélisé",
+      title: "Écosystème & Mapping",
+      title_display: "ÉCOSYSTÈME",
       list: [
-        "Mapping évolutif des acteurs",
-        "Visualisation flux et rapports force",
-        "Cartographie alliances et oppositions",
-        "Identification nœuds d'amplification",
-        "Mise à jour selon signaux captés",
+        "Visualisation des réseaux d'influence",
+        "Cartographie des parties prenantes",
+        "Analyse des liens de dépendance",
+        "Suivi des flux informationnels",
+        "Identification des nœuds de pouvoir",
       ],
     },
     dec: {
-      sub: "Output & Action",
-      title: "Décision Accélérée",
+      title: "Décision Stratégique",
+      title_display: "DÉCISION",
       list: [
-        "Hiérarchisation Go/No-Go/Timing",
-        "Réduction incertitude décisionnelle",
-        "Logique d'action vs Description",
-        "Livrables : Fiches, Dashboards",
-        "Briefings C-Level en temps réel",
+        "Arbitrage Go/No-Go",
+        "Optimisation du timing d'action",
+        "Réduction de l'incertitude décisionnelle",
+        "Briefing stratégique C-Level",
+        "Livrables actionnables en temps réel",
       ],
     },
   };
 
+  const angleStep = 360 / 6;
+
   return (
     <div
-      style={{ width: "100vw", background: "#F0F7FF", minHeight: "100vh", margin: 0, padding: 0, overflowX: "hidden" }}
+      style={{
+        width: "100%",
+        background: "#F0F7FF",
+        minHeight: "100vh",
+        margin: 0,
+        padding: 0,
+        overflowX: "hidden",
+        fontFamily: "'Segoe UI', Tahoma, sans-serif",
+      }}
     >
-      {/* HEADER PLEINE LARGEUR */}
-      <div style={{ textAlign: "center", padding: "80px 20px 40px" }}>
-        <div style={{ color: "#C9A84C", fontSize: 11, fontWeight: 900, letterSpacing: 4, marginBottom: 15 }}>
-          MÉTHODOLOGIE EXCLUSIVE
+      {/* HEADER SECTION */}
+      <div style={{ textAlign: "center", padding: "60px 20px" }}>
+        <div style={{ color: "#C9A84C", fontSize: 10, fontWeight: 900, letterSpacing: 4, marginBottom: 10 }}>
+          STRATEGIC INNOVATION
         </div>
-        <h1
-          style={{
-            fontSize: "3rem",
-            fontWeight: 900,
-            color: "#0D1B2A",
-            margin: 0,
-            fontFamily: "'Segoe UI', sans-serif",
-          }}
-        >
-          COMPETITIVE <span style={{ color: "#C9A84C" }}>VELOCITY</span> ENGINE
+        <h1 style={{ fontSize: "3.2rem", fontWeight: 900, color: "#0D1B2A", margin: 0 }}>
+          Competitive <span style={{ color: "#C9A84C" }}>Velocity</span> Engine
         </h1>
-        <p
-          style={{
-            color: "#64748b",
-            fontSize: 18,
-            marginTop: 20,
-            fontStyle: "italic",
-            maxWidth: 900,
-            margin: "20px auto 0",
-            lineHeight: "1.6",
-          }}
-        >
-          "Une nouvelle génération d'analyse stratégique, conçue pour accélérer la prise de décision dans des
-          environnements concurrentiels et hyper-complexes."
+        <p style={{ color: "#8899aa", fontSize: 16, marginTop: 15, maxWidth: 800, margin: "15px auto 0" }}>
+          Une nouvelle génération d'analyse stratégique, conçue pour accélérer la prise de décision dans des
+          environnements concurrentiels et hyper-complexes.
         </p>
       </div>
 
-      {/* SECTION CENTRALE : ROUE ET DÉTAILS */}
+      {/* CORE INTERACTIVE SECTION */}
       <div
         style={{
-          maxWidth: "1300px",
+          maxWidth: 1250,
           margin: "0 auto 60px",
           padding: "40px",
           background: "#fff",
-          borderRadius: "30px",
-          boxShadow: "0 20px 50px rgba(0,0,0,0.05)",
+          borderRadius: 30,
+          boxShadow: "0 20px 60px rgba(0,0,0,0.05)",
           display: "grid",
-          gridTemplateColumns: "1fr 1fr",
-          gap: "50px",
+          gridTemplateColumns: "1.2fr 1fr",
+          gap: 40,
           alignItems: "center",
         }}
       >
-        {/* ROUE INTERACTIVE */}
+        {/* WHEEL */}
         <div style={{ display: "flex", justifyContent: "center" }}>
-          <svg viewBox="0 0 500 500" style={{ width: "100%", maxWidth: "480px" }}>
+          <svg viewBox="0 0 500 500" style={{ width: "100%", maxWidth: 450 }}>
             {Object.keys(sectors).map((key, i) => {
-              const angles = [0, 60, 120, 180, 240, 300];
+              const startAngle = i * angleStep - 90;
+              const endAngle = (i + 1) * angleStep - 90;
+              const x1 = 250 + 200 * Math.cos((Math.PI * startAngle) / 180);
+              const y1 = 250 + 200 * Math.sin((Math.PI * startAngle) / 180);
+              const x2 = 250 + 200 * Math.cos((Math.PI * endAngle) / 180);
+              const y2 = 250 + 200 * Math.sin((Math.PI * endAngle) / 180);
               return (
                 <g key={key} onClick={() => setActiveSector(key)} style={{ cursor: "pointer" }}>
                   <path
-                    d={`M250,250 L${250 + 200 * Math.cos(((angles[i] - 90) * Math.PI) / 180)},${250 + 200 * Math.sin(((angles[i] - 90) * Math.PI) / 180)} A200,200 0 0,1 ${250 + 200 * Math.cos(((angles[i] + 60 - 90) * Math.PI) / 180)},${250 + 200 * Math.sin(((angles[i] + 60 - 90) * Math.PI) / 180)} Z`}
+                    d={`M250,250 L${x1},${y1} A200,200 0 0,1 ${x2},${y2} Z`}
                     fill={activeSector === key ? "#C9A84C" : "#1B3E6A"}
                     stroke="#FFF"
                     strokeWidth="4"
@@ -139,44 +132,35 @@ const CompetitiveVelocityEngine = () => {
                 </g>
               );
             })}
-            <circle cx="250" cy="250" r="80" fill="#FFF" />
+            <circle cx="250" cy="250" r="75" fill="#FFF" stroke="#F1F5F9" />
             <text
               x="250"
-              y="258"
+              y="255"
               textAnchor="middle"
               fill="#0D1B2A"
-              fontSize="14"
+              fontSize="10"
               fontWeight="900"
-              style={{ fontFamily: "'Segoe UI'" }}
+              style={{ letterSpacing: 1 }}
             >
-              ENGINE
+              BUILDFLUENCE
             </text>
           </svg>
         </div>
 
-        {/* CONTENU INTERACTIF (CENTRÉ) */}
-        <div style={{ padding: "20px" }}>
-          <div
-            style={{
-              color: "#C9A84C",
-              fontSize: 12,
-              fontWeight: 800,
-              textTransform: "uppercase",
-              letterSpacing: 2,
-              marginBottom: 10,
-            }}
-          >
-            {sectors[activeSector].sub}
+        {/* DETAIL PANEL */}
+        <div
+          style={{
+            padding: "30px",
+            borderLeft: "6px solid #C9A84C",
+            background: "#F8FAFC",
+            borderRadius: "0 20px 20px 0",
+            minHeight: 400,
+          }}
+        >
+          <div style={{ color: "#C9A84C", fontSize: 11, fontWeight: 900, letterSpacing: 2, marginBottom: 10 }}>
+            DISPOSITIF STRATÉGIQUE
           </div>
-          <h2
-            style={{
-              fontSize: "36px",
-              fontWeight: 800,
-              color: "#1B3E6A",
-              marginBottom: 30,
-              fontFamily: "'Segoe UI', sans-serif",
-            }}
-          >
+          <h2 style={{ fontSize: 36, fontWeight: 800, color: "#1B3E6A", marginBottom: 30 }}>
             {sectors[activeSector].title}
           </h2>
           <ul style={{ listStyle: "none", padding: 0 }}>
@@ -184,13 +168,12 @@ const CompetitiveVelocityEngine = () => {
               <li
                 key={idx}
                 style={{
-                  fontSize: "16px",
+                  fontSize: 15,
                   color: "#475569",
                   padding: "12px 0",
-                  borderBottom: "1px solid #f1f5f9",
+                  borderBottom: "1px solid #e2e8f0",
                   display: "flex",
-                  alignItems: "center",
-                  gap: "15px",
+                  gap: 15,
                 }}
               >
                 <span style={{ color: "#C9A84C", fontWeight: "bold" }}>→</span> {item}
@@ -200,59 +183,106 @@ const CompetitiveVelocityEngine = () => {
         </div>
       </div>
 
-      {/* LES CADRES EN BAS (RÉTABLIS EN GRILLE 2x2) */}
+      {/* LOWER GRID CARDS */}
       <div
         style={{
-          maxWidth: "1300px",
-          margin: "0 auto 120px",
+          maxWidth: 1250,
+          margin: "0 auto 100px",
           display: "grid",
-          gridTemplateColumns: "1fr 1fr",
-          gap: "25px",
+          gridTemplateColumns: "repeat(3, 1fr)",
+          gap: 25,
           padding: "0 20px",
         }}
       >
         {[
-          { label: "EXPERTISE", val: "400M$", desc: "sécurisés en Deep Due Diligence" },
-          { label: "HUMTECH", val: "180M MAD", desc: "générés via politiques publiques" },
-          { label: "ENGAGEMENT", val: "+14%", desc: "de parts de marché après crise" },
-          { label: "IMPACT", val: "2 sem.", desc: "crise nationale maîtrisée" },
+          {
+            title: "C'est plus qu'une étude",
+            desc: "Des écosystèmes de décision construits sur mesure, pas des rapports statiques livrés et oubliés",
+          },
+          {
+            title: "C'est plus qu'un benchmark",
+            desc: "Une lecture des stratégies implicites que les données seules ne révèlent jamais",
+          },
+          {
+            title: "C'est un moteur décisionnel",
+            desc: "Conçu pour inverser les rapports de force en votre faveur, avant que vos concurrents ne s'en aperçoivent",
+            button: true,
+          },
         ].map((card, i) => (
           <div
             key={i}
             style={{
-              background: "#fff",
-              padding: "35px",
-              borderRadius: "20px",
+              background: i === 2 ? "#1B3E6A" : "#1B3E6Aee",
+              padding: 40,
+              borderRadius: 20,
               textAlign: "center",
-              border: "1px solid #e2e8f0",
+              color: "#fff",
             }}
           >
-            <div style={{ color: "#C9A84C", fontSize: "11px", fontWeight: 900, marginBottom: "15px" }}>
-              {card.label}
-            </div>
-            <div
-              style={{
-                fontSize: "32px",
-                fontWeight: 900,
-                color: "#1B3E6A",
-                marginBottom: "10px",
-                fontFamily: "'Segoe UI'",
-              }}
-            >
-              {card.val}
-            </div>
-            <div style={{ fontSize: "14px", color: "#94a3b8" }}>{card.desc}</div>
+            <div style={{ color: "#C9A84C", fontSize: 20, fontWeight: 800, marginBottom: 20 }}>{card.title}</div>
+            <p style={{ fontSize: 14, lineHeight: "1.6", color: "#cbd5e1", marginBottom: card.button ? 25 : 0 }}>
+              {card.desc}
+            </p>
+            {card.button && (
+              <button
+                style={{
+                  background: "#C9A84C",
+                  border: "none",
+                  color: "#0D1B2A",
+                  padding: "10px 20px",
+                  borderRadius: 20,
+                  fontWeight: 900,
+                  fontSize: 11,
+                  textTransform: "uppercase",
+                }}
+              >
+                Competitive Velocity Engine
+              </button>
+            )}
           </div>
         ))}
       </div>
 
-      {/* CTA FIXE OPÉRATIONNEL */}
+      {/* BOTTOM DATA GRID (4 CARDS) */}
+      <div
+        style={{
+          maxWidth: 1250,
+          margin: "0 auto 150px",
+          display: "grid",
+          gridTemplateColumns: "repeat(4, 1fr)",
+          gap: 20,
+          padding: "0 20px",
+        }}
+      >
+        {[
+          { val: "400M$", sub: "sécurisés en Deep Due Diligence" },
+          { val: "180M MAD", sub: "générés via politiques publiques" },
+          { val: "+14%", sub: "de parts de marché après crise" },
+          { val: "2 sem.", sub: "crise nationale maîtrisée" },
+        ].map((item, i) => (
+          <div
+            key={i}
+            style={{
+              background: "#fff",
+              padding: "30px",
+              borderRadius: 20,
+              textAlign: "center",
+              boxShadow: "0 10px 30px rgba(0,0,0,0.03)",
+            }}
+          >
+            <div style={{ fontSize: 32, fontWeight: 900, color: "#C9A84C", marginBottom: 5 }}>{item.val}</div>
+            <div style={{ fontSize: 12, color: "#8899aa" }}>{item.sub}</div>
+          </div>
+        ))}
+      </div>
+
+      {/* FOOTER CTA */}
       <div
         style={{
           position: "fixed",
-          bottom: "40px",
-          left: "0",
-          right: "0",
+          bottom: 30,
+          left: 0,
+          right: 0,
           display: "flex",
           justifyContent: "center",
           zIndex: 1000,
@@ -261,32 +291,27 @@ const CompetitiveVelocityEngine = () => {
         <div
           style={{
             background: "#fff",
-            border: "1px solid #C9A84C",
-            borderRadius: "25px",
-            padding: "20px 40px",
+            border: "1px solid #e2e8f0",
+            borderRadius: 15,
+            padding: "15px 30px",
             display: "flex",
             alignItems: "center",
-            gap: "30px",
-            boxShadow: "0 25px 50px rgba(0,0,0,0.15)",
-            width: "90%",
-            maxWidth: "900px",
+            gap: 20,
+            boxShadow: "0 20px 50px rgba(0,0,0,0.1)",
           }}
         >
-          <div style={{ flex: 1 }}>
-            <div style={{ fontSize: "16px", fontWeight: 800, color: "#0D1B2A" }}>
-              Activez votre <span style={{ color: "#C9A84C" }}>Competitive Velocity Engine</span>
-            </div>
-            <div style={{ fontSize: "12px", color: "#64748b" }}>Stratégie & Influence • Accompagnement sur-mesure</div>
+          <div style={{ fontSize: 14, fontWeight: 800, color: "#0D1B2A" }}>
+            Activez votre <span style={{ color: "#C9A84C" }}>Competitive Velocity Engine</span>
           </div>
           <button
             style={{
-              background: "#1B3E6A",
-              color: "#fff",
+              background: "#C9A84C",
+              color: "#0D1B2A",
               border: "none",
-              padding: "15px 30px",
-              borderRadius: "12px",
+              padding: "10px 20px",
+              borderRadius: 8,
               fontWeight: 900,
-              cursor: "pointer",
+              fontSize: 11,
             }}
           >
             ÉCHANGE STRATÉGIQUE →
@@ -297,4 +322,4 @@ const CompetitiveVelocityEngine = () => {
   );
 };
 
-export default CompetitiveVelocityEngine;
+export default StrategicWorkflow;
