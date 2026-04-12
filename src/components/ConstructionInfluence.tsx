@@ -1,6 +1,6 @@
 import { useState, useCallback } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
-import logoFondBlanc from "@/assets/Logo_Buildfluence_FondBlanc2.png";
+import logoFondBlanc from "@/assets/logo-buildfluence-fond-blanc.png";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 

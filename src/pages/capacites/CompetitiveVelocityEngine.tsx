@@ -3,6 +3,7 @@ import Navbar from "@/components/Navbar";
 import CTAFooter from "@/components/CTAFooter";
 import { FormStrategicExchange } from "@/components/FormModals";
 import { motion } from "framer-motion";
+import logoFondBlanc from "@/assets/logo-buildfluence-fond-blanc.png";
 
 const SEGMENTS = [
   {
@@ -80,12 +81,29 @@ const DETAILS = [
 const SEG_COLORS = ["#1B3E6A", "#1e4878", "#1B3E6A", "#1e4878", "#1B3E6A", "#1e4878"];
 const BRIGHT_COLORS = ["#2a5a9a", "#2d6aaa", "#2a5a9a", "#2d6aaa", "#2a5a9a", "#2d6aaa"];
 
+const CENTER_DETAIL = {
+  tag: "DISPOSITIF STRATÉGIQUE",
+  title: "ACTIVER LE MOTEUR DE VÉLOCITÉ",
+  paragraphs: [
+    "Cliquez sur les secteurs du cercle pour explorer notre méthodologie d'Étude, d'Analyse et de Benchmark.",
+    "Chaque point est une brique de votre avantage compétitif.",
+  ],
+  italic: "Notre Track Record est multi sectoriel avec des résultats conformes aux attentes clients",
+};
+
 const CompetitiveVelocityEngine = () => {
   const [selected, setSelected] = useState<number>(-1);
+  const [showCenter, setShowCenter] = useState(false);
   const [f1Open, setF1Open] = useState(false);
 
   const pick = useCallback((i: number) => {
+    setShowCenter(false);
     setSelected(prev => prev === i ? -1 : i);
+  }, []);
+
+  const handleLogoClick = useCallback(() => {
+    setSelected(-1);
+    setShowCenter(true);
   }, []);
 
   const detail = selected >= 0 ? DETAILS[selected] : null;
@@ -112,7 +130,19 @@ const CompetitiveVelocityEngine = () => {
         </div>
         <div style={{ display: "flex", justifyContent: "center", gap: 10, flexWrap: "wrap", marginBottom: 12 }}>
           {["Benchmark", "Analyse", "Anticipation", "Décision"].map(tag => (
-            <span key={tag} className="hover:bg-[#C9A84C] hover:text-[#0D1B2A] transition-all duration-200" style={{ fontSize: 12, fontWeight: 600, padding: "6px 16px", borderRadius: 20, border: "1.5px solid #C9A84C", color: "#C9A84C", letterSpacing: 0.5 }}>
+            <span
+              key={tag}
+              className="group cursor-default transition-all duration-200 hover:bg-[#C9A84C]"
+              style={{ fontSize: 12, fontWeight: 600, padding: "6px 16px", borderRadius: 20, border: "1.5px solid #C9A84C", color: "#C9A84C", letterSpacing: 0.5 }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = "#C9A84C";
+                e.currentTarget.style.color = "#FFFFFF";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = "transparent";
+                e.currentTarget.style.color = "#C9A84C";
+              }}
+            >
               {tag}
             </span>
           ))}
@@ -150,23 +180,39 @@ const CompetitiveVelocityEngine = () => {
                     <text x={seg.labelX} y={seg.labelY + 13} textAnchor="middle" fontFamily="Inter, sans-serif" fontSize={seg.fontSize} fontWeight={700} fill="#ffffff" letterSpacing={0.5} style={{ pointerEvents: "none" }}>INTELLIGENCE</text>
                   </>
                 ) : (
-                  <text x={seg.labelX} y={seg.labelY} textAnchor="middle" fontFamily="Inter, sans-serif" fontSize={seg.fontSize} fontWeight={700} fill="#ffffff" letterSpacing={0.8} style={{ cursor: "pointer", pointerEvents: "none" }} onClick={() => pick(i)}>
+                  <text x={seg.labelX} y={seg.labelY} textAnchor="middle" fontFamily="Inter, sans-serif" fontSize={seg.fontSize} fontWeight={700} fill="#ffffff" letterSpacing={0.8} style={{ pointerEvents: "none" }}>
                     {seg.label}
                   </text>
                 )}
               </g>
             ))}
-            {/* Central circle */}
-            <circle cx={250} cy={250} r={83} fill="#1B3E6A" stroke="#fff" strokeWidth={4} />
-            <text x={250} y={240} textAnchor="middle" fontFamily="Inter, sans-serif" fontSize={14} fontWeight={700} fill="#ffffff">Competitive</text>
-            <text x={250} y={258} textAnchor="middle" fontFamily="Inter, sans-serif" fontSize={14} fontWeight={700} fill="#C9A84C">Velocity</text>
-            <text x={250} y={276} textAnchor="middle" fontFamily="Inter, sans-serif" fontSize={11} fontWeight={400} fill="rgba(255,255,255,0.6)">ENGINE</text>
+            {/* Central circle — WHITE background with logo */}
+            <circle cx={250} cy={250} r={83} fill="#FFFFFF" stroke="#ddd" strokeWidth={2} style={{ cursor: "pointer" }} onClick={handleLogoClick} />
+            <foreignObject x={250 - 70} y={250 - 50} width={140} height={100} style={{ pointerEvents: "none" }}>
+              <div style={{ width: "100%", height: "100%", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                <img src={logoFondBlanc} alt="Buildfluence" style={{ width: "90%", objectFit: "contain", cursor: "pointer", pointerEvents: "auto" }} onClick={handleLogoClick} />
+              </div>
+            </foreignObject>
           </svg>
         </div>
 
         {/* DETAIL PANEL */}
         <div style={{ flex: 1, minWidth: 280, maxWidth: 420, background: "#fff", border: "0.5px solid rgba(13,27,42,0.08)", borderRadius: 16, padding: 32, minHeight: 320, display: "flex", flexDirection: "column", justifyContent: "center" }}>
-          {!detail ? (
+          {showCenter ? (
+            <motion.div
+              key="center"
+              initial={{ opacity: 0, y: 6 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3 }}
+            >
+              <div style={{ fontSize: 10, color: "#C9A84C", letterSpacing: 2, textTransform: "uppercase", marginBottom: 8 }}>{CENTER_DETAIL.tag}</div>
+              <div style={{ fontSize: 20, fontWeight: 700, color: "#0D1B2A", marginBottom: 16 }}>{CENTER_DETAIL.title}</div>
+              {CENTER_DETAIL.paragraphs.map((p, idx) => (
+                <p key={idx} style={{ fontSize: 12.5, color: "#4a5568", lineHeight: 1.7, marginBottom: 10 }}>{p}</p>
+              ))}
+              <p style={{ fontSize: 12.5, color: "#8899aa", fontStyle: "italic", lineHeight: 1.7, marginTop: 8 }}>{CENTER_DETAIL.italic}</p>
+            </motion.div>
+          ) : !detail ? (
             <div style={{ textAlign: "center", color: "#aabbcc", fontSize: 13, fontStyle: "italic" }}>
               <div style={{ fontSize: 40, marginBottom: 12, opacity: 0.3 }}>🎯</div>
               Sélectionnez un secteur pour explorer ses dimensions stratégiques
