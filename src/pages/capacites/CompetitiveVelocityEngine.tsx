@@ -93,7 +93,7 @@ const CENTER_DETAIL = {
 
 const CompetitiveVelocityEngine = () => {
   const [selected, setSelected] = useState<number>(-1);
-  const [showCenter, setShowCenter] = useState(false);
+  const [showCenter, setShowCenter] = useState(true);
   const [f1Open, setF1Open] = useState(false);
 
   const pick = useCallback((i: number) => {
@@ -159,7 +159,13 @@ const CompetitiveVelocityEngine = () => {
         {/* WHEEL */}
         <div className="w-[500px] h-[500px] max-md:w-[320px] max-md:h-[320px]" style={{ position: "relative", flexShrink: 0 }}>
           <svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg" style={{ width: "100%", height: "100%" }}>
-            {SEGMENTS.map((seg, i) => (
+            {SEGMENTS.map((seg, i) => {
+              // Calculate center of each segment for label placement
+              const midAngle = [-30, 30, 90, 150, 210, 270][i] * Math.PI / 180;
+              const labelR = 155;
+              const cx = 250 + labelR * Math.cos(midAngle);
+              const cy = 250 + labelR * Math.sin(midAngle);
+              return (
               <g key={seg.id}>
                 <path
                   id={seg.id}
@@ -171,21 +177,20 @@ const CompetitiveVelocityEngine = () => {
                   style={{ cursor: "pointer", transition: "filter 0.2s, opacity 0.2s" }}
                   onClick={() => pick(i)}
                 />
-                <text x={seg.iconX} y={seg.iconY} textAnchor="middle" fontSize={22} style={{ cursor: "pointer", pointerEvents: "none" }}>
-                  {seg.icon}
-                </text>
                 {seg.twoLines ? (
                   <>
-                    <text x={seg.labelX} y={seg.labelY} textAnchor="middle" fontFamily="Inter, sans-serif" fontSize={seg.fontSize} fontWeight={700} fill="#ffffff" letterSpacing={0.5} style={{ pointerEvents: "none" }}>MARKET</text>
-                    <text x={seg.labelX} y={seg.labelY + 13} textAnchor="middle" fontFamily="Inter, sans-serif" fontSize={seg.fontSize} fontWeight={700} fill="#ffffff" letterSpacing={0.5} style={{ pointerEvents: "none" }}>INTELLIGENCE</text>
+                    <text x={cx} y={cy - 6} textAnchor="middle" dominantBaseline="central" fontFamily="Inter, sans-serif" fontSize={9.5} fontWeight={700} fill="#ffffff" letterSpacing={0.5} style={{ pointerEvents: "none" }}>MARKET</text>
+                    <text x={cx} y={cy + 7} textAnchor="middle" dominantBaseline="central" fontFamily="Inter, sans-serif" fontSize={9.5} fontWeight={700} fill="#ffffff" letterSpacing={0.5} style={{ pointerEvents: "none" }}>INTELLIGENCE</text>
                   </>
                 ) : (
-                  <text x={seg.labelX} y={seg.labelY} textAnchor="middle" fontFamily="Inter, sans-serif" fontSize={seg.fontSize} fontWeight={700} fill="#ffffff" letterSpacing={0.8} style={{ pointerEvents: "none" }}>
+                  <text x={cx} y={cy} textAnchor="middle" dominantBaseline="central" fontFamily="Inter, sans-serif" fontSize={10} fontWeight={700} fill="#ffffff" letterSpacing={0.8} style={{ pointerEvents: "none" }}>
                     {seg.label}
                   </text>
                 )}
               </g>
-            ))}
+              );
+            })}
+
             {/* Central circle — WHITE background with logo */}
             <circle cx={250} cy={250} r={83} fill="#FFFFFF" stroke="#ddd" strokeWidth={2} style={{ cursor: "pointer" }} onClick={handleLogoClick} />
             <foreignObject x={250 - 70} y={250 - 50} width={140} height={100} style={{ pointerEvents: "none" }}>
