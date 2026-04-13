@@ -199,7 +199,7 @@ const StrategicWorkflow = () => {
 
   return (
     <DetailPageLayout title="" chapeau="">
-      <div style={{ background: "#F0F7FF", minHeight: "100vh", fontFamily: "'Inter', sans-serif", color: "#0D1B2A", margin: "0 -24px" }}>
+      <div style={{ background: "#F0F7FF", minHeight: "100vh", fontFamily: "'Inter', sans-serif", color: "#0D1B2A", width: "100vw", position: "relative", left: "calc(-50vw + 50%)", marginLeft: 0, marginRight: 0 }}>
         {/* HERO */}
         <div style={{ textAlign: "center", padding: "52px 40px 32px" }}>
           <div
