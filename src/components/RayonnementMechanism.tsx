@@ -3,6 +3,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { motion, AnimatePresence } from "framer-motion";
 import buildfluenceLogo from "@/assets/Logo_Buildfluence_dark.png";
 import buildfluenceLogoFondBleu from "@/assets/reseau_fond_bleu.png";
+import logoFondBlancSP from "@/assets/logo-buildfluence-fond-blanc-sp.png";
 import amdieLogo from "@/assets/clients/amdie.png";
 import miceppLogo from "@/assets/clients/micepp.png";
 import growthLabLogo from "@/assets/clients/growthlab2.png";
