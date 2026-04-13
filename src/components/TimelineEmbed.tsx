@@ -16,7 +16,7 @@ const TimelineEmbed = () => {
           border: "none",
           display: "block"
         }}
-        title="Dispositif de Légitimation Durable"
+        title="Dispositif de Légitimation Éditoriale"
       />
     </div>
   );

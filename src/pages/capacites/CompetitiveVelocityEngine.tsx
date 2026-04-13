@@ -160,9 +160,18 @@ const CompetitiveVelocityEngine = () => {
         <div className="w-[500px] h-[500px] max-md:w-[320px] max-md:h-[320px]" style={{ position: "relative", flexShrink: 0 }}>
           <svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg" style={{ width: "100%", height: "100%" }}>
             {SEGMENTS.map((seg, i) => {
-              // Calculate center of each segment for label placement
-              const midAngle = [-30, 30, 90, 150, 210, 270][i] * Math.PI / 180;
-              const labelR = 155;
+              // Calculate true geometric center of each segment
+              const angles = [
+                { start: -60, end: 0 },
+                { start: 0, end: 60 },
+                { start: 60, end: 120 },
+                { start: 120, end: 180 },
+                { start: 180, end: 240 },
+                { start: 240, end: 300 },
+              ];
+              const a = angles[i];
+              const midAngle = ((a.start + a.end) / 2) * Math.PI / 180;
+              const labelR = 152;
               const cx = 250 + labelR * Math.cos(midAngle);
               const cy = 250 + labelR * Math.sin(midAngle);
               return (
@@ -179,8 +188,8 @@ const CompetitiveVelocityEngine = () => {
                 />
                 {seg.twoLines ? (
                   <>
-                    <text x={cx} y={cy - 6} textAnchor="middle" dominantBaseline="central" fontFamily="Inter, sans-serif" fontSize={9.5} fontWeight={700} fill="#ffffff" letterSpacing={0.5} style={{ pointerEvents: "none" }}>MARKET</text>
-                    <text x={cx} y={cy + 7} textAnchor="middle" dominantBaseline="central" fontFamily="Inter, sans-serif" fontSize={9.5} fontWeight={700} fill="#ffffff" letterSpacing={0.5} style={{ pointerEvents: "none" }}>INTELLIGENCE</text>
+                    <text x={cx} y={cy - 7} textAnchor="middle" dominantBaseline="central" fontFamily="Inter, sans-serif" fontSize={10} fontWeight={700} fill="#ffffff" letterSpacing={0.5} style={{ pointerEvents: "none" }}>MARKET</text>
+                    <text x={cx} y={cy + 7} textAnchor="middle" dominantBaseline="central" fontFamily="Inter, sans-serif" fontSize={10} fontWeight={700} fill="#ffffff" letterSpacing={0.5} style={{ pointerEvents: "none" }}>INTELLIGENCE</text>
                   </>
                 ) : (
                   <text x={cx} y={cy} textAnchor="middle" dominantBaseline="central" fontFamily="Inter, sans-serif" fontSize={10} fontWeight={700} fill="#ffffff" letterSpacing={0.8} style={{ pointerEvents: "none" }}>
