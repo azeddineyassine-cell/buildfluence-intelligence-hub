@@ -247,7 +247,7 @@ export default function LegitimationDurable() {
         {/* Hero */}
         <div className="text-center mb-8">
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight" style={{ color: "#0D1B2A", letterSpacing: "-0.5px" }}>
-            {t("Dispositif de Légitimation Durable", "Sustainable Legitimation Framework")}
+            {t("Dispositif de Légitimation éditoriale", "Editorial Legitimation Framework")}
           </h2>
           <p className="mt-3 text-sm md:text-base max-w-[680px] mx-auto leading-relaxed" style={{ color: "#6b7c93" }}>
             {t(

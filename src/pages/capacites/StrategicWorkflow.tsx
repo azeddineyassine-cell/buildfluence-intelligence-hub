@@ -1,5 +1,6 @@
 import { useState } from "react";
-import DetailPageLayout from "@/components/DetailPageLayout"; // L'import pour le menu
+import DetailPageLayout from "@/components/DetailPageLayout";
+import { FormStrategicExchange } from "@/components/FormModals";
 
 const StrategicWorkflow = () => {
   const [openStep, setOpenStep] = useState<number | null>(null);
@@ -194,9 +195,11 @@ const StrategicWorkflow = () => {
     },
   ];
 
+  const [f1Open, setF1Open] = useState(false);
+
   return (
     <DetailPageLayout title="" chapeau="">
-      <div style={{ background: "#F0F7FF", minHeight: "100vh", fontFamily: "'Inter', sans-serif", color: "#0D1B2A" }}>
+      <div style={{ background: "#F0F7FF", minHeight: "100vh", fontFamily: "'Inter', sans-serif", color: "#0D1B2A", margin: "0 -24px" }}>
         {/* HERO */}
         <div style={{ textAlign: "center", padding: "52px 40px 32px" }}>
           <div
@@ -224,7 +227,7 @@ const StrategicWorkflow = () => {
           </h1>
           <p style={{ fontSize: 14, color: "#6b7c93", maxWidth: 640, margin: "0 auto 8px", lineHeight: 1.7 }}>
             Installer une culture d'intelligence stratégique et un système de décision augmentée au sein de votre
-            entité.
+            entreprise.
           </p>
           <p style={{ fontSize: 13, color: "#C9A84C", fontStyle: "italic", marginBottom: 36 }}>
             Éviter les angles morts. Garder l'ascendant. Construire la souveraineté informationnelle.
@@ -548,6 +551,8 @@ const StrategicWorkflow = () => {
               </div>
             </div>
             <button
+              onClick={() => setF1Open(true)}
+              className="hover:bg-[#dbb85c] transition-colors duration-200"
               style={{
                 fontSize: 11,
                 padding: "7px 16px",
@@ -564,6 +569,7 @@ const StrategicWorkflow = () => {
           </div>
         </div>
       </div>
+      <FormStrategicExchange open={f1Open} onClose={() => setF1Open(false)} />
     </DetailPageLayout>
   );
 };

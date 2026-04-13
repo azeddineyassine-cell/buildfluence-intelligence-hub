@@ -75,8 +75,8 @@ const Navbar = () => {
 
   const navItems = [
     { label: t("Vos Situations Critiques", "Your Critical Situations"), href: "#situations-critiques", dropdown: "situations", maxW: "120px" },
-    { label: t("Nos Solutions", "Our Solutions"), href: "#nos-solutions", dropdown: "solutions", maxW: "90px" },
     { label: "Strategic Innovation", href: "#strategic-innovation", dropdown: "innovation", maxW: "90px" },
+    { label: t("Nos Solutions", "Our Solutions"), href: "#nos-solutions", dropdown: "solutions", maxW: "90px" },
     { label: "Success Stories", href: "#success-stories", maxW: "90px" },
     { label: "Insights & Resources", href: "#insights", maxW: "90px" },
     { label: t("Pourquoi Buildfluence", "Why Buildfluence"), href: "#pourquoi-buildfluence", maxW: "90px" },
