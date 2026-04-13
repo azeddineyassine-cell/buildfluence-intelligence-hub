@@ -189,8 +189,8 @@ const CompetitiveVelocityEngine = () => {
                 )}
               </g>
               );
-            }
-            ))}
+            })}
+
             {/* Central circle — WHITE background with logo */}
             <circle cx={250} cy={250} r={83} fill="#FFFFFF" stroke="#ddd" strokeWidth={2} style={{ cursor: "pointer" }} onClick={handleLogoClick} />
             <foreignObject x={250 - 70} y={250 - 50} width={140} height={100} style={{ pointerEvents: "none" }}>
