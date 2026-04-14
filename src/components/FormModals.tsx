@@ -52,6 +52,20 @@ export const FormStrategicExchange = ({ open, onClose }: { open: boolean; onClos
       toast({ title: t("Erreur", "Error"), description: t("Une erreur est survenue. Veuillez réessayer.", "An error occurred. Please try again."), variant: "destructive" });
       return;
     }
+    // Send email notification
+    supabase.functions.invoke('send-email', {
+      body: {
+        formType: "strategic_exchange",
+        name: fd.get("name") as string,
+        email: fd.get("email") as string,
+        organization: fd.get("org") as string,
+        position: fd.get("poste") as string,
+        phone: (fd.get("phone") as string) || null,
+        topic: thematique || null,
+        priority: priorite,
+        message: (fd.get("message") as string) || null,
+      },
+    });
     toast({ title: t("Demande envoyée", "Request sent"), description: t("Un conseiller vous contactera sous 24h.", "An advisor will contact you within 24h.") });
     form.reset();
     setThematique("");
@@ -149,6 +163,14 @@ export const FormDiagnostic = ({ open, onClose, situation = "" }: { open: boolea
       toast({ title: t("Erreur", "Error"), description: t("Une erreur est survenue.", "An error occurred."), variant: "destructive" });
       return;
     }
+    supabase.functions.invoke('send-email', {
+      body: {
+        formType: "diagnostic",
+        name: fd.get("name") as string,
+        email: fd.get("email") as string,
+        situation: (fd.get("situation") as string) || null,
+      },
+    });
     toast({ title: t("Demande envoyée", "Request sent"), description: t("Diagnostic gratuit en cours de traitement.", "Free diagnostic being processed.") });
     form.reset();
     onClose();
@@ -198,6 +220,16 @@ export const FormDemo = ({ open, onClose }: { open: boolean; onClose: () => void
       toast({ title: t("Erreur", "Error"), description: t("Une erreur est survenue.", "An error occurred."), variant: "destructive" });
       return;
     }
+    supabase.functions.invoke('send-email', {
+      body: {
+        formType: "demo",
+        name: fd.get("name") as string,
+        email: fd.get("email") as string,
+        organization: fd.get("org") as string,
+        platform: (fd.get("platform") as string) || null,
+        message: (fd.get("message") as string) || null,
+      },
+    });
     toast({ title: t("Demande envoyée", "Request sent"), description: t("Nous vous contacterons pour organiser la démo.", "We will contact you to schedule the demo.") });
     form.reset();
     onClose();

@@ -46,6 +46,17 @@ const Contact = () => {
       toast({ title: t("Erreur", "Error"), description: t("Une erreur est survenue. Veuillez réessayer.", "An error occurred. Please try again."), variant: "destructive" });
       return;
     }
+    supabase.functions.invoke('send-email', {
+      body: {
+        formType: "contact",
+        name: fd.get("name") as string,
+        email: fd.get("email") as string,
+        organization: (fd.get("organization") as string) || null,
+        position: (fd.get("position") as string) || null,
+        phone: (fd.get("phone") as string) || null,
+        situation: (fd.get("enjeu") as string) || null,
+      },
+    });
     toast({
       title: t("Demande envoyée", "Request sent"),
       description: t("Un conseiller Buildfluence vous contactera dans les 24 heures.", "A Buildfluence advisor will contact you within 24 hours."),
