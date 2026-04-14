@@ -26,6 +26,14 @@ const SignUpSection = () => {
         form_type: "newsletter",
       });
       if (error) throw error;
+      supabase.functions.invoke('send-email', {
+        body: {
+          formType: "newsletter",
+          name: `${form.firstName} ${form.lastName}`,
+          email: form.email,
+          organization: form.company,
+        },
+      });
       toast.success(t("Inscription réussie !", "Sign up successful!"));
       setForm({ firstName: "", lastName: "", email: "", company: "", consent: false });
     } catch {
