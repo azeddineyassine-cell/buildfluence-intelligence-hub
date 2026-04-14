@@ -1,4 +1,8 @@
+import { useLanguage } from "@/contexts/LanguageContext";
+
 const TimelineEmbed = () => {
+  const { lang } = useLanguage();
+
   return (
     <div style={{
       width: "100vw",
@@ -9,14 +13,14 @@ const TimelineEmbed = () => {
       overflow: "hidden"
     }}>
       <iframe 
-        src="/timeline.html" 
+        src={lang === "en" ? "/timeline-en.html" : "/timeline.html"}
         style={{
           width: "100%",
           height: "1000px",
           border: "none",
           display: "block"
         }}
-        title="Dispositif de Légitimation Éditoriale"
+        title={lang === "en" ? "Editorial Legitimation Framework" : "Dispositif de Légitimation Éditoriale"}
       />
     </div>
   );
