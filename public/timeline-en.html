@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Buildfluence — Editorial Legitimation Framework</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Inter',sans-serif;background:#F0F7FF;color:#0D1B2A;min-height:100vh;overflow-x:hidden}
+
+  .hero{text-align:center;padding:56px 40px 36px}
+  .hero h1{font-size:clamp(26px,4vw,44px);font-weight:700;line-height:1.2;margin-bottom:10px;letter-spacing:-1px;color:#0D1B2A}
+  .hero h1 em{color:#C9A84C;font-style:normal}
+  .hero .sous-titre{font-size:15px;color:#6b7c93;max-width:680px;margin:0 auto 18px;line-height:1.6}
+  .hero .accroche{font-size:16px;font-weight:600;color:#C9A84C;margin-bottom:22px}
+  .hero .principe{font-size:14px;color:#4a5568;max-width:720px;margin:0 auto 44px;line-height:1.8;font-style:italic;border-left:3px solid #C9A84C;padding:14px 20px;text-align:left;background:rgba(201,168,76,.06);border-radius:0 8px 8px 0}
+  .hero .principe strong{font-style:normal;color:#0D1B2A}
+  .hero .principe em.or{color:#C9A84C;font-style:italic}
+
+  .hint{text-align:center;font-size:12px;color:#8899aa;margin-bottom:20px;letter-spacing:1px}
+
+  .icons-row{display:grid;grid-template-columns:1fr 1.2fr 1.2fr 1.2fr 1.3fr;gap:0;max-width:1400px;margin:0 auto;padding:0 40px;margin-bottom:6px}
+  .seg-icon{display:flex;flex-direction:column;align-items:center;gap:4px}
+  .seg-icon .ico{font-size:26px;line-height:1}
+  .seg-icon .ico-label{font-size:10px;color:#8899aa;letter-spacing:1px}
+
+  .timeline-wrap{padding:0 40px 60px;max-width:1400px;margin:0 auto}
+  .track-bar{display:grid;grid-template-columns:1fr 1.2fr 1.2fr 1.2fr 1.3fr;gap:0;height:64px;border-radius:8px;overflow:hidden;margin-bottom:32px;cursor:pointer}
+
+  .seg{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:10px;transition:filter .2s;position:relative}
+  .seg:hover{filter:brightness(1.12)}
+  .seg.active{filter:brightness(1.2)}
+  .seg-label{font-size:15px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;color:#fff}
+  .seg-sub{font-size:9px;letter-spacing:1.5px;opacity:.8;margin-top:2px;text-transform:uppercase;color:#fff}
+  .seg-arrow{position:absolute;right:-14px;top:50%;transform:translateY(-50%);width:0;height:0;border-top:32px solid transparent;border-bottom:32px solid transparent;z-index:10}
+
+  .s0{background:#4a4a5a}.s0 .seg-arrow{border-left:14px solid #4a4a5a}
+  .s1{background:#1a6b5a}.s1 .seg-arrow{border-left:14px solid #1a6b5a}
+  .s2{background:#1a5580}.s2 .seg-arrow{border-left:14px solid #1a5580}
+  .s3{background:#4a3580}.s3 .seg-arrow{border-left:14px solid #4a3580}
+  .s4{background:#7a3060}.s4 .seg-arrow{display:none}
+
+  .seg.active.s0{background:#6a6a8a}
+  .seg.active.s1{background:#25907a}
+  .seg.active.s2{background:#2070a8}
+  .seg.active.s3{background:#6045a8}
+  .seg.active.s4{background:#a04080}
+
+  .dots{display:flex;justify-content:center;gap:10px;margin-bottom:24px}
+  .dot{width:8px;height:8px;border-radius:50%;background:rgba(13,27,42,.15);cursor:pointer;transition:background .2s,transform .2s}
+  .dot.active{background:#C9A84C;transform:scale(1.3)}
+
+  .panels{position:relative}
+  .panel{display:none;animation:fadeIn .35s ease}
+  .panel.active{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+  @keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+  .panel-top{grid-column:1/-1;display:flex;align-items:center;gap:16px;padding:20px 24px;border-radius:12px;border:1px solid rgba(13,27,42,.1);background:#fff}
+  .panel-icon{width:48px;height:48px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0}
+  .panel-top h2{font-size:19px;font-weight:700;margin-bottom:4px;color:#0D1B2A}
+  .panel-top p{font-size:13px;color:#6b7c93;line-height:1.5}
+  .badge-dest{font-size:10px;letter-spacing:2px;text-transform:uppercase;padding:3px 10px;border-radius:20px;margin-left:12px;vertical-align:middle}
+
+  .pub-card{background:#fff;border:1px solid rgba(13,27,42,.08);border-radius:12px;padding:20px 24px;transition:border-color .2s,box-shadow .2s}
+  .pub-card:hover{border-color:rgba(201,168,76,.5);box-shadow:0 4px 20px rgba(201,168,76,.1)}
+  .pub-tag{font-size:10px;letter-spacing:2px;text-transform:uppercase;font-weight:600;margin-bottom:10px}
+  .pub-card h3{font-size:15px;font-weight:700;margin-bottom:8px;color:#0D1B2A}
+  .pub-card p{font-size:13px;color:#6b7c93;line-height:1.6}
+  .pub-highlight{color:#C9A84C;font-style:italic;font-size:13px;margin-top:10px;display:block}
+
+  .nav-row{display:flex;justify-content:center;gap:16px;margin-top:28px}
+  .btn-prev{background:#fff;border:1px solid rgba(13,27,42,.15);color:#0D1B2A;padding:10px 24px;border-radius:8px;cursor:pointer;font-family:inherit;font-size:13px;transition:background .2s}
+  .btn-prev:hover{background:#f0f0f0}
+  .btn-next{background:#C9A84C;border:none;color:#0D1B2A;padding:10px 24px;border-radius:8px;cursor:pointer;font-family:inherit;font-size:13px;font-weight:700;transition:background .2s}
+  .btn-next:hover{background:#dbb85c}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>Editorial <em>Legitimation Framework</em></h1>
+  <div class="sous-titre">Structure, pace and control your narrative to durably cement your legitimacy with key decision-makers.</div>
+  <div class="accroche">Influence is not decreed. It is built over time.</div>
+  <div class="principe">
+    “Legitimacy does not rest on isolated actions or one-off campaigns.<br>
+    It results from a structured framework combining <strong>content production, targeted distribution</strong> and <strong>mastery of influence timelines</strong>. The aim is to transform visibility into authority, then into <em class="or">decision-making power</em>.”
+  </div>
+</div>
+
+<div class="hint">▸ Click each segment to explore the publications</div>
+
+<div class="icons-row">
+  <div class="seg-icon"><span class="ico">⚡</span></div>
+  <div class="seg-icon"><span class="ico">📊</span></div>
+  <div class="seg-icon"><span class="ico">📰</span></div>
+  <div class="seg-icon"><span class="ico">📈</span></div>
+  <div class="seg-icon"><span class="ico">📗</span></div>
+</div>
+
+<div class="timeline-wrap">
+  <div class="track-bar">
+    <div class="seg s0 active" onclick="activate(0)">
+      <span class="seg-label">Instant</span>
+      <span class="seg-sub">Internal</span>
+      <span class="seg-arrow"></span>
+    </div>
+    <div class="seg s1" onclick="activate(1)">
+      <span class="seg-label">Weekly</span>
+      <span class="seg-sub">Internal</span>
+      <span class="seg-arrow"></span>
+    </div>
+    <div class="seg s2" onclick="activate(2)">
+      <span class="seg-label">Monthly</span>
+      <span class="seg-sub">External Ecosystem</span>
+      <span class="seg-arrow"></span>
+    </div>
+    <div class="seg s3" onclick="activate(3)">
+      <span class="seg-label">Quarterly</span>
+      <span class="seg-sub">National / International</span>
+      <span class="seg-arrow"></span>
+    </div>
+    <div class="seg s4" onclick="activate(4)">
+      <span class="seg-label">Annual</span>
+      <span class="seg-sub">National / International</span>
+    </div>
+  </div>
+
+  <div class="dots">
+    <div class="dot active" onclick="activate(0)"></div>
+    <div class="dot" onclick="activate(1)"></div>
+    <div class="dot" onclick="activate(2)"></div>
+    <div class="dot" onclick="activate(3)"></div>
+    <div class="dot" onclick="activate(4)"></div>
+  </div>
+
+  <div class="panels">
+
+    <div class="panel active" id="p0">
+      <div class="panel-top">
+        <div class="panel-icon" style="background:#eef0f4">⚡</div>
+        <div>
+          <h2>Strategic Alerts <span class="badge-dest" style="background:#eef0f4;color:#4a4a5a">INTERNAL</span></h2>
+          <p>Real-time distribution of urgent strategic information: weak signals, disruptions and emerging crises.</p>
+        </div>
+      </div>
+      <div class="pub-card">
+        <div class="pub-tag" style="color:#4a4a5a">Format: Live dashboard</div>
+        <h3>Real-time alert system</h3>
+        <p>Immediate triggering on critical weak signals. Direct notification to the relevant decision-makers. Go / Caution / No-Go summary sheet.</p>
+        <span class="pub-highlight">Zero delay between signal and decision.</span>
+      </div>
+      <div class="pub-card">
+        <div class="pub-tag" style="color:#4a4a5a">Recipients</div>
+        <h3>Executive Management & C-Level</h3>
+        <p>Dedicated flow for strategic decision-makers. Secure and confidential distribution with reading traceability.</p>
+        <span class="pub-highlight">Sovereign-grade infrastructure.</span>
+      </div>
+    </div>
+
+    <div class="panel" id="p1">
+      <div class="panel-top">
+        <div class="panel-icon" style="background:#e6f5f0">📊</div>
+        <div>
+          <h2>Weekly Publications <span class="badge-dest" style="background:#e6f5f0;color:#1a6b5a">INTERNAL</span></h2>
+          <p>Three complementary formats to support decision-making every week without information overload.</p>
+        </div>
+      </div>
+      <div class="pub-card">
+        <div class="pub-tag" style="color:#1D9E75">Executive Dashboards</div>
+        <h3>Decision dashboard</h3>
+        <p>Visual synthesis of the competitive, geopolitical and reputational environment. Real-time KPIs. Actionable DataViz.</p>
+        <span class="pub-highlight">A decision-support tool, not a report.</span>
+      </div>
+      <div class="pub-card">
+        <div class="pub-tag" style="color:#1D9E75">Business Newsletter</div>
+        <h3>Targeted market intelligence</h3>
+        <p>Emerging trends, market, technology, innovation, competition, reputation and key events of the week.</p>
+        <span class="pub-highlight">Strengthen the internal decision culture.</span>
+      </div>
+      <div class="pub-card" style="grid-column:1/-1">
+        <div class="pub-tag" style="color:#1D9E75">Regulatory Monitoring</div>
+        <h3>Legislative & standards tracking</h3>
+        <p>Latest regulatory developments and publications from the WTO and national and international institutions. Immediate impact analysis.</p>
+        <span class="pub-highlight">Anticipate before the rule is imposed.</span>
+      </div>
+    </div>
+
+    <div class="panel" id="p2">
+      <div class="panel-top">
+        <div class="panel-icon" style="background:#e6eef5">📰</div>
+        <div>
+          <h2>Monthly Publications <span class="badge-dest" style="background:#e6eef5;color:#1a5580">EXTERNAL</span></h2>
+          <p>Influence across the external ecosystem: partners, prescribers, opinion leaders and key sector influence stakeholders.</p>
+        </div>
+      </div>
+      <div class="pub-card">
+        <div class="pub-tag" style="color:#1a5580">MDM Info</div>
+        <h3>Moroccans Around the World</h3>
+        <p>Strengthen ties with prescribers, partners, opinion leaders, the Moroccan diaspora and key international stakeholders. Targeted newsletter.</p>
+        <span class="pub-highlight">Turn the diaspora into a lever of influence.</span>
+      </div>
+      <div class="pub-card">
+        <div class="pub-tag" style="color:#1a5580">Business News</div>
+        <h3>External sector magazine</h3>
+        <p>In-depth analysis of your business topics. Positioning as a source of authority for your stakeholders.</p>
+        <span class="pub-highlight">Strengthen your brand’s visibility and credibility.</span>
+      </div>
+    </div>
+
+    <div class="panel" id="p3">
+      <div class="panel-top">
+        <div class="panel-icon" style="background:#eeebf5">📈</div>
+        <div>
+          <h2>Quarterly Publications <span class="badge-dest" style="background:#eeebf5;color:#4a3580">NATIONAL / INTERNATIONAL</span></h2>
+          <p>Broad distribution with high institutional value: investors, federations, public bodies and specialist media.</p>
+        </div>
+      </div>
+      <div class="pub-card">
+        <div class="pub-tag" style="color:#4a3580">Sector Studies</div>
+        <h3>Benchmark & Market Intelligence</h3>
+        <p>Mapping of strategic sectors. Analysis of competing and target countries. Investment flows and competitive dynamics.</p>
+        <span class="pub-highlight">Position your organization as a sector reference.</span>
+      </div>
+      <div class="pub-card">
+        <div class="pub-tag" style="color:#4a3580">Barometer</div>
+        <h3>Competitiveness indicators</h3>
+        <p>Highlight your expertise and strengths. Monitor national and international perception. Comparative attractiveness scoring.</p>
+        <span class="pub-highlight">Your voice in the national economic debate.</span>
+      </div>
+    </div>
+
+    <div class="panel" id="p4">
+      <div class="panel-top">
+        <div class="panel-icon" style="background:#f5eaf0">📗</div>
+        <div>
+          <h2>Annual Publications <span class="badge-dest" style="background:#f5eaf0;color:#7a3060">NATIONAL / INTERNATIONAL</span></h2>
+          <p>Reference publications with strong institutional impact: authority reports, white papers and annual activity reports.</p>
+        </div>
+      </div>
+      <div class="pub-card">
+        <div class="pub-tag" style="color:#C9A84C">White Paper</div>
+        <h3>Sector authority report</h3>
+        <p>Annual report delivering recommendations on economic and investment issues. Targeted distribution to institutional decision-makers.</p>
+        <span class="pub-highlight">Position yourself as an expert and influencer in your sector.</span>
+      </div>
+      <div class="pub-card">
+        <div class="pub-tag" style="color:#C9A84C">Annual Activity Report</div>
+        <h3>Results & Outlook</h3>
+        <p>Summary of achievements, economic impact and key KPIs. A transparent interlocutor for institutional decision-makers and strategic partners.</p>
+        <span class="pub-highlight">Influence is built over time, not on one-off events.</span>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="nav-row">
+    <button class="btn-prev" onclick="prev()">← Previous</button>
+    <button class="btn-next" onclick="next()">Next →</button>
+  </div>
+</div>
+
+<script>
+let cur=0;
+const total=5;
+function activate(i){
+  document.querySelectorAll('.seg').forEach((s,j)=>s.classList.toggle('active',j===i));
+  document.querySelectorAll('.panel').forEach((p,j)=>p.classList.toggle('active',j===i));
+  document.querySelectorAll('.dot').forEach((d,j)=>d.classList.toggle('active',j===i));
+  cur=i;
+}
+function next(){activate((cur+1)%total)}
+function prev(){activate((cur-1+total)%total)}
+document.addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight')next();
+  if(e.key==='ArrowLeft')prev();
+});
+</script>
+</body>
+</html>
