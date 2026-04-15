@@ -52,8 +52,8 @@ export const FormStrategicExchange = ({ open, onClose }: { open: boolean; onClos
       toast({ title: t("Erreur", "Error"), description: t("Une erreur est survenue. Veuillez réessayer.", "An error occurred. Please try again."), variant: "destructive" });
       return;
     }
-    // Send email notification
-    supabase.functions.invoke('send-email', {
+    // Send email notification - must await before closing modal
+    await supabase.functions.invoke('send-email', {
       body: {
         formType: "strategic_exchange",
         name: fd.get("name") as string,
@@ -163,7 +163,7 @@ export const FormDiagnostic = ({ open, onClose, situation = "" }: { open: boolea
       toast({ title: t("Erreur", "Error"), description: t("Une erreur est survenue.", "An error occurred."), variant: "destructive" });
       return;
     }
-    supabase.functions.invoke('send-email', {
+    await supabase.functions.invoke('send-email', {
       body: {
         formType: "diagnostic",
         name: fd.get("name") as string,
@@ -220,7 +220,7 @@ export const FormDemo = ({ open, onClose }: { open: boolean; onClose: () => void
       toast({ title: t("Erreur", "Error"), description: t("Une erreur est survenue.", "An error occurred."), variant: "destructive" });
       return;
     }
-    supabase.functions.invoke('send-email', {
+    await supabase.functions.invoke('send-email', {
       body: {
         formType: "demo",
         name: fd.get("name") as string,

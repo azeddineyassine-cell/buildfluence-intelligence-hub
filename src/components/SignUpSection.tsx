@@ -26,7 +26,7 @@ const SignUpSection = () => {
         form_type: "newsletter",
       });
       if (error) throw error;
-      supabase.functions.invoke('send-email', {
+      await supabase.functions.invoke('send-email', {
         body: {
           formType: "newsletter",
           name: `${form.firstName} ${form.lastName}`,

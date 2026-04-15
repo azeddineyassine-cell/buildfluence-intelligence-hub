@@ -46,7 +46,7 @@ const Contact = () => {
       toast({ title: t("Erreur", "Error"), description: t("Une erreur est survenue. Veuillez réessayer.", "An error occurred. Please try again."), variant: "destructive" });
       return;
     }
-    supabase.functions.invoke('send-email', {
+    await supabase.functions.invoke('send-email', {
       body: {
         formType: "contact",
         name: fd.get("name") as string,
