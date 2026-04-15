@@ -13,6 +13,7 @@ Deno.serve(async (req) => {
     const { formType, name, email, organization, position, phone, topic, priority, message, situation, platform } = await req.json()
 
     const DESTINATION = 'azeddine.yassine@gmail.com'
+    const FROM_EMAIL = 'info@buildfluence.ai'
 
     // Build email content
     const subject = `[Buildfluence] Nouvelle soumission — ${formType || 'Contact'}`
