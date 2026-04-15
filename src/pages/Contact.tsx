@@ -8,6 +8,9 @@ import { Lock } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { supabase } from "@/integrations/supabase/client";
 
+const SUPABASE_FUNCTIONS_URL = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/send-email`;
+const SUPABASE_PUBLISHABLE_KEY = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY;
+
 const Contact = () => {
   const { toast } = useToast();
   const { t } = useLanguage();
@@ -31,37 +34,66 @@ const Contact = () => {
     const form = e.target as HTMLFormElement;
     const fd = new FormData(form);
 
-    const { error } = await supabase.from("contact_submissions").insert({
-      form_type: "contact",
+    const payload = {
+      formType: "contact",
       name: fd.get("name") as string,
       email: fd.get("email") as string,
       organization: (fd.get("organization") as string) || null,
       position: (fd.get("position") as string) || null,
       phone: (fd.get("phone") as string) || null,
       situation: (fd.get("enjeu") as string) || null,
-    });
+    };
 
-    setIsSubmitting(false);
-    if (error) {
-      toast({ title: t("Erreur", "Error"), description: t("Une erreur est survenue. Veuillez réessayer.", "An error occurred. Please try again."), variant: "destructive" });
-      return;
+    try {
+      const { error } = await supabase.from("contact_submissions").insert({
+        form_type: payload.formType,
+        name: payload.name,
+        email: payload.email,
+        organization: payload.organization,
+        position: payload.position,
+        phone: payload.phone,
+        situation: payload.situation,
+      });
+
+      if (error) {
+        throw error;
+      }
+
+      const { data: sessionData } = await supabase.auth.getSession();
+      const accessToken = sessionData.session?.access_token;
+
+      const response = await fetch(SUPABASE_FUNCTIONS_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          apikey: SUPABASE_PUBLISHABLE_KEY,
+          ...(accessToken ? { Authorization: `Bearer ${accessToken}` } : {}),
+        },
+        body: JSON.stringify(payload),
+      });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(errorText || "send-email request failed");
+      }
+
+      await response.text();
+
+      toast({
+        title: t("Demande envoyée", "Request sent"),
+        description: t("Un conseiller Buildfluence vous contactera dans les 24 heures.", "A Buildfluence advisor will contact you within 24 hours."),
+      });
+      form.reset();
+    } catch (error) {
+      console.error("Contact form submission error:", error);
+      toast({
+        title: t("Erreur", "Error"),
+        description: t("Une erreur est survenue. Veuillez réessayer.", "An error occurred. Please try again."),
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
     }
-    await supabase.functions.invoke('send-email', {
-      body: {
-        formType: "contact",
-        name: fd.get("name") as string,
-        email: fd.get("email") as string,
-        organization: (fd.get("organization") as string) || null,
-        position: (fd.get("position") as string) || null,
-        phone: (fd.get("phone") as string) || null,
-        situation: (fd.get("enjeu") as string) || null,
-      },
-    });
-    toast({
-      title: t("Demande envoyée", "Request sent"),
-      description: t("Un conseiller Buildfluence vous contactera dans les 24 heures.", "A Buildfluence advisor will contact you within 24 hours."),
-    });
-    form.reset();
   };
 
   return (
