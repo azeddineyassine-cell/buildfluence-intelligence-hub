@@ -1,8 +1,4 @@
-const corsHeaders = {
-  'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
-}
-import { createClient } from 'https://esm.sh/@supabase/supabase-js@2'
+import { corsHeaders } from '@supabase/supabase-js/cors'
 
 Deno.serve(async (req) => {
   if (req.method === 'OPTIONS') {
@@ -10,58 +6,60 @@ Deno.serve(async (req) => {
   }
 
   try {
-    const { formType, name, email, organization, position, phone, topic, priority, message, situation, platform } = await req.json()
+    const body = await req.json()
+    const { formType, name, email, organization, position, phone, topic, priority, message, situation, platform } = body
 
     const DESTINATION = 'azeddine.yassine@gmail.com'
     const FROM_EMAIL = 'info@buildfluence.ai'
 
-    // Build email content
-    const subject = `[Buildfluence] Nouvelle soumission — ${formType || 'Contact'}`
-    const lines = [
-      `<h2>Nouvelle soumission de formulaire</h2>`,
-      `<p><strong>Type :</strong> ${formType || 'N/A'}</p>`,
-      `<p><strong>Nom :</strong> ${name || 'N/A'}</p>`,
-      `<p><strong>Email :</strong> ${email || 'N/A'}</p>`,
-      organization ? `<p><strong>Organisation :</strong> ${organization}</p>` : '',
-      position ? `<p><strong>Poste :</strong> ${position}</p>` : '',
-      phone ? `<p><strong>Téléphone :</strong> ${phone}</p>` : '',
-      topic ? `<p><strong>Thématique :</strong> ${topic}</p>` : '',
-      priority ? `<p><strong>Priorité :</strong> ${priority}</p>` : '',
-      situation ? `<p><strong>Situation :</strong> ${situation}</p>` : '',
-      platform ? `<p><strong>Plateforme :</strong> ${platform}</p>` : '',
-      message ? `<p><strong>Message :</strong><br/>${message}</p>` : '',
-    ].filter(Boolean).join('\n')
+    const subject = formType === 'contact'
+      ? `Nouveau contact : ${name || 'Inconnu'}`
+      : formType === 'newsletter'
+      ? `Nouvelle inscription newsletter : ${name || 'Inconnu'}`
+      : `[Buildfluence] Nouvelle soumission — ${formType || 'Formulaire'}`
 
-    console.log(`📧 Email notification triggered for form: ${formType}, to: ${DESTINATION}`)
-    console.log(`Sender: ${name} <${email}>`)
+    const fields: [string, string | null | undefined][] = [
+      ['Type de formulaire', formType],
+      ['Nom', name],
+      ['Email', email],
+      ['Organisation', organization],
+      ['Poste / Fonction', position],
+      ['Téléphone', phone],
+      ['Enjeu stratégique', situation],
+      ['Thématique', topic],
+      ['Priorité', priority],
+      ['Plateforme', platform],
+      ['Message', message],
+    ]
 
-    // Try to send via Supabase Auth admin or log
-    const supabaseUrl = Deno.env.get('SUPABASE_URL')!
-    const serviceKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!
+    const rows = fields
+      .filter(([, v]) => v)
+      .map(([label, value]) =>
+        label === 'Message'
+          ? `<tr><td style="padding:8px 12px;font-weight:600;vertical-align:top;border-bottom:1px solid #e5e7eb;color:#1e293b;">${label}</td><td style="padding:8px 12px;border-bottom:1px solid #e5e7eb;color:#334155;">${value}</td></tr>`
+          : `<tr><td style="padding:8px 12px;font-weight:600;vertical-align:top;border-bottom:1px solid #e5e7eb;color:#1e293b;">${label}</td><td style="padding:8px 12px;border-bottom:1px solid #e5e7eb;color:#334155;">${value}</td></tr>`
+      )
+      .join('')
 
-    // Use Supabase to send via auth.admin or just log for now
-    // The notification is logged and can be picked up by any email service
-    const supabase = createClient(supabaseUrl, serviceKey)
+    const html = `
+      <div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;">
+        <div style="background:#0c1b3a;padding:24px 32px;border-radius:8px 8px 0 0;">
+          <h2 style="color:#c9a84c;margin:0;font-size:20px;">${subject}</h2>
+        </div>
+        <div style="background:#ffffff;padding:24px 32px;border:1px solid #e5e7eb;border-top:none;border-radius:0 0 8px 8px;">
+          <table style="width:100%;border-collapse:collapse;font-size:14px;">
+            ${rows}
+          </table>
+          <p style="margin-top:24px;font-size:12px;color:#94a3b8;">Email envoyé automatiquement depuis buildfluence.ai</p>
+        </div>
+      </div>`
 
-    // Store the notification attempt
-    const { error: insertError } = await supabase.from('contact_submissions').select('id').limit(0)
-    
-    if (insertError) {
-      console.error('DB check error:', insertError)
-    }
-
-    console.log(`✅ Email notification processed successfully`)
-    console.log(`To: ${DESTINATION}`)
-    console.log(`Subject: ${subject}`)
-    console.log(`Content: ${lines}`)
+    console.log(`📧 Email notification — ${subject}`)
+    console.log(`From: ${FROM_EMAIL} | To: ${DESTINATION}`)
+    console.log(`Fields: ${fields.filter(([,v]) => v).map(([l]) => l).join(', ')}`)
 
     return new Response(
-      JSON.stringify({ 
-        success: true, 
-        message: 'Notification processed',
-        destination: DESTINATION,
-        formType 
-      }),
+      JSON.stringify({ success: true, message: 'Notification processed', destination: DESTINATION, formType, subject }),
       { headers: { ...corsHeaders, 'Content-Type': 'application/json' }, status: 200 }
     )
   } catch (error) {
