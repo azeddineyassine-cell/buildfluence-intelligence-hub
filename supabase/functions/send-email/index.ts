@@ -9,16 +9,20 @@ Deno.serve(async (req) => {
   }
 
   try {
+    const RESEND_API_KEY = Deno.env.get('RESEND_API_KEY')
+    if (!RESEND_API_KEY) {
+      throw new Error('RESEND_API_KEY is not configured')
+    }
+
     const body = await req.json()
-    const { formType, name, email, organization, position, phone, topic, priority, message, situation, platform } = body
+    const { formType, name, email, organization, position, phone, situation, topic, priority, message, platform } = body
 
     const DESTINATION = 'azeddine.yassine@gmail.com'
-    const FROM_EMAIL = 'info@buildfluence.ai'
 
     const subject = formType === 'contact'
       ? `Nouveau contact : ${name || 'Inconnu'}`
       : formType === 'newsletter'
-      ? `Nouvelle inscription newsletter : ${name || 'Inconnu'}`
+      ? `Nouvelle inscription newsletter : ${name || email || 'Inconnu'}`
       : `[Buildfluence] Nouvelle soumission — ${formType || 'Formulaire'}`
 
     const fields: [string, string | null | undefined][] = [
@@ -38,9 +42,7 @@ Deno.serve(async (req) => {
     const rows = fields
       .filter(([, v]) => v)
       .map(([label, value]) =>
-        label === 'Message'
-          ? `<tr><td style="padding:8px 12px;font-weight:600;vertical-align:top;border-bottom:1px solid #e5e7eb;color:#1e293b;">${label}</td><td style="padding:8px 12px;border-bottom:1px solid #e5e7eb;color:#334155;">${value}</td></tr>`
-          : `<tr><td style="padding:8px 12px;font-weight:600;vertical-align:top;border-bottom:1px solid #e5e7eb;color:#1e293b;">${label}</td><td style="padding:8px 12px;border-bottom:1px solid #e5e7eb;color:#334155;">${value}</td></tr>`
+        `<tr><td style="padding:8px 12px;font-weight:600;vertical-align:top;border-bottom:1px solid #e5e7eb;color:#1e293b;">${label}</td><td style="padding:8px 12px;border-bottom:1px solid #e5e7eb;color:#334155;">${value}</td></tr>`
       )
       .join('')
 
@@ -57,12 +59,31 @@ Deno.serve(async (req) => {
         </div>
       </div>`
 
-    console.log(`📧 Email notification — ${subject}`)
-    console.log(`From: ${FROM_EMAIL} | To: ${DESTINATION}`)
-    console.log(`Fields: ${fields.filter(([,v]) => v).map(([l]) => l).join(', ')}`)
+    const resendResponse = await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${RESEND_API_KEY}`,
+      },
+      body: JSON.stringify({
+        from: 'Buildfluence <info@buildfluence.ai>',
+        to: [DESTINATION],
+        subject,
+        html,
+      }),
+    })
+
+    const resendData = await resendResponse.json()
+
+    if (!resendResponse.ok) {
+      console.error('Resend API error:', JSON.stringify(resendData))
+      throw new Error(`Resend error [${resendResponse.status}]: ${JSON.stringify(resendData)}`)
+    }
+
+    console.log(`✅ Email sent via Resend — ${subject} — id: ${resendData.id}`)
 
     return new Response(
-      JSON.stringify({ success: true, message: 'Notification processed', destination: DESTINATION, formType, subject }),
+      JSON.stringify({ success: true, message: 'Email sent', id: resendData.id }),
       { headers: { ...corsHeaders, 'Content-Type': 'application/json' }, status: 200 }
     )
   } catch (error) {
