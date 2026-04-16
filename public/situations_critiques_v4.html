@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vos Situations Critiques — Buildfluence</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bleu:      #0D1B2A;
+  --bleu-mid:  #1B3E6A;
+  --bleu-ciel: #E8F2FF;
+  --or:        #C9A84C;
+  --fond:      #F0F7FF;
+  --blanc:     #ffffff;
+  --gris:      #6B7FA0;
+  --gris-clair:#D8E4F0;
+  --texte:     #2C3E55;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family:'DM Sans',sans-serif;
+  background:var(--fond);
+  color:var(--texte);
+  min-height:100vh;
+}
+
+/* ── PAGE HEADER ── */
+.page-header {
+  text-align:center;
+  padding:40px 24px 0;
+  background:var(--fond);
+}
+.eyebrow {
+  display:inline-block;
+  font-size:10px; font-weight:600;
+  letter-spacing:3.5px; text-transform:uppercase;
+  color:var(--or);
+  border-bottom:1px solid var(--or);
+  padding-bottom:3px; margin-bottom:14px;
+}
+/* TITRE : police site Buildfluence — serif bold comme l'exemple */
+.page-title {
+  font-family:'Playfair Display',serif;
+  font-size:clamp(28px,3.8vw,48px);
+  font-weight:700;
+  color:var(--bleu);
+  line-height:1.1;
+  margin-bottom:8px;
+}
+.page-title em {
+  font-style:italic;
+  color:var(--or);
+}
+/* Sous-titre */
+.page-sub {
+  font-size:13px; color:var(--gris);
+  max-width:560px; margin:0 auto 4px;
+  line-height:1.7;
+}
+.page-sub strong { color:var(--or); font-weight:600; }
+
+/* ── MAIN SPLIT LAYOUT ── */
+.main-layout {
+  display:grid;
+  grid-template-columns:1fr 1.5fr;
+  gap:0;
+  max-width:1380px;
+  margin:0 auto;
+  padding:18px 40px 36px;
+  align-items:start;
+}
+@media(max-width:880px){
+  .main-layout{ grid-template-columns:1fr; padding:16px; }
+}
+
+/* ── LEFT PANEL ── */
+.left-panel {
+  padding-right:28px;
+  display:flex; flex-direction:column;
+}
+@media(max-width:880px){ .left-panel{ padding-right:0; padding-bottom:20px; } }
+
+/* Intro state */
+.intro-state { display:flex; flex-direction:column; padding-top:4px; }
+.intro-state.hidden { display:none; }
+
+.intro-quote {
+  font-family:'Playfair Display',serif;
+  font-size:17px; font-weight:400; font-style:italic;
+  color:var(--bleu); line-height:1.6;
+  border-left:3px solid var(--or); padding-left:18px;
+  margin-bottom:20px;
+}
+.intro-points { list-style:none; }
+.intro-points li {
+  font-size:12.5px; color:var(--gris);
+  padding:5px 0 5px 16px; position:relative; line-height:1.6;
+}
+.intro-points li::before {
+  content:''; position:absolute; left:0; top:12px;
+  width:5px; height:5px; border-radius:50%;
+  background:var(--or); opacity:.55;
+}
+
+/* Detail card */
+.detail-card {
+  display:none;
+  background:var(--blanc);
+  border:1px solid var(--gris-clair);
+  border-radius:12px;
+  overflow:hidden;
+  box-shadow:0 4px 20px rgba(13,27,42,.07);
+  animation:slideIn .26s cubic-bezier(.16,1,.3,1);
+}
+.detail-card.visible { display:block; }
+@keyframes slideIn{
+  from{transform:translateY(10px);opacity:0}
+  to{transform:translateY(0);opacity:1}
+}
+
+.card-top-bar { height:4px; width:100%; }
+
+.card-body { padding:22px 26px 26px; }
+
+/* Header row */
+.card-head-row {
+  display:flex; justify-content:space-between;
+  align-items:flex-start; margin-bottom:4px;
+}
+.card-head { display:flex; align-items:flex-start; gap:12px; }
+.card-icon {
+  width:44px; height:44px; border-radius:9px;
+  background:var(--fond); border:1px solid var(--gris-clair);
+  display:flex; align-items:center; justify-content:center;
+  font-size:21px; flex-shrink:0;
+}
+.card-meta {}
+.card-tag {
+  font-size:9px; font-weight:700;
+  letter-spacing:2.5px; text-transform:uppercase;
+  color:var(--or); margin-bottom:2px;
+}
+.card-title {
+  font-family:'Playfair Display',serif;
+  font-size:20px; font-weight:700;
+  color:var(--bleu); line-height:1.15;
+}
+
+/* Nav */
+.card-nav { display:flex; gap:6px; flex-shrink:0; }
+.nav-btn {
+  width:28px; height:28px; border-radius:50%;
+  background:var(--fond); border:1px solid var(--gris-clair);
+  color:var(--bleu); font-size:14px;
+  cursor:pointer; display:flex; align-items:center; justify-content:center;
+  transition:all .16s;
+}
+.nav-btn:hover { background:var(--bleu); color:#fff; }
+
+.divider { height:1px; background:var(--gris-clair); margin:14px 0; }
+
+.card-sub {
+  font-family:'Playfair Display',serif;
+  font-size:13px; font-style:italic; color:var(--gris);
+  border-left:2px solid var(--or); padding-left:11px;
+  margin-bottom:12px; line-height:1.65;
+}
+
+/* stat — no hyphens */
+.card-stat {
+  background:var(--fond); border:1px solid var(--gris-clair);
+  border-radius:7px; padding:11px 14px;
+  font-size:12px; color:var(--texte); line-height:1.65;
+  margin-bottom:14px;
+  hyphens:none; word-break:normal;
+}
+.card-stat strong { color:var(--bleu); font-weight:700; }
+
+/* 2 cols */
+.card-cols { display:grid; grid-template-columns:1fr 1fr; gap:9px; margin-bottom:13px; }
+@media(max-width:560px){ .card-cols{ grid-template-columns:1fr; } }
+.c-block {
+  background:var(--fond); border:1px solid var(--gris-clair);
+  border-radius:7px; padding:11px 13px;
+}
+.c-block-lbl {
+  font-size:9px; font-weight:700;
+  letter-spacing:2.5px; text-transform:uppercase;
+  color:var(--bleu-mid); margin-bottom:7px;
+}
+.c-block ul { list-style:none; hyphens:none; word-break:normal; }
+.c-block ul li {
+  font-size:11px; color:var(--texte);
+  padding:2px 0 2px 12px; position:relative; line-height:1.6;
+}
+.c-block ul li::before {
+  content:''; position:absolute; left:0; top:8px;
+  width:4px; height:4px; border-radius:50%;
+  background:var(--or); opacity:.65;
+}
+
+/* Cas client */
+.cas-box {
+  border:1px solid var(--gris-clair);
+  border-left:3px solid var(--bleu-mid);
+  border-radius:7px; padding:13px 15px;
+  margin-bottom:13px; background:#FAFCFF;
+}
+.cas-lbl {
+  font-size:9px; font-weight:700;
+  letter-spacing:2.5px; text-transform:uppercase;
+  color:var(--or); margin-bottom:3px;
+}
+.cas-org {
+  font-family:'Playfair Display',serif;
+  font-size:14px; font-weight:700;
+  color:var(--bleu); margin-bottom:9px;
+}
+.cas-grid { display:grid; grid-template-columns:1fr 1fr; gap:9px; }
+@media(max-width:560px){ .cas-grid{ grid-template-columns:1fr; } }
+.cas-col-lbl {
+  font-size:9px; font-weight:700;
+  letter-spacing:2px; text-transform:uppercase;
+  color:var(--gris); margin-bottom:3px;
+}
+.cas-col-txt { font-size:11px; color:var(--texte); line-height:1.65; hyphens:none; }
+.cas-kpi {
+  display:inline-flex; align-items:center; gap:5px;
+  margin-top:9px;
+  background:rgba(201,168,76,.1);
+  border:1px solid rgba(201,168,76,.3);
+  border-radius:20px; padding:3px 11px;
+  font-size:10.5px; font-weight:600; color:#7A5A00;
+}
+
+/* Solution Buildfluence */
+.sol-row { display:flex; align-items:center; gap:8px; margin-bottom:13px; }
+.sol-lbl {
+  font-size:10px; color:var(--gris);
+  text-transform:uppercase; letter-spacing:1.5px; font-weight:700;
+}
+.sol-bf {
+  font-size:10px; color:var(--or);
+  text-transform:uppercase; letter-spacing:1.5px; font-weight:700;
+}
+.sol-badge {
+  background:var(--bleu); color:#fff;
+  font-size:10.5px; font-weight:600;
+  padding:3px 9px; border-radius:4px;
+}
+
+.card-cta {
+  display:inline-flex; align-items:center; gap:6px;
+  background:var(--bleu); color:#fff;
+  font-size:11.5px; font-weight:600;
+  padding:9px 18px; border-radius:5px;
+  border:none; cursor:pointer; text-decoration:none;
+  transition:background .16s;
+}
+.card-cta:hover { background:var(--bleu-mid); }
+.card-cta .ar { color:var(--or); }
+
+/* ── RIGHT PANEL ── */
+.right-panel {
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  position:sticky; top:20px; align-self:start;
+}
+
+/* Caption above map */
+.map-caption-above {
+  font-family:'Playfair Display',serif;
+  font-size:16px; font-style:italic;
+  color:var(--bleu); text-align:center;
+  margin-bottom:6px;
+  line-height:1.5;
+}
+.map-caption-below {
+  font-size:10px; color:var(--gris);
+  letter-spacing:0.5px; text-align:center;
+  margin-top:6px;
+}
+
+.map-container {
+  width:100%;
+  max-width:640px;
+}
+svg.map { width:100%; height:100%; overflow:visible; }
+
+/* SVG node styles */
+.topic-node { cursor:pointer; }
+.topic-node .ncard {
+  transition:filter .2s, transform .2s;
+  transform-box:fill-box; transform-origin:center;
+}
+.topic-node:hover .ncard { filter:drop-shadow(0 3px 8px rgba(13,27,42,.14)); transform:scale(1.04); }
+.topic-node.active .ncard { filter:drop-shadow(0 3px 12px rgba(13,27,42,.16)); transform:scale(1.04); }
+.topic-node.active .nbg { fill:var(--bleu-ciel) !important; }
+.topic-node.active .nborder { stroke:var(--bleu-mid) !important; stroke-width:2 !important; }
+
+.conn { transition:all .22s ease; }
+.conn.active { opacity:1 !important; stroke:var(--or) !important; stroke-width:1.5 !important; }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="page-header">
+  <div class="eyebrow">Diagnostic stratégique</div>
+  <h1 class="page-title">
+    Les <em>menaces</em> que vous ne voyez pas<br>sont les plus destructrices
+  </h1>
+  <p class="page-sub">
+    Identifier la nature de votre exposition aux risques est déjà
+    <strong>le premier acte de souveraineté décisionnelle.</strong>
+  </p>
+</div>
+
+<!-- MAIN LAYOUT -->
+<div class="main-layout">
+
+  <!-- LEFT -->
+  <div class="left-panel">
+
+    <div class="intro-state" id="introState">
+      <p class="intro-quote">
+        « Les crises ne naissent pas du chaos,<br>mais de l'illusion du contrôle. »
+      </p>
+      <ul class="intro-points">
+        <li>Attaques informationnelles non détectées</li>
+        <li>Concurrent qui prend de l'avance en silence</li>
+        <li>Crise qui éclate sans protocole de réponse</li>
+        <li>Investissement engagé sans due diligence réelle</li>
+        <li>Influence qui s'érode sans que personne ne le mesure</li>
+        <li>Décisions prises à l'aveugle, sans signal d'alerte</li>
+      </ul>
+    </div>
+
+    <div class="detail-card" id="detailCard">
+      <div class="card-top-bar" id="cardTopBar"></div>
+      <div class="card-body">
+
+        <div class="card-head-row">
+          <div class="card-head">
+            <div class="card-icon" id="cardIcon"></div>
+            <div class="card-meta">
+              <div class="card-tag" id="cardTag"></div>
+              <div class="card-title" id="cardTitle"></div>
+            </div>
+          </div>
+          <div class="card-nav">
+            <button class="nav-btn" onclick="navigate(-1)">&#8249;</button>
+            <button class="nav-btn" onclick="navigate(1)">&#8250;</button>
+          </div>
+        </div>
+
+        <div class="divider"></div>
+        <p class="card-sub" id="cardSub"></p>
+        <div class="card-stat" id="cardStat"></div>
+
+        <div class="card-cols">
+          <div class="c-block">
+            <div class="c-block-lbl">Vous risquez</div>
+            <ul id="cardRisques"></ul>
+          </div>
+          <div class="c-block">
+            <div class="c-block-lbl">Angles morts</div>
+            <ul id="cardAngles"></ul>
+          </div>
+        </div>
+
+        <div class="cas-box">
+          <div class="cas-lbl">Cas Client Buildfluence</div>
+          <div class="cas-org" id="casOrg"></div>
+          <div class="cas-grid">
+            <div>
+              <div class="cas-col-lbl">Notre intervention</div>
+              <div class="cas-col-txt" id="casIntervention"></div>
+            </div>
+            <div>
+              <div class="cas-col-lbl">Résultat</div>
+              <div class="cas-col-txt" id="casResultat"></div>
+            </div>
+          </div>
+          <div class="cas-kpi" id="casKPI"></div>
+        </div>
+
+        <div class="sol-row">
+          <span class="sol-lbl">Solution</span>
+          <span class="sol-bf">Buildfluence</span>
+          <span class="sol-badge" id="cardSolution"></span>
+        </div>
+
+        <a href="#" class="card-cta" onclick="return false;">
+          Evaluer ma situation &mdash; GRATUIT <span class="ar">&#8594;</span>
+        </a>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT MAP -->
+  <div class="right-panel">
+
+    <p class="map-caption-above">
+      &laquo;&nbsp;Les crises ne naissent pas du chaos, mais de l'illusion du contrôle.&nbsp;&raquo;
+    </p>
+
+    <div class="map-container">
+      <svg class="map" viewBox="0 0 560 560" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="cg" cx="50%" cy="40%" r="60%">
+            <stop offset="0%" stop-color="#1B3E6A"/>
+            <stop offset="100%" stop-color="#0D1B2A"/>
+          </radialGradient>
+          <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur stdDeviation="3" result="blur"/>
+            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+          <clipPath id="logoClip">
+            <circle cx="280" cy="280" r="56"/>
+          </clipPath>
+        </defs>
+
+        <!-- Orbit rings -->
+        <circle cx="280" cy="280" r="148" fill="none" stroke="#D8E4F0" stroke-width="1" stroke-dasharray="3 7"/>
+        <circle cx="280" cy="280" r="204" fill="none" stroke="#EEF4FB" stroke-width="1" stroke-dasharray="2 10"/>
+
+        <!-- CONNECTORS (r=148): 0=top(280,132), 1=TR(385,175), 2=R(428,280), 3=BR(385,385), 4=B(280,428), 5=BL(175,385), 6=L(132,280), 7=TL(175,175) -->
+        <line id="l0" class="conn" x1="280" y1="280" x2="280" y2="142" stroke="#C8D8E8" stroke-width="1" stroke-dasharray="3 5" opacity=".5"/>
+        <line id="l1" class="conn" x1="280" y1="280" x2="381" y2="179" stroke="#C8D8E8" stroke-width="1" stroke-dasharray="3 5" opacity=".5"/>
+        <line id="l2" class="conn" x1="280" y1="280" x2="418" y2="280" stroke="#C8D8E8" stroke-width="1" stroke-dasharray="3 5" opacity=".5"/>
+        <line id="l3" class="conn" x1="280" y1="280" x2="381" y2="381" stroke="#C8D8E8" stroke-width="1" stroke-dasharray="3 5" opacity=".5"/>
+        <line id="l4" class="conn" x1="280" y1="280" x2="280" y2="418" stroke="#C8D8E8" stroke-width="1" stroke-dasharray="3 5" opacity=".5"/>
+        <line id="l5" class="conn" x1="280" y1="280" x2="179" y2="381" stroke="#C8D8E8" stroke-width="1" stroke-dasharray="3 5" opacity=".5"/>
+        <line id="l6" class="conn" x1="280" y1="280" x2="142" y2="280" stroke="#C8D8E8" stroke-width="1" stroke-dasharray="3 5" opacity=".5"/>
+        <line id="l7" class="conn" x1="280" y1="280" x2="179" y2="179" stroke="#C8D8E8" stroke-width="1" stroke-dasharray="3 5" opacity=".5"/>
+
+        <!-- CENTER — logo perfectly clipped inside circle -->
+        <circle cx="280" cy="280" r="66" fill="url(#cg)" stroke="#C9A84C" stroke-width="1.5" filter="url(#glow)" style="cursor:pointer" onclick="resetPanel()"/>
+        <circle cx="280" cy="280" r="58" fill="none" stroke="rgba(201,168,76,.2)" stroke-width="1" style="cursor:pointer" onclick="resetPanel()"/>
+        <image href="data:image/png;base64,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" x="224" y="224" width="112" height="112"
+               clip-path="url(#logoClip)" style="cursor:pointer" onclick="resetPanel()"/>
+
+        <!-- NODE HELPER: each card 76x62, centered on node position -->
+
+        <!-- 0 — top (280,132) — Décider sans Visibilité -->
+        <g class="topic-node" id="n0" onclick="openPanel(0)">
+          <g class="ncard">
+            <rect class="nborder nbg" x="242" y="101" width="76" height="62" rx="9"
+              fill="white" stroke="#D8E4F0" stroke-width="1.5"/>
+            <rect x="242" y="101" width="76" height="4" rx="2" fill="#0D1B2A"/>
+            <text x="280" y="127" text-anchor="middle" font-size="20">🔭</text>
+            <text x="280" y="146" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" font-weight="600" fill="#0D1B2A">Décider sans</text>
+            <text x="280" y="157" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" font-weight="600" fill="#0D1B2A">Visibilité</text>
+          </g>
+        </g>
+
+        <!-- 1 — TR (385,175) — Attaques Informationnelles -->
+        <g class="topic-node" id="n1" onclick="openPanel(1)">
+          <g class="ncard">
+            <rect class="nborder nbg" x="347" y="144" width="76" height="62" rx="9"
+              fill="white" stroke="#D8E4F0" stroke-width="1.5"/>
+            <rect x="347" y="144" width="76" height="4" rx="2" fill="#C9453C"/>
+            <text x="385" y="170" text-anchor="middle" font-size="20">⚡</text>
+            <text x="385" y="189" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" font-weight="600" fill="#0D1B2A">Attaques</text>
+            <text x="385" y="200" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" font-weight="600" fill="#0D1B2A">Informationnelles</text>
+          </g>
+        </g>
+
+        <!-- 2 — R (428,280) — Perte d'Attractivité -->
+        <g class="topic-node" id="n2" onclick="openPanel(2)">
+          <g class="ncard">
+            <rect class="nborder nbg" x="390" y="249" width="76" height="62" rx="9"
+              fill="white" stroke="#D8E4F0" stroke-width="1.5"/>
+            <rect x="390" y="249" width="76" height="4" rx="2" fill="#C9862A"/>
+            <text x="428" y="275" text-anchor="middle" font-size="20">📉</text>
+            <text x="428" y="294" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" font-weight="600" fill="#0D1B2A">Perte</text>
+            <text x="428" y="305" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" font-weight="600" fill="#0D1B2A">d'Attractivité</text>
+          </g>
+        </g>
+
+        <!-- 3 — BR (385,385) — Crise Non Maîtrisée -->
+        <g class="topic-node" id="n3" onclick="openPanel(3)">
+          <g class="ncard">
+            <rect class="nborder nbg" x="347" y="354" width="76" height="62" rx="9"
+              fill="white" stroke="#D8E4F0" stroke-width="1.5"/>
+            <rect x="347" y="354" width="76" height="4" rx="2" fill="#1B3E6A"/>
+            <text x="385" y="380" text-anchor="middle" font-size="20">🔥</text>
+            <text x="385" y="399" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" font-weight="600" fill="#0D1B2A">Crise</text>
+            <text x="385" y="410" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" font-weight="600" fill="#0D1B2A">Non Maîtrisée</text>
+          </g>
+        </g>
+
+        <!-- 4 — B (280,428) — Perdre en Vélocité -->
+        <g class="topic-node" id="n4" onclick="openPanel(4)">
+          <g class="ncard">
+            <rect class="nborder nbg" x="242" y="397" width="76" height="62" rx="9"
+              fill="white" stroke="#D8E4F0" stroke-width="1.5"/>
+            <rect x="242" y="397" width="76" height="4" rx="2" fill="#6B4EC9"/>
+            <text x="280" y="423" text-anchor="middle" font-size="20">🏎</text>
+            <text x="280" y="442" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" font-weight="600" fill="#0D1B2A">Perdre en</text>
+            <text x="280" y="453" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" font-weight="600" fill="#0D1B2A">Vélocité</text>
+          </g>
+        </g>
+
+        <!-- 5 — BL (175,385) — Déficit d'Influence -->
+        <g class="topic-node" id="n5" onclick="openPanel(5)">
+          <g class="ncard">
+            <rect class="nborder nbg" x="137" y="354" width="76" height="62" rx="9"
+              fill="white" stroke="#D8E4F0" stroke-width="1.5"/>
+            <rect x="137" y="354" width="76" height="4" rx="2" fill="#A0306B"/>
+            <text x="175" y="380" text-anchor="middle" font-size="20">🌐</text>
+            <text x="175" y="399" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" font-weight="600" fill="#0D1B2A">Déficit</text>
+            <text x="175" y="410" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" font-weight="600" fill="#0D1B2A">d'Influence</text>
+          </g>
+        </g>
+
+        <!-- 6 — L (132,280) — Risque Invisible -->
+        <g class="topic-node" id="n6" onclick="openPanel(6)">
+          <g class="ncard">
+            <rect class="nborder nbg" x="94" y="249" width="76" height="62" rx="9"
+              fill="white" stroke="#D8E4F0" stroke-width="1.5"/>
+            <rect x="94" y="249" width="76" height="4" rx="2" fill="#1A7A4A"/>
+            <text x="132" y="275" text-anchor="middle" font-size="20">🔍</text>
+            <text x="132" y="294" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" font-weight="600" fill="#0D1B2A">Risque</text>
+            <text x="132" y="305" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" font-weight="600" fill="#0D1B2A">Invisible</text>
+          </g>
+        </g>
+
+        <!-- 7 — TL (175,175) — Gouverner sous Pression -->
+        <g class="topic-node" id="n7" onclick="openPanel(7)">
+          <g class="ncard">
+            <rect class="nborder nbg" x="137" y="144" width="76" height="62" rx="9"
+              fill="white" stroke="#D8E4F0" stroke-width="1.5"/>
+            <rect x="137" y="144" width="76" height="4" rx="2" fill="#C9A84C"/>
+            <text x="175" y="170" text-anchor="middle" font-size="20">📡</text>
+            <text x="175" y="189" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" font-weight="600" fill="#0D1B2A">Gouverner sous</text>
+            <text x="175" y="200" text-anchor="middle" font-family="DM Sans,sans-serif" font-size="8" font-weight="600" fill="#0D1B2A">Pression</text>
+          </g>
+        </g>
+
+      </svg>
+    </div>
+
+    <p class="map-caption-below">Cliquez sur une situation pour explorer le processus</p>
+  </div>
+
+</div>
+
+<script>
+const DATA = [
+  {
+    icon:"🔭", color:"#0D1B2A",
+    tag:"Situation 1 / 8", title:"Décider sans Visibilité",
+    sub:"Manque d'information fiable transformant chaque décision stratégique en pari hasardeux",
+    stat:"<strong>80% des dirigeants</strong> naviguent avec un angle mort. Seulement 20% estiment exceller dans la prise de décision <em>(McKinsey, 2019)</em>.",
+    risques:["Décisions prises sur indicateurs partiels","Sous-estimation des signaux faibles","Amplification d'une crise avant sa détection","Perte de confiance des investisseurs","Débordement géopolitique et pression diplomatique"],
+    angles:["Absence de cartographie des acteurs","Réseaux d'influence invisibles","Pas de suivi des tendances en temps réel","Confusion entre volume d'info et visibilité"],
+    casOrg:"Présidence de la République du Sénégal",
+    casIntervention:"Plateforme de veille IA temps réel<br>Cartographie des acteurs et alliances<br>Détection précoce des narratifs à risque<br>Scénarios d'anticipation",
+    casResultat:"Décision éclairée sous forte pression<br>Réduction des angles morts<br>Lisibilité stratégique restaurée",
+    casKPI:"✓ Crise narrative anticipée — Résilience renforcée",
+    solution:"Strategic Foresight Lab"
+  },
+  {
+    icon:"⚡", color:"#C9453C",
+    tag:"Situation 2 / 8", title:"Attaques Informationnelles",
+    sub:"Vulnérabilité aux manipulations qui altèrent la perception et sabotent les décisions",
+    stat:"<strong>70 à 80% de la valeur de marque</strong> repose sur des actifs intangibles. Un seul article négatif met <strong>22% des clients</strong> à risque <em>(SurveySparrow, 2025)</em>.",
+    risques:["Effondrement de confiance investisseurs et clients","Perte de valeur et ralentissement de croissance","Communication sans impact","Boycott coordonné et fuite de clients"],
+    angles:["Attaque découverte quand elle est déjà virale","Absence de contre-narratif structuré","Instigateurs non identifiés","Monitoring des amplifications absent"],
+    casOrg:"Centrale Danone Maroc",
+    casIntervention:"Digital investigation approfondie<br>Analyse forensique des documents médicaux<br>Stratégie de contre-influence<br>Mapping des instigateurs",
+    casResultat:"Marque innocentée à 100%<br>Confiance restaurée<br>Reconquête du marché en 24 mois",
+    casKPI:"✓ +14% de parts de marché — 120M MAD de pertes stoppées",
+    solution:"Threat Intelligence"
+  },
+  {
+    icon:"📉", color:"#C9862A",
+    tag:"Situation 3 / 8", title:"Perte d'Attractivité",
+    sub:"Avoir des atouts sans rayonnement c'est laisser les autres capter la valeur à votre place",
+    stat:"Dans l'arbitrage international, <strong>la perception précède la réalité</strong>. Les capitaux vont vers ceux qui maîtrisent leur narratif stratégique.",
+    risques:["Décrochage face aux territoires plus visibles","Détournement des flux d'IDE","Difficulté à attirer talents et investisseurs","Affaiblissement de la compétitivité territoriale"],
+    angles:["Absence de cartographie des concurrents territoriaux","Narratifs géoéconomiques adverses sous-estimés","Attractivité traitée comme communication et non actif","Signaux investisseurs non lus"],
+    casOrg:"Territoire Confidentiel (Mandat sous NDA strict)",
+    casIntervention:"Benchmark géoéconomique des concurrents<br>Cartographie des flux d'investissements<br>Identification des facteurs défavorables<br>Repositionnement du discours institutionnel",
+    casResultat:"Positionnement différenciant clarifié<br>Attractivité renforcée<br>Messages réalignés vers les investisseurs",
+    casKPI:"✓ Positionnement restructuré — Visibilité internationale renforcée",
+    solution:"Territorial Influence Lab"
+  },
+  {
+    icon:"🔥", color:"#1B3E6A",
+    tag:"Situation 4 / 8", title:"Crise Non Maîtrisée",
+    sub:"Ignorer les étincelles mène à l'incendie. 48 heures pour tout perdre.",
+    stat:"<strong>60%</strong> des entreprises touchées par des crises majeures ne s'en remettent jamais complètement <em>(Cleartail Marketing, 2025)</em>.",
+    risques:["Contagion réseaux puis amplification médiatique","Perte de contrôle face à l'enchaînement des faits","Boycott, sanctions, démissions, chute du CA","Effondrement de la confiance des parties prenantes"],
+    angles:["Absence de protocole de crise","Décisions sous pression sans data","Porte-parole non préparé","Réseaux sociaux hors contrôle"],
+    casOrg:"Ministère de la Santé — Royaume du Maroc",
+    casIntervention:"Fact-checking temps réel<br>Identification sources de désinformation<br>War room de crise<br>Coordination des messages officiels",
+    casResultat:"Crise H1N1 atténuée<br>Désinformation neutralisée<br>COVID-19 géré bien plus efficacement",
+    casKPI:"✓ Crise atténuée en 2 semaines — Dispositif pérennisé",
+    solution:"Crisis Command Center"
+  },
+  {
+    icon:"🏎", color:"#6B4EC9",
+    tag:"Situation 5 / 8", title:"Perdre en Vélocité",
+    sub:"Naviguer sans radar pendant que d'autres tracent leur route grâce aux signaux du marché",
+    stat:"Les entreprises agiles croissent <strong>2,5x plus vite</strong>. <strong>78%</strong> des dirigeants affirment que les données en temps réel créent un avantage décisif <em>(KX Research, 2021)</em>.",
+    risques:["Manquer les tendances porteuses","Arriver trop tard sur les marchés en croissance","Érosion progressive du CA","Obsolescence stratégique"],
+    angles:["Rapports volumineux et obsolètes","Absence de veille concurrentielle continue","Pas d'alerte sur les mouvements adverses","Boucle décisionnelle trop lente"],
+    casOrg:"OCP Group — Leader mondial des phosphates",
+    casIntervention:"Cartographie de l'écosystème sur 10 ans<br>Analyse géopolitique et concurrentielle<br>Matrice dynamique des parties prenantes<br>Dashboard décisionnel cabinet du Président",
+    casResultat:"Protection de milliards de dollars de CA<br>Leadership renforcé<br>Gestion proactive des campagnes de boycott",
+    casKPI:"✓ Position de leader mondial protégée — 10 ans de veille continue",
+    solution:"Competitive Velocity Engine"
+  },
+  {
+    icon:"🌐", color:"#A0306B",
+    tag:"Situation 6 / 8", title:"Déficit d'Influence",
+    sub:"Quand certains écrivent l'histoire, d'autres la subissent. Votre légitimité silencieuse est inefficace.",
+    stat:"<strong>85% des normes</strong> sont dictées par ceux qui occupent le terrain politique et institutionnel. L'influence se construit, elle ne se décrète pas.",
+    risques:["Marginalisation dans votre propre écosystème","Perte d'influence dans les arbitrages clés","Captation de votre rôle par d'autres acteurs","Perte de crédibilité auprès des partenaires"],
+    angles:["Empreinte digitale institutionnelle faible","Positionnement mal perçu dans l'écosystème","Pas d'architecture pour piloter l'influence","Communication déconnectée des dynamiques réelles"],
+    casOrg:"CIDC / OCI (57 pays) et ADD — Agence du Digital",
+    casIntervention:"Diagnostic et positionnement stratégique<br>Benchmark WB et WEF<br>Doing Business Platform<br>Roadmap d'influence et activation GITEX Africa",
+    casResultat:"CIDC repositionné comme hub OCI<br>ADD pionnier dans l'écosystème digital africain<br>Visibilité internationale renforcée",
+    casKPI:"✓ Rôle institutionnel restructuré — Influence opérationnelle acquise",
+    solution:"Political Intelligence"
+  },
+  {
+    icon:"🔍", color:"#1A7A4A",
+    tag:"Situation 7 / 8", title:"Risque Invisible",
+    sub:"Miser sans connaissance profonde : chaque investissement devient une loterie",
+    stat:"<strong>70 à 90%</strong> des M&A échouent par manque de due diligence approfondie <em>(CFA Institute, 2025)</em>. <strong>83%</strong> des leaders PE estiment leurs pratiques insuffisantes <em>(Accenture)</em>.",
+    risques:["Exposition aux scandales et blacklists","Pertes financières par association toxique","Réputation dégradée par contamination","Perte de confiance actionnaires et régulateurs"],
+    angles:["Infos critiques enfouies dans des sources disparates","Investissement sans due diligence systématique","Apparences soignées au lieu de faits vérifiés","Coût de l'investigation sous-estimé"],
+    casOrg:"Société de Capital-Risque — Confidentiel (NDA strict)",
+    casIntervention:"Deep Due Diligence 3 Niveaux<br>Screening PEP et affiliations sensibles<br>Vérifications sanctions ONU, OFAC, EU<br>Audit KYC et LCB-FT et ESG",
+    casResultat:"Due diligence complète sur valorisation 400M$<br>Points de vigilance identifiés<br>Partenariat sécurisé en toute connaissance",
+    casKPI:"✓ 400M$ sécurisés — Validation complète avec mapping des risques",
+    solution:"Deep Due Diligence (3 Niveaux)"
+  },
+  {
+    icon:"📡", color:"#C9A84C",
+    tag:"Situation 8 / 8", title:"Gouverner sous Pression",
+    sub:"Dans un environnement surexposé, ne laissez pas l'émotion dicter vos décisions",
+    stat:"Chaque action est <strong>observée, commentée, critiquée et amplifiée</strong>. La pression est permanente et asymétrique.",
+    risques:["Réactions sous pression émotionnelle élevée","Décisions pour calmer l'opinion plutôt que servir la stratégie","Perte de contrôle narratif","Affaiblissement de l'autorité décisionnelle"],
+    angles:["Confondre visibilité et maîtrise","Masse de critiques non maîtrisée","Réagir sans lecture consolidée des dynamiques","Absence de système structuré d'anticipation"],
+    casOrg:"Raja Club Athletic — Club historique à forte base populaire",
+    casIntervention:"Monitoring médiatique structuré<br>Centralisation des flux d'information<br>Cartographie des acteurs d'influence<br>Cellule stratégique interne",
+    casResultat:"Cycles de décision réduits<br>Silos éliminés<br>Vision consolidée<br>Pionnier dans le sport professionnel marocain",
+    casKPI:"✓ 1er club marocain doté d'une cellule d'intelligence stratégique",
+    solution:"AI Powered Monitor + Strategic Workflow"
+  }
+];
+
+let current = null;
+
+function openPanel(idx) {
+  current = idx;
+  const d = DATA[idx];
+
+  // SVG states
+  document.querySelectorAll('.topic-node').forEach(n => n.classList.remove('active'));
+  document.querySelectorAll('.conn').forEach(l => l.classList.remove('active'));
+  document.getElementById('n'+idx).classList.add('active');
+  document.getElementById('l'+idx).classList.add('active');
+
+  // Fill
+  document.getElementById('cardTopBar').style.background = d.color;
+  document.getElementById('cardIcon').textContent = d.icon;
+  document.getElementById('cardTag').textContent = d.tag;
+  document.getElementById('cardTitle').textContent = d.title;
+  document.getElementById('cardSub').textContent = d.sub;
+  document.getElementById('cardStat').innerHTML = d.stat;
+  document.getElementById('cardRisques').innerHTML = d.risques.map(r=>`<li>${r}</li>`).join('');
+  document.getElementById('cardAngles').innerHTML = d.angles.map(a=>`<li>${a}</li>`).join('');
+  document.getElementById('casOrg').textContent = d.casOrg;
+  document.getElementById('casIntervention').innerHTML = d.casIntervention;
+  document.getElementById('casResultat').innerHTML = d.casResultat;
+  document.getElementById('casKPI').textContent = d.casKPI;
+  document.getElementById('cardSolution').textContent = d.solution;
+
+  // Show card
+  document.getElementById('introState').classList.add('hidden');
+  document.getElementById('detailCard').classList.add('visible');
+}
+
+function resetPanel() {
+  document.querySelectorAll('.topic-node').forEach(n => n.classList.remove('active'));
+  document.querySelectorAll('.conn').forEach(l => l.classList.remove('active'));
+  document.getElementById('detailCard').classList.remove('visible');
+  document.getElementById('introState').classList.remove('hidden');
+  current = null;
+}
+
+function navigate(dir) {
+  if (current === null) return;
+  openPanel((current + dir + 8) % 8);
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight') navigate(1);
+  if (e.key === 'ArrowLeft')  navigate(-1);
+  if (e.key === 'Escape')     resetPanel();
+});
+</script>
+</body>
+</html>
