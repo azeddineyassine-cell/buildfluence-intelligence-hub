@@ -7,6 +7,7 @@ import { LanguageProvider } from "@/contexts/LanguageContext";
 import Index from "./pages/Index";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
+import SituationsCritiques from "./pages/SituationsCritiques";
 
 // Situation pages
 import DeciderSansVisibilite from "./pages/situations/DeciderSansVisibilite";
@@ -41,6 +42,7 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/situations-critiques" element={<SituationsCritiques />} />
 
             {/* Situations */}
             <Route path="/situations/decider-sans-visibilite" element={<DeciderSansVisibilite />} />
