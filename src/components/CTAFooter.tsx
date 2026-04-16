@@ -175,7 +175,7 @@ const CTAFooter = () => {
             </span>
             <div className="flex gap-6">
               {[
-                { label: t("Vos situations critiques", "Your Critical Situations"), href: "#situations-critiques" },
+                { label: t("Vos situations critiques", "Your Critical Situations"), href: "/situations-critiques" },
                 { label: "Insights & Resources", href: "#insights" },
                 { label: "Contact", href: "/contact" },
               ].map((link) => (
