@@ -237,6 +237,7 @@ const StrategicWorkflow = () => {
         {/* PILIERS */}
         <div
           style={{
+            position: "relative",
             display: "grid",
             gridTemplateColumns: "repeat(4, 1fr)",
             maxWidth: 1100,
@@ -245,10 +246,22 @@ const StrategicWorkflow = () => {
             gap: 12,
           }}
         >
+          {/* Gold connecting bar through pillar icons */}
+          <div
+            style={{
+              position: "absolute",
+              left: "calc(32px + 12.5%)",
+              right: "calc(32px + 12.5%)",
+              top: 27,
+              height: 2,
+              background: "#C9A84C",
+              zIndex: 0,
+            }}
+          />
           {piliers.map((p, i) => (
             <div
               key={i}
-              style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center" }}
+              style={{ position: "relative", zIndex: 1, display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center" }}
             >
               <div
                 style={{
