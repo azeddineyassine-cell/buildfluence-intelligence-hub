@@ -3,6 +3,7 @@ import DetailPageLayout from "@/components/DetailPageLayout";
 import { useLanguage } from "@/contexts/LanguageContext";
 import StrategicOrbitDiagram from "@/components/StrategicOrbitDiagram";
 import TimelineEmbed from "@/components/TimelineEmbed";
+import { FormCustom } from "@/components/FormCustom";
 import { motion } from "framer-motion";
 
 const FlipCard = ({ front, back }: { front: React.ReactNode; back: React.ReactNode }) => {
@@ -37,6 +38,7 @@ const FlipCard = ({ front, back }: { front: React.ReactNode; back: React.ReactNo
 
 const AIPoweredMonitor = () => {
   const { t } = useLanguage();
+  const [formOpen, setFormOpen] = useState(false);
 
   const cards = [
     {
@@ -87,8 +89,7 @@ const AIPoweredMonitor = () => {
       chapeau={t("Surveillez vos marchés en temps réel, anticipez les signaux faibles et gardez toujours une longueur d'avance sur vos concurrents.", "Monitor your markets in real time, anticipate weak signals and always stay one step ahead of your competitors.")}
       chapeauClassName="text-center mb-2"
       ctas={[
-        { label: t("Lire le cas complet", "Read the full case"), action: "#", formType: "f1" },
-        { label: t("Demander une démo", "Request a demo"), action: "#", formType: "f1" },
+        { label: t("Activer votre Portail de Veille", "Activate your Monitoring Portal"), action: "#open-form" },
       ]}
     >
       <StrategicOrbitDiagram />
