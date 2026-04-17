@@ -1,6 +1,6 @@
 import { useState } from "react";
 import DetailPageLayout from "@/components/DetailPageLayout";
-import { FormStrategicExchange } from "@/components/FormModals";
+import { FormCustom } from "@/components/FormCustom";
 
 const StrategicWorkflow = () => {
   const [openStep, setOpenStep] = useState<number | null>(null);
@@ -582,7 +582,20 @@ const StrategicWorkflow = () => {
           </div>
         </div>
       </div>
-      <FormStrategicExchange open={f1Open} onClose={() => setF1Open(false)} />
+      <FormCustom
+        open={f1Open}
+        onClose={() => setF1Open(false)}
+        title="Initier votre Cellule de Veille & Intelligence"
+        submitLabel="Lancer le Diagnostic"
+        formType="strategic_workflow_cell"
+        fields={[
+          { name: "name", placeholder: "Nom & Prénom", required: true, maxLength: 100 },
+          { name: "organization", placeholder: "Organisation", required: true, maxLength: 100 },
+          { name: "sector", placeholder: "Secteur d'activité", required: true, maxLength: 150 },
+          { name: "challenge", placeholder: "Votre principal défi stratégique", required: true, type: "textarea", rows: 4 },
+          { name: "phone", placeholder: "Téléphone", required: true, type: "tel", maxLength: 20 },
+        ]}
+      />
     </DetailPageLayout>
   );
 };

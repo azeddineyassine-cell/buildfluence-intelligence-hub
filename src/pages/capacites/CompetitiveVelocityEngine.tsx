@@ -1,7 +1,7 @@
 import { useState, useCallback } from "react";
 import Navbar from "@/components/Navbar";
 import CTAFooter from "@/components/CTAFooter";
-import { FormStrategicExchange } from "@/components/FormModals";
+import { FormCustom } from "@/components/FormCustom";
 import { motion } from "framer-motion";
 import { useLanguage } from "@/contexts/LanguageContext";
 import logoFondBlanc from "@/assets/logo-buildfluence-fond-blanc.png";
@@ -294,7 +294,20 @@ const CompetitiveVelocityEngine = () => {
       </motion.div>
 
       <CTAFooter />
-      <FormStrategicExchange open={f1Open} onClose={() => setF1Open(false)} />
+      <FormCustom
+        open={f1Open}
+        onClose={() => setF1Open(false)}
+        title={t("Lancer votre Etude & Analyse Stratégique", "Launch your Strategic Study & Analysis")}
+        submitLabel={t("Activer le CVE", "Activate CVE")}
+        formType="competitive_velocity_engine"
+        fields={[
+          { name: "name", placeholder: t("Nom & Prénom", "Full name"), required: true, maxLength: 100 },
+          { name: "organization", placeholder: t("Organisation", "Organization"), required: true, maxLength: 100 },
+          { name: "sector", placeholder: t("Secteur", "Sector"), required: true, maxLength: 150 },
+          { name: "competitors", placeholder: t("Principaux concurrents à analyser", "Main competitors to analyze"), required: true, type: "textarea", rows: 4 },
+          { name: "email", placeholder: t("Email professionnel", "Professional email"), required: true, type: "email", maxLength: 255 },
+        ]}
+      />
     </div>
   );
 };
