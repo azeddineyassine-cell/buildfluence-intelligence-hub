@@ -119,6 +119,43 @@ const AIPoweredMonitor = () => {
           />
         ))}
       </div>
+
+      {/* Custom CTA */}
+      <div className="text-center my-10">
+        <button
+          onClick={() => setFormOpen(true)}
+          className="hover:opacity-90 transition-opacity"
+          style={{
+            background: "#C9A84C",
+            color: "#0D1B2A",
+            fontWeight: 700,
+            padding: "14px 32px",
+            borderRadius: 6,
+            border: "none",
+            fontSize: 14,
+            letterSpacing: 0.5,
+            cursor: "pointer",
+            textTransform: "uppercase",
+          }}
+        >
+          {t("Activer votre Portail de Veille", "Activate your Monitoring Portal")} →
+        </button>
+      </div>
+
+      <FormCustom
+        open={formOpen}
+        onClose={() => setFormOpen(false)}
+        title={t("Activer votre Portail de Veille", "Activate your Monitoring Portal")}
+        submitLabel={t("Démarrer la Veille", "Start Monitoring")}
+        formType="ai_powered_monitor"
+        fields={[
+          { name: "name", placeholder: t("Nom & Prénom", "Full name"), required: true, maxLength: 100 },
+          { name: "organization", placeholder: t("Organisation", "Organization"), required: true, maxLength: 100 },
+          { name: "sector", placeholder: t("Secteur à surveiller", "Sector to monitor"), required: true, maxLength: 150 },
+          { name: "keywords", placeholder: t("Mots-clés prioritaires", "Priority keywords"), required: true, type: "textarea", rows: 4 },
+          { name: "email", placeholder: t("Email professionnel", "Professional email"), required: true, type: "email", maxLength: 255 },
+        ]}
+      />
     </DetailPageLayout>
   );
 };
