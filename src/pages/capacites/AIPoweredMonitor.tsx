@@ -88,9 +88,6 @@ const AIPoweredMonitor = () => {
       titleClassName="text-center"
       chapeau={t("Surveillez vos marchés en temps réel, anticipez les signaux faibles et gardez toujours une longueur d'avance sur vos concurrents.", "Monitor your markets in real time, anticipate weak signals and always stay one step ahead of your competitors.")}
       chapeauClassName="text-center mb-2"
-      ctas={[
-        { label: t("Activer votre Portail de Veille", "Activate your Monitoring Portal"), action: "#open-form" },
-      ]}
     >
       <StrategicOrbitDiagram />
       <TimelineEmbed />
