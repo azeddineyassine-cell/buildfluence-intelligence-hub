@@ -1,6 +1,6 @@
 import { useState } from "react";
 import DetailPageLayout from "@/components/DetailPageLayout";
-import { FormStrategicExchange } from "@/components/FormModals";
+import { FormCustom } from "@/components/FormCustom";
 
 const StrategicWorkflow = () => {
   const [openStep, setOpenStep] = useState<number | null>(null);
@@ -13,7 +13,7 @@ const StrategicWorkflow = () => {
       color: "#4a9a6a",
       icon: "🔍",
       title: "Évaluation des besoins",
-      tag: "Semaines 1–5",
+      tag: "Semaines 1–3",
       items: [
         "Audit et identification des besoins",
         "Analyse des exigences stratégiques",
@@ -28,7 +28,7 @@ const StrategicWorkflow = () => {
       color: "#1a7a5a",
       icon: "🏗️",
       title: "Préparation de l'infrastructure",
-      tag: "Semaines 6–10",
+      tag: "Semaines 4–6",
       items: [
         "Ateliers, Brainstorming & Validation",
         "Setup : Requêtes, profils, livrables",
@@ -43,7 +43,7 @@ const StrategicWorkflow = () => {
       color: "#1a5580",
       icon: "💡",
       title: "Brainstorming & Structuration",
-      tag: "Semaines 11–15",
+      tag: "Semaines 7–9",
       items: [
         "Rédaction & formalisation des exigences",
         "Validation des axes stratégiques",
@@ -58,7 +58,7 @@ const StrategicWorkflow = () => {
       color: "#2a6a9a",
       icon: "🚀",
       title: "Déploiement & Implémentation IA",
-      tag: "Semaines 16–20",
+      tag: "Semaines 10–11",
       items: [
         "Intégration de la solution IA de veille",
         "Tests et ajustements en conditions réelles",
@@ -73,7 +73,7 @@ const StrategicWorkflow = () => {
       color: "#C9A84C",
       icon: "🎓",
       title: "Formation Strategic Empowerment",
-      tag: "Semaines 21–25",
+      tag: "Semaines 12–13",
       items: [
         "Formation sur-mesure Next-Level",
         "Programme de montée en compétences",
@@ -88,7 +88,7 @@ const StrategicWorkflow = () => {
       color: "#7a3060",
       icon: "🔄",
       title: "Gestion du changement",
-      tag: "Semaines 26–30",
+      tag: "Semaines 14–15",
       items: [
         "Direction de Communication interne",
         "Actions internes de conduite du changement",
@@ -103,7 +103,7 @@ const StrategicWorkflow = () => {
       color: "#0F365F",
       icon: "🏅",
       title: "Accompagnement continu & Autonomisation",
-      tag: "Semaines 31–36 et au-delà",
+      tag: "Semaines 16–17",
       items: [
         "Support, suivi et visites sur site",
         "Retour d'expérience & amélioration continue",
@@ -237,6 +237,7 @@ const StrategicWorkflow = () => {
         {/* PILIERS */}
         <div
           style={{
+            position: "relative",
             display: "grid",
             gridTemplateColumns: "repeat(4, 1fr)",
             maxWidth: 1100,
@@ -245,10 +246,22 @@ const StrategicWorkflow = () => {
             gap: 12,
           }}
         >
+          {/* Gold connecting bar through pillar icons */}
+          <div
+            style={{
+              position: "absolute",
+              left: "calc(32px + 12.5%)",
+              right: "calc(32px + 12.5%)",
+              top: 27,
+              height: 2,
+              background: "#C9A84C",
+              zIndex: 0,
+            }}
+          />
           {piliers.map((p, i) => (
             <div
               key={i}
-              style={{ display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center" }}
+              style={{ position: "relative", zIndex: 1, display: "flex", flexDirection: "column", alignItems: "center", textAlign: "center" }}
             >
               <div
                 style={{
@@ -569,7 +582,20 @@ const StrategicWorkflow = () => {
           </div>
         </div>
       </div>
-      <FormStrategicExchange open={f1Open} onClose={() => setF1Open(false)} />
+      <FormCustom
+        open={f1Open}
+        onClose={() => setF1Open(false)}
+        title="Initier votre Cellule de Veille & Intelligence"
+        submitLabel="Lancer le Diagnostic"
+        formType="strategic_workflow_cell"
+        fields={[
+          { name: "name", placeholder: "Nom & Prénom", required: true, maxLength: 100 },
+          { name: "organization", placeholder: "Organisation", required: true, maxLength: 100 },
+          { name: "sector", placeholder: "Secteur d'activité", required: true, maxLength: 150 },
+          { name: "challenge", placeholder: "Votre principal défi stratégique", required: true, type: "textarea", rows: 4 },
+          { name: "phone", placeholder: "Téléphone", required: true, type: "tel", maxLength: 20 },
+        ]}
+      />
     </DetailPageLayout>
   );
 };
