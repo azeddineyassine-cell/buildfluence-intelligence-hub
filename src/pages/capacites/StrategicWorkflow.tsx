@@ -13,7 +13,7 @@ const StrategicWorkflow = () => {
       color: "#4a9a6a",
       icon: "🔍",
       title: "Évaluation des besoins",
-      tag: "Semaines 1–5",
+      tag: "Semaines 1–3",
       items: [
         "Audit et identification des besoins",
         "Analyse des exigences stratégiques",
@@ -28,7 +28,7 @@ const StrategicWorkflow = () => {
       color: "#1a7a5a",
       icon: "🏗️",
       title: "Préparation de l'infrastructure",
-      tag: "Semaines 6–10",
+      tag: "Semaines 4–6",
       items: [
         "Ateliers, Brainstorming & Validation",
         "Setup : Requêtes, profils, livrables",
@@ -43,7 +43,7 @@ const StrategicWorkflow = () => {
       color: "#1a5580",
       icon: "💡",
       title: "Brainstorming & Structuration",
-      tag: "Semaines 11–15",
+      tag: "Semaines 7–9",
       items: [
         "Rédaction & formalisation des exigences",
         "Validation des axes stratégiques",
@@ -58,7 +58,7 @@ const StrategicWorkflow = () => {
       color: "#2a6a9a",
       icon: "🚀",
       title: "Déploiement & Implémentation IA",
-      tag: "Semaines 16–20",
+      tag: "Semaines 10–11",
       items: [
         "Intégration de la solution IA de veille",
         "Tests et ajustements en conditions réelles",
@@ -73,7 +73,7 @@ const StrategicWorkflow = () => {
       color: "#C9A84C",
       icon: "🎓",
       title: "Formation Strategic Empowerment",
-      tag: "Semaines 21–25",
+      tag: "Semaines 12–13",
       items: [
         "Formation sur-mesure Next-Level",
         "Programme de montée en compétences",
@@ -88,7 +88,7 @@ const StrategicWorkflow = () => {
       color: "#7a3060",
       icon: "🔄",
       title: "Gestion du changement",
-      tag: "Semaines 26–30",
+      tag: "Semaines 14–15",
       items: [
         "Direction de Communication interne",
         "Actions internes de conduite du changement",
@@ -103,7 +103,7 @@ const StrategicWorkflow = () => {
       color: "#0F365F",
       icon: "🏅",
       title: "Accompagnement continu & Autonomisation",
-      tag: "Semaines 31–36 et au-delà",
+      tag: "Semaines 16–17",
       items: [
         "Support, suivi et visites sur site",
         "Retour d'expérience & amélioration continue",
