@@ -201,9 +201,15 @@ const Navbar = () => {
   const handleNavClick = (href: string) => {
     setOpen(false);
     setActiveDropdown(null);
+    // Route navigation (starts with "/")
+    if (href.startsWith("/")) {
+      navigate(href);
+      window.scrollTo(0, 0);
+      return;
+    }
+    // Anchor navigation (e.g. "#section")
     if (location.pathname !== "/") {
       navigate("/" + href);
-      // After navigation, scroll to the section
       setTimeout(() => {
         const el = document.querySelector(href);
         el?.scrollIntoView({ behavior: "smooth" });
