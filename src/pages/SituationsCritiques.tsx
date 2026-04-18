@@ -117,12 +117,12 @@ export default function SituationsCritiques() {
           <p style={{fontFamily:"Cormorant Garamond,serif",fontSize:15,fontStyle:"italic",color:"#0D1B2A",textAlign:"center",marginBottom:4,lineHeight:1.5}}>
             « Les crises ne naissent pas du chaos, mais de l'illusion du contrôle. »
           </p>
-          <div style={{width:"100%",maxWidth:594}}>
+          <div style={{width:"100%",maxWidth:1188}}>
             <svg viewBox="0 0 560 560" style={{width:"100%",height:"100%",overflow:"visible"}}>
               <defs>
                 <radialGradient id="cg2" cx="50%" cy="40%" r="60%">
-                  <stop offset="0%" stopColor="#1F4FA0"/>
-                  <stop offset="100%" stopColor="#103E8C"/>
+                  <stop offset="0%" stopColor="#1B478C"/>
+                  <stop offset="100%" stopColor="#10325F"/>
                 </radialGradient>
                 <clipPath id="lc2"><circle cx="280" cy="280" r="56"/></clipPath>
               </defs>
