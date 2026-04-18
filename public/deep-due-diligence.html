@@ -1,0 +1,1720 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Buildfluence · Deep Due Diligence, Case File: Operation Freedom Capital</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;700&family=JetBrains+Mono:wght@300;400;500&family=Cormorant+Garamond:ital,wght@1,400;1,500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0D1B2A;
+    --navy-2:#103E8C;
+    --navy-3:#1a2d4a;
+    --gold:#C9A84C;
+    --gold-soft:#d4b866;
+    --gold-dim:#8a7537;
+    --ivory:#F5F1E8;
+    --paper:#FAF6ED;
+    --bone:#E8E2D0;
+    --red:#B91C1C;
+    --amber:#D97706;
+    --green:#15803D;
+    --ink:#111827;
+    --mute:#6B7280;
+    --rule:#D9CFBC;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{background:var(--paper);color:var(--ink);font-family:'DM Sans',sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  body{
+    background:
+      radial-gradient(1200px 800px at 80% -10%, rgba(201,168,76,.08), transparent 60%),
+      radial-gradient(900px 700px at, 10% 110%, rgba(16,62,140,.06), transparent 55%),
+      var(--paper);
+    min-height:100vh;
+  }
+
+  /* paper grain */
+  body::before{
+    content:"";position:fixed;inset:0;pointer-events:none;z-index:1;mix-blend-mode:multiply;opacity:.5;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.1 0 0 0 0 0.1 0 0 0 0 0.1 0 0 0 0.06 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  }
+
+  .wrap{max-width:1320px;margin:0 auto;padding:0 40px;position:relative;z-index:2}
+
+  /* ============ TOP STAMP BAR ============ */
+  .stamp-bar{
+    border-bottom:1px solid var(--navy);background:var(--navy);color:var(--ivory);
+    font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.22em;text-transform:uppercase;
+    padding:10px 0;position:sticky;top:0;z-index:50;
+  }
+  .stamp-bar .inner{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
+  .stamp-bar .dot{width:6px;height:6px;background:var(--gold);border-radius:50%;display:inline-block;margin:0 8px;animation:pulse 2s ease-in-out infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+  .stamp-bar a{color:var(--gold);text-decoration:none;border-bottom:1px dotted var(--gold-dim)}
+
+  /* ============ HERO ============ */
+  .hero{
+    padding:110px 0 80px;position:relative;border-bottom:1px solid var(--rule);
+    background:
+      linear-gradient(180deg, transparent 0%, transparent 70%, rgba(13,27,42,.04) 100%);
+  }
+  .hero-grid{display:grid;grid-template-columns:1.2fr .9fr;gap:80px;align-items:start}
+  .eyebrow{
+    font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.3em;text-transform:uppercase;
+    color:var(--gold-dim);display:inline-flex;align-items:center;gap:14px;margin-bottom:28px;
+  }
+  .eyebrow::before{content:"";width:40px;height:1px;background:var(--gold)}
+  h1.title{
+    font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(42px,6vw,82px);line-height:.98;
+    color:var(--navy);letter-spacing:-.02em;margin-bottom:32px;
+  }
+  h1.title em{font-style:italic;color:var(--gold);font-weight:400}
+  .lead{
+    font-family:'Cormorant Garamond',serif;font-style:italic;font-size:22px;line-height:1.55;color:var(--navy-3);
+    max-width:580px;margin-bottom:40px;border-left:2px solid var(--gold);padding-left:22px;
+  }
+  .hero-cta{display:flex;gap:14px;flex-wrap:wrap}
+  .btn{
+    font-family:'DM Sans',sans-serif;font-weight:500;font-size:12px;letter-spacing:.22em;text-transform:uppercase;
+    padding:16px 28px;border-radius:2px;cursor:pointer;border:1px solid transparent;transition:all .25s;
+    text-decoration:none;display:inline-flex;align-items:center;gap:10px;
+  }
+  .btn-primary{background:var(--navy);color:var(--ivory);border-color:var(--navy)}
+  .btn-primary:hover{background:var(--gold);color:var(--navy);border-color:var(--gold)}
+  .btn-ghost{background:transparent;color:var(--navy);border-color:var(--navy)}
+  .btn-ghost:hover{background:var(--navy);color:var(--ivory)}
+  .btn .arrow{transition:transform .25s}
+  .btn:hover .arrow{transform:translateX(4px)}
+
+  /* DOSSIER CARD (hero right) */
+  .dossier{
+    background:linear-gradient(180deg,#fefbf3 0%,var(--paper) 100%);
+    border:1px solid var(--rule);border-top:3px solid var(--gold);
+    padding:36px 36px 30px;position:relative;
+    box-shadow:0 40px 80px -40px rgba(13,27,42,.25), 0 2px 0 var(--bone);
+  }
+  .dossier::before{
+    content:"CONFIDENTIEL";
+    position:absolute;top:22px;right:28px;
+    font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.3em;
+    color:var(--red);border:1px solid var(--red);padding:4px 8px;transform:rotate(6deg);opacity:.85;
+  }
+  .dossier-label{
+    font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.25em;color:var(--mute);text-transform:uppercase;margin-bottom:8px;
+  }
+  .dossier h3{
+    font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:var(--navy);line-height:1.15;margin-bottom:18px;
+  }
+  .dossier-meta{display:grid;grid-template-columns:1fr 1fr;gap:2px 24px;margin:20px 0 22px;border-top:1px dashed var(--rule);border-bottom:1px dashed var(--rule);padding:16px 0}
+  .dossier-meta dt{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.2em;color:var(--mute);text-transform:uppercase;margin-top:8px}
+  .dossier-meta dd{font-family:'DM Sans',sans-serif;font-size:13px;color:var(--navy);font-weight:500;margin-bottom:8px}
+  .verdict{
+    display:flex;align-items:center;gap:14px;padding:14px 18px;background:#fff;border:1px solid var(--rule);
+  }
+  .verdict-icon{width:40px;height:40px;border-radius:50%;background:var(--amber);color:#fff;display:grid;place-items:center;font-weight:700;font-family:'Playfair Display',serif;font-size:18px;flex-shrink:0}
+  .verdict-text{font-size:13px;line-height:1.4}
+  .verdict-text strong{display:block;font-family:'Playfair Display',serif;color:var(--navy);font-size:15px;margin-bottom:2px}
+
+  /* STATS STRIP */
+  .stats{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:0;
+    border:1px solid var(--rule);background:#fff;margin-top:60px;
+  }
+  .stat{padding:26px 28px;border-right:1px solid var(--rule);position:relative}
+  .stat:last-child{border-right:none}
+  .stat-num{font-family:'Playfair Display',serif;font-weight:900;font-size:46px;color:var(--navy);line-height:1;letter-spacing:-.02em}
+  .stat-num .u{color:var(--gold);font-size:24px;vertical-align:super;margin-left:3px}
+  .stat-lbl{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.2em;color:var(--mute);text-transform:uppercase;margin-top:10px}
+
+  /* ============ SECTION HEADERS ============ */
+  section{padding:110px 0;border-bottom:1px solid var(--rule);position:relative}
+  .sec-head{display:flex;align-items:baseline;gap:32px;margin-bottom:60px;flex-wrap:wrap}
+  .sec-num{
+    font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.25em;color:var(--gold-dim);
+    text-transform:uppercase;border:1px solid var(--gold);padding:6px 12px;flex-shrink:0;
+  }
+  .sec-title{font-family:'Playfair Display',serif;font-size:clamp(32px,4vw,48px);font-weight:700;color:var(--navy);line-height:1.1;letter-spacing:-.01em;flex:1;min-width:300px}
+  .sec-title em{color:var(--gold);font-style:italic;font-weight:400}
+  .sec-sub{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:19px;color:var(--navy-3);max-width:520px;line-height:1.5}
+
+  /* ============ THE 4 WHAT WE DETECT ============ */
+  .detect{background:var(--navy);color:var(--ivory);padding:120px 0}
+  .detect .sec-title{color:var(--ivory)}
+  .detect .sec-title em{color:var(--gold)}
+  .detect .sec-num{color:var(--gold);border-color:var(--gold)}
+  .detect .sec-sub{color:rgba(245,241,232,.75)}
+  .detect-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid rgba(201,168,76,.25)}
+  .detect-card{padding:40px 36px;border-right:1px solid rgba(201,168,76,.25);border-bottom:1px solid rgba(201,168,76,.25);position:relative;transition:background .3s}
+  .detect-card:nth-child(3n){border-right:none}
+  .detect-card:nth-last-child(-n+3){border-bottom:none}
+  .detect-card:hover{background:rgba(201,168,76,.05)}
+  .detect-idx{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--gold);letter-spacing:.25em;margin-bottom:22px}
+  .detect-card h4{font-family:'Playfair Display',serif;font-weight:700;font-size:22px;margin-bottom:14px;color:var(--ivory);letter-spacing:-.01em}
+  .detect-card p{font-size:14px;line-height:1.65;color:rgba(245,241,232,.78)}
+  .detect-card .icn{
+    position:absolute;top:40px;right:36px;width:28px;height:28px;border:1px solid var(--gold);display:grid;place-items:center;
+    font-family:'Playfair Display',serif;color:var(--gold);font-style:italic;font-size:13px;
+  }
+
+  /* ============ LEVELS ============ */
+  .levels-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  .level{
+    background:#fff;border:1px solid var(--rule);padding:40px 36px 36px;position:relative;
+    transition:transform .3s, box-shadow .3s;overflow:hidden;
+  }
+  .level::before{content:"";position:absolute;left:0;right:0;top:0;height:3px;background:var(--gold)}
+  .level:hover{transform:translateY(-4px);box-shadow:0 30px 60px -30px rgba(13,27,42,.2)}
+  .level-n{
+    font-family:'Playfair Display',serif;font-weight:900;font-size:14px;letter-spacing:.2em;text-transform:uppercase;
+    color:var(--gold-dim);margin-bottom:16px;display:flex;align-items:baseline;gap:12px;
+  }
+  .level-n .big{font-size:72px;color:var(--gold);line-height:.85;font-weight:900;font-style:italic}
+  .level h3{font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:var(--navy);margin-bottom:12px;letter-spacing:-.01em}
+  .level-tag{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:16px;color:var(--gold-dim);margin-bottom:24px}
+  .level ul{list-style:none}
+  .level li{
+    font-size:14px;line-height:1.5;color:var(--navy-3);padding:10px 0;border-bottom:1px dashed var(--rule);display:flex;gap:12px;align-items:flex-start;
+  }
+  .level li:last-child{border-bottom:none}
+  .level li::before{content:"→";color:var(--gold);font-weight:600;flex-shrink:0}
+  .level-out{
+    margin-top:20px;padding-top:20px;border-top:1px solid var(--rule);
+    font-size:12px;color:var(--mute);letter-spacing:.15em;text-transform:uppercase;font-family:'JetBrains Mono',monospace;
+  }
+  .level-out strong{color:var(--navy);font-family:'DM Sans',sans-serif;text-transform:none;letter-spacing:normal;font-size:13px;font-weight:500}
+
+  /* ============ CASE FILE, STORY ============ */
+  .case{background:linear-gradient(180deg, var(--paper) 0%, #fdf9ef 100%);padding:120px 0}
+  .case-intro{display:grid;grid-template-columns:5fr 7fr;gap:40px;align-items:start;margin-bottom:80px}
+  .case-plate{
+    background:var(--navy);color:var(--ivory);padding:50px 44px;position:relative;
+    border-top:3px solid var(--gold);
+  }
+  .case-plate::after{
+    content:"DOSSIER CONFIDENTIEL";
+    position:absolute;bottom:12px;right:18px;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.3em;color:var(--gold);opacity:.7;
+  }
+  .case-plate .kicker{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--gold);letter-spacing:.3em;margin-bottom:18px;text-transform:uppercase}
+  .case-plate h3{font-family:'Playfair Display',serif;font-size:34px;font-weight:700;line-height:1.15;margin-bottom:22px}
+  .case-plate h3 em{color:var(--gold);font-style:italic;font-weight:400}
+  .case-plate p{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:18px;line-height:1.6;color:rgba(245,241,232,.85)}
+
+  .case-note{padding:0 20px}
+  .case-note .q{font-family:'Playfair Display',serif;font-size:56px;color:var(--gold);line-height:0;position:relative;top:28px}
+  .case-note blockquote{
+    font-family:'Cormorant Garamond',serif;font-style:italic;font-size:24px;line-height:1.45;color:var(--navy);border-left:2px solid var(--gold);padding:10px 0 10px 28px;margin-bottom:28px;
+  }
+  .case-note .note-meta{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--mute);letter-spacing:.2em;text-transform:uppercase}
+
+  /* GRILLE PÉRIMÈTRE — 4 colonnes par juridiction */
+  .perimeter{padding-left:10px}
+  .perimeter-head{margin-bottom:20px;border-bottom:1px solid var(--rule);padding-bottom:12px}
+  .p-eyebrow{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:6px}
+  .perimeter-head h4{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--navy);letter-spacing:-.005em}
+  .perimeter-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+  .p-col{display:flex;flex-direction:column;gap:6px}
+  .p-col-head{display:flex;align-items:center;gap:6px;margin-bottom:4px;padding-bottom:6px;border-bottom:1px dashed var(--rule)}
+  .p-country{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.2em;color:var(--navy);font-weight:600}
+  .p-flag{width:18px;height:12px;display:inline-block;flex-shrink:0;border:1px solid rgba(13,27,42,.2);box-shadow:0 1px 2px rgba(0,0,0,.08)}
+  .p-flag-lv{background:linear-gradient(#9E2B25 40%,#fff 40%,#fff 60%,#9E2B25 60%)}
+  .p-flag-cy{background:#fff;position:relative}
+  .p-flag-cy::after{content:"";position:absolute;left:4px;top:3px;width:10px;height:5px;background:#D47600;border-radius:50%}
+  .p-flag-ru{background:linear-gradient(#fff 33.3%,#0039A6 33.3%,#0039A6 66.6%,#D52B1E 66.6%)}
+  .p-flag-vg{background:#012169;position:relative}
+  .p-flag-vg::after{content:"";position:absolute;inset:1px;background:linear-gradient(45deg,transparent 44%,#fff 44%,#fff 56%,transparent 56%),linear-gradient(-45deg,transparent 44%,#fff 44%,#fff 56%,transparent 56%)}
+
+  .p-card{
+    position:relative;display:flex;align-items:center;gap:8px;
+    padding:8px 10px;background:#fff;border:1px solid var(--rule);
+    cursor:pointer;transition:all .2s cubic-bezier(.4,0,.2,1);
+  }
+  .p-card:hover{border-color:var(--gold);box-shadow:0 6px 16px -8px rgba(13,27,42,.2);transform:translateY(-1px)}
+  .p-card-code{
+    width:22px;height:22px;flex-shrink:0;display:grid;place-items:center;
+    font-family:'Playfair Display',serif;font-size:13px;font-weight:800;font-style:italic;
+  }
+  .p-card-name{font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:.1em;color:var(--navy);font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  /* Variantes par type */
+  .p-ent .p-card-code{background:var(--navy);color:var(--gold)}
+  .p-per{background:linear-gradient(to right,#fdfaf0,#fff)}
+  .p-per .p-card-code{background:var(--gold);color:var(--navy)}
+  .p-dead{opacity:.75}
+  .p-dead .p-card-code{background:#9ca3af;color:#fff}
+  .p-dead .p-card-name{color:var(--mute)}
+  .p-offshore{border-color:#B91C1C;background:repeating-linear-gradient(45deg,#fff,#fff 5px,#fef2f2 5px,#fef2f2 10px)}
+  .p-offshore .p-card-code{background:#B91C1C;color:#fff}
+  .p-offshore .p-card-name{color:#B91C1C}
+
+  /* Tooltip */
+  .p-tooltip{
+    position:fixed;z-index:9999;pointer-events:none;
+    background:var(--navy);color:var(--ivory);
+    padding:14px 16px;min-width:240px;max-width:280px;
+    box-shadow:0 20px 40px -12px rgba(13,27,42,.4);
+    border-left:3px solid var(--gold);
+    opacity:0;transform:translateY(4px);transition:opacity .15s,transform .15s;
+  }
+  .p-tooltip.visible{opacity:1;transform:translateY(0)}
+  .p-tt-name{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--gold);margin-bottom:2px;letter-spacing:-.005em}
+  .p-tt-role{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:13px;color:rgba(245,241,232,.8);margin-bottom:10px;padding-bottom:10px;border-bottom:1px solid rgba(245,241,232,.12)}
+  .p-tt-row{display:flex;gap:8px;margin-bottom:6px;font-size:11px;line-height:1.4}
+  .p-tt-row:last-child{margin-bottom:0}
+  .p-tt-label{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);opacity:.7;min-width:72px;flex-shrink:0;padding-top:1px}
+  .p-tt-val{font-family:'DM Sans',sans-serif;color:var(--ivory)}
+
+  /* Citation déplacée sous la grille */
+  .perimeter-quote{
+    margin-top:18px;padding:14px 18px;border-left:2px solid var(--gold);
+    background:rgba(201,168,76,.05);position:relative;
+    display:flex;flex-direction:column;gap:6px;
+  }
+  .perimeter-quote .pq-mark{position:absolute;left:10px;top:2px;font-family:'Playfair Display',serif;font-size:32px;color:var(--gold);opacity:.4;line-height:1}
+  .perimeter-quote em{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:16px;line-height:1.4;color:var(--navy);padding-left:24px}
+  .pq-attrib{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--mute);padding-left:24px}
+  .p-asterisk{color:var(--gold);font-size:11px;margin-left:1px;font-weight:700}
+  .perimeter-legend{margin-top:10px;padding-left:12px;font-family:'DM Sans',sans-serif;font-size:10.5px;color:var(--mute);font-style:italic;line-height:1.4}
+  .pl-asterisk{color:var(--gold);font-weight:700;margin-right:2px}
+
+  /* TIMELINE */
+  .timeline{border-top:1px solid var(--rule);padding-top:60px}
+  .timeline h4{font-family:'Playfair Display',serif;font-size:22px;color:var(--navy);margin-bottom:32px;letter-spacing:-.01em}
+  .tl{display:grid;grid-template-columns:160px 1fr;gap:40px}
+  .tl-item{display:contents}
+  .tl-date{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--gold-dim);letter-spacing:.15em;padding-top:14px;position:relative}
+  .tl-date::after{
+    content:"";position:absolute;right:-20px;top:20px;width:10px;height:10px;border-radius:50%;background:var(--gold);border:3px solid var(--paper);z-index:2;
+  }
+  .tl-body{
+    padding:12px 0 30px 40px;border-left:1px solid var(--rule);position:relative;
+  }
+  .tl-body h5{font-family:'Playfair Display',serif;font-size:18px;color:var(--navy);margin-bottom:6px;font-weight:700}
+  .tl-body p{font-size:14px;line-height:1.6;color:var(--navy-3)}
+  .tl-body .tag{
+    display:inline-block;margin-top:8px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.2em;
+    padding:3px 8px;text-transform:uppercase;
+  }
+  .tag-go{background:#dcfce7;color:#166534}
+  .tag-watch{background:#fef3c7;color:#92400e}
+  .tag-stop{background:#fee2e2;color:#991b1b}
+
+  /* ============ CARTOGRAPHY (the star) ============ */
+  .carto{background:#fafafa;padding:120px 0;position:relative;overflow:hidden}
+  .carto .sec-head{margin-bottom:40px}
+  .carto-intro{
+    background:#fff;border:1px solid var(--rule);padding:28px 32px;margin-bottom:32px;
+    display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center;
+  }
+  .carto-intro p{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:18px;line-height:1.55;color:var(--navy-3);max-width:640px}
+  .carto-key{
+    font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.2em;color:var(--mute);text-transform:uppercase;
+    border-left:1px solid var(--rule);padding-left:24px;
+  }
+  .carto-key div{color:var(--gold-dim);font-weight:500;letter-spacing:.15em;margin-bottom:8px;font-size:11px}
+  .carto-key b{color:var(--navy);font-family:'DM Sans',sans-serif;text-transform:none;letter-spacing:normal;font-weight:500;font-size:13px;display:block;margin-top:2px}
+
+  /* legend */
+  .legend{display:flex;flex-wrap:wrap;gap:22px;margin-bottom:20px;padding:18px 22px;background:#fff;border:1px solid var(--rule)}
+  .lg{display:flex;align-items:center;gap:10px;font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--navy);letter-spacing:.08em;text-transform:uppercase}
+  .lg .sw{width:16px;height:16px;border-radius:50%;flex-shrink:0}
+  .sw-state{background:var(--navy-2)}
+  .sw-person{background:var(--gold);border-radius:2px}
+  .sw-offshore{background:transparent;border:2px dashed var(--red);border-radius:2px}
+  .sw-dead{background:#6b7280;opacity:.5}
+  .sw-link-go{background:var(--green)}
+  .sw-link-warn{background:var(--amber)}
+  .sw-link-stop{background:var(--red)}
+
+  /* THE MAP */
+  .map-wrap{
+    position:relative;background:#fff;border:1px solid var(--rule);
+    box-shadow:0 40px 80px -60px rgba(13,27,42,.3);
+    overflow:hidden;
+  }
+  .map-toolbar{
+    padding:14px 22px;background:var(--navy);color:var(--ivory);display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;
+  }
+  .map-toolbar .title{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.25em;color:var(--gold);text-transform:uppercase}
+  .map-toolbar .hint{font-family:'DM Sans',sans-serif;font-size:12px;color:rgba(245,241,232,.7);font-style:italic}
+  .filters{display:flex;gap:6px;flex-wrap:wrap}
+  .filt{
+    font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.15em;text-transform:uppercase;
+    padding:6px 12px;background:transparent;color:var(--ivory);border:1px solid rgba(245,241,232,.3);cursor:pointer;transition:all .2s;
+  }
+  .filt:hover{border-color:var(--gold);color:var(--gold)}
+  .filt.active{background:var(--gold);color:var(--navy);border-color:var(--gold)}
+
+  #mapStage{
+    height:760px;position:relative;
+    background:
+      linear-gradient(180deg, #fdfcf7, #fafafa);
+  }
+  #mapStage svg{position:absolute;inset:0;width:100%;height:100%;cursor:grab}
+  #mapStage svg:active{cursor:grabbing}
+
+  /* node labels & tooltips */
+  .node{cursor:pointer;transition:opacity .3s}
+  .node-circle{transition:all .25s}
+  .node:hover .node-circle{filter:drop-shadow(0 6px 16px rgba(201,168,76,.35))}
+  .node-label{font-family:'Playfair Display',serif;font-weight:700;font-size:13px;fill:var(--navy);letter-spacing:.02em;pointer-events:none}
+  .node-label.small{font-size:11px;font-weight:500}
+  .node-sub{font-family:'JetBrains Mono',monospace;font-size:9px;fill:var(--mute);letter-spacing:.15em;text-transform:uppercase;pointer-events:none}
+  .link{transition:opacity .3s, stroke-width .3s}
+  .link-label{font-family:'JetBrains Mono',monospace;font-size:9px;fill:var(--mute);letter-spacing:.1em;text-transform:uppercase;pointer-events:none}
+  .dim{opacity:.1}
+
+  /* detail panel */
+  .detail-panel{
+    position:absolute;top:0;right:-460px;bottom:0;width:420px;background:#fff;
+    border-left:1px solid var(--rule);box-shadow:-30px 0 60px -30px rgba(13,27,42,.2);
+    transition:right .4s cubic-bezier(.22,.9,.35,1);z-index:10;overflow-y:auto;
+  }
+  .detail-panel.open{right:0}
+  .dp-head{padding:28px 32px 20px;border-bottom:1px solid var(--rule);position:relative;background:var(--navy);color:var(--ivory)}
+  .dp-close{
+    position:absolute;top:18px;right:18px;width:32px;height:32px;border:1px solid rgba(245,241,232,.3);
+    background:transparent;color:var(--ivory);cursor:pointer;transition:all .2s;font-size:14px;
+    z-index:20;pointer-events:auto;display:flex;align-items:center;justify-content:center;line-height:1;
+  }
+  .dp-close:hover{background:var(--gold);color:var(--navy);border-color:var(--gold)}
+  .dp-kicker{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.25em;color:var(--gold);text-transform:uppercase;margin-bottom:10px}
+  .dp-head h3{font-family:'Playfair Display',serif;font-size:26px;font-weight:700;line-height:1.1;letter-spacing:-.01em}
+  .dp-head .alias{font-family:'Cormorant Garamond',serif;font-style:italic;color:rgba(201,168,76,.9);font-size:15px;margin-top:8px}
+  .dp-country{display:flex;align-items:center;gap:10px;margin-top:14px;padding:8px 12px;background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.25);border-radius:2px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:#E8E2D0}
+  .dp-country svg{flex-shrink:0}
+  .dp-country .cty-label{opacity:.7;font-size:9px;letter-spacing:.25em}
+  .dp-country .cty-name{color:var(--gold);font-weight:600}
+  .dp-body{padding:28px 32px}
+  .dp-section{margin-bottom:24px}
+  .dp-section h4{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.25em;color:var(--gold-dim);text-transform:uppercase;margin-bottom:8px}
+  .dp-section p{font-size:14px;line-height:1.6;color:var(--navy-3)}
+  .dp-badge{
+    display:inline-flex;align-items:center;gap:8px;padding:8px 14px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.15em;text-transform:uppercase;margin:8px 0;
+  }
+  .dp-badge.go{background:#dcfce7;color:#166534}
+  .dp-badge.watch{background:#fef3c7;color:#92400e}
+  .dp-badge.stop{background:#fee2e2;color:#991b1b}
+  .dp-badge.dead{background:#f3f4f6;color:#374151}
+  .dp-links{display:flex;flex-direction:column;gap:8px;font-size:13px}
+  .dp-links a{color:var(--navy);text-decoration:none;border-left:2px solid var(--gold);padding:6px 12px;background:#fafafa;cursor:default;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.1em}
+
+  /* SIGNAL CARDS, findings */
+  .findings{margin-top:80px}
+  .findings h3{font-family:'Playfair Display',serif;font-size:28px;color:var(--navy);margin-bottom:8px;font-weight:700;letter-spacing:-.01em}
+  .findings .f-sub{font-family:'Cormorant Garamond',serif;font-style:italic;color:var(--mute);font-size:17px;margin-bottom:32px}
+  .sig-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule)}
+  .sig{background:#fff;padding:26px 24px;position:relative}
+  .sig-level{
+    font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.25em;text-transform:uppercase;
+    padding:3px 8px;position:absolute;top:26px;right:24px;
+  }
+  .sig-level.l-red{background:var(--red);color:#fff}
+  .sig-level.l-amb{background:var(--amber);color:#fff}
+  .sig-level.l-grn{background:var(--green);color:#fff}
+  .sig h4{font-family:'Playfair Display',serif;font-size:17px;color:var(--navy);margin-bottom:10px;margin-top:28px;line-height:1.25}
+  .sig p{font-size:13px;line-height:1.55;color:var(--navy-3)}
+  .sig .detected{margin-top:14px;padding-top:14px;border-top:1px dashed var(--rule);font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--gold-dim);letter-spacing:.12em;text-transform:uppercase}
+
+  /* VERDICT BLOCK */
+  .verdict-block{
+    margin-top:80px;background:var(--navy);color:var(--ivory);padding:60px;display:grid;grid-template-columns:.8fr 1.2fr;gap:60px;align-items:center;border-top:3px solid var(--gold);
+  }
+  .verdict-block h3{font-family:'Playfair Display',serif;font-size:36px;font-weight:700;line-height:1.1;margin-bottom:16px}
+  .verdict-block h3 em{color:var(--gold);font-style:italic;font-weight:400}
+  .verdict-block .vb-intro{font-family:'Cormorant Garamond',serif;font-style:italic;color:rgba(245,241,232,.8);font-size:18px}
+  .verdict-list{display:flex;flex-direction:column;gap:14px}
+  .vr{
+    display:grid;grid-template-columns:140px 60px 1fr;gap:18px;align-items:center;padding:18px 22px;
+    background:rgba(245,241,232,.04);border-left:3px solid;
+  }
+  .vr.go{border-color:#22c55e}
+  .vr.watch{border-color:var(--gold)}
+  .vr.stop{border-color:var(--red)}
+  .vr-badge{font-family:'Playfair Display',serif;font-weight:700;font-size:14px;letter-spacing:.2em;text-transform:uppercase}
+  .vr.go .vr-badge{color:#4ade80}
+  .vr.watch .vr-badge{color:var(--gold)}
+  .vr.stop .vr-badge{color:#f87171}
+  .vr-icon{font-size:30px;font-family:'Playfair Display',serif;font-weight:900;text-align:center;opacity:.7}
+  .vr-text strong{display:block;font-family:'Playfair Display',serif;font-size:17px;color:var(--ivory);margin-bottom:4px;font-weight:700}
+  .vr-text span{font-size:13px;color:rgba(245,241,232,.7);line-height:1.5}
+
+  /* ============ CTA ============ */
+  .cta{padding:120px 0;text-align:center;background:var(--navy);color:var(--ivory);position:relative;overflow:hidden}
+  .cta::before{
+    content:"";position:absolute;inset:0;opacity:.05;
+    background-image:
+      linear-gradient(var(--gold) 1px, transparent 1px),
+      linear-gradient(90deg, var(--gold) 1px, transparent 1px);
+    background-size:80px 80px;
+  }
+  .cta-inner{position:relative;z-index:2;max-width:720px;margin:0 auto;padding:0 24px}
+  .cta .eyebrow{color:var(--gold)}
+  .cta .eyebrow::before{background:var(--gold)}
+  .cta h2{font-family:'Playfair Display',serif;font-size:clamp(36px,5vw,58px);font-weight:700;line-height:1.1;margin-bottom:24px;letter-spacing:-.01em}
+  .cta h2 em{color:var(--gold);font-style:italic;font-weight:400}
+  .cta p{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:20px;color:rgba(245,241,232,.85);margin-bottom:40px;line-height:1.55}
+  .cta .btn-primary{background:var(--gold);color:var(--navy);border-color:var(--gold)}
+  .cta .btn-primary:hover{background:#ddbc5f;border-color:#ddbc5f}
+
+  /* FOOTER */
+  footer{background:var(--navy);color:rgba(245,241,232,.6);padding:32px 0;border-top:1px solid rgba(201,168,76,.15);font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.15em;text-transform:uppercase}
+  footer .inner{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
+  footer a{color:var(--gold);text-decoration:none}
+
+  /* responsive */
+  @media (max-width:980px){
+    .hero-grid,.case-intro,.verdict-block{grid-template-columns:1fr;gap:40px}
+    .detect-grid{grid-template-columns:1fr}
+    .detect-card{border-right:none !important}
+    .levels-grid,.sig-grid{grid-template-columns:1fr 1fr}
+    .stats{grid-template-columns:1fr 1fr}
+    .carto-intro{grid-template-columns:1fr}
+    .carto-key{border-left:none;border-top:1px solid var(--rule);padding:22px 0 0}
+    .detail-panel{width:100%;right:-100%}
+    #mapStage{height:560px}
+    .perimeter-grid{grid-template-columns:repeat(2,1fr)}
+    .perimeter{padding-left:0}
+  }
+  @media (max-width:640px){
+    .wrap{padding:0 22px}
+    .levels-grid,.sig-grid,.stats{grid-template-columns:1fr}
+    .tl{grid-template-columns:1fr;gap:6px}
+    .tl-date::after{display:none}
+    .tl-body{border-left:none;padding:0 0 24px 0}
+    .stamp-bar .inner>*:not(.brand){display:none}
+  }
+
+  /* fade-in on load */
+  .fade-in{opacity:0;transform:translateY(20px);animation:fadeIn .9s forwards}
+  @keyframes fadeIn{to{opacity:1;transform:none}}
+  .d1{animation-delay:.15s}.d2{animation-delay:.3s}.d3{animation-delay:.45s}.d4{animation-delay:.6s}
+</style>
+</head>
+<body>
+
+<!-- ============ STICKY CLASSIFICATION BAR ============ -->
+<div class="stamp-bar">
+  <div class="wrap inner">
+    <span class="brand"><strong style="color:var(--gold)">BUILDFLUENCE</strong> · INTELLIGENCE HUB<span class="dot"></span>DEEP DUE DILIGENCE</span>
+    <span>CLASSIFICATION : <span style="color:var(--gold)">NDA / CONFIDENTIEL</span></span>
+    <span>DOSSIER CONFIDENTIEL<span class="dot"></span>MAJ : AVR. 2026</span>
+  </div>
+</div>
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <div class="eyebrow fade-in">PILIER III · DEEP DUE DILIGENCE</div>
+        <h1 class="title fade-in d1">Le risque n'est jamais visible.<br><em>Il se loge dans l'angle mort.</em></h1>
+        <p class="lead fade-in d2">Entre la signature et le scandale, il y a toujours un silence qu'on aurait pu entendre. Notre métier : écouter ce silence avant qu'il ne devienne un coût.</p>
+        <div class="hero-cta fade-in d3">
+          <a class="btn btn-primary" href="#case">Explorer un cas réel <span class="arrow">→</span></a>
+          <a class="btn btn-ghost" href="#levels">Nos 3 niveaux d'investigation</a>
+        </div>
+      </div>
+
+      <aside class="dossier fade-in d2">
+        <div class="dossier-label">Résumé opérationnel · mandant protégé par NDA</div>
+        <h3>Fonds d'investissement européen.<br>Partenariat en capital risque à <em style="color:var(--gold);font-style:italic;font-weight:400">400 M$</em>.</h3>
+        <dl class="dossier-meta">
+          <dt>Cible</dt><dd>Société VC · FinTech/IT</dd>
+          <dt>Périmètre</dt><dd>5 entités · 7 personnes clés</dd>
+          <dt>Durée</dt><dd>6 semaines</dd>
+          <dt>Niveau</dt><dd>Level 3 · Forensic</dd>
+          <dt>Juridictions</dt><dd>Lettonie · Chypre · BVI · Russie</dd>
+          <dt>Rendu</dt><dd>Dossier + cartographie</dd>
+        </dl>
+        <div class="verdict">
+          <div class="verdict-icon" style="background:var(--amber)">⚠</div>
+          <div class="verdict-text">
+            <strong>Verdict : Vigilance</strong>
+            Go sur le dirigeant. Attention sur la holding-parent. Partenariat conclu, périmètre redéfini.
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <div class="stats fade-in d4">
+      <div class="stat"><div class="stat-num">400<span class="u">M$</span></div><div class="stat-lbl">Sécurisés en 2024</div></div>
+      <div class="stat"><div class="stat-num">5</div><div class="stat-lbl">Entités cartographiées</div></div>
+      <div class="stat"><div class="stat-num">2</div><div class="stat-lbl">Shells offshore identifiées</div></div>
+      <div class="stat"><div class="stat-num">3</div><div class="stat-lbl">Signaux rouges détectés</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SIGNALS WE DETECT ============ -->
+<section class="detect" id="signals">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-num">01 · Signaux</div>
+      <h2 class="sec-title">Ce que nous <em>détectons</em>, <br>là où personne ne regarde.</h2>
+      <p class="sec-sub">Montages opaques, affiliations politiques, passifs dissimulés, réputations compromises, vulnérabilités géopolitiques, conflits structurels. <em>Six typologies de risques qui échappent aux audits classiques.</em></p>
+    </div>
+
+    <div class="detect-grid">
+      <div class="detect-card">
+        <div class="icn">i</div>
+        <div class="detect-idx">S/01</div>
+        <h4>Montages opaques</h4>
+        <p>Structures offshore en cascade, actionnariat difficile à tracer, multiplicité des juridictions, sociétés écrans au nom identique créées à des dates différentes.</p>
+      </div>
+      <div class="detect-card">
+        <div class="icn">ii</div>
+        <div class="detect-idx">S/02</div>
+        <h4>Affiliations politiques</h4>
+        <p>Liens avec régimes sanctionnés, PEP (Personnes Politiquement Exposées), réseaux d'influence toxiques, financements parallèles.</p>
+      </div>
+      <div class="detect-card">
+        <div class="icn">iii</div>
+        <div class="detect-idx">S/03</div>
+        <h4>Passifs dissimulés</h4>
+        <p>Litiges non déclarés, liquidations discrètes, procédures dans des juridictions tierces, dettes absorbées par restructuration.</p>
+      </div>
+      <div class="detect-card">
+        <div class="icn">iv</div>
+        <div class="detect-idx">S/04</div>
+        <h4>Réputations compromises</h4>
+        <p>Scandales enterrés, associations avec dirigeants condamnés, pratiques douteuses documentées dans la presse étrangère.</p>
+      </div>
+      <div class="detect-card">
+        <div class="icn">v</div>
+        <div class="detect-idx">S/05</div>
+        <h4>Vulnérabilités géopolitiques</h4>
+        <p>Exposition à des sanctions potentielles, zones de conflit, tensions diplomatiques non anticipées, dépendances énergétiques.</p>
+      </div>
+      <div class="detect-card">
+        <div class="icn">vi</div>
+        <div class="detect-idx">S/06</div>
+        <h4>Conflits structurels</h4>
+        <p>Interconnexions avec concurrents, double-jeu commercial, loyautés divisées, dirigeants actifs dans plusieurs entités concurrentes.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 3 LEVELS ============ -->
+<section id="levels">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-num">02 · Méthode</div>
+      <h2 class="sec-title">Trois niveaux. <em>Une seule logique :</em><br>détecter ce que l'autre ne dit pas.</h2>
+      <p class="sec-sub">Du screening express au dossier forensique. Chaque niveau se prononce clairement : Go, Vigilance, ou No-Go.</p>
+    </div>
+
+    <div class="levels-grid">
+      <article class="level">
+        <div class="level-n"><span class="big">01</span>INTEGRITY CHECK</div>
+        <h3>Screening express</h3>
+        <div class="level-tag">Décision en 7 à 10 jours</div>
+        <ul>
+          <li>Mapping express des acteurs & dirigeants</li>
+          <li>Screening PEP & affiliations déclarées</li>
+          <li>Consultation sanctions : OFAC, EU, UN, Interpol</li>
+          <li>Empreinte numérique & signaux médiatiques</li>
+          <li>Croisement avec registres publics</li>
+        </ul>
+        <div class="level-out">LIVRABLE<br><strong>Fiche Go / Vigilance / No Go</strong></div>
+      </article>
+
+      <article class="level">
+        <div class="level-n"><span class="big">02</span>RISK PROFILING</div>
+        <h3>Analyse stratégique</h3>
+        <div class="level-tag">Décision en 3 à 4 semaines</div>
+        <ul>
+          <li>Cartographie complète des parties prenantes</li>
+          <li>Analyse géopolitique du périmètre d'activité</li>
+          <li>Historique d'investissement & portefeuille</li>
+          <li>Identification des dirigeants non déclarés</li>
+          <li>Détection des conflits d'intérêts</li>
+        </ul>
+        <div class="level-out">LIVRABLE<br><strong>Rapport stratégique + cartographie des flux</strong></div>
+      </article>
+
+      <article class="level">
+        <div class="level-n"><span class="big">03</span>REGULATORY COMPLIANCE</div>
+        <h3>Forensique profonde</h3>
+        <div class="level-tag">Décision en 5 à 8 semaines</div>
+        <ul>
+          <li>Décryptage actionnariats offshore & BVI</li>
+          <li>Audit KYC / KYS / LCB FT / ESG</li>
+          <li>Bases ICIJ, Pandora, Panama Papers</li>
+          <li>Registres bénéficiaires effectifs croisés</li>
+          <li>Dossier contradictoire & recommandations</li>
+        </ul>
+        <div class="level-out">LIVRABLE<br><strong>Dossier forensique complet + dashboard de suivi</strong></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CASE FILE ============ -->
+<section class="case" id="case">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-num">03 · Cas d'école</div>
+      <h2 class="sec-title">Dossier <em>confidentiel</em><br>Mission : protéger 400 M$.</h2>
+      <p class="sec-sub">Ce qui suit est un cas réel, conduit en 2024 pour un fonds d'investissement européen. Par respect du NDA, entités et personnes ont été réencodées en États américains et Présidents des États Unis. La structure relationnelle, elle, est authentique.</p>
+    </div>
+
+    <div class="case-intro">
+      <div class="case-plate">
+        <div class="kicker">Brief client · novembre 2024</div>
+        <h3>« Nous nous apprêtons à coinvestir <em>400 M$</em> dans un fonds de capital risque établi à l'étranger. Tout semble propre. Trop propre. »</h3>
+        <p>La demande du mandant tenait en une phrase. En six semaines, nos analystes OSINT ont établi qu'il existait au moins deux entités écrans dans un paradis fiscal, un président discrètement absent des communications officielles, et une filiation historique avec un groupe liquidé pour fraude.</p>
+      </div>
+
+      <div class="perimeter">
+        <div class="perimeter-head">
+          <span class="p-eyebrow">Le périmètre du dossier</span>
+          <h4>5 entités · 7 personnes clés · 4 juridictions</h4>
+        </div>
+
+        <div class="perimeter-grid">
+          <!-- COLONNE LETTONIE -->
+          <div class="p-col">
+            <div class="p-col-head">
+              <span class="p-flag p-flag-lv"></span>
+              <span class="p-country">LETTONIE</span>
+            </div>
+            <div class="p-card p-ent"
+                 data-name="DELAWARE" data-role="Entité cible"
+                 data-sector="Capital risque · FinTech / IT"
+                 data-year="2009" data-leader="WASHINGTON">
+              <span class="p-card-code">D</span>
+              <span class="p-card-name">DELAWARE</span>
+            </div>
+            <div class="p-card p-per"
+                 data-name="WASHINGTON" data-role="Fondateur & dirigeant"
+                 data-sector="Capital risque · 20 ans en VC"
+                 data-year="—" data-leader="DELAWARE · CALIFORNIA">
+              <span class="p-card-code">W</span>
+              <span class="p-card-name">WASHINGTON</span>
+            </div>
+          </div>
+
+          <!-- COLONNE CHYPRE -->
+          <div class="p-col">
+            <div class="p-col-head">
+              <span class="p-flag p-flag-cy"></span>
+              <span class="p-country">CHYPRE</span>
+            </div>
+            <div class="p-card p-ent"
+                 data-name="NEVADA" data-role="Fonds parent · holding"
+                 data-sector="Private equity · biotech / IT / agro"
+                 data-year="2006" data-leader="JEFFERSON">
+              <span class="p-card-code">N</span>
+              <span class="p-card-name">NEVADA</span>
+            </div>
+            <div class="p-card p-ent"
+                 data-name="KANSAS" data-role="Filiale agroalimentaire"
+                 data-sector="Agro global · filiale NEVADA"
+                 data-year="2011" data-leader="MADISON">
+              <span class="p-card-code">K</span>
+              <span class="p-card-name">KANSAS</span>
+            </div>
+            <div class="p-card p-ent"
+                 data-name="WYOMING" data-role="Société énergétique"
+                 data-sector="Énergie · homonymie suspecte avec entité 1970"
+                 data-year="2018" data-leader="MADISON">
+              <span class="p-card-code">W</span>
+              <span class="p-card-name">WYOMING</span>
+            </div>
+            <div class="p-card p-per"
+                 data-name="JEFFERSON" data-role="Président NEVADA"
+                 data-sector="Multimandats · ex OHIO · 2 shells BVI"
+                 data-year="—" data-leader="NEVADA · OHIO · IOWA · TEXAS">
+              <span class="p-card-code">J</span>
+              <span class="p-card-name">JEFFERSON</span>
+            </div>
+            <div class="p-card p-per"
+                 data-name="MADISON" data-role="Directeur multi-entités"
+                 data-sector="Direction NEVADA, KANSAS, WYOMING"
+                 data-year="—" data-leader="NEVADA · KANSAS · WYOMING">
+              <span class="p-card-code">M</span>
+              <span class="p-card-name">MADISON</span>
+            </div>
+            <div class="p-card p-per"
+                 data-name="ADAMS" data-role="Avocat d'entreprise"
+                 data-sector="Juridique · NEVADA"
+                 data-year="Depuis 2020" data-leader="NEVADA">
+              <span class="p-card-code">A</span>
+              <span class="p-card-name">ADAMS</span>
+            </div>
+            <div class="p-card p-per"
+                 data-name="FILLMORE" data-role="Ex directeur historique"
+                 data-sector="WYOMING originelle (1970, dissoute)"
+                 data-year="1970" data-leader="WYOMING (ancien)">
+              <span class="p-card-code">F</span>
+              <span class="p-card-name">FILLMORE</span>
+            </div>
+          </div>
+
+          <!-- COLONNE RUSSIE -->
+          <div class="p-col">
+            <div class="p-col-head">
+              <span class="p-flag p-flag-ru"></span>
+              <span class="p-country">RUSSIE</span>
+            </div>
+            <div class="p-card p-dead"
+                 data-name="OHIO" data-role="Entité liquidée"
+                 data-sector="Agroalimentaire · sucre et céréales"
+                 data-year="Liquidé 2017" data-leader="NIXON (ex-président)">
+              <span class="p-card-code">O</span>
+              <span class="p-card-name">OHIO</span>
+            </div>
+            <div class="p-card p-ent"
+                 data-name="TEXAS" data-role="Banque régionale"
+                 data-sector="Banque · Kazan · mandat non vérifié"
+                 data-year="—" data-leader="JEFFERSON (allégué)">
+              <span class="p-card-code">T</span>
+              <span class="p-card-name">TEXAS</span>
+            </div>
+            <div class="p-card p-ent"
+                 data-name="IOWA" data-role="Producteur agroalimentaire"
+                 data-sector="Viande de porc · Oufa"
+                 data-year="—" data-leader="JEFFERSON (CA)">
+              <span class="p-card-code">I</span>
+              <span class="p-card-name">IOWA</span>
+            </div>
+            <div class="p-card p-ent"
+                 data-name="CALIFORNIA" data-role="Second fonds technologique"
+                 data-sector="Tech · Moscou · opacité de communication"
+                 data-year="—" data-leader="WASHINGTON (partner)">
+              <span class="p-card-code">C</span>
+              <span class="p-card-name">CALIFORNIA</span>
+            </div>
+            <div class="p-card p-per"
+                 data-name="JACKSON" data-role="Relations investisseurs"
+                 data-sector="Ex banquier · absent communication officielle"
+                 data-year="Depuis 2011" data-leader="NEVADA (non déclaré)">
+              <span class="p-card-code">J</span>
+              <span class="p-card-name">JACKSON</span>
+            </div>
+            <div class="p-card p-per"
+                 data-name="NIXON" data-role="Ex président (incarcéré)"
+                 data-sector="Présidence OHIO avant liquidation"
+                 data-year="—" data-leader="OHIO (ex)">
+              <span class="p-card-code">N</span>
+              <span class="p-card-name">NIXON</span>
+            </div>
+          </div>
+
+          <!-- COLONNE BVI -->
+          <div class="p-col">
+            <div class="p-col-head">
+              <span class="p-flag p-flag-vg"></span>
+              <span class="p-country">BVI<sup class="p-asterisk">*</sup></span>
+            </div>
+            <div class="p-card p-offshore"
+                 data-name="BERMUDA A" data-role="Shell offshore"
+                 data-sector="Pandora Papers · adresse moscovite"
+                 data-year="Date masquée" data-leader="JEFFERSON">
+              <span class="p-card-code">$</span>
+              <span class="p-card-name">BERMUDA A</span>
+            </div>
+            <div class="p-card p-offshore"
+                 data-name="BERMUDA B" data-role="Shell offshore"
+                 data-sector="Même adresse que BERMUDA A"
+                 data-year="Date masquée" data-leader="JEFFERSON">
+              <span class="p-card-code">$</span>
+              <span class="p-card-name">BERMUDA B</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="perimeter-quote">
+          <span class="pq-mark">“</span>
+          <em>Les documents ne disaient rien. Les connexions disaient tout.</em>
+          <span class="pq-attrib">Note d'analyste · vague 3 · OSINT profond</span>
+        </div>
+        <div class="perimeter-legend">
+          <span class="pl-asterisk">*</span> BVI : British Virgin Islands, paradis fiscal des Caraïbes britanniques.
+        </div>
+      </div>
+    </div>
+
+    <!-- TIMELINE -->
+    <div class="timeline">
+      <h4>Chronologie de l'investigation</h4>
+      <div class="tl">
+        <div class="tl-item">
+          <div class="tl-date">J+3 · SEMAINE 1</div>
+          <div class="tl-body">
+            <h5>Analyse initiale · décryptage ouvert</h5>
+            <p>Revue des sites institutionnels. La cible principale (<strong>DELAWARE</strong>) affiche un dirigeant unique. Mais une mention croisée dans une tierce source évoque un coinvestisseur systématique : un fonds basé dans un autre <strong>État offshore (NEVADA)</strong>.</p>
+            <span class="tag tag-watch">Déviation signalée</span>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-date">J+10 · SEMAINE 2</div>
+          <div class="tl-body">
+            <h5>Cartographie des dirigeants</h5>
+            <p>Le site officiel de NEVADA liste 3 managers. Une investigation profonde en révèle un <strong>quatrième</strong>, ex banquier, actif dans les relations investisseurs, jamais mentionné en communication publique. Indice de gouvernance asymétrique.</p>
+            <span class="tag tag-watch">Dirigeant fantôme identifié</span>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-date">J+20 · SEMAINE 3</div>
+          <div class="tl-body">
+            <h5>Filiation historique du Président</h5>
+            <p>Le Président de NEVADA a présidé un ancien groupe agroalimentaire (<strong>OHIO</strong>) liquidé pour fraudes en 2017. Son prédécesseur y est incarcéré. Lui-même n'est pas impliqué, mais c'est <strong>avec les fonds d'OHIO</strong> qu'il a capitalisé NEVADA.</p>
+            <span class="tag tag-stop">Signal rouge</span>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-date">J+28 · SEMAINE 4</div>
+          <div class="tl-body">
+            <h5>Requête ICIJ · Offshore Leaks</h5>
+            <p>Recherche dans la base du Consortium International des Journalistes d'Investigation. Le Président de NEVADA est propriétaire de <strong>2 sociétés offshore</strong> domiciliées aux Îles Vierges Britanniques, même adresse moscovite, nationalité confirmée.</p>
+            <span class="tag tag-stop">Preuve matérielle</span>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-date">J+35 · SEMAINE 5</div>
+          <div class="tl-body">
+            <h5>Analyse de conformité & sanctions</h5>
+            <p>Aucune des entités ni des individus ne figure dans les listes de sanctions ONU, OFAC, EU ou Interpol. Le risque n'est pas réglementaire, il est <strong>réputationnel et structurel</strong>.</p>
+            <span class="tag tag-go">Conformité : propre</span>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-date">J+42 · SEMAINE 6</div>
+          <div class="tl-body">
+            <h5>Remise du dossier & recommandation</h5>
+            <p>Dossier de 48 pages + dashboard. Recommandation : <strong>Go sur le dirigeant opérationnel</strong> (DELAWARE), <strong>Vigilance sur le coinvestisseur</strong> (NEVADA) avec clauses de protection renforcées. Le partenariat a été signé, sur périmètre redéfini.</p>
+            <span class="tag tag-go">Mission accomplie</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ THE CARTOGRAPHY, interactive ============ -->
+<section class="carto" id="map">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-num">04 · Cartographie</div>
+      <h2 class="sec-title">La <em>cartographie</em><br>relationnelle du dossier.</h2>
+    </div>
+
+    <div class="carto-intro">
+      <p>Par respect du NDA contractuel, nous avons réencodé chaque société en <strong>État des États Unis</strong> et chaque dirigeant en <strong>Président des États Unis</strong>. Le schéma relationnel, liens financiers, directions partagées, passifs historiques, structures offshore, est authentique.</p>
+      <div class="carto-key">
+        <div>MÉTAPHORE</div>
+        <b>Sociétés → États</b>
+        <b>Dirigeants → Présidents</b>
+        <b>Paradis fiscaux → Territoires insulaires</b>
+      </div>
+    </div>
+
+    <div class="legend">
+      <div class="lg"><span class="sw sw-state"></span>Entité / société</div>
+      <div class="lg"><span class="sw sw-person"></span>Dirigeant identifié</div>
+      <div class="lg"><span class="sw sw-offshore"></span>Shell offshore</div>
+      <div class="lg"><span class="sw sw-dead"></span>Entité liquidée</div>
+      <div class="lg"><span class="sw sw-link-go"></span>Lien vérifié / déclaré</div>
+      <div class="lg"><span class="sw sw-link-warn"></span>Lien officieux / indirect</div>
+      <div class="lg"><span class="sw sw-link-stop"></span>Lien historique problématique</div>
+    </div>
+
+    <div class="map-wrap">
+      <div class="map-toolbar">
+        <div class="title">↳ CARTOGRAPHIE INTERACTIVE · DOSSIER CONFIDENTIEL</div>
+        <div class="filters">
+          <button class="filt active" data-filt="all">Tout</button>
+          <button class="filt" data-filt="entity">Entités</button>
+          <button class="filt" data-filt="person">Dirigeants</button>
+          <button class="filt" data-filt="offshore">Offshore</button>
+          <button class="filt" data-filt="problem">Signaux rouges</button>
+        </div>
+        <div class="hint">Cliquez un nœud pour le dossier individuel</div>
+      </div>
+
+      <div id="mapStage">
+        <svg id="graph" viewBox="0 0 1280 760" preserveAspectRatio="xMidYMid meet"></svg>
+
+        <aside class="detail-panel" id="detail">
+          <div class="dp-head">
+            <button class="dp-close" id="closeDetail">✕</button>
+            <div class="dp-kicker" id="dpKicker">,</div>
+            <h3 id="dpTitle">,</h3>
+            <div class="alias" id="dpAlias"></div>
+          </div>
+          <div class="dp-body">
+            <div class="dp-section">
+              <h4>Réencodage NDA</h4>
+              <p id="dpRecode">,</p>
+            </div>
+            <div class="dp-section">
+              <h4>Profil</h4>
+              <p id="dpProfile">,</p>
+            </div>
+            <div class="dp-section">
+              <h4>Signaux détectés</h4>
+              <p id="dpSignals">,</p>
+            </div>
+            <div class="dp-section">
+              <h4>Verdict</h4>
+              <div id="dpVerdict"></div>
+            </div>
+            <div class="dp-section">
+              <h4>Connexions dans le dossier</h4>
+              <div class="dp-links" id="dpLinks">,</div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+
+    <!-- FINDINGS -->
+    <div class="findings">
+      <h3>Signaux remontés · vue synthétique</h3>
+      <p class="f-sub">Les éléments qui, pris isolément, ne disent rien. Pris ensemble, ils racontent tout.</p>
+
+      <div class="sig-grid">
+        <div class="sig">
+          <span class="sig-level l-red">NO GO</span>
+          <h4>Deux shells offshore aux BVI</h4>
+          <p>Le Président de NEVADA possède deux sociétés dans un paradis fiscal, révélées par les Pandora Papers. Même adresse moscovite sur les deux enregistrements.</p>
+          <div class="detected">Détection : base ICIJ Offshore Leaks</div>
+        </div>
+        <div class="sig">
+          <span class="sig-level l-red">NO GO</span>
+          <h4>Filiation historique frauduleuse</h4>
+          <p>Présidence héritée d'un groupe agroalimentaire (OHIO) liquidé pour fraude. Ex président incarcéré. Les capitaux de NEVADA proviennent de cette holding.</p>
+          <div class="detected">Détection : croisement presse russe + tribunaux</div>
+        </div>
+        <div class="sig">
+          <span class="sig-level l-amb">VIGILANCE</span>
+          <h4>Dirigeant fantôme</h4>
+          <p>Un ex banquier officie comme responsable des relations investisseurs depuis 2011, absent des 3 pages officielles de gouvernance. Connu pour actions de lobbying.</p>
+          <div class="detected">Détection : analyse différentielle multisources</div>
+        </div>
+        <div class="sig">
+          <span class="sig-level l-amb">VIGILANCE</span>
+          <h4>Homonymie de société</h4>
+          <p>Deux sociétés WYOMING portent exactement le même nom, créées à 48 ans d'écart, à deux adresses différentes. Technique classique d'ancienneté fictive.</p>
+          <div class="detected">Détection : registre chypriote croisé</div>
+        </div>
+        <div class="sig">
+          <span class="sig-level l-amb">VIGILANCE</span>
+          <h4>Logo affiché à tort</h4>
+          <p>Un investissement de DELAWARE dans une start-up israélienne est apparu sur le site de la cible sous le logo de NEVADA, confusion de marque ou signal de coinvestissement masqué ?</p>
+          <div class="detected">Détection : capture ecosystème écran</div>
+        </div>
+        <div class="sig">
+          <span class="sig-level l-grn">GO</span>
+          <h4>Aucune sanction internationale</h4>
+          <p>Vérification complète : ONU, OFAC, Interpol, Union Européenne. Ni les entités, ni les Présidents identifiés ne figurent dans une liste active.</p>
+          <div class="detected">Détection : screening automatisé quotidien</div>
+        </div>
+        <div class="sig">
+          <span class="sig-level l-grn">GO</span>
+          <h4>Portefeuille DELAWARE cohérent</h4>
+          <p>20 investissements identifiés sur la décennie, dont 2 licornes. Traçabilité capitalistique claire, équipe stable, gouvernance publique.</p>
+          <div class="detected">Détection : revue portfolio + registres</div>
+        </div>
+        <div class="sig">
+          <span class="sig-level l-grn">GO</span>
+          <h4>Fondateur-dirigeant DELAWARE : propre</h4>
+          <p>Pas de sanctions, pas de litiges majeurs, parcours académique et professionnel vérifié. C'est sur lui que le partenariat a été engagé.</p>
+          <div class="detected">Détection : due diligence individuelle</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- VERDICT -->
+    <div class="verdict-block">
+      <div>
+        <h3>Le verdict du <em>mandant</em>.</h3>
+        <p class="vb-intro">Trois feux. Une décision claire. Une histoire qui aurait pu mal finir, et qui ne l'a pas fait.</p>
+      </div>
+      <div class="verdict-list">
+        <div class="vr go">
+          <span class="vr-badge">GO</span>
+          <span class="vr-icon">✓</span>
+          <div class="vr-text">
+            <strong>Le dirigeant opérationnel de DELAWARE</strong>
+            <span>Aucun risque identifié. Collaboration directe validée.</span>
+          </div>
+        </div>
+        <div class="vr watch">
+          <span class="vr-badge">VIGILANCE</span>
+          <span class="vr-icon">⚠</span>
+          <div class="vr-text">
+            <strong>Le Président de NEVADA & NEVADA elle même</strong>
+            <span>Limites de collaboration à étudier. Clauses de protection renforcées à ajouter. Surveillance continue recommandée.</span>
+          </div>
+        </div>
+        <div class="vr stop">
+          <span class="vr-badge">NO GO</span>
+          <span class="vr-icon">✕</span>
+          <div class="vr-text">
+            <strong>Les deux shells BVI & toute entité liée à OHIO</strong>
+            <span>Exclusion totale du périmètre contractuel. Clause d'antitransitivité exigée.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============ CTA ============ -->
+<section class="cta">
+  <div class="cta-inner">
+    <div class="eyebrow">Votre dossier · Confidentiel</div>
+    <h2>Qu'y a t il dans l'<em>angle mort</em><br>de votre prochain deal ?</h2>
+    <p>Nous avons six semaines pour vous le dire.<br>Et vous avez tout à y gagner.</p>
+    <a href="#" class="btn btn-primary">Demander un brief confidentiel <span class="arrow">→</span></a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap inner">
+    <div>BUILDFLUENCE · INTELLIGENCE HUB · buildfluence.ai</div>
+    <div>DEEP DUE DILIGENCE · <a href="#">MENTIONS LÉGALES</a> · <a href="#">NDA TYPE</a></div>
+  </div>
+</footer>
+
+<script>
+/* ================================================================
+   CARTOGRAPHIE INTERACTIVE
+   Données anonymisées, sociétés = États US · dirigeants = Présidents
+================================================================ */
+
+const AVATAR_URI = "data:image/png;base64,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";
+
+const DATA = {
+  nodes: [
+    // ENTITÉS (sociétés → États)
+    {id:"DELAWARE", kind:"entity", label:"DELAWARE", sub:"Fonds de capital risque · cible principale", country:"LV", countryName:"Lettonie", x:280, y:380, r:50, color:"#103E8C",
+     recode:"Société de capital risque basée dans une capitale balte, spécialisée dans la FinTech et l'IT. Cible opérationnelle du mandat.",
+     profile:"Fondée il y a 15 ans. Deux licornes en portefeuille, une vingtaine d'investissements. Siège social transparent, gouvernance déclarée.",
+     signals:"Aucun signal rouge sur l'entité elle même. Portefeuille cohérent. Gouvernance publique.",
+     verdict:"go", verdictText:"GO, feu vert opérationnel",
+     links:["WASHINGTON","JEFFERSON","CALIFORNIA"]},
+
+    {id:"NEVADA", kind:"entity", label:"NEVADA", sub:"Fonds parent · holding offshore", country:"CY", countryName:"Chypre", x:640, y:330, r:48, color:"#103E8C",
+     recode:"Fonds de private equity enregistré dans une juridiction méditerranéenne à fiscalité favorable. Apparaît comme coinvestisseur systématique de DELAWARE.",
+     profile:"Créée il y a 18 ans. Présente officiellement 3 managers. Enquête ouvre sur un quatrième. Secteur : biotech, IT, agro, pharma.",
+     signals:"Capitalisation partiellement issue d'OHIO (liquidée pour fraude). Quatrième dirigeant non déclaré. Filiales énergie avec homonymie suspecte.",
+     verdict:"watch", verdictText:"VIGILANCE, périmètre à encadrer",
+     links:["JEFFERSON","MADISON","ADAMS","JACKSON","OHIO","WYOMING","KANSAS","BVI_1","BVI_2"]},
+
+    {id:"OHIO", kind:"dead", label:"OHIO", sub:"Groupe agro · liquidé 2017", country:"RU", countryName:"Russie", x:1080, y:170, r:40, color:"#6B7280",
+     recode:"Groupe agroindustriel de sucre et céréales. Liquidé judiciairement en 2017 pour fraudes massives.",
+     profile:"Anciennement holding majeure (24 usines, 11% du marché sucrier national). Aujourd'hui disparue, ne subsiste qu'un PDF résiduel en ligne.",
+     signals:"Ex Président incarcéré. Successeur (JEFFERSON) non impliqué judiciairement mais hérite de la présidence puis capitalise NEVADA avec ces fonds.",
+     verdict:"stop", verdictText:"NO GO, entité historique frauduleuse",
+     links:["NIXON","JEFFERSON"]},
+
+    {id:"TEXAS", kind:"entity", label:"TEXAS", sub:"Banque régionale · Kazan", country:"RU", countryName:"Russie", x:1090, y:340, r:34, color:"#103E8C",
+     recode:"Banque régionale russe dont JEFFERSON déclare avoir été membre du Conseil d'Administration. Vérification : son nom n'y figure pas dans les listes publiques.",
+     profile:"Siège dans une capitale régionale russe. Site web inaccessible lors de l'investigation. Conseil d'administration public consultable.",
+     signals:"Affirmation de mandat non confirmée par les sources publiques. Possible embellissement de CV.",
+     verdict:"watch", verdictText:"VIGILANCE, assertion non vérifiée",
+     links:["JEFFERSON"]},
+
+    {id:"IOWA", kind:"entity", label:"IOWA", sub:"Production viande · Oufa", country:"RU", countryName:"Russie", x:1200, y:470, r:30, color:"#103E8C",
+     recode:"Producteur de viande de porc basé dans le centre russe. Entreprise industrielle classique, dans le portefeuille élargi de JEFFERSON.",
+     profile:"Activité déclarée, site transparent. Pas de signaux d'alerte directs.",
+     signals:"Pas de signal. Mentionnée uniquement pour cartographier le réseau complet.",
+     verdict:"go", verdictText:"GO, périmètre adjacent",
+     links:["JEFFERSON"]},
+
+    {id:"CALIFORNIA", kind:"entity", label:"CALIFORNIA", sub:"Fonds tech · Moscou", country:"RU", countryName:"Russie", x:200, y:170, r:36, color:"#103E8C",
+     recode:"Second véhicule de capital risque où WASHINGTON est également partner. Site institutionnel réduit à une seule page : nom, téléphone, email.",
+     profile:"Investit dans 10+ start-ups technologiques. Partenaire de fonds souverains russe et chinois. Une start-up française financée par le fonds souverain national.",
+     signals:"Opacité de la communication publique. Interconnexion forte avec DELAWARE via dirigeant partagé. Une start-up du portefeuille (ROISTAT) est cofinancée par DELAWARE et CALIFORNIA.",
+     verdict:"watch", verdictText:"VIGILANCE, cogouvernance partielle",
+     links:["WASHINGTON","DELAWARE"]},
+
+    {id:"KANSAS", kind:"entity", label:"KANSAS", sub:"Filiale agro · Chypre", country:"CY", countryName:"Chypre", x:1030, y:580, r:28, color:"#103E8C",
+     recode:"Filiale chypriote de NEVADA, dédiée à l'agroglobal. MADISON y est directeur depuis 2018.",
+     profile:"Société enregistrée au registre chypriote depuis 2011. Adresse partagée avec d'autres entités du groupe.",
+     signals:"Aucun signal direct. Sert à dresser le réseau d'interconnexion des dirigeants.",
+     verdict:"go", verdictText:"GO, structure annexe",
+     links:["MADISON","NEVADA"]},
+
+    {id:"WYOMING", kind:"entity", label:"WYOMING", sub:"Énergie · homonymie suspecte", country:"CY", countryName:"Chypre", x:1160, y:680, r:32, color:"#103E8C",
+     recode:"Société énergétique enregistrée à Chypre. Homonyme exacte d'une société antérieure créée en 1970 sous une autre direction, à une autre adresse.",
+     profile:"Enregistrement récent (2018) sous nouveau numéro. MADISON y est directeur. Prédécesseure homonyme était dirigée par FILLMORE.",
+     signals:"Homonymie volontaire, technique classique d'apparence d'ancienneté ou d'absorption de notoriété.",
+     verdict:"watch", verdictText:"VIGILANCE, construction d'opacité",
+     links:["MADISON","FILLMORE"]},
+
+    // OFFSHORE SHELLS
+    {id:"BVI_1", kind:"offshore", label:"BERMUDA-A", sub:"Shell offshore · BVI", country:"VG", countryName:"BVI", x:470, y:570, r:28, color:"#B91C1C",
+     recode:"Société-écran détenue par JEFFERSON. Domiciliée dans un paradis fiscal des Caraïbes britanniques. Révélée par les Pandora Papers.",
+     profile:"Adresse moscovite identique à une seconde shell du même propriétaire. Objet social opaque. Aucune activité commerciale publique.",
+     signals:"Présence dans la base ICIJ Offshore Leaks. Concentration des indices.",
+     verdict:"stop", verdictText:"NO GO, exclusion contractuelle",
+     links:["JEFFERSON"]},
+
+    {id:"BVI_2", kind:"offshore", label:"BERMUDA-B", sub:"Shell offshore · BVI", country:"VG", countryName:"BVI", x:640, y:620, r:28, color:"#B91C1C",
+     recode:"Seconde société écran de JEFFERSON aux BVI. Même adresse moscovite. Même profil d'opacité.",
+     profile:"Redondance de structure. Hypothèse opérationnelle : optimisation fiscale et/ou isolation d'actifs.",
+     signals:"Confirmation par croisement Pandora Papers + nationalité + adresse.",
+     verdict:"stop", verdictText:"NO GO, exclusion contractuelle",
+     links:["JEFFERSON"]},
+
+    // PERSONNES (dirigeants → Présidents)
+    {id:"WASHINGTON", kind:"person", label:"WASHINGTON", sub:"Fondateur · DELAWARE", portrait:AVATAR_URI, country:"LV", countryName:"Lettonie", x:170, y:580, r:38, color:"#C9A84C",
+     recode:"Fondateur et dirigeant opérationnel de DELAWARE. Doctorat en finance, MBA d'une école américaine de premier rang. 20 ans d'expérience en capital risque.",
+     profile:"Parcours transparent, vérifiable. Membre de conseils d'administration de sociétés cotées. Orchestre toutes les opérations de DELAWARE.",
+     signals:"Aucune sanction. Aucun litige. Parcours cohérent avec les déclarations publiques.",
+     verdict:"go", verdictText:"GO, partenaire fiable",
+     links:["DELAWARE","CALIFORNIA"]},
+
+    {id:"JEFFERSON", kind:"person", label:"JEFFERSON", sub:"Président · NEVADA", portrait:AVATAR_URI, country:"CY", countryName:"Chypre", x:820, y:420, r:44, color:"#C9A84C",
+     recode:"Président de NEVADA. Ancien président d'OHIO (groupe liquidé). Membre du conseil d'administration d'IOWA. Affirme un siège chez TEXAS non confirmé publiquement. Partner de DELAWARE depuis 2017.",
+     profile:"MBA d'une école américaine. Ancien vice président d'une banque russe, ex PDG d'une société d'investissement. Multimandats, réseau dense.",
+     signals:"PROPRIÉTAIRE DE 2 SHELLS OFFSHORE aux BVI (Pandora Papers). Hérite présidence d'OHIO après chute de son prédécesseur. Affirmation TEXAS non vérifiée.",
+     verdict:"watch", verdictText:"VIGILANCE, profil complexe",
+     links:["NEVADA","OHIO","IOWA","TEXAS","BVI_1","BVI_2","DELAWARE"]},
+
+    {id:"JACKSON", kind:"person", label:"JACKSON", sub:"Fantôme · Relations investisseurs", portrait:AVATAR_URI, country:"RU", countryName:"Russie", x:560, y:130, r:32, color:"#C9A84C",
+     recode:"Ex banquier (fonds BNP Paribas puis banque russe) officiant comme responsable des relations investisseurs de NEVADA. Non déclaré dans la gouvernance officielle.",
+     profile:"Connu pour actions de lobbying. Identité absente des trois pages officielles de l'entreprise. Visible seulement via sources tierces et réseaux professionnels.",
+     signals:"Asymétrie entre présence opérationnelle et absence de communication. Indice récurrent de gouvernance opaque.",
+     verdict:"watch", verdictText:"VIGILANCE, dirigeant non déclaré",
+     links:["NEVADA"]},
+
+    {id:"MADISON", kind:"person", label:"MADISON", sub:"Directeur · NEVADA, KANSAS, WYOMING", portrait:AVATAR_URI, country:"CY", countryName:"Chypre", x:900, y:590, r:32, color:"#C9A84C",
+     recode:"Directeur de NEVADA depuis 2021. Également directeur de KANSAS et WYOMING. Profil international (Chine, Hong Kong).",
+     profile:"Relations internationales à l'université, formation environnementale complémentaire. A dirigé une filiale asiatique de NEVADA avant sa promotion.",
+     signals:"Multimandats internes. Aucun signal individuel. Présence au carrefour de 3 entités du groupe.",
+     verdict:"go", verdictText:"GO, cadre intégré",
+     links:["NEVADA","KANSAS","WYOMING"]},
+
+    {id:"ADAMS", kind:"person", label:"ADAMS", sub:"Juridique · NEVADA", portrait:AVATAR_URI, country:"CY", countryName:"Chypre", x:540, y:240, r:28, color:"#C9A84C",
+     recode:"Avocat d'entreprise chez NEVADA depuis 2020. Diplômé d'une faculté de droit moscovite, formation complémentaire à Chypre.",
+     profile:"Parcours cohérent : prestataire de services aux entreprises, puis fonds d'investissement privé, puis NEVADA. Formation double juridiction.",
+     signals:"Aucun signal. Profil junior propre. Référencé ouvertement.",
+     verdict:"go", verdictText:"GO, profil sans aspérité",
+     links:["NEVADA"]},
+
+    {id:"NIXON", kind:"person", label:"NIXON", sub:"Ex Président · OHIO · incarcéré", portrait:AVATAR_URI, country:"RU", countryName:"Russie", x:1210, y:80, r:28, color:"#C9A84C",
+     recode:"Ex Président d'OHIO avant sa liquidation. Incarcéré après les condamnations pour fraude. Son éviction ouvre la place de JEFFERSON à la présidence du groupe.",
+     profile:"Figure historique du secteur agroalimentaire. Trajectoire brisée par les scandales. Mention nominative dans presse russe.",
+     signals:"Condamnation pénale. Exclusion de facto de toute collaboration.",
+     verdict:"stop", verdictText:"NO GO, incarcéré",
+     links:["OHIO"]},
+
+    {id:"FILLMORE", kind:"person", label:"FILLMORE", sub:"Ex directeur · WYOMING historique", portrait:AVATAR_URI, country:"CY", countryName:"Chypre", x:810, y:700, r:24, color:"#C9A84C",
+     recode:"Ex directeur de la société WYOMING originelle (1970), dissoute puis recréée sous même nom en 2018 par MADISON.",
+     profile:"Figure obscure, peu documentée. Mentionné uniquement pour attester l'homonymie.",
+     signals:"Lien historique homonymique. Sert à caractériser la technique d'opacité.",
+     verdict:"watch", verdictText:"VIGILANCE, contexte historique",
+     links:["WYOMING"]}
+  ],
+
+  links: [
+    // WASHINGTON ops
+    {from:"WASHINGTON", to:"DELAWARE", kind:"go", label:"fondateur"},
+    {from:"WASHINGTON", to:"CALIFORNIA", kind:"go", label:"partner"},
+    {from:"DELAWARE", to:"CALIFORNIA", kind:"warn", label:"coportefeuille"},
+
+    // JEFFERSON réseau
+    {from:"JEFFERSON", to:"NEVADA", kind:"go", label:"président"},
+    {from:"JEFFERSON", to:"DELAWARE", kind:"warn", label:"partner depuis 2017"},
+    {from:"JEFFERSON", to:"OHIO", kind:"stop", label:"ex président"},
+    {from:"JEFFERSON", to:"IOWA", kind:"go", label:"CA"},
+    {from:"JEFFERSON", to:"TEXAS", kind:"warn", label:"CA non vérifié"},
+    {from:"JEFFERSON", to:"BVI_1", kind:"stop", label:"propriétaire"},
+    {from:"JEFFERSON", to:"BVI_2", kind:"stop", label:"propriétaire"},
+
+    // NEVADA gouvernance
+    {from:"ADAMS", to:"NEVADA", kind:"go", label:"juridique"},
+    {from:"JACKSON", to:"NEVADA", kind:"warn", label:"off record"},
+    {from:"MADISON", to:"NEVADA", kind:"go", label:"directeur"},
+    {from:"MADISON", to:"KANSAS", kind:"go", label:"directeur"},
+    {from:"MADISON", to:"WYOMING", kind:"go", label:"directeur"},
+    {from:"NEVADA", to:"KANSAS", kind:"go", label:"filiale"},
+    {from:"NEVADA", to:"WYOMING", kind:"go", label:"filiale"},
+
+    // Capitalisation OHIO → NEVADA
+    {from:"OHIO", to:"NEVADA", kind:"stop", label:"capitalisation historique"},
+    {from:"NIXON", to:"OHIO", kind:"stop", label:"ex président"},
+
+    // Homonymie
+    {from:"FILLMORE", to:"WYOMING", kind:"warn", label:"ex nom 1970"}
+  ]
+};
+
+/* =============== render =============== */
+const svg = document.getElementById('graph');
+const NS = "http://www.w3.org/2000/svg";
+
+// background grid + subtle compass
+const g = document.createElementNS(NS,'g');
+g.setAttribute('id','bgLayer');
+const grid = document.createElementNS(NS,'g');
+for(let i=0;i<=12;i++){
+  const x = i*(1280/12);
+  const l = document.createElementNS(NS,'line');
+  l.setAttribute('x1',x);l.setAttribute('x2',x);l.setAttribute('y1',0);l.setAttribute('y2',760);
+  l.setAttribute('stroke','#eee5cf');l.setAttribute('stroke-width','1');
+  grid.appendChild(l);
+}
+for(let i=0;i<=8;i++){
+  const y = i*(760/8);
+  const l = document.createElementNS(NS,'line');
+  l.setAttribute('y1',y);l.setAttribute('y2',y);l.setAttribute('x1',0);l.setAttribute('x2',1280);
+  l.setAttribute('stroke','#eee5cf');l.setAttribute('stroke-width','1');
+  grid.appendChild(l);
+}
+g.appendChild(grid);
+
+// decorative header stamp
+const stamp = document.createElementNS(NS,'g');
+stamp.innerHTML = `
+  <rect x="40" y="32" width="360" height="54" fill="none" stroke="#C9A84C" stroke-width="1.2"/>
+  <text x="60" y="55" font-family="JetBrains Mono" font-size="10" letter-spacing="3" fill="#C9A84C">BUILDFLUENCE · DOSSIER CONFIDENTIEL</text>
+  <text x="60" y="74" font-family="Playfair Display" font-size="14" font-style="italic" fill="#0D1B2A">Relational cartography</text>
+  <text x="1240" y="55" text-anchor="end" font-family="JetBrains Mono" font-size="10" letter-spacing="3" fill="#B91C1C">CONFIDENTIEL · NDA</text>
+  <text x="1240" y="74" text-anchor="end" font-family="JetBrains Mono" font-size="10" letter-spacing="2" fill="#6B7280">AVR. 2026 · RÉ-ENCODÉ US</text>
+`;
+g.appendChild(stamp);
+
+svg.appendChild(g);
+
+// LINKS layer
+const linkLayer = document.createElementNS(NS,'g'); linkLayer.setAttribute('id','links');
+svg.appendChild(linkLayer);
+const labelLayer = document.createElementNS(NS,'g'); labelLayer.setAttribute('id','linkLabels');
+svg.appendChild(labelLayer);
+
+// defs, markers (arrows) and patterns
+const defs = document.createElementNS(NS,'defs');
+defs.innerHTML = `
+  <marker id="arrGo" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+    <path d="M0,0 L10,5 L0,10 z" fill="#15803D"/>
+  </marker>
+  <marker id="arrWarn" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+    <path d="M0,0 L10,5 L0,10 z" fill="#D97706"/>
+  </marker>
+  <marker id="arrStop" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto">
+    <path d="M0,0 L10,5 L0,10 z" fill="#B91C1C"/>
+  </marker>
+  <pattern id="diag" patternUnits="userSpaceOnUse" width="6" height="6" patternTransform="rotate(45)">
+    <rect width="3" height="6" fill="#B91C1C" opacity=".15"/>
+  </pattern>
+`;
+svg.appendChild(defs);
+
+const byId = id => DATA.nodes.find(n=>n.id===id);
+
+// draw links
+DATA.links.forEach((L,idx)=>{
+  const a = byId(L.from), b = byId(L.to);
+  if(!a||!b) return;
+  const g = document.createElementNS(NS,'g');
+  g.classList.add('link-group');
+  g.dataset.from = L.from;
+  g.dataset.to = L.to;
+
+  const dx = b.x - a.x, dy = b.y - a.y;
+  const dist = Math.sqrt(dx*dx + dy*dy);
+  const ux = dx/dist, uy = dy/dist;
+  const x1 = a.x + ux*a.r, y1 = a.y + uy*a.r;
+  const x2 = b.x - ux*b.r, y2 = b.y - uy*b.r;
+
+  const color = L.kind==="stop" ? "#B91C1C" : L.kind==="warn" ? "#D97706" : "#15803D";
+  const marker = L.kind==="stop" ? "arrStop" : L.kind==="warn" ? "arrWarn" : "arrGo";
+  const dash = L.kind==="stop" ? "6 4" : L.kind==="warn" ? "3 3" : "";
+
+  const line = document.createElementNS(NS,'line');
+  line.classList.add('link');
+  line.setAttribute('x1',x1);line.setAttribute('y1',y1);
+  line.setAttribute('x2',x2);line.setAttribute('y2',y2);
+  line.setAttribute('stroke',color);
+  line.setAttribute('stroke-width', L.kind==="stop" ? 2.2 : 1.6);
+  if(dash) line.setAttribute('stroke-dasharray', dash);
+  line.setAttribute('marker-end', `url(#${marker})`);
+  line.setAttribute('opacity','.75');
+  g.appendChild(line);
+
+  // label mid
+  if(L.label){
+    const mx = (x1+x2)/2, my = (y1+y2)/2 - 4;
+    const bg = document.createElementNS(NS,'rect');
+    const tw = L.label.length*5.5 + 14;
+    bg.setAttribute('x', mx - tw/2); bg.setAttribute('y', my - 10); bg.setAttribute('width',tw);bg.setAttribute('height',14);
+    bg.setAttribute('fill','#fff'); bg.setAttribute('stroke','#E8E2D0'); bg.setAttribute('stroke-width','.8');
+    g.appendChild(bg);
+
+    const t = document.createElementNS(NS,'text');
+    t.setAttribute('x',mx); t.setAttribute('y',my); t.setAttribute('text-anchor','middle');
+    t.classList.add('link-label');
+    t.textContent = L.label;
+    g.appendChild(t);
+  }
+
+  linkLayer.appendChild(g);
+});
+
+// draw nodes
+const nodeLayer = document.createElementNS(NS,'g'); nodeLayer.setAttribute('id','nodes');
+svg.appendChild(nodeLayer);
+
+DATA.nodes.forEach(n=>{
+  const g = document.createElementNS(NS,'g');
+  g.classList.add('node');
+  g.dataset.id = n.id;
+  g.dataset.kind = n.kind;
+  g.dataset.verdict = n.verdict;
+  g.setAttribute('transform',`translate(${n.x},${n.y})`);
+
+  // outer aura for persons
+  if(n.kind==="person"){
+    const aura = document.createElementNS(NS,'circle');
+    aura.setAttribute('r', n.r+8);
+    aura.setAttribute('fill','none');
+    aura.setAttribute('stroke','#C9A84C');
+    aura.setAttribute('stroke-width','1');
+    aura.setAttribute('opacity','.4');
+    aura.setAttribute('stroke-dasharray','2 3');
+    g.appendChild(aura);
+  }
+
+  // main circle
+  const c = document.createElementNS(NS,'circle');
+  c.classList.add('node-circle');
+  c.setAttribute('r', n.r);
+  if(n.kind==="offshore"){
+    c.setAttribute('fill','url(#diag)');
+    c.setAttribute('stroke','#B91C1C');
+    c.setAttribute('stroke-width','2');
+    c.setAttribute('stroke-dasharray','4 3');
+  } else if(n.kind==="person"){
+    c.setAttribute('fill','#C9A84C');
+    c.setAttribute('stroke','#0D1B2A');
+    c.setAttribute('stroke-width','2');
+  } else if(n.kind==="dead"){
+    c.setAttribute('fill','#9ca3af');
+    c.setAttribute('stroke','#4b5563');
+    c.setAttribute('stroke-width','1.5');
+    c.setAttribute('opacity','.65');
+  } else {
+    c.setAttribute('fill','#103E8C');
+    c.setAttribute('stroke','#C9A84C');
+    c.setAttribute('stroke-width','2');
+  }
+  g.appendChild(c);
+
+  // verdict ring
+  const vcolor = n.verdict==="stop" ? "#B91C1C" : n.verdict==="watch" ? "#D97706" : "#15803D";
+  const ring = document.createElementNS(NS,'circle');
+  ring.setAttribute('r', n.r + 4);
+  ring.setAttribute('fill','none');
+  ring.setAttribute('stroke', vcolor);
+  ring.setAttribute('stroke-width','2.5');
+  ring.setAttribute('stroke-dasharray','3 5');
+  ring.setAttribute('opacity','.55');
+  g.appendChild(ring);
+
+  // === ICONE CENTRALE ===
+  // Pour les PERSONNES : portrait du Président (image clipée en cercle)
+  // Pour les ENTITÉS / OFFSHORE / DEAD : lettre + icône (comme avant)
+  if(n.kind==="person" && n.portrait){
+    // clipPath circulaire pour le portrait
+    const portClipId = `clip-portrait-${n.id}`;
+    const defs = svg.querySelector('defs') || svg.appendChild(document.createElementNS(NS,'defs'));
+    const clip = document.createElementNS(NS,'clipPath');
+    clip.setAttribute('id', portClipId);
+    const clipC = document.createElementNS(NS,'circle');
+    clipC.setAttribute('r', n.r - 3);
+    clip.appendChild(clipC);
+    defs.appendChild(clip);
+
+    // image du portrait
+    const img = document.createElementNS(NS,'image');
+    img.setAttribute('href', n.portrait);
+    img.setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', n.portrait);
+    img.setAttribute('x', -n.r);
+    img.setAttribute('y', -n.r);
+    img.setAttribute('width', n.r*2);
+    img.setAttribute('height', n.r*2);
+    img.setAttribute('preserveAspectRatio','xMidYMid slice');
+    img.setAttribute('clip-path', `url(#${portClipId})`);
+    g.appendChild(img);
+
+    // bordure dorée au-dessus du portrait
+    const border = document.createElementNS(NS,'circle');
+    border.setAttribute('r', n.r - 3);
+    border.setAttribute('fill', 'none');
+    border.setAttribute('stroke', '#C9A84C');
+    border.setAttribute('stroke-width', '1.5');
+    g.appendChild(border);
+  } else {
+    // === LETTRE (entités / offshore / dead) ===
+    const ic = document.createElementNS(NS,'text');
+    ic.setAttribute('x',0);ic.setAttribute('y',-1);ic.setAttribute('text-anchor','middle');
+    ic.setAttribute('font-family','Playfair Display');
+    ic.setAttribute('font-weight','900');
+    ic.setAttribute('font-size',n.r*0.62);
+    ic.setAttribute('font-style','italic');
+    if(n.kind==="offshore"){ ic.setAttribute('fill','#B91C1C'); ic.textContent='$'; }
+    else if(n.kind==="dead"){ ic.setAttribute('fill','#fff'); ic.textContent='✕'; }
+    else { ic.setAttribute('fill','#C9A84C'); ic.textContent=n.label.charAt(0); }
+    g.appendChild(ic);
+
+    // === ICONE REPRÉSENTATIVE (building / offshore / dead) ===
+    const iconY = n.r*0.35;
+    const iconSize = n.r*0.36;
+    const iconFill = (n.kind==="offshore") ? '#B91C1C' : (n.kind==="dead") ? '#fff' : '#C9A84C';
+    const iconOp = n.kind==="dead" ? '.85' : '.9';
+
+    const iconPath = document.createElementNS(NS,'path');
+    iconPath.setAttribute('fill', iconFill);
+    iconPath.setAttribute('opacity', iconOp);
+    iconPath.setAttribute('transform',`translate(${-iconSize/2}, ${iconY}) scale(${iconSize/24})`);
+    let d = '';
+    if(n.kind==="offshore"){
+      d = 'M4 5 L20 5 L20 19 L4 19 Z M7 8 L7 16 M12 10 A2 2 0 0 1 12 14 A2 2 0 0 1 12 10 Z M12 14 L12 16';
+    } else if(n.kind==="dead"){
+      d = 'M5 8 L12 4 L19 8 L19 20 L5 20 Z M9 12 L11 12 L11 14 L9 14 Z M13 12 L15 12 L15 14 L13 14 Z';
+    } else {
+      d = 'M5 20 L5 7 L11 7 L11 20 M11 20 L11 4 L19 4 L19 20 M7 10 L9 10 M7 13 L9 13 M7 16 L9 16 M13 7 L15 7 M13 10 L15 10 M13 13 L15 13 M13 16 L15 16';
+      iconPath.setAttribute('stroke', iconFill);
+      iconPath.setAttribute('stroke-width', '1.8');
+      iconPath.setAttribute('fill', 'none');
+      iconPath.setAttribute('stroke-linecap', 'round');
+    }
+    iconPath.setAttribute('d', d);
+    g.appendChild(iconPath);
+  }
+
+  // label outside (avec halo blanc pour lisibilité sur les liens)
+  const lblBg = document.createElementNS(NS,'text');
+  lblBg.setAttribute('x',0); lblBg.setAttribute('y', n.r + 22);
+  lblBg.setAttribute('text-anchor','middle');
+  lblBg.setAttribute('stroke','#fafafa');
+  lblBg.setAttribute('stroke-width','4');
+  lblBg.setAttribute('paint-order','stroke');
+  lblBg.classList.add('node-label');
+  lblBg.textContent = n.label;
+  g.appendChild(lblBg);
+
+  const lbl = document.createElementNS(NS,'text');
+  lbl.setAttribute('x',0); lbl.setAttribute('y', n.r + 22);
+  lbl.setAttribute('text-anchor','middle');
+  lbl.classList.add('node-label');
+  lbl.textContent = n.label;
+  g.appendChild(lbl);
+
+  // sublabel (avec halo blanc également)
+  const subBg = document.createElementNS(NS,'text');
+  subBg.setAttribute('x',0); subBg.setAttribute('y', n.r + 38);
+  subBg.setAttribute('text-anchor','middle');
+  subBg.setAttribute('stroke','#fafafa');
+  subBg.setAttribute('stroke-width','3.5');
+  subBg.setAttribute('paint-order','stroke');
+  subBg.classList.add('node-sub');
+  subBg.textContent = n.sub;
+  g.appendChild(subBg);
+
+  const sub = document.createElementNS(NS,'text');
+  sub.setAttribute('x',0); sub.setAttribute('y', n.r + 38);
+  sub.setAttribute('text-anchor','middle');
+  sub.classList.add('node-sub');
+  sub.textContent = n.sub;
+  g.appendChild(sub);
+
+  g.addEventListener('click', ()=>openDetail(n));
+
+  nodeLayer.appendChild(g);
+});
+
+/* =============== detail panel =============== */
+
+const panel = document.getElementById('detail');
+function openDetail(n){
+  document.getElementById('dpKicker').textContent = 
+    n.kind==="entity" ? "ENTITÉ · "+n.label :
+    n.kind==="person" ? "DIRIGEANT · "+n.label :
+    n.kind==="offshore" ? "SHELL OFFSHORE · "+n.label :
+    n.kind==="dead" ? "ENTITÉ LIQUIDÉE · "+n.label : n.label;
+  document.getElementById('dpTitle').textContent = n.label;
+  document.getElementById('dpAlias').textContent = n.sub;
+  document.getElementById('dpRecode').textContent = n.recode;
+  document.getElementById('dpProfile').textContent = n.profile;
+  document.getElementById('dpSignals').textContent = n.signals;
+  const vb = document.getElementById('dpVerdict');
+  vb.innerHTML = `<span class="dp-badge ${n.verdict}">${n.verdictText}</span>`;
+  const links = (n.links||[]).map(id=>{
+    const t = byId(id); if(!t) return '';
+    return `<a>↳ ${t.label} <span style="color:var(--mute)">· ${t.sub}</span></a>`;
+  }).join('');
+  document.getElementById('dpLinks').innerHTML = links || '<em style="color:var(--mute)">Aucune connexion directe</em>';
+  panel.classList.add('open');
+
+  // highlight related
+  highlight(n.id);
+}
+document.getElementById('closeDetail').addEventListener('click', ()=>{
+  panel.classList.remove('open');
+  clearHighlight();
+});
+
+function highlight(id){
+  // dim everything, then unhighlight related
+  const related = new Set([id]);
+  DATA.links.forEach(L=>{
+    if(L.from===id) related.add(L.to);
+    if(L.to===id) related.add(L.from);
+  });
+  document.querySelectorAll('.node').forEach(el=>{
+    if(related.has(el.dataset.id)) el.classList.remove('dim');
+    else el.classList.add('dim');
+  });
+  document.querySelectorAll('.link-group').forEach(el=>{
+    if(el.dataset.from===id || el.dataset.to===id) el.classList.remove('dim');
+    else el.classList.add('dim');
+  });
+}
+function clearHighlight(){
+  document.querySelectorAll('.node,.link-group').forEach(el=>el.classList.remove('dim'));
+}
+
+/* =============== filter buttons =============== */
+document.querySelectorAll('.filt').forEach(b=>{
+  b.addEventListener('click', ()=>{
+    document.querySelectorAll('.filt').forEach(x=>x.classList.remove('active'));
+    b.classList.add('active');
+    const f = b.dataset.filt;
+    document.querySelectorAll('.node').forEach(el=>{
+      el.classList.remove('dim');
+      if(f==="all") return;
+      const kind = el.dataset.kind;
+      const verdict = el.dataset.verdict;
+      let show = false;
+      if(f==="entity" && (kind==="entity"||kind==="dead")) show = true;
+      if(f==="person" && kind==="person") show = true;
+      if(f==="offshore" && kind==="offshore") show = true;
+      if(f==="problem" && (verdict==="stop"||verdict==="watch")) show = true;
+      if(!show) el.classList.add('dim');
+    });
+    // dim all links that don't connect two visible nodes
+    document.querySelectorAll('.link-group').forEach(el=>{
+      el.classList.remove('dim');
+      if(f==="all") return;
+      const a = document.querySelector(`.node[data-id="${el.dataset.from}"]`);
+      const b2 = document.querySelector(`.node[data-id="${el.dataset.to}"]`);
+      if(a?.classList.contains('dim') || b2?.classList.contains('dim')) el.classList.add('dim');
+    });
+  });
+});
+
+/* =============== pan & zoom =============== */
+let vb = {x:0,y:0,w:1280,h:720};
+function setVB(){svg.setAttribute('viewBox',`${vb.x} ${vb.y} ${vb.w} ${vb.h}`);}
+let isDown = false, sx=0, sy=0, sx0=0, sy0=0;
+svg.addEventListener('mousedown', e=>{
+  if(e.target.closest('.node')) return;
+  isDown = true; sx=e.clientX; sy=e.clientY; sx0=vb.x; sy0=vb.y;
+});
+window.addEventListener('mousemove', e=>{
+  if(!isDown) return;
+  const rect = svg.getBoundingClientRect();
+  const k = vb.w/rect.width;
+  vb.x = sx0 - (e.clientX-sx)*k;
+  vb.y = sy0 - (e.clientY-sy)*k;
+  setVB();
+});
+window.addEventListener('mouseup', ()=>isDown=false);
+svg.addEventListener('wheel', e=>{
+  e.preventDefault();
+  const rect = svg.getBoundingClientRect();
+  const mx = (e.clientX-rect.left)/rect.width*vb.w + vb.x;
+  const my = (e.clientY-rect.top)/rect.height*vb.h + vb.y;
+  const scale = e.deltaY > 0 ? 1.1 : 1/1.1;
+  const nw = Math.min(2400, Math.max(400, vb.w*scale));
+  const nh = Math.min(1350, Math.max(225, vb.h*scale));
+  vb.x = mx - (mx - vb.x) * (nw/vb.w);
+  vb.y = my - (my - vb.y) * (nh/vb.h);
+  vb.w = nw; vb.h = nh;
+  setVB();
+},{passive:false});
+
+/* =============== Tooltip de la grille périmètre =============== */
+(function(){
+  const cards = document.querySelectorAll('.p-card');
+  if(!cards.length) return;
+
+  // Créer le tooltip unique
+  const tt = document.createElement('div');
+  tt.className = 'p-tooltip';
+  tt.innerHTML = `
+    <div class="p-tt-name"></div>
+    <div class="p-tt-role"></div>
+    <div class="p-tt-row"><span class="p-tt-label">Pays</span><span class="p-tt-val" data-field="country"></span></div>
+    <div class="p-tt-row"><span class="p-tt-label">Année</span><span class="p-tt-val" data-field="year"></span></div>
+    <div class="p-tt-row"><span class="p-tt-label">Secteur</span><span class="p-tt-val" data-field="sector"></span></div>
+    <div class="p-tt-row"><span class="p-tt-label">Dirigeant</span><span class="p-tt-val" data-field="leader"></span></div>
+  `;
+  document.body.appendChild(tt);
+
+  const countryMap = {
+    'p-flag-lv':'Lettonie','p-flag-cy':'Chypre','p-flag-ru':'Russie','p-flag-vg':'Îles Vierges Britanniques'
+  };
+
+  cards.forEach(card => {
+    card.addEventListener('mouseenter', e => {
+      // Remplir avec fallbacks
+      tt.querySelector('.p-tt-name').textContent = card.dataset.name || '—';
+      tt.querySelector('.p-tt-role').textContent = card.dataset.role || '—';
+      tt.querySelector('[data-field="year"]').textContent = card.dataset.year || '—';
+      tt.querySelector('[data-field="sector"]').textContent = card.dataset.sector || '—';
+      tt.querySelector('[data-field="leader"]').textContent = card.dataset.leader || '—';
+      // Pays via le drapeau de la colonne
+      const col = card.closest('.p-col');
+      const flag = col && col.querySelector('.p-flag');
+      let countryName = '—';
+      if(flag){
+        for(const cls of flag.classList){
+          if(countryMap[cls]) countryName = countryMap[cls];
+        }
+      }
+      tt.querySelector('[data-field="country"]').textContent = countryName;
+
+      // Positionner le tooltip CENTRÉ sur la carte, au-dessus si possible, sinon en dessous
+      const rect = card.getBoundingClientRect();
+      const ttWidth = 260;
+      const ttHeight = 200;
+      // Centre horizontal de la carte
+      let left = rect.left + rect.width/2 - ttWidth/2;
+      // Garder dans le viewport horizontal
+      if(left < 12) left = 12;
+      if(left + ttWidth > window.innerWidth - 12) left = window.innerWidth - ttWidth - 12;
+      // Vertical : priorité au-dessus
+      let top = rect.top - ttHeight - 10;
+      // Si pas assez de place au-dessus, mettre en dessous
+      if(top < 12){
+        top = rect.bottom + 10;
+      }
+      // Si ça déborde encore en bas du viewport, forcer en haut
+      if(top + ttHeight > window.innerHeight - 12){
+        top = rect.top - ttHeight - 10;
+        if(top < 12) top = 12;
+      }
+      tt.style.left = left + 'px';
+      tt.style.top = top + 'px';
+      tt.classList.add('visible');
+    });
+    card.addEventListener('mouseleave', () => {
+      tt.classList.remove('visible');
+    });
+  });
+})();
+
+</script>
+</body>
+</html>
