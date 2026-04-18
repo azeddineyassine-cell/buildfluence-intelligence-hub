@@ -399,6 +399,7 @@ const StrategicWorkflow = () => {
           style={{
             display: "grid",
             gridTemplateColumns: "repeat(2, 1fr)",
+            alignItems: "start",
             gap: 14,
             maxWidth: 1100,
             margin: "0 auto 44px",

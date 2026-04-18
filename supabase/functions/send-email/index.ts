@@ -17,7 +17,7 @@ Deno.serve(async (req) => {
     const body = await req.json()
     const { formType, name, email, organization, position, phone, situation, topic, priority, message, platform } = body
 
-    const DESTINATION = 'azeddine.yassine@gmail.com'
+    const DESTINATION = 'info@buildfluence.ai'
 
     const subject = formType === 'contact'
       ? `Nouveau contact : ${name || 'Inconnu'}`
