@@ -224,7 +224,15 @@ const Navbar = () => {
     setActiveDropdown(null);
     setOpen(false);
     navigate(route);
-    window.scrollTo(0, 0);
+    if (route.includes("#")) {
+      const id = route.split("#")[1];
+      setTimeout(() => {
+        const el = document.getElementById(id);
+        if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 100);
+    } else {
+      window.scrollTo(0, 0);
+    }
   };
 
   return (
