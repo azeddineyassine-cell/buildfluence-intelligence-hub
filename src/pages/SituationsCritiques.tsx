@@ -27,6 +27,7 @@ export default function SituationsCritiques() {
 
   return (
     <div style={{background:"#F0F7FF",minHeight:"100vh",fontFamily:"DM Sans,sans-serif"}}>
+      <Navbar />
       <div style={{textAlign:"center",padding:"96px 24px 0"}}>
         <div style={{fontSize:10,fontWeight:700,letterSpacing:"3.5px",textTransform:"uppercase",color:"#C9A84C",borderBottom:"1px solid #C9A84C",display:"inline-block",paddingBottom:3,marginBottom:16}}>Diagnostic stratégique</div>
         <h1 style={{fontFamily:"Cormorant Garamond,serif",fontSize:"clamp(26px,4vw,46px)",fontWeight:300,color:"#0D1B2A",lineHeight:1.15,marginBottom:10}}>
