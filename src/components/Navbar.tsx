@@ -145,17 +145,17 @@ const Navbar = () => {
         {
           label: "Level 1: Integrity Check",
           desc: t("Screening PEP et signaux faibles", "PEP screening and weak signals"),
-          route: "/solutions/deep-due-diligence",
+          route: "/solutions/deep-due-diligence#level-1",
         },
         {
           label: "Level 2: Strategic Risk Profiling",
           desc: t("Cartographie et analyse géopolitique", "Mapping and geopolitical analysis"),
-          route: "/solutions/deep-due-diligence",
+          route: "/solutions/deep-due-diligence#level-2",
         },
         {
           label: "Level 3: Regulatory Compliance",
           desc: t("Audit KYC, KYS, LCB-FT, ESG", "KYC, KYS, AML-CFT, ESG Audit"),
-          route: "/solutions/deep-due-diligence",
+          route: "/solutions/deep-due-diligence#level-3",
         },
       ],
     },
@@ -224,18 +224,26 @@ const Navbar = () => {
     setActiveDropdown(null);
     setOpen(false);
     navigate(route);
-    window.scrollTo(0, 0);
+    if (route.includes("#")) {
+      const id = route.split("#")[1];
+      setTimeout(() => {
+        const el = document.getElementById(id);
+        if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 100);
+    } else {
+      window.scrollTo(0, 0);
+    }
   };
 
   return (
     <>
       <nav
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          scrolled ? "border-b shadow-sm" : "bg-transparent"
+        className={`fixed top-0 left-0 right-0 z-[1000] transition-all duration-300 ${
+          scrolled ? "border-b shadow-sm" : ""
         }`}
         style={{
-          background: scrolled ? "hsla(0, 0%, 100%, 0.96)" : "transparent",
-          backdropFilter: scrolled ? "blur(16px)" : "none",
+          background: "#ffffff",
+          backdropFilter: "blur(16px)",
           borderColor: scrolled ? "hsl(220 10% 90%)" : "transparent",
         }}
       >
