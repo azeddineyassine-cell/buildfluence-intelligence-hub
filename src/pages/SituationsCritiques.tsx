@@ -112,11 +112,11 @@ export default function SituationsCritiques() {
           )}
         </div>
         <div style={{display:"flex",flexDirection:"column",alignItems:"center",position:"sticky",top:20}}>
-          <p style={{fontFamily:"Cormorant Garamond,serif",fontSize:15,fontStyle:"italic",color:"#0D1B2A",textAlign:"center",marginBottom:1,lineHeight:1.5}}>
+          <p style={{fontFamily:"Cormorant Garamond,serif",fontSize:15,fontStyle:"italic",color:"#0D1B2A",textAlign:"center",margin:0,lineHeight:1.4}}>
             « Les crises ne naissent pas du chaos, mais de l'illusion du contrôle. »
           </p>
-          <div style={{width:"100%",maxWidth:1188,marginTop:1}}>
-            <svg viewBox="0 0 560 560" style={{width:"100%",height:"100%",overflow:"visible"}}>
+          <div style={{width:"100%",maxWidth:1188,margin:0,marginTop:-40,marginBottom:-40}}>
+            <svg viewBox="80 80 400 400" preserveAspectRatio="xMidYMid meet" style={{width:"100%",height:"auto",display:"block",overflow:"visible"}}>
               <defs>
                 <radialGradient id="cg2" cx="50%" cy="40%" r="60%">
                   <stop offset="0%" stopColor="#1B478C"/>
@@ -132,11 +132,11 @@ export default function SituationsCritiques() {
               })}
               <circle cx="280" cy="280" r="66" fill="#10325F" stroke="#C9A84C" strokeWidth="1.5" style={{cursor:"pointer"}} onClick={()=>setSel(null)}/>
               <circle cx="280" cy="280" r="58" fill="none" stroke="rgba(201,168,76,.2)" strokeWidth="1"/>
-              <text x="280" y="270" textAnchor="middle" fontFamily="JetBrains Mono, monospace" fontSize="10.5" fontWeight="700" letterSpacing="2.2" fill="#C9A84C" style={{textTransform:"uppercase",cursor:"pointer"}} onClick={()=>setSel(null)}>
-                RISQUES INVISIBLES
+              <text x="280" y="274" textAnchor="middle" fontFamily="JetBrains Mono, monospace" fontSize="12" fontWeight="700" letterSpacing="2.4" fill="#C9A84C" style={{textTransform:"uppercase",cursor:"pointer"}} onClick={()=>setSel(null)}>
+                RISQUES
               </text>
-              <text x="280" y="292" textAnchor="middle" fontFamily="JetBrains Mono, monospace" fontSize="9.6" fontWeight="600" letterSpacing="1.8" fill="#F4F0E6" style={{textTransform:"uppercase",cursor:"pointer"}} onClick={()=>setSel(null)}>
-                MENACES SILENCIEUSES
+              <text x="280" y="294" textAnchor="middle" fontFamily="JetBrains Mono, monospace" fontSize="12" fontWeight="700" letterSpacing="2.4" fill="#C9A84C" style={{textTransform:"uppercase",cursor:"pointer"}} onClick={()=>setSel(null)}>
+                INVISIBLES
               </text>
               {TOPICS.map(t=>{
                 const p=POS[t.pos]; const a=sel===t.id;
@@ -153,7 +153,7 @@ export default function SituationsCritiques() {
               })}
             </svg>
           </div>
-          <p style={{fontSize:10,color:"#6B7FA0",letterSpacing:"0.5px",textAlign:"center",marginTop:1}}>
+          <p style={{fontSize:10,color:"#6B7FA0",letterSpacing:"0.5px",textAlign:"center",margin:0}}>
             Cliquez sur une situation pour explorer le processus
           </p>
         </div>
