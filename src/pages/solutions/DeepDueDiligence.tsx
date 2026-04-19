@@ -9,6 +9,7 @@ const DeepDueDiligence = () => {
   const formRef = useRef<HTMLDivElement>(null);
   const { toast } = useToast();
   const [submitting, setSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
 
   useEffect(() => {
     document.title = "Deep Due Diligence Buildfluence";
@@ -122,6 +123,7 @@ const DeepDueDiligence = () => {
         description: "Un analyste senior vous recontacte sous 48h ouvrées.",
       });
       form.reset();
+      setSubmitted(true);
     } catch {
       form.reset();
       toast({
@@ -221,104 +223,142 @@ const DeepDueDiligence = () => {
               </p>
             </div>
 
-            <form
-              onSubmit={handleSubmit}
-              style={{
-                background: "#FAF6ED",
-                color: "#0D1B2A",
-                padding: "40px 36px",
-                border: "1px solid #C9A84C",
-                display: "grid",
-                gap: 20,
-              }}
-            >
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20 }}>
-                <div>
-                  <label style={labelStyle}>Nom complet *</label>
-                  <input name="name" required maxLength={120} style={inputStyle} />
-                </div>
-                <div>
-                  <label style={labelStyle}>Société *</label>
-                  <input name="organization" required maxLength={150} style={inputStyle} />
-                </div>
-              </div>
-
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20 }}>
-                <div>
-                  <label style={labelStyle}>Email professionnel *</label>
-                  <input name="email" type="email" required maxLength={200} style={inputStyle} />
-                </div>
-                <div>
-                  <label style={labelStyle}>Téléphone</label>
-                  <input name="phone" type="tel" maxLength={40} style={inputStyle} />
-                </div>
-              </div>
-
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20 }}>
-                <div>
-                  <label style={labelStyle}>Type de besoin *</label>
-                  <select name="need" required style={{ ...inputStyle, appearance: "auto" }}>
-                    <option value="">Sélectionner...</option>
-                    <option value="Investissement">Investissement</option>
-                    <option value="Partenariat">Partenariat</option>
-                    <option value="Acquisition">Acquisition</option>
-                    <option value="Autre">Autre</option>
-                  </select>
-                </div>
-                <div>
-                  <label style={labelStyle}>Périmètre estimé (M$)</label>
-                  <input name="scope" maxLength={40} placeholder="Optionnel" style={inputStyle} />
-                </div>
-              </div>
-
-              <div>
-                <label style={labelStyle}>Message libre</label>
-                <textarea
-                  name="message"
-                  rows={5}
-                  maxLength={2000}
-                  placeholder="Décrivez le contexte du dossier…"
-                  style={{ ...inputStyle, fontFamily: "DM Sans, sans-serif", resize: "vertical" }}
-                />
-              </div>
-
-              <label
+            {submitted ? (
+              <div
                 style={{
-                  display: "flex",
-                  alignItems: "flex-start",
-                  gap: 10,
-                  fontSize: 12.5,
+                  background: "#FAF6ED",
                   color: "#0D1B2A",
-                  lineHeight: 1.5,
+                  padding: "60px 36px",
+                  border: "1px solid #C9A84C",
+                  textAlign: "center",
                 }}
               >
-                <input type="checkbox" name="nda" required style={{ marginTop: 4 }} />
-                <span>
-                  J'accepte la confidentialité et les conditions <strong>NDA</strong> de Buildfluence.
-                </span>
-              </label>
-
-              <button
-                type="submit"
-                disabled={submitting}
+                <div
+                  style={{
+                    fontFamily: "JetBrains Mono, monospace",
+                    fontSize: 11,
+                    letterSpacing: "0.3em",
+                    color: "#C9A84C",
+                    textTransform: "uppercase",
+                    marginBottom: 18,
+                  }}
+                >
+                  · Brief reçu ·
+                </div>
+                <h3
+                  style={{
+                    fontFamily: "Playfair Display, serif",
+                    fontSize: 26,
+                    fontWeight: 700,
+                    marginBottom: 14,
+                  }}
+                >
+                  Merci. Votre dossier a bien été transmis.
+                </h3>
+                <p style={{ fontSize: 14, lineHeight: 1.7, color: "#2C3E55", maxWidth: 520, margin: "0 auto" }}>
+                  Un analyste senior vous recontacte sous 48h ouvrées, sous couvert de confidentialité.
+                </p>
+              </div>
+            ) : (
+              <form
+                onSubmit={handleSubmit}
                 style={{
-                  background: "#C9A84C",
+                  background: "#FAF6ED",
                   color: "#0D1B2A",
-                  border: "none",
-                  padding: "16px 28px",
-                  fontFamily: "JetBrains Mono, monospace",
-                  fontSize: 12,
-                  letterSpacing: "0.22em",
-                  textTransform: "uppercase",
-                  fontWeight: 600,
-                  cursor: submitting ? "not-allowed" : "pointer",
-                  opacity: submitting ? 0.6 : 1,
-                  borderRadius: 2,
+                  padding: "40px 36px",
+                  border: "1px solid #C9A84C",
+                  display: "grid",
+                  gap: 20,
                 }}
               >
-                {submitting ? "Envoi..." : "Envoyer le brief confidentiel →"}
-              </button>
-            </form>
+                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20 }}>
+                  <div>
+                    <label style={labelStyle}>Nom complet *</label>
+                    <input name="name" required maxLength={120} style={inputStyle} />
+                  </div>
+                  <div>
+                    <label style={labelStyle}>Société *</label>
+                    <input name="organization" required maxLength={150} style={inputStyle} />
+                  </div>
+                </div>
+
+                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20 }}>
+                  <div>
+                    <label style={labelStyle}>Email professionnel *</label>
+                    <input name="email" type="email" required maxLength={200} style={inputStyle} />
+                  </div>
+                  <div>
+                    <label style={labelStyle}>Téléphone</label>
+                    <input name="phone" type="tel" maxLength={40} style={inputStyle} />
+                  </div>
+                </div>
+
+                <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20 }}>
+                  <div>
+                    <label style={labelStyle}>Type de besoin *</label>
+                    <select name="need" required style={{ ...inputStyle, appearance: "auto" }}>
+                      <option value="">Sélectionner...</option>
+                      <option value="Investissement">Investissement</option>
+                      <option value="Partenariat">Partenariat</option>
+                      <option value="Acquisition">Acquisition</option>
+                      <option value="Autre">Autre</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label style={labelStyle}>Périmètre estimé (M$)</label>
+                    <input name="scope" maxLength={40} placeholder="Optionnel" style={inputStyle} />
+                  </div>
+                </div>
+
+                <div>
+                  <label style={labelStyle}>Message libre</label>
+                  <textarea
+                    name="message"
+                    rows={5}
+                    maxLength={2000}
+                    placeholder="Décrivez le contexte du dossier…"
+                    style={{ ...inputStyle, fontFamily: "DM Sans, sans-serif", resize: "vertical" }}
+                  />
+                </div>
+
+                <label
+                  style={{
+                    display: "flex",
+                    alignItems: "flex-start",
+                    gap: 10,
+                    fontSize: 12.5,
+                    color: "#0D1B2A",
+                    lineHeight: 1.5,
+                  }}
+                >
+                  <input type="checkbox" name="nda" required style={{ marginTop: 4 }} />
+                  <span>
+                    J'accepte la confidentialité et les conditions <strong>NDA</strong> de Buildfluence.
+                  </span>
+                </label>
+
+                <button
+                  type="submit"
+                  disabled={submitting}
+                  style={{
+                    background: "#C9A84C",
+                    color: "#0D1B2A",
+                    border: "none",
+                    padding: "16px 28px",
+                    fontFamily: "JetBrains Mono, monospace",
+                    fontSize: 12,
+                    letterSpacing: "0.22em",
+                    textTransform: "uppercase",
+                    fontWeight: 600,
+                    cursor: submitting ? "not-allowed" : "pointer",
+                    opacity: submitting ? 0.6 : 1,
+                    borderRadius: 2,
+                  }}
+                >
+                  {submitting ? "Envoi..." : "Envoyer le brief confidentiel →"}
+                </button>
+              </form>
+            )}
           </div>
         </section>
       </main>
