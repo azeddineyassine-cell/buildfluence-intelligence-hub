@@ -74,7 +74,8 @@ const DeepDueDiligence = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setSubmitting(true);
-    const fd = new FormData(e.currentTarget);
+    const form = e.currentTarget;
+    const fd = new FormData(form);
     const payload = {
       name: (fd.get("name") || "").toString(),
       email: (fd.get("email") || "").toString(),
@@ -89,18 +90,20 @@ const DeepDueDiligence = () => {
       .map(([k, v]) => `${k}: ${v}`)
       .join("\n");
 
-    const { error } = await supabase.from("contact_submissions").insert({
-      form_type: "deep_due_diligence_brief",
-      name: payload.name || "—",
-      email: payload.email || "noreply@buildfluence.com",
-      organization: payload.organization || null,
-      phone: payload.phone || null,
-      topic: payload.need || null,
-      message: messageBlob,
-    });
+    try {
+      const { error } = await supabase.from("contact_submissions").insert({
+        form_type: "deep_due_diligence_brief",
+        name: payload.name || "—",
+        email: payload.email || "noreply@buildfluence.com",
+        organization: payload.organization || null,
+        phone: payload.phone || null,
+        topic: payload.need || null,
+        message: messageBlob,
+      });
 
-    if (!error) {
-      await supabase.functions.invoke("send-email", {
+      if (error) throw error;
+
+      const { error: emailError } = await supabase.functions.invoke("send-email", {
         body: {
           formType: "deep_due_diligence_brief",
           name: payload.name,
@@ -111,22 +114,24 @@ const DeepDueDiligence = () => {
           message: messageBlob,
         },
       });
-    }
 
-    setSubmitting(false);
-    if (error) {
+      if (emailError) throw emailError;
+
+      toast({
+        title: "Brief envoyé",
+        description: "Un analyste senior vous recontacte sous 48h ouvrées.",
+      });
+      form.reset();
+    } catch {
+      form.reset();
       toast({
         title: "Erreur",
         description: "Une erreur est survenue. Veuillez réessayer.",
         variant: "destructive",
       });
-      return;
+    } finally {
+      setSubmitting(false);
     }
-    toast({
-      title: "Brief envoyé",
-      description: "Un analyste senior vous recontacte sous 48h ouvrées.",
-    });
-    (e.target as HTMLFormElement).reset();
   };
 
   const inputStyle: React.CSSProperties = {
