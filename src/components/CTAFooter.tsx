@@ -36,7 +36,7 @@ const CTAFooter = () => {
       links: [
         { label: "AI Powered Monitor", href: "/capacites/ai-powered-monitor" },
         { label: "Strategic Workflow", href: "/capacites/strategic-workflow" },
-        { label: "Knowledge Capitalization", href: "/capacites/knowledge-capitalization" },
+        { label: "Strategic Command Center", href: "/capacites/strategic-command-center" },
         { label: "Competitive Velocity Engine", href: "/capacites/competitive-velocity-engine" },
       ],
     },
