@@ -1,0 +1,2 @@
+ALTER TABLE public.contact_submissions DROP CONSTRAINT IF EXISTS contact_submissions_form_type_check;
+ALTER TABLE public.contact_submissions ADD CONSTRAINT contact_submissions_form_type_check CHECK (form_type = ANY (ARRAY['contact'::text, 'newsletter'::text, 'strategic_exchange'::text, 'diagnostic'::text, 'demo'::text, 'deep_due_diligence_brief'::text, 'strategic_command_center'::text]));
