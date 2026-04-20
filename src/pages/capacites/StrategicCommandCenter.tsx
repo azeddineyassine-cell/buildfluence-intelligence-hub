@@ -1,22 +1,721 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import DetailPageLayout from "@/components/DetailPageLayout";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { FormCustom } from "@/components/FormCustom";
 import { motion, AnimatePresence } from "framer-motion";
 
-/* ---------- Flip Card (copié à l'identique d'AIPoweredMonitor pour cohérence) ---------- */
+/* ====================================================================
+   CARTOGRAPHIE INTERACTIVE — Le schéma narratif de Buildfluence
+   Flux : Donnée → Information → Connaissance → Insight-Driven
+   5 capacités alimentent le Command Center (Hémisphère REAL + WAR)
+   V3 : Tooltip élégant au survol avec Force + Objectif + lien interne
+==================================================================== */
+const StrategicCartography = () => {
+  const { t } = useLanguage();
+  const [hoveredCapacity, setHoveredCapacity] = useState<number | null>(null);
+  const [hoveredFlow, setHoveredFlow] = useState<number | null>(null);
+
+  const flowSteps = [
+    { label: t("Donnée brute", "Raw data"), desc: t("Signaux dispersés, non traités", "Dispersed, untreated signals") },
+    { label: t("Information", "Information"), desc: t("Données contextualisées et filtrées", "Contextualized and filtered data") },
+    { label: t("Connaissance", "Knowledge"), desc: t("Information structurée et mise en relation", "Structured and linked information") },
+    { label: t("Insight-Driven", "Insight-Driven"), desc: t("Décision stratégique actionnable", "Actionable strategic decision") },
+  ];
+
+  const capacities = [
+    {
+      icon: "📡",
+      full: "AI Powered Monitor",
+      role: t("Capte", "Captures"),
+      force: t(
+        "L'IA qui transforme le bruit en signal décisionnel.",
+        "The AI that turns noise into decision-grade signals."
+      ),
+      objective: t(
+        "Détecter les signaux faibles avant vos concurrents.",
+        "Detect weak signals before your competitors."
+      ),
+      route: "/capacites/ai-powered-monitor",
+    },
+    {
+      icon: "⚡",
+      full: "Competitive Velocity Engine",
+      role: t("Compare", "Compares"),
+      force: t(
+        "Le benchmark vivant qui mesure la vitesse de vos concurrents.",
+        "The living benchmark that measures your competitors' velocity."
+      ),
+      objective: t(
+        "Identifier leurs mouvements et anticiper leurs offensives.",
+        "Identify their moves and anticipate their offensives."
+      ),
+      route: "/capacites/competitive-velocity-engine",
+    },
+    {
+      icon: "🔄",
+      full: "Strategic Workflow",
+      role: t("Structure", "Structures"),
+      force: t(
+        "La cellule d'intelligence qui orchestre vos analyses.",
+        "The intelligence cell that orchestrates your analyses."
+      ),
+      objective: t(
+        "Structurer la production de vos insights stratégiques.",
+        "Structure the production of your strategic insights."
+      ),
+      route: "/capacites/strategic-workflow",
+    },
+    {
+      icon: "🔍",
+      full: "Deep Due Diligence",
+      role: t("Investigue", "Investigates"),
+      force: t(
+        "L'investigation stratégique qui sécurise vos engagements.",
+        "The strategic investigation that secures your commitments."
+      ),
+      objective: t(
+        "Révéler les angles morts avant investissement ou partenariat.",
+        "Reveal blind spots before investment or partnership."
+      ),
+      route: "/solutions/deep-due-diligence",
+    },
+    {
+      icon: "📣",
+      full: "Soft Power & Influence",
+      role: t("Influence", "Influences"),
+      force: t(
+        "L'art de piloter perceptions et dynamiques d'influence.",
+        "The art of steering perceptions and influence dynamics."
+      ),
+      objective: t(
+        "Transformer votre position en avantage compétitif durable.",
+        "Turn your position into a lasting competitive advantage."
+      ),
+      route: "/solutions/soft-power-influence",
+    },
+  ];
+
+  const topics = [
+    { icon: "🛡", label: t("Risques", "Risks") },
+    { icon: "💎", label: t("Opportunités", "Opportunities") },
+    { icon: "⚔", label: t("Concurrence", "Competition") },
+    { icon: "📣", label: t("Narratif", "Narrative") },
+  ];
+
+  return (
+    <div style={{ margin: "32px 0 56px" }}>
+      {/* Titre du schéma */}
+      <div style={{ textAlign: "center", marginBottom: 32 }}>
+        <p
+          style={{
+            fontFamily: "JetBrains Mono, monospace",
+            fontSize: 10,
+            letterSpacing: "0.3em",
+            color: "#C9A84C",
+            textTransform: "uppercase",
+            marginBottom: 12,
+          }}
+        >
+          · {t("Cartographie interactive", "Interactive cartography")} ·
+        </p>
+        <h3
+          style={{
+            fontFamily: "Playfair Display, serif",
+            fontSize: "clamp(24px, 3.2vw, 32px)",
+            fontWeight: 700,
+            color: "#0D1B2A",
+            marginBottom: 12,
+            lineHeight: 1.22,
+          }}
+        >
+          {t(
+            "De la donnée brute à la décision stratégique",
+            "From raw data to strategic decision"
+          )}
+        </h3>
+        <p
+          style={{
+            fontFamily: "Cormorant Garamond, serif",
+            fontSize: 19,
+            fontStyle: "italic",
+            color: "#5c6470",
+            maxWidth: 740,
+            margin: "0 auto",
+            lineHeight: 1.55,
+          }}
+        >
+          {t(
+            "Comment les 5 capacités de Buildfluence alimentent en continu votre Strategic Command Center.",
+            "How Buildfluence's 5 capabilities continuously feed your Strategic Command Center."
+          )}
+        </p>
+      </div>
+
+      {/* ÉTAGE 1 : FLUX DE TRANSFORMATION */}
+      <div
+        style={{
+          background: "#fff",
+          border: "1px solid #D9CFBC",
+          padding: "30px 24px",
+          marginBottom: 28,
+          borderRadius: 2,
+        }}
+      >
+        <p
+          style={{
+            fontFamily: "JetBrains Mono, monospace",
+            fontSize: 9,
+            letterSpacing: "0.3em",
+            color: "#8a7a4a",
+            textTransform: "uppercase",
+            marginBottom: 22,
+            textAlign: "center",
+          }}
+        >
+          {t("Flux de transformation", "Transformation flow")}
+        </p>
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "1fr auto 1fr auto 1fr auto 1fr",
+            alignItems: "center",
+            gap: 14,
+          }}
+        >
+          {flowSteps.map((step, idx) => (
+            <>
+              <motion.div
+                key={`step-${idx}`}
+                onHoverStart={() => setHoveredFlow(idx)}
+                onHoverEnd={() => setHoveredFlow(null)}
+                whileHover={{ y: -3 }}
+                style={{
+                  padding: "18px 14px",
+                  textAlign: "center",
+                  background: hoveredFlow === idx ? "#0D1B2A" : "transparent",
+                  color: hoveredFlow === idx ? "#F5F1E8" : "#0D1B2A",
+                  border: `1px solid ${hoveredFlow === idx ? "#C9A84C" : "#E5DDC8"}`,
+                  borderRadius: 2,
+                  cursor: "pointer",
+                  transition: "all 0.3s ease",
+                  minHeight: 100,
+                }}
+              >
+                <div
+                  style={{
+                    fontFamily: "JetBrains Mono, monospace",
+                    fontSize: 10,
+                    letterSpacing: "0.22em",
+                    color: hoveredFlow === idx ? "#C9A84C" : "#8a7a4a",
+                    marginBottom: 6,
+                  }}
+                >
+                  0{idx + 1}
+                </div>
+                <div
+                  style={{
+                    fontFamily: "Playfair Display, serif",
+                    fontSize: 18,
+                    fontWeight: 700,
+                    marginBottom: 6,
+                  }}
+                >
+                  {step.label}
+                </div>
+                <div
+                  style={{
+                    fontFamily: "Cormorant Garamond, serif",
+                    fontSize: 14,
+                    fontStyle: "italic",
+                    opacity: 0.88,
+                    lineHeight: 1.4,
+                  }}
+                >
+                  {step.desc}
+                </div>
+              </motion.div>
+              {idx < flowSteps.length - 1 && (
+                <motion.div
+                  key={`arrow-${idx}`}
+                  animate={{ x: [0, 4, 0] }}
+                  transition={{ duration: 1.5, repeat: Infinity, delay: idx * 0.3 }}
+                  style={{
+                    fontSize: 22,
+                    color: "#C9A84C",
+                    fontWeight: 700,
+                  }}
+                >
+                  →
+                </motion.div>
+              )}
+            </>
+          ))}
+        </div>
+      </div>
+
+      {/* ÉTAGE 2 : LES 5 CAPACITÉS — avec tooltip élégant au survol */}
+      <div style={{ marginBottom: 28 }}>
+        <p
+          style={{
+            fontFamily: "JetBrains Mono, monospace",
+            fontSize: 9,
+            letterSpacing: "0.3em",
+            color: "#8a7a4a",
+            textTransform: "uppercase",
+            marginBottom: 16,
+            textAlign: "center",
+          }}
+        >
+          {t("Les 5 capacités qui alimentent le Command Center", "The 5 capabilities feeding the Command Center")}
+          <span
+            style={{
+              display: "block",
+              marginTop: 6,
+              fontSize: 9,
+              letterSpacing: "0.2em",
+              color: "#C9A84C",
+              opacity: 0.75,
+            }}
+          >
+            {t("Survolez pour découvrir · Cliquez pour explorer", "Hover to discover · Click to explore")}
+          </span>
+        </p>
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fit, minmax(170px, 1fr))",
+            gap: 12,
+          }}
+        >
+          {capacities.map((cap, idx) => (
+            <div
+              key={idx}
+              onMouseEnter={() => setHoveredCapacity(idx)}
+              onMouseLeave={() => setHoveredCapacity(null)}
+              style={{ position: "relative" }}
+            >
+              {/* === TOOLTIP au survol : Force + Objectif + lien === */}
+              <AnimatePresence>
+                {hoveredCapacity === idx && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 8, scale: 0.96 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: 8, scale: 0.96 }}
+                    transition={{ duration: 0.2, ease: "easeOut" }}
+                    style={{
+                      position: "absolute",
+                      bottom: "calc(100% + 12px)",
+                      left: "50%",
+                      transform: "translateX(-50%)",
+                      width: 280,
+                      maxWidth: "calc(100vw - 40px)",
+                      background: "#0D1B2A",
+                      color: "#F5F1E8",
+                      border: "1px solid #C9A84C",
+                      padding: "18px 18px 14px",
+                      borderRadius: 2,
+                      boxShadow: "0 14px 40px rgba(13,27,42,0.25)",
+                      zIndex: 50,
+                      pointerEvents: "auto",
+                    }}
+                  >
+                    {/* Triangle pointer vers la tuile */}
+                    <div
+                      style={{
+                        position: "absolute",
+                        bottom: -7,
+                        left: "50%",
+                        transform: "translateX(-50%) rotate(45deg)",
+                        width: 12,
+                        height: 12,
+                        background: "#0D1B2A",
+                        borderRight: "1px solid #C9A84C",
+                        borderBottom: "1px solid #C9A84C",
+                      }}
+                    />
+
+                    {/* Header du tooltip */}
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: 10,
+                        marginBottom: 12,
+                        paddingBottom: 10,
+                        borderBottom: "1px solid rgba(201,168,76,0.25)",
+                      }}
+                    >
+                      <span style={{ fontSize: 22, filter: "brightness(1.4)" }}>{cap.icon}</span>
+                      <div>
+                        <div
+                          style={{
+                            fontFamily: "Playfair Display, serif",
+                            fontSize: 15,
+                            fontWeight: 700,
+                            color: "#F5F1E8",
+                            lineHeight: 1.2,
+                          }}
+                        >
+                          {cap.full}
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Force */}
+                    <div style={{ marginBottom: 12 }}>
+                      <div
+                        style={{
+                          fontFamily: "JetBrains Mono, monospace",
+                          fontSize: 8.5,
+                          letterSpacing: "0.3em",
+                          color: "#C9A84C",
+                          textTransform: "uppercase",
+                          marginBottom: 5,
+                        }}
+                      >
+                        › {t("Force", "Strength")}
+                      </div>
+                      <div
+                        style={{
+                          fontFamily: "Cormorant Garamond, serif",
+                          fontSize: 15,
+                          fontStyle: "italic",
+                          color: "#e0c88a",
+                          lineHeight: 1.45,
+                        }}
+                      >
+                        {cap.force}
+                      </div>
+                    </div>
+
+                    {/* Objectif */}
+                    <div style={{ marginBottom: 14 }}>
+                      <div
+                        style={{
+                          fontFamily: "JetBrains Mono, monospace",
+                          fontSize: 8.5,
+                          letterSpacing: "0.3em",
+                          color: "#C9A84C",
+                          textTransform: "uppercase",
+                          marginBottom: 5,
+                        }}
+                      >
+                        › {t("Objectif", "Objective")}
+                      </div>
+                      <div
+                        style={{
+                          fontFamily: "DM Sans, sans-serif",
+                          fontSize: 13,
+                          color: "rgba(245,241,232,0.92)",
+                          lineHeight: 1.5,
+                        }}
+                      >
+                        {cap.objective}
+                      </div>
+                    </div>
+
+                    {/* Lien interne cliquable vers la page de la capacité */}
+                    <Link
+                      to={cap.route}
+                      style={{
+                        display: "inline-flex",
+                        alignItems: "center",
+                        gap: 6,
+                        fontFamily: "JetBrains Mono, monospace",
+                        fontSize: 10,
+                        letterSpacing: "0.22em",
+                        textTransform: "uppercase",
+                        color: "#C9A84C",
+                        textDecoration: "none",
+                        borderBottom: "1px solid rgba(201,168,76,0.4)",
+                        paddingBottom: 3,
+                        fontWeight: 600,
+                        transition: "all 0.2s ease",
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.borderBottomColor = "#C9A84C";
+                        e.currentTarget.style.color = "#e0c88a";
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.borderBottomColor = "rgba(201,168,76,0.4)";
+                        e.currentTarget.style.color = "#C9A84C";
+                      }}
+                    >
+                      {t("Explorer la page", "Explore the page")} →
+                    </Link>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+
+              {/* === La tuile de la capacité === */}
+              <motion.div
+                whileHover={{ y: -4 }}
+                style={{
+                  background: hoveredCapacity === idx ? "#0D1B2A" : "#fff",
+                  color: hoveredCapacity === idx ? "#F5F1E8" : "#0D1B2A",
+                  border: `1px solid ${hoveredCapacity === idx ? "#C9A84C" : "#D9CFBC"}`,
+                  padding: "20px 14px",
+                  textAlign: "center",
+                  borderRadius: 2,
+                  cursor: "pointer",
+                  position: "relative",
+                  transition: "all 0.3s ease",
+                }}
+              >
+                <div style={{ fontSize: 28, marginBottom: 10 }}>{cap.icon}</div>
+                <div
+                  style={{
+                    fontFamily: "Playfair Display, serif",
+                    fontSize: 15,
+                    fontWeight: 700,
+                    marginBottom: 6,
+                    lineHeight: 1.25,
+                  }}
+                >
+                  {cap.full}
+                </div>
+                <div
+                  style={{
+                    fontFamily: "JetBrains Mono, monospace",
+                    fontSize: 9,
+                    letterSpacing: "0.22em",
+                    textTransform: "uppercase",
+                    color: hoveredCapacity === idx ? "#C9A84C" : "#8a7a4a",
+                  }}
+                >
+                  › {cap.role}
+                </div>
+
+                {/* Flèche descendante animée */}
+                <motion.div
+                  animate={{ y: [0, 6, 0], opacity: [0.4, 1, 0.4] }}
+                  transition={{ duration: 1.8, repeat: Infinity, delay: idx * 0.2 }}
+                  style={{
+                    position: "absolute",
+                    bottom: -14,
+                    left: "50%",
+                    transform: "translateX(-50%)",
+                    color: "#C9A84C",
+                    fontSize: 15,
+                    fontWeight: 700,
+                  }}
+                >
+                  ↓
+                </motion.div>
+              </motion.div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* ÉTAGE 3 : LE STRATEGIC COMMAND CENTER */}
+      <div
+        style={{
+          background: "#0D1B2A",
+          color: "#F5F1E8",
+          padding: "44px 32px",
+          borderRadius: 2,
+          border: "1px solid #C9A84C",
+          position: "relative",
+          overflow: "hidden",
+        }}
+      >
+        <div style={{ textAlign: "center", marginBottom: 30 }}>
+          <p
+            style={{
+              fontFamily: "JetBrains Mono, monospace",
+              fontSize: 10,
+              letterSpacing: "0.35em",
+              color: "#C9A84C",
+              textTransform: "uppercase",
+              marginBottom: 12,
+            }}
+          >
+            ◈ {t("Point de convergence", "Convergence point")} ◈
+          </p>
+          <h4
+            style={{
+              fontFamily: "Playfair Display, serif",
+              fontSize: "clamp(26px, 3.5vw, 36px)",
+              fontWeight: 800,
+              color: "#F5F1E8",
+              lineHeight: 1.15,
+              letterSpacing: "0.02em",
+            }}
+          >
+            STRATEGIC COMMAND CENTER
+          </h4>
+        </div>
+
+        {/* Les 2 Hémisphères */}
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "1fr 1fr",
+            gap: 20,
+            marginBottom: 30,
+          }}
+        >
+          <div
+            style={{
+              background: "rgba(201,168,76,0.08)",
+              border: "1px solid rgba(201,168,76,0.35)",
+              padding: "24px 22px",
+              borderRadius: 2,
+            }}
+          >
+            <p
+              style={{
+                fontFamily: "JetBrains Mono, monospace",
+                fontSize: 9,
+                letterSpacing: "0.28em",
+                color: "#C9A84C",
+                textTransform: "uppercase",
+                marginBottom: 10,
+              }}
+            >
+              ● {t("Hémisphère 1", "Hemisphere 1")}
+            </p>
+            <h5
+              style={{
+                fontFamily: "Playfair Display, serif",
+                fontSize: 22,
+                fontWeight: 700,
+                color: "#F5F1E8",
+                marginBottom: 10,
+              }}
+            >
+              REAL
+            </h5>
+            <p
+              style={{
+                fontFamily: "Cormorant Garamond, serif",
+                fontSize: 17,
+                fontStyle: "italic",
+                color: "#e0c88a",
+                lineHeight: 1.5,
+              }}
+            >
+              {t("Présent — écosystème sous contrôle", "Present — ecosystem under control")}
+            </p>
+          </div>
+
+          <div
+            style={{
+              background: "rgba(201,168,76,0.08)",
+              border: "1px solid rgba(201,168,76,0.35)",
+              padding: "24px 22px",
+              borderRadius: 2,
+            }}
+          >
+            <p
+              style={{
+                fontFamily: "JetBrains Mono, monospace",
+                fontSize: 9,
+                letterSpacing: "0.28em",
+                color: "#C9A84C",
+                textTransform: "uppercase",
+                marginBottom: 10,
+              }}
+            >
+              ◈ {t("Hémisphère 2", "Hemisphere 2")}
+            </p>
+            <h5
+              style={{
+                fontFamily: "Playfair Display, serif",
+                fontSize: 22,
+                fontWeight: 700,
+                color: "#F5F1E8",
+                marginBottom: 10,
+              }}
+            >
+              WAR ROOM
+            </h5>
+            <p
+              style={{
+                fontFamily: "Cormorant Garamond, serif",
+                fontSize: 17,
+                fontStyle: "italic",
+                color: "#e0c88a",
+                lineHeight: 1.5,
+              }}
+            >
+              {t("Prédictif simulé — futurs testés", "Simulated predictive — tested futures")}
+            </p>
+          </div>
+        </div>
+
+        {/* Les 4 Topics Insight-Driven */}
+        <div>
+          <p
+            style={{
+              fontFamily: "JetBrains Mono, monospace",
+              fontSize: 9,
+              letterSpacing: "0.28em",
+              color: "#C9A84C",
+              textTransform: "uppercase",
+              marginBottom: 16,
+              textAlign: "center",
+            }}
+          >
+            {t("4 Topics Insight-Driven", "4 Insight-Driven Topics")}
+          </p>
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(140px, 1fr))",
+              gap: 12,
+            }}
+          >
+            {topics.map((topic, idx) => (
+              <motion.div
+                key={idx}
+                whileHover={{ scale: 1.04 }}
+                style={{
+                  background: "rgba(245,241,232,0.05)",
+                  border: "1px solid rgba(245,241,232,0.15)",
+                  padding: "18px 12px",
+                  textAlign: "center",
+                  borderRadius: 2,
+                  cursor: "pointer",
+                }}
+              >
+                <div style={{ fontSize: 28, marginBottom: 8, filter: "brightness(1.4)" }}>{topic.icon}</div>
+                <div
+                  style={{
+                    fontFamily: "Playfair Display, serif",
+                    fontSize: 17,
+                    fontWeight: 700,
+                    color: "#F5F1E8",
+                  }}
+                >
+                  {topic.label}
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+/* ====================================================================
+   Flip Card — structure identique à AIPoweredMonitor
+==================================================================== */
 const FlipCard = ({ front, back }: { front: React.ReactNode; back: React.ReactNode }) => {
   const [flipped, setFlipped] = useState(false);
   return (
     <div
       className="cursor-pointer"
-      style={{ perspective: "1200px", minHeight: "280px" }}
+      style={{ perspective: "1200px", minHeight: "320px" }}
       onClick={() => setFlipped(!flipped)}
     >
       <motion.div
         animate={{ rotateY: flipped ? 180 : 0 }}
         transition={{ duration: 0.6, ease: "easeInOut" }}
-        style={{ transformStyle: "preserve-3d", position: "relative", width: "100%", height: "100%", minHeight: "280px" }}
+        style={{ transformStyle: "preserve-3d", position: "relative", width: "100%", height: "100%", minHeight: "320px" }}
       >
         <div
           style={{ backfaceVisibility: "hidden", position: flipped ? "absolute" : "relative", inset: 0 }}
@@ -35,7 +734,9 @@ const FlipCard = ({ front, back }: { front: React.ReactNode; back: React.ReactNo
   );
 };
 
-/* ---------- Cockpit Interactif (la pièce maîtresse — signature Command Center) ---------- */
+/* ====================================================================
+   Cockpit interactif — 4 quadrants + Time Slider REAL / WAR ROOM
+==================================================================== */
 type Mode = "real" | "war";
 type TopicKey = "risk" | "opportunity" | "competition" | "narrative";
 
@@ -48,7 +749,7 @@ const CockpitInteractive = () => {
     key: TopicKey;
     icon: string;
     label: string;
-    temperature: "calm" | "tension" | "alert";
+    temperature: "calm" | "pressure" | "alert";
     realSignals: string[];
     warScenarios: Array<{ label: string; proba: string; impact: string }>;
   }> = [
@@ -72,7 +773,7 @@ const CockpitInteractive = () => {
       key: "opportunity",
       icon: "💎",
       label: t("Opportunités", "Opportunities"),
-      temperature: "tension",
+      temperature: "pressure",
       realSignals: [
         t("Fenêtre de marché ouverte (6-9 mois)", "Open market window (6-9 months)"),
         t("Angle mort concurrent identifié", "Competitor blind spot identified"),
@@ -88,7 +789,7 @@ const CockpitInteractive = () => {
       key: "competition",
       icon: "⚔",
       label: t("Concurrence", "Competition"),
-      temperature: "tension",
+      temperature: "pressure",
       realSignals: [
         t("Velocity score concurrent : +18%", "Competitor velocity score: +18%"),
         t("2 mouvements stratégiques en cours", "2 strategic moves in progress"),
@@ -118,15 +819,15 @@ const CockpitInteractive = () => {
     },
   ];
 
-  const tempColor = (level: "calm" | "tension" | "alert") => {
+  const tempColor = (level: "calm" | "pressure" | "alert") => {
     if (level === "alert") return "#E06D4F";
-    if (level === "tension") return "#C9A84C";
+    if (level === "pressure") return "#C9A84C";
     return "#6DB58C";
   };
 
-  const tempLabel = (level: "calm" | "tension" | "alert") => {
+  const tempLabel = (level: "calm" | "pressure" | "alert") => {
     if (level === "alert") return t("Alerte", "Alert");
-    if (level === "tension") return t("Tension", "Tension");
+    if (level === "pressure") return t("Pression", "Pressure");
     return t("Calme", "Calm");
   };
 
@@ -143,7 +844,7 @@ const CockpitInteractive = () => {
         overflow: "hidden",
       }}
     >
-      {/* Header du cockpit */}
+      {/* Header */}
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 32, flexWrap: "wrap", gap: 16 }}>
         <div>
           <p
@@ -170,7 +871,7 @@ const CockpitInteractive = () => {
           </h3>
         </div>
 
-        {/* Time Slider REAL ⇄ WAR ROOM */}
+        {/* Time Slider */}
         <div
           style={{
             display: "flex",
@@ -221,7 +922,7 @@ const CockpitInteractive = () => {
         </div>
       </div>
 
-      {/* Grille 4 quadrants */}
+      {/* 4 quadrants */}
       <div
         style={{
           display: "grid",
@@ -240,19 +941,18 @@ const CockpitInteractive = () => {
               style={{
                 background: isOpen ? "#1a2d44" : "#142235",
                 border: `1px solid ${isOpen ? "#C9A84C" : "#25405f"}`,
-                padding: "24px 20px",
+                padding: "26px 22px",
                 borderRadius: 3,
                 cursor: "pointer",
                 position: "relative",
-                minHeight: 200,
+                minHeight: 240,
               }}
             >
-              {/* Pulsation de température */}
               <div
                 style={{
                   position: "absolute",
-                  top: 16,
-                  right: 16,
+                  top: 18,
+                  right: 18,
                   display: "flex",
                   alignItems: "center",
                   gap: 6,
@@ -282,21 +982,19 @@ const CockpitInteractive = () => {
                 </span>
               </div>
 
-              {/* Icône + label */}
-              <div style={{ fontSize: 32, marginBottom: 12, filter: "brightness(1.4)" }}>{topic.icon}</div>
+              <div style={{ fontSize: 36, marginBottom: 14, filter: "brightness(1.4)" }}>{topic.icon}</div>
               <h4
                 style={{
                   fontFamily: "Playfair Display, serif",
-                  fontSize: 20,
+                  fontSize: 23,
                   fontWeight: 700,
-                  marginBottom: 16,
+                  marginBottom: 20,
                   color: "#F5F1E8",
                 }}
               >
                 {topic.label}
               </h4>
 
-              {/* Contenu conditionnel REAL vs WAR */}
               <AnimatePresence mode="wait">
                 {mode === "real" ? (
                   <motion.ul
@@ -311,16 +1009,16 @@ const CockpitInteractive = () => {
                         key={i}
                         style={{
                           fontFamily: "Cormorant Garamond, serif",
-                          fontSize: 14,
+                          fontSize: 17,
                           fontStyle: "italic",
-                          color: "#d4b866",
+                          color: "#e0c88a",
                           lineHeight: 1.5,
-                          marginBottom: 8,
-                          paddingLeft: 14,
+                          marginBottom: 11,
+                          paddingLeft: 18,
                           position: "relative",
                         }}
                       >
-                        <span style={{ position: "absolute", left: 0, color: "#C9A84C" }}>›</span>
+                        <span style={{ position: "absolute", left: 0, color: "#C9A84C", fontWeight: 700 }}>›</span>
                         {s}
                       </li>
                     ))}
@@ -336,7 +1034,7 @@ const CockpitInteractive = () => {
                       <div
                         key={i}
                         style={{
-                          padding: "8px 0",
+                          padding: "12px 0",
                           borderBottom: i < topic.warScenarios.length - 1 ? "1px dashed #25405f" : "none",
                         }}
                       >
@@ -344,7 +1042,7 @@ const CockpitInteractive = () => {
                           <span
                             style={{
                               fontFamily: "DM Sans, sans-serif",
-                              fontSize: 12.5,
+                              fontSize: 14.5,
                               color: "#F5F1E8",
                               fontWeight: 500,
                             }}
@@ -354,7 +1052,7 @@ const CockpitInteractive = () => {
                           <span
                             style={{
                               fontFamily: "JetBrains Mono, monospace",
-                              fontSize: 11,
+                              fontSize: 12,
                               color: "#C9A84C",
                               fontWeight: 600,
                             }}
@@ -365,7 +1063,7 @@ const CockpitInteractive = () => {
                         <span
                           style={{
                             fontFamily: "JetBrains Mono, monospace",
-                            fontSize: 9,
+                            fontSize: 10,
                             letterSpacing: "0.15em",
                             textTransform: "uppercase",
                             color: "#8a9bb0",
@@ -383,13 +1081,13 @@ const CockpitInteractive = () => {
         })}
       </div>
 
-      {/* Decision Brief — panneau inférieur */}
+      {/* Decision Brief */}
       <div
         style={{
           marginTop: 32,
           background: "#FAF6ED",
           color: "#0D1B2A",
-          padding: "24px 28px",
+          padding: "28px 32px",
           borderLeft: "3px solid #C9A84C",
           borderRadius: 2,
         }}
@@ -401,7 +1099,7 @@ const CockpitInteractive = () => {
             letterSpacing: "0.3em",
             color: "#C9A84C",
             textTransform: "uppercase",
-            marginBottom: 10,
+            marginBottom: 12,
           }}
         >
           · {t("Decision Brief COMEX", "Executive Decision Brief")} ·
@@ -409,7 +1107,7 @@ const CockpitInteractive = () => {
         <p
           style={{
             fontFamily: "Cormorant Garamond, serif",
-            fontSize: 18,
+            fontSize: 20,
             fontStyle: "italic",
             lineHeight: 1.6,
             color: "#0D1B2A",
@@ -417,8 +1115,8 @@ const CockpitInteractive = () => {
         >
           {mode === "real"
             ? t(
-                "Synthèse du jour : 1 alerte critique sur les Risques · 2 opportunités à arbitrer sous 30 jours · concurrence en tension · narratif sous contrôle.",
-                "Today's brief: 1 critical Risk alert · 2 opportunities to arbitrate within 30 days · competition in tension · narrative under control."
+                "Synthèse du jour : 1 alerte critique sur les Risques · 2 opportunités à arbitrer sous 30 jours · concurrence en pression · narratif sous contrôle.",
+                "Today's brief: 1 critical Risk alert · 2 opportunities to arbitrate within 30 days · competition under pressure · narrative under control."
               )
             : t(
                 "Projection 12 mois : 3 scénarios majeurs identifiés, dont 1 à probabilité supérieure à 60%. Arbitrage stratégique recommandé avant fin de trimestre.",
@@ -430,7 +1128,9 @@ const CockpitInteractive = () => {
   );
 };
 
-/* ---------- Page principale ---------- */
+/* ====================================================================
+   PAGE PRINCIPALE — fond crème #FAF6ED full-width
+==================================================================== */
 const StrategicCommandCenter = () => {
   const { t } = useLanguage();
   const [formOpen, setFormOpen] = useState(false);
@@ -478,157 +1178,169 @@ const StrategicCommandCenter = () => {
   ];
 
   return (
-    <DetailPageLayout
-      title={t("Strategic Command Center", "Strategic Command Center")}
-      titleClassName="text-center"
-      chapeau={
-        <span className="italic" style={{ color: "#6B7280" }}>
-          {t(
-            "Le cockpit qui voit le présent et simule le futur. Pilotez vos 4 enjeux stratégiques — Risques, Opportunités, Concurrence, Narratif — et stress-testez vos arbitrages avant que le marché ne le fasse pour vous.",
-            "The cockpit that sees the present and simulates the future. Steer your 4 strategic issues — Risks, Opportunities, Competition, Narrative — and stress-test your arbitrations before the market does it for you."
-          )}
-        </span>
-      }
-      chapeauClassName="text-center mb-2"
-    >
-      {/* Cockpit interactif — la pièce maîtresse */}
-      <CockpitInteractive />
+    <div style={{ background: "#FAF6ED", width: "100%", minHeight: "100vh" }}>
+      <DetailPageLayout
+        title={t("Strategic Command Center", "Strategic Command Center")}
+        titleClassName="text-center"
+        chapeau={
+          <span
+            className="italic"
+            style={{
+              color: "#5c6470",
+              fontFamily: "Cormorant Garamond, serif",
+              fontSize: 20,
+            }}
+          >
+            {t(
+              "Le cockpit qui voit le présent et simule le futur. Pilotez vos 4 enjeux stratégiques — Risques, Opportunités, Concurrence, Narratif — et stress-testez vos arbitrages avant que le marché ne le fasse pour vous.",
+              "The cockpit that sees the present and simulates the future. Steer your 4 strategic issues — Risks, Opportunities, Competition, Narrative — and stress-test your arbitrations before the market does it for you."
+            )}
+          </span>
+        }
+        chapeauClassName="text-center mb-2"
+      >
+        {/* CARTOGRAPHIE INTERACTIVE */}
+        <StrategicCartography />
 
-      {/* 3 Flip Cards — cohérence avec les autres pages capacités */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 my-10">
-        {cards.map((card, idx) => (
-          <FlipCard
-            key={idx}
-            front={
-              <div
-                className="w-full h-full flex flex-col items-center justify-center rounded-xl shadow-xl"
-                style={{ background: card.bg, minHeight: "280px", border: "1px solid #1a2d44" }}
-              >
-                <span className="text-5xl mb-5" style={{ filter: "brightness(1.4)" }}>
-                  {card.icon}
-                </span>
-                <h3
-                  className="mb-3 text-center"
-                  style={{
-                    fontFamily: "Playfair Display, serif",
-                    fontSize: 20,
-                    fontWeight: 700,
-                    color: "#F5F1E8",
-                  }}
-                >
-                  {card.title}
-                </h3>
-                <p
-                  className="leading-relaxed max-w-[240px] mb-6 text-center"
-                  style={{
-                    fontFamily: "Cormorant Garamond, serif",
-                    fontSize: 15,
-                    fontStyle: "italic",
-                    color: "#d4b866",
-                  }}
-                >
-                  {card.subtitle}
-                </p>
-                <p
-                  style={{
-                    fontFamily: "JetBrains Mono, monospace",
-                    fontSize: 10,
-                    letterSpacing: "0.25em",
-                    textTransform: "uppercase",
-                    color: "rgba(245,241,232,0.4)",
-                  }}
-                >
-                  {t("Cliquer pour découvrir →", "Click to discover →")}
-                </p>
-              </div>
-            }
-            back={
-              <div
-                className="w-full h-full flex flex-col rounded-xl shadow-xl"
-                style={{ background: card.bg, minHeight: "280px", border: "1px solid #C9A84C" }}
-              >
-                <h3
-                  className="mb-4 text-center"
-                  style={{
-                    fontFamily: "Playfair Display, serif",
-                    fontSize: 18,
-                    fontWeight: 700,
-                    color: "#F5F1E8",
-                  }}
-                >
-                  {card.title}
-                </h3>
-                <ul className="space-y-2.5 flex-1">
-                  {card.items.map((item, i) => (
-                    <li
-                      key={i}
-                      className="leading-relaxed pl-5 relative before:content-['→'] before:absolute before:left-0 before:text-[#C9A84C] before:text-sm"
-                      style={{
-                        fontFamily: "DM Sans, sans-serif",
-                        fontSize: 13,
-                        color: "rgba(245,241,232,0.85)",
-                      }}
-                    >
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-                <p
-                  className="mt-4 text-center"
-                  style={{
-                    fontFamily: "JetBrains Mono, monospace",
-                    fontSize: 10,
-                    letterSpacing: "0.25em",
-                    textTransform: "uppercase",
-                    color: "rgba(245,241,232,0.4)",
-                  }}
-                >
-                  {t("Cliquer pour retourner", "Click to flip back")}
-                </p>
-              </div>
-            }
-          />
-        ))}
-      </div>
+        {/* COCKPIT INTERACTIF */}
+        <CockpitInteractive />
 
-      {/* CTA doré — même pattern qu'AIPoweredMonitor */}
-      <div className="text-center my-10">
-        <button
-          onClick={() => setFormOpen(true)}
-          className="hover:opacity-90 transition-opacity"
-          style={{
-            background: "#C9A84C",
-            color: "#0D1B2A",
-            fontWeight: 700,
-            padding: "14px 32px",
-            borderRadius: 2,
-            border: "none",
-            fontSize: 13,
-            letterSpacing: "0.22em",
-            cursor: "pointer",
-            textTransform: "uppercase",
-            fontFamily: "JetBrains Mono, monospace",
-          }}
-        >
-          {t("Activer votre Command Center", "Activate your Command Center")} →
-        </button>
-      </div>
+        {/* 3 FLIP CARDS */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 my-10">
+          {cards.map((card, idx) => (
+            <FlipCard
+              key={idx}
+              front={
+                <div
+                  className="w-full h-full flex flex-col items-center justify-center rounded-xl shadow-xl"
+                  style={{ background: card.bg, minHeight: "320px", border: "1px solid #1a2d44" }}
+                >
+                  <span className="text-5xl mb-5" style={{ filter: "brightness(1.4)" }}>
+                    {card.icon}
+                  </span>
+                  <h3
+                    className="mb-3 text-center"
+                    style={{
+                      fontFamily: "Playfair Display, serif",
+                      fontSize: 23,
+                      fontWeight: 700,
+                      color: "#F5F1E8",
+                    }}
+                  >
+                    {card.title}
+                  </h3>
+                  <p
+                    className="leading-relaxed max-w-[240px] mb-6 text-center"
+                    style={{
+                      fontFamily: "Cormorant Garamond, serif",
+                      fontSize: 18,
+                      fontStyle: "italic",
+                      color: "#e0c88a",
+                    }}
+                  >
+                    {card.subtitle}
+                  </p>
+                  <p
+                    style={{
+                      fontFamily: "JetBrains Mono, monospace",
+                      fontSize: 10,
+                      letterSpacing: "0.25em",
+                      textTransform: "uppercase",
+                      color: "rgba(245,241,232,0.4)",
+                    }}
+                  >
+                    {t("Cliquer pour découvrir →", "Click to discover →")}
+                  </p>
+                </div>
+              }
+              back={
+                <div
+                  className="w-full h-full flex flex-col rounded-xl shadow-xl"
+                  style={{ background: card.bg, minHeight: "320px", border: "1px solid #C9A84C" }}
+                >
+                  <h3
+                    className="mb-4 text-center"
+                    style={{
+                      fontFamily: "Playfair Display, serif",
+                      fontSize: 20,
+                      fontWeight: 700,
+                      color: "#F5F1E8",
+                    }}
+                  >
+                    {card.title}
+                  </h3>
+                  <ul className="space-y-3 flex-1">
+                    {card.items.map((item, i) => (
+                      <li
+                        key={i}
+                        className="leading-relaxed pl-5 relative before:content-['→'] before:absolute before:left-0 before:text-[#C9A84C]"
+                        style={{
+                          fontFamily: "DM Sans, sans-serif",
+                          fontSize: 15,
+                          color: "rgba(245,241,232,0.92)",
+                        }}
+                      >
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                  <p
+                    className="mt-4 text-center"
+                    style={{
+                      fontFamily: "JetBrains Mono, monospace",
+                      fontSize: 10,
+                      letterSpacing: "0.25em",
+                      textTransform: "uppercase",
+                      color: "rgba(245,241,232,0.4)",
+                    }}
+                  >
+                    {t("Cliquer pour retourner", "Click to flip back")}
+                  </p>
+                </div>
+              }
+            />
+          ))}
+        </div>
 
-      <FormCustom
-        open={formOpen}
-        onClose={() => setFormOpen(false)}
-        title={t("Activer votre Strategic Command Center", "Activate your Strategic Command Center")}
-        submitLabel={t("Déployer le Cockpit", "Deploy the Cockpit")}
-        formType="strategic_command_center"
-        fields={[
-          { name: "name", placeholder: t("Nom & Prénom", "Full name"), required: true, maxLength: 100 },
-          { name: "organization", placeholder: t("Organisation", "Organization"), required: true, maxLength: 100 },
-          { name: "role", placeholder: t("Fonction / Niveau de décision", "Role / Decision level"), required: true, maxLength: 150 },
-          { name: "topics", placeholder: t("Enjeux stratégiques prioritaires à piloter", "Priority strategic issues to steer"), required: true, type: "textarea", rows: 4 },
-          { name: "email", placeholder: t("Email professionnel", "Professional email"), required: true, type: "email", maxLength: 255 },
-        ]}
-      />
-    </DetailPageLayout>
+        {/* CTA doré */}
+        <div className="text-center my-10">
+          <button
+            onClick={() => setFormOpen(true)}
+            className="hover:opacity-90 transition-opacity"
+            style={{
+              background: "#C9A84C",
+              color: "#0D1B2A",
+              fontWeight: 700,
+              padding: "16px 36px",
+              borderRadius: 2,
+              border: "none",
+              fontSize: 13,
+              letterSpacing: "0.22em",
+              cursor: "pointer",
+              textTransform: "uppercase",
+              fontFamily: "JetBrains Mono, monospace",
+            }}
+          >
+            {t("Activer votre Command Center", "Activate your Command Center")} →
+          </button>
+        </div>
+
+        <FormCustom
+          open={formOpen}
+          onClose={() => setFormOpen(false)}
+          title={t("Activer votre Strategic Command Center", "Activate your Strategic Command Center")}
+          submitLabel={t("Déployer le Cockpit", "Deploy the Cockpit")}
+          formType="strategic_command_center"
+          fields={[
+            { name: "name", placeholder: t("Nom & Prénom", "Full name"), required: true, maxLength: 100 },
+            { name: "organization", placeholder: t("Organisation", "Organization"), required: true, maxLength: 100 },
+            { name: "role", placeholder: t("Fonction / Niveau de décision", "Role / Decision level"), required: true, maxLength: 150 },
+            { name: "topics", placeholder: t("Enjeux stratégiques prioritaires à piloter", "Priority strategic issues to steer"), required: true, type: "textarea", rows: 4 },
+            { name: "email", placeholder: t("Email professionnel", "Professional email"), required: true, type: "email", maxLength: 255 },
+          ]}
+        />
+      </DetailPageLayout>
+    </div>
   );
 };
 
