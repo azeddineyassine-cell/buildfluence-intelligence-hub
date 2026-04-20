@@ -175,10 +175,10 @@ const Navbar = () => {
       route: "/capacites/strategic-workflow",
     },
     {
-      label: "Knowledge Capitalization",
-      desc: t("Intelligence collective structurée", "Structured collective intelligence"),
+      label: "Strategic Command Center",
+      desc: t("Cockpit décisionnel souverain", "Sovereign decision cockpit"),
       icon: Database,
-      route: "/capacites/knowledge-capitalization",
+      route: "/capacites/strategic-command-center",
     },
     {
       label: "Competitive Velocity Engine",

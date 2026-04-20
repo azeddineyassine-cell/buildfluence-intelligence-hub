@@ -27,7 +27,7 @@ import SoftPowerInfluence from "./pages/solutions/SoftPowerInfluence";
 // Capability pages
 import AIPoweredMonitor from "./pages/capacites/AIPoweredMonitor";
 import StrategicWorkflow from "./pages/capacites/StrategicWorkflow";
-import KnowledgeCapitalization from "./pages/capacites/KnowledgeCapitalization";
+import StrategicCommandCenter from "./pages/capacites/StrategicCommandCenter";
 import CompetitiveVelocityEngine from "./pages/capacites/CompetitiveVelocityEngine";
 
 const queryClient = new QueryClient();
@@ -62,7 +62,7 @@ const App = () => (
             {/* Capabilities */}
             <Route path="/capacites/ai-powered-monitor" element={<AIPoweredMonitor />} />
             <Route path="/capacites/strategic-workflow" element={<StrategicWorkflow />} />
-            <Route path="/capacites/knowledge-capitalization" element={<KnowledgeCapitalization />} />
+            <Route path="/capacites/strategic-command-center" element={<StrategicCommandCenter />} />
             <Route path="/capacites/competitive-velocity-engine" element={<CompetitiveVelocityEngine />} />
 
             <Route path="*" element={<NotFound />} />
