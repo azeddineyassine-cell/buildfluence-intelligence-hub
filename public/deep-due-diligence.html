@@ -822,11 +822,11 @@
  
         <div class="perimeter-quote">
           <span class="pq-mark">“</span>
-          <em>Les documents ne disaient rien. Les connexions disaient tout.</em>
-          <span class="pq-attrib">Note d'analyste · vague 3 · OSINT profond</span>
+          <em>The documents said nothing. The connections said everything.</em>
+          <span class="pq-attrib">Analyst note · wave 3 · deep OSINT</span>
         </div>
         <div class="perimeter-legend">
-          <span class="pl-asterisk">*</span> BVI : British Virgin Islands, paradis fiscal des Caraïbes britanniques.
+          <span class="pl-asterisk">*</span> BVI: British Virgin Islands, a Caribbean tax haven.
         </div>
       </div>
     </div>
@@ -1086,159 +1086,159 @@ const AVATAR_URI = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAYAAA
  
 const DATA = {
   nodes: [
-    // ENTITÉS (sociétés → États)
-    {id:"DELAWARE", kind:"entity", label:"DELAWARE", sub:"Fonds de capital risque · cible principale", country:"LV", countryName:"Lettonie", x:280, y:380, r:50, color:"#103E8C",
-     recode:"Société de capital risque basée dans une capitale balte, spécialisée dans la FinTech et l'IT. Cible opérationnelle du mandat.",
-     profile:"Fondée il y a 15 ans. Deux licornes en portefeuille, une vingtaine d'investissements. Siège social transparent, gouvernance déclarée.",
-     signals:"Aucun signal rouge sur l'entité elle même. Portefeuille cohérent. Gouvernance publique.",
-     verdict:"go", verdictText:"GO, feu vert opérationnel",
+    // ENTITIES (companies → US states)
+    {id:"DELAWARE", kind:"entity", label:"DELAWARE", sub:"Venture capital fund · primary target", country:"LV", countryName:"Latvia", x:280, y:380, r:50, color:"#103E8C",
+     recode:"Venture capital firm based in a Baltic capital, specialized in FinTech and IT. Operational target of the mandate.",
+     profile:"Founded 15 years ago. Two unicorns in the portfolio, around twenty investments. Transparent registered office, declared governance.",
+     signals:"No red flag on the entity itself. Coherent portfolio. Public governance.",
+     verdict:"go", verdictText:"GO, operational green light",
      links:["WASHINGTON","JEFFERSON","CALIFORNIA"]},
  
-    {id:"NEVADA", kind:"entity", label:"NEVADA", sub:"Fonds parent · holding offshore", country:"CY", countryName:"Chypre", x:640, y:330, r:48, color:"#103E8C",
-     recode:"Fonds de private equity enregistré dans une juridiction méditerranéenne à fiscalité favorable. Apparaît comme coinvestisseur systématique de DELAWARE.",
-     profile:"Créée il y a 18 ans. Présente officiellement 3 managers. Enquête ouvre sur un quatrième. Secteur : biotech, IT, agro, pharma.",
-     signals:"Capitalisation partiellement issue d'OHIO (liquidée pour fraude). Quatrième dirigeant non déclaré. Filiales énergie avec homonymie suspecte.",
-     verdict:"watch", verdictText:"VIGILANCE, périmètre à encadrer",
+    {id:"NEVADA", kind:"entity", label:"NEVADA", sub:"Parent fund · offshore holding", country:"CY", countryName:"Cyprus", x:640, y:330, r:48, color:"#103E8C",
+     recode:"Private equity fund registered in a Mediterranean jurisdiction with favorable taxation. Appears as a systematic co-investor of DELAWARE.",
+     profile:"Created 18 years ago. Officially lists 3 managers. Investigation reveals a fourth. Sectors: biotech, IT, agribusiness, pharma.",
+     signals:"Capitalization partly originating from OHIO (liquidated for fraud). Fourth undeclared executive. Energy subsidiaries with suspicious homonymy.",
+     verdict:"watch", verdictText:"WATCH, perimeter to be controlled",
      links:["JEFFERSON","MADISON","ADAMS","JACKSON","OHIO","WYOMING","KANSAS","BVI_1","BVI_2"]},
  
-    {id:"OHIO", kind:"dead", label:"OHIO", sub:"Groupe agro · liquidé 2017", country:"RU", countryName:"Russie", x:1080, y:170, r:40, color:"#6B7280",
-     recode:"Groupe agroindustriel de sucre et céréales. Liquidé judiciairement en 2017 pour fraudes massives.",
-     profile:"Anciennement holding majeure (24 usines, 11% du marché sucrier national). Aujourd'hui disparue, ne subsiste qu'un PDF résiduel en ligne.",
-     signals:"Ex Président incarcéré. Successeur (JEFFERSON) non impliqué judiciairement mais hérite de la présidence puis capitalise NEVADA avec ces fonds.",
-     verdict:"stop", verdictText:"NO GO, entité historique frauduleuse",
+    {id:"OHIO", kind:"dead", label:"OHIO", sub:"Agribusiness group · liquidated 2017", country:"RU", countryName:"Russia", x:1080, y:170, r:40, color:"#6B7280",
+     recode:"Sugar and grain agro-industrial group. Judicially liquidated in 2017 for massive fraud.",
+     profile:"Formerly a major holding (24 plants, 11% of the national sugar market). Now defunct, only a residual PDF remains online.",
+     signals:"Former Chairman incarcerated. Successor (JEFFERSON) not judicially implicated but inherits the chairmanship and then capitalizes NEVADA with these funds.",
+     verdict:"stop", verdictText:"NO GO, historically fraudulent entity",
      links:["NIXON","JEFFERSON"]},
  
-    {id:"TEXAS", kind:"entity", label:"TEXAS", sub:"Banque régionale · Kazan", country:"RU", countryName:"Russie", x:1090, y:340, r:34, color:"#103E8C",
-     recode:"Banque régionale russe dont JEFFERSON déclare avoir été membre du Conseil d'Administration. Vérification : son nom n'y figure pas dans les listes publiques.",
-     profile:"Siège dans une capitale régionale russe. Site web inaccessible lors de l'investigation. Conseil d'administration public consultable.",
-     signals:"Affirmation de mandat non confirmée par les sources publiques. Possible embellissement de CV.",
-     verdict:"watch", verdictText:"VIGILANCE, assertion non vérifiée",
+    {id:"TEXAS", kind:"entity", label:"TEXAS", sub:"Regional bank · Kazan", country:"RU", countryName:"Russia", x:1090, y:340, r:34, color:"#103E8C",
+     recode:"Russian regional bank where JEFFERSON claims to have been a Board member. Verification: his name does not appear in the public lists.",
+     profile:"Headquartered in a Russian regional capital. Website inaccessible during the investigation. Public board of directors available for review.",
+     signals:"Mandate claim not confirmed by public sources. Possible CV embellishment.",
+     verdict:"watch", verdictText:"WATCH, unverified claim",
      links:["JEFFERSON"]},
  
-    {id:"IOWA", kind:"entity", label:"IOWA", sub:"Production viande · Oufa", country:"RU", countryName:"Russie", x:1200, y:470, r:30, color:"#103E8C",
-     recode:"Producteur de viande de porc basé dans le centre russe. Entreprise industrielle classique, dans le portefeuille élargi de JEFFERSON.",
-     profile:"Activité déclarée, site transparent. Pas de signaux d'alerte directs.",
-     signals:"Pas de signal. Mentionnée uniquement pour cartographier le réseau complet.",
-     verdict:"go", verdictText:"GO, périmètre adjacent",
+    {id:"IOWA", kind:"entity", label:"IOWA", sub:"Meat production · Ufa", country:"RU", countryName:"Russia", x:1200, y:470, r:30, color:"#103E8C",
+     recode:"Pork meat producer based in central Russia. Standard industrial company, in JEFFERSON's extended portfolio.",
+     profile:"Declared activity, transparent website. No direct warning signals.",
+     signals:"No signal. Mentioned only to map the complete network.",
+     verdict:"go", verdictText:"GO, adjacent perimeter",
      links:["JEFFERSON"]},
  
-    {id:"CALIFORNIA", kind:"entity", label:"CALIFORNIA", sub:"Fonds tech · Moscou", country:"RU", countryName:"Russie", x:200, y:170, r:36, color:"#103E8C",
-     recode:"Second véhicule de capital risque où WASHINGTON est également partner. Site institutionnel réduit à une seule page : nom, téléphone, email.",
-     profile:"Investit dans 10+ start-ups technologiques. Partenaire de fonds souverains russe et chinois. Une start-up française financée par le fonds souverain national.",
-     signals:"Opacité de la communication publique. Interconnexion forte avec DELAWARE via dirigeant partagé. Une start-up du portefeuille (ROISTAT) est cofinancée par DELAWARE et CALIFORNIA.",
-     verdict:"watch", verdictText:"VIGILANCE, cogouvernance partielle",
+    {id:"CALIFORNIA", kind:"entity", label:"CALIFORNIA", sub:"Tech fund · Moscow", country:"RU", countryName:"Russia", x:200, y:170, r:36, color:"#103E8C",
+     recode:"Second venture capital vehicle where WASHINGTON is also a partner. Institutional website reduced to a single page: name, phone, email.",
+     profile:"Invests in 10+ tech start-ups. Partner of Russian and Chinese sovereign funds. One French start-up financed by the national sovereign fund.",
+     signals:"Opacity of public communication. Strong interconnection with DELAWARE through shared executive. One portfolio start-up (ROISTAT) is co-financed by DELAWARE and CALIFORNIA.",
+     verdict:"watch", verdictText:"WATCH, partial co-governance",
      links:["WASHINGTON","DELAWARE"]},
  
-    {id:"KANSAS", kind:"entity", label:"KANSAS", sub:"Filiale agro · Chypre", country:"CY", countryName:"Chypre", x:1030, y:580, r:28, color:"#103E8C",
-     recode:"Filiale chypriote de NEVADA, dédiée à l'agroglobal. MADISON y est directeur depuis 2018.",
-     profile:"Société enregistrée au registre chypriote depuis 2011. Adresse partagée avec d'autres entités du groupe.",
-     signals:"Aucun signal direct. Sert à dresser le réseau d'interconnexion des dirigeants.",
-     verdict:"go", verdictText:"GO, structure annexe",
+    {id:"KANSAS", kind:"entity", label:"KANSAS", sub:"Agribusiness subsidiary · Cyprus", country:"CY", countryName:"Cyprus", x:1030, y:580, r:28, color:"#103E8C",
+     recode:"Cypriot subsidiary of NEVADA, dedicated to agro-global. MADISON has been director since 2018.",
+     profile:"Company registered in the Cypriot register since 2011. Address shared with other group entities.",
+     signals:"No direct signal. Used to map the network of executives.",
+     verdict:"go", verdictText:"GO, ancillary structure",
      links:["MADISON","NEVADA"]},
  
-    {id:"WYOMING", kind:"entity", label:"WYOMING", sub:"Énergie · homonymie suspecte", country:"CY", countryName:"Chypre", x:1160, y:680, r:32, color:"#103E8C",
-     recode:"Société énergétique enregistrée à Chypre. Homonyme exacte d'une société antérieure créée en 1970 sous une autre direction, à une autre adresse.",
-     profile:"Enregistrement récent (2018) sous nouveau numéro. MADISON y est directeur. Prédécesseure homonyme était dirigée par FILLMORE.",
-     signals:"Homonymie volontaire, technique classique d'apparence d'ancienneté ou d'absorption de notoriété.",
-     verdict:"watch", verdictText:"VIGILANCE, construction d'opacité",
+    {id:"WYOMING", kind:"entity", label:"WYOMING", sub:"Energy · suspicious homonymy", country:"CY", countryName:"Cyprus", x:1160, y:680, r:32, color:"#103E8C",
+     recode:"Energy company registered in Cyprus. Exact homonym of an earlier company created in 1970 under different management, at a different address.",
+     profile:"Recent registration (2018) under new number. MADISON is director. Homonymous predecessor was led by FILLMORE.",
+     signals:"Deliberate homonymy, a classic technique for fabricating apparent seniority or absorbing reputation.",
+     verdict:"watch", verdictText:"WATCH, opacity construction",
      links:["MADISON","FILLMORE"]},
  
     // OFFSHORE SHELLS
-    {id:"BVI_1", kind:"offshore", label:"BERMUDA-A", sub:"Shell offshore · BVI", country:"VG", countryName:"BVI", x:470, y:570, r:28, color:"#B91C1C",
-     recode:"Société-écran détenue par JEFFERSON. Domiciliée dans un paradis fiscal des Caraïbes britanniques. Révélée par les Pandora Papers.",
-     profile:"Adresse moscovite identique à une seconde shell du même propriétaire. Objet social opaque. Aucune activité commerciale publique.",
-     signals:"Présence dans la base ICIJ Offshore Leaks. Concentration des indices.",
-     verdict:"stop", verdictText:"NO GO, exclusion contractuelle",
+    {id:"BVI_1", kind:"offshore", label:"BERMUDA-A", sub:"Offshore shell · BVI", country:"VG", countryName:"BVI", x:470, y:570, r:28, color:"#B91C1C",
+     recode:"Shell company owned by JEFFERSON. Domiciled in a British Caribbean tax haven. Revealed by the Pandora Papers.",
+     profile:"Moscow address identical to a second shell of the same owner. Opaque corporate purpose. No public commercial activity.",
+     signals:"Listed in the ICIJ Offshore Leaks database. Convergence of indicators.",
+     verdict:"stop", verdictText:"NO GO, contractual exclusion",
      links:["JEFFERSON"]},
  
-    {id:"BVI_2", kind:"offshore", label:"BERMUDA-B", sub:"Shell offshore · BVI", country:"VG", countryName:"BVI", x:640, y:620, r:28, color:"#B91C1C",
-     recode:"Seconde société écran de JEFFERSON aux BVI. Même adresse moscovite. Même profil d'opacité.",
-     profile:"Redondance de structure. Hypothèse opérationnelle : optimisation fiscale et/ou isolation d'actifs.",
-     signals:"Confirmation par croisement Pandora Papers + nationalité + adresse.",
-     verdict:"stop", verdictText:"NO GO, exclusion contractuelle",
+    {id:"BVI_2", kind:"offshore", label:"BERMUDA-B", sub:"Offshore shell · BVI", country:"VG", countryName:"BVI", x:640, y:620, r:28, color:"#B91C1C",
+     recode:"Second shell company of JEFFERSON in the BVI. Same Moscow address. Same opacity profile.",
+     profile:"Structural redundancy. Operational hypothesis: tax optimization and/or asset isolation.",
+     signals:"Confirmed by cross-referencing Pandora Papers + nationality + address.",
+     verdict:"stop", verdictText:"NO GO, contractual exclusion",
      links:["JEFFERSON"]},
  
-    // PERSONNES (dirigeants → Présidents)
-    {id:"WASHINGTON", kind:"person", label:"WASHINGTON", sub:"Fondateur · DELAWARE", portrait:AVATAR_URI, country:"LV", countryName:"Lettonie", x:170, y:580, r:38, color:"#C9A84C",
-     recode:"Fondateur et dirigeant opérationnel de DELAWARE. Doctorat en finance, MBA d'une école américaine de premier rang. 20 ans d'expérience en capital risque.",
-     profile:"Parcours transparent, vérifiable. Membre de conseils d'administration de sociétés cotées. Orchestre toutes les opérations de DELAWARE.",
-     signals:"Aucune sanction. Aucun litige. Parcours cohérent avec les déclarations publiques.",
-     verdict:"go", verdictText:"GO, partenaire fiable",
+    // PEOPLE (executives → US Presidents)
+    {id:"WASHINGTON", kind:"person", label:"WASHINGTON", sub:"Founder · DELAWARE", portrait:AVATAR_URI, country:"LV", countryName:"Latvia", x:170, y:580, r:38, color:"#C9A84C",
+     recode:"Founder and operational head of DELAWARE. PhD in finance, MBA from a top-tier US school. 20 years of venture capital experience.",
+     profile:"Transparent, verifiable background. Member of boards of listed companies. Orchestrates all DELAWARE operations.",
+     signals:"No sanctions. No litigation. Background consistent with public statements.",
+     verdict:"go", verdictText:"GO, reliable partner",
      links:["DELAWARE","CALIFORNIA"]},
  
-    {id:"JEFFERSON", kind:"person", label:"JEFFERSON", sub:"Président · NEVADA", portrait:AVATAR_URI, country:"CY", countryName:"Chypre", x:820, y:420, r:44, color:"#C9A84C",
-     recode:"Président de NEVADA. Ancien président d'OHIO (groupe liquidé). Membre du conseil d'administration d'IOWA. Affirme un siège chez TEXAS non confirmé publiquement. Partner de DELAWARE depuis 2017.",
-     profile:"MBA d'une école américaine. Ancien vice président d'une banque russe, ex PDG d'une société d'investissement. Multimandats, réseau dense.",
-     signals:"PROPRIÉTAIRE DE 2 SHELLS OFFSHORE aux BVI (Pandora Papers). Hérite présidence d'OHIO après chute de son prédécesseur. Affirmation TEXAS non vérifiée.",
-     verdict:"watch", verdictText:"VIGILANCE, profil complexe",
+    {id:"JEFFERSON", kind:"person", label:"JEFFERSON", sub:"Chairman · NEVADA", portrait:AVATAR_URI, country:"CY", countryName:"Cyprus", x:820, y:420, r:44, color:"#C9A84C",
+     recode:"Chairman of NEVADA. Former Chairman of OHIO (liquidated group). Board member of IOWA. Claims a TEXAS board seat not publicly confirmed. Partner of DELAWARE since 2017.",
+     profile:"MBA from a US school. Former vice-president of a Russian bank, former CEO of an investment company. Multi-mandate, dense network.",
+     signals:"OWNER OF 2 OFFSHORE SHELLS in the BVI (Pandora Papers). Inherited the OHIO chairmanship after his predecessor's downfall. TEXAS claim unverified.",
+     verdict:"watch", verdictText:"WATCH, complex profile",
      links:["NEVADA","OHIO","IOWA","TEXAS","BVI_1","BVI_2","DELAWARE"]},
  
-    {id:"JACKSON", kind:"person", label:"JACKSON", sub:"Fantôme · Relations investisseurs", portrait:AVATAR_URI, country:"RU", countryName:"Russie", x:560, y:130, r:32, color:"#C9A84C",
-     recode:"Ex banquier (fonds BNP Paribas puis banque russe) officiant comme responsable des relations investisseurs de NEVADA. Non déclaré dans la gouvernance officielle.",
-     profile:"Connu pour actions de lobbying. Identité absente des trois pages officielles de l'entreprise. Visible seulement via sources tierces et réseaux professionnels.",
-     signals:"Asymétrie entre présence opérationnelle et absence de communication. Indice récurrent de gouvernance opaque.",
-     verdict:"watch", verdictText:"VIGILANCE, dirigeant non déclaré",
+    {id:"JACKSON", kind:"person", label:"JACKSON", sub:"Ghost · Investor relations", portrait:AVATAR_URI, country:"RU", countryName:"Russia", x:560, y:130, r:32, color:"#C9A84C",
+     recode:"Former banker (BNP Paribas fund then Russian bank) acting as head of investor relations for NEVADA. Not declared in official governance.",
+     profile:"Known for lobbying activities. Identity absent from the company's three official pages. Visible only via third-party sources and professional networks.",
+     signals:"Asymmetry between operational presence and absence of communication. Recurring indicator of opaque governance.",
+     verdict:"watch", verdictText:"WATCH, undeclared executive",
      links:["NEVADA"]},
  
-    {id:"MADISON", kind:"person", label:"MADISON", sub:"Directeur · NEVADA, KANSAS, WYOMING", portrait:AVATAR_URI, country:"CY", countryName:"Chypre", x:900, y:590, r:32, color:"#C9A84C",
-     recode:"Directeur de NEVADA depuis 2021. Également directeur de KANSAS et WYOMING. Profil international (Chine, Hong Kong).",
-     profile:"Relations internationales à l'université, formation environnementale complémentaire. A dirigé une filiale asiatique de NEVADA avant sa promotion.",
-     signals:"Multimandats internes. Aucun signal individuel. Présence au carrefour de 3 entités du groupe.",
-     verdict:"go", verdictText:"GO, cadre intégré",
+    {id:"MADISON", kind:"person", label:"MADISON", sub:"Director · NEVADA, KANSAS, WYOMING", portrait:AVATAR_URI, country:"CY", countryName:"Cyprus", x:900, y:590, r:32, color:"#C9A84C",
+     recode:"Director of NEVADA since 2021. Also director of KANSAS and WYOMING. International profile (China, Hong Kong).",
+     profile:"International relations at university, complementary environmental training. Led an Asian subsidiary of NEVADA before being promoted.",
+     signals:"Internal multi-mandate. No individual signal. Present at the crossroads of 3 group entities.",
+     verdict:"go", verdictText:"GO, integrated executive",
      links:["NEVADA","KANSAS","WYOMING"]},
  
-    {id:"ADAMS", kind:"person", label:"ADAMS", sub:"Juridique · NEVADA", portrait:AVATAR_URI, country:"CY", countryName:"Chypre", x:540, y:240, r:28, color:"#C9A84C",
-     recode:"Avocat d'entreprise chez NEVADA depuis 2020. Diplômé d'une faculté de droit moscovite, formation complémentaire à Chypre.",
-     profile:"Parcours cohérent : prestataire de services aux entreprises, puis fonds d'investissement privé, puis NEVADA. Formation double juridiction.",
-     signals:"Aucun signal. Profil junior propre. Référencé ouvertement.",
-     verdict:"go", verdictText:"GO, profil sans aspérité",
+    {id:"ADAMS", kind:"person", label:"ADAMS", sub:"Legal · NEVADA", portrait:AVATAR_URI, country:"CY", countryName:"Cyprus", x:540, y:240, r:28, color:"#C9A84C",
+     recode:"Corporate lawyer at NEVADA since 2020. Graduate of a Moscow law school, complementary training in Cyprus.",
+     profile:"Coherent background: corporate services provider, then private investment fund, then NEVADA. Dual-jurisdiction training.",
+     signals:"No signal. Clean junior profile. Openly listed.",
+     verdict:"go", verdictText:"GO, clean profile",
      links:["NEVADA"]},
  
-    {id:"NIXON", kind:"person", label:"NIXON", sub:"Ex Président · OHIO · incarcéré", portrait:AVATAR_URI, country:"RU", countryName:"Russie", x:1210, y:80, r:28, color:"#C9A84C",
-     recode:"Ex Président d'OHIO avant sa liquidation. Incarcéré après les condamnations pour fraude. Son éviction ouvre la place de JEFFERSON à la présidence du groupe.",
-     profile:"Figure historique du secteur agroalimentaire. Trajectoire brisée par les scandales. Mention nominative dans presse russe.",
-     signals:"Condamnation pénale. Exclusion de facto de toute collaboration.",
-     verdict:"stop", verdictText:"NO GO, incarcéré",
+    {id:"NIXON", kind:"person", label:"NIXON", sub:"Former Chairman · OHIO · incarcerated", portrait:AVATAR_URI, country:"RU", countryName:"Russia", x:1210, y:80, r:28, color:"#C9A84C",
+     recode:"Former Chairman of OHIO before its liquidation. Incarcerated following fraud convictions. His ouster opened the chairmanship for JEFFERSON.",
+     profile:"Historical figure of the agri-food sector. Trajectory broken by scandals. Named in Russian press.",
+     signals:"Criminal conviction. De facto exclusion from any collaboration.",
+     verdict:"stop", verdictText:"NO GO, incarcerated",
      links:["OHIO"]},
  
-    {id:"FILLMORE", kind:"person", label:"FILLMORE", sub:"Ex directeur · WYOMING historique", portrait:AVATAR_URI, country:"CY", countryName:"Chypre", x:810, y:700, r:24, color:"#C9A84C",
-     recode:"Ex directeur de la société WYOMING originelle (1970), dissoute puis recréée sous même nom en 2018 par MADISON.",
-     profile:"Figure obscure, peu documentée. Mentionné uniquement pour attester l'homonymie.",
-     signals:"Lien historique homonymique. Sert à caractériser la technique d'opacité.",
-     verdict:"watch", verdictText:"VIGILANCE, contexte historique",
+    {id:"FILLMORE", kind:"person", label:"FILLMORE", sub:"Former director · historical WYOMING", portrait:AVATAR_URI, country:"CY", countryName:"Cyprus", x:810, y:700, r:24, color:"#C9A84C",
+     recode:"Former director of the original WYOMING company (1970), dissolved and then re-created under the same name in 2018 by MADISON.",
+     profile:"Obscure figure, poorly documented. Mentioned solely to attest the homonymy.",
+     signals:"Historical homonymic link. Used to characterize the opacity technique.",
+     verdict:"watch", verdictText:"WATCH, historical context",
      links:["WYOMING"]}
   ],
  
   links: [
     // WASHINGTON ops
-    {from:"WASHINGTON", to:"DELAWARE", kind:"go", label:"fondateur"},
+    {from:"WASHINGTON", to:"DELAWARE", kind:"go", label:"founder"},
     {from:"WASHINGTON", to:"CALIFORNIA", kind:"go", label:"partner"},
-    {from:"DELAWARE", to:"CALIFORNIA", kind:"warn", label:"coportefeuille"},
+    {from:"DELAWARE", to:"CALIFORNIA", kind:"warn", label:"co-portfolio"},
  
-    // JEFFERSON réseau
-    {from:"JEFFERSON", to:"NEVADA", kind:"go", label:"président"},
-    {from:"JEFFERSON", to:"DELAWARE", kind:"warn", label:"partner depuis 2017"},
-    {from:"JEFFERSON", to:"OHIO", kind:"stop", label:"ex président"},
-    {from:"JEFFERSON", to:"IOWA", kind:"go", label:"CA"},
-    {from:"JEFFERSON", to:"TEXAS", kind:"warn", label:"CA non vérifié"},
-    {from:"JEFFERSON", to:"BVI_1", kind:"stop", label:"propriétaire"},
-    {from:"JEFFERSON", to:"BVI_2", kind:"stop", label:"propriétaire"},
+    // JEFFERSON network
+    {from:"JEFFERSON", to:"NEVADA", kind:"go", label:"chairman"},
+    {from:"JEFFERSON", to:"DELAWARE", kind:"warn", label:"partner since 2017"},
+    {from:"JEFFERSON", to:"OHIO", kind:"stop", label:"former chairman"},
+    {from:"JEFFERSON", to:"IOWA", kind:"go", label:"board"},
+    {from:"JEFFERSON", to:"TEXAS", kind:"warn", label:"board unverified"},
+    {from:"JEFFERSON", to:"BVI_1", kind:"stop", label:"owner"},
+    {from:"JEFFERSON", to:"BVI_2", kind:"stop", label:"owner"},
  
-    // NEVADA gouvernance
-    {from:"ADAMS", to:"NEVADA", kind:"go", label:"juridique"},
+    // NEVADA governance
+    {from:"ADAMS", to:"NEVADA", kind:"go", label:"legal"},
     {from:"JACKSON", to:"NEVADA", kind:"warn", label:"off record"},
-    {from:"MADISON", to:"NEVADA", kind:"go", label:"directeur"},
-    {from:"MADISON", to:"KANSAS", kind:"go", label:"directeur"},
-    {from:"MADISON", to:"WYOMING", kind:"go", label:"directeur"},
-    {from:"NEVADA", to:"KANSAS", kind:"go", label:"filiale"},
-    {from:"NEVADA", to:"WYOMING", kind:"go", label:"filiale"},
+    {from:"MADISON", to:"NEVADA", kind:"go", label:"director"},
+    {from:"MADISON", to:"KANSAS", kind:"go", label:"director"},
+    {from:"MADISON", to:"WYOMING", kind:"go", label:"director"},
+    {from:"NEVADA", to:"KANSAS", kind:"go", label:"subsidiary"},
+    {from:"NEVADA", to:"WYOMING", kind:"go", label:"subsidiary"},
  
-    // Capitalisation OHIO → NEVADA
-    {from:"OHIO", to:"NEVADA", kind:"stop", label:"capitalisation historique"},
-    {from:"NIXON", to:"OHIO", kind:"stop", label:"ex président"},
+    // OHIO → NEVADA capitalization
+    {from:"OHIO", to:"NEVADA", kind:"stop", label:"historical capitalization"},
+    {from:"NIXON", to:"OHIO", kind:"stop", label:"former chairman"},
  
-    // Homonymie
-    {from:"FILLMORE", to:"WYOMING", kind:"warn", label:"ex nom 1970"}
+    // Homonymy
+    {from:"FILLMORE", to:"WYOMING", kind:"warn", label:"former 1970 name"}
   ]
 };
  
@@ -1270,10 +1270,10 @@ g.appendChild(grid);
 const stamp = document.createElementNS(NS,'g');
 stamp.innerHTML = `
   <rect x="40" y="32" width="360" height="54" fill="none" stroke="#C9A84C" stroke-width="1.2"/>
-  <text x="60" y="55" font-family="JetBrains Mono" font-size="10" letter-spacing="3" fill="#C9A84C">BUILDFLUENCE · DOSSIER CONFIDENTIEL</text>
+  <text x="60" y="55" font-family="JetBrains Mono" font-size="10" letter-spacing="3" fill="#C9A84C">BUILDFLUENCE · CONFIDENTIAL DOSSIER</text>
   <text x="60" y="74" font-family="Playfair Display" font-size="14" font-style="italic" fill="#0D1B2A">Relational cartography</text>
-  <text x="1240" y="55" text-anchor="end" font-family="JetBrains Mono" font-size="10" letter-spacing="3" fill="#B91C1C">CONFIDENTIEL · NDA</text>
-  <text x="1240" y="74" text-anchor="end" font-family="JetBrains Mono" font-size="10" letter-spacing="2" fill="#6B7280">AVR. 2026 · RÉ-ENCODÉ US</text>
+  <text x="1240" y="55" text-anchor="end" font-family="JetBrains Mono" font-size="10" letter-spacing="3" fill="#B91C1C">CONFIDENTIAL · NDA</text>
+  <text x="1240" y="74" text-anchor="end" font-family="JetBrains Mono" font-size="10" letter-spacing="2" fill="#6B7280">APR. 2026 · US RE-ENCODED</text>
 `;
 g.appendChild(stamp);
  
@@ -1415,8 +1415,8 @@ DATA.nodes.forEach(n=>{
   g.appendChild(ring);
  
   // === ICONE CENTRALE ===
-  // Pour les PERSONNES : portrait du Président (image clipée en cercle)
-  // Pour les ENTITÉS / OFFSHORE / DEAD : lettre + icône (comme avant)
+  // For PEOPLE: President portrait (image clipped in a circle)
+  // For ENTITIES / OFFSHORE / DEAD: letter + icon (as before)
   if(n.kind==="person" && n.portrait){
     // clipPath circulaire pour le portrait
     const portClipId = `clip-portrait-${n.id}`;
@@ -1657,7 +1657,7 @@ svg.addEventListener('wheel', e=>{
   document.body.appendChild(tt);
  
   const countryMap = {
-    'p-flag-lv':'Lettonie','p-flag-cy':'Chypre','p-flag-ru':'Russie','p-flag-vg':'Îles Vierges Britanniques'
+   'p-flag-lv':'Latvia','p-flag-cy':'Cyprus','p-flag-ru':'Russia','p-flag-vg':'British Virgin Islands'
   };
  
   cards.forEach(card => {

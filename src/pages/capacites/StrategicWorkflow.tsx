@@ -388,7 +388,7 @@ const StrategicWorkflow = () => {
           ))}
         </div>
 
-        {/* 7 ÉTAPES */}
+        {/* 7 STEPS */}
         <div style={{ textAlign: "center", maxWidth: 1100, margin: "0 auto 16px", padding: "0 32px" }}>
           <h2 style={{ fontSize: 18, fontWeight: 700, marginBottom: 6 }}>The 7-Step Process</h2>
           <p style={{ fontSize: 13, color: "#6b7c93" }}>
