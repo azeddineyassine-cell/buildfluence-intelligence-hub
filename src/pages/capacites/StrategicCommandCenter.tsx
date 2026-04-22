@@ -167,11 +167,9 @@ const StrategicCartography = () => {
             textAlign: "center",
           }}
         >
-          {t("Les 5 capacités qui alimentent le Command Center", "The 5 capabilities feeding the Command Center")}
           <span
             style={{
               display: "block",
-              marginTop: 6,
               fontSize: 9,
               letterSpacing: "0.2em",
               color: "#C9A84C",
