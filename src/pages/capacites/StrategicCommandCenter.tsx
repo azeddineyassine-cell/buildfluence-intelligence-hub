@@ -29,8 +29,8 @@ const StrategicCartography = () => {
       full: "AI Powered Monitor",
       role: t("Capte", "Captures"),
       force: t(
-        "L'IA qui transforme le bruit en signal décisionnel.",
-        "The AI that turns noise into decision-grade signals."
+        "La Veille qui transforme le bruit en signal décisionnel.",
+        "The watch that turns noise into decision-grade signals."
       ),
       objective: t(
         "Détecter les signaux faibles avant vos concurrents.",
@@ -367,10 +367,11 @@ const StrategicCartography = () => {
                 <div
                   style={{
                     fontFamily: "Playfair Display, serif",
-                    fontSize: 15,
+                    fontSize: 13.5,
                     fontWeight: 700,
                     marginBottom: 6,
                     lineHeight: 1.25,
+                    whiteSpace: "nowrap",
                   }}
                 >
                   {cap.full}
