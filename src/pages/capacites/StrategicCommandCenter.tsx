@@ -152,107 +152,7 @@ const StrategicCartography = () => {
         </p>
       </div>
 
-      {/* ÉTAGE 1 : FLUX DE TRANSFORMATION */}
-      <div
-        style={{
-          background: "#fff",
-          border: "1px solid #D9CFBC",
-          padding: "30px 24px",
-          marginBottom: 28,
-          borderRadius: 2,
-        }}
-      >
-        <p
-          style={{
-            fontFamily: "JetBrains Mono, monospace",
-            fontSize: 9,
-            letterSpacing: "0.3em",
-            color: "#8a7a4a",
-            textTransform: "uppercase",
-            marginBottom: 22,
-            textAlign: "center",
-          }}
-        >
-          {t("Flux de transformation", "Transformation flow")}
-        </p>
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "1fr auto 1fr auto 1fr auto 1fr",
-            alignItems: "center",
-            gap: 14,
-          }}
-        >
-          {flowSteps.map((step, idx) => (
-            <>
-              <motion.div
-                key={`step-${idx}`}
-                onHoverStart={() => setHoveredFlow(idx)}
-                onHoverEnd={() => setHoveredFlow(null)}
-                whileHover={{ y: -3 }}
-                style={{
-                  padding: "18px 14px",
-                  textAlign: "center",
-                  background: hoveredFlow === idx ? "#0D1B2A" : "transparent",
-                  color: hoveredFlow === idx ? "#F5F1E8" : "#0D1B2A",
-                  border: `1px solid ${hoveredFlow === idx ? "#C9A84C" : "#E5DDC8"}`,
-                  borderRadius: 2,
-                  cursor: "pointer",
-                  transition: "all 0.3s ease",
-                  minHeight: 100,
-                }}
-              >
-                <div
-                  style={{
-                    fontFamily: "JetBrains Mono, monospace",
-                    fontSize: 10,
-                    letterSpacing: "0.22em",
-                    color: hoveredFlow === idx ? "#C9A84C" : "#8a7a4a",
-                    marginBottom: 6,
-                  }}
-                >
-                  0{idx + 1}
-                </div>
-                <div
-                  style={{
-                    fontFamily: "Playfair Display, serif",
-                    fontSize: 18,
-                    fontWeight: 700,
-                    marginBottom: 6,
-                  }}
-                >
-                  {step.label}
-                </div>
-                <div
-                  style={{
-                    fontFamily: "Cormorant Garamond, serif",
-                    fontSize: 14,
-                    fontStyle: "italic",
-                    opacity: 0.88,
-                    lineHeight: 1.4,
-                  }}
-                >
-                  {step.desc}
-                </div>
-              </motion.div>
-              {idx < flowSteps.length - 1 && (
-                <motion.div
-                  key={`arrow-${idx}`}
-                  animate={{ x: [0, 4, 0] }}
-                  transition={{ duration: 1.5, repeat: Infinity, delay: idx * 0.3 }}
-                  style={{
-                    fontSize: 22,
-                    color: "#C9A84C",
-                    fontWeight: 700,
-                  }}
-                >
-                  →
-                </motion.div>
-              )}
-            </>
-          ))}
-        </div>
-      </div>
+      {/* ÉTAGE 1 (FLUX DE TRANSFORMATION) — supprimé */}
 
       {/* ÉTAGE 2 : LES 5 CAPACITÉS — avec tooltip élégant au survol */}
       <div style={{ marginBottom: 28 }}>
@@ -1178,7 +1078,7 @@ const StrategicCommandCenter = () => {
   ];
 
   return (
-    <div style={{ background: "#FAF6ED", width: "100%", minHeight: "100vh" }}>
+    <div style={{ background: "#F5F3E9", width: "100%", minHeight: "100vh" }}>
       <DetailPageLayout
         title={t("Strategic Command Center", "Strategic Command Center")}
         titleClassName="text-center"
