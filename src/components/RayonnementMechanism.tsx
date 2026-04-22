@@ -476,12 +476,12 @@ const RayonnementMechanism = () => {
     },
     {
       id: "pays" as BlockId, icon: "🗺", title: t("Pays Clés", "Key Countries"),
-      sub: t("Partenariats solides & innovants", "Solid & innovative partnerships"),
+      sub: t("Cliquez sur le drapeau d'un pays pour explorer le contenu", "Click a country's flag to explore the content"),
       desc: "", flags: keyCountries.map(c => ({ flag: c.flag, name: c.nameFr })),
     },
     {
       id: "pays_concurrent" as BlockId, icon: "⚡", title: t("Pays Concurrents", "Competitor Countries"),
-      sub: t("18 pays en compétition avec le Maroc sur 9 secteurs prioritaires", "18 countries competing with Morocco on 9 priority sectors"),
+      sub: t("Cliquez sur le drapeau d'un pays pour connaître sa compétitivité vs Maroc", "Click a country's flag to see its competitiveness vs Morocco"),
       desc: "", competitorFlags: competitorCountries.map(c => ({ flag: c.flag, name: c.nameFr })),
     },
     {
