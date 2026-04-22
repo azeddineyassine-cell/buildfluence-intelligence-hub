@@ -172,6 +172,7 @@ export default function SituationsCritiques() {
           </div>
         </div>
       </div>
+      <FormDiagnostic open={diagOpen} onClose={()=>setDiagOpen(false)} situation={cur ? cur.title : ""} />
     </div>
   );
 }
