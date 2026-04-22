@@ -223,17 +223,10 @@
   .p-flag-cy{background:#fff;position:relative}
   .p-flag-cy::after{content:"";position:absolute;left:4px;top:3px;width:10px;height:5px;background:#D47600;border-radius:50%}
   .p-flag-ru{background:linear-gradient(#fff 33.3%,#0039A6 33.3%,#0039A6 66.6%,#D52B1E 66.6%)}
- .p-flag-vg{background:#012169;position:relative;overflow:hidden}
- .p-flag-vg::before{content:"";position:absolute;inset:0;background:
-   linear-gradient(45deg,transparent 42%,#fff 42%,#fff 58%,transparent 58%),
-   linear-gradient(-45deg,transparent 42%,#fff 42%,#fff 58%,transparent 58%),
-   linear-gradient(45deg,transparent 46%,#C8102E 46%,#C8102E 54%,transparent 54%),
-   linear-gradient(-45deg,transparent 46%,#C8102E 46%,#C8102E 54%,transparent 54%)}
- .p-flag-vg::after{content:"";position:absolute;inset:0;background:
-   linear-gradient(#fff 38%,transparent 38%,transparent 62%,#fff 62%),
-   linear-gradient(90deg,#fff 44%,transparent 44%,transparent 56%,#fff 56%),
-   linear-gradient(#C8102E 42%,transparent 42%,transparent 58%,#C8102E 58%),
-   linear-gradient(90deg,#C8102E 46%,transparent 46%,transparent 54%,#C8102E 54%)}
+ .p-flag-vg{
+   background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 60 30'><clipPath id='t'><rect width='60' height='30'/></clipPath><path d='M0,0 L60,30 M60,0 L0,30' stroke='%23fff' stroke-width='6' clip-path='url(%23t)'/><path d='M0,0 L60,30 M60,0 L0,30' stroke='%23C8102E' stroke-width='2' clip-path='url(%23t)'/><path d='M30,0 V30 M0,15 H60' stroke='%23fff' stroke-width='10'/><path d='M30,0 V30 M0,15 H60' stroke='%23C8102E' stroke-width='6'/><rect width='60' height='30' fill='none' stroke='%23012169' stroke-width='0'/><rect width='60' height='30' fill='%23012169' fill-opacity='0' /></svg>");
+   background-color:#012169;background-size:100% 100%;background-repeat:no-repeat;
+ }
  
   .p-card{
     position:relative;display:flex;align-items:center;gap:8px;
@@ -636,7 +629,7 @@
       </article>
  
       <article class="level" id="level-3">
-        <div class="level-n" style="white-space:nowrap"><span class="big">03</span>REGULATORY&nbsp;COMPLIANCE</div>
+        <div class="level-n" style="white-space:nowrap;font-size:11px;letter-spacing:.15em;flex-wrap:nowrap"><span class="big">03</span><span style="white-space:nowrap;display:inline-block">REGULATORY&nbsp;COMPLIANCE</span></div>
         <h3>Forensique profonde</h3>
         <div class="level-tag">Décision en 5 à 8 semaines</div>
         <ul>
