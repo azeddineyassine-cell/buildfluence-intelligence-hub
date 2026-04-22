@@ -822,11 +822,11 @@
  
         <div class="perimeter-quote">
           <span class="pq-mark">“</span>
-          <em>Les documents ne disaient rien. Les connexions disaient tout.</em>
-          <span class="pq-attrib">Note d'analyste · vague 3 · OSINT profond</span>
+          <em>The documents said nothing. The connections said everything.</em>
+          <span class="pq-attrib">Analyst note · wave 3 · deep OSINT</span>
         </div>
         <div class="perimeter-legend">
-          <span class="pl-asterisk">*</span> BVI : British Virgin Islands, paradis fiscal des Caraïbes britanniques.
+          <span class="pl-asterisk">*</span> BVI: British Virgin Islands, a Caribbean tax haven.
         </div>
       </div>
     </div>
@@ -1270,10 +1270,10 @@ g.appendChild(grid);
 const stamp = document.createElementNS(NS,'g');
 stamp.innerHTML = `
   <rect x="40" y="32" width="360" height="54" fill="none" stroke="#C9A84C" stroke-width="1.2"/>
-  <text x="60" y="55" font-family="JetBrains Mono" font-size="10" letter-spacing="3" fill="#C9A84C">BUILDFLUENCE · DOSSIER CONFIDENTIEL</text>
+  <text x="60" y="55" font-family="JetBrains Mono" font-size="10" letter-spacing="3" fill="#C9A84C">BUILDFLUENCE · CONFIDENTIAL DOSSIER</text>
   <text x="60" y="74" font-family="Playfair Display" font-size="14" font-style="italic" fill="#0D1B2A">Relational cartography</text>
-  <text x="1240" y="55" text-anchor="end" font-family="JetBrains Mono" font-size="10" letter-spacing="3" fill="#B91C1C">CONFIDENTIEL · NDA</text>
-  <text x="1240" y="74" text-anchor="end" font-family="JetBrains Mono" font-size="10" letter-spacing="2" fill="#6B7280">AVR. 2026 · RÉ-ENCODÉ US</text>
+  <text x="1240" y="55" text-anchor="end" font-family="JetBrains Mono" font-size="10" letter-spacing="3" fill="#B91C1C">CONFIDENTIAL · NDA</text>
+  <text x="1240" y="74" text-anchor="end" font-family="JetBrains Mono" font-size="10" letter-spacing="2" fill="#6B7280">APR. 2026 · US RE-ENCODED</text>
 `;
 g.appendChild(stamp);
  
@@ -1657,7 +1657,7 @@ svg.addEventListener('wheel', e=>{
   document.body.appendChild(tt);
  
   const countryMap = {
-    'p-flag-lv':'Lettonie','p-flag-cy':'Chypre','p-flag-ru':'Russie','p-flag-vg':'Îles Vierges Britanniques'
+   'p-flag-lv':'Latvia','p-flag-cy':'Cyprus','p-flag-ru':'Russia','p-flag-vg':'British Virgin Islands'
   };
  
   cards.forEach(card => {
