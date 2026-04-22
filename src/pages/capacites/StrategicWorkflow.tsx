@@ -12,105 +12,105 @@ const StrategicWorkflow = () => {
       num: 1,
       color: "#4a9a6a",
       icon: "🔍",
-      title: "Évaluation des besoins",
-      tag: "Semaines 1–3",
+      title: "Needs Assessment",
+      tag: "Weeks 1–3",
       items: [
-        "Audit et identification des besoins",
-        "Analyse des exigences stratégiques",
-        "Construction de l'écosystème informationnel",
-        "Définition des objectifs et KPIs",
-        "Diagnostic de maturité décisionnelle",
-        "Cartographie des angles morts",
+        "Audit and identification of needs",
+        "Analysis of strategic requirements",
+        "Building the informational ecosystem",
+        "Definition of objectives and KPIs",
+        "Decision-making maturity diagnosis",
+        "Mapping of blind spots",
       ],
     },
     {
       num: 2,
       color: "#1a7a5a",
       icon: "🏗️",
-      title: "Préparation de l'infrastructure",
-      tag: "Semaines 4–6",
+      title: "Infrastructure Preparation",
+      tag: "Weeks 4–6",
       items: [
-        "Ateliers, Brainstorming & Validation",
-        "Setup : Requêtes, profils, livrables",
-        "Arborescence des dossiers & sous-dossiers",
-        "Paramétrage de la solution IA",
-        "Démarche IES / Structuration de la recherche",
-        "Sources décentralisées & bases de données",
+        "Workshops, Brainstorming & Validation",
+        "Setup: Queries, profiles, deliverables",
+        "Folder & sub-folder architecture",
+        "AI solution configuration",
+        "SIE approach / Research structuring",
+        "Decentralized sources & databases",
       ],
     },
     {
       num: 3,
       color: "#1a5580",
       icon: "💡",
-      title: "Brainstorming & Structuration",
-      tag: "Semaines 7–9",
+      title: "Brainstorming & Structuring",
+      tag: "Weeks 7–9",
       items: [
-        "Rédaction & formalisation des exigences",
-        "Validation des axes stratégiques",
-        "Workshops collaboratifs de co-construction",
-        "Catégorisation des thématiques de veille",
-        "Définition des livrables & formats",
-        "Élaboration du cahier des charges",
+        "Drafting & formalization of requirements",
+        "Validation of strategic axes",
+        "Collaborative co-construction workshops",
+        "Categorization of monitoring themes",
+        "Definition of deliverables & formats",
+        "Drafting of specifications",
       ],
     },
     {
       num: 4,
       color: "#2a6a9a",
       icon: "🚀",
-      title: "Déploiement & Implémentation IA",
-      tag: "Semaines 10–11",
+      title: "Deployment & AI Implementation",
+      tag: "Weeks 10–11",
       items: [
-        "Intégration de la solution IA de veille",
-        "Tests et ajustements en conditions réelles",
-        "Optimisation et mise en production",
-        "Installation Market & Competitive Intelligence Unit",
-        "Détection automatique des signaux faibles",
-        "Dashboards & KPIs temps réel",
+        "Integration of the AI monitoring solution",
+        "Real-world testing and adjustments",
+        "Optimization and production rollout",
+        "Setup of Market & Competitive Intelligence Unit",
+        "Automatic detection of weak signals",
+        "Real-time dashboards & KPIs",
       ],
     },
     {
       num: 5,
       color: "#C9A84C",
       icon: "🎓",
-      title: "Formation Strategic Empowerment",
-      tag: "Semaines 12–13",
+      title: "Strategic Empowerment Training",
+      tag: "Weeks 12–13",
       items: [
-        "Formation sur-mesure Next-Level",
-        "Programme de montée en compétences",
-        "Méthodologie IES, OSINT, e-Lobbying",
+        "Custom Next-Level training",
+        "Skills-development programme",
+        "Methodology: SIE, OSINT, e-Lobbying",
         "Sovereign Data & Competitive Intelligence 2.0",
-        "Groupe de 10 personnes / 10 jours",
-        "Transfert de compétences opérationnelles",
+        "Group of 10 people / 10 days",
+        "Transfer of operational skills",
       ],
     },
     {
       num: 6,
       color: "#7a3060",
       icon: "🔄",
-      title: "Gestion du changement",
-      tag: "Semaines 14–15",
+      title: "Change Management",
+      tag: "Weeks 14–15",
       items: [
-        "Direction de Communication interne",
-        "Actions internes de conduite du changement",
-        "One&One interviews dirigeants",
-        "Culture de la résilience informationnelle",
-        "Accompagnement transverse communauté/user",
-        "Ateliers immersifs Leadership Digital",
+        "Internal communications direction",
+        "Internal change-management initiatives",
+        "One-on-one executive interviews",
+        "Culture of informational resilience",
+        "Cross-functional community/user support",
+        "Immersive Digital Leadership workshops",
       ],
     },
     {
       num: 7,
       color: "#0F365F",
       icon: "🏅",
-      title: "Accompagnement continu & Autonomisation",
-      tag: "Semaines 16–17",
+      title: "Continuous Support & Empowerment",
+      tag: "Weeks 16–17",
       items: [
-        "Support, suivi et visites sur site",
-        "Retour d'expérience & amélioration continue",
-        "Stratégies d'optimisation des solutions",
-        "Construction des Orientations & Plans d'action",
-        "Boucle d'amélioration continue",
-        "Influence Builder : narratifs & e-Lobbying",
+        "Support, follow-up and on-site visits",
+        "Feedback & continuous improvement",
+        "Solution optimization strategies",
+        "Building Strategic Orientations & Action Plans",
+        "Continuous improvement loop",
+        "Influence Builder: narratives & e-Lobbying",
       ],
       full: true,
     },
@@ -121,42 +121,42 @@ const StrategicWorkflow = () => {
       color: "#4a4a5a",
       icon: "🏆",
       title: "Expertise",
-      desc: "Expert en Intelligence Économique en France et au Maroc. +20 ans d'expérience.",
+      desc: "Competitive Intelligence expert in France and Morocco. 20+ years of experience.",
     },
     {
       color: "#1a6b5a",
       icon: "⚙️",
       title: "HumTech",
-      desc: "IA Premium · OSINT · NLP · DataViz · Advanced Semantics · Graphes d'interactions.",
+      desc: "Premium AI · OSINT · NLP · DataViz · Advanced Semantics · Interaction graphs.",
     },
     {
       color: "#C9A84C",
       icon: "🎯",
       title: "Engagement",
-      desc: "Transformation de la donnée en décisions à fort impact. Transfert de compétences.",
+      desc: "Turning data into high-impact decisions. Skills transfer to your teams.",
     },
     {
       color: "#0F365F",
       icon: "⚡",
       title: "Impact",
-      desc: "Une décision n'a de sens que si elle change le rapport de force en votre faveur.",
+      desc: "A decision only matters if it shifts the balance of power in your favor.",
     },
   ];
 
   const kpis = [
-    { val: "400M$", lbl: "sécurisés en Deep Due Diligence" },
-    { val: "180M MAD", lbl: "générés via politiques publiques" },
-    { val: "+14%", lbl: "de parts de marché après crise" },
-    { val: "2 sem.", lbl: "crise nationale maîtrisée" },
+    { val: "$400M", lbl: "secured through Deep Due Diligence" },
+    { val: "180M MAD", lbl: "generated via public policy" },
+    { val: "+14%", lbl: "market share gained post-crisis" },
+    { val: "2 wks", lbl: "national crisis brought under control" },
   ];
 
   const cycle = [
-    { letter: "D", label: "Définition", color: "#4a9a6a" },
+    { letter: "D", label: "Definition", color: "#4a9a6a" },
     { letter: "S", label: "Sourcing", color: "#1a7a5a" },
-    { letter: "C", label: "Collecte", color: "#1a5580" },
-    { letter: "A", label: "Analyse", color: "#2a6a9a" },
-    { letter: "D", label: "Diffusion", color: "#C9A84C" },
-    { letter: "C", label: "Capitalisation", color: "#0F365F" },
+    { letter: "C", label: "Collection", color: "#1a5580" },
+    { letter: "A", label: "Analysis", color: "#2a6a9a" },
+    { letter: "D", label: "Dissemination", color: "#C9A84C" },
+    { letter: "C", label: "Capitalization", color: "#0F365F" },
   ];
 
   const adn = [
@@ -165,32 +165,32 @@ const StrategicWorkflow = () => {
       title: "Geostrategic Monitoring",
       items: [
         "Web, Social Media, OSINT",
-        "Bases de données institutionnelles",
-        "Blog, Forum, News, Flux RSS",
-        "Fact-Checking & Sources ad hoc",
-        "Exploration Open Web",
+        "Institutional databases",
+        "Blogs, Forums, News, RSS feeds",
+        "Fact-Checking & ad hoc sources",
+        "Open Web exploration",
       ],
     },
     {
       icon: "🔬",
       title: "Ecosystem Analysis",
       items: [
-        "Investisseurs & Fonds",
-        "Prescripteurs & Leaders d'Opinion",
-        "Pays concurrents & pays cibles",
-        "Géopolitique & Tendances",
-        "AI : NLP, Sémantique, DataViz",
+        "Investors & Funds",
+        "Influencers & Opinion Leaders",
+        "Competing & target countries",
+        "Geopolitics & Trends",
+        "AI: NLP, Semantics, DataViz",
       ],
     },
     {
       icon: "⚡",
       title: "Impactful Influence",
       items: [
-        "Prise de décision stratégique",
-        "e-Lobbying & Leadership thought",
-        "Création de contenu à fort impact",
-        "Communication & Événements",
-        "Livrables & Diffusion ciblée",
+        "Strategic decision-making",
+        "e-Lobbying & Thought Leadership",
+        "High-impact content creation",
+        "Communications & Events",
+        "Deliverables & targeted dissemination",
       ],
     },
   ];
@@ -212,7 +212,7 @@ const StrategicWorkflow = () => {
               marginBottom: 12,
             }}
           >
-            Méthodologie Exclusive
+            Exclusive Methodology
           </div>
           <h1
             style={{
@@ -226,11 +226,11 @@ const StrategicWorkflow = () => {
             Buildfluence <span style={{ color: "#C9A84C" }}>Strategic Workflow</span>
           </h1>
           <p style={{ fontSize: 14, color: "#6b7c93", maxWidth: 640, margin: "0 auto 8px", lineHeight: 1.7 }}>
-            Installer une culture d'intelligence stratégique et un système de décision augmentée au sein de votre
-            entreprise.
+            Embed a culture of strategic intelligence and an augmented decision-making system inside your
+            organization.
           </p>
           <p style={{ fontSize: 13, color: "#C9A84C", fontStyle: "italic", marginBottom: 36 }}>
-            Éviter les angles morts. Garder l'ascendant. Construire la souveraineté informationnelle.
+            Eliminate blind spots. Stay one step ahead. Build informational sovereignty.
           </p>
         </div>
 
@@ -327,9 +327,9 @@ const StrategicWorkflow = () => {
 
         {/* CYCLE VEILLE */}
         <div style={{ textAlign: "center", maxWidth: 1100, margin: "0 auto 16px", padding: "0 32px" }}>
-          <h2 style={{ fontSize: 18, fontWeight: 700, marginBottom: 6 }}>De la Veille au Partage d'Intelligence</h2>
+          <h2 style={{ fontSize: 18, fontWeight: 700, marginBottom: 6 }}>From Monitoring to Intelligence Sharing</h2>
           <p style={{ fontSize: 13, color: "#6b7c93" }}>
-            Le cycle complet de transformation de l'information en décision souveraine
+            The complete cycle of turning information into sovereign decision-making
           </p>
         </div>
         <div
@@ -390,9 +390,9 @@ const StrategicWorkflow = () => {
 
         {/* 7 ÉTAPES */}
         <div style={{ textAlign: "center", maxWidth: 1100, margin: "0 auto 16px", padding: "0 32px" }}>
-          <h2 style={{ fontSize: 18, fontWeight: 700, marginBottom: 6 }}>Le Process en 7 Étapes</h2>
+          <h2 style={{ fontSize: 18, fontWeight: 700, marginBottom: 6 }}>The 7-Step Process</h2>
           <p style={{ fontSize: 13, color: "#6b7c93" }}>
-            Cliquez sur chaque étape pour découvrir le détail de notre intervention
+            Click each step to see the details of our intervention
           </p>
         </div>
         <div
@@ -489,7 +489,7 @@ const StrategicWorkflow = () => {
                       border: "0.5px solid #1a5580",
                     }}
                   >
-                    ⏱ Durée : {s.tag}
+                    ⏱ Duration: {s.tag}
                   </span>
                 </div>
               )}
@@ -558,10 +558,10 @@ const StrategicWorkflow = () => {
             <span style={{ fontSize: 22 }}>🚀</span>
             <div>
               <div style={{ fontSize: 14, fontWeight: 700 }}>
-                Installez votre <span style={{ color: "#C9A84C" }}>cellule d'intelligence stratégique</span>
+                Set up your <span style={{ color: "#C9A84C" }}>Strategic Intelligence Cell</span>
               </div>
               <div style={{ fontSize: 11, color: "#8899aa", marginTop: 2 }}>
-                Un accompagnement sur 36 semaines, de l'audit à l'autonomie
+                A 36-week engagement, from audit to autonomy
               </div>
             </div>
             <button
@@ -578,7 +578,7 @@ const StrategicWorkflow = () => {
                 border: "none",
               }}
             >
-              ÉCHANGE STRATÉGIQUE →
+              STRATEGIC EXCHANGE →
             </button>
           </div>
         </div>
@@ -586,15 +586,15 @@ const StrategicWorkflow = () => {
       <FormCustom
         open={f1Open}
         onClose={() => setF1Open(false)}
-        title="Initier votre Cellule de Veille & Intelligence"
-        submitLabel="Lancer le Diagnostic"
+        title="Launch Your Monitoring & Intelligence Cell"
+        submitLabel="Start the Diagnosis"
         formType="strategic_workflow_cell"
         fields={[
-          { name: "name", placeholder: "Nom & Prénom", required: true, maxLength: 100 },
-          { name: "organization", placeholder: "Organisation", required: true, maxLength: 100 },
-          { name: "sector", placeholder: "Secteur d'activité", required: true, maxLength: 150 },
-          { name: "challenge", placeholder: "Votre principal défi stratégique", required: true, type: "textarea", rows: 4 },
-          { name: "phone", placeholder: "Téléphone", required: true, type: "tel", maxLength: 20 },
+          { name: "name", placeholder: "Full Name", required: true, maxLength: 100 },
+          { name: "organization", placeholder: "Organization", required: true, maxLength: 100 },
+          { name: "sector", placeholder: "Industry", required: true, maxLength: 150 },
+          { name: "challenge", placeholder: "Your main strategic challenge", required: true, type: "textarea", rows: 4 },
+          { name: "phone", placeholder: "Phone", required: true, type: "tel", maxLength: 20 },
         ]}
       />
     </DetailPageLayout>
