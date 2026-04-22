@@ -97,7 +97,15 @@ export default function SituationsCritiques() {
                 </div>
                 <div style={{border:"1px solid #D8E4F0",borderLeft:"3px solid #1B3E6A",borderRadius:7,padding:"13px 15px",marginBottom:13,background:"#FAFCFF"}}>
                   <div style={{fontSize:9,fontWeight:700,letterSpacing:"2.5px",textTransform:"uppercase",color:"#C9A84C",marginBottom:3}}>Cas Client Buildfluence</div>
-                  <div style={{fontFamily:"Cormorant Garamond,serif",fontSize:14,fontWeight:700,color:"#0D1B2A",marginBottom:9}}>{cur.casOrg}</div>
+                  {cur.casLogos && cur.casLogos.length > 0 ? (
+                    <div style={{display:"flex",alignItems:"center",gap:10,marginBottom:9,flexWrap:"wrap"}}>
+                      {cur.casLogos.map((logo:string,i:number)=>(
+                        <img key={i} src={logo} alt="" style={{height:34,width:"auto",objectFit:"contain"}}/>
+                      ))}
+                    </div>
+                  ) : (
+                    <div style={{fontFamily:"Cormorant Garamond,serif",fontSize:14,fontWeight:700,color:"#0D1B2A",marginBottom:9,fontStyle:"italic"}}>{cur.casOrg}</div>
+                  )}
                   <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:9}}>
                     {[{label:"Notre intervention",text:cur.casInt},{label:"Résultat",text:cur.casRes}].map(c=>(
                       <div key={c.label}>
@@ -110,10 +118,10 @@ export default function SituationsCritiques() {
                 </div>
                 <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:13}}>
                   <span style={{fontSize:10,color:"#6B7FA0",textTransform:"uppercase",letterSpacing:"1.5px",fontWeight:700}}>Solution</span>
-                  <span style={{fontSize:10,color:"#C9A84C",textTransform:"uppercase",letterSpacing:"1.5px",fontWeight:700}}>Buildfluence</span>
+                  <span style={{fontSize:10,color:"#6B7FA0",textTransform:"uppercase",letterSpacing:"1.5px",fontWeight:700}}>Buildfluence</span>
                   <span style={{background:"#0D1B2A",color:"#fff",fontSize:10.5,fontWeight:600,padding:"3px 9px",borderRadius:4}}>{cur.sol}</span>
                 </div>
-                <button style={{display:"inline-flex",alignItems:"center",gap:6,background:"#0D1B2A",color:"#fff",fontSize:11.5,fontWeight:600,padding:"9px 18px",borderRadius:5,border:"none",cursor:"pointer"}}>
+                <button onClick={()=>setDiagOpen(true)} style={{display:"inline-flex",alignItems:"center",gap:6,background:"#0D1B2A",color:"#fff",fontSize:11.5,fontWeight:600,padding:"9px 18px",borderRadius:5,border:"none",cursor:"pointer"}}>
                   Evaluer ma situation — GRATUIT <span style={{color:"#C9A84C"}}>→</span>
                 </button>
               </div>
@@ -121,8 +129,8 @@ export default function SituationsCritiques() {
           )}
         </div>
         <div style={{display:"flex",flexDirection:"column",alignItems:"center",position:"sticky",top:20}}>
-          <p style={{fontFamily:"Cormorant Garamond,serif",fontSize:15,fontStyle:"italic",color:"#0D1B2A",textAlign:"center",margin:0,lineHeight:1.4}}>
-            « Les crises ne naissent pas du chaos, mais de l'illusion du contrôle. »
+          <p style={{fontSize:12,color:"#6B7FA0",letterSpacing:"0.5px",textAlign:"center",margin:0,fontStyle:"italic"}}>
+            Cliquer sur une situation pour explorer le process
           </p>
           <div style={{width:"100%",maxWidth:1188,margin:0,marginTop:-40,marginBottom:-40}}>
             <svg viewBox="80 80 400 400" preserveAspectRatio="xMidYMid meet" style={{width:"100%",height:"auto",display:"block",overflow:"visible"}}>
@@ -162,9 +170,6 @@ export default function SituationsCritiques() {
               })}
             </svg>
           </div>
-          <p style={{fontSize:10,color:"#6B7FA0",letterSpacing:"0.5px",textAlign:"center",margin:0}}>
-            Cliquez sur une situation pour explorer le processus
-          </p>
         </div>
       </div>
     </div>
