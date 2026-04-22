@@ -95,26 +95,29 @@ export default function SituationsCritiques() {
                     </div>
                   ))}
                 </div>
-                <div style={{border:"1px solid #D8E4F0",borderLeft:"3px solid #1B3E6A",borderRadius:7,padding:"13px 15px",marginBottom:13,background:"#FAFCFF"}}>
-                  <div style={{fontSize:9,fontWeight:700,letterSpacing:"2.5px",textTransform:"uppercase",color:"#C9A84C",marginBottom:3}}>Cas Client Buildfluence</div>
-                  {cur.casLogos && cur.casLogos.length > 0 ? (
-                    <div style={{display:"flex",alignItems:"center",gap:10,marginBottom:9,flexWrap:"wrap"}}>
-                      {cur.casLogos.map((logo:string,i:number)=>(
-                        <img key={i} src={logo} alt="" style={{height:34,width:"auto",objectFit:"contain"}}/>
+                <div style={{border:"1px solid #D8E4F0",borderLeft:"3px solid #1B3E6A",borderRadius:7,padding:"13px 15px",marginBottom:13,background:"#FAFCFF",display:"flex",gap:14,alignItems:"stretch"}}>
+                  <div style={{flex:1,minWidth:0}}>
+                    <div style={{fontSize:9,fontWeight:700,letterSpacing:"2.5px",textTransform:"uppercase",color:"#C9A84C",marginBottom:6}}>Cas Client Buildfluence</div>
+                    {(!cur.casLogos || cur.casLogos.length === 0) && (
+                      <div style={{fontFamily:"Cormorant Garamond,serif",fontSize:14,fontWeight:700,color:"#0D1B2A",marginBottom:9,fontStyle:"italic"}}>{cur.casOrg}</div>
+                    )}
+                    <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:9}}>
+                      {[{label:"Notre intervention",text:cur.casInt},{label:"Résultat",text:cur.casRes}].map(c=>(
+                        <div key={c.label}>
+                          <div style={{fontSize:9,fontWeight:700,letterSpacing:"2px",textTransform:"uppercase",color:"#6B7FA0",marginBottom:3}}>{c.label}</div>
+                          <div style={{fontSize:11,color:"#2C3E55",lineHeight:1.65}}>{c.text}</div>
+                        </div>
                       ))}
                     </div>
-                  ) : (
-                    <div style={{fontFamily:"Cormorant Garamond,serif",fontSize:14,fontWeight:700,color:"#0D1B2A",marginBottom:9,fontStyle:"italic"}}>{cur.casOrg}</div>
-                  )}
-                  <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:9}}>
-                    {[{label:"Notre intervention",text:cur.casInt},{label:"Résultat",text:cur.casRes}].map(c=>(
-                      <div key={c.label}>
-                        <div style={{fontSize:9,fontWeight:700,letterSpacing:"2px",textTransform:"uppercase",color:"#6B7FA0",marginBottom:3}}>{c.label}</div>
-                        <div style={{fontSize:11,color:"#2C3E55",lineHeight:1.65}}>{c.text}</div>
-                      </div>
-                    ))}
+                    <div style={{display:"inline-flex",alignItems:"center",gap:5,marginTop:9,background:"rgba(201,168,76,.1)",border:"1px solid rgba(201,168,76,.3)",borderRadius:20,padding:"3px 11px",fontSize:10.5,fontWeight:600,color:"#7A5A00"}}>{cur.casKPI}</div>
                   </div>
-                  <div style={{display:"inline-flex",alignItems:"center",gap:5,marginTop:9,background:"rgba(201,168,76,.1)",border:"1px solid rgba(201,168,76,.3)",borderRadius:20,padding:"3px 11px",fontSize:10.5,fontWeight:600,color:"#7A5A00"}}>{cur.casKPI}</div>
+                  {cur.casLogos && cur.casLogos.length > 0 && (
+                    <div style={{display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",gap:8,flexShrink:0,width:90,borderLeft:"1px solid #E5EDF5",paddingLeft:12}}>
+                      {cur.casLogos.map((logo:string,i:number)=>(
+                        <img key={i} src={logo} alt="" style={{maxHeight:78,maxWidth:84,width:"auto",height:"auto",objectFit:"contain"}}/>
+                      ))}
+                    </div>
+                  )}
                 </div>
                 <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:13}}>
                   <span style={{fontSize:10,color:"#6B7FA0",textTransform:"uppercase",letterSpacing:"1.5px",fontWeight:700}}>Solution</span>
