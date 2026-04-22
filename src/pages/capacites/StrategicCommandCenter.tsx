@@ -1078,7 +1078,7 @@ const StrategicCommandCenter = () => {
   ];
 
   return (
-    <div style={{ background: "#F5F3E9", width: "100%", minHeight: "100vh" }}>
+    <div className="[&>div]:!bg-[#F5F3E9]" style={{ background: "#F5F3E9", width: "100%", minHeight: "100vh" }}>
       <DetailPageLayout
         title={t("Strategic Command Center", "Strategic Command Center")}
         titleClassName="text-center"
