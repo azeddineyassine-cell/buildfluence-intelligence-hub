@@ -1415,8 +1415,8 @@ DATA.nodes.forEach(n=>{
   g.appendChild(ring);
  
   // === ICONE CENTRALE ===
-  // Pour les PERSONNES : portrait du Président (image clipée en cercle)
-  // Pour les ENTITÉS / OFFSHORE / DEAD : lettre + icône (comme avant)
+  // For PEOPLE: President portrait (image clipped in a circle)
+  // For ENTITIES / OFFSHORE / DEAD: letter + icon (as before)
   if(n.kind==="person" && n.portrait){
     // clipPath circulaire pour le portrait
     const portClipId = `clip-portrait-${n.id}`;
