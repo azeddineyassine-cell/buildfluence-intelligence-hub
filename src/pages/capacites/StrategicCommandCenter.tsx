@@ -184,8 +184,8 @@ const StrategicCartography = () => {
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(170px, 1fr))",
-            gap: 12,
+            gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
+            gap: 10,
           }}
         >
           {capacities.map((cap, idx) => (
