@@ -28,6 +28,7 @@ const POS: Record<string,{x:number,y:number}> = {
 
 export default function SituationsCritiques() {
   const [sel, setSel] = useState<number|null>(null);
+  const [diagOpen, setDiagOpen] = useState(false);
   const cur = sel !== null ? TOPICS[sel] : null;
   const nav = (d:number) => sel !== null && setSel((sel+d+8)%8);
 
