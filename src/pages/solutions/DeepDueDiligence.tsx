@@ -3,11 +3,13 @@ import Navbar from "@/components/Navbar";
 import CTAFooter from "@/components/CTAFooter";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const DeepDueDiligence = () => {
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const formRef = useRef<HTMLDivElement>(null);
   const { toast } = useToast();
+  const { lang } = useLanguage();
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
