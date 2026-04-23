@@ -167,7 +167,8 @@ const DeepDueDiligence = () => {
       <main style={{ paddingTop: 80 }}>
         <iframe
           ref={iframeRef}
-          src="/deep-due-diligence.html"
+          key={lang}
+          src={lang === "en" ? "/deep-due-diligence-en.html" : "/deep-due-diligence-fr.html"}
           title="Deep Due Diligence — Cartographie interactive"
           onLoad={handleIframeLoad}
           className="w-full border-0 block"
