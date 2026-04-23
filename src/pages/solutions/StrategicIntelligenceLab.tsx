@@ -68,7 +68,7 @@ const StrategicIntelligenceLab = () => {
       <ConstructionInfluence />
 
       {/* ═══ SECTION 1 : STRATEGIC FORESIGHT — fond blanc ═══ */}
-      <div className="rounded-xl px-8 py-8" style={{ background: '#FFFFFF', border: '1px solid #E5E7EB' }}>
+      <div className="rounded-xl px-8 py-8" style={{ background: '#F5F3E9', border: '1px solid #E5DFC8' }}>
         <div className="flex items-center gap-3 mb-6 pb-4" style={{ borderBottom: '2px solid #103E8C' }}>
           <span className="text-xs font-bold uppercase tracking-[0.18em] px-3 py-1 rounded-full" style={{ background: '#103E8C', color: '#FFFFFF' }}>01</span>
           <h3 id="strategic-foresight" className="text-xl font-bold scroll-mt-24" style={{ color: '#103E8C' }}>Strategic Foresight</h3>
@@ -224,7 +224,7 @@ const StrategicIntelligenceLab = () => {
       </div>
 
       {/* ═══ SECTION 3 : EXPÉRIMENTATIONS & POCs — fond blanc ═══ */}
-      <div className="rounded-xl px-8 py-8" style={{ background: '#FFFFFF', border: '1px solid #E5E7EB' }}>
+      <div className="rounded-xl px-8 py-8" style={{ background: '#F5F3E9', border: '1px solid #E5DFC8' }}>
         <div className="flex items-center gap-3 mb-6 pb-4" style={{ borderBottom: '2px solid #103E8C' }}>
           <span className="text-xs font-bold uppercase tracking-[0.18em] px-3 py-1 rounded-full" style={{ background: '#103E8C', color: '#FFFFFF' }}>03</span>
           <h3 id="experimentations-pocs" className="text-xl font-bold scroll-mt-24" style={{ color: '#103E8C' }}>{t("Expérimentations & POCs", "Experiments & POCs")}</h3>

@@ -3,11 +3,13 @@ import Navbar from "@/components/Navbar";
 import CTAFooter from "@/components/CTAFooter";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const DeepDueDiligence = () => {
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const formRef = useRef<HTMLDivElement>(null);
   const { toast } = useToast();
+  const { lang } = useLanguage();
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
@@ -165,7 +167,8 @@ const DeepDueDiligence = () => {
       <main style={{ paddingTop: 80 }}>
         <iframe
           ref={iframeRef}
-          src="/deep-due-diligence.html"
+          key={lang}
+          src={lang === "en" ? "/deep-due-diligence-en.html" : "/deep-due-diligence-fr.html"}
           title="Deep Due Diligence — Cartographie interactive"
           onLoad={handleIframeLoad}
           className="w-full border-0 block"
