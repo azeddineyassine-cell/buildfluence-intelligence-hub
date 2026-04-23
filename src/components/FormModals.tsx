@@ -144,6 +144,19 @@ export const FormDiagnostic = ({ open, onClose, situation = "" }: { open: boolea
   const { toast } = useToast();
   const { t } = useLanguage();
   const [submitting, setSubmitting] = useState(false);
+  const [riskType, setRiskType] = useState(situation || "");
+
+  const riskTypes = [
+    t("Décider sans visibilité", "Deciding without visibility"),
+    t("Investir sous risque", "Investing under risk"),
+    t("Crises non maîtrisées", "Uncontrolled crises"),
+    t("Attaques informationnelles", "Informational attacks"),
+    t("Gouverner sous pression", "Governing under pressure"),
+    t("Déficit d'attractivité", "Attractiveness deficit"),
+    t("Déficit d'influence", "Influence deficit"),
+    t("Perte de vélocité", "Loss of velocity"),
+    t("Autre", "Other"),
+  ];
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -155,7 +168,11 @@ export const FormDiagnostic = ({ open, onClose, situation = "" }: { open: boolea
       form_type: "diagnostic",
       name: fd.get("name") as string,
       email: fd.get("email") as string,
-      situation: (fd.get("situation") as string) || null,
+      organization: (fd.get("organization") as string) || null,
+      sector: (fd.get("sector") as string) || null,
+      phone: (fd.get("phone") as string) || null,
+      situation: riskType || (fd.get("situation") as string) || null,
+      message: (fd.get("message") as string) || null,
     });
 
     setSubmitting(false);
@@ -168,26 +185,52 @@ export const FormDiagnostic = ({ open, onClose, situation = "" }: { open: boolea
         formType: "diagnostic",
         name: fd.get("name") as string,
         email: fd.get("email") as string,
-        situation: (fd.get("situation") as string) || null,
+        organization: (fd.get("organization") as string) || null,
+        sector: (fd.get("sector") as string) || null,
+        phone: (fd.get("phone") as string) || null,
+        situation: riskType || (fd.get("situation") as string) || null,
+        message: (fd.get("message") as string) || null,
       },
     });
-    toast({ title: t("Demande envoyée", "Request sent"), description: t("Diagnostic gratuit en cours de traitement.", "Free diagnostic being processed.") });
+    toast({ title: t("Brief envoyé", "Brief sent"), description: t("Nous vous recontactons rapidement.", "We will get back to you shortly.") });
     form.reset();
+    setRiskType("");
     onClose();
   };
 
   return (
     <Dialog open={open} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-md" style={{ background: '#1a1a2e', border: '1px solid hsl(220 20% 20%)', color: '#F0EDE6' }}>
+      <DialogContent className="sm:max-w-lg" style={{ background: '#F4F4F4', border: '1px solid #D1D5DB', color: '#1a2744' }}>
         <DialogHeader>
-          <DialogTitle className="font-serif text-xl" style={{ color: '#F0EDE6' }}>{t("Évaluer ma situation — GRATUIT", "Evaluate my situation — FREE")}</DialogTitle>
+          <DialogTitle className="font-serif text-xl" style={{ color: '#1a2744' }}>{t("Activez votre bouclier stratégique dès maintenant", "Activate your strategic shield now")}</DialogTitle>
         </DialogHeader>
-        <form onSubmit={handleSubmit} className="mt-4 space-y-4">
-          <Input required name="name" placeholder={t("Nom", "Name")} maxLength={100} style={lightInputStyle} />
-          <Input required type="email" name="email" placeholder={t("Email professionnel", "Professional email")} maxLength={255} style={lightInputStyle} />
-          <Input name="situation" defaultValue={situation} placeholder={t("Situation critique", "Critical situation")} readOnly={!!situation} style={lightInputStyle} />
+        <p className="text-sm italic" style={{ color: '#6B7280' }}>{t("Transformez vos risques en opportunités maîtrisées.", "Turn your risks into controlled opportunities.")}</p>
+        <form onSubmit={handleSubmit} className="mt-4 space-y-3">
+          <Input required name="name" placeholder={t("Nom complet *", "Full name *")} maxLength={100} style={lightInputStyle} />
+          <Input required name="organization" placeholder={t("Société *", "Company *")} maxLength={150} style={lightInputStyle} />
+          <Input name="sector" placeholder={t("Secteur", "Sector")} maxLength={100} style={lightInputStyle} />
+          <Input required type="email" name="email" placeholder={t("Email professionnel *", "Professional email *")} maxLength={255} style={lightInputStyle} />
+          <Input required type="tel" name="phone" placeholder={t("Téléphone *", "Phone *")} maxLength={40} style={lightInputStyle} />
+          <select
+            name="situation"
+            value={riskType}
+            onChange={(e) => setRiskType(e.target.value)}
+            className="w-full rounded-sm px-3 py-2.5 text-sm"
+            style={{ ...lightInputStyle, appearance: 'auto' }}
+          >
+            <option value="">{t("Type de risque", "Risk type")}</option>
+            {riskTypes.map((r) => <option key={r} value={r}>{r}</option>)}
+          </select>
+          <textarea
+            name="message"
+            placeholder={t("Message libre", "Free message")}
+            rows={4}
+            maxLength={2000}
+            className="w-full rounded-sm px-3 py-2.5 text-sm"
+            style={lightInputStyle}
+          />
           <button type="submit" disabled={submitting} className="btn-gold w-full disabled:opacity-50">
-            {submitting ? t("Envoi...", "Sending...") : t("Envoyer", "Send")}
+            {submitting ? t("Envoi...", "Sending...") : t("ENVOYER LE BRIEF CONFIDENTIEL", "SEND CONFIDENTIAL BRIEF")}
           </button>
         </form>
       </DialogContent>
