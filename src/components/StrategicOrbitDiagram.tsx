@@ -138,7 +138,7 @@ export default function StrategicOrbitDiagram() {
   });
 
   return (
-    <section className="w-full py-8 px-4 bg-white">
+    <section className="w-full py-8 px-4" style={{ background: '#F5F3E9' }}>
       {/* Header */}
       <div className="max-w-4xl mx-auto text-center mb-8">
         <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-slate-900 leading-tight mb-4">
@@ -156,7 +156,7 @@ export default function StrategicOrbitDiagram() {
         <div className="w-full md:w-[38%] order-2 md:order-1">
           <p className="text-center text-sm font-bold mb-3" style={{ fontVariant: 'small-caps', letterSpacing: '0.08em', color: '#040606' }}>{t("Architecture de veille décisionnelle par métier", "Decision Watch Architecture by Business Domain")}</p>
           <div className="rounded-2xl overflow-hidden"
-            style={{ border: "0.5px solid rgba(0,0,0,0.08)", background: "#f8fafc" }}>
+            style={{ border: "0.5px solid rgba(0,0,0,0.08)", background: "#F5F3E9" }}>
             <div className="flex items-center gap-3 px-5 py-4"
               style={{ borderBottom: "0.5px solid rgba(0,0,0,0.06)" }}>
               <span className="text-2xl">{panel.icon}</span>
