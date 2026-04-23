@@ -164,15 +164,18 @@ export const FormDiagnostic = ({ open, onClose, situation = "" }: { open: boolea
     const form = e.target as HTMLFormElement;
     const fd = new FormData(form);
 
+    const sectorVal = (fd.get("sector") as string) || "";
+    const messageVal = (fd.get("message") as string) || "";
+    const composedMessage = sectorVal ? `[${t("Secteur", "Sector")}: ${sectorVal}]\n${messageVal}` : messageVal;
+
     const { error } = await supabase.from("contact_submissions").insert({
       form_type: "diagnostic",
       name: fd.get("name") as string,
       email: fd.get("email") as string,
-      organization: (fd.get("organization") as string) || null,
-      sector: (fd.get("sector") as string) || null,
-      phone: (fd.get("phone") as string) || null,
-      situation: riskType || (fd.get("situation") as string) || null,
-      message: (fd.get("message") as string) || null,
+      organization: (fd.get("organization") as string) || undefined,
+      phone: (fd.get("phone") as string) || undefined,
+      situation: riskType || (fd.get("situation") as string) || undefined,
+      message: composedMessage || undefined,
     });
 
     setSubmitting(false);
@@ -186,10 +189,10 @@ export const FormDiagnostic = ({ open, onClose, situation = "" }: { open: boolea
         name: fd.get("name") as string,
         email: fd.get("email") as string,
         organization: (fd.get("organization") as string) || null,
-        sector: (fd.get("sector") as string) || null,
+        sector: sectorVal || null,
         phone: (fd.get("phone") as string) || null,
         situation: riskType || (fd.get("situation") as string) || null,
-        message: (fd.get("message") as string) || null,
+        message: messageVal || null,
       },
     });
     toast({ title: t("Brief envoyé", "Brief sent"), description: t("Nous vous recontactons rapidement.", "We will get back to you shortly.") });
