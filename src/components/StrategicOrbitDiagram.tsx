@@ -138,7 +138,7 @@ export default function StrategicOrbitDiagram() {
   });
 
   return (
-    <section className="w-full py-8 px-4 bg-white">
+    <section className="w-full py-8 px-4" style={{ background: '#F5F3E9' }}>
       {/* Header */}
       <div className="max-w-4xl mx-auto text-center mb-8">
         <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-slate-900 leading-tight mb-4">
