@@ -17,7 +17,7 @@ const POS: Record<string, { x: number; y: number }> = {
 };
 
 export default function SituationsCritiques() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const [sel, setSel] = useState<number | null>(null);
   const [diagOpen, setDiagOpen] = useState(false);
 
@@ -219,10 +219,18 @@ export default function SituationsCritiques() {
           {t("Diagnostic stratégique", "Strategic Diagnosis")}
         </div>
         <h1 style={{ fontFamily: "Cormorant Garamond,serif", fontSize: "clamp(26px,4vw,46px)", fontWeight: 300, color: "#0D1B2A", lineHeight: 1.15, marginBottom: 10 }}>
-          {t(<>Les <em style={{ fontStyle: "italic", fontWeight: 700, color: "#C9A84C" }}>menaces</em> que vous ne voyez pas<br />sont les plus destructrices</>, <>The <em style={{ fontStyle: "italic", fontWeight: 700, color: "#C9A84C" }}>threats</em> you cannot see<br />are the most destructive</>) as any}
+          {lang === "fr" ? (
+            <>Les <em style={{ fontStyle: "italic", fontWeight: 700, color: "#C9A84C" }}>menaces</em> que vous ne voyez pas<br />sont les plus destructrices</>
+          ) : (
+            <>The <em style={{ fontStyle: "italic", fontWeight: 700, color: "#C9A84C" }}>threats</em> you cannot see<br />are the most destructive</>
+          )}
         </h1>
         <p style={{ fontSize: 13.5, color: "#6B7FA0", maxWidth: 520, margin: "0 auto", lineHeight: 1.75, fontStyle: "italic" }}>
-          {t(<>Identifier la nature de votre exposition aux risques est déjà <strong style={{ color: "#C9A84C", fontStyle: "normal" }}>le premier acte de souveraineté décisionnelle.</strong></>, <>Identifying the nature of your risk exposure is already <strong style={{ color: "#C9A84C", fontStyle: "normal" }}>the first act of decision-making sovereignty.</strong></>) as any}
+          {lang === "fr" ? (
+            <>Identifier la nature de votre exposition aux risques est déjà <strong style={{ color: "#C9A84C", fontStyle: "normal" }}>le premier acte de souveraineté décisionnelle.</strong></>
+          ) : (
+            <>Identifying the nature of your risk exposure is already <strong style={{ color: "#C9A84C", fontStyle: "normal" }}>the first act of decision-making sovereignty.</strong></>
+          )}
         </p>
       </div>
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1.5fr", maxWidth: 1380, margin: "0 auto", padding: "16px 40px 40px", alignItems: "center" }}>
@@ -230,7 +238,11 @@ export default function SituationsCritiques() {
           {!cur && (
             <div>
               <p style={{ fontFamily: "Cormorant Garamond,serif", fontSize: 17, fontStyle: "italic", color: "#0D1B2A", lineHeight: 1.6, borderLeft: "3px solid #C9A84C", paddingLeft: 18, marginBottom: 20 }}>
-                {t(<>« Les crises ne naissent pas du chaos,<br />mais de l'illusion du contrôle. »</>, <>"Crises are not born from chaos,<br />but from the illusion of control."</>) as any}
+                {lang === "fr" ? (
+                  <>« Les crises ne naissent pas du chaos,<br />mais de l'illusion du contrôle. »</>
+                ) : (
+                  <>"Crises are not born from chaos,<br />but from the illusion of control."</>
+                )}
               </p>
               <ul style={{ listStyle: "none", padding: 0 }}>
                 {[
