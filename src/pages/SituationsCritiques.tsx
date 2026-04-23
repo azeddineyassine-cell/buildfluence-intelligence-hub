@@ -260,18 +260,6 @@ export default function SituationsCritiques() {
                 ))}
               </ul>
 
-              {/* GENERAL CTA */}
-              <div style={{ marginTop: 28, background: "#0D1B2A", color: "#F5F1E8", borderRadius: 10, padding: "22px 22px 20px", border: "1px solid #C9A84C" }}>
-                <div style={{ fontFamily: "Cormorant Garamond,serif", fontSize: 17, fontWeight: 700, color: "#fff", lineHeight: 1.3, marginBottom: 6 }}>
-                  {t("Activez votre bouclier stratégique dès maintenant", "Activate your strategic shield now")}
-                </div>
-                <div style={{ fontSize: 12.5, color: "#C9A84C", fontStyle: "italic", marginBottom: 14 }}>
-                  {t("Transformez vos risques en opportunités maîtrisées", "Turn your risks into mastered opportunities")}
-                </div>
-                <button onClick={() => setDiagOpen(true)} style={{ display: "inline-flex", alignItems: "center", gap: 6, background: "#C9A84C", color: "#0D1B2A", fontSize: 11, fontWeight: 700, letterSpacing: "2px", textTransform: "uppercase", padding: "10px 18px", borderRadius: 4, border: "none", cursor: "pointer" }}>
-                  {t("Échanges stratégiques", "Strategic Exchange")} →
-                </button>
-              </div>
             </div>
           )}
           {cur && (
