@@ -33,7 +33,7 @@ const DetailPageLayout = ({ title, chapeau, children, sidebar, ctas, situationCo
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen" style={{ background: '#FAF6ED' }}>
       <Navbar />
       <section className="pb-10 pt-24">
         <div className="w-full px-6 lg:px-12" style={{ maxWidth: '1600px', margin: '0 auto' }}>
@@ -43,7 +43,15 @@ const DetailPageLayout = ({ title, chapeau, children, sidebar, ctas, situationCo
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
             className="max-w-[75%] mx-auto"
           >
-            <h1 className={`font-serif text-3xl font-bold leading-tight sm:text-4xl md:text-5xl ${titleClassName || ''}`}>
+            <h1
+              className={`font-bold leading-[1.05] ${titleClassName || ''}`}
+              style={{
+                fontFamily: "'Playfair Display', serif",
+                fontSize: 'clamp(36px, 5vw, 56px)',
+                fontStyle: 'italic',
+                color: '#0D1B2A',
+              }}
+            >
               {title}
             </h1>
             <p className={`mt-3 text-lg italic text-muted-foreground ${chapeauClassName || ''}`}>
