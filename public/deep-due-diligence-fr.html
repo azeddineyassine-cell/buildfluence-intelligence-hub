@@ -465,6 +465,29 @@
   footer .inner{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
   footer a{color:var(--gold);text-decoration:none}
  
+
+  /* zoom controls */
+  .zoom-controls{
+    position:absolute;top:70px;right:14px;z-index:5;
+    display:flex;flex-direction:column;gap:4px;
+    background:#0D1B2A;border:1px solid #C9A84C;padding:4px;
+  }
+  .zoom-btn{
+    width:36px;height:36px;background:transparent;color:#F5F1E8;
+    border:none;cursor:pointer;font-family:'JetBrains Mono',monospace;
+    font-size:16px;font-weight:600;display:grid;place-items:center;
+    transition:all .2s;
+  }
+  .zoom-btn:hover{background:#C9A84C;color:#0D1B2A}
+  .zoom-btn:disabled{opacity:.3;cursor:not-allowed}
+  .zoom-btn.reset{font-size:11px;letter-spacing:.1em}
+  .zoom-divider{height:1px;background:rgba(201,168,76,.25);margin:2px 0}
+  .zoom-level{
+    font-family:'JetBrains Mono',monospace;font-size:9px;
+    color:#C9A84C;text-align:center;padding:4px 0;
+    letter-spacing:.1em;border-top:1px solid rgba(201,168,76,.25);
+  }
+
   /* responsive */
   @media (max-width:980px){
     .hero-grid,.case-intro,.verdict-block{grid-template-columns:1fr;gap:40px}
@@ -888,48 +911,56 @@
   </div>
 </section>
  
-<!-- ============ THE CARTOGRAPHY, interactive ============ -->
+<!-- ============ LA CARTOGRAPHIE, interactive ============ -->
 <section class="carto" id="map">
   <div class="wrap">
     <div class="sec-head">
-      <div class="sec-num">04 · Cartography</div>
-      <h2 class="sec-title">The relational <em>cartography</em><br>of the file.</h2>
+      <div class="sec-num">04 · Cartographie</div>
+      <h2 class="sec-title">La <em>cartographie</em> relationnelle<br>du dossier.</h2>
     </div>
 
     <div class="carto-intro">
-      <p>Out of respect for the contractual NDA, every company has been re-encoded as a <strong>US state</strong> and every executive as a <strong>US President</strong>. The relational scheme — financial links, shared directorships, historical liabilities, offshore structures — is authentic.</p>
+      <p>Par respect pour le NDA contractuel, chaque société a été ré-encodée en <strong>État américain</strong> et chaque dirigeant en <strong>Président américain</strong>. Le schéma relationnel — liens financiers, mandats croisés, passifs historiques, structures offshore — est authentique.</p>
       <div class="carto-key">
-        <div>METAPHOR</div>
-        <b>Companies → States</b>
-        <b>Executives → Presidents</b>
-        <b>Tax havens → Island territories</b>
+        <div>MÉTAPHORE</div>
+        <b>Sociétés → États</b>
+        <b>Dirigeants → Présidents</b>
+        <b>Paradis fiscaux → Territoires insulaires</b>
       </div>
     </div>
 
     <div class="legend">
-      <div class="lg"><span class="sw sw-state"></span>Entity / company</div>
-      <div class="lg"><span class="sw sw-person"></span>Identified executive</div>
-      <div class="lg"><span class="sw sw-offshore"></span>Offshore shell</div>
-      <div class="lg"><span class="sw sw-dead"></span>Liquidated entity</div>
-      <div class="lg"><span class="sw sw-link-go"></span>Verified / declared link</div>
-      <div class="lg"><span class="sw sw-link-warn"></span>Unofficial / indirect link</div>
-      <div class="lg"><span class="sw sw-link-stop"></span>Problematic historical link</div>
+      <div class="lg"><span class="sw sw-state"></span>Entité / société</div>
+      <div class="lg"><span class="sw sw-person"></span>Dirigeant identifié</div>
+      <div class="lg"><span class="sw sw-offshore"></span>Coquille offshore</div>
+      <div class="lg"><span class="sw sw-dead"></span>Entité liquidée</div>
+      <div class="lg"><span class="sw sw-link-go"></span>Lien vérifié / déclaré</div>
+      <div class="lg"><span class="sw sw-link-warn"></span>Lien officieux / indirect</div>
+      <div class="lg"><span class="sw sw-link-stop"></span>Lien historique problématique</div>
     </div>
 
     <div class="map-wrap">
       <div class="map-toolbar">
-        <div class="title">↳ INTERACTIVE CARTOGRAPHY · CONFIDENTIAL FILE</div>
+        <div class="title">↳ CARTOGRAPHIE INTERACTIVE · DOSSIER CONFIDENTIEL</div>
         <div class="filters">
-          <button class="filt active" data-filt="all">All</button>
-          <button class="filt" data-filt="entity">Entities</button>
-          <button class="filt" data-filt="person">Executives</button>
+          <button class="filt active" data-filt="all">Tous</button>
+          <button class="filt" data-filt="entity">Entités</button>
+          <button class="filt" data-filt="person">Dirigeants</button>
           <button class="filt" data-filt="offshore">Offshore</button>
-          <button class="filt" data-filt="problem">Red signals</button>
+          <button class="filt" data-filt="problem">Signaux rouges</button>
         </div>
-        <div class="hint">Click a node for the individual file</div>
+        <div class="hint">Cliquez sur un nœud pour la fiche individuelle</div>
       </div>
  
       <div id="mapStage">
+        <div class="zoom-controls">
+        <button class="zoom-btn" id="zoomIn" title="Zoomer">+</button>
+        <button class="zoom-btn" id="zoomOut" title="Dézoomer">−</button>
+        <div class="zoom-divider"></div>
+        <button class="zoom-btn reset" id="zoomReset" title="Réinitialiser">⊙</button>
+        <div class="zoom-level" id="zoomLevel">100%</div>
+      </div>
+        
         <svg id="graph" viewBox="0 0 1280 760" preserveAspectRatio="xMidYMid meet"></svg>
  
         <aside class="detail-panel" id="detail">
@@ -941,15 +972,15 @@
           </div>
           <div class="dp-body">
             <div class="dp-section">
-              <h4>NDA re-encoding</h4>
+              <h4>Ré-encodage NDA</h4>
               <p id="dpRecode">,</p>
             </div>
             <div class="dp-section">
-              <h4>Profile</h4>
+              <h4>Profil</h4>
               <p id="dpProfile">,</p>
             </div>
             <div class="dp-section">
-              <h4>Detected signals</h4>
+              <h4>Signaux détectés</h4>
               <p id="dpSignals">,</p>
             </div>
             <div class="dp-section">
@@ -957,7 +988,7 @@
               <div id="dpVerdict"></div>
             </div>
             <div class="dp-section">
-              <h4>Connections in the file</h4>
+              <h4>Connexions dans le dossier</h4>
               <div class="dp-links" id="dpLinks">,</div>
             </div>
           </div>
@@ -967,57 +998,57 @@
  
     <!-- FINDINGS -->
     <div class="findings">
-      <h3>Surfaced signals · synthetic view</h3>
-      <p class="f-sub">Items that, taken alone, mean nothing. Taken together, they tell the whole story.</p>
+      <h3>Signaux remontés · vue de synthèse</h3>
+      <p class="f-sub">Des éléments qui, isolés, ne signifient rien. Mis bout à bout, ils racontent toute l'histoire.</p>
 
       <div class="sig-grid">
         <div class="sig">
           <span class="sig-level l-red">NO GO</span>
-          <h4>Two BVI offshore shells</h4>
-          <p>The President of NEVADA owns two companies in a tax haven, revealed by the Pandora Papers. Same Moscow address on both registrations.</p>
-          <div class="detected">Detected via: ICIJ Offshore Leaks database</div>
+          <h4>Deux coquilles offshore aux BVI</h4>
+          <p>Le Président de NEVADA détient deux sociétés dans un paradis fiscal, révélées par les Pandora Papers. Même adresse moscovite sur les deux enregistrements.</p>
+          <div class="detected">Détecté via : base ICIJ Offshore Leaks</div>
         </div>
         <div class="sig">
           <span class="sig-level l-red">NO GO</span>
-          <h4>Fraudulent historical lineage</h4>
-          <p>Presidency inherited from an agro-food group (OHIO) liquidated for fraud. Former president incarcerated. NEVADA's capital comes from this holding.</p>
-          <div class="detected">Detected via: Russian press + courts cross-check</div>
+          <h4>Filiation historique frauduleuse</h4>
+          <p>Présidence héritée d'un groupe agro-alimentaire (OHIO) liquidé pour fraude. Ancien président incarcéré. Le capital de NEVADA provient de ce holding.</p>
+          <div class="detected">Détecté via : presse russe + recoupement judiciaire</div>
         </div>
         <div class="sig">
-          <span class="sig-level l-amb">CAUTION</span>
-          <h4>Shadow executive</h4>
-          <p>A former banker has been heading investor relations since 2011, absent from the 3 official governance pages. Known for lobbying activity.</p>
-          <div class="detected">Detected via: multi-source differential analysis</div>
+          <span class="sig-level l-amb">VIGILANCE</span>
+          <h4>Dirigeant fantôme</h4>
+          <p>Un ancien banquier dirige les relations investisseurs depuis 2011, absent des 3 pages officielles de gouvernance. Connu pour des activités de lobbying.</p>
+          <div class="detected">Détecté via : analyse différentielle multi-sources</div>
         </div>
         <div class="sig">
-          <span class="sig-level l-amb">CAUTION</span>
-          <h4>Company name homonymy</h4>
-          <p>Two WYOMING companies bear exactly the same name, created 48 years apart, at two different addresses. Classic technique for fictitious seniority.</p>
-          <div class="detected">Detected via: cross-checked Cypriot registry</div>
+          <span class="sig-level l-amb">VIGILANCE</span>
+          <h4>Homonymie de raison sociale</h4>
+          <p>Deux sociétés WYOMING portent exactement le même nom, créées à 48 ans d'écart, à deux adresses différentes. Technique classique d'antériorité fictive.</p>
+          <div class="detected">Détecté via : registre chypriote recoupé</div>
         </div>
         <div class="sig">
-          <span class="sig-level l-amb">CAUTION</span>
-          <h4>Logo wrongly displayed</h4>
-          <p>An investment by DELAWARE in an Israeli start-up appeared on the target's website under NEVADA's logo. Brand confusion or signal of masked co-investment?</p>
-          <div class="detected">Detected via: ecosystem screenshot capture</div>
-        </div>
-        <div class="sig">
-          <span class="sig-level l-grn">GO</span>
-          <h4>No international sanctions</h4>
-          <p>Full check: UN, OFAC, Interpol, European Union. Neither the entities nor the identified Presidents appear on any active list.</p>
-          <div class="detected">Detected via: automated daily screening</div>
+          <span class="sig-level l-amb">VIGILANCE</span>
+          <h4>Logo affiché à tort</h4>
+          <p>Un investissement de DELAWARE dans une start-up israélienne est apparu sur le site de la cible sous le logo de NEVADA. Confusion de marque ou signal de co-investissement masqué ?</p>
+          <div class="detected">Détecté via : capture d'écran de l'écosystème</div>
         </div>
         <div class="sig">
           <span class="sig-level l-grn">GO</span>
-          <h4>Coherent DELAWARE portfolio</h4>
-          <p>20 investments identified over the decade, including 2 unicorns. Clear capital traceability, stable team, public governance.</p>
-          <div class="detected">Detected via: portfolio review + registries</div>
+          <h4>Aucune sanction internationale</h4>
+          <p>Vérification complète : ONU, OFAC, Interpol, Union européenne. Ni les entités ni les Présidents identifiés n'apparaissent sur une liste active.</p>
+          <div class="detected">Détecté via : screening quotidien automatisé</div>
         </div>
         <div class="sig">
           <span class="sig-level l-grn">GO</span>
-          <h4>DELAWARE founder-CEO: clean</h4>
-          <p>No sanctions, no major litigation, verified academic and professional track record. He is the person on whom the partnership was built.</p>
-          <div class="detected">Detected via: individual due diligence</div>
+          <h4>Portefeuille DELAWARE cohérent</h4>
+          <p>20 investissements identifiés sur la décennie, dont 2 licornes. Traçabilité capitalistique claire, équipe stable, gouvernance publique.</p>
+          <div class="detected">Détecté via : revue de portefeuille + registres</div>
+        </div>
+        <div class="sig">
+          <span class="sig-level l-grn">GO</span>
+          <h4>Fondateur-CEO de DELAWARE : clean</h4>
+          <p>Aucune sanction, aucun contentieux majeur, parcours académique et professionnel vérifié. C'est la personne sur laquelle le partenariat s'est construit.</p>
+          <div class="detected">Détecté via : due diligence individuelle</div>
         </div>
       </div>
     </div>
@@ -1025,32 +1056,32 @@
     <!-- VERDICT -->
     <div class="verdict-block">
       <div>
-        <h3>The client's <em>verdict</em>.</h3>
-        <p class="vb-intro">Three lights. One clear decision. A story that could have ended badly — and didn't.</p>
+        <h3>Le <em>verdict</em> du client.</h3>
+        <p class="vb-intro">Trois feux. Une décision claire. Une histoire qui aurait pu mal finir — et qui n'a pas mal fini.</p>
       </div>
       <div class="verdict-list">
         <div class="vr go">
           <span class="vr-badge">GO</span>
           <span class="vr-icon">✓</span>
           <div class="vr-text">
-            <strong>The operating principal of DELAWARE</strong>
-            <span>No risk identified. Direct collaboration approved.</span>
+            <strong>Le donneur d'ordre opérationnel de DELAWARE</strong>
+            <span>Aucun risque identifié. Collaboration directe approuvée.</span>
           </div>
         </div>
         <div class="vr watch">
-          <span class="vr-badge">CAUTION</span>
+          <span class="vr-badge">VIGILANCE</span>
           <span class="vr-icon">⚠</span>
           <div class="vr-text">
-            <strong>The President of NEVADA & NEVADA itself</strong>
-            <span>Limits of collaboration to be defined. Reinforced protective clauses to be added. Continuous monitoring recommended.</span>
+            <strong>Le Président de NEVADA & NEVADA elle-même</strong>
+            <span>Limites de collaboration à définir. Clauses protectrices renforcées à ajouter. Veille continue recommandée.</span>
           </div>
         </div>
         <div class="vr stop">
           <span class="vr-badge">NO GO</span>
           <span class="vr-icon">✕</span>
           <div class="vr-text">
-            <strong>The two BVI shells & any entity tied to OHIO</strong>
-            <span>Total exclusion from the contractual scope. Anti-transitivity clause required.</span>
+            <strong>Les deux coquilles BVI & toute entité liée à OHIO</strong>
+            <span>Exclusion totale du périmètre contractuel. Clause d'anti-transitivité exigée.</span>
           </div>
         </div>
       </div>
@@ -1062,183 +1093,183 @@
 <!-- ============ CTA ============ -->
 <section class="cta">
   <div class="cta-inner">
-    <div class="eyebrow">Your file · Confidential</div>
-    <h2>Map the risks<br><em>before it's too late.</em></h2>
-    <p>Investment or partnership — every strategic decision deserves<br>an in-depth reading of the perimeter and its blind spots.</p>
-    <a href="#contact-brief" class="btn btn-primary">Request a confidential brief <span class="arrow">→</span></a>
+    <div class="eyebrow">Votre dossier · Confidentiel</div>
+    <h2>Cartographier les risques<br><em>avant qu'il ne soit trop tard.</em></h2>
+    <p>Investissement ou partenariat — chaque décision stratégique mérite<br>une lecture en profondeur du périmètre et de ses angles morts.</p>
+    <a href="#contact-brief" class="btn btn-primary">Demander un brief confidentiel <span class="arrow">→</span></a>
   </div>
 </section>
  
 <footer>
   <div class="wrap inner">
     <div>BUILDFLUENCE · INTELLIGENCE HUB · buildfluence.ai</div>
-    <div>DEEP DUE DILIGENCE · <a href="#">LEGAL NOTICE</a> · <a href="#">SAMPLE NDA</a></div>
+    <div>DEEP DUE DILIGENCE · <a href="#">MENTIONS LÉGALES</a> · <a href="#">EXEMPLE DE NDA</a></div>
   </div>
 </footer>
  
 <script>
 /* ================================================================
-   INTERACTIVE CARTOGRAPHY
-   Anonymized data: companies = US States · executives = US Presidents
+   CARTOGRAPHIE INTERACTIVE
+   Données anonymisées : sociétés = États US · dirigeants = Présidents US
 ================================================================ */
  
 const AVATAR_URI = "data:image/png;base64,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";
  
 const DATA = {
   nodes: [
-    // ENTITIES (companies → US states)
-    {id:"DELAWARE", kind:"entity", label:"DELAWARE", sub:"Venture capital fund · primary target", country:"LV", countryName:"Latvia", x:280, y:380, r:50, color:"#103E8C",
-     recode:"Venture capital firm based in a Baltic capital, specialized in FinTech and IT. Operational target of the mandate.",
-     profile:"Founded 15 years ago. Two unicorns in the portfolio, around twenty investments. Transparent registered office, declared governance.",
-     signals:"No red flag on the entity itself. Coherent portfolio. Public governance.",
-     verdict:"go", verdictText:"GO, operational green light",
+    // ENTITÉS (sociétés → États US)
+    {id:"DELAWARE", kind:"entity", label:"DELAWARE", sub:"Fonds de capital-risque · cible principale", country:"LV", countryName:"Latvia", x:280, y:380, r:50, color:"#103E8C",
+     recode:"Société de capital-risque basée dans une capitale balte, spécialisée FinTech et IT. Cible opérationnelle du mandat.",
+     profile:"Fondée il y a 15 ans. Deux licornes au portefeuille, une vingtaine d'investissements. Siège transparent, gouvernance déclarée.",
+     signals:"Aucun signal rouge sur l'entité elle-même. Portefeuille cohérent. Gouvernance publique.",
+     verdict:"go", verdictText:"GO, feu vert opérationnel",
      links:["WASHINGTON","JEFFERSON","CALIFORNIA"]},
  
-    {id:"NEVADA", kind:"entity", label:"NEVADA", sub:"Parent fund · offshore holding", country:"CY", countryName:"Cyprus", x:640, y:330, r:48, color:"#103E8C",
-     recode:"Private equity fund registered in a Mediterranean jurisdiction with favorable taxation. Appears as a systematic co-investor of DELAWARE.",
-     profile:"Created 18 years ago. Officially lists 3 managers. Investigation reveals a fourth. Sectors: biotech, IT, agribusiness, pharma.",
-     signals:"Capitalization partly originating from OHIO (liquidated for fraud). Fourth undeclared executive. Energy subsidiaries with suspicious homonymy.",
-     verdict:"watch", verdictText:"WATCH, perimeter to be controlled",
+    {id:"NEVADA", kind:"entity", label:"NEVADA", sub:"Fonds parent · holding offshore", country:"CY", countryName:"Cyprus", x:640, y:330, r:48, color:"#103E8C",
+     recode:"Fonds de private equity enregistré dans une juridiction méditerranéenne à fiscalité avantageuse. Apparaît comme co-investisseur systématique de DELAWARE.",
+     profile:"Créé il y a 18 ans. Liste officiellement 3 dirigeants. L'enquête en révèle un quatrième. Secteurs : biotech, IT, agro-alimentaire, pharma.",
+     signals:"Capitalisation provenant en partie d'OHIO (liquidée pour fraude). Quatrième dirigeant non déclaré. Filiales énergie à homonymie suspecte.",
+     verdict:"watch", verdictText:"VIGILANCE, périmètre à contrôler",
      links:["JEFFERSON","MADISON","ADAMS","JACKSON","OHIO","WYOMING","KANSAS","BVI_1","BVI_2"]},
  
-    {id:"OHIO", kind:"dead", label:"OHIO", sub:"Agribusiness group · liquidated 2017", country:"RU", countryName:"Russia", x:1080, y:170, r:40, color:"#6B7280",
-     recode:"Sugar and grain agro-industrial group. Judicially liquidated in 2017 for massive fraud.",
-     profile:"Formerly a major holding (24 plants, 11% of the national sugar market). Now defunct, only a residual PDF remains online.",
-     signals:"Former Chairman incarcerated. Successor (JEFFERSON) not judicially implicated but inherits the chairmanship and then capitalizes NEVADA with these funds.",
-     verdict:"stop", verdictText:"NO GO, historically fraudulent entity",
+    {id:"OHIO", kind:"dead", label:"OHIO", sub:"Groupe agro-alimentaire · liquidé 2017", country:"RU", countryName:"Russia", x:1080, y:170, r:40, color:"#6B7280",
+     recode:"Groupe agro-industriel sucre et céréales. Liquidé judiciairement en 2017 pour fraude massive.",
+     profile:"Ancien grand holding (24 usines, 11 % du marché sucrier national). Aujourd'hui défunt, seul un PDF résiduel subsiste en ligne.",
+     signals:"Ancien Président incarcéré. Successeur (JEFFERSON) non mis en cause judiciairement mais hérite de la présidence puis capitalise NEVADA avec ces fonds.",
+     verdict:"stop", verdictText:"NO GO, entité historiquement frauduleuse",
      links:["NIXON","JEFFERSON"]},
  
-    {id:"TEXAS", kind:"entity", label:"TEXAS", sub:"Regional bank · Kazan", country:"RU", countryName:"Russia", x:1090, y:340, r:34, color:"#103E8C",
-     recode:"Russian regional bank where JEFFERSON claims to have been a Board member. Verification: his name does not appear in the public lists.",
-     profile:"Headquartered in a Russian regional capital. Website inaccessible during the investigation. Public board of directors available for review.",
-     signals:"Mandate claim not confirmed by public sources. Possible CV embellishment.",
-     verdict:"watch", verdictText:"WATCH, unverified claim",
+    {id:"TEXAS", kind:"entity", label:"TEXAS", sub:"Banque régionale · Kazan", country:"RU", countryName:"Russia", x:1090, y:340, r:34, color:"#103E8C",
+     recode:"Banque régionale russe où JEFFERSON déclare avoir été membre du Conseil. Vérification : son nom n'apparaît pas dans les listes publiques.",
+     profile:"Siège dans une capitale régionale russe. Site web inaccessible pendant l'enquête. Conseil d'administration public consultable.",
+     signals:"Revendication de mandat non confirmée par les sources publiques. Embellissement de CV possible.",
+     verdict:"watch", verdictText:"VIGILANCE, déclaration non vérifiée",
      links:["JEFFERSON"]},
  
-    {id:"IOWA", kind:"entity", label:"IOWA", sub:"Meat production · Ufa", country:"RU", countryName:"Russia", x:1200, y:470, r:30, color:"#103E8C",
-     recode:"Pork meat producer based in central Russia. Standard industrial company, in JEFFERSON's extended portfolio.",
-     profile:"Declared activity, transparent website. No direct warning signals.",
-     signals:"No signal. Mentioned only to map the complete network.",
-     verdict:"go", verdictText:"GO, adjacent perimeter",
+    {id:"IOWA", kind:"entity", label:"IOWA", sub:"Production de viande · Oufa", country:"RU", countryName:"Russia", x:1200, y:470, r:30, color:"#103E8C",
+     recode:"Producteur de viande porcine basé en Russie centrale. Société industrielle standard, dans le portefeuille étendu de JEFFERSON.",
+     profile:"Activité déclarée, site web transparent. Aucun signal d'alerte direct.",
+     signals:"Aucun signal. Mentionnée uniquement pour cartographier le réseau complet.",
+     verdict:"go", verdictText:"GO, périmètre adjacent",
      links:["JEFFERSON"]},
  
-    {id:"CALIFORNIA", kind:"entity", label:"CALIFORNIA", sub:"Tech fund · Moscow", country:"RU", countryName:"Russia", x:200, y:170, r:36, color:"#103E8C",
-     recode:"Second venture capital vehicle where WASHINGTON is also a partner. Institutional website reduced to a single page: name, phone, email.",
-     profile:"Invests in 10+ tech start-ups. Partner of Russian and Chinese sovereign funds. One French start-up financed by the national sovereign fund.",
-     signals:"Opacity of public communication. Strong interconnection with DELAWARE through shared executive. One portfolio start-up (ROISTAT) is co-financed by DELAWARE and CALIFORNIA.",
-     verdict:"watch", verdictText:"WATCH, partial co-governance",
+    {id:"CALIFORNIA", kind:"entity", label:"CALIFORNIA", sub:"Fonds tech · Moscou", country:"RU", countryName:"Russia", x:200, y:170, r:36, color:"#103E8C",
+     recode:"Second véhicule de capital-risque où WASHINGTON est également associé. Site institutionnel réduit à une seule page : nom, téléphone, email.",
+     profile:"Investit dans 10+ start-ups tech. Partenaire de fonds souverains russe et chinois. Une start-up française financée par le fonds souverain national.",
+     signals:"Opacité de la communication publique. Forte interconnexion avec DELAWARE via dirigeant partagé. Une start-up du portefeuille (ROISTAT) est co-financée par DELAWARE et CALIFORNIA.",
+     verdict:"watch", verdictText:"VIGILANCE, co-gouvernance partielle",
      links:["WASHINGTON","DELAWARE"]},
  
-    {id:"KANSAS", kind:"entity", label:"KANSAS", sub:"Agribusiness subsidiary · Cyprus", country:"CY", countryName:"Cyprus", x:1030, y:580, r:28, color:"#103E8C",
-     recode:"Cypriot subsidiary of NEVADA, dedicated to agro-global. MADISON has been director since 2018.",
-     profile:"Company registered in the Cypriot register since 2011. Address shared with other group entities.",
-     signals:"No direct signal. Used to map the network of executives.",
-     verdict:"go", verdictText:"GO, ancillary structure",
+    {id:"KANSAS", kind:"entity", label:"KANSAS", sub:"Filiale agro-alimentaire · Chypre", country:"CY", countryName:"Cyprus", x:1030, y:580, r:28, color:"#103E8C",
+     recode:"Filiale chypriote de NEVADA, dédiée à l'agro-global. MADISON en est administrateur depuis 2018.",
+     profile:"Société enregistrée au registre chypriote depuis 2011. Adresse partagée avec d'autres entités du groupe.",
+     signals:"Aucun signal direct. Utilisée pour cartographier le réseau de dirigeants.",
+     verdict:"go", verdictText:"GO, structure annexe",
      links:["MADISON","NEVADA"]},
  
-    {id:"WYOMING", kind:"entity", label:"WYOMING", sub:"Energy · suspicious homonymy", country:"CY", countryName:"Cyprus", x:1160, y:680, r:32, color:"#103E8C",
-     recode:"Energy company registered in Cyprus. Exact homonym of an earlier company created in 1970 under different management, at a different address.",
-     profile:"Recent registration (2018) under new number. MADISON is director. Homonymous predecessor was led by FILLMORE.",
-     signals:"Deliberate homonymy, a classic technique for fabricating apparent seniority or absorbing reputation.",
-     verdict:"watch", verdictText:"WATCH, opacity construction",
+    {id:"WYOMING", kind:"entity", label:"WYOMING", sub:"Énergie · homonymie suspecte", country:"CY", countryName:"Cyprus", x:1160, y:680, r:32, color:"#103E8C",
+     recode:"Société énergétique enregistrée à Chypre. Homonyme exacte d'une société antérieure créée en 1970 sous une direction différente, à une adresse différente.",
+     profile:"Enregistrement récent (2018) sous nouveau numéro. MADISON est administrateur. Le prédécesseur homonyme était dirigé par FILLMORE.",
+     signals:"Homonymie délibérée, technique classique pour fabriquer une antériorité apparente ou absorber une réputation.",
+     verdict:"watch", verdictText:"VIGILANCE, construction d'opacité",
      links:["MADISON","FILLMORE"]},
  
-    // OFFSHORE SHELLS
-    {id:"BVI_1", kind:"offshore", label:"BERMUDA-A", sub:"Offshore shell · BVI", country:"VG", countryName:"BVI", x:470, y:570, r:28, color:"#B91C1C",
-     recode:"Shell company owned by JEFFERSON. Domiciled in a British Caribbean tax haven. Revealed by the Pandora Papers.",
-     profile:"Moscow address identical to a second shell of the same owner. Opaque corporate purpose. No public commercial activity.",
-     signals:"Listed in the ICIJ Offshore Leaks database. Convergence of indicators.",
-     verdict:"stop", verdictText:"NO GO, contractual exclusion",
+    // COQUILLES OFFSHORE
+    {id:"BVI_1", kind:"offshore", label:"BERMUDA-A", sub:"Coquille offshore · BVI", country:"VG", countryName:"BVI", x:470, y:570, r:28, color:"#B91C1C",
+     recode:"Société écran détenue par JEFFERSON. Domiciliée dans un paradis fiscal britannique des Caraïbes. Révélée par les Pandora Papers.",
+     profile:"Adresse moscovite identique à une seconde coquille du même propriétaire. Objet social opaque. Aucune activité commerciale publique.",
+     signals:"Référencée dans la base ICIJ Offshore Leaks. Convergence d'indicateurs.",
+     verdict:"stop", verdictText:"NO GO, exclusion contractuelle",
      links:["JEFFERSON"]},
  
-    {id:"BVI_2", kind:"offshore", label:"BERMUDA-B", sub:"Offshore shell · BVI", country:"VG", countryName:"BVI", x:640, y:620, r:28, color:"#B91C1C",
-     recode:"Second shell company of JEFFERSON in the BVI. Same Moscow address. Same opacity profile.",
-     profile:"Structural redundancy. Operational hypothesis: tax optimization and/or asset isolation.",
-     signals:"Confirmed by cross-referencing Pandora Papers + nationality + address.",
-     verdict:"stop", verdictText:"NO GO, contractual exclusion",
+    {id:"BVI_2", kind:"offshore", label:"BERMUDA-B", sub:"Coquille offshore · BVI", country:"VG", countryName:"BVI", x:640, y:620, r:28, color:"#B91C1C",
+     recode:"Seconde société écran de JEFFERSON aux BVI. Même adresse moscovite. Même profil d'opacité.",
+     profile:"Redondance structurelle. Hypothèse opérationnelle : optimisation fiscale et/ou isolation d'actifs.",
+     signals:"Confirmée par recoupement Pandora Papers + nationalité + adresse.",
+     verdict:"stop", verdictText:"NO GO, exclusion contractuelle",
      links:["JEFFERSON"]},
  
-    // PEOPLE (executives → US Presidents)
-    {id:"WASHINGTON", kind:"person", label:"WASHINGTON", sub:"Founder · DELAWARE", portrait:AVATAR_URI, country:"LV", countryName:"Latvia", x:170, y:580, r:38, color:"#C9A84C",
-     recode:"Founder and operational head of DELAWARE. PhD in finance, MBA from a top-tier US school. 20 years of venture capital experience.",
-     profile:"Transparent, verifiable background. Member of boards of listed companies. Orchestrates all DELAWARE operations.",
-     signals:"No sanctions. No litigation. Background consistent with public statements.",
-     verdict:"go", verdictText:"GO, reliable partner",
+    // PERSONNES (dirigeants → Présidents US)
+    {id:"WASHINGTON", kind:"person", label:"WASHINGTON", sub:"Fondateur · DELAWARE", portrait:AVATAR_URI, country:"LV", countryName:"Latvia", x:170, y:580, r:38, color:"#C9A84C",
+     recode:"Fondateur et patron opérationnel de DELAWARE. PhD en finance, MBA d'une école américaine de premier rang. 20 ans d'expérience en capital-risque.",
+     profile:"Parcours transparent, vérifiable. Membre de conseils d'administration de sociétés cotées. Orchestre toutes les opérations de DELAWARE.",
+     signals:"Aucune sanction. Aucun contentieux. Parcours cohérent avec les déclarations publiques.",
+     verdict:"go", verdictText:"GO, partenaire fiable",
      links:["DELAWARE","CALIFORNIA"]},
  
-    {id:"JEFFERSON", kind:"person", label:"JEFFERSON", sub:"Chairman · NEVADA", portrait:AVATAR_URI, country:"CY", countryName:"Cyprus", x:820, y:420, r:44, color:"#C9A84C",
-     recode:"Chairman of NEVADA. Former Chairman of OHIO (liquidated group). Board member of IOWA. Claims a TEXAS board seat not publicly confirmed. Partner of DELAWARE since 2017.",
-     profile:"MBA from a US school. Former vice-president of a Russian bank, former CEO of an investment company. Multi-mandate, dense network.",
-     signals:"OWNER OF 2 OFFSHORE SHELLS in the BVI (Pandora Papers). Inherited the OHIO chairmanship after his predecessor's downfall. TEXAS claim unverified.",
-     verdict:"watch", verdictText:"WATCH, complex profile",
+    {id:"JEFFERSON", kind:"person", label:"JEFFERSON", sub:"Président · NEVADA", portrait:AVATAR_URI, country:"CY", countryName:"Cyprus", x:820, y:420, r:44, color:"#C9A84C",
+     recode:"Président de NEVADA. Ancien Président d'OHIO (groupe liquidé). Administrateur d'IOWA. Revendique un mandat au conseil de TEXAS non confirmé publiquement. Associé de DELAWARE depuis 2017.",
+     profile:"MBA d'une école américaine. Ancien vice-président d'une banque russe, ancien CEO d'une société d'investissement. Multi-mandats, réseau dense.",
+     signals:"PROPRIÉTAIRE DE 2 COQUILLES OFFSHORE aux BVI (Pandora Papers). A hérité de la présidence d'OHIO après la chute de son prédécesseur. Revendication TEXAS non vérifiée.",
+     verdict:"watch", verdictText:"VIGILANCE, profil complexe",
      links:["NEVADA","OHIO","IOWA","TEXAS","BVI_1","BVI_2","DELAWARE"]},
  
-    {id:"JACKSON", kind:"person", label:"JACKSON", sub:"Ghost · Investor relations", portrait:AVATAR_URI, country:"RU", countryName:"Russia", x:560, y:130, r:32, color:"#C9A84C",
-     recode:"Former banker (BNP Paribas fund then Russian bank) acting as head of investor relations for NEVADA. Not declared in official governance.",
-     profile:"Known for lobbying activities. Identity absent from the company's three official pages. Visible only via third-party sources and professional networks.",
-     signals:"Asymmetry between operational presence and absence of communication. Recurring indicator of opaque governance.",
-     verdict:"watch", verdictText:"WATCH, undeclared executive",
+    {id:"JACKSON", kind:"person", label:"JACKSON", sub:"Fantôme · Relations investisseurs", portrait:AVATAR_URI, country:"RU", countryName:"Russia", x:560, y:130, r:32, color:"#C9A84C",
+     recode:"Ancien banquier (fonds BNP Paribas puis banque russe) faisant office de directeur des relations investisseurs pour NEVADA. Non déclaré dans la gouvernance officielle.",
+     profile:"Connu pour ses activités de lobbying. Identité absente des trois pages officielles de la société. Visible uniquement via sources tierces et réseaux professionnels.",
+     signals:"Asymétrie entre présence opérationnelle et absence de communication. Indicateur récurrent de gouvernance opaque.",
+     verdict:"watch", verdictText:"VIGILANCE, dirigeant non déclaré",
      links:["NEVADA"]},
  
-    {id:"MADISON", kind:"person", label:"MADISON", sub:"Director · NEVADA, KANSAS, WYOMING", portrait:AVATAR_URI, country:"CY", countryName:"Cyprus", x:900, y:590, r:32, color:"#C9A84C",
-     recode:"Director of NEVADA since 2021. Also director of KANSAS and WYOMING. International profile (China, Hong Kong).",
-     profile:"International relations at university, complementary environmental training. Led an Asian subsidiary of NEVADA before being promoted.",
-     signals:"Internal multi-mandate. No individual signal. Present at the crossroads of 3 group entities.",
-     verdict:"go", verdictText:"GO, integrated executive",
+    {id:"MADISON", kind:"person", label:"MADISON", sub:"Administrateur · NEVADA, KANSAS, WYOMING", portrait:AVATAR_URI, country:"CY", countryName:"Cyprus", x:900, y:590, r:32, color:"#C9A84C",
+     recode:"Administrateur de NEVADA depuis 2021. Également administrateur de KANSAS et WYOMING. Profil international (Chine, Hong Kong).",
+     profile:"Relations internationales à l'université, formation complémentaire environnement. A dirigé une filiale asiatique de NEVADA avant d'être promu.",
+     signals:"Multi-mandats internes. Aucun signal individuel. Présent au croisement de 3 entités du groupe.",
+     verdict:"go", verdictText:"GO, dirigeant intégré",
      links:["NEVADA","KANSAS","WYOMING"]},
  
-    {id:"ADAMS", kind:"person", label:"ADAMS", sub:"Legal · NEVADA", portrait:AVATAR_URI, country:"CY", countryName:"Cyprus", x:540, y:240, r:28, color:"#C9A84C",
-     recode:"Corporate lawyer at NEVADA since 2020. Graduate of a Moscow law school, complementary training in Cyprus.",
-     profile:"Coherent background: corporate services provider, then private investment fund, then NEVADA. Dual-jurisdiction training.",
-     signals:"No signal. Clean junior profile. Openly listed.",
-     verdict:"go", verdictText:"GO, clean profile",
+    {id:"ADAMS", kind:"person", label:"ADAMS", sub:"Juridique · NEVADA", portrait:AVATAR_URI, country:"CY", countryName:"Cyprus", x:540, y:240, r:28, color:"#C9A84C",
+     recode:"Juriste d'entreprise chez NEVADA depuis 2020. Diplômé d'une école de droit moscovite, formation complémentaire à Chypre.",
+     profile:"Parcours cohérent : prestataire de services corporate, puis fonds d'investissement privé, puis NEVADA. Formation bi-juridictionnelle.",
+     signals:"Aucun signal. Profil junior propre. Listé ouvertement.",
+     verdict:"go", verdictText:"GO, profil propre",
      links:["NEVADA"]},
  
-    {id:"NIXON", kind:"person", label:"NIXON", sub:"Former Chairman · OHIO · incarcerated", portrait:AVATAR_URI, country:"RU", countryName:"Russia", x:1210, y:80, r:28, color:"#C9A84C",
-     recode:"Former Chairman of OHIO before its liquidation. Incarcerated following fraud convictions. His ouster opened the chairmanship for JEFFERSON.",
-     profile:"Historical figure of the agri-food sector. Trajectory broken by scandals. Named in Russian press.",
-     signals:"Criminal conviction. De facto exclusion from any collaboration.",
-     verdict:"stop", verdictText:"NO GO, incarcerated",
+    {id:"NIXON", kind:"person", label:"NIXON", sub:"Ancien Président · OHIO · incarcéré", portrait:AVATAR_URI, country:"RU", countryName:"Russia", x:1210, y:80, r:28, color:"#C9A84C",
+     recode:"Ancien Président d'OHIO avant sa liquidation. Incarcéré suite à des condamnations pour fraude. Son éviction a ouvert la présidence à JEFFERSON.",
+     profile:"Figure historique du secteur agro-alimentaire. Trajectoire brisée par les scandales. Cité dans la presse russe.",
+     signals:"Condamnation pénale. Exclusion de fait de toute collaboration.",
+     verdict:"stop", verdictText:"NO GO, incarcéré",
      links:["OHIO"]},
  
-    {id:"FILLMORE", kind:"person", label:"FILLMORE", sub:"Former director · historical WYOMING", portrait:AVATAR_URI, country:"CY", countryName:"Cyprus", x:810, y:700, r:24, color:"#C9A84C",
-     recode:"Former director of the original WYOMING company (1970), dissolved and then re-created under the same name in 2018 by MADISON.",
-     profile:"Obscure figure, poorly documented. Mentioned solely to attest the homonymy.",
-     signals:"Historical homonymic link. Used to characterize the opacity technique.",
-     verdict:"watch", verdictText:"WATCH, historical context",
+    {id:"FILLMORE", kind:"person", label:"FILLMORE", sub:"Ancien administrateur · WYOMING historique", portrait:AVATAR_URI, country:"CY", countryName:"Cyprus", x:810, y:700, r:24, color:"#C9A84C",
+     recode:"Ancien administrateur de la société WYOMING d'origine (1970), dissoute puis recréée sous le même nom en 2018 par MADISON.",
+     profile:"Figure obscure, peu documentée. Mentionné uniquement pour attester l'homonymie.",
+     signals:"Lien historique d'homonymie. Utilisé pour caractériser la technique d'opacité.",
+     verdict:"watch", verdictText:"VIGILANCE, contexte historique",
      links:["WYOMING"]}
   ],
  
   links: [
     // WASHINGTON ops
-    {from:"WASHINGTON", to:"DELAWARE", kind:"go", label:"founder"},
-    {from:"WASHINGTON", to:"CALIFORNIA", kind:"go", label:"partner"},
-    {from:"DELAWARE", to:"CALIFORNIA", kind:"warn", label:"co-portfolio"},
+    {from:"WASHINGTON", to:"DELAWARE", kind:"go", label:"fondateur"},
+    {from:"WASHINGTON", to:"CALIFORNIA", kind:"go", label:"associé"},
+    {from:"DELAWARE", to:"CALIFORNIA", kind:"warn", label:"co-portefeuille"},
  
     // JEFFERSON network
-    {from:"JEFFERSON", to:"NEVADA", kind:"go", label:"chairman"},
-    {from:"JEFFERSON", to:"DELAWARE", kind:"warn", label:"partner since 2017"},
-    {from:"JEFFERSON", to:"OHIO", kind:"stop", label:"former chairman"},
-    {from:"JEFFERSON", to:"IOWA", kind:"go", label:"board"},
-    {from:"JEFFERSON", to:"TEXAS", kind:"warn", label:"board unverified"},
-    {from:"JEFFERSON", to:"BVI_1", kind:"stop", label:"owner"},
-    {from:"JEFFERSON", to:"BVI_2", kind:"stop", label:"owner"},
+    {from:"JEFFERSON", to:"NEVADA", kind:"go", label:"président"},
+    {from:"JEFFERSON", to:"DELAWARE", kind:"warn", label:"associé depuis 2017"},
+    {from:"JEFFERSON", to:"OHIO", kind:"stop", label:"ancien président"},
+    {from:"JEFFERSON", to:"IOWA", kind:"go", label:"conseil"},
+    {from:"JEFFERSON", to:"TEXAS", kind:"warn", label:"conseil non vérifié"},
+    {from:"JEFFERSON", to:"BVI_1", kind:"stop", label:"propriétaire"},
+    {from:"JEFFERSON", to:"BVI_2", kind:"stop", label:"propriétaire"},
  
     // NEVADA governance
-    {from:"ADAMS", to:"NEVADA", kind:"go", label:"legal"},
-    {from:"JACKSON", to:"NEVADA", kind:"warn", label:"off record"},
-    {from:"MADISON", to:"NEVADA", kind:"go", label:"director"},
-    {from:"MADISON", to:"KANSAS", kind:"go", label:"director"},
-    {from:"MADISON", to:"WYOMING", kind:"go", label:"director"},
-    {from:"NEVADA", to:"KANSAS", kind:"go", label:"subsidiary"},
-    {from:"NEVADA", to:"WYOMING", kind:"go", label:"subsidiary"},
+    {from:"ADAMS", to:"NEVADA", kind:"go", label:"juridique"},
+    {from:"JACKSON", to:"NEVADA", kind:"warn", label:"officieux"},
+    {from:"MADISON", to:"NEVADA", kind:"go", label:"administrateur"},
+    {from:"MADISON", to:"KANSAS", kind:"go", label:"administrateur"},
+    {from:"MADISON", to:"WYOMING", kind:"go", label:"administrateur"},
+    {from:"NEVADA", to:"KANSAS", kind:"go", label:"filiale"},
+    {from:"NEVADA", to:"WYOMING", kind:"go", label:"filiale"},
  
     // OHIO → NEVADA capitalization
-    {from:"OHIO", to:"NEVADA", kind:"stop", label:"historical capitalization"},
-    {from:"NIXON", to:"OHIO", kind:"stop", label:"former chairman"},
+    {from:"OHIO", to:"NEVADA", kind:"stop", label:"capitalisation historique"},
+    {from:"NIXON", to:"OHIO", kind:"stop", label:"ancien président"},
  
     // Homonymy
-    {from:"FILLMORE", to:"WYOMING", kind:"warn", label:"former 1970 name"}
+    {from:"FILLMORE", to:"WYOMING", kind:"warn", label:"ancienne raison 1970"}
   ]
 };
  
@@ -1270,10 +1301,10 @@ g.appendChild(grid);
 const stamp = document.createElementNS(NS,'g');
 stamp.innerHTML = `
   <rect x="40" y="32" width="360" height="54" fill="none" stroke="#C9A84C" stroke-width="1.2"/>
-  <text x="60" y="55" font-family="JetBrains Mono" font-size="10" letter-spacing="3" fill="#C9A84C">BUILDFLUENCE · CONFIDENTIAL DOSSIER</text>
-  <text x="60" y="74" font-family="Playfair Display" font-size="14" font-style="italic" fill="#0D1B2A">Relational cartography</text>
-  <text x="1240" y="55" text-anchor="end" font-family="JetBrains Mono" font-size="10" letter-spacing="3" fill="#B91C1C">CONFIDENTIAL · NDA</text>
-  <text x="1240" y="74" text-anchor="end" font-family="JetBrains Mono" font-size="10" letter-spacing="2" fill="#6B7280">APR. 2026 · US RE-ENCODED</text>
+  <text x="60" y="55" font-family="JetBrains Mono" font-size="10" letter-spacing="3" fill="#C9A84C">BUILDFLUENCE · DOSSIER CONFIDENTIEL</text>
+  <text x="60" y="74" font-family="Playfair Display" font-size="14" font-style="italic" fill="#0D1B2A">Cartographie relationnelle</text>
+  <text x="1240" y="55" text-anchor="end" font-family="JetBrains Mono" font-size="10" letter-spacing="3" fill="#B91C1C">CONFIDENTIEL · NDA</text>
+  <text x="1240" y="74" text-anchor="end" font-family="JetBrains Mono" font-size="10" letter-spacing="2" fill="#6B7280">AVR. 2026 · RÉ-ENCODAGE US</text>
 `;
 g.appendChild(stamp);
  
@@ -1709,6 +1740,67 @@ svg.addEventListener('wheel', e=>{
   });
 })();
  
+
+/* =============== zoom buttons =============== */
+(function(){
+  const svgEl = document.getElementById('graph');
+  if(!svgEl) return;
+  const zIn = document.getElementById('zoomIn');
+  const zOut = document.getElementById('zoomOut');
+  const zReset = document.getElementById('zoomReset');
+  const zLevel = document.getElementById('zoomLevel');
+  if(!zIn || !zOut || !zReset || !zLevel) return;
+
+  const BASE_W = 1280, BASE_H = 720;
+  const MIN_ZOOM = 0.5, MAX_ZOOM = 3, ZOOM_STEP = 0.2;
+
+  function currentZoom(){
+    // Use existing vb shared state if available, else infer from viewBox
+    if(typeof vb !== 'undefined' && vb && vb.w){
+      return BASE_W / vb.w;
+    }
+    const vbAttr = svgEl.getAttribute('viewBox');
+    if(!vbAttr) return 1;
+    const parts = vbAttr.split(/\s+/).map(Number);
+    return BASE_W / parts[2];
+  }
+
+  function applyZoom(z){
+    z = Math.min(MAX_ZOOM, Math.max(MIN_ZOOM, z));
+    const w = BASE_W / z;
+    const h = BASE_H / z;
+    if(typeof vb !== 'undefined' && vb){
+      // center the new viewBox while preserving the current center
+      const cx = vb.x + vb.w/2;
+      const cy = vb.y + vb.h/2;
+      vb.w = w; vb.h = h;
+      vb.x = cx - w/2;
+      vb.y = cy - h/2;
+      svgEl.setAttribute('viewBox', `${vb.x} ${vb.y} ${vb.w} ${vb.h}`);
+    } else {
+      svgEl.setAttribute('viewBox', `${(BASE_W-w)/2} ${(BASE_H-h)/2} ${w} ${h}`);
+    }
+    zLevel.textContent = Math.round(z*100) + '%';
+    zIn.disabled = z >= MAX_ZOOM - 0.001;
+    zOut.disabled = z <= MIN_ZOOM + 0.001;
+  }
+
+  zIn.addEventListener('click', () => applyZoom(currentZoom() + ZOOM_STEP));
+  zOut.addEventListener('click', () => applyZoom(currentZoom() - ZOOM_STEP));
+  zReset.addEventListener('click', () => {
+    if(typeof vb !== 'undefined' && vb){
+      vb.x = 0; vb.y = 0; vb.w = BASE_W; vb.h = BASE_H;
+      svgEl.setAttribute('viewBox', `0 0 ${BASE_W} ${BASE_H}`);
+    } else {
+      svgEl.setAttribute('viewBox', `0 0 ${BASE_W} ${BASE_H}`);
+    }
+    zLevel.textContent = '100%';
+    zIn.disabled = false; zOut.disabled = false;
+  });
+
+  applyZoom(currentZoom());
+})();
+
 </script>
 </body>
 </html>
