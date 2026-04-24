@@ -468,24 +468,27 @@
 
   /* zoom controls */
   .zoom-controls{
-    position:absolute;top:70px;right:14px;z-index:5;
-    display:flex;flex-direction:column;gap:4px;
-    background:#0D1B2A;border:1px solid #C9A84C;padding:4px;
+    position:absolute;top:14px;right:14px;z-index:5;
+    display:flex;flex-direction:row;align-items:center;gap:0;
+    background:#0D1B2A;border:1px solid #C9A84C;padding:3px;
   }
   .zoom-btn{
-    width:36px;height:36px;background:transparent;color:#F5F1E8;
+    width:32px;height:32px;background:transparent;color:#F5F1E8;
     border:none;cursor:pointer;font-family:'JetBrains Mono',monospace;
-    font-size:16px;font-weight:600;display:grid;place-items:center;
+    font-size:15px;font-weight:600;display:grid;place-items:center;
     transition:all .2s;
   }
   .zoom-btn:hover{background:#C9A84C;color:#0D1B2A}
   .zoom-btn:disabled{opacity:.3;cursor:not-allowed}
-  .zoom-btn.reset{font-size:11px;letter-spacing:.1em}
-  .zoom-divider{height:1px;background:rgba(201,168,76,.25);margin:2px 0}
+  .zoom-btn.reset{font-size:12px}
+  .zoom-divider{
+    width:1px;height:20px;background:rgba(201,168,76,.25);margin:0 2px;
+  }
   .zoom-level{
     font-family:'JetBrains Mono',monospace;font-size:9px;
-    color:#C9A84C;text-align:center;padding:4px 0;
-    letter-spacing:.1em;border-top:1px solid rgba(201,168,76,.25);
+    color:#C9A84C;padding:0 10px 0 8px;
+    letter-spacing:.1em;border-left:1px solid rgba(201,168,76,.25);
+    margin-left:2px;min-width:42px;text-align:center;
   }
 
   /* responsive */
