@@ -465,6 +465,29 @@
   footer .inner{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
   footer a{color:var(--gold);text-decoration:none}
  
+
+  /* zoom controls */
+  .zoom-controls{
+    position:absolute;top:70px;right:14px;z-index:5;
+    display:flex;flex-direction:column;gap:4px;
+    background:#0D1B2A;border:1px solid #C9A84C;padding:4px;
+  }
+  .zoom-btn{
+    width:36px;height:36px;background:transparent;color:#F5F1E8;
+    border:none;cursor:pointer;font-family:'JetBrains Mono',monospace;
+    font-size:16px;font-weight:600;display:grid;place-items:center;
+    transition:all .2s;
+  }
+  .zoom-btn:hover{background:#C9A84C;color:#0D1B2A}
+  .zoom-btn:disabled{opacity:.3;cursor:not-allowed}
+  .zoom-btn.reset{font-size:11px;letter-spacing:.1em}
+  .zoom-divider{height:1px;background:rgba(201,168,76,.25);margin:2px 0}
+  .zoom-level{
+    font-family:'JetBrains Mono',monospace;font-size:9px;
+    color:#C9A84C;text-align:center;padding:4px 0;
+    letter-spacing:.1em;border-top:1px solid rgba(201,168,76,.25);
+  }
+
   /* responsive */
   @media (max-width:980px){
     .hero-grid,.case-intro,.verdict-block{grid-template-columns:1fr;gap:40px}
@@ -930,6 +953,14 @@
       </div>
  
       <div id="mapStage">
+        <div class="zoom-controls">
+        <button class="zoom-btn" id="zoomIn" title="Zoom in">+</button>
+        <button class="zoom-btn" id="zoomOut" title="Zoom out">−</button>
+        <div class="zoom-divider"></div>
+        <button class="zoom-btn reset" id="zoomReset" title="Reset">⊙</button>
+        <div class="zoom-level" id="zoomLevel">100%</div>
+      </div>
+        
         <svg id="graph" viewBox="0 0 1280 760" preserveAspectRatio="xMidYMid meet"></svg>
  
         <aside class="detail-panel" id="detail">
@@ -1709,6 +1740,67 @@ svg.addEventListener('wheel', e=>{
   });
 })();
  
+
+/* =============== zoom buttons =============== */
+(function(){
+  const svgEl = document.getElementById('graph');
+  if(!svgEl) return;
+  const zIn = document.getElementById('zoomIn');
+  const zOut = document.getElementById('zoomOut');
+  const zReset = document.getElementById('zoomReset');
+  const zLevel = document.getElementById('zoomLevel');
+  if(!zIn || !zOut || !zReset || !zLevel) return;
+
+  const BASE_W = 1280, BASE_H = 720;
+  const MIN_ZOOM = 0.5, MAX_ZOOM = 3, ZOOM_STEP = 0.2;
+
+  function currentZoom(){
+    // Use existing vb shared state if available, else infer from viewBox
+    if(typeof vb !== 'undefined' && vb && vb.w){
+      return BASE_W / vb.w;
+    }
+    const vbAttr = svgEl.getAttribute('viewBox');
+    if(!vbAttr) return 1;
+    const parts = vbAttr.split(/\s+/).map(Number);
+    return BASE_W / parts[2];
+  }
+
+  function applyZoom(z){
+    z = Math.min(MAX_ZOOM, Math.max(MIN_ZOOM, z));
+    const w = BASE_W / z;
+    const h = BASE_H / z;
+    if(typeof vb !== 'undefined' && vb){
+      // center the new viewBox while preserving the current center
+      const cx = vb.x + vb.w/2;
+      const cy = vb.y + vb.h/2;
+      vb.w = w; vb.h = h;
+      vb.x = cx - w/2;
+      vb.y = cy - h/2;
+      svgEl.setAttribute('viewBox', `${vb.x} ${vb.y} ${vb.w} ${vb.h}`);
+    } else {
+      svgEl.setAttribute('viewBox', `${(BASE_W-w)/2} ${(BASE_H-h)/2} ${w} ${h}`);
+    }
+    zLevel.textContent = Math.round(z*100) + '%';
+    zIn.disabled = z >= MAX_ZOOM - 0.001;
+    zOut.disabled = z <= MIN_ZOOM + 0.001;
+  }
+
+  zIn.addEventListener('click', () => applyZoom(currentZoom() + ZOOM_STEP));
+  zOut.addEventListener('click', () => applyZoom(currentZoom() - ZOOM_STEP));
+  zReset.addEventListener('click', () => {
+    if(typeof vb !== 'undefined' && vb){
+      vb.x = 0; vb.y = 0; vb.w = BASE_W; vb.h = BASE_H;
+      svgEl.setAttribute('viewBox', `0 0 ${BASE_W} ${BASE_H}`);
+    } else {
+      svgEl.setAttribute('viewBox', `0 0 ${BASE_W} ${BASE_H}`);
+    }
+    zLevel.textContent = '100%';
+    zIn.disabled = false; zOut.disabled = false;
+  });
+
+  applyZoom(currentZoom());
+})();
+
 </script>
 </body>
 </html>
