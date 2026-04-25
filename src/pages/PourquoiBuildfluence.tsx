@@ -39,12 +39,7 @@ const polesData: Pole[] = [
     num: "P/01",
     title: "Données économiques",
     tag: "Marchés · Flux · Investissements",
-    icon: (
-      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M3 20V10l4-3 4 5 5-4 5 6v6H3z" />
-        <path d="M3 20h18" />
-      </svg>
-    ),
+    icon: <BarChart3 size={22} strokeWidth={1.6} />,
     panelTag: "P/01 · MARCHÉS · FLUX · INVESTISSEMENTS",
     lead: "Capter les flux d'investissement, lire les marchés en temps réel, anticiper les ruptures sectorielles avant qu'elles ne deviennent des évidences.",
     items: [
