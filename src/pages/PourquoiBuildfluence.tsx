@@ -55,12 +55,7 @@ const polesData: Pole[] = [
     num: "P/02",
     title: "Contexte géopolitique",
     tag: "États · Alliances · Souverainetés",
-    icon: (
-      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-        <circle cx="12" cy="12" r="9" />
-        <path d="M3 12h18M12 3a13 13 0 010 18M12 3a13 13 0 000 18" />
-      </svg>
-    ),
+    icon: <Globe size={22} strokeWidth={1.6} />,
     panelTag: "P/02 · ÉTATS · ALLIANCES · SOUVERAINETÉS",
     lead: "Décoder les jeux d'États, identifier les souverainetés contestées, lire les rapports de force régionaux et internationaux.",
     items: [
