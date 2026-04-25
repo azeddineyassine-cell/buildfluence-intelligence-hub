@@ -1654,7 +1654,7 @@ const CommandTree = () => {
   return (
     <div className="case-block command-tree" ref={ref}>
       <style>{`
-        .command-tree .tree-node,.command-tree .tree-link{opacity:0;transition:opacity .5s ease,stroke .2s ease,stroke-width .2s ease}.command-tree.in-view .tree-node,.command-tree.in-view .tree-link{opacity:1}.command-tree.in-view .tree-link{transition-delay:600ms}.command-tree .tree-node.highlight rect{stroke:${C.gold};stroke-width:2px}.command-tree .tree-node.dim{opacity:.18!important}.command-tree .tree-link.highlight{stroke:${C.gold};stroke-width:2px;opacity:1!important}.command-tree .tree-link.dim{opacity:.12!important}@media(max-width:640px){.tree-scroll{overflow-x:auto}}
+        .command-tree .tree-node,.command-tree .tree-link{opacity:0;transition:opacity .5s ease,stroke .2s ease,stroke-width .2s ease}.command-tree.in-view .tree-node{opacity:1}.command-tree.in-view .tree-link{opacity:.5}.command-tree.in-view .tree-link{transition-delay:600ms}.command-tree .tree-node.highlight rect{stroke:${C.gold};stroke-width:2px}.command-tree .tree-node.dim{opacity:.18!important}.command-tree .tree-link.highlight{stroke:${C.gold};stroke-width:2px;opacity:1!important}.command-tree .tree-link.dim{opacity:.12!important}@media(max-width:640px){.tree-scroll{overflow-x:auto}}
       `}</style>
       <BlockHeader kicker="A · DÉCRYPTAGE" title={<>L'arbre des commanditaires.<br />ONG façades, financeurs et relais.</>} hint="Survolez une façade pour révéler sa chaîne" />
       <div className="tree-scroll">
