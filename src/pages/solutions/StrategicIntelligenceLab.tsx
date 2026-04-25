@@ -7,10 +7,6 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import ConstructionInfluence from "@/components/ConstructionInfluence";
 import ocpLogo from "@/assets/clients/ocp.png";
 import ministereSanteLogo from "@/assets/clients/ministere-sante.jpg";
-import imgOcpCase from "@/assets/sections/cas-client-ocp.png";
-import imgMinistereSante from "@/assets/sections/cas-client-ministere-sante.png";
-import imgH1n1 from "@/assets/sections/h1n1-vaccines.jpg";
-import imgOcpProtesters from "@/assets/sections/ocp-protesters.jpg";
 
 /* ─────── Palette tokens (locales à la page) ─────── */
 const C = {
