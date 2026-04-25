@@ -87,13 +87,7 @@ const polesData: Pole[] = [
     num: "P/04",
     title: "Dynamiques narratives",
     tag: "Récits · Médias · Opinion",
-    icon: (
-      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M3 12c2-3 5-5 9-5s7 2 9 5" />
-        <path d="M3 12c2 3 5 5 9 5s7-2 9-5" />
-        <circle cx="12" cy="12" r="2" />
-      </svg>
-    ),
+    icon: <Eye size={22} strokeWidth={1.6} />,
     panelTag: "P/04 · RÉCITS · MÉDIAS · OPINION",
     lead: "Lire les récits qui façonnent l'opinion, identifier les amplifications coordonnées, comprendre comment se forme et se déforme la perception.",
     items: [
