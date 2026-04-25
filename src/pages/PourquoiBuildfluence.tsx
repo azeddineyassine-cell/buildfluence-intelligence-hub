@@ -103,16 +103,7 @@ const polesData: Pole[] = [
     num: "P/05",
     title: "Jeux d'influence",
     tag: "Acteurs · Réseaux · Coalitions",
-    icon: (
-      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-        <circle cx="6" cy="6" r="2.5" />
-        <circle cx="18" cy="6" r="2.5" />
-        <circle cx="6" cy="18" r="2.5" />
-        <circle cx="18" cy="18" r="2.5" />
-        <circle cx="12" cy="12" r="2.5" />
-        <path d="M8 7l3 4M16 7l-3 4M8 17l3-4M16 17l-3-4" />
-      </svg>
-    ),
+    icon: <Network size={22} strokeWidth={1.6} />,
     panelTag: "P/05 · ACTEURS · RÉSEAUX · COALITIONS",
     lead: "Cartographier les acteurs qui pèsent réellement, identifier les coalitions cachées, modéliser les jeux de pression et de contre-influence.",
     items: [
