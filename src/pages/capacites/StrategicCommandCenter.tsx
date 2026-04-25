@@ -187,164 +187,23 @@ const StrategicCartography = () => {
           }}
         >
           {capacities.map((cap, idx) => (
-            <div
+            <CapacityCard
               key={idx}
-              onMouseEnter={() => setHoveredCapacity(idx)}
-              onMouseLeave={() => setHoveredCapacity(null)}
-              style={{ position: "relative" }}
-            >
-              {/* === TOOLTIP au survol : Force + Objectif + lien === */}
-              <AnimatePresence>
-                {hoveredCapacity === idx && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 8, scale: 0.96 }}
-                    animate={{ opacity: 1, y: 0, scale: 1 }}
-                    exit={{ opacity: 0, y: 8, scale: 0.96 }}
-                    transition={{ duration: 0.2, ease: "easeOut" }}
-                    style={{
-                      position: "absolute",
-                      bottom: "calc(100% + 12px)",
-                      left: "50%",
-                      transform: "translateX(-50%)",
-                      width: 280,
-                      maxWidth: "calc(100vw - 40px)",
-                      background: "#0D1B2A",
-                      color: "#F5F1E8",
-                      border: "1px solid #C9A84C",
-                      padding: "18px 18px 14px",
-                      borderRadius: 2,
-                      boxShadow: "0 14px 40px rgba(13,27,42,0.25)",
-                      zIndex: 50,
-                      pointerEvents: "auto",
-                    }}
-                  >
-                    {/* Triangle pointer vers la tuile */}
-                    <div
-                      style={{
-                        position: "absolute",
-                        bottom: -7,
-                        left: "50%",
-                        transform: "translateX(-50%) rotate(45deg)",
-                        width: 12,
-                        height: 12,
-                        background: "#0D1B2A",
-                        borderRight: "1px solid #C9A84C",
-                        borderBottom: "1px solid #C9A84C",
-                      }}
-                    />
+              cap={cap}
+              idx={idx}
+              isHovered={hoveredCapacity === idx}
+              onEnter={() => setHoveredCapacity(idx)}
+              onLeave={() => setHoveredCapacity(null)}
+              t={t}
+            />
+          ))}
+        </div>
+      </div>
 
-                    {/* Header du tooltip */}
-                    <div
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        gap: 10,
-                        marginBottom: 12,
-                        paddingBottom: 10,
-                        borderBottom: "1px solid rgba(201,168,76,0.25)",
-                      }}
-                    >
-                      <span style={{ fontSize: 22, filter: "brightness(1.4)" }}>{cap.icon}</span>
-                      <div>
-                        <div
-                          style={{
-                            fontFamily: "Playfair Display, serif",
-                            fontSize: 15,
-                            fontWeight: 700,
-                            color: "#F5F1E8",
-                            lineHeight: 1.2,
-                          }}
-                        >
-                          {cap.full}
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Force */}
-                    <div style={{ marginBottom: 12 }}>
-                      <div
-                        style={{
-                          fontFamily: "JetBrains Mono, monospace",
-                          fontSize: 8.5,
-                          letterSpacing: "0.3em",
-                          color: "#C9A84C",
-                          textTransform: "uppercase",
-                          marginBottom: 5,
-                        }}
-                      >
-                        › {t("Force", "Strength")}
-                      </div>
-                      <div
-                        style={{
-                          fontFamily: "Cormorant Garamond, serif",
-                          fontSize: 15,
-                          fontStyle: "italic",
-                          color: "#e0c88a",
-                          lineHeight: 1.45,
-                        }}
-                      >
-                        {cap.force}
-                      </div>
-                    </div>
-
-                    {/* Objectif */}
-                    <div style={{ marginBottom: 14 }}>
-                      <div
-                        style={{
-                          fontFamily: "JetBrains Mono, monospace",
-                          fontSize: 8.5,
-                          letterSpacing: "0.3em",
-                          color: "#C9A84C",
-                          textTransform: "uppercase",
-                          marginBottom: 5,
-                        }}
-                      >
-                        › {t("Objectif", "Objective")}
-                      </div>
-                      <div
-                        style={{
-                          fontFamily: "DM Sans, sans-serif",
-                          fontSize: 13,
-                          color: "rgba(245,241,232,0.92)",
-                          lineHeight: 1.5,
-                        }}
-                      >
-                        {cap.objective}
-                      </div>
-                    </div>
-
-                    {/* Lien interne cliquable vers la page de la capacité */}
-                    <Link
-                      to={cap.route}
-                      style={{
-                        display: "inline-flex",
-                        alignItems: "center",
-                        gap: 6,
-                        fontFamily: "JetBrains Mono, monospace",
-                        fontSize: 10,
-                        letterSpacing: "0.22em",
-                        textTransform: "uppercase",
-                        color: "#C9A84C",
-                        textDecoration: "none",
-                        borderBottom: "1px solid rgba(201,168,76,0.4)",
-                        paddingBottom: 3,
-                        fontWeight: 600,
-                        transition: "all 0.2s ease",
-                      }}
-                      onMouseEnter={(e) => {
-                        e.currentTarget.style.borderBottomColor = "#C9A84C";
-                        e.currentTarget.style.color = "#e0c88a";
-                      }}
-                      onMouseLeave={(e) => {
-                        e.currentTarget.style.borderBottomColor = "rgba(201,168,76,0.4)";
-                        e.currentTarget.style.color = "#C9A84C";
-                      }}
-                    >
-                      {t("Explorer la page", "Explore the page")} →
-                    </Link>
-                  </motion.div>
-                )}
-              </AnimatePresence>
+      {/* ÉTAGE 3 placeholder marker */}
+      {false && (
+        <AnimatePresence />
+      )}
 
               {/* === La tuile de la capacité === */}
               <motion.div
