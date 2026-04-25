@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useLayoutEffect } from "react";
 import { Link } from "react-router-dom";
 import DetailPageLayout from "@/components/DetailPageLayout";
 import { useLanguage } from "@/contexts/LanguageContext";
