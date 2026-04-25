@@ -885,85 +885,82 @@ const CrisisCurveViz = () => {
 
       <div
         style={{
-          background: "rgba(13,27,42,0.4)",
-          border: "1px solid rgba(201,168,76,0.15)",
-          padding: "14px 16px",
+          width: "100%",
+          height: 180,
+          marginTop: 18,
+          background: `linear-gradient(135deg, ${C.navy}, ${C.navyMid})`,
+          border: `1px solid rgba(224,109,79,.25)`,
+          padding: 14,
+          position: "relative",
           borderRadius: 2,
         }}
       >
-        <div className="flex justify-between items-center mb-3">
-          <div
-            className="uppercase"
-            style={{ fontFamily: FONT_MONO, fontSize: 9, color: C.gold, letterSpacing: "0.25em" }}
-          >
-            · Désinformation vs Contre-narratif ·
-          </div>
-          <div
-            className="uppercase"
-            style={{
-              fontFamily: FONT_MONO,
-              fontSize: 9,
-              color: C.alert,
-              border: `1px solid ${C.alert}`,
-              padding: "2px 7px",
-              letterSpacing: "0.18em",
-            }}
-          >
-            T+48h
-          </div>
-        </div>
-
         <style>{`
-          @keyframes draw-curve { from { stroke-dashoffset: 600; } to { stroke-dashoffset: 0; } }
+          @keyframes draw-disinfo { from { stroke-dashoffset: 1000; } to { stroke-dashoffset: 0; } }
+          @keyframes fade-curve-el { from { opacity: 0; } to { opacity: 1; } }
         `}</style>
-        <svg viewBox="0 0 320 180" width="100%" height={180}>
-          {[0, 1, 2, 3].map((i) => (
-            <line
-              key={i}
-              x1={20}
-              y1={30 + i * 40}
-              x2={310}
-              y2={30 + i * 40}
-              stroke="rgba(201,168,76,0.12)"
-              strokeDasharray="2 3"
-            />
+        <div className="flex justify-between items-center uppercase" style={{ fontFamily: FONT_MONO, fontSize: 9, color: C.alert, letterSpacing: "0.12em" }}>
+          <span>· Courbe désinformation vs contre-narratif</span>
+          <span style={{ color: C.gold }}>CASE H1N1</span>
+        </div>
+        <svg viewBox="0 0 300 130" width="100%" height={130}>
+          <defs>
+            <linearGradient id="disinfoGradient" x1="0" x2="0" y1="0" y2="1">
+              <stop offset="0%" stopColor={C.alert} stopOpacity={0.4} />
+              <stop offset="100%" stopColor={C.alert} stopOpacity={0} />
+            </linearGradient>
+          </defs>
+          {[30, 65, 100].map((y) => (
+            <line key={y} x1={0} y1={y} x2={300} y2={y} stroke="rgba(245,241,232,.08)" />
           ))}
-          <line x1={20} y1={170} x2={310} y2={170} stroke="rgba(245,241,232,0.3)" />
-          <line x1={20} y1={20} x2={20} y2={170} stroke="rgba(245,241,232,0.3)" />
+          {[
+            { x: 5, t: "H+0" },
+            { x: 105, t: "J+3" },
+            { x: 195, t: "J+7" },
+            { x: 270, t: "J+14" },
+          ].map((l) => (
+            <text key={l.t} x={l.x} y={125} style={{ fontFamily: FONT_MONO, fontSize: 8, fill: "rgba(245,241,232,.4)" }}>
+              {l.t}
+            </text>
+          ))}
           <path
-            d="M 20 160 C 60 150, 90 50, 130 35 S 200 30, 230 90 T 310 155"
+            className="cc-area-disinfo"
+            d="M 0 110 Q 50 100, 100 35 T 200 50 T 300 105 L 300 130 L 0 130 Z"
+            fill="url(#disinfoGradient)"
+            style={{ opacity: 0, animation: "fade-curve-el 1s ease-out 2.5s forwards" }}
+          />
+          <path
+            className="cc-line-disinfo"
+            d="M 0 110 Q 50 100, 100 35 T 200 50 T 300 105"
             fill="none"
             stroke={C.alert}
-            strokeWidth={2.2}
-            strokeDasharray="600"
-            style={{ animation: "draw-curve 2.4s ease-out forwards" }}
+            strokeWidth={2}
+            strokeDasharray={1000}
+            strokeDashoffset={1000}
+            style={{ animation: "draw-disinfo 3s ease-out forwards" }}
           />
           <path
-            d="M 20 165 C 70 160, 110 145, 150 110 S 230 55, 310 35"
+            className="cc-line-counter"
+            d="M 100 115 Q 150 90, 200 55 T 300 30"
             fill="none"
             stroke={C.gold}
-            strokeWidth={2.2}
-            strokeDasharray="600"
-            style={{ animation: "draw-curve 2.4s ease-out 0.3s forwards", strokeDashoffset: 600 }}
+            strokeWidth={2}
+            strokeDasharray={1000}
+            strokeDashoffset={1000}
+            style={{ animation: "draw-disinfo 3s ease-out 1.2s forwards" }}
           />
-          <g transform="translate(40,28)">
-            <line x1={0} y1={0} x2={14} y2={0} stroke={C.alert} strokeWidth={2.2} />
-            <text x={20} y={3} style={{ fontFamily: FONT_MONO, fontSize: 8, fill: "rgba(245,241,232,0.8)" }}>
-              Désinformation
-            </text>
-          </g>
-          <g transform="translate(170,28)">
-            <line x1={0} y1={0} x2={14} y2={0} stroke={C.gold} strokeWidth={2.2} />
-            <text x={20} y={3} style={{ fontFamily: FONT_MONO, fontSize: 8, fill: "rgba(245,241,232,0.8)" }}>
-              Contre-narratif
-            </text>
-          </g>
+          <circle className="cc-marker" cx={100} cy={35} r={4} fill={C.gold} style={{ opacity: 0, animation: "fade-curve-el .45s ease-out 3.2s forwards" }} />
+          <text className="cc-marker-label" x={105} y={25} style={{ fontFamily: FONT_MONO, fontSize: 8, fill: C.gold, letterSpacing: ".1em", opacity: 0, animation: "fade-curve-el .45s ease-out 3.4s forwards" }}>
+            PIC J+3
+          </text>
+          <circle className="cc-marker" cx={270} cy={40} r={4} fill={C.gold} style={{ opacity: 0, animation: "fade-curve-el .45s ease-out 3.6s forwards" }} />
+          <text className="cc-marker-label" x={220} y={32} style={{ fontFamily: FONT_MONO, fontSize: 8, fill: C.gold, letterSpacing: ".1em", opacity: 0, animation: "fade-curve-el .45s ease-out 3.8s forwards" }}>
+            RÉCIT REPRIS
+          </text>
         </svg>
-        <div
-          className="text-center italic mt-2"
-          style={{ fontFamily: FONT_ITALIC, fontSize: 12, color: "rgba(245,241,232,0.7)" }}
-        >
-          Reprise du récit en moins de 14 jours
+        <div className="flex justify-center gap-[18px] uppercase" style={{ marginTop: 8, fontFamily: FONT_MONO, fontSize: 8.5, color: "rgba(245,241,232,.6)" }}>
+          <span><span style={{ color: C.alert }}>—</span> Désinformation</span>
+          <span><span style={{ color: C.gold }}>—</span> Contre-narratif</span>
         </div>
       </div>
     </div>
