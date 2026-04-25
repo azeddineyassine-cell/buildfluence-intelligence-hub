@@ -8,7 +8,6 @@ import SolutionsSection from "@/components/SolutionsSection";
 import AdvancedCapabilities from "@/components/AdvancedCapabilities";
 import SuccessStoriesSection from "@/components/SuccessStoriesSection";
 import InsightsSection from "@/components/InsightsSection";
-import WhySection from "@/components/WhySection";
 import TestimonialsSection from "@/components/TestimonialsSection";
 
 import CTAFooter from "@/components/CTAFooter";
@@ -26,7 +25,6 @@ const Index = () => (
     <SuccessStoriesSection />
     <TestimonialsSection />
     <InsightsSection />
-    <WhySection />
     
     <CTAFooter />
   </div>

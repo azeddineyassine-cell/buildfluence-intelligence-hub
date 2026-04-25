@@ -194,7 +194,7 @@ const Navbar = () => {
     { label: t("Nos Solutions", "Our Solutions"), href: "#nos-solutions", dropdown: "solutions", maxW: "90px" },
     { label: "Success Stories", href: "#success-stories", maxW: "90px" },
     { label: "Insights & Resources", href: "#insights", maxW: "90px" },
-    { label: t("Pourquoi Buildfluence", "Why Buildfluence"), href: "#pourquoi-buildfluence", maxW: "90px" },
+    { label: t("Pourquoi Buildfluence", "Why Buildfluence"), href: "/pourquoi-buildfluence", maxW: "90px" },
     { label: t("Espace\nClients", "Client\nArea"), href: "#espace-clients", maxW: "90px", isModal: true, isGold: true },
   ];
 
