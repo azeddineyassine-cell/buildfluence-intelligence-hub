@@ -11,6 +11,272 @@ import { motion, AnimatePresence } from "framer-motion";
    5 capacités alimentent le Command Center (Hémisphère REAL + WAR)
    V3 : Tooltip élégant au survol avec Force + Objectif + lien interne
 ==================================================================== */
+interface CapacityData {
+  icon: string;
+  full: string;
+  role: string;
+  force: string;
+  objective: string;
+  route: string;
+}
+
+const CapacityCard = ({
+  cap,
+  idx,
+  isHovered,
+  onEnter,
+  onLeave,
+  t,
+}: {
+  cap: CapacityData;
+  idx: number;
+  isHovered: boolean;
+  onEnter: () => void;
+  onLeave: () => void;
+  t: (fr: string, en: string) => string;
+}) => {
+  const cardRef = useRef<HTMLDivElement>(null);
+  const tooltipRef = useRef<HTMLDivElement>(null);
+  const [adjust, setAdjust] = useState<{ shiftX: number; arrowX: number }>({
+    shiftX: 0,
+    arrowX: 50,
+  });
+
+  useLayoutEffect(() => {
+    if (!isHovered) {
+      setAdjust({ shiftX: 0, arrowX: 50 });
+      return;
+    }
+    const tip = tooltipRef.current;
+    const card = cardRef.current;
+    if (!tip || !card) return;
+    const tipRect = tip.getBoundingClientRect();
+    const cardRect = card.getBoundingClientRect();
+    const margin = 12;
+    const vw = window.innerWidth;
+    let shiftX = 0;
+    if (tipRect.right > vw - margin) {
+      shiftX = vw - margin - tipRect.right;
+    } else if (tipRect.left < margin) {
+      shiftX = margin - tipRect.left;
+    }
+    // arrow should point to center of card, expressed in % of tooltip width
+    const cardCenter = cardRect.left + cardRect.width / 2;
+    const tipLeft = tipRect.left + shiftX;
+    const arrowPx = cardCenter - tipLeft;
+    const arrowPct = Math.max(8, Math.min(92, (arrowPx / tipRect.width) * 100));
+    setAdjust({ shiftX, arrowX: arrowPct });
+  }, [isHovered]);
+
+  return (
+    <div
+      ref={cardRef}
+      onMouseEnter={onEnter}
+      onMouseLeave={onLeave}
+      style={{ position: "relative" }}
+    >
+      <AnimatePresence>
+        {isHovered && (
+          <motion.div
+            ref={tooltipRef}
+            initial={{ opacity: 0, y: 8, scale: 0.96 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 8, scale: 0.96 }}
+            transition={{ duration: 0.2, ease: "easeOut" }}
+            style={{
+              position: "absolute",
+              bottom: "calc(100% + 12px)",
+              left: "50%",
+              transform: `translateX(calc(-50% + ${adjust.shiftX}px))`,
+              width: 280,
+              maxWidth: "calc(100vw - 40px)",
+              background: "#0D1B2A",
+              color: "#F5F1E8",
+              border: "1px solid #C9A84C",
+              padding: "18px 18px 14px",
+              borderRadius: 2,
+              boxShadow: "0 14px 40px rgba(13,27,42,0.25)",
+              zIndex: 50,
+              pointerEvents: "auto",
+            }}
+          >
+            <div
+              style={{
+                position: "absolute",
+                bottom: -7,
+                left: `${adjust.arrowX}%`,
+                transform: "translateX(-50%) rotate(45deg)",
+                width: 12,
+                height: 12,
+                background: "#0D1B2A",
+                borderRight: "1px solid #C9A84C",
+                borderBottom: "1px solid #C9A84C",
+              }}
+            />
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: 10,
+                marginBottom: 12,
+                paddingBottom: 10,
+                borderBottom: "1px solid rgba(201,168,76,0.25)",
+              }}
+            >
+              <span style={{ fontSize: 22, filter: "brightness(1.4)" }}>{cap.icon}</span>
+              <div>
+                <div
+                  style={{
+                    fontFamily: "Playfair Display, serif",
+                    fontSize: 15,
+                    fontWeight: 700,
+                    color: "#F5F1E8",
+                    lineHeight: 1.2,
+                  }}
+                >
+                  {cap.full}
+                </div>
+              </div>
+            </div>
+            <div style={{ marginBottom: 12 }}>
+              <div
+                style={{
+                  fontFamily: "JetBrains Mono, monospace",
+                  fontSize: 8.5,
+                  letterSpacing: "0.3em",
+                  color: "#C9A84C",
+                  textTransform: "uppercase",
+                  marginBottom: 5,
+                }}
+              >
+                › {t("Force", "Strength")}
+              </div>
+              <div
+                style={{
+                  fontFamily: "Cormorant Garamond, serif",
+                  fontSize: 15,
+                  fontStyle: "italic",
+                  color: "#e0c88a",
+                  lineHeight: 1.45,
+                }}
+              >
+                {cap.force}
+              </div>
+            </div>
+            <div style={{ marginBottom: 14 }}>
+              <div
+                style={{
+                  fontFamily: "JetBrains Mono, monospace",
+                  fontSize: 8.5,
+                  letterSpacing: "0.3em",
+                  color: "#C9A84C",
+                  textTransform: "uppercase",
+                  marginBottom: 5,
+                }}
+              >
+                › {t("Objectif", "Objective")}
+              </div>
+              <div
+                style={{
+                  fontFamily: "DM Sans, sans-serif",
+                  fontSize: 13,
+                  color: "rgba(245,241,232,0.92)",
+                  lineHeight: 1.5,
+                }}
+              >
+                {cap.objective}
+              </div>
+            </div>
+            <Link
+              to={cap.route}
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 6,
+                fontFamily: "JetBrains Mono, monospace",
+                fontSize: 10,
+                letterSpacing: "0.22em",
+                textTransform: "uppercase",
+                color: "#C9A84C",
+                textDecoration: "none",
+                borderBottom: "1px solid rgba(201,168,76,0.4)",
+                paddingBottom: 3,
+                fontWeight: 600,
+                transition: "all 0.2s ease",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.borderBottomColor = "#C9A84C";
+                e.currentTarget.style.color = "#e0c88a";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.borderBottomColor = "rgba(201,168,76,0.4)";
+                e.currentTarget.style.color = "#C9A84C";
+              }}
+            >
+              {t("Explorer la page", "Explore the page")} →
+            </Link>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <motion.div
+        whileHover={{ y: -4 }}
+        style={{
+          background: isHovered ? "#0D1B2A" : "#fff",
+          color: isHovered ? "#F5F1E8" : "#0D1B2A",
+          border: `1px solid ${isHovered ? "#C9A84C" : "#D9CFBC"}`,
+          padding: "20px 14px",
+          textAlign: "center",
+          borderRadius: 2,
+          cursor: "pointer",
+          position: "relative",
+          transition: "all 0.3s ease",
+        }}
+      >
+        <div style={{ fontSize: 28, marginBottom: 10 }}>{cap.icon}</div>
+        <div
+          style={{
+            fontFamily: "Playfair Display, serif",
+            fontSize: 13.5,
+            fontWeight: 700,
+            marginBottom: 6,
+            lineHeight: 1.25,
+            whiteSpace: "nowrap",
+          }}
+        >
+          {cap.full}
+        </div>
+        <div
+          style={{
+            fontFamily: "JetBrains Mono, monospace",
+            fontSize: 9,
+            letterSpacing: "0.22em",
+            textTransform: "uppercase",
+            color: isHovered ? "#C9A84C" : "#8a7a4a",
+          }}
+        >
+          › {cap.role}
+        </div>
+        <motion.div
+          animate={{ y: [0, 6, 0], opacity: [0.4, 1, 0.4] }}
+          transition={{ duration: 1.8, repeat: Infinity, delay: idx * 0.2 }}
+          style={{
+            position: "absolute",
+            bottom: -14,
+            left: "50%",
+            transform: "translateX(-50%)",
+            color: "#C9A84C",
+            fontSize: 15,
+            fontWeight: 700,
+          }}
+        >
+          ↓
+        </motion.div>
+      </motion.div>
+    </div>
+  );
+};
+
 const StrategicCartography = () => {
   const { t } = useLanguage();
   const [hoveredCapacity, setHoveredCapacity] = useState<number | null>(null);
