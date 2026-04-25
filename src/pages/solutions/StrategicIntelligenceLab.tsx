@@ -1508,7 +1508,6 @@ const StrategicIntelligenceLab = () => {
 
       {/* Cas client OCP rattaché à Foresight */}
       <CaseStudy
-        logo={ocpLogo}
         title="Cas client : OCP Group"
         context="Cartographie de l'écosystème concurrentiel. Tableau de bord décisionnel au cabinet du Président."
         intervention={[
@@ -1524,7 +1523,6 @@ const StrategicIntelligenceLab = () => {
 
       {/* Cas client Ministère rattaché à Threat */}
       <CaseStudy
-        logo={ministereSanteLogo}
         title="Cas client : Ministère de la Santé"
         context="Crise H1N1, 40 décès, désinformation massive."
         intervention={[
