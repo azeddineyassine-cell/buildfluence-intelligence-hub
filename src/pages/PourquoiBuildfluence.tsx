@@ -71,12 +71,7 @@ const polesData: Pole[] = [
     num: "P/03",
     title: "Risques réputationnels",
     tag: "Image · Crises · Vulnérabilités",
-    icon: (
-      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M12 3l9 16H3L12 3z" />
-        <path d="M12 10v4M12 17v.5" />
-      </svg>
-    ),
+    icon: <AlertTriangle size={22} strokeWidth={1.6} />,
     panelTag: "P/03 · IMAGE · CRISES · VULNÉRABILITÉS",
     lead: "Détecter les vulnérabilités d'image, anticiper les crises de réputation, protéger les actifs intangibles avant qu'ils ne soient attaqués.",
     items: [
