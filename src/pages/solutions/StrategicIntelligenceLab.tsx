@@ -826,46 +826,13 @@ const ThreatSection = () => {
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -8 }}
               transition={{ duration: 0.35 }}
-              className="p-8 md:p-10 flex items-center justify-center"
+              className="p-8 md:p-10"
               style={{
                 background: `linear-gradient(135deg, ${C.navy}, ${C.navyMid})`,
                 minHeight: 360,
               }}
             >
-              <div className="text-center">
-                <div
-                  style={{
-                    fontFamily: FONT_DISPLAY,
-                    fontStyle: "italic",
-                    fontSize: 80,
-                    color: C.gold,
-                    lineHeight: 1,
-                  }}
-                >
-                  02
-                </div>
-                <div
-                  className="mt-3"
-                  style={{
-                    fontFamily: FONT_DISPLAY,
-                    fontSize: 22,
-                    color: C.ivory,
-                  }}
-                >
-                  {mode === "veille" ? "Mode Veille" : "Mode War Room"}
-                </div>
-                <div
-                  className="mt-2 uppercase"
-                  style={{
-                    fontFamily: FONT_MONO,
-                    fontSize: 10,
-                    color: "rgba(201,168,76,0.7)",
-                    letterSpacing: "0.25em",
-                  }}
-                >
-                  Visualisation à venir
-                </div>
-              </div>
+              <ThreatViz mode={mode} />
             </motion.div>
           </AnimatePresence>
         </div>
