@@ -650,6 +650,354 @@ const THREAT_CONTENT: Record<
   },
 };
 
+/* ─────── Mini-viz Threat Intelligence (radar veille / courbe war room) ─────── */
+
+const ThreatPaneHeader = ({
+  num,
+  title,
+  tag,
+  tagColor,
+  lead,
+}: {
+  num: string;
+  title: string;
+  tag: string;
+  tagColor: string;
+  lead: string;
+}) => (
+  <div className="mb-6">
+    <div
+      style={{
+        fontFamily: FONT_DISPLAY,
+        fontStyle: "italic",
+        fontSize: 64,
+        color: C.gold,
+        lineHeight: 1,
+      }}
+    >
+      {num}
+    </div>
+    <h4 className="mt-2" style={{ fontFamily: FONT_DISPLAY, fontSize: 26, color: C.ivory, lineHeight: 1.2 }}>
+      {title}
+    </h4>
+    <div
+      className="inline-block mt-3 uppercase"
+      style={{
+        fontFamily: FONT_MONO,
+        fontSize: 10,
+        color: tagColor,
+        border: `1px solid ${tagColor}`,
+        padding: "4px 10px",
+        letterSpacing: "0.22em",
+      }}
+    >
+      {tag}
+    </div>
+    <p
+      className="italic mt-4 pl-4"
+      style={{
+        fontFamily: FONT_ITALIC,
+        fontSize: 16,
+        color: "rgba(245,241,232,0.85)",
+        borderLeft: `2px solid ${C.gold}`,
+        lineHeight: 1.5,
+      }}
+    >
+      {lead}
+    </p>
+  </div>
+);
+
+const RadarFeedViz = () => {
+  const blips = [
+    { cx: 135, cy: 55, d: "0.4s" },
+    { cx: 60, cy: 130, d: "1.6s" },
+    { cx: 155, cy: 125, d: "2.4s" },
+    { cx: 75, cy: 65, d: "3.2s" },
+  ];
+  const signals = [
+    { t: "14:32", s: "Pic narratif sur réseaux NL", lvl: "Faible", bg: "rgba(201,168,76,.2)", c: C.gold, d: "0.3s" },
+    { t: "11:08", s: "Coordination détectée 3 sites", lvl: "Moyen", bg: "rgba(217,119,6,.2)", c: "#f59e0b", d: "0.7s" },
+    { t: "09:14", s: "Brevet concurrent FR/EPO", lvl: "Faible", bg: "rgba(201,168,76,.2)", c: C.gold, d: "1.1s" },
+  ];
+  return (
+    <div>
+      <style>{`
+        @keyframes radar-rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        @keyframes blip-flash {
+          0%, 70%, 100% { opacity: 0; r: 2; }
+          5%, 30% { opacity: 1; r: 5; }
+        }
+        @keyframes signal-in { from { opacity:0; transform:translateX(-12px); } to { opacity:1; transform:translateX(0); } }
+        @keyframes pulse-dot { 0%,100% { opacity:.4 } 50% { opacity:1 } }
+      `}</style>
+      <div
+        style={{
+          width: "100%",
+          maxWidth: 280,
+          height: 200,
+          margin: "0 auto",
+          background: "radial-gradient(circle at center, rgba(201,168,76,0.10), transparent 70%)",
+          border: "1px solid rgba(201,168,76,0.25)",
+          borderRadius: "50%",
+          overflow: "hidden",
+          position: "relative",
+        }}
+      >
+        <svg viewBox="0 0 200 200" width="100%" height="100%">
+          <defs>
+            <radialGradient id="radarSweep" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stopColor={C.gold} stopOpacity={0.6} />
+              <stop offset="100%" stopColor={C.gold} stopOpacity={0} />
+            </radialGradient>
+          </defs>
+          {[30, 60, 90].map((r) => (
+            <circle key={r} cx={100} cy={100} r={r} fill="none" stroke={C.gold} opacity={0.3} />
+          ))}
+          <line x1={100} y1={10} x2={100} y2={190} stroke={C.gold} opacity={0.25} strokeDasharray="2 3" />
+          <line x1={10} y1={100} x2={190} y2={100} stroke={C.gold} opacity={0.25} strokeDasharray="2 3" />
+          <path
+            d="M 100 100 L 100 10 A 90 90 0 0 1 173.5 56 Z"
+            fill="url(#radarSweep)"
+            style={{ transformOrigin: "50% 50%", animation: "radar-rotate 4s linear infinite" }}
+          />
+          {blips.map((b, i) => (
+            <circle
+              key={i}
+              cx={b.cx}
+              cy={b.cy}
+              r={3}
+              fill={C.gold}
+              style={{ animation: `blip-flash 4s linear infinite`, animationDelay: b.d }}
+            />
+          ))}
+          <circle cx={100} cy={100} r={3} fill={C.gold} />
+        </svg>
+      </div>
+
+      <div
+        style={{
+          background: "rgba(13,27,42,0.4)",
+          border: "1px solid rgba(201,168,76,0.15)",
+          padding: "14px 16px",
+          borderRadius: 2,
+          marginTop: 18,
+        }}
+      >
+        <div className="flex justify-between items-center mb-3">
+          <div
+            className="uppercase"
+            style={{ fontFamily: FONT_MONO, fontSize: 9, color: C.gold, letterSpacing: "0.25em" }}
+          >
+            · Signaux faibles · 7 derniers jours
+          </div>
+          <div
+            style={{
+              background: C.gold,
+              color: C.navy,
+              padding: "2px 7px",
+              fontFamily: FONT_MONO,
+              fontSize: 9,
+              fontWeight: 700,
+              letterSpacing: "0.15em",
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 5,
+            }}
+          >
+            <span
+              style={{
+                width: 5,
+                height: 5,
+                borderRadius: "50%",
+                background: C.navy,
+                animation: "pulse-dot 1.4s infinite",
+                display: "inline-block",
+              }}
+            />
+            LIVE
+          </div>
+        </div>
+        {signals.map((sig, i) => (
+          <div
+            key={i}
+            style={{
+              display: "grid",
+              gridTemplateColumns: "60px 1fr auto",
+              gap: 10,
+              padding: "6px 0",
+              borderBottom: i < signals.length - 1 ? "1px dashed rgba(201,168,76,0.15)" : "none",
+              alignItems: "center",
+              animation: `signal-in .5s ease-out ${sig.d} both`,
+            }}
+          >
+            <span style={{ fontFamily: FONT_MONO, fontSize: 10, color: C.goldSoft }}>{sig.t}</span>
+            <span style={{ fontSize: 12, color: "rgba(245,241,232,0.9)" }}>{sig.s}</span>
+            <span
+              className="uppercase"
+              style={{
+                fontFamily: FONT_MONO,
+                fontSize: 8,
+                fontWeight: 700,
+                letterSpacing: "0.18em",
+                padding: "2px 6px",
+                background: sig.bg,
+                color: sig.c,
+              }}
+            >
+              {sig.lvl}
+            </span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+const CrisisCurveViz = () => {
+  const metrics = [
+    { v: "<2h", l: "Activation" },
+    { v: "24/7", l: "Monitoring" },
+    { v: "48h", l: "Premier plan" },
+    { v: "2 sem.", l: "Sortie crise" },
+  ];
+  return (
+    <div>
+      <div
+        className="grid grid-cols-2 gap-3 mb-6"
+        style={{ border: `1px solid rgba(201,168,76,0.2)`, padding: 14 }}
+      >
+        {metrics.map((m, i) => (
+          <div key={i} className="text-center" style={{ padding: "8px 4px", background: "rgba(13,27,42,0.4)" }}>
+            <div style={{ fontFamily: FONT_DISPLAY, fontSize: 24, fontWeight: 900, color: C.gold, lineHeight: 1 }}>
+              {m.v}
+            </div>
+            <div
+              className="mt-1 uppercase"
+              style={{ fontFamily: FONT_MONO, fontSize: 9, color: "rgba(245,241,232,0.65)", letterSpacing: "0.18em" }}
+            >
+              {m.l}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div
+        style={{
+          background: "rgba(13,27,42,0.4)",
+          border: "1px solid rgba(201,168,76,0.15)",
+          padding: "14px 16px",
+          borderRadius: 2,
+        }}
+      >
+        <div className="flex justify-between items-center mb-3">
+          <div
+            className="uppercase"
+            style={{ fontFamily: FONT_MONO, fontSize: 9, color: C.gold, letterSpacing: "0.25em" }}
+          >
+            · Désinformation vs Contre-narratif ·
+          </div>
+          <div
+            className="uppercase"
+            style={{
+              fontFamily: FONT_MONO,
+              fontSize: 9,
+              color: C.alert,
+              border: `1px solid ${C.alert}`,
+              padding: "2px 7px",
+              letterSpacing: "0.18em",
+            }}
+          >
+            T+48h
+          </div>
+        </div>
+
+        <style>{`
+          @keyframes draw-curve { from { stroke-dashoffset: 600; } to { stroke-dashoffset: 0; } }
+        `}</style>
+        <svg viewBox="0 0 320 180" width="100%" height={180}>
+          {[0, 1, 2, 3].map((i) => (
+            <line
+              key={i}
+              x1={20}
+              y1={30 + i * 40}
+              x2={310}
+              y2={30 + i * 40}
+              stroke="rgba(201,168,76,0.12)"
+              strokeDasharray="2 3"
+            />
+          ))}
+          <line x1={20} y1={170} x2={310} y2={170} stroke="rgba(245,241,232,0.3)" />
+          <line x1={20} y1={20} x2={20} y2={170} stroke="rgba(245,241,232,0.3)" />
+          <path
+            d="M 20 160 C 60 150, 90 50, 130 35 S 200 30, 230 90 T 310 155"
+            fill="none"
+            stroke={C.alert}
+            strokeWidth={2.2}
+            strokeDasharray="600"
+            style={{ animation: "draw-curve 2.4s ease-out forwards" }}
+          />
+          <path
+            d="M 20 165 C 70 160, 110 145, 150 110 S 230 55, 310 35"
+            fill="none"
+            stroke={C.gold}
+            strokeWidth={2.2}
+            strokeDasharray="600"
+            style={{ animation: "draw-curve 2.4s ease-out 0.3s forwards", strokeDashoffset: 600 }}
+          />
+          <g transform="translate(40,28)">
+            <line x1={0} y1={0} x2={14} y2={0} stroke={C.alert} strokeWidth={2.2} />
+            <text x={20} y={3} style={{ fontFamily: FONT_MONO, fontSize: 8, fill: "rgba(245,241,232,0.8)" }}>
+              Désinformation
+            </text>
+          </g>
+          <g transform="translate(170,28)">
+            <line x1={0} y1={0} x2={14} y2={0} stroke={C.gold} strokeWidth={2.2} />
+            <text x={20} y={3} style={{ fontFamily: FONT_MONO, fontSize: 8, fill: "rgba(245,241,232,0.8)" }}>
+              Contre-narratif
+            </text>
+          </g>
+        </svg>
+        <div
+          className="text-center italic mt-2"
+          style={{ fontFamily: FONT_ITALIC, fontSize: 12, color: "rgba(245,241,232,0.7)" }}
+        >
+          Reprise du récit en moins de 14 jours
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const ThreatViz = ({ mode }: { mode: ThreatMode }) => {
+  if (mode === "veille") {
+    return (
+      <>
+        <ThreatPaneHeader
+          num="02"
+          title="Radar opérationnel"
+          tag="● Surveillance live 24/7"
+          tagColor={C.gold}
+          lead="Détection en continu des signaux faibles. Chaque blip est un événement à qualifier avant qu'il ne devienne une crise."
+        />
+        <RadarFeedViz />
+      </>
+    );
+  }
+  return (
+    <>
+      <ThreatPaneHeader
+        num="02"
+        title="Pilotage de crise"
+        tag="◈ War Room active"
+        tagColor={C.alert}
+        lead="Tableau de bord temps réel. La désinformation contre-attaquée par le contre-narratif jusqu'à reprise du récit."
+      />
+      <CrisisCurveViz />
+    </>
+  );
+};
+
 const ThreatSection = () => {
   const [mode, setMode] = useState<ThreatMode>("veille");
   const data = THREAT_CONTENT[mode];
