@@ -5,8 +5,6 @@ import DetailPageLayout, { CaseStudy } from "@/components/DetailPageLayout";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 import ConstructionInfluence from "@/components/ConstructionInfluence";
-import ocpLogo from "@/assets/clients/ocp.png";
-import ministereSanteLogo from "@/assets/clients/ministere-sante.jpg";
 
 /* ─────── Palette tokens (locales à la page) ─────── */
 const C = {
@@ -757,6 +755,7 @@ const RadarFeedViz = () => {
           <line x1={100} y1={10} x2={100} y2={190} stroke={C.gold} opacity={0.25} strokeDasharray="2 3" />
           <line x1={10} y1={100} x2={190} y2={100} stroke={C.gold} opacity={0.25} strokeDasharray="2 3" />
           <path
+            className="radar-sweep"
             d="M 100 100 L 100 10 A 90 90 0 0 1 173.5 56 Z"
             fill="url(#radarSweep)"
             style={{ transformOrigin: "50% 50%", animation: "radar-rotate 4s linear infinite" }}
@@ -764,6 +763,7 @@ const RadarFeedViz = () => {
           {blips.map((b, i) => (
             <circle
               key={i}
+              className="radar-blip"
               cx={b.cx}
               cy={b.cy}
               r={3}
@@ -821,6 +821,7 @@ const RadarFeedViz = () => {
         {signals.map((sig, i) => (
           <div
             key={i}
+            className="signal-row"
             style={{
               display: "grid",
               gridTemplateColumns: "60px 1fr auto",
