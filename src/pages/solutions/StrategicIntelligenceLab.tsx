@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate, useLocation } from "react-router-dom";
-import DetailPageLayout, { CaseStudy } from "@/components/DetailPageLayout";
+import DetailPageLayout from "@/components/DetailPageLayout";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 import ConstructionInfluence from "@/components/ConstructionInfluence";
@@ -1415,6 +1415,583 @@ const ModelisationsSection = () => {
   );
 };
 
+
+/* ═══════════════════════════════════════════════════════
+   CASE FILES CLIENTS — refonte FR
+   ═══════════════════════════════════════════════════════ */
+
+const NAVY2 = "#103E8C";
+const NAVY3 = "#1a2d4a";
+const TERRACOTTA = "#b85a3a";
+const TERRACOTTA_STROKE = "#8a3f25";
+const OLIVE = "#7a8a3d";
+const OLIVE_STROKE = "#5d6b2a";
+const FOREST = "#5d7838";
+const MUTED = "#6f6a60";
+
+const CaseFileSection = ({ children }: { children: React.ReactNode }) => (
+  <section
+    style={{
+      background: `linear-gradient(180deg, ${C.paper} 0%, #fdf9ef 100%)`,
+      padding: "80px 0",
+      borderBottom: `1px solid ${C.rule}`,
+    }}
+  >
+    <div style={{ maxWidth: 1320, margin: "0 auto", padding: "0 40px" }}>{children}</div>
+  </section>
+);
+
+const CaseFileHeader = ({ number, title, emphasis }: { number: string; title: string; emphasis: string }) => {
+  const parts = title.split(emphasis);
+  return (
+    <header className="flex flex-wrap items-baseline gap-8 mb-12">
+      <div
+        className="uppercase"
+        style={{
+          fontFamily: FONT_MONO,
+          fontSize: 11,
+          color: C.goldDim,
+          letterSpacing: ".25em",
+          border: `1px solid ${C.gold}`,
+          padding: "6px 12px",
+        }}
+      >
+        {number}
+      </div>
+      <h2
+        style={{
+          fontFamily: FONT_DISPLAY,
+          fontSize: "clamp(28px, 4vw, 44px)",
+          fontWeight: 700,
+          color: C.navy,
+          lineHeight: 1.1,
+          letterSpacing: 0,
+          margin: 0,
+        }}
+      >
+        {parts[0]}
+        <em style={{ color: C.gold, fontWeight: 400 }}>{emphasis}</em>
+        {parts[1]}
+      </h2>
+    </header>
+  );
+};
+
+const CaseIntro = ({
+  kicker,
+  title,
+  emphasis,
+  body,
+  quote,
+  meta,
+}: {
+  kicker: string;
+  title: string;
+  emphasis: string;
+  body: string;
+  quote: string;
+  meta: string;
+}) => {
+  const titleParts = title.split(emphasis);
+  return (
+    <div className="case-intro-grid">
+      <div className="case-plate">
+        <div
+          style={{
+            position: "absolute",
+            bottom: 12,
+            right: 18,
+            fontFamily: FONT_MONO,
+            fontSize: 9,
+            color: C.gold,
+            opacity: 0.7,
+            letterSpacing: ".3em",
+          }}
+        >
+          CONFIDENTIAL FILE
+        </div>
+        <div
+          className="uppercase"
+          style={{ fontFamily: FONT_MONO, fontSize: 10, color: C.gold, letterSpacing: ".3em", marginBottom: 16 }}
+        >
+          {kicker}
+        </div>
+        <h3 style={{ fontFamily: FONT_DISPLAY, fontSize: 30, fontWeight: 700, lineHeight: 1.15, marginBottom: 20 }}>
+          {titleParts[0]}
+          <em style={{ color: C.gold, fontWeight: 400 }}>{emphasis}</em>
+          {titleParts[1]}
+        </h3>
+        <p
+          className="italic"
+          style={{ fontFamily: FONT_ITALIC, fontSize: 17, lineHeight: 1.6, color: "rgba(245,241,232,.85)", margin: 0 }}
+        >
+          {body}
+        </p>
+      </div>
+      <div className="case-quote-wrap">
+        <div style={{ fontFamily: FONT_DISPLAY, fontSize: 52, color: C.gold, lineHeight: 0, position: "relative", top: 28 }}>
+          “
+        </div>
+        <blockquote
+          className="italic"
+          style={{
+            fontFamily: FONT_ITALIC,
+            fontSize: 22,
+            lineHeight: 1.45,
+            color: C.navy,
+            borderLeft: `2px solid ${C.gold}`,
+            padding: "10px 0 10px 26px",
+            margin: "0 0 24px",
+          }}
+        >
+          {quote}
+        </blockquote>
+        <div
+          className="uppercase"
+          style={{ fontFamily: FONT_MONO, fontSize: 11, color: MUTED, letterSpacing: ".2em" }}
+        >
+          {meta}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const CaseStats = ({ stats }: { stats: { value: React.ReactNode; label: string }[] }) => (
+  <div className="case-stats-grid">
+    {stats.map((stat, index) => (
+      <div key={stat.label} className="case-stat" style={{ borderRight: index < stats.length - 1 ? `1px solid ${C.rule}` : "none" }}>
+        <div style={{ fontFamily: FONT_DISPLAY, fontWeight: 900, fontSize: 40, color: C.navy, lineHeight: 1, letterSpacing: "-.02em" }}>
+          {stat.value}
+        </div>
+        <div
+          className="uppercase"
+          style={{ fontFamily: FONT_MONO, fontSize: 10, color: MUTED, letterSpacing: ".2em", marginTop: 8 }}
+        >
+          {stat.label}
+        </div>
+      </div>
+    ))}
+  </div>
+);
+
+const Unit = ({ children }: { children: React.ReactNode }) => (
+  <span style={{ fontSize: 20, color: C.gold, verticalAlign: "super", marginLeft: 3 }}>{children}</span>
+);
+
+const CommandTree = () => {
+  const ref = useRef<HTMLDivElement | null>(null);
+  const [hovered, setHovered] = useState<string | null>(null);
+
+  useEffect(() => {
+    const node = ref.current;
+    if (!node) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          node.classList.add("in-view");
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.3 }
+    );
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, []);
+
+  const nodes = [
+    { id: "f1", level: "facade", x: 95, y: 50, w: 130, h: 50, name: "CNSSO", sub: "Comité norvégien", fill: OLIVE, stroke: OLIVE_STROKE, d: 0 },
+    { id: "f2", level: "facade", x: 270, y: 50, w: 130, h: 50, name: "WSRW", sub: "Resource Watch", fill: OLIVE, stroke: OLIVE_STROKE, d: 120 },
+    { id: "f3", level: "facade", x: 445, y: 50, w: 130, h: 50, name: "SWS", sub: "Solidarity W. Sahara", fill: OLIVE, stroke: OLIVE_STROKE, d: 240 },
+    { id: "f4", level: "facade", x: 615, y: 50, w: 130, h: 50, name: "AWSA", sub: "Australia W.S. Assoc.", fill: OLIVE, stroke: OLIVE_STROKE, d: 360 },
+    { id: "s1", level: "sponsor", x: 95, y: 170, w: 130, h: 50, name: "MFA Norvégien", sub: "Sponsor étatique", fill: NAVY2, stroke: "#0a2862", d: 700 },
+    { id: "s2", level: "sponsor", x: 200, y: 170, w: 130, h: 50, name: "Industri Energi", sub: "Syndicat sectoriel", fill: NAVY2, stroke: "#0a2862", d: 800 },
+    { id: "s3", level: "sponsor", x: 340, y: 170, w: 130, h: 50, name: "SAIH", sub: "Fonds étudiant", fill: NAVY2, stroke: "#0a2862", d: 900 },
+    { id: "s4", level: "sponsor", x: 470, y: 170, w: 130, h: 50, name: "Sahara Update", sub: "Centre information", fill: NAVY2, stroke: "#0a2862", d: 1000 },
+    { id: "s5", level: "sponsor", x: 615, y: 170, w: 130, h: 50, name: "Union Syndicats AU", sub: "Coalition relais", fill: NAVY2, stroke: "#0a2862", d: 1100 },
+    { id: "i1", level: "person", x: 150, y: 290, w: 130, h: 50, name: "Erik Hagen", sub: "Coordinateur", fill: TERRACOTTA, stroke: TERRACOTTA_STROKE, d: 1300 },
+    { id: "i2", level: "person", x: 270, y: 290, w: 130, h: 50, name: "Sara Eykmans", sub: "Présidente WSRW", fill: TERRACOTTA, stroke: TERRACOTTA_STROKE, d: 1400 },
+    { id: "i3", level: "person", x: 410, y: 290, w: 130, h: 50, name: "Cate Lewis", sub: "Direction SWS", fill: TERRACOTTA, stroke: TERRACOTTA_STROKE, d: 1500 },
+    { id: "i4", level: "person", x: 560, y: 290, w: 130, h: 50, name: "Lyn Allison", sub: "Présidente AWSA", fill: TERRACOTTA, stroke: TERRACOTTA_STROKE, d: 1600 },
+  ];
+  const nodeMap = Object.fromEntries(nodes.map((node) => [node.id, node]));
+  const links = [
+    ["f1", "s1"], ["f2", "s2"], ["f2", "s3"], ["f3", "s3"], ["f3", "s4"], ["f4", "s5"],
+    ["f1", "i1"], ["s4", "i1"], ["f2", "i2"], ["f3", "i3"], ["f4", "i4"],
+  ];
+
+  const collectChain = (id: string) => {
+    const chain = new Set([id]);
+    let changed = true;
+    while (changed) {
+      changed = false;
+      links.forEach(([from, to]) => {
+        if (chain.has(from) && !chain.has(to)) {
+          chain.add(to);
+          changed = true;
+        }
+        if (chain.has(to) && !chain.has(from)) {
+          chain.add(from);
+          changed = true;
+        }
+      });
+    }
+    return chain;
+  };
+
+  const chain = hovered ? collectChain(hovered) : null;
+  const path = (from: string, to: string) => {
+    const a = nodeMap[from];
+    const b = nodeMap[to];
+    const x1 = a.x + a.w / 2;
+    const y1 = a.y + a.h;
+    const x2 = b.x + b.w / 2;
+    const y2 = b.y;
+    const mid = (y1 + y2) / 2;
+    return `M ${x1} ${y1} C ${x1} ${mid}, ${x2} ${mid}, ${x2} ${y2}`;
+  };
+
+  return (
+    <div className="case-block" ref={ref}>
+      <style>{`
+        .command-tree .tree-node,.command-tree .tree-link{opacity:0;transition:opacity .5s ease,stroke .2s ease,stroke-width .2s ease}.command-tree.in-view .tree-node,.command-tree.in-view .tree-link{opacity:1}.command-tree.in-view .tree-link{transition-delay:600ms}.command-tree .tree-node.highlight rect{stroke:${C.gold};stroke-width:2px}.command-tree .tree-node.dim{opacity:.18!important}.command-tree .tree-link.highlight{stroke:${C.gold};stroke-width:2px;opacity:1!important}.command-tree .tree-link.dim{opacity:.12!important}@media(max-width:640px){.tree-scroll{overflow-x:auto}}
+      `}</style>
+      <BlockHeader kicker="A · DÉCRYPTAGE" title={<>L'arbre des commanditaires.<br />ONG façades, financeurs et relais.</>} hint="Survolez une façade pour révéler sa chaîne" />
+      <div className="tree-scroll">
+        <svg className="command-tree" viewBox="0 0 760 380" width="100%" height="380" style={{ minWidth: 760 }}>
+          {links.map(([from, to], index) => {
+            const active = chain?.has(from) && chain?.has(to);
+            const dim = chain && !active;
+            return <path key={`${from}-${to}`} className={`tree-link ${active ? "highlight" : ""} ${dim ? "dim" : ""}`} d={path(from, to)} stroke={C.rule} strokeWidth={1.5} fill="none" />;
+          })}
+          {nodes.map((node) => {
+            const active = chain?.has(node.id);
+            const dim = chain && !active;
+            return (
+              <g
+                key={node.id}
+                className={`tree-node ${active ? "highlight" : ""} ${dim ? "dim" : ""}`}
+                style={{ transitionDelay: `${node.d}ms` }}
+                onMouseEnter={() => setHovered(node.id)}
+                onMouseLeave={() => setHovered(null)}
+              >
+                <rect x={node.x} y={node.y} width={node.w} height={node.h} rx={2} fill={node.fill} stroke={node.stroke} />
+                <text x={node.x + node.w / 2} y={node.y + 22} textAnchor="middle" style={{ fontFamily: "DM Sans, sans-serif", fontSize: 11.5, fontWeight: 500, fill: "#fff" }}>{node.name}</text>
+                <text x={node.x + node.w / 2} y={node.y + 37} textAnchor="middle" style={{ fontFamily: FONT_MONO, fontSize: 8.5, fill: "rgba(255,255,255,.65)", letterSpacing: ".12em" }}>{node.sub}</text>
+              </g>
+            );
+          })}
+        </svg>
+      </div>
+      <div className="case-legend">
+        <LegendItem color={OLIVE} label="ONG façade visible" />
+        <LegendItem color={NAVY2} label="Sponsor / financeur" />
+        <LegendItem color={TERRACOTTA} label="Relais individuel identifié" />
+      </div>
+    </div>
+  );
+};
+
+const BlockHeader = ({ kicker, title, hint }: { kicker: string; title: React.ReactNode; hint?: string }) => (
+  <div style={{ marginBottom: 22 }}>
+    <div className="uppercase" style={{ fontFamily: FONT_MONO, fontSize: 10, color: C.gold, letterSpacing: ".3em", marginBottom: 8 }}>
+      {kicker}
+    </div>
+    <h3 style={{ fontFamily: FONT_DISPLAY, fontSize: 24, fontWeight: 700, color: C.navy, lineHeight: 1.2, margin: 0 }}>{title}</h3>
+    {hint && <p className="italic" style={{ fontFamily: FONT_ITALIC, fontSize: 14, color: MUTED, marginTop: 8 }}>{hint}</p>}
+  </div>
+);
+
+const LegendItem = ({ color, label }: { color: string; label: string }) => (
+  <div className="flex items-center gap-2">
+    <span style={{ width: 14, height: 14, background: color, display: "inline-block" }} />
+    <span>{label}</span>
+  </div>
+);
+
+const ChessboardsBlock = () => {
+  const cards = [
+    {
+      key: "geo",
+      color: NAVY2,
+      num: "01 · ÉCHIQUIER GÉOPOLITIQUE",
+      title: "Les jeux d'États",
+      tag: "Souverainetés, alliances, dépendances",
+      bullets: ["Fonds souverains anonymisés sponsors discrets", "Ministères des Affaires Étrangères de pays tiers", "Agences internationales (énergétiques, sanitaires)", "Organisations supranationales"],
+      reading: "Qui parle au nom de qui ? Quels intérêts d'État se cachent derrière le narratif officiel ?",
+    },
+    {
+      key: "eco",
+      color: "#9a4f2c",
+      num: "02 · ÉCHIQUIER ÉCONOMIQUE",
+      title: "Les rivalités industrielles",
+      tag: "Concurrents, fédérations, lobbies",
+      bullets: ["Concurrents directs sur les marchés clés", "Fédérations professionnelles tierces", "Groupes industriels aux intérêts contraires", "Syndicats sectoriels d'autres pays"],
+      reading: "Qui finance le bruit ? Quel concurrent profite directement de la déstabilisation ?",
+    },
+    {
+      key: "soc",
+      color: FOREST,
+      num: "03 · ÉCHIQUIER SOCIÉTAL",
+      title: "Les relais d'opinion",
+      tag: "ONG, militants, instituts, médias",
+      bullets: ["ONG façades à vocation militante", "Centres d'études partisans", "Personnalités relais (chercheurs, journalistes)", "Coalitions associatives transnationales"],
+      reading: "Qui amplifie ? Quels visages 'indépendants' portent en réalité un agenda commandé ?",
+    },
+  ];
+  return (
+    <div style={{ marginTop: 48 }}>
+      <BlockHeader kicker="B · MÉTHODE" title={<>L'analyse par échiquiers.<br />Trois lectures qui se croisent.</>} />
+      <div style={{ background: "rgba(16,62,140,0.04)", borderLeft: `4px solid ${NAVY2}`, padding: "22px 28px", borderRadius: 2, marginBottom: 28, maxWidth: 980 }}>
+        <p className="italic" style={{ fontFamily: FONT_ITALIC, fontSize: 17, lineHeight: 1.55, color: NAVY3, margin: 0 }}>
+          Là où la plupart des cabinets traitent une dimension à la fois, <strong style={{ color: C.navy, fontFamily: "DM Sans, sans-serif", fontStyle: "normal", fontWeight: 600 }}>Buildfluence croise systématiquement les trois échiquiers</strong> — géopolitique, économique et sociétal — pour révéler la mécanique réelle d'une attaque informationnelle. C'est ce mix tridimensionnel qui distingue notre méthode.
+        </p>
+      </div>
+      <div className="chess-grid">
+        {cards.map((card) => (
+          <article key={card.key} className="chess-card" style={{ borderTop: `4px solid ${card.color}` }}>
+            <div className="flex items-center gap-2 uppercase" style={{ fontFamily: FONT_MONO, fontSize: 10, color: C.goldDim, letterSpacing: ".25em" }}>
+              <span style={{ width: 8, height: 8, borderRadius: "50%", background: card.color, display: "inline-block", flex: "0 0 auto" }} />
+              {card.num}
+            </div>
+            <h4 style={{ fontFamily: FONT_DISPLAY, fontSize: 20, fontWeight: 700, color: C.navy, margin: "16px 0 2px" }}>{card.title}</h4>
+            <div className="italic" style={{ fontFamily: FONT_ITALIC, fontSize: 14, color: C.goldDim, marginBottom: 14 }}>{card.tag}</div>
+            <ul style={{ listStyle: "none", margin: 0, padding: 0 }}>
+              {card.bullets.map((bullet, index) => (
+                <li key={bullet} style={{ fontSize: 13, lineHeight: 1.5, color: NAVY3, padding: "7px 0 7px 16px", borderBottom: index < card.bullets.length - 1 ? `1px dashed ${C.rule}` : "none", position: "relative" }}>
+                  <span style={{ color: C.gold, position: "absolute", left: 0 }}>›</span>{bullet}
+                </li>
+              ))}
+            </ul>
+            <div style={{ borderTop: `1px solid ${C.rule}`, marginTop: 18, paddingTop: 14 }}>
+              <div className="uppercase" style={{ fontFamily: FONT_MONO, fontSize: 10, color: MUTED, letterSpacing: ".15em", marginBottom: 5 }}>LECTURE</div>
+              <div style={{ fontFamily: "DM Sans, sans-serif", fontSize: 12, fontWeight: 500, color: C.navy, lineHeight: 1.4 }}>{card.reading}</div>
+            </div>
+          </article>
+        ))}
+      </div>
+      <div style={{ marginTop: 28, background: C.navy, color: C.ivory, padding: "24px 30px", borderLeft: `4px solid ${C.gold}`, textAlign: "center" }}>
+        <p className="italic" style={{ fontFamily: FONT_ITALIC, fontSize: 18, lineHeight: 1.55, color: C.goldHover, margin: 0 }}>
+          La force Buildfluence : <strong style={{ color: C.ivory, fontFamily: "DM Sans, sans-serif", fontStyle: "normal", fontWeight: 500 }}>ne pas regarder un échiquier après l'autre, mais les trois en simultané.</strong> C'est dans les zones de chevauchement que la mécanique hostile devient lisible.
+        </p>
+      </div>
+    </div>
+  );
+};
+
+const StakeholderMatrix = () => {
+  const wrapRef = useRef<HTMLDivElement | null>(null);
+  const [filter, setFilter] = useState("all");
+  const [tooltip, setTooltip] = useState<{ visible: boolean; x: number; y: number; node: MatrixNode | null }>({ visible: false, x: 0, y: 0, node: null });
+  const PAD = 60;
+  const W = 800;
+  const H = 520;
+  const nodes: MatrixNode[] = [
+    { name: "WSRW", cat: "ngo", type: "ONG façade", role: "Coordinateur central des campagnes hostiles", x: -0.55, y: 0.78 },
+    { name: "CNSSO", cat: "ngo", type: "ONG façade", role: "Comité norvégien, relais institutionnel", x: -0.85, y: 0.55 },
+    { name: "SWS", cat: "ngo", type: "ONG façade", role: "Lobbying d'influence en Europe", x: -0.35, y: 0.55 },
+    { name: "AWSA", cat: "ngo", type: "ONG façade", role: "Antenne australienne militante", x: -0.7, y: 0.32 },
+    { name: "MFA Norvège*", cat: "state", type: "Ministère des Affaires Étrangères", role: "Financement indirect des ONG via fonds étudiants", x: -0.35, y: 0.18 },
+    { name: "Algérie", cat: "state", type: "Soutien financier", role: "Soutien financier structurant aux ONG hostiles", x: -0.55, y: 0.05 },
+    { name: "Maroc", cat: "state", type: "État allié", role: "Soutien institutionnel direct à OCP", x: 0.85, y: 0.5 },
+    { name: "ONHYM", cat: "state", type: "Agence souveraine", role: "Partenaire industriel marocain", x: 0.7, y: 0.2 },
+    { name: "Industri Energi", cat: "corp", type: "Syndicat industriel", role: "Sponsor sectoriel des campagnes", x: -0.18, y: 0.42 },
+    { name: "BASF Belgique", cat: "corp", type: "Concurrent indirect", role: "Présence ambivalente, observateur", x: -0.25, y: -0.2 },
+    { name: "Yara", cat: "corp", type: "Acteur fertilisants", role: "Concurrent neutralisé sur certains marchés", x: -0.15, y: -0.1 },
+    { name: "Erik Hagen", cat: "leader", type: "Activiste norvégien", role: "Visage public des campagnes anti-OCP", x: -0.92, y: 0.88 },
+    { name: "Sara Eykmans", cat: "leader", type: "Présidente WSRW", role: "Coordination des actions médiatiques", x: -0.2, y: 0.88 },
+    { name: "Jeremy Grantham", cat: "leader", type: "Investisseur", role: "Relais financier, position critique", x: -0.05, y: 0.6 },
+    { name: "Steven Van Kauwenberg", cat: "leader", type: "Analyste IFDC", role: "Position experte, discours équilibré", x: 0.2, y: -0.3 },
+  ];
+  const catStyles: Record<string, { fill: string; stroke: string; text: string }> = {
+    ngo: { fill: TERRACOTTA, stroke: TERRACOTTA_STROKE, text: "#fff" },
+    state: { fill: NAVY2, stroke: "#0a2862", text: "#fff" },
+    corp: { fill: FOREST, stroke: FOREST, text: "#fff" },
+    leader: { fill: C.gold, stroke: C.goldDim, text: C.navy },
+  };
+  const filters = [
+    { cat: "all", label: "Toutes" },
+    { cat: "ngo", label: "ONG", color: TERRACOTTA },
+    { cat: "state", label: "États", color: NAVY2 },
+    { cat: "corp", label: "Entreprises", color: FOREST },
+    { cat: "leader", label: "Leaders d'opinion", color: C.gold },
+  ];
+  const sx = (x: number) => PAD + ((x + 1) / 2) * (W - PAD * 2);
+  const sy = (y: number) => PAD + ((1 - y) / 2) * (H - PAD * 2);
+
+  useEffect(() => {
+    const wrap = wrapRef.current;
+    if (!wrap) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return;
+        wrap.querySelectorAll<SVGGElement>(".mn").forEach((element, index) => {
+          setTimeout(() => {
+            element.style.opacity = "";
+          }, index * 60);
+        });
+        observer.disconnect();
+      },
+      { threshold: 0.3 }
+    );
+    observer.observe(wrap);
+    return () => observer.disconnect();
+  }, []);
+
+  const showTooltip = (event: React.MouseEvent<SVGGElement>, node: MatrixNode) => {
+    const box = event.currentTarget.getBoundingClientRect();
+    const wrapBox = wrapRef.current?.getBoundingClientRect();
+    if (!wrapBox) return;
+    let x = box.right - wrapBox.left + 14;
+    const y = box.top - wrapBox.top - 10;
+    if (x + 280 > wrapBox.width) x = box.left - wrapBox.left - 294;
+    setTooltip({ visible: true, x, y: Math.max(12, y), node });
+  };
+
+  return (
+    <div className="case-block matrix-block" ref={wrapRef}>
+      <style>{`
+        .mn{opacity:1;transition:opacity .35s ease,filter .15s ease}.mn.dim{opacity:.12!important}.mn:hover{filter:drop-shadow(0 8px 12px rgba(13,27,42,.25))}.matrix-tooltip{opacity:0;transform:translateY(4px);transition:.15s;pointer-events:none}.matrix-tooltip.visible{opacity:1;transform:translateY(0)}
+      `}</style>
+      <BlockHeader kicker="C · CARTOGRAPHIE" title={<>La matrice dynamique des parties prenantes.<br />Qui pèse, qui amplifie, qui s'efface.</>} />
+      <div className="matrix-toolbar">
+        <div className="flex flex-wrap gap-[6px]">
+          {filters.map((item) => (
+            <button key={item.cat} className={`matrix-filter ${filter === item.cat ? "active" : ""}`} onClick={() => setFilter(item.cat)}>
+              {item.color && <span style={{ width: 8, height: 8, borderRadius: "50%", background: item.color, display: "inline-block", marginRight: 7 }} />}
+              {item.label}
+            </button>
+          ))}
+        </div>
+        <div className="italic" style={{ fontFamily: FONT_ITALIC, fontSize: 13, color: MUTED }}>Cliquez sur un nœud pour le détail</div>
+      </div>
+      <div className="matrix-canvas">
+        <svg width="100%" height="520" viewBox="0 0 800 520" preserveAspectRatio="xMidYMid meet">
+          {[-0.5, 0.5].map((v) => (
+            <g key={v}>
+              <line x1={sx(v)} y1={PAD} x2={sx(v)} y2={H - PAD} stroke={C.rule} strokeDasharray="3 3" opacity={0.5} />
+              <line x1={PAD} y1={sy(v)} x2={W - PAD} y2={sy(v)} stroke={C.rule} strokeDasharray="3 3" opacity={0.5} />
+            </g>
+          ))}
+          <line x1={sx(0)} y1={PAD} x2={sx(0)} y2={H - PAD} stroke={MUTED} opacity={0.5} />
+          <line x1={PAD} y1={sy(0)} x2={W - PAD} y2={sy(0)} stroke={MUTED} opacity={0.5} />
+          <text x={W / 2} y={30} textAnchor="middle" style={{ fontFamily: FONT_MONO, fontSize: 10, fill: C.goldDim, letterSpacing: ".2em" }}>↑ ACTIVISME</text>
+          <text x={W / 2} y={500} textAnchor="middle" style={{ fontFamily: FONT_MONO, fontSize: 10, fill: C.goldDim, letterSpacing: ".2em" }}>PASSIVITÉ ↓</text>
+          <text x={20} y={H / 2 + 4} style={{ fontFamily: FONT_MONO, fontSize: 10, fill: C.goldDim, letterSpacing: ".2em" }}>← HOSTILE</text>
+          <text x={780} y={H / 2 + 4} textAnchor="end" style={{ fontFamily: FONT_MONO, fontSize: 10, fill: C.goldDim, letterSpacing: ".2em" }}>SOUTIEN OCP →</text>
+          {[
+            { x: 220, y: 120, t: "Réfractaires" }, { x: 580, y: 120, t: "Alliés" }, { x: 220, y: 400, t: "Idiots utiles" }, { x: 580, y: 400, t: "Neutres" },
+          ].map((q) => <text key={q.t} x={q.x} y={q.y} textAnchor="middle" style={{ fontFamily: FONT_DISPLAY, fontStyle: "italic", fontSize: 14, fill: MUTED, opacity: 0.5 }}>{q.t}</text>)}
+          {nodes.map((node) => {
+            const style = catStyles[node.cat];
+            const width = Math.max(46, node.name.length * 6.4 + 18);
+            const dim = filter !== "all" && filter !== node.cat;
+            return (
+              <g key={node.name} className={`mn ${dim ? "dim" : ""}`} style={{ opacity: 0, cursor: "pointer" }} transform={`translate(${sx(node.x)} ${sy(node.y)})`} onMouseEnter={(event) => showTooltip(event, node)} onMouseLeave={() => setTooltip((current) => ({ ...current, visible: false }))}>
+                <rect x={-width / 2} y={-13} width={width} height={26} rx={2} fill={style.fill} stroke={style.stroke} />
+                <text y={4} textAnchor="middle" style={{ fontFamily: "DM Sans, sans-serif", fontSize: 10.5, fontWeight: 500, fill: style.text }}>{node.name}</text>
+              </g>
+            );
+          })}
+        </svg>
+        <div className={`matrix-tooltip ${tooltip.visible ? "visible" : ""}`} style={{ position: "absolute", zIndex: 50, left: tooltip.x, top: tooltip.y, background: C.navy, color: C.ivory, padding: "14px 16px", minWidth: 220, maxWidth: 280, borderLeft: `3px solid ${C.gold}`, boxShadow: "0 18px 38px -10px rgba(13,27,42,.4)" }}>
+          <div style={{ fontFamily: FONT_DISPLAY, fontSize: 16, fontWeight: 700, color: C.gold, marginBottom: 3 }}>{tooltip.node?.name}</div>
+          <div className="uppercase" style={{ fontFamily: FONT_MONO, fontSize: 9, letterSpacing: ".2em", color: "rgba(245,241,232,.6)", marginBottom: 8, paddingBottom: 8, borderBottom: "1px solid rgba(245,241,232,.12)" }}>{tooltip.node?.type}</div>
+          <div style={{ fontFamily: "DM Sans, sans-serif", fontSize: 12, lineHeight: 1.4, color: "rgba(245,241,232,.85)" }}>{tooltip.node?.role}</div>
+        </div>
+      </div>
+      <div className="italic" style={{ marginTop: 16, fontFamily: FONT_ITALIC, fontSize: 9, color: MUTED, letterSpacing: ".05em", textAlign: "center" }}>
+        * MFA = Ministry of Foreign Affairs (Ministère des Affaires Étrangères)
+      </div>
+    </div>
+  );
+};
+
+type MatrixNode = { name: string; cat: "ngo" | "state" | "corp" | "leader"; type: string; role: string; x: number; y: number };
+
+const MissionTimeline = ({ title, items }: { title: string; items: { date: string; title: string; description: string; tag: string; tagTone: "red" | "yellow" | "green" }[] }) => {
+  const tagStyle = {
+    red: { background: "#fee2e2", color: "#991b1b" },
+    yellow: { background: "#fef3c7", color: "#92400e" },
+    green: { background: "#dcfce7", color: "#166534" },
+  };
+  return (
+    <div style={{ marginTop: 48, padding: "28px 0 0" }}>
+      <h3 style={{ fontFamily: FONT_DISPLAY, fontSize: 20, color: C.navy, letterSpacing: "-.01em", marginBottom: 28 }}>{title}</h3>
+      <div className="mission-timeline">
+        {items.map((item) => (
+          <div key={item.date} className="timeline-row">
+            <div className="timeline-date">{item.date}<span className="timeline-dot" /></div>
+            <div className="timeline-body">
+              <h4 style={{ fontFamily: FONT_DISPLAY, fontSize: 17, fontWeight: 700, color: C.navy, margin: "0 0 6px" }}>{item.title}</h4>
+              <p style={{ fontFamily: "DM Sans, sans-serif", fontSize: 13.5, lineHeight: 1.55, color: NAVY3, margin: 0 }}>{item.description}</p>
+              <div className="timeline-tag" style={tagStyle[item.tagTone]}>{item.tag}</div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+const OcpCaseFile = () => (
+  <CaseFileSection>
+    <CaseFileStyles />
+    <CaseFileHeader number="CASE FILE · 01" title="Mission OCP Group : contrer les campagnes hostiles." emphasis="contrer" />
+    <CaseIntro
+      kicker="Mission · Cartographie adverse"
+      title="Groupe industriel stratégique, ciblé par des campagnes d'influence internationales."
+      emphasis="campagnes d'influence"
+      body="Agitation médiatique et sociale orchestrée par des ONG d'Europe du Nord. Le client a besoin de comprendre les chaînes d'amplification, d'identifier les idiots utiles, et de neutraliser le récit adverse avant qu'il n'atteigne ses marchés clés."
+      quote="L'attaque était invisible pour les veilles classiques. C'est dans la cartographie des relais qu'on a vu la mécanique."
+      meta="Analyst note · OCP mission"
+    />
+    <CaseStats stats={[{ value: "3", label: "Échiquiers d'analyse" }, { value: "47", label: "Parties prenantes mappées" }, { value: "12", label: "ONG sources identifiées" }, { value: "1", label: "Tableau de bord Président" }]} />
+    <CommandTree />
+    <ChessboardsBlock />
+    <StakeholderMatrix />
+    <MissionTimeline
+      title="Déroulé de la mission"
+      items={[
+        { date: "SEMAINE 1", title: "Analyse par échiquiers", description: "Décodage des trois niveaux : géopolitique, concurrentiel et sociétal. Identification des acteurs et de leurs intérêts croisés.", tag: "Cartographie posée", tagTone: "yellow" },
+        { date: "SEMAINE 2-3", title: "Matrice dynamique des parties prenantes", description: "Identification de 12 ONG d'Europe du Nord comme sources primaires, et de leurs idiots utiles dans les médias francophones.", tag: "Mécanique hostile révélée", tagTone: "red" },
+        { date: "SEMAINE 4", title: "Tableau de bord décisionnel", description: "Livraison au cabinet du Président. Actions de sensibilisation auprès des clients et partenaires. Contre-influence activée.", tag: "Menaces neutralisées", tagTone: "green" },
+      ]}
+    />
+  </CaseFileSection>
+);
+
+const HealthCaseFile = () => (
+  <CaseFileSection>
+    <CaseFileStyles />
+    <CaseFileHeader number="CASE FILE · 02" title="Ministère de la Santé : crise sanitaire H1N1." emphasis="crise sanitaire" />
+    <CaseIntro
+      kicker="War Room · Santé publique"
+      title="40 décès. Désinformation massive. Un ministère sous pression médiatique inédite."
+      emphasis="Désinformation massive."
+      body="La crise H1N1 a enclenché une spirale de désinformation dans les médias et sur les réseaux sociaux. Le Ministère de la Santé avait besoin d'identifier les sources hostiles, de produire des contre-narratifs crédibles, et de protéger l'image du Ministre pendant la tempête médiatique."
+      quote="En 2 semaines, le récit officiel est redevenu dominant. La War Room avait fait son travail."
+      meta="Debrief post-mission · Ministère de la Santé"
+    />
+    <CaseStats stats={[{ value: <><span>&lt;2</span><Unit>h</Unit></>, label: "Activation War Room" }, { value: <><span>14</span><Unit>j</Unit></>, label: "Crise maîtrisée" }, { value: <><span>+38</span><Unit>%</Unit></>, label: "Image digitale Ministre" }, { value: "1", label: "Cabinet accompagné" }]} />
+    <MissionTimeline
+      title="Déroulé de la War Room"
+      items={[
+        { date: "H+0", title: "Activation et diagnostic", description: "Mise en place de la cellule de crise. Monitoring 24/7 des flux médiatiques, sociaux et numériques. Identification immédiate des relais hostiles.", tag: "Signal rouge détecté", tagTone: "red" },
+        { date: "J+3", title: "Digital Investigation", description: "OSINT ciblé. Identification des sources de désinformation et de leurs chaînes d'amplification. Fact-checking continu sur les fausses informations.", tag: "Mécanique cartographiée", tagTone: "yellow" },
+        { date: "J+7", title: "Contre-narratifs et stratégie média", description: "Production de contre-narratifs crédibles, messages clés pour les porte-paroles, calendrier des prises de parole. Accompagnement personnel du Ministre.", tag: "Reprise du récit", tagTone: "yellow" },
+        { date: "J+14", title: "Sortie de crise", description: "Crise maîtrisée. Renforcement de l'image digitale du Ministre. Transmission du dispositif à l'équipe de communication et au Cabinet Ministériel.", tag: "Mission accomplie", tagTone: "green" },
+      ]}
+    />
+  </CaseFileSection>
+);
+
+const CaseFileStyles = () => (
+  <style>{`
+    .case-intro-grid{display:grid;grid-template-columns:5fr 7fr;gap:40px;align-items:stretch}.case-plate{background:${C.navy};color:${C.ivory};padding:44px 40px;position:relative;border-top:3px solid ${C.gold}}.case-quote-wrap{padding:8px 0 0}.case-stats-grid{display:grid;grid-template-columns:repeat(4,1fr);margin:40px 0;border:1px solid ${C.rule};background:#fff}.case-stat{padding:22px 26px}.case-block{background:#fff;border:1px solid ${C.rule};border-top:3px solid ${C.gold};padding:36px 32px 40px;border-radius:2px;margin-top:48px;box-shadow:0 30px 60px -40px rgba(13,27,42,.15)}.case-legend{display:flex;gap:22px;flex-wrap:wrap;padding:14px 18px;background:${C.paper};border:1px solid ${C.rule};font-family:${FONT_MONO};font-size:10px;color:${C.navy};text-transform:uppercase;letter-spacing:.1em}.chess-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}.chess-card{background:#fff;border:1px solid ${C.rule};padding:28px 26px;border-radius:2px;position:relative;overflow:hidden;transition:transform .25s ease,box-shadow .25s ease}.chess-card:hover{transform:translateY(-3px);box-shadow:0 20px 40px -20px rgba(13,27,42,.18)}.matrix-toolbar{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:18px;padding:12px 18px;background:${C.paper};border:1px solid ${C.rule}}.matrix-filter{font-family:${FONT_MONO};font-size:10px;color:${C.navy};text-transform:uppercase;letter-spacing:.15em;padding:7px 12px;background:transparent;border:1px solid ${C.rule};cursor:pointer;display:inline-flex;align-items:center;transition:.2s}.matrix-filter:hover{border-color:${C.gold};color:${C.goldDim}}.matrix-filter.active{background:${C.navy};color:${C.gold};border-color:${C.navy}}.matrix-canvas{position:relative;background:linear-gradient(180deg,#fefdf8 0%,#fafafa 100%);border:1px solid ${C.rule};overflow:hidden}.mission-timeline{display:grid;grid-template-columns:150px 1fr;gap:0 32px}.timeline-row{display:contents}.timeline-date{font-family:${FONT_MONO};font-size:12px;color:${C.goldDim};letter-spacing:.15em;padding-top:12px;position:relative;text-transform:uppercase}.timeline-dot{position:absolute;right:-37px;top:18px;width:10px;height:10px;background:${C.gold};border-radius:50%;z-index:2}.timeline-body{padding:10px 0 24px 32px;border-left:1px solid ${C.rule}}.timeline-tag{display:inline-block;padding:3px 8px;font-family:${FONT_MONO};font-size:10px;text-transform:uppercase;letter-spacing:.18em;margin-top:7px}@media(max-width:1060px){.case-intro-grid{grid-template-columns:1fr}.case-stats-grid{grid-template-columns:repeat(2,1fr)}.case-stat:nth-child(2){border-right:none!important}.chess-grid{grid-template-columns:1fr}.mission-timeline{grid-template-columns:1fr}.timeline-date{padding-top:0}.timeline-body{padding-left:0;border-left:none}.timeline-dot{display:none}}@media(max-width:640px){section .case-stats-grid{grid-template-columns:1fr}.case-stat{border-right:none!important;border-bottom:1px solid ${C.rule}}.case-stat:last-child{border-bottom:none}.case-block{padding:28px 20px}.case-plate{padding:34px 26px}.matrix-canvas{overflow-x:auto}.matrix-canvas svg{min-width:760px}.case-intro-grid{gap:28px}}
+  `}</style>
+);
+
 /* ═══════════════════════════════════════════════════════
    PAGE
    ═══════════════════════════════════════════════════════ */
@@ -1522,32 +2099,14 @@ const StrategicIntelligenceLab = () => {
       {/* SECTION 01 */}
       <ForesightSection />
 
-      {/* Cas client OCP rattaché à Foresight */}
-      <CaseStudy
-        title="Cas client : OCP Group"
-        context="Cartographie de l'écosystème concurrentiel. Tableau de bord décisionnel au cabinet du Président."
-        intervention={[
-          "Analyse par échiquiers : Géopolitique, Concurrentiel, Sociétal",
-          "Cartographie et Matrice dynamique des parties prenantes",
-          "Tableau de bord décisionnel",
-        ]}
-        result="Actions de sensibilisation et de contre-influence auprès des clients et partenaires. Maîtrise des menaces sociétales."
-      />
+      {/* Case File OCP refondu */}
+      <OcpCaseFile />
 
       {/* SECTION 02 */}
       <ThreatSection />
 
-      {/* Cas client Ministère rattaché à Threat */}
-      <CaseStudy
-        title="Cas client : Ministère de la Santé"
-        context="Crise H1N1, 40 décès, désinformation massive."
-        intervention={[
-          "Digital Investigation et Fact-checking en temps réel",
-          "Identification des sources de désinformation",
-          "War room de crise",
-        ]}
-        result="Crise maîtrisée en 2 semaines. Renforcement de l'image digitale du Ministre. Accompagnement de l'équipe de communication et du Cabinet Ministériel."
-      />
+      {/* Case File Ministère de la Santé refondu */}
+      <HealthCaseFile />
 
 
       {/* SECTION 03 */}
