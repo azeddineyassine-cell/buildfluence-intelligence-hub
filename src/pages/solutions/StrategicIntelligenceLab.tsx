@@ -212,7 +212,7 @@ const ForesightSection = () => {
           animate={{ height: "auto", opacity: 1 }}
           exit={{ height: 0, opacity: 0 }}
           transition={{ duration: 0.5, ease: "easeOut" }}
-          style={{ overflow: "hidden" }}
+          style={{ overflow: "hidden", maxHeight: 900 }}
         >
           <div
             className="mt-6 grid grid-cols-1 lg:grid-cols-2 gap-12 p-8 rounded-lg"
@@ -259,45 +259,344 @@ const ForesightSection = () => {
               </ul>
             </div>
 
-            {/* Droite — placeholder visuel */}
-            <div
-              className="rounded-md flex items-center justify-center"
-              style={{
-                background: "linear-gradient(135deg, #f9f5ea, #fefdf8)",
-                border: `1px solid ${C.rule}`,
-                minHeight: 340,
-              }}
-            >
-              <div className="text-center px-6">
-                <div
-                  style={{
-                    fontFamily: FONT_DISPLAY,
-                    fontStyle: "italic",
-                    fontSize: 56,
-                    color: C.gold,
-                    lineHeight: 1,
-                  }}
-                >
-                  {card.index.split("/")[1]}
-                </div>
-                <div
-                  className="mt-2 uppercase"
-                  style={{
-                    fontFamily: FONT_MONO,
-                    fontSize: 11,
-                    color: C.goldDim,
-                    letterSpacing: "0.25em",
-                  }}
-                >
-                  Visualisation à venir
-                </div>
-              </div>
-            </div>
+            {/* Droite — mini-viz par carte */}
+            <ForesightViz indexKey={card.index} />
           </div>
         </motion.div>
       </AnimatePresence>
     </div>
   );
+};
+
+/* ─────── Mini-viz pour les 4 cartes Foresight ─────── */
+
+const VizFrame = ({
+  kicker,
+  title,
+  footer,
+  children,
+}: {
+  kicker: string;
+  title: string;
+  footer?: React.ReactNode;
+  children: React.ReactNode;
+}) => (
+  <div
+    className="flex flex-col"
+    style={{
+      background: "linear-gradient(135deg, #f9f5ea 0%, #fefdf8 100%)",
+      border: `1px solid ${C.rule}`,
+      borderRadius: 2,
+      padding: "20px 18px",
+      minHeight: 340,
+    }}
+  >
+    <div
+      className="text-center uppercase mb-2"
+      style={{ fontFamily: FONT_MONO, fontSize: 9, color: C.goldDim, letterSpacing: "0.28em" }}
+    >
+      {kicker}
+    </div>
+    <div
+      className="text-center mb-4"
+      style={{ fontFamily: FONT_DISPLAY, fontSize: 15, color: C.navy, fontWeight: 700 }}
+    >
+      {title}
+    </div>
+    <div className="flex-1 flex flex-col justify-center">{children}</div>
+    {footer && (
+      <div
+        className="text-center italic mt-4"
+        style={{ fontFamily: FONT_ITALIC, fontSize: 12, color: C.navyMid, opacity: 0.75 }}
+      >
+        {footer}
+      </div>
+    )}
+  </div>
+);
+
+const PodiumViz = () => {
+  const bars = [
+    { rank: 2, country: "Vietnam", score: "9 225", h: "78%" },
+    { rank: 1, country: "Afrique du Sud", score: "9 968", h: "95%" },
+    { rank: 3, country: "Mexique", score: "4 761", h: "55%" },
+  ];
+  return (
+    <VizFrame
+      kicker="· Baromètre · Juillet–Août 2025 ·"
+      title="Indice mondial de compétitivité"
+      footer={
+        <>
+          <a
+            href="#"
+            className="inline-block uppercase mb-2"
+            style={{
+              fontFamily: FONT_MONO,
+              fontSize: 10,
+              color: C.navy,
+              background: C.gold,
+              padding: "7px 14px",
+              letterSpacing: "0.18em",
+              textDecoration: "none",
+            }}
+          >
+            Voir le baromètre →
+          </a>
+          <div>Extrait du baromètre d'investissement</div>
+        </>
+      }
+    >
+      <style>{`
+        @keyframes podium-rise { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+      `}</style>
+      <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "center", gap: 10, height: 140 }}>
+        {bars.map((b, i) => (
+          <div
+            key={i}
+            style={{
+              flex: 1,
+              maxWidth: 78,
+              height: b.h,
+              background: `linear-gradient(180deg, ${C.navyMid}, ${C.navy})`,
+              borderTop: `3px solid ${C.gold}`,
+              borderRadius: "2px 2px 0 0",
+              transformOrigin: "bottom",
+              animation: `podium-rise .8s cubic-bezier(.22,.9,.35,1) ${i * 0.15}s both`,
+              padding: "10px 4px 8px",
+              textAlign: "center",
+              color: C.ivory,
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "space-between",
+            }}
+          >
+            <div style={{ fontFamily: FONT_DISPLAY, fontStyle: "italic", fontSize: 22, fontWeight: 900, color: C.gold }}>
+              {b.rank}
+            </div>
+            <div>
+              <div style={{ fontFamily: "DM Sans, sans-serif", fontSize: 9.5, fontWeight: 600, textTransform: "uppercase" }}>
+                {b.country}
+              </div>
+              <div style={{ fontFamily: FONT_MONO, fontSize: 9, color: C.goldSoft, marginTop: 2 }}>
+                {b.score}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </VizFrame>
+  );
+};
+
+const FlourishViz = () => (
+  <VizFrame
+    kicker="· Cartographie territoriale ·"
+    title="Hiérarchie territoriale interactive"
+    footer="Interagissez directement avec la visualisation"
+  >
+    <div
+      style={{
+        position: "relative",
+        width: "100%",
+        height: 380,
+        border: `1px solid ${C.rule}`,
+        background: "#fff",
+        overflow: "hidden",
+        borderRadius: 2,
+      }}
+    >
+      <div
+        className="uppercase"
+        style={{
+          position: "absolute",
+          top: 8,
+          right: 8,
+          background: C.navy,
+          color: C.gold,
+          padding: "3px 7px",
+          fontFamily: FONT_MONO,
+          fontSize: 8,
+          letterSpacing: "0.18em",
+          zIndex: 2,
+        }}
+      >
+        LIVE
+      </div>
+      <iframe
+        src="https://public.flourish.studio/visualisation/24977460/embed"
+        title="Hierarchy visualization"
+        frameBorder={0}
+        scrolling="no"
+        sandbox="allow-same-origin allow-forms allow-scripts allow-downloads allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation"
+        style={{ width: "100%", height: "100%", border: 0 }}
+      />
+    </div>
+  </VizFrame>
+);
+
+const PatentsViz = () => {
+  const sats = [
+    { cx: 60, cy: 40, r: 6, fill: "#103E8C", stroke: "#0a2862", d: "0s" },
+    { cx: 100, cy: 120, r: 5, fill: "#5d7838", stroke: "#5d7838", d: ".3s" },
+    { cx: 240, cy: 50, r: 6, fill: "#103E8C", stroke: "#0a2862", d: ".6s" },
+    { cx: 270, cy: 115, r: 5, fill: "#b85a3a", stroke: "#b85a3a", d: ".9s" },
+    { cx: 80, cy: 100, r: 4, fill: "#5d7838", stroke: "#5d7838", d: "1.2s" },
+    { cx: 200, cy: 115, r: 4, fill: "#b85a3a", stroke: "#b85a3a", d: "1.5s" },
+  ];
+  return (
+    <VizFrame
+      kicker="· Innovation graph · Brevets & écosystèmes ·"
+      title="Constellation des technologies émergentes"
+    >
+      <style>{`
+        @keyframes pulse-node { 0%,100% { opacity:.45 } 50% { opacity:1 } }
+      `}</style>
+      <svg viewBox="0 0 320 160" width="100%" height={160}>
+        {sats.map((s, i) => (
+          <line
+            key={`l-${i}`}
+            x1={160}
+            y1={80}
+            x2={s.cx}
+            y2={s.cy}
+            stroke={C.gold}
+            strokeWidth={0.6}
+            opacity={0.4}
+          />
+        ))}
+        <circle cx={160} cy={80} r={10} fill={C.gold} stroke={C.goldDim} strokeWidth={1.5} />
+        <text
+          x={160}
+          y={83}
+          textAnchor="middle"
+          style={{ fontFamily: FONT_DISPLAY, fontSize: 9, fontWeight: 700, fill: C.navy }}
+        >
+          B
+        </text>
+        {sats.map((s, i) => (
+          <circle
+            key={`s-${i}`}
+            cx={s.cx}
+            cy={s.cy}
+            r={s.r}
+            fill={s.fill}
+            stroke={s.stroke}
+            strokeWidth={1}
+            style={{ animation: `pulse-node 2.4s infinite`, animationDelay: s.d }}
+          />
+        ))}
+      </svg>
+      <div
+        className="flex justify-around"
+        style={{ paddingTop: 10, borderTop: `1px solid ${C.rule}`, marginTop: 6 }}
+      >
+        {[
+          { n: "847", l: "Brevets suivis" },
+          { n: "12", l: "Écosystèmes" },
+          { n: "4", l: "Hubs deeptech" },
+        ].map((c, i) => (
+          <div key={i} className="text-center">
+            <div style={{ fontFamily: FONT_DISPLAY, fontWeight: 900, fontSize: 20, color: C.navy }}>{c.n}</div>
+            <div
+              className="uppercase"
+              style={{ fontFamily: FONT_MONO, fontSize: 8.5, color: C.navyMid, letterSpacing: "0.15em" }}
+            >
+              {c.l}
+            </div>
+          </div>
+        ))}
+      </div>
+    </VizFrame>
+  );
+};
+
+const MatrixViz = () => {
+  const nodes = [
+    { cx: 65, cy: 55, r: 7, fill: "#b85a3a", stroke: "#8a3f25" },
+    { cx: 100, cy: 75, r: 6, fill: "#103E8C", stroke: "#0a2862" },
+    { cx: 135, cy: 125, r: 5, fill: "#5d7838", stroke: "#5d7838" },
+    { cx: 220, cy: 65, r: 8, fill: C.gold, stroke: C.goldDim },
+    { cx: 255, cy: 90, r: 6, fill: "#103E8C", stroke: "#0a2862" },
+    { cx: 245, cy: 135, r: 5, fill: "#5d7838", stroke: "#5d7838" },
+  ];
+  return (
+    <VizFrame
+      kicker="· Stakeholder map · Méthode Buildfluence ·"
+      title="Matrice d'influence : qui pèse vraiment"
+      footer="Méthode appliquée sur le case file OCP ↓"
+    >
+      <style>{`
+        @keyframes fadein-mat { from { opacity:0; transform:scale(.7); } to { opacity:1; transform:scale(1); } }
+      `}</style>
+      <svg viewBox="0 0 320 200" width="100%" height={200}>
+        {/* grille pointillée */}
+        <line x1={90} y1={20} x2={90} y2={180} stroke={C.rule} strokeDasharray="2 2" />
+        <line x1={230} y1={20} x2={230} y2={180} stroke={C.rule} strokeDasharray="2 2" />
+        <line x1={20} y1={60} x2={300} y2={60} stroke={C.rule} strokeDasharray="2 2" />
+        <line x1={20} y1={140} x2={300} y2={140} stroke={C.rule} strokeDasharray="2 2" />
+        {/* axes */}
+        <line x1={160} y1={20} x2={160} y2={180} stroke={C.navyMid} strokeWidth={0.8} opacity={0.4} />
+        <line x1={20} y1={100} x2={300} y2={100} stroke={C.navyMid} strokeWidth={0.8} opacity={0.4} />
+        {/* labels quadrants */}
+        {[
+          { x: 90, y: 40, t: "Réfractaires" },
+          { x: 230, y: 40, t: "Alliés" },
+          { x: 90, y: 170, t: "Idiots utiles" },
+          { x: 230, y: 170, t: "Neutres" },
+        ].map((q, i) => (
+          <text
+            key={i}
+            x={q.x}
+            y={q.y}
+            textAnchor="middle"
+            style={{ fontFamily: FONT_DISPLAY, fontStyle: "italic", fontSize: 9, fill: C.navyMid, opacity: 0.55 }}
+          >
+            {q.t}
+          </text>
+        ))}
+        {/* axes labels */}
+        <text x={160} y={14} textAnchor="middle" style={{ fontFamily: FONT_MONO, fontSize: 7.5, fill: C.goldDim }}>
+          ↑ INFLUENCE
+        </text>
+        <text x={22} y={103} style={{ fontFamily: FONT_MONO, fontSize: 7.5, fill: C.goldDim }}>
+          ← HOSTILE
+        </text>
+        <text x={298} y={103} textAnchor="end" style={{ fontFamily: FONT_MONO, fontSize: 7.5, fill: C.goldDim }}>
+          ALLIÉ →
+        </text>
+        {nodes.map((n, i) => (
+          <circle
+            key={i}
+            cx={n.cx}
+            cy={n.cy}
+            r={n.r}
+            fill={n.fill}
+            stroke={n.stroke}
+            strokeWidth={1.2}
+            style={{
+              transformOrigin: `${n.cx}px ${n.cy}px`,
+              animation: `fadein-mat .5s ease-out ${0.1 + i * 0.1}s both`,
+            }}
+          />
+        ))}
+      </svg>
+    </VizFrame>
+  );
+};
+
+const ForesightViz = ({ indexKey }: { indexKey: string }) => {
+  switch (indexKey) {
+    case "S/01":
+      return <PodiumViz />;
+    case "S/02":
+      return <FlourishViz />;
+    case "S/03":
+      return <PatentsViz />;
+    case "S/04":
+      return <MatrixViz />;
+    default:
+      return null;
+  }
 };
 
 /* ═══════════════════════════════════════════════════════
