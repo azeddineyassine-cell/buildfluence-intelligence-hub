@@ -999,12 +999,28 @@ const ThreatViz = ({ mode }: { mode: ThreatMode }) => {
 const ThreatSection = () => {
   const [mode, setMode] = useState<ThreatMode>("veille");
   const data = THREAT_CONTENT[mode];
+  const restartThreatAnimations = () => {
+    requestAnimationFrame(() => {
+      document
+        .querySelectorAll<HTMLElement>(
+          ".signal-row, .cc-line-disinfo, .cc-line-counter, .cc-area-disinfo, .cc-marker, .cc-marker-label, .radar-blip, .radar-sweep"
+        )
+        .forEach((element) => {
+          element.style.animation = "none";
+          void element.offsetWidth;
+          element.style.animation = "";
+        });
+    });
+  };
 
   const ToggleBtn = ({ value, label }: { value: ThreatMode; label: string }) => {
     const active = mode === value;
     return (
       <button
-        onClick={() => setMode(value)}
+        onClick={() => {
+          setMode(value);
+          restartThreatAnimations();
+        }}
         className="transition-colors"
         style={{
           background: active ? C.gold : "transparent",
