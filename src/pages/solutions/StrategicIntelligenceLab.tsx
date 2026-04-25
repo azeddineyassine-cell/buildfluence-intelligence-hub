@@ -905,9 +905,6 @@ const StrategicIntelligenceLab = () => {
           "Tableau de bord décisionnel",
         ]}
         result="Actions de sensibilisation et de contre-influence auprès des clients et partenaires. Maîtrise des menaces sociétales."
-        image={imgOcpProtesters}
-        imageCaption="Agitation des idiots utiles manipulés par les ONG de l'Europe du Nord"
-        image2={imgOcpCase}
       />
 
       {/* SECTION 02 */}
@@ -924,9 +921,8 @@ const StrategicIntelligenceLab = () => {
           "War room de crise",
         ]}
         result="Crise maîtrisée en 2 semaines. Renforcement de l'image digitale du Ministre. Accompagnement de l'équipe de communication et du Cabinet Ministériel."
-        image={imgH1n1}
-        image2={imgMinistereSante}
       />
+
 
       {/* SECTION 03 */}
       <ModelisationsSection />
