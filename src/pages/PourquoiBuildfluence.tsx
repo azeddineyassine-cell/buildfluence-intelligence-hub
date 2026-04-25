@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState, ReactNode } from "react";
+import { BarChart3, Globe, AlertTriangle, Eye, Network } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import CTAFooter from "@/components/CTAFooter";
 
@@ -38,12 +39,7 @@ const polesData: Pole[] = [
     num: "P/01",
     title: "Données économiques",
     tag: "Marchés · Flux · Investissements",
-    icon: (
-      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M3 20V10l4-3 4 5 5-4 5 6v6H3z" />
-        <path d="M3 20h18" />
-      </svg>
-    ),
+    icon: <BarChart3 size={22} strokeWidth={1.6} />,
     panelTag: "P/01 · MARCHÉS · FLUX · INVESTISSEMENTS",
     lead: "Capter les flux d'investissement, lire les marchés en temps réel, anticiper les ruptures sectorielles avant qu'elles ne deviennent des évidences.",
     items: [
@@ -59,12 +55,7 @@ const polesData: Pole[] = [
     num: "P/02",
     title: "Contexte géopolitique",
     tag: "États · Alliances · Souverainetés",
-    icon: (
-      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-        <circle cx="12" cy="12" r="9" />
-        <path d="M3 12h18M12 3a13 13 0 010 18M12 3a13 13 0 000 18" />
-      </svg>
-    ),
+    icon: <Globe size={22} strokeWidth={1.6} />,
     panelTag: "P/02 · ÉTATS · ALLIANCES · SOUVERAINETÉS",
     lead: "Décoder les jeux d'États, identifier les souverainetés contestées, lire les rapports de force régionaux et internationaux.",
     items: [
@@ -80,12 +71,7 @@ const polesData: Pole[] = [
     num: "P/03",
     title: "Risques réputationnels",
     tag: "Image · Crises · Vulnérabilités",
-    icon: (
-      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M12 3l9 16H3L12 3z" />
-        <path d="M12 10v4M12 17v.5" />
-      </svg>
-    ),
+    icon: <AlertTriangle size={22} strokeWidth={1.6} />,
     panelTag: "P/03 · IMAGE · CRISES · VULNÉRABILITÉS",
     lead: "Détecter les vulnérabilités d'image, anticiper les crises de réputation, protéger les actifs intangibles avant qu'ils ne soient attaqués.",
     items: [
@@ -101,13 +87,7 @@ const polesData: Pole[] = [
     num: "P/04",
     title: "Dynamiques narratives",
     tag: "Récits · Médias · Opinion",
-    icon: (
-      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M3 12c2-3 5-5 9-5s7 2 9 5" />
-        <path d="M3 12c2 3 5 5 9 5s7-2 9-5" />
-        <circle cx="12" cy="12" r="2" />
-      </svg>
-    ),
+    icon: <Eye size={22} strokeWidth={1.6} />,
     panelTag: "P/04 · RÉCITS · MÉDIAS · OPINION",
     lead: "Lire les récits qui façonnent l'opinion, identifier les amplifications coordonnées, comprendre comment se forme et se déforme la perception.",
     items: [
@@ -123,16 +103,7 @@ const polesData: Pole[] = [
     num: "P/05",
     title: "Jeux d'influence",
     tag: "Acteurs · Réseaux · Coalitions",
-    icon: (
-      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-        <circle cx="6" cy="6" r="2.5" />
-        <circle cx="18" cy="6" r="2.5" />
-        <circle cx="6" cy="18" r="2.5" />
-        <circle cx="18" cy="18" r="2.5" />
-        <circle cx="12" cy="12" r="2.5" />
-        <path d="M8 7l3 4M16 7l-3 4M8 17l3-4M16 17l-3-4" />
-      </svg>
-    ),
+    icon: <Network size={22} strokeWidth={1.6} />,
     panelTag: "P/05 · ACTEURS · RÉSEAUX · COALITIONS",
     lead: "Cartographier les acteurs qui pèsent réellement, identifier les coalitions cachées, modéliser les jeux de pression et de contre-influence.",
     items: [
