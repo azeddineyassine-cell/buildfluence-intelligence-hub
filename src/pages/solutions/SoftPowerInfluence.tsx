@@ -590,7 +590,7 @@ const MechanismSection = ({ open }: { open: OpenDetail }) => {
       </div>
 
       {/* Footer 3 colonnes */}
-      <div className="sp-mech-foot grid mt-8 pt-6" style={{ gridTemplateColumns: "minmax(260px,320px) 1fr minmax(260px,320px)", gap: 32, borderTop: "1px solid rgba(244,241,234,0.08)" }}>
+      <div className="sp-mech-foot mt-8 pt-6" style={{ display: "grid", gridTemplateColumns: "320px 1fr 320px", gap: 32, borderTop: "1px solid rgba(244,241,234,0.08)" }}>
         {["Strategic Workflow · Veille & Intelligence","Infrastructure Décisionnelle Souveraine","Diffusion · Inter & Intra · National & International"].map((l) => (
           <div key={l} style={{ fontFamily: FONT_MONO, fontSize: 9, letterSpacing: "0.24em", textTransform: "uppercase", color: "rgba(244,241,234,0.4)", textAlign: "center" }}>{l}</div>
         ))}
@@ -603,6 +603,7 @@ const MechanismSection = ({ open }: { open: OpenDetail }) => {
         }
         @media (max-width: 1100px) {
           .sp-mech-grid, .sp-mech-foot { grid-template-columns: 1fr !important; }
+          .sp-mech-col-center { order: -1 !important; }
         }
         @media (max-width: 720px) {
           .sp-miniflow { grid-template-columns: 1fr !important; gap: 18px !important; }
