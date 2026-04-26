@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import DetailPageLayout from "@/components/DetailPageLayout";
 import {
@@ -327,12 +327,12 @@ const Signaletique = () => (
 
 /* ═══════════════ SECTION HEADER ═══════════════ */
 const SectionHeader = ({ num, eyebrow, children, intro }: { num: string; eyebrow: string; children: React.ReactNode; intro: React.ReactNode }) => (
-  <div className="grid gap-8 mb-12" style={{ gridTemplateColumns: "100px 1fr" }}>
-    <div style={{ fontFamily: FONT_DISPLAY, fontSize: 72, color: C.gold, fontWeight: 400, lineHeight: 0.9, fontStyle: "italic" }}>{num}</div>
-    <div>
+  <div className="sp-section-header mb-12">
+    <div className="sp-section-num" style={{ fontFamily: FONT_DISPLAY, fontSize: "clamp(48px,6vw,72px)", color: C.gold, fontWeight: 400, lineHeight: 0.9, fontStyle: "italic" }}>{num}</div>
+    <div className="min-w-0">
       <div style={{ fontFamily: FONT_MONO, fontSize: 11, letterSpacing: "0.22em", textTransform: "uppercase", color: C.gold, marginBottom: 14, fontWeight: 500 }}>{eyebrow}</div>
-      <h2 style={{ fontFamily: FONT_DISPLAY, fontSize: "clamp(34px,4.5vw,52px)", fontWeight: 600, color: C.navy, lineHeight: 1.08, marginBottom: 18, letterSpacing: "-0.015em" }}>{children}</h2>
-      <p style={{ fontFamily: FONT_ITALIC, fontStyle: "italic", fontSize: 20, color: C.inkSoft, maxWidth: 720, lineHeight: 1.5 }}>{intro}</p>
+      <h2 style={{ fontFamily: FONT_DISPLAY, fontSize: "clamp(28px,4.5vw,52px)", fontWeight: 600, color: C.navy, lineHeight: 1.08, marginBottom: 18, letterSpacing: "-0.015em" }}>{children}</h2>
+      <p style={{ fontFamily: FONT_ITALIC, fontStyle: "italic", fontSize: "clamp(15px,1.6vw,20px)", color: C.inkSoft, maxWidth: 720, lineHeight: 1.5 }}>{intro}</p>
     </div>
   </div>
 );
@@ -433,24 +433,24 @@ const MechanismSection = ({ open }: { open: OpenDetail }) => {
   const keyCountries = ["FR","DE","US","GB","JP","CN","BE","NL","ES","KR"];
   const competitors = ["TR","IN","MX","VN","TN","EG","PL","CZ","TH","ZA","HU","SK","CL","BG","KE","LT","SN","RW"];
   return (
-    <div style={{ background: C.navy, color: C.paper, padding: "80px clamp(20px,5vw,60px)", position: "relative", marginTop: 40 }}>
+    <div style={{ background: C.navy, color: C.paper, padding: "clamp(48px,6vw,80px) clamp(20px,4vw,48px)", position: "relative", marginTop: 40 }}>
       <span style={{ position: "absolute", top: 0, left: 0, right: 0, height: 1, background: "linear-gradient(90deg, transparent, #C9A84C 30%, #C9A84C 70%, transparent)", opacity: 0.4 }} />
 
       {/* Mini-flow */}
-      <div className="grid items-center gap-0 mx-auto mb-12 pb-12" style={{ gridTemplateColumns: "1fr auto 1fr auto 1fr", maxWidth: 920, borderBottom: "1px solid rgba(244,241,234,0.08)" }}>
+      <div className="sp-miniflow grid items-center gap-0 mx-auto mb-12 pb-12" style={{ gridTemplateColumns: "1fr auto 1fr auto 1fr", maxWidth: 920, borderBottom: "1px solid rgba(244,241,234,0.08)" }}>
         {[
           { num: "Phase 01", label: "Capter", desc: "Veille, DDD, BI, HumInt" },
           { num: "Phase 02", label: "Transformer", desc: "Infrastructure décisionnelle" },
           { num: "Phase 03", label: "Influencer", desc: "Diffusion & rayonnement" },
         ].map((s, i, arr) => (
-          <>
-            <div key={s.label} className="text-center px-4">
+          <React.Fragment key={s.label}>
+            <div className="text-center px-4">
               <div style={{ fontFamily: FONT_MONO, fontSize: 10, letterSpacing: "0.22em", color: C.gold, marginBottom: 8 }}>{s.num}</div>
-              <div style={{ fontFamily: FONT_DISPLAY, fontSize: 26, fontWeight: 600, color: C.paper, marginBottom: 6, letterSpacing: "-0.01em" }}>{s.label}</div>
-              <div style={{ fontFamily: FONT_ITALIC, fontStyle: "italic", fontSize: 15, color: "rgba(244,241,234,0.6)", lineHeight: 1.4 }}>{s.desc}</div>
+              <div style={{ fontFamily: FONT_DISPLAY, fontSize: "clamp(20px,2.4vw,26px)", fontWeight: 600, color: C.paper, marginBottom: 6, letterSpacing: "-0.01em" }}>{s.label}</div>
+              <div style={{ fontFamily: FONT_ITALIC, fontStyle: "italic", fontSize: 14, color: "rgba(244,241,234,0.6)", lineHeight: 1.4 }}>{s.desc}</div>
             </div>
-            {i < arr.length - 1 && <div key={"a" + i} style={{ color: C.gold, fontFamily: FONT_DISPLAY, fontSize: 28, fontWeight: 300, opacity: 0.6 }}>→</div>}
-          </>
+            {i < arr.length - 1 && <div className="sp-miniflow-arrow" style={{ color: C.gold, fontFamily: FONT_DISPLAY, fontSize: 28, fontWeight: 300, opacity: 0.6 }}>→</div>}
+          </React.Fragment>
         ))}
       </div>
 
@@ -467,7 +467,7 @@ const MechanismSection = ({ open }: { open: OpenDetail }) => {
       </div>
 
       {/* Grille 3 colonnes */}
-      <div className="grid items-start" style={{ gridTemplateColumns: "320px 1fr 320px", gap: 32, marginBottom: 32 }}>
+      <div className="sp-mech-grid grid items-start" style={{ gridTemplateColumns: "minmax(260px,320px) 1fr minmax(260px,320px)", gap: 32, marginBottom: 32 }}>
         {/* COL GAUCHE — Back-Office */}
         <div>
           <div style={colLabel}>Back-Office · Captation</div>
@@ -584,7 +584,7 @@ const MechanismSection = ({ open }: { open: OpenDetail }) => {
       </div>
 
       {/* Footer 3 colonnes */}
-      <div className="grid mt-8 pt-6" style={{ gridTemplateColumns: "320px 1fr 320px", gap: 32, borderTop: "1px solid rgba(244,241,234,0.08)" }}>
+      <div className="sp-mech-foot grid mt-8 pt-6" style={{ gridTemplateColumns: "minmax(260px,320px) 1fr minmax(260px,320px)", gap: 32, borderTop: "1px solid rgba(244,241,234,0.08)" }}>
         {["Strategic Workflow · Veille & Intelligence","Infrastructure Décisionnelle Souveraine","Diffusion · Inter & Intra · National & International"].map((l) => (
           <div key={l} style={{ fontFamily: FONT_MONO, fontSize: 9, letterSpacing: "0.24em", textTransform: "uppercase", color: "rgba(244,241,234,0.4)", textAlign: "center" }}>{l}</div>
         ))}
@@ -596,7 +596,11 @@ const MechanismSection = ({ open }: { open: OpenDetail }) => {
           50% { box-shadow: 0 0 0 12px rgba(201,168,76,0.08), 0 0 0 24px rgba(201,168,76,0.04); }
         }
         @media (max-width: 1100px) {
-          .softpower-mech-grid { grid-template-columns: 1fr !important; }
+          .sp-mech-grid, .sp-mech-foot { grid-template-columns: 1fr !important; }
+        }
+        @media (max-width: 720px) {
+          .sp-miniflow { grid-template-columns: 1fr !important; gap: 18px !important; }
+          .sp-miniflow-arrow { transform: rotate(90deg); }
         }
       `}</style>
     </div>
@@ -635,7 +639,7 @@ const AxesSection = () => (
     <SectionHeader num="ii" eyebrow="Trois axes pour peser sur votre écosystème" intro="Chaque axe activable seul ou en combinaison. La somme structure votre soft power. La séquence le rend opérationnel.">
       Activer les <em style={{ fontStyle: "italic", color: C.gold, fontWeight: 400 }}>leviers</em> qui déplacent les décisions.
     </SectionHeader>
-    <div className="grid gap-6" style={{ gridTemplateColumns: "repeat(3, 1fr)" }}>
+    <div className="sp-tri-grid grid gap-6" style={{ gridTemplateColumns: "repeat(3, minmax(0,1fr))" }}>
       <AxisCard
         eyebrow="S/I — Influence Intelligence" roman="I" title="Intelligence d'Influence"
         tagline="Orienter les perceptions avant qu'elles ne deviennent des décisions."
@@ -731,7 +735,7 @@ const CaseFileSection = () => (
       <span className="absolute" style={{ top: 0, left: 0, width: 80, height: 1, background: C.gold }} />
       <span className="absolute" style={{ bottom: 0, right: 0, width: 80, height: 1, background: C.gold }} />
 
-      <div className="grid items-start gap-14" style={{ gridTemplateColumns: "1fr 1.3fr" }}>
+      <div className="sp-case-grid grid items-start gap-14" style={{ gridTemplateColumns: "1fr 1.3fr" }}>
         <div>
           <div style={{ fontFamily: FONT_MONO, fontSize: 11, letterSpacing: "0.24em", textTransform: "uppercase", color: C.gold, marginBottom: 16 }}>Pièce au dossier</div>
           <div style={{ fontFamily: FONT_DISPLAY, fontStyle: "italic", fontSize: 80, color: C.gold, lineHeight: 1, marginBottom: 28, fontWeight: 400 }}>III</div>
@@ -792,7 +796,7 @@ const PocsSection = () => (
     <SectionHeader num="iv" eyebrow="Modélisations & POCs" intro="Du test rapide à l'infrastructure complète. Choisissez le format adapté à votre maturité — chacun est conçu pour produire un résultat tangible dès le premier mois.">
       Trois portes d'entrée pour <em style={{ fontStyle: "italic", color: C.gold, fontWeight: 400 }}>activer</em>.
     </SectionHeader>
-    <div className="grid gap-6" style={{ gridTemplateColumns: "repeat(3, 1fr)" }}>
+    <div className="sp-tri-grid grid gap-6" style={{ gridTemplateColumns: "repeat(3, minmax(0,1fr))" }}>
       {POCS.map((p) => (
         <article key={p.num} className="relative overflow-hidden transition-all hover:-translate-y-1" style={{ background: C.paperDeep, border: `1px solid ${C.line}`, padding: "40px 32px" }}>
           <div style={{ fontFamily: FONT_DISPLAY, fontStyle: "italic", fontSize: 64, color: C.gold, lineHeight: 0.9, marginBottom: 20, fontWeight: 400 }}>{p.num}</div>
@@ -889,6 +893,20 @@ const SoftPowerInfluence = () => {
       <ClosingSection />
 
       <DetailModal detail={detail} onClose={close} />
+
+      <style>{`
+        .sp-section-header { display: grid; grid-template-columns: 100px 1fr; gap: 32px; align-items: start; }
+        @media (max-width: 900px) {
+          .sp-section-header { grid-template-columns: 1fr; gap: 12px; }
+          .sp-section-num { font-size: 56px !important; }
+          .sp-tri-grid { grid-template-columns: 1fr !important; }
+          .sp-case-grid { grid-template-columns: 1fr !important; gap: 32px !important; }
+        }
+        @media (min-width: 901px) and (max-width: 1100px) {
+          .sp-tri-grid { grid-template-columns: 1fr !important; }
+          .sp-case-grid { grid-template-columns: 1fr !important; }
+        }
+      `}</style>
     </DetailPageLayout>
   );
 };
