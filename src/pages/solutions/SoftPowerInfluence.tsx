@@ -596,7 +596,11 @@ const MechanismSection = ({ open }: { open: OpenDetail }) => {
           50% { box-shadow: 0 0 0 12px rgba(201,168,76,0.08), 0 0 0 24px rgba(201,168,76,0.04); }
         }
         @media (max-width: 1100px) {
-          .softpower-mech-grid { grid-template-columns: 1fr !important; }
+          .sp-mech-grid, .sp-mech-foot { grid-template-columns: 1fr !important; }
+        }
+        @media (max-width: 720px) {
+          .sp-miniflow { grid-template-columns: 1fr !important; gap: 18px !important; }
+          .sp-miniflow-arrow { transform: rotate(90deg); }
         }
       `}</style>
     </div>
