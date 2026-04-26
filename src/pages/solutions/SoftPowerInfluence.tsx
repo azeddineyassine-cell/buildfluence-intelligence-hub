@@ -1,6 +1,7 @@
 import React, { useState, useMemo, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import DetailPageLayout from "@/components/DetailPageLayout";
+import logoBuildfluence from "@/assets/Logo_Buildfluence.png";
 import {
   sourcesData, destData, countries, fedData, apiData, coopData, logoData,
   getCompetitorBfApport, competitorOpportunities,
@@ -43,8 +44,14 @@ const DetailModal = ({ detail, onClose }: { detail: DetailKind | null; onClose: 
   useEffect(() => {
     const handler = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
     window.addEventListener("keydown", handler);
-    return () => window.removeEventListener("keydown", handler);
-  }, [onClose]);
+    if (detail) {
+      document.body.style.overflow = "hidden";
+    }
+    return () => {
+      window.removeEventListener("keydown", handler);
+      document.body.style.overflow = "";
+    };
+  }, [onClose, detail]);
 
   return (
     <AnimatePresence>
@@ -467,9 +474,9 @@ const MechanismSection = ({ open }: { open: OpenDetail }) => {
       </div>
 
       {/* Grille 3 colonnes */}
-      <div className="sp-mech-grid grid items-start" style={{ gridTemplateColumns: "minmax(260px,320px) 1fr minmax(260px,320px)", gap: 32, marginBottom: 32 }}>
+      <div className="sp-mech-grid" style={{ display: "grid", gridTemplateColumns: "320px 1fr 320px", gap: 32, alignItems: "start", marginBottom: 32 }}>
         {/* COL GAUCHE — Back-Office */}
-        <div>
+        <div className="sp-mech-col-left">
           <div style={colLabel}>Back-Office · Captation</div>
           <SourceCard k="veille" glyph="i" title="Veille & Intelligence" tagline="Voir avant les autres. Détecter les signaux invisibles." tags={["6 dimensions","NLP","Temps réel"]} open={open} />
           <SourceCard k="ddd" glyph="ii" title="Deep Due Diligence" tagline="Sécuriser la décision dans des environnements incertains." mini={["OFAC","EU Sanctions","ICIJ","GAFI","PitchBook","D&B"]} open={open} />
@@ -478,23 +485,22 @@ const MechanismSection = ({ open }: { open: OpenDetail }) => {
         </div>
 
         {/* COL CENTRE — BF Core */}
-        <div className="flex flex-col items-center gap-6">
+        <div className="sp-mech-col-center flex flex-col items-center gap-6">
           <div style={{ ...colLabel, width: "100%" }}>Infrastructure Décisionnelle</div>
           <button
             onClick={() => open({ kind: "source", data: sourcesData["bf-core"] })}
-            className="relative flex flex-col items-center justify-center transition-all"
+            className="bf-core-circle relative flex flex-col items-center justify-center transition-all"
             style={{
               width: 240, height: 240, borderRadius: "50%", background: C.paper,
               border: `2px solid rgba(201,168,76,0.4)`, cursor: "pointer",
               boxShadow: "0 0 0 8px rgba(201,168,76,0.05), 0 0 0 16px rgba(201,168,76,0.025)",
               animation: "bfPulse 3s ease-in-out infinite",
             }}
-            onMouseEnter={(e) => { e.currentTarget.style.borderColor = C.gold; e.currentTarget.style.boxShadow = "0 0 0 8px rgba(201,168,76,0.1), 0 0 0 16px rgba(201,168,76,0.05), 0 0 40px rgba(201,168,76,0.2)"; }}
-            onMouseLeave={(e) => { e.currentTarget.style.borderColor = "rgba(201,168,76,0.4)"; e.currentTarget.style.boxShadow = "0 0 0 8px rgba(201,168,76,0.05), 0 0 0 16px rgba(201,168,76,0.025)"; }}
+            onMouseEnter={(e) => { e.currentTarget.style.borderColor = C.gold; e.currentTarget.style.boxShadow = "0 0 0 8px rgba(201,168,76,0.1), 0 0 0 16px rgba(201,168,76,0.05), 0 0 40px rgba(201,168,76,0.2)"; e.currentTarget.style.animation = "none"; }}
+            onMouseLeave={(e) => { e.currentTarget.style.borderColor = "rgba(201,168,76,0.4)"; e.currentTarget.style.boxShadow = "0 0 0 8px rgba(201,168,76,0.05), 0 0 0 16px rgba(201,168,76,0.025)"; e.currentTarget.style.animation = "bfPulse 3s ease-in-out infinite"; }}
+            aria-label="Buildfluence — Infrastructure décisionnelle"
           >
-            <div style={{ fontFamily: FONT_DISPLAY, fontStyle: "italic", fontWeight: 600, fontSize: 56, color: C.navy, lineHeight: 1, letterSpacing: "-0.02em" }}><em style={{ color: C.gold, fontStyle: "italic" }}>B</em>F</div>
-            <div style={{ fontFamily: FONT_DISPLAY, fontSize: 13, fontWeight: 600, color: C.navy, marginTop: 8, letterSpacing: "0.02em" }}>Buildfluence</div>
-            <div style={{ fontFamily: FONT_MONO, fontSize: 8, letterSpacing: "0.28em", textTransform: "uppercase", color: C.gold, marginTop: 4 }}>Operator</div>
+            <img src={logoBuildfluence} alt="Buildfluence" style={{ width: 160, height: "auto", maxHeight: 160, objectFit: "contain", display: "block" }} />
           </button>
 
           <div style={{ fontFamily: FONT_DISPLAY, fontSize: 24, color: C.gold, opacity: 0.6, lineHeight: 1 }}>↓</div>
@@ -584,7 +590,7 @@ const MechanismSection = ({ open }: { open: OpenDetail }) => {
       </div>
 
       {/* Footer 3 colonnes */}
-      <div className="sp-mech-foot grid mt-8 pt-6" style={{ gridTemplateColumns: "minmax(260px,320px) 1fr minmax(260px,320px)", gap: 32, borderTop: "1px solid rgba(244,241,234,0.08)" }}>
+      <div className="sp-mech-foot mt-8 pt-6" style={{ display: "grid", gridTemplateColumns: "320px 1fr 320px", gap: 32, borderTop: "1px solid rgba(244,241,234,0.08)" }}>
         {["Strategic Workflow · Veille & Intelligence","Infrastructure Décisionnelle Souveraine","Diffusion · Inter & Intra · National & International"].map((l) => (
           <div key={l} style={{ fontFamily: FONT_MONO, fontSize: 9, letterSpacing: "0.24em", textTransform: "uppercase", color: "rgba(244,241,234,0.4)", textAlign: "center" }}>{l}</div>
         ))}
@@ -597,6 +603,7 @@ const MechanismSection = ({ open }: { open: OpenDetail }) => {
         }
         @media (max-width: 1100px) {
           .sp-mech-grid, .sp-mech-foot { grid-template-columns: 1fr !important; }
+          .sp-mech-col-center { order: -1 !important; }
         }
         @media (max-width: 720px) {
           .sp-miniflow { grid-template-columns: 1fr !important; gap: 18px !important; }
