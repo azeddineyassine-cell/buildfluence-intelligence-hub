@@ -893,6 +893,20 @@ const SoftPowerInfluence = () => {
       <ClosingSection />
 
       <DetailModal detail={detail} onClose={close} />
+
+      <style>{`
+        .sp-section-header { display: grid; grid-template-columns: 100px 1fr; gap: 32px; align-items: start; }
+        @media (max-width: 900px) {
+          .sp-section-header { grid-template-columns: 1fr; gap: 12px; }
+          .sp-section-num { font-size: 56px !important; }
+          .sp-tri-grid { grid-template-columns: 1fr !important; }
+          .sp-case-grid { grid-template-columns: 1fr !important; gap: 32px !important; }
+        }
+        @media (min-width: 901px) and (max-width: 1100px) {
+          .sp-tri-grid { grid-template-columns: 1fr !important; }
+          .sp-case-grid { grid-template-columns: 1fr !important; }
+        }
+      `}</style>
     </DetailPageLayout>
   );
 };
