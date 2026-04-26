@@ -433,24 +433,24 @@ const MechanismSection = ({ open }: { open: OpenDetail }) => {
   const keyCountries = ["FR","DE","US","GB","JP","CN","BE","NL","ES","KR"];
   const competitors = ["TR","IN","MX","VN","TN","EG","PL","CZ","TH","ZA","HU","SK","CL","BG","KE","LT","SN","RW"];
   return (
-    <div style={{ background: C.navy, color: C.paper, padding: "80px clamp(20px,5vw,60px)", position: "relative", marginTop: 40 }}>
+    <div style={{ background: C.navy, color: C.paper, padding: "clamp(48px,6vw,80px) clamp(20px,4vw,48px)", position: "relative", marginTop: 40 }}>
       <span style={{ position: "absolute", top: 0, left: 0, right: 0, height: 1, background: "linear-gradient(90deg, transparent, #C9A84C 30%, #C9A84C 70%, transparent)", opacity: 0.4 }} />
 
       {/* Mini-flow */}
-      <div className="grid items-center gap-0 mx-auto mb-12 pb-12" style={{ gridTemplateColumns: "1fr auto 1fr auto 1fr", maxWidth: 920, borderBottom: "1px solid rgba(244,241,234,0.08)" }}>
+      <div className="sp-miniflow grid items-center gap-0 mx-auto mb-12 pb-12" style={{ gridTemplateColumns: "1fr auto 1fr auto 1fr", maxWidth: 920, borderBottom: "1px solid rgba(244,241,234,0.08)" }}>
         {[
           { num: "Phase 01", label: "Capter", desc: "Veille, DDD, BI, HumInt" },
           { num: "Phase 02", label: "Transformer", desc: "Infrastructure décisionnelle" },
           { num: "Phase 03", label: "Influencer", desc: "Diffusion & rayonnement" },
         ].map((s, i, arr) => (
-          <>
-            <div key={s.label} className="text-center px-4">
+          <React.Fragment key={s.label}>
+            <div className="text-center px-4">
               <div style={{ fontFamily: FONT_MONO, fontSize: 10, letterSpacing: "0.22em", color: C.gold, marginBottom: 8 }}>{s.num}</div>
-              <div style={{ fontFamily: FONT_DISPLAY, fontSize: 26, fontWeight: 600, color: C.paper, marginBottom: 6, letterSpacing: "-0.01em" }}>{s.label}</div>
-              <div style={{ fontFamily: FONT_ITALIC, fontStyle: "italic", fontSize: 15, color: "rgba(244,241,234,0.6)", lineHeight: 1.4 }}>{s.desc}</div>
+              <div style={{ fontFamily: FONT_DISPLAY, fontSize: "clamp(20px,2.4vw,26px)", fontWeight: 600, color: C.paper, marginBottom: 6, letterSpacing: "-0.01em" }}>{s.label}</div>
+              <div style={{ fontFamily: FONT_ITALIC, fontStyle: "italic", fontSize: 14, color: "rgba(244,241,234,0.6)", lineHeight: 1.4 }}>{s.desc}</div>
             </div>
-            {i < arr.length - 1 && <div key={"a" + i} style={{ color: C.gold, fontFamily: FONT_DISPLAY, fontSize: 28, fontWeight: 300, opacity: 0.6 }}>→</div>}
-          </>
+            {i < arr.length - 1 && <div className="sp-miniflow-arrow" style={{ color: C.gold, fontFamily: FONT_DISPLAY, fontSize: 28, fontWeight: 300, opacity: 0.6 }}>→</div>}
+          </React.Fragment>
         ))}
       </div>
 
