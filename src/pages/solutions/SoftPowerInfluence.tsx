@@ -327,12 +327,12 @@ const Signaletique = () => (
 
 /* ═══════════════ SECTION HEADER ═══════════════ */
 const SectionHeader = ({ num, eyebrow, children, intro }: { num: string; eyebrow: string; children: React.ReactNode; intro: React.ReactNode }) => (
-  <div className="grid gap-8 mb-12" style={{ gridTemplateColumns: "100px 1fr" }}>
-    <div style={{ fontFamily: FONT_DISPLAY, fontSize: 72, color: C.gold, fontWeight: 400, lineHeight: 0.9, fontStyle: "italic" }}>{num}</div>
-    <div>
+  <div className="sp-section-header mb-12">
+    <div className="sp-section-num" style={{ fontFamily: FONT_DISPLAY, fontSize: "clamp(48px,6vw,72px)", color: C.gold, fontWeight: 400, lineHeight: 0.9, fontStyle: "italic" }}>{num}</div>
+    <div className="min-w-0">
       <div style={{ fontFamily: FONT_MONO, fontSize: 11, letterSpacing: "0.22em", textTransform: "uppercase", color: C.gold, marginBottom: 14, fontWeight: 500 }}>{eyebrow}</div>
-      <h2 style={{ fontFamily: FONT_DISPLAY, fontSize: "clamp(34px,4.5vw,52px)", fontWeight: 600, color: C.navy, lineHeight: 1.08, marginBottom: 18, letterSpacing: "-0.015em" }}>{children}</h2>
-      <p style={{ fontFamily: FONT_ITALIC, fontStyle: "italic", fontSize: 20, color: C.inkSoft, maxWidth: 720, lineHeight: 1.5 }}>{intro}</p>
+      <h2 style={{ fontFamily: FONT_DISPLAY, fontSize: "clamp(28px,4.5vw,52px)", fontWeight: 600, color: C.navy, lineHeight: 1.08, marginBottom: 18, letterSpacing: "-0.015em" }}>{children}</h2>
+      <p style={{ fontFamily: FONT_ITALIC, fontStyle: "italic", fontSize: "clamp(15px,1.6vw,20px)", color: C.inkSoft, maxWidth: 720, lineHeight: 1.5 }}>{intro}</p>
     </div>
   </div>
 );
