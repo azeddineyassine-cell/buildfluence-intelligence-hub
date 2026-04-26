@@ -889,12 +889,30 @@ const SoftPowerInfluence = () => {
 
   return (
     <DetailPageLayout
-      title={<>Soft Power & <em style={{ fontStyle: "italic", color: "#C9A84C", fontWeight: 400 }}>Influence</em></>}
-      chapeau={<span style={{ color: C.inkSoft, fontFamily: FONT_ITALIC, fontStyle: "italic" }}>Structurer et piloter les dynamiques d'influence pour transformer votre position en avantage compétitif durable.</span>}
+      title={
+        <>
+          <div className="mb-5 inline-flex items-center" style={{ padding: "10px 18px", border: `1px solid ${C.gold}`, fontFamily: FONT_MONO, fontSize: 11, letterSpacing: "0.28em", textTransform: "uppercase", color: C.gold, fontWeight: 500 }}>
+            Pilier II — Soft Power & Influence
+          </div>
+          <div>Soft Power & <em style={{ fontStyle: "italic", color: "#C9A84C", fontWeight: 400 }}>Influence</em></div>
+        </>
+      }
+      chapeau={
+        <span style={{ display: "block", borderLeft: `2px solid ${C.gold}`, paddingLeft: 18, color: C.inkSoft, fontFamily: FONT_ITALIC, fontStyle: "italic" }}>
+          Structurer et piloter les dynamiques d'influence pour transformer votre position en avantage compétitif durable.
+        </span>
+      }
       ctas={[{ label: "Parler de mon projet", action: "#", formType: "f1" }]}
       situationContext="Soft Power & Influence"
       sidebar={<Signaletique />}
     >
+      {/* Top intelligence band */}
+      <div className="flex flex-wrap items-center gap-x-6 gap-y-2 -mt-2 mb-2 pb-5" style={{ borderBottom: `1px solid ${C.line}`, fontFamily: FONT_MONO, fontSize: 10, letterSpacing: "0.24em", textTransform: "uppercase", color: C.inkMute, fontWeight: 500 }}>
+        <span style={{ color: C.gold }}>Buildfluence Intelligence Hub</span>
+        <span style={{ color: C.gold }}>— Pilier II / Soft Power & Influence</span>
+        <span style={{ marginLeft: "auto", color: C.gold }}>2026</span>
+      </div>
+
       {/* SECTION 01 — Mécanisme */}
       <section>
         <SectionHeader num="i" eyebrow="Mécanisme d'Attractivité & d'Influence" intro="Trois temps qui structurent l'intelligence stratégique. Une infrastructure souveraine au centre. Un écosystème de diffusion qui rayonne du Maroc vers le monde — et inversement.">
