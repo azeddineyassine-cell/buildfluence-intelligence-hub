@@ -467,7 +467,7 @@ const MechanismSection = ({ open }: { open: OpenDetail }) => {
       </div>
 
       {/* Grille 3 colonnes */}
-      <div className="grid items-start" style={{ gridTemplateColumns: "320px 1fr 320px", gap: 32, marginBottom: 32 }}>
+      <div className="sp-mech-grid grid items-start" style={{ gridTemplateColumns: "minmax(260px,320px) 1fr minmax(260px,320px)", gap: 32, marginBottom: 32 }}>
         {/* COL GAUCHE — Back-Office */}
         <div>
           <div style={colLabel}>Back-Office · Captation</div>
