@@ -1,4 +1,5 @@
 import React, { useState, useMemo, useEffect } from "react";
+import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import DetailPageLayout from "@/components/DetailPageLayout";
 import logoBuildfluence from "@/assets/Logo_Buildfluence.png";
@@ -53,7 +54,9 @@ const DetailModal = ({ detail, onClose }: { detail: DetailKind | null; onClose: 
     };
   }, [onClose, detail]);
 
-  return (
+  if (typeof document === "undefined") return null;
+
+  return createPortal(
     <AnimatePresence>
       {detail && (
         <>
@@ -61,18 +64,23 @@ const DetailModal = ({ detail, onClose }: { detail: DetailKind | null; onClose: 
             initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
             transition={{ duration: 0.25 }}
             onClick={onClose}
-            className="fixed inset-0 z-[999]"
-            style={{ background: "rgba(10, 22, 40, 0.7)", backdropFilter: "blur(4px)" }}
+            style={{
+              position: "fixed", inset: 0, zIndex: 9999,
+              background: "rgba(10, 22, 40, 0.7)", backdropFilter: "blur(4px)",
+            }}
           />
           <motion.div
             initial={{ opacity: 0, scale: 0.96, y: 10 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.96, y: 10 }}
             transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-            className="fixed left-1/2 top-1/2 z-[1000] -translate-x-1/2 -translate-y-1/2 overflow-y-auto"
             style={{
+              position: "fixed", left: "50%", top: "50%",
+              transform: "translate(-50%, -50%)",
+              zIndex: 10000,
               width: "min(900px, calc(100vw - 48px))",
               maxHeight: "calc(100vh - 80px)",
+              overflowY: "auto",
               background: C.paper,
               border: `1px solid ${C.gold}`,
               boxShadow: "0 30px 80px rgba(10,22,40,0.4), 0 0 0 1px rgba(201,168,76,0.2)",
@@ -91,7 +99,8 @@ const DetailModal = ({ detail, onClose }: { detail: DetailKind | null; onClose: 
           </motion.div>
         </>
       )}
-    </AnimatePresence>
+    </AnimatePresence>,
+    document.body
   );
 };
 
@@ -880,12 +889,30 @@ const SoftPowerInfluence = () => {
 
   return (
     <DetailPageLayout
-      title={<>Soft Power & <em style={{ fontStyle: "italic", color: "#C9A84C", fontWeight: 400 }}>Influence</em></>}
-      chapeau={<span style={{ color: C.inkSoft, fontFamily: FONT_ITALIC, fontStyle: "italic" }}>Structurer et piloter les dynamiques d'influence pour transformer votre position en avantage compétitif durable.</span>}
+      title={
+        <>
+          <div className="mb-5 inline-flex items-center" style={{ padding: "10px 18px", border: `1px solid ${C.gold}`, fontFamily: FONT_MONO, fontSize: 11, letterSpacing: "0.28em", textTransform: "uppercase", color: C.gold, fontWeight: 500 }}>
+            Pilier II — Soft Power & Influence
+          </div>
+          <div>Soft Power & <em style={{ fontStyle: "italic", color: "#C9A84C", fontWeight: 400 }}>Influence</em></div>
+        </>
+      }
+      chapeau={
+        <span style={{ display: "block", borderLeft: `2px solid ${C.gold}`, paddingLeft: 18, color: C.inkSoft, fontFamily: FONT_ITALIC, fontStyle: "italic" }}>
+          Structurer et piloter les dynamiques d'influence pour transformer votre position en avantage compétitif durable.
+        </span>
+      }
       ctas={[{ label: "Parler de mon projet", action: "#", formType: "f1" }]}
       situationContext="Soft Power & Influence"
       sidebar={<Signaletique />}
     >
+      {/* Top intelligence band */}
+      <div className="flex flex-wrap items-center gap-x-6 gap-y-2 -mt-2 mb-2 pb-5" style={{ borderBottom: `1px solid ${C.line}`, fontFamily: FONT_MONO, fontSize: 10, letterSpacing: "0.24em", textTransform: "uppercase", color: C.inkMute, fontWeight: 500 }}>
+        <span style={{ color: C.gold }}>Buildfluence Intelligence Hub</span>
+        <span style={{ color: C.gold }}>— Pilier II / Soft Power & Influence</span>
+        <span style={{ marginLeft: "auto", color: C.gold }}>2026</span>
+      </div>
+
       {/* SECTION 01 — Mécanisme */}
       <section>
         <SectionHeader num="i" eyebrow="Mécanisme d'Attractivité & d'Influence" intro="Trois temps qui structurent l'intelligence stratégique. Une infrastructure souveraine au centre. Un écosystème de diffusion qui rayonne du Maroc vers le monde — et inversement.">
