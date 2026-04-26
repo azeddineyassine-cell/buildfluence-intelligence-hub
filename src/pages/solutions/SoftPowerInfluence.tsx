@@ -54,7 +54,9 @@ const DetailModal = ({ detail, onClose }: { detail: DetailKind | null; onClose: 
     };
   }, [onClose, detail]);
 
-  return (
+  if (typeof document === "undefined") return null;
+
+  return createPortal(
     <AnimatePresence>
       {detail && (
         <>
@@ -62,18 +64,23 @@ const DetailModal = ({ detail, onClose }: { detail: DetailKind | null; onClose: 
             initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
             transition={{ duration: 0.25 }}
             onClick={onClose}
-            className="fixed inset-0 z-[999]"
-            style={{ background: "rgba(10, 22, 40, 0.7)", backdropFilter: "blur(4px)" }}
+            style={{
+              position: "fixed", inset: 0, zIndex: 9999,
+              background: "rgba(10, 22, 40, 0.7)", backdropFilter: "blur(4px)",
+            }}
           />
           <motion.div
             initial={{ opacity: 0, scale: 0.96, y: 10 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.96, y: 10 }}
             transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-            className="fixed left-1/2 top-1/2 z-[1000] -translate-x-1/2 -translate-y-1/2 overflow-y-auto"
             style={{
+              position: "fixed", left: "50%", top: "50%",
+              transform: "translate(-50%, -50%)",
+              zIndex: 10000,
               width: "min(900px, calc(100vw - 48px))",
               maxHeight: "calc(100vh - 80px)",
+              overflowY: "auto",
               background: C.paper,
               border: `1px solid ${C.gold}`,
               boxShadow: "0 30px 80px rgba(10,22,40,0.4), 0 0 0 1px rgba(201,168,76,0.2)",
@@ -92,7 +99,8 @@ const DetailModal = ({ detail, onClose }: { detail: DetailKind | null; onClose: 
           </motion.div>
         </>
       )}
-    </AnimatePresence>
+    </AnimatePresence>,
+    document.body
   );
 };
 
