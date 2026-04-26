@@ -1,4 +1,5 @@
 import React, { useState, useMemo, useEffect } from "react";
+import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import DetailPageLayout from "@/components/DetailPageLayout";
 import logoBuildfluence from "@/assets/Logo_Buildfluence.png";
