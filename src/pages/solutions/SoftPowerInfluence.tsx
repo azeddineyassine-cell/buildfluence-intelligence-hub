@@ -1,6 +1,7 @@
 import React, { useState, useMemo, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import DetailPageLayout from "@/components/DetailPageLayout";
+import logoBuildfluence from "@/assets/Logo_Buildfluence.png";
 import {
   sourcesData, destData, countries, fedData, apiData, coopData, logoData,
   getCompetitorBfApport, competitorOpportunities,
