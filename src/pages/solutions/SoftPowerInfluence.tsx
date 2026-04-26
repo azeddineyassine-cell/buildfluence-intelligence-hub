@@ -639,7 +639,7 @@ const AxesSection = () => (
     <SectionHeader num="ii" eyebrow="Trois axes pour peser sur votre écosystème" intro="Chaque axe activable seul ou en combinaison. La somme structure votre soft power. La séquence le rend opérationnel.">
       Activer les <em style={{ fontStyle: "italic", color: C.gold, fontWeight: 400 }}>leviers</em> qui déplacent les décisions.
     </SectionHeader>
-    <div className="grid gap-6" style={{ gridTemplateColumns: "repeat(3, 1fr)" }}>
+    <div className="sp-tri-grid grid gap-6" style={{ gridTemplateColumns: "repeat(3, minmax(0,1fr))" }}>
       <AxisCard
         eyebrow="S/I — Influence Intelligence" roman="I" title="Intelligence d'Influence"
         tagline="Orienter les perceptions avant qu'elles ne deviennent des décisions."
@@ -735,7 +735,7 @@ const CaseFileSection = () => (
       <span className="absolute" style={{ top: 0, left: 0, width: 80, height: 1, background: C.gold }} />
       <span className="absolute" style={{ bottom: 0, right: 0, width: 80, height: 1, background: C.gold }} />
 
-      <div className="grid items-start gap-14" style={{ gridTemplateColumns: "1fr 1.3fr" }}>
+      <div className="sp-case-grid grid items-start gap-14" style={{ gridTemplateColumns: "1fr 1.3fr" }}>
         <div>
           <div style={{ fontFamily: FONT_MONO, fontSize: 11, letterSpacing: "0.24em", textTransform: "uppercase", color: C.gold, marginBottom: 16 }}>Pièce au dossier</div>
           <div style={{ fontFamily: FONT_DISPLAY, fontStyle: "italic", fontSize: 80, color: C.gold, lineHeight: 1, marginBottom: 28, fontWeight: 400 }}>III</div>
@@ -796,7 +796,7 @@ const PocsSection = () => (
     <SectionHeader num="iv" eyebrow="Modélisations & POCs" intro="Du test rapide à l'infrastructure complète. Choisissez le format adapté à votre maturité — chacun est conçu pour produire un résultat tangible dès le premier mois.">
       Trois portes d'entrée pour <em style={{ fontStyle: "italic", color: C.gold, fontWeight: 400 }}>activer</em>.
     </SectionHeader>
-    <div className="grid gap-6" style={{ gridTemplateColumns: "repeat(3, 1fr)" }}>
+    <div className="sp-tri-grid grid gap-6" style={{ gridTemplateColumns: "repeat(3, minmax(0,1fr))" }}>
       {POCS.map((p) => (
         <article key={p.num} className="relative overflow-hidden transition-all hover:-translate-y-1" style={{ background: C.paperDeep, border: `1px solid ${C.line}`, padding: "40px 32px" }}>
           <div style={{ fontFamily: FONT_DISPLAY, fontStyle: "italic", fontSize: 64, color: C.gold, lineHeight: 0.9, marginBottom: 20, fontWeight: 400 }}>{p.num}</div>
