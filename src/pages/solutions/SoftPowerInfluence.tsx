@@ -258,7 +258,7 @@ const DetailContent = ({ detail }: { detail: DetailKind }) => {
           ] },
           { h: "Apport sectoriel ciblé", items: [f.apport] },
         ]} />
-        <BfApport text="Une fédération seule reçoit de la donnée. Une fédération avec Buildfluence reçoit une longueur d'avance." />
+        <BfApport text="Une fédération seule reçoit de la donnée. Une fédération avec Buildfluence reçoit une longueur d'avance." label="Valeur Buildfluence" />
       </>
     );
   }
