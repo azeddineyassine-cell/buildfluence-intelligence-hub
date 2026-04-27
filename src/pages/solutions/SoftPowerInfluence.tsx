@@ -698,9 +698,18 @@ const MechanismSection = ({ open }: { open: OpenDetail }) => {
 
 const colLabel: React.CSSProperties = {
   fontFamily: FONT_MONO, fontSize: 10, letterSpacing: "0.28em", textTransform: "uppercase",
-  color: "rgba(244,241,234,0.5)", textAlign: "center", marginBottom: 24, paddingBottom: 16,
-  borderBottom: "1px solid rgba(244,241,234,0.1)", position: "relative",
+  color: C.inkSoft, textAlign: "center", marginBottom: 8, paddingBottom: 16,
+  borderBottom: "1px solid rgba(10,22,40,0.10)", position: "relative",
 };
+
+const ColHeader = ({ children }: { children: React.ReactNode }) => (
+  <div style={{ marginBottom: 24 }}>
+    <div style={colLabel}>{children}</div>
+    <div style={{ display: "flex", justifyContent: "center", marginTop: 10 }}>
+      <span aria-hidden style={{ display: "block", width: 38, height: 2, background: C.gold }} />
+    </div>
+  </div>
+);
 
 /* ═══════════════ SECTION 02 — 3 AXES ═══════════════ */
 const AxisCard = ({ eyebrow, roman, title, tagline, viz, items }: {
