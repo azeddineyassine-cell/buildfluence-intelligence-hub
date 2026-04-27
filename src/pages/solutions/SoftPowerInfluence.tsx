@@ -601,7 +601,7 @@ const MechanismSection = ({ open }: { open: OpenDetail }) => {
 
         {/* COL DROITE — Ecosystem */}
         <div>
-          <div style={colLabel}>Ecosystem · Diffusion</div>
+          <ColHeader>Ecosystem · Diffusion</ColHeader>
 
           <DestCard onClick={() => open({ kind: "dest", data: destData.amdie })}>
             <DestHeader glyph="i" title="AMDIE / MICEPP" sub="Agence d'Investissement & Ministère de tutelle" />
