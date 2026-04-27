@@ -137,10 +137,10 @@ export const destData: Record<string, DestDetail> = {
       "Agences d'État, instances publiques, Centres Régionaux de l'Investissement. Le tissu institutionnel qui pilote les politiques publiques du Royaume.",
     cols: [
       { h: "Périmètre", items: ["Ministères sectoriels & agences", "Instances publiques de pilotage", "12 CRI — Centres Régionaux", "Conseils & instances consultatives"] },
-      { h: "L'apport Buildfluence", items: ["Pilotage avec longueur d'avance stratégique", "Anticipation réglementaire continue", "Intelligence territoriale dédiée", "Veille compétitivité régionale", "Suivi du Doing Business pour le Maroc"] },
+      { h: "Valeur Buildfluence", items: ["Pilotage avec longueur d'avance stratégique", "Anticipation réglementaire continue", "Intelligence territoriale dédiée", "Veille compétitivité régionale", "Suivi du Doing Business pour le Maroc"] },
     ],
     bfApport:
-      "Le Maroc dispose d'institutions solides. Buildfluence leur fournit la matière intellectuelle pour décider plus vite, plus juste, plus loin.",
+      "Dans des environnements sous contrainte, la qualité de la décision devient un levier de souveraineté. Buildfluence structure les capacités d'anticipation, d'arbitrage et d'influence au cœur de l'action publique.",
   },
   medias: {
     eyebrow: "Ecosystem · Pilier viii",
