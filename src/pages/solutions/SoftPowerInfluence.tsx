@@ -647,7 +647,7 @@ const MechanismSection = ({ open }: { open: OpenDetail }) => {
             <DestHeader glyph="vi" title="Agences de Promotion d'Investissements" sub="Benchmark international — cliquez une agence" />
             <div className="flex flex-wrap gap-2 pt-2.5" style={{ borderTop: "1px solid rgba(244,241,234,0.08)" }}>
               {Object.entries(apiData).map(([k, v]) => (
-                <LogoChip key={k} label={v.full.length > 14 ? k : v.full} onClick={() => open({ kind: "api", data: v })} />
+                <LogoChip key={k} label={v.full} src={API_LOGOS[k]} onClick={() => open({ kind: "api", data: v })} />
               ))}
             </div>
           </DestCard>
