@@ -451,9 +451,9 @@ const MechanismSection = ({ open }: { open: OpenDetail }) => {
   const keyCountries = ["FR","DE","US","GB","JP","CN","BE","NL","ES","KR"];
   const competitors = ["TR","IN","MX","VN","TN","EG","PL","CZ","TH","ZA","HU","SK","CL","BG","KE","LT","SN","RW"];
   return (
-    <div style={{ background: C.navy, color: C.paper, padding: "clamp(48px,6vw,80px) clamp(20px,4vw,48px)", position: "relative", marginTop: 40 }}>
+    <div style={{ background: C.navy, color: C.paper, padding: "clamp(48px,6vw,80px) 0", position: "relative", marginTop: 40 }}>
       <span style={{ position: "absolute", top: 0, left: 0, right: 0, height: 1, background: "linear-gradient(90deg, transparent, #C9A84C 30%, #C9A84C 70%, transparent)", opacity: 0.4 }} />
-
+      <div style={{ maxWidth: 1320, margin: "0 auto", padding: "0 clamp(20px,4vw,48px)" }}>
       {/* Mini-flow */}
       <div className="sp-miniflow grid items-center gap-0 mx-auto mb-12 pb-12" style={{ gridTemplateColumns: "1fr auto 1fr auto 1fr", maxWidth: 920, borderBottom: "1px solid rgba(244,241,234,0.08)" }}>
         {[
