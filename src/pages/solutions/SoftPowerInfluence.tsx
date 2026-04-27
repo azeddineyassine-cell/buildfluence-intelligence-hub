@@ -942,9 +942,7 @@ const SoftPowerInfluence = () => {
           </div>
           {/* Bandeau navy full-bleed */}
           <div className="sp-fullbleed">
-            <div className="sp-container">
-              <MechanismSection open={open} />
-            </div>
+            <MechanismSection open={open} />
           </div>
         </section>
 
