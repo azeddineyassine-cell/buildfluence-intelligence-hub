@@ -305,7 +305,7 @@ const DetailContent = ({ detail }: { detail: DetailKind }) => {
       <Eyebrow>AMDIE · MICEPP · Morocco Now</Eyebrow>
       <DetailTitle>{l.name}</DetailTitle>
       <DetailTagline>{l.full}</DetailTagline>
-      <BfApport text={l.apport} />
+      <BfApport text={l.apport} label="Valeur Buildfluence" />
     </>
   );
 };
