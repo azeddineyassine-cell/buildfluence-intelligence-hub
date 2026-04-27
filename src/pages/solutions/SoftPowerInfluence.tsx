@@ -4,7 +4,9 @@ import { motion, AnimatePresence } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import CTAFooter from "@/components/CTAFooter";
 import { FormStrategicExchange } from "@/components/FormModals";
-import logoBuildfluence from "@/assets/Logo_Buildfluence_FondBlanc2.png";
+import logoBuildfluence from "@/assets/Logo_Buildfluence-Fond_Blanc_1.png";
+import logoMedz from "@/assets/clients/medz.png";
+import logoCri from "@/assets/clients/cri.png";
 
 // Actor logos (Back-Office sources + Ecosystem)
 import logoOfac from "@/assets/clients/ofac.png";
