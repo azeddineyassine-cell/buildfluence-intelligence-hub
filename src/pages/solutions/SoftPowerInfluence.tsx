@@ -621,6 +621,7 @@ const MechanismSection = ({ open }: { open: OpenDetail }) => {
           .sp-miniflow-arrow { transform: rotate(90deg); }
         }
       `}</style>
+      </div>
     </div>
   );
 };
