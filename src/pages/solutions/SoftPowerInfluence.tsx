@@ -4,7 +4,58 @@ import { motion, AnimatePresence } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import CTAFooter from "@/components/CTAFooter";
 import { FormStrategicExchange } from "@/components/FormModals";
-import logoBuildfluence from "@/assets/Logo_Buildfluence.png";
+import logoBuildfluence from "@/assets/Logo_Buildfluence_FondBlanc2.png";
+
+// Actor logos (Back-Office sources + Ecosystem)
+import logoOfac from "@/assets/clients/ofac.png";
+import logoEuSanctions from "@/assets/clients/eu-sanctions.png";
+import logoIcij from "@/assets/clients/icij.png";
+import logoGafi from "@/assets/clients/gafi.png";
+import logoPitchbook from "@/assets/clients/pitchbook.png";
+import logoDnb from "@/assets/clients/dun-bradstreet.png";
+import logoGrowthlab from "@/assets/clients/growthlab.png";
+import logoStatista from "@/assets/clients/statista.png";
+import logoFdi from "@/assets/clients/fdi.png";
+import logoWorldbank from "@/assets/clients/worldbank.png";
+import logoHarvard from "@/assets/clients/harvard.png";
+import logoAmdie from "@/assets/clients/amdie.png";
+import logoMicepp from "@/assets/clients/micepp.png";
+import logoMoroccoNow from "@/assets/clients/morocco-now.png";
+import logoCgem from "@/assets/clients/cgem.png";
+import logoAsmex from "@/assets/clients/asmex.png";
+import logoAmica from "@/assets/clients/amica.png";
+import logoAmip from "@/assets/clients/amip.png";
+import logoAmith from "@/assets/clients/amith.png";
+import logoCnt from "@/assets/clients/cnt.png";
+import logoFenagri from "@/assets/clients/fenagri.png";
+import logoInvesthk from "@/assets/clients/investhk.png";
+import logoEdbsg from "@/assets/clients/edb-singapore.png";
+import logoApexbrasil from "@/assets/clients/apexbrasil.png";
+import logoInvestlt from "@/assets/clients/invest-lithuania.png";
+import logoInvestmx from "@/assets/clients/invest-mexico.png";
+import logoInvestvn from "@/assets/clients/invest-vietnam.png";
+import logoInvestcl from "@/assets/clients/investchile.png";
+import logoInvestsa from "@/assets/clients/investsa.png";
+import logoCzechinvest from "@/assets/clients/czech-invest.png";
+import logoGiz from "@/assets/clients/giz.png";
+import logoAfd from "@/assets/clients/afd.png";
+import logoJica from "@/assets/clients/jica.png";
+import logoBei from "@/assets/clients/bei.png";
+import logoPnud from "@/assets/clients/pnud.png";
+import logoBm from "@/assets/clients/worldbank.png";
+import logoBerd from "@/assets/clients/berd.png";
+import logoIsdb from "@/assets/clients/isdb.png";
+import logoBad from "@/assets/clients/bad.png";
+
+const FED_LOGOS: Record<string, string> = { cgem: logoCgem, asmex: logoAsmex, amica: logoAmica, amip: logoAmip, amith: logoAmith, cnt: logoCnt, fenagri: logoFenagri };
+const API_LOGOS: Record<string, string> = { investhk: logoInvesthk, edbsg: logoEdbsg, apexbrasil: logoApexbrasil, investlt: logoInvestlt, investmx: logoInvestmx, investvn: logoInvestvn, investcl: logoInvestcl, investsa: logoInvestsa, czechinvest: logoCzechinvest };
+const COOP_LOGOS: Record<string, string> = { giz: logoGiz, afd: logoAfd, jica: logoJica, bei: logoBei, pnud: logoPnud, bm: logoBm, berd: logoBerd, isdb: logoIsdb, bad: logoBad };
+const AMDIE_LOGOS: Record<string, string> = { amdie: logoAmdie, micepp: logoMicepp, moroccoNow: logoMoroccoNow };
+const SOURCE_LOGOS: Record<string, string> = {
+  OFAC: logoOfac, "EU Sanctions": logoEuSanctions, ICIJ: logoIcij, GAFI: logoGafi, PitchBook: logoPitchbook, "D&B": logoDnb,
+  "Growth Lab": logoGrowthlab, Statista: logoStatista, fDi: logoFdi, "World Bank": logoWorldbank, Harvard: logoHarvard,
+};
+
 import {
   sourcesData, destData, countries, fedData, apiData, coopData, logoData,
   getCompetitorBfApport, competitorOpportunities,
@@ -147,10 +198,10 @@ const ColsBlock = ({ cols }: { cols: { h: string; items: string[] }[] }) => (
   </div>
 );
 
-const BfApport = ({ text }: { text: string }) => (
+const BfApport = ({ text, label = "L'apport Buildfluence" }: { text: string; label?: string }) => (
   <div style={{ background: C.navy, color: C.paper, padding: 24, marginTop: 28, position: "relative" }}>
     <span style={{ position: "absolute", top: 0, left: 0, width: 40, height: 1, background: C.gold }} />
-    <h5 style={{ fontFamily: FONT_MONO, fontSize: 10, letterSpacing: "0.24em", textTransform: "uppercase", color: C.gold, marginBottom: 14, fontWeight: 600 }}>L'apport Buildfluence</h5>
+    <h5 style={{ fontFamily: FONT_MONO, fontSize: 10, letterSpacing: "0.24em", textTransform: "uppercase", color: C.gold, marginBottom: 14, fontWeight: 600 }}>{label}</h5>
     <p style={{ fontFamily: FONT_ITALIC, fontStyle: "italic", fontSize: 17, color: C.paper, lineHeight: 1.5, fontWeight: 400 }}>{text}</p>
   </div>
 );
@@ -197,7 +248,7 @@ const DetailContent = ({ detail }: { detail: DetailKind }) => {
         <DetailTagline>{d.tagline}</DetailTagline>
         {d.meta && <MetaStrip items={d.meta} />}
         <ColsBlock cols={d.cols} />
-        <BfApport text={d.bfApport} />
+        <BfApport text={d.bfApport} label="Valeur Buildfluence" />
       </>
     );
   }
@@ -258,7 +309,7 @@ const DetailContent = ({ detail }: { detail: DetailKind }) => {
           ] },
           { h: "Apport sectoriel ciblé", items: [f.apport] },
         ]} />
-        <BfApport text="Une fédération seule reçoit de la donnée. Une fédération avec Buildfluence reçoit une longueur d'avance." />
+        <BfApport text="Une fédération seule reçoit de la donnée. Une fédération avec Buildfluence reçoit une longueur d'avance." label="Valeur Buildfluence" />
       </>
     );
   }
@@ -274,9 +325,9 @@ const DetailContent = ({ detail }: { detail: DetailKind }) => {
             `${a.full} fait partie des agences de référence mondiale pour la promotion des investissements directs étrangers.`,
             "Buildfluence analyse en continu les méthodes, outils et succès de ces agences pour en transposer les meilleures pratiques au contexte marocain (AMDIE notamment).",
           ] },
-          { h: "Apport Buildfluence dédié", items: [a.apport] },
+          { h: "Valeur Buildfluence dédiée", items: [a.apport] },
         ]} />
-        <BfApport text="L'AMDIE n'a pas besoin de réinventer ce qui marche. Buildfluence livre les playbooks éprouvés des meilleures agences mondiales." />
+        <BfApport text="L'AMDIE n'a pas besoin de réinventer ce qui marche. Buildfluence livre les playbooks éprouvés des meilleures agences mondiales." label="Valeur Buildfluence" />
       </>
     );
   }
@@ -292,9 +343,9 @@ const DetailContent = ({ detail }: { detail: DetailKind }) => {
             `${c.full} est un bailleur clé du développement économique au Maroc.`,
             "Comprendre ses priorités, instruments et fenêtres de financement permet d'aligner les projets nationaux et privés sur ses cycles.",
           ] },
-          { h: "Apport Buildfluence dédié", items: [c.apport] },
+          { h: "Valeur Buildfluence dédiée", items: [c.apport] },
         ]} />
-        <BfApport text="Les bailleurs ne financent que les projets bien construits, bien narrés, bien timés. Buildfluence orchestre les trois." />
+        <BfApport text="Les bailleurs ne financent que les projets bien construits, bien narrés, bien timés. Buildfluence orchestre les trois." label="Valeur Buildfluence" />
       </>
     );
   }
@@ -305,7 +356,7 @@ const DetailContent = ({ detail }: { detail: DetailKind }) => {
       <Eyebrow>AMDIE · MICEPP · Morocco Now</Eyebrow>
       <DetailTitle>{l.name}</DetailTitle>
       <DetailTagline>{l.full}</DetailTagline>
-      <BfApport text={l.apport} />
+      <BfApport text={l.apport} label="Valeur Buildfluence" />
     </>
   );
 };
@@ -390,9 +441,16 @@ const SourceCard = ({ k, glyph, title, tagline, tags, mini, hum, open }: {
     )}
     {mini && (
       <div className="flex flex-wrap items-center gap-2 pt-2.5" style={{ borderTop: "1px solid rgba(244,241,234,0.08)" }}>
-        {mini.map((m) => (
-          <span key={m} style={{ fontFamily: FONT_MONO, fontSize: 9, color: "rgba(244,241,234,0.7)" }}>{m}</span>
-        ))}
+        {mini.map((m) => {
+          const src = SOURCE_LOGOS[m];
+          return src ? (
+            <span key={m} title={m} style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", width: 64, height: 28, background: "rgba(255,255,255,0.92)", border: "1px solid rgba(255,255,255,0.15)", borderRadius: 2, padding: "3px 6px" }}>
+              <img src={src} alt={m} style={{ maxWidth: "100%", maxHeight: "100%", objectFit: "contain", display: "block" }} />
+            </span>
+          ) : (
+            <span key={m} style={{ fontFamily: FONT_MONO, fontSize: 9, color: "rgba(244,241,234,0.7)" }}>{m}</span>
+          );
+        })}
       </div>
     )}
     <div style={{ marginTop: 12, fontFamily: FONT_MONO, fontSize: 9, letterSpacing: "0.22em", textTransform: "uppercase", color: hum ? "#E8A89F" : C.gold, opacity: 0.6 }}>→ Explorer le pilier</div>
@@ -421,15 +479,20 @@ const DestHeader = ({ glyph, title, sub }: { glyph: string; title: string; sub: 
   </>
 );
 
-const LogoChip = ({ label, onClick }: { label: string; onClick: () => void }) => (
+const LogoChip = ({ label, src, onClick }: { label: string; src?: string; onClick: () => void }) => (
   <button
     onClick={(e) => { e.stopPropagation(); onClick(); }}
     className="transition-all"
-    style={{ padding: "4px 8px", cursor: "pointer", borderRadius: 2, background: "rgba(244,241,234,0.08)", display: "flex", alignItems: "center", justifyContent: "center", minWidth: 50, height: 24, border: "none" }}
-    onMouseEnter={(e) => { e.currentTarget.style.background = "rgba(201,168,76,0.15)"; e.currentTarget.style.transform = "translateY(-2px)"; }}
-    onMouseLeave={(e) => { e.currentTarget.style.background = "rgba(244,241,234,0.08)"; e.currentTarget.style.transform = "translateY(0)"; }}
+    title={label}
+    style={{ padding: src ? "6px 10px" : "4px 8px", cursor: "pointer", borderRadius: 2, background: "rgba(255,255,255,0.92)", display: "flex", alignItems: "center", justifyContent: "center", width: src ? 96 : 50, height: src ? 44 : 24, border: "1px solid rgba(10,22,40,0.08)" }}
+    onMouseEnter={(e) => { e.currentTarget.style.background = "#FFFFFF"; e.currentTarget.style.borderColor = "rgba(201,168,76,0.6)"; e.currentTarget.style.transform = "translateY(-2px)"; }}
+    onMouseLeave={(e) => { e.currentTarget.style.background = "rgba(255,255,255,0.92)"; e.currentTarget.style.borderColor = "rgba(10,22,40,0.08)"; e.currentTarget.style.transform = "translateY(0)"; }}
   >
-    <span style={{ fontFamily: FONT_DISPLAY, fontSize: 11, fontWeight: 600, color: C.paper, letterSpacing: "0.02em" }}>{label}</span>
+    {src ? (
+      <img src={src} alt={label} style={{ maxWidth: "100%", maxHeight: "100%", width: "auto", height: "auto", objectFit: "contain", display: "block" }} />
+    ) : (
+      <span style={{ fontFamily: FONT_DISPLAY, fontSize: 11, fontWeight: 600, color: C.navy, letterSpacing: "0.02em" }}>{label}</span>
+    )}
   </button>
 );
 
@@ -455,11 +518,11 @@ const MechanismSection = ({ open }: { open: OpenDetail }) => {
   const keyCountries = ["FR","DE","US","GB","JP","CN","BE","NL","ES","KR"];
   const competitors = ["TR","IN","MX","VN","TN","EG","PL","CZ","TH","ZA","HU","SK","CL","BG","KE","LT","SN","RW"];
   return (
-    <div style={{ background: C.navy, color: C.paper, padding: "clamp(48px,6vw,80px) 0", position: "relative", marginTop: 40 }}>
+    <div style={{ background: "#EFEBE0", color: C.navy, padding: "clamp(48px,6vw,80px) 0", position: "relative", marginTop: 40 }}>
       <span style={{ position: "absolute", top: 0, left: 0, right: 0, height: 1, background: "linear-gradient(90deg, transparent, #C9A84C 30%, #C9A84C 70%, transparent)", opacity: 0.4 }} />
       <div style={{ maxWidth: 1320, margin: "0 auto", padding: "0 clamp(20px,4vw,48px)" }}>
       {/* Mini-flow */}
-      <div className="sp-miniflow grid items-center gap-0 mx-auto mb-12 pb-12" style={{ gridTemplateColumns: "1fr auto 1fr auto 1fr", maxWidth: 920, borderBottom: "1px solid rgba(244,241,234,0.08)" }}>
+      <div className="sp-miniflow grid items-center gap-0 mx-auto mb-12 pb-12" style={{ gridTemplateColumns: "1fr auto 1fr auto 1fr", maxWidth: 920, borderBottom: "1px solid rgba(10,22,40,0.10)" }}>
         {[
           { num: "Phase 01", label: "Capter", desc: "Veille, DDD, BI, HumInt" },
           { num: "Phase 02", label: "Transformer", desc: "Infrastructure décisionnelle" },
@@ -468,8 +531,8 @@ const MechanismSection = ({ open }: { open: OpenDetail }) => {
           <React.Fragment key={s.label}>
             <div className="text-center px-4">
               <div style={{ fontFamily: FONT_MONO, fontSize: 10, letterSpacing: "0.22em", color: C.gold, marginBottom: 8 }}>{s.num}</div>
-              <div style={{ fontFamily: FONT_DISPLAY, fontSize: "clamp(20px,2.4vw,26px)", fontWeight: 600, color: C.paper, marginBottom: 6, letterSpacing: "-0.01em" }}>{s.label}</div>
-              <div style={{ fontFamily: FONT_ITALIC, fontStyle: "italic", fontSize: 14, color: "rgba(244,241,234,0.6)", lineHeight: 1.4 }}>{s.desc}</div>
+              <div style={{ fontFamily: FONT_DISPLAY, fontSize: "clamp(20px,2.4vw,26px)", fontWeight: 600, color: C.navy, marginBottom: 6, letterSpacing: "-0.01em" }}>{s.label}</div>
+              <div style={{ fontFamily: FONT_ITALIC, fontStyle: "italic", fontSize: 14, color: C.inkSoft, lineHeight: 1.4 }}>{s.desc}</div>
             </div>
             {i < arr.length - 1 && <div className="sp-miniflow-arrow" style={{ color: C.gold, fontFamily: FONT_DISPLAY, fontSize: 28, fontWeight: 300, opacity: 0.6 }}>→</div>}
           </React.Fragment>
@@ -479,20 +542,20 @@ const MechanismSection = ({ open }: { open: OpenDetail }) => {
       {/* Header */}
       <div className="text-center mb-12">
         <div style={{ fontFamily: FONT_MONO, fontSize: 11, letterSpacing: "0.24em", textTransform: "uppercase", color: C.gold, marginBottom: 14 }}>Workflow propriétaire</div>
-        <h3 style={{ fontFamily: FONT_DISPLAY, fontSize: 38, fontWeight: 600, color: C.paper, marginBottom: 14, letterSpacing: "-0.015em", lineHeight: 1.1 }}>
+        <h3 style={{ fontFamily: FONT_DISPLAY, fontSize: 38, fontWeight: 600, color: C.navy, marginBottom: 14, letterSpacing: "-0.015em", lineHeight: 1.1 }}>
           Mécanisme de <em style={{ fontStyle: "italic", color: C.gold, fontWeight: 400 }}>Rayonnement & d'Attractivité</em>
         </h3>
-        <p style={{ fontFamily: FONT_ITALIC, fontStyle: "italic", fontSize: 18, color: "rgba(244,241,234,0.65)", maxWidth: 640, margin: "0 auto", lineHeight: 1.5 }}>
+        <p style={{ fontFamily: FONT_ITALIC, fontStyle: "italic", fontSize: 18, color: C.inkSoft, maxWidth: 640, margin: "0 auto", lineHeight: 1.5 }}>
           Captation premium · Infrastructure décisionnelle Buildfluence · Diffusion vers un écosystème mondial.
         </p>
-        <div style={{ marginTop: 20, fontFamily: FONT_MONO, fontSize: 10, letterSpacing: "0.22em", textTransform: "uppercase", color: C.gold, opacity: 0.7 }}>▸ Cliquez sur un bloc pour explorer</div>
+        <div style={{ marginTop: 20, fontFamily: FONT_MONO, fontSize: 10, letterSpacing: "0.22em", textTransform: "uppercase", color: C.gold, opacity: 0.85 }}>▸ Cliquez sur un bloc pour explorer</div>
       </div>
 
       {/* Grille 3 colonnes */}
       <div className="sp-mech-grid" style={{ display: "grid", gridTemplateColumns: "320px 1fr 320px", gap: 32, alignItems: "start", marginBottom: 32 }}>
         {/* COL GAUCHE — Back-Office */}
         <div className="sp-mech-col-left">
-          <div style={colLabel}>Back-Office · Captation</div>
+          <ColHeader>Back-Office · Captation</ColHeader>
           <SourceCard k="veille" glyph="i" title="Veille & Intelligence" tagline="Voir avant les autres. Détecter les signaux invisibles." tags={["6 dimensions","NLP","Temps réel"]} open={open} />
           <SourceCard k="ddd" glyph="ii" title="Deep Due Diligence" tagline="Sécuriser la décision dans des environnements incertains." mini={["OFAC","EU Sanctions","ICIJ","GAFI","PitchBook","D&B"]} open={open} />
           <SourceCard k="bi" glyph="iii" title="Business Intelligence" tagline="Lire la compétition avant qu'elle ne s'impose." mini={["Growth Lab","Statista","fDi","World Bank","Harvard"]} open={open} />
@@ -501,31 +564,31 @@ const MechanismSection = ({ open }: { open: OpenDetail }) => {
 
         {/* COL CENTRE — BF Core */}
         <div className="sp-mech-col-center flex flex-col items-center gap-6">
-          <div style={{ ...colLabel, width: "100%" }}>Infrastructure Décisionnelle</div>
+          <div className="w-full"><ColHeader>Infrastructure Décisionnelle</ColHeader></div>
           <button
             onClick={() => open({ kind: "source", data: sourcesData["bf-core"] })}
             className="bf-core-circle relative flex flex-col items-center justify-center transition-all"
             style={{
-              width: 240, height: 240, borderRadius: "50%", background: C.paper,
+              width: 240, height: 240, borderRadius: "50%", background: "#FFFFFF",
               border: `2px solid rgba(201,168,76,0.4)`, cursor: "pointer",
               boxShadow: "0 0 0 8px rgba(201,168,76,0.05), 0 0 0 16px rgba(201,168,76,0.025)",
               animation: "bfPulse 3s ease-in-out infinite",
             }}
-            onMouseEnter={(e) => { e.currentTarget.style.borderColor = C.gold; e.currentTarget.style.boxShadow = "0 0 0 8px rgba(201,168,76,0.1), 0 0 0 16px rgba(201,168,76,0.05), 0 0 40px rgba(201,168,76,0.2)"; e.currentTarget.style.animation = "none"; }}
+            onMouseEnter={(e) => { e.currentTarget.style.borderColor = C.gold; e.currentTarget.style.boxShadow = "0 0 0 8px rgba(201,168,76,0.12), 0 0 0 16px rgba(201,168,76,0.06), 0 0 40px rgba(201,168,76,0.25)"; e.currentTarget.style.animation = "none"; }}
             onMouseLeave={(e) => { e.currentTarget.style.borderColor = "rgba(201,168,76,0.4)"; e.currentTarget.style.boxShadow = "0 0 0 8px rgba(201,168,76,0.05), 0 0 0 16px rgba(201,168,76,0.025)"; e.currentTarget.style.animation = "bfPulse 3s ease-in-out infinite"; }}
             aria-label="Buildfluence — Infrastructure décisionnelle"
           >
-            <img src={logoBuildfluence} alt="Buildfluence" style={{ width: 160, height: "auto", maxHeight: 160, objectFit: "contain", display: "block" }} />
+            <img src={logoBuildfluence} alt="Buildfluence" style={{ width: 170, height: "auto", maxHeight: 170, objectFit: "contain", display: "block" }} />
           </button>
 
           <div style={{ fontFamily: FONT_DISPLAY, fontSize: 24, color: C.gold, opacity: 0.6, lineHeight: 1 }}>↓</div>
 
-          <div className="w-full text-center" style={{ background: "rgba(244,241,234,0.04)", border: "1px solid rgba(244,241,234,0.1)", padding: "28px 24px" }}>
-            <p style={{ fontFamily: FONT_DISPLAY, fontStyle: "italic", fontSize: 17, color: C.gold, lineHeight: 1.35, marginBottom: 14, fontWeight: 400 }}>Une architecture conçue pour transformer l'information en pouvoir décisionnel.</p>
-            <p style={{ fontFamily: FONT_ITALIC, fontStyle: "italic", fontSize: 14, color: "rgba(244,241,234,0.7)", lineHeight: 1.5, marginBottom: 20 }}>Buildfluence ne livre pas des rapports volumineux. Buildfluence livre une capacité d'anticipation.</p>
+          <div className="w-full text-center" style={{ background: "rgba(255,255,255,0.7)", border: "1px solid rgba(10,22,40,0.10)", padding: "28px 24px" }}>
+            <p style={{ fontFamily: FONT_DISPLAY, fontStyle: "italic", fontSize: 17, color: C.gold, lineHeight: 1.35, marginBottom: 14, fontWeight: 500 }}>Une architecture conçue pour transformer l'information en pouvoir décisionnel.</p>
+            <p style={{ fontFamily: FONT_ITALIC, fontStyle: "italic", fontSize: 14, color: C.inkSoft, lineHeight: 1.5, marginBottom: 20 }}>Buildfluence ne livre pas des rapports volumineux. Buildfluence livre une capacité d'anticipation.</p>
             <ul className="list-none text-left">
               {["Voir ce que les autres ne voient pas","Décider avec un temps d'avance","Neutraliser les risques invisibles","Identifier les vrais leviers d'attractivité","Transformer la visibilité en influence réelle"].map((it, i, arr) => (
-                <li key={it} style={{ fontSize: 12, color: "rgba(244,241,234,0.85)", padding: "8px 0 8px 18px", borderBottom: i === arr.length - 1 ? "none" : "1px solid rgba(244,241,234,0.06)", position: "relative", lineHeight: 1.4 }}>
+                <li key={it} style={{ fontSize: 12, color: C.navy, padding: "8px 0 8px 18px", borderBottom: i === arr.length - 1 ? "none" : "1px solid rgba(10,22,40,0.08)", position: "relative", lineHeight: 1.4 }}>
                   <span style={{ position: "absolute", left: 0, color: C.gold }}>—</span>{it}
                 </li>
               ))}
@@ -533,19 +596,19 @@ const MechanismSection = ({ open }: { open: OpenDetail }) => {
           </div>
 
           <div style={{ fontFamily: FONT_DISPLAY, fontSize: 24, color: C.gold, opacity: 0.6, lineHeight: 1 }}>↓</div>
-          <div style={{ textAlign: "center", fontFamily: FONT_MONO, fontSize: 10, letterSpacing: "0.24em", textTransform: "uppercase", color: C.gold, opacity: 0.7 }}>Visibilité — Rayonnement — Influence</div>
+          <div style={{ textAlign: "center", fontFamily: FONT_MONO, fontSize: 10, letterSpacing: "0.24em", textTransform: "uppercase", color: C.gold, opacity: 0.85 }}>Visibilité — Rayonnement — Influence</div>
         </div>
 
         {/* COL DROITE — Ecosystem */}
         <div>
-          <div style={colLabel}>Ecosystem · Diffusion</div>
+          <ColHeader>Ecosystem · Diffusion</ColHeader>
 
           <DestCard onClick={() => open({ kind: "dest", data: destData.amdie })}>
             <DestHeader glyph="i" title="AMDIE / MICEPP" sub="Agence d'Investissement & Ministère de tutelle" />
             <div className="flex flex-wrap gap-2 pt-2.5" style={{ borderTop: "1px solid rgba(244,241,234,0.08)" }}>
-              <LogoChip label="AMDIE" onClick={() => open({ kind: "logo", data: logoData.amdie })} />
-              <LogoChip label="MICEPP" onClick={() => open({ kind: "logo", data: logoData.micepp })} />
-              <LogoChip label="Morocco Now" onClick={() => open({ kind: "logo", data: logoData.moroccoNow })} />
+              <LogoChip label="AMDIE" src={AMDIE_LOGOS.amdie} onClick={() => open({ kind: "logo", data: logoData.amdie })} />
+              <LogoChip label="MICEPP" src={AMDIE_LOGOS.micepp} onClick={() => open({ kind: "logo", data: logoData.micepp })} />
+              <LogoChip label="Morocco Now" src={AMDIE_LOGOS.moroccoNow} onClick={() => open({ kind: "logo", data: logoData.moroccoNow })} />
             </div>
           </DestCard>
 
@@ -575,7 +638,7 @@ const MechanismSection = ({ open }: { open: OpenDetail }) => {
             <DestHeader glyph="v" title="Fédérations Sectorielles" sub="Partenaires & entreprises stratégiques — cliquez un acteur" />
             <div className="flex flex-wrap gap-2 pt-2.5" style={{ borderTop: "1px solid rgba(244,241,234,0.08)" }}>
               {Object.keys(fedData).map((k) => (
-                <LogoChip key={k} label={k.toUpperCase()} onClick={() => open({ kind: "fed", key: k, data: fedData[k] })} />
+                <LogoChip key={k} label={k.toUpperCase()} src={FED_LOGOS[k]} onClick={() => open({ kind: "fed", key: k, data: fedData[k] })} />
               ))}
             </div>
           </DestCard>
@@ -584,7 +647,7 @@ const MechanismSection = ({ open }: { open: OpenDetail }) => {
             <DestHeader glyph="vi" title="Agences de Promotion d'Investissements" sub="Benchmark international — cliquez une agence" />
             <div className="flex flex-wrap gap-2 pt-2.5" style={{ borderTop: "1px solid rgba(244,241,234,0.08)" }}>
               {Object.entries(apiData).map(([k, v]) => (
-                <LogoChip key={k} label={v.full.length > 14 ? k : v.full} onClick={() => open({ kind: "api", data: v })} />
+                <LogoChip key={k} label={v.full} src={API_LOGOS[k]} onClick={() => open({ kind: "api", data: v })} />
               ))}
             </div>
           </DestCard>
@@ -593,7 +656,7 @@ const MechanismSection = ({ open }: { open: OpenDetail }) => {
             <DestHeader glyph="vii" title="Coopération Internationale" sub="Bailleurs & financeurs — cliquez une institution" />
             <div className="flex flex-wrap gap-2 pt-2.5" style={{ borderTop: "1px solid rgba(244,241,234,0.08)" }}>
               {Object.entries(coopData).map(([k, v]) => (
-                <LogoChip key={k} label={k === "bm" ? "B. Mondiale" : k.toUpperCase()} onClick={() => open({ kind: "coop", data: v })} />
+                <LogoChip key={k} label={v.full} src={COOP_LOGOS[k]} onClick={() => open({ kind: "coop", data: v })} />
               ))}
             </div>
           </DestCard>
@@ -605,9 +668,12 @@ const MechanismSection = ({ open }: { open: OpenDetail }) => {
       </div>
 
       {/* Footer 3 colonnes */}
-      <div className="sp-mech-foot mt-8 pt-6" style={{ display: "grid", gridTemplateColumns: "320px 1fr 320px", gap: 32, borderTop: "1px solid rgba(244,241,234,0.08)" }}>
+      <div className="sp-mech-foot mt-8 pt-6" style={{ display: "grid", gridTemplateColumns: "320px 1fr 320px", gap: 32, borderTop: "1px solid rgba(10,22,40,0.10)" }}>
         {["Strategic Workflow · Veille & Intelligence","Infrastructure Décisionnelle Souveraine","Diffusion · Inter & Intra · National & International"].map((l) => (
-          <div key={l} style={{ fontFamily: FONT_MONO, fontSize: 9, letterSpacing: "0.24em", textTransform: "uppercase", color: "rgba(244,241,234,0.4)", textAlign: "center" }}>{l}</div>
+          <div key={l} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 10 }}>
+            <span aria-hidden style={{ display: "block", width: 38, height: 2, background: C.gold }} />
+            <div style={{ fontFamily: FONT_MONO, fontSize: 9, letterSpacing: "0.24em", textTransform: "uppercase", color: C.inkSoft, textAlign: "center" }}>{l}</div>
+          </div>
         ))}
       </div>
 
@@ -632,9 +698,18 @@ const MechanismSection = ({ open }: { open: OpenDetail }) => {
 
 const colLabel: React.CSSProperties = {
   fontFamily: FONT_MONO, fontSize: 10, letterSpacing: "0.28em", textTransform: "uppercase",
-  color: "rgba(244,241,234,0.5)", textAlign: "center", marginBottom: 24, paddingBottom: 16,
-  borderBottom: "1px solid rgba(244,241,234,0.1)", position: "relative",
+  color: C.inkSoft, textAlign: "center", marginBottom: 8, paddingBottom: 16,
+  borderBottom: "1px solid rgba(10,22,40,0.10)", position: "relative",
 };
+
+const ColHeader = ({ children }: { children: React.ReactNode }) => (
+  <div style={{ marginBottom: 24 }}>
+    <div style={colLabel}>{children}</div>
+    <div style={{ display: "flex", justifyContent: "center", marginTop: 10 }}>
+      <span aria-hidden style={{ display: "block", width: 38, height: 2, background: C.gold }} />
+    </div>
+  </div>
+);
 
 /* ═══════════════ SECTION 02 — 3 AXES ═══════════════ */
 const AxisCard = ({ eyebrow, roman, title, tagline, viz, items }: {
@@ -940,7 +1015,7 @@ const SoftPowerInfluence = () => {
         {/* SECTION 01 — Mécanisme */}
         <section className="sp-section sp-section--tight">
           <div className="sp-container">
-            <SectionHeader num="i" eyebrow="Mécanisme d'Attractivité & d'Influence" intro="Trois temps qui structurent l'intelligence stratégique. Une infrastructure souveraine au centre. Un écosystème de diffusion qui rayonne du Maroc vers le monde — et inversement.">
+            <SectionHeader num="i" eyebrow="Mécanisme d'Attractivité & d'Influence" intro={<><em style={{ fontStyle: "italic" }}>L'influence ne se décrète pas, elle s'ingénie…</em><br />— Une infrastructure souveraine au cœur,<br />— Un back-office qui capte et décrypte en temps réel,<br />— Un écosystème qui projette votre puissance décisionnelle au-delà des frontières.</>}>
               Capter, transformer, <em style={{ fontStyle: "italic", color: C.gold, fontWeight: 400 }}>influencer</em>.
             </SectionHeader>
           </div>

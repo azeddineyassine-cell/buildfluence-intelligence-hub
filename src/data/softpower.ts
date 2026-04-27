@@ -49,8 +49,8 @@ export const sourcesData: Record<string, SourceDetail> = {
       "Captation en temps réel des signaux faibles sectoriels, économiques et géopolitiques. Croisement multi-sources pour anticiper les ruptures et détecter les dynamiques invisibles.",
     cols: [
       { h: "6 dimensions captées", items: ["Web, médias, réseaux sociaux", "Bases sectorielles & brevets", "Dark web & deep web", "Organisations & personnes clés", "Concepts macroéconomiques", "Événements & produits"] },
-      { h: "Traitement", items: ["NLP & analyse sémantique", "Scoring de criticité", "Détection de signaux faibles", "Formation, accompagnement, change management"] },
-      { h: "Livrables", items: ["Rapports de veille structurés", "Alertes temps réel ciblées", "Dashboards interactifs"] },
+      { h: "Traitement", items: ["NLP & analyse sémantique", "Scoring de criticité", "Détection de signaux faibles", "Formation, accompagnement, change management", "Transfert de compétences"] },
+      { h: "Livrables", items: ["Rapports de veille structurés", "Alertes temps réel ciblées", "Dashboards interactifs", "Benchmark & Études", "Livre blanc", "Playbook, etc."] },
     ],
     bfApport:
       "Buildfluence ne livre pas de la donnée brute. Buildfluence livre une lecture stratégique du présent qui anticipe le futur.",
@@ -125,7 +125,7 @@ export const destData: Record<string, DestDetail> = {
     ],
     cols: [
       { h: "Périmètre AMDIE", items: ["Pilotage de l'attractivité nationale", "Plateforme Morocco Now — Nation Branding", "Coordination des missions internationales", "Suivi des grands projets d'investissement"] },
-      { h: "L'apport Buildfluence dédié", items: ["Newsletter stratégique sur-mesure", "Observatoire d'Investissement permanent", "Veille des dynamiques narratives concernant les entreprises étrangères au Maroc", "Information fraîche pour les exportateurs marocains", "Rayonnement sectoriel complet"] },
+      { h: "Valeur Buildfluence dédiée", items: ["Newsletter stratégique sur-mesure", "Observatoire d'Investissement permanent", "Veille des dynamiques narratives concernant les entreprises étrangères au Maroc", "Information fraîche pour les exportateurs marocains", "Rayonnement sectoriel complet"] },
     ],
     bfApport:
       "Transformer Morocco Now de campagne de communication en infrastructure d'influence souveraine, alimentée en continu par le mécanisme Buildfluence.",
@@ -137,10 +137,10 @@ export const destData: Record<string, DestDetail> = {
       "Agences d'État, instances publiques, Centres Régionaux de l'Investissement. Le tissu institutionnel qui pilote les politiques publiques du Royaume.",
     cols: [
       { h: "Périmètre", items: ["Ministères sectoriels & agences", "Instances publiques de pilotage", "12 CRI — Centres Régionaux", "Conseils & instances consultatives"] },
-      { h: "L'apport Buildfluence", items: ["Pilotage avec longueur d'avance stratégique", "Anticipation réglementaire continue", "Intelligence territoriale dédiée", "Veille compétitivité régionale", "Suivi du Doing Business pour le Maroc"] },
+      { h: "Valeur Buildfluence", items: ["Pilotage avec longueur d'avance stratégique", "Anticipation réglementaire continue", "Intelligence territoriale dédiée", "Veille compétitivité régionale", "Suivi du Doing Business pour le Maroc"] },
     ],
     bfApport:
-      "Le Maroc dispose d'institutions solides. Buildfluence leur fournit la matière intellectuelle pour décider plus vite, plus juste, plus loin.",
+      "Dans des environnements sous contrainte, la qualité de la décision devient un levier de souveraineté. Buildfluence structure les capacités d'anticipation, d'arbitrage et d'influence au cœur de l'action publique.",
   },
   medias: {
     eyebrow: "Ecosystem · Pilier viii",
