@@ -441,9 +441,16 @@ const SourceCard = ({ k, glyph, title, tagline, tags, mini, hum, open }: {
     )}
     {mini && (
       <div className="flex flex-wrap items-center gap-2 pt-2.5" style={{ borderTop: "1px solid rgba(244,241,234,0.08)" }}>
-        {mini.map((m) => (
-          <span key={m} style={{ fontFamily: FONT_MONO, fontSize: 9, color: "rgba(244,241,234,0.7)" }}>{m}</span>
-        ))}
+        {mini.map((m) => {
+          const src = SOURCE_LOGOS[m];
+          return src ? (
+            <span key={m} title={m} style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", width: 64, height: 28, background: "rgba(255,255,255,0.92)", border: "1px solid rgba(255,255,255,0.15)", borderRadius: 2, padding: "3px 6px" }}>
+              <img src={src} alt={m} style={{ maxWidth: "100%", maxHeight: "100%", objectFit: "contain", display: "block" }} />
+            </span>
+          ) : (
+            <span key={m} style={{ fontFamily: FONT_MONO, fontSize: 9, color: "rgba(244,241,234,0.7)" }}>{m}</span>
+          );
+        })}
       </div>
     )}
     <div style={{ marginTop: 12, fontFamily: FONT_MONO, fontSize: 9, letterSpacing: "0.22em", textTransform: "uppercase", color: hum ? "#E8A89F" : C.gold, opacity: 0.6 }}>→ Explorer le pilier</div>
