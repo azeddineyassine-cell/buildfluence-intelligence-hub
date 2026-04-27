@@ -668,9 +668,12 @@ const MechanismSection = ({ open }: { open: OpenDetail }) => {
       </div>
 
       {/* Footer 3 colonnes */}
-      <div className="sp-mech-foot mt-8 pt-6" style={{ display: "grid", gridTemplateColumns: "320px 1fr 320px", gap: 32, borderTop: "1px solid rgba(244,241,234,0.08)" }}>
+      <div className="sp-mech-foot mt-8 pt-6" style={{ display: "grid", gridTemplateColumns: "320px 1fr 320px", gap: 32, borderTop: "1px solid rgba(10,22,40,0.10)" }}>
         {["Strategic Workflow · Veille & Intelligence","Infrastructure Décisionnelle Souveraine","Diffusion · Inter & Intra · National & International"].map((l) => (
-          <div key={l} style={{ fontFamily: FONT_MONO, fontSize: 9, letterSpacing: "0.24em", textTransform: "uppercase", color: "rgba(244,241,234,0.4)", textAlign: "center" }}>{l}</div>
+          <div key={l} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 10 }}>
+            <span aria-hidden style={{ display: "block", width: 38, height: 2, background: C.gold }} />
+            <div style={{ fontFamily: FONT_MONO, fontSize: 9, letterSpacing: "0.24em", textTransform: "uppercase", color: C.inkSoft, textAlign: "center" }}>{l}</div>
+          </div>
         ))}
       </div>
 
