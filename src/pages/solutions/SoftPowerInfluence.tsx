@@ -518,11 +518,11 @@ const MechanismSection = ({ open }: { open: OpenDetail }) => {
   const keyCountries = ["FR","DE","US","GB","JP","CN","BE","NL","ES","KR"];
   const competitors = ["TR","IN","MX","VN","TN","EG","PL","CZ","TH","ZA","HU","SK","CL","BG","KE","LT","SN","RW"];
   return (
-    <div style={{ background: C.navy, color: C.paper, padding: "clamp(48px,6vw,80px) 0", position: "relative", marginTop: 40 }}>
+    <div style={{ background: "#EFEBE0", color: C.navy, padding: "clamp(48px,6vw,80px) 0", position: "relative", marginTop: 40 }}>
       <span style={{ position: "absolute", top: 0, left: 0, right: 0, height: 1, background: "linear-gradient(90deg, transparent, #C9A84C 30%, #C9A84C 70%, transparent)", opacity: 0.4 }} />
       <div style={{ maxWidth: 1320, margin: "0 auto", padding: "0 clamp(20px,4vw,48px)" }}>
       {/* Mini-flow */}
-      <div className="sp-miniflow grid items-center gap-0 mx-auto mb-12 pb-12" style={{ gridTemplateColumns: "1fr auto 1fr auto 1fr", maxWidth: 920, borderBottom: "1px solid rgba(244,241,234,0.08)" }}>
+      <div className="sp-miniflow grid items-center gap-0 mx-auto mb-12 pb-12" style={{ gridTemplateColumns: "1fr auto 1fr auto 1fr", maxWidth: 920, borderBottom: "1px solid rgba(10,22,40,0.10)" }}>
         {[
           { num: "Phase 01", label: "Capter", desc: "Veille, DDD, BI, HumInt" },
           { num: "Phase 02", label: "Transformer", desc: "Infrastructure décisionnelle" },
@@ -531,8 +531,8 @@ const MechanismSection = ({ open }: { open: OpenDetail }) => {
           <React.Fragment key={s.label}>
             <div className="text-center px-4">
               <div style={{ fontFamily: FONT_MONO, fontSize: 10, letterSpacing: "0.22em", color: C.gold, marginBottom: 8 }}>{s.num}</div>
-              <div style={{ fontFamily: FONT_DISPLAY, fontSize: "clamp(20px,2.4vw,26px)", fontWeight: 600, color: C.paper, marginBottom: 6, letterSpacing: "-0.01em" }}>{s.label}</div>
-              <div style={{ fontFamily: FONT_ITALIC, fontStyle: "italic", fontSize: 14, color: "rgba(244,241,234,0.6)", lineHeight: 1.4 }}>{s.desc}</div>
+              <div style={{ fontFamily: FONT_DISPLAY, fontSize: "clamp(20px,2.4vw,26px)", fontWeight: 600, color: C.navy, marginBottom: 6, letterSpacing: "-0.01em" }}>{s.label}</div>
+              <div style={{ fontFamily: FONT_ITALIC, fontStyle: "italic", fontSize: 14, color: C.inkSoft, lineHeight: 1.4 }}>{s.desc}</div>
             </div>
             {i < arr.length - 1 && <div className="sp-miniflow-arrow" style={{ color: C.gold, fontFamily: FONT_DISPLAY, fontSize: 28, fontWeight: 300, opacity: 0.6 }}>→</div>}
           </React.Fragment>
@@ -542,13 +542,13 @@ const MechanismSection = ({ open }: { open: OpenDetail }) => {
       {/* Header */}
       <div className="text-center mb-12">
         <div style={{ fontFamily: FONT_MONO, fontSize: 11, letterSpacing: "0.24em", textTransform: "uppercase", color: C.gold, marginBottom: 14 }}>Workflow propriétaire</div>
-        <h3 style={{ fontFamily: FONT_DISPLAY, fontSize: 38, fontWeight: 600, color: C.paper, marginBottom: 14, letterSpacing: "-0.015em", lineHeight: 1.1 }}>
+        <h3 style={{ fontFamily: FONT_DISPLAY, fontSize: 38, fontWeight: 600, color: C.navy, marginBottom: 14, letterSpacing: "-0.015em", lineHeight: 1.1 }}>
           Mécanisme de <em style={{ fontStyle: "italic", color: C.gold, fontWeight: 400 }}>Rayonnement & d'Attractivité</em>
         </h3>
-        <p style={{ fontFamily: FONT_ITALIC, fontStyle: "italic", fontSize: 18, color: "rgba(244,241,234,0.65)", maxWidth: 640, margin: "0 auto", lineHeight: 1.5 }}>
+        <p style={{ fontFamily: FONT_ITALIC, fontStyle: "italic", fontSize: 18, color: C.inkSoft, maxWidth: 640, margin: "0 auto", lineHeight: 1.5 }}>
           Captation premium · Infrastructure décisionnelle Buildfluence · Diffusion vers un écosystème mondial.
         </p>
-        <div style={{ marginTop: 20, fontFamily: FONT_MONO, fontSize: 10, letterSpacing: "0.22em", textTransform: "uppercase", color: C.gold, opacity: 0.7 }}>▸ Cliquez sur un bloc pour explorer</div>
+        <div style={{ marginTop: 20, fontFamily: FONT_MONO, fontSize: 10, letterSpacing: "0.22em", textTransform: "uppercase", color: C.gold, opacity: 0.85 }}>▸ Cliquez sur un bloc pour explorer</div>
       </div>
 
       {/* Grille 3 colonnes */}
