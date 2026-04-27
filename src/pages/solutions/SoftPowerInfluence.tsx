@@ -292,9 +292,9 @@ const DetailContent = ({ detail }: { detail: DetailKind }) => {
             `${c.full} est un bailleur clé du développement économique au Maroc.`,
             "Comprendre ses priorités, instruments et fenêtres de financement permet d'aligner les projets nationaux et privés sur ses cycles.",
           ] },
-          { h: "Apport Buildfluence dédié", items: [c.apport] },
+          { h: "Valeur Buildfluence dédiée", items: [c.apport] },
         ]} />
-        <BfApport text="Les bailleurs ne financent que les projets bien construits, bien narrés, bien timés. Buildfluence orchestre les trois." />
+        <BfApport text="Les bailleurs ne financent que les projets bien construits, bien narrés, bien timés. Buildfluence orchestre les trois." label="Valeur Buildfluence" />
       </>
     );
   }
