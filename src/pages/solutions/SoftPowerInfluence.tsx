@@ -656,7 +656,7 @@ const MechanismSection = ({ open }: { open: OpenDetail }) => {
             <DestHeader glyph="vii" title="Coopération Internationale" sub="Bailleurs & financeurs — cliquez une institution" />
             <div className="flex flex-wrap gap-2 pt-2.5" style={{ borderTop: "1px solid rgba(244,241,234,0.08)" }}>
               {Object.entries(coopData).map(([k, v]) => (
-                <LogoChip key={k} label={k === "bm" ? "B. Mondiale" : k.toUpperCase()} onClick={() => open({ kind: "coop", data: v })} />
+                <LogoChip key={k} label={v.full} src={COOP_LOGOS[k]} onClick={() => open({ kind: "coop", data: v })} />
               ))}
             </div>
           </DestCard>
