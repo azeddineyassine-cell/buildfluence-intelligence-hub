@@ -197,7 +197,7 @@ const DetailContent = ({ detail }: { detail: DetailKind }) => {
         <DetailTagline>{d.tagline}</DetailTagline>
         {d.meta && <MetaStrip items={d.meta} />}
         <ColsBlock cols={d.cols} />
-        <BfApport text={d.bfApport} />
+        <BfApport text={d.bfApport} label="Valeur Buildfluence" />
       </>
     );
   }
