@@ -1,7 +1,9 @@
-import React, { useState, useMemo, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import DetailPageLayout from "@/components/DetailPageLayout";
+import Navbar from "@/components/Navbar";
+import CTAFooter from "@/components/CTAFooter";
+import { FormStrategicExchange } from "@/components/FormModals";
 import logoBuildfluence from "@/assets/Logo_Buildfluence.png";
 import {
   sourcesData, destData, countries, fedData, apiData, coopData, logoData,
