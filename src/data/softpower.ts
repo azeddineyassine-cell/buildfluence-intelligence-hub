@@ -125,7 +125,7 @@ export const destData: Record<string, DestDetail> = {
     ],
     cols: [
       { h: "Périmètre AMDIE", items: ["Pilotage de l'attractivité nationale", "Plateforme Morocco Now — Nation Branding", "Coordination des missions internationales", "Suivi des grands projets d'investissement"] },
-      { h: "L'apport Buildfluence dédié", items: ["Newsletter stratégique sur-mesure", "Observatoire d'Investissement permanent", "Veille des dynamiques narratives concernant les entreprises étrangères au Maroc", "Information fraîche pour les exportateurs marocains", "Rayonnement sectoriel complet"] },
+      { h: "Valeur Buildfluence dédiée", items: ["Newsletter stratégique sur-mesure", "Observatoire d'Investissement permanent", "Veille des dynamiques narratives concernant les entreprises étrangères au Maroc", "Information fraîche pour les exportateurs marocains", "Rayonnement sectoriel complet"] },
     ],
     bfApport:
       "Transformer Morocco Now de campagne de communication en infrastructure d'influence souveraine, alimentée en continu par le mécanisme Buildfluence.",
