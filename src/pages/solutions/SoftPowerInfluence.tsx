@@ -274,9 +274,9 @@ const DetailContent = ({ detail }: { detail: DetailKind }) => {
             `${a.full} fait partie des agences de référence mondiale pour la promotion des investissements directs étrangers.`,
             "Buildfluence analyse en continu les méthodes, outils et succès de ces agences pour en transposer les meilleures pratiques au contexte marocain (AMDIE notamment).",
           ] },
-          { h: "Apport Buildfluence dédié", items: [a.apport] },
+          { h: "Valeur Buildfluence dédiée", items: [a.apport] },
         ]} />
-        <BfApport text="L'AMDIE n'a pas besoin de réinventer ce qui marche. Buildfluence livre les playbooks éprouvés des meilleures agences mondiales." />
+        <BfApport text="L'AMDIE n'a pas besoin de réinventer ce qui marche. Buildfluence livre les playbooks éprouvés des meilleures agences mondiales." label="Valeur Buildfluence" />
       </>
     );
   }
