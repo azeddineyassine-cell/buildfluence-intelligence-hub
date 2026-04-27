@@ -638,7 +638,7 @@ const MechanismSection = ({ open }: { open: OpenDetail }) => {
             <DestHeader glyph="v" title="Fédérations Sectorielles" sub="Partenaires & entreprises stratégiques — cliquez un acteur" />
             <div className="flex flex-wrap gap-2 pt-2.5" style={{ borderTop: "1px solid rgba(244,241,234,0.08)" }}>
               {Object.keys(fedData).map((k) => (
-                <LogoChip key={k} label={k.toUpperCase()} onClick={() => open({ kind: "fed", key: k, data: fedData[k] })} />
+                <LogoChip key={k} label={k.toUpperCase()} src={FED_LOGOS[k]} onClick={() => open({ kind: "fed", key: k, data: fedData[k] })} />
               ))}
             </div>
           </DestCard>
