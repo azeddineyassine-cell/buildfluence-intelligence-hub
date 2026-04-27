@@ -147,10 +147,10 @@ const ColsBlock = ({ cols }: { cols: { h: string; items: string[] }[] }) => (
   </div>
 );
 
-const BfApport = ({ text }: { text: string }) => (
+const BfApport = ({ text, label = "L'apport Buildfluence" }: { text: string; label?: string }) => (
   <div style={{ background: C.navy, color: C.paper, padding: 24, marginTop: 28, position: "relative" }}>
     <span style={{ position: "absolute", top: 0, left: 0, width: 40, height: 1, background: C.gold }} />
-    <h5 style={{ fontFamily: FONT_MONO, fontSize: 10, letterSpacing: "0.24em", textTransform: "uppercase", color: C.gold, marginBottom: 14, fontWeight: 600 }}>L'apport Buildfluence</h5>
+    <h5 style={{ fontFamily: FONT_MONO, fontSize: 10, letterSpacing: "0.24em", textTransform: "uppercase", color: C.gold, marginBottom: 14, fontWeight: 600 }}>{label}</h5>
     <p style={{ fontFamily: FONT_ITALIC, fontStyle: "italic", fontSize: 17, color: C.paper, lineHeight: 1.5, fontWeight: 400 }}>{text}</p>
   </div>
 );
