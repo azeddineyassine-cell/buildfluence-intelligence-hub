@@ -49,8 +49,8 @@ export const sourcesData: Record<string, SourceDetail> = {
       "Captation en temps réel des signaux faibles sectoriels, économiques et géopolitiques. Croisement multi-sources pour anticiper les ruptures et détecter les dynamiques invisibles.",
     cols: [
       { h: "6 dimensions captées", items: ["Web, médias, réseaux sociaux", "Bases sectorielles & brevets", "Dark web & deep web", "Organisations & personnes clés", "Concepts macroéconomiques", "Événements & produits"] },
-      { h: "Traitement", items: ["NLP & analyse sémantique", "Scoring de criticité", "Détection de signaux faibles", "Formation, accompagnement, change management"] },
-      { h: "Livrables", items: ["Rapports de veille structurés", "Alertes temps réel ciblées", "Dashboards interactifs"] },
+      { h: "Traitement", items: ["NLP & analyse sémantique", "Scoring de criticité", "Détection de signaux faibles", "Formation, accompagnement, change management", "Transfert de compétences"] },
+      { h: "Livrables", items: ["Rapports de veille structurés", "Alertes temps réel ciblées", "Dashboards interactifs", "Benchmark & Études", "Livre blanc", "Playbook, etc."] },
     ],
     bfApport:
       "Buildfluence ne livre pas de la donnée brute. Buildfluence livre une lecture stratégique du présent qui anticipe le futur.",
