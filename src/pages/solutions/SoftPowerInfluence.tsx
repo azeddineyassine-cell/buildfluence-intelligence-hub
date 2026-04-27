@@ -812,7 +812,7 @@ const MechanismSection = ({ open }: { open: OpenDetail }) => {
 
           <DestCard>
             <DestHeader glyph="i" title="Use Case : Investissement au Maroc" sub="Écosystème institutionnel marocain · cliquez un acteur" />
-            <div className="flex flex-wrap gap-2 pt-2.5" style={{ borderTop: "1px solid rgba(244,241,234,0.08)" }}>
+            <div className="sp-logo-grid pt-2.5" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 8, borderTop: "1px solid rgba(244,241,234,0.08)" }}>
               <LogoChip label="AMDIE" src={AMDIE_LOGOS.amdie} onClick={() => open({ kind: "useCase", data: useCaseData.amdie })} />
               <LogoChip label="MICEPP" src={AMDIE_LOGOS.micepp} onClick={() => open({ kind: "useCase", data: useCaseData.micepp })} />
               <LogoChip label="MedZ" src={AMDIE_LOGOS.medz} onClick={() => open({ kind: "useCase", data: useCaseData.medz })} />
@@ -844,7 +844,7 @@ const MechanismSection = ({ open }: { open: OpenDetail }) => {
 
           <DestCard>
             <DestHeader glyph="v" title="Fédérations Sectorielles" sub="Partenaires & entreprises stratégiques — cliquez un acteur" />
-            <div className="flex flex-wrap gap-2 pt-2.5" style={{ borderTop: "1px solid rgba(244,241,234,0.08)" }}>
+            <div className="sp-logo-grid pt-2.5" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 8, borderTop: "1px solid rgba(244,241,234,0.08)" }}>
               {Object.keys(fedData).map((k) => (
                 <LogoChip key={k} label={k.toUpperCase()} src={FED_LOGOS[k]} onClick={() => open({ kind: "fed", key: k, data: fedData[k] })} />
               ))}
@@ -853,7 +853,7 @@ const MechanismSection = ({ open }: { open: OpenDetail }) => {
 
           <DestCard>
             <DestHeader glyph="vi" title="Agences de Promotion d'Investissements" sub="Benchmark international — cliquez une agence" />
-            <div className="flex flex-wrap gap-2 pt-2.5" style={{ borderTop: "1px solid rgba(244,241,234,0.08)" }}>
+            <div className="sp-logo-grid pt-2.5" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 8, borderTop: "1px solid rgba(244,241,234,0.08)" }}>
               {Object.entries(apiData).map(([k, v]) => (
                 <LogoChip key={k} label={v.full} src={API_LOGOS[k]} onClick={() => open({ kind: "api", data: v })} />
               ))}
@@ -862,7 +862,7 @@ const MechanismSection = ({ open }: { open: OpenDetail }) => {
 
           <DestCard>
             <DestHeader glyph="vii" title="Coopération Internationale" sub="Bailleurs & financeurs — cliquez une institution" />
-            <div className="flex flex-wrap gap-2 pt-2.5" style={{ borderTop: "1px solid rgba(244,241,234,0.08)" }}>
+            <div className="sp-logo-grid pt-2.5" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 8, borderTop: "1px solid rgba(244,241,234,0.08)" }}>
               {Object.entries(coopData).map(([k, v]) => (
                 <LogoChip key={k} label={v.full} src={COOP_LOGOS[k]} onClick={() => open({ kind: "coop", data: v })} />
               ))}
