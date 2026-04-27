@@ -606,9 +606,9 @@ const MechanismSection = ({ open }: { open: OpenDetail }) => {
           <DestCard onClick={() => open({ kind: "dest", data: destData.amdie })}>
             <DestHeader glyph="i" title="AMDIE / MICEPP" sub="Agence d'Investissement & Ministère de tutelle" />
             <div className="flex flex-wrap gap-2 pt-2.5" style={{ borderTop: "1px solid rgba(244,241,234,0.08)" }}>
-              <LogoChip label="AMDIE" onClick={() => open({ kind: "logo", data: logoData.amdie })} />
-              <LogoChip label="MICEPP" onClick={() => open({ kind: "logo", data: logoData.micepp })} />
-              <LogoChip label="Morocco Now" onClick={() => open({ kind: "logo", data: logoData.moroccoNow })} />
+              <LogoChip label="AMDIE" src={AMDIE_LOGOS.amdie} onClick={() => open({ kind: "logo", data: logoData.amdie })} />
+              <LogoChip label="MICEPP" src={AMDIE_LOGOS.micepp} onClick={() => open({ kind: "logo", data: logoData.micepp })} />
+              <LogoChip label="Morocco Now" src={AMDIE_LOGOS.moroccoNow} onClick={() => open({ kind: "logo", data: logoData.moroccoNow })} />
             </div>
           </DestCard>
 
