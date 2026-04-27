@@ -4,7 +4,9 @@ import { motion, AnimatePresence } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import CTAFooter from "@/components/CTAFooter";
 import { FormStrategicExchange } from "@/components/FormModals";
-import logoBuildfluence from "@/assets/Logo_Buildfluence_FondBlanc2.png";
+import logoBuildfluence from "@/assets/Logo_Buildfluence-Fond_Blanc_1.png";
+import logoMedz from "@/assets/clients/medz.png";
+import logoCri from "@/assets/clients/cri.png";
 
 // Actor logos (Back-Office sources + Ecosystem)
 import logoOfac from "@/assets/clients/ofac.png";
@@ -50,7 +52,7 @@ import logoBad from "@/assets/clients/bad.png";
 const FED_LOGOS: Record<string, string> = { cgem: logoCgem, asmex: logoAsmex, amica: logoAmica, amip: logoAmip, amith: logoAmith, cnt: logoCnt, fenagri: logoFenagri };
 const API_LOGOS: Record<string, string> = { investhk: logoInvesthk, edbsg: logoEdbsg, apexbrasil: logoApexbrasil, investlt: logoInvestlt, investmx: logoInvestmx, investvn: logoInvestvn, investcl: logoInvestcl, investsa: logoInvestsa, czechinvest: logoCzechinvest };
 const COOP_LOGOS: Record<string, string> = { giz: logoGiz, afd: logoAfd, jica: logoJica, bei: logoBei, pnud: logoPnud, bm: logoBm, berd: logoBerd, isdb: logoIsdb, bad: logoBad };
-const AMDIE_LOGOS: Record<string, string> = { amdie: logoAmdie, micepp: logoMicepp, moroccoNow: logoMoroccoNow };
+const AMDIE_LOGOS: Record<string, string> = { amdie: logoAmdie, micepp: logoMicepp, moroccoNow: logoMoroccoNow, medz: logoMedz, cri: logoCri };
 const SOURCE_LOGOS: Record<string, string> = {
   OFAC: logoOfac, "EU Sanctions": logoEuSanctions, ICIJ: logoIcij, GAFI: logoGafi, PitchBook: logoPitchbook, "D&B": logoDnb,
   "Growth Lab": logoGrowthlab, Statista: logoStatista, fDi: logoFdi, "World Bank": logoWorldbank, Harvard: logoHarvard,
@@ -84,6 +86,153 @@ const FONT_ITALIC = "'Cormorant Garamond', serif";
 const FONT_MONO = "'JetBrains Mono', monospace";
 const FONT_BODY = "'DM Sans', sans-serif";
 
+/* ═══════════════ USE CASE DATA (Investissement au Maroc) ═══════════════ */
+type UseCaseDetail = {
+  eyebrow: string;
+  title: string;
+  tagline: string;
+  meta?: { l: string; v: string }[];
+  cols: { h: string; items: string[] }[];
+  timeline?: { year: string; text: string }[];
+  observation?: { title: string; colA: { h: string; items: string[] }; colB: { h: string; items: string[] } };
+  bottomLogos?: { label: string; src: string }[];
+  bfApport: string;
+};
+
+const useCaseData: Record<string, UseCaseDetail> = {
+  amdie: {
+    eyebrow: "Use Case · Acteur Institutionnel",
+    title: "AMDIE",
+    tagline: "Agence Marocaine de Développement des Investissements et des Exportations. Bras opérationnel de l'attractivité économique du Royaume.",
+    meta: [
+      { l: "Charte d'investissement", v: "Édition 2023" },
+      { l: "Objectif IDE 2026", v: "550 MMDH" },
+      { l: "Création d'emploi 2026", v: "500 000" },
+    ],
+    cols: [
+      { h: "Périmètre AMDIE", items: [
+        "Pilotage de l'attractivité nationale",
+        "Logo Morocco Now : Site vitrine de l'activité AMDIE",
+        "Coordination des missions internationales",
+        "Suivi des grands projets d'investissement",
+        "Promotion des exportations marocaines",
+      ] },
+      { h: "Valeur Buildfluence dédiée", items: [
+        "Observatoire d'Investissement permanent",
+        "Note stratégique & Lettre d'information sur-mesure",
+        "Veille des dynamiques narratives concernant les entreprises étrangères au Maroc",
+        "Information fraîche pour les exportateurs marocains",
+        "Rayonnement sectoriel complet",
+      ] },
+    ],
+    bottomLogos: [
+      { label: "AMDIE", src: logoAmdie },
+      { label: "Morocco Now", src: logoMoroccoNow },
+    ],
+    bfApport: "Transformer Morocco Now de campagne de communication en infrastructure d'influence souveraine, alimentée en continu par le mécanisme Doing Business Platform Buildfluence.",
+  },
+  micepp: {
+    eyebrow: "Use Case · Ministère de tutelle",
+    title: "MICEPP",
+    tagline: "Ministère de l'Investissement, de la Convergence et de l'Évaluation des Politiques Publiques. Architecte de la stratégie nationale d'investissement.",
+    meta: [
+      { l: "Tutelle directe", v: "AMDIE et CRI" },
+      { l: "Chantier emblématique", v: "Observatoire d'Investissement" },
+    ],
+    cols: [
+      { h: "Mandat stratégique", items: [
+        "Définition de la politique nationale d'investissement",
+        "Convergence des dispositifs publics d'attractivité",
+        "Évaluation de l'impact des politiques publiques",
+        "Pilotage des grandes réformes économiques",
+        "Tutelle de l'AMDIE",
+      ] },
+      { h: "Valeur Buildfluence dédiée", items: [
+        "Veille stratégique en continu sur les politiques d'investissement comparées",
+        "Décryptage des stratégies d'attractivité concurrentes (Vietnam, Afrique du Sud, Turquie…)",
+        "Anticipation des signaux faibles réglementaires et géoéconomiques",
+        "Production d'un Baromètre d'Investissement actionnable",
+        "Capacité immédiate de déploiement opérationnel",
+      ] },
+    ],
+    timeline: [
+      { year: "2017", text: "Conception de l'Observatoire d'Investissement par Buildfluence" },
+      { year: "2024", text: "Annonce officielle du chantier par le MICEPP" },
+      { year: "2025", text: "Étude toujours en cours" },
+    ],
+    bfApport: "L'expertise existe. La méthodologie est éprouvée. L'infrastructure peut être déployée immédiatement. Buildfluence porte ce projet depuis huit ans, prêt à transformer une vision officielle en outil opérationnel.",
+  },
+  medz: {
+    eyebrow: "Use Case · Aménageur stratégique",
+    title: "MedZ",
+    tagline: "Filiale du Groupe CDG dédiée à l'aménagement et au développement des zones d'activités économiques au Maroc. Vingt ans d'excellence opérationnelle... en attente d'une voix stratégique à la hauteur.",
+    meta: [
+      { l: "Groupe", v: "CDG (Caisse de Dépôt et de Gestion)" },
+      { l: "Type d'activité", v: "Aménageur-Développeur" },
+      { l: "Périmètre", v: "Zones industrielles · Offshoring · Tourisme" },
+    ],
+    cols: [
+      { h: "Portefeuille MedZ", items: [
+        "Plateformes Industrielles Intégrées (P2I)",
+        "Atlantic Free Zone : Kénitra",
+        "Midparc : Casablanca (aéronautique)",
+        "Technopolis : Rabat (offshoring)",
+        "Casanearshore & Rabat Technopolis (services)",
+      ] },
+      { h: "Valeur Buildfluence dédiée", items: [
+        "Production éditoriale stratégique structurante (rapports trimestriels, études sectorielles, Dashboard public dynamique)",
+        "Veille concurrentielle continue (zones franches mondiales et africaines)",
+        "Intelligence sur les investisseurs ciblés (équipementiers automobiles, énergies renouvelables, donneurs d'ordre aéronautiques)",
+        "Cartographie des décideurs industriels européens en phase de relocalisation",
+        "Livre Blanc annuel sur l'attractivité industrielle continentale",
+      ] },
+    ],
+    observation: {
+      title: "Observation stratégique",
+      colA: { h: "Ce que les leaders mondiaux font", items: [
+        "Plateforme data publique et rapports trimestriels",
+        "Nation Branding multilingue et présence éditoriale continue",
+        "AI Platforms et trackers de réformes en temps réel",
+        "Études sectorielles régulières et benchmarks publiés",
+      ] },
+      colB: { h: "Ce qu'on peut faire ensemble", items: [
+        "Reporting trimestriel structuré et accessible publiquement",
+        "Newsletter stratégique continue en plusieurs langues",
+        "Dashboard d'attractivité industrielle interactif",
+        "Livre Blanc annuel sur l'attractivité africaine",
+      ] },
+    },
+    bfApport: "Vingt ans de réussite terrain. Zéro étude stratégique publique depuis 2016. Le décalage entre l'excellence opérationnelle et la visibilité institutionnelle se paie en parts de marché continentales. Buildfluence transforme ce décalage en avantage compétitif.",
+  },
+  cri: {
+    eyebrow: "Use Case · Échelon territorial",
+    title: "CRI : Centres Régionaux d'Investissement",
+    tagline: "Guichet unique territorial pour les investisseurs. Bras armé de la régionalisation avancée du Royaume en matière d'investissement.",
+    meta: [
+      { l: "Nombre de CRI", v: "12 (un par région)" },
+      { l: "Création", v: "2002 · Refonte 2019" },
+      { l: "Mission", v: "Accompagnement & accélération" },
+    ],
+    cols: [
+      { h: "Mandat des CRI", items: [
+        "Guichet unique pour la création d'entreprise",
+        "Accompagnement des projets d'investissement régionaux",
+        "Promotion territoriale et identification des opportunités locales",
+        "Médiation avec les administrations",
+        "Suivi post-création des entreprises",
+      ] },
+      { h: "Valeur Buildfluence dédiée", items: [
+        "Intelligence territoriale dédiée par région",
+        "Benchmark de compétitivité régionale (vs autres territoires marocains et internationaux)",
+        "Veille sur les investisseurs ciblant des localisations spécifiques",
+        "Production de fiches d'attractivité régionale sur-mesure",
+        "Décryptage des stratégies concurrentes infrarégionales",
+      ] },
+    ],
+    bfApport: "Chaque région a ses atouts, ses concurrents et ses fenêtres d'opportunité. Buildfluence dote chaque CRI d'une intelligence territoriale équivalente à celle d'un État.",
+  },
+};
+
 /* ═══════════════ DETAIL MODAL ═══════════════ */
 type DetailKind =
   | { kind: "source"; data: SourceDetail }
@@ -92,7 +241,8 @@ type DetailKind =
   | { kind: "fed"; key: string; data: Federation }
   | { kind: "api"; data: Api }
   | { kind: "coop"; data: Coop }
-  | { kind: "logo"; data: Logo };
+  | { kind: "logo"; data: Logo }
+  | { kind: "useCase"; data: UseCaseDetail };
 
 const DetailModal = ({ detail, onClose }: { detail: DetailKind | null; onClose: () => void }) => {
   useEffect(() => {
@@ -235,7 +385,7 @@ const DetailContent = ({ detail }: { detail: DetailKind }) => {
             {d.sources}
           </div>
         )}
-        <BfApport text={d.bfApport} />
+        <BfApport text={d.bfApport} label="Valeur Buildfluence" />
       </>
     );
   }
@@ -256,7 +406,7 @@ const DetailContent = ({ detail }: { detail: DetailKind }) => {
     const c = detail.data;
     return (
       <>
-        <Eyebrow>{c.isKey ? "Pays Clé · Partenaire stratégique" : "Pays Concurrent · Benchmark"}</Eyebrow>
+        <Eyebrow>{c.isKey ? "Pays Clé · Partenaire stratégique" : "Pays Concurrent – Veille Concurrentielle"}</Eyebrow>
         <DetailTitle flag={c.flag}>{c.name}</DetailTitle>
         <DetailTagline>{c.description}</DetailTagline>
         <MetaStrip items={[
@@ -273,7 +423,7 @@ const DetailContent = ({ detail }: { detail: DetailKind }) => {
                 "Buildfluence cartographie en continu les décideurs émergents, les narratifs hostiles et les fenêtres d'opportunité que les approches diplomatiques classiques ne détectent pas.",
               ] },
             ]} />
-            <BfApport text={c.bfApport || ""} />
+            <BfApport text={c.bfApport || ""} label="Valeur Buildfluence" />
           </>
         ) : (
           <>
@@ -285,7 +435,7 @@ const DetailContent = ({ detail }: { detail: DetailKind }) => {
               ] },
               { h: "Opportunités Buildfluence", items: competitorOpportunities.map(o => o.replace("ce concurrent", c.name)) },
             ]} />
-            <BfApport text={getCompetitorBfApport(c.score || 0)} />
+            <BfApport text={getCompetitorBfApport(c.score || 0)} label="Valeur Buildfluence" />
           </>
         )}
       </>
@@ -346,6 +496,63 @@ const DetailContent = ({ detail }: { detail: DetailKind }) => {
           { h: "Valeur Buildfluence dédiée", items: [c.apport] },
         ]} />
         <BfApport text="Les bailleurs ne financent que les projets bien construits, bien narrés, bien timés. Buildfluence orchestre les trois." label="Valeur Buildfluence" />
+      </>
+    );
+  }
+  if (detail.kind === "useCase") {
+    const u = detail.data;
+    return (
+      <>
+        <Eyebrow>{u.eyebrow}</Eyebrow>
+        <DetailTitle>{u.title}</DetailTitle>
+        <DetailTagline>{u.tagline}</DetailTagline>
+        {u.meta && <MetaStrip items={u.meta} />}
+        <ColsBlock cols={u.cols} />
+
+        {u.timeline && (
+          <div style={{ margin: "28px 0 0 0", padding: "20px 0 20px 28px", borderLeft: `2px solid ${C.gold}` }}>
+            <h5 style={{ fontFamily: FONT_MONO, fontSize: 10, letterSpacing: "0.24em", textTransform: "uppercase", color: C.gold, marginBottom: 16, fontWeight: 600 }}>Timeline stratégique</h5>
+            {u.timeline.map((t, i) => (
+              <div key={i} style={{ display: "flex", gap: 18, alignItems: "baseline", padding: "8px 0", borderBottom: i === u.timeline!.length - 1 ? "none" : `1px solid ${C.lineSoft}` }}>
+                <span style={{ fontFamily: FONT_MONO, fontSize: 13, color: C.gold, fontWeight: 600, minWidth: 56 }}>─ {t.year}</span>
+                <span style={{ fontFamily: FONT_ITALIC, fontStyle: "italic", fontSize: 16, color: C.gold, lineHeight: 1.45 }}>{t.text}</span>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {u.observation && (
+          <div style={{ margin: "28px 0", padding: 24, background: "rgba(201,168,76,0.04)", borderLeft: `3px solid ${C.gold}` }}>
+            <h5 style={{ fontFamily: FONT_MONO, fontSize: 11, letterSpacing: "0.22em", textTransform: "uppercase", color: C.gold, marginBottom: 18, fontWeight: 600 }}>{u.observation.title}</h5>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24 }}>
+              {[u.observation.colA, u.observation.colB].map((col, ci) => (
+                <div key={ci}>
+                  <h6 style={{ fontFamily: FONT_MONO, fontSize: 10, letterSpacing: "0.22em", textTransform: "uppercase", color: C.gold, marginBottom: 14, paddingBottom: 10, borderBottom: `1px solid ${C.gold}`, fontWeight: 600 }}>{col.h}</h6>
+                  <ul className="list-none">
+                    {col.items.map((it, i) => (
+                      <li key={i} style={{ fontFamily: FONT_ITALIC, fontStyle: "italic", fontSize: 14, color: C.ink, padding: "8px 0 8px 22px", borderBottom: i === col.items.length - 1 ? "none" : `1px solid ${C.lineSoft}`, position: "relative", lineHeight: 1.5 }}>
+                        <span style={{ position: "absolute", left: 0, top: 8, color: C.gold, fontSize: 14 }}>→</span>
+                        {it}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {u.bottomLogos && (
+          <div style={{ display: "flex", flexWrap: "wrap", gap: 12, alignItems: "center", margin: "24px 0 0 0", paddingTop: 20, borderTop: `1px solid ${C.line}` }}>
+            {u.bottomLogos.map((lg) => (
+              <span key={lg.label} title={lg.label} style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", width: 110, height: 50, background: "#FFFFFF", border: `1px solid ${C.line}`, borderRadius: 2, padding: "6px 10px" }}>
+                <img src={lg.src} alt={lg.label} style={{ maxWidth: "100%", maxHeight: "100%", objectFit: "contain", display: "block" }} />
+              </span>
+            ))}
+          </div>
+        )}
+
+        <BfApport text={u.bfApport} label="Valeur Buildfluence" />
       </>
     );
   }
@@ -603,12 +810,13 @@ const MechanismSection = ({ open }: { open: OpenDetail }) => {
         <div>
           <ColHeader>Ecosystem · Diffusion</ColHeader>
 
-          <DestCard onClick={() => open({ kind: "dest", data: destData.amdie })}>
-            <DestHeader glyph="i" title="AMDIE / MICEPP" sub="Agence d'Investissement & Ministère de tutelle" />
+          <DestCard>
+            <DestHeader glyph="i" title="Use Case : Investissement au Maroc" sub="Écosystème institutionnel marocain · cliquez un acteur" />
             <div className="flex flex-wrap gap-2 pt-2.5" style={{ borderTop: "1px solid rgba(244,241,234,0.08)" }}>
-              <LogoChip label="AMDIE" src={AMDIE_LOGOS.amdie} onClick={() => open({ kind: "logo", data: logoData.amdie })} />
-              <LogoChip label="MICEPP" src={AMDIE_LOGOS.micepp} onClick={() => open({ kind: "logo", data: logoData.micepp })} />
-              <LogoChip label="Morocco Now" src={AMDIE_LOGOS.moroccoNow} onClick={() => open({ kind: "logo", data: logoData.moroccoNow })} />
+              <LogoChip label="AMDIE" src={AMDIE_LOGOS.amdie} onClick={() => open({ kind: "useCase", data: useCaseData.amdie })} />
+              <LogoChip label="MICEPP" src={AMDIE_LOGOS.micepp} onClick={() => open({ kind: "useCase", data: useCaseData.micepp })} />
+              <LogoChip label="MedZ" src={AMDIE_LOGOS.medz} onClick={() => open({ kind: "useCase", data: useCaseData.medz })} />
+              <LogoChip label="CRI" src={AMDIE_LOGOS.cri} onClick={() => open({ kind: "useCase", data: useCaseData.cri })} />
             </div>
           </DestCard>
 
