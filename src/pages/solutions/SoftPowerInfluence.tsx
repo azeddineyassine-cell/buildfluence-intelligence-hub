@@ -499,6 +499,63 @@ const DetailContent = ({ detail }: { detail: DetailKind }) => {
       </>
     );
   }
+  if (detail.kind === "useCase") {
+    const u = detail.data;
+    return (
+      <>
+        <Eyebrow>{u.eyebrow}</Eyebrow>
+        <DetailTitle>{u.title}</DetailTitle>
+        <DetailTagline>{u.tagline}</DetailTagline>
+        {u.meta && <MetaStrip items={u.meta} />}
+        <ColsBlock cols={u.cols} />
+
+        {u.timeline && (
+          <div style={{ margin: "28px 0 0 0", padding: "20px 0 20px 28px", borderLeft: `2px solid ${C.gold}` }}>
+            <h5 style={{ fontFamily: FONT_MONO, fontSize: 10, letterSpacing: "0.24em", textTransform: "uppercase", color: C.gold, marginBottom: 16, fontWeight: 600 }}>Timeline stratégique</h5>
+            {u.timeline.map((t, i) => (
+              <div key={i} style={{ display: "flex", gap: 18, alignItems: "baseline", padding: "8px 0", borderBottom: i === u.timeline!.length - 1 ? "none" : `1px solid ${C.lineSoft}` }}>
+                <span style={{ fontFamily: FONT_MONO, fontSize: 13, color: C.gold, fontWeight: 600, minWidth: 56 }}>─ {t.year}</span>
+                <span style={{ fontFamily: FONT_ITALIC, fontStyle: "italic", fontSize: 16, color: C.gold, lineHeight: 1.45 }}>{t.text}</span>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {u.observation && (
+          <div style={{ margin: "28px 0", padding: 24, background: "rgba(201,168,76,0.04)", borderLeft: `3px solid ${C.gold}` }}>
+            <h5 style={{ fontFamily: FONT_MONO, fontSize: 11, letterSpacing: "0.22em", textTransform: "uppercase", color: C.gold, marginBottom: 18, fontWeight: 600 }}>{u.observation.title}</h5>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24 }}>
+              {[u.observation.colA, u.observation.colB].map((col, ci) => (
+                <div key={ci}>
+                  <h6 style={{ fontFamily: FONT_MONO, fontSize: 10, letterSpacing: "0.22em", textTransform: "uppercase", color: C.gold, marginBottom: 14, paddingBottom: 10, borderBottom: `1px solid ${C.gold}`, fontWeight: 600 }}>{col.h}</h6>
+                  <ul className="list-none">
+                    {col.items.map((it, i) => (
+                      <li key={i} style={{ fontFamily: FONT_ITALIC, fontStyle: "italic", fontSize: 14, color: C.ink, padding: "8px 0 8px 22px", borderBottom: i === col.items.length - 1 ? "none" : `1px solid ${C.lineSoft}`, position: "relative", lineHeight: 1.5 }}>
+                        <span style={{ position: "absolute", left: 0, top: 8, color: C.gold, fontSize: 14 }}>→</span>
+                        {it}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {u.bottomLogos && (
+          <div style={{ display: "flex", flexWrap: "wrap", gap: 12, alignItems: "center", margin: "24px 0 0 0", paddingTop: 20, borderTop: `1px solid ${C.line}` }}>
+            {u.bottomLogos.map((lg) => (
+              <span key={lg.label} title={lg.label} style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", width: 110, height: 50, background: "#FFFFFF", border: `1px solid ${C.line}`, borderRadius: 2, padding: "6px 10px" }}>
+                <img src={lg.src} alt={lg.label} style={{ maxWidth: "100%", maxHeight: "100%", objectFit: "contain", display: "block" }} />
+              </span>
+            ))}
+          </div>
+        )}
+
+        <BfApport text={u.bfApport} label="Valeur Buildfluence" />
+      </>
+    );
+  }
   // logo
   const l = detail.data as Logo;
   return (
