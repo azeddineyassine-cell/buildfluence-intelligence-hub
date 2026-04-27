@@ -569,26 +569,26 @@ const MechanismSection = ({ open }: { open: OpenDetail }) => {
             onClick={() => open({ kind: "source", data: sourcesData["bf-core"] })}
             className="bf-core-circle relative flex flex-col items-center justify-center transition-all"
             style={{
-              width: 240, height: 240, borderRadius: "50%", background: C.paper,
+              width: 240, height: 240, borderRadius: "50%", background: "#FFFFFF",
               border: `2px solid rgba(201,168,76,0.4)`, cursor: "pointer",
               boxShadow: "0 0 0 8px rgba(201,168,76,0.05), 0 0 0 16px rgba(201,168,76,0.025)",
               animation: "bfPulse 3s ease-in-out infinite",
             }}
-            onMouseEnter={(e) => { e.currentTarget.style.borderColor = C.gold; e.currentTarget.style.boxShadow = "0 0 0 8px rgba(201,168,76,0.1), 0 0 0 16px rgba(201,168,76,0.05), 0 0 40px rgba(201,168,76,0.2)"; e.currentTarget.style.animation = "none"; }}
+            onMouseEnter={(e) => { e.currentTarget.style.borderColor = C.gold; e.currentTarget.style.boxShadow = "0 0 0 8px rgba(201,168,76,0.12), 0 0 0 16px rgba(201,168,76,0.06), 0 0 40px rgba(201,168,76,0.25)"; e.currentTarget.style.animation = "none"; }}
             onMouseLeave={(e) => { e.currentTarget.style.borderColor = "rgba(201,168,76,0.4)"; e.currentTarget.style.boxShadow = "0 0 0 8px rgba(201,168,76,0.05), 0 0 0 16px rgba(201,168,76,0.025)"; e.currentTarget.style.animation = "bfPulse 3s ease-in-out infinite"; }}
             aria-label="Buildfluence — Infrastructure décisionnelle"
           >
-            <img src={logoBuildfluence} alt="Buildfluence" style={{ width: 160, height: "auto", maxHeight: 160, objectFit: "contain", display: "block" }} />
+            <img src={logoBuildfluence} alt="Buildfluence" style={{ width: 170, height: "auto", maxHeight: 170, objectFit: "contain", display: "block" }} />
           </button>
 
           <div style={{ fontFamily: FONT_DISPLAY, fontSize: 24, color: C.gold, opacity: 0.6, lineHeight: 1 }}>↓</div>
 
-          <div className="w-full text-center" style={{ background: "rgba(244,241,234,0.04)", border: "1px solid rgba(244,241,234,0.1)", padding: "28px 24px" }}>
-            <p style={{ fontFamily: FONT_DISPLAY, fontStyle: "italic", fontSize: 17, color: C.gold, lineHeight: 1.35, marginBottom: 14, fontWeight: 400 }}>Une architecture conçue pour transformer l'information en pouvoir décisionnel.</p>
-            <p style={{ fontFamily: FONT_ITALIC, fontStyle: "italic", fontSize: 14, color: "rgba(244,241,234,0.7)", lineHeight: 1.5, marginBottom: 20 }}>Buildfluence ne livre pas des rapports volumineux. Buildfluence livre une capacité d'anticipation.</p>
+          <div className="w-full text-center" style={{ background: "rgba(255,255,255,0.7)", border: "1px solid rgba(10,22,40,0.10)", padding: "28px 24px" }}>
+            <p style={{ fontFamily: FONT_DISPLAY, fontStyle: "italic", fontSize: 17, color: C.gold, lineHeight: 1.35, marginBottom: 14, fontWeight: 500 }}>Une architecture conçue pour transformer l'information en pouvoir décisionnel.</p>
+            <p style={{ fontFamily: FONT_ITALIC, fontStyle: "italic", fontSize: 14, color: C.inkSoft, lineHeight: 1.5, marginBottom: 20 }}>Buildfluence ne livre pas des rapports volumineux. Buildfluence livre une capacité d'anticipation.</p>
             <ul className="list-none text-left">
               {["Voir ce que les autres ne voient pas","Décider avec un temps d'avance","Neutraliser les risques invisibles","Identifier les vrais leviers d'attractivité","Transformer la visibilité en influence réelle"].map((it, i, arr) => (
-                <li key={it} style={{ fontSize: 12, color: "rgba(244,241,234,0.85)", padding: "8px 0 8px 18px", borderBottom: i === arr.length - 1 ? "none" : "1px solid rgba(244,241,234,0.06)", position: "relative", lineHeight: 1.4 }}>
+                <li key={it} style={{ fontSize: 12, color: C.navy, padding: "8px 0 8px 18px", borderBottom: i === arr.length - 1 ? "none" : "1px solid rgba(10,22,40,0.08)", position: "relative", lineHeight: 1.4 }}>
                   <span style={{ position: "absolute", left: 0, color: C.gold }}>—</span>{it}
                 </li>
               ))}
@@ -596,7 +596,7 @@ const MechanismSection = ({ open }: { open: OpenDetail }) => {
           </div>
 
           <div style={{ fontFamily: FONT_DISPLAY, fontSize: 24, color: C.gold, opacity: 0.6, lineHeight: 1 }}>↓</div>
-          <div style={{ textAlign: "center", fontFamily: FONT_MONO, fontSize: 10, letterSpacing: "0.24em", textTransform: "uppercase", color: C.gold, opacity: 0.7 }}>Visibilité — Rayonnement — Influence</div>
+          <div style={{ textAlign: "center", fontFamily: FONT_MONO, fontSize: 10, letterSpacing: "0.24em", textTransform: "uppercase", color: C.gold, opacity: 0.85 }}>Visibilité — Rayonnement — Influence</div>
         </div>
 
         {/* COL DROITE — Ecosystem */}
