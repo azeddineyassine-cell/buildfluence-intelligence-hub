@@ -564,7 +564,7 @@ const MechanismSection = ({ open }: { open: OpenDetail }) => {
 
         {/* COL CENTRE — BF Core */}
         <div className="sp-mech-col-center flex flex-col items-center gap-6">
-          <div style={{ ...colLabel, width: "100%" }}>Infrastructure Décisionnelle</div>
+          <div className="w-full"><ColHeader>Infrastructure Décisionnelle</ColHeader></div>
           <button
             onClick={() => open({ kind: "source", data: sourcesData["bf-core"] })}
             className="bf-core-circle relative flex flex-col items-center justify-center transition-all"
