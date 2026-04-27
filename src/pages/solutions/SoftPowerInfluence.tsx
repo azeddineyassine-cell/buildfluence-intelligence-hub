@@ -691,7 +691,7 @@ const LogoChip = ({ label, src, onClick }: { label: string; src?: string; onClic
     onClick={(e) => { e.stopPropagation(); onClick(); }}
     className="transition-all"
     title={label}
-    style={{ padding: src ? "6px 10px" : "4px 8px", cursor: "pointer", borderRadius: 2, background: "rgba(255,255,255,0.92)", display: "flex", alignItems: "center", justifyContent: "center", width: src ? 96 : 50, height: src ? 44 : 24, border: "1px solid rgba(10,22,40,0.08)" }}
+    style={{ padding: src ? "6px 10px" : "4px 8px", cursor: "pointer", borderRadius: 2, background: "rgba(255,255,255,0.92)", display: "flex", alignItems: "center", justifyContent: "center", width: "100%", height: src ? 44 : 24, border: "1px solid rgba(10,22,40,0.08)" }}
     onMouseEnter={(e) => { e.currentTarget.style.background = "#FFFFFF"; e.currentTarget.style.borderColor = "rgba(201,168,76,0.6)"; e.currentTarget.style.transform = "translateY(-2px)"; }}
     onMouseLeave={(e) => { e.currentTarget.style.background = "rgba(255,255,255,0.92)"; e.currentTarget.style.borderColor = "rgba(10,22,40,0.08)"; e.currentTarget.style.transform = "translateY(0)"; }}
   >
@@ -812,7 +812,7 @@ const MechanismSection = ({ open }: { open: OpenDetail }) => {
 
           <DestCard>
             <DestHeader glyph="i" title="Use Case : Investissement au Maroc" sub="Écosystème institutionnel marocain · cliquez un acteur" />
-            <div className="flex flex-wrap gap-2 pt-2.5" style={{ borderTop: "1px solid rgba(244,241,234,0.08)" }}>
+            <div className="sp-logo-grid pt-2.5" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 8, borderTop: "1px solid rgba(244,241,234,0.08)" }}>
               <LogoChip label="AMDIE" src={AMDIE_LOGOS.amdie} onClick={() => open({ kind: "useCase", data: useCaseData.amdie })} />
               <LogoChip label="MICEPP" src={AMDIE_LOGOS.micepp} onClick={() => open({ kind: "useCase", data: useCaseData.micepp })} />
               <LogoChip label="MedZ" src={AMDIE_LOGOS.medz} onClick={() => open({ kind: "useCase", data: useCaseData.medz })} />
@@ -844,7 +844,7 @@ const MechanismSection = ({ open }: { open: OpenDetail }) => {
 
           <DestCard>
             <DestHeader glyph="v" title="Fédérations Sectorielles" sub="Partenaires & entreprises stratégiques — cliquez un acteur" />
-            <div className="flex flex-wrap gap-2 pt-2.5" style={{ borderTop: "1px solid rgba(244,241,234,0.08)" }}>
+            <div className="sp-logo-grid pt-2.5" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 8, borderTop: "1px solid rgba(244,241,234,0.08)" }}>
               {Object.keys(fedData).map((k) => (
                 <LogoChip key={k} label={k.toUpperCase()} src={FED_LOGOS[k]} onClick={() => open({ kind: "fed", key: k, data: fedData[k] })} />
               ))}
@@ -853,7 +853,7 @@ const MechanismSection = ({ open }: { open: OpenDetail }) => {
 
           <DestCard>
             <DestHeader glyph="vi" title="Agences de Promotion d'Investissements" sub="Benchmark international — cliquez une agence" />
-            <div className="flex flex-wrap gap-2 pt-2.5" style={{ borderTop: "1px solid rgba(244,241,234,0.08)" }}>
+            <div className="sp-logo-grid pt-2.5" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 8, borderTop: "1px solid rgba(244,241,234,0.08)" }}>
               {Object.entries(apiData).map(([k, v]) => (
                 <LogoChip key={k} label={v.full} src={API_LOGOS[k]} onClick={() => open({ kind: "api", data: v })} />
               ))}
@@ -862,7 +862,7 @@ const MechanismSection = ({ open }: { open: OpenDetail }) => {
 
           <DestCard>
             <DestHeader glyph="vii" title="Coopération Internationale" sub="Bailleurs & financeurs — cliquez une institution" />
-            <div className="flex flex-wrap gap-2 pt-2.5" style={{ borderTop: "1px solid rgba(244,241,234,0.08)" }}>
+            <div className="sp-logo-grid pt-2.5" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 8, borderTop: "1px solid rgba(244,241,234,0.08)" }}>
               {Object.entries(coopData).map(([k, v]) => (
                 <LogoChip key={k} label={v.full} src={COOP_LOGOS[k]} onClick={() => open({ kind: "coop", data: v })} />
               ))}
