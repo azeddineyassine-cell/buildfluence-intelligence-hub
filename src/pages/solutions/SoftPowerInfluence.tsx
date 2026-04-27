@@ -4,7 +4,58 @@ import { motion, AnimatePresence } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import CTAFooter from "@/components/CTAFooter";
 import { FormStrategicExchange } from "@/components/FormModals";
-import logoBuildfluence from "@/assets/Logo_Buildfluence.png";
+import logoBuildfluence from "@/assets/Logo_Buildfluence_FondBlanc2.png";
+
+// Actor logos (Back-Office sources + Ecosystem)
+import logoOfac from "@/assets/clients/ofac.png";
+import logoEuSanctions from "@/assets/clients/eu-sanctions.png";
+import logoIcij from "@/assets/clients/icij.png";
+import logoGafi from "@/assets/clients/gafi.png";
+import logoPitchbook from "@/assets/clients/pitchbook.png";
+import logoDnb from "@/assets/clients/dun-bradstreet.png";
+import logoGrowthlab from "@/assets/clients/growthlab.png";
+import logoStatista from "@/assets/clients/statista.png";
+import logoFdi from "@/assets/clients/fdi.png";
+import logoWorldbank from "@/assets/clients/worldbank.png";
+import logoHarvard from "@/assets/clients/harvard.png";
+import logoAmdie from "@/assets/clients/amdie.png";
+import logoMicepp from "@/assets/clients/micepp.png";
+import logoMoroccoNow from "@/assets/clients/morocco-now.png";
+import logoCgem from "@/assets/clients/cgem.png";
+import logoAsmex from "@/assets/clients/asmex.png";
+import logoAmica from "@/assets/clients/amica.png";
+import logoAmip from "@/assets/clients/amip.png";
+import logoAmith from "@/assets/clients/amith.png";
+import logoCnt from "@/assets/clients/cnt.png";
+import logoFenagri from "@/assets/clients/fenagri.png";
+import logoInvesthk from "@/assets/clients/investhk.png";
+import logoEdbsg from "@/assets/clients/edb-singapore.png";
+import logoApexbrasil from "@/assets/clients/apexbrasil.png";
+import logoInvestlt from "@/assets/clients/invest-lithuania.png";
+import logoInvestmx from "@/assets/clients/invest-mexico.png";
+import logoInvestvn from "@/assets/clients/invest-vietnam.png";
+import logoInvestcl from "@/assets/clients/investchile.png";
+import logoInvestsa from "@/assets/clients/investsa.png";
+import logoCzechinvest from "@/assets/clients/czech-invest.png";
+import logoGiz from "@/assets/clients/giz.png";
+import logoAfd from "@/assets/clients/afd.png";
+import logoJica from "@/assets/clients/jica.png";
+import logoBei from "@/assets/clients/bei.png";
+import logoPnud from "@/assets/clients/pnud.png";
+import logoBm from "@/assets/clients/worldbank.png";
+import logoBerd from "@/assets/clients/berd.png";
+import logoIsdb from "@/assets/clients/isdb.png";
+import logoBad from "@/assets/clients/bad.png";
+
+const FED_LOGOS: Record<string, string> = { cgem: logoCgem, asmex: logoAsmex, amica: logoAmica, amip: logoAmip, amith: logoAmith, cnt: logoCnt, fenagri: logoFenagri };
+const API_LOGOS: Record<string, string> = { investhk: logoInvesthk, edbsg: logoEdbsg, apexbrasil: logoApexbrasil, investlt: logoInvestlt, investmx: logoInvestmx, investvn: logoInvestvn, investcl: logoInvestcl, investsa: logoInvestsa, czechinvest: logoCzechinvest };
+const COOP_LOGOS: Record<string, string> = { giz: logoGiz, afd: logoAfd, jica: logoJica, bei: logoBei, pnud: logoPnud, bm: logoBm, berd: logoBerd, isdb: logoIsdb, bad: logoBad };
+const AMDIE_LOGOS: Record<string, string> = { amdie: logoAmdie, micepp: logoMicepp, moroccoNow: logoMoroccoNow };
+const SOURCE_LOGOS: Record<string, string> = {
+  OFAC: logoOfac, "EU Sanctions": logoEuSanctions, ICIJ: logoIcij, GAFI: logoGafi, PitchBook: logoPitchbook, "D&B": logoDnb,
+  "Growth Lab": logoGrowthlab, Statista: logoStatista, fDi: logoFdi, "World Bank": logoWorldbank, Harvard: logoHarvard,
+};
+
 import {
   sourcesData, destData, countries, fedData, apiData, coopData, logoData,
   getCompetitorBfApport, competitorOpportunities,
