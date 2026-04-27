@@ -61,13 +61,19 @@ const DetailModal = ({ detail, onClose }: { detail: DetailKind | null; onClose: 
   return createPortal(
     <AnimatePresence>
       {detail && (
-        <>
+        <div
+          style={{
+            position: "fixed", inset: 0, zIndex: 9999,
+            display: "flex", alignItems: "center", justifyContent: "center",
+            padding: 24,
+          }}
+        >
           <motion.div
             initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
             transition={{ duration: 0.25 }}
             onClick={onClose}
             style={{
-              position: "fixed", inset: 0, zIndex: 9999,
+              position: "absolute", inset: 0,
               background: "rgba(10, 22, 40, 0.7)", backdropFilter: "blur(4px)",
             }}
           />
@@ -77,10 +83,8 @@ const DetailModal = ({ detail, onClose }: { detail: DetailKind | null; onClose: 
             exit={{ opacity: 0, scale: 0.96, y: 10 }}
             transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
             style={{
-              position: "fixed", left: "50%", top: "50%",
-              transform: "translate(-50%, -50%)",
-              zIndex: 10000,
-              width: "min(900px, calc(100vw - 48px))",
+              position: "relative",
+              width: "min(900px, 100%)",
               maxHeight: "calc(100vh - 80px)",
               overflowY: "auto",
               background: C.paper,
@@ -99,7 +103,7 @@ const DetailModal = ({ detail, onClose }: { detail: DetailKind | null; onClose: 
             >✕</button>
             <DetailContent detail={detail} />
           </motion.div>
-        </>
+        </div>
       )}
     </AnimatePresence>,
     document.body
