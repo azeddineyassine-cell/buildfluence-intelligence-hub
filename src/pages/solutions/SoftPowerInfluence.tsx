@@ -472,15 +472,20 @@ const DestHeader = ({ glyph, title, sub }: { glyph: string; title: string; sub: 
   </>
 );
 
-const LogoChip = ({ label, onClick }: { label: string; onClick: () => void }) => (
+const LogoChip = ({ label, src, onClick }: { label: string; src?: string; onClick: () => void }) => (
   <button
     onClick={(e) => { e.stopPropagation(); onClick(); }}
     className="transition-all"
-    style={{ padding: "4px 8px", cursor: "pointer", borderRadius: 2, background: "rgba(244,241,234,0.08)", display: "flex", alignItems: "center", justifyContent: "center", minWidth: 50, height: 24, border: "none" }}
-    onMouseEnter={(e) => { e.currentTarget.style.background = "rgba(201,168,76,0.15)"; e.currentTarget.style.transform = "translateY(-2px)"; }}
-    onMouseLeave={(e) => { e.currentTarget.style.background = "rgba(244,241,234,0.08)"; e.currentTarget.style.transform = "translateY(0)"; }}
+    title={label}
+    style={{ padding: src ? "6px 10px" : "4px 8px", cursor: "pointer", borderRadius: 2, background: "rgba(255,255,255,0.92)", display: "flex", alignItems: "center", justifyContent: "center", width: src ? 96 : 50, height: src ? 44 : 24, border: "1px solid rgba(10,22,40,0.08)" }}
+    onMouseEnter={(e) => { e.currentTarget.style.background = "#FFFFFF"; e.currentTarget.style.borderColor = "rgba(201,168,76,0.6)"; e.currentTarget.style.transform = "translateY(-2px)"; }}
+    onMouseLeave={(e) => { e.currentTarget.style.background = "rgba(255,255,255,0.92)"; e.currentTarget.style.borderColor = "rgba(10,22,40,0.08)"; e.currentTarget.style.transform = "translateY(0)"; }}
   >
-    <span style={{ fontFamily: FONT_DISPLAY, fontSize: 11, fontWeight: 600, color: C.paper, letterSpacing: "0.02em" }}>{label}</span>
+    {src ? (
+      <img src={src} alt={label} style={{ maxWidth: "100%", maxHeight: "100%", width: "auto", height: "auto", objectFit: "contain", display: "block" }} />
+    ) : (
+      <span style={{ fontFamily: FONT_DISPLAY, fontSize: 11, fontWeight: 600, color: C.navy, letterSpacing: "0.02em" }}>{label}</span>
+    )}
   </button>
 );
 
