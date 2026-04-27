@@ -1,7 +1,9 @@
-import React, { useState, useMemo, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import DetailPageLayout from "@/components/DetailPageLayout";
+import Navbar from "@/components/Navbar";
+import CTAFooter from "@/components/CTAFooter";
+import { FormStrategicExchange } from "@/components/FormModals";
 import logoBuildfluence from "@/assets/Logo_Buildfluence.png";
 import {
   sourcesData, destData, countries, fedData, apiData, coopData, logoData,
@@ -59,13 +61,19 @@ const DetailModal = ({ detail, onClose }: { detail: DetailKind | null; onClose: 
   return createPortal(
     <AnimatePresence>
       {detail && (
-        <>
+        <div
+          style={{
+            position: "fixed", inset: 0, zIndex: 9999,
+            display: "flex", alignItems: "center", justifyContent: "center",
+            padding: 24,
+          }}
+        >
           <motion.div
             initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
             transition={{ duration: 0.25 }}
             onClick={onClose}
             style={{
-              position: "fixed", inset: 0, zIndex: 9999,
+              position: "absolute", inset: 0,
               background: "rgba(10, 22, 40, 0.7)", backdropFilter: "blur(4px)",
             }}
           />
@@ -75,10 +83,8 @@ const DetailModal = ({ detail, onClose }: { detail: DetailKind | null; onClose: 
             exit={{ opacity: 0, scale: 0.96, y: 10 }}
             transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
             style={{
-              position: "fixed", left: "50%", top: "50%",
-              transform: "translate(-50%, -50%)",
-              zIndex: 10000,
-              width: "min(900px, calc(100vw - 48px))",
+              position: "relative",
+              width: "min(900px, 100%)",
               maxHeight: "calc(100vh - 80px)",
               overflowY: "auto",
               background: C.paper,
@@ -97,7 +103,7 @@ const DetailModal = ({ detail, onClose }: { detail: DetailKind | null; onClose: 
             >✕</button>
             <DetailContent detail={detail} />
           </motion.div>
-        </>
+        </div>
       )}
     </AnimatePresence>,
     document.body
@@ -449,9 +455,9 @@ const MechanismSection = ({ open }: { open: OpenDetail }) => {
   const keyCountries = ["FR","DE","US","GB","JP","CN","BE","NL","ES","KR"];
   const competitors = ["TR","IN","MX","VN","TN","EG","PL","CZ","TH","ZA","HU","SK","CL","BG","KE","LT","SN","RW"];
   return (
-    <div style={{ background: C.navy, color: C.paper, padding: "clamp(48px,6vw,80px) clamp(20px,4vw,48px)", position: "relative", marginTop: 40 }}>
+    <div style={{ background: C.navy, color: C.paper, padding: "clamp(48px,6vw,80px) 0", position: "relative", marginTop: 40 }}>
       <span style={{ position: "absolute", top: 0, left: 0, right: 0, height: 1, background: "linear-gradient(90deg, transparent, #C9A84C 30%, #C9A84C 70%, transparent)", opacity: 0.4 }} />
-
+      <div style={{ maxWidth: 1320, margin: "0 auto", padding: "0 clamp(20px,4vw,48px)" }}>
       {/* Mini-flow */}
       <div className="sp-miniflow grid items-center gap-0 mx-auto mb-12 pb-12" style={{ gridTemplateColumns: "1fr auto 1fr auto 1fr", maxWidth: 920, borderBottom: "1px solid rgba(244,241,234,0.08)" }}>
         {[
@@ -619,6 +625,7 @@ const MechanismSection = ({ open }: { open: OpenDetail }) => {
           .sp-miniflow-arrow { transform: rotate(90deg); }
         }
       `}</style>
+      </div>
     </div>
   );
 };
@@ -877,6 +884,7 @@ const ClosingSection = () => {
 /* ═══════════════ MAIN PAGE ═══════════════ */
 const SoftPowerInfluence = () => {
   const [detail, setDetail] = useState<DetailKind | null>(null);
+  const [f1Open, setF1Open] = useState(false);
   const open: OpenDetail = (d) => setDetail(d);
   const close = () => setDetail(null);
 
@@ -888,60 +896,110 @@ const SoftPowerInfluence = () => {
   }, []);
 
   return (
-    <DetailPageLayout
-      title={
-        <>
-          <div className="mb-5 inline-flex items-center" style={{ padding: "10px 18px", border: `1px solid ${C.gold}`, fontFamily: FONT_MONO, fontSize: 11, letterSpacing: "0.28em", textTransform: "uppercase", color: C.gold, fontWeight: 500 }}>
-            Pilier II — Soft Power & Influence
+    <div className="min-h-screen" style={{ background: "#FAF6ED" }}>
+      <Navbar />
+      <main className="pt-24">
+        {/* HERO */}
+        <section className="sp-section">
+          <div className="sp-container">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            >
+              {/* Top intelligence band */}
+              <div className="flex flex-wrap items-center gap-x-6 gap-y-2 mb-8 pb-5" style={{ borderBottom: `1px solid ${C.line}`, fontFamily: FONT_MONO, fontSize: 10, letterSpacing: "0.24em", textTransform: "uppercase", color: C.inkMute, fontWeight: 500 }}>
+                <span style={{ color: C.gold }}>Buildfluence Intelligence Hub</span>
+                <span style={{ color: C.gold }}>— Pilier II / Soft Power & Influence</span>
+                <span style={{ marginLeft: "auto", color: C.gold }}>2026</span>
+              </div>
+
+              <div className="sp-hero-grid">
+                <div className="min-w-0">
+                  <div className="mb-5 inline-flex items-center" style={{ padding: "10px 18px", border: `1px solid ${C.gold}`, fontFamily: FONT_MONO, fontSize: 11, letterSpacing: "0.28em", textTransform: "uppercase", color: C.gold, fontWeight: 500 }}>
+                    Pilier II — Soft Power & Influence
+                  </div>
+                  <h1 style={{ fontFamily: FONT_DISPLAY, fontSize: "clamp(40px, 5.4vw, 72px)", fontStyle: "italic", color: C.navy, fontWeight: 700, lineHeight: 1.05, letterSpacing: "-0.02em" }}>
+                    Soft Power & <em style={{ fontStyle: "italic", color: C.gold, fontWeight: 400 }}>Influence</em>
+                  </h1>
+                  <p style={{ borderLeft: `2px solid ${C.gold}`, paddingLeft: 18, marginTop: 24, color: C.inkSoft, fontFamily: FONT_ITALIC, fontStyle: "italic", fontSize: 20, lineHeight: 1.5, maxWidth: 720 }}>
+                    Structurer et piloter les dynamiques d'influence pour transformer votre position en avantage compétitif durable.
+                  </p>
+                  <div className="mt-8">
+                    <button onClick={() => setF1Open(true)} className="btn-gold">Parler de mon projet</button>
+                  </div>
+                </div>
+                <div className="min-w-0">
+                  <Signaletique />
+                </div>
+              </div>
+            </motion.div>
           </div>
-          <div>Soft Power & <em style={{ fontStyle: "italic", color: "#C9A84C", fontWeight: 400 }}>Influence</em></div>
-        </>
-      }
-      chapeau={
-        <span style={{ display: "block", borderLeft: `2px solid ${C.gold}`, paddingLeft: 18, color: C.inkSoft, fontFamily: FONT_ITALIC, fontStyle: "italic" }}>
-          Structurer et piloter les dynamiques d'influence pour transformer votre position en avantage compétitif durable.
-        </span>
-      }
-      ctas={[{ label: "Parler de mon projet", action: "#", formType: "f1" }]}
-      situationContext="Soft Power & Influence"
-      sidebar={<Signaletique />}
-    >
-      {/* Top intelligence band */}
-      <div className="flex flex-wrap items-center gap-x-6 gap-y-2 -mt-2 mb-2 pb-5" style={{ borderBottom: `1px solid ${C.line}`, fontFamily: FONT_MONO, fontSize: 10, letterSpacing: "0.24em", textTransform: "uppercase", color: C.inkMute, fontWeight: 500 }}>
-        <span style={{ color: C.gold }}>Buildfluence Intelligence Hub</span>
-        <span style={{ color: C.gold }}>— Pilier II / Soft Power & Influence</span>
-        <span style={{ marginLeft: "auto", color: C.gold }}>2026</span>
-      </div>
+        </section>
 
-      {/* SECTION 01 — Mécanisme */}
-      <section>
-        <SectionHeader num="i" eyebrow="Mécanisme d'Attractivité & d'Influence" intro="Trois temps qui structurent l'intelligence stratégique. Une infrastructure souveraine au centre. Un écosystème de diffusion qui rayonne du Maroc vers le monde — et inversement.">
-          Capter, transformer, <em style={{ fontStyle: "italic", color: C.gold, fontWeight: 400 }}>influencer</em>.
-        </SectionHeader>
-        <MechanismSection open={open} />
-      </section>
+        {/* SECTION 01 — Mécanisme */}
+        <section className="sp-section sp-section--tight">
+          <div className="sp-container">
+            <SectionHeader num="i" eyebrow="Mécanisme d'Attractivité & d'Influence" intro="Trois temps qui structurent l'intelligence stratégique. Une infrastructure souveraine au centre. Un écosystème de diffusion qui rayonne du Maroc vers le monde — et inversement.">
+              Capter, transformer, <em style={{ fontStyle: "italic", color: C.gold, fontWeight: 400 }}>influencer</em>.
+            </SectionHeader>
+          </div>
+          {/* Bandeau navy full-bleed */}
+          <div className="sp-fullbleed">
+            <MechanismSection open={open} />
+          </div>
+        </section>
 
-      <AxesSection />
-      <CaseFileSection />
-      <PocsSection />
-      <ClosingSection />
+        <div className="sp-container">
+          <AxesSection />
+          <CaseFileSection />
+          <PocsSection />
+        </div>
+
+        {/* CHUTE FINALE — full bleed */}
+        <div className="sp-fullbleed sp-fullbleed--mt">
+          <ClosingSection />
+        </div>
+      </main>
+
+      <CTAFooter />
 
       <DetailModal detail={detail} onClose={close} />
+      <FormStrategicExchange open={f1Open} onClose={() => setF1Open(false)} />
 
       <style>{`
+        .sp-container { max-width: 1320px; margin: 0 auto; padding: 0 clamp(20px, 4vw, 48px); }
+        .sp-section { padding: 0 0 40px; }
+        .sp-section--tight { padding-bottom: 0; }
+        .sp-fullbleed {
+          width: 100vw;
+          position: relative;
+          left: 50%;
+          right: 50%;
+          margin-left: -50vw;
+          margin-right: -50vw;
+        }
+        .sp-fullbleed--mt { margin-top: 80px; }
+        .sp-hero-grid {
+          display: grid;
+          grid-template-columns: 1.4fr 1fr;
+          gap: 60px;
+          align-items: start;
+        }
         .sp-section-header { display: grid; grid-template-columns: 100px 1fr; gap: 32px; align-items: start; }
+        @media (max-width: 1100px) {
+          .sp-hero-grid { grid-template-columns: 1fr; gap: 40px; }
+          .sp-tri-grid { grid-template-columns: 1fr !important; }
+          .sp-case-grid { grid-template-columns: 1fr !important; }
+        }
         @media (max-width: 900px) {
           .sp-section-header { grid-template-columns: 1fr; gap: 12px; }
           .sp-section-num { font-size: 56px !important; }
           .sp-tri-grid { grid-template-columns: 1fr !important; }
           .sp-case-grid { grid-template-columns: 1fr !important; gap: 32px !important; }
         }
-        @media (min-width: 901px) and (max-width: 1100px) {
-          .sp-tri-grid { grid-template-columns: 1fr !important; }
-          .sp-case-grid { grid-template-columns: 1fr !important; }
-        }
       `}</style>
-    </DetailPageLayout>
+    </div>
   );
 };
 
