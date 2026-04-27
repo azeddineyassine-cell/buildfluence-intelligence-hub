@@ -940,7 +940,7 @@ const SoftPowerInfluence = () => {
         {/* SECTION 01 — Mécanisme */}
         <section className="sp-section sp-section--tight">
           <div className="sp-container">
-            <SectionHeader num="i" eyebrow="Mécanisme d'Attractivité & d'Influence" intro="Trois temps qui structurent l'intelligence stratégique. Une infrastructure souveraine au centre. Un écosystème de diffusion qui rayonne du Maroc vers le monde — et inversement.">
+            <SectionHeader num="i" eyebrow="Mécanisme d'Attractivité & d'Influence" intro={<><em style={{ fontStyle: "italic" }}>L'influence ne se décrète pas, elle s'ingénie…</em><br />— Une infrastructure souveraine au cœur,<br />— Un back-office qui capte et décrypte en temps réel,<br />— Un écosystème qui projette votre puissance décisionnelle au-delà des frontières.</>}>
               Capter, transformer, <em style={{ fontStyle: "italic", color: C.gold, fontWeight: 400 }}>influencer</em>.
             </SectionHeader>
           </div>
