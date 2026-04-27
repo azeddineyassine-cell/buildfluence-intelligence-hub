@@ -86,6 +86,153 @@ const FONT_ITALIC = "'Cormorant Garamond', serif";
 const FONT_MONO = "'JetBrains Mono', monospace";
 const FONT_BODY = "'DM Sans', sans-serif";
 
+/* ═══════════════ USE CASE DATA (Investissement au Maroc) ═══════════════ */
+type UseCaseDetail = {
+  eyebrow: string;
+  title: string;
+  tagline: string;
+  meta?: { l: string; v: string }[];
+  cols: { h: string; items: string[] }[];
+  timeline?: { year: string; text: string }[];
+  observation?: { title: string; colA: { h: string; items: string[] }; colB: { h: string; items: string[] } };
+  bottomLogos?: { label: string; src: string }[];
+  bfApport: string;
+};
+
+const useCaseData: Record<string, UseCaseDetail> = {
+  amdie: {
+    eyebrow: "Use Case · Acteur Institutionnel",
+    title: "AMDIE",
+    tagline: "Agence Marocaine de Développement des Investissements et des Exportations. Bras opérationnel de l'attractivité économique du Royaume.",
+    meta: [
+      { l: "Charte d'investissement", v: "Édition 2023" },
+      { l: "Objectif IDE 2026", v: "550 MMDH" },
+      { l: "Création d'emploi 2026", v: "500 000" },
+    ],
+    cols: [
+      { h: "Périmètre AMDIE", items: [
+        "Pilotage de l'attractivité nationale",
+        "Logo Morocco Now : Site vitrine de l'activité AMDIE",
+        "Coordination des missions internationales",
+        "Suivi des grands projets d'investissement",
+        "Promotion des exportations marocaines",
+      ] },
+      { h: "Valeur Buildfluence dédiée", items: [
+        "Observatoire d'Investissement permanent",
+        "Note stratégique & Lettre d'information sur-mesure",
+        "Veille des dynamiques narratives concernant les entreprises étrangères au Maroc",
+        "Information fraîche pour les exportateurs marocains",
+        "Rayonnement sectoriel complet",
+      ] },
+    ],
+    bottomLogos: [
+      { label: "AMDIE", src: logoAmdie },
+      { label: "Morocco Now", src: logoMoroccoNow },
+    ],
+    bfApport: "Transformer Morocco Now de campagne de communication en infrastructure d'influence souveraine, alimentée en continu par le mécanisme Doing Business Platform Buildfluence.",
+  },
+  micepp: {
+    eyebrow: "Use Case · Ministère de tutelle",
+    title: "MICEPP",
+    tagline: "Ministère de l'Investissement, de la Convergence et de l'Évaluation des Politiques Publiques. Architecte de la stratégie nationale d'investissement.",
+    meta: [
+      { l: "Tutelle directe", v: "AMDIE et CRI" },
+      { l: "Chantier emblématique", v: "Observatoire d'Investissement" },
+    ],
+    cols: [
+      { h: "Mandat stratégique", items: [
+        "Définition de la politique nationale d'investissement",
+        "Convergence des dispositifs publics d'attractivité",
+        "Évaluation de l'impact des politiques publiques",
+        "Pilotage des grandes réformes économiques",
+        "Tutelle de l'AMDIE",
+      ] },
+      { h: "Valeur Buildfluence dédiée", items: [
+        "Veille stratégique en continu sur les politiques d'investissement comparées",
+        "Décryptage des stratégies d'attractivité concurrentes (Vietnam, Afrique du Sud, Turquie…)",
+        "Anticipation des signaux faibles réglementaires et géoéconomiques",
+        "Production d'un Baromètre d'Investissement actionnable",
+        "Capacité immédiate de déploiement opérationnel",
+      ] },
+    ],
+    timeline: [
+      { year: "2017", text: "Conception de l'Observatoire d'Investissement par Buildfluence" },
+      { year: "2024", text: "Annonce officielle du chantier par le MICEPP" },
+      { year: "2025", text: "Étude toujours en cours" },
+    ],
+    bfApport: "L'expertise existe. La méthodologie est éprouvée. L'infrastructure peut être déployée immédiatement. Buildfluence porte ce projet depuis huit ans, prêt à transformer une vision officielle en outil opérationnel.",
+  },
+  medz: {
+    eyebrow: "Use Case · Aménageur stratégique",
+    title: "MedZ",
+    tagline: "Filiale du Groupe CDG dédiée à l'aménagement et au développement des zones d'activités économiques au Maroc. Vingt ans d'excellence opérationnelle... en attente d'une voix stratégique à la hauteur.",
+    meta: [
+      { l: "Groupe", v: "CDG (Caisse de Dépôt et de Gestion)" },
+      { l: "Type d'activité", v: "Aménageur-Développeur" },
+      { l: "Périmètre", v: "Zones industrielles · Offshoring · Tourisme" },
+    ],
+    cols: [
+      { h: "Portefeuille MedZ", items: [
+        "Plateformes Industrielles Intégrées (P2I)",
+        "Atlantic Free Zone : Kénitra",
+        "Midparc : Casablanca (aéronautique)",
+        "Technopolis : Rabat (offshoring)",
+        "Casanearshore & Rabat Technopolis (services)",
+      ] },
+      { h: "Valeur Buildfluence dédiée", items: [
+        "Production éditoriale stratégique structurante (rapports trimestriels, études sectorielles, Dashboard public dynamique)",
+        "Veille concurrentielle continue (zones franches mondiales et africaines)",
+        "Intelligence sur les investisseurs ciblés (équipementiers automobiles, énergies renouvelables, donneurs d'ordre aéronautiques)",
+        "Cartographie des décideurs industriels européens en phase de relocalisation",
+        "Livre Blanc annuel sur l'attractivité industrielle continentale",
+      ] },
+    ],
+    observation: {
+      title: "Observation stratégique",
+      colA: { h: "Ce que les leaders mondiaux font", items: [
+        "Plateforme data publique et rapports trimestriels",
+        "Nation Branding multilingue et présence éditoriale continue",
+        "AI Platforms et trackers de réformes en temps réel",
+        "Études sectorielles régulières et benchmarks publiés",
+      ] },
+      colB: { h: "Ce qu'on peut faire ensemble", items: [
+        "Reporting trimestriel structuré et accessible publiquement",
+        "Newsletter stratégique continue en plusieurs langues",
+        "Dashboard d'attractivité industrielle interactif",
+        "Livre Blanc annuel sur l'attractivité africaine",
+      ] },
+    },
+    bfApport: "Vingt ans de réussite terrain. Zéro étude stratégique publique depuis 2016. Le décalage entre l'excellence opérationnelle et la visibilité institutionnelle se paie en parts de marché continentales. Buildfluence transforme ce décalage en avantage compétitif.",
+  },
+  cri: {
+    eyebrow: "Use Case · Échelon territorial",
+    title: "CRI : Centres Régionaux d'Investissement",
+    tagline: "Guichet unique territorial pour les investisseurs. Bras armé de la régionalisation avancée du Royaume en matière d'investissement.",
+    meta: [
+      { l: "Nombre de CRI", v: "12 (un par région)" },
+      { l: "Création", v: "2002 · Refonte 2019" },
+      { l: "Mission", v: "Accompagnement & accélération" },
+    ],
+    cols: [
+      { h: "Mandat des CRI", items: [
+        "Guichet unique pour la création d'entreprise",
+        "Accompagnement des projets d'investissement régionaux",
+        "Promotion territoriale et identification des opportunités locales",
+        "Médiation avec les administrations",
+        "Suivi post-création des entreprises",
+      ] },
+      { h: "Valeur Buildfluence dédiée", items: [
+        "Intelligence territoriale dédiée par région",
+        "Benchmark de compétitivité régionale (vs autres territoires marocains et internationaux)",
+        "Veille sur les investisseurs ciblant des localisations spécifiques",
+        "Production de fiches d'attractivité régionale sur-mesure",
+        "Décryptage des stratégies concurrentes infrarégionales",
+      ] },
+    ],
+    bfApport: "Chaque région a ses atouts, ses concurrents et ses fenêtres d'opportunité. Buildfluence dote chaque CRI d'une intelligence territoriale équivalente à celle d'un État.",
+  },
+};
+
 /* ═══════════════ DETAIL MODAL ═══════════════ */
 type DetailKind =
   | { kind: "source"; data: SourceDetail }
@@ -94,7 +241,8 @@ type DetailKind =
   | { kind: "fed"; key: string; data: Federation }
   | { kind: "api"; data: Api }
   | { kind: "coop"; data: Coop }
-  | { kind: "logo"; data: Logo };
+  | { kind: "logo"; data: Logo }
+  | { kind: "useCase"; data: UseCaseDetail };
 
 const DetailModal = ({ detail, onClose }: { detail: DetailKind | null; onClose: () => void }) => {
   useEffect(() => {
