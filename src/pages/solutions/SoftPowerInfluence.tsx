@@ -385,7 +385,7 @@ const DetailContent = ({ detail }: { detail: DetailKind }) => {
             {d.sources}
           </div>
         )}
-        <BfApport text={d.bfApport} />
+        <BfApport text={d.bfApport} label="Valeur Buildfluence" />
       </>
     );
   }
@@ -406,7 +406,7 @@ const DetailContent = ({ detail }: { detail: DetailKind }) => {
     const c = detail.data;
     return (
       <>
-        <Eyebrow>{c.isKey ? "Pays Clé · Partenaire stratégique" : "Pays Concurrent · Benchmark"}</Eyebrow>
+        <Eyebrow>{c.isKey ? "Pays Clé · Partenaire stratégique" : "Pays Concurrent – Veille Concurrentielle"}</Eyebrow>
         <DetailTitle flag={c.flag}>{c.name}</DetailTitle>
         <DetailTagline>{c.description}</DetailTagline>
         <MetaStrip items={[
@@ -423,7 +423,7 @@ const DetailContent = ({ detail }: { detail: DetailKind }) => {
                 "Buildfluence cartographie en continu les décideurs émergents, les narratifs hostiles et les fenêtres d'opportunité que les approches diplomatiques classiques ne détectent pas.",
               ] },
             ]} />
-            <BfApport text={c.bfApport || ""} />
+            <BfApport text={c.bfApport || ""} label="Valeur Buildfluence" />
           </>
         ) : (
           <>
@@ -435,7 +435,7 @@ const DetailContent = ({ detail }: { detail: DetailKind }) => {
               ] },
               { h: "Opportunités Buildfluence", items: competitorOpportunities.map(o => o.replace("ce concurrent", c.name)) },
             ]} />
-            <BfApport text={getCompetitorBfApport(c.score || 0)} />
+            <BfApport text={getCompetitorBfApport(c.score || 0)} label="Valeur Buildfluence" />
           </>
         )}
       </>
