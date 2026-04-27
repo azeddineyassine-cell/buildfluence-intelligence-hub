@@ -691,7 +691,7 @@ const LogoChip = ({ label, src, onClick }: { label: string; src?: string; onClic
     onClick={(e) => { e.stopPropagation(); onClick(); }}
     className="transition-all"
     title={label}
-    style={{ padding: src ? "6px 10px" : "4px 8px", cursor: "pointer", borderRadius: 2, background: "rgba(255,255,255,0.92)", display: "flex", alignItems: "center", justifyContent: "center", width: src ? 96 : 50, height: src ? 44 : 24, border: "1px solid rgba(10,22,40,0.08)" }}
+    style={{ padding: src ? "6px 10px" : "4px 8px", cursor: "pointer", borderRadius: 2, background: "rgba(255,255,255,0.92)", display: "flex", alignItems: "center", justifyContent: "center", width: "100%", height: src ? 44 : 24, border: "1px solid rgba(10,22,40,0.08)" }}
     onMouseEnter={(e) => { e.currentTarget.style.background = "#FFFFFF"; e.currentTarget.style.borderColor = "rgba(201,168,76,0.6)"; e.currentTarget.style.transform = "translateY(-2px)"; }}
     onMouseLeave={(e) => { e.currentTarget.style.background = "rgba(255,255,255,0.92)"; e.currentTarget.style.borderColor = "rgba(10,22,40,0.08)"; e.currentTarget.style.transform = "translateY(0)"; }}
   >
