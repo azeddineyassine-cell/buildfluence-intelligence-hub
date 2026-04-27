@@ -555,7 +555,7 @@ const MechanismSection = ({ open }: { open: OpenDetail }) => {
       <div className="sp-mech-grid" style={{ display: "grid", gridTemplateColumns: "320px 1fr 320px", gap: 32, alignItems: "start", marginBottom: 32 }}>
         {/* COL GAUCHE — Back-Office */}
         <div className="sp-mech-col-left">
-          <div style={colLabel}>Back-Office · Captation</div>
+          <ColHeader>Back-Office · Captation</ColHeader>
           <SourceCard k="veille" glyph="i" title="Veille & Intelligence" tagline="Voir avant les autres. Détecter les signaux invisibles." tags={["6 dimensions","NLP","Temps réel"]} open={open} />
           <SourceCard k="ddd" glyph="ii" title="Deep Due Diligence" tagline="Sécuriser la décision dans des environnements incertains." mini={["OFAC","EU Sanctions","ICIJ","GAFI","PitchBook","D&B"]} open={open} />
           <SourceCard k="bi" glyph="iii" title="Business Intelligence" tagline="Lire la compétition avant qu'elle ne s'impose." mini={["Growth Lab","Statista","fDi","World Bank","Harvard"]} open={open} />
