@@ -330,10 +330,10 @@ const DetailTagline = ({ children }: { children: React.ReactNode }) => (
   </p>
 );
 
-const ColsBlock = ({ cols }: { cols: { h: string; items: string[] }[] }) => (
+const ColsBlock = ({ cols }: { cols: { h: React.ReactNode; items: string[] }[] }) => (
   <div className="grid gap-9" style={{ gridTemplateColumns: cols.length === 3 ? "repeat(3, 1fr)" : "1fr 1fr" }}>
-    {cols.map((c) => (
-      <div key={c.h}>
+    {cols.map((c, idx) => (
+      <div key={idx}>
         <h4 style={{ fontFamily: FONT_MONO, fontSize: 10, letterSpacing: "0.22em", textTransform: "uppercase", color: C.gold, marginBottom: 18, paddingBottom: 12, borderBottom: `1px solid ${C.gold}`, fontWeight: 600 }}>{c.h}</h4>
         <ul className="list-none">
           {c.items.map((it, i) => (
@@ -443,23 +443,52 @@ const DetailContent = ({ detail }: { detail: DetailKind }) => {
   }
   if (detail.kind === "fed") {
     const f = detail.data;
+    const fedSynergieIntro: Record<string, string> = {
+      cgem: "Pour la CGEM, Buildfluence déploierait un dispositif sur-mesure couvrant l'ensemble des filières représentées",
+      amica: "Pour l'AMICA, Buildfluence structurerait un dispositif d'intelligence dédié à la filière automobile",
+      amip: "Pour l'AMIP, Buildfluence déploierait un dispositif d'intelligence adapté aux enjeux de souveraineté sanitaire",
+      asmex: "Pour l'ASMEX, Buildfluence outillerait les exportateurs avec une intelligence de marchés cibles",
+      amith: "Pour l'AMITH, Buildfluence structurerait une intelligence dédiée aux dynamiques concurrentielles textiles",
+      cnt: "Pour le CNT, Buildfluence déploierait un dispositif d'intelligence touristique sur-mesure",
+      fenagri: "Pour la FENAGRI, Buildfluence outillerait le secteur agroalimentaire avec une intelligence dédiée aux chaînes de valeur",
+    };
+    const fedApportProjection: Record<string, string> = {
+      cgem: "Alimenter le patronat en intelligence sectorielle pour peser dans les arbitrages publics",
+      amica: "Veille sur les stratégies des constructeurs européens et asiatiques, anticipation des relocalisations, mapping des décideurs achats",
+      amip: "Intelligence sur les flux pharmaceutiques mondiaux, veille réglementaire AFCRMP, suivi des appels d'offres internationaux",
+      asmex: "Information fraîche sur les marchés cibles, veille sur les barrières tarifaires émergentes, identification d'opportunités sectorielles",
+      amith: "Benchmark concurrentiel Tunisie/Vietnam/Turquie en continu, veille sur les politiques d'achats responsables des donneurs d'ordre européens",
+      cnt: "Veille sur les tendances tourisme mondial, analyse des stratégies concurrentes (Égypte, Tunisie, Turquie), monitoring de la perception du Maroc à l'international",
+      fenagri: "Intelligence sur les chaînes de valeur agricoles mondiales, veille sur les opportunités à l'export en Afrique, suivi des barrières sanitaires UE",
+    };
+    const synergieIntro = fedSynergieIntro[detail.key] || `Pour ${detail.key.toUpperCase()}, Buildfluence déploierait un dispositif sur-mesure adapté à la filière`;
+    const apportProjection = fedApportProjection[detail.key] || f.apport;
     return (
       <>
-        <Eyebrow>Fédération Sectorielle · Partenaire stratégique</Eyebrow>
+        {/* Bandeau de cadrage — note de lecture (projectif / conditionnel) */}
+        <div style={{ background: C.paperDeep, borderLeft: `3px solid ${C.gold}`, padding: "18px 22px", marginBottom: 36 }}>
+          <div style={{ fontFamily: FONT_MONO, fontSize: 10, letterSpacing: "0.24em", textTransform: "uppercase", color: C.gold, marginBottom: 8, fontWeight: 600 }}>
+            Note de lecture
+          </div>
+          <p style={{ fontFamily: FONT_ITALIC, fontStyle: "italic", fontSize: 15, color: C.ink, lineHeight: 1.55, margin: 0 }}>
+            Les fédérations sectorielles présentées ci-dessous constituent l'écosystème naturel de diffusion d'un dispositif Buildfluence. Les cas d'usage exposés sont projectifs et illustrent la valeur que notre intelligence sur-mesure pourrait apporter à chaque organisation. Aucun partenariat formel n'est ici revendiqué.
+          </p>
+        </div>
+        <Eyebrow>Fédération Sectorielle · Écosystème de diffusion</Eyebrow>
         <DetailTitle>{detail.key.toUpperCase()}</DetailTitle>
         <DetailTagline>{f.full}</DetailTagline>
         <MetaStrip items={[{ l: "Rôle", v: f.role }]} />
         <ColsBlock cols={[
-          { h: "Synergie Buildfluence", items: [
-            `Buildfluence opère comme partenaire d'intelligence pour ${detail.key.toUpperCase()}, avec un dispositif sur-mesure adapté à la filière.`,
+          { h: <>Synergie Buildfluence <em style={{ fontFamily: FONT_ITALIC, fontStyle: "italic", color: C.inkMute, textTransform: "none", letterSpacing: 0, fontSize: 12, fontWeight: 400 }}>(Cas d'usage type)</em></>, items: [
+            synergieIntro,
             "Intelligence sectorielle partagée",
             "Benchmark concurrentiel continu",
             "Co-production de rapports stratégiques",
             "Veille narrative dédiée",
           ] },
-          { h: "Apport sectoriel ciblé", items: [f.apport] },
+          { h: <>Apport sectoriel ciblé <em style={{ fontFamily: FONT_ITALIC, fontStyle: "italic", color: C.inkMute, textTransform: "none", letterSpacing: 0, fontSize: 12, fontWeight: 400 }}>(Projection)</em></>, items: [apportProjection] },
         ]} />
-        <BfApport text="Une fédération seule reçoit de la donnée. Une fédération avec Buildfluence reçoit une longueur d'avance." label="Valeur Buildfluence" />
+        <BfApport text="Une fédération seule reçoit la donnée. Une fédération avec Buildfluence aurait une longueur d'avance." label="Valeur Buildfluence" />
       </>
     );
   }
