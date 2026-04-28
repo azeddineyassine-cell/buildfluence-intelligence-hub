@@ -966,7 +966,7 @@ const MechanismSection = ({ open }: { open: OpenDetail }) => {
               <LogoChip label="MICEPP" src={AMDIE_LOGOS.micepp} onClick={() => open({ kind: "useCase", data: useCaseData.micepp })} />
               <LogoChip label="MedZ" src={AMDIE_LOGOS.medz} onClick={() => open({ kind: "useCase", data: useCaseData.medz })} />
               <LogoChip label="CRI" src={AMDIE_LOGOS.cri} onClick={() => open({ kind: "useCase", data: useCaseData.cri })} />
-              <LogoChip label="Morocco Now" src={AMDIE_LOGOS.moroccoNow} onClick={() => open({ kind: "useCase", data: useCaseData.amdie })} />
+              <LogoChip label="Morocco Now" src={AMDIE_LOGOS.moroccoNow} onClick={() => open({ kind: "moroccoNow" })} />
             </div>
           </DestCard>
 
