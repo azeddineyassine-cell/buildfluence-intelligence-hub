@@ -242,7 +242,8 @@ type DetailKind =
   | { kind: "api"; data: Api }
   | { kind: "coop"; data: Coop }
   | { kind: "logo"; data: Logo }
-  | { kind: "useCase"; data: UseCaseDetail };
+  | { kind: "useCase"; data: UseCaseDetail }
+  | { kind: "moroccoNow" };
 
 const DetailModal = ({ detail, onClose }: { detail: DetailKind | null; onClose: () => void }) => {
   useEffect(() => {
