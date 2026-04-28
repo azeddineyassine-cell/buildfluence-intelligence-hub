@@ -112,7 +112,7 @@ const useCaseData: Record<string, UseCaseDetail> = {
     cols: [
       { h: "Périmètre AMDIE", items: [
         "Pilotage de l'attractivité nationale",
-        "Logo Morocco Now : Site vitrine de l'activité AMDIE",
+        "Morocco Now : Site vitrine de l'activité AMDIE",
         "Coordination des missions internationales",
         "Suivi des grands projets d'investissement",
         "Promotion des exportations marocaines",
@@ -158,7 +158,7 @@ const useCaseData: Record<string, UseCaseDetail> = {
     timeline: [
       { year: "2017", text: "Conception de l'Observatoire d'Investissement par Buildfluence" },
       { year: "2024", text: "Annonce officielle du chantier par le MICEPP" },
-      { year: "2025", text: "Étude toujours en cours" },
+      { year: "2026", text: "Étude toujours en cours" },
     ],
     bfApport: "L'expertise existe. La méthodologie est éprouvée. L'infrastructure peut être déployée immédiatement. Buildfluence porte ce projet depuis huit ans, prêt à transformer une vision officielle en outil opérationnel.",
   },
@@ -846,6 +846,7 @@ const MechanismSection = ({ open }: { open: OpenDetail }) => {
               <LogoChip label="MICEPP" src={AMDIE_LOGOS.micepp} onClick={() => open({ kind: "useCase", data: useCaseData.micepp })} />
               <LogoChip label="MedZ" src={AMDIE_LOGOS.medz} onClick={() => open({ kind: "useCase", data: useCaseData.medz })} />
               <LogoChip label="CRI" src={AMDIE_LOGOS.cri} onClick={() => open({ kind: "useCase", data: useCaseData.cri })} />
+              <LogoChip label="Morocco Now" src={AMDIE_LOGOS.moroccoNow} onClick={() => open({ kind: "useCase", data: useCaseData.amdie })} />
             </div>
           </DestCard>
 
