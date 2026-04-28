@@ -112,7 +112,7 @@ const useCaseData: Record<string, UseCaseDetail> = {
     cols: [
       { h: "Périmètre AMDIE", items: [
         "Pilotage de l'attractivité nationale",
-        "Logo Morocco Now : Site vitrine de l'activité AMDIE",
+        "Morocco Now : Site vitrine de l'activité AMDIE",
         "Coordination des missions internationales",
         "Suivi des grands projets d'investissement",
         "Promotion des exportations marocaines",
