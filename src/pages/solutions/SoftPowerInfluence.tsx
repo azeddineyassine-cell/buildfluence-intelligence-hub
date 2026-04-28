@@ -242,7 +242,8 @@ type DetailKind =
   | { kind: "api"; data: Api }
   | { kind: "coop"; data: Coop }
   | { kind: "logo"; data: Logo }
-  | { kind: "useCase"; data: UseCaseDetail };
+  | { kind: "useCase"; data: UseCaseDetail }
+  | { kind: "moroccoNow" };
 
 const DetailModal = ({ detail, onClose }: { detail: DetailKind | null; onClose: () => void }) => {
   useEffect(() => {
@@ -585,7 +586,126 @@ const DetailContent = ({ detail }: { detail: DetailKind }) => {
       </>
     );
   }
+  if (detail.kind === "moroccoNow") {
+    const benchmarkRows = [
+      { plat: "Invest Korea Plaza", flag: "🇰🇷", country: "Corée du Sud", tools: "Simulateur fiscal · Matchmaking · Suivi de dossier en temps réel" },
+      { plat: "Singapore EDB", flag: "🇸🇬", country: "Singapour", tools: "Sector dashboards · Partner finder · Tax & incentive calculator" },
+      { plat: "Department for Business & Trade", flag: "🇬🇧", country: "Royaume-Uni", tools: "Investment opportunities feed · Personalized matching · Live regulation tracker" },
+      { plat: "Invest Egypt", flag: "🇪🇬", country: "Égypte", tools: "Project finder · Sector intelligence dashboards · Direct contact tools" },
+    ];
+    const pillars = [
+      { num: "i.", h: "Intelligence dynamique", body: "Dashboards sectoriels en temps réel · Cartographie des opportunités · Veille réglementaire automatisée" },
+      { num: "ii.", h: "Outils décisionnels", body: "Simulateur fiscal et social · Calculateur d'incitations · Comparateur multi-zones d'implantation" },
+      { num: "iii.", h: "Matchmaking actif", body: "Mise en relation investisseur-écosystème · Identification des partenaires locaux · Routage automatisé vers les CRI compétents" },
+      { num: "iv.", h: "Personnalisation profonde", body: "Parcours différenciés par profil investisseur · Recommandations sur-mesure · Suivi de dossier en temps réel" },
+    ];
+    const constats = [
+      "Architecture essentiellement éditoriale — pages de présentation sectorielle, contenus institutionnels, sans interactivité dynamique disponible à ce jour",
+      "Absence d'outils décisionnels — pas de simulateur fiscal, pas de matchmaking investisseur-écosystème, pas de dashboard sectoriel en temps réel",
+      "Personnalisation limitée — l'expérience est uniforme, sans différenciation par profil investisseur (taille de ticket, secteur cible, géographie d'origine)",
+    ];
+    const constatsNum = ["i.", "ii.", "iii."];
+    return (
+      <>
+        {/* BLOC 1 — IDENTIFICATION */}
+        <Eyebrow>— Écosystème institutionnel · Plateforme d'attractivité</Eyebrow>
+        <DetailTitle>Morocco Now</DetailTitle>
+        <DetailTagline>Plateforme officielle de promotion des Investissements Directs Étrangers — opérée par l'AMDIE</DetailTagline>
+        <div style={{ marginBottom: 32, padding: "18px 22px", background: C.paperDeep, borderLeft: `3px solid ${C.gold}`, display: "grid", gridTemplateColumns: "max-content 1fr", columnGap: 28, rowGap: 12 }}>
+          {[
+            { l: "STATUT", v: "Vitrine internationale du Maroc auprès des investisseurs étrangers" },
+            { l: "PÉRIMÈTRE", v: "Promotion sectorielle · Image-pays · Présentation de l'offre Maroc" },
+            { l: "LANCEMENT", v: "2022 — Initiative gouvernementale de positionnement international" },
+            { l: "AMBITION AFFICHÉE", v: "100 Mds$ d'IDE captés à horizon stratégique" },
+          ].map((m, i) => (
+            <React.Fragment key={i}>
+              <div style={{ fontFamily: FONT_MONO, fontSize: 9, letterSpacing: "0.22em", textTransform: "uppercase", color: C.inkMute, paddingTop: 3 }}>{m.l}</div>
+              <div style={{ fontFamily: FONT_BODY, fontSize: 14, color: C.navy, lineHeight: 1.5 }}>{m.v}</div>
+            </React.Fragment>
+          ))}
+        </div>
+
+        {/* BLOC 2 — LECTURE BUILDFLUENCE */}
+        <div style={{ marginTop: 36 }}>
+          <h4 style={{ fontFamily: FONT_MONO, fontSize: 10, letterSpacing: "0.24em", textTransform: "uppercase", color: C.gold, marginBottom: 14, fontWeight: 600 }}>— Lecture Buildfluence · État des lieux observable</h4>
+          <p style={{ fontFamily: FONT_ITALIC, fontStyle: "italic", fontSize: 17, color: C.inkSoft, lineHeight: 1.5, marginBottom: 20 }}>
+            Une plateforme d'attractivité ne se juge pas à son ambition affichée mais aux outils qu'elle met à disposition de l'investisseur étranger qui la consulte.
+          </p>
+          <ul className="list-none">
+            {constats.map((c, i) => (
+              <li key={i} style={{ display: "flex", gap: 14, padding: "12px 0", borderBottom: i === constats.length - 1 ? "none" : `1px solid ${C.lineSoft}` }}>
+                <span style={{ fontFamily: FONT_MONO, fontSize: 13, color: C.gold, fontWeight: 600, minWidth: 24 }}>{constatsNum[i]}</span>
+                <span style={{ fontFamily: FONT_BODY, fontSize: 14, color: C.ink, lineHeight: 1.55 }}>{c}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* BLOC 3 — STANDARD INTERNATIONAL */}
+        <div style={{ marginTop: 40 }}>
+          <h4 style={{ fontFamily: FONT_MONO, fontSize: 10, letterSpacing: "0.24em", textTransform: "uppercase", color: C.gold, marginBottom: 14, fontWeight: 600 }}>— Benchmark · Le standard des plateformes d'attractivité mondiales</h4>
+          <p style={{ fontFamily: FONT_ITALIC, fontStyle: "italic", fontSize: 17, color: C.inkSoft, lineHeight: 1.5, marginBottom: 18 }}>
+            Quatre agences nationales d'attractivité ont posé le standard de marché. Voici ce qu'elles offrent à l'investisseur dès la première visite.
+          </p>
+          <div style={{ overflowX: "auto", border: `1px solid ${C.paperDeep}` }}>
+            <table style={{ width: "100%", borderCollapse: "collapse", fontFamily: FONT_BODY, fontSize: 13 }}>
+              <thead>
+                <tr style={{ background: C.paperDeep }}>
+                  <th style={{ textAlign: "left", padding: "12px 14px", fontFamily: FONT_MONO, fontSize: 9, letterSpacing: "0.22em", textTransform: "uppercase", color: C.navy, fontWeight: 600, borderBottom: `1px solid ${C.line}` }}>Plateforme</th>
+                  <th style={{ textAlign: "left", padding: "12px 14px", fontFamily: FONT_MONO, fontSize: 9, letterSpacing: "0.22em", textTransform: "uppercase", color: C.navy, fontWeight: 600, borderBottom: `1px solid ${C.line}` }}>Pays</th>
+                  <th style={{ textAlign: "left", padding: "12px 14px", fontFamily: FONT_MONO, fontSize: 9, letterSpacing: "0.22em", textTransform: "uppercase", color: C.navy, fontWeight: 600, borderBottom: `1px solid ${C.line}` }}>Outils interactifs disponibles</th>
+                </tr>
+              </thead>
+              <tbody>
+                {benchmarkRows.map((r, i) => (
+                  <tr key={i} style={{ borderBottom: i === benchmarkRows.length - 1 ? "none" : `1px solid ${C.paperDeep}` }}>
+                    <td style={{ padding: "14px", color: C.navy, fontWeight: 600, verticalAlign: "top" }}>{r.plat}</td>
+                    <td style={{ padding: "14px", color: C.inkSoft, verticalAlign: "top", whiteSpace: "nowrap" }}>
+                      <span style={{ fontSize: 18, marginRight: 8 }}>{r.flag}</span>{r.country}
+                    </td>
+                    <td style={{ padding: "14px", color: C.inkSoft, lineHeight: 1.5, verticalAlign: "top" }}>{r.tools}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <p style={{ fontFamily: FONT_ITALIC, fontStyle: "italic", fontSize: 14, color: C.gold, marginTop: 14, lineHeight: 1.5 }}>
+            Quatre plateformes publiques. Quatre niveaux de service que l'investisseur étranger considère désormais comme acquis.
+          </p>
+        </div>
+
+        {/* BLOC 4 — CAS D'USAGE BUILDFLUENCE */}
+        <div style={{ marginTop: 40 }}>
+          <h4 style={{ fontFamily: FONT_MONO, fontSize: 10, letterSpacing: "0.24em", textTransform: "uppercase", color: C.gold, marginBottom: 14, fontWeight: 600 }}>— Cas d'usage type · Plateforme d'attractivité de nouvelle génération</h4>
+          <p style={{ fontFamily: FONT_ITALIC, fontStyle: "italic", fontSize: 17, color: C.inkSoft, lineHeight: 1.5, marginBottom: 20 }}>
+            Ce qu'une plateforme d'attractivité IDE de nouvelle génération devrait offrir, conçue selon les standards Buildfluence et les meilleures pratiques internationales :
+          </p>
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
+            {pillars.map((p, i) => (
+              <div key={i} style={{ background: C.paperDeep, border: `1px solid ${C.gold}`, padding: "20px 22px" }}>
+                <div style={{ display: "flex", alignItems: "baseline", gap: 10, marginBottom: 10 }}>
+                  <span style={{ fontFamily: FONT_MONO, fontSize: 14, color: C.gold, fontWeight: 600 }}>{p.num}</span>
+                  <h5 style={{ fontFamily: FONT_DISPLAY, fontSize: 18, color: C.navy, fontWeight: 600, lineHeight: 1.2 }}>{p.h}</h5>
+                </div>
+                <p style={{ fontFamily: FONT_BODY, fontSize: 13, color: C.inkSoft, lineHeight: 1.55 }}>{p.body}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* BLOC 5 — SIGNATURE */}
+        <div style={{ background: C.navy, color: C.paper, padding: "26px 28px", marginTop: 36, position: "relative" }}>
+          <span style={{ position: "absolute", top: 0, left: 0, width: 40, height: 1, background: C.gold }} />
+          <p style={{ fontFamily: FONT_ITALIC, fontStyle: "italic", fontSize: 17, color: C.gold, lineHeight: 1.55 }}>
+            On ne capte pas un investisseur de 200 millions d'euros avec une plaquette numérique.<br />
+            On le capte avec une plateforme qui parle son langage : précision, personnalisation, vitesse.
+          </p>
+        </div>
+      </>
+    );
+  }
   // logo
+  if (detail.kind !== "logo") return null;
   const l = detail.data as Logo;
   return (
     <>
@@ -846,7 +966,7 @@ const MechanismSection = ({ open }: { open: OpenDetail }) => {
               <LogoChip label="MICEPP" src={AMDIE_LOGOS.micepp} onClick={() => open({ kind: "useCase", data: useCaseData.micepp })} />
               <LogoChip label="MedZ" src={AMDIE_LOGOS.medz} onClick={() => open({ kind: "useCase", data: useCaseData.medz })} />
               <LogoChip label="CRI" src={AMDIE_LOGOS.cri} onClick={() => open({ kind: "useCase", data: useCaseData.cri })} />
-              <LogoChip label="Morocco Now" src={AMDIE_LOGOS.moroccoNow} onClick={() => open({ kind: "useCase", data: useCaseData.amdie })} />
+              <LogoChip label="Morocco Now" src={AMDIE_LOGOS.moroccoNow} onClick={() => open({ kind: "moroccoNow" })} />
             </div>
           </DestCard>
 
