@@ -119,79 +119,50 @@ const polesData: Pole[] = [
 
 // === Tableau comparatif ===
 type Mark = "no" | "partial" | "yes";
-type Cell = { mark: Mark; text: string; muted?: boolean };
-type Row = { criterion: string; cells: Cell[]; bf: { mark: Mark; strong: string } };
+type Cell = { mark: Mark; note?: "1" | "2" };
+type Row = { criterion: string; cells: [Cell, Cell, Cell, Cell]; bf: string };
 
+// Ordre colonnes : Cabinets de Stratégie / Agrégateurs de Presse / Cabinets de Veille IE / Agences d'Influence
 const compareRows: Row[] = [
   {
     criterion: "Mode de livraison",
-    cells: [
-      { mark: "no", text: "Études ponctuelles", muted: true },
-      { mark: "partial", text: "Flux continus" },
-      { mark: "no", text: "Campagnes", muted: true },
-      { mark: "no", text: "Reporting", muted: true },
-    ],
-    bf: { mark: "yes", strong: "Dispositif permanent" },
+    cells: [{ mark: "no" }, { mark: "partial" }, { mark: "partial" }, { mark: "no" }],
+    bf: "Dispositif permanent",
   },
   {
     criterion: "Action sur le réel",
-    cells: [
-      { mark: "no", text: "Recommandations", muted: true },
-      { mark: "no", text: "Données brutes", muted: true },
-      { mark: "partial", text: "Messages diffusés" },
-      { mark: "no", text: "Synthèses", muted: true },
-    ],
-    bf: { mark: "yes", strong: "Intelligence + Influence" },
+    cells: [{ mark: "no" }, { mark: "no" }, { mark: "no" }, { mark: "partial" }],
+    bf: "Intelligence + Influence",
   },
   {
     criterion: "Vitesse de mise en route",
-    cells: [
-      { mark: "no", text: "3 à 6 mois", muted: true },
-      { mark: "partial", text: "2 à 4 semaines" },
-      { mark: "no", text: "1 à 2 mois", muted: true },
-      { mark: "no", text: "Variable", muted: true },
-    ],
-    bf: { mark: "yes", strong: "POC en 1 semaine" },
+    cells: [{ mark: "no" }, { mark: "partial" }, { mark: "no" }, { mark: "no" }],
+    bf: "POC en 1 semaine",
   },
   {
-    criterion: "Posture souveraineté",
-    cells: [
-      { mark: "no", text: "Globale", muted: true },
-      { mark: "no", text: "Globale", muted: true },
-      { mark: "no", text: "Globale", muted: true },
-      { mark: "partial", text: "Interne" },
-    ],
-    bf: { mark: "yes", strong: "Souveraine alignée" },
+    criterion: "Analyse & Interprétation",
+    cells: [{ mark: "yes" }, { mark: "no", note: "1" }, { mark: "partial" }, { mark: "no" }],
+    bf: "Signature experte du métier",
   },
   {
     criterion: "Technologie propriétaire",
-    cells: [
-      { mark: "no", text: "Aucune", muted: true },
-      { mark: "partial", text: "SaaS tiers (US/UE)" },
-      { mark: "no", text: "Aucune", muted: true },
-      { mark: "no", text: "Outils du marché", muted: true },
-    ],
-    bf: { mark: "yes", strong: "Stack OSINT + IA propriétaire" },
+    cells: [{ mark: "no" }, { mark: "no", note: "2" }, { mark: "partial" }, { mark: "no" }],
+    bf: "Stack OSINT + IA souveraine",
+  },
+  {
+    criterion: "Posture souveraineté",
+    cells: [{ mark: "no" }, { mark: "no" }, { mark: "no" }, { mark: "no" }],
+    bf: "Souveraine & alignée",
   },
   {
     criterion: "Mix Intelligence + Influence",
-    cells: [
-      { mark: "no", text: "Non", muted: true },
-      { mark: "no", text: "Non", muted: true },
-      { mark: "no", text: "Non", muted: true },
-      { mark: "no", text: "Non", muted: true },
-    ],
-    bf: { mark: "yes", strong: "Signature unique du métier" },
+    cells: [{ mark: "no" }, { mark: "no" }, { mark: "no" }, { mark: "no" }],
+    bf: "Signature unique du métier",
   },
   {
     criterion: "Confidentialité du dispositif",
-    cells: [
-      { mark: "partial", text: "Procédures standards" },
-      { mark: "partial", text: "Procédures standards" },
-      { mark: "no", text: "Procédures standards", muted: true },
-      { mark: "yes", text: "Interne" },
-    ],
-    bf: { mark: "yes", strong: "NDA + serveurs souverains" },
+    cells: [{ mark: "partial" }, { mark: "no" }, { mark: "partial" }, { mark: "no" }],
+    bf: "NDA + serveurs souverains",
   },
 ];
 
@@ -633,79 +604,87 @@ const PourquoiBuildfluence = () => {
       </section>
 
       {/* ════════ SECTION 3 — TABLEAU COMPARATIF ════════ */}
-      <section style={{ background: C.paper, color: C.ink, padding: "120px 0 100px" }}>
+      <section style={{ background: "#F4F1EA", color: C.ink, padding: "120px 0 100px" }}>
         <div className="pwb-wrap">
-          <div style={{ textAlign: "center", marginBottom: 56 }}>
-            <div style={{ display: "inline-flex", alignItems: "center", gap: 14, marginBottom: 22 }}>
-              <span style={{ width: 40, height: 1, background: C.gold, opacity: 0.6 }} />
-              <span
-                style={{
-                  fontFamily: "'JetBrains Mono', monospace",
-                  fontSize: 11,
-                  color: C.goldDim,
-                  letterSpacing: ".3em",
-                  textTransform: "uppercase",
-                }}
-              >
-                Comparatif
-              </span>
-              <span style={{ width: 40, height: 1, background: C.gold, opacity: 0.6 }} />
-            </div>
-            <h2
-              style={{
-                fontFamily: "'Playfair Display', serif",
-                fontWeight: 900,
-                fontSize: "clamp(36px, 5.5vw, 60px)",
-                color: C.navy,
-                lineHeight: 1.05,
-                margin: "0 auto 18px",
-                maxWidth: 1000,
-              }}
-            >
-              Sept critères.{" "}
-              <em style={{ fontStyle: "italic", fontWeight: 400, color: C.gold }}>Une seule</em>{" "}
-              réponse intégrée.
-            </h2>
-            <p
-              style={{
-                fontFamily: "'Cormorant Garamond', serif",
-                fontStyle: "italic",
-                fontSize: 20,
-                color: C.navyMid,
-                maxWidth: 680,
-                margin: "0 auto",
-                lineHeight: 1.5,
-              }}
-            >
-              Ce que les acteurs traditionnels traitent en silos, Buildfluence l'opère sous un seul
-              toit.
-            </p>
+          {/* Eyebrow */}
+          <div
+            style={{
+              fontFamily: "'JetBrains Mono', monospace",
+              fontSize: 11,
+              fontWeight: 500,
+              letterSpacing: "0.25em",
+              textTransform: "uppercase",
+              color: C.gold,
+              marginBottom: 16,
+            }}
+          >
+            — Positionnement / Le Marché vs Buildfluence
           </div>
 
-          <div style={{ maxWidth: 1280, margin: "0 auto", overflowX: "auto" }}>
+          {/* Titre */}
+          <h2
+            style={{
+              fontFamily: "'Playfair Display', serif",
+              fontWeight: 600,
+              fontSize: "clamp(32px, 4.2vw, 42px)",
+              color: C.navy,
+              lineHeight: 1.15,
+              margin: "0 0 12px",
+              maxWidth: 800,
+            }}
+          >
+            Pourquoi{" "}
+            <em style={{ fontStyle: "italic", fontWeight: 400, color: C.gold }}>
+              aucun acteur
+            </em>
+            <br />
+            ne fait ce que nous faisons.
+          </h2>
+
+          {/* Chapeau */}
+          <p
+            style={{
+              fontFamily: "'Cormorant Garamond', serif",
+              fontStyle: "italic",
+              fontSize: 19,
+              color: "#4A4A4A",
+              maxWidth: 720,
+              marginBottom: 48,
+              lineHeight: 1.4,
+            }}
+          >
+            Le marché de l'intelligence stratégique est saturé d'offres partielles. Études
+            ponctuelles, agrégateurs, cabinets de veille, agences d'influence — chacun couvre une
+            fraction du besoin. Buildfluence est conçu pour la couverture intégrale.
+          </p>
+
+          {/* Tableau */}
+          <div className="pwb-table-wrap">
             <table className="pwb-compare">
               <thead>
                 <tr>
-                  <th>Critère</th>
                   <th>
-                    Cabinet de stratégie
-                    <div className="col-tag">type BCG, Roland Berger</div>
+                    <span className="col-name col-criterion">Critère</span>
                   </th>
                   <th>
-                    Cabinet de veille / IE
-                    <div className="col-tag">type Kantar, Cision</div>
+                    <span className="col-name">Cabinets de Stratégie</span>
+                    <span className="col-sub">type BCG, Roland Berger</span>
                   </th>
                   <th>
-                    Agence d'influence
-                    <div className="col-tag">type Havas, Publicis</div>
+                    <span className="col-name">Agrégateurs de Presse</span>
+                    <span className="col-sub">type Factiva, Europresse</span>
                   </th>
                   <th>
-                    Cellule interne
-                    <div className="col-tag">équipe veille du client</div>
+                    <span className="col-name">Cabinets de Veille / IE</span>
+                    <span className="col-sub">type Kantar, Cision</span>
                   </th>
-                  <th className="bf-col">
-                    Buildfluence
-                    <div className="col-tag">dispositif souverain</div>
+                  <th>
+                    <span className="col-name">Agences d'Influence</span>
+                    <span className="col-sub">type Havas, Publicis</span>
+                  </th>
+                  <th className="bf-header">
+                    <span className="col-name">Buildfluence</span>
+                    <span className="col-sub">dispositif souverain</span>
                   </th>
                 </tr>
               </thead>
@@ -715,24 +694,59 @@ const PourquoiBuildfluence = () => {
                     <td className="criterion">{r.criterion}</td>
                     {r.cells.map((c, i) => (
                       <td key={i}>
-                        <span className="cell-mark">
-                          <span className={`mk ${c.mark}`}>
-                            {c.mark === "yes" ? "✓" : c.mark === "partial" ? "~" : "×"}
-                          </span>
-                          <span className={`cell-text ${c.muted ? "muted" : ""}`}>{c.text}</span>
+                        <span
+                          className={`sym ${
+                            c.mark === "yes"
+                              ? "sym-yes"
+                              : c.mark === "partial"
+                              ? "sym-mid"
+                              : "sym-no"
+                          }`}
+                        >
+                          {c.mark === "yes" ? "✓" : c.mark === "partial" ? "~" : "✕"}
                         </span>
+                        {c.note && <span className="note-mark">{c.note === "1" ? "¹" : "²"}</span>}
                       </td>
                     ))}
                     <td className="bf-cell">
-                      <span className="cell-mark">
-                        <span className="mk yes">✓</span>
-                        <strong>{r.bf.strong}</strong>
+                      <span className="bf-content">
+                        <span className="bf-check">✓</span>
+                        {r.bf}
                       </span>
                     </td>
                   </tr>
                 ))}
               </tbody>
             </table>
+          </div>
+
+          {/* Légende */}
+          <div className="pwb-legend">
+            <span className="pwb-legend-item">
+              <span className="sym sym-yes pwb-legend-sym">✓</span> Couvert
+            </span>
+            <span className="pwb-legend-item">
+              <span className="sym sym-mid pwb-legend-sym">~</span> Partiel
+            </span>
+            <span className="pwb-legend-item">
+              <span className="sym sym-no pwb-legend-sym">✕</span> Non couvert
+            </span>
+          </div>
+
+          {/* Notes */}
+          <div className="pwb-notes">
+            <div className="pwb-notes-eyebrow">— Notes de lecture</div>
+            <p className="pwb-note" data-num="¹">
+              <strong>Sur l'agrégation de presse —</strong> L'agrégation de presse est à
+              l'intelligence économique ce que la météo est à la stratégie militaire : une entrée,
+              jamais une sortie. Confondre les deux, c'est croire qu'avoir un thermomètre suffit
+              pour gagner une bataille.
+            </p>
+            <p className="pwb-note" data-num="²">
+              <strong>Sur la dépendance technologique —</strong> Les solutions d'agrégation
+              dominantes opèrent en cloud américain. Pour des données stratégiques marocaines, ce
+              n'est pas un détail technique : c'est une vulnérabilité structurelle.
+            </p>
           </div>
         </div>
       </section>
@@ -1040,94 +1054,191 @@ const PageStyles = () => (
       .pwb-results-row { flex-direction: column; align-items: center; }
     }
 
-    /* Tableau comparatif */
-    .pwb-compare {
-      background: #fff;
-      border: 1px solid ${C.rule};
+    /* Tableau comparatif v3 */
+    .pwb-table-wrap {
+      background: #FAF8F2;
+      border: 1px solid #EDE8DD;
+      overflow-x: auto;
       border-radius: 2px;
-      min-width: 1100px;
+    }
+    .pwb-compare {
       width: 100%;
       border-collapse: collapse;
-      box-shadow: 0 30px 80px -40px rgba(13,27,42,.18);
+      font-size: 14px;
+      min-width: 1000px;
     }
-    .pwb-compare thead { background: ${C.paper}; }
-    .pwb-compare th {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 10px;
-      color: ${C.navy};
-      letter-spacing: .22em;
-      text-transform: uppercase;
-      font-weight: 600;
-      padding: 22px 20px;
-      border-bottom: 1px solid ${C.rule};
+    .pwb-compare thead tr { background: #EDE8DD; }
+    .pwb-compare thead th {
+      padding: 22px 16px;
       text-align: left;
       vertical-align: top;
+      border-right: 1px solid #DCD5C5;
+      font-weight: 400;
     }
-    .pwb-compare th .col-tag {
+    .pwb-compare thead th:last-child { border-right: none; }
+    .pwb-compare thead th .col-name {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #0A1628;
+      line-height: 1.3;
+      display: block;
+      margin-bottom: 6px;
+    }
+    .pwb-compare thead th .col-sub {
       font-family: 'Cormorant Garamond', serif;
       font-style: italic;
-      font-size: 12px;
-      color: ${C.mute};
+      font-size: 13px;
+      color: #7A7A7A;
       font-weight: 400;
-      letter-spacing: .05em;
-      text-transform: none;
-      margin-top: 5px;
     }
-    .pwb-compare th.bf-col {
-      background: ${C.navy};
-      color: ${C.gold};
-      border-left: 1px solid ${C.gold};
-      border-right: 1px solid ${C.gold};
-      border-bottom: 1px solid ${C.gold};
-      position: relative;
+    .pwb-compare thead th:first-child .col-name { color: #4A4A4A; }
+    .pwb-compare thead th.bf-header {
+      background: #0A1628;
+      border-right: none;
     }
-    .pwb-compare th.bf-col::after {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 3px;
-      background: ${C.gold};
-    }
-    .pwb-compare th.bf-col .col-tag { color: ${C.goldHover}; }
-    .pwb-compare td {
-      border-bottom: 1px solid ${C.rule};
-      font-size: 13.5px;
-      line-height: 1.45;
-      color: ${C.navyMid};
-      padding: 18px 20px;
+    .pwb-compare thead th.bf-header .col-name { color: ${C.gold}; }
+    .pwb-compare thead th.bf-header .col-sub { color: rgba(217,188,106,0.7); }
+
+    .pwb-compare tbody td {
+      padding: 20px 16px;
+      border-top: 1px solid #EDE8DD;
+      border-right: 1px solid #EDE8DD;
       vertical-align: middle;
+      text-align: center;
+      color: #1A1A1A;
     }
-    .pwb-compare tbody tr:hover { background: rgba(201,168,76,.04); }
-    .pwb-compare td.criterion {
+    .pwb-compare tbody td:last-child { border-right: none; }
+    .pwb-compare tbody td.criterion {
       font-family: 'Playfair Display', serif;
-      font-size: 15px;
-      font-weight: 700;
-      color: ${C.navy};
-      background: rgba(13,27,42,.02);
-      max-width: 200px;
-    }
-    .pwb-compare td.bf-cell {
-      background: ${C.navy};
-      color: ${C.ivory};
       font-weight: 500;
-      border-left: 1px solid ${C.gold};
-      border-right: 1px solid ${C.gold};
+      font-size: 15px;
+      color: #0A1628;
+      text-align: left;
+      background: #FAF8F2;
+      width: 200px;
     }
-    .pwb-compare td.bf-cell strong { color: ${C.gold}; font-weight: 700; }
-    .pwb-compare tbody tr:last-child td.bf-cell { border-bottom: 1px solid ${C.gold}; }
-    .pwb-compare tbody tr:hover td.bf-cell { background: ${C.navyMid}; }
-    .cell-mark { display: inline-flex; align-items: center; gap: 8px; }
-    .mk {
-      width: 18px; height: 18px;
+
+    .sym {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 26px;
+      height: 26px;
       border-radius: 50%;
-      display: grid; place-items: center;
-      font-size: 11px; font-weight: 700;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+    }
+    .sym-no { background: rgba(176,57,46,0.12); color: #B0392E; font-weight: 600; }
+    .sym-mid { background: rgba(217,142,47,0.15); color: #C97A1F; font-size: 16px; font-weight: 700; }
+    .sym-yes { background: rgba(46,125,73,0.15); color: #2E7D49; font-weight: 700; }
+
+    .note-mark {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: ${C.gold};
+      margin-left: 4px;
+      vertical-align: super;
+      font-weight: 500;
+    }
+
+    .pwb-compare tbody td.bf-cell {
+      background: #0A1628;
+      color: ${C.gold};
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 500;
+      font-size: 14px;
+      text-align: left;
+      padding: 20px 18px;
+      border-right: none;
+      border-top: 1px solid #142340;
+      line-height: 1.4;
+    }
+    .pwb-compare tbody td.bf-cell .bf-content {
+      display: inline-flex;
+      align-items: center;
+    }
+    .pwb-compare tbody td.bf-cell .bf-check {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: ${C.gold};
+      color: #0A1628;
+      font-size: 11px;
+      font-weight: 700;
+      margin-right: 10px;
       flex-shrink: 0;
     }
-    .mk.no { background: rgba(13,27,42,.08); color: ${C.mute}; }
-    .mk.partial { background: rgba(217,119,6,.15); color: #92400e; }
-    .mk.yes { background: ${C.gold}; color: ${C.navy}; }
-    .cell-text.muted { color: ${C.mute}; }
+
+    /* Légende */
+    .pwb-legend {
+      margin-top: 24px;
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #7A7A7A;
+    }
+    .pwb-legend-item { display: flex; align-items: center; gap: 8px; }
+    .pwb-legend-sym { width: 18px !important; height: 18px !important; font-size: 10px !important; }
+
+    /* Notes */
+    .pwb-notes {
+      margin-top: 36px;
+      padding-top: 28px;
+      border-top: 1px solid #EDE8DD;
+      max-width: 900px;
+    }
+    .pwb-notes-eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: #7A7A7A;
+      margin-bottom: 18px;
+    }
+    .pwb-note {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 17px;
+      color: #4A4A4A;
+      line-height: 1.55;
+      margin-bottom: 16px;
+      padding-left: 24px;
+      position: relative;
+    }
+    .pwb-note::before {
+      content: attr(data-num);
+      position: absolute;
+      left: 0;
+      top: 2px;
+      font-family: 'JetBrains Mono', monospace;
+      font-style: normal;
+      font-size: 11px;
+      font-weight: 500;
+      color: ${C.gold};
+    }
+    .pwb-note strong {
+      font-style: normal;
+      color: #0A1628;
+      font-weight: 600;
+      font-family: 'Playfair Display', serif;
+    }
+
+    @media (max-width: 1024px) {
+      .pwb-table-wrap { overflow-x: auto; }
+      .pwb-compare { min-width: 1000px; }
+    }
 
     /* Track record stats */
     .pwb-stats {
