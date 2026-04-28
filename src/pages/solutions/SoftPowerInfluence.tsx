@@ -330,10 +330,10 @@ const DetailTagline = ({ children }: { children: React.ReactNode }) => (
   </p>
 );
 
-const ColsBlock = ({ cols }: { cols: { h: string; items: string[] }[] }) => (
+const ColsBlock = ({ cols }: { cols: { h: React.ReactNode; items: string[] }[] }) => (
   <div className="grid gap-9" style={{ gridTemplateColumns: cols.length === 3 ? "repeat(3, 1fr)" : "1fr 1fr" }}>
-    {cols.map((c) => (
-      <div key={c.h}>
+    {cols.map((c, idx) => (
+      <div key={idx}>
         <h4 style={{ fontFamily: FONT_MONO, fontSize: 10, letterSpacing: "0.22em", textTransform: "uppercase", color: C.gold, marginBottom: 18, paddingBottom: 12, borderBottom: `1px solid ${C.gold}`, fontWeight: 600 }}>{c.h}</h4>
         <ul className="list-none">
           {c.items.map((it, i) => (
