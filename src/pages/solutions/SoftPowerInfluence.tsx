@@ -158,7 +158,7 @@ const useCaseData: Record<string, UseCaseDetail> = {
     timeline: [
       { year: "2017", text: "Conception de l'Observatoire d'Investissement par Buildfluence" },
       { year: "2024", text: "Annonce officielle du chantier par le MICEPP" },
-      { year: "2025", text: "Étude toujours en cours" },
+      { year: "2026", text: "Étude toujours en cours" },
     ],
     bfApport: "L'expertise existe. La méthodologie est éprouvée. L'infrastructure peut être déployée immédiatement. Buildfluence porte ce projet depuis huit ans, prêt à transformer une vision officielle en outil opérationnel.",
   },
