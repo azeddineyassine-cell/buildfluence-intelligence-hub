@@ -119,79 +119,50 @@ const polesData: Pole[] = [
 
 // === Tableau comparatif ===
 type Mark = "no" | "partial" | "yes";
-type Cell = { mark: Mark; text: string; muted?: boolean };
-type Row = { criterion: string; cells: Cell[]; bf: { mark: Mark; strong: string } };
+type Cell = { mark: Mark; note?: "1" | "2" };
+type Row = { criterion: string; cells: [Cell, Cell, Cell, Cell]; bf: string };
 
+// Ordre colonnes : Cabinets de Stratégie / Agrégateurs de Presse / Cabinets de Veille IE / Agences d'Influence
 const compareRows: Row[] = [
   {
     criterion: "Mode de livraison",
-    cells: [
-      { mark: "no", text: "Études ponctuelles", muted: true },
-      { mark: "partial", text: "Flux continus" },
-      { mark: "no", text: "Campagnes", muted: true },
-      { mark: "no", text: "Reporting", muted: true },
-    ],
-    bf: { mark: "yes", strong: "Dispositif permanent" },
+    cells: [{ mark: "no" }, { mark: "partial" }, { mark: "partial" }, { mark: "no" }],
+    bf: "Dispositif permanent",
   },
   {
     criterion: "Action sur le réel",
-    cells: [
-      { mark: "no", text: "Recommandations", muted: true },
-      { mark: "no", text: "Données brutes", muted: true },
-      { mark: "partial", text: "Messages diffusés" },
-      { mark: "no", text: "Synthèses", muted: true },
-    ],
-    bf: { mark: "yes", strong: "Intelligence + Influence" },
+    cells: [{ mark: "no" }, { mark: "no" }, { mark: "no" }, { mark: "partial" }],
+    bf: "Intelligence + Influence",
   },
   {
     criterion: "Vitesse de mise en route",
-    cells: [
-      { mark: "no", text: "3 à 6 mois", muted: true },
-      { mark: "partial", text: "2 à 4 semaines" },
-      { mark: "no", text: "1 à 2 mois", muted: true },
-      { mark: "no", text: "Variable", muted: true },
-    ],
-    bf: { mark: "yes", strong: "POC en 1 semaine" },
+    cells: [{ mark: "no" }, { mark: "partial" }, { mark: "no" }, { mark: "no" }],
+    bf: "POC en 1 semaine",
   },
   {
-    criterion: "Posture souveraineté",
-    cells: [
-      { mark: "no", text: "Globale", muted: true },
-      { mark: "no", text: "Globale", muted: true },
-      { mark: "no", text: "Globale", muted: true },
-      { mark: "partial", text: "Interne" },
-    ],
-    bf: { mark: "yes", strong: "Souveraine alignée" },
+    criterion: "Analyse & Interprétation",
+    cells: [{ mark: "yes" }, { mark: "no", note: "1" }, { mark: "partial" }, { mark: "no" }],
+    bf: "Signature experte du métier",
   },
   {
     criterion: "Technologie propriétaire",
-    cells: [
-      { mark: "no", text: "Aucune", muted: true },
-      { mark: "partial", text: "SaaS tiers (US/UE)" },
-      { mark: "no", text: "Aucune", muted: true },
-      { mark: "no", text: "Outils du marché", muted: true },
-    ],
-    bf: { mark: "yes", strong: "Stack OSINT + IA propriétaire" },
+    cells: [{ mark: "no" }, { mark: "no", note: "2" }, { mark: "partial" }, { mark: "no" }],
+    bf: "Stack OSINT + IA souveraine",
+  },
+  {
+    criterion: "Posture souveraineté",
+    cells: [{ mark: "no" }, { mark: "no" }, { mark: "no" }, { mark: "no" }],
+    bf: "Souveraine & alignée",
   },
   {
     criterion: "Mix Intelligence + Influence",
-    cells: [
-      { mark: "no", text: "Non", muted: true },
-      { mark: "no", text: "Non", muted: true },
-      { mark: "no", text: "Non", muted: true },
-      { mark: "no", text: "Non", muted: true },
-    ],
-    bf: { mark: "yes", strong: "Signature unique du métier" },
+    cells: [{ mark: "no" }, { mark: "no" }, { mark: "no" }, { mark: "no" }],
+    bf: "Signature unique du métier",
   },
   {
     criterion: "Confidentialité du dispositif",
-    cells: [
-      { mark: "partial", text: "Procédures standards" },
-      { mark: "partial", text: "Procédures standards" },
-      { mark: "no", text: "Procédures standards", muted: true },
-      { mark: "yes", text: "Interne" },
-    ],
-    bf: { mark: "yes", strong: "NDA + serveurs souverains" },
+    cells: [{ mark: "partial" }, { mark: "no" }, { mark: "partial" }, { mark: "no" }],
+    bf: "NDA + serveurs souverains",
   },
 ];
 
