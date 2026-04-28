@@ -2,6 +2,7 @@ import { useEffect, useRef, useState, ReactNode } from "react";
 import { BarChart3, Globe, AlertTriangle, Eye, Network } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import CTAFooter from "@/components/CTAFooter";
+import TestimonialsSection from "@/components/TestimonialsSection";
 
 // === Palette ===
 const C = {
@@ -881,6 +882,10 @@ const PourquoiBuildfluence = () => {
           </div>
         </div>
       </section>
+
+      <div style={{ background: "#fff", padding: "40px 0" }}>
+        <TestimonialsSection />
+      </div>
 
       <CTAFooter />
     </div>
