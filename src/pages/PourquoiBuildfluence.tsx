@@ -604,79 +604,87 @@ const PourquoiBuildfluence = () => {
       </section>
 
       {/* ════════ SECTION 3 — TABLEAU COMPARATIF ════════ */}
-      <section style={{ background: C.paper, color: C.ink, padding: "120px 0 100px" }}>
+      <section style={{ background: "#F4F1EA", color: C.ink, padding: "120px 0 100px" }}>
         <div className="pwb-wrap">
-          <div style={{ textAlign: "center", marginBottom: 56 }}>
-            <div style={{ display: "inline-flex", alignItems: "center", gap: 14, marginBottom: 22 }}>
-              <span style={{ width: 40, height: 1, background: C.gold, opacity: 0.6 }} />
-              <span
-                style={{
-                  fontFamily: "'JetBrains Mono', monospace",
-                  fontSize: 11,
-                  color: C.goldDim,
-                  letterSpacing: ".3em",
-                  textTransform: "uppercase",
-                }}
-              >
-                Comparatif
-              </span>
-              <span style={{ width: 40, height: 1, background: C.gold, opacity: 0.6 }} />
-            </div>
-            <h2
-              style={{
-                fontFamily: "'Playfair Display', serif",
-                fontWeight: 900,
-                fontSize: "clamp(36px, 5.5vw, 60px)",
-                color: C.navy,
-                lineHeight: 1.05,
-                margin: "0 auto 18px",
-                maxWidth: 1000,
-              }}
-            >
-              Sept critères.{" "}
-              <em style={{ fontStyle: "italic", fontWeight: 400, color: C.gold }}>Une seule</em>{" "}
-              réponse intégrée.
-            </h2>
-            <p
-              style={{
-                fontFamily: "'Cormorant Garamond', serif",
-                fontStyle: "italic",
-                fontSize: 20,
-                color: C.navyMid,
-                maxWidth: 680,
-                margin: "0 auto",
-                lineHeight: 1.5,
-              }}
-            >
-              Ce que les acteurs traditionnels traitent en silos, Buildfluence l'opère sous un seul
-              toit.
-            </p>
+          {/* Eyebrow */}
+          <div
+            style={{
+              fontFamily: "'JetBrains Mono', monospace",
+              fontSize: 11,
+              fontWeight: 500,
+              letterSpacing: "0.25em",
+              textTransform: "uppercase",
+              color: C.gold,
+              marginBottom: 16,
+            }}
+          >
+            — Positionnement / Le Marché vs Buildfluence
           </div>
 
-          <div style={{ maxWidth: 1280, margin: "0 auto", overflowX: "auto" }}>
+          {/* Titre */}
+          <h2
+            style={{
+              fontFamily: "'Playfair Display', serif",
+              fontWeight: 600,
+              fontSize: "clamp(32px, 4.2vw, 42px)",
+              color: C.navy,
+              lineHeight: 1.15,
+              margin: "0 0 12px",
+              maxWidth: 800,
+            }}
+          >
+            Pourquoi{" "}
+            <em style={{ fontStyle: "italic", fontWeight: 400, color: C.gold }}>
+              aucun acteur
+            </em>
+            <br />
+            ne fait ce que nous faisons.
+          </h2>
+
+          {/* Chapeau */}
+          <p
+            style={{
+              fontFamily: "'Cormorant Garamond', serif",
+              fontStyle: "italic",
+              fontSize: 19,
+              color: "#4A4A4A",
+              maxWidth: 720,
+              marginBottom: 48,
+              lineHeight: 1.4,
+            }}
+          >
+            Le marché de l'intelligence stratégique est saturé d'offres partielles. Études
+            ponctuelles, agrégateurs, cabinets de veille, agences d'influence — chacun couvre une
+            fraction du besoin. Buildfluence est conçu pour la couverture intégrale.
+          </p>
+
+          {/* Tableau */}
+          <div className="pwb-table-wrap">
             <table className="pwb-compare">
               <thead>
                 <tr>
-                  <th>Critère</th>
                   <th>
-                    Cabinet de stratégie
-                    <div className="col-tag">type BCG, Roland Berger</div>
+                    <span className="col-name col-criterion">Critère</span>
                   </th>
                   <th>
-                    Cabinet de veille / IE
-                    <div className="col-tag">type Kantar, Cision</div>
+                    <span className="col-name">Cabinets de Stratégie</span>
+                    <span className="col-sub">type BCG, Roland Berger</span>
                   </th>
                   <th>
-                    Agence d'influence
-                    <div className="col-tag">type Havas, Publicis</div>
+                    <span className="col-name">Agrégateurs de Presse</span>
+                    <span className="col-sub">type Factiva, Europresse</span>
                   </th>
                   <th>
-                    Cellule interne
-                    <div className="col-tag">équipe veille du client</div>
+                    <span className="col-name">Cabinets de Veille / IE</span>
+                    <span className="col-sub">type Kantar, Cision</span>
                   </th>
-                  <th className="bf-col">
-                    Buildfluence
-                    <div className="col-tag">dispositif souverain</div>
+                  <th>
+                    <span className="col-name">Agences d'Influence</span>
+                    <span className="col-sub">type Havas, Publicis</span>
+                  </th>
+                  <th className="bf-header">
+                    <span className="col-name">Buildfluence</span>
+                    <span className="col-sub">dispositif souverain</span>
                   </th>
                 </tr>
               </thead>
@@ -686,24 +694,59 @@ const PourquoiBuildfluence = () => {
                     <td className="criterion">{r.criterion}</td>
                     {r.cells.map((c, i) => (
                       <td key={i}>
-                        <span className="cell-mark">
-                          <span className={`mk ${c.mark}`}>
-                            {c.mark === "yes" ? "✓" : c.mark === "partial" ? "~" : "×"}
-                          </span>
-                          <span className={`cell-text ${c.muted ? "muted" : ""}`}>{c.text}</span>
+                        <span
+                          className={`sym ${
+                            c.mark === "yes"
+                              ? "sym-yes"
+                              : c.mark === "partial"
+                              ? "sym-mid"
+                              : "sym-no"
+                          }`}
+                        >
+                          {c.mark === "yes" ? "✓" : c.mark === "partial" ? "~" : "✕"}
                         </span>
+                        {c.note && <span className="note-mark">{c.note === "1" ? "¹" : "²"}</span>}
                       </td>
                     ))}
                     <td className="bf-cell">
-                      <span className="cell-mark">
-                        <span className="mk yes">✓</span>
-                        <strong>{r.bf.strong}</strong>
+                      <span className="bf-content">
+                        <span className="bf-check">✓</span>
+                        {r.bf}
                       </span>
                     </td>
                   </tr>
                 ))}
               </tbody>
             </table>
+          </div>
+
+          {/* Légende */}
+          <div className="pwb-legend">
+            <span className="pwb-legend-item">
+              <span className="sym sym-yes pwb-legend-sym">✓</span> Couvert
+            </span>
+            <span className="pwb-legend-item">
+              <span className="sym sym-mid pwb-legend-sym">~</span> Partiel
+            </span>
+            <span className="pwb-legend-item">
+              <span className="sym sym-no pwb-legend-sym">✕</span> Non couvert
+            </span>
+          </div>
+
+          {/* Notes */}
+          <div className="pwb-notes">
+            <div className="pwb-notes-eyebrow">— Notes de lecture</div>
+            <p className="pwb-note" data-num="¹">
+              <strong>Sur l'agrégation de presse —</strong> L'agrégation de presse est à
+              l'intelligence économique ce que la météo est à la stratégie militaire : une entrée,
+              jamais une sortie. Confondre les deux, c'est croire qu'avoir un thermomètre suffit
+              pour gagner une bataille.
+            </p>
+            <p className="pwb-note" data-num="²">
+              <strong>Sur la dépendance technologique —</strong> Les solutions d'agrégation
+              dominantes opèrent en cloud américain. Pour des données stratégiques marocaines, ce
+              n'est pas un détail technique : c'est une vulnérabilité structurelle.
+            </p>
           </div>
         </div>
       </section>
