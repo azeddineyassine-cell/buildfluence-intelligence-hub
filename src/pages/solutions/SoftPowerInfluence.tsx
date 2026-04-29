@@ -698,7 +698,7 @@ const DetailContent = ({ detail }: { detail: DetailKind }) => {
           <span style={{ position: "absolute", top: 0, left: 0, width: 40, height: 1, background: C.gold }} />
           <p style={{ fontFamily: FONT_ITALIC, fontStyle: "italic", fontSize: 17, color: C.gold, lineHeight: 1.55 }}>
             On ne capte pas un investisseur de 200 millions d'euros avec une plaquette numérique.<br />
-            On le capte avec une plateforme qui parle son langage : précision, personnalisation, vitesse.
+            On le capte avec une plateforme interactive conçue pour décider vite : données précises, parcours personnalisés, réponses en temps réel.
           </p>
         </div>
       </>
@@ -1369,7 +1369,7 @@ const SoftPowerInfluence = () => {
         {/* SECTION 01 — Mécanisme */}
         <section className="sp-section sp-section--tight">
           <div className="sp-container">
-            <SectionHeader num="i" eyebrow="Mécanisme d'Attractivité & d'Influence" intro={<><em style={{ fontStyle: "italic" }}>L'influence ne se décrète pas, elle s'ingénie…</em><br />— Une infrastructure souveraine au cœur,<br />— Un back-office qui capte et décrypte en temps réel,<br />— Un écosystème qui projette votre puissance décisionnelle au-delà des frontières.</>}>
+            <SectionHeader num="i" eyebrow="Mécanisme d'Attractivité & d'Influence" intro={<><em style={{ fontStyle: "italic" }}>L'influence ne se décrète pas, elle s'ingénie…</em><br />— Une infrastructure souveraine au cœur des Process<br />— Un back-office Expert qui capte et décrypte en temps réel,<br />— Un écosystème qui projette votre puissance décisionnelle au-delà des frontières.</>}>
               Capter, transformer, <em style={{ fontStyle: "italic", color: C.gold, fontWeight: 400 }}>influencer</em>.
             </SectionHeader>
           </div>
