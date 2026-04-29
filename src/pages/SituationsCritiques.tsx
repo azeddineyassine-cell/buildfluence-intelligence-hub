@@ -336,10 +336,8 @@ export default function SituationsCritiques() {
           )}
         </div>
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center", position: "sticky", top: 20 }}>
-          <p style={{ fontSize: 12, color: "#6B7FA0", letterSpacing: "0.5px", textAlign: "center", margin: 0, fontStyle: "italic" }}>
-            {t("Cliquer sur une situation pour explorer le process", "Click a situation to explore the process")}
-          </p>
           <div style={{ width: "83%", maxWidth: 986, margin: 0, marginTop: -40, marginBottom: -40 }}>
+
             <svg viewBox="80 80 400 400" preserveAspectRatio="xMidYMid meet" style={{ width: "100%", height: "auto", display: "block", overflow: "visible" }}>
               <defs>
                 <radialGradient id="cg2" cx="50%" cy="40%" r="60%">
