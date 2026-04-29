@@ -696,7 +696,7 @@ const DetailContent = ({ detail }: { detail: DetailKind }) => {
         {/* BLOC 5 — SIGNATURE */}
         <div style={{ background: C.navy, color: C.paper, padding: "26px 28px", marginTop: 36, position: "relative" }}>
           <span style={{ position: "absolute", top: 0, left: 0, width: 40, height: 1, background: C.gold }} />
-          <p style={{ fontFamily: FONT_ITALIC, fontStyle: "italic", fontSize: 17, color: C.gold, lineHeight: 1.55 }}>
+          <p style={{ fontFamily: FONT_ITALIC, fontStyle: "italic", fontSize: 17, color: "#ffffff", lineHeight: 1.55 }}>
             On ne capte pas un investisseur de 200 millions d'euros avec une plaquette numérique.<br />
             On le capte avec une plateforme interactive conçue pour décider vite : données précises, parcours personnalisés, réponses en temps réel.
           </p>
