@@ -62,12 +62,12 @@ const FORESIGHT: ForesightCard[] = [
     preview:
       "Pilotage de l'attractivité économique dans la guerre de l'investissement.",
     lead:
-      "Pilotage de l'attractivité économique dans la guerre mondiale de l'investissement.",
+      "Disposez d'une analyse croisée des signaux d'investissement, des stratégies publiques et des jeux d'influence internationaux. Elle permet de comprendre :",
     bullets: [
-      "Guerre économique de l'investissement",
-      "Benchmark pays/régions concurrentes",
-      "Politiques publiques comparées",
-      "Narratifs d'attractivité et crédibilité internationale",
+      "Où se joue réellement la compétition mondiale ? Identifier les territoires qui concentrent les flux d'investissement et comprendre les logiques de domination sectorielle.",
+      "Quels pays gagnent en attractivité et pourquoi ? Analyser les facteurs différenciants : rapidité d'exécution, stabilité, stratégie d'influence, structuration des écosystèmes.",
+      "Comment se positionnent les concurrents directs ? Benchmark dynamique des pays rivaux, de leurs forces sectorielles et de leurs stratégies d'expansion.",
+      "Quels récits façonnent la perception des investisseurs ? Décrypter les narratifs dominants qui influencent les décisions au-delà des fondamentaux économiques.",
     ],
   },
   {
