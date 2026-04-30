@@ -610,7 +610,7 @@ const DetailContent = ({ detail }: { detail: DetailKind }) => {
         {/* BLOC 1 — IDENTIFICATION */}
         <Eyebrow>— Écosystème institutionnel · Plateforme d'attractivité</Eyebrow>
         <DetailTitle>Morocco Now</DetailTitle>
-        <DetailTagline>Plateforme officielle de promotion des Investissements Directs Étrangers — opérée par l'AMDIE</DetailTagline>
+        <DetailTagline>Plateforme officielle de promotion des Investissements Directs Étrangers opérée par l'AMDIE</DetailTagline>
         <div style={{ marginBottom: 32, padding: "18px 22px", background: C.paperDeep, borderLeft: `3px solid ${C.gold}`, display: "grid", gridTemplateColumns: "max-content 1fr", columnGap: 28, rowGap: 12 }}>
           {[
             { l: "STATUT", v: "Vitrine internationale du Maroc auprès des investisseurs étrangers" },
