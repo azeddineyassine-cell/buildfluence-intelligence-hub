@@ -588,10 +588,10 @@ const DetailContent = ({ detail }: { detail: DetailKind }) => {
   }
   if (detail.kind === "moroccoNow") {
     const benchmarkRows = [
-      { plat: "Invest Korea Plaza", flag: "🇰🇷", country: "Corée du Sud", tools: "Simulateur fiscal · Matchmaking · Suivi de dossier en temps réel" },
-      { plat: "Singapore EDB", flag: "🇸🇬", country: "Singapour", tools: "Sector dashboards · Partner finder · Tax & incentive calculator" },
-      { plat: "Department for Business & Trade", flag: "🇬🇧", country: "Royaume-Uni", tools: "Investment opportunities feed · Personalized matching · Live regulation tracker" },
-      { plat: "Invest Egypt", flag: "🇪🇬", country: "Égypte", tools: "Project finder · Sector intelligence dashboards · Direct contact tools" },
+      { plat: "Invest Korea Plaza", url: "https://www.investkorea.org/ik-en/index.do?clickArea=enmain00002*", flag: "🇰🇷", country: "Corée du Sud", tools: "Simulateur fiscal · Matchmaking · Suivi de dossier en temps réel" },
+      { plat: "Singapore EDB", url: "https://www.edb.gov.sg/", flag: "🇸🇬", country: "Singapour", tools: "Sector dashboards · Partner finder · Tax & incentive calculator" },
+      { plat: "Department for Business & Trade", url: "https://www.gov.uk/government/organisations/department-for-business-and-trade", flag: "🇬🇧", country: "Royaume-Uni", tools: "Investment opportunities feed · Personalized matching · Live regulation tracker" },
+      { plat: "Invest Egypt", url: "https://www.investinegypt.gov.eg/English/Pages/default.aspx", flag: "🇪🇬", country: "Égypte", tools: "Project finder · Sector intelligence dashboards · Direct contact tools" },
     ];
     const pillars = [
       { num: "i.", h: "Intelligence dynamique", body: "Dashboards sectoriels en temps réel · Cartographie des opportunités · Veille réglementaire automatisée" },
@@ -610,7 +610,7 @@ const DetailContent = ({ detail }: { detail: DetailKind }) => {
         {/* BLOC 1 — IDENTIFICATION */}
         <Eyebrow>— Écosystème institutionnel · Plateforme d'attractivité</Eyebrow>
         <DetailTitle>Morocco Now</DetailTitle>
-        <DetailTagline>Plateforme officielle de promotion des Investissements Directs Étrangers — opérée par l'AMDIE</DetailTagline>
+        <DetailTagline>Plateforme officielle de promotion des Investissements Directs Étrangers opérée par l'AMDIE</DetailTagline>
         <div style={{ marginBottom: 32, padding: "18px 22px", background: C.paperDeep, borderLeft: `3px solid ${C.gold}`, display: "grid", gridTemplateColumns: "max-content 1fr", columnGap: 28, rowGap: 12 }}>
           {[
             { l: "STATUT", v: "Vitrine internationale du Maroc auprès des investisseurs étrangers" },
@@ -659,7 +659,9 @@ const DetailContent = ({ detail }: { detail: DetailKind }) => {
               <tbody>
                 {benchmarkRows.map((r, i) => (
                   <tr key={i} style={{ borderBottom: i === benchmarkRows.length - 1 ? "none" : `1px solid ${C.paperDeep}` }}>
-                    <td style={{ padding: "14px", color: C.navy, fontWeight: 600, verticalAlign: "top" }}>{r.plat}</td>
+                    <td style={{ padding: "14px", color: C.navy, fontWeight: 600, verticalAlign: "top" }}>
+                      <a href={r.url} target="_blank" rel="noopener noreferrer" style={{ color: C.navy, textDecoration: "underline", textDecorationColor: C.gold, textUnderlineOffset: 3 }}>{r.plat}</a>
+                    </td>
                     <td style={{ padding: "14px", color: C.inkSoft, verticalAlign: "top", whiteSpace: "nowrap" }}>
                       <span style={{ fontSize: 18, marginRight: 8 }}>{r.flag}</span>{r.country}
                     </td>
@@ -1245,7 +1247,7 @@ const POCS = [
 
 const PocsSection = () => (
   <section className="mt-32">
-    <SectionHeader num="iv" eyebrow="Modélisations & POCs" intro="Du test rapide à l'infrastructure complète. Choisissez le format adapté à votre maturité — chacun est conçu pour produire un résultat tangible dès le premier mois.">
+    <SectionHeader num="iv" eyebrow="Modélisations & POCs" intro="Du test rapide à l'infrastructure complète. Choisissez le format adapté à votre maturité chacun est conçu pour produire un résultat tangible dès le premier mois.">
       Trois portes d'entrée pour <em style={{ fontStyle: "italic", color: C.gold, fontWeight: 400 }}>activer</em>.
     </SectionHeader>
     <div className="sp-tri-grid grid gap-6" style={{ gridTemplateColumns: "repeat(3, minmax(0,1fr))" }}>

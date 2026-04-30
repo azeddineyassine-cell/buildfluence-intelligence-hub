@@ -45,7 +45,7 @@ const AIPoweredMonitor = () => {
       icon: "📡",
       title: t("Captation & Intelligence IA", "Capture & AI Intelligence"),
       subtitle: t("L'IA qui transforme le bruit en signal décisionnel", "AI that transforms noise into decision signals"),
-      bg: "#1c75ba",
+      bg: "#215983",
       items: [
         t("Veille multicanale augmentée par l'IA : Web, brevets, publications scientifiques, BDD, Agrégateurs de presse, etc.", "AI-augmented multi-channel monitoring: Web, patents, scientific publications, databases, press aggregators, etc."),
         t("NLP & analyse sémantique avancée", "NLP & advanced semantic analysis"),
@@ -58,7 +58,7 @@ const AIPoweredMonitor = () => {
       icon: "⚡",
       title: t("Alerting & Décision", "Alerting & Decision"),
       subtitle: t("Décider avant que la menace ne s'impose", "Decide before the threat takes hold"),
-      bg: "#1c75ba",
+      bg: "#215983",
       items: [
         t("Alertes configurables par enjeu et criticité", "Configurable alerts by issue and criticality"),
         t("Scoring automatique de criticité Go / Vigilance / No-Go", "Automatic Go / Caution / No-Go criticality scoring"),
@@ -71,7 +71,7 @@ const AIPoweredMonitor = () => {
       icon: "📢",
       title: t("Production, Capitalisation & Diffusion", "Production, Capitalization & Distribution"),
       subtitle: t("Transformer chaque signal en levier d'action", "Transform every signal into an action lever"),
-      bg: "#1c75ba",
+      bg: "#215983",
       items: [
         t("Production de contenu intelligent", "Intelligent content production"),
         t("Magazines sectoriels personnalisés par destinataire (Flipbook)", "Custom sector magazines by recipient (Flipbook)"),
