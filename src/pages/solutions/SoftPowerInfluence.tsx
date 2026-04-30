@@ -659,7 +659,9 @@ const DetailContent = ({ detail }: { detail: DetailKind }) => {
               <tbody>
                 {benchmarkRows.map((r, i) => (
                   <tr key={i} style={{ borderBottom: i === benchmarkRows.length - 1 ? "none" : `1px solid ${C.paperDeep}` }}>
-                    <td style={{ padding: "14px", color: C.navy, fontWeight: 600, verticalAlign: "top" }}>{r.plat}</td>
+                    <td style={{ padding: "14px", color: C.navy, fontWeight: 600, verticalAlign: "top" }}>
+                      <a href={r.url} target="_blank" rel="noopener noreferrer" style={{ color: C.navy, textDecoration: "underline", textDecorationColor: C.gold, textUnderlineOffset: 3 }}>{r.plat}</a>
+                    </td>
                     <td style={{ padding: "14px", color: C.inkSoft, verticalAlign: "top", whiteSpace: "nowrap" }}>
                       <span style={{ fontSize: 18, marginRight: 8 }}>{r.flag}</span>{r.country}
                     </td>
