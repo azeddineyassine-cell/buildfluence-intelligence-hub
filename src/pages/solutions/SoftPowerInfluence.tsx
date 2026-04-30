@@ -1247,7 +1247,7 @@ const POCS = [
 
 const PocsSection = () => (
   <section className="mt-32">
-    <SectionHeader num="iv" eyebrow="Modélisations & POCs" intro="Du test rapide à l'infrastructure complète. Choisissez le format adapté à votre maturité — chacun est conçu pour produire un résultat tangible dès le premier mois.">
+    <SectionHeader num="iv" eyebrow="Modélisations & POCs" intro="Du test rapide à l'infrastructure complète. Choisissez le format adapté à votre maturité chacun est conçu pour produire un résultat tangible dès le premier mois.">
       Trois portes d'entrée pour <em style={{ fontStyle: "italic", color: C.gold, fontWeight: 400 }}>activer</em>.
     </SectionHeader>
     <div className="sp-tri-grid grid gap-6" style={{ gridTemplateColumns: "repeat(3, minmax(0,1fr))" }}>
