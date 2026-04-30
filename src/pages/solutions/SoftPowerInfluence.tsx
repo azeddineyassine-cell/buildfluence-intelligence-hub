@@ -588,10 +588,10 @@ const DetailContent = ({ detail }: { detail: DetailKind }) => {
   }
   if (detail.kind === "moroccoNow") {
     const benchmarkRows = [
-      { plat: "Invest Korea Plaza", flag: "🇰🇷", country: "Corée du Sud", tools: "Simulateur fiscal · Matchmaking · Suivi de dossier en temps réel" },
-      { plat: "Singapore EDB", flag: "🇸🇬", country: "Singapour", tools: "Sector dashboards · Partner finder · Tax & incentive calculator" },
-      { plat: "Department for Business & Trade", flag: "🇬🇧", country: "Royaume-Uni", tools: "Investment opportunities feed · Personalized matching · Live regulation tracker" },
-      { plat: "Invest Egypt", flag: "🇪🇬", country: "Égypte", tools: "Project finder · Sector intelligence dashboards · Direct contact tools" },
+      { plat: "Invest Korea Plaza", url: "https://www.investkorea.org/ik-en/index.do?clickArea=enmain00002*", flag: "🇰🇷", country: "Corée du Sud", tools: "Simulateur fiscal · Matchmaking · Suivi de dossier en temps réel" },
+      { plat: "Singapore EDB", url: "https://www.edb.gov.sg/", flag: "🇸🇬", country: "Singapour", tools: "Sector dashboards · Partner finder · Tax & incentive calculator" },
+      { plat: "Department for Business & Trade", url: "https://www.gov.uk/government/organisations/department-for-business-and-trade", flag: "🇬🇧", country: "Royaume-Uni", tools: "Investment opportunities feed · Personalized matching · Live regulation tracker" },
+      { plat: "Invest Egypt", url: "https://www.investinegypt.gov.eg/English/Pages/default.aspx", flag: "🇪🇬", country: "Égypte", tools: "Project finder · Sector intelligence dashboards · Direct contact tools" },
     ];
     const pillars = [
       { num: "i.", h: "Intelligence dynamique", body: "Dashboards sectoriels en temps réel · Cartographie des opportunités · Veille réglementaire automatisée" },
