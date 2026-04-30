@@ -247,13 +247,22 @@ const ForesightSection = () => {
               >
                 {card.lead}
               </p>
-              <ul className="space-y-3">
-                {card.bullets.map((b, k) => (
-                  <li key={k} className="flex gap-3 text-sm" style={{ color: C.navy, lineHeight: 1.55 }}>
-                    <span style={{ color: C.gold, fontWeight: 700 }}>→</span>
-                    <span>{b}</span>
-                  </li>
-                ))}
+              <ul className="space-y-5">
+                {card.bullets.map((b, k) => {
+                  const qMark = b.indexOf("?");
+                  const hasQuestion = qMark !== -1;
+                  const question = hasQuestion ? b.slice(0, qMark + 1).trim() : b;
+                  const answer = hasQuestion ? b.slice(qMark + 1).trim() : "";
+                  return (
+                    <li key={k} className="flex gap-3 text-sm" style={{ color: C.navy, lineHeight: 1.55 }}>
+                      <span style={{ color: C.gold, fontWeight: 700 }}>→</span>
+                      <div>
+                        <div style={{ fontWeight: 700 }}>{question}</div>
+                        {answer && <div style={{ fontWeight: 400, marginTop: 4 }}>{answer}</div>}
+                      </div>
+                    </li>
+                  );
+                })}
               </ul>
             </div>
 
