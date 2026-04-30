@@ -175,16 +175,16 @@ const Navbar = () => {
       route: "/capacites/strategic-workflow",
     },
     {
-      label: "Strategic Command Center",
-      desc: t("Cockpit décisionnel souverain", "Sovereign decision cockpit"),
-      icon: Database,
-      route: "/capacites/strategic-command-center",
-    },
-    {
       label: "Competitive Velocity Engine",
       desc: t("Mapping dynamique concurrentiel", "Dynamic competitive mapping"),
       icon: Gauge,
       route: "/capacites/competitive-velocity-engine",
+    },
+    {
+      label: "Strategic Command Center",
+      desc: t("Cockpit décisionnel souverain", "Sovereign decision cockpit"),
+      icon: Database,
+      route: "/capacites/strategic-command-center",
     },
   ];
 
