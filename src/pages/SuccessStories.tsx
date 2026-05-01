@@ -252,7 +252,7 @@ const SuccessStoriesPage = () => {
             marginBottom: 16,
           }}
         >
-          — Pilier III · Insight & Resources / Success Stories
+          — Insight & Resources / Success Stories
         </div>
         <h1
           style={{
