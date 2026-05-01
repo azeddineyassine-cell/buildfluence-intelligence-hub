@@ -1,5 +1,9 @@
 import Navbar from "@/components/Navbar";
 import CTAFooter from "@/components/CTAFooter";
+import logoCentraleDanone from "@/assets/clients/centrale-danone.jpg";
+import logoCidc from "@/assets/clients/cidc.jpg";
+import logoMinistereSante from "@/assets/clients/ministere-sante.jpg";
+import logoGinger from "@/assets/clients/ginger-international.jpg";
 
 const C = {
   paper: "#F4F1EA",
