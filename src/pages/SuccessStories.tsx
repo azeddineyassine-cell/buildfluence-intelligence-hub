@@ -340,26 +340,47 @@ const SuccessStoriesPage = () => {
                     flexWrap: "wrap",
                   }}
                 >
-                  {s.logos.map((l, i) => (
-                    <div
-                      key={i}
-                      style={{
-                        background: C.paper,
-                        color: C.navy,
-                        fontFamily: fontPlayfair,
-                        fontWeight: 600,
-                        fontSize: l.fontSize ?? 14,
-                        padding: "10px 14px",
-                        borderRadius: 0,
-                        lineHeight: 1.15,
-                        letterSpacing: "0.02em",
-                        fontStyle: l.smallItalic ? "italic" : "normal",
-                        whiteSpace: "pre-line",
-                      }}
-                    >
-                      {l.label}
-                    </div>
-                  ))}
+                  {s.logos.map((l, i) =>
+                    l.src ? (
+                      <div
+                        key={i}
+                        style={{
+                          background: C.paper,
+                          padding: "8px 12px",
+                          borderRadius: 0,
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          height: 50,
+                        }}
+                      >
+                        <img
+                          src={l.src}
+                          alt={l.label}
+                          style={{ maxHeight: 34, maxWidth: 140, objectFit: "contain", display: "block" }}
+                        />
+                      </div>
+                    ) : (
+                      <div
+                        key={i}
+                        style={{
+                          background: C.paper,
+                          color: C.navy,
+                          fontFamily: fontPlayfair,
+                          fontWeight: 600,
+                          fontSize: l.fontSize ?? 14,
+                          padding: "10px 14px",
+                          borderRadius: 0,
+                          lineHeight: 1.15,
+                          letterSpacing: "0.02em",
+                          fontStyle: l.smallItalic ? "italic" : "normal",
+                          whiteSpace: "pre-line",
+                        }}
+                      >
+                        {l.label}
+                      </div>
+                    )
+                  )}
                   {s.photoCircle && (
                     <div
                       style={{
