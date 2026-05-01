@@ -283,8 +283,8 @@ const PourquoiBuildfluence = () => {
             }}
           >
             Buildfluence construit la souveraineté décisionnelle. Un dispositif unifié qui croise
-            cinq pôles d'intelligence pour produire ce qui compte vraiment : Attractivité, Influence
-            et Compétitivité.
+            cinq pôles d'intelligence pour produire ce qui compte vraiment :{" "}
+            <span style={{ color: C.gold }}>Attractivité, Influence et Compétitivité.</span>
           </p>
 
           <div
