@@ -22,7 +22,7 @@ const fontCormorant = "'Cormorant Garamond', serif";
 const fontDM = "'DM Sans', sans-serif";
 const fontMono = "'JetBrains Mono', monospace";
 
-type Logo = { label: string; smallItalic?: boolean; fontSize?: number };
+type Logo = { label: string; smallItalic?: boolean; fontSize?: number; src?: string };
 
 type Story = {
   number: string;
