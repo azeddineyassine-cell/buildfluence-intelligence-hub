@@ -1,5 +1,9 @@
 import Navbar from "@/components/Navbar";
 import CTAFooter from "@/components/CTAFooter";
+import logoCentraleDanone from "@/assets/clients/centrale-danone.jpg";
+import logoCidc from "@/assets/clients/cidc.jpg";
+import logoMinistereSante from "@/assets/clients/ministere-sante.jpg";
+import logoGinger from "@/assets/clients/ginger-international.jpg";
 
 const C = {
   paper: "#F4F1EA",
@@ -18,7 +22,7 @@ const fontCormorant = "'Cormorant Garamond', serif";
 const fontDM = "'DM Sans', sans-serif";
 const fontMono = "'JetBrains Mono', monospace";
 
-type Logo = { label: string; smallItalic?: boolean; fontSize?: number };
+type Logo = { label: string; smallItalic?: boolean; fontSize?: number; src?: string };
 
 type Story = {
   number: string;
@@ -44,7 +48,7 @@ const stories: Story[] = [
   {
     number: "01",
     sector: "Industrie agroalimentaire",
-    logos: [{ label: "CENTRALE DANONE" }],
+    logos: [{ label: "CENTRALE DANONE", src: logoCentraleDanone }],
     photoCircle: "SK",
     visualFrame: "[ Capture média le360 — \u201cVidéo. Rumeurs et réseaux sociaux : quand Raïbi Jamila en paie le prix fort\u201d ]",
     meta: [
@@ -122,7 +126,7 @@ const stories: Story[] = [
   {
     number: "03",
     sector: "Organisation internationale",
-    logos: [{ label: "CIDC · OCI" }],
+    logos: [{ label: "CIDC · OCI", src: logoCidc }],
     visualFrame: "[ Capture Doing Business Platform + magazine TIJARIS ]",
     meta: [
       { label: "CLIENT", value: "CIDC (organe OCI)" },
@@ -155,7 +159,7 @@ const stories: Story[] = [
   {
     number: "04",
     sector: "Santé publique",
-    logos: [{ label: "MINISTÈRE\nDE LA SANTÉ\nROYAUME DU MAROC", fontSize: 11 }],
+    logos: [{ label: "MINISTÈRE\nDE LA SANTÉ\nROYAUME DU MAROC", fontSize: 11, src: logoMinistereSante }],
     visualFrame: "[ Crisis Dashboard : Grippe A H1N1 — courbe mentions négatives ]",
     meta: [
       { label: "CLIENT", value: "Ministère de la Santé" },
@@ -192,7 +196,7 @@ const stories: Story[] = [
   {
     number: "05",
     sector: "Coopération internationale & santé",
-    logos: [{ label: "GINGER INTERNATIONAL" }, { label: "KFW", fontSize: 12 }],
+    logos: [{ label: "GINGER INTERNATIONAL", src: logoGinger }, { label: "KFW", fontSize: 12 }],
     visualFrame: "[ Visuel sobre — établissement hospitalier de référence ]",
     meta: [
       { label: "CLIENT", value: "Ginger International (France)" },
@@ -336,26 +340,47 @@ const SuccessStoriesPage = () => {
                     flexWrap: "wrap",
                   }}
                 >
-                  {s.logos.map((l, i) => (
-                    <div
-                      key={i}
-                      style={{
-                        background: C.paper,
-                        color: C.navy,
-                        fontFamily: fontPlayfair,
-                        fontWeight: 600,
-                        fontSize: l.fontSize ?? 14,
-                        padding: "10px 14px",
-                        borderRadius: 0,
-                        lineHeight: 1.15,
-                        letterSpacing: "0.02em",
-                        fontStyle: l.smallItalic ? "italic" : "normal",
-                        whiteSpace: "pre-line",
-                      }}
-                    >
-                      {l.label}
-                    </div>
-                  ))}
+                  {s.logos.map((l, i) =>
+                    l.src ? (
+                      <div
+                        key={i}
+                        style={{
+                          background: C.paper,
+                          padding: "8px 12px",
+                          borderRadius: 0,
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          height: 50,
+                        }}
+                      >
+                        <img
+                          src={l.src}
+                          alt={l.label}
+                          style={{ maxHeight: 34, maxWidth: 140, objectFit: "contain", display: "block" }}
+                        />
+                      </div>
+                    ) : (
+                      <div
+                        key={i}
+                        style={{
+                          background: C.paper,
+                          color: C.navy,
+                          fontFamily: fontPlayfair,
+                          fontWeight: 600,
+                          fontSize: l.fontSize ?? 14,
+                          padding: "10px 14px",
+                          borderRadius: 0,
+                          lineHeight: 1.15,
+                          letterSpacing: "0.02em",
+                          fontStyle: l.smallItalic ? "italic" : "normal",
+                          whiteSpace: "pre-line",
+                        }}
+                      >
+                        {l.label}
+                      </div>
+                    )
+                  )}
                   {s.photoCircle && (
                     <div
                       style={{
