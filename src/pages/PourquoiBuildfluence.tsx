@@ -55,9 +55,9 @@ const polesData: Pole[] = [
     id: "p2",
     num: "P/02",
     title: "Contexte géopolitique",
-    tag: "États · Alliances · Souverainetés",
+    tag: "États · Alliances · Conflits",
     icon: <Globe size={22} strokeWidth={1.6} />,
-    panelTag: "P/02 · ÉTATS · ALLIANCES · SOUVERAINETÉS",
+    panelTag: "P/02 · ÉTATS · ALLIANCES · CONFLITS",
     lead: "Décoder les jeux d'États, identifier les souverainetés contestées, lire les rapports de force régionaux et internationaux.",
     items: [
       "Cartographie des alliances et des dépendances",
