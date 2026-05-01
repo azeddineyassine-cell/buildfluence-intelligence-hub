@@ -9,6 +9,7 @@ import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 import SituationsCritiques from "./pages/SituationsCritiques";
 import PourquoiBuildfluence from "./pages/PourquoiBuildfluence";
+import SuccessStories from "./pages/SuccessStories";
 
 // Situation pages
 import DeciderSansVisibilite from "./pages/situations/DeciderSansVisibilite";
@@ -45,6 +46,7 @@ const App = () => (
             <Route path="/contact" element={<Contact />} />
             <Route path="/situations-critiques" element={<SituationsCritiques />} />
             <Route path="/pourquoi-buildfluence" element={<PourquoiBuildfluence />} />
+            <Route path="/success-stories" element={<SuccessStories />} />
 
             {/* Situations */}
             <Route path="/situations/decider-sans-visibilite" element={<DeciderSansVisibilite />} />
