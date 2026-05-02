@@ -1152,8 +1152,13 @@ const ThreatSection = () => {
               exit={{ opacity: 0, x: 8 }}
               transition={{ duration: 0.35 }}
               className="p-8 md:p-10"
-              style={{ borderRight: `1px solid rgba(201,168,76,0.2)` }}
-            >
+              style={{
+                borderRight: `1px solid rgba(201,168,76,0.2)`,
+                minHeight: '100%',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
+              }}
               <div
                 style={{
                   fontFamily: FONT_DISPLAY,
