@@ -1136,12 +1136,12 @@ const ThreatSection = () => {
 
         {/* Cockpit body */}
         <div
-          className="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr]"
+          className="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr_1fr]"
           style={{ background: C.navy, color: C.ivory }}
         >
           <AnimatePresence mode="wait">
             <motion.div
-              key={`pane-l-${mode}`}
+              key={`col-0-${mode}`}
               initial={{ opacity: 0, x: -8 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: 8 }}
@@ -1208,18 +1208,34 @@ const ThreatSection = () => {
 
           <AnimatePresence mode="wait">
             <motion.div
-              key={`pane-r-${mode}`}
+              key={`col-1-${mode}`}
               initial={{ opacity: 0, x: 8 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -8 }}
               transition={{ duration: 0.35 }}
-              className="p-8 md:p-10"
+              className="p-6 md:p-8"
               style={{
+                borderRight: `1px solid rgba(201,168,76,0.2)`,
                 background: `linear-gradient(135deg, ${C.navy}, ${C.navyMid})`,
-                minHeight: 360,
               }}
             >
-              <ThreatViz mode={mode} />
+              {ThreatViz({ mode })[1]}
+            </motion.div>
+          </AnimatePresence>
+
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={`col-2-${mode}`}
+              initial={{ opacity: 0, x: 8 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -8 }}
+              transition={{ duration: 0.35 }}
+              className="p-6 md:p-8"
+              style={{
+                background: `linear-gradient(135deg, ${C.navy}, ${C.navyMid})`,
+              }}
+            >
+              {ThreatViz({ mode })[2]}
             </motion.div>
           </AnimatePresence>
         </div>
