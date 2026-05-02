@@ -715,17 +715,12 @@ const ThreatPaneHeader = ({
   </div>
 );
 
-const RadarFeedViz = () => {
+const RadarViz = () => {
   const blips = [
     { cx: 135, cy: 55, d: "0.4s" },
     { cx: 60, cy: 130, d: "1.6s" },
     { cx: 155, cy: 125, d: "2.4s" },
     { cx: 75, cy: 65, d: "3.2s" },
-  ];
-  const signals = [
-    { t: "14:32", s: "Pic narratif sur réseaux NL", lvl: "Faible", bg: "rgba(201,168,76,.2)", c: C.gold, d: "0.3s" },
-    { t: "11:08", s: "Coordination détectée 3 sites", lvl: "Moyen", bg: "rgba(217,119,6,.2)", c: "#f59e0b", d: "0.7s" },
-    { t: "09:14", s: "Brevet concurrent FR/EPO", lvl: "Faible", bg: "rgba(201,168,76,.2)", c: C.gold, d: "1.1s" },
   ];
   return (
     <div>
@@ -735,8 +730,6 @@ const RadarFeedViz = () => {
           0%, 70%, 100% { opacity: 0; r: 2; }
           5%, 30% { opacity: 1; r: 5; }
         }
-        @keyframes signal-in { from { opacity:0; transform:translateX(-12px); } to { opacity:1; transform:translateX(0); } }
-        @keyframes pulse-dot { 0%,100% { opacity:.4 } 50% { opacity:1 } }
       `}</style>
       <div
         style={{
@@ -783,14 +776,28 @@ const RadarFeedViz = () => {
           <circle cx={100} cy={100} r={3} fill={C.gold} />
         </svg>
       </div>
+    </div>
+  );
+};
 
+const SignalFeedViz = () => {
+  const signals = [
+    { t: "14:32", s: "Pic narratif sur réseaux NL", lvl: "Faible", bg: "rgba(201,168,76,.2)", c: C.gold, d: "0.3s" },
+    { t: "11:08", s: "Coordination détectée 3 sites", lvl: "Moyen", bg: "rgba(217,119,6,.2)", c: "#f59e0b", d: "0.7s" },
+    { t: "09:14", s: "Brevet concurrent FR/EPO", lvl: "Faible", bg: "rgba(201,168,76,.2)", c: C.gold, d: "1.1s" },
+  ];
+  return (
+    <div>
+      <style>{`
+        @keyframes signal-in { from { opacity:0; transform:translateX(-12px); } to { opacity:1; transform:translateX(0); } }
+        @keyframes pulse-dot { 0%,100% { opacity:.4 } 50% { opacity:1 } }
+      `}</style>
       <div
         style={{
           background: "rgba(13,27,42,0.4)",
           border: "1px solid rgba(201,168,76,0.15)",
           padding: "14px 16px",
           borderRadius: 2,
-          marginTop: 18,
         }}
       >
         <div className="flex justify-between items-center mb-3">
