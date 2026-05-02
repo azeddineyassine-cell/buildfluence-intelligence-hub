@@ -723,7 +723,7 @@ const RadarViz = () => {
     { cx: 75, cy: 65, d: "3.2s" },
   ];
   return (
-    <div>
+    <div style={{ flex: 1 }}>
       <style>{`
         @keyframes radar-rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
         @keyframes blip-flash {
@@ -787,7 +787,7 @@ const SignalFeedViz = () => {
     { t: "09:14", s: "Brevet concurrent FR/EPO", lvl: "Faible", bg: "rgba(201,168,76,.2)", c: C.gold, d: "1.1s" },
   ];
   return (
-    <div>
+    <div style={{ flex: 1 }}>
       <style>{`
         @keyframes signal-in { from { opacity:0; transform:translateX(-12px); } to { opacity:1; transform:translateX(0); } }
         @keyframes pulse-dot { 0%,100% { opacity:.4 } 50% { opacity:1 } }
@@ -879,7 +879,7 @@ const CrisisMetricsViz = () => {
     { v: "2 sem.", l: "Sortie crise" },
   ];
   return (
-    <div>
+    <div style={{ flex: 1 }}>
       <div
         className="grid grid-cols-2 gap-3"
         style={{ border: `1px solid rgba(201,168,76,0.2)`, padding: 14 }}
@@ -904,7 +904,7 @@ const CrisisMetricsViz = () => {
 
 const CrisisCurveViz = () => {
   return (
-    <div>
+    <div style={{ flex: 1 }}>
       <div
         style={{
           width: "100%",
@@ -1136,7 +1136,7 @@ const ThreatSection = () => {
 
         {/* Cockpit body */}
         <div
-          className="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr_1fr]"
+          className="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr_1fr] items-stretch"
           style={{ background: C.navy, color: C.ivory }}
         >
           <AnimatePresence mode="wait">
@@ -1217,6 +1217,9 @@ const ThreatSection = () => {
               style={{
                 borderRight: `1px solid rgba(201,168,76,0.2)`,
                 background: `linear-gradient(135deg, ${C.navy}, ${C.navyMid})`,
+                display: 'flex',
+                flexDirection: 'column',
+                height: '100%',
               }}
             >
               {ThreatViz({ mode })[1]}
@@ -1233,6 +1236,9 @@ const ThreatSection = () => {
               className="p-6 md:p-8"
               style={{
                 background: `linear-gradient(135deg, ${C.navy}, ${C.navyMid})`,
+                display: 'flex',
+                flexDirection: 'column',
+                height: '100%',
               }}
             >
               {ThreatViz({ mode })[2]}
