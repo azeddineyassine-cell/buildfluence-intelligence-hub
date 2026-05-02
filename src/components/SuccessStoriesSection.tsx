@@ -10,7 +10,7 @@ import ocpLogo from "@/assets/clients/ocp.png";
 import rajaLogo from "@/assets/clients/raja-club-athletic.jpg";
 import addLogo from "@/assets/clients/add.png";
 import cidcLogo from "@/assets/clients/cidc.jpg";
-import um6ssLogo from "@/assets/clients/um6ss.jpg";
+// import um6ssLogo from "@/assets/clients/um6ss.jpg";
 import gingerLogo from "@/assets/clients/ginger-international.jpg";
 import hopitalLogo from "@/assets/clients/hopital-mohammed-vi.png";
 
