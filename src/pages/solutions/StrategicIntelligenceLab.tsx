@@ -1228,9 +1228,10 @@ const ThreatSection = () => {
               style={{
                 borderRight: `1px solid rgba(201,168,76,0.2)`,
                 background: `linear-gradient(135deg, ${C.navy}, ${C.navyMid})`,
+                minHeight: '100%',
                 display: 'flex',
                 flexDirection: 'column',
-                height: '100%',
+                justifyContent: 'space-between',
               }}
             >
               {ThreatViz({ mode })[1]}
