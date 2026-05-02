@@ -723,7 +723,7 @@ const RadarViz = () => {
     { cx: 75, cy: 65, d: "3.2s" },
   ];
   return (
-    <div style={{ flex: 1 }}>
+    <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
       <style>{`
         @keyframes radar-rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
         @keyframes blip-flash {
@@ -787,7 +787,7 @@ const SignalFeedViz = () => {
     { t: "09:14", s: "Brevet concurrent FR/EPO", lvl: "Faible", bg: "rgba(201,168,76,.2)", c: C.gold, d: "1.1s" },
   ];
   return (
-    <div style={{ flex: 1 }}>
+    <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
       <style>{`
         @keyframes signal-in { from { opacity:0; transform:translateX(-12px); } to { opacity:1; transform:translateX(0); } }
         @keyframes pulse-dot { 0%,100% { opacity:.4 } 50% { opacity:1 } }
@@ -879,7 +879,7 @@ const CrisisMetricsViz = () => {
     { v: "2 sem.", l: "Sortie crise" },
   ];
   return (
-    <div style={{ flex: 1 }}>
+    <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
       <div
         className="grid grid-cols-2 gap-3"
         style={{ border: `1px solid rgba(201,168,76,0.2)`, padding: 14 }}
@@ -904,7 +904,7 @@ const CrisisMetricsViz = () => {
 
 const CrisisCurveViz = () => {
   return (
-    <div style={{ flex: 1 }}>
+    <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
       <div
         style={{
           width: "100%",
