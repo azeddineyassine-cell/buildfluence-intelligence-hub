@@ -1248,9 +1248,10 @@ const ThreatSection = () => {
               className="p-6 md:p-8"
               style={{
                 background: `linear-gradient(135deg, ${C.navy}, ${C.navyMid})`,
+                minHeight: '100%',
                 display: 'flex',
                 flexDirection: 'column',
-                height: '100%',
+                justifyContent: 'space-between',
               }}
             >
               {ThreatViz({ mode })[2]}
