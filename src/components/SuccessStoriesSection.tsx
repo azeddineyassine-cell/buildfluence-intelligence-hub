@@ -24,7 +24,6 @@ const clientLogos: Record<string, string> = {
   "Raja Club Athletic": rajaLogo,
   "ADD": addLogo,
   "CIDC": cidcLogo,
-  "UM6SS": um6ssLogo,
   "Fond Capital-Risque": undefined as unknown as string,
   "Venture Capital Fund": undefined as unknown as string,
   "GINGER INTERNATIONAL": gingerLogo,
