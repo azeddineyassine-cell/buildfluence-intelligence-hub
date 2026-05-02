@@ -1159,6 +1159,7 @@ const ThreatSection = () => {
                 flexDirection: 'column',
                 justifyContent: 'space-between',
               }}
+            >
               <div
                 style={{
                   fontFamily: FONT_DISPLAY,
