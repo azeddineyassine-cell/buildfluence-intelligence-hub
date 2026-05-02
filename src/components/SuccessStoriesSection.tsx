@@ -203,13 +203,14 @@ const SuccessStoriesSection = () => {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-[6px]">
           {deduped.map((s, i) => (
-            <motion.div
+            <motion.a
               key={`${s.client}-${i}`}
+              href={`/success-stories#${s.anchor}`}
               initial={{ opacity: 0 }}
               animate={isInView ? { opacity: 1 } : {}}
               transition={{ duration: 0.4, delay: i * 0.05 }}
               className="p-[28px] transition-colors rounded-sm"
-              style={{ background: '#1A2E45' }}
+              style={{ display: "block", textDecoration: "none", cursor: "pointer", background: '#1A2E45' }}
               onMouseOver={(e) => (e.currentTarget.style.background = '#243B56')}
               onMouseOut={(e) => (e.currentTarget.style.background = '#1A2E45')}
             >
@@ -218,7 +219,7 @@ const SuccessStoriesSection = () => {
               </div>
               <div className="text-[16px] font-bold mb-2 text-white">{s.client}</div>
               <div className="text-[13px] leading-[1.6]" style={{ color: 'rgba(255,255,255,0.6)' }}>{s.desc}</div>
-            </motion.div>
+            </motion.a>
           ))}
         </div>
       </div>
