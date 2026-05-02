@@ -871,7 +871,7 @@ const SignalFeedViz = () => {
   );
 };
 
-const CrisisCurveViz = () => {
+const CrisisMetricsViz = () => {
   const metrics = [
     { v: "<2h", l: "Activation" },
     { v: "24/7", l: "Monitoring" },
@@ -881,7 +881,7 @@ const CrisisCurveViz = () => {
   return (
     <div>
       <div
-        className="grid grid-cols-2 gap-3 mb-6"
+        className="grid grid-cols-2 gap-3"
         style={{ border: `1px solid rgba(201,168,76,0.2)`, padding: 14 }}
       >
         {metrics.map((m, i) => (
@@ -898,12 +898,17 @@ const CrisisCurveViz = () => {
           </div>
         ))}
       </div>
+    </div>
+  );
+};
 
+const CrisisCurveViz = () => {
+  return (
+    <div>
       <div
         style={{
           width: "100%",
           height: 180,
-          marginTop: 18,
           background: `linear-gradient(135deg, ${C.navy}, ${C.navyMid})`,
           border: `1px solid rgba(224,109,79,.25)`,
           padding: 14,
