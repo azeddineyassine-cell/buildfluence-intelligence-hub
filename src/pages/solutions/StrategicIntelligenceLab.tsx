@@ -1136,8 +1136,13 @@ const ThreatSection = () => {
 
         {/* Cockpit body */}
         <div
-          className="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr_1fr] items-stretch"
-          style={{ background: C.navy, color: C.ivory }}
+          style={{
+            background: C.navy,
+            color: C.ivory,
+            display: 'grid',
+            gridTemplateColumns: '1.1fr 1fr 1fr',
+            alignItems: 'stretch',
+          }}
         >
           <AnimatePresence mode="wait">
             <motion.div
