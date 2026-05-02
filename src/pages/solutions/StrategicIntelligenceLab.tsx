@@ -1049,31 +1049,33 @@ const ThreatSection = () => {
 
   return (
     <div
-      className="rounded-xl px-6 md:px-10 py-10"
+      className="py-10"
       style={{ background: "#F0F4FB", border: "1px solid #D0DCF0" }}
     >
-      <div className="mb-8">
-        <div
-          className="text-[11px] uppercase mb-3"
-          style={{ fontFamily: FONT_MONO, color: C.gold, letterSpacing: "0.25em" }}
-        >
-          02 · Threat Intelligence
+      <div className="px-6 md:px-10">
+        <div className="mb-8">
+          <div
+            className="text-[11px] uppercase mb-3"
+            style={{ fontFamily: FONT_MONO, color: C.gold, letterSpacing: "0.25em" }}
+          >
+            02 · Threat Intelligence
+          </div>
+          <h3
+            id="threat-intelligence"
+            className="text-3xl md:text-4xl scroll-mt-24"
+            style={{ fontFamily: FONT_DISPLAY, color: C.navy, lineHeight: 1.15 }}
+          >
+            De la veille continue{" "}
+            <em style={{ color: C.gold, fontFamily: FONT_DISPLAY }}>au</em> mode crise
+          </h3>
+          <p
+            className="mt-3 text-lg italic"
+            style={{ fontFamily: FONT_ITALIC, color: C.navyMid }}
+          >
+            Un cockpit double mode : détecter les signaux faibles en temps réel,
+            déclencher la War Room quand la crise frappe.
+          </p>
         </div>
-        <h3
-          id="threat-intelligence"
-          className="text-3xl md:text-4xl scroll-mt-24"
-          style={{ fontFamily: FONT_DISPLAY, color: C.navy, lineHeight: 1.15 }}
-        >
-          De la veille continue{" "}
-          <em style={{ color: C.gold, fontFamily: FONT_DISPLAY }}>au</em> mode crise
-        </h3>
-        <p
-          className="mt-3 text-lg italic"
-          style={{ fontFamily: FONT_ITALIC, color: C.navyMid }}
-        >
-          Un cockpit double mode : détecter les signaux faibles en temps réel,
-          déclencher la War Room quand la crise frappe.
-        </p>
       </div>
 
       {/* Cockpit */}
