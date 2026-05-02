@@ -988,33 +988,35 @@ const CrisisCurveViz = () => {
   );
 };
 
-const ThreatViz = ({ mode }: { mode: ThreatMode }) => {
-  if (mode === "veille") {
-    return (
-      <>
-        <ThreatPaneHeader
-          num="02"
-          title="Radar opérationnel"
-          tag="● Surveillance live 24/7"
-          tagColor={C.gold}
-          lead="Détection en continu des signaux faibles. Chaque blip est un événement à qualifier avant qu'il ne devienne une crise."
-        />
-        <RadarFeedViz />
-      </>
-    );
-  }
-  return (
+const ThreatViz = ({ mode }: { mode: ThreatMode }): [JSX.Element, JSX.Element, JSX.Element] => {
+  const data = THREAT_CONTENT[mode];
+  const header = (
     <>
       <ThreatPaneHeader
-        num="02"
-        title="Pilotage de crise"
-        tag="◈ War Room active"
-        tagColor={C.alert}
-        lead="Tableau de bord temps réel. La désinformation contre-attaquée par le contre-narratif jusqu'à reprise du récit."
+        num={data.num}
+        title={data.title}
+        tag={data.tag}
+        tagColor={data.tagColor}
+        lead={data.lead}
       />
-      <CrisisCurveViz />
+      <ul className="mt-2 space-y-3">
+        {data.bullets.map((b, k) => (
+          <li
+            key={k}
+            className="flex gap-3 text-sm"
+            style={{ color: "rgba(245,241,232,0.9)", lineHeight: 1.55 }}
+          >
+            <span style={{ color: C.gold, fontWeight: 700 }}>›</span>
+            <span>{b}</span>
+          </li>
+        ))}
+      </ul>
     </>
   );
+  if (mode === "veille") {
+    return [header, <RadarViz key="radar" />, <SignalFeedViz key="signals" />];
+  }
+  return [header, <CrisisMetricsViz key="metrics" />, <CrisisCurveViz key="curve" />];
 };
 
 const ThreatSection = () => {
