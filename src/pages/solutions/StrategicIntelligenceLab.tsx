@@ -715,17 +715,12 @@ const ThreatPaneHeader = ({
   </div>
 );
 
-const RadarFeedViz = () => {
+const RadarViz = () => {
   const blips = [
     { cx: 135, cy: 55, d: "0.4s" },
     { cx: 60, cy: 130, d: "1.6s" },
     { cx: 155, cy: 125, d: "2.4s" },
     { cx: 75, cy: 65, d: "3.2s" },
-  ];
-  const signals = [
-    { t: "14:32", s: "Pic narratif sur réseaux NL", lvl: "Faible", bg: "rgba(201,168,76,.2)", c: C.gold, d: "0.3s" },
-    { t: "11:08", s: "Coordination détectée 3 sites", lvl: "Moyen", bg: "rgba(217,119,6,.2)", c: "#f59e0b", d: "0.7s" },
-    { t: "09:14", s: "Brevet concurrent FR/EPO", lvl: "Faible", bg: "rgba(201,168,76,.2)", c: C.gold, d: "1.1s" },
   ];
   return (
     <div>
@@ -735,8 +730,6 @@ const RadarFeedViz = () => {
           0%, 70%, 100% { opacity: 0; r: 2; }
           5%, 30% { opacity: 1; r: 5; }
         }
-        @keyframes signal-in { from { opacity:0; transform:translateX(-12px); } to { opacity:1; transform:translateX(0); } }
-        @keyframes pulse-dot { 0%,100% { opacity:.4 } 50% { opacity:1 } }
       `}</style>
       <div
         style={{
@@ -783,14 +776,28 @@ const RadarFeedViz = () => {
           <circle cx={100} cy={100} r={3} fill={C.gold} />
         </svg>
       </div>
+    </div>
+  );
+};
 
+const SignalFeedViz = () => {
+  const signals = [
+    { t: "14:32", s: "Pic narratif sur réseaux NL", lvl: "Faible", bg: "rgba(201,168,76,.2)", c: C.gold, d: "0.3s" },
+    { t: "11:08", s: "Coordination détectée 3 sites", lvl: "Moyen", bg: "rgba(217,119,6,.2)", c: "#f59e0b", d: "0.7s" },
+    { t: "09:14", s: "Brevet concurrent FR/EPO", lvl: "Faible", bg: "rgba(201,168,76,.2)", c: C.gold, d: "1.1s" },
+  ];
+  return (
+    <div>
+      <style>{`
+        @keyframes signal-in { from { opacity:0; transform:translateX(-12px); } to { opacity:1; transform:translateX(0); } }
+        @keyframes pulse-dot { 0%,100% { opacity:.4 } 50% { opacity:1 } }
+      `}</style>
       <div
         style={{
           background: "rgba(13,27,42,0.4)",
           border: "1px solid rgba(201,168,76,0.15)",
           padding: "14px 16px",
           borderRadius: 2,
-          marginTop: 18,
         }}
       >
         <div className="flex justify-between items-center mb-3">
@@ -864,7 +871,7 @@ const RadarFeedViz = () => {
   );
 };
 
-const CrisisCurveViz = () => {
+const CrisisMetricsViz = () => {
   const metrics = [
     { v: "<2h", l: "Activation" },
     { v: "24/7", l: "Monitoring" },
@@ -874,7 +881,7 @@ const CrisisCurveViz = () => {
   return (
     <div>
       <div
-        className="grid grid-cols-2 gap-3 mb-6"
+        className="grid grid-cols-2 gap-3"
         style={{ border: `1px solid rgba(201,168,76,0.2)`, padding: 14 }}
       >
         {metrics.map((m, i) => (
@@ -891,12 +898,17 @@ const CrisisCurveViz = () => {
           </div>
         ))}
       </div>
+    </div>
+  );
+};
 
+const CrisisCurveViz = () => {
+  return (
+    <div>
       <div
         style={{
           width: "100%",
           height: 180,
-          marginTop: 18,
           background: `linear-gradient(135deg, ${C.navy}, ${C.navyMid})`,
           border: `1px solid rgba(224,109,79,.25)`,
           padding: 14,
@@ -976,33 +988,35 @@ const CrisisCurveViz = () => {
   );
 };
 
-const ThreatViz = ({ mode }: { mode: ThreatMode }) => {
-  if (mode === "veille") {
-    return (
-      <>
-        <ThreatPaneHeader
-          num="02"
-          title="Radar opérationnel"
-          tag="● Surveillance live 24/7"
-          tagColor={C.gold}
-          lead="Détection en continu des signaux faibles. Chaque blip est un événement à qualifier avant qu'il ne devienne une crise."
-        />
-        <RadarFeedViz />
-      </>
-    );
-  }
-  return (
+const ThreatViz = ({ mode }: { mode: ThreatMode }): [JSX.Element, JSX.Element, JSX.Element] => {
+  const data = THREAT_CONTENT[mode];
+  const header = (
     <>
       <ThreatPaneHeader
-        num="02"
-        title="Pilotage de crise"
-        tag="◈ War Room active"
-        tagColor={C.alert}
-        lead="Tableau de bord temps réel. La désinformation contre-attaquée par le contre-narratif jusqu'à reprise du récit."
+        num={data.num}
+        title={data.title}
+        tag={data.tag}
+        tagColor={data.tagColor}
+        lead={data.lead}
       />
-      <CrisisCurveViz />
+      <ul className="mt-2 space-y-3">
+        {data.bullets.map((b, k) => (
+          <li
+            key={k}
+            className="flex gap-3 text-sm"
+            style={{ color: "rgba(245,241,232,0.9)", lineHeight: 1.55 }}
+          >
+            <span style={{ color: C.gold, fontWeight: 700 }}>›</span>
+            <span>{b}</span>
+          </li>
+        ))}
+      </ul>
     </>
   );
+  if (mode === "veille") {
+    return [header, <RadarViz key="radar" />, <SignalFeedViz key="signals" />];
+  }
+  return [header, <CrisisMetricsViz key="metrics" />, <CrisisCurveViz key="curve" />];
 };
 
 const ThreatSection = () => {
@@ -1122,12 +1136,12 @@ const ThreatSection = () => {
 
         {/* Cockpit body */}
         <div
-          className="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr]"
+          className="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr_1fr]"
           style={{ background: C.navy, color: C.ivory }}
         >
           <AnimatePresence mode="wait">
             <motion.div
-              key={`pane-l-${mode}`}
+              key={`col-0-${mode}`}
               initial={{ opacity: 0, x: -8 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: 8 }}
@@ -1194,18 +1208,34 @@ const ThreatSection = () => {
 
           <AnimatePresence mode="wait">
             <motion.div
-              key={`pane-r-${mode}`}
+              key={`col-1-${mode}`}
               initial={{ opacity: 0, x: 8 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -8 }}
               transition={{ duration: 0.35 }}
-              className="p-8 md:p-10"
+              className="p-6 md:p-8"
               style={{
+                borderRight: `1px solid rgba(201,168,76,0.2)`,
                 background: `linear-gradient(135deg, ${C.navy}, ${C.navyMid})`,
-                minHeight: 360,
               }}
             >
-              <ThreatViz mode={mode} />
+              {ThreatViz({ mode })[1]}
+            </motion.div>
+          </AnimatePresence>
+
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={`col-2-${mode}`}
+              initial={{ opacity: 0, x: 8 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -8 }}
+              transition={{ duration: 0.35 }}
+              className="p-6 md:p-8"
+              style={{
+                background: `linear-gradient(135deg, ${C.navy}, ${C.navyMid})`,
+              }}
+            >
+              {ThreatViz({ mode })[2]}
             </motion.div>
           </AnimatePresence>
         </div>
