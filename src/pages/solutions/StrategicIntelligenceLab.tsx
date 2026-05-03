@@ -1106,29 +1106,18 @@ const ThreatSection = () => {
 
         {/* Cockpit body */}
         <div
-          style={{
-            background: C.navy,
-            color: C.ivory,
-            display: 'grid',
-            gridTemplateColumns: '1.1fr 1fr 1fr',
-            alignItems: 'stretch',
-          }}
+          className="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr]"
+          style={{ background: C.navy, color: C.ivory }}
         >
           <AnimatePresence mode="wait">
             <motion.div
-              key={`col-0-${mode}`}
+              key={`pane-l-${mode}`}
               initial={{ opacity: 0, x: -8 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: 8 }}
               transition={{ duration: 0.35 }}
               className="p-8 md:p-10"
-              style={{
-                borderRight: `1px solid rgba(201,168,76,0.2)`,
-                minHeight: '100%',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'space-between',
-              }}
+              style={{ borderRight: `1px solid rgba(201,168,76,0.2)` }}
             >
               <div
                 style={{
@@ -1189,42 +1178,15 @@ const ThreatSection = () => {
 
           <AnimatePresence mode="wait">
             <motion.div
-              key={`col-1-${mode}`}
+              key={`pane-r-${mode}`}
               initial={{ opacity: 0, x: 8 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -8 }}
               transition={{ duration: 0.35 }}
-              className="p-6 md:p-8"
-              style={{
-                borderRight: `1px solid rgba(201,168,76,0.2)`,
-                background: `linear-gradient(135deg, ${C.navy}, ${C.navyMid})`,
-                minHeight: '100%',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'space-between',
-              }}
+              className="p-8 md:p-10"
+              style={{ background: `linear-gradient(135deg, ${C.navy}, ${C.navyMid})`, minHeight: 360 }}
             >
-              {ThreatViz({ mode })[1]}
-            </motion.div>
-          </AnimatePresence>
-
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={`col-2-${mode}`}
-              initial={{ opacity: 0, x: 8 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -8 }}
-              transition={{ duration: 0.35 }}
-              className="p-6 md:p-8"
-              style={{
-                background: `linear-gradient(135deg, ${C.navy}, ${C.navyMid})`,
-                minHeight: '100%',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'space-between',
-              }}
-            >
-              {ThreatViz({ mode })[2]}
+              <ThreatViz mode={mode} />
             </motion.div>
           </AnimatePresence>
         </div>
