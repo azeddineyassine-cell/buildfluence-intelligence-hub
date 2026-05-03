@@ -1840,19 +1840,16 @@ const StakeholderMatrix = () => {
     const OFFSET = 14;
 
     let x = box.right - wrapBox.left + OFFSET;
-    let y = box.top - wrapBox.top - 10;
-    if (y + 120 > wrapBox.height - 40) {
-      y = box.top - wrapBox.top - 130;
-    }
-    if (y < 10) y = 10;
+    let y = box.top - wrapBox.top + (box.height / 2) - (TOOLTIP_H / 2);
 
     if (x + TOOLTIP_W > wrapBox.width - 10) {
       x = box.left - wrapBox.left - TOOLTIP_W - OFFSET;
     }
+    if (x < 10) x = 10;
+    if (x + TOOLTIP_W > wrapBox.width - 10) x = wrapBox.width - TOOLTIP_W - 10;
 
-    if (x < 10) {
-      x = box.left - wrapBox.left + (box.width / 2) - (TOOLTIP_W / 2);
-    }
+    if (y + TOOLTIP_H > wrapBox.height - 10) y = wrapBox.height - TOOLTIP_H - 10;
+    if (y < 10) y = 10;
 
     setTooltip({ visible: true, x, y, node });
   };
