@@ -1902,10 +1902,29 @@ const StakeholderMatrix = () => {
     const box = event.currentTarget.getBoundingClientRect();
     const wrapBox = wrapRef.current?.getBoundingClientRect();
     if (!wrapBox) return;
-    let x = box.right - wrapBox.left + 14;
-    const y = box.top - wrapBox.top - 10;
-    if (x + 280 > wrapBox.width) x = box.left - wrapBox.left - 294;
-    setTooltip({ visible: true, x, y: Math.max(12, y), node });
+
+    const TOOLTIP_W = 280;
+    const TOOLTIP_H = 100;
+    const OFFSET = 14;
+
+    let x = box.right - wrapBox.left + OFFSET;
+    let y = box.top - wrapBox.top - 10;
+
+    if (x + TOOLTIP_W > wrapBox.width - 10) {
+      x = box.left - wrapBox.left - TOOLTIP_W - OFFSET;
+    }
+
+    if (x < 10) {
+      x = box.left - wrapBox.left + (box.width / 2) - (TOOLTIP_W / 2);
+    }
+
+    if (y + TOOLTIP_H > wrapBox.height - 10) {
+      y = wrapBox.height - TOOLTIP_H - 20;
+    }
+
+    if (y < 10) y = 10;
+
+    setTooltip({ visible: true, x, y, node });
   };
 
   return (
