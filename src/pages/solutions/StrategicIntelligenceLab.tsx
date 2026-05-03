@@ -715,21 +715,28 @@ const ThreatPaneHeader = ({
   </div>
 );
 
-const RadarViz = () => {
+const RadarFeedViz = () => {
   const blips = [
     { cx: 135, cy: 55, d: "0.4s" },
     { cx: 60, cy: 130, d: "1.6s" },
     { cx: 155, cy: 125, d: "2.4s" },
     { cx: 75, cy: 65, d: "3.2s" },
   ];
+  const signals = [
+    { t: "14:32", s: "Pic narratif sur réseaux NL", lvl: "Faible", bg: "rgba(201,168,76,.2)", c: C.gold, d: "0.3s" },
+    { t: "11:08", s: "Coordination détectée 3 sites", lvl: "Moyen", bg: "rgba(217,119,6,.2)", c: "#f59e0b", d: "0.7s" },
+    { t: "09:14", s: "Brevet concurrent FR/EPO", lvl: "Faible", bg: "rgba(201,168,76,.2)", c: C.gold, d: "1.1s" },
+  ];
   return (
-    <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+    <div>
       <style>{`
         @keyframes radar-rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
         @keyframes blip-flash {
           0%, 70%, 100% { opacity: 0; r: 2; }
           5%, 30% { opacity: 1; r: 5; }
         }
+        @keyframes signal-in { from { opacity:0; transform:translateX(-12px); } to { opacity:1; transform:translateX(0); } }
+        @keyframes pulse-dot { 0%,100% { opacity:.4 } 50% { opacity:1 } }
       `}</style>
       <div
         style={{
@@ -776,28 +783,13 @@ const RadarViz = () => {
           <circle cx={100} cy={100} r={3} fill={C.gold} />
         </svg>
       </div>
-    </div>
-  );
-};
-
-const SignalFeedViz = () => {
-  const signals = [
-    { t: "14:32", s: "Pic narratif sur réseaux NL", lvl: "Faible", bg: "rgba(201,168,76,.2)", c: C.gold, d: "0.3s" },
-    { t: "11:08", s: "Coordination détectée 3 sites", lvl: "Moyen", bg: "rgba(217,119,6,.2)", c: "#f59e0b", d: "0.7s" },
-    { t: "09:14", s: "Brevet concurrent FR/EPO", lvl: "Faible", bg: "rgba(201,168,76,.2)", c: C.gold, d: "1.1s" },
-  ];
-  return (
-    <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-      <style>{`
-        @keyframes signal-in { from { opacity:0; transform:translateX(-12px); } to { opacity:1; transform:translateX(0); } }
-        @keyframes pulse-dot { 0%,100% { opacity:.4 } 50% { opacity:1 } }
-      `}</style>
       <div
         style={{
           background: "rgba(13,27,42,0.4)",
           border: "1px solid rgba(201,168,76,0.15)",
           padding: "14px 16px",
           borderRadius: 2,
+          marginTop: 18,
         }}
       >
         <div className="flex justify-between items-center mb-3">
@@ -871,7 +863,7 @@ const SignalFeedViz = () => {
   );
 };
 
-const CrisisMetricsViz = () => {
+const CrisisCurveViz = () => {
   const metrics = [
     { v: "<2h", l: "Activation" },
     { v: "24/7", l: "Monitoring" },
@@ -879,10 +871,10 @@ const CrisisMetricsViz = () => {
     { v: "2 sem.", l: "Sortie crise" },
   ];
   return (
-    <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+    <div>
       <div
         className="grid grid-cols-2 gap-3"
-        style={{ border: `1px solid rgba(201,168,76,0.2)`, padding: 14 }}
+        style={{ border: `1px solid rgba(201,168,76,0.2)`, padding: 14, marginBottom: 18 }}
       >
         {metrics.map((m, i) => (
           <div key={i} className="text-center" style={{ padding: "8px 4px", background: "rgba(13,27,42,0.4)" }}>
@@ -898,13 +890,6 @@ const CrisisMetricsViz = () => {
           </div>
         ))}
       </div>
-    </div>
-  );
-};
-
-const CrisisCurveViz = () => {
-  return (
-    <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
       <div
         style={{
           width: "100%",
@@ -988,9 +973,9 @@ const CrisisCurveViz = () => {
   );
 };
 
-const ThreatViz = ({ mode }: { mode: ThreatMode }): [JSX.Element, JSX.Element, JSX.Element] => {
+const ThreatViz = ({ mode }: { mode: ThreatMode }) => {
   const data = THREAT_CONTENT[mode];
-  const header = (
+  return (
     <>
       <ThreatPaneHeader
         num={data.num}
@@ -999,24 +984,9 @@ const ThreatViz = ({ mode }: { mode: ThreatMode }): [JSX.Element, JSX.Element, J
         tagColor={data.tagColor}
         lead={data.lead}
       />
-      <ul className="mt-2 space-y-3">
-        {data.bullets.map((b, k) => (
-          <li
-            key={k}
-            className="flex gap-3 text-sm"
-            style={{ color: "rgba(245,241,232,0.9)", lineHeight: 1.55 }}
-          >
-            <span style={{ color: C.gold, fontWeight: 700 }}>›</span>
-            <span>{b}</span>
-          </li>
-        ))}
-      </ul>
+      {mode === "veille" ? <RadarFeedViz /> : <CrisisCurveViz />}
     </>
   );
-  if (mode === "veille") {
-    return [header, <RadarViz key="radar" />, <SignalFeedViz key="signals" />];
-  }
-  return [header, <CrisisMetricsViz key="metrics" />, <CrisisCurveViz key="curve" />];
 };
 
 const ThreatSection = () => {
