@@ -1839,15 +1839,27 @@ const StakeholderMatrix = () => {
     const TOOLTIP_H = 100;
     const OFFSET = 14;
 
+    // Horizontal: next to node (right by default, flip left if overflow)
     let x = box.right - wrapBox.left + OFFSET;
-    let y = box.top - wrapBox.top + (box.height / 2) - (TOOLTIP_H / 2);
-
     if (x + TOOLTIP_W > wrapBox.width - 10) {
       x = box.left - wrapBox.left - TOOLTIP_W - OFFSET;
     }
     if (x < 10) x = 10;
     if (x + TOOLTIP_W > wrapBox.width - 10) x = wrapBox.width - TOOLTIP_W - 10;
 
+    // Vertical: centered on node, but stay near node if it would overflow
+    const nodeTop = box.top - wrapBox.top;
+    const nodeBottom = box.bottom - wrapBox.top;
+    let y = nodeTop + (box.height / 2) - (TOOLTIP_H / 2);
+
+    if (y + TOOLTIP_H > wrapBox.height - 10) {
+      // Place tooltip above the node
+      y = nodeTop - TOOLTIP_H - OFFSET;
+    }
+    if (y < 10) {
+      // Place tooltip below the node
+      y = nodeBottom + OFFSET;
+    }
     if (y + TOOLTIP_H > wrapBox.height - 10) y = wrapBox.height - TOOLTIP_H - 10;
     if (y < 10) y = 10;
 
