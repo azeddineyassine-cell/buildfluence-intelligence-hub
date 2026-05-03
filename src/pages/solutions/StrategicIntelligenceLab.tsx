@@ -715,21 +715,28 @@ const ThreatPaneHeader = ({
   </div>
 );
 
-const RadarViz = () => {
+const RadarFeedViz = () => {
   const blips = [
     { cx: 135, cy: 55, d: "0.4s" },
     { cx: 60, cy: 130, d: "1.6s" },
     { cx: 155, cy: 125, d: "2.4s" },
     { cx: 75, cy: 65, d: "3.2s" },
   ];
+  const signals = [
+    { t: "14:32", s: "Pic narratif sur réseaux NL", lvl: "Faible", bg: "rgba(201,168,76,.2)", c: C.gold, d: "0.3s" },
+    { t: "11:08", s: "Coordination détectée 3 sites", lvl: "Moyen", bg: "rgba(217,119,6,.2)", c: "#f59e0b", d: "0.7s" },
+    { t: "09:14", s: "Brevet concurrent FR/EPO", lvl: "Faible", bg: "rgba(201,168,76,.2)", c: C.gold, d: "1.1s" },
+  ];
   return (
-    <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+    <div>
       <style>{`
         @keyframes radar-rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
         @keyframes blip-flash {
           0%, 70%, 100% { opacity: 0; r: 2; }
           5%, 30% { opacity: 1; r: 5; }
         }
+        @keyframes signal-in { from { opacity:0; transform:translateX(-12px); } to { opacity:1; transform:translateX(0); } }
+        @keyframes pulse-dot { 0%,100% { opacity:.4 } 50% { opacity:1 } }
       `}</style>
       <div
         style={{
@@ -776,28 +783,13 @@ const RadarViz = () => {
           <circle cx={100} cy={100} r={3} fill={C.gold} />
         </svg>
       </div>
-    </div>
-  );
-};
-
-const SignalFeedViz = () => {
-  const signals = [
-    { t: "14:32", s: "Pic narratif sur réseaux NL", lvl: "Faible", bg: "rgba(201,168,76,.2)", c: C.gold, d: "0.3s" },
-    { t: "11:08", s: "Coordination détectée 3 sites", lvl: "Moyen", bg: "rgba(217,119,6,.2)", c: "#f59e0b", d: "0.7s" },
-    { t: "09:14", s: "Brevet concurrent FR/EPO", lvl: "Faible", bg: "rgba(201,168,76,.2)", c: C.gold, d: "1.1s" },
-  ];
-  return (
-    <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-      <style>{`
-        @keyframes signal-in { from { opacity:0; transform:translateX(-12px); } to { opacity:1; transform:translateX(0); } }
-        @keyframes pulse-dot { 0%,100% { opacity:.4 } 50% { opacity:1 } }
-      `}</style>
       <div
         style={{
           background: "rgba(13,27,42,0.4)",
           border: "1px solid rgba(201,168,76,0.15)",
           padding: "14px 16px",
           borderRadius: 2,
+          marginTop: 18,
         }}
       >
         <div className="flex justify-between items-center mb-3">
@@ -871,7 +863,7 @@ const SignalFeedViz = () => {
   );
 };
 
-const CrisisMetricsViz = () => {
+const CrisisCurveViz = () => {
   const metrics = [
     { v: "<2h", l: "Activation" },
     { v: "24/7", l: "Monitoring" },
@@ -879,10 +871,10 @@ const CrisisMetricsViz = () => {
     { v: "2 sem.", l: "Sortie crise" },
   ];
   return (
-    <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+    <div>
       <div
         className="grid grid-cols-2 gap-3"
-        style={{ border: `1px solid rgba(201,168,76,0.2)`, padding: 14 }}
+        style={{ border: `1px solid rgba(201,168,76,0.2)`, padding: 14, marginBottom: 18 }}
       >
         {metrics.map((m, i) => (
           <div key={i} className="text-center" style={{ padding: "8px 4px", background: "rgba(13,27,42,0.4)" }}>
@@ -898,13 +890,6 @@ const CrisisMetricsViz = () => {
           </div>
         ))}
       </div>
-    </div>
-  );
-};
-
-const CrisisCurveViz = () => {
-  return (
-    <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
       <div
         style={{
           width: "100%",
@@ -988,9 +973,9 @@ const CrisisCurveViz = () => {
   );
 };
 
-const ThreatViz = ({ mode }: { mode: ThreatMode }): [JSX.Element, JSX.Element, JSX.Element] => {
+const ThreatViz = ({ mode }: { mode: ThreatMode }) => {
   const data = THREAT_CONTENT[mode];
-  const header = (
+  return (
     <>
       <ThreatPaneHeader
         num={data.num}
@@ -999,24 +984,9 @@ const ThreatViz = ({ mode }: { mode: ThreatMode }): [JSX.Element, JSX.Element, J
         tagColor={data.tagColor}
         lead={data.lead}
       />
-      <ul className="mt-2 space-y-3">
-        {data.bullets.map((b, k) => (
-          <li
-            key={k}
-            className="flex gap-3 text-sm"
-            style={{ color: "rgba(245,241,232,0.9)", lineHeight: 1.55 }}
-          >
-            <span style={{ color: C.gold, fontWeight: 700 }}>›</span>
-            <span>{b}</span>
-          </li>
-        ))}
-      </ul>
+      {mode === "veille" ? <RadarFeedViz /> : <CrisisCurveViz />}
     </>
   );
-  if (mode === "veille") {
-    return [header, <RadarViz key="radar" />, <SignalFeedViz key="signals" />];
-  }
-  return [header, <CrisisMetricsViz key="metrics" />, <CrisisCurveViz key="curve" />];
 };
 
 const ThreatSection = () => {
@@ -1136,29 +1106,18 @@ const ThreatSection = () => {
 
         {/* Cockpit body */}
         <div
-          style={{
-            background: C.navy,
-            color: C.ivory,
-            display: 'grid',
-            gridTemplateColumns: '1.1fr 1fr 1fr',
-            alignItems: 'stretch',
-          }}
+          className="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr]"
+          style={{ background: C.navy, color: C.ivory }}
         >
           <AnimatePresence mode="wait">
             <motion.div
-              key={`col-0-${mode}`}
+              key={`pane-l-${mode}`}
               initial={{ opacity: 0, x: -8 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: 8 }}
               transition={{ duration: 0.35 }}
               className="p-8 md:p-10"
-              style={{
-                borderRight: `1px solid rgba(201,168,76,0.2)`,
-                minHeight: '100%',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'space-between',
-              }}
+              style={{ borderRight: `1px solid rgba(201,168,76,0.2)` }}
             >
               <div
                 style={{
@@ -1219,42 +1178,15 @@ const ThreatSection = () => {
 
           <AnimatePresence mode="wait">
             <motion.div
-              key={`col-1-${mode}`}
+              key={`pane-r-${mode}`}
               initial={{ opacity: 0, x: 8 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -8 }}
               transition={{ duration: 0.35 }}
-              className="p-6 md:p-8"
-              style={{
-                borderRight: `1px solid rgba(201,168,76,0.2)`,
-                background: `linear-gradient(135deg, ${C.navy}, ${C.navyMid})`,
-                minHeight: '100%',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'space-between',
-              }}
+              className="p-8 md:p-10"
+              style={{ background: `linear-gradient(135deg, ${C.navy}, ${C.navyMid})`, minHeight: 360 }}
             >
-              {ThreatViz({ mode })[1]}
-            </motion.div>
-          </AnimatePresence>
-
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={`col-2-${mode}`}
-              initial={{ opacity: 0, x: 8 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -8 }}
-              transition={{ duration: 0.35 }}
-              className="p-6 md:p-8"
-              style={{
-                background: `linear-gradient(135deg, ${C.navy}, ${C.navyMid})`,
-                minHeight: '100%',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'space-between',
-              }}
-            >
-              {ThreatViz({ mode })[2]}
+              <ThreatViz mode={mode} />
             </motion.div>
           </AnimatePresence>
         </div>
@@ -1902,10 +1834,29 @@ const StakeholderMatrix = () => {
     const box = event.currentTarget.getBoundingClientRect();
     const wrapBox = wrapRef.current?.getBoundingClientRect();
     if (!wrapBox) return;
-    let x = box.right - wrapBox.left + 14;
-    const y = box.top - wrapBox.top - 10;
-    if (x + 280 > wrapBox.width) x = box.left - wrapBox.left - 294;
-    setTooltip({ visible: true, x, y: Math.max(12, y), node });
+
+    const TOOLTIP_W = 280;
+    const TOOLTIP_H = 100;
+    const OFFSET = 14;
+
+    let x = box.right - wrapBox.left + OFFSET;
+    let y = box.top - wrapBox.top - 10;
+
+    if (x + TOOLTIP_W > wrapBox.width - 10) {
+      x = box.left - wrapBox.left - TOOLTIP_W - OFFSET;
+    }
+
+    if (x < 10) {
+      x = box.left - wrapBox.left + (box.width / 2) - (TOOLTIP_W / 2);
+    }
+
+    if (y + TOOLTIP_H > wrapBox.height - 10) {
+      y = wrapBox.height - TOOLTIP_H - 20;
+    }
+
+    if (y < 10) y = 10;
+
+    setTooltip({ visible: true, x, y, node });
   };
 
   return (
@@ -1940,7 +1891,7 @@ const StakeholderMatrix = () => {
           <text x={20} y={H / 2 + 4} style={{ fontFamily: FONT_MONO, fontSize: 10, fill: C.goldDim, letterSpacing: ".2em" }}>← HOSTILE</text>
           <text x={780} y={H / 2 + 4} textAnchor="end" style={{ fontFamily: FONT_MONO, fontSize: 10, fill: C.goldDim, letterSpacing: ".2em" }}>SOUTIEN OCP →</text>
           {[
-            { x: 220, y: 120, t: "Réfractaires" }, { x: 580, y: 120, t: "Alliés" }, { x: 220, y: 400, t: "Idiots utiles" }, { x: 580, y: 400, t: "Neutres" },
+            { x: 220, y: 50, t: "Réfractaires" }, { x: 580, y: 120, t: "Alliés" }, { x: 220, y: 400, t: "Idiots utiles" }, { x: 580, y: 400, t: "Neutres" },
           ].map((q) => <text key={q.t} x={q.x} y={q.y} textAnchor="middle" style={{ fontFamily: FONT_DISPLAY, fontStyle: "italic", fontSize: 14, fill: MUTED, opacity: 0.5 }}>{q.t}</text>)}
           {nodes.map((node) => {
             const style = catStyles[node.cat];
