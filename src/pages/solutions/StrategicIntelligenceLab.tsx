@@ -1959,7 +1959,7 @@ const StakeholderMatrix = () => {
           <text x={20} y={H / 2 + 4} style={{ fontFamily: FONT_MONO, fontSize: 10, fill: C.goldDim, letterSpacing: ".2em" }}>← HOSTILE</text>
           <text x={780} y={H / 2 + 4} textAnchor="end" style={{ fontFamily: FONT_MONO, fontSize: 10, fill: C.goldDim, letterSpacing: ".2em" }}>SOUTIEN OCP →</text>
           {[
-            { x: 220, y: 120, t: "Réfractaires" }, { x: 580, y: 120, t: "Alliés" }, { x: 220, y: 400, t: "Idiots utiles" }, { x: 580, y: 400, t: "Neutres" },
+            { x: 220, y: 50, t: "Réfractaires" }, { x: 580, y: 120, t: "Alliés" }, { x: 220, y: 400, t: "Idiots utiles" }, { x: 580, y: 400, t: "Neutres" },
           ].map((q) => <text key={q.t} x={q.x} y={q.y} textAnchor="middle" style={{ fontFamily: FONT_DISPLAY, fontStyle: "italic", fontSize: 14, fill: MUTED, opacity: 0.5 }}>{q.t}</text>)}
           {nodes.map((node) => {
             const style = catStyles[node.cat];
