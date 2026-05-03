@@ -1841,6 +1841,10 @@ const StakeholderMatrix = () => {
 
     let x = box.right - wrapBox.left + OFFSET;
     let y = box.top - wrapBox.top - 10;
+    if (y + 120 > wrapBox.height - 40) {
+      y = box.top - wrapBox.top - 130;
+    }
+    if (y < 10) y = 10;
 
     if (x + TOOLTIP_W > wrapBox.width - 10) {
       x = box.left - wrapBox.left - TOOLTIP_W - OFFSET;
@@ -1849,12 +1853,6 @@ const StakeholderMatrix = () => {
     if (x < 10) {
       x = box.left - wrapBox.left + (box.width / 2) - (TOOLTIP_W / 2);
     }
-
-    if (y + TOOLTIP_H > wrapBox.height - 10) {
-      y = wrapBox.height - TOOLTIP_H - 20;
-    }
-
-    if (y < 10) y = 10;
 
     setTooltip({ visible: true, x, y, node });
   };
@@ -1891,7 +1889,7 @@ const StakeholderMatrix = () => {
           <text x={20} y={H / 2 + 4} style={{ fontFamily: FONT_MONO, fontSize: 10, fill: C.goldDim, letterSpacing: ".2em" }}>← HOSTILE</text>
           <text x={780} y={H / 2 + 4} textAnchor="end" style={{ fontFamily: FONT_MONO, fontSize: 10, fill: C.goldDim, letterSpacing: ".2em" }}>SOUTIEN OCP →</text>
           {[
-            { x: 220, y: 50, t: "Réfractaires" }, { x: 580, y: 120, t: "Alliés" }, { x: 220, y: 400, t: "Idiots utiles" }, { x: 580, y: 400, t: "Neutres" },
+            { x: 220, y: 50, t: "Réfractaires" }, { x: 580, y: 50, t: "Alliés" }, { x: 220, y: 400, t: "Idiots utiles" }, { x: 580, y: 400, t: "Neutres" },
           ].map((q) => <text key={q.t} x={q.x} y={q.y} textAnchor="middle" style={{ fontFamily: FONT_DISPLAY, fontStyle: "italic", fontSize: 14, fill: MUTED, opacity: 0.5 }}>{q.t}</text>)}
           {nodes.map((node) => {
             const style = catStyles[node.cat];
