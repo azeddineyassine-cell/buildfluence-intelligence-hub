@@ -1832,11 +1832,11 @@ const StakeholderMatrix = () => {
 
   const showTooltip = (event: React.MouseEvent<SVGGElement>, node: MatrixNode) => {
     const box = event.currentTarget.getBoundingClientRect();
-    const wrapBox = wrapRef.current?.getBoundingClientRect();
+    const wrapBox = (event.currentTarget.ownerSVGElement?.parentElement as HTMLElement | null)?.getBoundingClientRect();
     if (!wrapBox) return;
 
     const TOOLTIP_W = 280;
-    const TOOLTIP_H = 100;
+    const TOOLTIP_H = 118;
     const OFFSET = 14;
 
     // Horizontal: next to node (right by default, flip left if overflow)
