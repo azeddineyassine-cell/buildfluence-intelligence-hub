@@ -588,7 +588,9 @@ const DATA = [
     casIntervention:"Plateforme de veille IA temps réel<br>Cartographie des acteurs et alliances<br>Détection précoce des narratifs à risque<br>Scénarios d'anticipation",
     casResultat:"Décision éclairée sous forte pression<br>Réduction des angles morts<br>Lisibilité stratégique restaurée",
     casKPI:"✓ Crise narrative anticipée — Résilience renforcée",
-    solution:"Strategic Foresight Lab"
+    solution:"Strategic Foresight Lab",
+    solUrl:"/solutions/strategic-intelligence-lab#strategic-foresight",
+    storyUrl:"/success-stories#presidence-senegal"
   },
   {
     icon:"⚡", color:"#C9453C",
@@ -601,7 +603,9 @@ const DATA = [
     casIntervention:"Digital investigation approfondie<br>Analyse forensique des documents médicaux<br>Stratégie de contre-influence<br>Mapping des instigateurs",
     casResultat:"Marque innocentée à 100%<br>Confiance restaurée<br>Reconquête du marché en 24 mois",
     casKPI:"✓ +14% de parts de marché — 120M MAD de pertes stoppées",
-    solution:"Threat Intelligence"
+    solution:"Threat Intelligence",
+    solUrl:"/solutions/strategic-intelligence-lab#threat-intelligence",
+    storyUrl:"/success-stories#danone-maroc"
   },
   {
     icon:"📉", color:"#C9862A",
@@ -614,7 +618,9 @@ const DATA = [
     casIntervention:"Benchmark géoéconomique des concurrents<br>Cartographie des flux d'investissements<br>Identification des facteurs défavorables<br>Repositionnement du discours institutionnel",
     casResultat:"Positionnement différenciant clarifié<br>Attractivité renforcée<br>Messages réalignés vers les investisseurs",
     casKPI:"✓ Positionnement restructuré — Visibilité internationale renforcée",
-    solution:"Territorial Influence Lab"
+    solution:"Territorial Influence Lab",
+    solUrl:"/solutions/strategic-intelligence-lab#territorial-influence",
+    storyUrl:"/success-stories#territoire-confidentiel"
   },
   {
     icon:"🔥", color:"#1B3E6A",
@@ -627,7 +633,9 @@ const DATA = [
     casIntervention:"Fact-checking temps réel<br>Identification sources de désinformation<br>War room de crise<br>Coordination des messages officiels",
     casResultat:"Crise H1N1 atténuée<br>Désinformation neutralisée<br>COVID-19 géré bien plus efficacement",
     casKPI:"✓ Crise atténuée en 2 semaines — Dispositif pérennisé",
-    solution:"Crisis Command Center"
+    solution:"Crisis Command Center",
+    solUrl:"/solutions/strategic-intelligence-lab#crisis-command",
+    storyUrl:"/success-stories#ministere-sante-maroc"
   },
   {
     icon:"🏎", color:"#6B4EC9",
@@ -640,7 +648,9 @@ const DATA = [
     casIntervention:"Cartographie de l'écosystème sur 10 ans<br>Analyse géopolitique et concurrentielle<br>Matrice dynamique des parties prenantes<br>Dashboard décisionnel cabinet du Président",
     casResultat:"Protection de milliards de dollars de CA<br>Leadership renforcé<br>Gestion proactive des campagnes de boycott",
     casKPI:"✓ Position de leader mondial protégée — 10 ans de veille continue",
-    solution:"Competitive Velocity Engine"
+    solution:"Competitive Velocity Engine",
+    solUrl:"/solutions/strategic-intelligence-lab#competitive-velocity",
+    storyUrl:"/success-stories#ocp-group"
   },
   {
     icon:"🌐", color:"#A0306B",
@@ -653,7 +663,9 @@ const DATA = [
     casIntervention:"Diagnostic et positionnement stratégique<br>Benchmark WB et WEF<br>Doing Business Platform<br>Roadmap d'influence et activation GITEX Africa",
     casResultat:"CIDC repositionné comme hub OCI<br>ADD pionnier dans l'écosystème digital africain<br>Visibilité internationale renforcée",
     casKPI:"✓ Rôle institutionnel restructuré — Influence opérationnelle acquise",
-    solution:"Political Intelligence"
+    solution:"Political Intelligence",
+    solUrl:"/solutions/strategic-intelligence-lab#political-intelligence",
+    storyUrl:"/success-stories#cidc-add"
   },
   {
     icon:"🔍", color:"#1A7A4A",
@@ -666,7 +678,9 @@ const DATA = [
     casIntervention:"Deep Due Diligence 3 Niveaux<br>Screening PEP et affiliations sensibles<br>Vérifications sanctions ONU, OFAC, EU<br>Audit KYC et LCB-FT et ESG",
     casResultat:"Due diligence complète sur valorisation 400M$<br>Points de vigilance identifiés<br>Partenariat sécurisé en toute connaissance",
     casKPI:"✓ 400M$ sécurisés — Validation complète avec mapping des risques",
-    solution:"Deep Due Diligence (3 Niveaux)"
+    solution:"Deep Due Diligence (3 Niveaux)",
+    solUrl:"/solutions/strategic-intelligence-lab#deep-due-diligence",
+    storyUrl:"/success-stories#capital-risque-confidentiel"
   },
   {
     icon:"📡", color:"#C9A84C",
@@ -679,7 +693,9 @@ const DATA = [
     casIntervention:"Monitoring médiatique structuré<br>Centralisation des flux d'information<br>Cartographie des acteurs d'influence<br>Cellule stratégique interne",
     casResultat:"Cycles de décision réduits<br>Silos éliminés<br>Vision consolidée<br>Pionnier dans le sport professionnel marocain",
     casKPI:"✓ 1er club marocain doté d'une cellule d'intelligence stratégique",
-    solution:"AI Powered Monitor + Strategic Workflow"
+    solution:"AI Powered Monitor + Strategic Workflow",
+    solUrl:"/solutions/strategic-intelligence-lab#ai-monitor",
+    storyUrl:"/success-stories#raja-club-athletic"
   }
 ];
 
@@ -709,6 +725,8 @@ function openPanel(idx) {
   document.getElementById('casResultat').innerHTML = d.casResultat;
   document.getElementById('casKPI').textContent = d.casKPI;
   document.getElementById('cardSolution').textContent = d.solution;
+  document.getElementById('cardSolution').href = d.solUrl || '#';
+  document.getElementById('cardStory').href = d.storyUrl || '#';
 
   // Show card
   document.getElementById('introState').classList.add('hidden');
@@ -734,5 +752,13 @@ document.addEventListener('keydown', e => {
   if (e.key === 'Escape')     resetPanel();
 });
 </script>
+<div style="background:#0A1628;padding:80px 40px;text-align:center;margin-top:80px;">
+  <div style="max-width:760px;margin:0 auto;">
+    <p style="font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;letter-spacing:0.25em;text-transform:uppercase;color:#C9A84C;margin:0 0 24px;">Première étape</p>
+    <h2 style="font-family:'Playfair Display',serif;font-size:clamp(24px,3vw,38px);font-weight:900;color:#fff;line-height:1.15;margin:0 0 20px;">Prêt à <em style="color:#C9A84C;font-style:italic;">passer à l'action</em> ?</h2>
+    <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:18px;color:rgba(255,255,255,0.75);margin:0 0 36px;">Un échange stratégique confidentiel pour cartographier votre exposition réelle.</p>
+    <a href="#" style="display:inline-flex;align-items:center;gap:10px;background:#C9A84C;color:#0A1628;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;padding:14px 32px;border-radius:2px;text-decoration:none;">Passer à l'action &#8594;</a>
+  </div>
+</div>
 </body>
 </html>
