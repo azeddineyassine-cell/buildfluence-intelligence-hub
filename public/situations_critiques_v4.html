@@ -725,6 +725,8 @@ function openPanel(idx) {
   document.getElementById('casResultat').innerHTML = d.casResultat;
   document.getElementById('casKPI').textContent = d.casKPI;
   document.getElementById('cardSolution').textContent = d.solution;
+  document.getElementById('cardSolution').href = d.solUrl || '#';
+  document.getElementById('cardStory').href = d.storyUrl || '#';
 
   // Show card
   document.getElementById('introState').classList.add('hidden');
