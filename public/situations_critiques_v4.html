@@ -239,20 +239,40 @@ body {
 }
 
 /* Solution Buildfluence */
-.sol-row { display:flex; align-items:center; gap:8px; margin-bottom:13px; }
+.sol-row { display:flex; align-items:center; gap:8px; margin-bottom:13px; flex-wrap:wrap; }
 .sol-lbl {
-  font-size:10px; color:var(--gris);
+  font-family:'JetBrains Mono',monospace;
+  font-size:10px; color:#C9A84C;
   text-transform:uppercase; letter-spacing:1.5px; font-weight:700;
 }
 .sol-bf {
-  font-size:10px; color:var(--or);
+  font-family:'JetBrains Mono',monospace;
+  font-size:10px; color:#C9A84C;
   text-transform:uppercase; letter-spacing:1.5px; font-weight:700;
 }
 .sol-badge {
-  background:var(--bleu); color:#fff;
-  font-size:10.5px; font-weight:600;
-  padding:3px 9px; border-radius:4px;
+  background:transparent; color:#C9A84C;
+  font-size:11px; font-weight:600;
+  padding:0; border-radius:0;
+  text-decoration:underline;
+  cursor:pointer;
 }
+.sol-badge:hover { color:#b89540; }
+.story-btn {
+  display:inline-flex; align-items:center;
+  border:1px solid #C9A84C;
+  color:#C9A84C;
+  background:transparent;
+  font-family:'JetBrains Mono',monospace;
+  font-size:9px;
+  padding:5px 10px;
+  border-radius:2px;
+  text-decoration:none;
+  text-transform:uppercase;
+  letter-spacing:1px;
+  margin-left:auto;
+}
+.story-btn:hover { background:rgba(201,168,76,.1); }
 
 .card-cta {
   display:inline-flex; align-items:center; gap:6px;
