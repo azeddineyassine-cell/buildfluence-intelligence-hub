@@ -44,7 +44,7 @@ export default function SituationsCritiques() {
       casInt: t("Plateforme de veille IA temps réel · Cartographie des acteurs et alliances · Détection précoce des narratifs à risque", "Real-time AI monitoring platform · Stakeholder and alliance mapping · Early detection of risk narratives"),
       casRes: t("Décision éclairée sous forte pression · Réduction des angles morts · Lisibilité stratégique restaurée", "Informed decision under strong pressure · Blind spots reduced · Strategic clarity restored"),
       casKPI: t("✓ Crise narrative anticipée\n✓ Baromètre d'image", "✓ Anticipated narrative crisis\n✓ Image barometer"),
-      sol: "Strategic Foresight Lab" },
+      sol: "Strategic Foresight Lab", solUrl: "/solutions/strategic-intelligence-lab#strategic-foresight", storyUrl: "/success-stories#story-08" },
     { id: 1, icon: "⚡", color: "#C9453C", pos: "topRight",
       tag: t("Situation 2 / 8", "Situation 2 / 8"),
       title: t("Attaques Informationnelles", "Informational Attacks"),
@@ -67,7 +67,7 @@ export default function SituationsCritiques() {
       casInt: t("Digital investigation approfondie · Analyse forensique · Stratégie de contre-influence · Mapping des instigateurs", "In-depth digital investigation · Forensic analysis · Counter-influence strategy · Instigator mapping"),
       casRes: t("Reconquête du marché après 24 mois de déclin de marque et perte de 120M MAD de CA", "Market reconquest after 24 months of brand decline and loss of MAD 120M in revenue"),
       casKPI: t("✓ Gain de +14% de parts de marché\n✓ Légitimation de marque", "✓ +14% market share gained\n✓ Brand legitimization"),
-      sol: "Threat Intelligence" },
+      sol: "Threat Intelligence", solUrl: "/solutions/strategic-intelligence-lab#threat-intelligence", storyUrl: "/success-stories#story-01" },
     { id: 2, icon: "📉", color: "#C9862A", pos: "right",
       tag: t("Situation 3 / 8", "Situation 3 / 8"),
       title: t("Perte d'Attractivité", "Loss of Attractiveness"),
@@ -90,7 +90,7 @@ export default function SituationsCritiques() {
       casInt: t("Benchmark géoéconomique · Cartographie des flux d'investissements · Repositionnement du discours institutionnel", "Geo-economic benchmark · Investment flow mapping · Repositioning of institutional discourse"),
       casRes: t("Positionnement différenciant clarifié · Attractivité renforcée · Messages réalignés", "Differentiating positioning clarified · Attractiveness strengthened · Messages realigned"),
       casKPI: t("✓ Positionnement restructuré\n✓ Visibilité internationale renforcée", "✓ Positioning restructured\n✓ International visibility strengthened"),
-      sol: "Territorial Influence Lab" },
+      sol: "Territorial Influence Lab", solUrl: "/solutions/soft-power-influence", storyUrl: "/success-stories#story-03" },
     { id: 3, icon: "🔥", color: "#1B3E6A", pos: "bottomRight",
       tag: t("Situation 4 / 8", "Situation 4 / 8"),
       title: t("Crise Non Maîtrisée", "Uncontrolled Crisis"),
@@ -113,7 +113,7 @@ export default function SituationsCritiques() {
       casInt: t("Fact-checking temps réel · Identification sources de désinformation · War room de crise · Coordination des messages officiels", "Real-time fact-checking · Identification of disinformation sources · Crisis war room · Coordination of official messages"),
       casRes: t("Crise H1N1 atténuée · Désinformation neutralisée · COVID-19 géré bien plus efficacement", "H1N1 crisis mitigated · Disinformation neutralized · COVID-19 handled far more efficiently"),
       casKPI: t("✓ Crise atténuée en 2 semaines\n✓ Dispositif pérennisé", "✓ Crisis mitigated in 2 weeks\n✓ System made permanent"),
-      sol: "Threat Intelligence" },
+      sol: "Threat Intelligence", solUrl: "/solutions/strategic-intelligence-lab#threat-intelligence", storyUrl: "/success-stories#story-04" },
     { id: 4, icon: "🏎", color: "#6B4EC9", pos: "bottom",
       tag: t("Situation 5 / 8", "Situation 5 / 8"),
       title: t("Perdre en Vélocité", "Losing Velocity"),
@@ -136,7 +136,7 @@ export default function SituationsCritiques() {
       casInt: t("Cartographie de l'écosystème sur 10 ans · Analyse géopolitique et concurrentielle · Dashboard décisionnel cabinet du Président", "10-year ecosystem mapping · Geopolitical and competitive analysis · Decision dashboard for the President's office"),
       casRes: t("Protection de milliards de dollars de CA · Leadership renforcé · Gestion proactive des campagnes de boycott", "Protection of billions of dollars in revenue · Strengthened leadership · Proactive boycott management"),
       casKPI: t("✓ Position de leader mondial protégée\n✓ 10 ans (2004-2014) de positionnement décrypté", "✓ Global leadership position protected\n✓ 10 years (2004-2014) of positioning decoded"),
-      sol: "Competitive Velocity Engine" },
+      sol: "Competitive Velocity Engine", solUrl: "/capacites/competitive-velocity-engine", storyUrl: "/success-stories#story-07" },
     { id: 5, icon: "🌐", color: "#A0306B", pos: "bottomLeft",
       tag: t("Situation 6 / 8", "Situation 6 / 8"),
       title: t("Déficit d'Influence", "Influence Deficit"),
@@ -159,7 +159,7 @@ export default function SituationsCritiques() {
       casInt: t("Diagnostic et positionnement stratégique · Doing Business Platform · Roadmap d'influence · Activation GITEX Africa Morocco", "Diagnosis and strategic positioning · Doing Business Platform · Influence roadmap · GITEX Africa Morocco activation"),
       casRes: t("CIDC repositionné comme hub OCI · ADD pionnier dans l'écosystème digital africain", "CIDC repositioned as an OIC hub · ADD pioneer in the African digital ecosystem"),
       casKPI: t("✓ Rôle institutionnel restructuré\n✓ Influence opérationnelle acquise", "✓ Institutional role restructured\n✓ Operational influence acquired"),
-      sol: "Political Intelligence" },
+      sol: "Political Intelligence", solUrl: "/solutions/soft-power-influence", storyUrl: "/success-stories#story-09" },
     { id: 6, icon: "🔍", color: "#1A7A4A", pos: "left",
       tag: t("Situation 7 / 8", "Situation 7 / 8"),
       title: t("Risque Invisible", "Invisible Risk"),
@@ -182,7 +182,7 @@ export default function SituationsCritiques() {
       casInt: t("Deep Due Diligence 3 Niveaux · Screening PEP · Vérifications sanctions ONU OFAC EU · Audit KYC LCB-FT ESG", "3-Level Deep Due Diligence · PEP screening · UN/OFAC/EU sanctions checks · KYC AML-CFT ESG audit"),
       casRes: t("Due diligence complète sur valorisation 400M$ · Points de vigilance identifiés · Partenariat sécurisé", "Complete due diligence on $400M valuation · Watchpoints identified · Partnership secured"),
       casKPI: t("✓ 400M$ sécurisés\n✓ Validation complète avec mapping interactif des risques", "✓ $400M secured\n✓ Full validation with interactive risk mapping"),
-      sol: "Deep Due Diligence (3 Levels)" },
+      sol: "Deep Due Diligence (3 Levels)", solUrl: "/solutions/deep-due-diligence", storyUrl: "/success-stories#story-11" },
     { id: 7, icon: "📡", color: "#C9A84C", pos: "topLeft",
       tag: t("Situation 8 / 8", "Situation 8 / 8"),
       title: t("Gouverner sous Pression", "Governing under Pressure"),
@@ -205,31 +205,31 @@ export default function SituationsCritiques() {
       casInt: t("Monitoring médiatique structuré · Centralisation des flux d'information · Cartographie des acteurs d'influence · Cellule stratégique interne", "Structured media monitoring · Centralization of information flows · Mapping of influence actors · Internal strategic unit"),
       casRes: t("Cycles de décision réduits · Silos éliminés · Vision consolidée · Pionnier dans le sport marocain", "Decision cycles reduced · Silos eliminated · Consolidated vision · Pioneer in Moroccan sport"),
       casKPI: t("✓ 1er club marocain doté d'une cellule d'intelligence stratégique", "✓ 1st Moroccan club equipped with a strategic intelligence unit"),
-      sol: "AI Powered Monitor + Strategic Workflow" },
+      sol: "AI Powered Monitor + Strategic Workflow", solUrl: "/capacites/strategic-workflow", storyUrl: "/success-stories#story-06" },
   ];
 
   const cur = sel !== null ? TOPICS[sel] : null;
   const nav = (d: number) => sel !== null && setSel((sel + d + 8) % 8);
 
   return (
-    <div style={{ background: "#F2F2F2", minHeight: "100vh", fontFamily: "DM Sans,sans-serif" }}>
+    <div style={{ background: "#F4F1EA", minHeight: "100vh", fontFamily: "DM Sans,sans-serif" }}>
       <Navbar />
-      <div style={{ textAlign: "center", padding: "96px 24px 0" }}>
+      <div style={{ textAlign: "center", padding: "96px 24px 0", background: "#F4F1EA" }}>
         <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: "3.5px", textTransform: "uppercase", color: "#C9A84C", borderBottom: "1px solid #C9A84C", display: "inline-block", paddingBottom: 3, marginBottom: 16 }}>
           {t("Diagnostic stratégique", "Strategic Diagnosis")}
         </div>
-        <h1 style={{ fontFamily: "Cormorant Garamond,serif", fontSize: "clamp(26px,4vw,46px)", fontWeight: 300, color: "#0D1B2A", lineHeight: 1.15, marginBottom: 10 }}>
+        <h1 style={{ fontFamily: "Playfair Display,serif", fontSize: "clamp(40px,5.5vw,72px)", fontWeight: 900, color: "#0A1628", lineHeight: 1.05, letterSpacing: "-0.02em", marginBottom: 10 }}>
           {lang === "fr" ? (
-            <>Les <em style={{ fontStyle: "italic", fontWeight: 700, color: "#C9A84C" }}>menaces</em> que vous ne voyez pas<br />sont les plus destructrices</>
+            <>Les <em style={{ fontStyle: "italic", color: "#C9A84C" }}>menaces</em> que vous ne voyez pas<br />sont les plus destructrices</>
           ) : (
-            <>The <em style={{ fontStyle: "italic", fontWeight: 700, color: "#C9A84C" }}>threats</em> you cannot see<br />are the most destructive</>
+            <>The <em style={{ fontStyle: "italic", color: "#C9A84C" }}>threats</em> you cannot see<br />are the most destructive</>
           )}
         </h1>
-        <p style={{ fontSize: 13.5, color: "#6B7FA0", maxWidth: 520, margin: "0 auto", lineHeight: 1.75, fontStyle: "italic" }}>
+        <p style={{ fontFamily: "Cormorant Garamond,serif", fontStyle: "italic", fontSize: "clamp(17px,2vw,22px)", color: "#4A4A4A", maxWidth: 520, margin: "0 auto", lineHeight: 1.75 }}>
           {lang === "fr" ? (
-            <>Identifier la nature de votre exposition aux risques est déjà <strong style={{ color: "#C9A84C", fontStyle: "normal" }}>le premier acte de souveraineté décisionnelle.</strong></>
+            <>Identifier la nature de votre exposition aux risques est déjà <strong style={{ color: "#C9A84C", fontWeight: 500 }}>le premier acte de souveraineté décisionnelle.</strong></>
           ) : (
-            <>Identifying the nature of your risk exposure is already <strong style={{ color: "#C9A84C", fontStyle: "normal" }}>the first act of decision-making sovereignty.</strong></>
+            <>Identifying the nature of your risk exposure is already <strong style={{ color: "#C9A84C", fontWeight: 500 }}>the first act of decision-making sovereignty.</strong></>
           )}
         </p>
       </div>
@@ -240,7 +240,7 @@ export default function SituationsCritiques() {
               <p style={{ fontSize: 12, color: "#6B7FA0", letterSpacing: "0.5px", margin: "0 0 16px 0", fontStyle: "italic" }}>
                 {t("Cliquer sur une situation pour explorer le process", "Click a situation to explore the process")}
               </p>
-              <p style={{ fontFamily: "Cormorant Garamond,serif", fontSize: 17, fontStyle: "italic", color: "#0D1B2A", lineHeight: 1.6, borderLeft: "3px solid #C9A84C", paddingLeft: 18, marginBottom: 20 }}>
+              <p style={{ fontFamily: "Cormorant Garamond,serif", fontStyle: "italic", fontSize: 17, color: "#0A1628", lineHeight: 1.6, borderLeft: "3px solid #C9A84C", paddingLeft: 18, marginBottom: 20 }}>
                 {lang === "fr" ? (
                   <>« Les crises ne naissent pas du chaos,<br />mais de l'illusion du contrôle. »</>
                 ) : (
@@ -323,10 +323,11 @@ export default function SituationsCritiques() {
                     </div>
                   )}
                 </div>
-                <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 13 }}>
-                  <span style={{ fontSize: 10, color: "#6B7FA0", textTransform: "uppercase", letterSpacing: "1.5px", fontWeight: 700 }}>{t("Solution", "Solution")}</span>
-                  <span style={{ fontSize: 10, color: "#6B7FA0", textTransform: "uppercase", letterSpacing: "1.5px", fontWeight: 700 }}>Buildfluence</span>
-                  <span style={{ background: "#0D1B2A", color: "#fff", fontSize: 10.5, fontWeight: 600, padding: "3px 9px", borderRadius: 4 }}>{cur.sol}</span>
+                <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 13, flexWrap: "wrap" }}>
+                  <span style={{ fontFamily: "JetBrains Mono,monospace", fontSize: 10, color: "#C9A84C", textTransform: "uppercase", letterSpacing: "1.5px", fontWeight: 700 }}>{t("Solution", "Solution")}</span>
+                  <span style={{ fontFamily: "JetBrains Mono,monospace", fontSize: 10, color: "#C9A84C", textTransform: "uppercase", letterSpacing: "1.5px", fontWeight: 700 }}>Buildfluence</span>
+                  <a href={cur.solUrl} style={{ color: "#C9A84C", fontSize: 10.5, fontWeight: 600, textDecoration: "underline", textUnderlineOffset: 3 }}>{cur.sol}</a>
+                  <a href={cur.storyUrl} style={{ border: "1px solid #C9A84C", color: "#C9A84C", background: "transparent", fontFamily: "JetBrains Mono,monospace", fontSize: 9, padding: "5px 10px", borderRadius: 2, textDecoration: "none" }}>Explorer la Success Story →</a>
                 </div>
                 <button onClick={() => setDiagOpen(true)} style={{ display: "inline-flex", alignItems: "center", gap: 6, background: "#0D1B2A", color: "#fff", fontSize: 11.5, fontWeight: 600, padding: "9px 18px", borderRadius: 5, border: "none", cursor: "pointer" }}>
                   {t("Évaluer ma situation — GRATUIT", "Evaluate my situation — FREE")} <span style={{ color: "#C9A84C" }}>→</span>
@@ -354,12 +355,8 @@ export default function SituationsCritiques() {
               })}
               <circle cx="280" cy="280" r="66" fill="#10325F" stroke="#C9A84C" strokeWidth="1.5" style={{ cursor: "pointer" }} onClick={() => setSel(null)} />
               <circle cx="280" cy="280" r="58" fill="none" stroke="rgba(201,168,76,.2)" strokeWidth="1" />
-              <text x="280" y="274" textAnchor="middle" fontFamily="JetBrains Mono, monospace" fontSize="12" fontWeight="700" letterSpacing="2.4" fill="#C9A84C" style={{ textTransform: "uppercase", cursor: "pointer" }} onClick={() => setSel(null)}>
-                {t("RISQUES", "INVISIBLE")}
-              </text>
-              <text x="280" y="294" textAnchor="middle" fontFamily="JetBrains Mono, monospace" fontSize="12" fontWeight="700" letterSpacing="2.4" fill="#C9A84C" style={{ textTransform: "uppercase", cursor: "pointer" }} onClick={() => setSel(null)}>
-                {t("INVISIBLES", "RISKS")}
-              </text>
+              <text x="280" y="272" textAnchor="middle" fontFamily="Playfair Display, serif" fontSize="28" fontWeight="900" fontStyle="italic" fill="#D9BC6A" letterSpacing="-0.5" style={{ cursor: "pointer" }} onClick={() => setSel(null)}>Vous êtes</text>
+              <text x="280" y="308" textAnchor="middle" fontFamily="Playfair Display, serif" fontSize="46" fontWeight="900" fontStyle="italic" fill="#D9BC6A" style={{ cursor: "pointer" }} onClick={() => setSel(null)}>là</text>
               {TOPICS.map(top => {
                 const p = POS[top.pos]; const a = sel === top.id;
                 const words = top.title.split(" "); const half = Math.ceil(words.length / 2);
@@ -376,6 +373,12 @@ export default function SituationsCritiques() {
             </svg>
           </div>
         </div>
+      </div>
+      <div style={{ background: "#0A1628", padding: "56px 24px", textAlign: "center", marginTop: 40 }}>
+        <div style={{ fontFamily: "JetBrains Mono,monospace", fontSize: 10, fontWeight: 600, letterSpacing: "0.25em", textTransform: "uppercase", color: "#C9A84C", borderBottom: "1px solid #C9A84C", paddingBottom: 3, marginBottom: 20, display: "inline-block" }}>Première étape</div>
+        <h2 style={{ fontFamily: "Playfair Display,serif", fontSize: "clamp(24px,3vw,38px)", fontWeight: 700, color: "#fff", lineHeight: 1.15, marginBottom: 10 }}>Prêt à <em style={{ fontStyle: "italic", color: "#C9A84C" }}>passer à l'action</em> ?</h2>
+        <p style={{ fontFamily: "Cormorant Garamond,serif", fontStyle: "italic", fontSize: 18, color: "rgba(255,255,255,.65)", maxWidth: 520, margin: "0 auto 28px", lineHeight: 1.7 }}>Un échange de 30 minutes suffit pour cartographier votre exposition réelle.</p>
+        <a href="#" style={{ display: "inline-flex", alignItems: "center", gap: 10, background: "#C9A84C", color: "#0A1628", fontFamily: "JetBrains Mono,monospace", fontSize: 11, fontWeight: 700, letterSpacing: "0.2em", textTransform: "uppercase", padding: "14px 32px", borderRadius: 2, textDecoration: "none" }}>Passer à l'action &#8594;</a>
       </div>
       <FormDiagnostic open={diagOpen} onClose={() => setDiagOpen(false)} situation={cur ? cur.title : ""} />
     </div>
