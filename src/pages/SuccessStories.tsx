@@ -1,6 +1,19 @@
 import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import CTAFooter from "@/components/CTAFooter";
+import logoCentraleDanone from "@/assets/clients/centrale-danone.jpg";
+import logoCidc from "@/assets/clients/cidc.jpg";
+import logoMinistereSante from "@/assets/clients/ministere-sante.jpg";
+import logoGinger from "@/assets/clients/ginger-international.jpg";
+import logoRaja from "@/assets/clients/raja-club-athletic.jpg";
+import logoOcp from "@/assets/clients/ocp.png";
+import logoPresidenceSenegal from "@/assets/clients/presidence-senegal.jpg";
+import logoAdd from "@/assets/clients/add.png";
+import logoHopital from "@/assets/clients/hopital-mohammed-vi.png";
+import photoSamiaKabbaj from "@/assets/clients/samia-kabbaj.jpg";
+import photoHananFadlallah from "@/assets/clients/hanan-fadlallah.jpg";
+import photoOlivierLaboue from "@/assets/clients/olivier-laboue.jpg";
+import photoSanaeAlami from "@/assets/clients/sanae-alami.jpg";
 
 type Thematique =
   | "all"
