@@ -363,7 +363,7 @@ export default function SituationsCritiques() {
                 return (
                   <g key={top.id} style={{ cursor: "pointer" }} onClick={() => setSel(top.id)}>
                     <rect x={p.x - 38} y={p.y - 31} width="76" height="62" rx="9" fill={a ? "#E8F2FF" : "white"} stroke={a ? "#1B3E6A" : "#D8E4F0"} strokeWidth={a ? 2 : 1.5} />
-                    <rect x={p.x - 38} y={p.y - 31} width="76" height="4" rx="2" fill={top.color} />
+                    <rect x={p.x - 38} y={p.y - 31} width="76" height="4" rx="9" ry="0" fill={top.color} />
                     <text x={p.x} y={p.y - 8} textAnchor="middle" fontSize="18">{top.icon}</text>
                     <text x={p.x} y={p.y + 13} textAnchor="middle" fontFamily="DM Sans,sans-serif" fontSize="7.5" fontWeight="600" fill="#0D1B2A">{words.slice(0, half).join(" ")}</text>
                     <text x={p.x} y={p.y + 24} textAnchor="middle" fontFamily="DM Sans,sans-serif" fontSize="7.5" fontWeight="600" fill="#0D1B2A">{words.slice(half).join(" ")}</text>
