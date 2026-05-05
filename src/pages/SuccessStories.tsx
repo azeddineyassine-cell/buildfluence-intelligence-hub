@@ -57,9 +57,9 @@ const SECTEURS: { value: Secteur; label: string }[] = [
   { value: "international", label: "Organisation internationale" },
 ];
 
-type Logo = { label: string; italic?: boolean };
+type Logo = { label: string; italic?: boolean; image?: string; alt?: string };
 type Resource = { type: string; text: string };
-type Testimony = { initials: string; text: string; authorBold: string; authorRest: string; date?: string };
+type Testimony = { initials: string; text: string; authorBold: string; authorRest: string; date?: string; photo?: string; photoAlt?: string };
 type Story = {
   id: string;
   num: string;
