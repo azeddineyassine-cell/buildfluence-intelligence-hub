@@ -829,7 +829,20 @@ const SuccessStoriesPage = () => {
               <div className="ss-logos">
                 {s.logos.map((l, i) => (
                   <div key={i} className={`ss-logo${l.italic ? " italic" : ""}`}>
-                    {l.label}
+                    {l.image ? (
+                      <img
+                        src={l.image}
+                        alt={l.alt || l.label}
+                        className="ss-logo-img"
+                        onError={(e) => {
+                          const img = e.currentTarget;
+                          img.style.display = "none";
+                          if (img.parentElement) img.parentElement.textContent = l.label;
+                        }}
+                      />
+                    ) : (
+                      l.label
+                    )}
                   </div>
                 ))}
               </div>
@@ -892,7 +905,21 @@ const SuccessStoriesPage = () => {
 
               {s.testimony && (
                 <div className="ss-testimony">
-                  <div className="ss-test-photo">{s.testimony.initials}</div>
+                  <div className="ss-test-photo">
+                    {s.testimony.photo ? (
+                      <img
+                        src={s.testimony.photo}
+                        alt={s.testimony.photoAlt || s.testimony.authorBold}
+                        onError={(e) => {
+                          const img = e.currentTarget;
+                          img.style.display = "none";
+                          if (img.parentElement) img.parentElement.textContent = s.testimony!.initials;
+                        }}
+                      />
+                    ) : (
+                      s.testimony.initials
+                    )}
+                  </div>
                   <div className="ss-test-body">
                     <p className="ss-test-text">{s.testimony.text}</p>
                     <div className="ss-test-author">
