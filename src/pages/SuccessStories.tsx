@@ -1,6 +1,19 @@
 import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import CTAFooter from "@/components/CTAFooter";
+import logoCentraleDanone from "@/assets/clients/centrale-danone.jpg";
+import logoCidc from "@/assets/clients/cidc.jpg";
+import logoMinistereSante from "@/assets/clients/ministere-sante.jpg";
+import logoGinger from "@/assets/clients/ginger-international.jpg";
+import logoRaja from "@/assets/clients/raja-club-athletic.jpg";
+import logoOcp from "@/assets/clients/ocp.png";
+import logoPresidenceSenegal from "@/assets/clients/presidence-senegal.jpg";
+import logoAdd from "@/assets/clients/add.png";
+import logoHopital from "@/assets/clients/hopital-mohammed-vi.png";
+import photoSamiaKabbaj from "@/assets/clients/samia-kabbaj.jpg";
+import photoHananFadlallah from "@/assets/clients/hanan-fadlallah.jpg";
+import photoOlivierLaboue from "@/assets/clients/olivier-laboue.jpg";
+import photoSanaeAlami from "@/assets/clients/sanae-alami.jpg";
 
 type Thematique =
   | "all"
@@ -44,9 +57,9 @@ const SECTEURS: { value: Secteur; label: string }[] = [
   { value: "international", label: "Organisation internationale" },
 ];
 
-type Logo = { label: string; italic?: boolean };
+type Logo = { label: string; italic?: boolean; image?: string; alt?: string };
 type Resource = { type: string; text: string };
-type Testimony = { initials: string; text: string; authorBold: string; authorRest: string; date?: string };
+type Testimony = { initials: string; text: string; authorBold: string; authorRest: string; date?: string; photo?: string; photoAlt?: string };
 type Story = {
   id: string;
   num: string;
@@ -85,7 +98,7 @@ const stories: Story[] = [
     miniPitch: "Trois semaines pour défaire deux ans de crise.",
     miniSecteur: "Agroalimentaire · 🇲🇦",
     eyebrow: "Industrie agroalimentaire",
-    logos: [{ label: "CENTRALE DANONE" }],
+    logos: [{ label: "CENTRALE DANONE", image: logoCentraleDanone, alt: "Centrale Danone" }],
     visualMain: (
       <>
         [ Capture média le360<br />
@@ -123,6 +136,8 @@ const stories: Story[] = [
     resultsExtra: "+ Reportage exclusif de 45 minutes diffusé sur RTM",
     testimony: {
       initials: "SK",
+      photo: photoSamiaKabbaj,
+      photoAlt: "Samia Kabbaj Douiri, Secrétaire Générale, Centrale Danone",
       text: "\"Prestataire référencé chez nous depuis 2016, M. Azeddine Yassine (Buildfluence) a réalisé avec succès des missions pour Centrale Danone. Dès le début, M. Yassine a fait preuve d'un réel professionnalisme et d'une rigueur à toute épreuve. Nous le recommandons vivement.\"",
       authorBold: "Samia Kabbaj Douiri",
       authorRest: ", Secrétaire Générale, Centrale Danone",
@@ -193,7 +208,7 @@ const stories: Story[] = [
     miniPitch: "Faire renaître une organisation 38 ans après sa création.",
     miniSecteur: "Organisation internationale · 🇸🇦 OCI",
     eyebrow: "Organisation internationale",
-    logos: [{ label: "CIDC · OCI" }],
+    logos: [{ label: "CIDC · OCI", image: logoCidc, alt: "CIDC – Centre Islamique pour le Développement du Commerce" }],
     visualMain: (
       <>
         [ Doing Business Platform<br />
@@ -242,7 +257,7 @@ const stories: Story[] = [
     miniPitch: "Stopper une psychose nationale en deux semaines.",
     miniSecteur: "Santé publique · 🇲🇦",
     eyebrow: "Santé publique",
-    logos: [{ label: "MINISTÈRE\nDE LA SANTÉ\nMAROC", italic: true }],
+    logos: [{ label: "MINISTÈRE\nDE LA SANTÉ\nMAROC", italic: true, image: logoMinistereSante, alt: "Ministère de la Santé du Maroc" }],
     visualMain: (
       <>
         [ Crisis Dashboard Grippe A H1N1<br />
@@ -275,6 +290,8 @@ const stories: Story[] = [
     ],
     testimony: {
       initials: "HF",
+      photo: photoHananFadlallah,
+      photoAlt: "Dr Hanan Fadlallah, Cheffe de la Division de l'Information et de la Communication, Ministère de la Santé",
       text: "\"Doté d'une vision exceptionnelle, des capacités d'analyse fine et de synthèse, les conseils de M. Azeddine Yassine étaient un appui fort pour la stratégie de communication du Ministère de la Santé. Son intervention a laissé des marques de valeurs : installation d'une solution de veille stratégique et de Data Intelligence, formation des cadres et des journalistes de la DICom, compréhension et cartographie de l'écosystème du Ministère, méthodologie d'extraction des insights de risques et prévention de crise.\"",
       authorBold: "Dr Hanan Fadlallah",
       authorRest: ", Cheffe de la Division de l'Information et de la Communication, Ministère de la Santé",
@@ -292,7 +309,7 @@ const stories: Story[] = [
     miniPitch: "Quand l'intelligence stratégique sert l'attractivité hospitalière.",
     miniSecteur: "Santé · 🇲🇦 🇫🇷 🇩🇪",
     eyebrow: "Coopération internationale & santé",
-    logos: [{ label: "GINGER INTERNATIONAL" }, { label: "KFW", italic: true }],
+    logos: [{ label: "GINGER INTERNATIONAL", image: logoGinger, alt: "Ginger International" }, { label: "KFW", italic: true }],
     visualMain: (
       <>
         [ Mission tripartite<br />
@@ -326,6 +343,8 @@ const stories: Story[] = [
     resultsExtra: "+ Mission internationale tripartite : bailleur public allemand, cabinet français, expertise marocaine",
     testimony: {
       initials: "OL",
+      photo: photoOlivierLaboue,
+      photoAlt: "Olivier Laboue, Directeur de Développement International, Ginger International",
       text: "\"Mandaté pour un audit d'image, le cabinet Buildfluence a livré des solutions innovantes et créatives. La mission s'est distinguée par un professionnalisme exemplaire, une attention méticuleuse aux détails et un respect total des délais de livraison. Une vive recommandation pour tout projet alliant excellence opérationnelle et créativité.\"",
       authorBold: "Olivier Laboue",
       authorRest: ", Directeur de Développement International, Ginger International",
@@ -342,7 +361,7 @@ const stories: Story[] = [
     miniPitch: "Quand un club légendaire devient cible informationnelle.",
     miniSecteur: "Sport professionnel · 🇲🇦",
     eyebrow: "Sport professionnel & gouvernance",
-    logos: [{ label: "RAJA CLUB ATHLETIC" }, { label: "MARSA MAROC", italic: true }],
+    logos: [{ label: "RAJA CLUB ATHLETIC", image: logoRaja, alt: "Raja Club Athletic" }, { label: "MARSA MAROC", italic: true }],
     visualMain: (
       <>
         [ Architecture de veille multi-dossiers<br />
@@ -389,7 +408,7 @@ const stories: Story[] = [
     miniPitch: "Briser l'encerclement informationnel d'un champion national.",
     miniSecteur: "Industrie stratégique · 🇲🇦",
     eyebrow: "Industrie stratégique nationale",
-    logos: [{ label: "OCP GROUP" }],
+    logos: [{ label: "OCP GROUP", image: logoOcp, alt: "OCP Group" }],
     visualMain: (
       <>
         [ Cartographie d'écosystème<br />
@@ -422,6 +441,8 @@ const stories: Story[] = [
     ],
     testimony: {
       initials: "SA",
+      photo: photoSanaeAlami,
+      photoAlt: "Sanaë Alami Afilal, VP Chargée de mission, Direction Générale OCP Group",
       text: "\"Dans le cadre de ses responsabilités de Strategic Communication Manager au sein de la Direction de Communication Corporate OCP Group, Azeddine Yassine assumait les missions qui lui ont été conférées avec dévouement et menait ses projets avec professionnalisme. Doté des capacités d'analyse et de synthèse, Azeddine Yassine est intervenu en parfait conseiller apportant une plus-value certaine pour l'information décisionnelle.\"",
       authorBold: "Sanaë Alami Afilal",
       authorRest: ", VP Chargée de mission, Direction Générale OCP Group",
@@ -439,7 +460,7 @@ const stories: Story[] = [
     miniPitch: "Surveiller la notoriété d'un État en temps réel.",
     miniSecteur: "Gouvernement · 🇸🇳",
     eyebrow: "Gouvernement & souveraineté",
-    logos: [{ label: "PRÉSIDENCE\nDE LA RÉPUBLIQUE\nDU SÉNÉGAL", italic: true }],
+    logos: [{ label: "PRÉSIDENCE\nDE LA RÉPUBLIQUE\nDU SÉNÉGAL", italic: true, image: logoPresidenceSenegal, alt: "Présidence de la République du Sénégal" }],
     visualMain: (
       <>
         [ Cartographie stratégique<br />
@@ -483,7 +504,7 @@ const stories: Story[] = [
     miniPitch: "Repositionner un acteur public dans son écosystème digital.",
     miniSecteur: "Établissement public · 🇲🇦",
     eyebrow: "Établissement public & transformation digitale",
-    logos: [{ label: "#ADD" }, { label: "GITEX AFRICA", italic: true }],
+    logos: [{ label: "#ADD", image: logoAdd, alt: "Agence de Développement du Digital" }, { label: "GITEX AFRICA", italic: true }],
     visualMain: (
       <>
         [ Architecture digitale ADD<br />
@@ -527,7 +548,7 @@ const stories: Story[] = [
     miniPitch: "Crédibiliser l'attractivité d'un hôpital universitaire de référence.",
     miniSecteur: "Santé · 🇲🇦",
     eyebrow: "Santé & attractivité hospitalière",
-    logos: [{ label: "HUIM VI\nBOUSKOURA", italic: true }],
+    logos: [{ label: "HUIM VI\nBOUSKOURA", italic: true, image: logoHopital, alt: "Hôpital Universitaire International Mohammed VI – Bouskoura" }],
     visualMain: (
       <>
         [ Stakeholders Mapping<br />
@@ -656,8 +677,9 @@ const SuccessStoriesCSS = `
   .ss-visual { background: var(--bf-navy); padding: 32px 28px; color: var(--bf-paper); display: flex; flex-direction: column; min-height: 100%; }
   .ss-story-eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--bf-gold); margin-bottom: 22px; line-height: 1.5; }
   .ss-logos { display: flex; align-items: center; gap: 12px; margin-bottom: 22px; padding-bottom: 18px; border-bottom: 1px solid var(--bf-navy-soft); flex-wrap: wrap; }
-  .ss-logo { background: var(--bf-paper); color: var(--bf-navy); font-family: 'Playfair Display', serif; font-weight: 600; font-size: 13px; padding: 9px 13px; border-radius: 0; line-height: 1.1; letter-spacing: 0.02em; white-space: pre-line; }
+  .ss-logo { background: var(--bf-paper); color: var(--bf-navy); font-family: 'Playfair Display', serif; font-weight: 600; font-size: 13px; padding: 9px 13px; border-radius: 0; line-height: 1.1; letter-spacing: 0.02em; white-space: pre-line; display: inline-flex; align-items: center; justify-content: center; min-height: 56px; }
   .ss-logo.italic { font-style: italic; font-size: 11px; }
+  .ss-logo-img { display: block; height: 44px; width: auto; max-width: 160px; object-fit: contain; }
   .ss-visual-main { background: linear-gradient(135deg, var(--bf-navy-deeper), var(--bf-navy-soft)); border: 1px solid var(--bf-navy-soft); padding: 28px 20px; margin-bottom: 18px; text-align: center; color: var(--bf-ink-muted); font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 13px; min-height: 160px; display: flex; align-items: center; justify-content: center; line-height: 1.5; position: relative; }
   .ss-visual-main::before { content: ''; position: absolute; top: 8px; left: 8px; right: 8px; bottom: 8px; border: 1px solid rgba(217, 188, 106, 0.15); pointer-events: none; }
   .ss-resources { margin-bottom: 22px; }
@@ -689,6 +711,7 @@ const SuccessStoriesCSS = `
   .ss-results-extra { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 14px; color: var(--bf-ink-soft); text-align: center; margin-top: 4px; margin-bottom: 28px; padding: 0 10px; }
   .ss-testimony { background: #FAF8F2; border: 1px solid var(--bf-paper-deep); border-left: 3px solid var(--bf-gold); padding: 22px 26px; margin: 24px 0 0; display: flex; gap: 20px; align-items: flex-start; }
   .ss-test-photo { flex-shrink: 0; width: 72px; height: 72px; border-radius: 50%; background: var(--bf-paper-deep); border: 1px solid var(--bf-gold); display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; color: var(--bf-navy); font-size: 16px; font-style: italic; overflow: hidden; }
+  .ss-test-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; }
   .ss-test-body { flex: 1; min-width: 0; }
   .ss-test-text { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 16px; color: var(--bf-ink-soft); line-height: 1.55; margin-bottom: 14px; }
   .ss-test-author { font-family: 'DM Sans', sans-serif; font-size: 13px; color: var(--bf-navy); font-weight: 500; }
@@ -806,7 +829,20 @@ const SuccessStoriesPage = () => {
               <div className="ss-logos">
                 {s.logos.map((l, i) => (
                   <div key={i} className={`ss-logo${l.italic ? " italic" : ""}`}>
-                    {l.label}
+                    {l.image ? (
+                      <img
+                        src={l.image}
+                        alt={l.alt || l.label}
+                        className="ss-logo-img"
+                        onError={(e) => {
+                          const img = e.currentTarget;
+                          img.style.display = "none";
+                          if (img.parentElement) img.parentElement.textContent = l.label;
+                        }}
+                      />
+                    ) : (
+                      l.label
+                    )}
                   </div>
                 ))}
               </div>
@@ -869,7 +905,21 @@ const SuccessStoriesPage = () => {
 
               {s.testimony && (
                 <div className="ss-testimony">
-                  <div className="ss-test-photo">{s.testimony.initials}</div>
+                  <div className="ss-test-photo">
+                    {s.testimony.photo ? (
+                      <img
+                        src={s.testimony.photo}
+                        alt={s.testimony.photoAlt || s.testimony.authorBold}
+                        onError={(e) => {
+                          const img = e.currentTarget;
+                          img.style.display = "none";
+                          if (img.parentElement) img.parentElement.textContent = s.testimony!.initials;
+                        }}
+                      />
+                    ) : (
+                      s.testimony.initials
+                    )}
+                  </div>
                   <div className="ss-test-body">
                     <p className="ss-test-text">{s.testimony.text}</p>
                     <div className="ss-test-author">
