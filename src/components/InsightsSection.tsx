@@ -1,28 +1,22 @@
 import { motion, useInView } from "framer-motion";
-import { useRef, useState } from "react";
-import { FileText } from "lucide-react";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { useToast } from "@/hooks/use-toast";
+import { useRef } from "react";
+import { FileText, Download, ExternalLink } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const InsightsSection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.2 });
-  const [openIndex, setOpenIndex] = useState<number | null>(null);
-  const { toast } = useToast();
   const { t } = useLanguage();
 
-  const insights = [
-    { type: t("Baromètre d'investissement", "Investment barometer"), title: t("Guerre informationnelle : les nouvelles armes de déstabilisation", "Information warfare: the new weapons of destabilization"), description: t("Décryptage des mécanismes de désinformation utilisés contre les institutions souveraines et les grands groupes industriels.", "Decoding disinformation mechanisms used against sovereign institutions and major industrial groups."), summary: t("Résumé de l'analyse — contenu détaillé à définir selon les spécifications du projet.", "Analysis summary — detailed content to be defined per project specifications.") },
-    { type: t("Baromètre d'investissement", "Investment barometer"), title: t("Due diligence approfondie : au-delà de la conformité", "Deep due diligence: beyond compliance"), description: t("Pourquoi les méthodologies classiques de due diligence laissent 70% des risques dans l'angle mort des décideurs.", "Why traditional due diligence methodologies leave 70% of risks in decision-makers' blind spots."), summary: t("Résumé de la note — contenu détaillé à définir selon les spécifications du projet.", "Note summary — detailed content to be defined per project specifications.") },
-    { type: t("Baromètre d'investissement", "Investment barometer"), title: t("Souveraineté décisionnelle à l'ère de l'IA", "Decision-making sovereignty in the age of AI"), description: t("Intervention sur les enjeux de souveraineté informationnelle et la transformation des infrastructures décisionnelles.", "Addressing informational sovereignty challenges and the transformation of decision-making infrastructures."), summary: t("Résumé de la conférence — contenu détaillé à définir selon les spécifications du projet.", "Conference summary — detailed content to be defined per project specifications.") },
-  ];
+  const caseUrl = "/Cas_client_RCA_v2.html";
 
-  const handleDownload = (e: React.FormEvent) => {
-    e.preventDefault();
-    toast({ title: t("Demande envoyée", "Request sent"), description: t("Vous recevrez l'étude par email.", "You will receive the study by email.") });
-    setOpenIndex(null);
+  const handlePrint = () => {
+    const w = window.open(`${caseUrl}?print=true`, "_blank");
+    if (w) {
+      w.addEventListener("load", () => {
+        try { w.print(); } catch { /* noop */ }
+      });
+    }
   };
 
   return (
@@ -39,57 +33,82 @@ const InsightsSection = () => {
             {t("Éclairages stratégiques", "Strategic insights")}
           </h2>
           <p className="mt-4 text-base" style={{ color: '#5A6170' }}>
-            {t("Analyses, guides et notes stratégiques au service de la compréhension des enjeux majeurs", "Analyses, guides and strategic notes serving the understanding of major challenges")}
+            {t(
+              "Cas clients, analyses et notes stratégiques — des preuves, pas des promesses.",
+              "Client cases, analyses and strategic notes — evidence, not promises."
+            )}
           </p>
         </motion.div>
 
-        <div className="mt-8 grid gap-5 md:grid-cols-3">
-          {insights.map((item, i) => (
-            <motion.button
-              key={item.title}
-              onClick={() => setOpenIndex(i)}
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
-              className="group flex cursor-pointer flex-col rounded-sm border p-7 text-left transition-all hover:shadow-lg"
-              style={{ background: '#FFFFFF', borderColor: '#E5E7EB', borderTop: '2px solid hsl(43 50% 54% / 0.3)' }}
-            >
-              <div className="mb-3 flex items-center gap-2">
-                <FileText className="h-4 w-4" style={{ color: 'hsl(43 50% 54%)' }} />
-                <span className="text-[10px] font-semibold uppercase tracking-[0.15em]" style={{ color: 'hsl(43 50% 54%)' }}>{item.type}</span>
-              </div>
-              <h3 className="font-serif text-base font-bold leading-snug" style={{ color: '#0D1B2A' }}>{item.title}</h3>
-              <p className="mt-2 flex-1 text-[13px] leading-relaxed" style={{ color: '#6B7280' }}>{item.description}</p>
-              <span className="mt-4 text-xs font-medium transition-colors" style={{ color: 'hsl(43 50% 54%)' }}>
-                {t("Lire & télécharger →", "Read & download →")}
-              </span>
-            </motion.button>
-          ))}
-        </div>
-      </div>
+        <motion.article
+          initial={{ opacity: 0, y: 24 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.15 }}
+          className="relative mx-auto mt-10 max-w-5xl overflow-hidden rounded-sm bg-white"
+          style={{
+            borderLeft: '6px solid #006233',
+            boxShadow: '0 12px 40px -12px rgba(13,27,42,0.18), 0 2px 8px -2px rgba(13,27,42,0.08)',
+            border: '1px solid #E5E7EB',
+            borderLeftWidth: '6px',
+            borderLeftColor: '#006233',
+          }}
+        >
+          <div
+            className="absolute right-5 top-5 rounded-full px-3 py-1 text-[10px] font-bold uppercase tracking-[0.18em]"
+            style={{ background: '#C8972A', color: '#FFFFFF' }}
+          >
+            {t("Nouveau", "New")}
+          </div>
 
-      <Dialog open={openIndex !== null} onOpenChange={() => setOpenIndex(null)}>
-        {openIndex !== null && (
-          <DialogContent className="sm:max-w-xl" style={{ background: '#0D1B2A', border: '1px solid hsl(220 20% 20%)', color: '#F0EDE6' }}>
-            <DialogHeader>
-              <DialogTitle className="font-serif text-lg" style={{ color: '#F0EDE6' }}>{insights[openIndex].title}</DialogTitle>
-            </DialogHeader>
-            <div className="mt-2 grid gap-6 sm:grid-cols-2">
-              <div>
-                <p className="text-[11px] font-semibold uppercase tracking-wider" style={{ color: 'hsl(43 50% 54%)' }}>{insights[openIndex].type}</p>
-                <p className="mt-2 text-sm" style={{ color: '#8A8F9E' }}>{insights[openIndex].summary}</p>
-              </div>
-              <form onSubmit={handleDownload} className="space-y-3">
-                <Input required name="name" placeholder={t("Nom", "Name")} style={{ background: 'hsl(210 40% 12%)', borderColor: 'hsl(220 20% 20%)', color: '#F0EDE6' }} />
-                <Input required type="email" name="email" placeholder="Email" style={{ background: 'hsl(210 40% 12%)', borderColor: 'hsl(220 20% 20%)', color: '#F0EDE6' }} />
-                <Input name="org" placeholder="Organisation" style={{ background: 'hsl(210 40% 12%)', borderColor: 'hsl(220 20% 20%)', color: '#F0EDE6' }} />
-                <Input name="fonction" placeholder={t("Fonction", "Position")} style={{ background: 'hsl(210 40% 12%)', borderColor: 'hsl(220 20% 20%)', color: '#F0EDE6' }} />
-                <button type="submit" className="btn-gold w-full text-[11px]">{t("Télécharger l'étude", "Download the study")}</button>
-              </form>
+          <div className="p-8 sm:p-10 md:p-12">
+            <div className="mb-4 flex items-center gap-2">
+              <FileText className="h-4 w-4" style={{ color: '#C8972A' }} />
+              <span className="text-[10px] font-semibold uppercase tracking-[0.2em]" style={{ color: '#C8972A' }}>
+                {t("Veille sous pression", "Intelligence under pressure")}
+              </span>
             </div>
-          </DialogContent>
-        )}
-      </Dialog>
+
+            <h3 className="font-serif text-2xl font-bold leading-tight sm:text-3xl md:text-[34px]" style={{ color: '#0D1B2A' }}>
+              {t(
+                "Raja Club Athletic : quand la veille stratégique devient un bouclier institutionnel",
+                "Raja Club Athletic: when strategic intelligence becomes an institutional shield"
+              )}
+            </h3>
+
+            <p className="mt-4 max-w-3xl text-[15px] leading-relaxed" style={{ color: '#3A5470' }}>
+              {t(
+                "Comment le premier club de football marocain a transformé la pression médiatique en avantage décisionnel grâce à une cellule de veille souveraine.",
+                "How Morocco's leading football club turned media pressure into a decision-making advantage through a sovereign intelligence cell."
+              )}
+            </p>
+
+            <div className="mt-6 flex flex-wrap gap-x-7 gap-y-2 text-[13px]" style={{ color: '#5A6170' }}>
+              <span>🏟️ {t("Secteur", "Sector")} : {t("Football professionnel", "Professional football")}</span>
+              <span>🇲🇦 {t("Marché", "Market")} : Maroc · Afrique</span>
+              <span>📅 {t("Période", "Period")} : Juil. 2025 — Mai 2026</span>
+            </div>
+
+            <div className="mt-8 flex flex-wrap gap-3">
+              <a
+                href={caseUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-sm px-6 py-3 text-[12px] font-semibold uppercase tracking-[0.15em] transition-all hover:opacity-90"
+                style={{ background: '#0D1B2A', color: '#FFFFFF' }}
+              >
+                {t("Lire le cas", "Read the case")} <ExternalLink className="h-3.5 w-3.5" />
+              </a>
+              <button
+                onClick={handlePrint}
+                className="inline-flex items-center gap-2 rounded-sm border px-6 py-3 text-[12px] font-semibold uppercase tracking-[0.15em] transition-all hover:bg-[#FDF3E0]"
+                style={{ borderColor: '#C8972A', color: '#C8972A', background: 'transparent' }}
+              >
+                {t("Télécharger en PDF", "Download as PDF")} <Download className="h-3.5 w-3.5" />
+              </button>
+            </div>
+          </div>
+        </motion.article>
+      </div>
     </section>
   );
 };
