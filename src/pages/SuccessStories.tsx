@@ -98,7 +98,7 @@ const stories: Story[] = [
     miniPitch: "Trois semaines pour défaire deux ans de crise.",
     miniSecteur: "Agroalimentaire · 🇲🇦",
     eyebrow: "Industrie agroalimentaire",
-    logos: [{ label: "CENTRALE DANONE" }],
+    logos: [{ label: "CENTRALE DANONE", image: logoCentraleDanone, alt: "Centrale Danone" }],
     visualMain: (
       <>
         [ Capture média le360<br />
@@ -136,6 +136,8 @@ const stories: Story[] = [
     resultsExtra: "+ Reportage exclusif de 45 minutes diffusé sur RTM",
     testimony: {
       initials: "SK",
+      photo: photoSamiaKabbaj,
+      photoAlt: "Samia Kabbaj Douiri, Secrétaire Générale, Centrale Danone",
       text: "\"Prestataire référencé chez nous depuis 2016, M. Azeddine Yassine (Buildfluence) a réalisé avec succès des missions pour Centrale Danone. Dès le début, M. Yassine a fait preuve d'un réel professionnalisme et d'une rigueur à toute épreuve. Nous le recommandons vivement.\"",
       authorBold: "Samia Kabbaj Douiri",
       authorRest: ", Secrétaire Générale, Centrale Danone",
@@ -206,7 +208,7 @@ const stories: Story[] = [
     miniPitch: "Faire renaître une organisation 38 ans après sa création.",
     miniSecteur: "Organisation internationale · 🇸🇦 OCI",
     eyebrow: "Organisation internationale",
-    logos: [{ label: "CIDC · OCI" }],
+    logos: [{ label: "CIDC · OCI", image: logoCidc, alt: "CIDC – Centre Islamique pour le Développement du Commerce" }],
     visualMain: (
       <>
         [ Doing Business Platform<br />
@@ -255,7 +257,7 @@ const stories: Story[] = [
     miniPitch: "Stopper une psychose nationale en deux semaines.",
     miniSecteur: "Santé publique · 🇲🇦",
     eyebrow: "Santé publique",
-    logos: [{ label: "MINISTÈRE\nDE LA SANTÉ\nMAROC", italic: true }],
+    logos: [{ label: "MINISTÈRE\nDE LA SANTÉ\nMAROC", italic: true, image: logoMinistereSante, alt: "Ministère de la Santé du Maroc" }],
     visualMain: (
       <>
         [ Crisis Dashboard Grippe A H1N1<br />
@@ -288,6 +290,8 @@ const stories: Story[] = [
     ],
     testimony: {
       initials: "HF",
+      photo: photoHananFadlallah,
+      photoAlt: "Dr Hanan Fadlallah, Cheffe de la Division de l'Information et de la Communication, Ministère de la Santé",
       text: "\"Doté d'une vision exceptionnelle, des capacités d'analyse fine et de synthèse, les conseils de M. Azeddine Yassine étaient un appui fort pour la stratégie de communication du Ministère de la Santé. Son intervention a laissé des marques de valeurs : installation d'une solution de veille stratégique et de Data Intelligence, formation des cadres et des journalistes de la DICom, compréhension et cartographie de l'écosystème du Ministère, méthodologie d'extraction des insights de risques et prévention de crise.\"",
       authorBold: "Dr Hanan Fadlallah",
       authorRest: ", Cheffe de la Division de l'Information et de la Communication, Ministère de la Santé",
@@ -305,7 +309,7 @@ const stories: Story[] = [
     miniPitch: "Quand l'intelligence stratégique sert l'attractivité hospitalière.",
     miniSecteur: "Santé · 🇲🇦 🇫🇷 🇩🇪",
     eyebrow: "Coopération internationale & santé",
-    logos: [{ label: "GINGER INTERNATIONAL" }, { label: "KFW", italic: true }],
+    logos: [{ label: "GINGER INTERNATIONAL", image: logoGinger, alt: "Ginger International" }, { label: "KFW", italic: true }],
     visualMain: (
       <>
         [ Mission tripartite<br />
@@ -339,6 +343,8 @@ const stories: Story[] = [
     resultsExtra: "+ Mission internationale tripartite : bailleur public allemand, cabinet français, expertise marocaine",
     testimony: {
       initials: "OL",
+      photo: photoOlivierLaboue,
+      photoAlt: "Olivier Laboue, Directeur de Développement International, Ginger International",
       text: "\"Mandaté pour un audit d'image, le cabinet Buildfluence a livré des solutions innovantes et créatives. La mission s'est distinguée par un professionnalisme exemplaire, une attention méticuleuse aux détails et un respect total des délais de livraison. Une vive recommandation pour tout projet alliant excellence opérationnelle et créativité.\"",
       authorBold: "Olivier Laboue",
       authorRest: ", Directeur de Développement International, Ginger International",
@@ -355,7 +361,7 @@ const stories: Story[] = [
     miniPitch: "Quand un club légendaire devient cible informationnelle.",
     miniSecteur: "Sport professionnel · 🇲🇦",
     eyebrow: "Sport professionnel & gouvernance",
-    logos: [{ label: "RAJA CLUB ATHLETIC" }, { label: "MARSA MAROC", italic: true }],
+    logos: [{ label: "RAJA CLUB ATHLETIC", image: logoRaja, alt: "Raja Club Athletic" }, { label: "MARSA MAROC", italic: true }],
     visualMain: (
       <>
         [ Architecture de veille multi-dossiers<br />
@@ -402,7 +408,7 @@ const stories: Story[] = [
     miniPitch: "Briser l'encerclement informationnel d'un champion national.",
     miniSecteur: "Industrie stratégique · 🇲🇦",
     eyebrow: "Industrie stratégique nationale",
-    logos: [{ label: "OCP GROUP" }],
+    logos: [{ label: "OCP GROUP", image: logoOcp, alt: "OCP Group" }],
     visualMain: (
       <>
         [ Cartographie d'écosystème<br />
@@ -435,6 +441,8 @@ const stories: Story[] = [
     ],
     testimony: {
       initials: "SA",
+      photo: photoSanaeAlami,
+      photoAlt: "Sanaë Alami Afilal, VP Chargée de mission, Direction Générale OCP Group",
       text: "\"Dans le cadre de ses responsabilités de Strategic Communication Manager au sein de la Direction de Communication Corporate OCP Group, Azeddine Yassine assumait les missions qui lui ont été conférées avec dévouement et menait ses projets avec professionnalisme. Doté des capacités d'analyse et de synthèse, Azeddine Yassine est intervenu en parfait conseiller apportant une plus-value certaine pour l'information décisionnelle.\"",
       authorBold: "Sanaë Alami Afilal",
       authorRest: ", VP Chargée de mission, Direction Générale OCP Group",
@@ -452,7 +460,7 @@ const stories: Story[] = [
     miniPitch: "Surveiller la notoriété d'un État en temps réel.",
     miniSecteur: "Gouvernement · 🇸🇳",
     eyebrow: "Gouvernement & souveraineté",
-    logos: [{ label: "PRÉSIDENCE\nDE LA RÉPUBLIQUE\nDU SÉNÉGAL", italic: true }],
+    logos: [{ label: "PRÉSIDENCE\nDE LA RÉPUBLIQUE\nDU SÉNÉGAL", italic: true, image: logoPresidenceSenegal, alt: "Présidence de la République du Sénégal" }],
     visualMain: (
       <>
         [ Cartographie stratégique<br />
@@ -496,7 +504,7 @@ const stories: Story[] = [
     miniPitch: "Repositionner un acteur public dans son écosystème digital.",
     miniSecteur: "Établissement public · 🇲🇦",
     eyebrow: "Établissement public & transformation digitale",
-    logos: [{ label: "#ADD" }, { label: "GITEX AFRICA", italic: true }],
+    logos: [{ label: "#ADD", image: logoAdd, alt: "Agence de Développement du Digital" }, { label: "GITEX AFRICA", italic: true }],
     visualMain: (
       <>
         [ Architecture digitale ADD<br />
@@ -540,7 +548,7 @@ const stories: Story[] = [
     miniPitch: "Crédibiliser l'attractivité d'un hôpital universitaire de référence.",
     miniSecteur: "Santé · 🇲🇦",
     eyebrow: "Santé & attractivité hospitalière",
-    logos: [{ label: "HUIM VI\nBOUSKOURA", italic: true }],
+    logos: [{ label: "HUIM VI\nBOUSKOURA", italic: true, image: logoHopital, alt: "Hôpital Universitaire International Mohammed VI – Bouskoura" }],
     visualMain: (
       <>
         [ Stakeholders Mapping<br />
