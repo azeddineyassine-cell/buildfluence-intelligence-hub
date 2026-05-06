@@ -2,6 +2,7 @@ import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { FileText, Download, ExternalLink } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import logoRaja from "@/assets/clients/raja-club-athletic.jpg";
 
 const InsightsSection = () => {
   const ref = useRef(null);
@@ -9,15 +10,7 @@ const InsightsSection = () => {
   const { t } = useLanguage();
 
   const caseUrl = "/Cas_client_RCA_v2.html";
-
-  const handlePrint = () => {
-    const w = window.open(`${caseUrl}?print=true`, "_blank");
-    if (w) {
-      w.addEventListener("load", () => {
-        try { w.print(); } catch { /* noop */ }
-      });
-    }
-  };
+  const pdfUrl = "/Cas_client_RCA_v2.pdf";
 
   return (
     <section id="insights" className="relative py-10" ref={ref} style={{ background: '#FFFFFF' }}>
