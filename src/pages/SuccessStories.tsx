@@ -749,7 +749,7 @@ const SuccessStoriesPage = () => {
       <Navbar />
 
       <header className="ss-header">
-        <div className="ss-eyebrow">— Pilier III · Insight & Resources / Success Stories</div>
+        <div className="ss-eyebrow">— Insight & Resources / Success Stories</div>
         <h1 className="ss-title">
           Là où l'<em>intelligence</em>
           <br />
