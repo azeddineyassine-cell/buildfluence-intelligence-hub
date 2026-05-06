@@ -14,6 +14,7 @@ import photoSamiaKabbaj from "@/assets/clients/samia-kabbaj.jpg";
 import photoHananFadlallah from "@/assets/clients/hanan-fadlallah.jpg";
 import photoOlivierLaboue from "@/assets/clients/olivier-laboue.jpg";
 import photoSanaeAlami from "@/assets/clients/sanae-alami.jpg";
+import logoKfw from "@/assets/clients/kfw.png";
 
 type Thematique =
   | "all"
@@ -309,7 +310,7 @@ const stories: Story[] = [
     miniPitch: "Quand l'intelligence stratégique sert l'attractivité hospitalière.",
     miniSecteur: "Santé · 🇲🇦 🇫🇷 🇩🇪",
     eyebrow: "Coopération internationale & santé",
-    logos: [{ label: "GINGER INTERNATIONAL", image: logoGinger, alt: "Ginger International" }, { label: "KFW", italic: true }],
+    logos: [{ label: "GINGER INTERNATIONAL", image: logoGinger, alt: "Ginger International" }, { label: "KFW", image: logoKfw, alt: "KfW Bankengruppe" }],
     visualMain: (
       <>
         [ Mission tripartite<br />

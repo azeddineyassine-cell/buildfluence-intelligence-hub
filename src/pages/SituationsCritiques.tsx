@@ -355,8 +355,8 @@ export default function SituationsCritiques() {
               })}
               <circle cx="280" cy="280" r="66" fill="#10325F" stroke="#C9A84C" strokeWidth="1.5" style={{ cursor: "pointer" }} onClick={() => setSel(null)} />
               <circle cx="280" cy="280" r="58" fill="none" stroke="rgba(201,168,76,.2)" strokeWidth="1" />
-              <text x="280" y="272" textAnchor="middle" fontFamily="Playfair Display, serif" fontSize="28" fontWeight="900" fontStyle="italic" fill="#D9BC6A" letterSpacing="-0.5" style={{ cursor: "pointer" }} onClick={() => setSel(null)}>Vous êtes</text>
-              <text x="280" y="308" textAnchor="middle" fontFamily="Playfair Display, serif" fontSize="46" fontWeight="900" fontStyle="italic" fill="#D9BC6A" style={{ cursor: "pointer" }} onClick={() => setSel(null)}>là</text>
+              <text x="280" y="274" textAnchor="middle" fontFamily="Playfair Display, serif" fontSize="22" fontWeight="900" fontStyle="italic" fill="#D9BC6A" letterSpacing="-0.3" style={{ cursor: "pointer" }} onClick={() => setSel(null)}>Vous êtes</text>
+              <text x="280" y="304" textAnchor="middle" fontFamily="Playfair Display, serif" fontSize="34" fontWeight="900" fontStyle="italic" fill="#D9BC6A" style={{ cursor: "pointer" }} onClick={() => setSel(null)}>là</text>
               {TOPICS.map(top => {
                 const p = POS[top.pos]; const a = sel === top.id;
                 const words = top.title.split(" "); const half = Math.ceil(words.length / 2);
@@ -378,7 +378,7 @@ export default function SituationsCritiques() {
         <div style={{ fontFamily: "JetBrains Mono,monospace", fontSize: 10, fontWeight: 600, letterSpacing: "0.25em", textTransform: "uppercase", color: "#C9A84C", borderBottom: "1px solid #C9A84C", paddingBottom: 3, marginBottom: 20, display: "inline-block" }}>Première étape</div>
         <h2 style={{ fontFamily: "Playfair Display,serif", fontSize: "clamp(24px,3vw,38px)", fontWeight: 700, color: "#fff", lineHeight: 1.15, marginBottom: 10 }}>Prêt à <em style={{ fontStyle: "italic", color: "#C9A84C" }}>passer à l'action</em> ?</h2>
         <p style={{ fontFamily: "Cormorant Garamond,serif", fontStyle: "italic", fontSize: 18, color: "rgba(255,255,255,.65)", maxWidth: 520, margin: "0 auto 28px", lineHeight: 1.7 }}>Un échange de 30 minutes suffit pour cartographier votre exposition réelle.</p>
-        <a href="#" style={{ display: "inline-flex", alignItems: "center", gap: 10, background: "#C9A84C", color: "#0A1628", fontFamily: "JetBrains Mono,monospace", fontSize: 11, fontWeight: 700, letterSpacing: "0.2em", textTransform: "uppercase", padding: "14px 32px", borderRadius: 2, textDecoration: "none" }}>Passer à l'action &#8594;</a>
+        <a href="#" onClick={(e) => { e.preventDefault(); setDiagOpen(true); }} style={{ display: "inline-flex", alignItems: "center", gap: 10, background: "#C9A84C", color: "#0A1628", fontFamily: "JetBrains Mono,monospace", fontSize: 11, fontWeight: 700, letterSpacing: "0.2em", textTransform: "uppercase", padding: "14px 32px", borderRadius: 2, textDecoration: "none", cursor: "pointer" }}>Passer à l'action &#8594;</a>
       </div>
       <FormDiagnostic open={diagOpen} onClose={() => setDiagOpen(false)} situation={cur ? cur.title : ""} />
     </div>
