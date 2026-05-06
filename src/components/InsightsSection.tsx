@@ -91,13 +91,15 @@ const InsightsSection = () => {
               >
                 {t("Lire le cas", "Read the case")} <ExternalLink className="h-3.5 w-3.5" />
               </a>
-              <button
-                onClick={handlePrint}
+              <a
+                href={pdfUrl}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 rounded-sm border px-6 py-3 text-[12px] font-semibold uppercase tracking-[0.15em] transition-all hover:bg-[#FDF3E0]"
                 style={{ borderColor: '#C8972A', color: '#C8972A', background: 'transparent' }}
               >
                 {t("Télécharger en PDF", "Download as PDF")} <Download className="h-3.5 w-3.5" />
-              </button>
+              </a>
             </div>
           </div>
         </motion.article>
