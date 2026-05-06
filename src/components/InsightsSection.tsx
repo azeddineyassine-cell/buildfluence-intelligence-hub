@@ -53,7 +53,19 @@ const InsightsSection = () => {
             {t("Nouveau", "New")}
           </div>
 
+          <img
+            src={logoRaja}
+            alt="Raja Club Athletic"
+            className="hidden sm:block absolute right-8 top-16 h-24 w-24 object-contain"
+            style={{ background: 'transparent' }}
+          />
           <div className="p-8 sm:p-10 md:p-12">
+            <img
+              src={logoRaja}
+              alt="Raja Club Athletic"
+              className="sm:hidden mx-auto mb-4 h-20 w-20 object-contain"
+              style={{ background: 'transparent' }}
+            />
             <div className="mb-4 flex items-center gap-2">
               <FileText className="h-4 w-4" style={{ color: '#C8972A' }} />
               <span className="text-[10px] font-semibold uppercase tracking-[0.2em]" style={{ color: '#C8972A' }}>
@@ -61,7 +73,7 @@ const InsightsSection = () => {
               </span>
             </div>
 
-            <h3 className="font-serif text-2xl font-bold leading-tight sm:text-3xl md:text-[34px]" style={{ color: '#0D1B2A' }}>
+            <h3 className="font-serif text-2xl font-bold leading-tight sm:text-3xl md:text-[34px] sm:pr-32" style={{ color: '#0D1B2A' }}>
               {t(
                 "Raja Club Athletic : quand la veille stratégique devient un bouclier institutionnel",
                 "Raja Club Athletic: when strategic intelligence becomes an institutional shield"
