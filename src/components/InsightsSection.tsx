@@ -2,6 +2,7 @@ import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { FileText, Download, ExternalLink } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import logoRaja from "@/assets/clients/raja-club-athletic.jpg";
 
 const InsightsSection = () => {
   const ref = useRef(null);
@@ -9,15 +10,7 @@ const InsightsSection = () => {
   const { t } = useLanguage();
 
   const caseUrl = "/Cas_client_RCA_v2.html";
-
-  const handlePrint = () => {
-    const w = window.open(`${caseUrl}?print=true`, "_blank");
-    if (w) {
-      w.addEventListener("load", () => {
-        try { w.print(); } catch { /* noop */ }
-      });
-    }
-  };
+  const pdfUrl = "/Cas_client_RCA_v2.pdf";
 
   return (
     <section id="insights" className="relative py-10" ref={ref} style={{ background: '#FFFFFF' }}>
@@ -60,7 +53,19 @@ const InsightsSection = () => {
             {t("Nouveau", "New")}
           </div>
 
+          <img
+            src={logoRaja}
+            alt="Raja Club Athletic"
+            className="hidden sm:block absolute right-8 top-16 h-24 w-24 object-contain"
+            style={{ background: 'transparent' }}
+          />
           <div className="p-8 sm:p-10 md:p-12">
+            <img
+              src={logoRaja}
+              alt="Raja Club Athletic"
+              className="sm:hidden mx-auto mb-4 h-20 w-20 object-contain"
+              style={{ background: 'transparent' }}
+            />
             <div className="mb-4 flex items-center gap-2">
               <FileText className="h-4 w-4" style={{ color: '#C8972A' }} />
               <span className="text-[10px] font-semibold uppercase tracking-[0.2em]" style={{ color: '#C8972A' }}>
@@ -68,7 +73,7 @@ const InsightsSection = () => {
               </span>
             </div>
 
-            <h3 className="font-serif text-2xl font-bold leading-tight sm:text-3xl md:text-[34px]" style={{ color: '#0D1B2A' }}>
+            <h3 className="font-serif text-2xl font-bold leading-tight sm:text-3xl md:text-[34px] sm:pr-32" style={{ color: '#0D1B2A' }}>
               {t(
                 "Raja Club Athletic : quand la veille stratégique devient un bouclier institutionnel",
                 "Raja Club Athletic: when strategic intelligence becomes an institutional shield"
@@ -98,13 +103,15 @@ const InsightsSection = () => {
               >
                 {t("Lire le cas", "Read the case")} <ExternalLink className="h-3.5 w-3.5" />
               </a>
-              <button
-                onClick={handlePrint}
+              <a
+                href={pdfUrl}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 rounded-sm border px-6 py-3 text-[12px] font-semibold uppercase tracking-[0.15em] transition-all hover:bg-[#FDF3E0]"
                 style={{ borderColor: '#C8972A', color: '#C8972A', background: 'transparent' }}
               >
                 {t("Télécharger en PDF", "Download as PDF")} <Download className="h-3.5 w-3.5" />
-              </button>
+              </a>
             </div>
           </div>
         </motion.article>
