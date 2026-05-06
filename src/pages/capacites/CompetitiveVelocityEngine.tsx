@@ -306,6 +306,7 @@ const CompetitiveVelocityEngine = () => {
           { name: "sector", placeholder: t("Secteur", "Sector"), required: true, maxLength: 150 },
           { name: "competitors", placeholder: t("Principaux concurrents à analyser", "Main competitors to analyze"), required: true, type: "textarea", rows: 4 },
           { name: "email", placeholder: t("Email professionnel", "Professional email"), required: true, type: "email", maxLength: 255 },
+          { name: "phone", placeholder: t("Téléphone *", "Phone *"), required: true, type: "tel", maxLength: 40 },
         ]}
       />
     </div>

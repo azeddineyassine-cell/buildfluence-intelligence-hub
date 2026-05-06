@@ -14,6 +14,7 @@ import photoSamiaKabbaj from "@/assets/clients/samia-kabbaj.jpg";
 import photoHananFadlallah from "@/assets/clients/hanan-fadlallah.jpg";
 import photoOlivierLaboue from "@/assets/clients/olivier-laboue.jpg";
 import photoSanaeAlami from "@/assets/clients/sanae-alami.jpg";
+import logoKfw from "@/assets/clients/kfw.png";
 
 type Thematique =
   | "all"
@@ -309,7 +310,7 @@ const stories: Story[] = [
     miniPitch: "Quand l'intelligence stratégique sert l'attractivité hospitalière.",
     miniSecteur: "Santé · 🇲🇦 🇫🇷 🇩🇪",
     eyebrow: "Coopération internationale & santé",
-    logos: [{ label: "GINGER INTERNATIONAL", image: logoGinger, alt: "Ginger International" }, { label: "KFW", italic: true }],
+    logos: [{ label: "GINGER INTERNATIONAL", image: logoGinger, alt: "Ginger International" }, { label: "KFW", image: logoKfw, alt: "KfW Bankengruppe" }],
     visualMain: (
       <>
         [ Mission tripartite<br />
@@ -666,7 +667,8 @@ const SuccessStoriesCSS = `
   .ss-mini-card:hover .ss-mini-pitch { color: rgba(244, 241, 234, 0.75); }
   .ss-mini-num { font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 500; letter-spacing: 0.2em; color: var(--bf-ink-muted); }
   .ss-mini-thema { font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--bf-gold); margin-left: 8px; }
-  .ss-mini-title { font-family: 'Playfair Display', serif; font-weight: 600; font-size: 16px; color: var(--bf-navy); line-height: 1.25; transition: color 0.15s ease; }
+  .ss-mini-title { font-family: 'Playfair Display', serif; font-weight: 600; font-size: 16px; color: var(--bf-navy); line-height: 1.25; transition: color 0.15s ease; min-height: 44px; display: flex; align-items: center; }
+  .ss-mini-logo-img { display: block; height: 40px; width: auto; max-width: 100%; max-height: 44px; object-fit: contain; }
   .ss-mini-pitch { font-family: 'DM Sans', sans-serif; font-size: 12px; color: var(--bf-ink-muted); line-height: 1.45; margin-top: auto; }
   .ss-mini-secteur-line { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--bf-ink-muted); margin-top: 4px; }
 
@@ -749,7 +751,7 @@ const SuccessStoriesPage = () => {
       <Navbar />
 
       <header className="ss-header">
-        <div className="ss-eyebrow">— Pilier III · Insight & Resources / Success Stories</div>
+        <div className="ss-eyebrow">— Insight & Resources / Success Stories</div>
         <h1 className="ss-title">
           Là où l'<em>intelligence</em>
           <br />
@@ -803,7 +805,22 @@ const SuccessStoriesPage = () => {
                 <span className="ss-mini-num">{s.num}.</span>
                 <span className="ss-mini-thema">{s.thematiqueLabel}</span>
               </div>
-              <div className="ss-mini-title">{s.miniTitle}</div>
+              <div className="ss-mini-title">
+                {s.logos[0]?.image ? (
+                  <img
+                    src={s.logos[0].image}
+                    alt={s.logos[0].alt || s.miniTitle}
+                    className="ss-mini-logo-img"
+                    onError={(e) => {
+                      const img = e.currentTarget;
+                      img.style.display = "none";
+                      if (img.parentElement) img.parentElement.textContent = s.miniTitle;
+                    }}
+                  />
+                ) : (
+                  s.miniTitle
+                )}
+              </div>
               <div className="ss-mini-pitch">{s.miniPitch}</div>
               <div className="ss-mini-secteur-line">{s.miniSecteur}</div>
             </a>

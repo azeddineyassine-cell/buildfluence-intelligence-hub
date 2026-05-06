@@ -224,6 +224,15 @@ export const FormDiagnostic = ({ open, onClose, situation = "" }: { open: boolea
             <option value="">{t("Type de risque", "Risk type")}</option>
             {riskTypes.map((r) => <option key={r} value={r}>{r}</option>)}
           </select>
+          {riskType === t("Autre", "Other") && (
+            <Input
+              name="autre_precision"
+              placeholder={t("Précisez votre besoin *", "Specify your need *")}
+              maxLength={200}
+              required
+              style={lightInputStyle}
+            />
+          )}
           <textarea
             name="message"
             placeholder={t("Message libre", "Free message")}

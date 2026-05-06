@@ -156,6 +156,7 @@ const AIPoweredMonitor = () => {
           { name: "sector", placeholder: t("Secteur à surveiller", "Sector to monitor"), required: true, maxLength: 150 },
           { name: "keywords", placeholder: t("Mots-clés prioritaires", "Priority keywords"), required: true, type: "textarea", rows: 4 },
           { name: "email", placeholder: t("Email professionnel", "Professional email"), required: true, type: "email", maxLength: 255 },
+          { name: "phone", placeholder: t("Téléphone *", "Phone *"), required: true, type: "tel", maxLength: 40 },
         ]}
       />
     </DetailPageLayout>

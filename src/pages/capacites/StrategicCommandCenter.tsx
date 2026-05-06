@@ -814,7 +814,7 @@ const CockpitInteractive = () => {
               marginBottom: 8,
             }}
           >
-            · {t("Cockpit décisionnel", "Decision cockpit")} ·
+            - {t("MODÈLE DE COCKPIT DÉCISIONNEL", "DECISION COCKPIT MODEL")} -
           </p>
           <h3
             style={{
