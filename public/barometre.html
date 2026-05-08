@@ -891,18 +891,28 @@ window.addEventListener('load',()=>{
   },500);
 });
 
-/* INTERSECTION OBSERVER */
-const io=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{
-    if(!e.isIntersecting)return;
-    const el=e.target;
-    el.classList.add('in');
-    el.querySelectorAll('.rt-bar-fill[data-w]').forEach((b,i)=>{
-      setTimeout(()=>{b.style.width=b.dataset.w+'%'},150+i*60);
-    });
-    io.unobserve(el);
+/* INTERSECTION OBSERVER — iframe/Lovable compatible */
+function activateEl(el){
+  if(el.classList.contains('in'))return;
+  el.classList.add('in');
+  el.querySelectorAll('.rt-bar-fill[data-w]').forEach((b,i)=>{
+    setTimeout(()=>{b.style.width=b.dataset.w+'%'},150+i*60);
   });
-},{threshold:.08});
+}
+/* Force tout visible immediatement (iframe, Lovable, preview) */
+function activateAll(){
+  document.querySelectorAll('.fi,.fi2,.fi3').forEach(activateEl);
+}
+/* Declenchement immediat */
+if(document.readyState==='loading'){
+  document.addEventListener('DOMContentLoaded', activateAll);
+} else {
+  activateAll();
+}
+/* IntersectionObserver en complement pour l'animation au scroll */
+const io=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){activateEl(e.target);io.unobserve(e.target);}});
+},{threshold:0,rootMargin:'200px 0px 200px 0px'});
 document.querySelectorAll('.fi,.fi2,.fi3').forEach(el=>io.observe(el));
 
 /* METHODO TABS */
