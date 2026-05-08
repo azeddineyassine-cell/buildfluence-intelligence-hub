@@ -959,7 +959,7 @@ const MechanismSection = ({ open }: { open: OpenDetail }) => {
         </div>
 
         {/* COL DROITE — Ecosystem */}
-        <div>
+        <div style={{ gridColumn: "3 / 4", gridRow: "1 / span 2" }}>
           <ColHeader>Ecosystem · Diffusion</ColHeader>
 
           <DestCard>
