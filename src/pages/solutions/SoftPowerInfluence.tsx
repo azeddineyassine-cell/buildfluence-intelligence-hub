@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import CTAFooter from "@/components/CTAFooter";
 import { FormStrategicExchange } from "@/components/FormModals";
+import CompetitiveLandscape from "@/components/CompetitiveLandscape";
 import logoBuildfluence from "@/assets/Logo_Buildfluence-Fond_Blanc_1.png";
 import logoMedz from "@/assets/clients/medz.png";
 import logoCri from "@/assets/clients/cri.png";
