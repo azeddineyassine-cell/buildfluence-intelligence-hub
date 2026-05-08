@@ -918,6 +918,7 @@ const MechanismSection = ({ open }: { open: OpenDetail }) => {
           <SourceCard k="ddd" glyph="ii" title="Deep Due Diligence" tagline="Sécuriser la décision dans des environnements incertains." mini={["OFAC","EU Sanctions","ICIJ","GAFI","PitchBook","D&B"]} open={open} />
           <SourceCard k="bi" glyph="iii" title="Business Intelligence" tagline="Lire la compétition avant qu'elle ne s'impose." mini={["Growth Lab","Statista","fDi","World Bank","Harvard"]} open={open} />
           <SourceCard k="humint" glyph="iv" title="HumInt — Intelligence Humaine" tagline="Activer le réseau qualifié. Comprendre les intentions réelles." tags={["Analystes terrain","Sources primaires"]} hum open={open} />
+          <CompetitiveLandscape />
         </div>
 
         {/* COL CENTRE — BF Core */}
