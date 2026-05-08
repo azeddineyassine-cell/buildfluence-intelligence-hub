@@ -360,6 +360,7 @@ const CompetitiveLandscape: React.FC<{ variant?: "both" | "map" | "sectors" }> =
           })}
         </div>
       </div>
+      )}
 
       <style>{`
         @media (max-width: 900px) {
