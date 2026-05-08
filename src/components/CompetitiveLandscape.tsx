@@ -256,8 +256,9 @@ const CompetitiveLandscape: React.FC<{ variant?: "both" | "map" | "sectors" }> =
           </div>
         </div>
       </div>
+      )}
 
-      {/* BLOC B — 9 SECTEURS pleine largeur */}
+      {showSectors && (
       <div>
         <div style={{ textAlign: "center", marginBottom: 24 }}>
           <div style={{ fontFamily: FONT_MONO, fontSize: 11, letterSpacing: "0.24em", textTransform: "uppercase", color: C.gold, marginBottom: 14, fontWeight: 600 }}>
