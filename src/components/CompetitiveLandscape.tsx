@@ -222,45 +222,54 @@ const CompetitiveLandscape: React.FC = () => {
   const [openIdx, setOpenIdx] = useState<number | null>(null);
 
   return (
-    <div style={{ marginTop: 24 }}>
-      {/* BLOC A — CARTE MONDE */}
-      <div style={{ background: "#FFFFFF", border: `1px solid ${C.rule}`, borderTop: `2px solid ${C.gold}`, padding: 18, marginBottom: 24 }}>
-        <div style={{ fontFamily: FONT_MONO, fontSize: 10, letterSpacing: "0.24em", textTransform: "uppercase", color: C.gold, marginBottom: 8, fontWeight: 600 }}>
-          Cartographie concurrentielle
+    <div style={{ marginTop: 56 }}>
+      {/* BLOC A — CARTE MONDE pleine largeur */}
+      <div style={{ marginBottom: 56 }}>
+        <div style={{ textAlign: "center", marginBottom: 28 }}>
+          <div style={{ fontFamily: FONT_MONO, fontSize: 11, letterSpacing: "0.24em", textTransform: "uppercase", color: C.gold, marginBottom: 14, fontWeight: 600 }}>
+            Cartographie concurrentielle
+          </div>
+          <h3 style={{ fontFamily: FONT_DISPLAY, fontSize: "clamp(28px,3vw,38px)", fontWeight: 600, color: C.navy, lineHeight: 1.1, letterSpacing: "-0.015em" }}>
+            Concurrence, <em style={{ fontStyle: "italic", color: C.gold, fontWeight: 400 }}>Coopétition</em> &amp; Alliances globales du Maroc
+          </h3>
+          <p style={{ fontFamily: FONT_SANS, fontStyle: "italic", fontSize: 15, color: C.inkSoft, marginTop: 12, maxWidth: 720, marginInline: "auto", lineHeight: 1.5 }}>
+            Lecture intégrée de l'environnement compétitif marocain — survolez un pays pour révéler son positionnement sectoriel.
+          </p>
         </div>
-        <h4 style={{ fontFamily: FONT_DISPLAY, fontSize: 20, fontWeight: 700, color: C.navy, marginBottom: 14, lineHeight: 1.15 }}>
-          Environnement compétitif du Maroc
-        </h4>
-        <WorldMap />
-        {/* Légende */}
-        <div style={{ display: "flex", flexWrap: "wrap", gap: 14, marginTop: 14, paddingTop: 12, borderTop: `1px solid ${C.rule}` }}>
-          {[
-            { c: "#22c55e", l: "Maroc" },
-            { c: "#ef4444", l: "Concurrents directs" },
-            { c: "#3b82f6", l: "Partenaires stratégiques" },
-            { c: "#f59e0b", l: "Coopétiteurs" },
-          ].map((it) => (
-            <div key={it.l} style={{ display: "flex", alignItems: "center", gap: 6 }}>
-              <span style={{ width: 10, height: 10, background: it.c, borderRadius: 0, display: "inline-block" }} />
-              <span style={{ fontFamily: FONT_MONO, fontSize: 9, letterSpacing: "0.12em", textTransform: "uppercase", color: C.inkSoft }}>{it.l}</span>
-            </div>
-          ))}
+        <div style={{ background: "#FFFFFF", border: `1px solid ${C.rule}`, borderTop: `2px solid ${C.gold}`, padding: "clamp(16px,2vw,28px)" }}>
+          <WorldMap />
+          {/* Légende */}
+          <div style={{ display: "flex", flexWrap: "wrap", gap: 22, justifyContent: "center", marginTop: 18, paddingTop: 16, borderTop: `1px solid ${C.rule}` }}>
+            {[
+              { c: "#22c55e", l: "Maroc" },
+              { c: "#ef4444", l: "Concurrents directs" },
+              { c: "#3b82f6", l: "Partenaires stratégiques" },
+              { c: "#f59e0b", l: "Coopétiteurs" },
+            ].map((it) => (
+              <div key={it.l} style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                <span style={{ width: 12, height: 12, background: it.c, borderRadius: 0, display: "inline-block" }} />
+                <span style={{ fontFamily: FONT_MONO, fontSize: 10, letterSpacing: "0.16em", textTransform: "uppercase", color: C.inkSoft, fontWeight: 600 }}>{it.l}</span>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
 
-      {/* BLOC B — 9 SECTEURS */}
-      <div style={{ background: "#FFFFFF", border: `1px solid ${C.rule}`, borderTop: `2px solid ${C.gold}`, padding: 18 }}>
-        <div style={{ fontFamily: FONT_MONO, fontSize: 10, letterSpacing: "0.24em", textTransform: "uppercase", color: C.gold, marginBottom: 8, fontWeight: 600 }}>
-          Baromètre AMDIE
+      {/* BLOC B — 9 SECTEURS pleine largeur */}
+      <div>
+        <div style={{ textAlign: "center", marginBottom: 24 }}>
+          <div style={{ fontFamily: FONT_MONO, fontSize: 11, letterSpacing: "0.24em", textTransform: "uppercase", color: C.gold, marginBottom: 14, fontWeight: 600 }}>
+            Baromètre AMDIE
+          </div>
+          <h3 style={{ fontFamily: FONT_DISPLAY, fontSize: "clamp(24px,2.4vw,30px)", fontWeight: 600, color: C.navy, lineHeight: 1.15, letterSpacing: "-0.01em" }}>
+            Les 9 secteurs stratégiques identifiés par l'AMDIE
+          </h3>
+          <p style={{ fontFamily: FONT_SANS, fontStyle: "italic", fontSize: 13, color: C.inkSoft, marginTop: 10 }}>
+            Cliquer sur un secteur pour voir le détail
+          </p>
         </div>
-        <h4 style={{ fontFamily: FONT_DISPLAY, fontSize: 20, fontWeight: 700, color: C.navy, marginBottom: 4, lineHeight: 1.15 }}>
-          Les 9 secteurs stratégiques identifiés par l'AMDIE
-        </h4>
-        <p style={{ fontFamily: FONT_SANS, fontStyle: "italic", fontSize: 12, color: C.inkSoft, marginBottom: 14 }}>
-          Cliquer sur un secteur pour voir le détail
-        </p>
 
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 8 }}>
+        <div className="cl-sectors-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 14 }}>
           {SECTORS.map((s, i) => {
             const isOpen = openIdx === i;
             return (
@@ -271,31 +280,31 @@ const CompetitiveLandscape: React.FC = () => {
                     gridColumn: "span 1",
                     background: isOpen ? C.paper : "#fff",
                     border: `1px solid ${isOpen ? C.gold : C.rule}`,
-                    padding: "10px 8px",
+                    borderTop: `2px solid ${isOpen ? C.gold : "transparent"}`,
+                    padding: "16px 16px",
                     cursor: "pointer",
                     textAlign: "left",
                     transition: "all 0.2s ease",
                     display: "flex",
                     flexDirection: "column",
-                    gap: 6,
-                    minHeight: 92,
+                    gap: 10,
+                    minHeight: 130,
                   }}
-                  onMouseEnter={(e) => { e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = `0 4px 12px rgba(201,168,76,0.18)`; }}
+                  onMouseEnter={(e) => { e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = `0 6px 18px rgba(201,168,76,0.18)`; }}
                   onMouseLeave={(e) => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "none"; }}
                 >
-                  <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
-                    <span style={{ fontSize: 16 }}>{s.icon}</span>
-                    <span style={{ fontFamily: FONT_DISPLAY, fontSize: 12, fontWeight: 700, color: C.navy, lineHeight: 1.1 }}>{s.name}</span>
+                  <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+                    <span style={{ fontSize: 22 }}>{s.icon}</span>
+                    <span style={{ fontFamily: FONT_DISPLAY, fontSize: 17, fontWeight: 700, color: C.navy, lineHeight: 1.15, letterSpacing: "-0.005em" }}>{s.name}</span>
                   </div>
-                  <span style={{ fontFamily: FONT_MONO, fontSize: 8, letterSpacing: "0.14em", textTransform: "uppercase", padding: "3px 6px", display: "inline-block", width: "fit-content", fontWeight: 600, ...BADGE_STYLES[s.badge] }}>
+                  <span style={{ fontFamily: FONT_MONO, fontSize: 9, letterSpacing: "0.16em", textTransform: "uppercase", padding: "4px 8px", display: "inline-block", width: "fit-content", fontWeight: 600, ...BADGE_STYLES[s.badge] }}>
                     {s.badgeLabel}
                   </span>
-                  <div style={{ fontFamily: FONT_MONO, fontSize: 9, color: C.inkSoft, letterSpacing: "0.06em" }}>
+                  <div style={{ fontFamily: FONT_MONO, fontSize: 10, color: C.inkSoft, letterSpacing: "0.08em", marginTop: "auto" }}>
                     {s.mentions} mentions
                   </div>
                 </button>
 
-                {/* Accordion panel — full row when open */}
                 {isOpen && (
                   <div
                     style={{
@@ -303,35 +312,31 @@ const CompetitiveLandscape: React.FC = () => {
                       background: C.paper,
                       border: `1px solid ${C.gold}`,
                       borderTop: `2px solid ${C.gold}`,
-                      padding: 16,
-                      maxHeight: 600,
-                      opacity: 1,
-                      transition: "max-height 0.3s ease, opacity 0.3s ease",
+                      padding: 22,
                       position: "relative",
                     }}
                   >
                     <button
                       onClick={() => setOpenIdx(null)}
                       aria-label="Fermer"
-                      style={{ position: "absolute", top: 8, right: 10, background: "transparent", border: "none", cursor: "pointer", fontSize: 18, color: C.navy, lineHeight: 1 }}
+                      style={{ position: "absolute", top: 10, right: 14, background: "transparent", border: "none", cursor: "pointer", fontSize: 22, color: C.navy, lineHeight: 1 }}
                     >×</button>
-                    <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 8 }}>
-                      <span style={{ fontSize: 18 }}>{s.icon}</span>
-                      <h5 style={{ fontFamily: FONT_DISPLAY, fontSize: 16, fontWeight: 700, color: C.navy }}>{s.name}</h5>
+                    <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 10 }}>
+                      <span style={{ fontSize: 22 }}>{s.icon}</span>
+                      <h5 style={{ fontFamily: FONT_DISPLAY, fontSize: 20, fontWeight: 700, color: C.navy }}>{s.name}</h5>
                     </div>
-                    <p style={{ fontFamily: FONT_SANS, fontSize: 12, color: C.ink, lineHeight: 1.5, marginBottom: 12 }}>{s.detail}</p>
+                    <p style={{ fontFamily: FONT_SANS, fontSize: 14, color: C.ink, lineHeight: 1.55, marginBottom: 16, maxWidth: 760 }}>{s.detail}</p>
 
-                    {/* Mini bar chart */}
-                    <div style={{ display: "flex", flexDirection: "column", gap: 6, marginBottom: 8 }}>
+                    <div style={{ display: "flex", flexDirection: "column", gap: 10, marginBottom: 10, maxWidth: 560 }}>
                       {(() => {
                         const max = Math.max(s.marocVal, s.bestVal, 1);
                         const Bar = ({ label, val, color }: { label: string; val: number; color: string }) => (
                           <div>
-                            <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 2 }}>
-                              <span style={{ fontFamily: FONT_MONO, fontSize: 10, color: C.navy, letterSpacing: "0.08em" }}>{label}</span>
-                              <span style={{ fontFamily: FONT_MONO, fontSize: 10, color: C.navy, fontWeight: 600 }}>{val}</span>
+                            <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 4 }}>
+                              <span style={{ fontFamily: FONT_MONO, fontSize: 10, color: C.navy, letterSpacing: "0.10em" }}>{label}</span>
+                              <span style={{ fontFamily: FONT_MONO, fontSize: 10, color: C.navy, fontWeight: 700 }}>{val}</span>
                             </div>
-                            <div style={{ background: "#E6E3DB", height: 10, position: "relative" }}>
+                            <div style={{ background: "#E6E3DB", height: 12, position: "relative" }}>
                               <div style={{ width: `${(val / max) * 100}%`, height: "100%", background: color, transition: "width 0.4s ease" }} />
                             </div>
                           </div>
@@ -344,7 +349,7 @@ const CompetitiveLandscape: React.FC = () => {
                         );
                       })()}
                     </div>
-                    <p style={{ fontFamily: FONT_MONO, fontSize: 9, letterSpacing: "0.14em", textTransform: "uppercase", color: C.inkSoft }}>{s.comp}</p>
+                    <p style={{ fontFamily: FONT_MONO, fontSize: 10, letterSpacing: "0.16em", textTransform: "uppercase", color: C.inkSoft }}>{s.comp}</p>
                   </div>
                 )}
               </React.Fragment>
@@ -352,6 +357,15 @@ const CompetitiveLandscape: React.FC = () => {
           })}
         </div>
       </div>
+
+      <style>{`
+        @media (max-width: 900px) {
+          .cl-sectors-grid { grid-template-columns: repeat(2, 1fr) !important; }
+        }
+        @media (max-width: 560px) {
+          .cl-sectors-grid { grid-template-columns: 1fr !important; }
+        }
+      `}</style>
     </div>
   );
 };
