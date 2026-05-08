@@ -1029,9 +1029,12 @@ const MechanismSection = ({ open }: { open: OpenDetail }) => {
 
         {/* Cartographie compétitive — sous gauche+centre, à gauche de la colonne droite */}
         <div style={{ gridColumn: "1 / 3", marginTop: 8 }}>
-          <CompetitiveLandscape />
+          <CompetitiveLandscape variant="map" />
         </div>
       </div>
+
+      {/* 9 secteurs — pleine largeur sous toute la grille */}
+      <CompetitiveLandscape variant="sectors" />
 
       {/* Footer 3 colonnes */}
       <div className="sp-mech-foot mt-8 pt-6" style={{ display: "grid", gridTemplateColumns: "320px 1fr 320px", gap: 32, borderTop: "1px solid rgba(10,22,40,0.10)" }}>
