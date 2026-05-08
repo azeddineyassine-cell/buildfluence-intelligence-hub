@@ -2,7 +2,15 @@ const Barometre = () => {
   return (
     <iframe
       src="/barometre.html"
-      style={{ width: "100%", height: "100vh", border: "none", display: "block" }}
+      style={{
+        position: "fixed",
+        top: 0,
+        left: 0,
+        width: "100vw",
+        height: "100vh",
+        border: "none",
+        zIndex: 9999,
+      }}
       title="Baromètre d'Investissement — Sep 2025"
     />
   );
