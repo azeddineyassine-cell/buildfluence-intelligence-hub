@@ -218,11 +218,14 @@ const WorldMap: React.FC = () => {
   );
 };
 
-const CompetitiveLandscape: React.FC = () => {
+const CompetitiveLandscape: React.FC<{ variant?: "both" | "map" | "sectors" }> = ({ variant = "both" }) => {
   const [openIdx, setOpenIdx] = useState<number | null>(null);
+  const showMap = variant === "both" || variant === "map";
+  const showSectors = variant === "both" || variant === "sectors";
 
   return (
-    <div style={{ marginTop: 56 }}>
+    <div style={{ marginTop: variant === "sectors" ? 32 : 8 }}>
+      {showMap && (
       {/* BLOC A — CARTE MONDE pleine largeur */}
       <div style={{ marginBottom: 56 }}>
         <div style={{ textAlign: "center", marginBottom: 28 }}>
