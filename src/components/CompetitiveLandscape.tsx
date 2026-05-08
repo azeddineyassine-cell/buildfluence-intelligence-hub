@@ -226,8 +226,7 @@ const CompetitiveLandscape: React.FC<{ variant?: "both" | "map" | "sectors" }> =
   return (
     <div style={{ marginTop: variant === "sectors" ? 32 : 8 }}>
       {showMap && (
-      {/* BLOC A — CARTE MONDE pleine largeur */}
-      <div style={{ marginBottom: 56 }}>
+      <div style={{ marginBottom: variant === "map" ? 0 : 56 }}>
         <div style={{ textAlign: "center", marginBottom: 28 }}>
           <div style={{ fontFamily: FONT_MONO, fontSize: 11, letterSpacing: "0.24em", textTransform: "uppercase", color: C.gold, marginBottom: 14, fontWeight: 600 }}>
             Cartographie concurrentielle
