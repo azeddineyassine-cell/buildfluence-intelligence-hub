@@ -959,7 +959,7 @@ const MechanismSection = ({ open }: { open: OpenDetail }) => {
         </div>
 
         {/* COL DROITE — Ecosystem */}
-        <div>
+        <div style={{ gridColumn: "3 / 4", gridRow: "1 / span 2" }}>
           <ColHeader>Ecosystem · Diffusion</ColHeader>
 
           <DestCard>
@@ -1028,7 +1028,7 @@ const MechanismSection = ({ open }: { open: OpenDetail }) => {
         </div>
 
         {/* Cartographie compétitive — sous gauche+centre, à gauche de la colonne droite */}
-        <div style={{ gridColumn: "1 / 3", marginTop: 8 }}>
+        <div style={{ gridColumn: "1 / 3", gridRow: "2 / 3", marginTop: 8 }}>
           <CompetitiveLandscape variant="map" />
         </div>
       </div>
