@@ -1,7 +1,12 @@
+import { useMemo } from "react";
+
 const Barometre = () => {
+  // Cache-busting param so iframe always loads the freshest barometre.html
+  const src = useMemo(() => `/barometre.html?v=${Date.now()}`, []);
+
   return (
     <iframe
-      src="/barometre.html"
+      src={src}
       style={{
         position: "fixed",
         top: 0,
