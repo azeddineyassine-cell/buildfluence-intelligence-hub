@@ -38,7 +38,12 @@ const Navbar = () => {
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
+    const onOpenEspace = () => setEspaceClientOpen(true);
+    window.addEventListener("open-espace-client", onOpenEspace as EventListener);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("open-espace-client", onOpenEspace as EventListener);
+    };
   }, []);
 
   const situationsItems = [

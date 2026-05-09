@@ -19,6 +19,7 @@ import logoDnb from "@/assets/clients/dun-bradstreet.png";
 import logoGrowthlab from "@/assets/clients/growthlab.png";
 import logoStatista from "@/assets/clients/statista.png";
 import logoFdi from "@/assets/clients/fdi.png";
+import logoItc from "@/assets/itc-logo.png";
 import logoWorldbank from "@/assets/clients/worldbank.png";
 import logoHarvard from "@/assets/clients/harvard.png";
 import logoAmdie from "@/assets/clients/amdie.png";
@@ -57,6 +58,7 @@ const AMDIE_LOGOS: Record<string, string> = { amdie: logoAmdie, micepp: logoMice
 const SOURCE_LOGOS: Record<string, string> = {
   OFAC: logoOfac, "EU Sanctions": logoEuSanctions, ICIJ: logoIcij, GAFI: logoGafi, PitchBook: logoPitchbook, "D&B": logoDnb,
   "Growth Lab": logoGrowthlab, Statista: logoStatista, fDi: logoFdi, "World Bank": logoWorldbank, Harvard: logoHarvard,
+  ITC: logoItc,
 };
 
 import {
@@ -917,7 +919,7 @@ const MechanismSection = ({ open }: { open: OpenDetail }) => {
           <ColHeader>Back-Office · Captation</ColHeader>
           <SourceCard k="veille" glyph="i" title="Veille & Intelligence" tagline="Voir avant les autres. Détecter les signaux invisibles." tags={["6 dimensions","NLP","Temps réel"]} open={open} />
           <SourceCard k="ddd" glyph="ii" title="Deep Due Diligence" tagline="Sécuriser la décision dans des environnements incertains." mini={["OFAC","EU Sanctions","ICIJ","GAFI","PitchBook","D&B"]} open={open} />
-          <SourceCard k="bi" glyph="iii" title="Business Intelligence" tagline="Lire la compétition avant qu'elle ne s'impose." mini={["Growth Lab","Statista","fDi","World Bank","Harvard"]} open={open} />
+          <SourceCard k="bi" glyph="iii" title="Business Intelligence" tagline="Lire la compétition avant qu'elle ne s'impose." mini={["Growth Lab","Statista","fDi","World Bank","Harvard","ITC"]} open={open} />
           <SourceCard k="humint" glyph="iv" title="HumInt — Intelligence Humaine" tagline="Activer le réseau qualifié. Comprendre les intentions réelles." tags={["Analystes terrain","Sources primaires"]} hum open={open} />
         </div>
 
@@ -1239,7 +1241,13 @@ const CaseFileSection = () => (
               <div style={{ fontFamily: FONT_MONO, fontSize: 9, letterSpacing: "0.24em", textTransform: "uppercase", color: C.gold, marginBottom: 6 }}>Espace Client · Bientôt accessible</div>
               <div style={{ fontFamily: FONT_ITALIC, fontStyle: "italic", fontSize: 16, color: C.paper, lineHeight: 1.4 }}>Une page dédiée détaillera l'ensemble du dispositif, sa méthodologie et ses livrables.</div>
             </div>
-            <div style={{ fontFamily: FONT_MONO, fontSize: 10, letterSpacing: "0.22em", textTransform: "uppercase", color: C.gold, padding: "10px 16px", border: `1px solid ${C.gold}`, whiteSpace: "nowrap" }}>→ Accès réservé</div>
+            <button
+              type="button"
+              onClick={() => window.dispatchEvent(new CustomEvent("open-espace-client"))}
+              style={{ fontFamily: FONT_MONO, fontSize: 10, letterSpacing: "0.22em", textTransform: "uppercase", color: C.gold, padding: "10px 16px", border: `1px solid ${C.gold}`, whiteSpace: "nowrap", background: "transparent", cursor: "pointer", transition: "all 0.2s" }}
+              onMouseEnter={(e) => { e.currentTarget.style.background = C.gold; e.currentTarget.style.color = C.navy; }}
+              onMouseLeave={(e) => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.color = C.gold; }}
+            >→ Accès réservé</button>
           </div>
         </div>
       </div>
