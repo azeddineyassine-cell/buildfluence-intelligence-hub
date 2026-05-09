@@ -202,7 +202,7 @@ const WorldMap: React.FC = () => {
             position: "absolute",
             left: tooltip.x,
             top: tooltip.y,
-            background: "rgba(255,255,255,0.98)",
+            background: "#FFFFFF",
             border: `1px solid ${C.rule}`,
             borderTop: `2px solid ${C.gold}`,
             padding: "10px 12px",
@@ -238,7 +238,7 @@ const CompetitiveLandscape: React.FC<{ variant?: "both" | "map" | "sectors" }> =
             Lecture intégrée de l'environnement compétitif marocain — survolez un pays pour révéler son positionnement sectoriel.
           </p>
         </div>
-        <div style={{ background: "#FFFFFF", border: `1px solid ${C.rule}`, borderTop: `2px solid ${C.gold}`, padding: "clamp(16px,2vw,28px)" }}>
+        <div style={{ background: C.paper, border: `1px solid ${C.rule}`, borderTop: `2px solid ${C.gold}`, padding: "clamp(16px,2vw,28px)" }}>
           <WorldMap />
           {/* Légende */}
           <div style={{ display: "flex", flexWrap: "wrap", gap: 22, justifyContent: "center", marginTop: 18, paddingTop: 16, borderTop: `1px solid ${C.rule}` }}>
@@ -261,9 +261,6 @@ const CompetitiveLandscape: React.FC<{ variant?: "both" | "map" | "sectors" }> =
       {showSectors && (
       <div>
         <div style={{ textAlign: "center", marginBottom: 24 }}>
-          <div style={{ fontFamily: FONT_MONO, fontSize: 11, letterSpacing: "0.24em", textTransform: "uppercase", color: C.gold, marginBottom: 14, fontWeight: 600 }}>
-            Baromètre AMDIE
-          </div>
           <h3 style={{ fontFamily: FONT_DISPLAY, fontSize: "clamp(24px,2.4vw,30px)", fontWeight: 600, color: C.navy, lineHeight: 1.15, letterSpacing: "-0.01em" }}>
             Les 9 secteurs stratégiques identifiés par l'AMDIE
           </h3>
@@ -281,7 +278,7 @@ const CompetitiveLandscape: React.FC<{ variant?: "both" | "map" | "sectors" }> =
                   onClick={() => setOpenIdx(isOpen ? null : i)}
                   style={{
                     gridColumn: "span 1",
-                    background: isOpen ? C.paper : "#fff",
+                    background: isOpen ? "#FFFFFF" : C.paper,
                     border: `1px solid ${isOpen ? C.gold : C.rule}`,
                     borderTop: `2px solid ${isOpen ? C.gold : "transparent"}`,
                     padding: "16px 16px",
