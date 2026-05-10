@@ -1091,6 +1091,14 @@ tlNodes.forEach(node=>{
   new MutationObserver(run).observe(document.body,{childList:true,subtree:true});
 })();
 
+/* STRATEGIC EXCHANGE FORM TRIGGER (sent to parent React app) */
+function openStrategicExchange(e){
+  if(e) e.preventDefault();
+  try { window.parent.postMessage('open-strategic-exchange','*'); } catch(_){}
+}
+document.getElementById('nav-strategic-exchange')?.addEventListener('click', openStrategicExchange);
+document.getElementById('cta-strategic-exchange')?.addEventListener('click', openStrategicExchange);
+
 </script>
 </body>
 </html>
