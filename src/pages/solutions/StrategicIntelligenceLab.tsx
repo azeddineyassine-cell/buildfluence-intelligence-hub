@@ -2048,9 +2048,41 @@ const OcpCaseFile = () => (
     <MissionTimeline
       title="Déroulé de la mission"
       items={[
-        { date: "SEMAINE 1", title: "Analyse par échiquiers", description: "Décodage des trois niveaux : géopolitique, concurrentiel et sociétal. Identification des acteurs et de leurs intérêts croisés.", tag: "Cartographie posée", tagTone: "yellow" },
-        { date: "SEMAINE 2-3", title: "Matrice dynamique des parties prenantes", description: "Identification de 12 ONG d'Europe du Nord comme sources primaires, et de leurs idiots utiles dans les médias francophones.", tag: "Mécanique hostile révélée", tagTone: "red" },
-        { date: "SEMAINE 4", title: "Tableau de bord décisionnel", description: "Livraison au cabinet du Président. Actions de sensibilisation auprès des clients et partenaires. Contre-influence activée.", tag: "Menaces neutralisées", tagTone: "green" },
+        {
+          date: "SEMAINE 1",
+          title: "Analyse par échiquier",
+          tooltipTitle: "Analyse par échiquier",
+          bullets: [
+            "Décodage des 3 niveaux : géopolitique, concurrentiel et sociétal",
+            "Identification des acteurs et de leurs intérêts croisés",
+          ],
+          badges: [{ label: "Cartographie phase" }],
+        },
+        {
+          date: "SEMAINE 2-3",
+          title: "Matrice dynamique des Stakeholders",
+          tooltipTitle: "Matrice dynamique des parties prenantes",
+          bullets: [
+            "Identification de 12 ONG d'Europe du Nord comme sources primaires",
+            "Identification de leurs idiots utiles dans les médias francophones",
+            "Livraison au cabinet du Président",
+          ],
+          badges: [
+            { label: "Pression" },
+            { label: "Hostile", tone: "alert" },
+            { label: "Dealer" },
+          ],
+        },
+        {
+          date: "SEMAINE 4",
+          title: "Tableau de bord décisionnel",
+          tooltipTitle: "Tableau de bord décisionnel",
+          bullets: [
+            "Actions de sensibilisation auprès des clients et partenaires",
+            "Contre-influence activée",
+          ],
+          badges: [{ label: "Mission accomplie", tone: "success" }],
+        },
       ]}
     />
   </CaseFileSection>
