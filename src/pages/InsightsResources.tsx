@@ -386,8 +386,13 @@ const InsightsResources = () => {
       </section>
 
       <CTAFooter />
+      <FormStrategicExchange open={formOpen} onClose={() => setFormOpen(false)} />
     </div>
   );
 };
+
+// expose page-level trigger if needed externally
+export const __noop = () => {};
+
 
 export default InsightsResources;
