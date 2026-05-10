@@ -28,11 +28,11 @@ body{font-family:'DM Sans',sans-serif;background:var(--gray-ll);color:var(--text
 .hero-logos{display:flex;align-items:center;gap:18px}
 .hero-logos img.rca{height:72px;width:auto}
 .hero-sep{width:1px;height:44px;background:rgba(255,255,255,.18)}
-.hero-logos img.marsa{height:36px;width:auto;filter:brightness(0) invert(1);opacity:.82}
+.hero-logos img.marsa{height:36px;width:auto;background:#fff;padding:8px 14px;border-radius:2px;filter:none;opacity:1;box-shadow:0 1px 8px rgba(255,255,255,.16)}
 .hero-marsa-sep{width:1px;height:32px;background:rgba(255,255,255,.12)}
 .hero-marsa-lbl{font-size:9px;color:rgba(255,255,255,.28);letter-spacing:.1em;text-transform:uppercase;line-height:1.4;max-width:70px}
 .hero-right{display:flex;align-items:center;gap:10px}
-.hero-right img.bf{height:30px;filter:brightness(0) invert(1);opacity:.85}
+.hero-right img.bf{height:30px;background:#fff;padding:8px 16px;border-radius:2px;filter:none;opacity:1;box-shadow:0 1px 8px rgba(255,255,255,.16)}
 .hero-right-lbl{font-size:9px;color:rgba(255,255,255,.28);letter-spacing:.08em;text-transform:uppercase}
 .hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(0,98,51,.28);border:1px solid rgba(0,98,51,.45);padding:9px 18px;border-radius:50px;font-size:11px;color:rgba(255,255,255,.85);font-weight:600;margin-bottom:22px}
 .hero-dot{width:7px;height:7px;border-radius:50%;background:var(--gold);animation:pulse 2s infinite}
@@ -81,7 +81,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--gray-ll);color:var(--text
 .htl-sec-label{font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(200,151,42,.6);margin-bottom:10px}
 .htl-sec-title{font-family:'Cormorant Garamond',serif;font-size:clamp(26px,4vw,40px);color:#fff;line-height:1.2;margin-bottom:16px;font-weight:700}
 .htl-sec-lead{font-size:16px;color:rgba(255,255,255,.42);line-height:1.8;max-width:640px;margin-bottom:56px}
-.htl-track{position:relative;padding-bottom:200px}
+.htl-track{position:relative;padding-bottom:380px}
 .htl-line{position:absolute;top:76px;left:12.5%;right:12.5%;height:2px;background:linear-gradient(90deg,var(--green),var(--gold),var(--green),rgba(200,151,42,.3));z-index:0}
 .htl-nodes{display:grid;grid-template-columns:repeat(4,1fr);position:relative;z-index:1}
 .htl-node{display:flex;flex-direction:column;align-items:center;cursor:pointer;padding:0 12px;position:relative}
@@ -161,6 +161,18 @@ body{font-family:'DM Sans',sans-serif;background:var(--gray-ll);color:var(--text
 .cta-sub{font-size:15px;color:rgba(255,255,255,.42);max-width:480px;margin:0 auto 32px;line-height:1.75}
 .cta-btn{display:inline-block;background:linear-gradient(135deg,var(--green),var(--green-d));color:#fff;padding:16px 36px;border-radius:50px;font-size:13px;font-weight:700;text-decoration:none;letter-spacing:.05em;transition:transform .2s,box-shadow .2s}
 .cta-btn:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(0,98,51,.4)}
+.cta-modal{position:fixed;inset:0;background:rgba(13,27,42,.72);display:none;align-items:center;justify-content:center;padding:24px;z-index:1000}
+.cta-modal.active{display:flex}
+.cta-dialog{width:min(640px,100%);background:#F4F4F4;border:1px solid #D1D5DB;border-radius:12px;padding:28px;box-shadow:0 24px 80px rgba(0,0,0,.45);position:relative;color:#1a2744}
+.cta-close{position:absolute;right:16px;top:14px;background:transparent;border:0;color:#1a2744;font-size:28px;line-height:1;cursor:pointer}
+.cta-form-title{font-family:'Cormorant Garamond',serif;font-size:24px;color:#1a2744;margin-bottom:8px;font-weight:700}
+.cta-form-secure{font-size:12px;color:#6B7280;margin-bottom:18px}
+.cta-form{display:grid;gap:14px}
+.cta-form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.cta-form input,.cta-form textarea{width:100%;background:#fff;border:1px solid #D1D5DB;border-radius:4px;color:#1a2744;font-family:'DM Sans',sans-serif;font-size:14px;padding:12px 14px;outline:none}
+.cta-form textarea{resize:vertical;min-height:110px}
+.cta-submit{background:var(--gold);color:#1a2744;border:0;border-radius:4px;padding:14px 18px;font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;cursor:pointer}
+.cta-confirm{display:none;font-size:13px;color:var(--green-d);font-weight:700;text-align:center;margin-top:4px}
 
 .footer{background:linear-gradient(135deg,#141E2E,#1B2C42);padding:28px 48px;display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
 .footer-logos{display:flex;align-items:center;gap:16px}
@@ -309,6 +321,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--gray-ll);color:var(--text
  <div class="htl-tooltip">
  <div class="tt-tag c4">Phase 4 Avr. à Mai 2026</div>
  <div class="tt-title">Gestion de crise en conditions réelles</div>
+ <img class="poc-img" src="/rca-phase4-crisis.png" alt="Montée en puissance de la crise RCA">
  <div class="tt-body">Deux crises majeures testent le dispositif. Avril 2026 : campagne coordonnée d'attaques informationnelles ciblant directement la DG. Mai 2026 : Crise du Clasico RCA vs FAR 80 mentions, 41,2M de contacts, sentiment 100% négatif en 72h. Détection immédiate, analyse des narratifs, recommandations actionnables à la DG en temps réel.</div>
  </div>
  </div>
@@ -412,10 +425,32 @@ body{font-family:'DM Sans',sans-serif;background:var(--gray-ll);color:var(--text
  <div style="font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(200,151,42,.65);margin-bottom:12px">Votre organisation est-elle prête ?</div>
  <h2 class="cta-title">La prochaine crise ne vous préviendra pas.</h2>
  <p class="cta-sub">Buildfluence accompagne les organisations qui choisissent de décider avec souveraineté. Échangeons sur votre situation.</p>
- <a href="https://buildfluence.com" class="cta-btn">Demander un échange stratégique →</a>
+ <a href="#" class="cta-btn" onclick="openStrategicForm(event)">Demander un échange stratégique →</a>
  </div>
  </div>
 </section>
+
+<div class="cta-modal" id="strategicModal" aria-hidden="true">
+ <div class="cta-dialog" role="dialog" aria-modal="true" aria-labelledby="strategicModalTitle">
+ <button class="cta-close" type="button" onclick="closeStrategicForm()" aria-label="Fermer">×</button>
+ <div class="cta-form-title" id="strategicModalTitle">Demander mon échange stratégique</div>
+ <div class="cta-form-secure">🔒 Communication sécurisée et confidentielle</div>
+ <form class="cta-form" onsubmit="submitStrategicForm(event)">
+ <div class="cta-form-row">
+ <input required name="name" placeholder="Nom" maxlength="100">
+ <input required name="org" placeholder="Organisation" maxlength="100">
+ </div>
+ <div class="cta-form-row">
+ <input required name="poste" placeholder="Poste / Fonction" maxlength="100">
+ <input required type="email" name="email" placeholder="Email professionnel" maxlength="255">
+ </div>
+ <input type="tel" name="phone" placeholder="Téléphone" maxlength="20">
+ <textarea name="message" placeholder="Tapez votre texte..." maxlength="1000"></textarea>
+ <button class="cta-submit" type="submit">Soumettre ma demande</button>
+ <div class="cta-confirm" id="strategicConfirm">Demande prête à être transmise.</div>
+ </form>
+ </div>
+</div>
 
 <footer class="footer">
  <div class="footer-logos">
@@ -441,6 +476,23 @@ document.addEventListener('click',function(e){
  if(!e.target.closest('.htl-node'))
  document.querySelectorAll('.htl-node').forEach(n=>n.classList.remove('active'));
 });
+function openStrategicForm(e){
+ if(e)e.preventDefault();
+ var modal=document.getElementById('strategicModal');
+ if(modal){modal.classList.add('active');modal.setAttribute('aria-hidden','false');}
+}
+function closeStrategicForm(){
+ var modal=document.getElementById('strategicModal');
+ if(modal){modal.classList.remove('active');modal.setAttribute('aria-hidden','true');}
+}
+function submitStrategicForm(e){
+ e.preventDefault();
+ var confirm=document.getElementById('strategicConfirm');
+ if(confirm)confirm.style.display='block';
+ e.target.reset();
+}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeStrategicForm();});
+document.getElementById('strategicModal')?.addEventListener('click',function(e){if(e.target===this)closeStrategicForm();});
 </script>
 </body>
 </html>
