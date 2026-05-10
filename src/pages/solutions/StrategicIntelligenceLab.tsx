@@ -1931,10 +1931,10 @@ type TimelineBadge = { label: string; tone?: "default" | "success" | "alert" };
 type TimelineNode = { date: string; title: string; tooltipTitle: string; bullets: string[]; badges: TimelineBadge[] };
 
 const MissionTimeline = ({ title, items }: { title: string; items: TimelineNode[] }) => {
-  const [active, setActive] = React.useState<number | null>(null);
-  const wrapRef = React.useRef<HTMLDivElement | null>(null);
+  const [active, setActive] = useState<number | null>(null);
+  const wrapRef = useRef<HTMLDivElement | null>(null);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const onDoc = (e: MouseEvent) => {
       if (!wrapRef.current) return;
       if (!wrapRef.current.contains(e.target as Node)) setActive(null);
