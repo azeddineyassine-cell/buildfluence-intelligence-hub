@@ -66,6 +66,7 @@ const CARDS: Card[] = [
 const InsightsResources = () => {
   const [active, setActive] = useState<Filter>("all");
   const [email, setEmail] = useState("");
+  const [formOpen, setFormOpen] = useState(false);
 
   const visible = useMemo(
     () => (active === "all" ? CARDS : CARDS.filter((c) => c.filter === active)),
@@ -322,6 +323,21 @@ const InsightsResources = () => {
               <div className="ir-overlay-inner">
                 <div className="ir-overlay-cat">{card.category} · {card.date}</div>
                 <h3 className="ir-overlay-title">{card.title}</h3>
+                {card.overlayImage && (
+                  <img
+                    src={card.overlayImage}
+                    alt=""
+                    style={{
+                      width: '100%',
+                      height: 'auto',
+                      maxHeight: '140px',
+                      objectFit: 'cover',
+                      borderRadius: '2px',
+                      marginBottom: '14px',
+                      border: '1px solid rgba(201,168,76,0.35)',
+                    }}
+                  />
+                )}
                 <p className="ir-overlay-summary">{card.summary}</p>
                 <button
                   type="button"
