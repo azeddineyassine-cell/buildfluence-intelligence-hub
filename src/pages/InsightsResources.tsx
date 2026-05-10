@@ -1,8 +1,10 @@
 import { useMemo, useState } from "react";
 import Navbar from "@/components/Navbar";
 import CTAFooter from "@/components/CTAFooter";
+import { FormStrategicExchange } from "@/components/FormModals";
 import barometreCover from "@/assets/barometre-cover.png";
-import rajaLogo from "@/assets/raja-club.png";
+import rcaGradins from "@/assets/rca-gradins.png";
+import rcaEquipe from "@/assets/rca-equipe.png";
 
 type Filter =
   | "all"
@@ -32,6 +34,7 @@ type Card = {
   image?: string;
   logo?: string;
   gradient?: string;
+  overlayImage?: string;
 };
 
 const CARDS: Card[] = [
@@ -50,19 +53,20 @@ const CARDS: Card[] = [
     id: "raja-club-athletic",
     filter: "veille-sport",
     category: "Veille Sport",
-    date: "Mai 2026",
+    date: "Juil. 2026 - Mars 2027",
     title: "Raja Club Athletic : la veille comme bouclier institutionnel",
     summary:
-      "Comment le premier club de football marocain a transformé la pression médiatique en avantage décisionnel grâce à une cellule de veille souveraine. Période : Juil. 2025 — Mai 2026.",
+      "Comment le premier club de football marocain a transformé la pression médiatique en avantage décisionnel grâce à une cellule de veille souveraine. Période : Juil. 2026 - Mars 2027.",
     href: "/Cas_client_RCA_v2.html",
-    logo: rajaLogo,
-    gradient: "linear-gradient(135deg, #0a3d2a 0%, #1a6b4a 50%, #c9a84c 100%)",
+    image: rcaGradins,
+    overlayImage: rcaEquipe,
   },
 ];
 
 const InsightsResources = () => {
   const [active, setActive] = useState<Filter>("all");
   const [email, setEmail] = useState("");
+  const [formOpen, setFormOpen] = useState(false);
 
   const visible = useMemo(
     () => (active === "all" ? CARDS : CARDS.filter((c) => c.filter === active)),
@@ -319,6 +323,21 @@ const InsightsResources = () => {
               <div className="ir-overlay-inner">
                 <div className="ir-overlay-cat">{card.category} · {card.date}</div>
                 <h3 className="ir-overlay-title">{card.title}</h3>
+                {card.overlayImage && (
+                  <img
+                    src={card.overlayImage}
+                    alt=""
+                    style={{
+                      width: '100%',
+                      height: 'auto',
+                      maxHeight: '140px',
+                      objectFit: 'cover',
+                      borderRadius: '2px',
+                      marginBottom: '14px',
+                      border: '1px solid rgba(201,168,76,0.35)',
+                    }}
+                  />
+                )}
                 <p className="ir-overlay-summary">{card.summary}</p>
                 <button
                   type="button"
@@ -367,8 +386,13 @@ const InsightsResources = () => {
       </section>
 
       <CTAFooter />
+      <FormStrategicExchange open={formOpen} onClose={() => setFormOpen(false)} />
     </div>
   );
 };
+
+// expose page-level trigger if needed externally
+export const __noop = () => {};
+
 
 export default InsightsResources;
