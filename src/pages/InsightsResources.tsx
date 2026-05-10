@@ -34,6 +34,7 @@ type Card = {
   image?: string;
   logo?: string;
   gradient?: string;
+  overlayImage?: string;
 };
 
 const CARDS: Card[] = [
