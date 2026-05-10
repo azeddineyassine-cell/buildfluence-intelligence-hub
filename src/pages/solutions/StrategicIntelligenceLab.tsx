@@ -2104,10 +2104,52 @@ const HealthCaseFile = () => (
     <MissionTimeline
       title="Déroulé de la War Room"
       items={[
-        { date: "H+0", title: "Activation et diagnostic", description: "Mise en place de la cellule de crise. Monitoring 24/7 des flux médiatiques, sociaux et numériques. Identification immédiate des relais hostiles.", tag: "Signal rouge détecté", tagTone: "red" },
-        { date: "J+3", title: "Digital Investigation", description: "OSINT ciblé. Identification des sources de désinformation et de leurs chaînes d'amplification. Fact-checking continu sur les fausses informations.", tag: "Mécanique cartographiée", tagTone: "yellow" },
-        { date: "J+7", title: "Contre-narratifs et stratégie média", description: "Production de contre-narratifs crédibles, messages clés pour les porte-paroles, calendrier des prises de parole. Accompagnement personnel du Ministre.", tag: "Reprise du récit", tagTone: "yellow" },
-        { date: "J+14", title: "Sortie de crise", description: "Crise maîtrisée. Renforcement de l'image digitale du Ministre. Transmission du dispositif à l'équipe de communication et au Cabinet Ministériel.", tag: "Mission accomplie", tagTone: "green" },
+        {
+          date: "H+0",
+          title: "Activation et diagnostic",
+          tooltipTitle: "Activation et diagnostic",
+          bullets: [
+            "Mise en place de la cellule de crise",
+            "Monitoring 24/7 des flux médiatiques, sociaux et numériques",
+            "Identification immédiate des relais hostiles",
+          ],
+          badges: [{ label: "Essai pour détecte", tone: "alert" }],
+        },
+        {
+          date: "J+3",
+          title: "Digital Investigation",
+          tooltipTitle: "Digital Investigation",
+          bullets: [
+            "OSINT cible : identification des sources de désinformation",
+            "Identification de leurs chaînes d'amplification",
+            "Fact-checking continu sur les fausses informations",
+          ],
+          badges: [{ label: "Mécanique cartographie" }],
+        },
+        {
+          date: "J+7",
+          title: "Contre-narratifs & stratégie média",
+          tooltipTitle: "Contre-narratifs & stratégie média",
+          bullets: [
+            "Production de contre-narratifs crédibles et massagés",
+            "Clés pour les porte-paroles",
+            "Calendrier des prises de parole",
+            "Accompagnement personnel du Ministre",
+          ],
+          badges: [{ label: "Reprise du récit" }],
+        },
+        {
+          date: "J+56",
+          title: "Sortie de crise",
+          tooltipTitle: "Sortie de crise",
+          bullets: [
+            "Crise maîtrisée",
+            "Renforcement de l'image digitale du Ministre",
+            "Transmission du dispositif à l'équipe de communication",
+            "Transmission au Cabinet Ministériel",
+          ],
+          badges: [{ label: "Mission accomplie", tone: "success" }],
+        },
       ]}
     />
   </CaseFileSection>
