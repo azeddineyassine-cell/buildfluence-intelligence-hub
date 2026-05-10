@@ -360,7 +360,7 @@ const InsightsResources = () => {
           <div className="ir-news-eyebrow">Newsletter · Baromètre</div>
           <h2 className="ir-news-title">Recevez le prochain Baromètre en avant-première</h2>
           <p className="ir-news-sub">
-            Décryptages exclusifs et analyses concurrentielles — chaque mois.
+            Décryptages exclusifs et analyses concurrentielles.
           </p>
           <form
             className="ir-news-form"
