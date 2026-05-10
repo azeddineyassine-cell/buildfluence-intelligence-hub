@@ -49,6 +49,7 @@ const CARDS: Card[] = [
       "Vietnam, Afrique du Sud, Mexique… Le Maroc peut-il rivaliser ? 9 secteurs, 24 600 données, 18 pays concurrents analysés sur 31 jours d'observation continue.",
     href: "/barometre",
     image: barometreCover,
+    overlayImage: barometreEnR,
   },
   {
     id: "raja-club-athletic",
