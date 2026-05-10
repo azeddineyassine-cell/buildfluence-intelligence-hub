@@ -3,6 +3,7 @@ import Navbar from "@/components/Navbar";
 import CTAFooter from "@/components/CTAFooter";
 import { FormStrategicExchange } from "@/components/FormModals";
 import barometreCover from "@/assets/barometre-cover.png";
+import barometreEnR from "@/assets/barometre-enr.png";
 import rcaGradins from "@/assets/rca-gradins.png";
 import rcaEquipe from "@/assets/rca-equipe.png";
 
@@ -48,6 +49,7 @@ const CARDS: Card[] = [
       "Vietnam, Afrique du Sud, Mexique… Le Maroc peut-il rivaliser ? 9 secteurs, 24 600 données, 18 pays concurrents analysés sur 31 jours d'observation continue.",
     href: "/barometre",
     image: barometreCover,
+    overlayImage: barometreEnR,
   },
   {
     id: "raja-club-athletic",
@@ -330,8 +332,9 @@ const InsightsResources = () => {
                     style={{
                       width: '100%',
                       height: 'auto',
-                      maxHeight: '140px',
+                      maxHeight: '240px',
                       objectFit: 'cover',
+                      objectPosition: 'top',
                       borderRadius: '2px',
                       marginBottom: '14px',
                       border: '1px solid rgba(201,168,76,0.35)',
@@ -357,7 +360,7 @@ const InsightsResources = () => {
           <div className="ir-news-eyebrow">Newsletter · Baromètre</div>
           <h2 className="ir-news-title">Recevez le prochain Baromètre en avant-première</h2>
           <p className="ir-news-sub">
-            Décryptages exclusifs et analyses concurrentielles — chaque mois.
+            Décryptages exclusifs et analyses concurrentielles.
           </p>
           <form
             className="ir-news-form"
