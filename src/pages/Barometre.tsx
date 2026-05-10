@@ -24,7 +24,7 @@ const Barometre = () => {
           width: "100vw",
           height: "100vh",
           border: "none",
-          zIndex: 9999,
+          zIndex: 0,
         }}
         title="Baromètre d'Investissement — Sep 2025"
       />
