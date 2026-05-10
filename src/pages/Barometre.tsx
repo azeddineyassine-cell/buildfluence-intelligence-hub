@@ -1,23 +1,35 @@
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { FormStrategicExchange } from "@/components/FormModals";
 
 const Barometre = () => {
-  // Cache-busting param so iframe always loads the freshest barometre.html
   const src = useMemo(() => `/barometre.html?v=${Date.now()}`, []);
+  const [formOpen, setFormOpen] = useState(false);
+
+  useEffect(() => {
+    const onMsg = (e: MessageEvent) => {
+      if (e?.data === "open-strategic-exchange") setFormOpen(true);
+    };
+    window.addEventListener("message", onMsg);
+    return () => window.removeEventListener("message", onMsg);
+  }, []);
 
   return (
-    <iframe
-      src={src}
-      style={{
-        position: "fixed",
-        top: 0,
-        left: 0,
-        width: "100vw",
-        height: "100vh",
-        border: "none",
-        zIndex: 9999,
-      }}
-      title="Baromètre d'Investissement — Sep 2025"
-    />
+    <>
+      <iframe
+        src={src}
+        style={{
+          position: "fixed",
+          top: 0,
+          left: 0,
+          width: "100vw",
+          height: "100vh",
+          border: "none",
+          zIndex: 9999,
+        }}
+        title="Baromètre d'Investissement — Sep 2025"
+      />
+      <FormStrategicExchange open={formOpen} onClose={() => setFormOpen(false)} />
+    </>
   );
 };
 

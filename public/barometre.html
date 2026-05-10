@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Barometre d'Investissement - Buildfluence</title>
+<title>Baromètre d'Investissement - Buildfluence</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400;1,700&family=Cormorant+Garamond:ital,wght@1,400;1,500&family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
 :root{
@@ -210,7 +210,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;background:rgba(250,246,237,
 .adv-grid2{display:grid;grid-template-columns:1fr 1fr;gap:36px}
 .adv-score{font-family:'Playfair Display',serif;font-size:56px;font-weight:900;font-style:italic;color:var(--navy);line-height:1;display:block}
 .adv-score-lbl{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-faint);display:block;margin-bottom:20px}
-.adv-item{display:flex;gap:12px;padding:11px 0;border-bottom:1px solid var(--rule)}
+.adv-item{display:flex;gap:12px;padding:11px 0}
 .adv-item:last-of-type{border-bottom:none}
 .adv-bullet{width:5px;height:5px;border-radius:50%;background:var(--gold);margin-top:8px;flex-shrink:0}
 .adv-text{font-size:14px;color:var(--ink-light);line-height:1.6}
@@ -332,7 +332,7 @@ a[href*="flourish"]{display:none!important}
     <a href="#influence" class="nav-link">Influence</a>
     <a href="#leviers" class="nav-link">Leviers</a>
   </div>
-  <a href="#cta" class="nav-cta">Nous contacter</a>
+  <a href="#cta" class="nav-cta" id="nav-strategic-exchange">Échange stratégique</a>
 </nav>
 <div id="prog"><div id="prog-fill"></div></div>
 
@@ -354,20 +354,20 @@ a[href*="flourish"]{display:none!important}
 <!-- HERO -->
 <header class="hero" id="hero">
   <div class="hero-left">
-    <div class="eyebrow" style="margin-bottom:18px">Intelligence strategique souveraine</div>
+    <div class="eyebrow" style="margin-bottom:18px">Intelligence stratégique souveraine</div>
     <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--ink-faint);letter-spacing:.18em;text-transform:uppercase;margin-bottom:18px">14.07.2025 - 14.08.2025</div>
-    <h1>Barometre<br>d'<em>Investissement</em></h1>
-    <p class="hero-sub">Vietnam, Afrique du Sud, Mexique... Le Maroc peut-il rivaliser ? 9 secteurs, une seule bataille : l'attractivite.</p>
+    <h1>Baromètre<br>d'<em>Investissement</em></h1>
+    <p class="hero-sub">Vietnam, Afrique du Sud, Mexique... Le Maroc peut-il rivaliser ? 9 secteurs, une seule bataille : l'attractivité.</p>
     <div class="hero-ctas">
-      <a href="#constat" class="btn btn-dark">Decouvrir l'analyse</a>
-      <a href="#cta" class="btn btn-outline">Version integrale (50p.)</a>
+      <a href="#constat" class="btn btn-dark">Découvrir l'analyse</a>
+      <a href="#cta" class="btn btn-outline">Version intégrale (50p.)</a>
     </div>
   </div>
   <div class="hero-right">
-    <div class="hero-stat"><span class="hs-num" id="c1">0</span><span class="hs-lbl">Mentions analysees</span><p class="hs-sub">-5% vs periode precedente</p></div>
+    <div class="hero-stat"><span class="hs-num" id="c1">0</span><span class="hs-lbl">Mentions analysées</span><p class="hs-sub">-5% vs période précédente</p></div>
     <div class="hero-stat"><span class="hs-num" id="c2">0</span><span class="hs-lbl">Pays concurrents</span><p class="hs-sub">17 concurrents + Maroc</p></div>
-    <div class="hero-stat"><span class="hs-num" id="c3">0</span><span class="hs-lbl">Secteurs strategiques</span><p class="hs-sub">Charte AMDIE</p></div>
-    <div class="hero-stat"><span class="hs-num" id="c4">0j</span><span class="hs-lbl">Collecte temps reel</span><p class="hs-sub">IA + Big Data + OSINT</p></div>
+    <div class="hero-stat"><span class="hs-num" id="c3">0</span><span class="hs-lbl">Secteurs stratégiques</span><p class="hs-sub">Charte AMDIE</p></div>
+    <div class="hero-stat"><span class="hs-num" id="c4">0j</span><span class="hs-lbl">Collecte temps réel</span><p class="hs-sub">IA + Big Data + OSINT</p></div>
   </div>
 </header>
 
@@ -375,27 +375,27 @@ a[href*="flourish"]{display:none!important}
 <section class="section" id="constat">
   <div class="wrap">
     <div class="eyebrow fi">01 / Constat</div>
-    <h2 class="section-title fi">Quand les donnees <em>trompent</em></h2>
-    <p class="section-lead fi">Deux methodes, deux resultats radicalement differents pour le meme pays. La methode change tout.</p>
+    <h2 class="section-title fi">Quand les données <em>trompent</em></h2>
+    <p class="section-lead fi">Deux méthodes, deux résultats radicalement différents pour le même pays. La méthode change tout.</p>
     <div class="constat-pair fi">
       <div class="cp-panel cp-dim">
         <span class="cp-label">Analyse quantitative brute</span>
         <span class="cp-rank">6<sup style="font-size:.38em">e</sup></span>
-        <span class="cp-method">Indice de competitivite cumule · 2 056 pts</span>
-        <p class="cp-desc">Agregation sectorielle ponderee par volume de mentions. Vision superficielle sans profondeur qualitative. Ignore la diversification et le positionnement sectoriel fin.</p>
-        <span class="cp-badge">Lecture incomplete</span>
+        <span class="cp-method">Indice de compétitivité cumulé · 2 056 pts</span>
+        <p class="cp-desc">Agrégation sectorielle pondérée par volume de mentions. Vision superficielle sans profondeur qualitative. Ignore la diversification et le positionnement sectoriel fin.</p>
+        <span class="cp-badge">Lecture incomplète</span>
       </div>
       <div class="cp-panel cp-lit">
         <div class="vs-pill">vs</div>
         <span class="cp-label">Analyse Buildfluence - Global Heatmap</span>
         <span class="cp-rank">2<sup style="font-size:.38em">e</sup></span>
         <span class="cp-method">Heatmap x Bubble Chart x Radial Analysis</span>
-        <p class="cp-desc">Integre profondeur sectorielle, diversification et stabilite. Revele le Maroc N°1 mondial en aeronautique. Seul pays africain avec portefeuille comparable aux leaders globaux.</p>
-        <span class="cp-badge">Verite strategique</span>
+        <p class="cp-desc">Integre profondeur sectorielle, diversification et stabilité. Révèle le Maroc N°1 mondial en aéronautique. Seul pays africain avec portefeuille comparable aux leaders globaux.</p>
+        <span class="cp-badge">Vérité stratégique</span>
       </div>
     </div>
     <div class="punch fi2">
-      <p class="punch-text">"La difference entre 6e et 2e position ? La reponse est l'objectif de cette etude : <strong>l'intelligence strategique retablit la verite.</strong>"</p>
+      <p class="punch-text">"La différence entre 6e et 2e position ? La réponse est l'objectif de cette étude : <strong>l'intelligence stratégique rétablit la vérité.</strong>"</p>
     </div>
   </div>
 </section>
@@ -403,7 +403,7 @@ a[href*="flourish"]{display:none!important}
 <!-- 02 METHODOLOGIE (TABS) -->
 <section class="section alt" id="methodo">
   <div class="wrap">
-    <div class="eyebrow fi">02 / Methodologie</div>
+    <div class="eyebrow fi">02 / Méthodologie</div>
     <h2 class="section-title fi">Une approche <em>Strategic-Driven</em></h2>
     <p class="section-lead fi">Cinq axes d'analyse combines avec Intelligence Economique, IA, Big Data et intelligence humaine.</p>
     <div class="tab-bar fi" id="methodo-tabs">
@@ -415,48 +415,48 @@ a[href*="flourish"]{display:none!important}
     </div>
     <div class="tab-panel active" id="m0">
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px">
-        <div><div style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--ink);margin-bottom:12px">Sources <em style="font-style:italic;color:var(--gold)">& Collecte</em></div><p style="font-size:14px;color:var(--ink-light);line-height:1.7">Periode : 14/07/2025 au 14/08/2025. Langue : anglais et francais. Sources : Web, reseaux sociaux, sites institutionnels, presse, LinkedIn, broadcast, blogs. 24 600 donnees collectees. Fiabilite garantie via Indice NewsGuard et module OSINT Fact-Checking.</p></div>
+        <div><div style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--ink);margin-bottom:12px">Sources <em style="font-style:italic;color:var(--gold)">& Collecte</em></div><p style="font-size:14px;color:var(--ink-light);line-height:1.7">Période : 14/07/2025 au 14/08/2025. Langue : anglais et francais. Sources : Web, réseaux sociaux, sites institutionnels, presse, LinkedIn, broadcast, blogs. 24 600 données collectees. Fiabilité garantie via Indice NewsGuard et module OSINT Fact-Checking.</p></div>
         <div style="display:flex;flex-direction:column;gap:8px">
-          <div style="background:white;border:1px solid var(--rule);border-radius:2px;padding:14px 18px"><div style="font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;color:var(--gold);letter-spacing:.15em;margin-bottom:4px">NEWSGUARD</div><div style="font-size:13px;color:var(--ink-light)">Certification mondiale de fiabilite des organes de presse</div></div>
-          <div style="background:white;border:1px solid var(--rule);border-radius:2px;padding:14px 18px"><div style="font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;color:var(--gold);letter-spacing:.15em;margin-bottom:4px">OSINT FACT-CHECKING</div><div style="font-size:13px;color:var(--ink-light)">Module de detection des Fake news pour e-Reputation</div></div>
-          <div style="background:white;border:1px solid var(--rule);border-radius:2px;padding:14px 18px"><div style="font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;color:var(--gold);letter-spacing:.15em;margin-bottom:4px">MOTEUR BOOLEEN</div><div style="font-size:13px;color:var(--ink-light)">Requetes normalisees pour comparabilite parfaite et objective</div></div>
+          <div style="background:white;border:1px solid var(--rule);border-radius:2px;padding:14px 18px"><div style="font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;color:var(--gold);letter-spacing:.15em;margin-bottom:4px">NEWSGUARD</div><div style="font-size:13px;color:var(--ink-light)">Certification mondiale de fiabilité des organes de presse</div></div>
+          <div style="background:white;border:1px solid var(--rule);border-radius:2px;padding:14px 18px"><div style="font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;color:var(--gold);letter-spacing:.15em;margin-bottom:4px">OSINT FACT-CHECKING</div><div style="font-size:13px;color:var(--ink-light)">Module de détection des Fake news pour e-Réputation</div></div>
+          <div style="background:white;border:1px solid var(--rule);border-radius:2px;padding:14px 18px"><div style="font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;color:var(--gold);letter-spacing:.15em;margin-bottom:4px">MOTEUR BOOLEEN</div><div style="font-size:13px;color:var(--ink-light)">Requetes normalisées pour comparabilité parfaite et objective</div></div>
         </div>
       </div>
     </div>
-    <div class="tab-panel" id="m1"><div style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--ink);margin-bottom:12px">Axe 1 : <em style="font-style:italic;color:var(--gold)">Investissement Global</em></div><p style="font-size:14px;color:var(--ink-light);line-height:1.7;max-width:680px">Suivi quotidien des evolutions de l'investissement dans les pays concurrents sur les 9 secteurs strategiques. Objectif : detecter les pics d'activite, comprendre les declencheurs, mesurer l'interet des investisseurs. Livrable : Cartographie operationnelle des acteurs cles, nouveaux entrants et signaux sectoriels emergents.</p></div>
-    <div class="tab-panel" id="m2"><div style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--ink);margin-bottom:12px">Axe 2 : <em style="font-style:italic;color:var(--gold)">Investissement par Secteur</em></div><p style="font-size:14px;color:var(--ink-light);line-height:1.7;max-width:680px">Identifier les secteurs prioritaires chez les concurrents. Localiser les poles d'attractivite et comprendre leurs moteurs. Livrable : Taux de repartition par secteur + Scoring comparatif par pays concurrent.</p></div>
-    <div class="tab-panel" id="m3"><div style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--ink);margin-bottom:12px">Axe 3 & 4 : <em style="font-style:italic;color:var(--gold)">Par Pays & Secteurs par Concurrents</em></div><p style="font-size:14px;color:var(--ink-light);line-height:1.7;max-width:680px">Analyse concurrentielle des secteurs moteurs de competitivite. Mettre en lumiere les atouts sectoriels de chaque concurrent. Livrable : Classement des secteurs phares generateurs d'attractivite + Tendances et alertes concurrentielles a forte criticite.</p></div>
-    <div class="tab-panel" id="m4"><div style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--ink);margin-bottom:12px">Axe 5 : <em style="font-style:italic;color:var(--gold)">Positionnement du Maroc</em></div><p style="font-size:14px;color:var(--ink-light);line-height:1.7;max-width:680px">Evaluer la performance sectorielle du Maroc face a chaque concurrent. Comparaison exhaustive et classement strategique. Livrable : Palmares des Top 5 concurrents avec identification des 3 secteurs dominants par pays.</p></div>
+    <div class="tab-panel" id="m1"><div style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--ink);margin-bottom:12px">Axe 1 : <em style="font-style:italic;color:var(--gold)">Investissement Global</em></div><p style="font-size:14px;color:var(--ink-light);line-height:1.7;max-width:680px">Suivi quotidien des evolutions de l'investissement dans les pays concurrents sur les 9 secteurs stratégiques. Objectif : detecter les pics d'activite, comprendre les déclencheurs, mesurer l'interet des investisseurs. Livrable : Cartographie opérationnelle des acteurs clés, nouveaux entrants et signaux sectoriels émergents.</p></div>
+    <div class="tab-panel" id="m2"><div style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--ink);margin-bottom:12px">Axe 2 : <em style="font-style:italic;color:var(--gold)">Investissement par Secteur</em></div><p style="font-size:14px;color:var(--ink-light);line-height:1.7;max-width:680px">Identifier les secteurs prioritaires chez les concurrents. Localiser les poles d'attractivité et comprendre leurs moteurs. Livrable : Taux de répartition par secteur + Scoring comparatif par pays concurrent.</p></div>
+    <div class="tab-panel" id="m3"><div style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--ink);margin-bottom:12px">Axe 3 & 4 : <em style="font-style:italic;color:var(--gold)">Par Pays & Secteurs par Concurrents</em></div><p style="font-size:14px;color:var(--ink-light);line-height:1.7;max-width:680px">Analyse concurrentielle des secteurs moteurs de compétitivité. Mettre en lumiere les atouts sectoriels de chaque concurrent. Livrable : Classement des secteurs phares générateurs d'attractivité + Tendances et alertes concurrentielles a forte criticite.</p></div>
+    <div class="tab-panel" id="m4"><div style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--ink);margin-bottom:12px">Axe 5 : <em style="font-style:italic;color:var(--gold)">Positionnement du Maroc</em></div><p style="font-size:14px;color:var(--ink-light);line-height:1.7;max-width:680px">Évaluer la performance sectorielle du Maroc face a chaque concurrent. Comparaison exhaustive et classement stratégique. Livrable : Palmarès des Top 5 concurrents avec identification des 3 secteurs dominants par pays.</p></div>
   </div>
 </section>
 
 <!-- 03 CARTE + 9 SECTEURS -->
 <section class="section" id="geo">
   <div class="wrap">
-    <div class="eyebrow fi">03 / Environnement competitif du Maroc</div>
-    <h2 class="section-title fi">Concurrence, <em>Coopetition</em> & Alliances globales du Maroc</h2>
-    <p class="section-lead fi">La grille de lecture ne se reduit plus a un duel binaire. Entre concurrents et partenaires emerge une categorie hybride : les Coopetiteurs.</p>
+    <div class="eyebrow fi">03 / Environnement compétitif du Maroc</div>
+    <h2 class="section-title fi">Concurrence, <em>Coopétition</em> & Alliances globales du Maroc</h2>
+    <p class="section-lead fi">La grille de lecture ne se réduit plus a un duel binaire. Entre concurrents et partenaires émerge une catégorie hybride : les Coopétiteurs.</p>
     <div class="geo-legend fi">
       <div class="gl-item"><span class="gl-dot" style="background:#22c55e"></span>Maroc</div>
       <div class="gl-item"><span class="gl-dot" style="background:#ef4444"></span>17 concurrents directs</div>
-      <div class="gl-item"><span class="gl-dot" style="background:#3b82f6"></span>11 partenaires strategiques</div>
-      <div class="gl-item"><span class="gl-dot" style="background:#f59e0b"></span>Coopetiteurs</div>
+      <div class="gl-item"><span class="gl-dot" style="background:#3b82f6"></span>11 partenaires stratégiques</div>
+      <div class="gl-item"><span class="gl-dot" style="background:#f59e0b"></span>Coopétiteurs</div>
     </div>
     <div id="world-map" class="fi">
       <div class="map-tt" id="map-tt"><strong id="tt-n">Pays</strong><div class="tt-cat" id="tt-c"></div><div id="tt-s" style="font-size:12px;color:rgba(245,241,232,.65);margin-top:3px"></div></div>
     </div>
     <div class="divider fi"></div>
-    <h3 class="fi" style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--ink);margin-bottom:20px">Les <em style="font-style:italic;color:var(--gold)">9 secteurs strategiques</em> identifies par l'AMDIE</h3>
+    <h3 class="fi" style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--ink);margin-bottom:20px">Les <em style="font-style:italic;color:var(--gold)">9 secteurs stratégiques</em> identifiés par l'AMDIE</h3>
     <div class="secteurs-grid fi2" id="secteurs-grid">
-      <div class="sc sc-tt" data-rank="4e mondial" data-score="335 mentions" data-detail="Hub automobile consolide. Renault, Stellantis, BYD. Export prioritaire vers l'Europe."><span class="sc-icon">🚗</span><div><div class="sc-name">Automobile</div><div class="sc-sub">Hub regional · Export Europe</div></div><span class="sc-badge sc-fort">4e mondial</span></div>
-      <div class="sc sc-tt" data-rank="N°1 mondial" data-score="118 mentions" data-detail="Leader inconteste sur la periode d'etude. Safran, Boeing, Airbus. Singularite africaine majeure."><span class="sc-icon">✈️</span><div><div class="sc-name">Aeronautique</div><div class="sc-sub">N°1 mondial - periode etude</div></div><span class="sc-badge sc-leader">N°1 mondial</span></div>
-      <div class="sc sc-tt" data-rank="Regional" data-score="102 mentions" data-detail="Concurrent regional face a la Tunisie et Bangladesh. Main d'oeuvre competitive, proximite UE."><span class="sc-icon">👕</span><div><div class="sc-name">Textile</div><div class="sc-sub">Proximite UE · main d'oeuvre</div></div><span class="sc-badge sc-moyen">Regional</span></div>
-      <div class="sc sc-tt" data-rank="Potentiel fort" data-score="98 mentions" data-detail="Ressources naturelles abondantes. Agritech en developpement. Marche africain a saisir."><span class="sc-icon">🌾</span><div><div class="sc-name">Agroalimentaire</div><div class="sc-sub">Ressources naturelles · AgriTech</div></div><span class="sc-badge sc-moyen">Potentiel</span></div>
-      <div class="sc sc-tt" data-rank="Sous-exploite" data-score="23 mentions" data-detail="Secteur critique sous-exploite. Le Mexique investit 643M USD. Retard strategique a corriger urgemment."><span class="sc-icon">💊</span><div><div class="sc-name">Pharma</div><div class="sc-sub">Secteur sous-exploite - alerte</div></div><span class="sc-badge sc-alert">Alerte</span></div>
+      <div class="sc sc-tt" data-rank="4e mondial" data-score="335 mentions" data-detail="Hub automobile consolide. Renault, Stellantis, BYD. Export prioritaire vers l'Europe."><span class="sc-icon">🚗</span><div><div class="sc-name">Automobile</div><div class="sc-sub">Hub régional · Export Europe</div></div><span class="sc-badge sc-fort">4e mondial</span></div>
+      <div class="sc sc-tt" data-rank="N°1 mondial" data-score="118 mentions" data-detail="Leader incontesté sur la période d'étude. Safran, Boeing, Airbus. Singularite africaine majeure."><span class="sc-icon">✈️</span><div><div class="sc-name">Aéronautique</div><div class="sc-sub">N°1 mondial - période étude</div></div><span class="sc-badge sc-leader">N°1 mondial</span></div>
+      <div class="sc sc-tt" data-rank="Régional" data-score="102 mentions" data-detail="Concurrent régional face a la Tunisie et Bangladesh. Main d'œuvre compétitive, proximite UE."><span class="sc-icon">👕</span><div><div class="sc-name">Textile</div><div class="sc-sub">Proximite UE · main d'œuvre</div></div><span class="sc-badge sc-moyen">Régional</span></div>
+      <div class="sc sc-tt" data-rank="Potentiel fort" data-score="98 mentions" data-detail="Ressources naturelles abondantes. Agritech en développement. Marche africain à saisir."><span class="sc-icon">🌾</span><div><div class="sc-name">Agroalimentaire</div><div class="sc-sub">Ressources naturelles · AgriTech</div></div><span class="sc-badge sc-moyen">Potentiel</span></div>
+      <div class="sc sc-tt" data-rank="Sous-exploite" data-score="23 mentions" data-detail="Secteur critique sous-exploité. Le Mexique investit 643M USD. Retard stratégique à corriger urgemment."><span class="sc-icon">💊</span><div><div class="sc-name">Pharma</div><div class="sc-sub">Secteur sous-exploité - alerte</div></div><span class="sc-badge sc-alert">Alerte</span></div>
       <div class="sc sc-tt" data-rank="Hub nearshore" data-score="31 mentions" data-detail="Nearshore Europe, bilingue, fuseaux horaires compatibles. Concurrent face a la Tunisie et Pologne."><span class="sc-icon">📞</span><div><div class="sc-name">Outsourcing</div><div class="sc-sub">Nearshore Europe · bilingue</div></div><span class="sc-badge sc-moyen">Nearshore</span></div>
-      <div class="sc sc-tt" data-rank="Retard critique" data-score="674 mentions" data-detail="Retard vs Vietnam (5519) et Afrique du Sud (5191). Fragilite numerique majeure. Acceleration urgente requise."><span class="sc-icon">💻</span><div><div class="sc-name">Digital & Tech</div><div class="sc-sub">56,9% de l'investissement mondial</div></div><span class="sc-badge sc-alert">Retard critique</span></div>
-      <div class="sc sc-tt" data-rank="Potentiel" data-score="21 mentions" data-detail="Facade atlantique strategique. Infrastructures portuaires. Tanger Med comme levier majeur."><span class="sc-icon">⚓</span><div><div class="sc-name">Industrie Navale</div><div class="sc-sub">Facade atlantique · infrastructures</div></div><span class="sc-badge sc-moyen">Potentiel</span></div>
-      <div class="sc sc-tt" data-rank="3e mondial" data-score="654 mentions" data-detail="3e position mondiale. Gazoduc NMGP 25 Mds USD. Hub energetique continental en construction."><span class="sc-icon">⚡</span><div><div class="sc-name">Energies Renouvelables</div><div class="sc-sub">3e mondial · Gazoduc NMGP 25 Mds$</div></div><span class="sc-badge sc-fort">3e mondial</span></div>
+      <div class="sc sc-tt" data-rank="Retard critique" data-score="674 mentions" data-detail="Retard vs Vietnam (5519) et Afrique du Sud (5191). Fragilite numerique majeure. Accélération urgente requise."><span class="sc-icon">💻</span><div><div class="sc-name">Digital & Tech</div><div class="sc-sub">56,9% de l'investissement mondial</div></div><span class="sc-badge sc-alert">Retard critique</span></div>
+      <div class="sc sc-tt" data-rank="Potentiel" data-score="21 mentions" data-detail="Façade atlantique stratégique. Infrastructures portuaires. Tanger Med comme levier majeur."><span class="sc-icon">⚓</span><div><div class="sc-name">Industrie Navale</div><div class="sc-sub">Façade atlantique · infrastructures</div></div><span class="sc-badge sc-moyen">Potentiel</span></div>
+      <div class="sc sc-tt" data-rank="3e mondial" data-score="654 mentions" data-detail="3e position mondiale. Gazoduc NMGP 25 Mds USD. Hub énergétique continental en construction."><span class="sc-icon">⚡</span><div><div class="sc-name">Énergies Renouvelables</div><div class="sc-sub">3e mondial · Gazoduc NMGP 25 Mds$</div></div><span class="sc-badge sc-fort">3e mondial</span></div>
     </div>
     <div id="sc-tooltip" style="display:none;position:fixed;z-index:500;background:white;border:1px solid var(--rule);border-radius:2px;padding:16px 20px;box-shadow:0 8px 28px rgba(0,0,0,.14);max-width:260px;pointer-events:none">
       <div id="sc-tt-rank" style="font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:4px"></div>
@@ -470,25 +470,25 @@ a[href*="flourish"]{display:none!important}
 <section class="section alt" id="classement">
   <div class="wrap">
     <div class="eyebrow fi">04 / Cartographie des leaders</div>
-    <h2 class="section-title fi">Indice de competitivite <em>cumule</em></h2>
-    <p class="section-lead fi">Classement quantitatif et ce que l'analyse qualitative revele en plus.</p>
+    <h2 class="section-title fi">Indice de compétitivité <em>cumulé</em></h2>
+    <p class="section-lead fi">Classement quantitatif et ce que l'analyse qualitative révèle en plus.</p>
     <table class="ranking-table fi" id="rank-table">
       <tbody>
         <tr><td class="rt-rank">01</td><td class="rt-flag">🇿🇦</td><td><div class="rt-name">Afrique du Sud</div><div class="rt-tag">Leader · 8 secteurs · Butterfly Strategy</div></td><td><div class="rt-bar-wrap"><div class="rt-bar-track"><div class="rt-bar-fill" style="background:var(--gold)" data-w="100"></div></div></div></td><td class="rt-score">9 968<small> pts</small></td></tr>
         <tr><td class="rt-rank">02</td><td class="rt-flag">🇻🇳</td><td><div class="rt-name">Vietnam</div><div class="rt-tag">Leader · Nation Branding 11 langues · Trade Vietnam</div></td><td><div class="rt-bar-wrap"><div class="rt-bar-track"><div class="rt-bar-fill" style="background:var(--navy)" data-w="92.6"></div></div></div></td><td class="rt-score">9 225<small> pts</small></td></tr>
         <tr><td class="rt-rank">03</td><td class="rt-flag">🇲🇽</td><td><div class="rt-name">Mexique</div><div class="rt-tag">Leader · Auto + Pharma · Plan Mexico</div></td><td><div class="rt-bar-wrap"><div class="rt-bar-track"><div class="rt-bar-fill" style="background:var(--teal)" data-w="47.8"></div></div></div></td><td class="rt-score">4 761<small> pts</small></td></tr>
-        <tr><td class="rt-rank">04</td><td class="rt-flag">🇹🇭</td><td><div class="rt-name">Thailande</div><div class="rt-tag">Equilibriste · Auto + Digital + EnR</div></td><td><div class="rt-bar-wrap"><div class="rt-bar-track"><div class="rt-bar-fill" style="background:#888" data-w="32.3"></div></div></div></td><td class="rt-score">3 218<small> pts</small></td></tr>
-        <tr><td class="rt-rank">05</td><td class="rt-flag">🇰🇪</td><td><div class="rt-name">Kenya</div><div class="rt-tag">Coopetiteur · Digital + EnR Afrique</div></td><td><div class="rt-bar-wrap"><div class="rt-bar-track"><div class="rt-bar-fill" style="background:#888" data-w="25.1"></div></div></div></td><td class="rt-score">2 506<small> pts</small></td></tr>
-        <tr class="maroc-row"><td colspan="5" style="padding:0"><div style="padding:18px 14px 6px;display:flex;align-items:center;gap:14px"><span style="font-family:'Playfair Display',serif;font-size:18px;font-weight:900;font-style:italic;color:var(--gold)">06</span><span style="font-size:20px">🇲🇦</span><div><div class="rt-name" style="font-size:15px">Maroc - <em style="font-style:italic;color:var(--gold)">2e rang par l'analyse qualitative</em></div><div class="rt-tag">Challenger Majeur · Seul pays africain avec portefeuille 7 secteurs comparable aux leaders</div></div><div style="margin-left:auto;text-align:right"><div style="font-family:'Playfair Display',serif;font-size:26px;font-weight:900;font-style:italic;color:var(--navy)">2 056</div><div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--ink-faint);letter-spacing:.12em">pts quanti</div></div></div><div class="maroc-pillars" style="padding:10px 14px 18px"><div class="mp"><span class="mp-rank">N°1</span><span class="mp-sector">Aeronautique · Mondial</span></div><div class="mp"><span class="mp-rank">3e</span><span class="mp-sector">EnR · Mondial</span></div><div class="mp"><span class="mp-rank">4e</span><span class="mp-sector">Automobile · Mondial</span></div><div class="mp"><span class="mp-rank" style="font-size:20px;color:var(--navy)">25 Mds$</span><span class="mp-sector">Gazoduc NMGP</span></div></div></td></tr>
-        <tr><td class="rt-rank" style="color:var(--ink-faint);font-size:15px">07</td><td class="rt-flag">🇪🇬</td><td><div class="rt-name">Egypte</div><div class="rt-tag">Coopetiteur · Pharma + EnR</div></td><td><div class="rt-bar-wrap"><div class="rt-bar-track"><div class="rt-bar-fill" style="background:#ccc" data-w="17.7"></div></div></div></td><td class="rt-score" style="color:var(--ink-faint)">1 764<small> pts</small></td></tr>
+        <tr><td class="rt-rank">04</td><td class="rt-flag">🇹🇭</td><td><div class="rt-name">Thailande</div><div class="rt-tag">Équilibriste · Auto + Digital + EnR</div></td><td><div class="rt-bar-wrap"><div class="rt-bar-track"><div class="rt-bar-fill" style="background:#888" data-w="32.3"></div></div></div></td><td class="rt-score">3 218<small> pts</small></td></tr>
+        <tr><td class="rt-rank">05</td><td class="rt-flag">🇰🇪</td><td><div class="rt-name">Kenya</div><div class="rt-tag">Coopétiteur · Digital + EnR Afrique</div></td><td><div class="rt-bar-wrap"><div class="rt-bar-track"><div class="rt-bar-fill" style="background:#888" data-w="25.1"></div></div></div></td><td class="rt-score">2 506<small> pts</small></td></tr>
+        <tr class="maroc-row"><td colspan="5" style="padding:0"><div style="padding:18px 14px 6px;display:flex;align-items:center;gap:14px"><span style="font-family:'Playfair Display',serif;font-size:18px;font-weight:900;font-style:italic;color:var(--gold)">06</span><span style="font-size:20px">🇲🇦</span><div><div class="rt-name" style="font-size:15px">Maroc - <em style="font-style:italic;color:var(--gold)">2e rang par l'analyse qualitative</em></div><div class="rt-tag">Challenger Majeur · Seul pays africain avec portefeuille 7 secteurs comparable aux leaders</div></div><div style="margin-left:auto;text-align:right"><div style="font-family:'Playfair Display',serif;font-size:26px;font-weight:900;font-style:italic;color:var(--navy)">2 056</div><div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--ink-faint);letter-spacing:.12em">pts quanti</div></div></div><div class="maroc-pillars" style="padding:10px 14px 18px"><div class="mp"><span class="mp-rank">N°1</span><span class="mp-sector">Aéronautique · Mondial</span></div><div class="mp"><span class="mp-rank">3e</span><span class="mp-sector">EnR · Mondial</span></div><div class="mp"><span class="mp-rank">4e</span><span class="mp-sector">Automobile · Mondial</span></div><div class="mp"><span class="mp-rank" style="font-size:20px;color:var(--navy)">25 Mds$</span><span class="mp-sector">Gazoduc NMGP</span></div></div></td></tr>
+        <tr><td class="rt-rank" style="color:var(--ink-faint);font-size:15px">07</td><td class="rt-flag">🇪🇬</td><td><div class="rt-name">Égypte</div><div class="rt-tag">Coopétiteur · Pharma + EnR</div></td><td><div class="rt-bar-wrap"><div class="rt-bar-track"><div class="rt-bar-fill" style="background:#ccc" data-w="17.7"></div></div></div></td><td class="rt-score" style="color:var(--ink-faint)">1 764<small> pts</small></td></tr>
       </tbody>
     </table>
 
     <!-- Bubble chart -->
-    <h3 class="fi" style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--ink);margin-bottom:6px">Bubble Chart - <em style="font-style:italic;color:var(--gold)">Attractivite sectorielle qualitative</em></h3>
-    <p class="fi2" style="font-size:13px;color:var(--ink-faint);margin-bottom:20px">Taille = indice cumule · Axe X = nombre de secteurs couverts · Survol pour details</p>
+    <h3 class="fi" style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--ink);margin-bottom:6px">Bubble Chart - <em style="font-style:italic;color:var(--gold)">Attractivité sectorielle qualitative</em></h3>
+    <p class="fi2" style="font-size:13px;color:var(--ink-faint);margin-bottom:20px">Taille = indice cumulé · Axe X = nombre de secteurs couverts · Survol pour details</p>
     <div style="background:white;border:1px solid var(--rule);border-radius:2px;padding:20px" class="fi">
-      <div class="chart-wrap tall"><canvas id="bubbleChart" role="img" aria-label="Bubble chart attractivite pays">Afrique du Sud 9968pts, Vietnam 9225pts, Mexique 4761pts, Thailande 3218pts, Maroc 2056pts.</canvas></div>
+      <div class="chart-wrap tall"><canvas id="bubbleChart" role="img" aria-label="Bubble chart attractivité pays">Afrique du Sud 9968pts, Vietnam 9225pts, Mexique 4761pts, Thailande 3218pts, Maroc 2056pts.</canvas></div>
     </div>
   </div>
 </section>
@@ -498,7 +498,7 @@ a[href*="flourish"]{display:none!important}
   <div class="wrap">
     <div class="eyebrow fi">05 / Scoring sectoriel</div>
     <h2 class="section-title fi">Le Digital domine, <em>l'EnR accelere</em></h2>
-    <p class="section-lead fi">Trois filieres captent 91% des investissements mondiaux. Selectionner un pays pour voir son profil.</p>
+    <p class="section-lead fi">Trois filieres captent 91% des investissements mondiaux. Sélectionner un pays pour voir son profil.</p>
     <div class="kpi-row fi">
       <div class="kpi"><span class="kpi-num">56,9%</span><span class="kpi-lbl">Digital</span></div>
       <div class="kpi"><span class="kpi-num" style="color:var(--teal)">26%</span><span class="kpi-lbl">EnR</span></div>
@@ -512,7 +512,7 @@ a[href*="flourish"]{display:none!important}
       <button class="sector-tab" data-c="ma">🇲🇦 Maroc</button>
       <button class="sector-tab" data-c="th">🇹🇭 Thailande</button>
     </div>
-    <div class="chart-wrap fi2"><canvas id="sectorChart" role="img" aria-label="Bar chart scoring investissement par secteur">Digital 20877, EnR 9536, Auto 3069, Agro 863, Textile 739, Pharma 660, Outsourcing 333, Navale 318, Aero 278.</canvas></div>
+    <div class="chart-wrap fi2"><canvas id="sectorChart" role="img" aria-label="Bar chart scoring investissement par secteur">Digital 20877, EnR 9536, Auto 3069, Agro 863, Textile 739, Pharma 660, Outsourcing 333, Navale 318, Aéro 278.</canvas></div>
   </div>
 </section>
 
@@ -521,7 +521,7 @@ a[href*="flourish"]{display:none!important}
   <div class="wrap">
     <div class="eyebrow fi">06 / Boussole des investisseurs</div>
     <h2 class="section-title fi">Qu'est-ce qui <em>fa&#231;onne</em> leurs d&#233;cisions ?</h2>
-    <p class="section-lead fi">Analyse des 5 entites : Localisation, Thematiques, Mots-cles, Personnes, Organisations. Trois criteres determinants emergent.</p>
+    <p class="section-lead fi">Analyse des 5 entites : Localisation, Thématiques, Mots-clés, Personnes, Organisations. Trois criteres determinants émergent.</p>
     <div class="boussole-grid fi">
       <div>
         <div class="bviz" style="padding:0;position:relative;min-height:400px">
@@ -530,23 +530,23 @@ a[href*="flourish"]{display:none!important}
             <div style="position:absolute;bottom:0;right:0;width:100%;height:20px;background:#F2EDD8;z-index:9999;pointer-events:none;"></div>
           </div>
         </div>
-        <div style="margin-top:14px;padding:18px 20px;background:white;border:1px solid var(--rule);border-radius:2px"><p style="font-size:13px;color:var(--ink-light);line-height:1.6"><strong style="color:var(--ink)">Resultat cle :</strong> Les investisseurs ne cherchent pas seulement des secteurs porteurs, mais avant tout un <strong style="color:var(--ink)">pays attractif et stable</strong>. L'opportunite d'investissement ne se dissocie jamais du pays hote.</p></div>
+        <div style="margin-top:14px;padding:18px 20px;background:white;border:1px solid var(--rule);border-radius:2px"><p style="font-size:13px;color:var(--ink-light);line-height:1.6"><strong style="color:var(--ink)">Resultat clé :</strong> Les investisseurs ne cherchent pas seulement des secteurs porteurs, mais avant tout un <strong style="color:var(--ink)">pays attractif et stable</strong>. L'opportunite d'investissement ne se dissocie jamais du pays hôte.</p></div>
       </div>
       <div class="b-insights">
         <div class="bi">
-          <span class="bi-kicker">Insight cle</span>
-          <div class="bi-title">L'equation de l'attractivite moderne</div>
+          <span class="bi-kicker">Insight clé</span>
+          <div class="bi-title">L'equation de l'attractivité moderne</div>
           <p class="bi-text">Forte convergence entre "Countries" + "Investment" et "Investment Opportunities". Les investisseurs cherchent un pays avant un secteur.</p>
           <ul class="criteria">
-            <li><span class="crit-n">01</span><div><strong style="color:var(--ink)">Previsibilite :</strong> Stabilite politique et reglementaire, gouvernance solide, simplification administrative</div></li>
+            <li><span class="crit-n">01</span><div><strong style="color:var(--ink)">Prévisibilité :</strong> Stabilité politique et réglementaire, gouvernance solide, simplification administrative</div></li>
             <li><span class="crit-n">02</span><div><strong style="color:var(--ink)">Rapidite d'execution :</strong> Avantages fiscaux, guichet unique efficace, zones franches, suivi post-investissement</div></li>
-            <li><span class="crit-n">03</span><div><strong style="color:var(--ink)">Capital humain & vie sociale :</strong> Infrastructures, qualite de vie, securite, capital humain qualifie</div></li>
+            <li><span class="crit-n">03</span><div><strong style="color:var(--ink)">Capital humain & vie sociale :</strong> Infrastructures, qualité de vie, sécurité, capital humain qualifié</div></li>
           </ul>
         </div>
         <div class="bi">
-          <span class="bi-kicker">Implication strategique</span>
-          <div class="bi-title">ESG + Digital + EnR = coeur narratif</div>
-          <p class="bi-text">La recurrence de l'ESG montre son integration croissante dans les criteres d'attractivite. Cet axe doit devenir le coeur du narratif de competitivite du Maroc.</p>
+          <span class="bi-kicker">Implication stratégique</span>
+          <div class="bi-title">ESG + Digital + EnR = cœur narratif</div>
+          <p class="bi-text">La récurrence de l'ESG montre son intégration croissante dans les criteres d'attractivité. Cet axe doit devenir le cœur du narratif de compétitivité du Maroc.</p>
         </div>
       </div>
     </div>
@@ -557,63 +557,63 @@ a[href*="flourish"]{display:none!important}
 <section class="section" id="influence">
   <div class="wrap">
     <div class="eyebrow fi">07 / Jeux d'influence des concurrents</div>
-    <h2 class="section-title fi">Strategies adverses <em>decryptees</em></h2>
-    <p class="section-lead fi">Vietnam & Afrique du Sud - deux modeles radicalement differents. Deux lecons critiques pour le Maroc.</p>
+    <h2 class="section-title fi">Stratégies adverses <em>décryptées</em></h2>
+    <p class="section-lead fi">Vietnam & Afrique du Sud - deux modèles radicalement différents. Deux leçons critiques pour le Maroc.</p>
     <div class="pays-tabs fi" id="pays-tabs">
       <button class="pays-tab active" data-pays="vn">🇻🇳 Vietnam - L'arme numerique</button>
       <button class="pays-tab" data-pays="sa">🇿🇦 Afrique du Sud - L'arsenal institutionnel</button>
       <button class="pays-tab" data-pays="vs">Vietnam vs Afrique du Sud</button>
     </div>
     <div class="pays-panel active" id="panel-vn">
-      <div class="vs-box"><div class="vs-box-title">Vietnam : Moins de volume, <em>plus d'impact</em></div><p class="vs-box-text">9 225 pts vs 9 968 (Afrique du Sud), mais visibilite superieure de ~40%. La preuve que la strategie digitale ciblee surpasse le volume brut.</p></div>
+      <div class="vs-box"><div class="vs-box-title">Vietnam : Moins de volume, <em>plus d'impact</em></div><p class="vs-box-text">9 225 pts vs 9 968 (Afrique du Sud), mais visibilite supérieure de ~40%. La preuve que la stratégie digitale ciblée surpasse le volume brut.</p></div>
       <div class="adv-grid2">
         <div>
           <div class="adv-item"><div class="adv-bullet"></div><div class="adv-text"><strong>Trade Vietnam</strong> - Plateforme matchmaking investisseurs-entreprises. UX optimisee, navigation simplifiee, disponible en 5 langues</div></div>
-          <div class="adv-item"><div class="adv-bullet"></div><div class="adv-text"><strong>Vietnam.vn</strong> - Nation Branding multilingue, 11 langues dont arabe, francais, espagnol et allemand. Contenus reguliers, tous themes couverts</div></div>
-          <div class="adv-item"><div class="adv-bullet"></div><div class="adv-text"><strong>Big Data + IA</strong> - Analyse predictive, ciblage sectoriel ultra-precis, signaux faibles transformes en atouts competitifs</div></div>
+          <div class="adv-item"><div class="adv-bullet"></div><div class="adv-text"><strong>Vietnam.vn</strong> - Nation Branding multilingue, 11 langues dont arabe, francais, espagnol et allemand. Contenus réguliers, tous themes couverts</div></div>
+          <div class="adv-item"><div class="adv-bullet"></div><div class="adv-text"><strong>Big Data + IA</strong> - Analyse prédictive, ciblage sectoriel ultra-précis, signaux faibles transformes en atouts compétitifs</div></div>
           <div class="adv-item"><div class="adv-bullet"></div><div class="adv-text"><strong>EVIPA ratifie avec l'Allemagne</strong> - 472 projets allemands au Vietnam en S1 2024, soit 2,76 Mds USD en 6 mois</div></div>
           <span class="adv-score">9 225</span><span class="adv-score-lbl">Points d'indice · Rang 2</span>
         </div>
         <div>
-          <h4 style="font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--ink);margin-bottom:16px">Chronologie des investissements cles</h4>
+          <h4 style="font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--ink);margin-bottom:16px">Chronologie des investissements clés</h4>
           <div class="tl">
-            <div class="tl-item"><div class="tl-dot"></div><span class="tl-date">Fin 2023</span><p class="tl-text"><strong>463 projets allemands</strong> au Vietnam - 2,68 Mds USD cumules</p></div>
+            <div class="tl-item"><div class="tl-dot"></div><span class="tl-date">Fin 2023</span><p class="tl-text"><strong>463 projets allemands</strong> au Vietnam - 2,68 Mds USD cumulés</p></div>
             <div class="tl-item"><div class="tl-dot"></div><span class="tl-date">S1 2024</span><p class="tl-text"><strong>472 projets</strong> - 2,76 Mds USD. Ratification EVIPA soumise au Bundestag (23/07/2025)</p></div>
             <div class="tl-item"><div class="tl-dot"></div><span class="tl-date">2025</span><p class="tl-text"><strong>SAP investit 150M€</strong> sur 5 ans dans l'infrastructure digitale vietnamienne</p></div>
-            <div class="tl-item" style="padding-bottom:0"><div class="tl-dot"></div><span class="tl-date">Horizon</span><p class="tl-text"><strong>Hub blockchain regional</strong> - Enjeu cybersecurite 12,8 Mds USD 2020-2025</p></div>
+            <div class="tl-item" style="padding-bottom:0"><div class="tl-dot"></div><span class="tl-date">Horizon</span><p class="tl-text"><strong>Hub blockchain régional</strong> - Enjeu cybersecurite 12,8 Mds USD 2020-2025</p></div>
           </div>
         </div>
       </div>
     </div>
     <div class="pays-panel" id="panel-sa">
-      <div class="vs-box"><div class="vs-box-title">Afrique du Sud : Arsenal lourd, <em>fragile dans l'execution</em></div><p class="vs-box-text">11 structures dediees, le volume le plus eleve (9 968 pts). Mais la complexite institutionnelle genere des frictions contre-productives.</p></div>
+      <div class="vs-box"><div class="vs-box-title">Afrique du Sud : Arsenal lourd, <em>fragile dans l'execution</em></div><p class="vs-box-text">11 structures dediees, le volume le plus élevé (9 968 pts). Mais la complexité institutionnelle génère des frictions contre-productives.</p></div>
       <div class="adv-grid2">
         <div>
-          <div class="adv-item"><div class="adv-bullet"></div><div class="adv-text"><strong>InvestSA</strong> - Guichet unique national, facilitation IDE, aftercare, pipeline. 203 projets cumules (ZAR 1.8 trillion)</div></div>
-          <div class="adv-item"><div class="adv-bullet"></div><div class="adv-text"><strong>Butterfly Strategy (Aout 2025)</strong> - Reponse aux droits de douane US (30%). 4 piliers : Diversification marches, Multi-voies export, Agilite, Resilience</div></div>
-          <div class="adv-item"><div class="adv-bullet"></div><div class="adv-text"><strong>BLSA Reform Tracker</strong> - 240 reformes suivies publiquement. 65% sur la bonne voie, 88% reformes economiques en cours</div></div>
-          <div class="adv-item"><div class="adv-bullet"></div><div class="adv-text"><strong>SEZ structurees</strong> - Coega SEZ (~R12bn), Dube TradePort (40+ projets), Invest Cape Town (744 projets, R114bn cumules)</div></div>
+          <div class="adv-item"><div class="adv-bullet"></div><div class="adv-text"><strong>InvestSA</strong> - Guichet unique national, facilitation IDE, aftercare, pipeline. 203 projets cumulés (ZAR 1.8 trillion)</div></div>
+          <div class="adv-item"><div class="adv-bullet"></div><div class="adv-text"><strong>Butterfly Strategy (Aout 2025)</strong> - Réponse aux droits de douane US (30%). 4 piliers : Diversification marches, Multi-voies export, Agilité, Résilience</div></div>
+          <div class="adv-item"><div class="adv-bullet"></div><div class="adv-text"><strong>BLSA Reform Tracker</strong> - 240 réformes suivies publiquement. 65% sur la bonne voie, 88% réformes economiques en cours</div></div>
+          <div class="adv-item"><div class="adv-bullet"></div><div class="adv-text"><strong>SEZ structurees</strong> - Coega SEZ (~R12bn), Dube TradePort (40+ projets), Invest Cape Town (744 projets, R114bn cumulés)</div></div>
           <span class="adv-score">9 968</span><span class="adv-score-lbl">Points d'indice · Rang 1</span>
-          <div class="adv-warn"><span class="aw-label">Limites critiques</span><p class="aw-text">Chevauchement des roles entre 11 structures. Manque de clarte hierarchique. Confusion et fragmentation. Retards et inefficacites systemiques malgre l'arsenal.</p></div>
+          <div class="adv-warn"><span class="aw-label">Limites critiques</span><p class="aw-text">Chevauchement des rôles entre 11 structures. Manque de clarte hierarchique. Confusion et fragmentation. Retards et inefficacites systémiques malgré l'arsenal.</p></div>
         </div>
         <div>
           <h4 style="font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--ink);margin-bottom:14px">Butterfly Strategy - 4 piliers</h4>
           <div class="bf-grid">
-            <div class="bf-card"><div class="bf-card-title">Diversification Marches</div><div class="bf-card-text">Reduire dependance USA/UE. Priorite AfCFTA. Expansion Indo-Pacifique</div></div>
-            <div class="bf-card"><div class="bf-card-title">Multi-voies Export</div><div class="bf-card-text">Negociations bilaterales. Protocoles agricoles. Services numeriques</div></div>
-            <div class="bf-card"><div class="bf-card-title">Agilite Institutionnelle</div><div class="bf-card-text">Export Support Desk. Localisation Fund. Programmes competitivite</div></div>
-            <div class="bf-card"><div class="bf-card-title">Resilience & Defense</div><div class="bf-card-text">Antidumping. "Proudly SA". Protection 30k emplois menaces</div></div>
+            <div class="bf-card"><div class="bf-card-title">Diversification Marches</div><div class="bf-card-text">Reduire dépendance USA/UE. Priorite AfCFTA. Expansion Indo-Pacifique</div></div>
+            <div class="bf-card"><div class="bf-card-title">Multi-voies Export</div><div class="bf-card-text">Négociations bilaterales. Protocoles agricoles. Services numériques</div></div>
+            <div class="bf-card"><div class="bf-card-title">Agilité Institutionnelle</div><div class="bf-card-text">Export Support Desk. Localisation Fund. Programmes compétitivité</div></div>
+            <div class="bf-card"><div class="bf-card-title">Résilience & Defense</div><div class="bf-card-text">Antidumping. "Proudly SA". Protection 30k emplois menaces</div></div>
           </div>
         </div>
       </div>
     </div>
     <div class="pays-panel" id="panel-vs">
       <div style="display:grid;grid-template-columns:1fr auto 1fr;gap:24px;align-items:start;margin-bottom:28px">
-        <div style="background:white;border:1px solid var(--rule);border-radius:2px;padding:24px"><div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid var(--rule)"><span style="font-size:24px">🇻🇳</span><div><div style="font-family:'Playfair Display',serif;font-size:18px;font-weight:700">Vietnam</div><div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--ink-faint);letter-spacing:.1em">Impact superieur · volume inferieur</div></div></div><div style="font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;color:var(--teal);margin-bottom:6px;letter-spacing:.15em">STRATEGIE</div><p style="font-size:13px;color:var(--ink-light);line-height:1.6;margin-bottom:10px">Big Data + IA + Nation Branding multilingue (11 langues). Plateforme matchmaking dediee. Ciblage chirurgical.</p><div style="padding:10px 14px;background:#e1f5ee;border-radius:2px;font-size:12px;color:#0f6e56"><strong>Resultat :</strong> Visibilite +40% vs Afrique du Sud malgre un volume inferieur</div></div>
+        <div style="background:white;border:1px solid var(--rule);border-radius:2px;padding:24px"><div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid var(--rule)"><span style="font-size:24px">🇻🇳</span><div><div style="font-family:'Playfair Display',serif;font-size:18px;font-weight:700">Vietnam</div><div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--ink-faint);letter-spacing:.1em">Impact supérieur · volume inférieur</div></div></div><div style="font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;color:var(--teal);margin-bottom:6px;letter-spacing:.15em">STRATEGIE</div><p style="font-size:13px;color:var(--ink-light);line-height:1.6;margin-bottom:10px">Big Data + IA + Nation Branding multilingue (11 langues). Plateforme matchmaking dediee. Ciblage chirurgical.</p><div style="padding:10px 14px;background:#e1f5ee;border-radius:2px;font-size:12px;color:#0f6e56"><strong>Resultat :</strong> Visibilite +40% vs Afrique du Sud malgré un volume inférieur</div></div>
         <div style="padding-top:56px;font-family:'Playfair Display',serif;font-size:16px;font-style:italic;color:var(--ink-faint)">vs</div>
-        <div style="background:white;border:1px solid var(--rule);border-radius:2px;padding:24px"><div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid var(--rule)"><span style="font-size:24px">🇿🇦</span><div><div style="font-family:'Playfair Display',serif;font-size:18px;font-weight:700">Afrique du Sud</div><div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--ink-faint);letter-spacing:.1em">Volume N°1 · fragile en execution</div></div></div><div style="font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;color:var(--blue);margin-bottom:6px;letter-spacing:.15em">STRATEGIE</div><p style="font-size:13px;color:var(--ink-light);line-height:1.6;margin-bottom:10px">11 structures institutionnelles. Butterfly Strategy anti-droits US. BLSA Reform Tracker public.</p><div style="padding:10px 14px;background:#fdf6f5;border:1px solid #e8c5c0;border-radius:2px;font-size:12px;color:#7a3028"><strong>Limite :</strong> Chevauchement des roles, confusion, manque de synergie</div></div>
+        <div style="background:white;border:1px solid var(--rule);border-radius:2px;padding:24px"><div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid var(--rule)"><span style="font-size:24px">🇿🇦</span><div><div style="font-family:'Playfair Display',serif;font-size:18px;font-weight:700">Afrique du Sud</div><div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--ink-faint);letter-spacing:.1em">Volume N°1 · fragile en execution</div></div></div><div style="font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;color:var(--blue);margin-bottom:6px;letter-spacing:.15em">STRATEGIE</div><p style="font-size:13px;color:var(--ink-light);line-height:1.6;margin-bottom:10px">11 structures institutionnelles. Butterfly Strategy anti-droits US. BLSA Reform Tracker public.</p><div style="padding:10px 14px;background:#fdf6f5;border:1px solid #e8c5c0;border-radius:2px;font-size:12px;color:#7a3028"><strong>Limite :</strong> Chevauchement des rôles, confusion, manque de synergie</div></div>
       </div>
-      <div class="punch"><p class="punch-text"><strong>Lecon pour le Maroc :</strong> Une strategie digitale ciblee, multilingue et coherente surpasse un arsenal institutionnel lourd mais fragmente. L'intelligence strategique permanente est la condition pour passer de Challenger a Leader inconteste.</p></div>
+      <div class="punch"><p class="punch-text"><strong>Leçon pour le Maroc :</strong> Une stratégie digitale ciblée, multilingue et cohérente surpasse un arsenal institutionnel lourd mais fragmente. L'intelligence stratégique permanente est la condition pour passer de Challenger a Leader incontesté.</p></div>
     </div>
   </div>
 </section>
@@ -621,45 +621,45 @@ a[href*="flourish"]{display:none!important}
 <!-- 08 PODIUM -->
 <section class="section alt" id="podium">
   <div class="wrap">
-    <div class="eyebrow fi">08 / Podium des champions d'attractivite</div>
-    <h2 class="section-title fi">3 groupes, <em>une seule verite</em> strategique</h2>
-    <p class="section-lead fi">Trois analyses convergentes (Bubble Chart, Packed Circles, Radial Analysis) confirment le meme classement.</p>
+    <div class="eyebrow fi">08 / Podium des champions d'attractivité</div>
+    <h2 class="section-title fi">3 groupes, <em>une seule vérité</em> stratégique</h2>
+    <p class="section-lead fi">Trois analyses convergentes (Bubble Chart, Packed Circles, Radial Analysis) confirment le même classement.</p>
     <div class="podium-vis fi">
       <div class="pod"><div class="pod-block" style="height:110px;background:#5f5e5a"><span class="pod-flag">🇲🇦 🇹🇭</span><div class="pod-name">Maroc · Thailande</div><div class="pod-score">Challengers</div></div><div class="pod-base"><div class="pod-rank" style="font-size:26px;color:var(--ink-faint)">2</div></div></div>
       <div class="pod"><div class="pod-block" style="height:190px;background:var(--gold)"><span class="pod-flag">🇿🇦 🇻🇳 🇲🇽</span><div class="pod-name">Vietnam · Afr. du Sud · Mexique</div><div class="pod-score">Leaders</div></div><div class="pod-base"><div class="pod-rank">1</div></div></div>
-      <div class="pod"><div class="pod-block" style="height:75px;background:#888780"><span class="pod-flag">🇰🇪 🇪🇬 🇹🇷</span><div class="pod-name">Kenya · Egypte · Turquie</div><div class="pod-score">Specialistes</div></div><div class="pod-base"><div class="pod-rank" style="font-size:26px;color:var(--ink-faint)">3</div></div></div>
+      <div class="pod"><div class="pod-block" style="height:75px;background:#888780"><span class="pod-flag">🇰🇪 🇪🇬 🇹🇷</span><div class="pod-name">Kenya · Égypte · Turquie</div><div class="pod-score">Specialistes</div></div><div class="pod-base"><div class="pod-rank" style="font-size:26px;color:var(--ink-faint)">3</div></div></div>
     </div>
     <div class="podium-cards fi2">
-      <div class="pc"><div class="pc-title">🏆 Groupe 1 - Leaders (8 secteurs)</div><ul class="pc-items"><li>Afrique du Sud, Vietnam, Mexique</li><li>Portefeuilles diversifies : Digital + EnR + Auto</li><li>Benchmark mondial de reference</li><li>Architectures d'influence numeriques matures</li></ul></div>
-      <div class="pc" style="border-color:var(--gold);border-width:1.5px"><div class="pc-title">🇲🇦 Groupe 2 - Equilibristes (7 secteurs)</div><ul class="pc-items"><li>Maroc et Thailande</li><li>Maroc N°1 en aeronautique - singularite africaine</li><li>Trio Aero + Auto + EnR unique en Afrique</li><li>Potentiel de hub continental avec NMGP</li></ul></div>
-      <div class="pc"><div class="pc-title">📍 Groupe 3 - Specialistes (6 secteurs)</div><ul class="pc-items"><li>Kenya (Digital + EnR), Egypte (Pharma + EnR)</li><li>Turquie (Digital + Agro)</li><li>Montee en puissance ciblee</li><li>Risque de dependance sectorielle</li></ul></div>
+      <div class="pc"><div class="pc-title">🏆 Groupe 1 - Leaders (8 secteurs)</div><ul class="pc-items"><li>Afrique du Sud, Vietnam, Mexique</li><li>Portefeuilles diversifiés : Digital + EnR + Auto</li><li>Benchmark mondial de référence</li><li>Architectures d'influence numériques matures</li></ul></div>
+      <div class="pc" style="border-color:var(--gold);border-width:1.5px"><div class="pc-title">🇲🇦 Groupe 2 - Equilibristes (7 secteurs)</div><ul class="pc-items"><li>Maroc et Thailande</li><li>Maroc N°1 en aéronautique - singularité africaine</li><li>Trio Aéro + Auto + EnR unique en Afrique</li><li>Potentiel de hub continental avec NMGP</li></ul></div>
+      <div class="pc"><div class="pc-title">📍 Groupe 3 - Specialistes (6 secteurs)</div><ul class="pc-items"><li>Kenya (Digital + EnR), Égypte (Pharma + EnR)</li><li>Turquie (Digital + Agro)</li><li>Montee en puissance ciblée</li><li>Risque de dépendance sectorielle</li></ul></div>
     </div>
-    <div class="fi3" style="background:rgba(184,147,42,.07);border:1px solid rgba(184,147,42,.2);border-radius:2px;padding:28px 36px"><p style="font-size:15px;color:var(--ink-light);line-height:1.7;max-width:720px"><strong style="color:var(--ink)">Levier d'influence :</strong> Le Maroc est le seul pays africain a presenter un portefeuille sectoriel comparable aux leaders globaux. Cette singularite justifie une legitimite pour viser le podium africain et mondial.</p></div>
+    <div class="fi3" style="background:rgba(184,147,42,.07);border:1px solid rgba(184,147,42,.2);border-radius:2px;padding:28px 36px"><p style="font-size:15px;color:var(--ink-light);line-height:1.7;max-width:720px"><strong style="color:var(--ink)">Levier d'influence :</strong> Le Maroc est le seul pays africain a presenter un portefeuille sectoriel comparable aux leaders globaux. Cette singularité justifie une legitimite pour viser le podium africain et mondial.</p></div>
   </div>
 </section>
 
 <!-- 09 TAG MAPPING -->
 <section class="section" id="tags">
   <div class="wrap">
-    <div class="eyebrow fi">09 / Mapping des recits strategiques</div>
-    <h2 class="section-title fi">Invest Tag Mapping - <em>l'ecosysteme narratif</em></h2>
-    <p class="section-lead fi">Les ramifications colorees se declinent par familles de thematiques. Plus on s'eloigne du centre, plus la granularite est fine.</p>
+    <div class="eyebrow fi">09 / Mapping des récits stratégiques</div>
+    <h2 class="section-title fi">Invest Tag Mapping - <em>l'écosystème narratif</em></h2>
+    <p class="section-lead fi">Les ramifications colorees se déclinent par familles de thématiques. Plus on s'eloigne du centre, plus la granularité est fine.</p>
     <div class="fi" style="background:white;border:1px solid var(--rule);border-radius:2px;padding:0;position:relative;margin-bottom:28px;min-height:500px">
       <div class="flourish-embed flourish-hierarchy" data-src="visualisation/25116187" style="min-height:500px;position:relative;">
         <iframe src="https://flo.uri.sh/visualisation/25116187/embed" width="100%" height="500" frameborder="0" scrolling="no" style="display:block;width:100%;height:500px;" allowfullscreen></iframe>
         <div style="position:absolute;bottom:0;right:0;width:220px;height:38px;background:#ffffff;z-index:9999;pointer-events:none;"></div>
       </div>
     </div>
-    <div class="tag-insight fi2"><strong>Insight cle :</strong> L'investisseur navigue dans un ecosysteme d'information multidimensionnel. Il relie toujours "Finance & Investing" a la "Technologie" et a "la reglementation des pays cles". Les opportunites d'investissement s'interpretent toujours a travers un prisme global : <strong>Environnement politique, innovation technologique, stabilite societale et cadre reglementaire.</strong></div>
+    <div class="tag-insight fi2"><strong>Insight clé :</strong> L'investisseur navigue dans un écosystème d'information multidimensionnel. Il relie toujours "Finance & Investing" a la "Technologie" et a "la réglementation des pays clés". Les opportunites d'investissement s'interprètent toujours à travers un prisme global : <strong>Environnement politique, innovation technologique, stabilité sociétale et cadre réglementaire.</strong></div>
   </div>
 </section>
 
 <!-- 10 LEVIERS -->
 <section class="section alt" id="leviers">
   <div class="wrap">
-    <div class="eyebrow fi">10 / Recommandations strategiques</div>
+    <div class="eyebrow fi">10 / Recommandations stratégiques</div>
     <h2 class="section-title fi">Quatre leviers <em>d'action immediate</em></h2>
-    <p class="section-lead fi">L'attractivite est un champ de bataille. Quatre piliers vitaux pour rivaliser avec des concurrents equipes et coordonnes.</p>
+    <p class="section-lead fi">L'attractivité est un champ de bataille. Quatre piliers vitaux pour rivaliser avec des concurrents equipes et coordonnes.</p>
 
     <!-- HORIZONTAL TIMELINE -->
     <div class="tl-horiz fi" id="tl-horiz">
@@ -670,12 +670,12 @@ a[href*="flourish"]{display:none!important}
           <div class="tl-node active" data-idx="0">
             <div class="tl-node-dot"></div>
             <div class="tl-node-num">01</div>
-            <div class="tl-node-title">Intelligence<br><em>Strategique</em></div>
+            <div class="tl-node-title">Intelligence<br><em>Stratégique</em></div>
           </div>
           <div class="tl-node" data-idx="1">
             <div class="tl-node-dot"></div>
             <div class="tl-node-num">02</div>
-            <div class="tl-node-title">Acceleration<br><em>Digitale</em></div>
+            <div class="tl-node-title">Accélération<br><em>Digitale</em></div>
           </div>
           <div class="tl-node" data-idx="2">
             <div class="tl-node-dot"></div>
@@ -696,12 +696,12 @@ a[href*="flourish"]{display:none!important}
           <div class="tlp-inner">
             <div class="tlp-tag">Architecture · Anticipation</div>
             <div class="tlp-title">Passer de la <em>reaction a l'anticipation</em></div>
-            <p class="tlp-lead">Seule une veille structuree et une demarche d'intelligence strategique institutionnalisee permettront d'anticiper les offensives concurrentes et de transformer les signaux faibles en opportunites.</p>
+            <p class="tlp-lead">Seule une veille structurée et une démarche d'intelligence stratégique institutionnalisée permettront d'anticiper les offensives concurrentes et de transformer les signaux faibles en opportunites.</p>
             <ul class="tlp-items">
-              <li>Market & Competitive Intelligence Unit (MCIU) institutionnalisee</li>
+              <li>Market & Competitive Intelligence Unit (MCIU) institutionnalisée</li>
               <li>Radar 24/7 sur les 17 pays concurrents directs</li>
-              <li>Capacites OSINT, fact-checking et anti-desinformation</li>
-              <li>Transformation des signaux faibles en avantages competitifs</li>
+              <li>Capacites OSINT, fact-checking et anti-désinformation</li>
+              <li>Transformation des signaux faibles en avantages compétitifs</li>
             </ul>
             <div class="tlp-kpi"><span class="tlp-kpi-num">17</span><span class="tlp-kpi-lbl">pays sous radar permanent</span></div>
           </div>
@@ -710,12 +710,12 @@ a[href*="flourish"]{display:none!important}
           <div class="tlp-inner">
             <div class="tlp-tag">Big Data · IA · Multilingue</div>
             <div class="tlp-title">Le digital comme <em>levier d'impact</em></div>
-            <p class="tlp-lead">Le Vietnam l'a demontre : Big Data, IA et contenus multilingues peuvent transformer un effort cible en une visibilite mondiale. L'Afrique du Sud, malgre son arsenal, se heurte encore a ses fragilites internes.</p>
+            <p class="tlp-lead">Le Vietnam l'a demontre : Big Data, IA et contenus multilingues peuvent transformer un effort ciblé en une visibilite mondiale. L'Afrique du Sud, malgré son arsenal, se heurte encore a ses fragilites internes.</p>
             <ul class="tlp-items">
-              <li>Plateforme d'attractivite interactive et multilingue (Morocco Now)</li>
-              <li>Big Data + IA pour anticipation predictive et ciblage sectoriel</li>
-              <li>Ecosysteme de donnees sectorielles en temps reel</li>
-              <li>Benchmark : Vietnam 11 langues - reproduire et depasser</li>
+              <li>Plateforme d'attractivité interactive et multilingue (Morocco Now)</li>
+              <li>Big Data + IA pour anticipation prédictive et ciblage sectoriel</li>
+              <li>Écosystème de données sectorielles en temps réel</li>
+              <li>Benchmark : Vietnam 11 langues - reproduire et dépasser</li>
             </ul>
             <div class="tlp-kpi"><span class="tlp-kpi-num">11</span><span class="tlp-kpi-lbl">langues - benchmark Vietnam</span></div>
           </div>
@@ -724,28 +724,28 @@ a[href*="flourish"]{display:none!important}
           <div class="tlp-inner">
             <div class="tlp-tag">Narratif · Influence · Visibilite</div>
             <div class="tlp-title">Le Branding national, <em>arme d'influence</em></div>
-            <p class="tlp-lead">La stabilite geopolitique, la position geographique et la richesse culturelle du Maroc sont des atouts majeurs. Les integrer dans un narratif business coherent et multilingue, capable de rassurer et de stimuler l'interet des investisseurs.</p>
+            <p class="tlp-lead">La stabilité géopolitique, la position geographique et la richesse culturelle du Maroc sont des atouts majeurs. Les integrer dans un narratif business cohérent et multilingue, capable de rassurer et de stimuler l'interet des investisseurs.</p>
             <ul class="tlp-items">
-              <li>Construire un narratif business attractif, coherent et percutant</li>
-              <li>Strategie d'influence multicanale et multilingue par communaute cible</li>
+              <li>Construire un narratif business attractif, cohérent et percutant</li>
+              <li>Stratégie d'influence multicanale et multilingue par communaute ciblé</li>
               <li>Positionner le Maroc comme pont Afrique-Europe incontournable</li>
-              <li>Artillerie editoriale : cadence reguliere, secteurs cibles, anglais pivot</li>
+              <li>Artillerie editoriale : cadence régulière, secteurs cibles, anglais pivot</li>
             </ul>
-            <div class="tlp-kpi"><span class="tlp-kpi-num">3</span><span class="tlp-kpi-lbl">criteres decideurs : stabilite · incitations · qualite de vie</span></div>
+            <div class="tlp-kpi"><span class="tlp-kpi-num">3</span><span class="tlp-kpi-lbl">criteres décideurs : stabilité · incitations · qualité de vie</span></div>
           </div>
         </div>
         <div class="tl-panel" id="tlp3">
           <div class="tlp-inner">
-            <div class="tlp-tag">Aero · Auto · EnR · Digital · Pharma</div>
+            <div class="tlp-tag">Aéro · Auto · EnR · Digital · Pharma</div>
             <div class="tlp-title">Des atouts solides <em>a amplifier</em></div>
-            <p class="tlp-lead">Automobile, aeronautique, energies renouvelables : trois secteurs qui placent le Maroc dans le peloton mondial. Le defi est desormais de donner a ces reussites la visibilite et l'audience qu'elles meritent.</p>
+            <p class="tlp-lead">Automobile, aéronautique, energies renouvelables : trois secteurs qui placent le Maroc dans le peloton mondial. Le défi est desormais de donner a ces reussites la visibilite et l'audience qu'elles meritent.</p>
             <ul class="tlp-items">
               <li>Combler les failles critiques : Digital et Pharma sous-exploites</li>
-              <li>Amplifier les acquis : Aeronautique N°1, Auto 4e, EnR 3e mondial</li>
-              <li>Capitaliser sur NMGP : 25 Mds USD, hub energetique continental</li>
+              <li>Amplifier les acquis : Aéronautique N°1, Auto 4e, EnR 3e mondial</li>
+              <li>Capitaliser sur NMGP : 25 Mds USD, hub énergétique continental</li>
               <li>Donner aux succes la visibilite internationale qu'ils meritent</li>
             </ul>
-            <div class="tlp-kpi"><span class="tlp-kpi-num">25 Mds$</span><span class="tlp-kpi-lbl">Gazoduc NMGP - hub energetique africain</span></div>
+            <div class="tlp-kpi"><span class="tlp-kpi-num">25 Mds$</span><span class="tlp-kpi-lbl">Gazoduc NMGP - hub énergétique africain</span></div>
           </div>
         </div>
       </div>
@@ -754,7 +754,7 @@ a[href*="flourish"]{display:none!important}
     <!-- Conclusion -->
     <div class="fi2" style="background:var(--navy);color:white;padding:36px 44px;border-radius:2px;margin-top:40px;position:relative;overflow:hidden">
       <div style="position:absolute;top:-20px;left:16px;font-family:'Playfair Display',serif;font-size:160px;font-weight:900;font-style:italic;color:rgba(201,168,76,.05);line-height:1">"</div>
-      <p style="font-family:'Cormorant Garamond',serif;font-size:clamp(18px,2.2vw,24px);font-style:italic;color:rgba(245,241,232,.85);line-height:1.5;max-width:700px;position:relative;z-index:1">Elever le Maroc du niveau d'equilibriste a celui de leader inconteste ? C'est faisable : <strong style="color:#D4A83A;font-style:normal">combiner intelligence strategique permanente & amplification narrative mondiale.</strong></p>
+      <p style="font-family:'Cormorant Garamond',serif;font-size:clamp(18px,2.2vw,24px);font-style:italic;color:rgba(245,241,232,.85);line-height:1.5;max-width:700px;position:relative;z-index:1">Élever le Maroc du niveau d'équilibriste a celui de leader incontesté ? C'est faisable : <strong style="color:#D4A83A;font-style:normal">combiner intelligence stratégique permanente & amplification narrative mondiale.</strong></p>
     </div>
   </div>
 </section>
@@ -763,26 +763,26 @@ a[href*="flourish"]{display:none!important}
 <section class="cta-section" id="cta">
   <div class="wrap">
     <div style="text-align:center;font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;letter-spacing:.28em;text-transform:uppercase;color:rgba(201,168,76,.5);margin-bottom:36px;display:flex;align-items:center;justify-content:center;gap:12px"><span style="display:block;width:28px;height:1px;background:rgba(201,168,76,.3)"></span>Passer a l'action<span style="display:block;width:28px;height:1px;background:rgba(201,168,76,.3)"></span></div>
-    <p class="cta-quote">"Ce barometre n'est qu'un apercu de ce que revele une architecture d'intelligence deployee sur un mois. Imaginez ce que vous pourriez accomplir avec <strong>une vision complete et permanente.</strong>"</p>
+    <p class="cta-quote">"Ce baromètre n'est qu'un aperçu de ce que révèle une architecture d'intelligence déployée sur un mois. Imaginez ce que vous pourriez accomplir avec <strong>une vision complète et permanente.</strong>"</p>
 
-    <!-- 5 poles Buildfluence (source : page 45 du barometre) -->
+    <!-- 5 poles Buildfluence (source : page 45 du baromètre) -->
     <div class="services-grid">
       <div class="svc">
         <span class="svc-icon">🔍</span>
         <div class="svc-title">Strategic Foresight</div>
         <p class="svc-desc">Identifiez les signaux faibles. Anticipez demain avant vos concurrents.</p>
         <ul class="svc-items">
-          <li>Radar 17 pays concurrents</li>
-          <li>Signaux faibles en temps reel</li>
-          <li>Avantage decisif positionnel</li>
+          <li>Radar stratégique sur la concurrence ou pages spécifiques</li>
+          <li>Signaux faibles en temps réel</li>
+          <li>Avantage décisif positionnel</li>
         </ul>
       </div>
       <div class="svc">
         <span class="svc-icon">🛡️</span>
         <div class="svc-title">Threat Intelligence</div>
-        <p class="svc-desc">Controlez les risques de desinformation. Dejouez les menaces avant qu'elles ne frappent.</p>
+        <p class="svc-desc">Contrôlez les risques de désinformation. Dejouez les menaces avant qu'elles ne frappent.</p>
         <ul class="svc-items">
-          <li>Detection desinformation</li>
+          <li>Détection désinformation</li>
           <li>Campagnes manipulation</li>
           <li>Destabilisation adversariale</li>
         </ul>
@@ -790,21 +790,21 @@ a[href*="flourish"]{display:none!important}
       <div class="svc">
         <span class="svc-icon">🤝</span>
         <div class="svc-title">Due Diligence</div>
-        <p class="svc-desc">Avant chaque decision d'investissement : avec qui avez-vous reellement affaire ?</p>
+        <p class="svc-desc">Avant chaque décision d'investissement : avec qui avez-vous réellement affaire ?</p>
         <ul class="svc-items">
-          <li>Verification des acteurs</li>
-          <li>Reduction de l'incertitude</li>
-          <li>Securisation des choix</li>
+          <li>Vérification des acteurs</li>
+          <li>Réduction de l'incertitude</li>
+          <li>Sécurisation des choix</li>
         </ul>
       </div>
       <div class="svc">
         <span class="svc-icon">📡</span>
         <div class="svc-title">Influence Builder</div>
-        <p class="svc-desc">Ne laissez pas les autres ecrire votre histoire. Devenez maitre du recit.</p>
+        <p class="svc-desc">Ne laissez pas les autres écrire votre histoire. Devenez maitre du récit.</p>
         <ul class="svc-items">
           <li>Narratifs influents</li>
           <li>Storytelling & capital savoir</li>
-          <li>Orientation de la decision</li>
+          <li>Orientation de la décision</li>
         </ul>
       </div>
       <div class="svc">
@@ -813,34 +813,21 @@ a[href*="flourish"]{display:none!important}
         <p class="svc-desc">Capter avant les autres. Lire entre les lignes. Raconter pour convaincre.</p>
         <ul class="svc-items">
           <li>Veille IA continue</li>
-          <li>Decodage des marches</li>
+          <li>Décodage des marches</li>
           <li>Big Data sectoriel</li>
         </ul>
       </div>
     </div>
 
-    <div class="cta-clients">
-      <div class="cta-client-label">Nos clients au Maroc et a l'international</div>
-      <span class="cta-client-chip">OCP</span>
-      <span class="cta-client-chip">Danone</span>
-      <span class="cta-client-chip">CEIS</span>
-      <span class="cta-client-chip">Hopital Univ. Int. Mohammed VI</span>
-      <span class="cta-client-chip">ADD</span>
-      <span class="cta-client-chip">UM6SS</span>
-      <span class="cta-client-chip">Ginger International</span>
-      <span class="cta-client-chip">Presidence du Senegal</span>
-    </div>
-
     <div class="cta-bottom">
-      <a href="mailto:info@buildfluence.ai" class="btn btn-gold" style="font-size:11px;padding:15px 40px">Demander un audit strategique</a>
-      <p class="cta-contact" style="margin-top:14px"><a href="mailto:info@buildfluence.ai">info@buildfluence.ai</a> · <a href="tel:+212661227474">+212 6 61 22 74 74</a></p>
+      <a href="#" id="cta-strategic-exchange" class="btn btn-gold" style="font-size:11px;padding:15px 40px">Demander un échange stratégique</a>
     </div>
   </div>
 </section>
 
 <footer>
-  <div class="fb">Build<span>fluence</span> - Sovereign Decision Infrastructure</div>
-  <div class="fc">© 2025 · Barometre Investissement · Sep 2025</div>
+  <div class="fb">Build<span>fluence</span> - Sovereign Décision Infrastructure</div>
+  <div class="fc">© 2025 · Baromètre Investissement · Sep 2025</div>
 </footer>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
@@ -938,39 +925,39 @@ document.getElementById('pays-tabs').addEventListener('click',e=>{
 
 /* WORLD MAP */
 const geoData={
-  504:{name:'Maroc',cat:'maroc',col:'#22c55e',sec:'Aero N°1 · Auto 4e · EnR 3e'},
+  504:{name:'Maroc',cat:'maroc',col:'#22c55e',sec:'Aéro N°1 · Auto 4e · EnR 3e'},
   710:{name:'Afrique du Sud',cat:'concurrent',col:'#ef4444',sec:'Auto · Digital · EnR · Textile'},
   704:{name:'Vietnam',cat:'concurrent',col:'#ef4444',sec:'Digital · EnR · Textile · Auto'},
   484:{name:'Mexique',cat:'concurrent',col:'#ef4444',sec:'Auto · EnR · Pharma'},
   764:{name:'Thailande',cat:'concurrent',col:'#ef4444',sec:'Auto · EnR · Digital'},
   100:{name:'Bulgarie',cat:'concurrent',col:'#ef4444',sec:'Auto · Digital'},
-  818:{name:'Egypte',cat:'coopetiteur',col:'#f59e0b',sec:'Pharma · EnR · Digital · Textile'},
-  404:{name:'Kenya',cat:'coopetiteur',col:'#f59e0b',sec:'Digital · EnR'},
+  818:{name:'Égypte',cat:'coopétiteur',col:'#f59e0b',sec:'Pharma · EnR · Digital · Textile'},
+  404:{name:'Kenya',cat:'coopétiteur',col:'#f59e0b',sec:'Digital · EnR'},
   440:{name:'Lituanie',cat:'concurrent',col:'#ef4444',sec:'Digital · Outsourcing'},
   152:{name:'Chili',cat:'concurrent',col:'#ef4444',sec:'EnR · Agriculture'},
   616:{name:'Pologne',cat:'concurrent',col:'#ef4444',sec:'Auto · Pharma · Digital'},
-  646:{name:'Rwanda',cat:'coopetiteur',col:'#f59e0b',sec:'Digital · Services'},
-  686:{name:'Senegal',cat:'coopetiteur',col:'#f59e0b',sec:'EnR · Digital · Agro'},
+  646:{name:'Rwanda',cat:'coopétiteur',col:'#f59e0b',sec:'Digital · Services'},
+  686:{name:'Sénégal',cat:'coopétiteur',col:'#f59e0b',sec:'EnR · Digital · Agro'},
   703:{name:'Slovaquie',cat:'concurrent',col:'#ef4444',sec:'Auto'},
   348:{name:'Hongrie',cat:'concurrent',col:'#ef4444',sec:'Auto · Pharma'},
   788:{name:'Tunisie',cat:'concurrent',col:'#ef4444',sec:'Textile · Outsourcing'},
-  792:{name:'Turquie',cat:'coopetiteur',col:'#f59e0b',sec:'Auto · Textile · EnR'},
-  203:{name:'Rep. Tcheque',cat:'concurrent',col:'#ef4444',sec:'Auto'},
-  840:{name:'Etats-Unis',cat:'strategique',col:'#3b82f6',sec:'Investisseur majeur · Global'},
-  724:{name:'Espagne',cat:'strategique',col:'#3b82f6',sec:'Textile · EnR · Geopolitique'},
-  250:{name:'France',cat:'strategique',col:'#3b82f6',sec:'1er investisseur au Maroc'},
-  380:{name:'Italie',cat:'strategique',col:'#3b82f6',sec:'Auto · Aero · Agro · Textile'},
-  56:{name:'Belgique',cat:'strategique',col:'#3b82f6',sec:'Auto · Investisseur'},
-  276:{name:'Allemagne',cat:'strategique',col:'#3b82f6',sec:'Auto · Digital · EnR · Leader ind.'},
-  528:{name:'Pays-Bas',cat:'strategique',col:'#3b82f6',sec:'Agro · Digital'},
-  826:{name:'Grande-Bretagne',cat:'strategique',col:'#3b82f6',sec:'Pharma · Digital'},
-  156:{name:'Chine',cat:'strategique',col:'#3b82f6',sec:'EnR · Digital · Auto · Infra.'},
-  392:{name:'Japon',cat:'strategique',col:'#3b82f6',sec:'Auto · Aero'},
-  410:{name:'Coree du Sud',cat:'strategique',col:'#3b82f6',sec:'Auto · Tech'},
+  792:{name:'Turquie',cat:'coopétiteur',col:'#f59e0b',sec:'Auto · Textile · EnR'},
+  203:{name:'Rep. Tchèque',cat:'concurrent',col:'#ef4444',sec:'Auto'},
+  840:{name:'États-Unis',cat:'stratégique',col:'#3b82f6',sec:'Investisseur majeur · Global'},
+  724:{name:'Espagne',cat:'stratégique',col:'#3b82f6',sec:'Textile · EnR · Géopolitique'},
+  250:{name:'France',cat:'stratégique',col:'#3b82f6',sec:'1er investisseur au Maroc'},
+  380:{name:'Italie',cat:'stratégique',col:'#3b82f6',sec:'Auto · Aéro · Agro · Textile'},
+  56:{name:'Belgique',cat:'stratégique',col:'#3b82f6',sec:'Auto · Investisseur'},
+  276:{name:'Allemagne',cat:'stratégique',col:'#3b82f6',sec:'Auto · Digital · EnR · Leader ind.'},
+  528:{name:'Pays-Bas',cat:'stratégique',col:'#3b82f6',sec:'Agro · Digital'},
+  826:{name:'Grande-Bretagne',cat:'stratégique',col:'#3b82f6',sec:'Pharma · Digital'},
+  156:{name:'Chine',cat:'stratégique',col:'#3b82f6',sec:'EnR · Digital · Auto · Infra.'},
+  392:{name:'Japon',cat:'stratégique',col:'#3b82f6',sec:'Auto · Aéro'},
+  410:{name:'Corée du Sud',cat:'stratégique',col:'#3b82f6',sec:'Auto · Tech'},
   356:{name:'Inde',cat:'concurrent',col:'#ef4444',sec:'Textile · Outsourcing · EnR'},
-  76:{name:'Bresil',cat:'coopetiteur',col:'#f59e0b',sec:'EnR · Agriculture'},
+  76:{name:'Brésil',cat:'coopétiteur',col:'#f59e0b',sec:'EnR · Agriculture'},
 };
-const catLabels={maroc:'Maroc',concurrent:'Concurrent direct',coopetiteur:'Coopetiteur',strategique:'Partenaire strategique'};
+const catLabels={maroc:'Maroc',concurrent:'Concurrent direct',coopétiteur:'Coopétiteur',stratégique:'Partenaire stratégique'};
 
 const mapEl=document.getElementById('world-map');
 const tt=document.getElementById('map-tt');
@@ -1005,7 +992,7 @@ d3.json('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json').then(w
 });
 
 /* SECTOR CHART */
-const sLabels=['Digital','EnR','Automobile','Agro','Textile','Pharma','Outsourcing','Navale','Aero'];
+const sLabels=['Digital','EnR','Automobile','Agro','Textile','Pharma','Outsourcing','Navale','Aéro'];
 const sCols=['#B8932A','#1a6b5c','#1a4a7a','#7F77DD','#D4537E','#BA7517','#888780','#0F6E56','#E24B4A'];
 const sData={
   all:[20877,9536,3069,863,739,660,333,318,278],
@@ -1035,11 +1022,11 @@ new Chart(document.getElementById('bubbleChart').getContext('2d'),{
   data:{datasets:[
     {label:'Leaders',data:[{x:8.1,y:9968,r:30,n:'Afrique du Sud'},{x:8.3,y:9225,r:28,n:'Vietnam'},{x:7.9,y:4761,r:20,n:'Mexique'}],backgroundColor:'rgba(184,147,42,.7)',borderColor:'#B8932A',borderWidth:1.5},
     {label:'Equilibristes',data:[{x:7.0,y:3218,r:16,n:'Thailande'},{x:7.2,y:2056,r:14,n:'Maroc'}],backgroundColor:'rgba(13,27,42,.7)',borderColor:'#0D1B2A',borderWidth:1.5},
-    {label:'Specialistes',data:[{x:6.1,y:2506,r:13,n:'Kenya'},{x:5.9,y:1764,r:11,n:'Egypte'},{x:6.2,y:638,r:9,n:'Turquie'}],backgroundColor:'rgba(26,107,92,.7)',borderColor:'#1a6b5c',borderWidth:1.5},
+    {label:'Specialistes',data:[{x:6.1,y:2506,r:13,n:'Kenya'},{x:5.9,y:1764,r:11,n:'Égypte'},{x:6.2,y:638,r:9,n:'Turquie'}],backgroundColor:'rgba(26,107,92,.7)',borderColor:'#1a6b5c',borderWidth:1.5},
   ]},
   options:{responsive:true,maintainAspectRatio:false,
     plugins:{legend:{position:'top',labels:{font:{family:'JetBrains Mono',size:10},padding:14,boxWidth:10}},tooltip:{backgroundColor:'#0D1B2A',borderColor:'rgba(184,147,42,.3)',borderWidth:1,titleColor:'#D4A83A',bodyColor:'rgba(245,241,232,.75)',callbacks:{title:items=>items[0].raw.n||'',label:items=>'Indice : '+items.raw.y.toLocaleString('fr-FR')+' pts'}}},
-    scales:{x:{title:{display:true,text:'Nb secteurs couverts',color:'#a89880',font:{size:11}},min:4,max:10,ticks:{color:'#a89880',font:{size:10}},grid:{color:'rgba(0,0,0,.04)'}},y:{title:{display:true,text:'Indice de competitivite',color:'#a89880',font:{size:11}},ticks:{color:'#a89880',font:{size:10},callback:v=>v.toLocaleString('fr-FR')},grid:{color:'rgba(0,0,0,.04)'}}}},
+    scales:{x:{title:{display:true,text:'Nb secteurs couverts',color:'#a89880',font:{size:11}},min:4,max:10,ticks:{color:'#a89880',font:{size:10}},grid:{color:'rgba(0,0,0,.04)'}},y:{title:{display:true,text:'Indice de compétitivité',color:'#a89880',font:{size:11}},ticks:{color:'#a89880',font:{size:10},callback:v=>v.toLocaleString('fr-FR')},grid:{color:'rgba(0,0,0,.04)'}}}},
 });
 
 /* RADAR CHART - replaced by Flourish - removed */
@@ -1103,6 +1090,14 @@ tlNodes.forEach(node=>{
   setTimeout(run,3500);
   new MutationObserver(run).observe(document.body,{childList:true,subtree:true});
 })();
+
+/* STRATEGIC EXCHANGE FORM TRIGGER (sent to parent React app) */
+function openStrategicExchange(e){
+  if(e) e.preventDefault();
+  try { window.parent.postMessage('open-strategic-exchange','*'); } catch(_){}
+}
+document.getElementById('nav-strategic-exchange')?.addEventListener('click', openStrategicExchange);
+document.getElementById('cta-strategic-exchange')?.addEventListener('click', openStrategicExchange);
 
 </script>
 </body>
