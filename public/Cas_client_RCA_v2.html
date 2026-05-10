@@ -476,6 +476,23 @@ document.addEventListener('click',function(e){
  if(!e.target.closest('.htl-node'))
  document.querySelectorAll('.htl-node').forEach(n=>n.classList.remove('active'));
 });
+function openStrategicForm(e){
+ if(e)e.preventDefault();
+ var modal=document.getElementById('strategicModal');
+ if(modal){modal.classList.add('active');modal.setAttribute('aria-hidden','false');}
+}
+function closeStrategicForm(){
+ var modal=document.getElementById('strategicModal');
+ if(modal){modal.classList.remove('active');modal.setAttribute('aria-hidden','true');}
+}
+function submitStrategicForm(e){
+ e.preventDefault();
+ var confirm=document.getElementById('strategicConfirm');
+ if(confirm)confirm.style.display='block';
+ e.target.reset();
+}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeStrategicForm();});
+document.getElementById('strategicModal')?.addEventListener('click',function(e){if(e.target===this)closeStrategicForm();});
 </script>
 </body>
 </html>
