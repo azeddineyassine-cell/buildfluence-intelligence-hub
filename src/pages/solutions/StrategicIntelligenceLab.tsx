@@ -1927,27 +1927,104 @@ const StakeholderMatrix = () => {
 
 type MatrixNode = { name: string; cat: "ngo" | "state" | "corp" | "leader"; type: string; role: string; x: number; y: number };
 
-const MissionTimeline = ({ title, items }: { title: string; items: { date: string; title: string; description: string; tag: string; tagTone: "red" | "yellow" | "green" }[] }) => {
-  const tagStyle = {
-    red: { background: "#fee2e2", color: "#991b1b" },
-    yellow: { background: "#fef3c7", color: "#92400e" },
-    green: { background: "#dcfce7", color: "#166534" },
+type TimelineBadge = { label: string; tone?: "default" | "success" | "alert" };
+type TimelineNode = { date: string; title: string; tooltipTitle: string; bullets: string[]; badges: TimelineBadge[] };
+
+const MissionTimeline = ({ title, items }: { title: string; items: TimelineNode[] }) => {
+  const [active, setActive] = React.useState<number | null>(null);
+  const wrapRef = React.useRef<HTMLDivElement | null>(null);
+
+  React.useEffect(() => {
+    const onDoc = (e: MouseEvent) => {
+      if (!wrapRef.current) return;
+      if (!wrapRef.current.contains(e.target as Node)) setActive(null);
+    };
+    document.addEventListener("mousedown", onDoc);
+    return () => document.removeEventListener("mousedown", onDoc);
+  }, []);
+
+  const badgeStyle = (tone: TimelineBadge["tone"]) => {
+    if (tone === "success") return { background: C.gold, color: "#fff" };
+    if (tone === "alert") return { background: "#E06D4F", color: "#fff" };
+    return { background: C.navy, color: "#fff" };
   };
+
   return (
-    <div style={{ marginTop: 48, padding: "28px 0 0" }}>
-      <h3 style={{ fontFamily: FONT_DISPLAY, fontSize: 20, color: C.navy, letterSpacing: "-.01em", marginBottom: 28 }}>{title}</h3>
-      <div className="mission-timeline">
-        {items.map((item) => (
-          <div key={item.date} className="timeline-row">
-            <div className="timeline-date">{item.date}<span className="timeline-dot" /></div>
-            <div className="timeline-body">
-              <h4 style={{ fontFamily: FONT_DISPLAY, fontSize: 17, fontWeight: 700, color: C.navy, margin: "0 0 6px" }}>{item.title}</h4>
-              <p style={{ fontFamily: "DM Sans, sans-serif", fontSize: 13.5, lineHeight: 1.55, color: NAVY3, margin: 0 }}>{item.description}</p>
-              <div className="timeline-tag" style={tagStyle[item.tagTone]}>{item.tag}</div>
-            </div>
-          </div>
-        ))}
+    <div className="mt-timeline-wrap" ref={wrapRef} style={{ marginTop: 48, padding: "28px 0 0" }}>
+      <h3 style={{ fontFamily: FONT_DISPLAY, fontSize: 20, color: C.navy, letterSpacing: "-.01em", marginBottom: 40 }}>{title}</h3>
+      <div className="mt-timeline" style={{ position: "relative" }}>
+        <div className="mt-line" style={{ position: "absolute", left: 0, right: 0, top: "50%", height: 1, background: C.gold }} />
+        <div className="mt-nodes" style={{ position: "relative", display: "flex", justifyContent: "space-between", alignItems: "center", minHeight: 120 }}>
+          {items.map((item, i) => {
+            const isActive = active === i;
+            return (
+              <div key={i} className="mt-node-col" style={{ position: "relative", flex: "1 1 0", display: "flex", flexDirection: "column", alignItems: "center" }}>
+                <div className="mt-above" style={{ position: "absolute", bottom: "calc(50% + 18px)", textAlign: "center", fontFamily: FONT_MONO, fontSize: 11, color: C.gold, letterSpacing: ".18em", textTransform: "uppercase", whiteSpace: "nowrap" }}>{item.date}</div>
+                <button
+                  type="button"
+                  onClick={(e) => { e.stopPropagation(); setActive(isActive ? null : i); }}
+                  aria-expanded={isActive}
+                  className="mt-node"
+                  style={{
+                    width: 16, height: 16, borderRadius: "50%",
+                    background: isActive ? C.gold : C.navy,
+                    border: `2px solid ${C.gold}`,
+                    cursor: "pointer", padding: 0, position: "relative", zIndex: 2,
+                    transition: "all .2s ease",
+                  }}
+                />
+                <div className="mt-below" style={{ position: "absolute", top: "calc(50% + 18px)", textAlign: "center", fontFamily: FONT_DISPLAY, fontSize: 15, color: C.navy, lineHeight: 1.3, padding: "0 6px" }}>{item.title}</div>
+
+                {isActive && (
+                  <div
+                    className="mt-tooltip"
+                    onClick={(e) => e.stopPropagation()}
+                    style={{
+                      position: "absolute",
+                      bottom: "calc(50% + 60px)",
+                      left: "50%",
+                      transform: "translateX(-50%)",
+                      width: 320,
+                      maxWidth: "90vw",
+                      background: "#fff",
+                      border: `1px solid ${C.rule}`,
+                      borderRadius: 2,
+                      padding: 20,
+                      boxShadow: "0 18px 40px -18px rgba(13,27,42,.25)",
+                      zIndex: 10,
+                      textAlign: "left",
+                    }}
+                  >
+                    <h4 style={{ fontFamily: FONT_DISPLAY, fontSize: 16, fontWeight: 700, color: C.navy, margin: "0 0 10px" }}>{item.tooltipTitle}</h4>
+                    <ul style={{ margin: "0 0 12px", paddingLeft: 18, listStyle: "disc" }}>
+                      {item.bullets.map((b, k) => (
+                        <li key={k} style={{ fontFamily: "DM Sans, sans-serif", fontSize: 13, lineHeight: 1.55, color: "#1a1410", marginBottom: 4 }}>{b}</li>
+                      ))}
+                    </ul>
+                    <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
+                      {item.badges.map((b, k) => (
+                        <span key={k} style={{ ...badgeStyle(b.tone), fontFamily: FONT_MONO, fontSize: 9, letterSpacing: ".15em", textTransform: "uppercase", padding: "4px 8px", borderRadius: 2 }}>{b.label}</span>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            );
+          })}
+        </div>
       </div>
+      <style>{`
+        @media(max-width:760px){
+          .mt-timeline .mt-line{display:none}
+          .mt-timeline .mt-nodes{flex-direction:column;align-items:flex-start;gap:48px}
+          .mt-timeline .mt-node-col{flex-direction:row;align-items:flex-start;gap:14px;width:100%}
+          .mt-timeline .mt-above{position:static;text-align:left;margin-bottom:6px;display:block}
+          .mt-timeline .mt-below{position:static;text-align:left;padding:0;margin-top:4px}
+          .mt-timeline .mt-node-col > div:first-child{order:0}
+          .mt-timeline .mt-node{margin-top:6px;flex-shrink:0}
+          .mt-timeline .mt-tooltip{position:static;transform:none;width:100%;margin-top:10px}
+        }
+      `}</style>
     </div>
   );
 };
