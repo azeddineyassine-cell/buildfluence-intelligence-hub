@@ -1,8 +1,10 @@
 import { useMemo, useState } from "react";
 import Navbar from "@/components/Navbar";
 import CTAFooter from "@/components/CTAFooter";
+import { FormStrategicExchange } from "@/components/FormModals";
 import barometreCover from "@/assets/barometre-cover.png";
-import rajaLogo from "@/assets/raja-club.png";
+import rcaGradins from "@/assets/rca-gradins.png";
+import rcaEquipe from "@/assets/rca-equipe.png";
 
 type Filter =
   | "all"
@@ -50,13 +52,13 @@ const CARDS: Card[] = [
     id: "raja-club-athletic",
     filter: "veille-sport",
     category: "Veille Sport",
-    date: "Mai 2026",
+    date: "Juil. 2026 - Mars 2027",
     title: "Raja Club Athletic : la veille comme bouclier institutionnel",
     summary:
-      "Comment le premier club de football marocain a transformé la pression médiatique en avantage décisionnel grâce à une cellule de veille souveraine. Période : Juil. 2025 — Mai 2026.",
+      "Comment le premier club de football marocain a transformé la pression médiatique en avantage décisionnel grâce à une cellule de veille souveraine. Période : Juil. 2026 - Mars 2027.",
     href: "/Cas_client_RCA_v2.html",
-    logo: rajaLogo,
-    gradient: "linear-gradient(135deg, #0a3d2a 0%, #1a6b4a 50%, #c9a84c 100%)",
+    image: rcaGradins,
+    overlayImage: rcaEquipe,
   },
 ];
 
