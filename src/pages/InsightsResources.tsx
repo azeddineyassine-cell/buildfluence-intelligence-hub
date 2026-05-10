@@ -332,8 +332,9 @@ const InsightsResources = () => {
                     style={{
                       width: '100%',
                       height: 'auto',
-                      maxHeight: '140px',
+                      maxHeight: '240px',
                       objectFit: 'cover',
+                      objectPosition: 'top',
                       borderRadius: '2px',
                       marginBottom: '14px',
                       border: '1px solid rgba(201,168,76,0.35)',
