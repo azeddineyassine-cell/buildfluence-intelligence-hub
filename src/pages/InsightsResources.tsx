@@ -3,6 +3,7 @@ import Navbar from "@/components/Navbar";
 import CTAFooter from "@/components/CTAFooter";
 import { FormStrategicExchange } from "@/components/FormModals";
 import barometreCover from "@/assets/barometre-cover.png";
+import barometreEnR from "@/assets/barometre-enr.png";
 import rcaGradins from "@/assets/rca-gradins.png";
 import rcaEquipe from "@/assets/rca-equipe.png";
 
