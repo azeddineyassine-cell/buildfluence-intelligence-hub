@@ -322,6 +322,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--gray-ll);color:var(--text
  <div class="tt-tag c4">Phase 4 Avr. à Mai 2026</div>
  <div class="tt-title">Gestion de crise en conditions réelles</div>
  <div class="tt-body">Deux crises majeures testent le dispositif. Avril 2026 : campagne coordonnée d'attaques informationnelles ciblant directement la DG. Mai 2026 : Crise du Clasico RCA vs FAR 80 mentions, 41,2M de contacts, sentiment 100% négatif en 72h. Détection immédiate, analyse des narratifs, recommandations actionnables à la DG en temps réel.</div>
+ <img class="poc-img" src="/rca-phase4-crisis.png" alt="Montée en puissance de la crise RCA">
  </div>
  </div>
  </div>
@@ -424,10 +425,32 @@ body{font-family:'DM Sans',sans-serif;background:var(--gray-ll);color:var(--text
  <div style="font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(200,151,42,.65);margin-bottom:12px">Votre organisation est-elle prête ?</div>
  <h2 class="cta-title">La prochaine crise ne vous préviendra pas.</h2>
  <p class="cta-sub">Buildfluence accompagne les organisations qui choisissent de décider avec souveraineté. Échangeons sur votre situation.</p>
- <a href="https://buildfluence.com" class="cta-btn">Demander un échange stratégique →</a>
+ <a href="#" class="cta-btn" onclick="openStrategicForm(event)">Demander un échange stratégique →</a>
  </div>
  </div>
 </section>
+
+<div class="cta-modal" id="strategicModal" aria-hidden="true">
+ <div class="cta-dialog" role="dialog" aria-modal="true" aria-labelledby="strategicModalTitle">
+ <button class="cta-close" type="button" onclick="closeStrategicForm()" aria-label="Fermer">×</button>
+ <div class="cta-form-title" id="strategicModalTitle">Demander mon échange stratégique</div>
+ <div class="cta-form-secure">🔒 Communication sécurisée et confidentielle</div>
+ <form class="cta-form" onsubmit="submitStrategicForm(event)">
+ <div class="cta-form-row">
+ <input required name="name" placeholder="Nom" maxlength="100">
+ <input required name="org" placeholder="Organisation" maxlength="100">
+ </div>
+ <div class="cta-form-row">
+ <input required name="poste" placeholder="Poste / Fonction" maxlength="100">
+ <input required type="email" name="email" placeholder="Email professionnel" maxlength="255">
+ </div>
+ <input type="tel" name="phone" placeholder="Téléphone" maxlength="20">
+ <textarea name="message" placeholder="Tapez votre texte..." maxlength="1000"></textarea>
+ <button class="cta-submit" type="submit">Soumettre ma demande</button>
+ <div class="cta-confirm" id="strategicConfirm">Demande prête à être transmise.</div>
+ </form>
+ </div>
+</div>
 
 <footer class="footer">
  <div class="footer-logos">
