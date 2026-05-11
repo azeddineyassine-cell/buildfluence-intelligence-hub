@@ -1204,7 +1204,7 @@ const CaseFileSection = () => (
           <div style={{ fontFamily: FONT_DISPLAY, fontStyle: "italic", fontSize: 80, color: C.gold, lineHeight: 1, marginBottom: 28, fontWeight: 400 }}>III</div>
           <h3 style={{ fontFamily: FONT_DISPLAY, fontSize: 36, fontWeight: 600, color: C.paper, lineHeight: 1.1, marginBottom: 16, letterSpacing: "-0.015em" }}>Observer pour <em style={{ fontStyle: "italic", color: C.gold, fontWeight: 400 }}>devancer</em>.</h3>
           <p style={{ fontFamily: FONT_ITALIC, fontStyle: "italic", fontSize: 19, color: "rgba(244,241,234,0.85)", lineHeight: 1.5 }}>
-            Une infrastructure de veille permanente sur les flux d'investissement, les pays concurrents et les dynamiques narratives — pour transformer la promotion économique nationale en arme de précision.
+            Une infrastructure de veille permanente sur les flux d'investissement, les pays concurrents et les dynamiques narratives, pour transformer la promotion économique nationale en arme de précision.
           </p>
           <div style={{ fontFamily: FONT_MONO, fontSize: 10, letterSpacing: "0.22em", textTransform: "uppercase", color: "rgba(244,241,234,0.5)", marginTop: 24 }}>— Méthodologie Buildfluence · Architecture propriétaire</div>
         </div>
