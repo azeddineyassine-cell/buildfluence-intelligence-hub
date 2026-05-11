@@ -98,7 +98,7 @@ export const sourcesData: Record<string, SourceDetail> = {
   },
   "bf-core": {
     eyebrow: "Infrastructure Décisionnelle",
-    title: "Buildfluence — L'Opérateur Central",
+    title: "Buildfluence : L'Opérateur Central",
     tagline:
       "Une architecture conçue pour transformer l'information en pouvoir décisionnel efficace. Buildfluence ne délivre pas des rapports volumineux, mais une capacité d'anticipation et d'influence.",
     cols: [
