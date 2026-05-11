@@ -593,7 +593,6 @@ const DetailContent = ({ detail }: { detail: DetailKind }) => {
     const benchmarkRows = [
       { plat: "Invest Korea Plaza", url: "https://www.investkorea.org/ik-en/index.do?clickArea=enmain00002*", flag: "🇰🇷", country: "Corée du Sud", tools: "Simulateur fiscal · Matchmaking · Suivi de dossier en temps réel" },
       { plat: "Singapore EDB", url: "https://www.edb.gov.sg/", flag: "🇸🇬", country: "Singapour", tools: "Sector dashboards · Partner finder · Tax & incentive calculator" },
-      { plat: "Department for Business & Trade", url: "https://www.gov.uk/government/organisations/department-for-business-and-trade", flag: "🇬🇧", country: "Royaume-Uni", tools: "Investment opportunities feed · Personalized matching · Live regulation tracker" },
       { plat: "Invest Egypt", url: "https://www.investinegypt.gov.eg/English/Pages/default.aspx", flag: "🇪🇬", country: "Égypte", tools: "Project finder · Sector intelligence dashboards · Direct contact tools" },
     ];
     const pillars = [
@@ -603,9 +602,9 @@ const DetailContent = ({ detail }: { detail: DetailKind }) => {
       { num: "iv.", h: "Personnalisation profonde", body: "Parcours différenciés par profil investisseur · Recommandations sur-mesure · Suivi de dossier en temps réel" },
     ];
     const constats = [
-      "Architecture essentiellement éditoriale — pages de présentation sectorielle, contenus institutionnels, sans interactivité dynamique disponible à ce jour",
-      "Absence d'outils décisionnels — pas de simulateur fiscal, pas de matchmaking investisseur-écosystème, pas de dashboard sectoriel en temps réel",
-      "Personnalisation limitée — l'expérience est uniforme, sans différenciation par profil investisseur (taille de ticket, secteur cible, géographie d'origine)",
+      "Architecture essentiellement éditoriale : pages de présentation sectorielle, contenus institutionnels, sans interactivité dynamique disponible à ce jour",
+      "Absence d'outils décisionnels : pas de simulateur fiscal, pas de matchmaking investisseur-écosystème, pas de dashboard sectoriel en temps réel",
+      "Personnalisation limitée, l'expérience est uniforme, sans différenciation par profil investisseur (taille de ticket, secteur cible, géographie d'origine)",
     ];
     const constatsNum = ["i.", "ii.", "iii."];
     return (
