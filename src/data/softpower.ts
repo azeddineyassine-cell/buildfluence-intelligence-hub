@@ -59,7 +59,7 @@ export const sourcesData: Record<string, SourceDetail> = {
     eyebrow: "Pilier ii — Captation",
     title: "Deep Due Diligence",
     tagline:
-      "Sécuriser la décision dans des environnements incertains. Analyse approfondie des acteurs, réseaux d'influence et risques réputationnels — avant toute prise de position stratégique.",
+      "Sécuriser la décision dans des environnements incertains. Analyse approfondie des acteurs, réseaux d'influence et risques réputationnels, avant toute prise de position stratégique.",
     cols: [
       { h: "Integrity Check", items: ["Vérification identitaire", "Screening sanctions internationales", "Analyse de réputation initiale"] },
       { h: "Strategic Risk Profiling", items: ["Cartographie de la structure capitalistique", "Litiges & contentieux historiques", "Réseau d'influence & affiliations"] },
