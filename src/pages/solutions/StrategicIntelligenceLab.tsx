@@ -2215,18 +2215,21 @@ const StrategicIntelligenceLab = () => {
           <span>— Pilier I / Strategic Intelligence Lab</span>
           <span style={{ marginLeft: "auto" }}>2026</span>
           <div
-            className="basis-full inline-flex items-center mt-2"
-            style={{
-              padding: "10px 18px",
-              border: `1px solid ${C.gold}`,
-              fontSize: 11,
-              letterSpacing: "0.28em",
-              color: C.gold,
-              alignSelf: "flex-start",
-              width: "fit-content",
-            }}
+            className="basis-full mt-2"
           >
-            Pilier I — Strategic Intelligence Lab
+            <span
+              className="inline-block"
+              style={{
+                padding: "10px 18px",
+                border: `1px solid ${C.gold}`,
+                fontSize: 11,
+                letterSpacing: "0.28em",
+                color: C.gold,
+                width: "auto",
+              }}
+            >
+              Pilier I — Strategic Intelligence Lab
+            </span>
           </div>
         </div>
       }
