@@ -1236,8 +1236,8 @@ const CaseFileSection = () => (
 
           <div className="mt-9 flex flex-wrap items-center justify-between gap-6" style={{ padding: "20px 24px", background: "rgba(201,168,76,0.06)", border: "1px solid rgba(201,168,76,0.3)" }}>
             <div>
-              <div style={{ fontFamily: FONT_MONO, fontSize: 9, letterSpacing: "0.24em", textTransform: "uppercase", color: C.gold, marginBottom: 6 }}>Espace Client · Bientôt accessible</div>
-              <div style={{ fontFamily: FONT_ITALIC, fontStyle: "italic", fontSize: 16, color: C.paper, lineHeight: 1.4 }}>Une page dédiée détaillera l'ensemble du dispositif, sa méthodologie et ses livrables.</div>
+              <div style={{ fontFamily: FONT_MONO, fontSize: 9, letterSpacing: "0.24em", textTransform: "uppercase", color: C.gold, marginBottom: 6 }}>Espace Client</div>
+              <div style={{ fontFamily: FONT_ITALIC, fontStyle: "italic", fontSize: 16, color: C.paper, lineHeight: 1.4 }}>Un espace dédié détaillera l'ensemble du dispositif, sa méthodologie et ses livrables.</div>
             </div>
             <button
               type="button"
