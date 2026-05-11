@@ -945,8 +945,7 @@ const MechanismSection = ({ open }: { open: OpenDetail }) => {
           <div style={{ fontFamily: FONT_DISPLAY, fontSize: 24, color: C.gold, opacity: 0.6, lineHeight: 1 }}>↓</div>
 
           <div className="w-full text-center" style={{ background: "rgba(255,255,255,0.7)", border: "1px solid rgba(10,22,40,0.10)", padding: "28px 24px" }}>
-            <p style={{ fontFamily: FONT_DISPLAY, fontStyle: "italic", fontSize: 17, color: C.gold, lineHeight: 1.35, marginBottom: 14, fontWeight: 500 }}>Une architecture conçue pour transformer l'information en pouvoir décisionnel.</p>
-            <p style={{ fontFamily: FONT_ITALIC, fontStyle: "italic", fontSize: 14, color: C.inkSoft, lineHeight: 1.5, marginBottom: 20 }}>Buildfluence ne livre pas des rapports volumineux. Buildfluence livre une capacité d'anticipation.</p>
+            <p style={{ fontFamily: FONT_DISPLAY, fontStyle: "italic", fontSize: 17, color: C.gold, lineHeight: 1.35, marginBottom: 14, fontWeight: 500 }}>Conception d'architecture pour transformer l'information en pouvoir décisionnel efficace. Buildfluence ne délivre pas des rapports volumineux, mais une capacité d'anticipation et d'influence.</p>
             <ul className="list-none text-left">
               {["Voir ce que les autres ne voient pas","Décider avec un temps d'avance","Neutraliser les risques invisibles","Identifier les vrais leviers d'attractivité","Transformer la visibilité en influence réelle"].map((it, i, arr) => (
                 <li key={it} style={{ fontSize: 12, color: C.navy, padding: "8px 0 8px 18px", borderBottom: i === arr.length - 1 ? "none" : "1px solid rgba(10,22,40,0.08)", position: "relative", lineHeight: 1.4 }}>
