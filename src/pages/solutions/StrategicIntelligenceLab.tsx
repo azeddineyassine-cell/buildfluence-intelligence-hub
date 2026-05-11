@@ -640,7 +640,7 @@ const THREAT_CONTENT: Record<
   }
 > = {
   veille: {
-    num: "02",
+    num: "01",
     title: "OSINT & Fact-Checking",
     tag: "● ACTIF 24/7",
     tagColor: C.gold,
@@ -2198,6 +2198,38 @@ const StrategicIntelligenceLab = () => {
   return (
     <DetailPageLayout
       title="Strategic Intelligence Lab"
+      topBand={
+        <div
+          className="flex flex-wrap items-center gap-x-6 gap-y-2 pb-5"
+          style={{
+            borderBottom: "1px solid rgba(10,22,40,0.12)",
+            fontFamily: FONT_MONO,
+            fontSize: 10,
+            letterSpacing: "0.24em",
+            textTransform: "uppercase",
+            color: C.gold,
+            fontWeight: 500,
+          }}
+        >
+          <span>Buildfluence Intelligence Hub</span>
+          <span>— Pilier I / Strategic Intelligence Lab</span>
+          <span style={{ marginLeft: "auto" }}>2026</span>
+          <div
+            className="basis-full inline-flex items-center mt-2"
+            style={{
+              padding: "10px 18px",
+              border: `1px solid ${C.gold}`,
+              fontSize: 11,
+              letterSpacing: "0.28em",
+              color: C.gold,
+              alignSelf: "flex-start",
+              width: "fit-content",
+            }}
+          >
+            Pilier I — Strategic Intelligence Lab
+          </div>
+        </div>
+      }
       chapeau={t(
         "Le pouvoir appartient à ceux qui voient les ruptures avant qu'elles ne soient évidentes. Le Strategic Intelligence Lab transforme l'incertain en actionnable.",
         "Power belongs to those who see disruptions before they become obvious. The Strategic Intelligence Lab transforms uncertainty into actionable."
@@ -2205,10 +2237,10 @@ const StrategicIntelligenceLab = () => {
       ctas={[{ label: t("Parler de mon projet", "Discuss my project"), action: "#", formType: "f1" }]}
       situationContext="Strategic Intelligence Lab"
     >
-      {/* Intro paragraphes */}
+      {/* Intro paragraphes — style DDD (border-left gold) */}
       <div
         className="rounded-lg border-l-4 px-6 py-5 space-y-4"
-        style={{ borderColor: "#103E8C", background: "rgba(16,62,140,0.04)" }}
+        style={{ borderColor: C.gold, background: "rgba(201,168,76,0.06)" }}
       >
         <p className="text-sm leading-relaxed text-foreground/85">
           {lang === "fr" ? (

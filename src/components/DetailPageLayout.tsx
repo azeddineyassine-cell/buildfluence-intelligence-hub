@@ -18,9 +18,10 @@ export interface DetailPageLayoutProps {
   nextSituation?: { label: string; path: string };
   titleClassName?: string;
   chapeauClassName?: string;
+  topBand?: ReactNode;
 }
 
-const DetailPageLayout = ({ title, chapeau, children, sidebar, ctas, situationContext, prevSituation, nextSituation, titleClassName, chapeauClassName }: DetailPageLayoutProps) => {
+const DetailPageLayout = ({ title, chapeau, children, sidebar, ctas, situationContext, prevSituation, nextSituation, titleClassName, chapeauClassName, topBand }: DetailPageLayoutProps) => {
   const navigate = useNavigate();
   const { t } = useLanguage();
   const [f1Open, setF1Open] = useState(false);
@@ -43,6 +44,7 @@ const DetailPageLayout = ({ title, chapeau, children, sidebar, ctas, situationCo
             transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
             className="max-w-[75%] mx-auto"
           >
+            {topBand && <div className="mb-6">{topBand}</div>}
             <h1
               className={`font-bold leading-[1.05] ${titleClassName || ''}`}
               style={{
