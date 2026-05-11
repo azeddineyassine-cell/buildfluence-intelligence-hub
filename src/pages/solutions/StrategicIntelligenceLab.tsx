@@ -1287,7 +1287,7 @@ const ModelisationsSection = () => {
           className="mt-3 text-lg italic"
           style={{ fontFamily: FONT_ITALIC, color: C.navyMid }}
         >
-          Du POC express à l'infrastructure décisionnelle complète — chaque
+          Du POC express à l'infrastructure décisionnelle complète, chaque
           niveau rend un livrable mesurable.
         </p>
       </div>
