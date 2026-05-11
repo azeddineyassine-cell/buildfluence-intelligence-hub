@@ -2051,9 +2051,9 @@ const OcpCaseFile = () => (
     <CaseFileHeader number="CASE FILE · 01" title="Mission OCP Group : contrer les campagnes hostiles." emphasis="contrer" />
     <CaseIntro
       kicker="Mission · Cartographie adverse"
-      title="Groupe industriel stratégique, ciblé par des campagnes d'influence internationales."
-      emphasis="campagnes d'influence"
-      body="Agitation médiatique et sociale orchestrée par des ONG d'Europe du Nord. Le client a besoin de comprendre les chaînes d'amplification, d'identifier les idiots utiles, et de neutraliser le récit adverse avant qu'il n'atteigne ses marchés clés."
+      title="Groupe industriel stratégique, ciblé par des campagnes de nuisance internationales."
+      emphasis="campagnes de nuisance"
+      body={<>Agitation médiatique et sociale orchestrée par des ONG d'Europe du Nord. Le client a besoin de comprendre les <strong>chaînes d'amplification & idiots utiles</strong>, et de neutraliser le récit adverse avant qu'il n'atteigne ses marchés clés.</>}
       quote="L'attaque était invisible pour les veilles classiques. C'est dans la cartographie des relais qu'on a vu la mécanique."
       meta="Analyst note · OCP mission"
     />
