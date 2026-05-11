@@ -640,7 +640,7 @@ const THREAT_CONTENT: Record<
   }
 > = {
   veille: {
-    num: "01",
+    num: "02",
     title: "OSINT & Fact-Checking",
     tag: "● ACTIF 24/7",
     tagColor: C.gold,
@@ -656,7 +656,7 @@ const THREAT_CONTENT: Record<
     ],
   },
   warroom: {
-    num: "01",
+    num: "02",
     title: "Gestion de Crise",
     tag: "◈ WAR ROOM ACTIVE",
     tagColor: C.alert,
