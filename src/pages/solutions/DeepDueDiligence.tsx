@@ -69,7 +69,8 @@ const DeepDueDiligence = () => {
         const target = doc?.getElementById(h.slice(1));
         if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
       } else if (h === "#contact-brief") {
-        formRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+        setFormOpen(true);
+        setTimeout(() => formRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }), 50);
       }
     };
     window.addEventListener("hashchange", onHash);
