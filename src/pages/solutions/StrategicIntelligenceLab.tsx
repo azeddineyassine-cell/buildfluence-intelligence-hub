@@ -250,6 +250,8 @@ const ForesightSection = () => {
               {card.index === "S/01" && (
                 <a
                   href="/barometre"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="inline-block mb-6 hover:underline"
                   style={{
                     fontFamily: FONT_MONO,
