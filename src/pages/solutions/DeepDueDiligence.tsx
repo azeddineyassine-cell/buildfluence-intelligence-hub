@@ -41,7 +41,8 @@ const DeepDueDiligence = () => {
       doc.querySelectorAll('a[href="#contact-brief"]').forEach((a) => {
         a.addEventListener("click", (e) => {
           e.preventDefault();
-          formRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+          setFormOpen(true);
+          setTimeout(() => formRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }), 50);
         });
       });
 
