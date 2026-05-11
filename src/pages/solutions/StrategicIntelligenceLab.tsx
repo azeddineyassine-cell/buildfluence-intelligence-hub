@@ -351,7 +351,7 @@ const PodiumViz = () => {
       footer={
         <>
           <a
-            href="#"
+            href="/barometre"
             className="inline-block uppercase mb-2"
             style={{
               fontFamily: FONT_MONO,
