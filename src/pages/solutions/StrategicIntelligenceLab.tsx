@@ -352,6 +352,8 @@ const PodiumViz = () => {
         <>
           <a
             href="/barometre"
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-block uppercase mb-2"
             style={{
               fontFamily: FONT_MONO,
