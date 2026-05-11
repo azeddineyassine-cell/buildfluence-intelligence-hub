@@ -235,7 +235,7 @@ const CompetitiveLandscape: React.FC<{ variant?: "both" | "map" | "sectors" }> =
             Concurrence, <em style={{ fontStyle: "italic", color: C.gold, fontWeight: 400 }}>Coopétition</em> &amp; Alliances globales du Maroc
           </h3>
           <p style={{ fontFamily: FONT_SANS, fontStyle: "italic", fontSize: 15, color: C.inkSoft, marginTop: 12, maxWidth: 720, marginInline: "auto", lineHeight: 1.5 }}>
-            Lecture intégrée de l'environnement compétitif marocain — survolez un pays pour révéler son positionnement sectoriel.
+            Lecture intégrée de l'environnement compétitif marocain, survolez un pays pour révéler son positionnement sectoriel.
           </p>
         </div>
         <div style={{ background: C.paper, border: `1px solid ${C.rule}`, borderTop: `2px solid ${C.gold}`, padding: "clamp(16px,2vw,28px)" }}>
