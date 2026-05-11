@@ -247,6 +247,22 @@ const ForesightSection = () => {
               >
                 {card.lead}
               </p>
+              {card.index === "S/01" && (
+                <a
+                  href="/barometre"
+                  className="inline-block mb-6 hover:underline"
+                  style={{
+                    fontFamily: FONT_MONO,
+                    fontSize: 11,
+                    color: C.gold,
+                    textDecoration: "none",
+                  }}
+                  onMouseEnter={(e) => (e.currentTarget.style.textDecoration = "underline")}
+                  onMouseLeave={(e) => (e.currentTarget.style.textDecoration = "none")}
+                >
+                  Voir le baromètre →
+                </a>
+              )}
               <ul className="space-y-5">
                 {card.bullets.map((b, k) => {
                   const qMark = b.indexOf("?");
