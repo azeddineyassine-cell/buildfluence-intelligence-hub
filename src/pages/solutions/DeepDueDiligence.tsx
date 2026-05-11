@@ -12,7 +12,7 @@ const DeepDueDiligence = () => {
   const { lang } = useLanguage();
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
-  const [formOpen, setFormOpen] = useState(true);
+  const [formOpen, setFormOpen] = useState(false);
 
   useEffect(() => {
     document.title = "Deep Due Diligence Buildfluence";
