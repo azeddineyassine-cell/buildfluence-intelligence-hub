@@ -661,10 +661,10 @@ const SuccessStoriesCSS = `
   .ss-mini-section { max-width: 1200px; margin: 32px auto 0; padding: 0 40px; }
   .ss-mini-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1px; background: var(--bf-paper-deep); border: 1px solid var(--bf-paper-deep); }
   .ss-mini-card { background: #FAF8F2; padding: 18px 20px; cursor: pointer; transition: all 0.15s ease; text-decoration: none; color: inherit; display: flex; flex-direction: column; gap: 8px; min-height: 140px; }
-  .ss-mini-card:hover { background: var(--bf-navy); color: var(--bf-paper); }
+  .ss-mini-card:hover { background: #FFFFFF; color: var(--bf-navy); }
   .ss-mini-card:hover .ss-mini-thema, .ss-mini-card:hover .ss-mini-secteur-line { color: var(--bf-gold); }
-  .ss-mini-card:hover .ss-mini-title { color: var(--bf-paper); }
-  .ss-mini-card:hover .ss-mini-pitch { color: rgba(244, 241, 234, 0.75); }
+  .ss-mini-card:hover .ss-mini-title { color: var(--bf-navy); }
+  .ss-mini-card:hover .ss-mini-pitch { color: var(--bf-ink-soft); }
   .ss-mini-num { font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 500; letter-spacing: 0.2em; color: var(--bf-ink-muted); }
   .ss-mini-thema { font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--bf-gold); margin-left: 8px; }
   .ss-mini-title { font-family: 'Playfair Display', serif; font-weight: 600; font-size: 16px; color: var(--bf-navy); line-height: 1.25; transition: color 0.15s ease; min-height: 44px; display: flex; align-items: center; }
@@ -751,7 +751,7 @@ const SuccessStoriesPage = () => {
       <Navbar />
 
       <header className="ss-header">
-        <div className="ss-eyebrow">— Insight & Resources / Success Stories</div>
+        <div className="ss-eyebrow">SUCCESS STORIES</div>
         <h1 className="ss-title">
           Là où l'<em>intelligence</em>
           <br />

@@ -135,7 +135,7 @@ const ForesightSection = () => {
           style={{ fontFamily: FONT_ITALIC, color: C.navyMid }}
         >
           Quatre capacités pour lire les marchés, les territoires, l'innovation
-          et les jeux d'acteurs — en profondeur.
+          et les jeux d'acteurs, en profondeur.
         </p>
       </div>
 
@@ -247,6 +247,22 @@ const ForesightSection = () => {
               >
                 {card.lead}
               </p>
+              {card.index === "S/01" && (
+                <a
+                  href="/barometre"
+                  className="inline-block mb-6 hover:underline"
+                  style={{
+                    fontFamily: FONT_MONO,
+                    fontSize: 11,
+                    color: C.gold,
+                    textDecoration: "none",
+                  }}
+                  onMouseEnter={(e) => (e.currentTarget.style.textDecoration = "underline")}
+                  onMouseLeave={(e) => (e.currentTarget.style.textDecoration = "none")}
+                >
+                  Voir le baromètre →
+                </a>
+              )}
               <ul className="space-y-5">
                 {card.bullets.map((b, k) => {
                   const qMark = b.indexOf("?");
@@ -624,7 +640,7 @@ const THREAT_CONTENT: Record<
   }
 > = {
   veille: {
-    num: "01",
+    num: "02",
     title: "OSINT & Fact-Checking",
     tag: "● ACTIF 24/7",
     tagColor: C.gold,
@@ -640,7 +656,7 @@ const THREAT_CONTENT: Record<
     ],
   },
   warroom: {
-    num: "01",
+    num: "02",
     title: "Gestion de Crise",
     tag: "◈ WAR ROOM ACTIVE",
     tagColor: C.alert,
@@ -1271,7 +1287,7 @@ const ModelisationsSection = () => {
           className="mt-3 text-lg italic"
           style={{ fontFamily: FONT_ITALIC, color: C.navyMid }}
         >
-          Du POC express à l'infrastructure décisionnelle complète — chaque
+          Du POC express à l'infrastructure décisionnelle complète, chaque
           niveau rend un livrable mesurable.
         </p>
       </div>
@@ -1480,7 +1496,7 @@ const CaseIntro = ({
   kicker: string;
   title: string;
   emphasis: string;
-  body: string;
+  body: React.ReactNode;
   quote: string;
   meta: string;
 }) => {
@@ -2035,9 +2051,9 @@ const OcpCaseFile = () => (
     <CaseFileHeader number="CASE FILE · 01" title="Mission OCP Group : contrer les campagnes hostiles." emphasis="contrer" />
     <CaseIntro
       kicker="Mission · Cartographie adverse"
-      title="Groupe industriel stratégique, ciblé par des campagnes d'influence internationales."
-      emphasis="campagnes d'influence"
-      body="Agitation médiatique et sociale orchestrée par des ONG d'Europe du Nord. Le client a besoin de comprendre les chaînes d'amplification, d'identifier les idiots utiles, et de neutraliser le récit adverse avant qu'il n'atteigne ses marchés clés."
+      title="Groupe industriel stratégique, ciblé par des campagnes de nuisance internationales."
+      emphasis="campagnes de nuisance"
+      body={<>Agitation médiatique et sociale orchestrée par des ONG d'Europe du Nord. Le client a besoin de comprendre les <strong>chaînes d'amplification & idiots utiles</strong>, et de neutraliser le récit adverse avant qu'il n'atteigne ses marchés clés.</>}
       quote="L'attaque était invisible pour les veilles classiques. C'est dans la cartographie des relais qu'on a vu la mécanique."
       meta="Analyst note · OCP mission"
     />

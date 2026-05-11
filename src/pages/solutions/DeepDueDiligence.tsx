@@ -12,6 +12,7 @@ const DeepDueDiligence = () => {
   const { lang } = useLanguage();
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [formOpen, setFormOpen] = useState(false);
 
   useEffect(() => {
     document.title = "Deep Due Diligence Buildfluence";
@@ -40,7 +41,8 @@ const DeepDueDiligence = () => {
       doc.querySelectorAll('a[href="#contact-brief"]').forEach((a) => {
         a.addEventListener("click", (e) => {
           e.preventDefault();
-          formRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+          setFormOpen(true);
+          setTimeout(() => formRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }), 50);
         });
       });
 
@@ -67,7 +69,8 @@ const DeepDueDiligence = () => {
         const target = doc?.getElementById(h.slice(1));
         if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
       } else if (h === "#contact-brief") {
-        formRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+        setFormOpen(true);
+        setTimeout(() => formRef.current?.scrollIntoView({ behavior: "smooth", block: "start" }), 50);
       }
     };
     window.addEventListener("hashchange", onHash);
@@ -176,6 +179,7 @@ const DeepDueDiligence = () => {
         />
 
         {/* Formulaire de brief confidentiel */}
+        {formOpen && (
         <section
           id="contact-brief"
           ref={formRef}
@@ -184,8 +188,28 @@ const DeepDueDiligence = () => {
             color: "#F5F1E8",
             padding: "80px 24px",
             scrollMarginTop: 100,
+            position: "relative",
           }}
         >
+          <button
+            type="button"
+            onClick={() => setFormOpen(false)}
+            aria-label="Fermer le formulaire"
+            style={{
+              position: "absolute",
+              top: 12,
+              right: 16,
+              fontSize: 20,
+              cursor: "pointer",
+              color: "var(--ink, #F5F1E8)",
+              background: "transparent",
+              border: "none",
+              zIndex: 10,
+              lineHeight: 1,
+            }}
+          >
+            ×
+          </button>
           <div style={{ maxWidth: 880, margin: "0 auto" }}>
             <div style={{ textAlign: "center", marginBottom: 40 }}>
               <p
@@ -364,6 +388,7 @@ const DeepDueDiligence = () => {
             )}
           </div>
         </section>
+        )}
       </main>
       <CTAFooter />
     </div>

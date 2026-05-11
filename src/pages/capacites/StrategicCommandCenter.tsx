@@ -1147,12 +1147,13 @@ const StrategicCommandCenter = () => {
               fontFamily: "Cormorant Garamond, serif",
               fontSize: 20,
             }}
-          >
-            {t(
-              "Le cockpit qui voit le présent et simule le futur. Pilotez vos 4 enjeux stratégiques — Risques, Opportunités, Concurrence, Narratif — et stress-testez vos arbitrages avant que le marché ne le fasse pour vous.",
-              "The cockpit that sees the present and simulates the future. Steer your 4 strategic issues — Risks, Opportunities, Competition, Narrative — and stress-test your arbitrations before the market does it for you."
-            )}
-          </span>
+            dangerouslySetInnerHTML={{
+              __html: t(
+                "Le cockpit qui voit le présent et simule le futur. Pilotez vos 4 enjeux stratégiques : <strong>Risques</strong>, <strong>Opportunités</strong>, <strong>Concurrence</strong>, <strong>Narratif</strong>, et testez vos arbitrages avant que le marché ne le fasse pour vous.",
+                "The cockpit that sees the present and simulates the future. Steer your 4 strategic issues: <strong>Risks</strong>, <strong>Opportunities</strong>, <strong>Competition</strong>, <strong>Narrative</strong>, and test your arbitrations before the market does it for you."
+              ),
+            }}
+          />
         }
         chapeauClassName="text-center mb-2"
       >

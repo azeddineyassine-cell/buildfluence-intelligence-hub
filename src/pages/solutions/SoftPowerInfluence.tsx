@@ -593,7 +593,6 @@ const DetailContent = ({ detail }: { detail: DetailKind }) => {
     const benchmarkRows = [
       { plat: "Invest Korea Plaza", url: "https://www.investkorea.org/ik-en/index.do?clickArea=enmain00002*", flag: "🇰🇷", country: "Corée du Sud", tools: "Simulateur fiscal · Matchmaking · Suivi de dossier en temps réel" },
       { plat: "Singapore EDB", url: "https://www.edb.gov.sg/", flag: "🇸🇬", country: "Singapour", tools: "Sector dashboards · Partner finder · Tax & incentive calculator" },
-      { plat: "Department for Business & Trade", url: "https://www.gov.uk/government/organisations/department-for-business-and-trade", flag: "🇬🇧", country: "Royaume-Uni", tools: "Investment opportunities feed · Personalized matching · Live regulation tracker" },
       { plat: "Invest Egypt", url: "https://www.investinegypt.gov.eg/English/Pages/default.aspx", flag: "🇪🇬", country: "Égypte", tools: "Project finder · Sector intelligence dashboards · Direct contact tools" },
     ];
     const pillars = [
@@ -603,9 +602,9 @@ const DetailContent = ({ detail }: { detail: DetailKind }) => {
       { num: "iv.", h: "Personnalisation profonde", body: "Parcours différenciés par profil investisseur · Recommandations sur-mesure · Suivi de dossier en temps réel" },
     ];
     const constats = [
-      "Architecture essentiellement éditoriale — pages de présentation sectorielle, contenus institutionnels, sans interactivité dynamique disponible à ce jour",
-      "Absence d'outils décisionnels — pas de simulateur fiscal, pas de matchmaking investisseur-écosystème, pas de dashboard sectoriel en temps réel",
-      "Personnalisation limitée — l'expérience est uniforme, sans différenciation par profil investisseur (taille de ticket, secteur cible, géographie d'origine)",
+      "Architecture essentiellement éditoriale : pages de présentation sectorielle, contenus institutionnels, sans interactivité dynamique disponible à ce jour",
+      "Absence d'outils décisionnels : pas de simulateur fiscal, pas de matchmaking investisseur-écosystème, pas de dashboard sectoriel en temps réel",
+      "Personnalisation limitée, l'expérience est uniforme, sans différenciation par profil investisseur (taille de ticket, secteur cible, géographie d'origine)",
     ];
     const constatsNum = ["i.", "ii.", "iii."];
     return (
@@ -945,8 +944,7 @@ const MechanismSection = ({ open }: { open: OpenDetail }) => {
           <div style={{ fontFamily: FONT_DISPLAY, fontSize: 24, color: C.gold, opacity: 0.6, lineHeight: 1 }}>↓</div>
 
           <div className="w-full text-center" style={{ background: "rgba(255,255,255,0.7)", border: "1px solid rgba(10,22,40,0.10)", padding: "28px 24px" }}>
-            <p style={{ fontFamily: FONT_DISPLAY, fontStyle: "italic", fontSize: 17, color: C.gold, lineHeight: 1.35, marginBottom: 14, fontWeight: 500 }}>Une architecture conçue pour transformer l'information en pouvoir décisionnel.</p>
-            <p style={{ fontFamily: FONT_ITALIC, fontStyle: "italic", fontSize: 14, color: C.inkSoft, lineHeight: 1.5, marginBottom: 20 }}>Buildfluence ne livre pas des rapports volumineux. Buildfluence livre une capacité d'anticipation.</p>
+            <p style={{ fontFamily: FONT_DISPLAY, fontStyle: "italic", fontSize: 17, color: C.gold, lineHeight: 1.35, marginBottom: 14, fontWeight: 500 }}>Conception d'architecture pour transformer l'information en pouvoir décisionnel efficace. Buildfluence ne délivre pas des rapports volumineux, mais une capacité d'anticipation et d'influence.</p>
             <ul className="list-none text-left">
               {["Voir ce que les autres ne voient pas","Décider avec un temps d'avance","Neutraliser les risques invisibles","Identifier les vrais leviers d'attractivité","Transformer la visibilité en influence réelle"].map((it, i, arr) => (
                 <li key={it} style={{ fontSize: 12, color: C.navy, padding: "8px 0 8px 18px", borderBottom: i === arr.length - 1 ? "none" : "1px solid rgba(10,22,40,0.08)", position: "relative", lineHeight: 1.4 }}>
@@ -1206,14 +1204,14 @@ const CaseFileSection = () => (
           <div style={{ fontFamily: FONT_DISPLAY, fontStyle: "italic", fontSize: 80, color: C.gold, lineHeight: 1, marginBottom: 28, fontWeight: 400 }}>III</div>
           <h3 style={{ fontFamily: FONT_DISPLAY, fontSize: 36, fontWeight: 600, color: C.paper, lineHeight: 1.1, marginBottom: 16, letterSpacing: "-0.015em" }}>Observer pour <em style={{ fontStyle: "italic", color: C.gold, fontWeight: 400 }}>devancer</em>.</h3>
           <p style={{ fontFamily: FONT_ITALIC, fontStyle: "italic", fontSize: 19, color: "rgba(244,241,234,0.85)", lineHeight: 1.5 }}>
-            Une infrastructure de veille permanente sur les flux d'investissement, les pays concurrents et les dynamiques narratives — pour transformer la promotion économique nationale en arme de précision.
+            Une infrastructure de veille permanente sur les flux d'investissement, les pays concurrents et les dynamiques narratives, pour transformer la promotion économique nationale en arme de précision.
           </p>
           <div style={{ fontFamily: FONT_MONO, fontSize: 10, letterSpacing: "0.22em", textTransform: "uppercase", color: "rgba(244,241,234,0.5)", marginTop: 24 }}>— Méthodologie Buildfluence · Architecture propriétaire</div>
         </div>
 
         <div>
           {[
-            { h: "Les piliers du projet", p: <>Veille concurrentielle continue sur 18 territoires, mapping des décideurs économiques dans 10 pays partenaires, monitoring narratif et anticipation des dynamiques d'opinion, production d'un <em style={{ fontFamily: FONT_ITALIC, fontStyle: "italic", color: C.paper }}>Baromètre d'Investissement actionnable</em> par les opérateurs publics et privés.</> },
+            { h: "Les piliers du projet", p: <>Radar stratégique continu sur 18 pays, mapping des décideurs économiques dans 10 pays partenaires, monitoring narratif et anticipation des dynamiques d'opinion, production d'un <em style={{ fontFamily: FONT_ITALIC, fontStyle: "italic", color: C.paper }}>Baromètre d'Investissement actionnable</em> par les opérateurs publics et privés.</> },
             { h: "La maîtrise Buildfluence", p: <>Une <em style={{ fontFamily: FONT_ITALIC, fontStyle: "italic", color: C.paper }}>infrastructure technologique souveraine</em> couplée à une équipe d'analystes spécialisés. Croisement OSINT + HumInt + BI + IA augmentée. Capacité à délivrer en continu une <em style={{ fontFamily: FONT_ITALIC, fontStyle: "italic", color: C.paper }}>longueur d'avance stratégique</em> sur l'ensemble du périmètre couvert.</> },
             { h: "L'impact opérationnel", p: <>Les missions d'attractivité deviennent des <em style={{ fontFamily: FONT_ITALIC, fontStyle: "italic", color: C.paper }}>opérations chirurgicales</em>, briefées par de la donnée fraîche. La promotion économique passe de campagne ponctuelle à <em style={{ fontFamily: FONT_ITALIC, fontStyle: "italic", color: C.paper }}>infrastructure d'influence permanente</em>. Chaque décideur public dispose d'un cockpit dédié.</> },
           ].map((b) => (
@@ -1238,8 +1236,8 @@ const CaseFileSection = () => (
 
           <div className="mt-9 flex flex-wrap items-center justify-between gap-6" style={{ padding: "20px 24px", background: "rgba(201,168,76,0.06)", border: "1px solid rgba(201,168,76,0.3)" }}>
             <div>
-              <div style={{ fontFamily: FONT_MONO, fontSize: 9, letterSpacing: "0.24em", textTransform: "uppercase", color: C.gold, marginBottom: 6 }}>Espace Client · Bientôt accessible</div>
-              <div style={{ fontFamily: FONT_ITALIC, fontStyle: "italic", fontSize: 16, color: C.paper, lineHeight: 1.4 }}>Une page dédiée détaillera l'ensemble du dispositif, sa méthodologie et ses livrables.</div>
+              <div style={{ fontFamily: FONT_MONO, fontSize: 9, letterSpacing: "0.24em", textTransform: "uppercase", color: C.gold, marginBottom: 6 }}>Espace Client</div>
+              <div style={{ fontFamily: FONT_ITALIC, fontStyle: "italic", fontSize: 16, color: C.paper, lineHeight: 1.4 }}>Un espace dédié détaillera l'ensemble du dispositif, sa méthodologie et ses livrables.</div>
             </div>
             <button
               type="button"
@@ -1264,7 +1262,7 @@ const POCS = [
 
 const PocsSection = () => (
   <section className="mt-32">
-    <SectionHeader num="iv" eyebrow="Modélisations & POCs" intro="Du test rapide à l'infrastructure complète. Choisissez le format adapté à votre maturité chacun est conçu pour produire un résultat tangible dès le premier mois.">
+    <SectionHeader num="iv" eyebrow="Modélisations & POCs" intro="Choisissez le format adapté à votre maturité. Chacun est conçu pour produire un résultat fiable dès le premier mois.">
       Trois portes d'entrée pour <em style={{ fontStyle: "italic", color: C.gold, fontWeight: 400 }}>activer</em>.
     </SectionHeader>
     <div className="sp-tri-grid grid gap-6" style={{ gridTemplateColumns: "repeat(3, minmax(0,1fr))" }}>

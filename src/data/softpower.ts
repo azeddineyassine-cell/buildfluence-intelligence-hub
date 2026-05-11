@@ -59,7 +59,7 @@ export const sourcesData: Record<string, SourceDetail> = {
     eyebrow: "Pilier ii — Captation",
     title: "Deep Due Diligence",
     tagline:
-      "Sécuriser la décision dans des environnements incertains. Analyse approfondie des acteurs, réseaux d'influence et risques réputationnels — avant toute prise de position stratégique.",
+      "Sécuriser la décision dans des environnements incertains. Analyse approfondie des acteurs, réseaux d'influence et risques réputationnels, avant toute prise de position stratégique.",
     cols: [
       { h: "Integrity Check", items: ["Vérification identitaire", "Screening sanctions internationales", "Analyse de réputation initiale"] },
       { h: "Strategic Risk Profiling", items: ["Cartographie de la structure capitalistique", "Litiges & contentieux historiques", "Réseau d'influence & affiliations"] },
@@ -98,7 +98,7 @@ export const sourcesData: Record<string, SourceDetail> = {
   },
   "bf-core": {
     eyebrow: "Infrastructure Décisionnelle",
-    title: "Buildfluence — L'Opérateur Central",
+    title: "Buildfluence : L'Opérateur Central",
     tagline:
       "Une architecture conçue pour transformer l'information en pouvoir décisionnel efficace. Buildfluence ne délivre pas des rapports volumineux, mais une capacité d'anticipation et d'influence.",
     cols: [
