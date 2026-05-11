@@ -1496,7 +1496,7 @@ const CaseIntro = ({
   kicker: string;
   title: string;
   emphasis: string;
-  body: string;
+  body: React.ReactNode;
   quote: string;
   meta: string;
 }) => {
