@@ -135,7 +135,7 @@ const ForesightSection = () => {
           style={{ fontFamily: FONT_ITALIC, color: C.navyMid }}
         >
           Quatre capacités pour lire les marchés, les territoires, l'innovation
-          et les jeux d'acteurs — en profondeur.
+          et les jeux d'acteurs, en profondeur.
         </p>
       </div>
 
