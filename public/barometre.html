@@ -670,6 +670,106 @@ a[href*="flourish"]{display:none!important}
     <h2 class="section-title fi">Quatre leviers <em>d'action immediate</em></h2>
     <p class="section-lead fi">L'attractivité est un champ de bataille. Quatre piliers vitaux pour rivaliser avec des concurrents equipes et coordonnes.</p>
 
+    <!-- TIMELINE HORIZONTALE 4 NOEUDS -->
+    <style>
+      .lev-timeline{position:relative;margin:3rem 0 2.5rem;padding:0 2rem}
+      .lev-timeline-line{position:relative;height:2px;background:#C9A84C;margin:2rem 0}
+      .lev-nodes{position:absolute;top:50%;left:0;right:0;display:flex;justify-content:space-between;transform:translateY(-50%)}
+      .lev-node{display:flex;flex-direction:column;align-items:center;cursor:pointer;position:relative;flex:0 0 auto;width:120px}
+      .lev-node-num{font-family:'JetBrains Mono',monospace;font-size:10px;color:#C9A84C;margin-bottom:8px;letter-spacing:.1em}
+      .lev-node-circle{width:18px;height:18px;border-radius:50%;background:#FAF6ED;border:2px solid #D9CFBC;transition:all .25s ease}
+      .lev-node.active .lev-node-circle{background:#0D1B2A;border-color:#C9A84C;transform:scale(1.3)}
+      .lev-node-label{font-family:'DM Sans',sans-serif;font-size:11px;color:#6b5c48;max-width:100px;text-align:center;margin-top:8px;line-height:1.3}
+      .lev-tooltip{position:absolute;top:calc(100% + 18px);left:50%;transform:translateX(-50%);background:#fff;border:1px solid #D9CFBC;border-radius:2px;padding:16px;width:280px;z-index:10;opacity:0;pointer-events:none;transition:opacity .25s ease;box-shadow:0 6px 24px rgba(13,27,42,.08)}
+      .lev-node.active .lev-tooltip{opacity:1;pointer-events:auto}
+      .lev-tooltip::before{content:'';position:absolute;top:-7px;left:50%;transform:translateX(-50%) rotate(45deg);width:12px;height:12px;background:#fff;border-left:1px solid #D9CFBC;border-top:1px solid #D9CFBC}
+      .lev-tooltip-title{font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;color:#0D1B2A;margin:0 0 10px}
+      .lev-tooltip ul{list-style:none;padding:0;margin:0 0 12px}
+      .lev-tooltip li{position:relative;padding-left:14px;font-size:12px;color:#6b5c48;line-height:1.5;margin-bottom:6px;text-align:left}
+      .lev-tooltip li::before{content:'';position:absolute;left:0;top:7px;width:5px;height:5px;border-radius:50%;background:#C9A84C}
+      .lev-tooltip-badge{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.15em;padding:4px 8px;border-radius:2px;color:#fff}
+      @media(max-width:720px){.lev-node{width:70px}.lev-node-label{font-size:10px;-webkit-line-clamp:2;display:-webkit-box;-webkit-box-orient:vertical;overflow:hidden}.lev-tooltip{width:220px}}
+    </style>
+    <div class="lev-timeline" id="levTimeline">
+      <div class="lev-timeline-line"></div>
+      <div class="lev-nodes">
+        <div class="lev-node" data-idx="0">
+          <div class="lev-node-num">01</div>
+          <div class="lev-node-circle"></div>
+          <div class="lev-node-label">Intelligence Stratégique</div>
+          <div class="lev-tooltip">
+            <h4 class="lev-tooltip-title">Intelligence Stratégique</h4>
+            <ul>
+              <li>Radar permanent sur 18 pays concurrents</li>
+              <li>Détection des signaux faibles sectoriels</li>
+              <li>Baromètre mensuel actualisé en temps réel</li>
+            </ul>
+            <span class="lev-tooltip-badge" style="background:#0D1B2A">CONTINU</span>
+          </div>
+        </div>
+        <div class="lev-node" data-idx="1">
+          <div class="lev-node-num">02</div>
+          <div class="lev-node-circle"></div>
+          <div class="lev-node-label">Accélération Numérique</div>
+          <div class="lev-tooltip">
+            <h4 class="lev-tooltip-title">Accélération Numérique</h4>
+            <ul>
+              <li>Fonds souverain Tech 500M USD</li>
+              <li>Zone Franche Digitale Casablanca-Rabat</li>
+              <li>Réduire l'écart Digital vs Vietnam de 674 à 2000 mentions</li>
+            </ul>
+            <span class="lev-tooltip-badge" style="background:#E06D4F">URGENT</span>
+          </div>
+        </div>
+        <div class="lev-node" data-idx="2">
+          <div class="lev-node-num">03</div>
+          <div class="lev-node-circle"></div>
+          <div class="lev-node-label">Nation Branding</div>
+          <div class="lev-tooltip">
+            <h4 class="lev-tooltip-title">Nation Branding</h4>
+            <ul>
+              <li>Morocco.invest multilingue en 6 langues</li>
+              <li>Task Force Nation Branding AMDIE</li>
+              <li>Campagne internationale Morocco First</li>
+            </ul>
+            <span class="lev-tooltip-badge" style="background:#C9A84C">OFFENSIF</span>
+          </div>
+        </div>
+        <div class="lev-node" data-idx="3">
+          <div class="lev-node-num">04</div>
+          <div class="lev-node-circle"></div>
+          <div class="lev-node-label">Renforcement des Acquis</div>
+          <div class="lev-tooltip">
+            <h4 class="lev-tooltip-title">Renforcement des Acquis</h4>
+            <ul>
+              <li>Consolider N°1 Aéronautique mondial</li>
+              <li>Cluster EnR Hub continental</li>
+              <li>Programme Pharma 2026 100M USD</li>
+            </ul>
+            <span class="lev-tooltip-badge" style="background:#0F6E56">STRUCTUREL</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      (function(){
+        var root=document.getElementById('levTimeline');
+        if(!root)return;
+        var nodes=root.querySelectorAll('.lev-node');
+        nodes.forEach(function(n){
+          n.addEventListener('click',function(e){
+            e.stopPropagation();
+            var wasActive=n.classList.contains('active');
+            nodes.forEach(function(x){x.classList.remove('active')});
+            if(!wasActive)n.classList.add('active');
+          });
+        });
+        document.addEventListener('click',function(){
+          nodes.forEach(function(x){x.classList.remove('active')});
+        });
+      })();
+    </script>
+
     <!-- 4 RECOMMANDATIONS CARDS -->
     <style>
       .reco-card{background:#FAF6ED;border:0.5px solid #D9CFBC;border-radius:12px;overflow:hidden;margin-bottom:1.5rem;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:auto auto}
