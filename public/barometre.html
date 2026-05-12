@@ -709,6 +709,12 @@ a[href*="flourish"]{display:none!important}
         .reco-card .reco-left{border-right:none;border-bottom:0.5px solid #D9CFBC}
         .reco-card .reco-bottom{flex-direction:column;align-items:flex-start;gap:14px}
       }
+      @keyframes orbit1 { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+      @keyframes orbit2 { from { transform: rotate(0deg); } to { transform: rotate(-360deg); } }
+      @keyframes orbit3 { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+      .galaxy-orbit-1 { transform-origin: 155px 162px; animation: orbit1 28s linear infinite; }
+      .galaxy-orbit-2 { transform-origin: 155px 162px; animation: orbit2 48s linear infinite; }
+      .galaxy-orbit-3 { transform-origin: 155px 162px; animation: orbit3 70s linear infinite; }
     </style>
 
     <!-- CARTE 1 -->
