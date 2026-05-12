@@ -857,60 +857,92 @@
       </div>
     </div>
  
-    <!-- TIMELINE -->
-    <div class="timeline">
-      <h4>Chronologie de l'investigation</h4>
-      <div class="tl">
-        <div class="tl-item">
-          <div class="tl-date">J+3 · SEMAINE 1</div>
-          <div class="tl-body">
-            <h5>Analyse initiale · décodage en sources ouvertes</h5>
-            <p>Revue des sites institutionnels. La cible principale (<strong>DELAWARE</strong>) ne mentionne qu'un seul dirigeant. Mais un recoupement dans une source tierce évoque un co-investisseur systématique : un fonds basé dans un autre <strong>État offshore (NEVADA)</strong>.</p>
-            <span class="tag tag-watch">Écart signalé</span>
-          </div>
-        </div>
-        <div class="tl-item">
-          <div class="tl-date">J+10 · SEMAINE 2</div>
-          <div class="tl-body">
-            <h5>Cartographie des dirigeants</h5>
-            <p>Le site officiel de NEVADA mentionne 3 dirigeants. Une investigation plus poussée révèle un <strong>quatrième</strong>, ancien banquier, actif dans la relation investisseurs, jamais mentionné dans la communication publique. Signe d'une gouvernance asymétrique.</p>
-            <span class="tag tag-watch">Dirigeant de l'ombre identifié</span>
-          </div>
-        </div>
-        <div class="tl-item">
-          <div class="tl-date">J+20 · SEMAINE 3</div>
-          <div class="tl-body">
-            <h5>Filiation historique du Président</h5>
-            <p>Le Président de NEVADA a précédemment dirigé un ancien groupe agroalimentaire (<strong>OHIO</strong>) liquidé pour fraude en 2017. Son prédécesseur est incarcéré. Lui-même n'est pas mis en cause, mais c'est <strong>avec les fonds d'OHIO</strong> qu'il a capitalisé NEVADA.</p>
-            <span class="tag tag-stop">Signal rouge</span>
-          </div>
-        </div>
-        <div class="tl-item">
-          <div class="tl-date">J+28 · SEMAINE 4</div>
-          <div class="tl-body">
-            <h5>ICIJ · interrogation Offshore Leaks</h5>
-            <p>Recherche dans la base du Consortium International des Journalistes d'Investigation. Le Président de NEVADA possède <strong>2 sociétés offshore</strong> domiciliées aux Îles Vierges britanniques, partageant la même adresse à Moscou — nationalité confirmée.</p>
-            <span class="tag tag-stop">Preuve matérielle</span>
-          </div>
-        </div>
-        <div class="tl-item">
-          <div class="tl-date">J+35 · SEMAINE 5</div>
-          <div class="tl-body">
-            <h5>Analyse compliance & sanctions</h5>
-            <p>Aucune des entités ni des personnes ne figure sur les listes de sanctions ONU, OFAC, UE ou Interpol. Le risque n'est pas réglementaire — il est <strong>réputationnel et structurel</strong>.</p>
-            <span class="tag tag-go">Compliance : clean</span>
-          </div>
-        </div>
-        <div class="tl-item">
-          <div class="tl-date">J+42 · SEMAINE 6</div>
-          <div class="tl-body">
-            <h5>Livraison finale & recommandation</h5>
-            <p>Dossier de 48 pages + tableau de bord. Recommandation : <strong>Go sur le donneur d'ordre opérationnel</strong> (DELAWARE), <strong>Vigilance sur le co-investisseur</strong> (NEVADA) avec des clauses de protection renforcées. Partenariat signé, sur un périmètre redéfini.</p>
-            <span class="tag tag-go">Mission accomplie</span>
-          </div>
-        </div>
+    <!-- TIMELINE INTERACTIVE -->
+    <div class="htl-wrap" style="padding:2rem 0 3rem;">
+      <style>
+        .htl-eyebrow{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.2em;color:#C9A84C;margin-bottom:14px}
+        .htl-title{font-family:'Playfair Display',serif;font-size:26px;color:#0D1B2A;margin:0 0 8px;line-height:1.2}
+        .htl-title em{color:#C9A84C;font-style:normal}
+        .htl-sub{font-family:'DM Sans',sans-serif;font-size:13px;color:#5a6675;margin:0 0 20px}
+        .htl-timeline{position:relative;padding:60px 0 80px}
+        .htl-line{position:absolute;top:50%;left:40px;right:40px;height:2px;background:#C9A84C}
+        .htl-nodes{position:relative;display:flex;justify-content:space-between;padding:0 40px}
+        .htl-node{display:flex;flex-direction:column;align-items:center;cursor:pointer;flex:0 0 auto;width:120px}
+        .htl-date{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.15em;color:#C9A84C;margin-bottom:14px;text-align:center;min-height:14px}
+        .htl-circle{width:20px;height:20px;border-radius:50%;transition:all .25s ease;border:2px solid transparent;box-sizing:border-box}
+        .htl-circle.gold{background:#C9A84C}
+        .htl-circle.red{background:#E06D4F}
+        .htl-circle.teal{background:#0F6E56}
+        .htl-node.active .htl-circle{background:#0D1B2A;border:2px solid #C9A84C;transform:scale(1.4);box-shadow:0 0 0 4px rgba(201,168,76,.2)}
+        .htl-label{font-family:'DM Sans',sans-serif;font-size:11px;max-width:90px;text-align:center;line-height:1.4;color:#0D1B2A;margin-top:14px}
+        .htl-panel{position:relative;background:#fff;border:1px solid #D9CFBC;border-radius:2px;padding:20px 24px;margin-top:8px;opacity:0;transform:translateY(-4px);animation:htlfade .25s ease forwards}
+        .htl-panel:before{content:"";position:absolute;top:-8px;width:14px;height:14px;background:#fff;border-left:1px solid #D9CFBC;border-top:1px solid #D9CFBC;transform:rotate(45deg);transition:left .25s ease}
+        @keyframes htlfade{to{opacity:1;transform:translateY(0)}}
+        .htl-panel-top{display:flex;align-items:center;gap:14px;margin-bottom:8px;flex-wrap:wrap}
+        .htl-panel-date{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.18em;color:#C9A84C}
+        .htl-badge{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.12em;padding:4px 10px;border-radius:2px;color:#fff}
+        .htl-panel-title{font-family:'Playfair Display',serif;font-size:15px;font-weight:700;color:#0D1B2A;margin:0 0 8px;line-height:1.35}
+        .htl-panel-desc{font-family:'DM Sans',sans-serif;font-size:13px;color:#5a6675;line-height:1.6;margin:0 0 12px}
+        .htl-panel ul{list-style:none;padding:0;margin:0}
+        .htl-panel ul li{position:relative;padding-left:18px;font-family:'DM Sans',sans-serif;font-size:13px;color:#0D1B2A;line-height:1.55;margin-bottom:6px}
+        .htl-panel ul li:before{content:"";position:absolute;left:0;top:8px;width:5px;height:5px;border-radius:50%;background:#C9A84C}
+        @media (max-width:768px){
+          .htl-nodes{padding:0 16px}
+          .htl-line{left:16px;right:16px}
+          .htl-node{width:60px}
+          .htl-label{font-size:10px;max-width:70px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+        }
+      </style>
+      <div class="htl-eyebrow">DEEP DUE DILIGENCE · CHRONOLOGIE DE L'INVESTIGATION</div>
+      <h2 class="htl-title">Dossier confidentiel — Fonds d'investissement européen <em>$400M</em></h2>
+      <p class="htl-sub">Cliquez sur un nœud pour révéler le détail de chaque phase</p>
+      <div class="htl-timeline">
+        <div class="htl-line"></div>
+        <div class="htl-nodes" id="htl-nodes-fr"></div>
       </div>
+      <div id="htl-panel-fr"></div>
     </div>
+    <script>
+      (function(){
+        var data=[
+          {date:"J+3 · S1",label:"Analyse initiale",color:"gold",badge:"Signal détecté",badgeBg:"#0D1B2A",title:"Analyse initiale — décodage en sources ouvertes",desc:"Revue des sites institutionnels. La cible principale (DELAWARE) ne mentionne qu'un seul dirigeant. Mais une source tierce évoque un co-investisseur systématique : un fonds basé dans un autre État offshore (NEVADA).",points:["DELAWARE : structure principale, un dirigeant déclaré","NEVADA offshore : co-investisseur non déclaré détecté","Recoupement déclenche l'élargissement de l'investigation"]},
+          {date:"J+10 · S2",label:"Cartographie des dirigeants",color:"gold",badge:"Signal investisseur",badgeBg:"#0D1B2A",title:"Cartographie des dirigeants",desc:"Le site officiel de NEVADA mentionne 3 dirigeants. Une investigation plus poussée révèle un quatrième, ancien banquier, actif dans la relation investisseurs, jamais mentionné dans la communication publique.",points:["Gouvernance asymétrique : 4e dirigeant actif mais non public","Structuration délibérée pour limiter la traçabilité","Niveau de risque : élevé — analyse approfondie déclenchée"]},
+          {date:"J+20 · S3",label:"Filiation historique",color:"red",badge:"Signal rouge",badgeBg:"#E06D4F",title:"Filiation historique du Président",desc:"Le Président de NEVADA a précédemment dirigé un groupe agroalimentaire (OHIO) liquidé pour fraude en 2017. Son prédécesseur est incarcéré.",points:["OHIO : liquidé pour fraude en 2017","Prédécesseur incarcéré, fonds capitalisés dans NEVADA","Connexion directe avec les fonds frauduleux confirmée"]},
+          {date:"J+28 · S4",label:"ICIJ · Offshore leaks",color:"red",badge:"Preuve matérielle",badgeBg:"#E06D4F",title:"ICIJ — Interrogation Offshore Leaks",desc:"Recherche dans la base du Consortium International des Journalistes d'Investigation. Le Président de NEVADA possède 2 sociétés offshore domiciliées aux Îles Vierges Britanniques, partageant la même adresse à Moscou.",points:["2 sociétés offshore : Îles Vierges Britanniques","Adresse commune à Moscou avec entités russes sanctionnées","Nationalité russe du Président confirmée"]},
+          {date:"J+35 · S5",label:"Analyse compliance",color:"gold",badge:"Compliance · Clear",badgeBg:"#0D1B2A",title:"Analyse compliance et sanctions",desc:"Aucune entité ni personne ne figure sur les listes de sanctions ONU, OFAC, UE ou Interpol. Le risque n'est pas réglementaire : il est réputationnel et structurel.",points:["Listes ONU, OFAC, UE, Interpol : aucun résultat","Risque réglementaire direct : absent","Risque réel : réputationnel, structurel et géopolitique"]},
+          {date:"J+42 · S6",label:"Livraison finale",color:"teal",badge:"Mission accomplie",badgeBg:"#0F6E56",title:"Livraison finale et recommandations",desc:"Dossier de 40 pages avec cartographie relationnelle complète. Verdict : Vigilance sur le donneur d'ordre opérationnel, surveillance renforcée du co-investisseur, périmètre de partenariat redéfini.",points:["40 pages : dossier complet + tableau de bord forensique","Verdict : Vigilance — partenariat signé, périmètre redéfini","400M$ sécurisés grâce à l'investigation"]}
+        ];
+        var nodesEl=document.getElementById("htl-nodes-fr");
+        var panelEl=document.getElementById("htl-panel-fr");
+        var active=null;
+        data.forEach(function(d,i){
+          var n=document.createElement("div");
+          n.className="htl-node";
+          n.innerHTML='<div class="htl-date">'+d.date+'</div><div class="htl-circle '+d.color+'"></div><div class="htl-label">'+d.label+'</div>';
+          n.addEventListener("click",function(){
+            if(active===i){active=null;render();return;}
+            active=i;render();
+          });
+          nodesEl.appendChild(n);
+        });
+        function render(){
+          Array.prototype.forEach.call(nodesEl.children,function(c,idx){
+            c.classList.toggle("active",idx===active);
+          });
+          if(active===null){panelEl.innerHTML="";return;}
+          var d=data[active];
+          var pct=(active+0.5)/data.length*100;
+          var lis=d.points.map(function(p){return "<li>"+p+"</li>";}).join("");
+          panelEl.innerHTML='<div class="htl-panel"><div class="htl-panel-top"><span class="htl-panel-date">'+d.date+'</span><span class="htl-badge" style="background:'+d.badgeBg+'">'+d.badge+'</span></div><h3 class="htl-panel-title">'+d.title+'</h3><p class="htl-panel-desc">'+d.desc+'</p><ul>'+lis+'</ul></div>';
+          var arrow=panelEl.querySelector(".htl-panel");
+          if(arrow){
+            var s=document.createElement("style");
+            s.textContent='#htl-panel-fr .htl-panel:before{left:calc('+pct+'% - 7px)}';
+            panelEl.appendChild(s);
+          }
+        }
+      })();
+    </script>
   </div>
 </section>
  
