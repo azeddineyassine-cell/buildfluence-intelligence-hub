@@ -230,7 +230,27 @@ const DeepDueDiligence = () => {
               </p>
             </div>
 
-            {submitted ? (
+            <div style={{ position: "relative" }}>
+              <button
+                type="button"
+                onClick={() => setFormOpen(false)}
+                aria-label="Fermer le formulaire"
+                style={{
+                  position: 'absolute',
+                  top: '16px',
+                  right: '16px',
+                  background: 'transparent',
+                  border: 'none',
+                  fontSize: '22px',
+                  cursor: 'pointer',
+                  color: '#1a1410',
+                  zIndex: 10,
+                  lineHeight: 1,
+                }}
+              >
+                ×
+              </button>
+              {submitted ? (
               <div
                 style={{
                   background: "#FAF6ED",
