@@ -689,61 +689,25 @@ a[href*="flourish"]{display:none!important}
     <div class="lev-timeline" id="levTimeline">
       <div class="lev-timeline-line"></div>
       <div class="lev-nodes">
-        <div class="lev-node" data-idx="0">
+        <div class="lev-node active" data-idx="0">
           <div class="lev-node-num">01</div>
           <div class="lev-node-circle"></div>
           <div class="lev-node-label">Intelligence Stratégique</div>
-          <div class="lev-tooltip">
-            <h4 class="lev-tooltip-title">Intelligence Stratégique</h4>
-            <ul>
-              <li>Radar permanent sur 18 pays concurrents</li>
-              <li>Détection des signaux faibles sectoriels</li>
-              <li>Baromètre mensuel actualisé en temps réel</li>
-            </ul>
-            <span class="lev-tooltip-badge" style="background:#0D1B2A">CONTINU</span>
-          </div>
         </div>
         <div class="lev-node" data-idx="1">
           <div class="lev-node-num">02</div>
           <div class="lev-node-circle"></div>
           <div class="lev-node-label">Accélération Numérique</div>
-          <div class="lev-tooltip">
-            <h4 class="lev-tooltip-title">Accélération Numérique</h4>
-            <ul>
-              <li>Fonds souverain Tech 500M USD</li>
-              <li>Zone Franche Digitale Casablanca-Rabat</li>
-              <li>Réduire l'écart Digital vs Vietnam de 674 à 2000 mentions</li>
-            </ul>
-            <span class="lev-tooltip-badge" style="background:#E06D4F">URGENT</span>
-          </div>
         </div>
         <div class="lev-node" data-idx="2">
           <div class="lev-node-num">03</div>
           <div class="lev-node-circle"></div>
           <div class="lev-node-label">Nation Branding</div>
-          <div class="lev-tooltip">
-            <h4 class="lev-tooltip-title">Nation Branding</h4>
-            <ul>
-              <li>Morocco.invest multilingue en 6 langues</li>
-              <li>Task Force Nation Branding AMDIE</li>
-              <li>Campagne internationale Morocco First</li>
-            </ul>
-            <span class="lev-tooltip-badge" style="background:#C9A84C">OFFENSIF</span>
-          </div>
         </div>
         <div class="lev-node" data-idx="3">
           <div class="lev-node-num">04</div>
           <div class="lev-node-circle"></div>
           <div class="lev-node-label">Renforcement des Acquis</div>
-          <div class="lev-tooltip">
-            <h4 class="lev-tooltip-title">Renforcement des Acquis</h4>
-            <ul>
-              <li>Consolider N°1 Aéronautique mondial</li>
-              <li>Cluster EnR Hub continental</li>
-              <li>Programme Pharma 2026 100M USD</li>
-            </ul>
-            <span class="lev-tooltip-badge" style="background:#0F6E56">STRUCTUREL</span>
-          </div>
         </div>
       </div>
     </div>
@@ -752,16 +716,17 @@ a[href*="flourish"]{display:none!important}
         var root=document.getElementById('levTimeline');
         if(!root)return;
         var nodes=root.querySelectorAll('.lev-node');
+        function activate(idx){
+          nodes.forEach(function(x){x.classList.toggle('active', Number(x.dataset.idx)===idx)});
+          document.querySelectorAll('.reco-panel').forEach(function(p){
+            p.classList.toggle('active', Number(p.dataset.panel)===idx);
+          });
+        }
         nodes.forEach(function(n){
           n.addEventListener('click',function(e){
             e.stopPropagation();
-            var wasActive=n.classList.contains('active');
-            nodes.forEach(function(x){x.classList.remove('active')});
-            if(!wasActive)n.classList.add('active');
+            activate(Number(n.dataset.idx));
           });
-        });
-        document.addEventListener('click',function(){
-          nodes.forEach(function(x){x.classList.remove('active')});
         });
       })();
     </script>
