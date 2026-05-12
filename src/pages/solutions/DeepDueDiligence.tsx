@@ -386,6 +386,7 @@ const DeepDueDiligence = () => {
                 </button>
               </form>
             )}
+            </div>
           </div>
         </section>
         )}
