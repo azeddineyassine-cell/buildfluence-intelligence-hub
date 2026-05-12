@@ -188,28 +188,8 @@ const DeepDueDiligence = () => {
             color: "#F5F1E8",
             padding: "80px 24px",
             scrollMarginTop: 100,
-            position: "relative",
           }}
         >
-          <button
-            type="button"
-            onClick={() => setFormOpen(false)}
-            aria-label="Fermer le formulaire"
-            style={{
-              position: "absolute",
-              top: 12,
-              right: 16,
-              fontSize: 20,
-              cursor: "pointer",
-              color: "var(--ink, #F5F1E8)",
-              background: "transparent",
-              border: "none",
-              zIndex: 10,
-              lineHeight: 1,
-            }}
-          >
-            ×
-          </button>
           <div style={{ maxWidth: 880, margin: "0 auto" }}>
             <div style={{ textAlign: "center", marginBottom: 40 }}>
               <p
@@ -250,7 +230,27 @@ const DeepDueDiligence = () => {
               </p>
             </div>
 
-            {submitted ? (
+            <div style={{ position: "relative" }}>
+              <button
+                type="button"
+                onClick={() => setFormOpen(false)}
+                aria-label="Fermer le formulaire"
+                style={{
+                  position: 'absolute',
+                  top: '16px',
+                  right: '16px',
+                  background: 'transparent',
+                  border: 'none',
+                  fontSize: '22px',
+                  cursor: 'pointer',
+                  color: '#1a1410',
+                  zIndex: 10,
+                  lineHeight: 1,
+                }}
+              >
+                ×
+              </button>
+              {submitted ? (
               <div
                 style={{
                   background: "#FAF6ED",
@@ -386,6 +386,7 @@ const DeepDueDiligence = () => {
                 </button>
               </form>
             )}
+            </div>
           </div>
         </section>
         )}
