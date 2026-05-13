@@ -230,7 +230,7 @@ const PourquoiBuildfluence = () => {
                 textTransform: "uppercase",
               }}
             >
-              Pourquoi Buildfluence
+              {t("Pourquoi Buildfluence", "Why Buildfluence")}
             </span>
           </div>
 
