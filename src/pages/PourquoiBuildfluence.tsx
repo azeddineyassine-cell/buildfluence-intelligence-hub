@@ -644,9 +644,10 @@ const PourquoiBuildfluence = () => {
               lineHeight: 1.4,
             }}
           >
-            Le marché de l'intelligence stratégique est saturé d'offres partielles. Études
-            ponctuelles, agrégateurs, cabinets de veille, agences d'influence — chacun couvre une
-            fraction du besoin. Buildfluence est conçu pour la couverture intégrale.
+            {t(
+              "Le marché de l'intelligence stratégique est saturé d'offres partielles. Études ponctuelles, agrégateurs, cabinets de veille, agences d'influence — chacun couvre une fraction du besoin. Buildfluence est conçu pour la couverture intégrale.",
+              "The strategic intelligence market is saturated with partial offerings. One-off studies, aggregators, monitoring firms, influence agencies — each covers a fraction of the need. Buildfluence is designed for integral coverage."
+            )}
           </p>
 
           {/* Tableau */}
