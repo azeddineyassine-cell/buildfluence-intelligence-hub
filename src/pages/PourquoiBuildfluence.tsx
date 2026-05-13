@@ -813,20 +813,20 @@ const PourquoiBuildfluence = () => {
               {
                 num: "100",
                 unit: "%",
-                label: "Missions réussies",
-                detail: "Toutes les missions livrées<br/>depuis la création (2016)",
+                label: t("Missions réussies", "Successful missions"),
+                detail: t("Toutes les missions livrées<br/>depuis la création (2016)", "All missions delivered<br/>since inception (2016)"),
               },
               {
                 num: "47",
                 unit: "",
-                label: "Missions livrées",
-                detail: "Sur 5 continents,<br/>secteurs publics et privés",
+                label: t("Missions livrées", "Missions delivered"),
+                detail: t("Sur 5 continents,<br/>secteurs publics et privés", "Across 5 continents,<br/>public and private sectors"),
               },
               {
                 num: "<1",
-                unit: "sem",
-                label: "Pour le POC",
-                detail: "Preuve par l'action,<br/>pas par le PowerPoint",
+                unit: t("sem", "wk"),
+                label: t("Pour le POC", "For the POC"),
+                detail: t("Preuve par l'action,<br/>pas par le PowerPoint", "Proof through action,<br/>not through PowerPoint"),
               },
             ].map((s) => (
               <div key={s.label} className="t-stat">
