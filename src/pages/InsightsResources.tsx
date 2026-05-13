@@ -359,7 +359,7 @@ const InsightsResources = () => {
                   className="ir-learn-more"
                   onClick={(e) => { e.stopPropagation(); openCard(card); }}
                 >
-                  Learn more →
+                  {t("En savoir plus", "Learn more")} →
                 </button>
               </div>
             </div>
@@ -369,17 +369,17 @@ const InsightsResources = () => {
 
       <section className="ir-newsletter">
         <div className="ir-newsletter-inner">
-          <div className="ir-news-eyebrow">Newsletter · Baromètre</div>
-          <h2 className="ir-news-title">Recevez le prochain Baromètre en avant-première</h2>
+          <div className="ir-news-eyebrow">{t("Newsletter · Baromètre", "Newsletter · Barometer")}</div>
+          <h2 className="ir-news-title">{t("Recevez le prochain Baromètre en avant-première", "Receive the next Barometer in preview")}</h2>
           <p className="ir-news-sub">
-            Décryptages exclusifs et analyses concurrentielles.
+            {t("Décryptages exclusifs et analyses concurrentielles.", "Exclusive insights and competitive analyses.")}
           </p>
           <form
             className="ir-news-form"
             onSubmit={(e) => {
               e.preventDefault();
               if (!email) return;
-              alert("Merci ! Votre inscription a bien été prise en compte.");
+              alert(t("Merci ! Votre inscription a bien été prise en compte.", "Thank you! Your subscription has been registered."));
               setEmail("");
             }}
           >
@@ -388,15 +388,15 @@ const InsightsResources = () => {
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="votre.email@exemple.com"
+              placeholder={t("votre.email@exemple.com", "your.email@example.com")}
               className="ir-news-input"
-              aria-label="Adresse e-mail"
+              aria-label={t("Adresse e-mail", "Email address")}
             />
             <button type="submit" className="ir-btn-gold">
-              Je m'inscris →
+              {t("Je m'inscris", "Subscribe")} →
             </button>
           </form>
-          <p className="ir-news-note">Aucun spam · Données protégées · Désabonnement en 1 clic</p>
+          <p className="ir-news-note">{t("Aucun spam · Données protégées · Désabonnement en 1 clic", "No spam · Protected data · One-click unsubscribe")}</p>
         </div>
       </section>
 
