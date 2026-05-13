@@ -624,12 +624,12 @@ const PourquoiBuildfluence = () => {
               maxWidth: 800,
             }}
           >
-            Pourquoi{" "}
+            {t("Pourquoi ", "Why ")}
             <em style={{ fontStyle: "italic", fontWeight: 400, color: C.gold }}>
-              aucun acteur
+              {t("aucun acteur", "no other player")}
             </em>
             <br />
-            ne fait ce que nous faisons.
+            {t("ne fait ce que nous faisons.", "does what we do.")}
           </h2>
 
           {/* Chapeau */}
