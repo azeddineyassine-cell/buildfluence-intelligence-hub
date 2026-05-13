@@ -886,7 +886,7 @@ const PourquoiBuildfluence = () => {
 
           <div style={{ textAlign: "center", marginTop: 60 }}>
             <button className="pwb-cta" onClick={() => {}}>
-              Voir nos Success Stories <span className="arr">→</span>
+              {t("Voir nos Success Stories", "View our Success Stories")} <span className="arr">→</span>
             </button>
           </div>
         </div>
