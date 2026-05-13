@@ -609,7 +609,7 @@ const PourquoiBuildfluence = () => {
               marginBottom: 16,
             }}
           >
-            — Positionnement / Le Marché vs Buildfluence
+            {t("— Positionnement / Le Marché vs Buildfluence", "— Positioning / The Market vs Buildfluence")}
           </div>
 
           {/* Titre */}
