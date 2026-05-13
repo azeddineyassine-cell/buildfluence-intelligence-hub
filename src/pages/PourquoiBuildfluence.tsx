@@ -291,7 +291,7 @@ const PourquoiBuildfluence = () => {
               animation: "pwb-pulse 2s ease-in-out infinite",
             }}
           >
-            Faire défiler ↓
+            {t("Faire défiler ↓", "Scroll ↓")}
           </div>
         </div>
       </section>
