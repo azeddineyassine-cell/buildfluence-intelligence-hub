@@ -420,7 +420,7 @@ const PourquoiBuildfluence = () => {
                       marginTop: 16,
                     }}
                   >
-                    EXPLORER →
+                    {t("EXPLORER →", "EXPLORE →")}
                   </div>
                 </div>
               );
