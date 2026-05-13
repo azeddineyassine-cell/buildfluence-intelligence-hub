@@ -269,9 +269,11 @@ const PourquoiBuildfluence = () => {
               marginTop: 40,
             }}
           >
-            Buildfluence construit la souveraineté décisionnelle. Un dispositif unifié qui croise
-            cinq pôles d'intelligence pour produire ce qui compte vraiment :{" "}
-            <span style={{ color: C.gold }}>Attractivité, Influence et Compétitivité.</span>
+            {t(
+              "Buildfluence construit la souveraineté décisionnelle. Un dispositif unifié qui croise cinq pôles d'intelligence pour produire ce qui compte vraiment : ",
+              "Buildfluence builds decision-making sovereignty. A unified infrastructure that cross-references five intelligence poles to produce what truly matters: "
+            )}
+            <span style={{ color: C.gold }}>{t("Attractivité, Influence et Compétitivité.", "Attractiveness, Influence and Competitiveness.")}</span>
           </p>
 
           <div
