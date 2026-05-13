@@ -773,9 +773,9 @@ a[href*="flourish"]{display:none!important}
       @keyframes orbit1 { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
       @keyframes orbit2 { from { transform: rotate(0deg); } to { transform: rotate(-360deg); } }
       @keyframes orbit3 { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-      .galaxy-orbit-1 { transform-origin: 155px 162px; animation: orbit1 28s linear infinite; }
-      .galaxy-orbit-2 { transform-origin: 155px 162px; animation: orbit2 48s linear infinite; }
-      .galaxy-orbit-3 { transform-origin: 155px 162px; animation: orbit3 70s linear infinite; }
+      .galaxy-orbit-1 { transform-origin: 210px 210px; animation: orbit1 28s linear infinite; }
+      .galaxy-orbit-2 { transform-origin: 210px 210px; animation: orbit2 48s linear infinite; }
+      .galaxy-orbit-3 { transform-origin: 210px 210px; animation: orbit3 70s linear infinite; }
     </style>
 
     <!-- CARTE 1 -->
@@ -852,7 +852,7 @@ a[href*="flourish"]{display:none!important}
         </div>
       </div>
       <div class="reco-right">
-        <svg width="100%" height="320" viewBox="-20 0 350 320" xmlns="http://www.w3.org/2000/svg">
+        <svg width="100%" height="420" viewBox="0 0 420 420" xmlns="http://www.w3.org/2000/svg">
           <defs>
             <radialGradient id="bgc2" cx="50%" cy="50%" r="50%">
               <stop offset="0%" stop-color="#EDE8D8"/>
@@ -863,84 +863,141 @@ a[href*="flourish"]{display:none!important}
               <stop offset="100%" stop-color="#C9A84C" stop-opacity="0"/>
             </radialGradient>
           </defs>
-          <rect width="310" height="320" fill="url(#bgc2)" rx="8"/>
+          <rect width="420" height="420" fill="url(#bgc2)" rx="8"/>
 
-          <circle cx="155" cy="162" r="52" fill="none" stroke="#BA7517" stroke-width="0.6" stroke-opacity="0.3" stroke-dasharray="3 7"/>
-          <circle cx="155" cy="162" r="92" fill="none" stroke="#185FA5" stroke-width="0.5" stroke-opacity="0.25" stroke-dasharray="2 9"/>
-          <circle cx="155" cy="162" r="135" fill="none" stroke="#0F6E56" stroke-width="0.5" stroke-opacity="0.2" stroke-dasharray="2 12"/>
+          <!-- 3 couches concentriques distinctes -->
+          <circle cx="210" cy="210" r="42" fill="none" stroke="#BA7517" stroke-width="0.7" stroke-opacity="0.35" stroke-dasharray="3 7"/>
+          <circle cx="210" cy="210" r="125" fill="none" stroke="#185FA5" stroke-width="0.6" stroke-opacity="0.28" stroke-dasharray="2 9"/>
+          <circle cx="210" cy="210" r="180" fill="none" stroke="#0F6E56" stroke-width="0.6" stroke-opacity="0.22" stroke-dasharray="2 12"/>
 
-          <circle cx="155" cy="162" r="42" fill="url(#cglowc)"/>
+          <circle cx="210" cy="210" r="34" fill="url(#cglowc)"/>
 
+          <!-- Petits points décoratifs animés (couche interne marron) -->
           <g class="galaxy-orbit-1">
-            <circle cx="155" cy="110" r="2.5" fill="#BA7517"/>
-            <circle cx="201" cy="134" r="2.5" fill="#BA7517"/>
-            <circle cx="201" cy="190" r="2.5" fill="#BA7517"/>
-            <circle cx="155" cy="214" r="2.5" fill="#BA7517"/>
-            <circle cx="109" cy="190" r="2.5" fill="#BA7517"/>
-            <circle cx="109" cy="134" r="2.5" fill="#BA7517"/>
+            <circle cx="210" cy="168" r="1.6" fill="#BA7517" fill-opacity="0.6"/>
+            <circle cx="246.4" cy="189" r="1.6" fill="#BA7517" fill-opacity="0.6"/>
+            <circle cx="246.4" cy="231" r="1.6" fill="#BA7517" fill-opacity="0.6"/>
+            <circle cx="210" cy="252" r="1.6" fill="#BA7517" fill-opacity="0.6"/>
+            <circle cx="173.6" cy="231" r="1.6" fill="#BA7517" fill-opacity="0.6"/>
+            <circle cx="173.6" cy="189" r="1.6" fill="#BA7517" fill-opacity="0.6"/>
           </g>
 
+          <!-- Points animés couche nationale -->
           <g class="galaxy-orbit-2">
-            <circle cx="155" cy="70" r="2" fill="#185FA5"/>
-            <circle cx="218" cy="88" r="2" fill="#185FA5"/>
-            <circle cx="247" cy="148" r="2" fill="#185FA5"/>
-            <circle cx="235" cy="212" r="2" fill="#185FA5"/>
-            <circle cx="190" cy="248" r="2" fill="#185FA5"/>
-            <circle cx="120" cy="250" r="2" fill="#185FA5"/>
-            <circle cx="72" cy="216" r="2" fill="#185FA5"/>
-            <circle cx="60" cy="152" r="2" fill="#185FA5"/>
+            <circle cx="282" cy="115" r="1.4" fill="#185FA5" fill-opacity="0.55"/>
+            <circle cx="320" cy="160" r="1.4" fill="#185FA5" fill-opacity="0.55"/>
+            <circle cx="320" cy="260" r="1.4" fill="#185FA5" fill-opacity="0.55"/>
+            <circle cx="282" cy="305" r="1.4" fill="#185FA5" fill-opacity="0.55"/>
+            <circle cx="138" cy="305" r="1.4" fill="#185FA5" fill-opacity="0.55"/>
+            <circle cx="100" cy="260" r="1.4" fill="#185FA5" fill-opacity="0.55"/>
+            <circle cx="100" cy="160" r="1.4" fill="#185FA5" fill-opacity="0.55"/>
+            <circle cx="138" cy="115" r="1.4" fill="#185FA5" fill-opacity="0.55"/>
           </g>
 
+          <!-- Points animés couche internationale -->
           <g class="galaxy-orbit-3">
-            <circle cx="155" cy="27" r="1.8" fill="#0F6E56"/>
-            <circle cx="228" cy="47" r="1.8" fill="#0F6E56"/>
-            <circle cx="283" cy="108" r="1.8" fill="#0F6E56"/>
-            <circle cx="288" cy="185" r="1.8" fill="#0F6E56"/>
-            <circle cx="242" cy="255" r="1.8" fill="#0F6E56"/>
-            <circle cx="168" cy="296" r="1.8" fill="#0F6E56"/>
+            <circle cx="270" cy="55" r="1.4" fill="#0F6E56" fill-opacity="0.5"/>
+            <circle cx="370" cy="135" r="1.4" fill="#0F6E56" fill-opacity="0.5"/>
+            <circle cx="370" cy="285" r="1.4" fill="#0F6E56" fill-opacity="0.5"/>
+            <circle cx="270" cy="365" r="1.4" fill="#0F6E56" fill-opacity="0.5"/>
+            <circle cx="150" cy="365" r="1.4" fill="#0F6E56" fill-opacity="0.5"/>
+            <circle cx="50" cy="285" r="1.4" fill="#0F6E56" fill-opacity="0.5"/>
+            <circle cx="50" cy="135" r="1.4" fill="#0F6E56" fill-opacity="0.5"/>
+            <circle cx="150" cy="55" r="1.4" fill="#0F6E56" fill-opacity="0.5"/>
           </g>
 
-          <circle cx="155" cy="162" r="28" fill="#FFFFFF" stroke="#C9A84C" stroke-width="1.5"/>
-          <image href="/morocco-now-logo.png" x="131" y="142" width="48" height="40" preserveAspectRatio="xMidYMid meet"/>
+          <!-- Centre : Morocco Now -->
+          <circle cx="210" cy="210" r="26" fill="#FFFFFF" stroke="#C9A84C" stroke-width="1.5"/>
+          <image href="/morocco-now-logo.png" x="188" y="192" width="44" height="36" preserveAspectRatio="xMidYMid meet"/>
 
-          <text x="155" y="102" text-anchor="middle" font-size="9" fill="#854F0B" font-family="monospace">DG</text>
-          <text x="210" y="130" text-anchor="start" font-size="9" fill="#854F0B" font-family="monospace">Juridique</text>
-          <text x="210" y="198" text-anchor="start" font-size="9" fill="#854F0B" font-family="monospace">BusDev</text>
-          <text x="155" y="228" text-anchor="middle" font-size="9" fill="#854F0B" font-family="monospace">Comm. &amp; Brand</text>
-          <text x="100" y="198" text-anchor="end" font-size="9" fill="#854F0B" font-family="monospace">Finance</text>
-          <text x="100" y="127" text-anchor="end" font-size="9" fill="#854F0B" font-family="monospace">Stratégie</text>
+          <!-- ============ COUCHE 1 — INTERNE (marron) — r=42 ============ -->
+          <circle cx="210" cy="168" r="2.6" fill="#BA7517"/>
+          <text x="210" y="160" text-anchor="middle" font-size="9" fill="#854F0B" font-family="monospace" font-weight="600">DG</text>
 
-          <!-- Orbit 2: Acteurs nationaux (logos harmonisés 36x20) -->
-          <rect x="128" y="60" width="54" height="16" rx="3" fill="#EBF3FB" stroke="#185FA5" stroke-width="0.6"/>
-          <text x="155" y="72" text-anchor="middle" font-size="8.5" fill="#0C447C" font-family="monospace" font-weight="bold">MICEPP</text>
-          <rect x="224" y="78" width="46" height="15" rx="3" fill="#EBF3FB" stroke="#185FA5" stroke-width="0.6"/>
-          <text x="247" y="89" text-anchor="middle" font-size="8" fill="#0C447C" font-family="monospace">MCINET</text>
-          <rect x="229" y="138" width="40" height="22" rx="3" fill="#FFFFFF" stroke="#185FA5" stroke-width="0.6"/>
-          <image href="/logos/cri.png" x="231" y="140" width="36" height="18" preserveAspectRatio="xMidYMid meet"/>
-          <rect x="215" y="201" width="40" height="22" rx="3" fill="#FFFFFF" stroke="#185FA5" stroke-width="0.6"/>
-          <image href="/logos/fond-m6.png" x="217" y="203" width="36" height="18" preserveAspectRatio="xMidYMid meet"/>
-          <rect x="170" y="237" width="40" height="22" rx="3" fill="#FFFFFF" stroke="#185FA5" stroke-width="0.6"/>
-          <image href="/logos/cdg.png" x="172" y="239" width="36" height="18" preserveAspectRatio="xMidYMid meet"/>
-          <rect x="100" y="239" width="40" height="22" rx="3" fill="#FFFFFF" stroke="#185FA5" stroke-width="0.6"/>
-          <image href="/logos/masen.png" x="102" y="241" width="36" height="18" preserveAspectRatio="xMidYMid meet"/>
-          <rect x="52" y="205" width="40" height="22" rx="3" fill="#FFFFFF" stroke="#185FA5" stroke-width="0.6"/>
-          <image href="/logos/cgem.png" x="54" y="207" width="36" height="18" preserveAspectRatio="xMidYMid meet"/>
-          <rect x="40" y="141" width="40" height="22" rx="3" fill="#FFFFFF" stroke="#185FA5" stroke-width="0.6"/>
-          <image href="/logos/bank-al-maghrib.png" x="42" y="143" width="36" height="18" preserveAspectRatio="xMidYMid meet"/>
+          <circle cx="246.4" cy="189" r="2.6" fill="#BA7517"/>
+          <text x="251" y="186" text-anchor="start" font-size="9" fill="#854F0B" font-family="monospace" font-weight="600">Juridique</text>
 
-          <!-- Orbit 3: Acteurs internationaux (logos harmonisés 36x20) -->
-          <rect x="135" y="15" width="40" height="22" rx="3" fill="#FFFFFF" stroke="#0F6E56" stroke-width="0.8"/>
-          <image href="/logos/worldbank.png" x="137" y="17" width="36" height="18" preserveAspectRatio="xMidYMid meet"/>
-          <rect x="208" y="36" width="40" height="22" rx="3" fill="#FFFFFF" stroke="#0F6E56" stroke-width="0.6"/>
-          <image href="/logos/bad.png" x="210" y="38" width="36" height="18" preserveAspectRatio="xMidYMid meet"/>
-          <rect x="263" y="97" width="40" height="22" rx="3" fill="#FFFFFF" stroke="#0F6E56" stroke-width="0.6"/>
-          <image href="/logos/wef.png" x="265" y="99" width="36" height="18" preserveAspectRatio="xMidYMid meet"/>
-          <rect x="268" y="174" width="40" height="22" rx="3" fill="#FFFFFF" stroke="#0F6E56" stroke-width="0.6"/>
-          <image href="/logos/berd.png" x="270" y="176" width="36" height="18" preserveAspectRatio="xMidYMid meet"/>
-          <rect x="222" y="244" width="46" height="15" rx="3" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
-          <text x="245" y="255" text-anchor="middle" font-size="8" fill="#085041" font-family="monospace">Diaspora</text>
-          <rect x="148" y="285" width="40" height="22" rx="3" fill="#FFFFFF" stroke="#0F6E56" stroke-width="0.6"/>
-          <image href="/logos/cci.png" x="150" y="287" width="36" height="18" preserveAspectRatio="xMidYMid meet"/>
+          <circle cx="246.4" cy="231" r="2.6" fill="#BA7517"/>
+          <text x="251" y="234" text-anchor="start" font-size="9" fill="#854F0B" font-family="monospace" font-weight="600">BusDev</text>
+
+          <circle cx="210" cy="252" r="2.6" fill="#BA7517"/>
+          <text x="210" y="265" text-anchor="middle" font-size="9" fill="#854F0B" font-family="monospace" font-weight="600">Comm. &amp; Brand</text>
+
+          <circle cx="173.6" cy="231" r="2.6" fill="#BA7517"/>
+          <text x="169" y="234" text-anchor="end" font-size="9" fill="#854F0B" font-family="monospace" font-weight="600">Finance</text>
+
+          <circle cx="173.6" cy="189" r="2.6" fill="#BA7517"/>
+          <text x="169" y="186" text-anchor="end" font-size="9" fill="#854F0B" font-family="monospace" font-weight="600">Stratégie</text>
+
+          <!-- ============ COUCHE 2 — NATIONAL (bleu) — r=125 — 14 acteurs ============ -->
+          <!-- MICEPP (210, 85) -->
+          <rect x="190" y="74" width="40" height="22" rx="3" fill="#FFFFFF" stroke="#185FA5" stroke-width="0.7"/>
+          <image href="/logos/micepp.png" x="192" y="76" width="36" height="18" preserveAspectRatio="xMidYMid meet"/>
+          <!-- MCINET (264.2, 97.4) -->
+          <rect x="244.2" y="86.4" width="40" height="22" rx="3" fill="#FFFFFF" stroke="#185FA5" stroke-width="0.7"/>
+          <image href="/logos/mcinet.png" x="246.2" y="88.4" width="36" height="18" preserveAspectRatio="xMidYMid meet"/>
+          <!-- AMDIE (307.7, 132.1) -->
+          <rect x="287.7" y="121.1" width="40" height="22" rx="3" fill="#FFFFFF" stroke="#185FA5" stroke-width="0.7"/>
+          <image href="/logos/amdie.png" x="289.7" y="123.1" width="36" height="18" preserveAspectRatio="xMidYMid meet"/>
+          <!-- CRI (331.9, 182.2) -->
+          <rect x="311.9" y="171.2" width="40" height="22" rx="3" fill="#FFFFFF" stroke="#185FA5" stroke-width="0.7"/>
+          <image href="/logos/cri.png" x="313.9" y="173.2" width="36" height="18" preserveAspectRatio="xMidYMid meet"/>
+          <!-- Fond M6 (331.9, 237.8) -->
+          <rect x="311.9" y="226.8" width="40" height="22" rx="3" fill="#FFFFFF" stroke="#185FA5" stroke-width="0.7"/>
+          <image href="/logos/fond-m6.png" x="313.9" y="228.8" width="36" height="18" preserveAspectRatio="xMidYMid meet"/>
+          <!-- CDG (307.7, 287.9) -->
+          <rect x="287.7" y="276.9" width="40" height="22" rx="3" fill="#FFFFFF" stroke="#185FA5" stroke-width="0.7"/>
+          <image href="/logos/cdg.png" x="289.7" y="278.9" width="36" height="18" preserveAspectRatio="xMidYMid meet"/>
+          <!-- MASEN (264.2, 322.6) -->
+          <rect x="244.2" y="311.6" width="40" height="22" rx="3" fill="#FFFFFF" stroke="#185FA5" stroke-width="0.7"/>
+          <image href="/logos/masen.png" x="246.2" y="313.6" width="36" height="18" preserveAspectRatio="xMidYMid meet"/>
+          <!-- CGEM (210, 335) -->
+          <rect x="190" y="324" width="40" height="22" rx="3" fill="#FFFFFF" stroke="#185FA5" stroke-width="0.7"/>
+          <image href="/logos/cgem.png" x="192" y="326" width="36" height="18" preserveAspectRatio="xMidYMid meet"/>
+          <!-- Bank Al-Maghrib (155.8, 322.6) -->
+          <rect x="135.8" y="311.6" width="40" height="22" rx="3" fill="#FFFFFF" stroke="#185FA5" stroke-width="0.7"/>
+          <image href="/logos/bank-al-maghrib.png" x="137.8" y="313.6" width="36" height="18" preserveAspectRatio="xMidYMid meet"/>
+          <!-- MedZ (112.3, 287.9) -->
+          <rect x="92.3" y="276.9" width="40" height="22" rx="3" fill="#FFFFFF" stroke="#185FA5" stroke-width="0.7"/>
+          <image href="/logos/medz.png" x="94.3" y="278.9" width="36" height="18" preserveAspectRatio="xMidYMid meet"/>
+          <!-- ANGSPE (88.1, 237.8) -->
+          <rect x="68.1" y="226.8" width="40" height="22" rx="3" fill="#FFFFFF" stroke="#185FA5" stroke-width="0.7"/>
+          <image href="/logos/angspe.png" x="70.1" y="228.8" width="36" height="18" preserveAspectRatio="xMidYMid meet"/>
+          <!-- Tamwilcom (88.1, 182.2) -->
+          <rect x="68.1" y="171.2" width="40" height="22" rx="3" fill="#FFFFFF" stroke="#185FA5" stroke-width="0.7"/>
+          <image href="/logos/tamwilcom.png" x="70.1" y="173.2" width="36" height="18" preserveAspectRatio="xMidYMid meet"/>
+          <!-- FEC (112.3, 132.1) -->
+          <rect x="92.3" y="121.1" width="40" height="22" rx="3" fill="#FFFFFF" stroke="#185FA5" stroke-width="0.7"/>
+          <image href="/logos/fec.png" x="94.3" y="123.1" width="36" height="18" preserveAspectRatio="xMidYMid meet"/>
+          <!-- Ithmar (155.8, 97.4) -->
+          <rect x="135.8" y="86.4" width="40" height="22" rx="3" fill="#FFFFFF" stroke="#185FA5" stroke-width="0.7"/>
+          <image href="/logos/ithmar.png" x="137.8" y="88.4" width="36" height="18" preserveAspectRatio="xMidYMid meet"/>
+
+          <!-- ============ COUCHE 3 — INTERNATIONAL (vert) — r=180 — 8 acteurs ============ -->
+          <!-- World Bank (210, 30) -->
+          <rect x="190" y="19" width="40" height="22" rx="3" fill="#FFFFFF" stroke="#0F6E56" stroke-width="0.8"/>
+          <image href="/logos/worldbank.png" x="192" y="21" width="36" height="18" preserveAspectRatio="xMidYMid meet"/>
+          <!-- BAD (337.3, 82.7) -->
+          <rect x="317.3" y="71.7" width="40" height="22" rx="3" fill="#FFFFFF" stroke="#0F6E56" stroke-width="0.8"/>
+          <image href="/logos/bad.png" x="319.3" y="73.7" width="36" height="18" preserveAspectRatio="xMidYMid meet"/>
+          <!-- WEF (390, 210) -->
+          <rect x="370" y="199" width="40" height="22" rx="3" fill="#FFFFFF" stroke="#0F6E56" stroke-width="0.8"/>
+          <image href="/logos/wef.png" x="372" y="201" width="36" height="18" preserveAspectRatio="xMidYMid meet"/>
+          <!-- BERD / European Investment Bank (337.3, 337.3) -->
+          <rect x="317.3" y="326.3" width="40" height="22" rx="3" fill="#FFFFFF" stroke="#0F6E56" stroke-width="0.8"/>
+          <image href="/logos/berd.png" x="319.3" y="328.3" width="36" height="18" preserveAspectRatio="xMidYMid meet"/>
+          <!-- ICC (210, 390) -->
+          <rect x="190" y="379" width="40" height="22" rx="3" fill="#FFFFFF" stroke="#0F6E56" stroke-width="0.8"/>
+          <image href="/logos/cci.png" x="192" y="381" width="36" height="18" preserveAspectRatio="xMidYMid meet"/>
+          <!-- FOCAC (82.7, 337.3) -->
+          <rect x="62.7" y="326.3" width="40" height="22" rx="3" fill="#FFFFFF" stroke="#0F6E56" stroke-width="0.8"/>
+          <image href="/logos/focac.png" x="64.7" y="328.3" width="36" height="18" preserveAspectRatio="xMidYMid meet"/>
+          <!-- DIASPORA (30, 210) -->
+          <rect x="6" y="201" width="48" height="18" rx="3" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.7"/>
+          <text x="30" y="213" text-anchor="middle" font-size="8.5" fill="#085041" font-family="monospace" font-weight="bold">DIASPORA</text>
+          <!-- Aerospace (82.7, 82.7) -->
+          <rect x="58.7" y="73.7" width="48" height="18" rx="3" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.7"/>
+          <text x="82.7" y="85.7" text-anchor="middle" font-size="8.5" fill="#085041" font-family="monospace" font-weight="bold">AEROSPACE</text>
         </svg>
       </div>
       <div class="reco-bottom">
