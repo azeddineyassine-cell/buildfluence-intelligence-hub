@@ -801,8 +801,10 @@ const PourquoiBuildfluence = () => {
                 lineHeight: 1.5,
               }}
             >
-              Une décennie de missions stratégiques pour des institutions souveraines, des
-              multinationales et des fonds d'investissement.
+              {t(
+                "Une décennie de missions stratégiques pour des institutions souveraines, des multinationales et des fonds d'investissement.",
+                "A decade of strategic missions for sovereign institutions, multinationals and investment funds."
+              )}
             </p>
           </div>
 
