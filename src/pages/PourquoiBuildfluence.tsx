@@ -715,13 +715,13 @@ const PourquoiBuildfluence = () => {
           {/* Légende */}
           <div className="pwb-legend">
             <span className="pwb-legend-item">
-              <span className="sym sym-yes pwb-legend-sym">✓</span> Couvert
+              <span className="sym sym-yes pwb-legend-sym">✓</span> {t("Couvert", "Covered")}
             </span>
             <span className="pwb-legend-item">
-              <span className="sym sym-mid pwb-legend-sym">~</span> Partiel
+              <span className="sym sym-mid pwb-legend-sym">~</span> {t("Partiel", "Partial")}
             </span>
             <span className="pwb-legend-item">
-              <span className="sym sym-no pwb-legend-sym">✕</span> Non couvert
+              <span className="sym sym-no pwb-legend-sym">✕</span> {t("Non couvert", "Not covered")}
             </span>
           </div>
 
