@@ -246,12 +246,12 @@ const PourquoiBuildfluence = () => {
               maxWidth: 1200,
             }}
           >
-            Ce n'est pas{" "}
-            <em style={{ fontStyle: "italic", fontWeight: 400, color: C.gold }}>un cabinet</em>.
+            {t("Ce n'est pas ", "This is not ")}
+            <em style={{ fontStyle: "italic", fontWeight: 400, color: C.gold }}>{t("un cabinet", "a consultancy")}</em>.
             <br />
-            C'est{" "}
+            {t("C'est ", "It is ")}
             <em style={{ fontStyle: "italic", fontWeight: 400, color: C.gold }}>
-              une nouvelle génération hybride
+              {t("une nouvelle génération hybride", "a new hybrid generation")}
             </em>
             .
           </h1>
