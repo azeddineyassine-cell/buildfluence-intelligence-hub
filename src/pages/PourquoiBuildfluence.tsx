@@ -767,7 +767,7 @@ const PourquoiBuildfluence = () => {
                   textTransform: "uppercase",
                 }}
               >
-                Track Record · Depuis 2016
+                {t("Track Record · Depuis 2016", "Track Record · Since 2016")}
               </span>
               <span style={{ width: 50, height: 1, background: C.gold, opacity: 0.6 }} />
             </div>
