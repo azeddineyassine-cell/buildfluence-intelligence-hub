@@ -44,12 +44,123 @@ type Row = { criterion: string; cells: [Cell, Cell, Cell, Cell]; bf: string };
 
 // === Composant principal ===
 const PourquoiBuildfluence = () => {
+  const { t } = useLanguage();
   const [activePole, setActivePole] = useState<string | null>(null);
   const [panelFading, setPanelFading] = useState(false);
   const [polesVisible, setPolesVisible] = useState(false);
   const [resultsVisible, setResultsVisible] = useState(false);
   const [connectorVisible, setConnectorVisible] = useState(false);
   const polesRef = useRef<HTMLDivElement>(null);
+
+  const polesData: Pole[] = [
+    {
+      id: "p1",
+      num: "P/01",
+      title: t("Données économiques", "Economic data"),
+      tag: t("Marchés · Flux · Investissements", "Markets · Flows · Investments"),
+      icon: <BarChart3 size={22} strokeWidth={1.6} />,
+      panelTag: t("P/01 · MARCHÉS · FLUX · INVESTISSEMENTS", "P/01 · MARKETS · FLOWS · INVESTMENTS"),
+      lead: t(
+        "Capter les flux d'investissement, lire les marchés en temps réel, anticiper les ruptures sectorielles avant qu'elles ne deviennent des évidences.",
+        "Capture investment flows, read markets in real time, anticipate sector disruptions before they become obvious."
+      ),
+      items: [
+        t("Veille macro et sectorielle augmentée par l'IA", "AI-augmented macro and sector monitoring"),
+        t("Cartographie des flux d'investissement étrangers", "Mapping of foreign investment flows"),
+        t("Benchmarks de compétitivité multi-pays", "Multi-country competitiveness benchmarks"),
+        t("Détection des signaux faibles d'opportunités", "Detection of weak opportunity signals"),
+        t("Analyse prédictive des tendances marchés", "Predictive analysis of market trends"),
+      ],
+    },
+    {
+      id: "p2",
+      num: "P/02",
+      title: t("Contexte géopolitique", "Geopolitical context"),
+      tag: t("États · Alliances · Conflits", "States · Alliances · Conflicts"),
+      icon: <Globe size={22} strokeWidth={1.6} />,
+      panelTag: t("P/02 · ÉTATS · ALLIANCES · CONFLITS", "P/02 · STATES · ALLIANCES · CONFLICTS"),
+      lead: t(
+        "Décoder les jeux d'États, identifier les souverainetés contestées, lire les rapports de force régionaux et internationaux.",
+        "Decode state games, identify contested sovereignties, read regional and international power dynamics."
+      ),
+      items: [
+        t("Cartographie des alliances et des dépendances", "Mapping of alliances and dependencies"),
+        t("Suivi des décisions souveraines et réglementaires", "Tracking of sovereign and regulatory decisions"),
+        t("Analyse des stratégies d'influence étatique", "Analysis of state influence strategies"),
+        t("Veille des fonds souverains et agences internationales", "Monitoring of sovereign funds and international agencies"),
+        t("Décryptage des tensions géo-économiques", "Decoding of geo-economic tensions"),
+      ],
+    },
+    {
+      id: "p3",
+      num: "P/03",
+      title: t("Risques réputationnels", "Reputational risks"),
+      tag: t("Image · Crises · Vulnérabilités", "Image · Crises · Vulnerabilities"),
+      icon: <AlertTriangle size={22} strokeWidth={1.6} />,
+      panelTag: t("P/03 · IMAGE · CRISES · VULNÉRABILITÉS", "P/03 · IMAGE · CRISES · VULNERABILITIES"),
+      lead: t(
+        "Détecter les vulnérabilités d'image, anticiper les crises de réputation, protéger les actifs intangibles avant qu'ils ne soient attaqués.",
+        "Detect image vulnerabilities, anticipate reputational crises, protect intangible assets before they are attacked."
+      ),
+      items: [
+        t("Audit de vulnérabilités réputationnelles", "Reputational vulnerability audit"),
+        t("Monitoring des signaux faibles de crise", "Monitoring of weak crisis signals"),
+        t("Identification des sources hostiles", "Identification of hostile sources"),
+        t("Cellule War Room en moins de 2h", "War Room unit in less than 2 hours"),
+        t("Stratégies de contre-narratifs et reconquête d'image", "Counter-narrative and image reconquest strategies"),
+      ],
+    },
+    {
+      id: "p4",
+      num: "P/04",
+      title: t("Dynamiques narratives", "Narrative dynamics"),
+      tag: t("Récits · Médias · Opinion", "Narratives · Media · Opinion"),
+      icon: <Eye size={22} strokeWidth={1.6} />,
+      panelTag: t("P/04 · RÉCITS · MÉDIAS · OPINION", "P/04 · NARRATIVES · MEDIA · OPINION"),
+      lead: t(
+        "Lire les récits qui façonnent l'opinion, identifier les amplifications coordonnées, comprendre comment se forme et se déforme la perception.",
+        "Read the narratives that shape opinion, identify coordinated amplifications, understand how perception forms and deforms."
+      ),
+      items: [
+        t("Analyse de polarisation narrative multicanale", "Multichannel narrative polarization analysis"),
+        t("Tracking des chaînes d'amplification médiatique", "Tracking of media amplification chains"),
+        t("Détection des opérations d'influence coordonnées", "Detection of coordinated influence operations"),
+        t("Veille des leaders d'opinion et relais sectoriels", "Monitoring of opinion leaders and sector relays"),
+        t("Production de contre-narratifs crédibles et sourcés", "Production of credible and sourced counter-narratives"),
+      ],
+    },
+    {
+      id: "p5",
+      num: "P/05",
+      title: t("Jeux d'influence", "Influence games"),
+      tag: t("Acteurs · Réseaux · Coalitions", "Actors · Networks · Coalitions"),
+      icon: <Network size={22} strokeWidth={1.6} />,
+      panelTag: t("P/05 · ACTEURS · RÉSEAUX · COALITIONS", "P/05 · ACTORS · NETWORKS · COALITIONS"),
+      lead: t(
+        "Cartographier les acteurs qui pèsent réellement, identifier les coalitions cachées, modéliser les jeux de pression et de contre-influence.",
+        "Map the actors who truly matter, identify hidden coalitions, model pressure and counter-influence games."
+      ),
+      items: [
+        t("Mapping des stratégies adverses et réseaux d'influence", "Mapping of adversarial strategies and influence networks"),
+        t("Cartographie des leaders, ONG, think tanks et investisseurs", "Mapping of leaders, NGOs, think tanks and investors"),
+        t("Analyse des alliances, antagonismes et coalitions", "Analysis of alliances, antagonisms and coalitions"),
+        t("Identification des acteurs clés sur vos décisions", "Identification of key actors on your decisions"),
+        t("Modélisation des scénarios de pression et de contre-influence", "Modeling of pressure and counter-influence scenarios"),
+      ],
+    },
+  ];
+
+  const compareRows: Row[] = [
+    { criterion: t("Mode de livraison", "Delivery mode"), cells: [{ mark: "no" }, { mark: "partial" }, { mark: "partial" }, { mark: "no" }], bf: t("Dispositif permanent", "Permanent infrastructure") },
+    { criterion: t("Action sur le réel", "Action on reality"), cells: [{ mark: "no" }, { mark: "no" }, { mark: "no" }, { mark: "partial" }], bf: t("Intelligence + Influence", "Intelligence + Influence") },
+    { criterion: t("Vitesse de mise en route", "Time to launch"), cells: [{ mark: "no" }, { mark: "partial" }, { mark: "no" }, { mark: "no" }], bf: t("POC en 1 semaine", "POC in 1 week") },
+    { criterion: t("Analyse & Interprétation", "Analysis & Interpretation"), cells: [{ mark: "yes" }, { mark: "no", note: "1" }, { mark: "partial" }, { mark: "no" }], bf: t("Signature experte du métier", "Signature expertise of the trade") },
+    { criterion: t("Technologie propriétaire", "Proprietary technology"), cells: [{ mark: "no" }, { mark: "no", note: "2" }, { mark: "partial" }, { mark: "no" }], bf: t("Stack OSINT + IA souveraine", "OSINT stack + sovereign AI") },
+    { criterion: t("Posture souveraineté", "Sovereignty stance"), cells: [{ mark: "no" }, { mark: "no" }, { mark: "no" }, { mark: "no" }], bf: t("Souveraine & alignée", "Sovereign & aligned") },
+    { criterion: t("Mix Intelligence + Influence", "Intelligence + Influence mix"), cells: [{ mark: "no" }, { mark: "no" }, { mark: "no" }, { mark: "no" }], bf: t("Signature unique du métier", "Unique signature of the trade") },
+    { criterion: t("Confidentialité du dispositif", "Infrastructure confidentiality"), cells: [{ mark: "partial" }, { mark: "no" }, { mark: "partial" }, { mark: "no" }], bf: t("NDA + serveurs souverains", "NDA + sovereign servers") },
+  ];
+
 
   // Observer pour la cascade des pôles
   useEffect(() => {
