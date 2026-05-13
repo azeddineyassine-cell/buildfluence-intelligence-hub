@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import CTAFooter from "@/components/CTAFooter";
+import { useLanguage } from "@/contexts/LanguageContext";
 import logoCentraleDanone from "@/assets/clients/centrale-danone.jpg";
 import logoCidc from "@/assets/clients/cidc.jpg";
 import logoMinistereSante from "@/assets/clients/ministere-sante.jpg";
@@ -36,28 +37,6 @@ type Secteur =
   | "sport"
   | "international";
 
-const THEMATIQUES: { value: Thematique; label: string }[] = [
-  { value: "all", label: "Toutes" },
-  { value: "gestion-crise", label: "Gestion de crise" },
-  { value: "desinformation", label: "Attaques & Désinformation" },
-  { value: "due-diligence", label: "Due Diligence & Investissement" },
-  { value: "attractivite", label: "Attractivité & Rayonnement" },
-  { value: "influence", label: "Influence & Soft Power" },
-  { value: "ecosysteme", label: "Écosystème Concurrentiel" },
-];
-
-const SECTEURS: { value: Secteur; label: string }[] = [
-  { value: "all", label: "Tous" },
-  { value: "agroalimentaire", label: "Agroalimentaire" },
-  { value: "sante", label: "Santé" },
-  { value: "industrie", label: "Industrie" },
-  { value: "gouvernement", label: "Gouvernement" },
-  { value: "public", label: "Établissement public" },
-  { value: "finance", label: "Finance & Investissement" },
-  { value: "sport", label: "Sport" },
-  { value: "international", label: "Organisation internationale" },
-];
-
 type Logo = { label: string; italic?: boolean; image?: string; alt?: string };
 type Resource = { type: string; text: string };
 type Testimony = { initials: string; text: string; authorBold: string; authorRest: string; date?: string; photo?: string; photoAlt?: string };
@@ -88,547 +67,6 @@ type Story = {
   tags: string[];
 };
 
-const stories: Story[] = [
-  {
-    id: "story-01",
-    num: "01",
-    thematique: "gestion-crise",
-    secteur: "agroalimentaire",
-    thematiqueLabel: "Gestion de crise",
-    miniTitle: "Centrale Danone",
-    miniPitch: "Trois semaines pour défaire deux ans de crise.",
-    miniSecteur: "Agroalimentaire · 🇲🇦",
-    eyebrow: "Industrie agroalimentaire",
-    logos: [{ label: "CENTRALE DANONE", image: logoCentraleDanone, alt: "Centrale Danone" }],
-    visualMain: (
-      <>
-        [ Capture média le360<br />
-        <span style={{ color: "var(--bf-gold)" }}>"Vidéo. Rumeurs et réseaux sociaux : quand Raïbi Jamila en paie le prix fort"</span> ]
-      </>
-    ),
-    resources: [
-      { type: "▶ Reportage exclusif", text: "RTM, 45 minutes, 2017" },
-      { type: "📰 Article média", text: "le360.com, \"Quand Raïbi Jamila en paie le prix fort\"" },
-    ],
-    meta: [
-      { label: "CLIENT", value: "Centrale Danone" },
-      { label: "PÉRIODE", value: "2015 / 2017" },
-      { label: "GÉOGRAPHIE", value: "🇲🇦 Maroc" },
-    ],
-    titleBefore: "Trois semaines pour défaire ",
-    titleEm: "deux ans",
-    titleAfter: " de crise",
-    storytelling:
-      "Août 2015, région d'Agadir. Deux enfants meurent après avoir consommé Raïbi Jamila. Sur les réseaux sociaux, la sentence tombe en quelques heures : la marque est coupable. Pendant deux ans, une campagne de dénigrement va s'installer, vider les rayons et faire fondre 120 millions de dirhams de chiffre d'affaires. La contagion gagne les autres produits du groupe. Et personne ne sait qui orchestre l'attaque.",
-    mission:
-      "Identifier les origines réelles de la campagne de dénigrement, documenter l'innocence du produit, et reconstruire la confiance des consommateurs.",
-    objectives: [
-      "Récupérer et exploiter les pièces sanitaires officielles",
-      "Cartographier les acteurs et profiler les comptes virulents",
-      "Bâtir une contre-narrative documentée et activer un canal médiatique de masse",
-    ],
-    methodo:
-      "Déploiement d'une cellule de veille et d'intelligence économique dédiée. Analyse et décryptage des attaques en réseaux sociaux. Mapping et profiling des auteurs virulents. Récupération des documents sanitaires et du rapport d'autopsie. Construction d'un dossier d'innocentement et orchestration d'un reportage exclusif sur la chaîne nationale.",
-    kpis: [
-      { value: "3 sem.", label: "pour juguler une crise de 2 ans" },
-      { value: "100 %", label: "marque innocentée" },
-      { value: "+14 %", label: "parts de marché regagnées" },
-    ],
-    resultsExtra: "+ Reportage exclusif de 45 minutes diffusé sur RTM",
-    testimony: {
-      initials: "SK",
-      photo: photoSamiaKabbaj,
-      photoAlt: "Samia Kabbaj Douiri, Secrétaire Générale, Centrale Danone",
-      text: "\"Prestataire référencé chez nous depuis 2016, M. Azeddine Yassine (Buildfluence) a réalisé avec succès des missions pour Centrale Danone. Dès le début, M. Yassine a fait preuve d'un réel professionnalisme et d'une rigueur à toute épreuve. Nous le recommandons vivement.\"",
-      authorBold: "Samia Kabbaj Douiri",
-      authorRest: ", Secrétaire Générale, Centrale Danone",
-      date: "(lettre du 2 février 2020)",
-    },
-    tags: ["AGROALIMENTAIRE", "GESTION DE CRISE", "RÉHABILITATION DE MARQUE", "DÉSINFORMATION", "🇲🇦 MAROC"],
-  },
-  {
-    id: "story-02",
-    num: "02",
-    thematique: "desinformation",
-    secteur: "international",
-    thematiqueLabel: "Attaques & Désinformation",
-    miniTitle: "Cabinet européen d'intelligence",
-    miniPitch: "Quand un boycott n'est pas un mouvement spontané.",
-    miniSecteur: "Intelligence stratégique · 🇲🇦",
-    eyebrow: "Intelligence stratégique internationale",
-    logos: [{ label: "CABINET EUROPÉEN\nD'INTELLIGENCE", italic: true }],
-    visualMain: (
-      <>
-        [ Iconographie boycott 2018<br />
-        <span style={{ color: "var(--bf-gold)" }}>#كلنا_مقاطعون</span> ]
-      </>
-    ),
-    resources: [
-      { type: "📄 Étude indépendante", text: "EPGE, \"Le boycott d'avril 2018 au Maroc\", septembre 2019" },
-    ],
-    meta: [
-      { label: "CLIENT", value: "Cabinet européen d'intelligence" },
-      { label: "PÉRIODE", value: "2018" },
-      { label: "GÉOGRAPHIE", value: "🇲🇦 Maroc" },
-    ],
-    titleBefore: "Quand un boycott n'est ",
-    titleEm: "pas",
-    titleAfter: " un mouvement spontané",
-    storytelling:
-      "Avril 2018. Une vague de boycott sans précédent frappe trois marques emblématiques au Maroc : Centrale Danone, Sidi Ali, Afriquia. En quelques jours, des millions d'interactions, des pertes business massives, une psychose nationale. L'opinion croit à un réflexe citoyen. La donnée raconte autre chose : pages anonymes coordonnées, plus de 800 bots créés un mois avant le déclenchement, sponsorisation détectée, éléments de langage répliqués. L'opération est orchestrée. Reste à le prouver.",
-    mission:
-      "Identifier, analyser et cartographier les instigateurs d'une campagne de désinformation visant les produits de première nécessité au Maroc, pour le compte d'un cabinet européen d'intelligence stratégique de premier plan.",
-    objectives: [
-      "Décoder les moyens techniques (pages anonymes, bots, astroturfing, sponsoring)",
-      "Tracker les éléments de langage et reconstituer le réseau opérationnel",
-      "Documenter l'orchestration et identifier la signature politique sous-jacente",
-    ],
-    methodo:
-      "Veille multicanale et OSINT approfondi sur Facebook, Twitter, YouTube. Analyse de plus de 4 000 posts originaux et 500 000 commentaires. Cartographie des comptes clés et de leurs interconnexions. Détection des bots par profilage comportemental. Tracking des éléments de langage et identification des facteurs de vulnérabilité instrumentalisés.",
-    kpis: [
-      { value: "800+", label: "bots identifiés et profilés" },
-      { value: "3 niveaux", label: "technique, narratif, opérationnel" },
-      { value: "100 %", label: "chaîne d'orchestration documentée" },
-    ],
-    testimony: {
-      initials: "DG",
-      text: "\"Partenaire depuis 2017, nous sollicitons M. Azeddine Yassine pour réaliser des missions concernant des études socio-économiques ou géopolitiques nécessitant la collecte de données, l'analyse des tendances et des recommandations facilitant des prises de décision éclairées. À chaque fois, M. Yassine a su travailler efficacement et ponctuellement pour répondre à nos demandes. Personne rigoureuse, organisée, perfectionniste et discrète. Approche en matière de gestion de tous projets qui dépasse nos exigences.\"",
-      authorBold: "Directeur Général",
-      authorRest: ", cabinet européen d'intelligence stratégique",
-      date: "(lettre du 2 mars 2020)",
-    },
-    tags: ["INTELLIGENCE STRATÉGIQUE", "DÉSINFORMATION", "CARTOGRAPHIE D'ACTEURS", "OSINT", "🇲🇦 MAROC"],
-  },
-  {
-    id: "story-03",
-    num: "03",
-    thematique: "attractivite",
-    secteur: "international",
-    thematiqueLabel: "Attractivité & Rayonnement",
-    miniTitle: "CIDC / OCI",
-    miniPitch: "Faire renaître une organisation 38 ans après sa création.",
-    miniSecteur: "Organisation internationale · 🇸🇦 OCI",
-    eyebrow: "Organisation internationale",
-    logos: [{ label: "CIDC · OCI", image: logoCidc, alt: "CIDC – Centre Islamique pour le Développement du Commerce" }],
-    visualMain: (
-      <>
-        [ Doing Business Platform<br />
-        <span style={{ color: "var(--bf-gold)" }}>+ Magazine TIJARIS bimensuel</span> ]
-      </>
-    ),
-    resources: [
-      { type: "🌐 Plateforme", text: "Doing Business Platform · CIDC OCI" },
-      { type: "📖 Publication", text: "Magazine TIJARIS, bimensuel" },
-    ],
-    meta: [
-      { label: "CLIENT", value: "CIDC (organe OCI)" },
-      { label: "SIÈGE", value: "🇲🇦 Casablanca" },
-      { label: "COUVERTURE", value: "57 États membres" },
-      { label: "PÉRIODE", value: "2022 / 2023" },
-    ],
-    titleBefore: "Faire renaître une organisation ",
-    titleEm: "38 ans",
-    titleAfter: " après sa création",
-    storytelling:
-      "Trente-huit ans après sa création, le CIDC peine à exister auprès de ses 57 États membres. Faible visibilité, sollicitation marginale, organisation perçue comme dépassée par les enjeux du commerce intra-OCI. Une nouvelle Direction Générale arrive, ambitieuse : transformer le centre en plateforme d'attractivité moderne, capable de générer du business réel entre ses pays membres. Restait à concevoir l'outil.",
-    mission:
-      "Concevoir et développer l'architecture d'une plateforme digitale d'attractivité et d'influence pour relancer la notoriété et l'utilité opérationnelle du CIDC.",
-    objectives: [
-      "Diagnostiquer les missions et le positionnement du CIDC",
-      "Concevoir l'architecture d'une \"Doing Business Platform\" multi-composantes",
-      "Transformer le CIDC en organisation orientée intelligence économique et insight-driven",
-    ],
-    methodo:
-      "Compréhension fine des missions du CIDC, diagnostic opérationnel et stratégique. Conception de l'architecture digitale autour de six composantes : Business Ecosystem, Carte sectorielle interactive, Country Profile, Matchmaking, Knowledge Center, Outils décisionnels. Partenariat avec une solution spécialisée Halal. Production éditoriale soutenue (Lettre de Veille et magazine TIJARIS bimensuel).",
-    kpis: [
-      { value: "57", label: "États membres OCI couverts" },
-      { value: "6", label: "composantes digitales déployées" },
-      { value: "Bimensuel", label: "magazine TIJARIS lancé" },
-    ],
-    resultsExtra: "+ Repositionnement du CIDC en organisation orientée Intelligence Économique et approche Insight-Driven",
-    tags: ["ORGANISATION INTERNATIONALE", "PLATEFORME D'ATTRACTIVITÉ", "INTELLIGENCE ÉCONOMIQUE", "MATCHMAKING", "🇲🇦 🇸🇦 OCI"],
-  },
-  {
-    id: "story-04",
-    num: "04",
-    thematique: "gestion-crise",
-    secteur: "sante",
-    thematiqueLabel: "Gestion de crise",
-    miniTitle: "Ministère de la Santé",
-    miniPitch: "Stopper une psychose nationale en deux semaines.",
-    miniSecteur: "Santé publique · 🇲🇦",
-    eyebrow: "Santé publique",
-    logos: [{ label: "MINISTÈRE\nDE LA SANTÉ\nMAROC", italic: true, image: logoMinistereSante, alt: "Ministère de la Santé du Maroc" }],
-    visualMain: (
-      <>
-        [ Crisis Dashboard Grippe A H1N1<br />
-        <span style={{ color: "var(--bf-gold)" }}>+ Weekly Dashboard DICom</span> ]
-      </>
-    ),
-    meta: [
-      { label: "CLIENT", value: "Ministère de la Santé" },
-      { label: "TÉMOIGNAGE", value: "Dr Hanan Fadlallah" },
-      { label: "PÉRIODE", value: "2018 / 2019" },
-      { label: "GÉOGRAPHIE", value: "🇲🇦 Maroc" },
-    ],
-    titleBefore: "Stopper une psychose nationale en ",
-    titleEm: "deux semaines",
-    storytelling:
-      "2018. Le virus H1N1 frappe le Maroc. Une quarantaine de décès. Sur les réseaux sociaux, le silence du Ministère laisse un vide immédiatement comblé : rumeurs, fake news, désinformation organisée. La psychose s'installe, l'indignation citoyenne monte, l'autorité sanitaire perd la main. Pour reprendre le récit, il faut comprendre qui le fabrique. Et avec quelle intensité.",
-    mission:
-      "Piloter la communication de crise H1N1 et installer un dispositif de veille stratégique au sein de la Division de l'Information et de la Communication du Ministère.",
-    objectives: [
-      "Mesurer en temps réel la perception publique et identifier les vecteurs de désinformation",
-      "Outiller la Division Communication avec un baromètre d'image et des dashboards opérationnels",
-      "Former les cadres aux techniques d'intelligence économique appliquées à la santé publique",
-    ],
-    methodo:
-      "Déploiement d'une solution de veille et d'analyse stratégique. Fact-checking des contenus diffusés sur Facebook et YouTube. Décryptage et mapping des auteurs de messages nuisibles. Production de tableaux de bord hebdomadaires (Positionnement, Gouvernement, Partis politiques, Trending Public Opinion). Campagne digitale activant cadres du Ministère et experts externes.",
-    kpis: [
-      { value: "2 sem.", label: "pour atténuer la crise nationale" },
-      { value: "Permanente", label: "solution de veille installée" },
-      { value: "Formation", label: "cadres et journalistes DICom" },
-    ],
-    testimony: {
-      initials: "HF",
-      photo: photoHananFadlallah,
-      photoAlt: "Dr Hanan Fadlallah, Cheffe de la Division de l'Information et de la Communication, Ministère de la Santé",
-      text: "\"Doté d'une vision exceptionnelle, des capacités d'analyse fine et de synthèse, les conseils de M. Azeddine Yassine étaient un appui fort pour la stratégie de communication du Ministère de la Santé. Son intervention a laissé des marques de valeurs : installation d'une solution de veille stratégique et de Data Intelligence, formation des cadres et des journalistes de la DICom, compréhension et cartographie de l'écosystème du Ministère, méthodologie d'extraction des insights de risques et prévention de crise.\"",
-      authorBold: "Dr Hanan Fadlallah",
-      authorRest: ", Cheffe de la Division de l'Information et de la Communication, Ministère de la Santé",
-      date: "(lettre du 2 janvier 2020)",
-    },
-    tags: ["SANTÉ PUBLIQUE", "COMMUNICATION DE CRISE", "DATA INTELLIGENCE", "FACT-CHECKING", "🇲🇦 MAROC"],
-  },
-  {
-    id: "story-05",
-    num: "05",
-    thematique: "attractivite",
-    secteur: "sante",
-    thematiqueLabel: "Attractivité & Rayonnement",
-    miniTitle: "Ginger International",
-    miniPitch: "Quand l'intelligence stratégique sert l'attractivité hospitalière.",
-    miniSecteur: "Santé · 🇲🇦 🇫🇷 🇩🇪",
-    eyebrow: "Coopération internationale & santé",
-    logos: [{ label: "GINGER INTERNATIONAL", image: logoGinger, alt: "Ginger International" }, { label: "KFW", image: logoKfw, alt: "KfW Bankengruppe" }],
-    visualMain: (
-      <>
-        [ Mission tripartite<br />
-        <span style={{ color: "var(--bf-gold)" }}>🇲🇦 Maroc · 🇫🇷 France · 🇩🇪 Allemagne</span> ]
-      </>
-    ),
-    meta: [
-      { label: "CLIENT", value: "Ginger International (France)" },
-      { label: "BÉNÉFICIAIRE", value: "Établissement hospitalier de référence" },
-      { label: "BAILLEUR", value: "KFW (Banque Allemande)" },
-      { label: "PÉRIODE", value: "2022 / 2023 · 🇲🇦 🇫🇷 🇩🇪" },
-    ],
-    titleBefore: "Quand l'intelligence stratégique sert ",
-    titleEm: "l'attractivité hospitalière",
-    storytelling:
-      "2022. Un grand établissement hospitalier de référence à Casablanca fait face à un enjeu d'attractivité et de positionnement. Le bailleur allemand KFW finance une mission d'assistance technique stratégique, confiée au cabinet français Ginger International. Mission : moderniser la communication d'un acteur de santé majeur, en s'appuyant sur la Data, l'analyse et l'intelligence économique appliquées au secteur hospitalier.",
-    mission:
-      "Accompagner la transformation de la communication d'un grand établissement hospitalier marocain via une approche d'intelligence stratégique et de Data Influence, dans le cadre d'une mission financée par KFW.",
-    objectives: [
-      "Asseoir la notoriété et le positionnement de l'établissement",
-      "Outiller les équipes communication avec des dispositifs d'aide à la décision basés sur l'IA",
-      "Produire des audits, recommandations et feuille de route opérationnelle",
-    ],
-    methodo:
-      "Benchmarks et analyses de situation approfondies. Déploiement d'une plateforme de données basée sur l'intelligence artificielle pour l'extraction et l'analyse de données stratégiques. Création de tableaux de bord et de rapports d'analyse pour le suivi de performance. Accompagnement opérationnel du département communication par enjeu et par cible.",
-    kpis: [
-      { value: "11 mois", label: "de mission menée à terme" },
-      { value: "Plateforme IA", label: "déployée pour l'aide à la décision" },
-      { value: "Stratégie", label: "de communication repositionnée" },
-    ],
-    resultsExtra: "+ Mission internationale tripartite : bailleur public allemand, cabinet français, expertise marocaine",
-    testimony: {
-      initials: "OL",
-      photo: photoOlivierLaboue,
-      photoAlt: "Olivier Laboue, Directeur de Développement International, Ginger International",
-      text: "\"Mandaté pour un audit d'image, le cabinet Buildfluence a livré des solutions innovantes et créatives. La mission s'est distinguée par un professionnalisme exemplaire, une attention méticuleuse aux détails et un respect total des délais de livraison. Une vive recommandation pour tout projet alliant excellence opérationnelle et créativité.\"",
-      authorBold: "Olivier Laboue",
-      authorRest: ", Directeur de Développement International, Ginger International",
-    },
-    tags: ["COOPÉRATION INTERNATIONALE", "SANTÉ", "DATA INTELLIGENCE", "ATTRACTIVITÉ HOSPITALIÈRE", "🇲🇦 🇫🇷 🇩🇪"],
-  },
-  {
-    id: "story-06",
-    num: "06",
-    thematique: "desinformation",
-    secteur: "sport",
-    thematiqueLabel: "Attaques & Désinformation",
-    miniTitle: "Raja Club Athletic",
-    miniPitch: "Quand un club légendaire devient cible informationnelle.",
-    miniSecteur: "Sport professionnel · 🇲🇦",
-    eyebrow: "Sport professionnel & gouvernance",
-    logos: [{ label: "RAJA CLUB ATHLETIC", image: logoRaja, alt: "Raja Club Athletic" }, { label: "MARSA MAROC", italic: true }],
-    visualMain: (
-      <>
-        [ Architecture de veille multi-dossiers<br />
-        <span style={{ color: "var(--bf-gold)" }}>Sport, Gouvernance, Médias</span> ]
-      </>
-    ),
-    resources: [
-      { type: "📰 Couverture média", text: "Africa Intelligence, \"La contre-offensive numérique du Raja\"" },
-    ],
-    meta: [
-      { label: "CLIENT", value: "Raja Club Athletic" },
-      { label: "ACTIONNAIRE", value: "Marsa Maroc (60%)" },
-      { label: "PÉRIODE", value: "Mission 2026 en cours" },
-      { label: "GÉOGRAPHIE", value: "🇲🇦 Maroc" },
-    ],
-    titleBefore: "Quand un club légendaire devient ",
-    titleEm: "cible informationnelle",
-    storytelling:
-      "2026. Le Raja Club Athletic, club le plus populaire du Maroc, entre dans une nouvelle ère : reprise par Marsa Maroc, nouveau président, nouvelle directrice générale issue du privé. La modernisation s'enclenche, et avec elle, les premières attaques informationnelles ciblant la direction. Articles de presse, posts coordonnés, screenshots viralisés. Sous l'apparence du débat sportif, une autre lecture émerge : celle d'une déstabilisation orchestrée des dirigeants au moment où le club retrouve sa stabilité institutionnelle.",
-    mission:
-      "Mettre en place un dispositif de veille stratégique permanent et fournir une analyse de crise en temps réel face aux campagnes informationnelles ciblant la direction du club.",
-    objectives: [
-      "Structurer une plateforme de veille multi-dossiers (concurrentielle, réglementaire, sponsoring, technologique, sociétale)",
-      "Détecter et analyser les attaques informationnelles ciblant les dirigeants",
-      "Formuler des recommandations pro-actives de gestion de crise et de réponse stratégique",
-    ],
-    methodo:
-      "Architecture de veille sur six dossiers structurés : Botola Pro et compétitions africaines, FRMF/CAF/FIFA, sponsoring et investisseurs, technologies de performance et infrastructure, supporters et médias, modèles économiques internationaux. Analyse en temps réel des publications négatives, identification des sources et des chaînes de propagation, qualification des intentions, recommandations stratégiques.",
-    kpis: [
-      { value: "6", label: "dossiers de veille structurée" },
-      { value: "24/7", label: "monitoring permanent" },
-      { value: "Réactif", label: "analyse en moins de 24h" },
-    ],
-    resultsExtra: "+ Mission d'intelligence stratégique au service d'un acteur emblématique du sport marocain",
-    tags: ["SPORT PROFESSIONNEL", "INTELLIGENCE STRATÉGIQUE", "GESTION DE CRISE", "MONITORING NARRATIF", "🇲🇦 MAROC"],
-  },
-  {
-    id: "story-07",
-    num: "07",
-    thematique: "ecosysteme",
-    secteur: "industrie",
-    thematiqueLabel: "Écosystème Concurrentiel",
-    miniTitle: "OCP Group",
-    miniPitch: "Briser l'encerclement informationnel d'un champion national.",
-    miniSecteur: "Industrie stratégique · 🇲🇦",
-    eyebrow: "Industrie stratégique nationale",
-    logos: [{ label: "OCP GROUP", image: logoOcp, alt: "OCP Group" }],
-    visualMain: (
-      <>
-        [ Cartographie d'écosystème<br />
-        <span style={{ color: "var(--bf-gold)" }}>+ Matrice socio-dynamique</span> ]
-      </>
-    ),
-    meta: [
-      { label: "CLIENT", value: "OCP Group" },
-      { label: "POSTE", value: "Strategic Communication Manager" },
-      { label: "PÉRIODE", value: "2014" },
-      { label: "GÉOGRAPHIE", value: "🇲🇦 Maroc" },
-    ],
-    titleBefore: "Briser l'encerclement informationnel d'un ",
-    titleEm: "champion national",
-    storytelling:
-      "De 2004 à 2014, OCP Group fait face à une série de campagnes de nuisance commerciale orchestrées sur trois échiquiers : géopolitique, concurrentiel, sociétal. La conséquence est mesurable : perte de notoriété, migration de clients vers la concurrence, brouillage du récit institutionnel d'un champion industriel marocain. Dans une industrie où la perception influence la valorisation, l'environnement informationnel devient un terrain stratégique à part entière.",
-    mission:
-      "Réaliser une analyse à 360° de l'environnement informationnel d'OCP, structurer un système de veille permanent et formuler les actions de contre-influence et de communication adaptées à chaque échiquier.",
-    objectives: [
-      "Mettre en place un système de veille spécifique (image, compétitivité, marché)",
-      "Identifier et décrypter les nuisances sur les trois échiquiers (géopolitique, concurrentiel, sociétal)",
-      "Outiller la Direction Générale avec un dispositif de reporting régulier permettant des prises de décision éclairées",
-    ],
-    methodo:
-      "Choix de l'outil de veille, formation des équipes, mise en œuvre de la solution. Méthodologie de collecte et d'analyse des informations à valeur ajoutée. Études, benchmark et décryptage des thématiques sensibles. Matrice socio-dynamique pour positionner et anticiper l'évolution des parties prenantes. Cartographie d'écosystème, scénarisation d'actions, feuille de route et outils décisionnels.",
-    kpis: [
-      { value: "3 échiquiers", label: "analysés à 360°" },
-      { value: "Permanent", label: "dispositif de veille déployé" },
-      { value: "Souverain", label: "reporting décisionnel haut niveau" },
-    ],
-    testimony: {
-      initials: "SA",
-      photo: photoSanaeAlami,
-      photoAlt: "Sanaë Alami Afilal, VP Chargée de mission, Direction Générale OCP Group",
-      text: "\"Dans le cadre de ses responsabilités de Strategic Communication Manager au sein de la Direction de Communication Corporate OCP Group, Azeddine Yassine assumait les missions qui lui ont été conférées avec dévouement et menait ses projets avec professionnalisme. Doté des capacités d'analyse et de synthèse, Azeddine Yassine est intervenu en parfait conseiller apportant une plus-value certaine pour l'information décisionnelle.\"",
-      authorBold: "Sanaë Alami Afilal",
-      authorRest: ", VP Chargée de mission, Direction Générale OCP Group",
-      date: "(lettre du 3 mars 2020)",
-    },
-    tags: ["INDUSTRIE STRATÉGIQUE", "INTELLIGENCE COMPÉTITIVE", "CARTOGRAPHIE D'ÉCOSYSTÈME", "CONTRE-INFLUENCE", "🇲🇦 MAROC"],
-  },
-  {
-    id: "story-08",
-    num: "08",
-    thematique: "influence",
-    secteur: "gouvernement",
-    thematiqueLabel: "Influence & Soft Power",
-    miniTitle: "Présidence du Sénégal",
-    miniPitch: "Surveiller la notoriété d'un État en temps réel.",
-    miniSecteur: "Gouvernement · 🇸🇳",
-    eyebrow: "Gouvernement & souveraineté",
-    logos: [{ label: "PRÉSIDENCE\nDE LA RÉPUBLIQUE\nDU SÉNÉGAL", italic: true, image: logoPresidenceSenegal, alt: "Présidence de la République du Sénégal" }],
-    visualMain: (
-      <>
-        [ Cartographie stratégique<br />
-        <span style={{ color: "var(--bf-gold)" }}>+ Tendances émergentes IA</span> ]
-      </>
-    ),
-    meta: [
-      { label: "CLIENT", value: "Présidence du Sénégal" },
-      { label: "MISSION", value: "Veille à 360°" },
-      { label: "GÉOGRAPHIE", value: "🇸🇳 Sénégal" },
-    ],
-    titleBefore: "Surveiller la ",
-    titleEm: "notoriété d'un État",
-    titleAfter: " en temps réel",
-    storytelling:
-      "Une présidence ouest-africaine fait face à un contexte de turbulence informationnelle aiguë. Sur les plateformes digitales, le récit se fragmente : tendances émergentes, signaux faibles, narratifs concurrents. Pour un cabinet présidentiel, la maîtrise de la perception devient une question de gouvernance. Il faut voir avant de réagir, comprendre avant de décider.",
-    mission:
-      "Mettre en place un dispositif de surveillance de la notoriété de l'État et du Chef de l'État, avec monitoring narratif en temps réel et alertes décisionnelles.",
-    objectives: [
-      "Surveiller en temps réel l'image de l'État sur les plateformes digitales",
-      "Identifier et décrypter les tendances émergentes et discours nuisibles",
-      "Fournir au cabinet présidentiel des outils d'aide à la décision pour adapter la stratégie de communication",
-    ],
-    methodo:
-      "Cartographie stratégique des interactions et alliances. Surveillance permanente des thématiques émergentes et de leur impact sur l'opinion. Détection des signaux faibles et évaluation des scénarios. Plateforme de veille dédiée à la collecte et l'analyse des données. Investigation digitale et solution de fact-checking.",
-    kpis: [
-      { value: "24/7", label: "monitoring narratif" },
-      { value: "Temps réel", label: "détection des signaux faibles" },
-      { value: "Décisionnel", label: "rapports et alertes au cabinet" },
-    ],
-    resultsExtra: "+ Identification des dynamiques adverses et des vecteurs de désinformation, veille sur les secteurs stratégiques de l'État",
-    tags: ["GOUVERNEMENT", "NOTORIÉTÉ D'ÉTAT", "MONITORING NARRATIF", "INTELLIGENCE SOUVERAINE", "🇸🇳 SÉNÉGAL"],
-  },
-  {
-    id: "story-09",
-    num: "09",
-    thematique: "attractivite",
-    secteur: "public",
-    thematiqueLabel: "Attractivité & Rayonnement",
-    miniTitle: "ADD",
-    miniPitch: "Repositionner un acteur public dans son écosystème digital.",
-    miniSecteur: "Établissement public · 🇲🇦",
-    eyebrow: "Établissement public & transformation digitale",
-    logos: [{ label: "#ADD", image: logoAdd, alt: "Agence de Développement du Digital" }, { label: "GITEX AFRICA", italic: true }],
-    visualMain: (
-      <>
-        [ Architecture digitale ADD<br />
-        <span style={{ color: "var(--bf-gold)" }}>+ Benchmark international</span> ]
-      </>
-    ),
-    meta: [
-      { label: "CLIENT", value: "Agence de Développement du Digital" },
-      { label: "PARTENARIAT", value: "GITEX Africa Morocco" },
-      { label: "PÉRIODE", value: "2022 / 2023" },
-      { label: "GÉOGRAPHIE", value: "🇲🇦 Maroc" },
-    ],
-    titleBefore: "Repositionner un acteur public dans son ",
-    titleEm: "écosystème digital",
-    storytelling:
-      "Cinq ans après sa création, l'Agence de Développement du Digital cherche à consolider sa place dans l'écosystème digital national. Plusieurs initiatives ont été lancées, mais le positionnement mérite d'être clarifié pour faire de l'ADD un acteur incontournable de la transformation digitale marocaine. Une démarche d'audit, d'analyse et de feuille de route s'impose.",
-    mission:
-      "Diagnostiquer le positionnement de l'ADD, analyser son empreinte digitale, et proposer une feuille de route pour renforcer son rôle d'acteur central du développement digital national.",
-    objectives: [
-      "Analyser les attributions de l'ADD, son organisation interne et l'écosystème digital national",
-      "Auditer l'empreinte digitale et benchmarker les meilleures pratiques internationales",
-      "Proposer une feuille de route stratégique pour améliorer la perception et le rayonnement de l'ADD",
-    ],
-    methodo:
-      "Diagnostic organisationnel via brainstorming, interviews des directeurs et analyse des verbatims. Analyse de l'empreinte digitale de l'agence. Benchmark des best practices internationales d'agences digitales nationales. Sondage et analyse de l'opinion publique. Solution de veille et d'analyse stratégique. Outils d'évaluation organisationnelle.",
-    kpis: [
-      { value: "Audit", label: "organisationnel et digital complet" },
-      { value: "Cellule", label: "de veille mise en place" },
-      { value: "GITEX Africa", label: "partenariat stratégique recommandé" },
-    ],
-    resultsExtra: "+ Diversification de la communication multicanale, formation des directeurs et chefs de département",
-    tags: ["ÉTABLISSEMENT PUBLIC", "TRANSFORMATION DIGITALE", "BENCHMARK INTERNATIONAL", "FEUILLE DE ROUTE", "🇲🇦 MAROC"],
-  },
-  {
-    id: "story-10",
-    num: "10",
-    thematique: "attractivite",
-    secteur: "sante",
-    thematiqueLabel: "Attractivité & Rayonnement",
-    miniTitle: "Hôpital Universitaire Med VI",
-    miniPitch: "Crédibiliser l'attractivité d'un hôpital universitaire de référence.",
-    miniSecteur: "Santé · 🇲🇦",
-    eyebrow: "Santé & attractivité hospitalière",
-    logos: [{ label: "HUIM VI\nBOUSKOURA", italic: true, image: logoHopital, alt: "Hôpital Universitaire International Mohammed VI – Bouskoura" }],
-    visualMain: (
-      <>
-        [ Stakeholders Mapping<br />
-        <span style={{ color: "var(--bf-gold)" }}>+ Audit digital hospitalier</span> ]
-      </>
-    ),
-    meta: [
-      { label: "CLIENT", value: "Hôpital Universitaire Med VI" },
-      { label: "LOCALISATION", value: "Bouskoura" },
-      { label: "PÉRIODE", value: "2022" },
-      { label: "GÉOGRAPHIE", value: "🇲🇦 Maroc" },
-    ],
-    titleBefore: "Crédibiliser l'attractivité d'un ",
-    titleEm: "hôpital universitaire de référence",
-    storytelling:
-      "2022. L'Hôpital Universitaire International Mohammed VI, établissement de santé moderne situé à Bouskoura, souhaite renforcer son positionnement et son attractivité dans un écosystème hospitalier marocain compétitif. La direction générale et la direction de la communication mandatent une étude stratégique pour bâtir une feuille de route dédiée à la notoriété, à l'image institutionnelle et à l'engagement des acteurs clés (patients, médecins, partenaires).",
-    mission:
-      "Réaliser une étude stratégique sur l'image et la notoriété de l'établissement et activer les leviers d'attractivité ascendante via une approche d'intelligence et de communication ciblée.",
-    objectives: [
-      "Asseoir la réputation aux niveaux régional, national et international",
-      "Sceller le positionnement au sein de l'écosystème médical et de la santé au Maroc",
-      "Crédibiliser l'attractivité auprès des patients et valoriser les médecins",
-    ],
-    methodo:
-      "Vingt jours d'immersion : meetings, entretiens individuels, séances de brainstorming, analyse des verbatims. Cartographie des parties prenantes (Stakeholders Mapping). Analyse de l'écosystème (emplacement géographique, environnement concurrentiel, acteurs clés). Audit digital approfondi (architecture, SEO, contenu, réseaux sociaux). Production d'une feuille de route stratégique en 18 recommandations opérationnelles.",
-    kpis: [
-      { value: "18 reco.", label: "stratégiques opérationnelles" },
-      { value: "Feuille de route", label: "différenciée par cible et enjeu" },
-      { value: "Stakeholders", label: "écosystème complet cartographié" },
-    ],
-    resultsExtra: "+ Stratégie de Content Intelligence par cible (DG, personnel, professionnels de santé, institutions)",
-    tags: ["SANTÉ", "ATTRACTIVITÉ HOSPITALIÈRE", "STAKEHOLDERS MAPPING", "STRATÉGIE DE COMMUNICATION", "🇲🇦 MAROC"],
-  },
-  {
-    id: "story-11",
-    num: "11",
-    thematique: "due-diligence",
-    secteur: "finance",
-    thematiqueLabel: "Due Diligence & Investissement",
-    miniTitle: "Due Diligence Internationale",
-    miniPitch: "Lever le voile sur un investisseur en zone de risque.",
-    miniSecteur: "Finance & Conformité · 🇲🇦 🌍",
-    eyebrow: "Deep Due Diligence & conformité",
-    logos: [{ label: "CONFIDENTIEL\nNDA STRICT", italic: true }],
-    visualMain: (
-      <>
-        [ Cartographie d'investisseurs internationaux<br />
-        <span style={{ color: "var(--bf-gold)" }}>+ Code feu vert / orange / rouge</span> ]
-      </>
-    ),
-    meta: [
-      { label: "CLIENT", value: "Entreprise marocaine (NDA strict)" },
-      { label: "CIBLE", value: "Capital-Risque sous sanctions" },
-      { label: "SECTEUR", value: "IT / Tech" },
-      { label: "PÉRIODE", value: "2024 · 🇲🇦 🌍" },
-    ],
-    titleBefore: "Lever le voile sur un investisseur en ",
-    titleEm: "zone de risque",
-    storytelling:
-      "Novembre 2024, Marrakech. Une entreprise marocaine s'apprête à entrer en relation d'affaires avec un fonds d'investissement issu d'une juridiction soumise à un régime de sanctions internationales, lors d'un rassemblement de quarante investisseurs étrangers. Avant tout engagement, une question s'impose : qui sont vraiment les acteurs derrière la société cible ? Quels liens, quels actionnaires, quels risques de conformité ? Une investigation Deep Due Diligence devient indispensable.",
-    mission:
-      "Réaliser une radiologie d'honorabilité complète sur une société cible et ses investisseurs, dans un contexte de conformité internationale renforcée et de risque réputationnel.",
-    objectives: [
-      "Cibler une seule société dans le secteur Capital-Risque IT",
-      "Mener une investigation informationnelle de conformité complète sur l'entreprise et ses investisseurs",
-      "Identifier les dynamiques adverses et vecteurs de risque",
-    ],
-    methodo:
-      "Plateforme de veille dédiée à la collecte et l'analyse des données. Solution de Fact-Checking et de cartographie des dirigeants. Screening PEP, vérifications sanctions ONU/OFAC/UE. Audit KYC, LCB-FT, ESG. Cartographie des interconnexions entre dirigeants et entreprises dans différents pays. Analyse sur les secteurs stratégiques et les concurrents.",
-    kpis: [
-      { value: "400 M$", label: "valorisation auditée" },
-      { value: "Code 3 niv.", label: "vert / orange / rouge pour décision" },
-      { value: "NDA strict", label: "confidentialité absolue" },
-    ],
-    resultsExtra: "+ Cartographie complète des interconnexions internationales et identification des risques de conformité",
-    tags: ["DEEP DUE DILIGENCE", "CONFORMITÉ INTERNATIONALE", "KYC / LCB-FT", "CARTOGRAPHIE D'ACTEURS", "🇲🇦 🌍"],
-  },
-];
-
 const SuccessStoriesCSS = `
   :root {
     --bf-paper: #F4F1EA;
@@ -649,7 +87,6 @@ const SuccessStoriesCSS = `
   .ss-title { font-family: 'Playfair Display', serif; font-weight: 600; font-size: 48px; color: var(--bf-navy); line-height: 1.1; margin: 0 0 18px; max-width: 800px; }
   .ss-title em { font-style: italic; color: var(--bf-gold); font-weight: 400; }
   .ss-chapeau { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 21px; color: var(--bf-ink-soft); max-width: 720px; line-height: 1.4; margin: 0; }
-
   .ss-filters { max-width: 1200px; margin: 0 auto; padding: 40px 40px 0; border-top: 1px solid var(--bf-paper-deep); }
   .ss-filter-row { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
   .ss-filter-label { font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--bf-ink-muted); margin-right: 12px; min-width: 90px; }
@@ -657,7 +94,6 @@ const SuccessStoriesCSS = `
   .ss-filter-btn:hover { border-color: var(--bf-gold); color: var(--bf-navy); }
   .ss-filter-btn.active-thema { background: var(--bf-navy); border-color: var(--bf-navy); color: var(--bf-gold); font-weight: 500; }
   .ss-filter-btn.active-secteur { background: var(--bf-paper-deep); border-color: var(--bf-gold); color: var(--bf-navy); font-weight: 500; }
-
   .ss-mini-section { max-width: 1200px; margin: 32px auto 0; padding: 0 40px; }
   .ss-mini-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1px; background: var(--bf-paper-deep); border: 1px solid var(--bf-paper-deep); }
   .ss-mini-card { background: #FAF8F2; padding: 18px 20px; cursor: pointer; transition: all 0.15s ease; text-decoration: none; color: inherit; display: flex; flex-direction: column; gap: 8px; min-height: 140px; }
@@ -671,9 +107,7 @@ const SuccessStoriesCSS = `
   .ss-mini-logo-img { display: block; height: 40px; width: auto; max-width: 100%; max-height: 44px; object-fit: contain; }
   .ss-mini-pitch { font-family: 'DM Sans', sans-serif; font-size: 12px; color: var(--bf-ink-muted); line-height: 1.45; margin-top: auto; }
   .ss-mini-secteur-line { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--bf-ink-muted); margin-top: 4px; }
-
   .ss-hidden { display: none !important; }
-
   .ss-stories { max-width: 1200px; margin: 60px auto 0; padding: 0 40px 120px; }
   .ss-story { background: #FAF8F2; border: 1px solid var(--bf-paper-deep); margin-bottom: 60px; overflow: hidden; display: grid; grid-template-columns: 1fr 1.6fr; scroll-margin-top: 40px; }
   .ss-visual { background: var(--bf-navy); padding: 32px 28px; color: var(--bf-paper); display: flex; flex-direction: column; min-height: 100%; }
@@ -692,7 +126,6 @@ const SuccessStoriesCSS = `
   .ss-meta { font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; line-height: 1.7; border-top: 1px solid var(--bf-navy-soft); padding-top: 16px; margin-top: auto; }
   .ss-meta-line { color: rgba(244, 241, 234, 0.55); margin-bottom: 4px; }
   .ss-meta-line strong { color: var(--bf-gold); font-weight: 500; }
-
   .ss-content { padding: 40px 44px; }
   .ss-num { font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 500; letter-spacing: 0.25em; text-transform: uppercase; color: var(--bf-gold); margin-bottom: 14px; }
   .ss-story-title { font-family: 'Playfair Display', serif; font-weight: 600; font-size: 32px; color: var(--bf-navy); line-height: 1.15; margin: 0 0 28px; }
@@ -721,7 +154,6 @@ const SuccessStoriesCSS = `
   .ss-test-author span { color: var(--bf-ink-muted); font-style: italic; font-family: 'Cormorant Garamond', serif; font-size: 13px; margin-left: 6px; }
   .ss-tags { margin-top: 28px; padding-top: 22px; border-top: 1px solid var(--bf-paper-deep); font-family: 'JetBrains Mono', monospace; font-size: 9.5px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--bf-ink-muted); line-height: 1.8; }
   .ss-tags .sep { color: var(--bf-gold); margin: 0 6px; }
-
   @media (max-width: 980px) {
     .ss-story { grid-template-columns: 1fr; }
     .ss-visual { min-height: auto; }
@@ -738,8 +170,653 @@ const SuccessStoriesCSS = `
 `;
 
 const SuccessStoriesPage = () => {
+  const { t } = useLanguage();
   const [thematique, setThematique] = useState<Thematique>("all");
   const [secteur, setSecteur] = useState<Secteur>("all");
+
+  const THEMATIQUES: { value: Thematique; label: string }[] = [
+    { value: "all", label: t("Toutes", "All") },
+    { value: "gestion-crise", label: t("Gestion de crise", "Crisis Management") },
+    { value: "desinformation", label: t("Attaques & Désinformation", "Attacks & Disinformation") },
+    { value: "due-diligence", label: t("Due Diligence & Investissement", "Due Diligence & Investment") },
+    { value: "attractivite", label: t("Attractivité & Rayonnement", "Attractiveness & Outreach") },
+    { value: "influence", label: t("Influence & Soft Power", "Influence & Soft Power") },
+    { value: "ecosysteme", label: t("Écosystème Concurrentiel", "Competitive Ecosystem") },
+  ];
+
+  const SECTEURS: { value: Secteur; label: string }[] = [
+    { value: "all", label: t("Tous", "All") },
+    { value: "agroalimentaire", label: t("Agroalimentaire", "Agri-food") },
+    { value: "sante", label: t("Santé", "Healthcare") },
+    { value: "industrie", label: t("Industrie", "Industry") },
+    { value: "gouvernement", label: t("Gouvernement", "Government") },
+    { value: "public", label: t("Établissement public", "Public institution") },
+    { value: "finance", label: t("Finance & Investissement", "Finance & Investment") },
+    { value: "sport", label: t("Sport", "Sport") },
+    { value: "international", label: t("Organisation internationale", "International organization") },
+  ];
+
+  const stories: Story[] = [
+    {
+      id: "story-01",
+      num: "01",
+      thematique: "gestion-crise",
+      secteur: "agroalimentaire",
+      thematiqueLabel: t("Gestion de crise", "Crisis Management"),
+      miniTitle: "Centrale Danone",
+      miniPitch: t("Trois semaines pour défaire deux ans de crise.", "Three weeks to undo two years of crisis."),
+      miniSecteur: t("Agroalimentaire · 🇲🇦", "Agri-food · 🇲🇦"),
+      eyebrow: t("Industrie agroalimentaire", "Agri-food industry"),
+      logos: [{ label: "CENTRALE DANONE", image: logoCentraleDanone, alt: "Centrale Danone" }],
+      visualMain: (
+        <>
+          [ {t("Capture média le360", "le360 media capture")}<br />
+          <span style={{ color: "var(--bf-gold)" }}>"{t("Vidéo. Rumeurs et réseaux sociaux : quand Raïbi Jamila en paie le prix fort", "Video. Rumors and social media: when Raïbi Jamila pays the price")}"</span> ]
+        </>
+      ),
+      resources: [
+        { type: t("▶ Reportage exclusif", "▶ Exclusive report"), text: t("RTM, 45 minutes, 2017", "RTM, 45 minutes, 2017") },
+        { type: t("📰 Article média", "📰 Media article"), text: t("le360.com, \"Quand Raïbi Jamila en paie le prix fort\"", "le360.com, \"When Raïbi Jamila pays the price\"") },
+      ],
+      meta: [
+        { label: t("CLIENT", "CLIENT"), value: "Centrale Danone" },
+        { label: t("PÉRIODE", "PERIOD"), value: "2015 / 2017" },
+        { label: t("GÉOGRAPHIE", "GEOGRAPHY"), value: t("🇲🇦 Maroc", "🇲🇦 Morocco") },
+      ],
+      titleBefore: t("Trois semaines pour défaire ", "Three weeks to undo "),
+      titleEm: t("deux ans", "two years"),
+      titleAfter: t(" de crise", " of crisis"),
+      storytelling: t(
+        "Août 2015, région d'Agadir. Deux enfants meurent après avoir consommé Raïbi Jamila. Sur les réseaux sociaux, la sentence tombe en quelques heures : la marque est coupable. Pendant deux ans, une campagne de dénigrement va s'installer, vider les rayons et faire fondre 120 millions de dirhams de chiffre d'affaires. La contagion gagne les autres produits du groupe. Et personne ne sait qui orchestre l'attaque.",
+        "August 2015, Agadir region. Two children die after consuming Raïbi Jamila. Within hours, social media delivers its verdict: the brand is guilty. Over two years, a disparagement campaign empties shelves and erodes MAD 120 million in revenue. The contagion spreads to the group's other products. And nobody knows who is orchestrating the attack."
+      ),
+      mission: t(
+        "Identifier les origines réelles de la campagne de dénigrement, documenter l'innocence du produit, et reconstruire la confiance des consommateurs.",
+        "Identify the true origins of the disparagement campaign, document the product's innocence, and rebuild consumer trust."
+      ),
+      objectives: [
+        t("Récupérer et exploiter les pièces sanitaires officielles", "Retrieve and leverage official health records"),
+        t("Cartographier les acteurs et profiler les comptes virulents", "Map the actors and profile the most virulent accounts"),
+        t("Bâtir une contre-narrative documentée et activer un canal médiatique de masse", "Build a documented counter-narrative and activate a mass media channel"),
+      ],
+      methodo: t(
+        "Déploiement d'une cellule de veille et d'intelligence économique dédiée. Analyse et décryptage des attaques en réseaux sociaux. Mapping et profiling des auteurs virulents. Récupération des documents sanitaires et du rapport d'autopsie. Construction d'un dossier d'innocentement et orchestration d'un reportage exclusif sur la chaîne nationale.",
+        "Deployment of a dedicated intelligence and monitoring unit. Analysis and decoding of social media attacks. Mapping and profiling of virulent authors. Retrieval of sanitary documents and autopsy report. Construction of an exoneration file and orchestration of an exclusive report on the national channel."
+      ),
+      kpis: [
+        { value: t("3 sem.", "3 wks"), label: t("pour juguler une crise de 2 ans", "to contain a 2-year crisis") },
+        { value: "100 %", label: t("marque innocentée", "brand fully exonerated") },
+        { value: "+14 %", label: t("parts de marché regagnées", "market share regained") },
+      ],
+      resultsExtra: t("+ Reportage exclusif de 45 minutes diffusé sur RTM", "+ Exclusive 45-minute report broadcast on RTM"),
+      testimony: {
+        initials: "SK",
+        photo: photoSamiaKabbaj,
+        photoAlt: "Samia Kabbaj Douiri, Centrale Danone",
+        text: t(
+          "\"Prestataire référencé chez nous depuis 2016, M. Azeddine Yassine (Buildfluence) a réalisé avec succès des missions pour Centrale Danone. Dès le début, M. Yassine a fait preuve d'un réel professionnalisme et d'une rigueur à toute épreuve. Nous le recommandons vivement.\"",
+          "\"A referenced provider since 2016, Mr. Azeddine Yassine (Buildfluence) has successfully delivered missions for Centrale Danone. From the outset, Mr. Yassine has demonstrated genuine professionalism and unwavering rigor. We highly recommend him.\""
+        ),
+        authorBold: "Samia Kabbaj Douiri",
+        authorRest: t(", Secrétaire Générale, Centrale Danone", ", Secretary General, Centrale Danone"),
+        date: t("(lettre du 2 février 2020)", "(letter of February 2, 2020)"),
+      },
+      tags: [t("AGROALIMENTAIRE","AGRI-FOOD"), t("GESTION DE CRISE","CRISIS MANAGEMENT"), t("RÉHABILITATION DE MARQUE","BRAND REHABILITATION"), t("DÉSINFORMATION","DISINFORMATION"), t("🇲🇦 MAROC","🇲🇦 MOROCCO")],
+    },
+    {
+      id: "story-02",
+      num: "02",
+      thematique: "desinformation",
+      secteur: "international",
+      thematiqueLabel: t("Attaques & Désinformation","Attacks & Disinformation"),
+      miniTitle: t("Cabinet européen d'intelligence","European intelligence firm"),
+      miniPitch: t("Quand un boycott n'est pas un mouvement spontané.","When a boycott is not a spontaneous movement."),
+      miniSecteur: t("Intelligence stratégique · 🇲🇦","Strategic intelligence · 🇲🇦"),
+      eyebrow: t("Intelligence stratégique internationale","International strategic intelligence"),
+      logos: [{ label: t("CABINET EUROPÉEN\nD'INTELLIGENCE","EUROPEAN\nINTELLIGENCE FIRM"), italic: true }],
+      visualMain: (
+        <>
+          [ {t("Iconographie boycott 2018","2018 boycott iconography")}<br />
+          <span style={{ color: "var(--bf-gold)" }}>#كلنا_مقاطعون</span> ]
+        </>
+      ),
+      resources: [
+        { type: t("📄 Étude indépendante","📄 Independent study"), text: t("EPGE, \"Le boycott d'avril 2018 au Maroc\", septembre 2019","EPGE, \"The April 2018 boycott in Morocco\", September 2019") },
+      ],
+      meta: [
+        { label: t("CLIENT","CLIENT"), value: t("Cabinet européen d'intelligence","European intelligence firm") },
+        { label: t("PÉRIODE","PERIOD"), value: "2018" },
+        { label: t("GÉOGRAPHIE","GEOGRAPHY"), value: t("🇲🇦 Maroc","🇲🇦 Morocco") },
+      ],
+      titleBefore: t("Quand un boycott n'est ","When a boycott is "),
+      titleEm: t("pas","not"),
+      titleAfter: t(" un mouvement spontané"," a spontaneous movement"),
+      storytelling: t(
+        "Avril 2018. Une vague de boycott sans précédent frappe trois marques emblématiques au Maroc : Centrale Danone, Sidi Ali, Afriquia. En quelques jours, des millions d'interactions, des pertes business massives, une psychose nationale. L'opinion croit à un réflexe citoyen. La donnée raconte autre chose : pages anonymes coordonnées, plus de 800 bots créés un mois avant le déclenchement, sponsorisation détectée, éléments de langage répliqués. L'opération est orchestrée. Reste à le prouver.",
+        "April 2018. An unprecedented boycott wave hits three iconic brands in Morocco: Centrale Danone, Sidi Ali, Afriquia. Within days: millions of interactions, massive business losses, national psychosis. The public believes it is a civic reflex. The data tells another story: coordinated anonymous pages, more than 800 bots created a month before the trigger, detected sponsoring, replicated talking points. The operation is orchestrated. It remains to be proven."
+      ),
+      mission: t(
+        "Identifier, analyser et cartographier les instigateurs d'une campagne de désinformation visant les produits de première nécessité au Maroc, pour le compte d'un cabinet européen d'intelligence stratégique de premier plan.",
+        "Identify, analyze and map the instigators of a disinformation campaign targeting essential goods in Morocco, on behalf of a leading European strategic intelligence firm."
+      ),
+      objectives: [
+        t("Décoder les moyens techniques (pages anonymes, bots, astroturfing, sponsoring)","Decode the technical means (anonymous pages, bots, astroturfing, sponsoring)"),
+        t("Tracker les éléments de langage et reconstituer le réseau opérationnel","Track talking points and reconstruct the operational network"),
+        t("Documenter l'orchestration et identifier la signature politique sous-jacente","Document the orchestration and identify the underlying political signature"),
+      ],
+      methodo: t(
+        "Veille multicanale et OSINT approfondi sur Facebook, Twitter, YouTube. Analyse de plus de 4 000 posts originaux et 500 000 commentaires. Cartographie des comptes clés et de leurs interconnexions. Détection des bots par profilage comportemental. Tracking des éléments de langage et identification des facteurs de vulnérabilité instrumentalisés.",
+        "Multi-channel monitoring and in-depth OSINT on Facebook, Twitter, YouTube. Analysis of over 4,000 original posts and 500,000 comments. Mapping of key accounts and their interconnections. Bot detection through behavioral profiling. Talking point tracking and identification of weaponized vulnerability factors."
+      ),
+      kpis: [
+        { value: "800+", label: t("bots identifiés et profilés","bots identified and profiled") },
+        { value: t("3 niveaux","3 levels"), label: t("technique, narratif, opérationnel","technical, narrative, operational") },
+        { value: "100 %", label: t("chaîne d'orchestration documentée","orchestration chain documented") },
+      ],
+      testimony: {
+        initials: "DG",
+        text: t(
+          "\"Partenaire depuis 2017, nous sollicitons M. Azeddine Yassine pour réaliser des missions concernant des études socio-économiques ou géopolitiques nécessitant la collecte de données, l'analyse des tendances et des recommandations facilitant des prises de décision éclairées. À chaque fois, M. Yassine a su travailler efficacement et ponctuellement pour répondre à nos demandes. Personne rigoureuse, organisée, perfectionniste et discrète. Approche en matière de gestion de tous projets qui dépasse nos exigences.\"",
+          "\"A partner since 2017, we engage Mr. Azeddine Yassine for socio-economic and geopolitical studies requiring data collection, trend analysis and recommendations that enable informed decision-making. Each time, Mr. Yassine has worked efficiently and on time to meet our requests. A rigorous, organized, perfectionist and discreet professional. His project management approach exceeds our requirements.\""
+        ),
+        authorBold: t("Directeur Général","Managing Director"),
+        authorRest: t(", cabinet européen d'intelligence stratégique",", European strategic intelligence firm"),
+        date: t("(lettre du 2 mars 2020)","(letter of March 2, 2020)"),
+      },
+      tags: [t("INTELLIGENCE STRATÉGIQUE","STRATEGIC INTELLIGENCE"), t("DÉSINFORMATION","DISINFORMATION"), t("CARTOGRAPHIE D'ACTEURS","ACTOR MAPPING"), "OSINT", t("🇲🇦 MAROC","🇲🇦 MOROCCO")],
+    },
+    {
+      id: "story-03",
+      num: "03",
+      thematique: "attractivite",
+      secteur: "international",
+      thematiqueLabel: t("Attractivité & Rayonnement","Attractiveness & Outreach"),
+      miniTitle: "CIDC / OCI",
+      miniPitch: t("Faire renaître une organisation 38 ans après sa création.","Reviving an organization 38 years after its creation."),
+      miniSecteur: t("Organisation internationale · 🇸🇦 OCI","International organization · 🇸🇦 OIC"),
+      eyebrow: t("Organisation internationale","International organization"),
+      logos: [{ label: "CIDC · OCI", image: logoCidc, alt: "CIDC – Islamic Centre for Development of Trade" }],
+      visualMain: (
+        <>
+          [ Doing Business Platform<br />
+          <span style={{ color: "var(--bf-gold)" }}>{t("+ Magazine TIJARIS bimensuel","+ Bi-monthly TIJARIS magazine")}</span> ]
+        </>
+      ),
+      resources: [
+        { type: t("🌐 Plateforme","🌐 Platform"), text: "Doing Business Platform · CIDC OIC" },
+        { type: t("📖 Publication","📖 Publication"), text: t("Magazine TIJARIS, bimensuel","TIJARIS magazine, bi-monthly") },
+      ],
+      meta: [
+        { label: t("CLIENT","CLIENT"), value: t("CIDC (organe OCI)","ICDT (OIC body)") },
+        { label: t("SIÈGE","HQ"), value: t("🇲🇦 Casablanca","🇲🇦 Casablanca") },
+        { label: t("COUVERTURE","COVERAGE"), value: t("57 États membres","57 member states") },
+        { label: t("PÉRIODE","PERIOD"), value: "2022 / 2023" },
+      ],
+      titleBefore: t("Faire renaître une organisation ","Reviving an organization "),
+      titleEm: t("38 ans","38 years"),
+      titleAfter: t(" après sa création"," after its creation"),
+      storytelling: t(
+        "Trente-huit ans après sa création, le CIDC peine à exister auprès de ses 57 États membres. Faible visibilité, sollicitation marginale, organisation perçue comme dépassée par les enjeux du commerce intra-OCI. Une nouvelle Direction Générale arrive, ambitieuse : transformer le centre en plateforme d'attractivité moderne, capable de générer du business réel entre ses pays membres. Restait à concevoir l'outil.",
+        "Thirty-eight years after its creation, the ICDT struggles to exist for its 57 member states. Low visibility, marginal solicitation, an organization perceived as outdated by intra-OIC trade challenges. An ambitious new General Management arrives: transform the centre into a modern attractiveness platform able to generate real business between its member countries. The tool still needed to be designed."
+      ),
+      mission: t(
+        "Concevoir et développer l'architecture d'une plateforme digitale d'attractivité et d'influence pour relancer la notoriété et l'utilité opérationnelle du CIDC.",
+        "Design and develop the architecture of a digital attractiveness and influence platform to revive the ICDT's notoriety and operational usefulness."
+      ),
+      objectives: [
+        t("Diagnostiquer les missions et le positionnement du CIDC","Audit the ICDT's missions and positioning"),
+        t("Concevoir l'architecture d'une \"Doing Business Platform\" multi-composantes","Design the architecture of a multi-component \"Doing Business Platform\""),
+        t("Transformer le CIDC en organisation orientée intelligence économique et insight-driven","Transform the ICDT into an economic-intelligence-driven, insight-driven organization"),
+      ],
+      methodo: t(
+        "Compréhension fine des missions du CIDC, diagnostic opérationnel et stratégique. Conception de l'architecture digitale autour de six composantes : Business Ecosystem, Carte sectorielle interactive, Country Profile, Matchmaking, Knowledge Center, Outils décisionnels. Partenariat avec une solution spécialisée Halal. Production éditoriale soutenue (Lettre de Veille et magazine TIJARIS bimensuel).",
+        "Fine understanding of the ICDT's missions, operational and strategic diagnosis. Design of the digital architecture around six components: Business Ecosystem, interactive sector map, Country Profile, Matchmaking, Knowledge Center, decision tools. Partnership with a specialized Halal solution. Sustained editorial production (Intelligence Letter and bi-monthly TIJARIS magazine)."
+      ),
+      kpis: [
+        { value: "57", label: t("États membres OCI couverts","OIC member states covered") },
+        { value: "6", label: t("composantes digitales déployées","digital components deployed") },
+        { value: t("Bimensuel","Bi-monthly"), label: t("magazine TIJARIS lancé","TIJARIS magazine launched") },
+      ],
+      resultsExtra: t("+ Repositionnement du CIDC en organisation orientée Intelligence Économique et approche Insight-Driven","+ Repositioning of the ICDT as an Economic Intelligence and Insight-Driven organization"),
+      tags: [t("ORGANISATION INTERNATIONALE","INTERNATIONAL ORGANIZATION"), t("PLATEFORME D'ATTRACTIVITÉ","ATTRACTIVENESS PLATFORM"), t("INTELLIGENCE ÉCONOMIQUE","ECONOMIC INTELLIGENCE"), "MATCHMAKING", t("🇲🇦 🇸🇦 OCI","🇲🇦 🇸🇦 OIC")],
+    },
+    {
+      id: "story-04",
+      num: "04",
+      thematique: "gestion-crise",
+      secteur: "sante",
+      thematiqueLabel: t("Gestion de crise","Crisis Management"),
+      miniTitle: t("Ministère de la Santé","Ministry of Health"),
+      miniPitch: t("Stopper une psychose nationale en deux semaines.","Stopping a national panic in two weeks."),
+      miniSecteur: t("Santé publique · 🇲🇦","Public health · 🇲🇦"),
+      eyebrow: t("Santé publique","Public health"),
+      logos: [{ label: t("MINISTÈRE\nDE LA SANTÉ\nMAROC","MINISTRY\nOF HEALTH\nMOROCCO"), italic: true, image: logoMinistereSante, alt: "Ministry of Health of Morocco" }],
+      visualMain: (
+        <>
+          [ {t("Crisis Dashboard Grippe A H1N1","H1N1 Flu Crisis Dashboard")}<br />
+          <span style={{ color: "var(--bf-gold)" }}>{t("+ Weekly Dashboard DICom","+ DICom Weekly Dashboard")}</span> ]
+        </>
+      ),
+      meta: [
+        { label: t("CLIENT","CLIENT"), value: t("Ministère de la Santé","Ministry of Health") },
+        { label: t("TÉMOIGNAGE","TESTIMONY"), value: "Dr Hanan Fadlallah" },
+        { label: t("PÉRIODE","PERIOD"), value: "2018 / 2019" },
+        { label: t("GÉOGRAPHIE","GEOGRAPHY"), value: t("🇲🇦 Maroc","🇲🇦 Morocco") },
+      ],
+      titleBefore: t("Stopper une psychose nationale en ","Stopping a national panic in "),
+      titleEm: t("deux semaines","two weeks"),
+      storytelling: t(
+        "2018. Le virus H1N1 frappe le Maroc. Une quarantaine de décès. Sur les réseaux sociaux, le silence du Ministère laisse un vide immédiatement comblé : rumeurs, fake news, désinformation organisée. La psychose s'installe, l'indignation citoyenne monte, l'autorité sanitaire perd la main. Pour reprendre le récit, il faut comprendre qui le fabrique. Et avec quelle intensité.",
+        "2018. The H1N1 virus hits Morocco. About forty deaths. On social media, the Ministry's silence leaves a vacuum immediately filled: rumors, fake news, organized disinformation. Panic settles in, public indignation rises, the health authority loses control. To regain the narrative, it must be understood who is making it. And with what intensity."
+      ),
+      mission: t(
+        "Piloter la communication de crise H1N1 et installer un dispositif de veille stratégique au sein de la Division de l'Information et de la Communication du Ministère.",
+        "Steer H1N1 crisis communication and install a strategic intelligence system within the Ministry's Division of Information and Communication."
+      ),
+      objectives: [
+        t("Mesurer en temps réel la perception publique et identifier les vecteurs de désinformation","Measure public perception in real time and identify disinformation vectors"),
+        t("Outiller la Division Communication avec un baromètre d'image et des dashboards opérationnels","Equip the Communication Division with an image barometer and operational dashboards"),
+        t("Former les cadres aux techniques d'intelligence économique appliquées à la santé publique","Train executives in economic intelligence techniques applied to public health"),
+      ],
+      methodo: t(
+        "Déploiement d'une solution de veille et d'analyse stratégique. Fact-checking des contenus diffusés sur Facebook et YouTube. Décryptage et mapping des auteurs de messages nuisibles. Production de tableaux de bord hebdomadaires (Positionnement, Gouvernement, Partis politiques, Trending Public Opinion). Campagne digitale activant cadres du Ministère et experts externes.",
+        "Deployment of a strategic monitoring and analysis solution. Fact-checking of content published on Facebook and YouTube. Decoding and mapping of authors of harmful messages. Weekly dashboards (Positioning, Government, Political parties, Trending Public Opinion). Digital campaign activating Ministry executives and external experts."
+      ),
+      kpis: [
+        { value: t("2 sem.","2 wks"), label: t("pour atténuer la crise nationale","to mitigate the national crisis") },
+        { value: t("Permanente","Permanent"), label: t("solution de veille installée","monitoring solution installed") },
+        { value: t("Formation","Training"), label: t("cadres et journalistes DICom","DICom executives and journalists") },
+      ],
+      testimony: {
+        initials: "HF",
+        photo: photoHananFadlallah,
+        photoAlt: "Dr Hanan Fadlallah, Ministry of Health",
+        text: t(
+          "\"Doté d'une vision exceptionnelle, des capacités d'analyse fine et de synthèse, les conseils de M. Azeddine Yassine étaient un appui fort pour la stratégie de communication du Ministère de la Santé. Son intervention a laissé des marques de valeurs : installation d'une solution de veille stratégique et de Data Intelligence, formation des cadres et des journalistes de la DICom, compréhension et cartographie de l'écosystème du Ministère, méthodologie d'extraction des insights de risques et prévention de crise.\"",
+          "\"With exceptional vision and sharp analytical and synthesis abilities, Mr. Azeddine Yassine's advice was a strong support for the Ministry of Health's communication strategy. His intervention left lasting marks: installation of a strategic intelligence and Data Intelligence solution, training of DICom executives and journalists, mapping of the Ministry's ecosystem, methodology for extracting risk insights and crisis prevention.\""
+        ),
+        authorBold: "Dr Hanan Fadlallah",
+        authorRest: t(", Cheffe de la Division de l'Information et de la Communication, Ministère de la Santé",", Head of the Information and Communication Division, Ministry of Health"),
+        date: t("(lettre du 2 janvier 2020)","(letter of January 2, 2020)"),
+      },
+      tags: [t("SANTÉ PUBLIQUE","PUBLIC HEALTH"), t("COMMUNICATION DE CRISE","CRISIS COMMUNICATION"), "DATA INTELLIGENCE", "FACT-CHECKING", t("🇲🇦 MAROC","🇲🇦 MOROCCO")],
+    },
+    {
+      id: "story-05",
+      num: "05",
+      thematique: "attractivite",
+      secteur: "sante",
+      thematiqueLabel: t("Attractivité & Rayonnement","Attractiveness & Outreach"),
+      miniTitle: "Ginger International",
+      miniPitch: t("Quand l'intelligence stratégique sert l'attractivité hospitalière.","When strategic intelligence serves hospital attractiveness."),
+      miniSecteur: t("Santé · 🇲🇦 🇫🇷 🇩🇪","Healthcare · 🇲🇦 🇫🇷 🇩🇪"),
+      eyebrow: t("Coopération internationale & santé","International cooperation & healthcare"),
+      logos: [{ label: "GINGER INTERNATIONAL", image: logoGinger, alt: "Ginger International" }, { label: "KFW", image: logoKfw, alt: "KfW Bankengruppe" }],
+      visualMain: (
+        <>
+          [ {t("Mission tripartite","Tripartite mission")}<br />
+          <span style={{ color: "var(--bf-gold)" }}>{t("🇲🇦 Maroc · 🇫🇷 France · 🇩🇪 Allemagne","🇲🇦 Morocco · 🇫🇷 France · 🇩🇪 Germany")}</span> ]
+        </>
+      ),
+      meta: [
+        { label: t("CLIENT","CLIENT"), value: t("Ginger International (France)","Ginger International (France)") },
+        { label: t("BÉNÉFICIAIRE","BENEFICIARY"), value: t("Établissement hospitalier de référence","Reference hospital institution") },
+        { label: t("BAILLEUR","FUNDER"), value: t("KFW (Banque Allemande)","KFW (German Bank)") },
+        { label: t("PÉRIODE","PERIOD"), value: "2022 / 2023 · 🇲🇦 🇫🇷 🇩🇪" },
+      ],
+      titleBefore: t("Quand l'intelligence stratégique sert ","When strategic intelligence serves "),
+      titleEm: t("l'attractivité hospitalière","hospital attractiveness"),
+      storytelling: t(
+        "2022. Un grand établissement hospitalier de référence à Casablanca fait face à un enjeu d'attractivité et de positionnement. Le bailleur allemand KFW finance une mission d'assistance technique stratégique, confiée au cabinet français Ginger International. Mission : moderniser la communication d'un acteur de santé majeur, en s'appuyant sur la Data, l'analyse et l'intelligence économique appliquées au secteur hospitalier.",
+        "2022. A major reference hospital in Casablanca faces an attractiveness and positioning challenge. German funder KFW finances a strategic technical assistance mission entrusted to French firm Ginger International. Mission: modernize the communication of a major healthcare player by leveraging Data, analysis and economic intelligence applied to the hospital sector."
+      ),
+      mission: t(
+        "Accompagner la transformation de la communication d'un grand établissement hospitalier marocain via une approche d'intelligence stratégique et de Data Influence, dans le cadre d'une mission financée par KFW.",
+        "Support the communication transformation of a major Moroccan hospital through a strategic intelligence and Data Influence approach, within a KFW-funded mission."
+      ),
+      objectives: [
+        t("Asseoir la notoriété et le positionnement de l'établissement","Establish the institution's notoriety and positioning"),
+        t("Outiller les équipes communication avec des dispositifs d'aide à la décision basés sur l'IA","Equip communication teams with AI-based decision-support tools"),
+        t("Produire des audits, recommandations et feuille de route opérationnelle","Produce audits, recommendations and operational roadmap"),
+      ],
+      methodo: t(
+        "Benchmarks et analyses de situation approfondies. Déploiement d'une plateforme de données basée sur l'intelligence artificielle pour l'extraction et l'analyse de données stratégiques. Création de tableaux de bord et de rapports d'analyse pour le suivi de performance. Accompagnement opérationnel du département communication par enjeu et par cible.",
+        "In-depth benchmarks and situational analyses. Deployment of an AI-based data platform for the extraction and analysis of strategic data. Creation of dashboards and analysis reports for performance tracking. Operational support of the communication department by issue and audience."
+      ),
+      kpis: [
+        { value: t("11 mois","11 months"), label: t("de mission menée à terme","mission successfully delivered") },
+        { value: t("Plateforme IA","AI platform"), label: t("déployée pour l'aide à la décision","deployed for decision support") },
+        { value: t("Stratégie","Strategy"), label: t("de communication repositionnée","communication repositioned") },
+      ],
+      resultsExtra: t("+ Mission internationale tripartite : bailleur public allemand, cabinet français, expertise marocaine","+ Tripartite international mission: German public funder, French firm, Moroccan expertise"),
+      testimony: {
+        initials: "OL",
+        photo: photoOlivierLaboue,
+        photoAlt: "Olivier Laboue, Ginger International",
+        text: t(
+          "\"Mandaté pour un audit d'image, le cabinet Buildfluence a livré des solutions innovantes et créatives. La mission s'est distinguée par un professionnalisme exemplaire, une attention méticuleuse aux détails et un respect total des délais de livraison. Une vive recommandation pour tout projet alliant excellence opérationnelle et créativité.\"",
+          "\"Engaged for an image audit, Buildfluence delivered innovative and creative solutions. The mission stood out for exemplary professionalism, meticulous attention to detail and full respect of delivery deadlines. A strong recommendation for any project combining operational excellence and creativity.\""
+        ),
+        authorBold: "Olivier Laboue",
+        authorRest: t(", Directeur de Développement International, Ginger International",", International Development Director, Ginger International"),
+      },
+      tags: [t("COOPÉRATION INTERNATIONALE","INTERNATIONAL COOPERATION"), t("SANTÉ","HEALTHCARE"), "DATA INTELLIGENCE", t("ATTRACTIVITÉ HOSPITALIÈRE","HOSPITAL ATTRACTIVENESS"), "🇲🇦 🇫🇷 🇩🇪"],
+    },
+    {
+      id: "story-06",
+      num: "06",
+      thematique: "desinformation",
+      secteur: "sport",
+      thematiqueLabel: t("Attaques & Désinformation","Attacks & Disinformation"),
+      miniTitle: "Raja Club Athletic",
+      miniPitch: t("Quand un club légendaire devient cible informationnelle.","When a legendary club becomes an informational target."),
+      miniSecteur: t("Sport professionnel · 🇲🇦","Professional sport · 🇲🇦"),
+      eyebrow: t("Sport professionnel & gouvernance","Professional sport & governance"),
+      logos: [{ label: "RAJA CLUB ATHLETIC", image: logoRaja, alt: "Raja Club Athletic" }, { label: "MARSA MAROC", italic: true }],
+      visualMain: (
+        <>
+          [ {t("Architecture de veille multi-dossiers","Multi-domain monitoring architecture")}<br />
+          <span style={{ color: "var(--bf-gold)" }}>{t("Sport, Gouvernance, Médias","Sport, Governance, Media")}</span> ]
+        </>
+      ),
+      resources: [
+        { type: t("📰 Couverture média","📰 Media coverage"), text: t("Africa Intelligence, \"La contre-offensive numérique du Raja\"","Africa Intelligence, \"Raja's digital counter-offensive\"") },
+      ],
+      meta: [
+        { label: t("CLIENT","CLIENT"), value: "Raja Club Athletic" },
+        { label: t("ACTIONNAIRE","SHAREHOLDER"), value: "Marsa Maroc (60%)" },
+        { label: t("PÉRIODE","PERIOD"), value: t("Mission 2026 en cours","2026 mission in progress") },
+        { label: t("GÉOGRAPHIE","GEOGRAPHY"), value: t("🇲🇦 Maroc","🇲🇦 Morocco") },
+      ],
+      titleBefore: t("Quand un club légendaire devient ","When a legendary club becomes an "),
+      titleEm: t("cible informationnelle","informational target"),
+      storytelling: t(
+        "2026. Le Raja Club Athletic, club le plus populaire du Maroc, entre dans une nouvelle ère : reprise par Marsa Maroc, nouveau président, nouvelle directrice générale issue du privé. La modernisation s'enclenche, et avec elle, les premières attaques informationnelles ciblant la direction. Articles de presse, posts coordonnés, screenshots viralisés. Sous l'apparence du débat sportif, une autre lecture émerge : celle d'une déstabilisation orchestrée des dirigeants au moment où le club retrouve sa stabilité institutionnelle.",
+        "2026. Raja Club Athletic, Morocco's most popular club, enters a new era: takeover by Marsa Maroc, new president, new managing director from the private sector. Modernization kicks in, and with it the first informational attacks targeting management. Press articles, coordinated posts, viral screenshots. Behind the appearance of sports debate, another reading emerges: an orchestrated destabilization of executives just as the club regains its institutional stability."
+      ),
+      mission: t(
+        "Mettre en place un dispositif de veille stratégique permanent et fournir une analyse de crise en temps réel face aux campagnes informationnelles ciblant la direction du club.",
+        "Implement a permanent strategic monitoring system and provide real-time crisis analysis in response to informational campaigns targeting the club's management."
+      ),
+      objectives: [
+        t("Structurer une plateforme de veille multi-dossiers (concurrentielle, réglementaire, sponsoring, technologique, sociétale)","Structure a multi-domain monitoring platform (competitive, regulatory, sponsoring, technological, societal)"),
+        t("Détecter et analyser les attaques informationnelles ciblant les dirigeants","Detect and analyze informational attacks targeting executives"),
+        t("Formuler des recommandations pro-actives de gestion de crise et de réponse stratégique","Issue proactive crisis management and strategic response recommendations"),
+      ],
+      methodo: t(
+        "Architecture de veille sur six dossiers structurés : Botola Pro et compétitions africaines, FRMF/CAF/FIFA, sponsoring et investisseurs, technologies de performance et infrastructure, supporters et médias, modèles économiques internationaux. Analyse en temps réel des publications négatives, identification des sources et des chaînes de propagation, qualification des intentions, recommandations stratégiques.",
+        "Monitoring architecture across six structured domains: Botola Pro and African competitions, FRMF/CAF/FIFA, sponsoring and investors, performance technologies and infrastructure, supporters and media, international economic models. Real-time analysis of negative publications, identification of sources and propagation chains, intent qualification, strategic recommendations."
+      ),
+      kpis: [
+        { value: "6", label: t("dossiers de veille structurée","structured monitoring domains") },
+        { value: "24/7", label: t("monitoring permanent","permanent monitoring") },
+        { value: t("Réactif","Reactive"), label: t("analyse en moins de 24h","analysis in under 24h") },
+      ],
+      resultsExtra: t("+ Mission d'intelligence stratégique au service d'un acteur emblématique du sport marocain","+ Strategic intelligence mission serving an iconic player of Moroccan sport"),
+      tags: [t("SPORT PROFESSIONNEL","PROFESSIONAL SPORT"), t("INTELLIGENCE STRATÉGIQUE","STRATEGIC INTELLIGENCE"), t("GESTION DE CRISE","CRISIS MANAGEMENT"), t("MONITORING NARRATIF","NARRATIVE MONITORING"), t("🇲🇦 MAROC","🇲🇦 MOROCCO")],
+    },
+    {
+      id: "story-07",
+      num: "07",
+      thematique: "ecosysteme",
+      secteur: "industrie",
+      thematiqueLabel: t("Écosystème Concurrentiel","Competitive Ecosystem"),
+      miniTitle: "OCP Group",
+      miniPitch: t("Briser l'encerclement informationnel d'un champion national.","Breaking the informational encirclement of a national champion."),
+      miniSecteur: t("Industrie stratégique · 🇲🇦","Strategic industry · 🇲🇦"),
+      eyebrow: t("Industrie stratégique nationale","National strategic industry"),
+      logos: [{ label: "OCP GROUP", image: logoOcp, alt: "OCP Group" }],
+      visualMain: (
+        <>
+          [ {t("Cartographie d'écosystème","Ecosystem mapping")}<br />
+          <span style={{ color: "var(--bf-gold)" }}>{t("+ Matrice socio-dynamique","+ Socio-dynamic matrix")}</span> ]
+        </>
+      ),
+      meta: [
+        { label: t("CLIENT","CLIENT"), value: "OCP Group" },
+        { label: t("POSTE","ROLE"), value: "Strategic Communication Manager" },
+        { label: t("PÉRIODE","PERIOD"), value: "2014" },
+        { label: t("GÉOGRAPHIE","GEOGRAPHY"), value: t("🇲🇦 Maroc","🇲🇦 Morocco") },
+      ],
+      titleBefore: t("Briser l'encerclement informationnel d'un ","Breaking the informational encirclement of a "),
+      titleEm: t("champion national","national champion"),
+      storytelling: t(
+        "De 2004 à 2014, OCP Group fait face à une série de campagnes de nuisance commerciale orchestrées sur trois échiquiers : géopolitique, concurrentiel, sociétal. La conséquence est mesurable : perte de notoriété, migration de clients vers la concurrence, brouillage du récit institutionnel d'un champion industriel marocain. Dans une industrie où la perception influence la valorisation, l'environnement informationnel devient un terrain stratégique à part entière.",
+        "From 2004 to 2014, OCP Group faces a series of commercial-nuisance campaigns orchestrated across three chessboards: geopolitical, competitive, societal. The consequence is measurable: loss of notoriety, client migration to competitors, blurring of the institutional narrative of a Moroccan industrial champion. In an industry where perception drives valuation, the informational environment becomes a strategic battleground in its own right."
+      ),
+      mission: t(
+        "Réaliser une analyse à 360° de l'environnement informationnel d'OCP, structurer un système de veille permanent et formuler les actions de contre-influence et de communication adaptées à chaque échiquier.",
+        "Conduct a 360° analysis of OCP's informational environment, structure a permanent monitoring system, and define counter-influence and communication actions tailored to each chessboard."
+      ),
+      objectives: [
+        t("Mettre en place un système de veille spécifique (image, compétitivité, marché)","Set up a dedicated monitoring system (image, competitiveness, market)"),
+        t("Identifier et décrypter les nuisances sur les trois échiquiers (géopolitique, concurrentiel, sociétal)","Identify and decode nuisances on the three chessboards (geopolitical, competitive, societal)"),
+        t("Outiller la Direction Générale avec un dispositif de reporting régulier permettant des prises de décision éclairées","Equip the General Management with a regular reporting system enabling informed decisions"),
+      ],
+      methodo: t(
+        "Choix de l'outil de veille, formation des équipes, mise en œuvre de la solution. Méthodologie de collecte et d'analyse des informations à valeur ajoutée. Études, benchmark et décryptage des thématiques sensibles. Matrice socio-dynamique pour positionner et anticiper l'évolution des parties prenantes. Cartographie d'écosystème, scénarisation d'actions, feuille de route et outils décisionnels.",
+        "Selection of monitoring tooling, team training, solution implementation. Methodology for collecting and analyzing high-value information. Studies, benchmark and decoding of sensitive issues. Socio-dynamic matrix to position and anticipate stakeholder evolution. Ecosystem mapping, action scenario building, roadmap and decision tools."
+      ),
+      kpis: [
+        { value: t("3 échiquiers","3 chessboards"), label: t("analysés à 360°","analyzed at 360°") },
+        { value: t("Permanent","Permanent"), label: t("dispositif de veille déployé","monitoring system deployed") },
+        { value: t("Souverain","Sovereign"), label: t("reporting décisionnel haut niveau","top-level decision reporting") },
+      ],
+      testimony: {
+        initials: "SA",
+        photo: photoSanaeAlami,
+        photoAlt: "Sanaë Alami Afilal, OCP Group",
+        text: t(
+          "\"Dans le cadre de ses responsabilités de Strategic Communication Manager au sein de la Direction de Communication Corporate OCP Group, Azeddine Yassine assumait les missions qui lui ont été conférées avec dévouement et menait ses projets avec professionnalisme. Doté des capacités d'analyse et de synthèse, Azeddine Yassine est intervenu en parfait conseiller apportant une plus-value certaine pour l'information décisionnelle.\"",
+          "\"As Strategic Communication Manager within OCP Group's Corporate Communication Department, Azeddine Yassine carried out his missions with dedication and led his projects with professionalism. With strong analytical and synthesis abilities, he acted as a perfect advisor bringing real added value to decision-making information.\""
+        ),
+        authorBold: "Sanaë Alami Afilal",
+        authorRest: t(", VP Chargée de mission, Direction Générale OCP Group",", VP, Special Advisor to the General Management, OCP Group"),
+        date: t("(lettre du 3 mars 2020)","(letter of March 3, 2020)"),
+      },
+      tags: [t("INDUSTRIE STRATÉGIQUE","STRATEGIC INDUSTRY"), t("INTELLIGENCE COMPÉTITIVE","COMPETITIVE INTELLIGENCE"), t("CARTOGRAPHIE D'ÉCOSYSTÈME","ECOSYSTEM MAPPING"), t("CONTRE-INFLUENCE","COUNTER-INFLUENCE"), t("🇲🇦 MAROC","🇲🇦 MOROCCO")],
+    },
+    {
+      id: "story-08",
+      num: "08",
+      thematique: "influence",
+      secteur: "gouvernement",
+      thematiqueLabel: t("Influence & Soft Power","Influence & Soft Power"),
+      miniTitle: t("Présidence du Sénégal","Presidency of Senegal"),
+      miniPitch: t("Surveiller la notoriété d'un État en temps réel.","Monitoring a State's reputation in real time."),
+      miniSecteur: t("Gouvernement · 🇸🇳","Government · 🇸🇳"),
+      eyebrow: t("Gouvernement & souveraineté","Government & sovereignty"),
+      logos: [{ label: t("PRÉSIDENCE\nDE LA RÉPUBLIQUE\nDU SÉNÉGAL","PRESIDENCY\nOF THE REPUBLIC\nOF SENEGAL"), italic: true, image: logoPresidenceSenegal, alt: "Presidency of the Republic of Senegal" }],
+      visualMain: (
+        <>
+          [ {t("Cartographie stratégique","Strategic mapping")}<br />
+          <span style={{ color: "var(--bf-gold)" }}>{t("+ Tendances émergentes IA","+ AI-driven emerging trends")}</span> ]
+        </>
+      ),
+      meta: [
+        { label: t("CLIENT","CLIENT"), value: t("Présidence du Sénégal","Presidency of Senegal") },
+        { label: t("MISSION","MISSION"), value: t("Veille à 360°","360° intelligence") },
+        { label: t("GÉOGRAPHIE","GEOGRAPHY"), value: t("🇸🇳 Sénégal","🇸🇳 Senegal") },
+      ],
+      titleBefore: t("Surveiller la ","Monitoring the "),
+      titleEm: t("notoriété d'un État","reputation of a State"),
+      titleAfter: t(" en temps réel"," in real time"),
+      storytelling: t(
+        "Une présidence ouest-africaine fait face à un contexte de turbulence informationnelle aiguë. Sur les plateformes digitales, le récit se fragmente : tendances émergentes, signaux faibles, narratifs concurrents. Pour un cabinet présidentiel, la maîtrise de la perception devient une question de gouvernance. Il faut voir avant de réagir, comprendre avant de décider.",
+        "A West-African presidency faces acute informational turbulence. On digital platforms, the narrative fragments: emerging trends, weak signals, competing narratives. For a presidential cabinet, perception mastery becomes a governance issue. One must see before reacting, understand before deciding."
+      ),
+      mission: t(
+        "Mettre en place un dispositif de surveillance de la notoriété de l'État et du Chef de l'État, avec monitoring narratif en temps réel et alertes décisionnelles.",
+        "Implement a monitoring system for the reputation of the State and the Head of State, with real-time narrative monitoring and decision-grade alerts."
+      ),
+      objectives: [
+        t("Surveiller en temps réel l'image de l'État sur les plateformes digitales","Monitor the State's image on digital platforms in real time"),
+        t("Identifier et décrypter les tendances émergentes et discours nuisibles","Identify and decode emerging trends and harmful narratives"),
+        t("Fournir au cabinet présidentiel des outils d'aide à la décision pour adapter la stratégie de communication","Provide the presidential cabinet with decision-support tools to adapt communication strategy"),
+      ],
+      methodo: t(
+        "Cartographie stratégique des interactions et alliances. Surveillance permanente des thématiques émergentes et de leur impact sur l'opinion. Détection des signaux faibles et évaluation des scénarios. Plateforme de veille dédiée à la collecte et l'analyse des données. Investigation digitale et solution de fact-checking.",
+        "Strategic mapping of interactions and alliances. Permanent monitoring of emerging topics and their impact on public opinion. Weak-signal detection and scenario evaluation. Dedicated monitoring platform for data collection and analysis. Digital investigation and fact-checking solution."
+      ),
+      kpis: [
+        { value: "24/7", label: t("monitoring narratif","narrative monitoring") },
+        { value: t("Temps réel","Real time"), label: t("détection des signaux faibles","weak-signal detection") },
+        { value: t("Décisionnel","Decision-grade"), label: t("rapports et alertes au cabinet","reports and alerts to the cabinet") },
+      ],
+      resultsExtra: t("+ Identification des dynamiques adverses et des vecteurs de désinformation, veille sur les secteurs stratégiques de l'État","+ Identification of adverse dynamics and disinformation vectors, monitoring of the State's strategic sectors"),
+      tags: [t("GOUVERNEMENT","GOVERNMENT"), t("NOTORIÉTÉ D'ÉTAT","STATE REPUTATION"), t("MONITORING NARRATIF","NARRATIVE MONITORING"), t("INTELLIGENCE SOUVERAINE","SOVEREIGN INTELLIGENCE"), t("🇸🇳 SÉNÉGAL","🇸🇳 SENEGAL")],
+    },
+    {
+      id: "story-09",
+      num: "09",
+      thematique: "attractivite",
+      secteur: "public",
+      thematiqueLabel: t("Attractivité & Rayonnement","Attractiveness & Outreach"),
+      miniTitle: "ADD",
+      miniPitch: t("Repositionner un acteur public dans son écosystème digital.","Repositioning a public player in its digital ecosystem."),
+      miniSecteur: t("Établissement public · 🇲🇦","Public institution · 🇲🇦"),
+      eyebrow: t("Établissement public & transformation digitale","Public institution & digital transformation"),
+      logos: [{ label: "#ADD", image: logoAdd, alt: "Digital Development Agency" }, { label: "GITEX AFRICA", italic: true }],
+      visualMain: (
+        <>
+          [ {t("Architecture digitale ADD","ADD digital architecture")}<br />
+          <span style={{ color: "var(--bf-gold)" }}>{t("+ Benchmark international","+ International benchmark")}</span> ]
+        </>
+      ),
+      meta: [
+        { label: t("CLIENT","CLIENT"), value: t("Agence de Développement du Digital","Digital Development Agency") },
+        { label: t("PARTENARIAT","PARTNERSHIP"), value: "GITEX Africa Morocco" },
+        { label: t("PÉRIODE","PERIOD"), value: "2022 / 2023" },
+        { label: t("GÉOGRAPHIE","GEOGRAPHY"), value: t("🇲🇦 Maroc","🇲🇦 Morocco") },
+      ],
+      titleBefore: t("Repositionner un acteur public dans son ","Repositioning a public player in its "),
+      titleEm: t("écosystème digital","digital ecosystem"),
+      storytelling: t(
+        "Cinq ans après sa création, l'Agence de Développement du Digital cherche à consolider sa place dans l'écosystème digital national. Plusieurs initiatives ont été lancées, mais le positionnement mérite d'être clarifié pour faire de l'ADD un acteur incontournable de la transformation digitale marocaine. Une démarche d'audit, d'analyse et de feuille de route s'impose.",
+        "Five years after its creation, the Digital Development Agency seeks to consolidate its place in the national digital ecosystem. Several initiatives have been launched, but the positioning deserves to be clarified to make ADD an essential player of Moroccan digital transformation. An audit, analysis and roadmap approach is required."
+      ),
+      mission: t(
+        "Diagnostiquer le positionnement de l'ADD, analyser son empreinte digitale, et proposer une feuille de route pour renforcer son rôle d'acteur central du développement digital national.",
+        "Diagnose ADD's positioning, analyze its digital footprint, and propose a roadmap to strengthen its role as a central player of national digital development."
+      ),
+      objectives: [
+        t("Analyser les attributions de l'ADD, son organisation interne et l'écosystème digital national","Analyze ADD's mandate, internal organization and the national digital ecosystem"),
+        t("Auditer l'empreinte digitale et benchmarker les meilleures pratiques internationales","Audit digital footprint and benchmark international best practices"),
+        t("Proposer une feuille de route stratégique pour améliorer la perception et le rayonnement de l'ADD","Propose a strategic roadmap to improve ADD's perception and outreach"),
+      ],
+      methodo: t(
+        "Diagnostic organisationnel via brainstorming, interviews des directeurs et analyse des verbatims. Analyse de l'empreinte digitale de l'agence. Benchmark des best practices internationales d'agences digitales nationales. Sondage et analyse de l'opinion publique. Solution de veille et d'analyse stratégique. Outils d'évaluation organisationnelle.",
+        "Organizational diagnosis via brainstorming, director interviews and verbatim analysis. Analysis of the agency's digital footprint. Benchmark of international best practices of national digital agencies. Public opinion survey and analysis. Strategic monitoring and analysis solution. Organizational assessment tools."
+      ),
+      kpis: [
+        { value: t("Audit","Audit"), label: t("organisationnel et digital complet","full organizational and digital audit") },
+        { value: t("Cellule","Unit"), label: t("de veille mise en place","monitoring unit deployed") },
+        { value: "GITEX Africa", label: t("partenariat stratégique recommandé","strategic partnership recommended") },
+      ],
+      resultsExtra: t("+ Diversification de la communication multicanale, formation des directeurs et chefs de département","+ Multi-channel communication diversification, training of directors and department heads"),
+      tags: [t("ÉTABLISSEMENT PUBLIC","PUBLIC INSTITUTION"), t("TRANSFORMATION DIGITALE","DIGITAL TRANSFORMATION"), t("BENCHMARK INTERNATIONAL","INTERNATIONAL BENCHMARK"), t("FEUILLE DE ROUTE","ROADMAP"), t("🇲🇦 MAROC","🇲🇦 MOROCCO")],
+    },
+    {
+      id: "story-10",
+      num: "10",
+      thematique: "attractivite",
+      secteur: "sante",
+      thematiqueLabel: t("Attractivité & Rayonnement","Attractiveness & Outreach"),
+      miniTitle: t("Hôpital Universitaire Med VI","Mohammed VI University Hospital"),
+      miniPitch: t("Crédibiliser l'attractivité d'un hôpital universitaire de référence.","Building the credible attractiveness of a leading university hospital."),
+      miniSecteur: t("Santé · 🇲🇦","Healthcare · 🇲🇦"),
+      eyebrow: t("Santé & attractivité hospitalière","Healthcare & hospital attractiveness"),
+      logos: [{ label: t("HUIM VI\nBOUSKOURA","HUIM VI\nBOUSKOURA"), italic: true, image: logoHopital, alt: "Mohammed VI International University Hospital – Bouskoura" }],
+      visualMain: (
+        <>
+          [ Stakeholders Mapping<br />
+          <span style={{ color: "var(--bf-gold)" }}>{t("+ Audit digital hospitalier","+ Hospital digital audit")}</span> ]
+        </>
+      ),
+      meta: [
+        { label: t("CLIENT","CLIENT"), value: t("Hôpital Universitaire Med VI","Mohammed VI University Hospital") },
+        { label: t("LOCALISATION","LOCATION"), value: "Bouskoura" },
+        { label: t("PÉRIODE","PERIOD"), value: "2022" },
+        { label: t("GÉOGRAPHIE","GEOGRAPHY"), value: t("🇲🇦 Maroc","🇲🇦 Morocco") },
+      ],
+      titleBefore: t("Crédibiliser l'attractivité d'un ","Building the credible attractiveness of a "),
+      titleEm: t("hôpital universitaire de référence","leading university hospital"),
+      storytelling: t(
+        "2022. L'Hôpital Universitaire International Mohammed VI, établissement de santé moderne situé à Bouskoura, souhaite renforcer son positionnement et son attractivité dans un écosystème hospitalier marocain compétitif. La direction générale et la direction de la communication mandatent une étude stratégique pour bâtir une feuille de route dédiée à la notoriété, à l'image institutionnelle et à l'engagement des acteurs clés (patients, médecins, partenaires).",
+        "2022. The Mohammed VI International University Hospital, a modern healthcare institution located in Bouskoura, seeks to strengthen its positioning and attractiveness within a competitive Moroccan hospital ecosystem. General management and communication leadership commission a strategic study to build a roadmap dedicated to notoriety, institutional image and the engagement of key stakeholders (patients, doctors, partners)."
+      ),
+      mission: t(
+        "Réaliser une étude stratégique sur l'image et la notoriété de l'établissement et activer les leviers d'attractivité ascendante via une approche d'intelligence et de communication ciblée.",
+        "Carry out a strategic study on the institution's image and notoriety, and activate the levers of upward attractiveness through targeted intelligence and communication."
+      ),
+      objectives: [
+        t("Asseoir la réputation aux niveaux régional, national et international","Establish reputation at regional, national and international levels"),
+        t("Sceller le positionnement au sein de l'écosystème médical et de la santé au Maroc","Seal positioning within the medical and healthcare ecosystem in Morocco"),
+        t("Crédibiliser l'attractivité auprès des patients et valoriser les médecins","Build credible attractiveness for patients and elevate physicians"),
+      ],
+      methodo: t(
+        "Vingt jours d'immersion : meetings, entretiens individuels, séances de brainstorming, analyse des verbatims. Cartographie des parties prenantes (Stakeholders Mapping). Analyse de l'écosystème (emplacement géographique, environnement concurrentiel, acteurs clés). Audit digital approfondi (architecture, SEO, contenu, réseaux sociaux). Production d'une feuille de route stratégique en 18 recommandations opérationnelles.",
+        "Twenty days of immersion: meetings, individual interviews, brainstorming sessions, verbatim analysis. Stakeholders Mapping. Ecosystem analysis (geographic location, competitive environment, key actors). In-depth digital audit (architecture, SEO, content, social media). Production of a strategic roadmap with 18 operational recommendations."
+      ),
+      kpis: [
+        { value: t("18 reco.","18 recs"), label: t("stratégiques opérationnelles","operational strategic recommendations") },
+        { value: t("Feuille de route","Roadmap"), label: t("différenciée par cible et enjeu","differentiated by audience and issue") },
+        { value: "Stakeholders", label: t("écosystème complet cartographié","full ecosystem mapped") },
+      ],
+      resultsExtra: t("+ Stratégie de Content Intelligence par cible (DG, personnel, professionnels de santé, institutions)","+ Content Intelligence strategy by audience (GM, staff, health professionals, institutions)"),
+      tags: [t("SANTÉ","HEALTHCARE"), t("ATTRACTIVITÉ HOSPITALIÈRE","HOSPITAL ATTRACTIVENESS"), "STAKEHOLDERS MAPPING", t("STRATÉGIE DE COMMUNICATION","COMMUNICATION STRATEGY"), t("🇲🇦 MAROC","🇲🇦 MOROCCO")],
+    },
+    {
+      id: "story-11",
+      num: "11",
+      thematique: "due-diligence",
+      secteur: "finance",
+      thematiqueLabel: t("Due Diligence & Investissement","Due Diligence & Investment"),
+      miniTitle: t("Due Diligence Internationale","International Due Diligence"),
+      miniPitch: t("Lever le voile sur un investisseur en zone de risque.","Lifting the veil on an investor in a risk zone."),
+      miniSecteur: t("Finance & Conformité · 🇲🇦 🌍","Finance & Compliance · 🇲🇦 🌍"),
+      eyebrow: t("Deep Due Diligence & conformité","Deep Due Diligence & compliance"),
+      logos: [{ label: t("CONFIDENTIEL\nNDA STRICT","CONFIDENTIAL\nSTRICT NDA"), italic: true }],
+      visualMain: (
+        <>
+          [ {t("Cartographie d'investisseurs internationaux","Mapping of international investors")}<br />
+          <span style={{ color: "var(--bf-gold)" }}>{t("+ Code feu vert / orange / rouge","+ Green / amber / red traffic-light code")}</span> ]
+        </>
+      ),
+      meta: [
+        { label: t("CLIENT","CLIENT"), value: t("Entreprise marocaine (NDA strict)","Moroccan company (strict NDA)") },
+        { label: t("CIBLE","TARGET"), value: t("Capital-Risque sous sanctions","Venture Capital under sanctions") },
+        { label: t("SECTEUR","SECTOR"), value: "IT / Tech" },
+        { label: t("PÉRIODE","PERIOD"), value: "2024 · 🇲🇦 🌍" },
+      ],
+      titleBefore: t("Lever le voile sur un investisseur en ","Lifting the veil on an investor in a "),
+      titleEm: t("zone de risque","risk zone"),
+      storytelling: t(
+        "Novembre 2024, Marrakech. Une entreprise marocaine s'apprête à entrer en relation d'affaires avec un fonds d'investissement issu d'une juridiction soumise à un régime de sanctions internationales, lors d'un rassemblement de quarante investisseurs étrangers. Avant tout engagement, une question s'impose : qui sont vraiment les acteurs derrière la société cible ? Quels liens, quels actionnaires, quels risques de conformité ? Une investigation Deep Due Diligence devient indispensable.",
+        "November 2024, Marrakech. A Moroccan company is about to engage with an investment fund from a jurisdiction under international sanctions, at a gathering of forty foreign investors. Before any commitment, one question arises: who are the real actors behind the target company? Which links, which shareholders, which compliance risks? A Deep Due Diligence investigation becomes indispensable."
+      ),
+      mission: t(
+        "Réaliser une radiologie d'honorabilité complète sur une société cible et ses investisseurs, dans un contexte de conformité internationale renforcée et de risque réputationnel.",
+        "Conduct a full integrity radiology of a target company and its investors, in a context of reinforced international compliance and reputational risk."
+      ),
+      objectives: [
+        t("Cibler une seule société dans le secteur Capital-Risque IT","Target a single company in the IT Venture Capital sector"),
+        t("Mener une investigation informationnelle de conformité complète sur l'entreprise et ses investisseurs","Run a full compliance information investigation on the company and its investors"),
+        t("Identifier les dynamiques adverses et vecteurs de risque","Identify adverse dynamics and risk vectors"),
+      ],
+      methodo: t(
+        "Plateforme de veille dédiée à la collecte et l'analyse des données. Solution de Fact-Checking et de cartographie des dirigeants. Screening PEP, vérifications sanctions ONU/OFAC/UE. Audit KYC, LCB-FT, ESG. Cartographie des interconnexions entre dirigeants et entreprises dans différents pays. Analyse sur les secteurs stratégiques et les concurrents.",
+        "Dedicated monitoring platform for data collection and analysis. Fact-Checking solution and executive mapping. PEP screening, UN/OFAC/EU sanctions checks. KYC, AML-CFT, ESG audit. Mapping of interconnections between executives and companies across countries. Analysis of strategic sectors and competitors."
+      ),
+      kpis: [
+        { value: "400 M$", label: t("valorisation auditée","valuation audited") },
+        { value: t("Code 3 niv.","3-level code"), label: t("vert / orange / rouge pour décision","green / amber / red for decision") },
+        { value: t("NDA strict","Strict NDA"), label: t("confidentialité absolue","absolute confidentiality") },
+      ],
+      resultsExtra: t("+ Cartographie complète des interconnexions internationales et identification des risques de conformité","+ Full mapping of international interconnections and identification of compliance risks"),
+      tags: [t("DEEP DUE DILIGENCE","DEEP DUE DILIGENCE"), t("CONFORMITÉ INTERNATIONALE","INTERNATIONAL COMPLIANCE"), "KYC / AML-CFT", t("CARTOGRAPHIE D'ACTEURS","ACTOR MAPPING"), "🇲🇦 🌍"],
+    },
+  ];
 
   const matches = (s: Story) =>
     (thematique === "all" || s.thematique === thematique) &&
@@ -753,32 +830,34 @@ const SuccessStoriesPage = () => {
       <header className="ss-header">
         <div className="ss-eyebrow">SUCCESS STORIES</div>
         <h1 className="ss-title">
-          Là où l'<em>intelligence</em>
+          {t("Là où l'", "Where ")}<em>{t("intelligence", "intelligence")}</em>
           <br />
-          change l'issue.
+          {t("change l'issue.", "changes the outcome.")}
         </h1>
         <p className="ss-chapeau">
-          Des missions, des contextes critiques, une méthode constante. Comprendre avant d'agir, agir sans bruit, mesurer ce qui change vraiment.
+          {t(
+            "Des missions, des contextes critiques, une méthode constante. Comprendre avant d'agir, agir sans bruit, mesurer ce qui change vraiment.",
+            "Missions, critical contexts, a constant method. Understand before acting, act without noise, measure what truly changes."
+          )}
         </p>
       </header>
 
-      {/* FILTRES */}
       <section className="ss-filters">
         <div className="ss-filter-row">
-          <span className="ss-filter-label">— Par thématique</span>
-          {THEMATIQUES.map((t) => (
+          <span className="ss-filter-label">{t("— Par thématique", "— By theme")}</span>
+          {THEMATIQUES.map((th) => (
             <button
-              key={t.value}
-              className={`ss-filter-btn${thematique === t.value ? " active-thema" : ""}`}
-              onClick={() => setThematique(t.value)}
+              key={th.value}
+              className={`ss-filter-btn${thematique === th.value ? " active-thema" : ""}`}
+              onClick={() => setThematique(th.value)}
               type="button"
             >
-              {t.label}
+              {th.label}
             </button>
           ))}
         </div>
         <div className="ss-filter-row">
-          <span className="ss-filter-label">— Par secteur</span>
+          <span className="ss-filter-label">{t("— Par secteur", "— By sector")}</span>
           {SECTEURS.map((s) => (
             <button
               key={s.value}
@@ -792,15 +871,10 @@ const SuccessStoriesPage = () => {
         </div>
       </section>
 
-      {/* MINI-GRILLE */}
       <section className="ss-mini-section">
         <div className="ss-mini-grid">
           {stories.map((s) => (
-            <a
-              key={s.id}
-              href={`#${s.id}`}
-              className={`ss-mini-card${matches(s) ? "" : " ss-hidden"}`}
-            >
+            <a key={s.id} href={`#${s.id}`} className={`ss-mini-card${matches(s) ? "" : " ss-hidden"}`}>
               <div>
                 <span className="ss-mini-num">{s.num}.</span>
                 <span className="ss-mini-thema">{s.thematiqueLabel}</span>
@@ -828,18 +902,12 @@ const SuccessStoriesPage = () => {
         </div>
       </section>
 
-      {/* STORIES DÉTAILLÉES */}
       <main className="ss-stories">
         {stories.map((s) => (
-          <article
-            key={s.id}
-            id={s.id}
-            className={`ss-story${matches(s) ? "" : " ss-hidden"}`}
-          >
-            {/* LEFT */}
+          <article key={s.id} id={s.id} className={`ss-story${matches(s) ? "" : " ss-hidden"}`}>
             <div className="ss-visual">
               <div className="ss-story-eyebrow">
-                — Success Story · {s.num}
+                {t("— Success Story · ", "— Success Story · ")}{s.num}
                 <br />
                 {s.eyebrow}
               </div>
@@ -866,7 +934,7 @@ const SuccessStoriesPage = () => {
               <div className="ss-visual-main">{s.visualMain}</div>
               {s.resources && s.resources.length > 0 && (
                 <div className="ss-resources">
-                  <div className="ss-res-label">— Ressources liées</div>
+                  <div className="ss-res-label">{t("— Ressources liées", "— Related resources")}</div>
                   {s.resources.map((r, i) => (
                     <a key={i} href="#" className="ss-res-link" onClick={(e) => e.preventDefault()}>
                       <span className="ss-res-type">{r.type}</span>
@@ -884,32 +952,29 @@ const SuccessStoriesPage = () => {
               </div>
             </div>
 
-            {/* RIGHT */}
             <div className="ss-content">
-              <div className="ss-num">SUCCESS STORY · {s.num} / 11</div>
+              <div className="ss-num">{t("SUCCESS STORY · ", "SUCCESS STORY · ")}{s.num} / 11</div>
               <h2 className="ss-story-title">
                 {s.titleBefore}
                 <em>{s.titleEm}</em>
                 {s.titleAfter}
               </h2>
 
-              <div className="ss-section-label first">— Storytelling</div>
+              <div className="ss-section-label first">{t("— Storytelling", "— Storytelling")}</div>
               <p className="ss-storytelling">{s.storytelling}</p>
 
-              <div className="ss-section-label">— Mission</div>
+              <div className="ss-section-label">{t("— Mission", "— Mission")}</div>
               <div className="ss-mission">{s.mission}</div>
 
-              <div className="ss-section-label">— Objectifs</div>
+              <div className="ss-section-label">{t("— Objectifs", "— Objectives")}</div>
               <ol className="ss-objectives">
-                {s.objectives.map((o, i) => (
-                  <li key={i}>{o}</li>
-                ))}
+                {s.objectives.map((o, i) => (<li key={i}>{o}</li>))}
               </ol>
 
-              <div className="ss-section-label">— Méthodologie</div>
+              <div className="ss-section-label">{t("— Méthodologie", "— Methodology")}</div>
               <p className="ss-methodo">{s.methodo}</p>
 
-              <div className="ss-section-label">— Résultats</div>
+              <div className="ss-section-label">{t("— Résultats", "— Results")}</div>
               <div className="ss-results">
                 {s.kpis.map((k, i) => (
                   <div key={i} className="ss-kpi">
