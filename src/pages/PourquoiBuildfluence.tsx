@@ -3,6 +3,7 @@ import { BarChart3, Globe, AlertTriangle, Eye, Network } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import CTAFooter from "@/components/CTAFooter";
 import TestimonialsSection from "@/components/TestimonialsSection";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 // === Palette ===
 const C = {
