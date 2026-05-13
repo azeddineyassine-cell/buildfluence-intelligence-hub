@@ -727,17 +727,18 @@ const PourquoiBuildfluence = () => {
 
           {/* Notes */}
           <div className="pwb-notes">
-            <div className="pwb-notes-eyebrow">— Notes de lecture</div>
+            <div className="pwb-notes-eyebrow">{t("— Notes de lecture", "— Reading notes")}</div>
             <p className="pwb-note" data-num="¹">
-              <strong>Sur l'agrégation de presse —</strong> L'agrégation de presse est à
-              l'intelligence économique ce que la météo est à la stratégie militaire : une entrée,
-              jamais une sortie. Confondre les deux, c'est croire qu'avoir un thermomètre suffit
-              pour gagner une bataille.
+              <strong>{t("Sur l'agrégation de presse —", "On press aggregation —")}</strong> {t(
+                "L'agrégation de presse est à l'intelligence économique ce que la météo est à la stratégie militaire : une entrée, jamais une sortie. Confondre les deux, c'est croire qu'avoir un thermomètre suffit pour gagner une bataille.",
+                "Press aggregation is to economic intelligence what weather is to military strategy: an input, never an output. To confuse the two is to believe that owning a thermometer is enough to win a battle."
+              )}
             </p>
             <p className="pwb-note" data-num="²">
-              <strong>Sur la dépendance technologique —</strong> Les solutions d'agrégation
-              dominantes opèrent en cloud américain. Pour des données stratégiques marocaines, ce
-              n'est pas un détail technique : c'est une vulnérabilité structurelle.
+              <strong>{t("Sur la dépendance technologique —", "On technological dependence —")}</strong> {t(
+                "Les solutions d'agrégation dominantes opèrent en cloud américain. Pour des données stratégiques marocaines, ce n'est pas un détail technique : c'est une vulnérabilité structurelle.",
+                "Dominant aggregation solutions operate on US cloud infrastructure. For strategic Moroccan data, this is not a technical detail: it is a structural vulnerability."
+              )}
             </p>
           </div>
         </div>
