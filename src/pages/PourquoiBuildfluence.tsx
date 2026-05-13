@@ -335,10 +335,10 @@ const PourquoiBuildfluence = () => {
                 maxWidth: 1000,
               }}
             >
-              Cinq pôles. Une seule{" "}
-              <em style={{ fontStyle: "italic", fontWeight: 400, color: C.gold }}>architecture</em>.
+              {t("Cinq pôles. Une seule ", "Five poles. One single ")}
+              <em style={{ fontStyle: "italic", fontWeight: 400, color: C.gold }}>{t("architecture", "architecture")}</em>.
               <br />
-              Trois résultats stratégiques.
+              {t("Trois résultats stratégiques.", "Three strategic outcomes.")}
             </h2>
             <p
               style={{
