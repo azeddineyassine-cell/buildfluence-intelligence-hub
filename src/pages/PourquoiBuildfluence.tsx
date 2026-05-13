@@ -3,6 +3,7 @@ import { BarChart3, Globe, AlertTriangle, Eye, Network } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import CTAFooter from "@/components/CTAFooter";
 import TestimonialsSection from "@/components/TestimonialsSection";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 // === Palette ===
 const C = {
@@ -34,146 +35,132 @@ type Pole = {
   items: string[];
 };
 
-const polesData: Pole[] = [
-  {
-    id: "p1",
-    num: "P/01",
-    title: "Données économiques",
-    tag: "Marchés · Flux · Investissements",
-    icon: <BarChart3 size={22} strokeWidth={1.6} />,
-    panelTag: "P/01 · MARCHÉS · FLUX · INVESTISSEMENTS",
-    lead: "Capter les flux d'investissement, lire les marchés en temps réel, anticiper les ruptures sectorielles avant qu'elles ne deviennent des évidences.",
-    items: [
-      "Veille macro et sectorielle augmentée par l'IA",
-      "Cartographie des flux d'investissement étrangers",
-      "Benchmarks de compétitivité multi-pays",
-      "Détection des signaux faibles d'opportunités",
-      "Analyse prédictive des tendances marchés",
-    ],
-  },
-  {
-    id: "p2",
-    num: "P/02",
-    title: "Contexte géopolitique",
-    tag: "États · Alliances · Conflits",
-    icon: <Globe size={22} strokeWidth={1.6} />,
-    panelTag: "P/02 · ÉTATS · ALLIANCES · CONFLITS",
-    lead: "Décoder les jeux d'États, identifier les souverainetés contestées, lire les rapports de force régionaux et internationaux.",
-    items: [
-      "Cartographie des alliances et des dépendances",
-      "Suivi des décisions souveraines et réglementaires",
-      "Analyse des stratégies d'influence étatique",
-      "Veille des fonds souverains et agences internationales",
-      "Décryptage des tensions géo-économiques",
-    ],
-  },
-  {
-    id: "p3",
-    num: "P/03",
-    title: "Risques réputationnels",
-    tag: "Image · Crises · Vulnérabilités",
-    icon: <AlertTriangle size={22} strokeWidth={1.6} />,
-    panelTag: "P/03 · IMAGE · CRISES · VULNÉRABILITÉS",
-    lead: "Détecter les vulnérabilités d'image, anticiper les crises de réputation, protéger les actifs intangibles avant qu'ils ne soient attaqués.",
-    items: [
-      "Audit de vulnérabilités réputationnelles",
-      "Monitoring des signaux faibles de crise",
-      "Identification des sources hostiles",
-      "Cellule War Room en moins de 2h",
-      "Stratégies de contre-narratifs et reconquête d'image",
-    ],
-  },
-  {
-    id: "p4",
-    num: "P/04",
-    title: "Dynamiques narratives",
-    tag: "Récits · Médias · Opinion",
-    icon: <Eye size={22} strokeWidth={1.6} />,
-    panelTag: "P/04 · RÉCITS · MÉDIAS · OPINION",
-    lead: "Lire les récits qui façonnent l'opinion, identifier les amplifications coordonnées, comprendre comment se forme et se déforme la perception.",
-    items: [
-      "Analyse de polarisation narrative multicanale",
-      "Tracking des chaînes d'amplification médiatique",
-      "Détection des opérations d'influence coordonnées",
-      "Veille des leaders d'opinion et relais sectoriels",
-      "Production de contre-narratifs crédibles et sourcés",
-    ],
-  },
-  {
-    id: "p5",
-    num: "P/05",
-    title: "Jeux d'influence",
-    tag: "Acteurs · Réseaux · Coalitions",
-    icon: <Network size={22} strokeWidth={1.6} />,
-    panelTag: "P/05 · ACTEURS · RÉSEAUX · COALITIONS",
-    lead: "Cartographier les acteurs qui pèsent réellement, identifier les coalitions cachées, modéliser les jeux de pression et de contre-influence.",
-    items: [
-      "Mapping des stratégies adverses et réseaux d'influence",
-      "Cartographie des leaders, ONG, think tanks et investisseurs",
-      "Analyse des alliances, antagonismes et coalitions",
-      "Identification des acteurs clés sur vos décisions",
-      "Modélisation des scénarios de pression et de contre-influence",
-    ],
-  },
-];
+// Données construites à l'intérieur du composant pour supporter i18n.
 
 // === Tableau comparatif ===
 type Mark = "no" | "partial" | "yes";
 type Cell = { mark: Mark; note?: "1" | "2" };
 type Row = { criterion: string; cells: [Cell, Cell, Cell, Cell]; bf: string };
 
-// Ordre colonnes : Cabinets de Stratégie / Agrégateurs de Presse / Cabinets de Veille IE / Agences d'Influence
-const compareRows: Row[] = [
-  {
-    criterion: "Mode de livraison",
-    cells: [{ mark: "no" }, { mark: "partial" }, { mark: "partial" }, { mark: "no" }],
-    bf: "Dispositif permanent",
-  },
-  {
-    criterion: "Action sur le réel",
-    cells: [{ mark: "no" }, { mark: "no" }, { mark: "no" }, { mark: "partial" }],
-    bf: "Intelligence + Influence",
-  },
-  {
-    criterion: "Vitesse de mise en route",
-    cells: [{ mark: "no" }, { mark: "partial" }, { mark: "no" }, { mark: "no" }],
-    bf: "POC en 1 semaine",
-  },
-  {
-    criterion: "Analyse & Interprétation",
-    cells: [{ mark: "yes" }, { mark: "no", note: "1" }, { mark: "partial" }, { mark: "no" }],
-    bf: "Signature experte du métier",
-  },
-  {
-    criterion: "Technologie propriétaire",
-    cells: [{ mark: "no" }, { mark: "no", note: "2" }, { mark: "partial" }, { mark: "no" }],
-    bf: "Stack OSINT + IA souveraine",
-  },
-  {
-    criterion: "Posture souveraineté",
-    cells: [{ mark: "no" }, { mark: "no" }, { mark: "no" }, { mark: "no" }],
-    bf: "Souveraine & alignée",
-  },
-  {
-    criterion: "Mix Intelligence + Influence",
-    cells: [{ mark: "no" }, { mark: "no" }, { mark: "no" }, { mark: "no" }],
-    bf: "Signature unique du métier",
-  },
-  {
-    criterion: "Confidentialité du dispositif",
-    cells: [{ mark: "partial" }, { mark: "no" }, { mark: "partial" }, { mark: "no" }],
-    bf: "NDA + serveurs souverains",
-  },
-];
-
 // === Composant principal ===
 const PourquoiBuildfluence = () => {
+  const { t } = useLanguage();
   const [activePole, setActivePole] = useState<string | null>(null);
   const [panelFading, setPanelFading] = useState(false);
   const [polesVisible, setPolesVisible] = useState(false);
   const [resultsVisible, setResultsVisible] = useState(false);
   const [connectorVisible, setConnectorVisible] = useState(false);
   const polesRef = useRef<HTMLDivElement>(null);
+
+  const polesData: Pole[] = [
+    {
+      id: "p1",
+      num: "P/01",
+      title: t("Données économiques", "Economic data"),
+      tag: t("Marchés · Flux · Investissements", "Markets · Flows · Investments"),
+      icon: <BarChart3 size={22} strokeWidth={1.6} />,
+      panelTag: t("P/01 · MARCHÉS · FLUX · INVESTISSEMENTS", "P/01 · MARKETS · FLOWS · INVESTMENTS"),
+      lead: t(
+        "Capter les flux d'investissement, lire les marchés en temps réel, anticiper les ruptures sectorielles avant qu'elles ne deviennent des évidences.",
+        "Capture investment flows, read markets in real time, anticipate sector disruptions before they become obvious."
+      ),
+      items: [
+        t("Veille macro et sectorielle augmentée par l'IA", "AI-augmented macro and sector monitoring"),
+        t("Cartographie des flux d'investissement étrangers", "Mapping of foreign investment flows"),
+        t("Benchmarks de compétitivité multi-pays", "Multi-country competitiveness benchmarks"),
+        t("Détection des signaux faibles d'opportunités", "Detection of weak opportunity signals"),
+        t("Analyse prédictive des tendances marchés", "Predictive analysis of market trends"),
+      ],
+    },
+    {
+      id: "p2",
+      num: "P/02",
+      title: t("Contexte géopolitique", "Geopolitical context"),
+      tag: t("États · Alliances · Conflits", "States · Alliances · Conflicts"),
+      icon: <Globe size={22} strokeWidth={1.6} />,
+      panelTag: t("P/02 · ÉTATS · ALLIANCES · CONFLITS", "P/02 · STATES · ALLIANCES · CONFLICTS"),
+      lead: t(
+        "Décoder les jeux d'États, identifier les souverainetés contestées, lire les rapports de force régionaux et internationaux.",
+        "Decode state games, identify contested sovereignties, read regional and international power dynamics."
+      ),
+      items: [
+        t("Cartographie des alliances et des dépendances", "Mapping of alliances and dependencies"),
+        t("Suivi des décisions souveraines et réglementaires", "Tracking of sovereign and regulatory decisions"),
+        t("Analyse des stratégies d'influence étatique", "Analysis of state influence strategies"),
+        t("Veille des fonds souverains et agences internationales", "Monitoring of sovereign funds and international agencies"),
+        t("Décryptage des tensions géo-économiques", "Decoding of geo-economic tensions"),
+      ],
+    },
+    {
+      id: "p3",
+      num: "P/03",
+      title: t("Risques réputationnels", "Reputational risks"),
+      tag: t("Image · Crises · Vulnérabilités", "Image · Crises · Vulnerabilities"),
+      icon: <AlertTriangle size={22} strokeWidth={1.6} />,
+      panelTag: t("P/03 · IMAGE · CRISES · VULNÉRABILITÉS", "P/03 · IMAGE · CRISES · VULNERABILITIES"),
+      lead: t(
+        "Détecter les vulnérabilités d'image, anticiper les crises de réputation, protéger les actifs intangibles avant qu'ils ne soient attaqués.",
+        "Detect image vulnerabilities, anticipate reputational crises, protect intangible assets before they are attacked."
+      ),
+      items: [
+        t("Audit de vulnérabilités réputationnelles", "Reputational vulnerability audit"),
+        t("Monitoring des signaux faibles de crise", "Monitoring of weak crisis signals"),
+        t("Identification des sources hostiles", "Identification of hostile sources"),
+        t("Cellule War Room en moins de 2h", "War Room unit in less than 2 hours"),
+        t("Stratégies de contre-narratifs et reconquête d'image", "Counter-narrative and image reconquest strategies"),
+      ],
+    },
+    {
+      id: "p4",
+      num: "P/04",
+      title: t("Dynamiques narratives", "Narrative dynamics"),
+      tag: t("Récits · Médias · Opinion", "Narratives · Media · Opinion"),
+      icon: <Eye size={22} strokeWidth={1.6} />,
+      panelTag: t("P/04 · RÉCITS · MÉDIAS · OPINION", "P/04 · NARRATIVES · MEDIA · OPINION"),
+      lead: t(
+        "Lire les récits qui façonnent l'opinion, identifier les amplifications coordonnées, comprendre comment se forme et se déforme la perception.",
+        "Read the narratives that shape opinion, identify coordinated amplifications, understand how perception forms and deforms."
+      ),
+      items: [
+        t("Analyse de polarisation narrative multicanale", "Multichannel narrative polarization analysis"),
+        t("Tracking des chaînes d'amplification médiatique", "Tracking of media amplification chains"),
+        t("Détection des opérations d'influence coordonnées", "Detection of coordinated influence operations"),
+        t("Veille des leaders d'opinion et relais sectoriels", "Monitoring of opinion leaders and sector relays"),
+        t("Production de contre-narratifs crédibles et sourcés", "Production of credible and sourced counter-narratives"),
+      ],
+    },
+    {
+      id: "p5",
+      num: "P/05",
+      title: t("Jeux d'influence", "Influence games"),
+      tag: t("Acteurs · Réseaux · Coalitions", "Actors · Networks · Coalitions"),
+      icon: <Network size={22} strokeWidth={1.6} />,
+      panelTag: t("P/05 · ACTEURS · RÉSEAUX · COALITIONS", "P/05 · ACTORS · NETWORKS · COALITIONS"),
+      lead: t(
+        "Cartographier les acteurs qui pèsent réellement, identifier les coalitions cachées, modéliser les jeux de pression et de contre-influence.",
+        "Map the actors who truly matter, identify hidden coalitions, model pressure and counter-influence games."
+      ),
+      items: [
+        t("Mapping des stratégies adverses et réseaux d'influence", "Mapping of adversarial strategies and influence networks"),
+        t("Cartographie des leaders, ONG, think tanks et investisseurs", "Mapping of leaders, NGOs, think tanks and investors"),
+        t("Analyse des alliances, antagonismes et coalitions", "Analysis of alliances, antagonisms and coalitions"),
+        t("Identification des acteurs clés sur vos décisions", "Identification of key actors on your decisions"),
+        t("Modélisation des scénarios de pression et de contre-influence", "Modeling of pressure and counter-influence scenarios"),
+      ],
+    },
+  ];
+
+  const compareRows: Row[] = [
+    { criterion: t("Mode de livraison", "Delivery mode"), cells: [{ mark: "no" }, { mark: "partial" }, { mark: "partial" }, { mark: "no" }], bf: t("Dispositif permanent", "Permanent infrastructure") },
+    { criterion: t("Action sur le réel", "Action on reality"), cells: [{ mark: "no" }, { mark: "no" }, { mark: "no" }, { mark: "partial" }], bf: t("Intelligence + Influence", "Intelligence + Influence") },
+    { criterion: t("Vitesse de mise en route", "Time to launch"), cells: [{ mark: "no" }, { mark: "partial" }, { mark: "no" }, { mark: "no" }], bf: t("POC en 1 semaine", "POC in 1 week") },
+    { criterion: t("Analyse & Interprétation", "Analysis & Interpretation"), cells: [{ mark: "yes" }, { mark: "no", note: "1" }, { mark: "partial" }, { mark: "no" }], bf: t("Signature experte du métier", "Signature expertise of the trade") },
+    { criterion: t("Technologie propriétaire", "Proprietary technology"), cells: [{ mark: "no" }, { mark: "no", note: "2" }, { mark: "partial" }, { mark: "no" }], bf: t("Stack OSINT + IA souveraine", "OSINT stack + sovereign AI") },
+    { criterion: t("Posture souveraineté", "Sovereignty stance"), cells: [{ mark: "no" }, { mark: "no" }, { mark: "no" }, { mark: "no" }], bf: t("Souveraine & alignée", "Sovereign & aligned") },
+    { criterion: t("Mix Intelligence + Influence", "Intelligence + Influence mix"), cells: [{ mark: "no" }, { mark: "no" }, { mark: "no" }, { mark: "no" }], bf: t("Signature unique du métier", "Unique signature of the trade") },
+    { criterion: t("Confidentialité du dispositif", "Infrastructure confidentiality"), cells: [{ mark: "partial" }, { mark: "no" }, { mark: "partial" }, { mark: "no" }], bf: t("NDA + serveurs souverains", "NDA + sovereign servers") },
+  ];
+
 
   // Observer pour la cascade des pôles
   useEffect(() => {
@@ -243,7 +230,7 @@ const PourquoiBuildfluence = () => {
                 textTransform: "uppercase",
               }}
             >
-              Pourquoi Buildfluence
+              {t("Pourquoi Buildfluence", "Why Buildfluence")}
             </span>
           </div>
 
@@ -259,12 +246,12 @@ const PourquoiBuildfluence = () => {
               maxWidth: 1200,
             }}
           >
-            Ce n'est pas{" "}
-            <em style={{ fontStyle: "italic", fontWeight: 400, color: C.gold }}>un cabinet</em>.
+            {t("Ce n'est pas ", "This is not ")}
+            <em style={{ fontStyle: "italic", fontWeight: 400, color: C.gold }}>{t("un cabinet", "a consultancy")}</em>.
             <br />
-            C'est{" "}
+            {t("C'est ", "It is ")}
             <em style={{ fontStyle: "italic", fontWeight: 400, color: C.gold }}>
-              une nouvelle génération hybride
+              {t("une nouvelle génération hybride", "a new hybrid generation")}
             </em>
             .
           </h1>
@@ -282,9 +269,11 @@ const PourquoiBuildfluence = () => {
               marginTop: 40,
             }}
           >
-            Buildfluence construit la souveraineté décisionnelle. Un dispositif unifié qui croise
-            cinq pôles d'intelligence pour produire ce qui compte vraiment :{" "}
-            <span style={{ color: C.gold }}>Attractivité, Influence et Compétitivité.</span>
+            {t(
+              "Buildfluence construit la souveraineté décisionnelle. Un dispositif unifié qui croise cinq pôles d'intelligence pour produire ce qui compte vraiment : ",
+              "Buildfluence builds decision-making sovereignty. A unified infrastructure that cross-references five intelligence poles to produce what truly matters: "
+            )}
+            <span style={{ color: C.gold }}>{t("Attractivité, Influence et Compétitivité.", "Attractiveness, Influence and Competitiveness.")}</span>
           </p>
 
           <div
@@ -302,7 +291,7 @@ const PourquoiBuildfluence = () => {
               animation: "pwb-pulse 2s ease-in-out infinite",
             }}
           >
-            Faire défiler ↓
+            {t("Faire défiler ↓", "Scroll ↓")}
           </div>
         </div>
       </section>
@@ -330,7 +319,7 @@ const PourquoiBuildfluence = () => {
                   textTransform: "uppercase",
                 }}
               >
-                · Architecture Buildfluence ·
+                {t("· Architecture Buildfluence ·", "· Buildfluence Architecture ·")}
               </span>
               <span style={{ width: 60, height: 1, background: C.gold, opacity: 0.5 }} />
             </div>
@@ -346,10 +335,10 @@ const PourquoiBuildfluence = () => {
                 maxWidth: 1000,
               }}
             >
-              Cinq pôles. Une seule{" "}
-              <em style={{ fontStyle: "italic", fontWeight: 400, color: C.gold }}>architecture</em>.
+              {t("Cinq pôles. Une seule ", "Five poles. One single ")}
+              <em style={{ fontStyle: "italic", fontWeight: 400, color: C.gold }}>{t("architecture", "architecture")}</em>.
               <br />
-              Trois résultats stratégiques.
+              {t("Trois résultats stratégiques.", "Three strategic outcomes.")}
             </h2>
             <p
               style={{
@@ -362,8 +351,10 @@ const PourquoiBuildfluence = () => {
                 lineHeight: 1.45,
               }}
             >
-              L'équation Buildfluence : ce que d'autres séparent en silos, nous l'orchestrons sous
-              un seul toit.
+              {t(
+                "L'équation Buildfluence : ce que d'autres séparent en silos, nous l'orchestrons sous un seul toit.",
+                "The Buildfluence equation: what others separate into silos, we orchestrate under one roof."
+              )}
             </p>
           </div>
 
@@ -429,7 +420,7 @@ const PourquoiBuildfluence = () => {
                       marginTop: 16,
                     }}
                   >
-                    EXPLORER →
+                    {t("EXPLORER →", "EXPLORE →")}
                   </div>
                 </div>
               );
@@ -515,7 +506,7 @@ const PourquoiBuildfluence = () => {
                 textTransform: "uppercase",
               }}
             >
-              égale
+              {t("égale", "equals")}
             </span>
             <span
               style={{
@@ -539,9 +530,9 @@ const PourquoiBuildfluence = () => {
             }}
           >
             {[
-              { label: "· Résultat 01 ·", word: "Attractivité" },
-              { label: "· Résultat 02 ·", word: "Influence" },
-              { label: "· Résultat 03 ·", word: "Compétitivité" },
+              { label: t("· Résultat 01 ·", "· Outcome 01 ·"), word: t("Attractivité", "Attractiveness") },
+              { label: t("· Résultat 02 ·", "· Outcome 02 ·"), word: t("Influence", "Influence") },
+              { label: t("· Résultat 03 ·", "· Outcome 03 ·"), word: t("Compétitivité", "Competitiveness") },
             ].map((r) => (
               <div key={r.word} className="pwb-result">
                 <div
@@ -595,10 +586,10 @@ const PourquoiBuildfluence = () => {
                 color: C.ivory,
               }}
             >
-              Buildfluence n'est pas un cabinet de plus.
+              {t("Buildfluence n'est pas un cabinet de plus.", "Buildfluence is not just another consultancy.")}
             </strong>
             <br />
-            C'est la nouvelle génération hybride de l'intelligence souveraine.
+            {t("C'est la nouvelle génération hybride de l'intelligence souveraine.", "It is the new hybrid generation of sovereign intelligence.")}
           </div>
         </div>
       </section>
@@ -618,7 +609,7 @@ const PourquoiBuildfluence = () => {
               marginBottom: 16,
             }}
           >
-            — Positionnement / Le Marché vs Buildfluence
+            {t("— Positionnement / Le Marché vs Buildfluence", "— Positioning / The Market vs Buildfluence")}
           </div>
 
           {/* Titre */}
@@ -633,12 +624,12 @@ const PourquoiBuildfluence = () => {
               maxWidth: 800,
             }}
           >
-            Pourquoi{" "}
+            {t("Pourquoi ", "Why ")}
             <em style={{ fontStyle: "italic", fontWeight: 400, color: C.gold }}>
-              aucun acteur
+              {t("aucun acteur", "no other player")}
             </em>
             <br />
-            ne fait ce que nous faisons.
+            {t("ne fait ce que nous faisons.", "does what we do.")}
           </h2>
 
           {/* Chapeau */}
@@ -653,9 +644,10 @@ const PourquoiBuildfluence = () => {
               lineHeight: 1.4,
             }}
           >
-            Le marché de l'intelligence stratégique est saturé d'offres partielles. Études
-            ponctuelles, agrégateurs, cabinets de veille, agences d'influence — chacun couvre une
-            fraction du besoin. Buildfluence est conçu pour la couverture intégrale.
+            {t(
+              "Le marché de l'intelligence stratégique est saturé d'offres partielles. Études ponctuelles, agrégateurs, cabinets de veille, agences d'influence — chacun couvre une fraction du besoin. Buildfluence est conçu pour la couverture intégrale.",
+              "The strategic intelligence market is saturated with partial offerings. One-off studies, aggregators, monitoring firms, influence agencies — each covers a fraction of the need. Buildfluence is designed for integral coverage."
+            )}
           </p>
 
           {/* Tableau */}
@@ -664,27 +656,27 @@ const PourquoiBuildfluence = () => {
               <thead>
                 <tr>
                   <th>
-                    <span className="col-name col-criterion">Critère</span>
+                    <span className="col-name col-criterion">{t("Critère", "Criterion")}</span>
                   </th>
                   <th>
-                    <span className="col-name">Cabinets de Stratégie</span>
-                    <span className="col-sub">type BCG, Roland Berger</span>
+                    <span className="col-name">{t("Cabinets de Stratégie", "Strategy Consultancies")}</span>
+                    <span className="col-sub">{t("type BCG, Roland Berger", "e.g. BCG, Roland Berger")}</span>
                   </th>
                   <th>
-                    <span className="col-name">Agrégateurs de Presse</span>
-                    <span className="col-sub">type Factiva, Europresse</span>
+                    <span className="col-name">{t("Agrégateurs de Presse", "Press Aggregators")}</span>
+                    <span className="col-sub">{t("type Factiva, Europresse", "e.g. Factiva, Europresse")}</span>
                   </th>
                   <th>
-                    <span className="col-name">Cabinets de Veille / IE</span>
-                    <span className="col-sub">type Kantar, Cision</span>
+                    <span className="col-name">{t("Cabinets de Veille / IE", "Monitoring / CI Firms")}</span>
+                    <span className="col-sub">{t("type Kantar, Cision", "e.g. Kantar, Cision")}</span>
                   </th>
                   <th>
-                    <span className="col-name">Agences d'Influence</span>
-                    <span className="col-sub">type Havas, Publicis</span>
+                    <span className="col-name">{t("Agences d'Influence", "Influence Agencies")}</span>
+                    <span className="col-sub">{t("type Havas, Publicis", "e.g. Havas, Publicis")}</span>
                   </th>
                   <th className="bf-header">
                     <span className="col-name">Buildfluence</span>
-                    <span className="col-sub">dispositif souverain</span>
+                    <span className="col-sub">{t("dispositif souverain", "sovereign infrastructure")}</span>
                   </th>
                 </tr>
               </thead>
@@ -723,29 +715,30 @@ const PourquoiBuildfluence = () => {
           {/* Légende */}
           <div className="pwb-legend">
             <span className="pwb-legend-item">
-              <span className="sym sym-yes pwb-legend-sym">✓</span> Couvert
+              <span className="sym sym-yes pwb-legend-sym">✓</span> {t("Couvert", "Covered")}
             </span>
             <span className="pwb-legend-item">
-              <span className="sym sym-mid pwb-legend-sym">~</span> Partiel
+              <span className="sym sym-mid pwb-legend-sym">~</span> {t("Partiel", "Partial")}
             </span>
             <span className="pwb-legend-item">
-              <span className="sym sym-no pwb-legend-sym">✕</span> Non couvert
+              <span className="sym sym-no pwb-legend-sym">✕</span> {t("Non couvert", "Not covered")}
             </span>
           </div>
 
           {/* Notes */}
           <div className="pwb-notes">
-            <div className="pwb-notes-eyebrow">— Notes de lecture</div>
+            <div className="pwb-notes-eyebrow">{t("— Notes de lecture", "— Reading notes")}</div>
             <p className="pwb-note" data-num="¹">
-              <strong>Sur l'agrégation de presse —</strong> L'agrégation de presse est à
-              l'intelligence économique ce que la météo est à la stratégie militaire : une entrée,
-              jamais une sortie. Confondre les deux, c'est croire qu'avoir un thermomètre suffit
-              pour gagner une bataille.
+              <strong>{t("Sur l'agrégation de presse —", "On press aggregation —")}</strong> {t(
+                "L'agrégation de presse est à l'intelligence économique ce que la météo est à la stratégie militaire : une entrée, jamais une sortie. Confondre les deux, c'est croire qu'avoir un thermomètre suffit pour gagner une bataille.",
+                "Press aggregation is to economic intelligence what weather is to military strategy: an input, never an output. To confuse the two is to believe that owning a thermometer is enough to win a battle."
+              )}
             </p>
             <p className="pwb-note" data-num="²">
-              <strong>Sur la dépendance technologique —</strong> Les solutions d'agrégation
-              dominantes opèrent en cloud américain. Pour des données stratégiques marocaines, ce
-              n'est pas un détail technique : c'est une vulnérabilité structurelle.
+              <strong>{t("Sur la dépendance technologique —", "On technological dependence —")}</strong> {t(
+                "Les solutions d'agrégation dominantes opèrent en cloud américain. Pour des données stratégiques marocaines, ce n'est pas un détail technique : c'est une vulnérabilité structurelle.",
+                "Dominant aggregation solutions operate on US cloud infrastructure. For strategic Moroccan data, this is not a technical detail: it is a structural vulnerability."
+              )}
             </p>
           </div>
         </div>
@@ -774,7 +767,7 @@ const PourquoiBuildfluence = () => {
                   textTransform: "uppercase",
                 }}
               >
-                Track Record · Depuis 2016
+                {t("Track Record · Depuis 2016", "Track Record · Since 2016")}
               </span>
               <span style={{ width: 50, height: 1, background: C.gold, opacity: 0.6 }} />
             </div>
@@ -790,12 +783,12 @@ const PourquoiBuildfluence = () => {
             >
               Buildfluence{" "}
               <em style={{ fontStyle: "italic", fontWeight: 400, color: C.gold }}>
-                ne raconte pas
+                {t("ne raconte pas", "does not tell")}
               </em>
               .
               <br />
               Buildfluence{" "}
-              <em style={{ fontStyle: "italic", fontWeight: 400, color: C.gold }}>livre</em>.
+              <em style={{ fontStyle: "italic", fontWeight: 400, color: C.gold }}>{t("livre", "delivers")}</em>.
             </h2>
             <p
               style={{
@@ -808,8 +801,10 @@ const PourquoiBuildfluence = () => {
                 lineHeight: 1.5,
               }}
             >
-              Une décennie de missions stratégiques pour des institutions souveraines, des
-              multinationales et des fonds d'investissement.
+              {t(
+                "Une décennie de missions stratégiques pour des institutions souveraines, des multinationales et des fonds d'investissement.",
+                "A decade of strategic missions for sovereign institutions, multinationals and investment funds."
+              )}
             </p>
           </div>
 
@@ -818,20 +813,20 @@ const PourquoiBuildfluence = () => {
               {
                 num: "100",
                 unit: "%",
-                label: "Missions réussies",
-                detail: "Toutes les missions livrées<br/>depuis la création (2016)",
+                label: t("Missions réussies", "Successful missions"),
+                detail: t("Toutes les missions livrées<br/>depuis la création (2016)", "All missions delivered<br/>since inception (2016)"),
               },
               {
                 num: "47",
                 unit: "",
-                label: "Missions livrées",
-                detail: "Sur 5 continents,<br/>secteurs publics et privés",
+                label: t("Missions livrées", "Missions delivered"),
+                detail: t("Sur 5 continents,<br/>secteurs publics et privés", "Across 5 continents,<br/>public and private sectors"),
               },
               {
                 num: "<1",
-                unit: "sem",
-                label: "Pour le POC",
-                detail: "Preuve par l'action,<br/>pas par le PowerPoint",
+                unit: t("sem", "wk"),
+                label: t("Pour le POC", "For the POC"),
+                detail: t("Preuve par l'action,<br/>pas par le PowerPoint", "Proof through action,<br/>not through PowerPoint"),
               },
             ].map((s) => (
               <div key={s.label} className="t-stat">
@@ -891,7 +886,7 @@ const PourquoiBuildfluence = () => {
 
           <div style={{ textAlign: "center", marginTop: 60 }}>
             <button className="pwb-cta" onClick={() => {}}>
-              Voir nos Success Stories <span className="arr">→</span>
+              {t("Voir nos Success Stories", "View our Success Stories")} <span className="arr">→</span>
             </button>
           </div>
         </div>
