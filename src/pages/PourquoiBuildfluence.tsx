@@ -586,10 +586,10 @@ const PourquoiBuildfluence = () => {
                 color: C.ivory,
               }}
             >
-              Buildfluence n'est pas un cabinet de plus.
+              {t("Buildfluence n'est pas un cabinet de plus.", "Buildfluence is not just another consultancy.")}
             </strong>
             <br />
-            C'est la nouvelle génération hybride de l'intelligence souveraine.
+            {t("C'est la nouvelle génération hybride de l'intelligence souveraine.", "It is the new hybrid generation of sovereign intelligence.")}
           </div>
         </div>
       </section>
