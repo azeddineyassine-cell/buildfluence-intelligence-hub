@@ -656,27 +656,27 @@ const PourquoiBuildfluence = () => {
               <thead>
                 <tr>
                   <th>
-                    <span className="col-name col-criterion">Critère</span>
+                    <span className="col-name col-criterion">{t("Critère", "Criterion")}</span>
                   </th>
                   <th>
-                    <span className="col-name">Cabinets de Stratégie</span>
-                    <span className="col-sub">type BCG, Roland Berger</span>
+                    <span className="col-name">{t("Cabinets de Stratégie", "Strategy Consultancies")}</span>
+                    <span className="col-sub">{t("type BCG, Roland Berger", "e.g. BCG, Roland Berger")}</span>
                   </th>
                   <th>
-                    <span className="col-name">Agrégateurs de Presse</span>
-                    <span className="col-sub">type Factiva, Europresse</span>
+                    <span className="col-name">{t("Agrégateurs de Presse", "Press Aggregators")}</span>
+                    <span className="col-sub">{t("type Factiva, Europresse", "e.g. Factiva, Europresse")}</span>
                   </th>
                   <th>
-                    <span className="col-name">Cabinets de Veille / IE</span>
-                    <span className="col-sub">type Kantar, Cision</span>
+                    <span className="col-name">{t("Cabinets de Veille / IE", "Monitoring / CI Firms")}</span>
+                    <span className="col-sub">{t("type Kantar, Cision", "e.g. Kantar, Cision")}</span>
                   </th>
                   <th>
-                    <span className="col-name">Agences d'Influence</span>
-                    <span className="col-sub">type Havas, Publicis</span>
+                    <span className="col-name">{t("Agences d'Influence", "Influence Agencies")}</span>
+                    <span className="col-sub">{t("type Havas, Publicis", "e.g. Havas, Publicis")}</span>
                   </th>
                   <th className="bf-header">
                     <span className="col-name">Buildfluence</span>
-                    <span className="col-sub">dispositif souverain</span>
+                    <span className="col-sub">{t("dispositif souverain", "sovereign infrastructure")}</span>
                   </th>
                 </tr>
               </thead>
