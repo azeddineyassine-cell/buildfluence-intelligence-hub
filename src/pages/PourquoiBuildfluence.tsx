@@ -506,7 +506,7 @@ const PourquoiBuildfluence = () => {
                 textTransform: "uppercase",
               }}
             >
-              égale
+              {t("égale", "equals")}
             </span>
             <span
               style={{
