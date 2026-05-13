@@ -2,6 +2,7 @@ import { useMemo, useState } from "react";
 import Navbar from "@/components/Navbar";
 import CTAFooter from "@/components/CTAFooter";
 import { FormStrategicExchange } from "@/components/FormModals";
+import { useLanguage } from "@/contexts/LanguageContext";
 import barometreCover from "@/assets/barometre-cover.png";
 import barometreEnR from "@/assets/barometre-enr.png";
 import rcaGradins from "@/assets/rca-gradins.png";
@@ -14,15 +15,6 @@ type Filter =
   | "intelligence-economique"
   | "nation-branding"
   | "threat-intelligence";
-
-const FILTERS: { value: Filter; label: string }[] = [
-  { value: "all", label: "Tous" },
-  { value: "barometre", label: "Baromètre" },
-  { value: "veille-sport", label: "Veille Sport" },
-  { value: "intelligence-economique", label: "Intelligence Économique" },
-  { value: "nation-branding", label: "Nation Branding" },
-  { value: "threat-intelligence", label: "Threat Intelligence" },
-];
 
 type Card = {
   id: string;
@@ -38,37 +30,54 @@ type Card = {
   overlayImage?: string;
 };
 
-const CARDS: Card[] = [
-  {
-    id: "barometre-sep-2025",
-    filter: "barometre",
-    category: "Baromètre",
-    date: "Sep 2025",
-    title: "Baromètre d'Investissement — Sep 2025",
-    summary:
-      "Vietnam, Afrique du Sud, Mexique… Le Maroc peut-il rivaliser ? 9 secteurs, 24 600 données, 18 pays concurrents analysés sur 31 jours d'observation continue.",
-    href: "/barometre",
-    image: barometreCover,
-    overlayImage: barometreEnR,
-  },
-  {
-    id: "raja-club-athletic",
-    filter: "veille-sport",
-    category: "Veille Sport",
-    date: "Juil. 2026 - Mars 2027",
-    title: "Raja Club Athletic : la veille comme bouclier institutionnel",
-    summary:
-      "Comment le premier club de football marocain a transformé la pression médiatique en avantage décisionnel grâce à une cellule de veille souveraine. Période : Juil. 2026 - Mars 2027.",
-    href: "/Cas_client_RCA_v2.html",
-    image: rcaGradins,
-    overlayImage: rcaEquipe,
-  },
-];
-
 const InsightsResources = () => {
+  const { t, lang } = useLanguage();
   const [active, setActive] = useState<Filter>("all");
   const [email, setEmail] = useState("");
   const [formOpen, setFormOpen] = useState(false);
+
+  const FILTERS: { value: Filter; label: string }[] = [
+    { value: "all", label: t("Tous", "All") },
+    { value: "barometre", label: t("Baromètre", "Barometer") },
+    { value: "veille-sport", label: t("Veille Sport", "Sports Intelligence") },
+    { value: "intelligence-economique", label: t("Intelligence Économique", "Economic Intelligence") },
+    { value: "nation-branding", label: "Nation Branding" },
+    { value: "threat-intelligence", label: "Threat Intelligence" },
+  ];
+
+  const CARDS: Card[] = [
+    {
+      id: "barometre-sep-2025",
+      filter: "barometre",
+      category: t("Baromètre", "Barometer"),
+      date: "Sep 2025",
+      title: t("Baromètre d'Investissement — Sep 2025", "Investment Barometer — Sep 2025"),
+      summary: t(
+        "Vietnam, Afrique du Sud, Mexique… Le Maroc peut-il rivaliser ? 9 secteurs, 24 600 données, 18 pays concurrents analysés sur 31 jours d'observation continue.",
+        "Vietnam, South Africa, Mexico… Can Morocco compete? 9 sectors, 24,600 data points, 18 competing countries analyzed over 31 days of continuous observation."
+      ),
+      href: "/barometre",
+      image: barometreCover,
+      overlayImage: barometreEnR,
+    },
+    {
+      id: "raja-club-athletic",
+      filter: "veille-sport",
+      category: t("Veille Sport", "Sports Intelligence"),
+      date: t("Juil. 2026 - Mars 2027", "Jul. 2026 - Mar. 2027"),
+      title: t(
+        "Raja Club Athletic : la veille comme bouclier institutionnel",
+        "Raja Club Athletic: intelligence as an institutional shield"
+      ),
+      summary: t(
+        "Comment le premier club de football marocain a transformé la pression médiatique en avantage décisionnel grâce à une cellule de veille souveraine. Période : Juil. 2026 - Mars 2027.",
+        "How Morocco's leading football club turned media pressure into a decision-making advantage through a sovereign intelligence unit. Period: Jul. 2026 - Mar. 2027."
+      ),
+      href: lang === "en" ? "/Cas_client_RCA_v2-en.html" : "/Cas_client_RCA_v2.html",
+      image: rcaGradins,
+      overlayImage: rcaEquipe,
+    },
+  ];
 
   const visible = useMemo(
     () => (active === "all" ? CARDS : CARDS.filter((c) => c.filter === active)),
