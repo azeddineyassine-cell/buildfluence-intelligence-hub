@@ -351,8 +351,10 @@ const PourquoiBuildfluence = () => {
                 lineHeight: 1.45,
               }}
             >
-              L'équation Buildfluence : ce que d'autres séparent en silos, nous l'orchestrons sous
-              un seul toit.
+              {t(
+                "L'équation Buildfluence : ce que d'autres séparent en silos, nous l'orchestrons sous un seul toit.",
+                "The Buildfluence equation: what others separate into silos, we orchestrate under one roof."
+              )}
             </p>
           </div>
 
