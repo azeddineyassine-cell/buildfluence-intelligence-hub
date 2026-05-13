@@ -530,9 +530,9 @@ const PourquoiBuildfluence = () => {
             }}
           >
             {[
-              { label: "· Résultat 01 ·", word: "Attractivité" },
-              { label: "· Résultat 02 ·", word: "Influence" },
-              { label: "· Résultat 03 ·", word: "Compétitivité" },
+              { label: t("· Résultat 01 ·", "· Outcome 01 ·"), word: t("Attractivité", "Attractiveness") },
+              { label: t("· Résultat 02 ·", "· Outcome 02 ·"), word: t("Influence", "Influence") },
+              { label: t("· Résultat 03 ·", "· Outcome 03 ·"), word: t("Compétitivité", "Competitiveness") },
             ].map((r) => (
               <div key={r.word} className="pwb-result">
                 <div
