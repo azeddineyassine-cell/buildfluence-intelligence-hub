@@ -856,7 +856,7 @@ const DetailContent = ({ detail }: { detail: DetailKind }) => {
         <div style={{ background: C.navy, color: C.paper, padding: "26px 28px", marginTop: 36, position: "relative" }}>
           <span style={{ position: "absolute", top: 0, left: 0, width: 40, height: 1, background: C.gold }} />
           <p style={{ fontFamily: FONT_ITALIC, fontStyle: "italic", fontSize: 17, color: "#ffffff", lineHeight: 1.55 }}>
-            {lang === 'fr' ? (
+            {fr ? (
               <>On ne capte pas un investisseur de 200 millions d'euros avec une plaquette numérique.<br />On le capte avec une plateforme interactive conçue pour décider vite : données précises, parcours personnalisés, réponses en temps réel.</>
             ) : (
               <>You don't capture a EUR 200 million investor with a digital brochure.<br />You capture them with an interactive platform built to decide fast: precise data, personalised journeys, real-time answers.</>
