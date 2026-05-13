@@ -783,12 +783,12 @@ const PourquoiBuildfluence = () => {
             >
               Buildfluence{" "}
               <em style={{ fontStyle: "italic", fontWeight: 400, color: C.gold }}>
-                ne raconte pas
+                {t("ne raconte pas", "does not tell")}
               </em>
               .
               <br />
               Buildfluence{" "}
-              <em style={{ fontStyle: "italic", fontWeight: 400, color: C.gold }}>livre</em>.
+              <em style={{ fontStyle: "italic", fontWeight: 400, color: C.gold }}>{t("livre", "delivers")}</em>.
             </h2>
             <p
               style={{
