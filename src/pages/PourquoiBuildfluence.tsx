@@ -319,7 +319,7 @@ const PourquoiBuildfluence = () => {
                   textTransform: "uppercase",
                 }}
               >
-                · Architecture Buildfluence ·
+                {t("· Architecture Buildfluence ·", "· Buildfluence Architecture ·")}
               </span>
               <span style={{ width: 60, height: 1, background: C.gold, opacity: 0.5 }} />
             </div>
