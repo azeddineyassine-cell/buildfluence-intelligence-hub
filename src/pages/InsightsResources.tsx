@@ -271,17 +271,20 @@ const InsightsResources = () => {
       `}</style>
 
       <section className="ir-hero">
-        <div className="ir-eyebrow">Intelligence · Ressources · Analyses</div>
+        <div className="ir-eyebrow">{t("Intelligence · Ressources · Analyses", "Intelligence · Resources · Analysis")}</div>
         <h1 className="ir-title">
           Insights & <em>Resources</em>
         </h1>
         <p className="ir-chapeau">
-          Décryptages stratégiques, baromètres d'investissement et analyses de compétitivité pour décider avant les autres.
+          {t(
+            "Décryptages stratégiques, baromètres d'investissement et analyses de compétitivité pour décider avant les autres.",
+            "Strategic insights, investment barometers and competitiveness analyses to decide ahead of the others."
+          )}
         </p>
       </section>
 
-      <section className="ir-filters" aria-label="Filtres thématiques">
-        <span className="ir-filter-label">Thématique</span>
+      <section className="ir-filters" aria-label={t("Filtres thématiques", "Thematic filters")}>
+        <span className="ir-filter-label">{t("Thématique", "Theme")}</span>
         {FILTERS.map((f) => (
           <button
             key={f.value}
