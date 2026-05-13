@@ -2,6 +2,7 @@ import { useMemo, useState } from "react";
 import Navbar from "@/components/Navbar";
 import CTAFooter from "@/components/CTAFooter";
 import { FormStrategicExchange } from "@/components/FormModals";
+import { useLanguage } from "@/contexts/LanguageContext";
 import barometreCover from "@/assets/barometre-cover.png";
 import barometreEnR from "@/assets/barometre-enr.png";
 import rcaGradins from "@/assets/rca-gradins.png";
@@ -14,15 +15,6 @@ type Filter =
   | "intelligence-economique"
   | "nation-branding"
   | "threat-intelligence";
-
-const FILTERS: { value: Filter; label: string }[] = [
-  { value: "all", label: "Tous" },
-  { value: "barometre", label: "Baromètre" },
-  { value: "veille-sport", label: "Veille Sport" },
-  { value: "intelligence-economique", label: "Intelligence Économique" },
-  { value: "nation-branding", label: "Nation Branding" },
-  { value: "threat-intelligence", label: "Threat Intelligence" },
-];
 
 type Card = {
   id: string;
@@ -38,37 +30,54 @@ type Card = {
   overlayImage?: string;
 };
 
-const CARDS: Card[] = [
-  {
-    id: "barometre-sep-2025",
-    filter: "barometre",
-    category: "Baromètre",
-    date: "Sep 2025",
-    title: "Baromètre d'Investissement — Sep 2025",
-    summary:
-      "Vietnam, Afrique du Sud, Mexique… Le Maroc peut-il rivaliser ? 9 secteurs, 24 600 données, 18 pays concurrents analysés sur 31 jours d'observation continue.",
-    href: "/barometre",
-    image: barometreCover,
-    overlayImage: barometreEnR,
-  },
-  {
-    id: "raja-club-athletic",
-    filter: "veille-sport",
-    category: "Veille Sport",
-    date: "Juil. 2026 - Mars 2027",
-    title: "Raja Club Athletic : la veille comme bouclier institutionnel",
-    summary:
-      "Comment le premier club de football marocain a transformé la pression médiatique en avantage décisionnel grâce à une cellule de veille souveraine. Période : Juil. 2026 - Mars 2027.",
-    href: "/Cas_client_RCA_v2.html",
-    image: rcaGradins,
-    overlayImage: rcaEquipe,
-  },
-];
-
 const InsightsResources = () => {
+  const { t, lang } = useLanguage();
   const [active, setActive] = useState<Filter>("all");
   const [email, setEmail] = useState("");
   const [formOpen, setFormOpen] = useState(false);
+
+  const FILTERS: { value: Filter; label: string }[] = [
+    { value: "all", label: t("Tous", "All") },
+    { value: "barometre", label: t("Baromètre", "Barometer") },
+    { value: "veille-sport", label: t("Veille Sport", "Sports Intelligence") },
+    { value: "intelligence-economique", label: t("Intelligence Économique", "Economic Intelligence") },
+    { value: "nation-branding", label: "Nation Branding" },
+    { value: "threat-intelligence", label: "Threat Intelligence" },
+  ];
+
+  const CARDS: Card[] = [
+    {
+      id: "barometre-sep-2025",
+      filter: "barometre",
+      category: t("Baromètre", "Barometer"),
+      date: "Sep 2025",
+      title: t("Baromètre d'Investissement — Sep 2025", "Investment Barometer — Sep 2025"),
+      summary: t(
+        "Vietnam, Afrique du Sud, Mexique… Le Maroc peut-il rivaliser ? 9 secteurs, 24 600 données, 18 pays concurrents analysés sur 31 jours d'observation continue.",
+        "Vietnam, South Africa, Mexico… Can Morocco compete? 9 sectors, 24,600 data points, 18 competing countries analyzed over 31 days of continuous observation."
+      ),
+      href: "/barometre",
+      image: barometreCover,
+      overlayImage: barometreEnR,
+    },
+    {
+      id: "raja-club-athletic",
+      filter: "veille-sport",
+      category: t("Veille Sport", "Sports Intelligence"),
+      date: t("Juil. 2026 - Mars 2027", "Jul. 2026 - Mar. 2027"),
+      title: t(
+        "Raja Club Athletic : la veille comme bouclier institutionnel",
+        "Raja Club Athletic: intelligence as an institutional shield"
+      ),
+      summary: t(
+        "Comment le premier club de football marocain a transformé la pression médiatique en avantage décisionnel grâce à une cellule de veille souveraine. Période : Juil. 2026 - Mars 2027.",
+        "How Morocco's leading football club turned media pressure into a decision-making advantage through a sovereign intelligence unit. Period: Jul. 2026 - Mar. 2027."
+      ),
+      href: lang === "en" ? "/Cas_client_RCA_v2-en.html" : "/Cas_client_RCA_v2.html",
+      image: rcaGradins,
+      overlayImage: rcaEquipe,
+    },
+  ];
 
   const visible = useMemo(
     () => (active === "all" ? CARDS : CARDS.filter((c) => c.filter === active)),
@@ -262,17 +271,20 @@ const InsightsResources = () => {
       `}</style>
 
       <section className="ir-hero">
-        <div className="ir-eyebrow">Intelligence · Ressources · Analyses</div>
+        <div className="ir-eyebrow">{t("Intelligence · Ressources · Analyses", "Intelligence · Resources · Analysis")}</div>
         <h1 className="ir-title">
           Insights & <em>Resources</em>
         </h1>
         <p className="ir-chapeau">
-          Décryptages stratégiques, baromètres d'investissement et analyses de compétitivité pour décider avant les autres.
+          {t(
+            "Décryptages stratégiques, baromètres d'investissement et analyses de compétitivité pour décider avant les autres.",
+            "Strategic insights, investment barometers and competitiveness analyses to decide ahead of the others."
+          )}
         </p>
       </section>
 
-      <section className="ir-filters" aria-label="Filtres thématiques">
-        <span className="ir-filter-label">Thématique</span>
+      <section className="ir-filters" aria-label={t("Filtres thématiques", "Thematic filters")}>
+        <span className="ir-filter-label">{t("Thématique", "Theme")}</span>
         {FILTERS.map((f) => (
           <button
             key={f.value}
@@ -347,7 +359,7 @@ const InsightsResources = () => {
                   className="ir-learn-more"
                   onClick={(e) => { e.stopPropagation(); openCard(card); }}
                 >
-                  Learn more →
+                  {t("En savoir plus", "Learn more")} →
                 </button>
               </div>
             </div>
@@ -357,17 +369,17 @@ const InsightsResources = () => {
 
       <section className="ir-newsletter">
         <div className="ir-newsletter-inner">
-          <div className="ir-news-eyebrow">Newsletter · Baromètre</div>
-          <h2 className="ir-news-title">Recevez le prochain Baromètre en avant-première</h2>
+          <div className="ir-news-eyebrow">{t("Newsletter · Baromètre", "Newsletter · Barometer")}</div>
+          <h2 className="ir-news-title">{t("Recevez le prochain Baromètre en avant-première", "Receive the next Barometer in preview")}</h2>
           <p className="ir-news-sub">
-            Décryptages exclusifs et analyses concurrentielles.
+            {t("Décryptages exclusifs et analyses concurrentielles.", "Exclusive insights and competitive analyses.")}
           </p>
           <form
             className="ir-news-form"
             onSubmit={(e) => {
               e.preventDefault();
               if (!email) return;
-              alert("Merci ! Votre inscription a bien été prise en compte.");
+              alert(t("Merci ! Votre inscription a bien été prise en compte.", "Thank you! Your subscription has been registered."));
               setEmail("");
             }}
           >
@@ -376,15 +388,15 @@ const InsightsResources = () => {
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="votre.email@exemple.com"
+              placeholder={t("votre.email@exemple.com", "your.email@example.com")}
               className="ir-news-input"
-              aria-label="Adresse e-mail"
+              aria-label={t("Adresse e-mail", "Email address")}
             />
             <button type="submit" className="ir-btn-gold">
-              Je m'inscris →
+              {t("Je m'inscris", "Subscribe")} →
             </button>
           </form>
-          <p className="ir-news-note">Aucun spam · Données protégées · Désabonnement en 1 clic</p>
+          <p className="ir-news-note">{t("Aucun spam · Données protégées · Désabonnement en 1 clic", "No spam · Protected data · One-click unsubscribe")}</p>
         </div>
       </section>
 
