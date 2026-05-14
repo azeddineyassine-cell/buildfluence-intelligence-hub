@@ -2127,7 +2127,7 @@ const HealthCaseFile = () => {
     />
     <CaseStats stats={[{ value: <><span>&lt;2</span><Unit>h</Unit></>, label: "Activation War Room" }, { value: <><span>14</span><Unit>j</Unit></>, label: "Crise maîtrisée" }, { value: <><span>+38</span><Unit>%</Unit></>, label: "Image digitale Ministre" }, { value: "1", label: "Cabinet accompagné" }]} />
     <MissionTimeline
-      title="Déroulé de la War Room"
+      title={lang === "en" ? "War Room Workflow" : "Déroulé de la War Room"}
       items={[
         {
           date: "H+0",
@@ -2178,7 +2178,8 @@ const HealthCaseFile = () => {
       ]}
     />
   </CaseFileSection>
-);
+  );
+};
 
 const CaseFileStyles = () => (
   <style>{`
