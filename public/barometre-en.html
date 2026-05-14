@@ -1,0 +1,1430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Investment Barometer - Buildfluence</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400;1,700&family=Cormorant+Garamond:ital,wght@1,400;1,500&family=JetBrains+Mono:wght@400;500;600;700&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.47.0/tabler-icons.min.css">
+<style>
+:root{
+  --paper:#FAF6ED;--paper-alt:#F2EDD8;--ink:#1a1410;--ink-mid:#3d3226;
+  --ink-light:#6b5c48;--ink-faint:#a89880;--rule:#D9CFBC;
+  --gold:#B8932A;--gold-light:#D4A83A;--gold-pale:#F5E8C0;
+  --navy:#0D1B2A;--navy-mid:#1a2d44;--navy-light:#24394f;
+  --teal:#1a6b5c;--blue:#1a4a7a;--alert:#C0392B;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font-family:'DM Sans',sans-serif;font-size:16px;line-height:1.7;overflow-x:hidden}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:300;background:rgba(250,246,237,.97);backdrop-filter:blur(12px);border-bottom:1px solid var(--rule);height:56px;display:flex;align-items:center;justify-content:space-between;padding:0 48px}
+.nav-brand{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--ink)}
+.nav-brand span{color:var(--gold)}
+.nav-links{display:flex;gap:28px}
+.nav-link{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-faint);text-decoration:none;transition:color .2s}
+.nav-link:hover{color:var(--gold)}
+.nav-cta{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--paper);background:var(--navy);padding:9px 20px;border:none;cursor:pointer;text-decoration:none;border-radius:2px;transition:background .2s}
+.nav-cta:hover{background:var(--navy-mid)}
+#prog{position:fixed;top:56px;left:0;right:0;z-index:299;height:2px;background:var(--rule)}
+#prog-fill{height:100%;width:0%;background:var(--gold);transition:width .08s}
+
+/* LAYOUT */
+.wrap{max-width:1080px;margin:0 auto;padding:0 48px}
+.section{padding:80px 0;border-top:1px solid var(--rule)}
+.section.alt{background:var(--paper-alt)}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.eyebrow::before{content:'';display:block;width:24px;height:1px;background:var(--gold)}
+.section-title{font-family:'Playfair Display',serif;font-size:clamp(28px,4vw,46px);font-weight:700;line-height:1.1;color:var(--ink);margin-bottom:12px}
+.section-title em{font-style:italic;color:var(--gold)}
+.section-lead{font-family:'Cormorant Garamond',serif;font-size:19px;font-style:italic;color:var(--ink-light);max-width:620px;line-height:1.55;margin-bottom:48px}
+.divider{width:100%;height:1px;background:var(--rule);margin:32px 0}
+
+/* BUTTONS */
+.btn{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;padding:13px 28px;border-radius:2px;cursor:pointer;text-decoration:none;display:inline-block;transition:all .2s;border:none}
+.btn-dark{color:var(--paper);background:var(--navy)}.btn-dark:hover{background:var(--navy-mid);transform:translateY(-2px)}
+.btn-outline{color:var(--ink);background:transparent;border:1px solid var(--ink-light)}.btn-outline:hover{border-color:var(--ink);transform:translateY(-2px)}
+.btn-gold{color:var(--navy);background:var(--gold-light)}.btn-gold:hover{background:#e0c055;transform:translateY(-2px)}
+
+/* FADE IN */
+.fi{opacity:0;transform:translateY(14px);transition:opacity .65s ease,transform .65s ease}
+.fi.in{opacity:1;transform:translateY(0)}
+.fi2{opacity:0;transform:translateY(14px);transition:opacity .65s ease .15s,transform .65s ease .15s}
+.fi2.in{opacity:1;transform:translateY(0)}
+.fi3{opacity:0;transform:translateY(14px);transition:opacity .65s ease .3s,transform .65s ease .3s}
+.fi3.in{opacity:1;transform:translateY(0)}
+
+/* SIDE DOTS */
+.side-nav{position:fixed;right:20px;top:50%;transform:translateY(-50%);z-index:200;display:flex;flex-direction:column;gap:10px}
+.side-dot{width:7px;height:7px;border-radius:50%;background:var(--rule);cursor:pointer;transition:background .3s,transform .3s;border:none;padding:0}
+.side-dot.active{background:var(--gold);transform:scale(1.5)}
+
+/* HERO */
+.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--rule);padding-top:56px}
+.hero-left{padding:80px 56px 80px 80px;border-right:1px solid var(--rule);display:flex;flex-direction:column;justify-content:center}
+.hero-right{display:grid;grid-template-columns:1fr 1fr}
+.hero-stat{padding:36px 28px;border-bottom:1px solid var(--rule);border-right:1px solid var(--rule)}
+.hero-stat:nth-child(2n){border-right:none}
+.hero-stat:nth-child(3),.hero-stat:nth-child(4){border-bottom:none}
+.hs-num{font-family:'Playfair Display',serif;font-size:48px;font-weight:900;font-style:italic;color:var(--gold);line-height:1;display:block}
+.hs-lbl{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-faint);margin-top:4px;display:block}
+.hs-sub{font-size:12px;color:var(--ink-light);margin-top:6px;line-height:1.4}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(40px,5vw,72px);font-weight:900;line-height:1.0;letter-spacing:-.02em;color:var(--ink);margin-bottom:20px}
+.hero h1 em{font-style:italic;color:var(--gold)}
+.hero-sub{font-family:'Cormorant Garamond',serif;font-size:clamp(16px,1.8vw,20px);font-style:italic;color:var(--ink-light);line-height:1.5;margin-bottom:36px}
+.hero-ctas{display:flex;gap:12px;flex-wrap:wrap}
+
+/* CONSTAT */
+.constat-pair{display:grid;grid-template-columns:1fr 1fr;overflow:hidden;margin-bottom:32px;position:relative;border:1px solid var(--rule);border-radius:2px}
+.cp-panel{padding:48px 44px}
+.cp-dim{background:#f4efe5}
+.cp-lit{background:var(--navy);color:white}
+.cp-label{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;letter-spacing:.28em;text-transform:uppercase;margin-bottom:20px;display:block}
+.cp-dim .cp-label{color:var(--ink-faint)}.cp-lit .cp-label{color:rgba(201,168,76,.7)}
+.cp-rank{font-family:'Playfair Display',serif;font-size:96px;font-weight:900;font-style:italic;line-height:1;display:block;margin-bottom:6px}
+.cp-dim .cp-rank{color:var(--rule)}.cp-lit .cp-rank{color:var(--gold-light)}
+.cp-method{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.14em;display:block;margin-bottom:12px}
+.cp-dim .cp-method{color:var(--ink-faint)}.cp-lit .cp-method{color:rgba(245,241,232,.4)}
+.cp-desc{font-size:14px;line-height:1.65}
+.cp-dim .cp-desc{color:var(--ink-light)}.cp-lit .cp-desc{color:rgba(245,241,232,.65)}
+.cp-badge{display:inline-block;margin-top:16px;padding:6px 14px;border-radius:2px;font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;letter-spacing:.18em;text-transform:uppercase}
+.cp-dim .cp-badge{background:#ede7d6;color:var(--ink-faint)}.cp-lit .cp-badge{background:rgba(201,168,76,.15);color:var(--gold-light);border:1px solid rgba(201,168,76,.3)}
+.vs-pill{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:white;border:1px solid var(--rule);border-radius:50%;width:44px;height:44px;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:12px;font-style:italic;color:var(--ink-mid);box-shadow:0 2px 10px rgba(0,0,0,.1);z-index:2}
+.punch{background:var(--navy);color:white;padding:44px 52px;border-radius:2px;position:relative;overflow:hidden}
+.punch::before{content:'\201C';font-family:'Playfair Display',serif;font-size:180px;font-weight:900;font-style:italic;color:rgba(201,168,76,.06);position:absolute;top:-30px;left:16px;line-height:1}
+.punch-text{font-family:'Cormorant Garamond',serif;font-size:clamp(18px,2.2vw,25px);font-style:italic;color:rgba(245,241,232,.85);line-height:1.5;max-width:680px;position:relative;z-index:1}
+.punch-text strong{color:var(--gold-light);font-style:normal}
+
+/* TABBED COMPONENT */
+.tab-bar{display:flex;gap:2px;margin-bottom:0;border-bottom:2px solid var(--rule)}
+.tab-btn{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;padding:12px 20px;border:none;background:transparent;color:var(--ink-faint);cursor:pointer;transition:all .2s;border-bottom:2px solid transparent;margin-bottom:-2px}
+.tab-btn:hover{color:var(--gold)}
+.tab-btn.active{color:var(--gold);border-bottom-color:var(--gold)}
+.tab-panel{display:none;padding-top:32px}.tab-panel.active{display:block}
+
+/* GEO MAP */
+#world-map{width:100%;height:400px;background:#ede8da;border:1px solid var(--rule);border-radius:2px;overflow:hidden;position:relative;cursor:crosshair}
+.map-tt{position:absolute;background:var(--navy);color:white;padding:10px 14px;border-radius:2px;font-size:12px;pointer-events:none;opacity:0;transition:opacity .15s;z-index:10;min-width:160px;max-width:220px}
+.map-tt strong{color:var(--gold-light);display:block;margin-bottom:3px;font-size:13px}
+.map-tt .tt-cat{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.15em;text-transform:uppercase;margin-bottom:3px;color:rgba(245,241,232,.5)}
+.geo-legend{display:flex;gap:20px;flex-wrap:wrap;margin-bottom:16px}
+.gl-item{display:flex;align-items:center;gap:7px;font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--ink-mid);letter-spacing:.1em}
+.gl-dot{width:10px;height:10px;border-radius:2px;flex-shrink:0}
+
+/* SECTEURS GRID */
+.secteurs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:28px}
+.sc{background:white;border:1px solid var(--rule);border-radius:2px;padding:14px 18px;display:flex;align-items:center;gap:12px;transition:border-color .2s}
+.sc:hover{border-color:var(--gold)}
+.sc-badge{font-family:'JetBrains Mono',monospace;font-size:8px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:3px 8px;border-radius:2px;margin-left:auto;flex-shrink:0;align-self:center}
+.sc-leader{background:#faeeda;color:#854f0b}
+.sc-fort{background:#e1f5ee;color:#0f6e56}
+.sc-moyen{background:#e6f1fb;color:#185fa5}
+.sc-alert{background:#fcebeb;color:#a32d2d}
+.sc{display:flex;align-items:center;gap:12px;cursor:pointer}
+
+/* HORIZONTAL TIMELINE */
+.tl-horiz{margin-top:8px}
+.tl-rail{position:relative;padding:0 0 40px;margin-bottom:0}
+.tl-rail-fill{position:absolute;top:24px;left:12%;right:12%;height:2px;background:var(--rule);z-index:0}
+.tl-nodes{display:flex;justify-content:space-between;align-items:flex-start;position:relative;z-index:1}
+.tl-node{display:flex;flex-direction:column;align-items:center;width:22%;cursor:pointer;gap:8px;padding:0 8px}
+.tl-node-dot{width:16px;height:16px;border-radius:50%;background:var(--rule);border:2px solid white;box-shadow:0 0 0 2px var(--rule);transition:all .25s;flex-shrink:0}
+.tl-node.active .tl-node-dot{background:var(--gold);box-shadow:0 0 0 3px rgba(184,147,42,.25)}
+.tl-node:hover .tl-node-dot{background:var(--gold-light)}
+.tl-node-num{font-family:'Playfair Display',serif;font-size:28px;font-weight:900;font-style:italic;color:var(--rule);line-height:1;transition:color .25s;text-align:center}
+.tl-node.active .tl-node-num{color:var(--gold)}
+.tl-node-title{font-family:'Playfair Display',serif;font-size:14px;font-weight:700;color:var(--ink-faint);text-align:center;line-height:1.25;transition:color .25s}
+.tl-node-title em{font-style:italic;color:var(--gold);opacity:0}
+.tl-node.active .tl-node-title{color:var(--ink)}
+.tl-node.active .tl-node-title em{opacity:1}
+.tl-panels{position:relative;min-height:320px}
+.tl-panel{display:none}
+.tl-panel.active{display:block;animation:panelIn .35s ease}
+@keyframes panelIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.tlp-inner{background:white;border:1px solid var(--rule);border-radius:2px;padding:36px 40px;display:grid;grid-template-columns:1fr auto;gap:24px;align-items:start}
+.tlp-tag{grid-column:1/-1;font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:2px}
+.tlp-title{grid-column:1;font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--ink);line-height:1.2;margin-bottom:10px}
+.tlp-title em{font-style:italic;color:var(--gold)}
+.tlp-lead{grid-column:1;font-size:14px;color:var(--ink-light);line-height:1.7;margin-bottom:16px}
+.tlp-items{grid-column:1;list-style:none}
+.tlp-items li{font-size:13px;color:var(--ink-light);padding:5px 0 5px 16px;position:relative;border-bottom:1px solid rgba(0,0,0,.05);line-height:1.5}
+.tlp-items li:last-child{border-bottom:none}
+.tlp-items li::before{content:'>';position:absolute;left:0;color:var(--gold);font-size:10px;font-family:'JetBrains Mono',monospace;top:7px}
+.tlp-kpi{grid-row:2/-1;grid-column:2;text-align:center;padding:20px 24px;background:rgba(184,147,42,.06);border:1px solid rgba(184,147,42,.15);border-radius:2px;align-self:start;min-width:120px}
+.tlp-kpi-num{font-family:'Playfair Display',serif;font-size:32px;font-weight:900;font-style:italic;color:var(--gold);display:block;line-height:1;margin-bottom:6px}
+.tlp-kpi-lbl{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-faint);display:block;line-height:1.4}
+.sc-icon{font-size:20px;flex-shrink:0}
+.sc-name{font-size:13px;font-weight:600;color:var(--ink)}
+.sc-sub{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--ink-faint);letter-spacing:.08em;margin-top:2px}
+
+/* RANKING */
+.ranking-table{width:100%;border-collapse:collapse;margin-bottom:36px}
+.ranking-table tr{border-bottom:1px solid var(--rule);transition:background .15s}
+.ranking-table tr:hover{background:rgba(184,147,42,.04)}
+.ranking-table td{padding:16px 14px;vertical-align:middle}
+.rt-rank{font-family:'Playfair Display',serif;font-size:18px;font-weight:900;font-style:italic;color:var(--gold);width:44px}
+.rt-flag{font-size:20px;width:32px}
+.rt-name{font-size:14px;font-weight:700;color:var(--ink)}
+.rt-tag{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--ink-faint);letter-spacing:.08em;margin-top:2px}
+.rt-bar-wrap{display:flex;align-items:center;gap:10px}
+.rt-bar-track{flex:1;height:4px;background:var(--paper-alt);border-radius:1px;overflow:hidden}
+.rt-bar-fill{height:100%;border-radius:1px;width:0%;transition:width 1.2s cubic-bezier(.16,1,.3,1)}
+.rt-score{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;color:var(--ink-mid);width:90px;text-align:right}
+.rt-score small{font-size:9px;color:var(--ink-faint)}
+.maroc-row{background:rgba(184,147,42,.05)}
+.maroc-pillars{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;padding:16px 0 20px}
+.mp{background:white;border:1px solid var(--rule);border-radius:2px;padding:18px 14px;text-align:center}
+.mp-rank{font-family:'Playfair Display',serif;font-size:30px;font-weight:900;font-style:italic;color:var(--gold);line-height:1;display:block}
+.mp-sector{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-faint);margin-top:3px;display:block}
+
+/* CHARTS */
+.chart-wrap{position:relative;width:100%;height:300px;margin-bottom:32px}
+.chart-wrap.tall{height:360px}
+.sector-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px}
+.sector-tab{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;padding:6px 14px;border:1px solid var(--rule);background:transparent;color:var(--ink-faint);cursor:pointer;border-radius:2px;transition:all .2s}
+.sector-tab:hover,.sector-tab.active{border-color:var(--gold);color:var(--gold);background:rgba(184,147,42,.05)}
+.kpi-row{display:flex;gap:36px;flex-wrap:wrap;margin-bottom:36px}
+.kpi{text-align:center}
+.kpi-num{font-family:'Playfair Display',serif;font-size:44px;font-weight:900;font-style:italic;color:var(--gold);line-height:1;display:block}
+.kpi-lbl{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-faint);margin-top:3px;display:block}
+
+/* BOUSSOLE */
+.boussole-grid{display:grid;grid-template-columns:380px 1fr;gap:48px;align-items:start}
+.bviz{background:white;border:1px solid var(--rule);border-radius:2px;padding:24px}
+.bviz canvas{display:block}
+.b-insights{display:flex;flex-direction:column;gap:16px}
+.bi{background:white;border:1px solid var(--rule);border-radius:2px;padding:20px 22px}
+.bi-kicker{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;letter-spacing:.2em;color:var(--gold);margin-bottom:6px;display:block;text-transform:uppercase}
+.bi-title{font-size:14px;font-weight:700;color:var(--ink);margin-bottom:6px}
+.bi-text{font-size:13px;color:var(--ink-light);line-height:1.6}
+.criteria{list-style:none;margin-top:12px}
+.criteria li{display:flex;gap:10px;padding:9px 0;border-bottom:1px solid var(--rule);font-size:13px;color:var(--ink-light);align-items:baseline}
+.criteria li:last-child{border-bottom:none}
+.crit-n{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;color:var(--gold);flex-shrink:0;min-width:20px}
+
+/* JEUX D'INFLUENCE */
+.pays-tabs{display:flex;gap:2px;margin-bottom:0;border-bottom:2px solid var(--rule)}
+.pays-tab{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:12px 22px;border:none;background:transparent;color:var(--ink-faint);cursor:pointer;transition:all .2s;border-bottom:2px solid transparent;margin-bottom:-2px}
+.pays-tab:hover{color:var(--gold)}.pays-tab.active{color:var(--gold);border-bottom-color:var(--gold)}
+.pays-panel{display:none;padding-top:32px}.pays-panel.active{display:block}
+.adv-grid2{display:grid;grid-template-columns:1fr 1fr;gap:36px}
+.adv-score{font-family:'Playfair Display',serif;font-size:56px;font-weight:900;font-style:italic;color:var(--navy);line-height:1;display:block}
+.adv-score-lbl{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-faint);display:block;margin-bottom:20px}
+.adv-item{display:flex;gap:12px;padding:11px 0}
+.adv-item:last-of-type{border-bottom:none}
+.adv-bullet{width:5px;height:5px;border-radius:50%;background:var(--gold);margin-top:8px;flex-shrink:0}
+.adv-text{font-size:14px;color:var(--ink-light);line-height:1.6}
+.adv-text strong{color:var(--ink);font-weight:600}
+.adv-list{list-style:disc;margin:0;padding:0 0 0 16px;color:var(--ink-light)}
+.adv-list li{font-size:14px;color:var(--ink-light);line-height:1.6;padding:8px 0;background:transparent;opacity:1;visibility:visible}
+.adv-list li::marker{color:var(--gold);font-size:11px}
+.adv-list strong{color:var(--ink);font-weight:600}
+.adv-warn{background:#fdf6f5;border:1px solid #e8c5c0;border-left:3px solid var(--alert);border-radius:2px;padding:14px 18px;margin-top:18px}
+.aw-label{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--alert);margin-bottom:5px;display:block}
+.aw-text{font-size:13px;color:#7a3028;line-height:1.55}
+.vs-box{background:white;border:1px solid var(--rule);border-radius:2px;padding:28px 32px;margin-bottom:28px}
+.vs-box-title{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:var(--ink);margin-bottom:10px}
+.vs-box-title em{font-style:italic;color:var(--gold)}
+.vs-box-text{font-size:14px;color:var(--ink-light);line-height:1.7;max-width:680px}
+.tl{display:flex;flex-direction:column;border-left:2px solid var(--rule);margin-left:10px;padding-left:20px}
+.tl-item{position:relative;padding-bottom:20px}
+.tl-dot{position:absolute;left:-28px;top:5px;width:9px;height:9px;border-radius:50%;background:var(--gold);border:2px solid var(--paper-alt)}
+.tl-date{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;letter-spacing:.12em;color:var(--gold);margin-bottom:3px;display:block}
+.tl-text{font-size:13px;color:var(--ink-light);line-height:1.55}
+.tl-text strong{color:var(--ink)}
+.bf-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.bf-card{background:white;border:1px solid var(--rule);border-radius:2px;padding:18px 16px}
+.bf-card-title{font-size:13px;font-weight:700;color:var(--ink);margin-bottom:5px}
+.bf-card-text{font-size:12px;color:var(--ink-faint);line-height:1.5}
+
+/* PODIUM */
+.podium-vis{display:flex;align-items:flex-end;justify-content:center;gap:2px;height:220px;margin-bottom:28px}
+.pod{display:flex;flex-direction:column;align-items:center;cursor:default;transition:transform .2s}
+.pod:hover{transform:translateY(-3px)}
+.pod-block{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;padding:14px 10px 10px;border-radius:2px 2px 0 0;width:150px}
+.pod-flag{font-size:22px;margin-bottom:5px}
+.pod-name{font-family:'JetBrains Mono',monospace;font-size:8px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.85);text-align:center;line-height:1.4}
+.pod-score{font-family:'Playfair Display',serif;font-size:16px;font-weight:900;font-style:italic;color:rgba(255,255,255,.6);margin-top:3px}
+.pod-base{text-align:center;padding:6px 0}
+.pod-rank{font-family:'Playfair Display',serif;font-size:32px;font-weight:900;font-style:italic;color:var(--gold)}
+.podium-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:28px}
+.pc{background:white;border:1px solid var(--rule);border-radius:2px;padding:20px}
+.pc-title{font-size:13px;font-weight:700;color:var(--ink);margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.pc-items{list-style:none}
+.pc-items li{font-size:12px;color:var(--ink-light);padding:4px 0;border-bottom:1px solid rgba(0,0,0,.05);line-height:1.4}
+.pc-items li:last-child{border-bottom:none}
+
+/* TAG CLOUD */
+.tag-wrap{background:white;border:1px solid var(--rule);border-radius:2px;padding:28px;margin-bottom:28px}
+.tag-cloud{width:100%;height:340px;position:relative;overflow:hidden}
+.tag-item{position:absolute;cursor:default;font-weight:500;border-radius:10px;padding:3px 9px;transition:transform .25s;white-space:nowrap}
+.tag-item:hover{transform:scale(1.12);z-index:10}
+.tag-key{font-size:18px;font-family:'Playfair Display',serif;font-weight:700;background:rgba(184,147,42,.15);color:var(--gold)}
+.tag-l1{font-size:13px;background:#e6f1fb;color:#185fa5}
+.tag-l2{font-size:11px;background:#e1f5ee;color:#0f6e56}
+.tag-l3{font-size:10px;background:#faeeda;color:#854f0b}
+.tag-l4{font-size:10px;background:#f1efe8;color:#5f5e5a}
+.tag-insight{background:var(--paper-alt);border-left:3px solid var(--gold);padding:18px 22px;font-size:14px;color:var(--ink-light);line-height:1.7}
+.tag-insight strong{color:var(--ink)}
+
+/* LEVIERS */
+.leviers{display:flex;flex-direction:column}
+.levier{display:grid;grid-template-columns:56px 260px 1fr;gap:36px;padding:32px 0;border-top:1px solid var(--rule);align-items:start;transition:background .15s}
+.levier:last-child{border-bottom:1px solid var(--rule)}
+.levier:hover{background:rgba(184,147,42,.02)}
+.lv-num{font-family:'Playfair Display',serif;font-size:48px;font-weight:900;font-style:italic;color:var(--gold-pale);line-height:1}
+.lv-tag{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:6px;display:block}
+.lv-title{font-family:'Playfair Display',serif;font-size:19px;font-weight:700;color:var(--ink);line-height:1.2}
+.lv-title em{font-style:italic;color:var(--gold)}
+.lv-items{list-style:none}
+.lv-items li{font-size:14px;color:var(--ink-light);padding:5px 0 5px 16px;position:relative;border-bottom:1px solid rgba(0,0,0,.05);line-height:1.5}
+.lv-items li:last-child{border-bottom:none}
+.lv-items li::before{content:'>';position:absolute;left:0;color:var(--gold);font-size:11px;font-family:'JetBrains Mono',monospace;top:7px}
+
+/* CTA - Buildfluence services */
+.cta-section{background:var(--navy);padding:90px 0}
+.cta-quote{font-family:'Cormorant Garamond',serif;font-size:clamp(19px,2.6vw,30px);font-style:italic;color:rgba(245,241,232,.7);line-height:1.5;max-width:720px;margin:0 auto 56px;text-align:center}
+.cta-quote strong{color:white;font-style:normal}
+.services-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:rgba(245,241,232,.08);margin-bottom:48px}
+.svc{background:var(--navy-mid);padding:28px 20px;transition:background .2s;text-align:left}
+.svc:hover{background:var(--navy-light)}
+.svc-icon{font-size:20px;margin-bottom:12px;display:block}
+.svc-title{font-size:14px;font-weight:700;color:white;margin-bottom:6px}
+.svc-desc{font-size:12px;color:rgba(245,241,232,.45);line-height:1.5;margin-bottom:12px}
+.svc-items{list-style:none}
+.svc-items li{font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(201,168,76,.6);letter-spacing:.08em;padding:2px 0}
+.svc-items li::before{content:'> ';opacity:.5}
+.cta-bottom{text-align:center}
+.cta-contact{font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(245,241,232,.3);letter-spacing:.1em;margin-top:16px}
+.cta-contact a{color:rgba(201,168,76,.6);text-decoration:none}
+.cta-contact a:hover{color:var(--gold-light)}
+.cta-clients{display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;margin-bottom:40px}
+.cta-client-label{font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(245,241,232,.3);letter-spacing:.15em;text-transform:uppercase;width:100%;text-align:center;margin-bottom:8px}
+.cta-client-chip{background:rgba(245,241,232,.07);border:1px solid rgba(245,241,232,.1);border-radius:2px;padding:5px 12px;font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(245,241,232,.4);letter-spacing:.08em}
+
+footer{background:#08111c;padding:24px 48px;display:flex;justify-content:space-between;align-items:center}
+.fb{font-family:'Playfair Display',serif;font-size:14px;font-weight:700;color:rgba(245,241,232,.3)}
+.fb span{color:rgba(201,168,76,.5)}
+.fc{font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(245,241,232,.2);letter-spacing:.12em}
+
+@media(max-width:860px){
+  nav .nav-links{display:none}
+  .hero{grid-template-columns:1fr}.hero-right{display:none}
+  .constat-pair{grid-template-columns:1fr}.vs-pill{display:none}
+  .wrap{padding:0 20px}
+  .secteurs-grid{grid-template-columns:1fr 1fr}
+  .maroc-pillars{grid-template-columns:1fr 1fr}
+  .boussole-grid{grid-template-columns:1fr}
+  .adv-grid2{grid-template-columns:1fr}
+  .levier{grid-template-columns:40px 1fr;grid-template-rows:auto auto}
+  .lv-items-col{grid-column:2}
+  .services-grid{grid-template-columns:1fr 1fr}
+  .podium-cards{grid-template-columns:1fr}
+}
+.flourish-embed + div,
+a[href*="flourish"]{display:none!important}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-brand">Build<span>fluence</span></div>
+  <div class="nav-links">
+    <a href="#constat" class="nav-link">Finding</a>
+    <a href="#geo" class="nav-link">Environment</a>
+    <a href="#classement" class="nav-link">Ranking</a>
+    <a href="#influence" class="nav-link">Influence</a>
+    <a href="#leviers" class="nav-link">Recommendations</a>
+  </div>
+  <a href="#cta" class="nav-cta" id="nav-strategic-exchange">Strategic Exchange</a>
+</nav>
+<div id="prog"><div id="prog-fill"></div></div>
+
+<div class="side-nav" id="side-nav">
+  <button class="side-dot active" data-s="hero"></button>
+  <button class="side-dot" data-s="constat"></button>
+  <button class="side-dot" data-s="methodo"></button>
+  <button class="side-dot" data-s="geo"></button>
+  <button class="side-dot" data-s="classement"></button>
+  <button class="side-dot" data-s="secteurs"></button>
+  <button class="side-dot" data-s="boussole"></button>
+  <button class="side-dot" data-s="influence"></button>
+  <button class="side-dot" data-s="podium"></button>
+  <button class="side-dot" data-s="tags"></button>
+  <button class="side-dot" data-s="leviers"></button>
+  <button class="side-dot" data-s="cta"></button>
+</div>
+
+<!-- HERO -->
+<header class="hero" id="hero">
+  <div class="hero-left">
+    <div class="eyebrow" style="margin-bottom:18px">Sovereign Strategic Intelligence</div>
+    <div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--ink-faint);letter-spacing:.18em;text-transform:uppercase;margin-bottom:18px">2025.07.14 - 2025.08.14</div>
+    <h1>Investment<br><em>Barometer</em></h1>
+    <p class="hero-sub">Vietnam, South Africa, Mexico... Can Morocco compete? 9 sectors, one battle: attractiveness.</p>
+    <div class="hero-ctas">
+      <a href="#constat" class="btn btn-dark">Discover the analysis</a>
+      <a href="#cta" class="btn btn-outline">Full version (50p.)</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-stat"><span class="hs-num" id="c1">0</span><span class="hs-lbl">Mentions analyzed</span><p class="hs-sub">-5% vs. previous period</p></div>
+    <div class="hero-stat"><span class="hs-num" id="c2">0</span><span class="hs-lbl">Competing countries</span><p class="hs-sub">17 competitors + Morocco</p></div>
+    <div class="hero-stat"><span class="hs-num" id="c3">0</span><span class="hs-lbl">Strategic sectors</span><p class="hs-sub">AMDIE Charter</p></div>
+    <div class="hero-stat"><span class="hs-num" id="c4">0j</span><span class="hs-lbl">Real-time collection</span><p class="hs-sub">AI + Big Data + OSINT</p></div>
+  </div>
+</header>
+
+<!-- 01 FINDING -->
+<section class="section" id="constat">
+  <div class="wrap">
+    <div class="eyebrow fi">01 / Finding</div>
+    <h2 class="section-title fi">When data is <em>misleading</em></h2>
+    <p class="section-lead fi">Two methods, two radically different outcomes for the same country. The methodology changes everything.</p>
+    <div class="constat-pair fi">
+      <div class="cp-panel cp-dim">
+        <span class="cp-label">Raw Quantitative Analysis</span>
+        <span class="cp-rank">6<sup style="font-size:.38em">th</sup></span>
+        <span class="cp-method">Cumulative Competitiveness Index · 2,056 pts</span>
+        <p class="cp-desc">Sectoral aggregation weighted by volume of mentions. Superficial vision without qualitative depth. Ignores diversification and fine sectoral positioning.</p>
+        <span class="cp-badge">Incomplete Reading</span>
+      </div>
+      <div class="cp-panel cp-lit">
+        <div class="vs-pill">vs</div>
+        <span class="cp-label">Buildfluence Analysis - Global Heatmap</span>
+        <span class="cp-rank">2<sup style="font-size:.38em">nd</sup></span>
+        <span class="cp-method">Heatmap x Bubble Chart x Radial Analysis</span>
+        <p class="cp-desc">Integrates sectoral depth, diversification, and stability. Reveals Morocco as the world's #1 in aeronautics. The only African country with a portfolio comparable to global leaders.</p>
+        <span class="cp-badge">Strategic Truth</span>
+      </div>
+    </div>
+    <div class="punch fi2">
+      <p class="punch-text">"The difference between 6th and 2nd position? The answer is the objective of this study: <strong>strategic intelligence restores the truth.</strong>"</p>
+    </div>
+  </div>
+</section>
+
+<!-- 02 METHODOLOGY (TABS) -->
+<section class="section alt" id="methodo">
+  <div class="wrap">
+    <div class="eyebrow fi">02 / Methodology</div>
+    <h2 class="section-title fi">A <em>Strategic-Driven</em> Approach</h2>
+    <p class="section-lead fi">Five analytical axes combined with Economic Intelligence, AI, Big Data, and human intelligence.</p>
+    <div class="tab-bar fi" id="methodo-tabs">
+      <button class="tab-btn active" data-tab="m0">01 Sources</button>
+      <button class="tab-btn" data-tab="m1">02 Global Investment</button>
+      <button class="tab-btn" data-tab="m2">03 By Sector</button>
+      <button class="tab-btn" data-tab="m3">04 By Country</button>
+      <button class="tab-btn" data-tab="m4">05 Morocco's Positioning</button>
+    </div>
+    <div class="tab-panel active" id="m0">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px">
+        <div><div style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--ink);margin-bottom:12px">Sources <em style="font-style:italic;color:var(--gold)">& Collection</em></div><p style="font-size:14px;color:var(--ink-light);line-height:1.7">Period: 2025/07/14 to 2025/08/14. Language: English and French. Sources: Web, social networks, institutional websites, press, LinkedIn, broadcast, blogs. 24,600 pieces of data collected. Reliability guaranteed via NewsGuard Index and OSINT Fact-Checking module.</p></div>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <div style="background:white;border:1px solid var(--rule);border-radius:2px;padding:14px 18px"><div style="font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;color:var(--gold);letter-spacing:.15em;margin-bottom:4px">NEWSGUARD</div><div style="font-size:13px;color:var(--ink-light)">Global certification for news media reliability</div></div>
+          <div style="background:white;border:1px solid var(--rule);border-radius:2px;padding:14px 18px"><div style="font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;color:var(--gold);letter-spacing:.15em;margin-bottom:4px">OSINT FACT-CHECKING</div><div style="font-size:13px;color:var(--ink-light)">Fake news detection module for e-Reputation</div></div>
+          <div style="background:white;border:1px solid var(--rule);border-radius:2px;padding:14px 18px"><div style="font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;color:var(--gold);letter-spacing:.15em;margin-bottom:4px">BOOLEAN ENGINE</div><div style="font-size:13px;color:var(--ink-light)">Standardized queries for perfect and objective comparability</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="tab-panel" id="m1"><div style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--ink);margin-bottom:12px">Axis 1: <em style="font-style:italic;color:var(--gold)">Global Investment</em></div><p style="font-size:14px;color:var(--ink-light);line-height:1.7;max-width:680px">Daily monitoring of investment trends in competing countries across 9 strategic sectors. Objective: detect activity peaks, understand triggers, measure investor interest. Deliverable: Operational mapping of key players, new entrants, and emerging sectoral signals.</p></div>
+    <div class="tab-panel" id="m2"><div style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--ink);margin-bottom:12px">Axis 2: <em style="font-style:italic;color:var(--gold)">Investment by Sector</em></div><p style="font-size:14px;color:var(--ink-light);line-height:1.7;max-width:680px">Identify priority sectors among competitors. Locate attractive hubs and understand their drivers. Deliverable: Sectoral distribution rate + Comparative scoring by competitor country.</p></div>
+    <div class="tab-panel" id="m3"><div style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--ink);margin-bottom:12px">Axis 3 & 4: <em style="font-style:italic;color:var(--gold)">By Countries & Sectors by Competitors</em></div><p style="font-size:14px;color:var(--ink-light);line-height:1.7;max-width:680px">Competitive analysis of key competitiveness sectors. Highlight the sectoral strengths of each competitor. Deliverable: Ranking of leading sectors generating attractiveness + High criticality competitive trends and alerts.</p></div>
+    <div class="tab-panel" id="m4"><div style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--ink);margin-bottom:12px">Axis 5: <em style="font-style:italic;color:var(--gold)">Morocco's Positioning</em></div><p style="font-size:14px;color:var(--ink-light);line-height:1.7;max-width:680px">Evaluate Morocco's sectoral performance against each competitor. Exhaustive comparison and strategic ranking. Deliverable: Top 5 competitor rankings with identification of the 3 dominant sectors per country.</p></div>
+  </div>
+</section>
+
+<!-- 03 MAP + 9 SECTORS -->
+<section class="section" id="geo">
+  <div class="wrap">
+    <div class="eyebrow fi">03 / Morocco's Competitive Environment</div>
+    <h2 class="section-title fi">Competition, <em lang="en">Coopetition</em> & Morocco's Global Alliances</h2>
+    <p class="section-lead fi">The analytical framework is no longer limited to a binary duel. Between competitors and partners, a hybrid category emerges: Coopetitors.</p>
+    <div class="geo-legend fi">
+      <div class="gl-item"><span class="gl-dot" style="background:#22c55e"></span>Morocco</div>
+      <div class="gl-item"><span class="gl-dot" style="background:#ef4444"></span>17 Direct Competitors</div>
+      <div class="gl-item"><span class="gl-dot" style="background:#3b82f6"></span>11 Strategic Partners</div>
+      <div class="gl-item"><span class="gl-dot" style="background:#f59e0b"></span>Coopetitors</div>
+    </div>
+    <div id="world-map" class="fi">
+      <div class="map-tt" id="map-tt"><strong id="tt-n">Country</strong><div class="tt-cat" id="tt-c"></div><div id="tt-s" style="font-size:12px;color:rgba(245,241,232,.65);margin-top:3px"></div></div>
+    </div>
+    <div class="divider fi"></div>
+    <h3 class="fi" style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--ink);margin-bottom:20px">The <em style="font-style:italic;color:var(--gold)">9 Strategic Sectors</em> identified by AMDIE</h3>
+    <div class="secteurs-grid fi2" id="secteurs-grid">
+      <div class="sc sc-tt" data-rank="4th worldwide" data-score="335 mentions" data-detail="Consolidated automotive hub. Renault, Stellantis, BYD. Priority export to Europe."><span class="sc-icon">🚗</span><div><div class="sc-name">Automotive</div><div class="sc-sub">Regional Hub · Export to Europe</div></div><span class="sc-badge sc-fort">4th Worldwide</span></div>
+      <div class="sc sc-tt" data-rank="No. 1 worldwide" data-score="118 mentions" data-detail="Undisputed leader during the study period. Safran, Boeing, Airbus. Major African singularity."><span class="sc-icon">✈️</span><div><div class="sc-name">Aerospace</div><div class="sc-sub">No. 1 worldwide - study period</div></div><span class="sc-badge sc-leader">No. 1 Worldwide</span></div>
+      <div class="sc sc-tt" data-rank="Regional" data-score="102 mentions" data-detail="Regional competitor facing Tunisia and Bangladesh. Competitive workforce, EU proximity."><span class="sc-icon">👕</span><div><div class="sc-name">Textile</div><div class="sc-sub">EU Proximity · Workforce</div></div><span class="sc-badge sc-moyen">Regional</span></div>
+      <div class="sc sc-tt" data-rank="Strong potential" data-score="98 mentions" data-detail="Abundant natural resources. Developing Agritech. African market to seize."><span class="sc-icon">🌾</span><div><div class="sc-name">Agri-food</div><div class="sc-sub">Natural Resources · AgriTech</div></div><span class="sc-badge sc-moyen">Potential</span></div>
+      <div class="sc sc-tt" data-rank="Under-exploited" data-score="23 mentions" data-detail="Critical under-exploited sector. Mexico invests 643M USD. Strategic delay to urgently correct."><span class="sc-icon">💊</span><div><div class="sc-name">Pharma</div><div class="sc-sub">Under-exploited sector - alert</div></div><span class="sc-badge sc-alert">Alert</span></div>
+      <div class="sc sc-tt" data-rank="Nearshore Hub" data-score="31 mentions" data-detail="Nearshore Europe, bilingual, compatible time zones. Competitor facing Tunisia and Poland."><span class="sc-icon">📞</span><div><div class="sc-name">Outsourcing</div><div class="sc-sub">Nearshore Europe · Bilingual</div></div><span class="sc-badge sc-moyen">Nearshore</span></div>
+      <div class="sc sc-tt" data-rank="Critical delay" data-score="674 mentions" data-detail="Delay vs Vietnam (5519) and South Africa (5191). Major digital fragility. Urgent acceleration required."><span class="sc-icon">💻</span><div><div class="sc-name">Digital & Tech</div><div class="sc-sub">56.9% of global investment</div></div><span class="sc-badge sc-alert">Critical Delay</span></div>
+      <div class="sc sc-tt" data-rank="Potential" data-score="21 mentions" data-detail="Strategic Atlantic facade. Port infrastructures. Tanger Med as a major lever."><span class="sc-icon">⚓</span><div><div class="sc-name">Naval Industry</div><div class="sc-sub">Atlantic facade · Infrastructures</div></div><span class="sc-badge sc-moyen">Potential</span></div>
+      <div class="sc sc-tt" data-rank="3rd worldwide" data-score="654 mentions" data-detail="3rd global position. NMGP gas pipeline 25 Bn USD. Continental energy hub under construction."><span class="sc-icon">⚡</span><div><div class="sc-name">Renewable Energies</div><div class="sc-sub">3rd worldwide · NMGP Gas Pipeline 25 Bn$</div></div><span class="sc-badge sc-fort">3rd Worldwide</span></div>
+    </div>
+    <div id="sc-tooltip" style="display:none;position:fixed;z-index:500;background:white;border:1px solid var(--rule);border-radius:2px;padding:16px 20px;box-shadow:0 8px 28px rgba(0,0,0,.14);max-width:260px;pointer-events:none">
+      <div id="sc-tt-rank" style="font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:4px"></div>
+      <div id="sc-tt-score" style="font-family:'Playfair Display',serif;font-size:20px;font-weight:900;font-style:italic;color:var(--navy);line-height:1;margin-bottom:8px"></div>
+      <div id="sc-tt-detail" style="font-size:12px;color:var(--ink-light);line-height:1.5"></div>
+    </div>
+  </div>
+</section>
+
+<!-- 04 RANKING + BUBBLE CHART -->
+<section class="section alt" id="classement">
+  <div class="wrap">
+    <div class="eyebrow fi">04 / Leaders Mapping</div>
+    <h2 class="section-title fi">Cumulative <em lang="en">Competitiveness Index</em></h2>
+    <p class="section-lead fi">Quantitative ranking and what qualitative analysis further reveals.</p>
+    <table class="ranking-table fi" id="rank-table">
+      <tbody>
+        <tr><td class="rt-rank">01</td><td class="rt-flag">🇿🇦</td><td><div class="rt-name">South Africa</div><div class="rt-tag">Leader · 8 sectors · Butterfly Strategy</div></td><td><div class="rt-bar-wrap"><div class="rt-bar-track"><div class="rt-bar-fill" style="background:var(--gold)" data-w="100"></div></div></div></td><td class="rt-score">9,968<small> pts</small></td></tr>
+        <tr><td class="rt-rank">02</td><td class="rt-flag">🇻🇳</td><td><div class="rt-name">Vietnam</div><div class="rt-tag">Leader · Nation Branding 11 languages · Trade Vietnam</div></td><td><div class="rt-bar-wrap"><div class="rt-bar-track"><div class="rt-bar-fill" style="background:var(--navy)" data-w="92.6"></div></div></div></td><td class="rt-score">9,225<small> pts</small></td></tr>
+        <tr><td class="rt-rank">03</td><td class="rt-flag">🇲🇽</td><td><div class="rt-name">Mexico</div><div class="rt-tag">Leader · Auto + Pharma · Plan Mexico</div></td><td><div class="rt-bar-wrap"><div class="rt-bar-track"><div class="rt-bar-fill" style="background:var(--teal)" data-w="47.8"></div></div></div></td><td class="rt-score">4,761<small> pts</small></td></tr>
+        <tr><td class="rt-rank">04</td><td class="rt-flag">🇹🇭</td><td><div class="rt-name">Thailand</div><div class="rt-tag">Equilibrist · Auto + Digital + RE</div></td><td><div class="rt-bar-wrap"><div class="rt-bar-track"><div class="rt-bar-fill" style="background:#888" data-w="32.3"></div></div></div></td><td class="rt-score">3,218<small> pts</small></td></tr>
+        <tr><td class="rt-rank">05</td><td class="rt-flag">🇰🇪</td><td><div class="rt-name">Kenya</div><div class="rt-tag">Coopetitor · Digital + African RE</div></td><td><div class="rt-bar-wrap"><div class="rt-bar-track"><div class="rt-bar-fill" style="background:#888" data-w="25.1"></div></div></div></td><td class="rt-score">2,506<small> pts</small></td></tr>
+        <tr class="maroc-row"><td colspan="5" style="padding:0"><div style="padding:18px 14px 6px;display:flex;align-items:center;gap:14px"><span style="font-family:'Playfair Display',serif;font-size:18px;font-weight:900;font-style:italic;color:var(--gold)">06</span><span style="font-size:20px">🇲🇦</span><div><div class="rt-name" style="font-size:15px">Morocco - <em style="font-style:italic;color:var(--gold)">2nd rank by qualitative analysis</em></div><div class="rt-tag">Major Challenger · Only African country with a 7-sector portfolio comparable to leaders</div></div><div style="margin-left:auto;text-align:right"><div style="font-family:'Playfair Display',serif;font-size:26px;font-weight:900;font-style:italic;color:var(--navy)">2,056</div><div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--ink-faint);letter-spacing:.12em">quantitative pts</div></div></div><div class="maroc-pillars" style="padding:10px 14px 18px"><div class="mp"><span class="mp-rank">No. 1</span><span class="mp-sector">Aerospace · Global</span></div><div class="mp"><span class="mp-rank">3rd</span><span class="mp-sector">RE · Global</span></div><div class="mp"><span class="mp-rank">4th</span><span class="mp-sector">Automotive · Global</span></div><div class="mp"><span class="mp-rank" style="font-size:20px;color:var(--navy)">$25 Bn</span><span class="mp-sector">NMGP Gas Pipeline</span></div></div></td></tr>
+        <tr><td class="rt-rank" style="color:var(--ink-faint);font-size:15px">07</td><td class="rt-flag">🇪🇬</td><td><div class="rt-name">Egypt</div><div class="rt-tag">Coopetitor · Pharma + RE</div></td><td><div class="rt-bar-wrap"><div class="rt-bar-track"><div class="rt-bar-fill" style="background:#ccc" data-w="17.7"></div></div></div></td><td class="rt-score" style="color:var(--ink-faint)">1,764<small> pts</small></td></tr>
+      </tbody>
+    </table>
+
+    <!-- Bubble chart -->
+    <h3 class="fi" style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--ink);margin-bottom:6px">Bubble Chart - <em style="font-style:italic;color:var(--gold)">Qualitative Sectoral Attractiveness</em></h3>
+    <p class="fi2" style="font-size:13px;color:var(--ink-faint);margin-bottom:20px">Size = cumulative index · X-axis = number of sectors covered · Hover for details</p>
+    <div style="background:white;border:1px solid var(--rule);border-radius:2px;padding:20px" class="fi">
+      <div class="chart-wrap tall"><canvas id="bubbleChart" role="img" aria-label="Bubble chart country attractiveness">South Africa 9968pts, Vietnam 9225pts, Mexico 4761pts, Thailand 3218pts, Morocco 2056pts.</canvas></div>
+    </div>
+  </div>
+</section>
+
+<!-- 05 SECTORS -->
+<section class="section" id="secteurs">
+  <div class="wrap">
+    <div class="eyebrow fi">05 / Sectoral Scoring</div>
+    <h2 class="section-title fi">Digital dominates, <em lang="en">RE accelerates</em></h2>
+    <p class="section-lead fi">Three sectors capture 91% of global investments. Select a country to see its profile.</p>
+    <div class="kpi-row fi">
+      <div class="kpi"><span class="kpi-num">56.9%</span><span class="kpi-lbl">Digital</span></div>
+      <div class="kpi"><span class="kpi-num" style="color:var(--teal)">26%</span><span class="kpi-lbl">RE</span></div>
+      <div class="kpi"><span class="kpi-num" style="color:var(--blue)">8.4%</span><span class="kpi-lbl">Automotive</span></div>
+    </div>
+    <div class="sector-tabs fi" id="stabs">
+      <button class="sector-tab active" data-c="all">All</button>
+      <button class="sector-tab" data-c="sa">🇿🇦 South Africa</button>
+      <button class="sector-tab" data-c="vn">🇻🇳 Vietnam</button>
+      <button class="sector-tab" data-c="mx">🇲🇽 Mexico</button>
+      <button class="sector-tab" data-c="ma">🇲🇦 Morocco</button>
+      <button class="sector-tab" data-c="th">🇹🇭 Thailand</button>
+    </div>
+    <div class="chart-wrap fi2"><canvas id="sectorChart" role="img" aria-label="Bar chart investment scoring by sector">Digital 20877, RE 9536, Auto 3069, Agri-food 863, Textile 739, Pharma 660, Outsourcing 333, Naval 318, Aerospace 278.</canvas></div>
+  </div>
+</section>
+
+<!-- 06 Boussole -->
+<section class="section alt" id="boussole">
+  <div class="wrap">
+    <div class="eyebrow fi">06 / Investor Compass</div>
+    <h2 class="section-title fi">What <em lang="en">shapes</em> their decisions?</h2>
+    <p class="section-lead fi">Analysis of 5 entities: Location, Themes, Keywords, People, Organizations. Three determining criteria emerge.</p>
+    <div class="boussole-grid fi">
+      <div>
+        <div class="bviz" style="padding:0;position:relative;min-height:400px">
+          <div class="flourish-embed flourish-hierarchy" data-src="visualisation/25118657" style="min-height:400px;position:relative;">
+            <iframe src="https://flo.uri.sh/visualisation/25118657/embed" width="100%" height="400" frameborder="0" scrolling="no" style="display:block;width:100%;height:400px;" allowfullscreen></iframe>
+            <div style="position:absolute;bottom:0;right:0;width:100%;height:20px;background:#F2EDD8;z-index:9999;pointer-events:none;"></div>
+          </div>
+        </div>
+        <div style="margin-top:14px;padding:18px 20px;background:white;border:1px solid var(--rule);border-radius:2px"><p style="font-size:13px;color:var(--ink-light);line-height:1.6"><strong style="color:var(--ink)">Key Result:</strong> Investors are not just looking for promising sectors, but first and foremost for an <strong style="color:var(--ink)">attractive and stable country</strong>. The investment opportunity is never dissociated from the host country.</p></div>
+      </div>
+      <div class="b-insights">
+        <div class="bi">
+          <span class="bi-kicker">Key Insight</span>
+          <div class="bi-title">The Modern Attractiveness Equation</div>
+          <p class="bi-text">Strong convergence between "Countries" + "Investment" and "Investment Opportunities". Investors seek a country before a sector.</p>
+          <ul class="criteria">
+            <li><span class="crit-n">01</span><div><strong style="color:var(--ink)">Predictability:</strong> Political and regulatory stability, robust governance, administrative simplification</div></li>
+            <li><span class="crit-n">02</span><div><strong style="color:var(--ink)">Speed of Execution:</strong> Tax advantages, efficient one-stop-shop, free zones, post-investment monitoring</div></li>
+            <li><span class="crit-n">03</span><div><strong style="color:var(--ink)">Human Capital & Social Life:</strong> Infrastructures, quality of life, security, skilled human capital</div></li>
+          </ul>
+        </div>
+        <div class="bi">
+          <span class="bi-kicker">Strategic Implication</span>
+          <div class="bi-title">ESG + Digital + RE = Narrative Core</div>
+          <p class="bi-text">The recurrence of ESG shows its growing integration into attractiveness criteria. This axis must become the core of Morocco's competitiveness narrative.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 07 INFLUENCE STRATEGIES -->
+<section class="section" id="influence">
+  <div class="wrap">
+    <div class="eyebrow fi">07 / Competitors' Influence Strategies</div>
+    <h2 class="section-title fi">Adversarial Strategies <em lang="en">Deciphered</em></h2>
+    <p class="section-lead fi">Vietnam & South Africa - two radically different models. Two critical lessons for Morocco.</p>
+    <div class="pays-tabs fi" id="pays-tabs">
+      <button class="pays-tab active" data-pays="vn">🇻🇳 Vietnam - The Digital Weapon</button>
+      <button class="pays-tab" data-pays="sa">🇿🇦 South Africa - The Institutional Arsenal</button>
+      <button class="pays-tab" data-pays="vs">Vietnam vs South Africa</button>
+    </div>
+    <div class="pays-panel active" id="panel-vn">
+      <div class="vs-box"><div class="vs-box-title">Vietnam: Less Volume, <em lang="en">More Impact</em></div><p class="vs-box-text">9,225 pts vs 9,968 (South Africa), but ~40% higher visibility. Proof that targeted digital strategy surpasses raw volume.</p></div>
+      <div class="adv-grid2">
+        <div>
+          <span class="adv-score">9,225</span><span class="adv-score-lbl">Index Points · Rank 2</span>
+          <ul class="adv-list">
+            <li><strong>Trade Vietnam:</strong> Matchmaking platform for investors-companies. Optimized UX, simplified navigation, available in 5 languages.</li>
+            <li><strong>Vietnam.vn:</strong> Multilingual Nation Branding, 11 languages including Arabic, French, Spanish, and German. Regular content, all topics covered.</li>
+            <li><strong>Big Data + AI:</strong> Predictive analytics, ultra-precise sectoral targeting, weak signals transformed into competitive advantages.</li>
+            <li><strong>EVIPA ratified with Germany:</strong> 472 German projects in Vietnam in H1 2024, totaling 2.76 Bn USD in 6 months.</li>
+          </ul>
+        </div>
+        <div>
+          <h4 style="font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--ink);margin-bottom:16px">Timeline of Key Investments</h4>
+          <div class="tl">
+            <div class="tl-item"><div class="tl-dot"></div><span class="tl-date">End of 2023</span><p class="tl-text"><strong>463 German projects</strong> in Vietnam - 2.68 Bn USD cumulative</p></div>
+            <div class="tl-item"><div class="tl-dot"></div><span class="tl-date">H1 2024</span><p class="tl-text"><strong>472 projects</strong> - 2.76 Bn USD. EVIPA ratification submitted to Bundestag (07/23/2025)</p></div>
+            <div class="tl-item"><div class="tl-dot"></div><span class="tl-date">2025</span><p class="tl-text"><strong>SAP invests €150M</strong> over 5 years in Vietnamese digital infrastructure</p></div>
+            <div class="tl-item" style="padding-bottom:0"><div class="tl-dot"></div><span class="tl-date">Horizon</span><p class="tl-text"><strong>Regional blockchain hub</strong> - Cybersecurity challenge 12.8 Bn USD 2020-2025</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pays-panel" id="panel-sa">
+      <div class="vs-box"><div class="vs-box-title">South Africa: Heavy Arsenal, <em lang="en">Fragile in Execution</em></div><p class="vs-box-text">11 dedicated structures, highest volume (9,968 pts). But institutional complexity generates counterproductive friction.</p></div>
+      <div class="adv-grid2">
+        <div>
+          <span class="adv-score">9,968</span><span class="adv-score-lbl">Index Points · Rank 1</span>
+          <ul class="adv-list">
+            <li><strong>InvestSA:</strong> National one-stop-shop, FDI facilitation, aftercare, pipeline. 203 cumulative projects (ZAR 1.8 trillion).</li>
+            <li><strong>Butterfly Strategy (August 2025):</strong> Response to US tariffs (30%). 4 pillars: Market Diversification, Multi-export Channels, Agility, Resilience.</li>
+            <li><strong>BLSA Reform Tracker:</strong> 240 reforms publicly tracked. 65% on track, 88% economic reforms underway.</li>
+            <li><strong>Structured SEZs:</strong> Coega SEZ (~R12bn), Dube TradePort (40+ projects), Invest Cape Town (744 projects, cumulative R114bn).</li>
+          </ul>
+          <div class="adv-warn"><span class="aw-label">Critical Limitations</span><p class="aw-text">Overlap of roles among 11 structures. Lack of hierarchical clarity. Confusion and fragmentation. Systemic delays and inefficiencies despite the arsenal.</p></div>
+        </div>
+        <div>
+          <h4 style="font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--ink);margin-bottom:14px">Butterfly Strategy - 4 Pillars</h4>
+          <div class="bf-grid">
+            <div class="bf-card"><div class="bf-card-title">Market Diversification</div><div class="bf-card-text">Reduce USA/EU dependence. AfCFTA Priority. Indo-Pacific Expansion</div></div>
+            <div class="bf-card"><div class="bf-card-title">Multi-Export Channels</div><div class="bf-card-text">Bilateral negotiations. Agricultural protocols. Digital services</div></div>
+            <div class="bf-card"><div class="bf-card-title">Institutional Agility</div><div class="bf-card-text">Export Support Desk. Localization Fund. Competitiveness programs</div></div>
+            <div class="bf-card"><div class="bf-card-title">Resilience & Defense</div><div class="bf-card-text">Anti-dumping. "Proudly SA". Protection of 30k threatened jobs</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pays-panel" id="panel-vs">
+      <div style="display:grid;grid-template-columns:1fr auto 1fr;gap:24px;align-items:start;margin-bottom:28px">
+        <div style="background:white;border:1px solid var(--rule);border-radius:2px;padding:24px"><div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid var(--rule)"><span style="font-size:24px">🇻🇳</span><div><div style="font-family:'Playfair Display',serif;font-size:18px;font-weight:700">Vietnam</div><div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--ink-faint);letter-spacing:.1em">Higher Impact · Lower Volume</div></div></div><div style="font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;color:var(--teal);margin-bottom:6px;letter-spacing:.15em">STRATEGY</div><p style="font-size:13px;color:var(--ink-light);line-height:1.6;margin-bottom:10px">Big Data + AI + Multilingual Nation Branding (11 languages). Dedicated matchmaking platform. Surgical targeting.</p><div style="padding:10px 14px;background:#e1f5ee;border-radius:2px;font-size:12px;color:#0f6e56"><strong>Result:</strong> +40% visibility vs South Africa despite lower volume</div></div>
+        <div style="padding-top:56px;font-family:'Playfair Display',serif;font-size:16px;font-style:italic;color:var(--ink-faint)">vs</div>
+        <div style="background:white;border:1px solid var(--rule);border-radius:2px;padding:24px"><div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid var(--rule)"><span style="font-size:24px">🇿🇦</span><div><div style="font-family:'Playfair Display',serif;font-size:18px;font-weight:700">South Africa</div><div style="font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--ink-faint);letter-spacing:.1em">No. 1 Volume · Fragile in Execution</div></div></div><div style="font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;color:var(--blue);margin-bottom:6px;letter-spacing:.15em">STRATEGY</div><p style="font-size:13px;color:var(--ink-light);line-height:1.6;margin-bottom:10px">11 institutional structures. Butterfly Strategy anti-US tariffs. Public BLSA Reform Tracker.</p><div style="padding:10px 14px;background:#fdf6f5;border:1px solid #e8c5c0;border-radius:2px;font-size:12px;color:#7a3028"><strong>Limitation:</strong> Overlap of roles, confusion, lack of synergy</div></div>
+      </div>
+      <div class="punch"><p class="punch-text"><strong>Lesson for Morocco:</strong> A targeted, multilingual, and coherent digital strategy surpasses a heavy but fragmented institutional arsenal. Permanent strategic intelligence is the condition to move from Challenger to undisputed Leader.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 08 PODIUM -->
+<section class="section alt" id="podium">
+  <div class="wrap">
+    <div class="eyebrow fi">08 / Podium of Attractiveness Champions</div>
+    <h2 class="section-title fi">3 groups, <em lang="en">one strategic truth</em></h2>
+    <p class="section-lead fi">Three convergent analyses (Bubble Chart, Packed Circles, Radial Analysis) confirm the same ranking.</p>
+    <div class="podium-vis fi">
+      <div class="pod"><div class="pod-block" style="height:110px;background:#5f5e5a"><span class="pod-flag">🇲🇦 🇹🇭</span><div class="pod-name">Morocco · Thailand</div><div class="pod-score">Challengers</div></div><div class="pod-base"><div class="pod-rank" style="font-size:26px;color:var(--ink-faint)">2</div></div></div>
+      <div class="pod"><div class="pod-block" style="height:190px;background:var(--gold)"><span class="pod-flag">🇿🇦 🇻🇳 🇲🇽</span><div class="pod-name">Vietnam · S. Africa · Mexico</div><div class="pod-score">Leaders</div></div><div class="pod-base"><div class="pod-rank">1</div></div></div>
+      <div class="pod"><div class="pod-block" style="height:75px;background:#888780"><span class="pod-flag">🇰🇪 🇪🇬 🇹🇷</span><div class="pod-name">Kenya · Egypt · Turkey</div><div class="pod-score">Specialists</div></div><div class="pod-base"><div class="pod-rank" style="font-size:26px;color:var(--ink-faint)">3</div></div></div>
+    </div>
+    <div class="podium-cards fi2">
+      <div class="pc"><div class="pc-title">🏆 Group 1 - Leaders (8 sectors)</div><ul class="pc-items"><li>South Africa, Vietnam, Mexico</li><li>Diversified portfolios: Digital + RE + Auto</li><li>Global benchmark of reference</li><li>Mature digital influence architectures</li></ul></div>
+      <div class="pc" style="border-color:var(--gold);border-width:1.5px"><div class="pc-title">🇲🇦 Group 2 - Equilibrist (7 sectors)</div><ul class="pc-items"><li>Morocco and Thailand</li><li>Morocco No. 1 in aerospace - African singularity</li><li>Unique Aerospace + Auto + RE trio in Africa</li><li>Potential as a continental hub with NMGP</li></ul></div>
+      <div class="pc"><div class="pc-title">📍 Group 3 - Specialists (6 sectors)</div><ul class="pc-items"><li>Kenya (Digital + RE), Egypt (Pharma + RE)</li><li>Turkey (Digital + Agri-food)</li><li>Targeted power rise</li><li>Risk of sectoral dependence</li></ul></div>
+    </div>
+    <div class="fi3" style="background:rgba(184,147,42,.07);border:1px solid rgba(184,147,42,.2);border-radius:2px;padding:28px 36px"><p style="font-size:15px;color:var(--ink-light);line-height:1.7;max-width:720px"><strong style="color:var(--ink)">Lever of Influence:</strong> Morocco is the only African country to present a sectoral portfolio comparable to global leaders. This singularity justifies its legitimacy to aim for the African and world podium.</p></div>
+  </div>
+</section>
+
+<!-- 09 TAG MAPPING -->
+<section class="section" id="tags">
+  <div class="wrap">
+    <div class="eyebrow fi">09 / Mapping Strategic Narratives</div>
+    <h2 class="section-title fi">Invest Tag Mapping - <em lang="en">The Narrative Ecosystem</em></h2>
+    <p class="section-lead fi">The colored ramifications are categorized by thematic families. The further from the center, the finer the granularity.</p>
+    <div class="fi" style="background:white;border:1px solid var(--rule);border-radius:2px;padding:0;position:relative;margin-bottom:28px;min-height:500px">
+      <div class="flourish-embed flourish-hierarchy" data-src="visualisation/25116187" style="min-height:500px;position:relative;">
+        <iframe src="https://flo.uri.sh/visualisation/25116187/embed" width="100%" height="500" frameborder="0" scrolling="no" style="display:block;width:100%;height:500px;" allowfullscreen></iframe>
+        <div style="position:absolute;bottom:0;right:0;width:220px;height:38px;background:#ffffff;z-index:9999;pointer-events:none;"></div>
+      </div>
+    </div>
+    <div class="tag-insight fi2"><strong>Key Insight:</strong> Investors navigate a multidimensional information ecosystem. They always link "Finance & Investing" to "Technology" and "key countries' regulation". Investment opportunities are always interpreted through a global lens: <strong>Political environment, technological innovation, societal stability, and regulatory framework.</strong></div>
+  </div>
+</section>
+
+<!-- 10 LEVERS -->
+<section class="section alt" id="leviers">
+  <div class="wrap">
+    <div class="eyebrow fi">10 / Strategic Recommendations</div>
+    <h2 class="section-title fi">Four <em lang="en">Immediate Action Levers</em></h2>
+    <p class="section-lead fi">Attractiveness is a battlefield. Four vital pillars to compete with equipped and coordinated competitors.</p>
+
+    <!-- HORIZONTAL TIMELINE 4 NODES -->
+    <style>
+      .lev-timeline{position:relative;margin:3rem 0 2.5rem;padding:0 2rem}
+      .lev-timeline-line{position:relative;height:2px;background:#C9A84C;margin:2rem 0}
+      .lev-nodes{position:absolute;top:50%;left:0;right:0;display:flex;justify-content:space-between;transform:translateY(-50%)}
+      .lev-node{display:flex;flex-direction:column;align-items:center;cursor:pointer;position:relative;flex:0 0 auto;width:120px}
+      .lev-node-num{font-family:'JetBrains Mono',monospace;font-size:10px;color:#a89880;margin-bottom:8px;letter-spacing:.1em;transition:color .25s ease}
+      .lev-node-circle{width:18px;height:18px;border-radius:50%;background:#FAF6ED;border:2px solid #D9CFBC;transition:all .25s ease}
+      .lev-node-label{font-family:'DM Sans',sans-serif;font-size:11px;color:#a89880;max-width:100px;text-align:center;margin-top:8px;line-height:1.3;transition:color .25s ease,font-weight .25s ease}
+      .lev-node.active .lev-node-num{color:#C9A84C}
+      .lev-node.active .lev-node-circle{background:#0D1B2A;border-color:#C9A84C;transform:scale(1.3);box-shadow:0 0 0 4px rgba(201,168,76,.2)}
+      .lev-node.active .lev-node-label{color:#0D1B2A;font-weight:500}
+      .reco-card.reco-panel{display:none !important;opacity:0;transform:translateY(8px);transition:opacity .3s ease,transform .3s ease}
+      .reco-card.reco-panel.active{display:grid !important;opacity:1;transform:translateY(0)}
+      @media(max-width:720px){.lev-node{width:70px}.lev-node-label{font-size:10px;-webkit-line-clamp:2;display:-webkit-box;-webkit-box-orient:vertical;overflow:hidden}}
+    </style>
+    <div class="lev-timeline" id="levTimeline">
+      <div class="lev-timeline-line"></div>
+      <div class="lev-nodes">
+        <div class="lev-node active" data-idx="0">
+          <div class="lev-node-num">Recommendation 01</div>
+          <div class="lev-node-circle"></div>
+          <div class="lev-node-label">Strategic Intelligence</div>
+        </div>
+        <div class="lev-node" data-idx="1">
+          <div class="lev-node-num">Recommendation 02</div>
+          <div class="lev-node-circle"></div>
+          <div class="lev-node-label">Digital Acceleration</div>
+        </div>
+        <div class="lev-node" data-idx="2">
+          <div class="lev-node-num">Recommendation 03</div>
+          <div class="lev-node-circle"></div>
+          <div class="lev-node-label">Nation Branding</div>
+        </div>
+        <div class="lev-node" data-idx="3">
+          <div class="lev-node-num">Recommendation 04</div>
+          <div class="lev-node-circle"></div>
+          <div class="lev-node-label">Reinforcement of Achievements</div>
+        </div>
+      </div>
+    </div>
+    <script>
+      (function(){
+        var root=document.getElementById('levTimeline');
+        if(!root)return;
+        var nodes=root.querySelectorAll('.lev-node');
+        function activate(idx){
+          nodes.forEach(function(x){x.classList.toggle('active', Number(x.dataset.idx)===idx)});
+          document.querySelectorAll('.reco-panel').forEach(function(p){
+            p.classList.toggle('active', Number(p.dataset.panel)===idx);
+          });
+        }
+        nodes.forEach(function(n){
+          n.addEventListener('click',function(e){
+            e.stopPropagation();
+            activate(Number(n.dataset.idx));
+          });
+        });
+      })();
+    </script>
+
+    <!-- 4 RECOMMENDATION CARDS -->
+    <style><lang="en">
+      .reco-card{background:#FAF6ED;border:0.5px solid #D9CFBC;border-radius:12px;overflow:hidden;margin-bottom:1.5rem;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:auto auto}
+      .reco-card .reco-left{background:#FAF6ED;border-right:0.5px solid #D9CFBC;padding:28px 32px;display:flex;flex-direction:column;gap:14px}
+      .reco-card .reco-right{background:#F2EDD8;padding:24px;display:flex;align-items:center;justify-content:center}
+      .reco-card .reco-bottom{grid-column:1 / -1;border-top:0.5px solid #D9CFBC;padding:18px 32px;display:flex;align-items:center;justify-content:space-between;gap:24px;background:#FAF6ED}
+      .reco-logo .b-build{color:#0D1B2A;font-weight:500;font-size:20px;font-family:'DM Sans',sans-serif}
+      .reco-logo .b-fluence{color:#C9A84C;font-weight:500;font-size:20px;font-family:'DM Sans',sans-serif}
+      .reco-logo .b-sub{display:block;font-size:9px;text-transform:uppercase;letter-spacing:.18em;color:#6b5c48;margin-top:2px;font-family:'JetBrains Mono',monospace}
+      .reco-eyebrow{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.18em;color:#C9A84C}
+      .reco-title{font-family:'DM Sans',sans-serif;font-size:17px;font-weight:500;color:#0D1B2A;line-height:1.4;margin:0}
+      .reco-title em{color:#C9A84C;font-style:italic}
+      .reco-desc{font-size:13px;color:#6b5c48;line-height:1.65;margin:0}
+      .reco-lesson{font-size:12px;color:#6b5c48;font-style:italic;flex:1}
+      .reco-lesson strong{color:#0D1B2A;font-style:normal}
+      .reco-kpis{display:flex;gap:28px}
+      .reco-kpi{display:flex;flex-direction:column;align-items:flex-start}
+      .reco-kpi-val{color:#C9A84C;font-size:18px;font-family:'JetBrains Mono',monospace;font-weight:600;line-height:1}
+      .reco-kpi-lbl{color:#a89880;font-size:10px;text-transform:uppercase;letter-spacing:.12em;margin-top:4px;font-family:'JetBrains Mono',monospace}
+      .reco-legend{display:flex;flex-direction:column;gap:6px;margin-top:6px}
+      .reco-legend-item{display:flex;align-items:center;gap:10px;font-size:11px;color:#6b5c48;font-family:'JetBrains Mono',monospace}
+      .reco-legend-dot{width:8px;height:8px;border-radius:50%;display:inline-block}
+      .reco-grid9{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;width:100%}
+      .reco-grid9 .gi{display:flex;flex-direction:column;align-items:center;gap:8px;transition:transform .2s ease}
+      .reco-grid9 .gi:hover{transform:translateY(-3px)}
+      .reco-grid9 .gi-circle{width:52px;height:52px;border-radius:50%;border:1px solid;display:flex;align-items:center;justify-content:center;font-size:22px}
+      .reco-grid9 .gi-label{font-size:10px;color:#6b5c48;text-align:center;line-height:1.25}
+      .reco-blocks{display:flex;flex-direction:column;gap:10px;width:100%}
+      .reco-blocks .nb{display:flex;align-items:flex-start;gap:12px;padding:12px 14px;border-radius:8px;background:#FAF6ED;border:0.5px solid #D9CFBC;transition:border-color .2s ease}
+      .reco-blocks .nb:hover{border-color:#C9A84C}
+      .reco-blocks .nb-icon{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+      .reco-blocks .nb-title{font-size:12px;font-weight:500;color:#0D1B2A;margin:0 0 3px}
+      .reco-blocks .nb-desc{font-size:11px;color:#6b5c48;line-height:1.4;margin:0 0 4px}
+      .reco-blocks .nb-kpi{font-size:10px;color:#C9A84C;font-family:'JetBrains Mono',monospace}
+      @media (max-width: 768px){
+        .reco-card{grid-template-columns:1fr}
+        .reco-card .reco-left{border-right:none;border-bottom:0.5px solid #D9CFBC}
+        .reco-card .reco-bottom{flex-direction:column;align-items:flex-start;gap:14px}
+      }
+      @keyframes orbit1 { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+      @keyframes orbit2 { from { transform: rotate(0deg); } to { transform: rotate(-360deg); } }
+      @keyframes orbit3 { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+      .galaxy-orbit-1 { transform-origin: 210px 210px; animation: orbit1 28s linear infinite; }
+      .galaxy-orbit-2 { transform-origin: 210px 210px; animation: orbit2 48s linear infinite; }
+      .galaxy-orbit-3 { transform-origin: 210px 210px; animation: orbit3 70s linear infinite; }
+    </style>
+
+    <!-- CARD 1 -->
+    <article class="reco-card reco-panel active fi" data-panel="0">
+      <div class="reco-left">
+        <div class="reco-logo"><span class="b-build">Build</span><span class="b-fluence">fluence</span><span class="b-sub">Sovereign Decision Infrastructure</span></div>
+        <div class="reco-eyebrow">Recommendation 01 · Competitive Intelligence</div>
+        <h3 class="reco-title">Activate a permanent radar on the <em>competitive ecosystem</em></h3>
+        <p class="reco-desc">Morocco must move beyond raw quantitative analysis. Continuously monitor weak signals from the 18 competing countries, identify promising sectors, and anticipate disruptions before they become threats.</p>
+      </div>
+      <div class="reco-right">
+        <svg width="100%" height="250" viewBox="-40 0 370 250" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <radialGradient id="r1halo" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#C9A84C" stop-opacity="0.25"/>
+              <stop offset="100%" stop-color="#C9A84C" stop-opacity="0"/>
+            </radialGradient>
+          </defs>
+          <circle cx="145" cy="125" r="105" fill="none" stroke="#0D1B2A" stroke-opacity="0.12"/>
+          <circle cx="145" cy="125" r="78" fill="none" stroke="#0D1B2A" stroke-opacity="0.15"/>
+          <circle cx="145" cy="125" r="52" fill="none" stroke="#0D1B2A" stroke-opacity="0.20"/>
+          <circle cx="145" cy="125" r="26" fill="none" stroke="#0D1B2A" stroke-opacity="0.25"/>
+          <line x1="145" y1="20" x2="145" y2="230" stroke="#0D1B2A" stroke-width="0.3" stroke-opacity="0.12"/>
+          <line x1="40" y1="125" x2="250" y2="125" stroke="#0D1B2A" stroke-width="0.3" stroke-opacity="0.12"/>
+          <line x1="71" y1="51" x2="219" y2="199" stroke="#0D1B2A" stroke-width="0.3" stroke-opacity="0.12"/>
+          <line x1="219" y1="51" x2="71" y2="199" stroke="#0D1B2A" stroke-width="0.3" stroke-opacity="0.12"/>
+          <polygon points="145,47 198,80 198,170 145,203 92,170 92,80" fill="#C9A84C" fill-opacity="0.08" stroke="#C9A84C" stroke-width="1" stroke-opacity="0.4"/>
+          <circle cx="145" cy="125" r="85" fill="url(#r1halo)"/>
+          <circle cx="145" cy="125" r="4" fill="#C9A84C"/>
+          <g>
+            <line x1="145" y1="125" x2="145" y2="20" stroke="#C9A84C" stroke-width="1"/>
+            <circle cx="145" cy="20" r="3" fill="#C9A84C"/>
+            <animateTransform attributeName="transform" type="rotate" from="0 145 125" to="360 145 125" dur="4s" repeatCount="indefinite"/>
+          </g>
+          <circle cx="145" cy="20" r="2.5" fill="#C9A84C" fill-opacity="0.7"/>
+          <circle cx="230" cy="72" r="3" fill="#C9A84C" fill-opacity="0.8"/>
+          <circle cx="255" cy="148" r="2.8" fill="#C9A84C" fill-opacity="0.7"/>
+          <circle cx="195" cy="215" r="3.5" fill="#C9A84C" fill-opacity="0.9"/>
+          <circle cx="95" cy="215" r="2.5" fill="#C9A84C" fill-opacity="0.7"/>
+          <circle cx="35" cy="148" r="3" fill="#C9A84C" fill-opacity="0.8"/>
+          <circle cx="60" cy="72" r="2.8" fill="#C9A84C" fill-opacity="0.75"/>
+          <circle cx="155" cy="99" r="3" fill="#C9A84C"/>
+          <text x="145" y="13" font-family="monospace" font-size="10" fill="#0D1B2A" text-anchor="middle">Emerging Markets</text>
+          <text x="238" y="68" font-family="monospace" font-size="10" fill="#C9A84C" text-anchor="start">Strategic Sectors</text>
+          <text x="262" y="152" font-family="monospace" font-size="10" fill="#0D1B2A" text-anchor="start">Opportunities</text>
+          <text x="195" y="230" font-family="monospace" font-size="10" fill="#0D1B2A" text-anchor="middle">Invest Tags</text>
+          <text x="94" y="230" font-family="monospace" font-size="10" fill="#0D1B2A" text-anchor="middle">Competition</text>
+          <text x="28" y="152" font-family="monospace" font-size="10" fill="#C9A84C" text-anchor="end">Land</text>
+          <text x="52" y="68" font-family="monospace" font-size="10" fill="#0D1B2A" text-anchor="end">Partners</text>
+          <text x="157" y="96" font-family="monospace" font-size="9" fill="#C9A84C">Weak Signals</text>
+        </svg>
+      </div>
+      <div class="reco-bottom">
+        <div class="reco-lesson"><strong>Vietnam Lesson:</strong> a targeted digital strategy outperforms crude volume by 40%.</div>
+        <div class="reco-kpis">
+          <div class="reco-kpi"><span class="reco-kpi-val">18</span><span class="reco-kpi-lbl">monitored countries</span></div>
+          <div class="reco-kpi"><span class="reco-kpi-val">24 600</span><span class="reco-kpi-lbl">data · 31d</span></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- CARD 2 -->
+    <article class="reco-card reco-panel fi" data-panel="1">
+      <div class="reco-left">
+        <div class="reco-logo"><span class="b-build">Build</span><span class="b-fluence">fluence</span><span class="b-sub">Sovereign Decision Infrastructure</span></div>
+        <div class="reco-eyebrow">Recommendation 02 · Institutional Ecosystem</div>
+        <h3 class="reco-title">Federate the ecosystem around a <em>sovereign platform</em></h3>
+        <p class="reco-desc">Morocco Now must become the central infrastructure coordinating all investment promotion stakeholders. One voice, one coherent narrative against 11 competing structures in South Africa.</p>
+        <div class="reco-legend">
+          <div class="reco-legend-item"><span class="reco-legend-dot" style="background:#C9A84C"></span>Center — Morocco Now</div>
+          <div class="reco-legend-item"><span class="reco-legend-dot" style="background:#BA7517"></span>Internal — AMDIE Directorate</div>
+          <div class="reco-legend-item"><span class="reco-legend-dot" style="background:#185FA5"></span>National — Moroccan Stakeholders</div>
+          <div class="reco-legend-item"><span class="reco-legend-dot" style="background:#0F6E56"></span>International — Global Partners</div>
+        </div>
+      </div>
+      <div class="reco-right">
+        <svg width="100%" height="420" viewBox="0 0 420 420" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <radialGradient id="bgc2" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#EDE8D8"/>
+              <stop offset="100%" stop-color="#F2EDD8"/>
+            </radialGradient>
+            <radialGradient id="cglowc" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#C9A84C" stop-opacity=".4"/>
+              <stop offset="100%" stop-color="#C9A84C" stop-opacity="0"/>
+            </radialGradient>
+          </defs>
+          <rect width="420" height="420" fill="url(#bgc2)" rx="8"/>
+
+          <!-- 3 distinct concentric layers -->
+          <circle cx="210" cy="210" r="42" fill="none" stroke="#BA7517" stroke-width="0.7" stroke-opacity="0.35" stroke-dasharray="3 7"/>
+          <circle cx="210" cy="210" r="125" fill="none" stroke="#185FA5" stroke-width="0.6" stroke-opacity="0.28" stroke-dasharray="2 9"/>
+          <circle cx="210" cy="210" r="180" fill="none" stroke="#0F6E56" stroke-width="0.6" stroke-opacity="0.22" stroke-dasharray="2 12"/>
+
+          <circle cx="210" cy="210" r="34" fill="url(#cglowc)"/>
+
+          <!-- Small animated decorative dots (internal brown layer) -->
+          <g class="galaxy-orbit-1">
+            <circle cx="210" cy="168" r="1.6" fill="#BA7517" fill-opacity="0.6"/>
+            <circle cx="246.4" cy="189" r="1.6" fill="#BA7517" fill-opacity="0.6"/>
+            <circle cx="246.4" cy="231" r="1.6" fill="#BA7517" fill-opacity="0.6"/>
+            <circle cx="210" cy="252" r="1.6" fill="#BA7517" fill-opacity="0.6"/>
+            <circle cx="173.6" cy="231" r="1.6" fill="#BA7517" fill-opacity="0.6"/>
+            <circle cx="173.6" cy="189" r="1.6" fill="#BA7517" fill-opacity="0.6"/>
+          </g>
+
+          <!-- Animated national layer dots -->
+          <g class="galaxy-orbit-2">
+            <circle cx="282" cy="115" r="1.4" fill="#185FA5" fill-opacity="0.55"/>
+            <circle cx="320" cy="160" r="1.4" fill="#185FA5" fill-opacity="0.55"/>
+            <circle cx="320" cy="260" r="1.4" fill="#185FA5" fill-opacity="0.55"/>
+            <circle cx="282" cy="305" r="1.4" fill="#185FA5" fill-opacity="0.55"/>
+            <circle cx="138" cy="305" r="1.4" fill="#185FA5" fill-opacity="0.55"/>
+            <circle cx="100" cy="260" r="1.4" fill="#185FA5" fill-opacity="0.55"/>
+            <circle cx="100" cy="160" r="1.4" fill="#185FA5" fill-opacity="0.55"/>
+            <circle cx="138" cy="115" r="1.4" fill="#185FA5" fill-opacity="0.55"/>
+          </g>
+
+          <!-- Animated international layer dots -->
+          <g class="galaxy-orbit-3">
+            <circle cx="270" cy="55" r="1.4" fill="#0F6E56" fill-opacity="0.5"/>
+            <circle cx="370" cy="135" r="1.4" fill="#0F6E56" fill-opacity="0.5"/>
+            <circle cx="370" cy="285" r="1.4" fill="#0F6E56" fill-opacity="0.5"/>
+            <circle cx="270" cy="365" r="1.4" fill="#0F6E56" fill-opacity="0.5"/>
+            <circle cx="150" cy="365" r="1.4" fill="#0F6E56" fill-opacity="0.5"/>
+            <circle cx="50" cy="285" r="1.4" fill="#0F6E56" fill-opacity="0.5"/>
+            <circle cx="50" cy="135" r="1.4" fill="#0F6E56" fill-opacity="0.5"/>
+            <circle cx="150" cy="55" r="1.4" fill="#0F6E56" fill-opacity="0.5"/>
+          </g>
+
+          <!-- Center: Morocco Now -->
+          <circle cx="210" cy="210" r="26" fill="#FFFFFF" stroke="#C9A84C" stroke-width="1.5"/>
+          <image href="/morocco-now-logo.png" x="188" y="192" width="44" height="36" preserveAspectRatio="xMidYMid meet"/>
+
+          <!-- ============ LAYER 1 — INTERNAL (brown) — r=42 ============ -->
+          <circle cx="210" cy="168" r="2.6" fill="#BA7517"/>
+          <text x="210" y="160" text-anchor="middle" font-size="9" fill="#854F0B" font-family="monospace" font-weight="600">DG</text>
+
+          <circle cx="246.4" cy="189" r="2.6" fill="#BA7517"/>
+          <text x="251" y="186" text-anchor="start" font-size="9" fill="#854F0B" font-family="monospace" font-weight="600">Legal</text>
+
+          <circle cx="246.4" cy="231" r="2.6" fill="#BA7517"/>
+          <text x="251" y="234" text-anchor="start" font-size="9" fill="#854F0B" font-family="monospace" font-weight="600">BusDev</text>
+
+          <circle cx="210" cy="252" r="2.6" fill="#BA7517"/>
+          <text x="210" y="265" text-anchor="middle" font-size="9" fill="#854F0B" font-family="monospace" font-weight="600">Comm. &amp; Brand</text>
+
+          <circle cx="173.6" cy="231" r="2.6" fill="#BA7517"/>
+          <text x="169" y="234" text-anchor="end" font-size="9" fill="#854F0B" font-family="monospace" font-weight="600">Finance</text>
+
+          <circle cx="173.6" cy="189" r="2.6" fill="#BA7517"/>
+          <text x="169" y="186" text-anchor="end" font-size="9" fill="#854F0B" font-family="monospace" font-weight="600">Strategy</text>
+
+          <!-- ============ LAYER 2 — NATIONAL (blue) — r=125 — 14 stakeholders ============ -->
+          <!-- MICEPP (210, 85) -->
+          <rect x="190" y="74" width="40" height="22" rx="3" fill="#FFFFFF" stroke="#185FA5" stroke-width="0.7"/>
+          <image href="/logos/micepp.png" x="192" y="76" width="36" height="18" preserveAspectRatio="xMidYMid meet"/>
+          <!-- MCINET (264.2, 97.4) -->
+          <rect x="244.2" y="86.4" width="40" height="22" rx="3" fill="#FFFFFF" stroke="#185FA5" stroke-width="0.7"/>
+          <image href="/logos/mcinet.png" x="246.2" y="88.4" width="36" height="18" preserveAspectRatio="xMidYMid meet"/>
+          <!-- AMDIE (307.7, 132.1) -->
+          <rect x="287.7" y="121.1" width="40" height="22" rx="3" fill="#FFFFFF" stroke="#185FA5" stroke-width="0.7"/>
+          <image href="/logos/amdie.png" x="289.7" y="123.1" width="36" height="18" preserveAspectRatio="xMidYMid meet"/>
+          <!-- CRI (331.9, 182.2) -->
+          <rect x="311.9" y="171.2" width="40" height="22" rx="3" fill="#FFFFFF" stroke="#185FA5" stroke-width="0.7"/>
+          <image href="/logos/cri.png" x="313.9" y="173.2" width="36" height="18" preserveAspectRatio="xMidYMid meet"/>
+          <!-- Fund M6 (331.9, 237.8) -->
+          <rect x="311.9" y="226.8" width="40" height="22" rx="3" fill="#FFFFFF" stroke="#185FA5" stroke-width="0.7"/>
+          <image href="/logos/fond-m6.png" x="313.9" y="228.8" width="36" height="18" preserveAspectRatio="xMidYMid meet"/>
+          <!-- CDG (307.7, 287.9) -->
+          <rect x="287.7" y="276.9" width="40" height="22" rx="3" fill="#FFFFFF" stroke="#185FA5" stroke-width="0.7"/>
+          <image href="/logos/cdg.png" x="289.7" y="278.9" width="36" height="18" preserveAspectRatio="xMidYMid meet"/>
+          <!-- MASEN (264.2, 322.6) -->
+          <rect x="244.2" y="311.6" width="40" height="22" rx="3" fill="#FFFFFF" stroke="#185FA5" stroke-width="0.7"/>
+          <image href="/logos/masen.png" x="246.2" y="313.6" width="36" height="18" preserveAspectRatio="xMidYMid meet"/>
+          <!-- CGEM (210, 335) -->
+          <rect x="190" y="324" width="40" height="22" rx="3" fill="#FFFFFF" stroke="#185FA5" stroke-width="0.7"/>
+          <image href="/logos/cgem.png" x="192" y="326" width="36" height="18" preserveAspectRatio="xMidYMid meet"/>
+          <!-- Bank Al-Maghrib (155.8, 322.6) -->
+          <rect x="135.8" y="311.6" width="40" height="22" rx="3" fill="#FFFFFF" stroke="#185FA5" stroke-width="0.7"/>
+          <image href="/logos/bank-al-maghrib.png" x="137.8" y="313.6" width="36" height="18" preserveAspectRatio="xMidYMid meet"/>
+          <!-- MedZ (112.3, 287.9) -->
+          <rect x="92.3" y="276.9" width="40" height="22" rx="3" fill="#FFFFFF" stroke="#185FA5" stroke-width="0.7"/>
+          <image href="/logos/medz.png" x="94.3" y="278.9" width="36" height="18" preserveAspectRatio="xMidYMid meet"/>
+          <!-- ANGSPE (88.1, 237.8) -->
+          <rect x="68.1" y="226.8" width="40" height="22" rx="3" fill="#FFFFFF" stroke="#185FA5" stroke-width="0.7"/>
+          <image href="/logos/angspe.png" x="70.1" y="228.8" width="36" height="18" preserveAspectRatio="xMidYMid meet"/>
+          <!-- Tamwilcom (88.1, 182.2) -->
+          <rect x="68.1" y="171.2" width="40" height="22" rx="3" fill="#FFFFFF" stroke="#185FA5" stroke-width="0.7"/>
+          <image href="/logos/tamwilcom.png" x="70.1" y="173.2" width="36" height="18" preserveAspectRatio="xMidYMid meet"/>
+          <!-- FEC (112.3, 132.1) -->
+          <rect x="92.3" y="121.1" width="40" height="22" rx="3" fill="#FFFFFF" stroke="#185FA5" stroke-width="0.7"/>
+          <image href="/logos/fec.png" x="94.3" y="123.1" width="36" height="18" preserveAspectRatio="xMidYMid meet"/>
+          <!-- Ithmar (155.8, 97.4) -->
+          <rect x="135.8" y="86.4" width="40" height="22" rx="3" fill="#FFFFFF" stroke="#185FA5" stroke-width="0.7"/>
+          <image href="/logos/ithmar.png" x="137.8" y="88.4" width="36" height="18" preserveAspectRatio="xMidYMid meet"/>
+
+          <!-- ============ LAYER 3 — INTERNATIONAL (green) — r=180 — 8 stakeholders ============ -->
+          <!-- World Bank (210, 30) -->
+          <rect x="190" y="19" width="40" height="22" rx="3" fill="#FFFFFF" stroke="#0F6E56" stroke-width="0.8"/>
+          <image href="/logos/worldbank.png" x="192" y="21" width="36" height="18" preserveAspectRatio="xMidYMid meet"/>
+          <!-- AfDB (337.3, 82.7) -->
+          <rect x="317.3" y="71.7" width="40" height="22" rx="3" fill="#FFFFFF" stroke="#0F6E56" stroke-width="0.8"/>
+          <image href="/logos/bad.png" x="319.3" y="73.7" width="36" height="18" preserveAspectRatio="xMidYMid meet"/>
+          <!-- WEF (390, 210) -->
+          <rect x="370" y="199" width="40" height="22" rx="3" fill="#FFFFFF" stroke="#0F6E56" stroke-width="0.8"/>
+          <image href="/logos/wef.png" x="372" y="201" width="36" height="18" preserveAspectRatio="xMidYMid meet"/>
+          <!-- EBRD / European Investment Bank (337.3, 337.3) -->
+          <rect x="317.3" y="326.3" width="40" height="22" rx="3" fill="#FFFFFF" stroke="#0F6E56" stroke-width="0.8"/>
+          <image href="/logos/berd.png" x="319.3" y="328.3" width="36" height="18" preserveAspectRatio="xMidYMid meet"/>
+          <!-- ICC (210, 390) -->
+          <rect x="190" y="379" width="40" height="22" rx="3" fill="#FFFFFF" stroke="#0F6E56" stroke-width="0.8"/>
+          <image href="/logos/cci.png" x="192" y="381" width="36" height="18" preserveAspectRatio="xMidYMid meet"/>
+          <!-- FOCAC (82.7, 337.3) -->
+          <rect x="62.7" y="326.3" width="40" height="22" rx="3" fill="#FFFFFF" stroke="#0F6E56" stroke-width="0.8"/>
+          <image href="/logos/focac.png" x="64.7" y="328.3" width="36" height="18" preserveAspectRatio="xMidYMid meet"/>
+          <!-- DIASPORA (30, 210) -->
+          <rect x="6" y="201" width="48" height="18" rx="3" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.7"/>
+          <text x="30" y="213" text-anchor="middle" font-size="8.5" fill="#085041" font-family="monospace" font-weight="bold">DIASPORA</text>
+          <!-- Aerospace (82.7, 82.7) -->
+          <rect x="62.7" y="71.7" width="40" height="22" rx="3" fill="#FFFFFF" stroke="#0F6E56" stroke-width="0.8"/>
+          <image href="/logos/aerospace.png" x="64.7" y="73.7" width="36" height="18" preserveAspectRatio="xMidYMid meet"/>
+        </svg>
+      </div>
+      <div class="reco-bottom">
+        <div class="reco-lesson"><strong>South Africa Lesson:</strong> 11 uncoordinated structures generate fragmentation and counterproductive friction.</div>
+        <div class="reco-kpis">
+          <div class="reco-kpi"><span class="reco-kpi-val">1</span><span class="reco-kpi-lbl">central voice</span></div>
+          <div class="reco-kpi"><span class="reco-kpi-val">28+</span><span class="reco-kpi-lbl">federated stakeholders</span></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- CARD 3 -->
+    <article class="reco-card reco-panel fi" data-panel="2">
+      <div class="reco-left">
+        <div class="reco-logo"><span class="b-build">Build</span><span class="b-fluence">fluence</span><span class="b-sub">Sovereign Decision Infrastructure</span></div>
+        <div class="reco-eyebrow">Recommendation 03 · Nation Branding</div>
+        <h3 class="reco-title">Construct Morocco's sovereign narrative as an <em>attractiveness weapon</em></h3>
+        <p class="reco-desc">Morocco's geopolitical stability, cultural richness, and geographical position are major assets underutilized in the international narrative. An investor seeks a country before a sector.</p>
+      </div>
+      <div class="reco-right">
+        <div class="reco-grid9">
+          <div class="gi"><div class="gi-circle" style="background:#E1F5EE;border-color:#0F6E56"><i class="ti ti-shield-check" style="color:#0F6E56"></i></div><div class="gi-label">Political Stability</div></div>
+          <div class="gi"><div class="gi-circle" style="background:#F9F3E3;border-color:#BA7517"><i class="ti ti-map-pin" style="color:#BA7517"></i></div><div class="gi-label">Geographical Position</div></div>
+          <div class="gi"><div class="gi-circle" style="background:#EEEDFE;border-color:#534AB7"><i class="ti ti-building-mosque" style="color:#534AB7"></i></div><div class="gi-label">Cultural Richness</div></div>
+          <div class="gi"><div class="gi-circle" style="background:#E6F1FB;border-color:#185FA5"><i class="ti ti-sailboat" style="color:#185FA5"></i></div><div class="gi-label">Diverse Tourism</div></div>
+          <div class="gi"><div class="gi-circle" style="background:#FAEEDA;border-color:#BA7517"><i class="ti ti-receipt-tax" style="color:#BA7517"></i></div><div class="gi-label">Tax Incentives</div></div>
+          <div class="gi"><div class="gi-circle" style="background:#EAF3DE;border-color:#3B6D11"><i class="ti ti-heart" style="color:#3B6D11"></i></div><div class="gi-label">Quality of Life</div></div>
+          <div class="gi"><div class="gi-circle" style="background:#FAEEDA;border-color:#C9A84C"><i class="ti ti-users" style="color:#C9A84C"></i></div><div class="gi-label">Human Capital</div></div>
+          <div class="gi"><div class="gi-circle" style="background:#E1F5EE;border-color:#085041"><i class="ti ti-plug" style="color:#085041"></i></div><div class="gi-label">Infrastructure</div></div>
+          <div class="gi"><div class="gi-circle" style="background:#F9F3E3;border-color:#854F0B"><i class="ti ti-brand-speedtest" style="color:#854F0B"></i></div><div class="gi-label">Personalized Support</div></div>
+        </div>
+      </div>
+      <div class="reco-bottom">
+        <div class="reco-lesson"><strong>Objective:</strong> Morocco.invest multilingual in 6 languages, +40% international visibility in 12 months</div>
+        <div class="reco-kpis">
+          <div class="reco-kpi"><span class="reco-kpi-val">6</span><span class="reco-kpi-lbl">target languages</span></div>
+          <div class="reco-kpi"><span class="reco-kpi-val">+40%</span><span class="reco-kpi-lbl">visibility · 12m</span></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- CARD 4 -->
+    <article class="reco-card reco-panel fi" data-panel="3">
+      <div class="reco-left">
+        <div class="reco-logo"><span class="b-build">Build</span><span class="b-fluence">fluence</span><span class="b-sub">Sovereign Decision Infrastructure</span></div>
+        <div class="reco-eyebrow">Recommendation 04 · Strategic Influence</div>
+        <h3 class="reco-title">Amplify achievements to build the <em>leader's narrative</em></h3>
+        <p class="reco-desc">Morocco is already world leader in aeronautics, 3rd in renewable energy, 4th in automotive. These positions of excellence are underutilized in the international narrative. Achievements must be transformed into a narrative weapon.</p>
+      </div>
+      <div class="reco-right">
+        <div class="reco-blocks">
+          <div class="nb">
+            <div class="nb-icon" style="background:#F9F3E3"><i class="ti ti-trophy" style="color:#C9A84C"></i></div>
+            <div><p class="nb-title">Asset Valorization</p><p class="nb-desc">World-leading positions underutilized in international communication</p><span class="nb-kpi">N°1 Aero · 3rd RE · 4th Auto</span></div>
+          </div>
+          <div class="nb">
+            <div class="nb-icon" style="background:#E1F5EE"><i class="ti ti-speakerphone" style="color:#0F6E56"></i></div>
+            <div><p class="nb-title">Amplification of Achievements</p><p class="nb-desc">Transform every major investment into a strong signal for target markets</p><span class="nb-kpi">NMG gas pipeline · 25 Bn USD</span></div>
+          </div>
+          <div class="nb">
+            <div class="nb-icon" style="background:#E6F1FB"><i class="ti ti-world" style="color:#185FA5"></i></div>
+            <div><p class="nb-title">Narrative of Influence</p><p class="nb-desc">Position Morocco as an essential continental hub between two continents</p><span class="nb-kpi">Africa · Europe · MENA Hub</span></div>
+          </div>
+          <div class="nb">
+            <div class="nb-icon" style="background:#EEEDFE"><i class="ti ti-antenna" style="color:#534AB7"></i></div>
+            <div><p class="nb-title">Sovereign Dissemination</p><p class="nb-desc">Deploy the narrative via the complete institutional dissemination ecosystem</p><span class="nb-kpi">8 spheres · 28 territories</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="reco-bottom">
+        <div class="reco-lesson"><strong>Vision:</strong> Transition from Challenger to undisputed Leader through permanent strategic intelligence</div>
+        <div class="reco-kpis">
+          <div class="reco-kpi"><span class="reco-kpi-val">3</span><span class="reco-kpi-lbl">N°1 positions</span></div>
+          <div class="reco-kpi"><span class="reco-kpi-val">28</span><span class="reco-kpi-lbl">territories</span></div>
+        </div>
+      </div>
+    </article>
+    </div>
+
+    <!-- Conclusion -->
+    <div class="fi2" style="background:var(--navy);color:white;padding:36px 44px;border-radius:2px;margin-top:40px;position:relative;overflow:hidden">
+      <div style="position:absolute;top:-20px;left:16px;font-family:'Playfair Display',serif;font-size:160px;font-weight:900;font-style:italic;color:rgba(201,168,76,.05);line-height:1">"</div>
+      <p style="font-family:'Cormorant Garamond',serif;font-size:clamp(18px,2.2vw,24px);font-style:italic;color:rgba(245,241,232,.85);line-height:1.5;max-width:700px;position:relative;z-index:1">Elevating Morocco from balancing act to undisputed leader? It's achievable: <strong style="color:#D4A83A;font-style:normal">combine continuous strategic intelligence & global narrative amplification.</strong></p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BUILDFLUENCE -->
+<section class="cta-section" id="cta">
+  <div class="wrap">
+    <div style="text-align:center;font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;letter-spacing:.28em;text-transform:uppercase;color:rgba(201,168,76,.5);margin-bottom:36px;display:flex;align-items:center;justify-content:center;gap:12px"><span style="display:block;width:28px;height:1px;background:rgba(201,168,76,.3)"></span>Take Action<span style="display:block;width:28px;height:1px;background:rgba(201,168,76,.3)"></span></div>
+    <p class="cta-quote">"This barometer is just a glimpse of what an intelligence architecture deployed over a month reveals. Imagine what you could achieve with <strong>a complete and permanent vision.</strong>"</p>
+
+    <!-- 5 Buildfluence poles (source: page 45 of the barometer) -->
+    <div class="services-grid">
+      <div class="svc">
+        <span class="svc-icon">🔍</span>
+        <div class="svc-title">Strategic Foresight</div>
+        <p class="svc-desc">Identify weak signals. Anticipate tomorrow before your competitors.</p>
+        <ul class="svc-items">
+          <li>Competitive strategic radar or specific pages</li>
+          <li>Real-time weak signals</li>
+          <li>Decisive positional advantage</li>
+        </ul>
+      </div>
+      <div class="svc">
+        <span class="svc-icon">🛡️</span>
+        <div class="svc-title">Threat Intelligence</div>
+        <p class="svc-desc">Control disinformation risks. Thwart threats before they strike.</p>
+        <ul class="svc-items">
+          <li>Disinformation detection</li>
+          <li>Manipulation campaigns</li>
+          <li>Adversarial destabilization</li>
+        </ul>
+      </div>
+      <div class="svc">
+        <span class="svc-icon">🤝</span>
+        <div class="svc-title">Due Diligence</div>
+        <p class="svc-desc">Before every investment decision: who are you really dealing with?</p>
+        <ul class="svc-items">
+          <li>Stakeholder verification</li>
+          <li>Uncertainty reduction</li>
+          <li>Securing choices</li>
+        </ul>
+      </div>
+      <div class="svc">
+        <span class="svc-icon">📡</span>
+        <div class="svc-title">Influence Builder</div>
+        <p class="svc-desc">Don't let others write your story. Master the narrative.</p>
+        <ul class="svc-items">
+          <li>Influential narratives</li>
+          <li>Storytelling & knowledge capital</li>
+          <li>Decision orientation</li>
+        </ul>
+      </div>
+      <div class="svc">
+        <span class="svc-icon">⚙️</span>
+        <div class="svc-title">Intelligence Platform</div>
+        <p class="svc-desc">Capture before others. Read between the lines. Tell to convince.</p>
+        <ul class="svc-items">
+          <li>Continuous AI monitoring</li>
+          <li>Market decoding</li>
+          <li>Sectoral Big Data</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="cta-bottom">
+      <a href="#" id="cta-strategic-exchange" class="btn btn-gold" style="font-size:11px;padding:15px 40px">Request a Strategic Exchange</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="fb">Build<span>fluence</span> - Sovereign Decision Infrastructure</div>
+  <div class="fc">© 2025 · Investment Barometer · Sep 2025</div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+/* PROGRESS */
+window.addEventListener('scroll',()=>{
+  const h=document.documentElement.scrollHeight-window.innerHeight;
+  document.getElementById('prog-fill').style.width=(window.scrollY/h*100)+'%';
+  updateDots();
+});
+
+/* SIDE DOTS */
+const sids=['hero','constat','methodo','geo','classement','secteurs','boussole','influence','podium','tags','leviers','cta'];
+function updateDots(){
+  const mid=window.innerHeight*.45;
+  document.querySelectorAll('.side-dot').forEach((d,i)=>{
+    const el=document.getElementById(sids[i]);
+    if(!el)return;
+    const r=el.getBoundingClientRect();
+    if(r.top<=mid&&r.bottom>=mid){
+      document.querySelectorAll('.side-dot').forEach(x=>x.classList.remove('active'));
+      d.classList.add('active');
+    }
+  });
+}
+document.querySelectorAll('.side-dot').forEach((d,i)=>{
+  d.addEventListener('click',()=>{document.getElementById(sids[i])?.scrollIntoView({behavior:'smooth'})});
+});
+
+/* COUNTERS */
+function cnt(el,target,suffix,dur,divide){
+  dur=dur||1500;divide=divide||1;
+  const s=performance.now();
+  (function step(now){
+    const p=Math.min((now-s)/dur,1),e=1-Math.pow(1-p,3),v=target*e/divide;
+    el.textContent=(divide>1?v.toFixed(1):Math.round(v))+suffix;
+    if(p<1)requestAnimationFrame(step);
+  })(performance.now());
+}
+window.addEventListener('load',()=>{
+  setTimeout(()=>{
+    cnt(document.getElementById('c1'),24.6,'k',1800,1);
+    cnt(document.getElementById('c2'),18,'',1200);
+    cnt(document.getElementById('c3'),9,'',900);
+    cnt(document.getElementById('c4'),31,'j',1400);
+  },500);
+});
+
+/* INTERSECTION OBSERVER — iframe/Lovable compatible */
+function activateEl(el){
+  if(el.classList.contains('in'))return;
+  el.classList.add('in');
+  el.querySelectorAll('.rt-bar-fill[data-w]').forEach((b,i)=>{
+    setTimeout(()=>{b.style.width=b.dataset.w+'%'},150+i*60);
+  });
+}
+/* Force all visible immediately (iframe, Lovable, preview) */
+function activateAll(){
+  document.querySelectorAll('.fi,.fi2,.fi3').forEach(activateEl);
+}
+/* Immediate triggering */
+if(document.readyState==='loading'){
+  document.addEventListener('DOMContentLoaded', activateAll);
+} else {
+  activateAll();
+}
+/* IntersectionObserver as a complement for scroll animation */
+const io=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){activateEl(e.target);io.unobserve(e.target);}});
+},{threshold:0,rootMargin:'200px 0px 200px 0px'});
+document.querySelectorAll('.fi,.fi2,.fi3').forEach(el=>io.observe(el));
+
+/* METHODO TABS */
+document.getElementById('methodo-tabs').addEventListener('click',e=>{
+  const btn=e.target.closest('.tab-btn');if(!btn)return;
+  document.querySelectorAll('#methodo-tabs .tab-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  const tid=btn.dataset.tab;
+  document.querySelectorAll('#methodo .tab-panel').forEach(p=>{p.classList.remove('active')});
+  const tp=document.getElementById(tid);
+  if(tp){tp.classList.add('active');tp.style.opacity=0;tp.style.transform='translateY(6px)';setTimeout(()=>{tp.style.transition='opacity .25s,transform .25s';tp.style.opacity=1;tp.style.transform='translateY(0)'},10);}
+});
+
+/* COUNTRY TABS */
+document.getElementById('pays-tabs').addEventListener('click',e=>{
+  const btn=e.target.closest('.pays-tab');if(!btn)return;
+  document.querySelectorAll('.pays-tab').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.pays-panel').forEach(p=>p.classList.remove('active'));
+  btn.classList.add('active');
+  const p=document.getElementById('panel-'+btn.dataset.pays);
+  if(p){p.classList.add('active');p.style.opacity=0;setTimeout(()=>{p.style.transition='opacity .25s';p.style.opacity=1},10);}
+});
+
+/* WORLD MAP */
+const geoData={
+  504:{name:'Morocco',cat:'maroc',col:'#22c55e',sec:'Aero N°1 · Auto 4th · RE 3rd'},
+  710:{name:'South Africa',cat:'concurrent',col:'#ef4444',sec:'Auto · Digital · RE · Textile'},
+  704:{name:'Vietnam',cat:'concurrent',col:'#ef4444',sec:'Digital · RE · Textile · Auto'},
+  484:{name:'Mexico',cat:'concurrent',col:'#ef4444',sec:'Auto · RE · Pharma'},
+  764:{name:'Thailand',cat:'concurrent',col:'#ef4444',sec:'Auto · RE · Digital'},
+  100:{name:'Bulgaria',cat:'concurrent',col:'#ef4444',sec:'Auto · Digital'},
+  818:{name:'Egypt',cat:'coopétiteur',col:'#f59e0b',sec:'Pharma · RE · Digital · Textile'},
+  404:{name:'Kenya',cat:'coopétiteur',col:'#f59e0b',sec:'Digital · RE'},
+  440:{name:'Lithuania',cat:'concurrent',col:'#ef4444',sec:'Digital · Outsourcing'},
+  152:{name:'Chile',cat:'concurrent',col:'#ef4444',sec:'RE · Agriculture'},
+  616:{name:'Poland',cat:'concurrent',col:'#ef4444',sec:'Auto · Pharma · Digital'},
+  646:{name:'Rwanda',cat:'coopétiteur',col:'#f59e0b',sec:'Digital · Services'},
+  686:{name:'Senegal',cat:'coopétiteur',col:'#f59e0b',sec:'RE · Digital · Agro'},
+  703:{name:'Slovakia',cat:'concurrent',col:'#ef4444',sec:'Auto'},
+  348:{name:'Hungary',cat:'concurrent',col:'#ef4444',sec:'Auto · Pharma'},
+  788:{name:'Tunisia',cat:'concurrent',col:'#ef4444',sec:'Textile · Outsourcing'},
+  792:{name:'Turkey',cat:'coopétiteur',col:'#f59e0b',sec:'Auto · Textile · RE'},
+  203:{name:'Czech Republic',cat:'concurrent',col:'#ef4444',sec:'Auto'},
+  840:{name:'United States',cat:'stratégique',col:'#3b82f6',sec:'Major investor · Global'},
+  724:{name:'Spain',cat:'stratégique',col:'#3b82f6',sec:'Textile · RE · Geopolitics'},
+  250:{name:'France',cat:'stratégique',col:'#3b82f6',sec:'1st investor in Morocco'},
+  380:{name:'Italy',cat:'stratégique',col:'#3b82f6',sec:'Auto · Aero · Agro · Textile'},
+  56:{name:'Belgium',cat:'stratégique',col:'#3b82f6',sec:'Auto · Investor'},
+  276:{name:'Germany',cat:'stratégique',col:'#3b82f6',sec:'Auto · Digital · RE · Industrial Leader'},
+  528:{name:'Netherlands',cat:'stratégique',col:'#3b82f6',sec:'Agro · Digital'},
+  826:{name:'Great Britain',cat:'stratégique',col:'#3b82f6',sec:'Pharma · Digital'},
+  156:{name:'China',cat:'stratégique',col:'#3b82f6',sec:'RE · Digital · Auto · Infra.'},
+  392:{name:'Japan',cat:'stratégique',col:'#3b82f6',sec:'Auto · Aero'},
+  410:{name:'South Korea',cat:'stratégique',col:'#3b82f6',sec:'Auto · Tech'},
+  356:{name:'India',cat:'concurrent',col:'#ef4444',sec:'Textile · Outsourcing · RE'},
+  76:{name:'Brazil',cat:'coopétiteur',col:'#f59e0b',sec:'RE · Agriculture'},
+};
+const catLabels={maroc:'Morocco',concurrent:'Direct Competitor',coopétiteur:'Coopetitor',stratégique:'Strategic Partner'};
+
+const mapEl=document.getElementById('world-map');
+const tt=document.getElementById('map-tt');
+const ttN=document.getElementById('tt-n');
+const ttC=document.getElementById('tt-c');
+const ttS=document.getElementById('tt-s');
+
+const W=mapEl.clientWidth||800,H=mapEl.clientHeight||400;
+const svg=d3.select('#world-map').append('svg').attr('width','100%').attr('height','100%').attr('viewBox',`0 0 ${W} ${H}`);
+const proj=d3.geoNaturalEarth1().scale(W/6.5).translate([W/2,H/2]);
+const path=d3.geoPath(proj);
+
+d3.json('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json').then(world=>{
+  const features=topojson.feature(world,world.objects.countries).features;
+  svg.selectAll('path').data(features).join('path')
+    .attr('d',path)
+    .attr('stroke','white').attr('stroke-width',.4)
+    .attr('fill',d=>{const g=geoData[+d.id];return g?g.col:'#d9cfbc';})
+    .attr('opacity',d=>{const g=geoData[+d.id];return g?1:.55;})
+    .attr('cursor',d=>geoData[+d.id]?'pointer':'default')
+    .on('mousemove',(event,d)=>{
+      const g=geoData[+d.id];if(!g)return;
+      ttN.textContent=g.name;ttC.textContent=catLabels[g.cat]||'';ttS.textContent=g.sec;
+      const rect=mapEl.getBoundingClientRect();
+      let x=event.clientX-rect.left+14,y=event.clientY-rect.top-12;
+      if(x+230>rect.width)x=x-244;
+      tt.style.left=x+'px';tt.style.top=y+'px';tt.style.opacity='1';
+    })
+    .on('mouseleave',()=>{tt.style.opacity='0';});
+}).catch(()=>{
+  svg.append('text').attr('x',20).attr('y',40).attr('fill','#888').attr('font-size',13).text('Map loading...');
+});
+
+/* SECTOR CHART */
+const sLabels=['Digital','RE','Automotive','Agro','Textile','Pharma','Outsourcing','Naval','Aero'];
+const sCols=['#B8932A','#1a6b5c','#1a4a7a','#7F77DD','#D4537E','#BA7517','#888780','#0F6E56','#E24B4A'];
+const sData={
+  all:[20877,9536,3069,863,739,660,333,318,278],
+  sa:[5191,3076,969,283,150,99,99,77,24],
+  vn:[5519,2466,428,224,238,154,49,101,46],
+  mx:[3242,595,521,45,37,166,83,32,40],
+  ma:[674,654,335,98,102,23,31,21,118],
+  th:[2161,570,287,28,28,111,10,12,11],
+};
+const sCtx=document.getElementById('sectorChart').getContext('2d');
+const sChart=new Chart(sCtx,{
+  type:'bar',
+  data:{labels:sLabels,datasets:[{label:'Mentions',data:sData.all,backgroundColor:sCols,borderWidth:0,borderRadius:2}]},
+  options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{backgroundColor:'#0D1B2A',borderColor:'rgba(184,147,42,.3)',borderWidth:1,titleColor:'#D4A83A',bodyColor:'rgba(245,241,232,.75)',padding:10,callbacks:{label:c=>' '+c.parsed.y.toLocaleString('en-US')+' mentions'}}},scales:{x:{grid:{color:'rgba(0,0,0,.04)'},ticks:{font:{family:'JetBrains Mono,monospace',size:10},color:'#a89880'}},y:{grid:{color:'rgba(0,0,0,.04)'},ticks:{font:{family:'JetBrains Mono,monospace',size:10},color:'#a89880',callback:v=>v>=1000?(v/1000).toFixed(0)+'k':v}}}},
+});
+document.getElementById('stabs').addEventListener('click',e=>{
+  const tab=e.target.closest('.sector-tab');if(!tab)return;
+  document.querySelectorAll('.sector-tab').forEach(t=>t.classList.remove('active'));
+  tab.classList.add('active');
+  sChart.data.datasets[0].data=sData[tab.dataset.c]||sData.all;
+  sChart.update('active');
+});
+
+/* BUBBLE CHART */
+new Chart(document.getElementById('bubbleChart').getContext('2d'),{
+  type:'bubble',
+  data:{datasets:[
+    {label:'Leaders',data:[{x:8.1,y:9968,r:30,n:'South Africa'},{x:8.3,y:9225,r:28,n:'Vietnam'},{x:7.9,y:4761,r:20,n:'Mexico'}],backgroundColor:'rgba(184,147,42,.7)',borderColor:'#B8932A',borderWidth:1.5},
+    {label:'Balancers',data:[{x:7.0,y:3218,r:16,n:'Thailand'},{x:7.2,y:2056,r:14,n:'Morocco'}],backgroundColor:'rgba(13,27,42,.7)',borderColor:'#0D1B2A',borderWidth:1.5},
+    {label:'Specialists',data:[{x:6.1,y:2506,r:13,n:'Kenya'},{x:5.9,y:1764,r:11,n:'Egypt'},{x:6.2,y:638,r:9,n:'Turkey'}],backgroundColor:'rgba(26,107,92,.7)',borderColor:'#1a6b5c',borderWidth:1.5},
+  ]},
+  options:{responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{position:'top',labels:{font:{family:'JetBrains Mono',size:10},padding:14,boxWidth:10}},tooltip:{backgroundColor:'#0D1B2A',borderColor:'rgba(184,147,42,.3)',borderWidth:1,titleColor:'#D4A83A',bodyColor:'rgba(245,241,232,.75)',callbacks:{title:items=>items[0].raw.n||'',label:items=>'Index : '+items.raw.y.toLocaleString('en-US')+' pts'}}},
+    scales:{x:{title:{display:true,text:'No. sectors covered',color:'#a89880',font:{size:11}},min:4,max:10,ticks:{color:'#a89880',font:{size:10}},grid:{color:'rgba(0,0,0,.04)'}},y:{title:{display:true,text:'Competitiveness Index',color:'#a89880',font:{size:11}},ticks:{color:'#a89880',font:{size:10},callback:v=>v.toLocaleString('en-US')},grid:{color:'rgba(0,0,0,.04)'}}}},
+});
+
+/* RADAR CHART - replaced by Flourish - removed */
+/* TAG CLOUD - replaced by Flourish */
+
+/* SECTOR TOOLTIPS */
+const scTT=document.getElementById('sc-tooltip');
+const scTTRank=document.getElementById('sc-tt-rank');
+const scTTScore=document.getElementById('sc-tt-score');
+const scTTDetail=document.getElementById('sc-tt-detail');
+document.querySelectorAll('.sc-tt').forEach(sc=>{
+  sc.addEventListener('mouseenter',e=>{
+    scTTRank.textContent='Morocco - '+sc.dataset.rank;
+    scTTScore.textContent=sc.dataset.score;
+    scTTDetail.textContent=sc.dataset.detail;
+    scTT.style.display='block';
+  });
+  sc.addEventListener('mousemove',e=>{
+    let x=e.clientX+16,y=e.clientY-20;
+    if(x+270>window.innerWidth)x=e.clientX-280;
+    scTT.style.left=x+'px';scTT.style.top=y+'px';
+  });
+  sc.addEventListener('mouseleave',()=>{scTT.style.display='none';});
+});
+
+/* HORIZONTAL TIMELINE */
+const tlNodes=document.querySelectorAll('.tl-node');
+const tlPanels=document.querySelectorAll('.tl-panel');
+tlNodes.forEach(node=>{
+  node.addEventListener('click',()=>{
+    const idx=+node.dataset.idx;
+    tlNodes.forEach((n,i)=>{
+      n.classList.toggle('active',i===idx);
+    });
+    tlPanels.forEach((p,i)=>{
+      p.classList.toggle('active',i===idx);
+    });
+    // Update rail fill
+    const fills=[0,33,66,100];
+    const fill=document.getElementById('tl-rail-fill');
+    if(fill)fill.style.background='linear-gradient(to right,var(--gold) '+fills[idx]+'%,var(--rule) '+fills[idx]+'%)';
+  });
+});
+
+/* Hide "Made with Flourish" badge — overlay technique */
+(function(){
+  function coverBadge(el){
+    if(el.getAttribute('data-badge-hidden')) return;
+    el.setAttribute('data-badge-hidden','1');
+    // Place cover on parent to avoid overflow:hidden clipping
+    var parent = el.parentElement || el;
+    parent.style.position='relative';
+    var cover=document.createElement('div');
+    cover.style.cssText='position:absolute;bottom:0;right:0;width:200px;height:36px;background:white;z-index:9999;pointer-events:none';
+    parent.appendChild(cover);
+  }
+  function run(){
+    document.querySelectorAll('.flourish-embed').forEach(coverBadge);
+  }
+  setTimeout(run,1500);
+  setTimeout(run,3500);
+  new MutationObserver(run).observe(document.body,{childList:true,subtree:true});
+})();
+
+/* STRATEGIC EXCHANGE FORM TRIGGER (sent to parent React app) */
+function openStrategicExchange(e){
+  if(e) e.preventDefault();
+  try { window.parent.postMessage('open-strategic-exchange','*'); } catch(_){}
+}
+document.getElementById('nav-strategic-exchange')?.addEventListener('click', openStrategicExchange);
+document.getElementById('cta-strategic-exchange')?.addEventListener('click', openStrategicExchange);
+
+</script>
+</body>
+</html>
