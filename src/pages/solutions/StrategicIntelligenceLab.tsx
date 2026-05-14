@@ -2111,10 +2111,12 @@ const OcpCaseFile = () => {
   );
 };
 
-const HealthCaseFile = () => (
+const HealthCaseFile = () => {
+  const { lang } = useLanguage();
+  return (
   <CaseFileSection>
     <CaseFileStyles />
-    <CaseFileHeader number="CASE FILE · 02" title="Ministère de la Santé : crise sanitaire H1N1." emphasis="crise sanitaire" />
+    <CaseFileHeader number="CASE FILE · 02" title={lang === "en" ? "Ministry of Health: H1N1 health crisis." : "Ministère de la Santé : crise sanitaire H1N1."} emphasis={lang === "en" ? "H1N1 health crisis" : "crise sanitaire"} />
     <CaseIntro
       kicker="War Room · Santé publique"
       title="40 décès. Désinformation massive. Un ministère sous pression médiatique inédite."
