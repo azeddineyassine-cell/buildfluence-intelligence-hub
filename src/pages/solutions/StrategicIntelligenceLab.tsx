@@ -2049,10 +2049,12 @@ const MissionTimeline = ({ title, items }: { title: string; items: TimelineNode[
   );
 };
 
-const OcpCaseFile = () => (
+const OcpCaseFile = () => {
+  const { lang } = useLanguage();
+  return (
   <CaseFileSection>
     <CaseFileStyles />
-    <CaseFileHeader number="CASE FILE · 01" title="Mission OCP Group : contrer les campagnes hostiles." emphasis="contrer" />
+    <CaseFileHeader number="CASE FILE · 01" title={lang === "en" ? "OCP Group Mission: countering hostile campaigns." : "Mission OCP Group : contrer les campagnes hostiles."} emphasis={lang === "en" ? "countering" : "contrer"} />
     <CaseIntro
       kicker="Mission · Cartographie adverse"
       title="Groupe industriel stratégique, ciblé par des campagnes de nuisance internationales."
@@ -2066,7 +2068,7 @@ const OcpCaseFile = () => (
     <ChessboardsBlock />
     <StakeholderMatrix />
     <MissionTimeline
-      title="Déroulé de la mission"
+      title={lang === "en" ? "Mission Roadmap" : "Déroulé de la mission"}
       items={[
         {
           date: "SEMAINE 1",
@@ -2106,7 +2108,8 @@ const OcpCaseFile = () => (
       ]}
     />
   </CaseFileSection>
-);
+  );
+};
 
 const HealthCaseFile = () => (
   <CaseFileSection>
