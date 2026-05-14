@@ -1,8 +1,10 @@
 import { useEffect, useMemo, useState } from "react";
 import { FormStrategicExchange } from "@/components/FormModals";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const Barometre = () => {
-  const src = useMemo(() => `/barometre.html?v=${Date.now()}`, []);
+  const { lang } = useLanguage();
+  const src = useMemo(() => `${lang === "en" ? "/barometre-en.html" : "/barometre.html"}?v=${Date.now()}`, [lang]);
   const [formOpen, setFormOpen] = useState(false);
 
   useEffect(() => {
