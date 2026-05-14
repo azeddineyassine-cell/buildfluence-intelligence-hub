@@ -360,7 +360,7 @@ const DeepDueDiligence = () => {
                 >
                   <input type="checkbox" name="nda" required style={{ marginTop: 4 }} />
                   <span>
-                    {t(<>J'accepte la confidentialité et les conditions <strong>NDA</strong> de Buildfluence.</>, <>I accept Buildfluence's confidentiality and <strong>NDA</strong> terms.</>)}
+                    {lang === "en" ? <>I accept Buildfluence's confidentiality and <strong>NDA</strong> terms.</> : <>J'accepte la confidentialité et les conditions <strong>NDA</strong> de Buildfluence.</>}
                   </span>
                 </label>
 
