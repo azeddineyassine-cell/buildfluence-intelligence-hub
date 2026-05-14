@@ -9,7 +9,7 @@ const DeepDueDiligence = () => {
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const formRef = useRef<HTMLDivElement>(null);
   const { toast } = useToast();
-  const { lang } = useLanguage();
+  const { lang, t } = useLanguage();
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [formOpen, setFormOpen] = useState(false);
