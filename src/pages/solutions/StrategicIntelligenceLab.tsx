@@ -1010,6 +1010,7 @@ const ThreatViz = ({ mode }: { mode: ThreatMode }) => {
 };
 
 const ThreatSection = () => {
+  const { lang } = useLanguage();
   const [mode, setMode] = useState<ThreatMode>("veille");
   const data = THREAT_CONTENT[mode];
   const restartThreatAnimations = () => {
@@ -1113,7 +1114,7 @@ const ThreatSection = () => {
               padding: 4,
             }}
           >
-            <ToggleBtn value="veille" label="● VEILLE" />
+            <ToggleBtn value="veille" label={lang === "en" ? "● MONITORING" : "● VEILLE"} />
             <ToggleBtn value="warroom" label="◈ WAR ROOM" />
           </div>
           <div
