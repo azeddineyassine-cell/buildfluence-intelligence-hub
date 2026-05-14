@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const C = {
   navy: "#0D1B2A",
@@ -219,6 +220,7 @@ const WorldMap: React.FC = () => {
 };
 
 const CompetitiveLandscape: React.FC<{ variant?: "both" | "map" | "sectors" }> = ({ variant = "both" }) => {
+  const { lang } = useLanguage();
   const [openIdx, setOpenIdx] = useState<number | null>(null);
   const showMap = variant === "both" || variant === "map";
   const showSectors = variant === "both" || variant === "sectors";
@@ -229,7 +231,7 @@ const CompetitiveLandscape: React.FC<{ variant?: "both" | "map" | "sectors" }> =
       <div style={{ marginBottom: variant === "map" ? 0 : 56 }}>
         <div style={{ textAlign: "center", marginBottom: 28 }}>
           <div style={{ fontFamily: FONT_MONO, fontSize: 11, letterSpacing: "0.24em", textTransform: "uppercase", color: C.gold, marginBottom: 14, fontWeight: 600 }}>
-            Cartographie concurrentielle
+            {lang === "en" ? "Competitive mapping" : "Cartographie concurrentielle"}
           </div>
           <h3 style={{ fontFamily: FONT_DISPLAY, fontSize: "clamp(28px,3vw,38px)", fontWeight: 600, color: C.navy, lineHeight: 1.1, letterSpacing: "-0.015em" }}>
             Concurrence, <em style={{ fontStyle: "italic", color: C.gold, fontWeight: 400 }}>Coopétition</em> &amp; Alliances globales du Maroc
@@ -262,7 +264,7 @@ const CompetitiveLandscape: React.FC<{ variant?: "both" | "map" | "sectors" }> =
       <div>
         <div style={{ textAlign: "center", marginBottom: 24 }}>
           <h3 style={{ fontFamily: FONT_DISPLAY, fontSize: "clamp(24px,2.4vw,30px)", fontWeight: 600, color: C.navy, lineHeight: 1.15, letterSpacing: "-0.01em" }}>
-            Les 9 secteurs stratégiques identifiés par l'AMDIE
+            {lang === "en" ? "The 9 strategic sectors identified by AMDIE" : "Les 9 secteurs stratégiques identifiés par l'AMDIE"}
           </h3>
           <p style={{ fontFamily: FONT_SANS, fontStyle: "italic", fontSize: 13, color: C.inkSoft, marginTop: 10 }}>
             Cliquer sur un secteur pour voir le détail

@@ -1010,6 +1010,7 @@ const ThreatViz = ({ mode }: { mode: ThreatMode }) => {
 };
 
 const ThreatSection = () => {
+  const { lang } = useLanguage();
   const [mode, setMode] = useState<ThreatMode>("veille");
   const data = THREAT_CONTENT[mode];
   const restartThreatAnimations = () => {
@@ -1113,7 +1114,7 @@ const ThreatSection = () => {
               padding: 4,
             }}
           >
-            <ToggleBtn value="veille" label="● VEILLE" />
+            <ToggleBtn value="veille" label={lang === "en" ? "● MONITORING" : "● VEILLE"} />
             <ToggleBtn value="warroom" label="◈ WAR ROOM" />
           </div>
           <div
@@ -1264,6 +1265,7 @@ const LEVELS = [
 ];
 
 const ModelisationsSection = () => {
+  const { lang } = useLanguage();
   return (
     <div
       className="rounded-xl px-6 md:px-10 py-10"
@@ -1274,7 +1276,7 @@ const ModelisationsSection = () => {
           className="text-[11px] uppercase mb-3"
           style={{ fontFamily: FONT_MONO, color: C.gold, letterSpacing: "0.25em" }}
         >
-          03 · Modélisations & POCs
+          {lang === "en" ? "03 · Modeling & POCs" : "03 · Modélisations & POCs"}
         </div>
         <h3
           id="modelisations-pocs"
@@ -1592,6 +1594,7 @@ const Unit = ({ children }: { children: React.ReactNode }) => (
 );
 
 const CommandTree = () => {
+  const { lang } = useLanguage();
   const ref = useRef<HTMLDivElement | null>(null);
   const [hovered, setHovered] = useState<string | null>(null);
 
@@ -1668,7 +1671,7 @@ const CommandTree = () => {
       <style>{`
         .command-tree .tree-node,.command-tree .tree-link{opacity:0;transition:opacity .5s ease,stroke .2s ease,stroke-width .2s ease}.command-tree.in-view .tree-node{opacity:1}.command-tree.in-view .tree-link{opacity:.5}.command-tree.in-view .tree-link{transition-delay:600ms}.command-tree .tree-node.highlight rect{stroke:${C.gold};stroke-width:2px}.command-tree .tree-node.dim{opacity:.18!important}.command-tree .tree-link.highlight{stroke:${C.gold};stroke-width:2px;opacity:1!important}.command-tree .tree-link.dim{opacity:.12!important}@media(max-width:640px){.tree-scroll{overflow-x:auto}}
       `}</style>
-      <BlockHeader kicker="A · DÉCRYPTAGE" title={<>L'arbre des commanditaires.<br />ONG façades, financeurs et relais.</>} hint="Survolez une façade pour révéler sa chaîne" />
+      <BlockHeader kicker={lang === "en" ? "A · DECODING" : "A · DÉCRYPTAGE"} title={<>L'arbre des commanditaires.<br />ONG façades, financeurs et relais.</>} hint="Survolez une façade pour révéler sa chaîne" />
       <div className="tree-scroll">
         <svg className="command-tree" viewBox="0 0 760 380" width="100%" height="380" style={{ minWidth: 760 }}>
           {links.map(([from, to], index) => {
@@ -1722,6 +1725,7 @@ const LegendItem = ({ color, label }: { color: string; label: string }) => (
 );
 
 const ChessboardsBlock = () => {
+  const { lang } = useLanguage();
   const cards = [
     {
       key: "geo",
@@ -1753,7 +1757,7 @@ const ChessboardsBlock = () => {
   ];
   return (
     <div style={{ marginTop: 48 }}>
-      <BlockHeader kicker="B · MÉTHODE" title={<>L'analyse par échiquiers.<br />Trois lectures qui se croisent.</>} />
+      <BlockHeader kicker={lang === "en" ? "B · METHODOLOGY" : "B · MÉTHODE"} title={<>L'analyse par échiquiers.<br />Trois lectures qui se croisent.</>} />
       <div style={{ background: "rgba(16,62,140,0.04)", borderLeft: `4px solid ${NAVY2}`, padding: "22px 28px", borderRadius: 2, marginBottom: 28, maxWidth: 980 }}>
         <p className="italic" style={{ fontFamily: FONT_ITALIC, fontSize: 17, lineHeight: 1.55, color: NAVY3, margin: 0 }}>
           Là où la plupart des cabinets traitent une dimension à la fois, <strong style={{ color: C.navy, fontFamily: "DM Sans, sans-serif", fontStyle: "normal", fontWeight: 600 }}>Buildfluence croise systématiquement les trois échiquiers</strong> — géopolitique, économique et sociétal — pour révéler la mécanique réelle d'une attaque informationnelle. C'est ce mix tridimensionnel qui distingue notre méthode.
@@ -1792,6 +1796,7 @@ const ChessboardsBlock = () => {
 };
 
 const StakeholderMatrix = () => {
+  const { lang } = useLanguage();
   const wrapRef = useRef<HTMLDivElement | null>(null);
   const [filter, setFilter] = useState("all");
   const [tooltip, setTooltip] = useState<{ visible: boolean; x: number; y: number; node: MatrixNode | null }>({ visible: false, x: 0, y: 0, node: null });
@@ -1891,7 +1896,7 @@ const StakeholderMatrix = () => {
       <style>{`
         .mn{opacity:1;transition:opacity .35s ease,filter .15s ease}.mn.dim{opacity:.12!important}.mn:hover{filter:drop-shadow(0 8px 12px rgba(13,27,42,.25))}.matrix-tooltip{opacity:0;transform:translateY(4px);transition:.15s;pointer-events:none}.matrix-tooltip.visible{opacity:1;transform:translateY(0)}
       `}</style>
-      <BlockHeader kicker="C · CARTOGRAPHIE" title={<>La matrice dynamique des parties prenantes.<br />Qui pèse, qui amplifie, qui s'efface.</>} />
+      <BlockHeader kicker={lang === "en" ? "C · MAPPING" : "C · CARTOGRAPHIE"} title={<>La matrice dynamique des parties prenantes.<br />Qui pèse, qui amplifie, qui s'efface.</>} />
       <div className="matrix-toolbar">
         <div className="flex flex-wrap gap-[6px]">
           {filters.map((item) => (
@@ -2049,10 +2054,12 @@ const MissionTimeline = ({ title, items }: { title: string; items: TimelineNode[
   );
 };
 
-const OcpCaseFile = () => (
+const OcpCaseFile = () => {
+  const { lang } = useLanguage();
+  return (
   <CaseFileSection>
     <CaseFileStyles />
-    <CaseFileHeader number="CASE FILE · 01" title="Mission OCP Group : contrer les campagnes hostiles." emphasis="contrer" />
+    <CaseFileHeader number="CASE FILE · 01" title={lang === "en" ? "OCP Group Mission: countering hostile campaigns." : "Mission OCP Group : contrer les campagnes hostiles."} emphasis={lang === "en" ? "countering" : "contrer"} />
     <CaseIntro
       kicker="Mission · Cartographie adverse"
       title="Groupe industriel stratégique, ciblé par des campagnes de nuisance internationales."
@@ -2066,7 +2073,7 @@ const OcpCaseFile = () => (
     <ChessboardsBlock />
     <StakeholderMatrix />
     <MissionTimeline
-      title="Déroulé de la mission"
+      title={lang === "en" ? "Mission Roadmap" : "Déroulé de la mission"}
       items={[
         {
           date: "SEMAINE 1",
@@ -2106,12 +2113,15 @@ const OcpCaseFile = () => (
       ]}
     />
   </CaseFileSection>
-);
+  );
+};
 
-const HealthCaseFile = () => (
+const HealthCaseFile = () => {
+  const { lang } = useLanguage();
+  return (
   <CaseFileSection>
     <CaseFileStyles />
-    <CaseFileHeader number="CASE FILE · 02" title="Ministère de la Santé : crise sanitaire H1N1." emphasis="crise sanitaire" />
+    <CaseFileHeader number="CASE FILE · 02" title={lang === "en" ? "Ministry of Health: H1N1 health crisis." : "Ministère de la Santé : crise sanitaire H1N1."} emphasis={lang === "en" ? "H1N1 health crisis" : "crise sanitaire"} />
     <CaseIntro
       kicker="War Room · Santé publique"
       title="40 décès. Désinformation massive. Un ministère sous pression médiatique inédite."
@@ -2122,7 +2132,7 @@ const HealthCaseFile = () => (
     />
     <CaseStats stats={[{ value: <><span>&lt;2</span><Unit>h</Unit></>, label: "Activation War Room" }, { value: <><span>14</span><Unit>j</Unit></>, label: "Crise maîtrisée" }, { value: <><span>+38</span><Unit>%</Unit></>, label: "Image digitale Ministre" }, { value: "1", label: "Cabinet accompagné" }]} />
     <MissionTimeline
-      title="Déroulé de la War Room"
+      title={lang === "en" ? "War Room Workflow" : "Déroulé de la War Room"}
       items={[
         {
           date: "H+0",
@@ -2173,7 +2183,8 @@ const HealthCaseFile = () => (
       ]}
     />
   </CaseFileSection>
-);
+  );
+};
 
 const CaseFileStyles = () => (
   <style>{`
