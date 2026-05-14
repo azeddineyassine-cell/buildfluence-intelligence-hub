@@ -202,7 +202,7 @@ const DeepDueDiligence = () => {
                   marginBottom: 16,
                 }}
               >
-                · Brief confidentiel ·
+                · {t("Brief confidentiel", "Confidential brief")} ·
               </p>
               <h2
                 style={{
@@ -213,7 +213,7 @@ const DeepDueDiligence = () => {
                   marginBottom: 18,
                 }}
               >
-                Décrivez-nous votre dossier.
+                {t("Décrivez-nous votre dossier.", "Tell us about your case.")}
               </h2>
               <p
                 style={{
@@ -226,7 +226,7 @@ const DeepDueDiligence = () => {
                   lineHeight: 1.6,
                 }}
               >
-                Un analyste senior vous recontacte sous 48h ouvrées, sous couvert de confidentialité.
+                {t("Un analyste senior vous recontacte sous 48h ouvrées, sous couvert de confidentialité.", "A senior analyst will get back to you within 48 business hours, under strict confidentiality.")}
               </p>
             </div>
 
@@ -234,7 +234,7 @@ const DeepDueDiligence = () => {
               <button
                 type="button"
                 onClick={() => setFormOpen(false)}
-                aria-label="Fermer le formulaire"
+                aria-label={t("Fermer le formulaire", "Close the form")}
                 style={{
                   position: 'absolute',
                   top: '16px',
@@ -270,7 +270,7 @@ const DeepDueDiligence = () => {
                     marginBottom: 18,
                   }}
                 >
-                  · Brief reçu ·
+                  · {t("Brief reçu", "Brief received")} ·
                 </div>
                 <h3
                   style={{
@@ -280,10 +280,10 @@ const DeepDueDiligence = () => {
                     marginBottom: 14,
                   }}
                 >
-                  Merci. Votre dossier a bien été transmis.
+                  {t("Merci. Votre dossier a bien été transmis.", "Thank you. Your file has been received.")}
                 </h3>
                 <p style={{ fontSize: 14, lineHeight: 1.7, color: "#2C3E55", maxWidth: 520, margin: "0 auto" }}>
-                  Un analyste senior vous recontacte sous 48h ouvrées, sous couvert de confidentialité.
+                  {t("Un analyste senior vous recontacte sous 48h ouvrées, sous couvert de confidentialité.", "A senior analyst will get back to you within 48 business hours, under strict confidentiality.")}
                 </p>
               </div>
             ) : (
@@ -300,50 +300,50 @@ const DeepDueDiligence = () => {
               >
                 <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20 }}>
                   <div>
-                    <label style={labelStyle}>Nom complet *</label>
+                    <label style={labelStyle}>{t("Nom complet", "Full name")} *</label>
                     <input name="name" required maxLength={120} style={inputStyle} />
                   </div>
                   <div>
-                    <label style={labelStyle}>Société *</label>
+                    <label style={labelStyle}>{t("Société", "Company")} *</label>
                     <input name="organization" required maxLength={150} style={inputStyle} />
                   </div>
                 </div>
 
                 <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20 }}>
                   <div>
-                    <label style={labelStyle}>Email professionnel *</label>
+                    <label style={labelStyle}>{t("Email professionnel", "Business email")} *</label>
                     <input name="email" type="email" required maxLength={200} style={inputStyle} />
                   </div>
                   <div>
-                    <label style={labelStyle}>Téléphone</label>
+                    <label style={labelStyle}>{t("Téléphone", "Phone")}</label>
                     <input name="phone" type="tel" maxLength={40} style={inputStyle} />
                   </div>
                 </div>
 
                 <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20 }}>
                   <div>
-                    <label style={labelStyle}>Type de besoin *</label>
+                    <label style={labelStyle}>{t("Type de besoin", "Type of need")} *</label>
                     <select name="need" required style={{ ...inputStyle, appearance: "auto" }}>
-                      <option value="">Sélectionner...</option>
-                      <option value="Investissement">Investissement</option>
-                      <option value="Partenariat">Partenariat</option>
-                      <option value="Acquisition">Acquisition</option>
-                      <option value="Autre">Autre</option>
+                      <option value="">{t("Sélectionner...", "Select...")}</option>
+                      <option value="Investissement">{t("Investissement", "Investment")}</option>
+                      <option value="Partenariat">{t("Partenariat", "Partnership")}</option>
+                      <option value="Acquisition">{t("Acquisition", "Acquisition")}</option>
+                      <option value="Autre">{t("Autre", "Other")}</option>
                     </select>
                   </div>
                   <div>
-                    <label style={labelStyle}>Périmètre estimé (M$)</label>
-                    <input name="scope" maxLength={40} placeholder="Optionnel" style={inputStyle} />
+                    <label style={labelStyle}>{t("Périmètre estimé (M$)", "Estimated scope (M$)")}</label>
+                    <input name="scope" maxLength={40} placeholder={t("Optionnel", "Optional")} style={inputStyle} />
                   </div>
                 </div>
 
                 <div>
-                  <label style={labelStyle}>Message libre</label>
+                  <label style={labelStyle}>{t("Message libre", "Free message")}</label>
                   <textarea
                     name="message"
                     rows={5}
                     maxLength={2000}
-                    placeholder="Décrivez le contexte du dossier…"
+                    placeholder={t("Décrivez le contexte du dossier…", "Describe the context of the case…")}
                     style={{ ...inputStyle, fontFamily: "DM Sans, sans-serif", resize: "vertical" }}
                   />
                 </div>
@@ -360,7 +360,7 @@ const DeepDueDiligence = () => {
                 >
                   <input type="checkbox" name="nda" required style={{ marginTop: 4 }} />
                   <span>
-                    J'accepte la confidentialité et les conditions <strong>NDA</strong> de Buildfluence.
+                    {t(<>J'accepte la confidentialité et les conditions <strong>NDA</strong> de Buildfluence.</>, <>I accept Buildfluence's confidentiality and <strong>NDA</strong> terms.</>)}
                   </span>
                 </label>
 
@@ -382,7 +382,7 @@ const DeepDueDiligence = () => {
                     borderRadius: 2,
                   }}
                 >
-                  {submitting ? "Envoi..." : "Envoyer le brief confidentiel →"}
+                  {submitting ? t("Envoi...", "Sending...") : t("Envoyer le brief confidentiel →", "Send confidential brief →")}
                 </button>
               </form>
             )}
