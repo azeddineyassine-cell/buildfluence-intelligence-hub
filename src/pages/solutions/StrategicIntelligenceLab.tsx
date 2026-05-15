@@ -520,7 +520,8 @@ const FlourishViz = () => {
       />
     </div>
   </VizFrame>
-);
+  );
+};
 
 const PatentsViz = () => {
   const sats = [
