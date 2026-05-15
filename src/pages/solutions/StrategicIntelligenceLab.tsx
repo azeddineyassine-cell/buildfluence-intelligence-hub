@@ -1284,7 +1284,49 @@ const ThreatSection = () => {
    SECTION 03 — MODÉLISATIONS & POCs (3 cartes levels)
    ═══════════════════════════════════════════════════════ */
 
-const LEVELS = [
+const getLevels = (lang: "fr" | "en") => lang === "en" ? [
+  {
+    num: "01",
+    label: "POC EXPRESS",
+    title: "Rapid proof",
+    tag: "Delivered in 1 week",
+    bullets: [
+      "Integration of your strategic stakes",
+      "Decision-making maturity audit (initial diagnostic)",
+      "1 use case modelled on real data",
+      "Live operational demonstration",
+    ],
+    deliverable: "Feasibility report + functional demo",
+  },
+  {
+    num: "02",
+    label: "PILOT",
+    title: "Actionable model",
+    tag: "Delivered in 3-4 weeks",
+    bullets: [
+      "Predictive analytics models on client data",
+      "Weak-signal detection platforms (live POC)",
+      "Real-time image and reputation barometers",
+      "Interactive decision-making dashboards",
+      "Strategic Business Review with recommendations",
+    ],
+    deliverable: "Functional cockpit + industrialisation roadmap",
+  },
+  {
+    num: "03",
+    label: "INFRASTRUCTURE",
+    title: "Full deployment",
+    tag: "6-12 weeks",
+    bullets: [
+      "Permanent decision-making infrastructure",
+      "Integration into your existing systems",
+      "Training and skills transfer",
+      "Monitoring, maintenance and evolution",
+      "Long-term strategic support",
+    ],
+    deliverable: "Operational system + dedicated team",
+  },
+] : [
   {
     num: "01",
     label: "POC EXPRESS",
@@ -1330,6 +1372,7 @@ const LEVELS = [
 
 const ModelisationsSection = () => {
   const { lang } = useLanguage();
+  const LEVELS = getLevels(lang);
   return (
     <div
       className="rounded-xl px-6 md:px-10 py-10"
