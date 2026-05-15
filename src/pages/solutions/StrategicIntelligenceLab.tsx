@@ -2164,55 +2164,27 @@ const OcpCaseFile = () => {
     <CaseFileStyles />
     <CaseFileHeader number="CASE FILE · 01" title={lang === "en" ? "OCP Group Mission: countering hostile campaigns." : "Mission OCP Group : contrer les campagnes hostiles."} emphasis={lang === "en" ? "countering" : "contrer"} />
     <CaseIntro
-      kicker="Mission · Cartographie adverse"
-      title="Groupe industriel stratégique, ciblé par des campagnes de nuisance internationales."
-      emphasis="campagnes de nuisance"
-      body={<>Agitation médiatique et sociale orchestrée par des ONG d'Europe du Nord. Le client a besoin de comprendre les <strong>chaînes d'amplification & idiots utiles</strong>, et de neutraliser le récit adverse avant qu'il n'atteigne ses marchés clés.</>}
-      quote="L'attaque était invisible pour les veilles classiques. C'est dans la cartographie des relais qu'on a vu la mécanique."
-      meta="Analyst note · OCP mission"
+      kicker={lang === "en" ? "Mission · Adversarial mapping" : "Mission · Cartographie adverse"}
+      title={lang === "en" ? "Strategic industrial group, targeted by international nuisance campaigns." : "Groupe industriel stratégique, ciblé par des campagnes de nuisance internationales."}
+      emphasis={lang === "en" ? "nuisance campaigns" : "campagnes de nuisance"}
+      body={lang === "en" ? <>Media and social agitation orchestrated by Northern European NGOs. The client needs to understand the <strong>amplification chains & useful idiots</strong>, and to neutralise the adversarial narrative before it reaches its key markets.</> : <>Agitation médiatique et sociale orchestrée par des ONG d'Europe du Nord. Le client a besoin de comprendre les <strong>chaînes d'amplification & idiots utiles</strong>, et de neutraliser le récit adverse avant qu'il n'atteigne ses marchés clés.</>}
+      quote={lang === "en" ? "The attack was invisible to traditional intelligence. It was in the mapping of relays that we saw the mechanics." : "L'attaque était invisible pour les veilles classiques. C'est dans la cartographie des relais qu'on a vu la mécanique."}
+      meta={lang === "en" ? "Analyst note · OCP mission" : "Analyst note · OCP mission"}
     />
-    <CaseStats stats={[{ value: "3", label: "Échiquiers d'analyse" }, { value: "47", label: "Parties prenantes mappées" }, { value: "12", label: "ONG sources identifiées" }, { value: "1", label: "Tableau de bord Président" }]} />
+    <CaseStats stats={[{ value: "3", label: lang === "en" ? "Analytical chessboards" : "Échiquiers d'analyse" }, { value: "47", label: lang === "en" ? "Stakeholders mapped" : "Parties prenantes mappées" }, { value: "12", label: lang === "en" ? "Source NGOs identified" : "ONG sources identifiées" }, { value: "1", label: lang === "en" ? "President's dashboard" : "Tableau de bord Président" }]} />
     <CommandTree />
     <ChessboardsBlock />
     <StakeholderMatrix />
     <MissionTimeline
       title={lang === "en" ? "Mission Roadmap" : "Déroulé de la mission"}
-      items={[
-        {
-          date: "SEMAINE 1",
-          title: "Analyse par échiquier",
-          tooltipTitle: "Analyse par échiquier",
-          bullets: [
-            "Décodage des 3 niveaux : géopolitique, concurrentiel et sociétal",
-            "Identification des acteurs et de leurs intérêts croisés",
-          ],
-          badges: [{ label: "Cartographie phase" }],
-        },
-        {
-          date: "SEMAINE 2-3",
-          title: "Matrice dynamique des Stakeholders",
-          tooltipTitle: "Matrice dynamique des parties prenantes",
-          bullets: [
-            "Identification de 12 ONG d'Europe du Nord comme sources primaires",
-            "Identification de leurs idiots utiles dans les médias francophones",
-            "Livraison au cabinet du Président",
-          ],
-          badges: [
-            { label: "Pression" },
-            { label: "Hostile", tone: "alert" },
-            { label: "Dealer" },
-          ],
-        },
-        {
-          date: "SEMAINE 4",
-          title: "Tableau de bord décisionnel",
-          tooltipTitle: "Tableau de bord décisionnel",
-          bullets: [
-            "Actions de sensibilisation auprès des clients et partenaires",
-            "Contre-influence activée",
-          ],
-          badges: [{ label: "Mission accomplie", tone: "success" }],
-        },
+      items={lang === "en" ? [
+        { date: "WEEK 1", title: "Chessboard analysis", tooltipTitle: "Chessboard analysis", bullets: ["Decoding the 3 levels: geopolitical, competitive and societal", "Identification of actors and their cross-cutting interests"], badges: [{ label: "Mapping phase" }] },
+        { date: "WEEKS 2-3", title: "Dynamic stakeholder matrix", tooltipTitle: "Dynamic stakeholder matrix", bullets: ["Identification of 12 Northern European NGOs as primary sources", "Identification of their useful idiots in francophone media", "Delivery to the President's office"], badges: [{ label: "Pressure" }, { label: "Hostile", tone: "alert" }, { label: "Dealer" }] },
+        { date: "WEEK 4", title: "Decision-making dashboard", tooltipTitle: "Decision-making dashboard", bullets: ["Awareness actions with clients and partners", "Counter-influence activated"], badges: [{ label: "Mission accomplished", tone: "success" }] },
+      ] : [
+        { date: "SEMAINE 1", title: "Analyse par échiquier", tooltipTitle: "Analyse par échiquier", bullets: ["Décodage des 3 niveaux : géopolitique, concurrentiel et sociétal", "Identification des acteurs et de leurs intérêts croisés"], badges: [{ label: "Cartographie phase" }] },
+        { date: "SEMAINE 2-3", title: "Matrice dynamique des Stakeholders", tooltipTitle: "Matrice dynamique des parties prenantes", bullets: ["Identification de 12 ONG d'Europe du Nord comme sources primaires", "Identification de leurs idiots utiles dans les médias francophones", "Livraison au cabinet du Président"], badges: [{ label: "Pression" }, { label: "Hostile", tone: "alert" }, { label: "Dealer" }] },
+        { date: "SEMAINE 4", title: "Tableau de bord décisionnel", tooltipTitle: "Tableau de bord décisionnel", bullets: ["Actions de sensibilisation auprès des clients et partenaires", "Contre-influence activée"], badges: [{ label: "Mission accomplie", tone: "success" }] },
       ]}
     />
   </CaseFileSection>
