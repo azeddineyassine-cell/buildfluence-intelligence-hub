@@ -285,7 +285,7 @@ const ForesightSection = () => {
                   letterSpacing: "0.2em",
                 }}
               >
-                › {card.index} · DÉTAIL
+                › {card.index} · {lang === "en" ? "DETAIL" : "DÉTAIL"}
               </div>
               <h4
                 className="mb-4"
