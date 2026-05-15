@@ -581,9 +581,9 @@ const PatentsViz = () => {
         style={{ paddingTop: 10, borderTop: `1px solid ${C.rule}`, marginTop: 6 }}
       >
         {[
-          { n: "847", l: "Brevets suivis" },
-          { n: "12", l: "Écosystèmes" },
-          { n: "4", l: "Hubs deeptech" },
+          { n: "847", l: lang === "en" ? "Patents tracked" : "Brevets suivis" },
+          { n: "12", l: lang === "en" ? "Ecosystems" : "Écosystèmes" },
+          { n: "4", l: lang === "en" ? "Deeptech hubs" : "Hubs deeptech" },
         ].map((c, i) => (
           <div key={i} className="text-center">
             <div style={{ fontFamily: FONT_DISPLAY, fontWeight: 900, fontSize: 20, color: C.navy }}>{c.n}</div>
