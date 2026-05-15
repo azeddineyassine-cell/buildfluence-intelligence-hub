@@ -524,6 +524,7 @@ const FlourishViz = () => {
 };
 
 const PatentsViz = () => {
+  const { lang } = useLanguage();
   const sats = [
     { cx: 60, cy: 40, r: 6, fill: "#103E8C", stroke: "#0a2862", d: "0s" },
     { cx: 100, cy: 120, r: 5, fill: "#5d7838", stroke: "#5d7838", d: ".3s" },
@@ -534,8 +535,8 @@ const PatentsViz = () => {
   ];
   return (
     <VizFrame
-      kicker="· Innovation graph · Brevets & écosystèmes ·"
-      title="Constellation des technologies émergentes"
+      kicker={lang === "en" ? "· Innovation graph · Patents & ecosystems ·" : "· Innovation graph · Brevets & écosystèmes ·"}
+      title={lang === "en" ? "Constellation of emerging technologies" : "Constellation des technologies émergentes"}
     >
       <style>{`
         @keyframes pulse-node { 0%,100% { opacity:.45 } 50% { opacity:1 } }
