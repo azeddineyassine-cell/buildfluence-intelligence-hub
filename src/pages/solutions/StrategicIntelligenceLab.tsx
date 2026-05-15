@@ -185,16 +185,15 @@ const ForesightSection = () => {
           className="text-3xl md:text-4xl scroll-mt-24"
           style={{ fontFamily: FONT_DISPLAY, color: C.navy, lineHeight: 1.15 }}
         >
-          Cartographier le champ de bataille{" "}
-          <em style={{ color: C.gold, fontFamily: FONT_DISPLAY }}>avant</em>{" "}
-          d'y entrer
+          {lang === "en" ? <>Map the battlefield <em style={{ color: C.gold, fontFamily: FONT_DISPLAY }}>before</em> entering it</> : <>Cartographier le champ de bataille{" "}<em style={{ color: C.gold, fontFamily: FONT_DISPLAY }}>avant</em>{" "}d'y entrer</>}
         </h3>
         <p
           className="mt-3 text-lg italic"
           style={{ fontFamily: FONT_ITALIC, color: C.navyMid }}
         >
-          Quatre capacités pour lire les marchés, les territoires, l'innovation
-          et les jeux d'acteurs, en profondeur.
+          {lang === "en"
+            ? "Four capabilities to read markets, territories, innovation and stakeholder games, in depth."
+            : "Quatre capacités pour lire les marchés, les territoires, l'innovation et les jeux d'acteurs, en profondeur."}
         </p>
       </div>
 
