@@ -1514,8 +1514,7 @@ const ModelisationsSection = () => {
             lineHeight: 1.4,
           }}
         >
-          « Un POC Buildfluence, c'est la preuve par l'action. Zéro théorie,
-          cent pour cent opérationnel. »
+          {lang === "en" ? "« A Buildfluence POC is proof through action. Zero theory, one hundred percent operational. »" : "« Un POC Buildfluence, c'est la preuve par l'action. Zéro théorie, cent pour cent opérationnel. »"}
         </p>
         <div
           className="mt-3 uppercase"
@@ -1526,7 +1525,7 @@ const ModelisationsSection = () => {
             letterSpacing: "0.25em",
           }}
         >
-          — Méthode Buildfluence
+          {lang === "en" ? "— Buildfluence Method" : "— Méthode Buildfluence"}
         </div>
       </div>
     </div>
