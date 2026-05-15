@@ -2198,63 +2198,26 @@ const HealthCaseFile = () => {
     <CaseFileStyles />
     <CaseFileHeader number="CASE FILE · 02" title={lang === "en" ? "Ministry of Health: H1N1 health crisis." : "Ministère de la Santé : crise sanitaire H1N1."} emphasis={lang === "en" ? "H1N1 health crisis" : "crise sanitaire"} />
     <CaseIntro
-      kicker="War Room · Santé publique"
-      title="40 décès. Désinformation massive. Un ministère sous pression médiatique inédite."
-      emphasis="Désinformation massive."
-      body="La crise H1N1 a enclenché une spirale de désinformation dans les médias et sur les réseaux sociaux. Le Ministère de la Santé avait besoin d'identifier les sources hostiles, de produire des contre-narratifs crédibles, et de protéger l'image du Ministre pendant la tempête médiatique."
-      quote="En 2 semaines, le récit officiel est redevenu dominant. La War Room avait fait son travail."
-      meta="Debrief post-mission · Ministère de la Santé"
+      kicker={lang === "en" ? "War Room · Public health" : "War Room · Santé publique"}
+      title={lang === "en" ? "40 deaths. Massive disinformation. A ministry under unprecedented media pressure." : "40 décès. Désinformation massive. Un ministère sous pression médiatique inédite."}
+      emphasis={lang === "en" ? "Massive disinformation." : "Désinformation massive."}
+      body={lang === "en" ? "The H1N1 crisis triggered a spiral of disinformation across media and social networks. The Ministry of Health needed to identify hostile sources, produce credible counter-narratives, and protect the Minister's image during the media storm." : "La crise H1N1 a enclenché une spirale de désinformation dans les médias et sur les réseaux sociaux. Le Ministère de la Santé avait besoin d'identifier les sources hostiles, de produire des contre-narratifs crédibles, et de protéger l'image du Ministre pendant la tempête médiatique."}
+      quote={lang === "en" ? "In 2 weeks, the official narrative regained dominance. The War Room had done its job." : "En 2 semaines, le récit officiel est redevenu dominant. La War Room avait fait son travail."}
+      meta={lang === "en" ? "Post-mission debrief · Ministry of Health" : "Debrief post-mission · Ministère de la Santé"}
     />
-    <CaseStats stats={[{ value: <><span>&lt;2</span><Unit>h</Unit></>, label: "Activation War Room" }, { value: <><span>14</span><Unit>j</Unit></>, label: "Crise maîtrisée" }, { value: <><span>+38</span><Unit>%</Unit></>, label: "Image digitale Ministre" }, { value: "1", label: "Cabinet accompagné" }]} />
+    <CaseStats stats={[{ value: <><span>&lt;2</span><Unit>h</Unit></>, label: lang === "en" ? "War Room activation" : "Activation War Room" }, { value: <><span>14</span><Unit>{lang === "en" ? "d" : "j"}</Unit></>, label: lang === "en" ? "Crisis contained" : "Crise maîtrisée" }, { value: <><span>+38</span><Unit>%</Unit></>, label: lang === "en" ? "Minister digital image" : "Image digitale Ministre" }, { value: "1", label: lang === "en" ? "Cabinet supported" : "Cabinet accompagné" }]} />
     <MissionTimeline
       title={lang === "en" ? "War Room Workflow" : "Déroulé de la War Room"}
-      items={[
-        {
-          date: "H+0",
-          title: "Activation et diagnostic",
-          tooltipTitle: "Activation et diagnostic",
-          bullets: [
-            "Mise en place de la cellule de crise",
-            "Monitoring 24/7 des flux médiatiques, sociaux et numériques",
-            "Identification immédiate des relais hostiles",
-          ],
-          badges: [{ label: "Essai pour détecte", tone: "alert" }],
-        },
-        {
-          date: "J+3",
-          title: "Digital Investigation",
-          tooltipTitle: "Digital Investigation",
-          bullets: [
-            "OSINT cible : identification des sources de désinformation",
-            "Identification de leurs chaînes d'amplification",
-            "Fact-checking continu sur les fausses informations",
-          ],
-          badges: [{ label: "Mécanique cartographie" }],
-        },
-        {
-          date: "J+7",
-          title: "Contre-narratifs & stratégie média",
-          tooltipTitle: "Contre-narratifs & stratégie média",
-          bullets: [
-            "Production de contre-narratifs crédibles et massagés",
-            "Clés pour les porte-paroles",
-            "Calendrier des prises de parole",
-            "Accompagnement personnel du Ministre",
-          ],
-          badges: [{ label: "Reprise du récit" }],
-        },
-        {
-          date: "J+56",
-          title: "Sortie de crise",
-          tooltipTitle: "Sortie de crise",
-          bullets: [
-            "Crise maîtrisée",
-            "Renforcement de l'image digitale du Ministre",
-            "Transmission du dispositif à l'équipe de communication",
-            "Transmission au Cabinet Ministériel",
-          ],
-          badges: [{ label: "Mission accomplie", tone: "success" }],
-        },
+      items={lang === "en" ? [
+        { date: "H+0", title: "Activation and diagnostic", tooltipTitle: "Activation and diagnostic", bullets: ["Setting up the crisis cell", "24/7 monitoring of media, social and digital flows", "Immediate identification of hostile relays"], badges: [{ label: "Detection trial", tone: "alert" }] },
+        { date: "D+3", title: "Digital Investigation", tooltipTitle: "Digital Investigation", bullets: ["Targeted OSINT: identification of disinformation sources", "Identification of their amplification chains", "Continuous fact-checking on false information"], badges: [{ label: "Mechanics mapping" }] },
+        { date: "D+7", title: "Counter-narratives & media strategy", tooltipTitle: "Counter-narratives & media strategy", bullets: ["Production of credible, polished counter-narratives", "Talking points for spokespersons", "Speaking calendar", "Personal coaching of the Minister"], badges: [{ label: "Narrative reclaimed" }] },
+        { date: "D+56", title: "Crisis exit", tooltipTitle: "Crisis exit", bullets: ["Crisis contained", "Strengthening of the Minister's digital image", "Transfer of the system to the communications team", "Transfer to the Ministerial Cabinet"], badges: [{ label: "Mission accomplished", tone: "success" }] },
+      ] : [
+        { date: "H+0", title: "Activation et diagnostic", tooltipTitle: "Activation et diagnostic", bullets: ["Mise en place de la cellule de crise", "Monitoring 24/7 des flux médiatiques, sociaux et numériques", "Identification immédiate des relais hostiles"], badges: [{ label: "Essai pour détecte", tone: "alert" }] },
+        { date: "J+3", title: "Digital Investigation", tooltipTitle: "Digital Investigation", bullets: ["OSINT cible : identification des sources de désinformation", "Identification de leurs chaînes d'amplification", "Fact-checking continu sur les fausses informations"], badges: [{ label: "Mécanique cartographie" }] },
+        { date: "J+7", title: "Contre-narratifs & stratégie média", tooltipTitle: "Contre-narratifs & stratégie média", bullets: ["Production de contre-narratifs crédibles et massagés", "Clés pour les porte-paroles", "Calendrier des prises de parole", "Accompagnement personnel du Ministre"], badges: [{ label: "Reprise du récit" }] },
+        { date: "J+56", title: "Sortie de crise", tooltipTitle: "Sortie de crise", bullets: ["Crise maîtrisée", "Renforcement de l'image digitale du Ministre", "Transmission du dispositif à l'équipe de communication", "Transmission au Cabinet Ministériel"], badges: [{ label: "Mission accomplie", tone: "success" }] },
       ]}
     />
   </CaseFileSection>
