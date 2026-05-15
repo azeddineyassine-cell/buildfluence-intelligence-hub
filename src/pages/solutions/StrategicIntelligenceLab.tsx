@@ -320,7 +320,7 @@ const ForesightSection = () => {
                   onMouseEnter={(e) => (e.currentTarget.style.textDecoration = "underline")}
                   onMouseLeave={(e) => (e.currentTarget.style.textDecoration = "none")}
                 >
-                  Voir le baromètre →
+                  {lang === "en" ? "View the barometer →" : "Voir le baromètre →"}
                 </a>
               )}
               <ul className="space-y-5">
