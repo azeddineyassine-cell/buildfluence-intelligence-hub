@@ -6,9 +6,9 @@ import { useLanguage } from "@/contexts/LanguageContext";
 const InsightsSection = () => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.2 });
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
 
-  const caseUrl = "/Cas_client_RCA_v2.html";
+  const caseUrl = lang === "en" ? "/Cas_client_RCA_v2-en.html" : "/Cas_client_RCA_v2.html";
 
   const handlePrint = () => {
     const w = window.open(`${caseUrl}?print=true`, "_blank");
