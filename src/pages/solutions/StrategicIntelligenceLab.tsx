@@ -253,7 +253,7 @@ const ForesightSection = () => {
                   color: isActive ? C.gold : "rgba(201,168,76,0.6)",
                 }}
               >
-                EXPLORER →
+                {lang === "en" ? "EXPLORE →" : "EXPLORER →"}
               </div>
             </button>
           );
