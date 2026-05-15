@@ -37,7 +37,64 @@ type ForesightCard = {
   bullets: string[];
 };
 
-const FORESIGHT: ForesightCard[] = [
+const getForesight = (lang: "fr" | "en"): ForesightCard[] => lang === "en" ? [
+  {
+    index: "S/01",
+    title: "Market & Competitive Intelligence",
+    role: "Monitoring · Mapping · Benchmarks",
+    preview: "See markets before their players, read competitors better than they read themselves.",
+    lead: "See markets before their players, read competitors better than they read themselves.",
+    bullets: [
+      "Multi-channel intelligence: markets, competitors, patents, regulatory",
+      "Dynamic competitive mapping",
+      "Sectoral trend detection",
+      "Identification of high-potential markets",
+      "Foresight studies, international benchmarks",
+      "Mapping of key actors: Allies / Resisters / Useful idiots",
+    ],
+  },
+  {
+    index: "S/02",
+    title: "Territorial Attractiveness",
+    role: "Competitiveness · Narratives · Influence",
+    preview: "Steering economic attractiveness in the war for investment.",
+    lead: "Get a cross-analysis of investment signals, public strategies and international influence games. It allows you to understand:",
+    bullets: [
+      "Where is global competition really being fought? Identify the territories that concentrate investment flows and understand sectoral dominance dynamics.",
+      "Which countries are gaining attractiveness and why? Analyse differentiating factors: speed of execution, stability, influence strategy, ecosystem structuring.",
+      "How are direct competitors positioning themselves? Dynamic benchmark of rival countries, their sectoral strengths and expansion strategies.",
+      "Which narratives shape investor perception? Decode the dominant narratives that influence decisions beyond economic fundamentals.",
+    ],
+  },
+  {
+    index: "S/03",
+    title: "Innovation Mapping",
+    role: "Deeptech · Patents · M&A",
+    preview: "Map the technologies that will reshape your sector in 3-5 years.",
+    lead: "Map the technologies that will reshape your sector in 3-5 years.",
+    bullets: [
+      "Mapping of emerging technologies and startups",
+      "Innovation ecosystems (Deeptech, AI, biotech)",
+      "VC/CVC trends",
+      "Open Innovation opportunities and strategic M&A",
+      "Patent intelligence (WIPO, EPO, USPTO)",
+    ],
+  },
+  {
+    index: "S/04",
+    title: "Stakeholder Intelligence",
+    role: "Coalitions · Influences · Networks",
+    preview: "Identify the actors that truly weigh on your strategic decisions.",
+    lead: "Identify the actors that truly weigh on your strategic decisions.",
+    bullets: [
+      "Mapping of adversarial strategies and hidden influence networks",
+      "Mapping of opinion leaders, investors, think tanks, NGOs",
+      "Analysis of alliances, antagonisms and coalition dynamics",
+      "Identification of key actors likely to weigh on your decisions",
+      "Modelling of pressure and counter-influence scenarios",
+    ],
+  },
+] : [
   {
     index: "S/01",
     title: "Market & Competitive Intelligence",
@@ -105,6 +162,8 @@ const FORESIGHT: ForesightCard[] = [
 ];
 
 const ForesightSection = () => {
+  const { lang } = useLanguage();
+  const FORESIGHT = getForesight(lang);
   const [active, setActive] = useState<number>(0);
   const card = FORESIGHT[active];
 
@@ -126,16 +185,15 @@ const ForesightSection = () => {
           className="text-3xl md:text-4xl scroll-mt-24"
           style={{ fontFamily: FONT_DISPLAY, color: C.navy, lineHeight: 1.15 }}
         >
-          Cartographier le champ de bataille{" "}
-          <em style={{ color: C.gold, fontFamily: FONT_DISPLAY }}>avant</em>{" "}
-          d'y entrer
+          {lang === "en" ? <>Map the battlefield <em style={{ color: C.gold, fontFamily: FONT_DISPLAY }}>before</em> entering it</> : <>Cartographier le champ de bataille{" "}<em style={{ color: C.gold, fontFamily: FONT_DISPLAY }}>avant</em>{" "}d'y entrer</>}
         </h3>
         <p
           className="mt-3 text-lg italic"
           style={{ fontFamily: FONT_ITALIC, color: C.navyMid }}
         >
-          Quatre capacités pour lire les marchés, les territoires, l'innovation
-          et les jeux d'acteurs, en profondeur.
+          {lang === "en"
+            ? "Four capabilities to read markets, territories, innovation and stakeholder games, in depth."
+            : "Quatre capacités pour lire les marchés, les territoires, l'innovation et les jeux d'acteurs, en profondeur."}
         </p>
       </div>
 
@@ -195,7 +253,7 @@ const ForesightSection = () => {
                   color: isActive ? C.gold : "rgba(201,168,76,0.6)",
                 }}
               >
-                EXPLORER →
+                {lang === "en" ? "EXPLORE →" : "EXPLORER →"}
               </div>
             </button>
           );
@@ -227,7 +285,7 @@ const ForesightSection = () => {
                   letterSpacing: "0.2em",
                 }}
               >
-                › {card.index} · DÉTAIL
+                › {card.index} · {lang === "en" ? "DETAIL" : "DÉTAIL"}
               </div>
               <h4
                 className="mb-4"
@@ -262,7 +320,7 @@ const ForesightSection = () => {
                   onMouseEnter={(e) => (e.currentTarget.style.textDecoration = "underline")}
                   onMouseLeave={(e) => (e.currentTarget.style.textDecoration = "none")}
                 >
-                  Voir le baromètre →
+                  {lang === "en" ? "View the barometer →" : "Voir le baromètre →"}
                 </a>
               )}
               <ul className="space-y-5">
@@ -341,15 +399,16 @@ const VizFrame = ({
 );
 
 const PodiumViz = () => {
+  const { lang } = useLanguage();
   const bars = [
     { rank: 2, country: "Vietnam", score: "9 225", h: "78%" },
-    { rank: 1, country: "Afrique du Sud", score: "9 968", h: "95%" },
-    { rank: 3, country: "Mexique", score: "4 761", h: "55%" },
+    { rank: 1, country: lang === "en" ? "South Africa" : "Afrique du Sud", score: "9 968", h: "95%" },
+    { rank: 3, country: lang === "en" ? "Mexico" : "Mexique", score: "4 761", h: "55%" },
   ];
   return (
     <VizFrame
-      kicker="· Baromètre · Juillet–Août 2025 ·"
-      title="Indice mondial de compétitivité"
+      kicker={lang === "en" ? "· Barometer · July–August 2025 ·" : "· Baromètre · Juillet–Août 2025 ·"}
+      title={lang === "en" ? "Global Competitiveness Index" : "Indice mondial de compétitivité"}
       footer={
         <>
           <a
@@ -367,9 +426,9 @@ const PodiumViz = () => {
               textDecoration: "none",
             }}
           >
-            Voir le baromètre →
+            {lang === "en" ? "View the barometer →" : "Voir le baromètre →"}
           </a>
-          <div>Extrait du baromètre d'investissement</div>
+          <div>{lang === "en" ? "Excerpt from the investment barometer" : "Extrait du baromètre d'investissement"}</div>
         </>
       }
     >
@@ -415,11 +474,13 @@ const PodiumViz = () => {
   );
 };
 
-const FlourishViz = () => (
+const FlourishViz = () => {
+  const { lang } = useLanguage();
+  return (
   <VizFrame
-    kicker="· Cartographie territoriale ·"
-    title="Hiérarchie territoriale interactive"
-    footer="Interagissez directement avec la visualisation"
+    kicker={lang === "en" ? "· Territorial mapping ·" : "· Cartographie territoriale ·"}
+    title={lang === "en" ? "Interactive territorial hierarchy" : "Hiérarchie territoriale interactive"}
+    footer={lang === "en" ? "Interact directly with the visualisation" : "Interagissez directement avec la visualisation"}
   >
     <div
       style={{
@@ -459,9 +520,11 @@ const FlourishViz = () => (
       />
     </div>
   </VizFrame>
-);
+  );
+};
 
 const PatentsViz = () => {
+  const { lang } = useLanguage();
   const sats = [
     { cx: 60, cy: 40, r: 6, fill: "#103E8C", stroke: "#0a2862", d: "0s" },
     { cx: 100, cy: 120, r: 5, fill: "#5d7838", stroke: "#5d7838", d: ".3s" },
@@ -472,8 +535,8 @@ const PatentsViz = () => {
   ];
   return (
     <VizFrame
-      kicker="· Innovation graph · Brevets & écosystèmes ·"
-      title="Constellation des technologies émergentes"
+      kicker={lang === "en" ? "· Innovation graph · Patents & ecosystems ·" : "· Innovation graph · Brevets & écosystèmes ·"}
+      title={lang === "en" ? "Constellation of emerging technologies" : "Constellation des technologies émergentes"}
     >
       <style>{`
         @keyframes pulse-node { 0%,100% { opacity:.45 } 50% { opacity:1 } }
@@ -518,9 +581,9 @@ const PatentsViz = () => {
         style={{ paddingTop: 10, borderTop: `1px solid ${C.rule}`, marginTop: 6 }}
       >
         {[
-          { n: "847", l: "Brevets suivis" },
-          { n: "12", l: "Écosystèmes" },
-          { n: "4", l: "Hubs deeptech" },
+          { n: "847", l: lang === "en" ? "Patents tracked" : "Brevets suivis" },
+          { n: "12", l: lang === "en" ? "Ecosystems" : "Écosystèmes" },
+          { n: "4", l: lang === "en" ? "Deeptech hubs" : "Hubs deeptech" },
         ].map((c, i) => (
           <div key={i} className="text-center">
             <div style={{ fontFamily: FONT_DISPLAY, fontWeight: 900, fontSize: 20, color: C.navy }}>{c.n}</div>
@@ -538,6 +601,7 @@ const PatentsViz = () => {
 };
 
 const MatrixViz = () => {
+  const { lang } = useLanguage();
   const nodes = [
     { cx: 65, cy: 55, r: 7, fill: "#b85a3a", stroke: "#8a3f25" },
     { cx: 100, cy: 75, r: 6, fill: "#103E8C", stroke: "#0a2862" },
@@ -548,9 +612,9 @@ const MatrixViz = () => {
   ];
   return (
     <VizFrame
-      kicker="· Stakeholder map · Méthode Buildfluence ·"
-      title="Matrice d'influence : qui pèse vraiment"
-      footer="Méthode appliquée sur le case file OCP ↓"
+      kicker={lang === "en" ? "· Stakeholder map · Buildfluence method ·" : "· Stakeholder map · Méthode Buildfluence ·"}
+      title={lang === "en" ? "Influence matrix: who really weighs in" : "Matrice d'influence : qui pèse vraiment"}
+      footer={lang === "en" ? "Method applied to OCP case file ↓" : "Méthode appliquée sur le case file OCP ↓"}
     >
       <style>{`
         @keyframes fadein-mat { from { opacity:0; transform:scale(.7); } to { opacity:1; transform:scale(1); } }
@@ -566,10 +630,10 @@ const MatrixViz = () => {
         <line x1={20} y1={100} x2={300} y2={100} stroke={C.navyMid} strokeWidth={0.8} opacity={0.4} />
         {/* labels quadrants */}
         {[
-          { x: 90, y: 40, t: "Réfractaires" },
-          { x: 230, y: 40, t: "Alliés" },
-          { x: 90, y: 170, t: "Idiots utiles" },
-          { x: 230, y: 170, t: "Neutres" },
+          { x: 90, y: 40, t: lang === "en" ? "Resisters" : "Réfractaires" },
+          { x: 230, y: 40, t: lang === "en" ? "Allies" : "Alliés" },
+          { x: 90, y: 170, t: lang === "en" ? "Useful idiots" : "Idiots utiles" },
+          { x: 230, y: 170, t: lang === "en" ? "Neutral" : "Neutres" },
         ].map((q, i) => (
           <text
             key={i}
@@ -589,7 +653,7 @@ const MatrixViz = () => {
           ← HOSTILE
         </text>
         <text x={298} y={103} textAnchor="end" style={{ fontFamily: FONT_MONO, fontSize: 7.5, fill: C.goldDim }}>
-          ALLIÉ →
+          {lang === "en" ? "ALLY →" : "ALLIÉ →"}
         </text>
         {nodes.map((n, i) => (
           <circle
@@ -1220,7 +1284,49 @@ const ThreatSection = () => {
    SECTION 03 — MODÉLISATIONS & POCs (3 cartes levels)
    ═══════════════════════════════════════════════════════ */
 
-const LEVELS = [
+const getLevels = (lang: "fr" | "en") => lang === "en" ? [
+  {
+    num: "01",
+    label: "POC EXPRESS",
+    title: "Rapid proof",
+    tag: "Delivered in 1 week",
+    bullets: [
+      "Integration of your strategic stakes",
+      "Decision-making maturity audit (initial diagnostic)",
+      "1 use case modelled on real data",
+      "Live operational demonstration",
+    ],
+    deliverable: "Feasibility report + functional demo",
+  },
+  {
+    num: "02",
+    label: "PILOT",
+    title: "Actionable model",
+    tag: "Delivered in 3-4 weeks",
+    bullets: [
+      "Predictive analytics models on client data",
+      "Weak-signal detection platforms (live POC)",
+      "Real-time image and reputation barometers",
+      "Interactive decision-making dashboards",
+      "Strategic Business Review with recommendations",
+    ],
+    deliverable: "Functional cockpit + industrialisation roadmap",
+  },
+  {
+    num: "03",
+    label: "INFRASTRUCTURE",
+    title: "Full deployment",
+    tag: "6-12 weeks",
+    bullets: [
+      "Permanent decision-making infrastructure",
+      "Integration into your existing systems",
+      "Training and skills transfer",
+      "Monitoring, maintenance and evolution",
+      "Long-term strategic support",
+    ],
+    deliverable: "Operational system + dedicated team",
+  },
+] : [
   {
     num: "01",
     label: "POC EXPRESS",
@@ -1266,6 +1372,7 @@ const LEVELS = [
 
 const ModelisationsSection = () => {
   const { lang } = useLanguage();
+  const LEVELS = getLevels(lang);
   return (
     <div
       className="rounded-xl px-6 md:px-10 py-10"
@@ -1283,18 +1390,15 @@ const ModelisationsSection = () => {
           className="text-3xl md:text-4xl scroll-mt-24"
           style={{ fontFamily: FONT_DISPLAY, color: C.navy, lineHeight: 1.15 }}
         >
-          Trois niveaux.{" "}
-          <em style={{ color: C.gold, fontFamily: FONT_DISPLAY }}>
-            Une seule logique :
-          </em>{" "}
-          prouver la valeur avant de déployer.
+          {lang === "en" ? <>Three levels.{" "}<em style={{ color: C.gold, fontFamily: FONT_DISPLAY }}>One single logic:</em>{" "}prove value before deploying.</> : <>Trois niveaux.{" "}<em style={{ color: C.gold, fontFamily: FONT_DISPLAY }}>Une seule logique :</em>{" "}prouver la valeur avant de déployer.</>}
         </h3>
         <p
           className="mt-3 text-lg italic"
           style={{ fontFamily: FONT_ITALIC, color: C.navyMid }}
         >
-          Du POC express à l'infrastructure décisionnelle complète, chaque
-          niveau rend un livrable mesurable.
+          {lang === "en"
+            ? "From rapid POC to a complete decision-making infrastructure, each level produces a measurable deliverable."
+            : "Du POC express à l'infrastructure décisionnelle complète, chaque niveau rend un livrable mesurable."}
         </p>
       </div>
 
@@ -1381,7 +1485,7 @@ const ModelisationsSection = () => {
                   letterSpacing: "0.22em",
                 }}
               >
-                Livrable
+                {lang === "en" ? "Deliverable" : "Livrable"}
               </div>
               <div className="text-sm" style={{ color: C.navy, fontWeight: 500 }}>
                 {lv.deliverable}
@@ -1410,8 +1514,7 @@ const ModelisationsSection = () => {
             lineHeight: 1.4,
           }}
         >
-          « Un POC Buildfluence, c'est la preuve par l'action. Zéro théorie,
-          cent pour cent opérationnel. »
+          {lang === "en" ? "« A Buildfluence POC is proof through action. Zero theory, one hundred percent operational. »" : "« Un POC Buildfluence, c'est la preuve par l'action. Zéro théorie, cent pour cent opérationnel. »"}
         </p>
         <div
           className="mt-3 uppercase"
@@ -1422,7 +1525,7 @@ const ModelisationsSection = () => {
             letterSpacing: "0.25em",
           }}
         >
-          — Méthode Buildfluence
+          {lang === "en" ? "— Buildfluence Method" : "— Méthode Buildfluence"}
         </div>
       </div>
     </div>
@@ -2061,55 +2164,27 @@ const OcpCaseFile = () => {
     <CaseFileStyles />
     <CaseFileHeader number="CASE FILE · 01" title={lang === "en" ? "OCP Group Mission: countering hostile campaigns." : "Mission OCP Group : contrer les campagnes hostiles."} emphasis={lang === "en" ? "countering" : "contrer"} />
     <CaseIntro
-      kicker="Mission · Cartographie adverse"
-      title="Groupe industriel stratégique, ciblé par des campagnes de nuisance internationales."
-      emphasis="campagnes de nuisance"
-      body={<>Agitation médiatique et sociale orchestrée par des ONG d'Europe du Nord. Le client a besoin de comprendre les <strong>chaînes d'amplification & idiots utiles</strong>, et de neutraliser le récit adverse avant qu'il n'atteigne ses marchés clés.</>}
-      quote="L'attaque était invisible pour les veilles classiques. C'est dans la cartographie des relais qu'on a vu la mécanique."
-      meta="Analyst note · OCP mission"
+      kicker={lang === "en" ? "Mission · Adversarial mapping" : "Mission · Cartographie adverse"}
+      title={lang === "en" ? "Strategic industrial group, targeted by international nuisance campaigns." : "Groupe industriel stratégique, ciblé par des campagnes de nuisance internationales."}
+      emphasis={lang === "en" ? "nuisance campaigns" : "campagnes de nuisance"}
+      body={lang === "en" ? <>Media and social agitation orchestrated by Northern European NGOs. The client needs to understand the <strong>amplification chains & useful idiots</strong>, and to neutralise the adversarial narrative before it reaches its key markets.</> : <>Agitation médiatique et sociale orchestrée par des ONG d'Europe du Nord. Le client a besoin de comprendre les <strong>chaînes d'amplification & idiots utiles</strong>, et de neutraliser le récit adverse avant qu'il n'atteigne ses marchés clés.</>}
+      quote={lang === "en" ? "The attack was invisible to traditional intelligence. It was in the mapping of relays that we saw the mechanics." : "L'attaque était invisible pour les veilles classiques. C'est dans la cartographie des relais qu'on a vu la mécanique."}
+      meta={lang === "en" ? "Analyst note · OCP mission" : "Analyst note · OCP mission"}
     />
-    <CaseStats stats={[{ value: "3", label: "Échiquiers d'analyse" }, { value: "47", label: "Parties prenantes mappées" }, { value: "12", label: "ONG sources identifiées" }, { value: "1", label: "Tableau de bord Président" }]} />
+    <CaseStats stats={[{ value: "3", label: lang === "en" ? "Analytical chessboards" : "Échiquiers d'analyse" }, { value: "47", label: lang === "en" ? "Stakeholders mapped" : "Parties prenantes mappées" }, { value: "12", label: lang === "en" ? "Source NGOs identified" : "ONG sources identifiées" }, { value: "1", label: lang === "en" ? "President's dashboard" : "Tableau de bord Président" }]} />
     <CommandTree />
     <ChessboardsBlock />
     <StakeholderMatrix />
     <MissionTimeline
       title={lang === "en" ? "Mission Roadmap" : "Déroulé de la mission"}
-      items={[
-        {
-          date: "SEMAINE 1",
-          title: "Analyse par échiquier",
-          tooltipTitle: "Analyse par échiquier",
-          bullets: [
-            "Décodage des 3 niveaux : géopolitique, concurrentiel et sociétal",
-            "Identification des acteurs et de leurs intérêts croisés",
-          ],
-          badges: [{ label: "Cartographie phase" }],
-        },
-        {
-          date: "SEMAINE 2-3",
-          title: "Matrice dynamique des Stakeholders",
-          tooltipTitle: "Matrice dynamique des parties prenantes",
-          bullets: [
-            "Identification de 12 ONG d'Europe du Nord comme sources primaires",
-            "Identification de leurs idiots utiles dans les médias francophones",
-            "Livraison au cabinet du Président",
-          ],
-          badges: [
-            { label: "Pression" },
-            { label: "Hostile", tone: "alert" },
-            { label: "Dealer" },
-          ],
-        },
-        {
-          date: "SEMAINE 4",
-          title: "Tableau de bord décisionnel",
-          tooltipTitle: "Tableau de bord décisionnel",
-          bullets: [
-            "Actions de sensibilisation auprès des clients et partenaires",
-            "Contre-influence activée",
-          ],
-          badges: [{ label: "Mission accomplie", tone: "success" }],
-        },
+      items={lang === "en" ? [
+        { date: "WEEK 1", title: "Chessboard analysis", tooltipTitle: "Chessboard analysis", bullets: ["Decoding the 3 levels: geopolitical, competitive and societal", "Identification of actors and their cross-cutting interests"], badges: [{ label: "Mapping phase" }] },
+        { date: "WEEKS 2-3", title: "Dynamic stakeholder matrix", tooltipTitle: "Dynamic stakeholder matrix", bullets: ["Identification of 12 Northern European NGOs as primary sources", "Identification of their useful idiots in francophone media", "Delivery to the President's office"], badges: [{ label: "Pressure" }, { label: "Hostile", tone: "alert" }, { label: "Dealer" }] },
+        { date: "WEEK 4", title: "Decision-making dashboard", tooltipTitle: "Decision-making dashboard", bullets: ["Awareness actions with clients and partners", "Counter-influence activated"], badges: [{ label: "Mission accomplished", tone: "success" }] },
+      ] : [
+        { date: "SEMAINE 1", title: "Analyse par échiquier", tooltipTitle: "Analyse par échiquier", bullets: ["Décodage des 3 niveaux : géopolitique, concurrentiel et sociétal", "Identification des acteurs et de leurs intérêts croisés"], badges: [{ label: "Cartographie phase" }] },
+        { date: "SEMAINE 2-3", title: "Matrice dynamique des Stakeholders", tooltipTitle: "Matrice dynamique des parties prenantes", bullets: ["Identification de 12 ONG d'Europe du Nord comme sources primaires", "Identification de leurs idiots utiles dans les médias francophones", "Livraison au cabinet du Président"], badges: [{ label: "Pression" }, { label: "Hostile", tone: "alert" }, { label: "Dealer" }] },
+        { date: "SEMAINE 4", title: "Tableau de bord décisionnel", tooltipTitle: "Tableau de bord décisionnel", bullets: ["Actions de sensibilisation auprès des clients et partenaires", "Contre-influence activée"], badges: [{ label: "Mission accomplie", tone: "success" }] },
       ]}
     />
   </CaseFileSection>
@@ -2123,63 +2198,26 @@ const HealthCaseFile = () => {
     <CaseFileStyles />
     <CaseFileHeader number="CASE FILE · 02" title={lang === "en" ? "Ministry of Health: H1N1 health crisis." : "Ministère de la Santé : crise sanitaire H1N1."} emphasis={lang === "en" ? "H1N1 health crisis" : "crise sanitaire"} />
     <CaseIntro
-      kicker="War Room · Santé publique"
-      title="40 décès. Désinformation massive. Un ministère sous pression médiatique inédite."
-      emphasis="Désinformation massive."
-      body="La crise H1N1 a enclenché une spirale de désinformation dans les médias et sur les réseaux sociaux. Le Ministère de la Santé avait besoin d'identifier les sources hostiles, de produire des contre-narratifs crédibles, et de protéger l'image du Ministre pendant la tempête médiatique."
-      quote="En 2 semaines, le récit officiel est redevenu dominant. La War Room avait fait son travail."
-      meta="Debrief post-mission · Ministère de la Santé"
+      kicker={lang === "en" ? "War Room · Public health" : "War Room · Santé publique"}
+      title={lang === "en" ? "40 deaths. Massive disinformation. A ministry under unprecedented media pressure." : "40 décès. Désinformation massive. Un ministère sous pression médiatique inédite."}
+      emphasis={lang === "en" ? "Massive disinformation." : "Désinformation massive."}
+      body={lang === "en" ? "The H1N1 crisis triggered a spiral of disinformation across media and social networks. The Ministry of Health needed to identify hostile sources, produce credible counter-narratives, and protect the Minister's image during the media storm." : "La crise H1N1 a enclenché une spirale de désinformation dans les médias et sur les réseaux sociaux. Le Ministère de la Santé avait besoin d'identifier les sources hostiles, de produire des contre-narratifs crédibles, et de protéger l'image du Ministre pendant la tempête médiatique."}
+      quote={lang === "en" ? "In 2 weeks, the official narrative regained dominance. The War Room had done its job." : "En 2 semaines, le récit officiel est redevenu dominant. La War Room avait fait son travail."}
+      meta={lang === "en" ? "Post-mission debrief · Ministry of Health" : "Debrief post-mission · Ministère de la Santé"}
     />
-    <CaseStats stats={[{ value: <><span>&lt;2</span><Unit>h</Unit></>, label: "Activation War Room" }, { value: <><span>14</span><Unit>j</Unit></>, label: "Crise maîtrisée" }, { value: <><span>+38</span><Unit>%</Unit></>, label: "Image digitale Ministre" }, { value: "1", label: "Cabinet accompagné" }]} />
+    <CaseStats stats={[{ value: <><span>&lt;2</span><Unit>h</Unit></>, label: lang === "en" ? "War Room activation" : "Activation War Room" }, { value: <><span>14</span><Unit>{lang === "en" ? "d" : "j"}</Unit></>, label: lang === "en" ? "Crisis contained" : "Crise maîtrisée" }, { value: <><span>+38</span><Unit>%</Unit></>, label: lang === "en" ? "Minister digital image" : "Image digitale Ministre" }, { value: "1", label: lang === "en" ? "Cabinet supported" : "Cabinet accompagné" }]} />
     <MissionTimeline
       title={lang === "en" ? "War Room Workflow" : "Déroulé de la War Room"}
-      items={[
-        {
-          date: "H+0",
-          title: "Activation et diagnostic",
-          tooltipTitle: "Activation et diagnostic",
-          bullets: [
-            "Mise en place de la cellule de crise",
-            "Monitoring 24/7 des flux médiatiques, sociaux et numériques",
-            "Identification immédiate des relais hostiles",
-          ],
-          badges: [{ label: "Essai pour détecte", tone: "alert" }],
-        },
-        {
-          date: "J+3",
-          title: "Digital Investigation",
-          tooltipTitle: "Digital Investigation",
-          bullets: [
-            "OSINT cible : identification des sources de désinformation",
-            "Identification de leurs chaînes d'amplification",
-            "Fact-checking continu sur les fausses informations",
-          ],
-          badges: [{ label: "Mécanique cartographie" }],
-        },
-        {
-          date: "J+7",
-          title: "Contre-narratifs & stratégie média",
-          tooltipTitle: "Contre-narratifs & stratégie média",
-          bullets: [
-            "Production de contre-narratifs crédibles et massagés",
-            "Clés pour les porte-paroles",
-            "Calendrier des prises de parole",
-            "Accompagnement personnel du Ministre",
-          ],
-          badges: [{ label: "Reprise du récit" }],
-        },
-        {
-          date: "J+56",
-          title: "Sortie de crise",
-          tooltipTitle: "Sortie de crise",
-          bullets: [
-            "Crise maîtrisée",
-            "Renforcement de l'image digitale du Ministre",
-            "Transmission du dispositif à l'équipe de communication",
-            "Transmission au Cabinet Ministériel",
-          ],
-          badges: [{ label: "Mission accomplie", tone: "success" }],
-        },
+      items={lang === "en" ? [
+        { date: "H+0", title: "Activation and diagnostic", tooltipTitle: "Activation and diagnostic", bullets: ["Setting up the crisis cell", "24/7 monitoring of media, social and digital flows", "Immediate identification of hostile relays"], badges: [{ label: "Detection trial", tone: "alert" }] },
+        { date: "D+3", title: "Digital Investigation", tooltipTitle: "Digital Investigation", bullets: ["Targeted OSINT: identification of disinformation sources", "Identification of their amplification chains", "Continuous fact-checking on false information"], badges: [{ label: "Mechanics mapping" }] },
+        { date: "D+7", title: "Counter-narratives & media strategy", tooltipTitle: "Counter-narratives & media strategy", bullets: ["Production of credible, polished counter-narratives", "Talking points for spokespersons", "Speaking calendar", "Personal coaching of the Minister"], badges: [{ label: "Narrative reclaimed" }] },
+        { date: "D+56", title: "Crisis exit", tooltipTitle: "Crisis exit", bullets: ["Crisis contained", "Strengthening of the Minister's digital image", "Transfer of the system to the communications team", "Transfer to the Ministerial Cabinet"], badges: [{ label: "Mission accomplished", tone: "success" }] },
+      ] : [
+        { date: "H+0", title: "Activation et diagnostic", tooltipTitle: "Activation et diagnostic", bullets: ["Mise en place de la cellule de crise", "Monitoring 24/7 des flux médiatiques, sociaux et numériques", "Identification immédiate des relais hostiles"], badges: [{ label: "Essai pour détecte", tone: "alert" }] },
+        { date: "J+3", title: "Digital Investigation", tooltipTitle: "Digital Investigation", bullets: ["OSINT cible : identification des sources de désinformation", "Identification de leurs chaînes d'amplification", "Fact-checking continu sur les fausses informations"], badges: [{ label: "Mécanique cartographie" }] },
+        { date: "J+7", title: "Contre-narratifs & stratégie média", tooltipTitle: "Contre-narratifs & stratégie média", bullets: ["Production de contre-narratifs crédibles et massagés", "Clés pour les porte-paroles", "Calendrier des prises de parole", "Accompagnement personnel du Ministre"], badges: [{ label: "Reprise du récit" }] },
+        { date: "J+56", title: "Sortie de crise", tooltipTitle: "Sortie de crise", bullets: ["Crise maîtrisée", "Renforcement de l'image digitale du Ministre", "Transmission du dispositif à l'équipe de communication", "Transmission au Cabinet Ministériel"], badges: [{ label: "Mission accomplie", tone: "success" }] },
       ]}
     />
   </CaseFileSection>
