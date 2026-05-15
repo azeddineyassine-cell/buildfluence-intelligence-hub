@@ -1485,7 +1485,7 @@ const ModelisationsSection = () => {
                   letterSpacing: "0.22em",
                 }}
               >
-                Livrable
+                {lang === "en" ? "Deliverable" : "Livrable"}
               </div>
               <div className="text-sm" style={{ color: C.navy, fontWeight: 500 }}>
                 {lv.deliverable}
