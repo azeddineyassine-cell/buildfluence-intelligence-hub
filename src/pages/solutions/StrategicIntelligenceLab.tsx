@@ -474,11 +474,13 @@ const PodiumViz = () => {
   );
 };
 
-const FlourishViz = () => (
+const FlourishViz = () => {
+  const { lang } = useLanguage();
+  return (
   <VizFrame
-    kicker="· Cartographie territoriale ·"
-    title="Hiérarchie territoriale interactive"
-    footer="Interagissez directement avec la visualisation"
+    kicker={lang === "en" ? "· Territorial mapping ·" : "· Cartographie territoriale ·"}
+    title={lang === "en" ? "Interactive territorial hierarchy" : "Hiérarchie territoriale interactive"}
+    footer={lang === "en" ? "Interact directly with the visualisation" : "Interagissez directement avec la visualisation"}
   >
     <div
       style={{
