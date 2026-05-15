@@ -37,7 +37,64 @@ type ForesightCard = {
   bullets: string[];
 };
 
-const FORESIGHT: ForesightCard[] = [
+const getForesight = (lang: "fr" | "en"): ForesightCard[] => lang === "en" ? [
+  {
+    index: "S/01",
+    title: "Market & Competitive Intelligence",
+    role: "Monitoring · Mapping · Benchmarks",
+    preview: "See markets before their players, read competitors better than they read themselves.",
+    lead: "See markets before their players, read competitors better than they read themselves.",
+    bullets: [
+      "Multi-channel intelligence: markets, competitors, patents, regulatory",
+      "Dynamic competitive mapping",
+      "Sectoral trend detection",
+      "Identification of high-potential markets",
+      "Foresight studies, international benchmarks",
+      "Mapping of key actors: Allies / Resisters / Useful idiots",
+    ],
+  },
+  {
+    index: "S/02",
+    title: "Territorial Attractiveness",
+    role: "Competitiveness · Narratives · Influence",
+    preview: "Steering economic attractiveness in the war for investment.",
+    lead: "Get a cross-analysis of investment signals, public strategies and international influence games. It allows you to understand:",
+    bullets: [
+      "Where is global competition really being fought? Identify the territories that concentrate investment flows and understand sectoral dominance dynamics.",
+      "Which countries are gaining attractiveness and why? Analyse differentiating factors: speed of execution, stability, influence strategy, ecosystem structuring.",
+      "How are direct competitors positioning themselves? Dynamic benchmark of rival countries, their sectoral strengths and expansion strategies.",
+      "Which narratives shape investor perception? Decode the dominant narratives that influence decisions beyond economic fundamentals.",
+    ],
+  },
+  {
+    index: "S/03",
+    title: "Innovation Mapping",
+    role: "Deeptech · Patents · M&A",
+    preview: "Map the technologies that will reshape your sector in 3-5 years.",
+    lead: "Map the technologies that will reshape your sector in 3-5 years.",
+    bullets: [
+      "Mapping of emerging technologies and startups",
+      "Innovation ecosystems (Deeptech, AI, biotech)",
+      "VC/CVC trends",
+      "Open Innovation opportunities and strategic M&A",
+      "Patent intelligence (WIPO, EPO, USPTO)",
+    ],
+  },
+  {
+    index: "S/04",
+    title: "Stakeholder Intelligence",
+    role: "Coalitions · Influences · Networks",
+    preview: "Identify the actors that truly weigh on your strategic decisions.",
+    lead: "Identify the actors that truly weigh on your strategic decisions.",
+    bullets: [
+      "Mapping of adversarial strategies and hidden influence networks",
+      "Mapping of opinion leaders, investors, think tanks, NGOs",
+      "Analysis of alliances, antagonisms and coalition dynamics",
+      "Identification of key actors likely to weigh on your decisions",
+      "Modelling of pressure and counter-influence scenarios",
+    ],
+  },
+] : [
   {
     index: "S/01",
     title: "Market & Competitive Intelligence",
@@ -105,6 +162,8 @@ const FORESIGHT: ForesightCard[] = [
 ];
 
 const ForesightSection = () => {
+  const { lang } = useLanguage();
+  const FORESIGHT = getForesight(lang);
   const [active, setActive] = useState<number>(0);
   const card = FORESIGHT[active];
 
