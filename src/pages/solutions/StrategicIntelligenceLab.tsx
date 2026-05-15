@@ -399,15 +399,16 @@ const VizFrame = ({
 );
 
 const PodiumViz = () => {
+  const { lang } = useLanguage();
   const bars = [
     { rank: 2, country: "Vietnam", score: "9 225", h: "78%" },
-    { rank: 1, country: "Afrique du Sud", score: "9 968", h: "95%" },
-    { rank: 3, country: "Mexique", score: "4 761", h: "55%" },
+    { rank: 1, country: lang === "en" ? "South Africa" : "Afrique du Sud", score: "9 968", h: "95%" },
+    { rank: 3, country: lang === "en" ? "Mexico" : "Mexique", score: "4 761", h: "55%" },
   ];
   return (
     <VizFrame
-      kicker="· Baromètre · Juillet–Août 2025 ·"
-      title="Indice mondial de compétitivité"
+      kicker={lang === "en" ? "· Barometer · July–August 2025 ·" : "· Baromètre · Juillet–Août 2025 ·"}
+      title={lang === "en" ? "Global Competitiveness Index" : "Indice mondial de compétitivité"}
       footer={
         <>
           <a
@@ -425,9 +426,9 @@ const PodiumViz = () => {
               textDecoration: "none",
             }}
           >
-            Voir le baromètre →
+            {lang === "en" ? "View the barometer →" : "Voir le baromètre →"}
           </a>
-          <div>Extrait du baromètre d'investissement</div>
+          <div>{lang === "en" ? "Excerpt from the investment barometer" : "Extrait du baromètre d'investissement"}</div>
         </>
       }
     >
