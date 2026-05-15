@@ -601,6 +601,7 @@ const PatentsViz = () => {
 };
 
 const MatrixViz = () => {
+  const { lang } = useLanguage();
   const nodes = [
     { cx: 65, cy: 55, r: 7, fill: "#b85a3a", stroke: "#8a3f25" },
     { cx: 100, cy: 75, r: 6, fill: "#103E8C", stroke: "#0a2862" },
@@ -611,9 +612,9 @@ const MatrixViz = () => {
   ];
   return (
     <VizFrame
-      kicker="· Stakeholder map · Méthode Buildfluence ·"
-      title="Matrice d'influence : qui pèse vraiment"
-      footer="Méthode appliquée sur le case file OCP ↓"
+      kicker={lang === "en" ? "· Stakeholder map · Buildfluence method ·" : "· Stakeholder map · Méthode Buildfluence ·"}
+      title={lang === "en" ? "Influence matrix: who really weighs in" : "Matrice d'influence : qui pèse vraiment"}
+      footer={lang === "en" ? "Method applied to OCP case file ↓" : "Méthode appliquée sur le case file OCP ↓"}
     >
       <style>{`
         @keyframes fadein-mat { from { opacity:0; transform:scale(.7); } to { opacity:1; transform:scale(1); } }
@@ -629,10 +630,10 @@ const MatrixViz = () => {
         <line x1={20} y1={100} x2={300} y2={100} stroke={C.navyMid} strokeWidth={0.8} opacity={0.4} />
         {/* labels quadrants */}
         {[
-          { x: 90, y: 40, t: "Réfractaires" },
-          { x: 230, y: 40, t: "Alliés" },
-          { x: 90, y: 170, t: "Idiots utiles" },
-          { x: 230, y: 170, t: "Neutres" },
+          { x: 90, y: 40, t: lang === "en" ? "Resisters" : "Réfractaires" },
+          { x: 230, y: 40, t: lang === "en" ? "Allies" : "Alliés" },
+          { x: 90, y: 170, t: lang === "en" ? "Useful idiots" : "Idiots utiles" },
+          { x: 230, y: 170, t: lang === "en" ? "Neutral" : "Neutres" },
         ].map((q, i) => (
           <text
             key={i}
@@ -652,7 +653,7 @@ const MatrixViz = () => {
           ← HOSTILE
         </text>
         <text x={298} y={103} textAnchor="end" style={{ fontFamily: FONT_MONO, fontSize: 7.5, fill: C.goldDim }}>
-          ALLIÉ →
+          {lang === "en" ? "ALLY →" : "ALLIÉ →"}
         </text>
         {nodes.map((n, i) => (
           <circle
