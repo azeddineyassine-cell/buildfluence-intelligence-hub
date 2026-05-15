@@ -1390,18 +1390,15 @@ const ModelisationsSection = () => {
           className="text-3xl md:text-4xl scroll-mt-24"
           style={{ fontFamily: FONT_DISPLAY, color: C.navy, lineHeight: 1.15 }}
         >
-          Trois niveaux.{" "}
-          <em style={{ color: C.gold, fontFamily: FONT_DISPLAY }}>
-            Une seule logique :
-          </em>{" "}
-          prouver la valeur avant de déployer.
+          {lang === "en" ? <>Three levels.{" "}<em style={{ color: C.gold, fontFamily: FONT_DISPLAY }}>One single logic:</em>{" "}prove value before deploying.</> : <>Trois niveaux.{" "}<em style={{ color: C.gold, fontFamily: FONT_DISPLAY }}>Une seule logique :</em>{" "}prouver la valeur avant de déployer.</>}
         </h3>
         <p
           className="mt-3 text-lg italic"
           style={{ fontFamily: FONT_ITALIC, color: C.navyMid }}
         >
-          Du POC express à l'infrastructure décisionnelle complète, chaque
-          niveau rend un livrable mesurable.
+          {lang === "en"
+            ? "From rapid POC to a complete decision-making infrastructure, each level produces a measurable deliverable."
+            : "Du POC express à l'infrastructure décisionnelle complète, chaque niveau rend un livrable mesurable."}
         </p>
       </div>
 
