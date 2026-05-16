@@ -835,6 +835,7 @@ const ThreatPaneHeader = ({
 );
 
 const RadarFeedViz = ({ lang }: { lang: "fr" | "en" }) => {
+  const isEn = lang === "en";
   const blips = [
     { cx: 135, cy: 55, d: "0.4s" },
     { cx: 60, cy: 130, d: "1.6s" },
@@ -842,9 +843,9 @@ const RadarFeedViz = ({ lang }: { lang: "fr" | "en" }) => {
     { cx: 75, cy: 65, d: "3.2s" },
   ];
   const signals = [
-    { t: "14:32", s: "Pic narratif sur réseaux NL", lvl: "Faible", bg: "rgba(201,168,76,.2)", c: C.gold, d: "0.3s" },
-    { t: "11:08", s: "Coordination détectée 3 sites", lvl: "Moyen", bg: "rgba(217,119,6,.2)", c: "#f59e0b", d: "0.7s" },
-    { t: "09:14", s: "Brevet concurrent FR/EPO", lvl: "Faible", bg: "rgba(201,168,76,.2)", c: C.gold, d: "1.1s" },
+    { t: "14:32", s: isEn ? "Narrative spike on Dutch networks" : "Pic narratif sur réseaux NL", lvl: isEn ? "Low" : "Faible", bg: "rgba(201,168,76,.2)", c: C.gold, d: "0.3s" },
+    { t: "11:08", s: isEn ? "Coordination detected across 3 sites" : "Coordination détectée 3 sites", lvl: isEn ? "Medium" : "Moyen", bg: "rgba(217,119,6,.2)", c: "#f59e0b", d: "0.7s" },
+    { t: "09:14", s: isEn ? "Competing FR/EPO patent signal" : "Brevet concurrent FR/EPO", lvl: isEn ? "Low" : "Faible", bg: "rgba(201,168,76,.2)", c: C.gold, d: "1.1s" },
   ];
   return (
     <div>
@@ -916,7 +917,7 @@ const RadarFeedViz = ({ lang }: { lang: "fr" | "en" }) => {
             className="uppercase"
             style={{ fontFamily: FONT_MONO, fontSize: 9, color: C.gold, letterSpacing: "0.25em" }}
           >
-            · Signaux faibles · 7 derniers jours
+            {isEn ? "· Weak signals · Last 7 days" : "· Signaux faibles · 7 derniers jours"}
           </div>
           <div
             style={{
@@ -983,11 +984,12 @@ const RadarFeedViz = ({ lang }: { lang: "fr" | "en" }) => {
 };
 
 const CrisisCurveViz = ({ lang }: { lang: "fr" | "en" }) => {
+  const isEn = lang === "en";
   const metrics = [
     { v: "<2h", l: "Activation" },
     { v: "24/7", l: "Monitoring" },
-    { v: "48h", l: "Premier plan" },
-    { v: "2 sem.", l: "Sortie crise" },
+    { v: "48h", l: isEn ? "First response" : "Premier plan" },
+    { v: isEn ? "2 wks" : "2 sem.", l: isEn ? "Crisis exit" : "Sortie crise" },
   ];
   return (
     <div>
@@ -1025,7 +1027,7 @@ const CrisisCurveViz = ({ lang }: { lang: "fr" | "en" }) => {
           @keyframes fade-curve-el { from { opacity: 0; } to { opacity: 1; } }
         `}</style>
         <div className="flex justify-between items-center uppercase" style={{ fontFamily: FONT_MONO, fontSize: 9, color: C.alert, letterSpacing: "0.12em" }}>
-          <span>· Courbe désinformation vs contre-narratif</span>
+          <span>{isEn ? "· Disinformation vs counter-narrative curve" : "· Courbe désinformation vs contre-narratif"}</span>
           <span style={{ color: C.gold }}>CASE H1N1</span>
         </div>
         <svg viewBox="0 0 300 130" width="100%" height={130}>
@@ -1076,16 +1078,16 @@ const CrisisCurveViz = ({ lang }: { lang: "fr" | "en" }) => {
           />
           <circle className="cc-marker" cx={100} cy={35} r={4} fill={C.gold} style={{ opacity: 0, animation: "fade-curve-el .45s ease-out 3.2s forwards" }} />
           <text className="cc-marker-label" x={105} y={25} style={{ fontFamily: FONT_MONO, fontSize: 8, fill: C.gold, letterSpacing: ".1em", opacity: 0, animation: "fade-curve-el .45s ease-out 3.4s forwards" }}>
-            PIC J+3
+            {isEn ? "D+3 PEAK" : "PIC J+3"}
           </text>
           <circle className="cc-marker" cx={270} cy={40} r={4} fill={C.gold} style={{ opacity: 0, animation: "fade-curve-el .45s ease-out 3.6s forwards" }} />
           <text className="cc-marker-label" x={220} y={32} style={{ fontFamily: FONT_MONO, fontSize: 8, fill: C.gold, letterSpacing: ".1em", opacity: 0, animation: "fade-curve-el .45s ease-out 3.8s forwards" }}>
-            RÉCIT REPRIS
+            {isEn ? "NARRATIVE REGAINED" : "RÉCIT REPRIS"}
           </text>
         </svg>
         <div className="flex justify-center gap-[18px] uppercase" style={{ marginTop: 8, fontFamily: FONT_MONO, fontSize: 8.5, color: "rgba(245,241,232,.6)" }}>
-          <span><span style={{ color: C.alert }}>—</span> Désinformation</span>
-          <span><span style={{ color: C.gold }}>—</span> Contre-narratif</span>
+          <span><span style={{ color: C.alert }}>—</span> {isEn ? "Disinformation" : "Désinformation"}</span>
+          <span><span style={{ color: C.gold }}>—</span> {isEn ? "Counter-narrative" : "Contre-narratif"}</span>
         </div>
       </div>
     </div>
