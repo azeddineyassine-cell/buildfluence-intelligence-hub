@@ -244,13 +244,13 @@ const CompetitiveLandscape: React.FC<{ variant?: "both" | "map" | "sectors" }> =
       <div style={{ marginBottom: variant === "map" ? 0 : 56 }}>
         <div style={{ textAlign: "center", marginBottom: 28 }}>
           <div style={{ fontFamily: FONT_MONO, fontSize: 11, letterSpacing: "0.24em", textTransform: "uppercase", color: C.gold, marginBottom: 14, fontWeight: 600 }}>
-            {lang === "en" ? "Competitive mapping" : "Cartographie concurrentielle"}
+            {lang === "en" ? "Competitive Mapping" : "Cartographie concurrentielle"}
           </div>
           <h3 style={{ fontFamily: FONT_DISPLAY, fontSize: "clamp(28px,3vw,38px)", fontWeight: 600, color: C.navy, lineHeight: 1.1, letterSpacing: "-0.015em" }}>
-            Concurrence, <em style={{ fontStyle: "italic", color: C.gold, fontWeight: 400 }}>Coopétition</em> &amp; Alliances globales du Maroc
+            {lang === "en" ? <>Morocco’s Global Competitive Landscape, <em style={{ fontStyle: "italic", color: C.gold, fontWeight: 400 }}>Coopetition</em> &amp; Strategic Alliances</> : <>Concurrence, <em style={{ fontStyle: "italic", color: C.gold, fontWeight: 400 }}>Coopétition</em> &amp; Alliances globales du Maroc</>}
           </h3>
           <p style={{ fontFamily: FONT_SANS, fontStyle: "italic", fontSize: 15, color: C.inkSoft, marginTop: 12, maxWidth: 720, marginInline: "auto", lineHeight: 1.5 }}>
-            Lecture intégrée de l'environnement compétitif marocain, survolez un pays pour révéler son positionnement sectoriel.
+            {lang === "en" ? "An integrated view of Morocco’s competitive environment. Hover over a country to explore its sectoral positioning and strategic dynamics." : "Lecture intégrée de l'environnement compétitif marocain, survolez un pays pour révéler son positionnement sectoriel."}
           </p>
         </div>
         <div style={{ background: C.paper, border: `1px solid ${C.rule}`, borderTop: `2px solid ${C.gold}`, padding: "clamp(16px,2vw,28px)" }}>
@@ -258,10 +258,10 @@ const CompetitiveLandscape: React.FC<{ variant?: "both" | "map" | "sectors" }> =
           {/* Légende */}
           <div style={{ display: "flex", flexWrap: "wrap", gap: 22, justifyContent: "center", marginTop: 18, paddingTop: 16, borderTop: `1px solid ${C.rule}` }}>
             {[
-              { c: "#22c55e", l: "Maroc" },
-              { c: "#ef4444", l: "Concurrents directs" },
-              { c: "#3b82f6", l: "Partenaires stratégiques" },
-              { c: "#f59e0b", l: "Coopétiteurs" },
+              { c: "#22c55e", l: lang === "en" ? "Morocco" : "Maroc" },
+              { c: "#ef4444", l: lang === "en" ? "Direct competitors" : "Concurrents directs" },
+              { c: "#3b82f6", l: lang === "en" ? "Strategic partners" : "Partenaires stratégiques" },
+              { c: "#f59e0b", l: lang === "en" ? "Coopetitors" : "Coopétiteurs" },
             ].map((it) => (
               <div key={it.l} style={{ display: "flex", alignItems: "center", gap: 8 }}>
                 <span style={{ width: 12, height: 12, background: it.c, borderRadius: 0, display: "inline-block" }} />
@@ -280,7 +280,7 @@ const CompetitiveLandscape: React.FC<{ variant?: "both" | "map" | "sectors" }> =
             {lang === "en" ? "The 9 strategic sectors identified by AMDIE" : "Les 9 secteurs stratégiques identifiés par l'AMDIE"}
           </h3>
           <p style={{ fontFamily: FONT_SANS, fontStyle: "italic", fontSize: 13, color: C.inkSoft, marginTop: 10 }}>
-            Cliquer sur un secteur pour voir le détail
+            {lang === "en" ? "Click a sector to view details" : "Cliquer sur un secteur pour voir le détail"}
           </p>
         </div>
 
