@@ -233,6 +233,7 @@ const WorldMap: React.FC = () => {
 
 const CompetitiveLandscape: React.FC<{ variant?: "both" | "map" | "sectors" }> = ({ variant = "both" }) => {
   const { lang } = useLanguage();
+  const SECTORS = getSectors(lang);
   const [openIdx, setOpenIdx] = useState<number | null>(null);
   const showMap = variant === "both" || variant === "map";
   const showSectors = variant === "both" || variant === "sectors";
