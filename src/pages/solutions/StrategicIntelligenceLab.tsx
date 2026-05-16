@@ -1171,15 +1171,15 @@ const ThreatSection = () => {
             className="text-3xl md:text-4xl scroll-mt-24"
             style={{ fontFamily: FONT_DISPLAY, color: C.navy, lineHeight: 1.15 }}
           >
-            De la veille continue{" "}
-            <em style={{ color: C.gold, fontFamily: FONT_DISPLAY }}>au</em> mode crise
+            {lang === "en" ? <>From continuous monitoring <em style={{ color: C.gold, fontFamily: FONT_DISPLAY }}>to</em> crisis mode</> : <>De la veille continue{" "}<em style={{ color: C.gold, fontFamily: FONT_DISPLAY }}>au</em> mode crise</>}
           </h3>
           <p
             className="mt-3 text-lg italic"
             style={{ fontFamily: FONT_ITALIC, color: C.navyMid }}
           >
-            Un cockpit double mode : détecter les signaux faibles en temps réel,
-            déclencher la War Room quand la crise frappe.
+            {lang === "en"
+              ? "A dual-mode cockpit: detect weak signals in real time, trigger the War Room when a crisis strikes."
+              : "Un cockpit double mode : détecter les signaux faibles en temps réel, déclencher la War Room quand la crise frappe."}
           </p>
         </div>
       </div>
@@ -1222,7 +1222,7 @@ const ThreatSection = () => {
             className="italic text-sm hidden md:block"
             style={{ fontFamily: FONT_ITALIC, color: "rgba(245,241,232,0.7)" }}
           >
-            Basculez entre mode continu et mode crise
+            {lang === "en" ? "Switch between continuous monitoring and crisis mode" : "Basculez entre mode continu et mode crise"}
           </div>
         </div>
 
