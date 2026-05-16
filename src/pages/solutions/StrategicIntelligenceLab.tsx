@@ -834,7 +834,7 @@ const ThreatPaneHeader = ({
   </div>
 );
 
-const RadarFeedViz = () => {
+const RadarFeedViz = ({ lang }: { lang: "fr" | "en" }) => {
   const blips = [
     { cx: 135, cy: 55, d: "0.4s" },
     { cx: 60, cy: 130, d: "1.6s" },
@@ -982,7 +982,7 @@ const RadarFeedViz = () => {
   );
 };
 
-const CrisisCurveViz = () => {
+const CrisisCurveViz = ({ lang }: { lang: "fr" | "en" }) => {
   const metrics = [
     { v: "<2h", l: "Activation" },
     { v: "24/7", l: "Monitoring" },
@@ -1306,7 +1306,7 @@ const ThreatSection = () => {
               className="p-8 md:p-10"
               style={{ background: `linear-gradient(135deg, ${C.navy}, ${C.navyMid})`, minHeight: 360 }}
             >
-              <ThreatViz mode={mode} />
+              <ThreatViz mode={mode} lang={lang} />
             </motion.div>
           </AnimatePresence>
         </div>
