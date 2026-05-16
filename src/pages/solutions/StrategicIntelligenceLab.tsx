@@ -696,7 +696,7 @@ const ForesightViz = ({ indexKey }: { indexKey: string }) => {
 
 type ThreatMode = "veille" | "warroom";
 
-const THREAT_CONTENT: Record<
+type ThreatContent = Record<
   ThreatMode,
   {
     num: string;
@@ -706,7 +706,42 @@ const THREAT_CONTENT: Record<
     lead: string;
     bullets: string[];
   }
-> = {
+>;
+
+const getThreatContent = (lang: "fr" | "en"): ThreatContent => lang === "en" ? {
+  veille: {
+    num: "01",
+    title: "OSINT & Fact-Checking",
+    tag: "● ACTIVE 24/7",
+    tagColor: C.gold,
+    lead:
+      "In an environment saturated with competing narratives, knowing who is speaking, from where, and through which relays has become a decisive advantage.",
+    bullets: [
+      "AI-augmented multi-channel monitoring (press, social media, dark web)",
+      "Identification and mapping of hostile sources",
+      "Narrative polarization analysis",
+      "Real-time fact-checking with full traceability",
+      "Tracking of influencers and amplification relays",
+      "Detection of weak signals preceding a crisis",
+    ],
+  },
+  warroom: {
+    num: "02",
+    title: "Crisis Management",
+    tag: "◈ WAR ROOM ACTIVE",
+    tagColor: C.alert,
+    lead:
+      "A poorly managed crisis can destroy in 48 hours what took 20 years to build. We intervene to neutralize, regain the narrative, and protect institutional capital.",
+    bullets: [
+      "War Room activation in under 2 hours",
+      "Real-time monitoring of media and social flows",
+      "Targeted Digital Investigation & OSINT",
+      "Continuous fact-checking and counter-narrative production",
+      "Crisis communication strategy and spokesperson briefings",
+      "Post-crisis reputational recovery",
+    ],
+  },
+} : {
   veille: {
     num: "01",
     title: "OSINT & Fact-Checking",
