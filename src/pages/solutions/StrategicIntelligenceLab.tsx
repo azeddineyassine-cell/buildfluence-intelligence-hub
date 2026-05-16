@@ -1811,7 +1811,7 @@ const CommandTree = () => {
       <style>{`
         .command-tree .tree-node,.command-tree .tree-link{opacity:0;transition:opacity .5s ease,stroke .2s ease,stroke-width .2s ease}.command-tree.in-view .tree-node{opacity:1}.command-tree.in-view .tree-link{opacity:.5}.command-tree.in-view .tree-link{transition-delay:600ms}.command-tree .tree-node.highlight rect{stroke:${C.gold};stroke-width:2px}.command-tree .tree-node.dim{opacity:.18!important}.command-tree .tree-link.highlight{stroke:${C.gold};stroke-width:2px;opacity:1!important}.command-tree .tree-link.dim{opacity:.12!important}@media(max-width:640px){.tree-scroll{overflow-x:auto}}
       `}</style>
-      <BlockHeader kicker={lang === "en" ? "A · DECODING" : "A · DÉCRYPTAGE"} title={<>L'arbre des commanditaires.<br />ONG façades, financeurs et relais.</>} hint="Survolez une façade pour révéler sa chaîne" />
+      <BlockHeader kicker={lang === "en" ? "A · DECODING" : "A · DÉCRYPTAGE"} title={lang === "en" ? <>The sponsor tree.<br />Front NGOs, funders and relays.</> : <>L'arbre des commanditaires.<br />ONG façades, financeurs et relais.</>} hint={lang === "en" ? "Hover over a front organization to reveal its chain" : "Survolez une façade pour révéler sa chaîne"} />
       <div className="tree-scroll">
         <svg className="command-tree" viewBox="0 0 760 380" width="100%" height="380" style={{ minWidth: 760 }}>
           {links.map(([from, to], index) => {
@@ -1839,9 +1839,9 @@ const CommandTree = () => {
         </svg>
       </div>
       <div className="case-legend">
-        <LegendItem color={OLIVE} label="ONG façade visible" />
-        <LegendItem color={NAVY2} label="Sponsor / financeur" />
-        <LegendItem color={TERRACOTTA} label="Relais individuel identifié" />
+        <LegendItem color={OLIVE} label={lang === "en" ? "Visible front NGO" : "ONG façade visible"} />
+        <LegendItem color={NAVY2} label={lang === "en" ? "Sponsor / funder" : "Sponsor / financeur"} />
+        <LegendItem color={TERRACOTTA} label={lang === "en" ? "Identified individual relay" : "Relais individuel identifié"} />
       </div>
     </div>
   );
