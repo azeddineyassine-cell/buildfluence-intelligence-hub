@@ -1967,13 +1967,30 @@ const ChessboardsBlock = () => {
 
 const StakeholderMatrix = () => {
   const { lang } = useLanguage();
+  const isEn = lang === "en";
   const wrapRef = useRef<HTMLDivElement | null>(null);
   const [filter, setFilter] = useState("all");
   const [tooltip, setTooltip] = useState<{ visible: boolean; x: number; y: number; node: MatrixNode | null }>({ visible: false, x: 0, y: 0, node: null });
   const PAD = 60;
   const W = 800;
   const H = 520;
-  const nodes: MatrixNode[] = [
+  const nodes: MatrixNode[] = isEn ? [
+    { name: "WSRW", cat: "ngo", type: "Front NGO", role: "Central coordinator of hostile campaigns", x: -0.55, y: 0.78 },
+    { name: "CNSSO", cat: "ngo", type: "Front NGO", role: "Norwegian committee and institutional relay", x: -0.85, y: 0.55 },
+    { name: "SWS", cat: "ngo", type: "Front NGO", role: "Influence lobbying across Europe", x: -0.35, y: 0.55 },
+    { name: "AWSA", cat: "ngo", type: "Front NGO", role: "Australian activist branch", x: -0.7, y: 0.32 },
+    { name: "Norwegian MFA*", cat: "state", type: "Ministry of Foreign Affairs", role: "Indirect NGO funding through student funds", x: -0.35, y: 0.18 },
+    { name: "Algeria", cat: "state", type: "Financial support", role: "Structural financial backing for hostile NGOs", x: -0.55, y: 0.05 },
+    { name: "Morocco", cat: "state", type: "Allied state", role: "Direct institutional support to OCP", x: 0.85, y: 0.5 },
+    { name: "ONHYM", cat: "state", type: "Sovereign agency", role: "Moroccan industrial partner", x: 0.7, y: 0.2 },
+    { name: "Industri Energi", cat: "corp", type: "Industrial union", role: "Sector sponsor of campaigns", x: -0.18, y: 0.42 },
+    { name: "BASF Belgium", cat: "corp", type: "Indirect competitor", role: "Ambivalent presence, observer position", x: -0.25, y: -0.2 },
+    { name: "Yara", cat: "corp", type: "Fertilizer actor", role: "Competitor neutralized in selected markets", x: -0.15, y: -0.1 },
+    { name: "Erik Hagen", cat: "leader", type: "Norwegian activist", role: "Public face of anti-OCP campaigns", x: -0.92, y: 0.88 },
+    { name: "Sara Eykmans", cat: "leader", type: "WSRW President", role: "Coordination of media actions", x: -0.2, y: 0.88 },
+    { name: "Jeremy Grantham", cat: "leader", type: "Investor", role: "Financial relay, critical position", x: -0.05, y: 0.6 },
+    { name: "Steven Van Kauwenberg", cat: "leader", type: "IFDC analyst", role: "Expert position, balanced discourse", x: 0.2, y: -0.3 },
+  ] : [
     { name: "WSRW", cat: "ngo", type: "ONG façade", role: "Coordinateur central des campagnes hostiles", x: -0.55, y: 0.78 },
     { name: "CNSSO", cat: "ngo", type: "ONG façade", role: "Comité norvégien, relais institutionnel", x: -0.85, y: 0.55 },
     { name: "SWS", cat: "ngo", type: "ONG façade", role: "Lobbying d'influence en Europe", x: -0.35, y: 0.55 },
@@ -1997,11 +2014,11 @@ const StakeholderMatrix = () => {
     leader: { fill: C.gold, stroke: C.goldDim, text: C.navy },
   };
   const filters = [
-    { cat: "all", label: "Toutes" },
+    { cat: "all", label: isEn ? "All" : "Toutes" },
     { cat: "ngo", label: "ONG", color: TERRACOTTA },
-    { cat: "state", label: "États", color: NAVY2 },
-    { cat: "corp", label: "Entreprises", color: FOREST },
-    { cat: "leader", label: "Leaders d'opinion", color: C.gold },
+    { cat: "state", label: isEn ? "States" : "États", color: NAVY2 },
+    { cat: "corp", label: isEn ? "Companies" : "Entreprises", color: FOREST },
+    { cat: "leader", label: isEn ? "Opinion leaders" : "Leaders d'opinion", color: C.gold },
   ];
   const sx = (x: number) => PAD + ((x + 1) / 2) * (W - PAD * 2);
   const sy = (y: number) => PAD + ((1 - y) / 2) * (H - PAD * 2);
