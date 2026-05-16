@@ -2083,7 +2083,7 @@ const StakeholderMatrix = () => {
       <style>{`
         .mn{opacity:1;transition:opacity .35s ease,filter .15s ease}.mn.dim{opacity:.12!important}.mn:hover{filter:drop-shadow(0 8px 12px rgba(13,27,42,.25))}.matrix-tooltip{opacity:0;transform:translateY(4px);transition:.15s;pointer-events:none}.matrix-tooltip.visible{opacity:1;transform:translateY(0)}
       `}</style>
-      <BlockHeader kicker={lang === "en" ? "C · MAPPING" : "C · CARTOGRAPHIE"} title={<>La matrice dynamique des parties prenantes.<br />Qui pèse, qui amplifie, qui s'efface.</>} />
+      <BlockHeader kicker={lang === "en" ? "C · MAPPING" : "C · CARTOGRAPHIE"} title={isEn ? <>The dynamic stakeholder matrix.<br />Who weighs, who amplifies, who fades.</> : <>La matrice dynamique des parties prenantes.<br />Qui pèse, qui amplifie, qui s'efface.</>} />
       <div className="matrix-toolbar">
         <div className="flex flex-wrap gap-[6px]">
           {filters.map((item) => (
@@ -2093,7 +2093,7 @@ const StakeholderMatrix = () => {
             </button>
           ))}
         </div>
-        <div className="italic" style={{ fontFamily: FONT_ITALIC, fontSize: 13, color: MUTED }}>Cliquez sur un nœud pour le détail</div>
+        <div className="italic" style={{ fontFamily: FONT_ITALIC, fontSize: 13, color: MUTED }}>{isEn ? "Hover over a node for details" : "Cliquez sur un nœud pour le détail"}</div>
       </div>
       <div className="matrix-canvas">
         <svg width="100%" height="520" viewBox="0 0 800 520" preserveAspectRatio="xMidYMid meet">
@@ -2105,12 +2105,12 @@ const StakeholderMatrix = () => {
           ))}
           <line x1={sx(0)} y1={PAD} x2={sx(0)} y2={H - PAD} stroke={MUTED} opacity={0.5} />
           <line x1={PAD} y1={sy(0)} x2={W - PAD} y2={sy(0)} stroke={MUTED} opacity={0.5} />
-          <text x={W / 2} y={30} textAnchor="middle" style={{ fontFamily: FONT_MONO, fontSize: 10, fill: C.goldDim, letterSpacing: ".2em" }}>↑ ACTIVISME</text>
-          <text x={W / 2} y={500} textAnchor="middle" style={{ fontFamily: FONT_MONO, fontSize: 10, fill: C.goldDim, letterSpacing: ".2em" }}>PASSIVITÉ ↓</text>
-          <text x={20} y={H / 2 + 4} style={{ fontFamily: FONT_MONO, fontSize: 10, fill: C.goldDim, letterSpacing: ".2em" }}>← HOSTILE</text>
-          <text x={780} y={H / 2 + 4} textAnchor="end" style={{ fontFamily: FONT_MONO, fontSize: 10, fill: C.goldDim, letterSpacing: ".2em" }}>SOUTIEN OCP →</text>
+          <text x={W / 2} y={30} textAnchor="middle" style={{ fontFamily: FONT_MONO, fontSize: 10, fill: C.goldDim, letterSpacing: ".2em" }}>{isEn ? "↑ ACTIVISM" : "↑ ACTIVISME"}</text>
+          <text x={W / 2} y={500} textAnchor="middle" style={{ fontFamily: FONT_MONO, fontSize: 10, fill: C.goldDim, letterSpacing: ".2em" }}>{isEn ? "PASSIVITY ↓" : "PASSIVITÉ ↓"}</text>
+          <text x={20} y={H / 2 + 4} style={{ fontFamily: FONT_MONO, fontSize: 10, fill: C.goldDim, letterSpacing: ".2em" }}>{isEn ? "← HOSTILE" : "← HOSTILE"}</text>
+          <text x={780} y={H / 2 + 4} textAnchor="end" style={{ fontFamily: FONT_MONO, fontSize: 10, fill: C.goldDim, letterSpacing: ".2em" }}>{isEn ? "OCP SUPPORT →" : "SOUTIEN OCP →"}</text>
           {[
-            { x: 220, y: 50, t: "Réfractaires" }, { x: 580, y: 50, t: "Alliés" }, { x: 220, y: 400, t: "Idiots utiles" }, { x: 580, y: 400, t: "Neutres" },
+            { x: 220, y: 50, t: isEn ? "Resisters" : "Réfractaires" }, { x: 580, y: 50, t: isEn ? "Allies" : "Alliés" }, { x: 220, y: 400, t: isEn ? "Useful amplifiers" : "Idiots utiles" }, { x: 580, y: 400, t: isEn ? "Neutrals" : "Neutres" },
           ].map((q) => <text key={q.t} x={q.x} y={q.y} textAnchor="middle" style={{ fontFamily: FONT_DISPLAY, fontStyle: "italic", fontSize: 14, fill: MUTED, opacity: 0.5 }}>{q.t}</text>)}
           {nodes.map((node) => {
             const style = catStyles[node.cat];
@@ -2131,7 +2131,7 @@ const StakeholderMatrix = () => {
         </div>
       </div>
       <div className="italic" style={{ marginTop: 16, fontFamily: FONT_ITALIC, fontSize: 9, color: MUTED, letterSpacing: ".05em", textAlign: "center" }}>
-        * MFA = Ministry of Foreign Affairs (Ministère des Affaires Étrangères)
+        {isEn ? "* MFA = Ministry of Foreign Affairs" : "* MFA = Ministry of Foreign Affairs (Ministère des Affaires Étrangères)"}
       </div>
     </div>
   );
