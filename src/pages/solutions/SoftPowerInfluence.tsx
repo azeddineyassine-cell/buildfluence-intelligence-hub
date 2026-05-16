@@ -1480,7 +1480,7 @@ const PocsSection = () => {
     { num: "iii", eyebrow: "Infrastructure", title: "Infrastructure Souveraine", duration: "— Engagement annuel", desc: "Mise en place d'un dispositif d'intelligence permanent. Observatoire dédié, équipe d'analystes, infrastructure technologique sur-mesure intégrée à vos process décisionnels." },
   ] : [
     { num: "i", eyebrow: "Express", title: "Express POC", duration: "— 2 to 4 weeks", desc: "Targeted influence mapping on a topic, territory or file. Quick operational deliverable to validate the relevance of the approach before broad deployment." },
-    { num: "ii", eyebrow: "Pilot", title: "Pilot Programme", duration: "— 2 to 4 months", desc: "Structured deployment over an extended perimeter. Combination of Watch + DDD + BI + HumInt with monthly dashboards and regular strategic checkpoints." },
+    { num: "ii", eyebrow: "Pilot", title: "Pilot Program", duration: "— 2 to 4 months", desc: "Structured deployment over an extended perimeter. Combination of Watch + DDD + BI + HumInt with monthly dashboards and regular strategic checkpoints." },
     { num: "iii", eyebrow: "Infrastructure", title: "Sovereign Infrastructure", duration: "— Annual engagement", desc: "Implementation of a permanent intelligence setup. Dedicated observatory, team of analysts, tailor-made technological infrastructure integrated into your decision processes." },
   ];
   return (

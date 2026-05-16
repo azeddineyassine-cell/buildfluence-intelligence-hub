@@ -696,7 +696,7 @@ const ForesightViz = ({ indexKey }: { indexKey: string }) => {
 
 type ThreatMode = "veille" | "warroom";
 
-const THREAT_CONTENT: Record<
+type ThreatContent = Record<
   ThreatMode,
   {
     num: string;
@@ -706,7 +706,42 @@ const THREAT_CONTENT: Record<
     lead: string;
     bullets: string[];
   }
-> = {
+>;
+
+const getThreatContent = (lang: "fr" | "en"): ThreatContent => lang === "en" ? {
+  veille: {
+    num: "01",
+    title: "OSINT & Fact-Checking",
+    tag: "● ACTIVE 24/7",
+    tagColor: C.gold,
+    lead:
+      "In an environment saturated with competing narratives, knowing who is speaking, from where, and through which relays has become a decisive advantage.",
+    bullets: [
+      "AI-augmented multi-channel monitoring (press, social media, dark web)",
+      "Identification and mapping of hostile sources",
+      "Narrative polarization analysis",
+      "Real-time fact-checking with full traceability",
+      "Tracking of influencers and amplification relays",
+      "Detection of weak signals preceding a crisis",
+    ],
+  },
+  warroom: {
+    num: "02",
+    title: "Crisis Management",
+    tag: "◈ WAR ROOM ACTIVE",
+    tagColor: C.alert,
+    lead:
+      "A poorly managed crisis can destroy in 48 hours what took 20 years to build. We intervene to neutralize, regain the narrative, and protect institutional capital.",
+    bullets: [
+      "War Room activation in under 2 hours",
+      "Real-time monitoring of media and social flows",
+      "Targeted Digital Investigation & OSINT",
+      "Continuous fact-checking and counter-narrative production",
+      "Crisis communication strategy and spokesperson briefings",
+      "Post-crisis reputational recovery",
+    ],
+  },
+} : {
   veille: {
     num: "01",
     title: "OSINT & Fact-Checking",
@@ -799,7 +834,8 @@ const ThreatPaneHeader = ({
   </div>
 );
 
-const RadarFeedViz = () => {
+const RadarFeedViz = ({ lang }: { lang: "fr" | "en" }) => {
+  const isEn = lang === "en";
   const blips = [
     { cx: 135, cy: 55, d: "0.4s" },
     { cx: 60, cy: 130, d: "1.6s" },
@@ -807,9 +843,9 @@ const RadarFeedViz = () => {
     { cx: 75, cy: 65, d: "3.2s" },
   ];
   const signals = [
-    { t: "14:32", s: "Pic narratif sur réseaux NL", lvl: "Faible", bg: "rgba(201,168,76,.2)", c: C.gold, d: "0.3s" },
-    { t: "11:08", s: "Coordination détectée 3 sites", lvl: "Moyen", bg: "rgba(217,119,6,.2)", c: "#f59e0b", d: "0.7s" },
-    { t: "09:14", s: "Brevet concurrent FR/EPO", lvl: "Faible", bg: "rgba(201,168,76,.2)", c: C.gold, d: "1.1s" },
+    { t: "14:32", s: isEn ? "Narrative spike on Dutch networks" : "Pic narratif sur réseaux NL", lvl: isEn ? "Low" : "Faible", bg: "rgba(201,168,76,.2)", c: C.gold, d: "0.3s" },
+    { t: "11:08", s: isEn ? "Coordination detected across 3 sites" : "Coordination détectée 3 sites", lvl: isEn ? "Medium" : "Moyen", bg: "rgba(217,119,6,.2)", c: "#f59e0b", d: "0.7s" },
+    { t: "09:14", s: isEn ? "Competing FR/EPO patent signal" : "Brevet concurrent FR/EPO", lvl: isEn ? "Low" : "Faible", bg: "rgba(201,168,76,.2)", c: C.gold, d: "1.1s" },
   ];
   return (
     <div>
@@ -881,7 +917,7 @@ const RadarFeedViz = () => {
             className="uppercase"
             style={{ fontFamily: FONT_MONO, fontSize: 9, color: C.gold, letterSpacing: "0.25em" }}
           >
-            · Signaux faibles · 7 derniers jours
+            {isEn ? "· Weak signals · Last 7 days" : "· Signaux faibles · 7 derniers jours"}
           </div>
           <div
             style={{
@@ -947,12 +983,13 @@ const RadarFeedViz = () => {
   );
 };
 
-const CrisisCurveViz = () => {
+const CrisisCurveViz = ({ lang }: { lang: "fr" | "en" }) => {
+  const isEn = lang === "en";
   const metrics = [
     { v: "<2h", l: "Activation" },
     { v: "24/7", l: "Monitoring" },
-    { v: "48h", l: "Premier plan" },
-    { v: "2 sem.", l: "Sortie crise" },
+    { v: "48h", l: isEn ? "First response" : "Premier plan" },
+    { v: isEn ? "2 wks" : "2 sem.", l: isEn ? "Crisis exit" : "Sortie crise" },
   ];
   return (
     <div>
@@ -990,7 +1027,7 @@ const CrisisCurveViz = () => {
           @keyframes fade-curve-el { from { opacity: 0; } to { opacity: 1; } }
         `}</style>
         <div className="flex justify-between items-center uppercase" style={{ fontFamily: FONT_MONO, fontSize: 9, color: C.alert, letterSpacing: "0.12em" }}>
-          <span>· Courbe désinformation vs contre-narratif</span>
+          <span>{isEn ? "· Disinformation vs counter-narrative curve" : "· Courbe désinformation vs contre-narratif"}</span>
           <span style={{ color: C.gold }}>CASE H1N1</span>
         </div>
         <svg viewBox="0 0 300 130" width="100%" height={130}>
@@ -1041,24 +1078,24 @@ const CrisisCurveViz = () => {
           />
           <circle className="cc-marker" cx={100} cy={35} r={4} fill={C.gold} style={{ opacity: 0, animation: "fade-curve-el .45s ease-out 3.2s forwards" }} />
           <text className="cc-marker-label" x={105} y={25} style={{ fontFamily: FONT_MONO, fontSize: 8, fill: C.gold, letterSpacing: ".1em", opacity: 0, animation: "fade-curve-el .45s ease-out 3.4s forwards" }}>
-            PIC J+3
+            {isEn ? "D+3 PEAK" : "PIC J+3"}
           </text>
           <circle className="cc-marker" cx={270} cy={40} r={4} fill={C.gold} style={{ opacity: 0, animation: "fade-curve-el .45s ease-out 3.6s forwards" }} />
           <text className="cc-marker-label" x={220} y={32} style={{ fontFamily: FONT_MONO, fontSize: 8, fill: C.gold, letterSpacing: ".1em", opacity: 0, animation: "fade-curve-el .45s ease-out 3.8s forwards" }}>
-            RÉCIT REPRIS
+            {isEn ? "NARRATIVE REGAINED" : "RÉCIT REPRIS"}
           </text>
         </svg>
         <div className="flex justify-center gap-[18px] uppercase" style={{ marginTop: 8, fontFamily: FONT_MONO, fontSize: 8.5, color: "rgba(245,241,232,.6)" }}>
-          <span><span style={{ color: C.alert }}>—</span> Désinformation</span>
-          <span><span style={{ color: C.gold }}>—</span> Contre-narratif</span>
+          <span><span style={{ color: C.alert }}>—</span> {isEn ? "Disinformation" : "Désinformation"}</span>
+          <span><span style={{ color: C.gold }}>—</span> {isEn ? "Counter-narrative" : "Contre-narratif"}</span>
         </div>
       </div>
     </div>
   );
 };
 
-const ThreatViz = ({ mode }: { mode: ThreatMode }) => {
-  const data = THREAT_CONTENT[mode];
+const ThreatViz = ({ mode, lang }: { mode: ThreatMode; lang: "fr" | "en" }) => {
+  const data = getThreatContent(lang)[mode];
   return (
     <>
       <ThreatPaneHeader
@@ -1068,7 +1105,7 @@ const ThreatViz = ({ mode }: { mode: ThreatMode }) => {
         tagColor={data.tagColor}
         lead={data.lead}
       />
-      {mode === "veille" ? <RadarFeedViz /> : <CrisisCurveViz />}
+      {mode === "veille" ? <RadarFeedViz lang={lang} /> : <CrisisCurveViz lang={lang} />}
     </>
   );
 };
@@ -1076,7 +1113,7 @@ const ThreatViz = ({ mode }: { mode: ThreatMode }) => {
 const ThreatSection = () => {
   const { lang } = useLanguage();
   const [mode, setMode] = useState<ThreatMode>("veille");
-  const data = THREAT_CONTENT[mode];
+  const data = getThreatContent(lang)[mode];
   const restartThreatAnimations = () => {
     requestAnimationFrame(() => {
       document
@@ -1134,15 +1171,15 @@ const ThreatSection = () => {
             className="text-3xl md:text-4xl scroll-mt-24"
             style={{ fontFamily: FONT_DISPLAY, color: C.navy, lineHeight: 1.15 }}
           >
-            De la veille continue{" "}
-            <em style={{ color: C.gold, fontFamily: FONT_DISPLAY }}>au</em> mode crise
+            {lang === "en" ? <>From continuous monitoring <em style={{ color: C.gold, fontFamily: FONT_DISPLAY }}>to</em> crisis mode</> : <>De la veille continue{" "}<em style={{ color: C.gold, fontFamily: FONT_DISPLAY }}>au</em> mode crise</>}
           </h3>
           <p
             className="mt-3 text-lg italic"
             style={{ fontFamily: FONT_ITALIC, color: C.navyMid }}
           >
-            Un cockpit double mode : détecter les signaux faibles en temps réel,
-            déclencher la War Room quand la crise frappe.
+            {lang === "en"
+              ? "A dual-mode cockpit: detect weak signals in real time, trigger the War Room when a crisis strikes."
+              : "Un cockpit double mode : détecter les signaux faibles en temps réel, déclencher la War Room quand la crise frappe."}
           </p>
         </div>
       </div>
@@ -1185,7 +1222,7 @@ const ThreatSection = () => {
             className="italic text-sm hidden md:block"
             style={{ fontFamily: FONT_ITALIC, color: "rgba(245,241,232,0.7)" }}
           >
-            Basculez entre mode continu et mode crise
+            {lang === "en" ? "Switch between continuous monitoring and crisis mode" : "Basculez entre mode continu et mode crise"}
           </div>
         </div>
 
@@ -1271,7 +1308,7 @@ const ThreatSection = () => {
               className="p-8 md:p-10"
               style={{ background: `linear-gradient(135deg, ${C.navy}, ${C.navyMid})`, minHeight: 360 }}
             >
-              <ThreatViz mode={mode} />
+              <ThreatViz mode={mode} lang={lang} />
             </motion.div>
           </AnimatePresence>
         </div>
@@ -1717,20 +1754,21 @@ const CommandTree = () => {
     return () => observer.disconnect();
   }, []);
 
+  const isEn = lang === "en";
   const nodes = [
-    { id: "f1", level: "facade", x: 95, y: 50, w: 130, h: 50, name: "CNSSO", sub: "Comité norvégien", fill: OLIVE, stroke: OLIVE_STROKE, d: 0 },
+    { id: "f1", level: "facade", x: 95, y: 50, w: 130, h: 50, name: "CNSSO", sub: isEn ? "Norwegian committee" : "Comité norvégien", fill: OLIVE, stroke: OLIVE_STROKE, d: 0 },
     { id: "f2", level: "facade", x: 270, y: 50, w: 130, h: 50, name: "WSRW", sub: "Resource Watch", fill: OLIVE, stroke: OLIVE_STROKE, d: 120 },
     { id: "f3", level: "facade", x: 445, y: 50, w: 130, h: 50, name: "SWS", sub: "Solidarity W. Sahara", fill: OLIVE, stroke: OLIVE_STROKE, d: 240 },
     { id: "f4", level: "facade", x: 615, y: 50, w: 130, h: 50, name: "AWSA", sub: "Australia W.S. Assoc.", fill: OLIVE, stroke: OLIVE_STROKE, d: 360 },
-    { id: "s1", level: "sponsor", x: 95, y: 170, w: 130, h: 50, name: "MFA Norvégien", sub: "Sponsor étatique", fill: NAVY2, stroke: "#0a2862", d: 700 },
-    { id: "s2", level: "sponsor", x: 200, y: 170, w: 130, h: 50, name: "Industri Energi", sub: "Syndicat sectoriel", fill: NAVY2, stroke: "#0a2862", d: 800 },
-    { id: "s3", level: "sponsor", x: 340, y: 170, w: 130, h: 50, name: "SAIH", sub: "Fonds étudiant", fill: NAVY2, stroke: "#0a2862", d: 900 },
-    { id: "s4", level: "sponsor", x: 470, y: 170, w: 130, h: 50, name: "Sahara Update", sub: "Centre information", fill: NAVY2, stroke: "#0a2862", d: 1000 },
-    { id: "s5", level: "sponsor", x: 615, y: 170, w: 130, h: 50, name: "Union Syndicats AU", sub: "Coalition relais", fill: NAVY2, stroke: "#0a2862", d: 1100 },
-    { id: "i1", level: "person", x: 150, y: 290, w: 130, h: 50, name: "Erik Hagen", sub: "Coordinateur", fill: TERRACOTTA, stroke: TERRACOTTA_STROKE, d: 1300 },
-    { id: "i2", level: "person", x: 270, y: 290, w: 130, h: 50, name: "Sara Eykmans", sub: "Présidente WSRW", fill: TERRACOTTA, stroke: TERRACOTTA_STROKE, d: 1400 },
-    { id: "i3", level: "person", x: 410, y: 290, w: 130, h: 50, name: "Cate Lewis", sub: "Direction SWS", fill: TERRACOTTA, stroke: TERRACOTTA_STROKE, d: 1500 },
-    { id: "i4", level: "person", x: 560, y: 290, w: 130, h: 50, name: "Lyn Allison", sub: "Présidente AWSA", fill: TERRACOTTA, stroke: TERRACOTTA_STROKE, d: 1600 },
+    { id: "s1", level: "sponsor", x: 95, y: 170, w: 130, h: 50, name: isEn ? "Norwegian MFA" : "MFA Norvégien", sub: isEn ? "State sponsor" : "Sponsor étatique", fill: NAVY2, stroke: "#0a2862", d: 700 },
+    { id: "s2", level: "sponsor", x: 200, y: 170, w: 130, h: 50, name: "Industri Energi", sub: isEn ? "Sector union" : "Syndicat sectoriel", fill: NAVY2, stroke: "#0a2862", d: 800 },
+    { id: "s3", level: "sponsor", x: 340, y: 170, w: 130, h: 50, name: "SAIH", sub: isEn ? "Student fund" : "Fonds étudiant", fill: NAVY2, stroke: "#0a2862", d: 900 },
+    { id: "s4", level: "sponsor", x: 470, y: 170, w: 130, h: 50, name: "Sahara Update", sub: isEn ? "Information hub" : "Centre information", fill: NAVY2, stroke: "#0a2862", d: 1000 },
+    { id: "s5", level: "sponsor", x: 615, y: 170, w: 130, h: 50, name: isEn ? "AU Trade Unions" : "Union Syndicats AU", sub: isEn ? "Relay coalition" : "Coalition relais", fill: NAVY2, stroke: "#0a2862", d: 1100 },
+    { id: "i1", level: "person", x: 150, y: 290, w: 130, h: 50, name: "Erik Hagen", sub: isEn ? "Coordinator" : "Coordinateur", fill: TERRACOTTA, stroke: TERRACOTTA_STROKE, d: 1300 },
+    { id: "i2", level: "person", x: 270, y: 290, w: 130, h: 50, name: "Sara Eykmans", sub: isEn ? "WSRW President" : "Présidente WSRW", fill: TERRACOTTA, stroke: TERRACOTTA_STROKE, d: 1400 },
+    { id: "i3", level: "person", x: 410, y: 290, w: 130, h: 50, name: "Cate Lewis", sub: isEn ? "SWS leadership" : "Direction SWS", fill: TERRACOTTA, stroke: TERRACOTTA_STROKE, d: 1500 },
+    { id: "i4", level: "person", x: 560, y: 290, w: 130, h: 50, name: "Lyn Allison", sub: isEn ? "AWSA President" : "Présidente AWSA", fill: TERRACOTTA, stroke: TERRACOTTA_STROKE, d: 1600 },
   ];
   const nodeMap = Object.fromEntries(nodes.map((node) => [node.id, node]));
   const links = [
@@ -1774,7 +1812,7 @@ const CommandTree = () => {
       <style>{`
         .command-tree .tree-node,.command-tree .tree-link{opacity:0;transition:opacity .5s ease,stroke .2s ease,stroke-width .2s ease}.command-tree.in-view .tree-node{opacity:1}.command-tree.in-view .tree-link{opacity:.5}.command-tree.in-view .tree-link{transition-delay:600ms}.command-tree .tree-node.highlight rect{stroke:${C.gold};stroke-width:2px}.command-tree .tree-node.dim{opacity:.18!important}.command-tree .tree-link.highlight{stroke:${C.gold};stroke-width:2px;opacity:1!important}.command-tree .tree-link.dim{opacity:.12!important}@media(max-width:640px){.tree-scroll{overflow-x:auto}}
       `}</style>
-      <BlockHeader kicker={lang === "en" ? "A · DECODING" : "A · DÉCRYPTAGE"} title={<>L'arbre des commanditaires.<br />ONG façades, financeurs et relais.</>} hint="Survolez une façade pour révéler sa chaîne" />
+      <BlockHeader kicker={lang === "en" ? "A · DECODING" : "A · DÉCRYPTAGE"} title={lang === "en" ? <>The sponsor tree.<br />Front NGOs, funders and relays.</> : <>L'arbre des commanditaires.<br />ONG façades, financeurs et relais.</>} hint={lang === "en" ? "Hover over a front organization to reveal its chain" : "Survolez une façade pour révéler sa chaîne"} />
       <div className="tree-scroll">
         <svg className="command-tree" viewBox="0 0 760 380" width="100%" height="380" style={{ minWidth: 760 }}>
           {links.map(([from, to], index) => {
@@ -1802,9 +1840,9 @@ const CommandTree = () => {
         </svg>
       </div>
       <div className="case-legend">
-        <LegendItem color={OLIVE} label="ONG façade visible" />
-        <LegendItem color={NAVY2} label="Sponsor / financeur" />
-        <LegendItem color={TERRACOTTA} label="Relais individuel identifié" />
+        <LegendItem color={OLIVE} label={lang === "en" ? "Visible front NGO" : "ONG façade visible"} />
+        <LegendItem color={NAVY2} label={lang === "en" ? "Sponsor / funder" : "Sponsor / financeur"} />
+        <LegendItem color={TERRACOTTA} label={lang === "en" ? "Identified individual relay" : "Relais individuel identifié"} />
       </div>
     </div>
   );
@@ -1829,7 +1867,36 @@ const LegendItem = ({ color, label }: { color: string; label: string }) => (
 
 const ChessboardsBlock = () => {
   const { lang } = useLanguage();
-  const cards = [
+  const isEn = lang === "en";
+  const cards = isEn ? [
+    {
+      key: "geo",
+      color: NAVY2,
+      num: "01 · GEOPOLITICAL CHESSBOARD",
+      title: "State games",
+      tag: "Sovereignties, alliances, dependencies",
+      bullets: ["Anonymized sovereign funds acting as discreet sponsors", "Foreign ministries from third countries", "International agencies in energy and health", "Supranational organizations"],
+      reading: "Who is speaking on whose behalf? Which state interests sit behind the official narrative?",
+    },
+    {
+      key: "eco",
+      color: "#9a4f2c",
+      num: "02 · ECONOMIC CHESSBOARD",
+      title: "Industrial rivalries",
+      tag: "Competitors, federations, lobbies",
+      bullets: ["Direct competitors on key markets", "Third-party professional federations", "Industrial groups with opposing interests", "Sector unions from other countries"],
+      reading: "Who funds the noise? Which competitor benefits directly from destabilization?",
+    },
+    {
+      key: "soc",
+      color: FOREST,
+      num: "03 · SOCIETAL CHESSBOARD",
+      title: "Opinion relays",
+      tag: "NGOs, activists, institutes, media",
+      bullets: ["Activist-oriented front NGOs", "Partisan research centers", "Relay personalities (researchers, journalists)", "Transnational advocacy coalitions"],
+      reading: "Who amplifies? Which 'independent' faces are in fact carrying a commissioned agenda?",
+    },
+  ] : [
     {
       key: "geo",
       color: NAVY2,
@@ -1860,10 +1927,10 @@ const ChessboardsBlock = () => {
   ];
   return (
     <div style={{ marginTop: 48 }}>
-      <BlockHeader kicker={lang === "en" ? "B · METHODOLOGY" : "B · MÉTHODE"} title={<>L'analyse par échiquiers.<br />Trois lectures qui se croisent.</>} />
+      <BlockHeader kicker={lang === "en" ? "B · METHODOLOGY" : "B · MÉTHODE"} title={isEn ? <>Chessboard analysis.<br />Three intersecting readings.</> : <>L'analyse par échiquiers.<br />Trois lectures qui se croisent.</>} />
       <div style={{ background: "rgba(16,62,140,0.04)", borderLeft: `4px solid ${NAVY2}`, padding: "22px 28px", borderRadius: 2, marginBottom: 28, maxWidth: 980 }}>
         <p className="italic" style={{ fontFamily: FONT_ITALIC, fontSize: 17, lineHeight: 1.55, color: NAVY3, margin: 0 }}>
-          Là où la plupart des cabinets traitent une dimension à la fois, <strong style={{ color: C.navy, fontFamily: "DM Sans, sans-serif", fontStyle: "normal", fontWeight: 600 }}>Buildfluence croise systématiquement les trois échiquiers</strong> — géopolitique, économique et sociétal — pour révéler la mécanique réelle d'une attaque informationnelle. C'est ce mix tridimensionnel qui distingue notre méthode.
+          {isEn ? <>Where most firms address one dimension at a time, <strong style={{ color: C.navy, fontFamily: "DM Sans, sans-serif", fontStyle: "normal", fontWeight: 600 }}>Buildfluence systematically cross-reads the three chessboards</strong> — geopolitical, economic and societal — to reveal the real mechanics of an information attack. This three-dimensional mix is what distinguishes our method.</> : <>Là où la plupart des cabinets traitent une dimension à la fois, <strong style={{ color: C.navy, fontFamily: "DM Sans, sans-serif", fontStyle: "normal", fontWeight: 600 }}>Buildfluence croise systématiquement les trois échiquiers</strong> — géopolitique, économique et sociétal — pour révéler la mécanique réelle d'une attaque informationnelle. C'est ce mix tridimensionnel qui distingue notre méthode.</>}
         </p>
       </div>
       <div className="chess-grid">
@@ -1883,7 +1950,7 @@ const ChessboardsBlock = () => {
               ))}
             </ul>
             <div style={{ borderTop: `1px solid ${C.rule}`, marginTop: 18, paddingTop: 14 }}>
-              <div className="uppercase" style={{ fontFamily: FONT_MONO, fontSize: 10, color: MUTED, letterSpacing: ".15em", marginBottom: 5 }}>LECTURE</div>
+              <div className="uppercase" style={{ fontFamily: FONT_MONO, fontSize: 10, color: MUTED, letterSpacing: ".15em", marginBottom: 5 }}>{isEn ? "READING" : "LECTURE"}</div>
               <div style={{ fontFamily: "DM Sans, sans-serif", fontSize: 12, fontWeight: 500, color: C.navy, lineHeight: 1.4 }}>{card.reading}</div>
             </div>
           </article>
@@ -1891,7 +1958,7 @@ const ChessboardsBlock = () => {
       </div>
       <div style={{ marginTop: 28, background: C.navy, color: C.ivory, padding: "24px 30px", borderLeft: `4px solid ${C.gold}`, textAlign: "center" }}>
         <p className="italic" style={{ fontFamily: FONT_ITALIC, fontSize: 18, lineHeight: 1.55, color: C.goldHover, margin: 0 }}>
-          La force Buildfluence : <strong style={{ color: C.ivory, fontFamily: "DM Sans, sans-serif", fontStyle: "normal", fontWeight: 500 }}>ne pas regarder un échiquier après l'autre, mais les trois en simultané.</strong> C'est dans les zones de chevauchement que la mécanique hostile devient lisible.
+          {isEn ? <>The Buildfluence advantage: <strong style={{ color: C.ivory, fontFamily: "DM Sans, sans-serif", fontStyle: "normal", fontWeight: 500 }}>not reading one chessboard after another, but all three simultaneously.</strong> It is in the overlap zones that hostile mechanics become legible.</> : <>La force Buildfluence : <strong style={{ color: C.ivory, fontFamily: "DM Sans, sans-serif", fontStyle: "normal", fontWeight: 500 }}>ne pas regarder un échiquier après l'autre, mais les trois en simultané.</strong> C'est dans les zones de chevauchement que la mécanique hostile devient lisible.</>}
         </p>
       </div>
     </div>
@@ -1900,13 +1967,30 @@ const ChessboardsBlock = () => {
 
 const StakeholderMatrix = () => {
   const { lang } = useLanguage();
+  const isEn = lang === "en";
   const wrapRef = useRef<HTMLDivElement | null>(null);
   const [filter, setFilter] = useState("all");
   const [tooltip, setTooltip] = useState<{ visible: boolean; x: number; y: number; node: MatrixNode | null }>({ visible: false, x: 0, y: 0, node: null });
   const PAD = 60;
   const W = 800;
   const H = 520;
-  const nodes: MatrixNode[] = [
+  const nodes: MatrixNode[] = isEn ? [
+    { name: "WSRW", cat: "ngo", type: "Front NGO", role: "Central coordinator of hostile campaigns", x: -0.55, y: 0.78 },
+    { name: "CNSSO", cat: "ngo", type: "Front NGO", role: "Norwegian committee and institutional relay", x: -0.85, y: 0.55 },
+    { name: "SWS", cat: "ngo", type: "Front NGO", role: "Influence lobbying across Europe", x: -0.35, y: 0.55 },
+    { name: "AWSA", cat: "ngo", type: "Front NGO", role: "Australian activist branch", x: -0.7, y: 0.32 },
+    { name: "Norwegian MFA*", cat: "state", type: "Ministry of Foreign Affairs", role: "Indirect NGO funding through student funds", x: -0.35, y: 0.18 },
+    { name: "Algeria", cat: "state", type: "Financial support", role: "Structural financial backing for hostile NGOs", x: -0.55, y: 0.05 },
+    { name: "Morocco", cat: "state", type: "Allied state", role: "Direct institutional support to OCP", x: 0.85, y: 0.5 },
+    { name: "ONHYM", cat: "state", type: "Sovereign agency", role: "Moroccan industrial partner", x: 0.7, y: 0.2 },
+    { name: "Industri Energi", cat: "corp", type: "Industrial union", role: "Sector sponsor of campaigns", x: -0.18, y: 0.42 },
+    { name: "BASF Belgium", cat: "corp", type: "Indirect competitor", role: "Ambivalent presence, observer position", x: -0.25, y: -0.2 },
+    { name: "Yara", cat: "corp", type: "Fertilizer actor", role: "Competitor neutralized in selected markets", x: -0.15, y: -0.1 },
+    { name: "Erik Hagen", cat: "leader", type: "Norwegian activist", role: "Public face of anti-OCP campaigns", x: -0.92, y: 0.88 },
+    { name: "Sara Eykmans", cat: "leader", type: "WSRW President", role: "Coordination of media actions", x: -0.2, y: 0.88 },
+    { name: "Jeremy Grantham", cat: "leader", type: "Investor", role: "Financial relay, critical position", x: -0.05, y: 0.6 },
+    { name: "Steven Van Kauwenberg", cat: "leader", type: "IFDC analyst", role: "Expert position, balanced discourse", x: 0.2, y: -0.3 },
+  ] : [
     { name: "WSRW", cat: "ngo", type: "ONG façade", role: "Coordinateur central des campagnes hostiles", x: -0.55, y: 0.78 },
     { name: "CNSSO", cat: "ngo", type: "ONG façade", role: "Comité norvégien, relais institutionnel", x: -0.85, y: 0.55 },
     { name: "SWS", cat: "ngo", type: "ONG façade", role: "Lobbying d'influence en Europe", x: -0.35, y: 0.55 },
@@ -1930,11 +2014,11 @@ const StakeholderMatrix = () => {
     leader: { fill: C.gold, stroke: C.goldDim, text: C.navy },
   };
   const filters = [
-    { cat: "all", label: "Toutes" },
+    { cat: "all", label: isEn ? "All" : "Toutes" },
     { cat: "ngo", label: "ONG", color: TERRACOTTA },
-    { cat: "state", label: "États", color: NAVY2 },
-    { cat: "corp", label: "Entreprises", color: FOREST },
-    { cat: "leader", label: "Leaders d'opinion", color: C.gold },
+    { cat: "state", label: isEn ? "States" : "États", color: NAVY2 },
+    { cat: "corp", label: isEn ? "Companies" : "Entreprises", color: FOREST },
+    { cat: "leader", label: isEn ? "Opinion leaders" : "Leaders d'opinion", color: C.gold },
   ];
   const sx = (x: number) => PAD + ((x + 1) / 2) * (W - PAD * 2);
   const sy = (y: number) => PAD + ((1 - y) / 2) * (H - PAD * 2);
@@ -1999,7 +2083,7 @@ const StakeholderMatrix = () => {
       <style>{`
         .mn{opacity:1;transition:opacity .35s ease,filter .15s ease}.mn.dim{opacity:.12!important}.mn:hover{filter:drop-shadow(0 8px 12px rgba(13,27,42,.25))}.matrix-tooltip{opacity:0;transform:translateY(4px);transition:.15s;pointer-events:none}.matrix-tooltip.visible{opacity:1;transform:translateY(0)}
       `}</style>
-      <BlockHeader kicker={lang === "en" ? "C · MAPPING" : "C · CARTOGRAPHIE"} title={<>La matrice dynamique des parties prenantes.<br />Qui pèse, qui amplifie, qui s'efface.</>} />
+      <BlockHeader kicker={lang === "en" ? "C · MAPPING" : "C · CARTOGRAPHIE"} title={isEn ? <>The dynamic stakeholder matrix.<br />Who weighs, who amplifies, who fades.</> : <>La matrice dynamique des parties prenantes.<br />Qui pèse, qui amplifie, qui s'efface.</>} />
       <div className="matrix-toolbar">
         <div className="flex flex-wrap gap-[6px]">
           {filters.map((item) => (
@@ -2009,7 +2093,7 @@ const StakeholderMatrix = () => {
             </button>
           ))}
         </div>
-        <div className="italic" style={{ fontFamily: FONT_ITALIC, fontSize: 13, color: MUTED }}>Cliquez sur un nœud pour le détail</div>
+        <div className="italic" style={{ fontFamily: FONT_ITALIC, fontSize: 13, color: MUTED }}>{isEn ? "Hover over a node for details" : "Cliquez sur un nœud pour le détail"}</div>
       </div>
       <div className="matrix-canvas">
         <svg width="100%" height="520" viewBox="0 0 800 520" preserveAspectRatio="xMidYMid meet">
@@ -2021,12 +2105,12 @@ const StakeholderMatrix = () => {
           ))}
           <line x1={sx(0)} y1={PAD} x2={sx(0)} y2={H - PAD} stroke={MUTED} opacity={0.5} />
           <line x1={PAD} y1={sy(0)} x2={W - PAD} y2={sy(0)} stroke={MUTED} opacity={0.5} />
-          <text x={W / 2} y={30} textAnchor="middle" style={{ fontFamily: FONT_MONO, fontSize: 10, fill: C.goldDim, letterSpacing: ".2em" }}>↑ ACTIVISME</text>
-          <text x={W / 2} y={500} textAnchor="middle" style={{ fontFamily: FONT_MONO, fontSize: 10, fill: C.goldDim, letterSpacing: ".2em" }}>PASSIVITÉ ↓</text>
-          <text x={20} y={H / 2 + 4} style={{ fontFamily: FONT_MONO, fontSize: 10, fill: C.goldDim, letterSpacing: ".2em" }}>← HOSTILE</text>
-          <text x={780} y={H / 2 + 4} textAnchor="end" style={{ fontFamily: FONT_MONO, fontSize: 10, fill: C.goldDim, letterSpacing: ".2em" }}>SOUTIEN OCP →</text>
+          <text x={W / 2} y={30} textAnchor="middle" style={{ fontFamily: FONT_MONO, fontSize: 10, fill: C.goldDim, letterSpacing: ".2em" }}>{isEn ? "↑ ACTIVISM" : "↑ ACTIVISME"}</text>
+          <text x={W / 2} y={500} textAnchor="middle" style={{ fontFamily: FONT_MONO, fontSize: 10, fill: C.goldDim, letterSpacing: ".2em" }}>{isEn ? "PASSIVITY ↓" : "PASSIVITÉ ↓"}</text>
+          <text x={20} y={H / 2 + 4} style={{ fontFamily: FONT_MONO, fontSize: 10, fill: C.goldDim, letterSpacing: ".2em" }}>{isEn ? "← HOSTILE" : "← HOSTILE"}</text>
+          <text x={780} y={H / 2 + 4} textAnchor="end" style={{ fontFamily: FONT_MONO, fontSize: 10, fill: C.goldDim, letterSpacing: ".2em" }}>{isEn ? "OCP SUPPORT →" : "SOUTIEN OCP →"}</text>
           {[
-            { x: 220, y: 50, t: "Réfractaires" }, { x: 580, y: 50, t: "Alliés" }, { x: 220, y: 400, t: "Idiots utiles" }, { x: 580, y: 400, t: "Neutres" },
+            { x: 220, y: 50, t: isEn ? "Resisters" : "Réfractaires" }, { x: 580, y: 50, t: isEn ? "Allies" : "Alliés" }, { x: 220, y: 400, t: isEn ? "Useful amplifiers" : "Idiots utiles" }, { x: 580, y: 400, t: isEn ? "Neutrals" : "Neutres" },
           ].map((q) => <text key={q.t} x={q.x} y={q.y} textAnchor="middle" style={{ fontFamily: FONT_DISPLAY, fontStyle: "italic", fontSize: 14, fill: MUTED, opacity: 0.5 }}>{q.t}</text>)}
           {nodes.map((node) => {
             const style = catStyles[node.cat];
@@ -2047,7 +2131,7 @@ const StakeholderMatrix = () => {
         </div>
       </div>
       <div className="italic" style={{ marginTop: 16, fontFamily: FONT_ITALIC, fontSize: 9, color: MUTED, letterSpacing: ".05em", textAlign: "center" }}>
-        * MFA = Ministry of Foreign Affairs (Ministère des Affaires Étrangères)
+        {isEn ? "* MFA = Ministry of Foreign Affairs" : "* MFA = Ministry of Foreign Affairs (Ministère des Affaires Étrangères)"}
       </div>
     </div>
   );
