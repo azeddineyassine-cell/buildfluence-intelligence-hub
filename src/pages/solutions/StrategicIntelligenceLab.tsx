@@ -1092,8 +1092,8 @@ const CrisisCurveViz = () => {
   );
 };
 
-const ThreatViz = ({ mode }: { mode: ThreatMode }) => {
-  const data = THREAT_CONTENT[mode];
+const ThreatViz = ({ mode, lang }: { mode: ThreatMode; lang: "fr" | "en" }) => {
+  const data = getThreatContent(lang)[mode];
   return (
     <>
       <ThreatPaneHeader
@@ -1103,7 +1103,7 @@ const ThreatViz = ({ mode }: { mode: ThreatMode }) => {
         tagColor={data.tagColor}
         lead={data.lead}
       />
-      {mode === "veille" ? <RadarFeedViz /> : <CrisisCurveViz />}
+      {mode === "veille" ? <RadarFeedViz lang={lang} /> : <CrisisCurveViz lang={lang} />}
     </>
   );
 };
@@ -1111,7 +1111,7 @@ const ThreatViz = ({ mode }: { mode: ThreatMode }) => {
 const ThreatSection = () => {
   const { lang } = useLanguage();
   const [mode, setMode] = useState<ThreatMode>("veille");
-  const data = THREAT_CONTENT[mode];
+  const data = getThreatContent(lang)[mode];
   const restartThreatAnimations = () => {
     requestAnimationFrame(() => {
       document
