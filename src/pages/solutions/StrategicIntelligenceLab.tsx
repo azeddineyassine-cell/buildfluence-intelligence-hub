@@ -1754,20 +1754,21 @@ const CommandTree = () => {
     return () => observer.disconnect();
   }, []);
 
+  const isEn = lang === "en";
   const nodes = [
-    { id: "f1", level: "facade", x: 95, y: 50, w: 130, h: 50, name: "CNSSO", sub: "Comité norvégien", fill: OLIVE, stroke: OLIVE_STROKE, d: 0 },
+    { id: "f1", level: "facade", x: 95, y: 50, w: 130, h: 50, name: "CNSSO", sub: isEn ? "Norwegian committee" : "Comité norvégien", fill: OLIVE, stroke: OLIVE_STROKE, d: 0 },
     { id: "f2", level: "facade", x: 270, y: 50, w: 130, h: 50, name: "WSRW", sub: "Resource Watch", fill: OLIVE, stroke: OLIVE_STROKE, d: 120 },
     { id: "f3", level: "facade", x: 445, y: 50, w: 130, h: 50, name: "SWS", sub: "Solidarity W. Sahara", fill: OLIVE, stroke: OLIVE_STROKE, d: 240 },
     { id: "f4", level: "facade", x: 615, y: 50, w: 130, h: 50, name: "AWSA", sub: "Australia W.S. Assoc.", fill: OLIVE, stroke: OLIVE_STROKE, d: 360 },
-    { id: "s1", level: "sponsor", x: 95, y: 170, w: 130, h: 50, name: "MFA Norvégien", sub: "Sponsor étatique", fill: NAVY2, stroke: "#0a2862", d: 700 },
-    { id: "s2", level: "sponsor", x: 200, y: 170, w: 130, h: 50, name: "Industri Energi", sub: "Syndicat sectoriel", fill: NAVY2, stroke: "#0a2862", d: 800 },
-    { id: "s3", level: "sponsor", x: 340, y: 170, w: 130, h: 50, name: "SAIH", sub: "Fonds étudiant", fill: NAVY2, stroke: "#0a2862", d: 900 },
-    { id: "s4", level: "sponsor", x: 470, y: 170, w: 130, h: 50, name: "Sahara Update", sub: "Centre information", fill: NAVY2, stroke: "#0a2862", d: 1000 },
-    { id: "s5", level: "sponsor", x: 615, y: 170, w: 130, h: 50, name: "Union Syndicats AU", sub: "Coalition relais", fill: NAVY2, stroke: "#0a2862", d: 1100 },
-    { id: "i1", level: "person", x: 150, y: 290, w: 130, h: 50, name: "Erik Hagen", sub: "Coordinateur", fill: TERRACOTTA, stroke: TERRACOTTA_STROKE, d: 1300 },
-    { id: "i2", level: "person", x: 270, y: 290, w: 130, h: 50, name: "Sara Eykmans", sub: "Présidente WSRW", fill: TERRACOTTA, stroke: TERRACOTTA_STROKE, d: 1400 },
-    { id: "i3", level: "person", x: 410, y: 290, w: 130, h: 50, name: "Cate Lewis", sub: "Direction SWS", fill: TERRACOTTA, stroke: TERRACOTTA_STROKE, d: 1500 },
-    { id: "i4", level: "person", x: 560, y: 290, w: 130, h: 50, name: "Lyn Allison", sub: "Présidente AWSA", fill: TERRACOTTA, stroke: TERRACOTTA_STROKE, d: 1600 },
+    { id: "s1", level: "sponsor", x: 95, y: 170, w: 130, h: 50, name: isEn ? "Norwegian MFA" : "MFA Norvégien", sub: isEn ? "State sponsor" : "Sponsor étatique", fill: NAVY2, stroke: "#0a2862", d: 700 },
+    { id: "s2", level: "sponsor", x: 200, y: 170, w: 130, h: 50, name: "Industri Energi", sub: isEn ? "Sector union" : "Syndicat sectoriel", fill: NAVY2, stroke: "#0a2862", d: 800 },
+    { id: "s3", level: "sponsor", x: 340, y: 170, w: 130, h: 50, name: "SAIH", sub: isEn ? "Student fund" : "Fonds étudiant", fill: NAVY2, stroke: "#0a2862", d: 900 },
+    { id: "s4", level: "sponsor", x: 470, y: 170, w: 130, h: 50, name: "Sahara Update", sub: isEn ? "Information hub" : "Centre information", fill: NAVY2, stroke: "#0a2862", d: 1000 },
+    { id: "s5", level: "sponsor", x: 615, y: 170, w: 130, h: 50, name: isEn ? "AU Trade Unions" : "Union Syndicats AU", sub: isEn ? "Relay coalition" : "Coalition relais", fill: NAVY2, stroke: "#0a2862", d: 1100 },
+    { id: "i1", level: "person", x: 150, y: 290, w: 130, h: 50, name: "Erik Hagen", sub: isEn ? "Coordinator" : "Coordinateur", fill: TERRACOTTA, stroke: TERRACOTTA_STROKE, d: 1300 },
+    { id: "i2", level: "person", x: 270, y: 290, w: 130, h: 50, name: "Sara Eykmans", sub: isEn ? "WSRW President" : "Présidente WSRW", fill: TERRACOTTA, stroke: TERRACOTTA_STROKE, d: 1400 },
+    { id: "i3", level: "person", x: 410, y: 290, w: 130, h: 50, name: "Cate Lewis", sub: isEn ? "SWS leadership" : "Direction SWS", fill: TERRACOTTA, stroke: TERRACOTTA_STROKE, d: 1500 },
+    { id: "i4", level: "person", x: 560, y: 290, w: 130, h: 50, name: "Lyn Allison", sub: isEn ? "AWSA President" : "Présidente AWSA", fill: TERRACOTTA, stroke: TERRACOTTA_STROKE, d: 1600 },
   ];
   const nodeMap = Object.fromEntries(nodes.map((node) => [node.id, node]));
   const links = [
