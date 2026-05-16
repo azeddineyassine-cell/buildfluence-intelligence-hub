@@ -1867,7 +1867,36 @@ const LegendItem = ({ color, label }: { color: string; label: string }) => (
 
 const ChessboardsBlock = () => {
   const { lang } = useLanguage();
-  const cards = [
+  const isEn = lang === "en";
+  const cards = isEn ? [
+    {
+      key: "geo",
+      color: NAVY2,
+      num: "01 · GEOPOLITICAL CHESSBOARD",
+      title: "State games",
+      tag: "Sovereignties, alliances, dependencies",
+      bullets: ["Anonymized sovereign funds acting as discreet sponsors", "Foreign ministries from third countries", "International agencies in energy and health", "Supranational organizations"],
+      reading: "Who is speaking on whose behalf? Which state interests sit behind the official narrative?",
+    },
+    {
+      key: "eco",
+      color: "#9a4f2c",
+      num: "02 · ECONOMIC CHESSBOARD",
+      title: "Industrial rivalries",
+      tag: "Competitors, federations, lobbies",
+      bullets: ["Direct competitors on key markets", "Third-party professional federations", "Industrial groups with opposing interests", "Sector unions from other countries"],
+      reading: "Who funds the noise? Which competitor benefits directly from destabilization?",
+    },
+    {
+      key: "soc",
+      color: FOREST,
+      num: "03 · SOCIETAL CHESSBOARD",
+      title: "Opinion relays",
+      tag: "NGOs, activists, institutes, media",
+      bullets: ["Activist-oriented front NGOs", "Partisan research centers", "Relay personalities (researchers, journalists)", "Transnational advocacy coalitions"],
+      reading: "Who amplifies? Which 'independent' faces are in fact carrying a commissioned agenda?",
+    },
+  ] : [
     {
       key: "geo",
       color: NAVY2,
@@ -1898,10 +1927,10 @@ const ChessboardsBlock = () => {
   ];
   return (
     <div style={{ marginTop: 48 }}>
-      <BlockHeader kicker={lang === "en" ? "B · METHODOLOGY" : "B · MÉTHODE"} title={<>L'analyse par échiquiers.<br />Trois lectures qui se croisent.</>} />
+      <BlockHeader kicker={lang === "en" ? "B · METHODOLOGY" : "B · MÉTHODE"} title={isEn ? <>Chessboard analysis.<br />Three intersecting readings.</> : <>L'analyse par échiquiers.<br />Trois lectures qui se croisent.</>} />
       <div style={{ background: "rgba(16,62,140,0.04)", borderLeft: `4px solid ${NAVY2}`, padding: "22px 28px", borderRadius: 2, marginBottom: 28, maxWidth: 980 }}>
         <p className="italic" style={{ fontFamily: FONT_ITALIC, fontSize: 17, lineHeight: 1.55, color: NAVY3, margin: 0 }}>
-          Là où la plupart des cabinets traitent une dimension à la fois, <strong style={{ color: C.navy, fontFamily: "DM Sans, sans-serif", fontStyle: "normal", fontWeight: 600 }}>Buildfluence croise systématiquement les trois échiquiers</strong> — géopolitique, économique et sociétal — pour révéler la mécanique réelle d'une attaque informationnelle. C'est ce mix tridimensionnel qui distingue notre méthode.
+          {isEn ? <>Where most firms address one dimension at a time, <strong style={{ color: C.navy, fontFamily: "DM Sans, sans-serif", fontStyle: "normal", fontWeight: 600 }}>Buildfluence systematically cross-reads the three chessboards</strong> — geopolitical, economic and societal — to reveal the real mechanics of an information attack. This three-dimensional mix is what distinguishes our method.</> : <>Là où la plupart des cabinets traitent une dimension à la fois, <strong style={{ color: C.navy, fontFamily: "DM Sans, sans-serif", fontStyle: "normal", fontWeight: 600 }}>Buildfluence croise systématiquement les trois échiquiers</strong> — géopolitique, économique et sociétal — pour révéler la mécanique réelle d'une attaque informationnelle. C'est ce mix tridimensionnel qui distingue notre méthode.</>}
         </p>
       </div>
       <div className="chess-grid">
@@ -1921,7 +1950,7 @@ const ChessboardsBlock = () => {
               ))}
             </ul>
             <div style={{ borderTop: `1px solid ${C.rule}`, marginTop: 18, paddingTop: 14 }}>
-              <div className="uppercase" style={{ fontFamily: FONT_MONO, fontSize: 10, color: MUTED, letterSpacing: ".15em", marginBottom: 5 }}>LECTURE</div>
+              <div className="uppercase" style={{ fontFamily: FONT_MONO, fontSize: 10, color: MUTED, letterSpacing: ".15em", marginBottom: 5 }}>{isEn ? "READING" : "LECTURE"}</div>
               <div style={{ fontFamily: "DM Sans, sans-serif", fontSize: 12, fontWeight: 500, color: C.navy, lineHeight: 1.4 }}>{card.reading}</div>
             </div>
           </article>
@@ -1929,7 +1958,7 @@ const ChessboardsBlock = () => {
       </div>
       <div style={{ marginTop: 28, background: C.navy, color: C.ivory, padding: "24px 30px", borderLeft: `4px solid ${C.gold}`, textAlign: "center" }}>
         <p className="italic" style={{ fontFamily: FONT_ITALIC, fontSize: 18, lineHeight: 1.55, color: C.goldHover, margin: 0 }}>
-          La force Buildfluence : <strong style={{ color: C.ivory, fontFamily: "DM Sans, sans-serif", fontStyle: "normal", fontWeight: 500 }}>ne pas regarder un échiquier après l'autre, mais les trois en simultané.</strong> C'est dans les zones de chevauchement que la mécanique hostile devient lisible.
+          {isEn ? <>The Buildfluence advantage: <strong style={{ color: C.ivory, fontFamily: "DM Sans, sans-serif", fontStyle: "normal", fontWeight: 500 }}>not reading one chessboard after another, but all three simultaneously.</strong> It is in the overlap zones that hostile mechanics become legible.</> : <>La force Buildfluence : <strong style={{ color: C.ivory, fontFamily: "DM Sans, sans-serif", fontStyle: "normal", fontWeight: 500 }}>ne pas regarder un échiquier après l'autre, mais les trois en simultané.</strong> C'est dans les zones de chevauchement que la mécanique hostile devient lisible.</>}
         </p>
       </div>
     </div>
