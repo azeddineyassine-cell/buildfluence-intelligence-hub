@@ -24,6 +24,7 @@ import {
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate, useLocation } from "react-router-dom";
 import { FormStrategicExchange } from "./FormModals";
+import { useAuth } from "@/hooks/useAuth";
 
 const Navbar = () => {
   const { lang, setLang, t } = useLanguage();
@@ -31,20 +32,27 @@ const Navbar = () => {
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [scrolled, setScrolled] = useState(false);
   const [formOpen, setFormOpen] = useState(false);
-  const [espaceClientOpen, setEspaceClientOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
+  const { session } = useAuth();
+
+  const goToAccesPremium = () => {
+    if (session) navigate("/acces-premium/dashboard");
+    else navigate("/acces-premium");
+    window.scrollTo(0, 0);
+  };
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", onScroll);
-    const onOpenEspace = () => setEspaceClientOpen(true);
-    window.addEventListener("open-espace-client", onOpenEspace as EventListener);
+    const onOpenAcces = () => goToAccesPremium();
+    window.addEventListener("open-acces-premium", onOpenAcces as EventListener);
     return () => {
       window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("open-espace-client", onOpenEspace as EventListener);
+      window.removeEventListener("open-acces-premium", onOpenAcces as EventListener);
     };
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [session]);
 
   const situationsItems = [
     {
@@ -200,7 +208,7 @@ const Navbar = () => {
     { label: "Success Stories", href: "/success-stories", maxW: "90px" },
     { label: "Insights & Resources", href: "/insights-resources", maxW: "90px" },
     { label: t("Pourquoi Buildfluence", "Why Buildfluence"), href: "/pourquoi-buildfluence", maxW: "90px" },
-    { label: t("Espace\nClients", "Client\nArea"), href: "#espace-clients", maxW: "90px", isModal: true, isGold: true },
+    { label: t("Accès\nPremium", "Premium\nAccess"), href: "#acces-premium", maxW: "90px", isModal: true, isGold: true },
   ];
 
   const handleNavClick = (href: string) => {
@@ -285,7 +293,7 @@ const Navbar = () => {
                   onClick={(e) => {
                     e.preventDefault();
                     if ((item as any).isModal) {
-                      setEspaceClientOpen(true);
+                      goToAccesPremium();
                     } else {
                       handleNavClick(item.href);
                     }
@@ -543,7 +551,7 @@ const Navbar = () => {
                       e.preventDefault();
                       if ((item as any).isModal) {
                         setOpen(false);
-                        setEspaceClientOpen(true);
+                        goToAccesPremium();
                       } else {
                         handleNavClick(item.href);
                       }
@@ -572,57 +580,6 @@ const Navbar = () => {
 
       <FormStrategicExchange open={formOpen} onClose={() => setFormOpen(false)} />
 
-      {/* Espace Clients Modal */}
-      <AnimatePresence>
-        {espaceClientOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[60] flex items-center justify-center"
-            style={{ background: "rgba(13, 27, 42, 0.7)" }}
-            onClick={() => setEspaceClientOpen(false)}
-          >
-            <motion.div
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
-              transition={{ duration: 0.2 }}
-              className="bg-white rounded-xl shadow-2xl max-w-md w-full mx-4 p-8 text-center"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <div
-                className="w-14 h-14 rounded-full mx-auto mb-4 flex items-center justify-center"
-                style={{ background: "#0F365F" }}
-              >
-                <span className="text-white text-xl">🔒</span>
-              </div>
-              <h3 className="text-xl font-bold mb-3" style={{ color: "#0D1B2A" }}>
-                {t("Espace Réservé", "Reserved Area")}
-              </h3>
-              <p className="text-sm leading-relaxed mb-6" style={{ color: "#4A5568" }}>
-                {t(
-                  "Cet espace est une Plateforme exclusivement réservé aux clients de Buildfluence.\n\nVeuillez contacter votre chargé de compte ou nous envoyer un message pour obtenir vos identifiants d'accès.",
-                  "This area is a Platform exclusively reserved for Buildfluence clients.\n\nPlease contact your account manager or send us a message to obtain your access credentials.",
-                )}
-              </p>
-              <button
-                onClick={() => setEspaceClientOpen(false)}
-                className="px-8 py-2.5 text-sm font-semibold uppercase tracking-wider rounded transition-all"
-                style={{ background: "#0F365F", color: "#FFFFFF" }}
-                onMouseOver={(e) => {
-                  e.currentTarget.style.background = "#1a4a73";
-                }}
-                onMouseOut={(e) => {
-                  e.currentTarget.style.background = "#0F365F";
-                }}
-              >
-                {t("Fermer", "Close")}
-              </button>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </>
   );
 };
