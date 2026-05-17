@@ -32,28 +32,27 @@ const Navbar = () => {
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [scrolled, setScrolled] = useState(false);
   const [formOpen, setFormOpen] = useState(false);
-  const [accesPremiumOpen, setAccesPremiumOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
   const { session } = useAuth();
 
+  const goToAccesPremium = () => {
+    if (session) navigate("/acces-premium/dashboard");
+    else navigate("/acces-premium");
+    window.scrollTo(0, 0);
+  };
+
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", onScroll);
-    const onOpenAcces = () => {
-      if (session) navigate("/acces-premium/dashboard");
-      else navigate("/acces-premium");
-    };
+    const onOpenAcces = () => goToAccesPremium();
     window.addEventListener("open-acces-premium", onOpenAcces as EventListener);
     return () => {
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("open-acces-premium", onOpenAcces as EventListener);
     };
-  }, [session, navigate]);
-
-  // accesPremiumOpen is preserved for backward compatibility; the modal is removed.
-  void accesPremiumOpen;
-  void setAccesPremiumOpen;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [session]);
 
   const situationsItems = [
     {
