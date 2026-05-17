@@ -1453,12 +1453,12 @@ const CaseFileSection = () => {
 
           <div className="mt-9 flex flex-wrap items-center justify-between gap-6" style={{ padding: "20px 24px", background: "rgba(201,168,76,0.06)", border: "1px solid rgba(201,168,76,0.3)" }}>
             <div>
-              <div style={{ fontFamily: FONT_MONO, fontSize: 9, letterSpacing: "0.24em", textTransform: "uppercase", color: C.gold, marginBottom: 6 }}>{t("Espace Client", "Client Area")}</div>
+              <div style={{ fontFamily: FONT_MONO, fontSize: 9, letterSpacing: "0.24em", textTransform: "uppercase", color: C.gold, marginBottom: 6 }}>{t("Accès Premium", "Premium Access")}</div>
               <div style={{ fontFamily: FONT_ITALIC, fontStyle: "italic", fontSize: 16, color: C.paper, lineHeight: 1.4 }}>{t("Un espace dédié détaillera l'ensemble du dispositif, sa méthodologie et ses livrables.", "A dedicated area will detail the full setup, its methodology and its deliverables.")}</div>
             </div>
             <button
               type="button"
-              onClick={() => window.dispatchEvent(new CustomEvent("open-espace-client"))}
+              onClick={() => window.dispatchEvent(new CustomEvent("open-acces-premium"))}
               style={{ fontFamily: FONT_MONO, fontSize: 10, letterSpacing: "0.22em", textTransform: "uppercase", color: C.gold, padding: "10px 16px", border: `1px solid ${C.gold}`, whiteSpace: "nowrap", background: "transparent", cursor: "pointer", transition: "all 0.2s" }}
               onMouseEnter={(e) => { e.currentTarget.style.background = C.gold; e.currentTarget.style.color = C.navy; }}
               onMouseLeave={(e) => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.color = C.gold; }}
