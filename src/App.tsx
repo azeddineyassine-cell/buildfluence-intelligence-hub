@@ -4,6 +4,10 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { LanguageProvider } from "@/contexts/LanguageContext";
+import { AuthProvider } from "@/hooks/useAuth";
+import ProtectedRoute from "@/components/ProtectedRoute";
+import AccesPremium from "./pages/AccesPremium";
+import AccesPremiumDashboard from "./pages/AccesPremiumDashboard";
 import Index from "./pages/Index";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
@@ -38,6 +42,7 @@ const queryClient = new QueryClient();
 
 const App = () => (
   <LanguageProvider>
+    <AuthProvider>
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <Toaster />
@@ -45,6 +50,15 @@ const App = () => (
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Index />} />
+            <Route path="/acces-premium" element={<AccesPremium />} />
+            <Route
+              path="/acces-premium/dashboard"
+              element={
+                <ProtectedRoute>
+                  <AccesPremiumDashboard />
+                </ProtectedRoute>
+              }
+            />
             <Route path="/contact" element={<Contact />} />
             <Route path="/situations-critiques" element={<SituationsCritiques />} />
             <Route path="/pourquoi-buildfluence" element={<PourquoiBuildfluence />} />
@@ -78,6 +92,7 @@ const App = () => (
         </BrowserRouter>
       </TooltipProvider>
     </QueryClientProvider>
+    </AuthProvider>
   </LanguageProvider>
 );
 
