@@ -24,6 +24,7 @@ import {
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate, useLocation } from "react-router-dom";
 import { FormStrategicExchange } from "./FormModals";
+import { useAuth } from "@/hooks/useAuth";
 
 const Navbar = () => {
   const { lang, setLang, t } = useLanguage();
@@ -31,20 +32,28 @@ const Navbar = () => {
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [scrolled, setScrolled] = useState(false);
   const [formOpen, setFormOpen] = useState(false);
-  const [espaceClientOpen, setEspaceClientOpen] = useState(false);
+  const [accesPremiumOpen, setAccesPremiumOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
+  const { session } = useAuth();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", onScroll);
-    const onOpenEspace = () => setEspaceClientOpen(true);
-    window.addEventListener("open-espace-client", onOpenEspace as EventListener);
+    const onOpenAcces = () => {
+      if (session) navigate("/acces-premium/dashboard");
+      else navigate("/acces-premium");
+    };
+    window.addEventListener("open-acces-premium", onOpenAcces as EventListener);
     return () => {
       window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("open-espace-client", onOpenEspace as EventListener);
+      window.removeEventListener("open-acces-premium", onOpenAcces as EventListener);
     };
-  }, []);
+  }, [session, navigate]);
+
+  // accesPremiumOpen is preserved for backward compatibility; the modal is removed.
+  void accesPremiumOpen;
+  void setAccesPremiumOpen;
 
   const situationsItems = [
     {
