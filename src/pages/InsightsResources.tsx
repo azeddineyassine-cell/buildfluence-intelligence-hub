@@ -85,7 +85,9 @@ const InsightsResources = () => {
   );
 
   const openCard = (card: Card) => {
-    window.open(card.href, "_blank", "noopener,noreferrer");
+    const sep = card.href.includes("?") ? "&" : "?";
+    const url = `${card.href}${sep}lang=${lang}`;
+    window.open(url, "_blank", "noopener,noreferrer");
   };
 
   return (
