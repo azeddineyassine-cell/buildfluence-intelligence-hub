@@ -46,11 +46,11 @@ const AccesPremium = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center px-6 py-12" style={{ background: "#0D1B2A" }}>
+    <div className="min-h-screen flex flex-col items-center justify-center px-6 py-12" style={{ background: "#FFFFFF" }}>
       <a href="/" className="mb-10 flex items-center gap-3">
         <img src={logoBuildfluence} alt="Buildfluence" className="h-12 w-auto" />
         <span className="font-serif text-2xl tracking-tight">
-          <span className="font-bold" style={{ color: "#FFFFFF" }}>Build</span>
+          <span className="font-bold" style={{ color: "#0D1B2A" }}>Build</span>
           <span className="font-bold" style={{ color: "#FFDE59" }}>fluence</span>
         </span>
       </a>
@@ -60,12 +60,12 @@ const AccesPremium = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4 }}
         className="w-full max-w-[440px] p-10"
-        style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(201,168,76,0.3)" }}
+        style={{ background: "#FFFFFF", border: "1px solid #E5E7EB", boxShadow: "0 4px 20px rgba(0,0,0,0.06)" }}
       >
-        <h1 className="font-serif text-[28px] font-bold mb-2 text-center" style={{ color: "#C9A84C" }}>
+        <h1 className="font-serif text-[28px] font-bold mb-2 text-center" style={{ color: "#0D1B2A" }}>
           {t("Accès Premium", "Premium Access")}
         </h1>
-        <p className="text-[13px] text-center mb-8" style={{ color: "rgba(255,255,255,0.6)" }}>
+        <p className="text-[13px] text-center mb-8" style={{ color: "#4A5568" }}>
           {t("Espace exclusivement réservé aux clients Buildfluence", "Area exclusively reserved for Buildfluence clients")}
         </p>
 
@@ -76,8 +76,8 @@ const AccesPremium = () => {
             placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full px-4 py-3 text-[14px] bg-white/5 text-white placeholder:text-white/30 focus:outline-none focus:ring-1 focus:ring-[#C9A84C]"
-            style={{ border: "1px solid rgba(255,255,255,0.15)" }}
+            className="w-full px-4 py-3 text-[14px] bg-[#F9FAFB] text-[#0D1B2A] placeholder:text-[#A0AEC0] focus:outline-none focus:ring-1 focus:ring-[#C9A84C]"
+            style={{ border: "1px solid #E5E7EB" }}
           />
           <input
             type="password"
@@ -85,8 +85,8 @@ const AccesPremium = () => {
             placeholder={t("Mot de passe", "Password")}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="w-full px-4 py-3 text-[14px] bg-white/5 text-white placeholder:text-white/30 focus:outline-none focus:ring-1 focus:ring-[#C9A84C]"
-            style={{ border: "1px solid rgba(255,255,255,0.15)" }}
+            className="w-full px-4 py-3 text-[14px] bg-[#F9FAFB] text-[#0D1B2A] placeholder:text-[#A0AEC0] focus:outline-none focus:ring-1 focus:ring-[#C9A84C]"
+            style={{ border: "1px solid #E5E7EB" }}
           />
 
           {error && (
@@ -108,7 +108,7 @@ const AccesPremium = () => {
             type="button"
             onClick={handleReset}
             className="block mx-auto text-[12px] underline transition-colors"
-            style={{ color: "rgba(255,255,255,0.5)" }}
+            style={{ color: "#4A5568" }}
           >
             {t("Mot de passe oublié ?", "Forgot password?")}
           </button>

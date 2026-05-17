@@ -37,9 +37,12 @@ const Navbar = () => {
   const { session } = useAuth();
 
   const goToAccesPremium = () => {
-    if (session) navigate("/acces-premium/dashboard");
-    else navigate("/acces-premium");
-    window.scrollTo(0, 0);
+    if (session) {
+      navigate("/acces-premium/dashboard");
+      window.scrollTo(0, 0);
+    } else {
+      window.open('/acces-premium', '_blank');
+    }
   };
 
   useEffect(() => {
