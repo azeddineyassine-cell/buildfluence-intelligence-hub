@@ -405,8 +405,10 @@ const InsightsResources = () => {
                           : a.variant === "tertiary"
                           ? { ...base, padding: "12px 4px", background: "transparent", color: "#C9A84C", letterSpacing: "0.2em" }
                           : { ...base, background: "#C9A84C", color: "#0D1B2A" };
+                      const isHtml = /\.html?(\?|$)/i.test(a.href);
+                      const href = isHtml ? `${a.href}${a.href.includes("?") ? "&" : "?"}lang=${lang}` : a.href;
                       return (
-                        <a key={a.label} href={a.href} target="_blank" rel="noopener noreferrer"
+                        <a key={a.label} href={href} target="_blank" rel="noopener noreferrer"
                           onClick={(e) => e.stopPropagation()} style={style}>
                           {a.label}
                         </a>
