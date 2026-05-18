@@ -1264,6 +1264,219 @@ function hideFlagTip() {
   document.getElementById('flag-tooltip').style.display = 'none';
   document.querySelectorAll('.flag-item span').forEach(s => s.style.transform = '');
 }
+
+/* ===== Strategic Exchange trigger (bridges to parent React app) ===== */
+function openExchange(){
+  try {
+    if (window.parent && window.parent !== window) {
+      window.parent.postMessage({type:'open-strategic-exchange'}, '*');
+      return;
+    }
+  } catch(e) {}
+  try { window.dispatchEvent(new CustomEvent('open-strategic-exchange')); } catch(e){}
+  window.location.href = '/?openExchange=1';
+}
+
+/* ===== Bilingual FR/EN i18n ===== */
+(function(){
+  // Detect language: ?lang= URL param wins, else filename hint, else FR
+  var LANG = 'fr';
+  try {
+    var qp = new URLSearchParams(window.location.search).get('lang');
+    if (qp === 'en' || qp === 'fr') LANG = qp;
+    else if (/-en\.html$/i.test(window.location.pathname)) LANG = 'en';
+  } catch(e){}
+  window.__BF_LANG = LANG;
+  if (LANG !== 'en') return;
+
+  // Reflect lang attribute
+  document.documentElement.setAttribute('lang','en');
+  document.title = 'Global IPA Benchmark · Free Extract · Buildfluence Intelligence';
+
+  // Translation dictionary (FR exact text -> EN)
+  var DICT = {
+    // Nav
+    "Vue d'ensemble":"Overview",
+    "Agences 🔒":"Agencies 🔒",
+    "Matrice 🔒":"Matrix 🔒",
+    "Plan d'action 🔒":"Action plan 🔒",
+    "Échange Stratégique":"Strategic Exchange",
+    // Hero
+    "Buildfluence · Intelligence · Mai 2026":"Buildfluence · Intelligence · May 2026",
+    "🔓 Extrait gratuit — Analyse complète dans l'Espace Premium":"🔓 Free extract — Full analysis in the Premium Area",
+    "Benchmark des mécanismes d'attractivité numérique de 6 agences mondiales : analysés sur deux axes : Tech/Data et Marketing/Contact.":"Benchmark of digital attractiveness mechanisms of 6 global agencies — analyzed across two axes: Tech/Data and Marketing/Contact.",
+    "Découvrir l'analyse →":"Discover the analysis →",
+    "6 agences analysées · Panel mondial 2025-2026":"6 agencies analyzed · Global panel 2025-2026",
+    "Les 6 pays du benchmark":"The 6 benchmark countries",
+    "Score Morocco Now":"Morocco Now score",
+    "vs 4,9 pour le leader":"vs 4.9 for the leader",
+    "Critères évalués":"Criteria assessed",
+    "Tech, Data, Marketing":"Tech, Data, Marketing",
+    "Années de retard":"Years behind",
+    "Morocco Now vs leaders":"Morocco Now vs leaders",
+    // Overview section
+    "01 / Vue d'ensemble":"01 / Overview",
+    "Verdict Buildfluence":"Buildfluence Verdict",
+    "Classement global pondéré : Tech/Data + Marketing":"Weighted global ranking: Tech/Data + Marketing",
+    "De la promotion à l'influence : où se situent les API ?":"From promotion to influence: where do IPAs stand?",
+    "Niveau 5 : Leader":"Level 5: Leader",
+    "Niveau 4 : Avancé":"Level 4: Advanced",
+    "Niveau 3 : En transition":"Level 3: In transition",
+    "Niveau 1 : Vitrine":"Level 1: Showcase",
+    "Note méthodologique : système de notation":"Methodology note: scoring system",
+    "Note méthodologique : lecture du graphique à bulles":"Methodology note: reading the bubble chart",
+    "Écart Morocco Now vs chaque concurrent : axe Tech/Data (points)":"Morocco Now gap vs each competitor: Tech/Data axis (points)",
+    // Agencies
+    "02 / Fiches agences":"02 / Agency profiles",
+    "Cliquez sur une agence pour explorer sa fiche complète : outils, stratégie, différenciateur et verdict Buildfluence.":"Click an agency to explore its full profile: tools, strategy, differentiator and Buildfluence verdict.",
+    "🔒 Accès Premium · Espace Clients":"🔒 Premium Access · Client Area",
+    "6 fiches agences complètes":"6 complete agency profiles",
+    "Outils détaillés, verdicts sourcés et différenciateurs stratégiques pour chaque agence du panel mondial.":"Detailed tools, sourced verdicts and strategic differentiators for each agency in the global panel.",
+    "6 fiches agences avec verdicts Buildfluence sourcés":"6 agency profiles with sourced Buildfluence verdicts",
+    "Scores Tech/Data et Marketing Opérationnel détaillés":"Detailed Tech/Data and Operational Marketing scores",
+    "Différenciateur stratégique par agence":"Strategic differentiator per agency",
+    "Sources vérifiées et cliquables":"Verified and clickable sources",
+    "Accéder à l'Espace Premium →":"Access the Premium Area →",
+    // Matrix
+    "03 / Matrice comparative":"03 / Comparative matrix",
+    "Notation de 1 (absent) à 5 (excellent). Les cellules Morocco Now en rouge révèlent l'étendue du retard structurel sur tous les axes.":"Scoring from 1 (absent) to 5 (excellent). Morocco Now cells in red reveal the extent of structural lag across all axes.",
+    "Méthodologie de notation":"Scoring methodology",
+    "Excellent":"Excellent",
+    "Bon":"Good",
+    "Moyen":"Average",
+    "Faible":"Weak",
+    "Absent":"Absent",
+    "🔒 4 critères sur 12 dévoilés":"🔒 4 criteria out of 12 revealed",
+    "Matrice comparative complète":"Full comparative matrix",
+    "12 critères évalués, sources vérifiables, notation 1 à 5 documentée. La matrice complète est réservée à l'Espace Premium.":"12 evaluated criteria, verifiable sources, documented 1-to-5 scoring. The complete matrix is reserved for the Premium Area.",
+    "12 critères avec sources URL cliquables":"12 criteria with clickable URL sources",
+    "Scores totaux pondérés par agence":"Weighted total scores per agency",
+    "8 critères supplémentaires déverrouillés":"8 additional criteria unlocked",
+    // Recos
+    "04 / Plan de transformation":"04 / Transformation plan",
+    "La question clé pour AMDIE":"The key question for AMDIE",
+    "Plan de transformation":"Transformation Plan",
+    "6 Leviers Stratégiques":"6 Strategic Levers",
+    // CTA
+    "Morocco Now peut prendre le virage":"Morocco Now can take the turn",
+    "L'analyse complète avec fiches agences, matrice 12 critères et plan de transformation est disponible dans l'Espace Premium Buildfluence.":"The full analysis with agency profiles, 12-criteria matrix and transformation plan is available in the Buildfluence Premium Area.",
+    "Accéder à l'analyse complète →":"Access the full analysis →",
+    // Light matrix labels
+    "Critère":"Criterion",
+    "SIG / Carte interactive":"GIS / Interactive map",
+    "Newsletter investisseurs":"Investor newsletter",
+    "Simulateurs investisseurs":"Investor simulators",
+    "Présence digitale":"Digital presence",
+  };
+
+  // Replace text in matching nodes (exact textContent match after trim)
+  function walk(node){
+    if (node.nodeType === 3) {
+      var txt = node.nodeValue;
+      var key = txt && txt.trim();
+      if (key && DICT[key]) node.nodeValue = txt.replace(key, DICT[key]);
+      return;
+    }
+    if (node.nodeType !== 1) return;
+    var tag = node.tagName;
+    if (tag === 'SCRIPT' || tag === 'STYLE' || tag === 'NOSCRIPT' || tag === 'CANVAS') return;
+    for (var i=0; i<node.childNodes.length; i++) walk(node.childNodes[i]);
+  }
+
+  // Section titles (with <em>) — keep markup
+  var titleMap = {
+    "Positionnement mondial": "Global positioning",
+    "Six modèles, une leçon": "Six models, one lesson",
+    "12 critères, une vérité": "12 criteria, one truth",
+    "Six leviers prioritaires": "Six priority levers"
+  };
+  function fixSectionTitles(){
+    document.querySelectorAll('.section-title').forEach(function(h){
+      var plain = h.textContent.trim().replace(/\s+/g,' ');
+      var en = titleMap[plain];
+      if (en) {
+        var parts = en.split(' ');
+        var mid = Math.ceil(parts.length/2);
+        var left = parts.slice(0, mid).join(' ');
+        var right = parts.slice(mid).join(' ');
+        h.innerHTML = left + ' <em>' + right + '</em>';
+      }
+    });
+  }
+
+  // Section leads (rich HTML) — replace entirely
+  var leadMap = {};
+  leadMap['Chaque agence positionnée sur deux axes : maturité tech/data et intensité marketing. Morocco Now accuse un retard structurel considérable.'] = 'Each agency is positioned on two axes: tech/data maturity and marketing intensity. Morocco Now shows a considerable structural lag.';
+
+  function fixLeads(){
+    document.querySelectorAll('.section-lead').forEach(function(p){
+      var key = p.textContent.trim().replace(/\s+/g,' ');
+      if (leadMap[key]) p.textContent = leadMap[key];
+      if (p.getAttribute('data-i18n') === 'section-lead-recos') {
+        p.innerHTML = "<strong style=\"color:#0D1B2A\">AMDIE</strong>: evolve from a logic of <strong>'visibility'</strong> towards an <strong style=\"color:#C9A84C\">Investor Intelligence</strong> strategy.<br><strong style=\"color:#0D1B2A\">Morocco Now</strong>: shift from an <strong>'institutional portal'</strong> to a platform of <strong style=\"color:#C9A84C\">Decision Engineering</strong> for investors.";
+      }
+    });
+  }
+
+  // Hero H1 (preserves <em><br>)
+  function fixHero(){
+    var h1 = document.querySelector('.hero-h1');
+    if (h1) h1.innerHTML = "Global IPAs have changed their craft.<br><em>AMDIE excels in Operational Marketing.</em>";
+    // Question encart
+    document.querySelectorAll('p').forEach(function(p){
+      var t = p.textContent.replace(/\s+/g,' ').trim();
+      if (t.indexOf("FinTech ou AgroTech") !== -1) {
+        p.innerHTML = "A <strong style=\"color:var(--gold)\">FinTech or AgroTech</strong> investor will no longer want an agency to merely 'reply'.<br>They expect a platform to <strong style=\"color:var(--gold)\">accelerate their decision-making</strong>.<br><br><em style=\"font-size:15px;color:var(--navy)\">Does Morocco Now currently embody this role?</em>";
+      }
+      if (t.indexOf("12 critères") !== -1 && t.indexOf("Tech/Data") !== -1 && t.indexOf("Marketing Opérationnel") !== -1 && t.length < 600) {
+        p.innerHTML = 'Each agency is assessed on <strong>12 criteria</strong> spread across two axes: <strong>Tech/Data</strong> (digital tools, GIS, simulators, open data) and <strong>Operational Marketing</strong> (newsletter, events, testimonials, digital presence).';
+      }
+      if (t.indexOf("La notation va de") !== -1) {
+        p.innerHTML = 'Scoring ranges from <strong>1 (absent or non-existent)</strong> to <strong>5 (excellent, global best practice)</strong>. The global score is the weighted average of the 12 criteria, converted to a percentage for positioning on the bubble chart.';
+      }
+      if (t.indexOf("axe horizontal (Tech/Data") !== -1) {
+        p.innerHTML = "The horizontal axis (Tech/Data %) reflects the maturity of digital tools: GIS, fiscal simulators, licensing platforms and self-service FDI data. The vertical axis (Operational Marketing %) measures the intensity and consistency of communication actions and digital presence.";
+      }
+      if (t.indexOf("taille de chaque bulle") !== -1) {
+        p.innerHTML = 'The size of each bubble reflects the weighted global score. All tools were verified and documented directly on the agencies\' websites in May 2026.';
+      }
+      if (t.indexOf("Comment lire ce graphique") !== -1) {
+        p.innerHTML = '<strong>How to read this chart:</strong> The bars represent the raw Tech/Data score gap between Morocco Now (12 points out of 100) and each competitor. A gap of +76 points with Türkiye means the Turkish agency scores 88/100 on Tech/Data vs 12 for Morocco Now. These scores are computed from the evaluation of digital tools actually deployed and accessible on each agency\'s website, verified and documented by Buildfluence in May 2026.';
+      }
+      if (t.indexOf("Chaque agence a été évaluée en") !== -1) {
+        p.innerHTML = 'Each agency was evaluated in <strong>May 2026</strong> by Buildfluence analysts on the basis of a direct, documented visit to each institutional website. Scoring follows a 5-level grid:';
+      }
+    });
+    // Methodology level descriptors
+    document.querySelectorAll('div').forEach(function(d){
+      var map = {
+        "Best practice mondiale, outil pleinement opérationnel":"Global best practice, fully operational tool",
+        "Outil déployé et fonctionnel, quelques lacunes mineures":"Tool deployed and functional, a few minor gaps",
+        "Outil partiel ou en cours de développement":"Partial tool or under development",
+        "Présence minimale, outil peu accessible ou obsolète":"Minimal presence, tool barely accessible or obsolete",
+        "Critère inexistant ou introuvable sur le site de l'agence":"Criterion non-existent or not found on the agency's website"
+      };
+      var k = d.textContent.trim();
+      if (map[k]) d.textContent = map[k];
+    });
+  }
+
+  function applyAll(){
+    fixHero();
+    fixSectionTitles();
+    fixLeads();
+    walk(document.body);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function(){ setTimeout(applyAll, 50); });
+  } else {
+    setTimeout(applyAll, 50);
+  }
+  // Re-apply after dynamic builds (ranking, gap rows, matrix, insights)
+  setTimeout(applyAll, 1500);
+  setTimeout(applyAll, 3000);
+})();
 </script>
 </body>
 </html>
