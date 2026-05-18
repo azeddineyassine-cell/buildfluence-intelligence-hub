@@ -5,7 +5,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { useAuth } from "@/hooks/useAuth";
 
 const AccesPremiumDashboard = () => {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const { signOut } = useAuth();
   const navigate = useNavigate();
 
@@ -14,9 +14,10 @@ const AccesPremiumDashboard = () => {
     navigate("/acces-premium", { replace: true });
   };
 
-  const cards = [
+  const benchmarkSrc = lang === "en" ? "/benchmark-api-en.html" : "/benchmark-api-fr.html";
+
+  const sideCards = [
     { title: t("Baromètre Sectoriel", "Sector Barometer"), icon: "📊", desc: t("Indicateurs sectoriels stratégiques mis à jour en continu.", "Strategic sector indicators continuously updated.") },
-    { title: t("Benchmark API", "API Benchmark"), icon: "🔬", desc: t("Comparatifs concurrentiels et études approfondies.", "Competitive benchmarks and in-depth studies.") },
     { title: t("Observatoire d'Investissement", "Investment Observatory"), icon: "🔭", desc: t("Suivi des flux d'investissement et signaux faibles.", "Investment flow tracking and weak-signal monitoring.") },
   ];
 
@@ -44,8 +45,47 @@ const AccesPremiumDashboard = () => {
           {t("Accès Premium — Espace Réservé Clients", "Premium Access — Reserved Client Area")}
         </h1>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {cards.map((c, i) => (
+        <motion.section
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4 }}
+          className="mb-12 p-8"
+          style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(201,168,76,0.25)" }}
+        >
+          <div className="flex flex-wrap items-end justify-between gap-4 mb-6">
+            <div>
+              <h2 className="font-serif text-[28px] font-bold mb-2" style={{ color: "#FFFFFF" }}>
+                {t("Benchmark API Mondial", "Global API Benchmark")}
+              </h2>
+              <p className="text-[13px]" style={{ color: "rgba(255,255,255,0.6)" }}>
+                {t("6 agences mondiales · Analyse complète · Mai 2026", "6 global agencies · Full analysis · May 2026")}
+              </p>
+            </div>
+            <button
+              onClick={() => window.open(benchmarkSrc, "_blank")}
+              className="px-5 py-2.5 text-[11px] font-bold uppercase tracking-[0.22em] transition-all"
+              style={{ background: "#C9A84C", color: "#0D1B2A", border: "1px solid #C9A84C" }}
+            >
+              {t("Ouvrir en plein écran →", "Open fullscreen →")}
+            </button>
+          </div>
+          <iframe
+            key={benchmarkSrc}
+            src={benchmarkSrc}
+            title={t("Benchmark API Mondial", "Global API Benchmark")}
+            style={{
+              width: "100%",
+              height: "900px",
+              border: "none",
+              borderRadius: "8px",
+              boxShadow: "0 8px 30px rgba(0,0,0,0.25)",
+              background: "#FAF6ED",
+            }}
+          />
+        </motion.section>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {sideCards.map((c, i) => (
             <motion.div
               key={c.title}
               initial={{ opacity: 0, y: 12 }}
