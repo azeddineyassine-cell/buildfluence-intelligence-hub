@@ -85,17 +85,22 @@ const InsightsResources = () => {
       filter: "intelligence-economique",
       category: t("Extrait gratuit", "Free extract"),
       date: t("Mai 2026", "May 2026"),
-      title: t("Benchmark API Mondial", "Global API Benchmark"),
-      subtitle: t("6 agences · 12 critères · Mai 2026", "6 agencies · 12 criteria · May 2026"),
+      title: t(
+        "Benchmark des Agences de Promotion des Investissements (API)",
+        "Investment Promotion Agencies (IPA) Benchmark"
+      ),
+      subtitle: t(
+        "6 AGENCES – 12 CRITÈRES – 6 LEVIERS STRATÉGIQUES",
+        "6 AGENCIES – 12 CRITERIA – 6 STRATEGIC LEVERS"
+      ),
       summary: t(
         "Analyse comparative des mécanismes d'attractivité numérique de 6 agences mondiales sur deux axes : Tech/Data et Marketing.",
         "Comparative analysis of digital attractiveness mechanisms of 6 global investment promotion agencies: Tech/Data and Marketing."
       ),
       href: "/benchmark-api-light.html",
-      gradient: "linear-gradient(135deg,#0D1B2A 0%,#1E3A5F 60%,#C9A84C 140%)",
+      image: "/Benchmark_API_image-1.png",
       actions: [
         { label: t("Voir l'analyse →", "View analysis →"), href: "/benchmark-api-light.html", variant: "primary" },
-        { label: t("Télécharger PDF", "Download PDF"), href: "/benchmark-api-light.pdf", variant: "secondary" },
         { label: t("Accès complet →", "Full access →"), href: "/acces-premium", variant: "tertiary" },
       ],
     },
@@ -400,8 +405,10 @@ const InsightsResources = () => {
                           : a.variant === "tertiary"
                           ? { ...base, padding: "12px 4px", background: "transparent", color: "#C9A84C", letterSpacing: "0.2em" }
                           : { ...base, background: "#C9A84C", color: "#0D1B2A" };
+                      const isHtml = /\.html?(\?|$)/i.test(a.href);
+                      const href = isHtml ? `${a.href}${a.href.includes("?") ? "&" : "?"}lang=${lang}` : a.href;
                       return (
-                        <a key={a.label} href={a.href} target="_blank" rel="noopener noreferrer"
+                        <a key={a.label} href={href} target="_blank" rel="noopener noreferrer"
                           onClick={(e) => e.stopPropagation()} style={style}>
                           {a.label}
                         </a>

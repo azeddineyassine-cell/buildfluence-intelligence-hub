@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Benchmark API Mondial : Buildfluence Intelligence · Mai 2026</title>
+<title>Benchmark API Mondial · Extrait Gratuit · Buildfluence Intelligence</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700;1,900&family=JetBrains+Mono:wght@400;600&family=DM+Sans:wght@400;500&family=Cormorant+Garamond:ital,wght@1,400;1,500&display=swap" rel="stylesheet">
 <style>
@@ -47,8 +47,17 @@ nav{position:fixed;top:0;left:0;right:0;z-index:999;background:rgba(250,246,237,
 .section-lead{font-family:'Cormorant Garamond',serif;font-size:19px;font-style:italic;color:var(--ink-faint);line-height:1.6;margin-bottom:40px}
 
 /* HERO */
-.hero{min-height:100vh;display:flex;align-items:center;padding:100px 40px 80px;position:relative;overflow:hidden;background:var(--paper)}
-.hero::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(ellipse at 20% 50%,rgba(201,168,76,.06) 0%,transparent 60%),radial-gradient(ellipse at 80% 20%,rgba(24,95,165,.04) 0%,transparent 50%)}
+.hero{min-height:100vh;display:flex;align-items:center;padding:100px 40px 80px;position:relative;overflow:hidden;background:linear-gradient(rgba(13,27,42,0.78),rgba(13,27,42,0.86)),url('/Benchmark_API_image-2.png') center/cover no-repeat,var(--paper)}
+.hero::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(ellipse at 20% 50%,rgba(201,168,76,.08) 0%,transparent 60%),radial-gradient(ellipse at 80% 20%,rgba(24,95,165,.06) 0%,transparent 50%)}
+.hero .hero-h1{color:#FAF6ED}
+.hero .hero-h1 em{color:#C9A84C}
+.hero .hero-sub{color:rgba(250,246,237,0.82)}
+.hero .hs{background:rgba(250,246,237,0.08);border-color:rgba(201,168,76,0.25);backdrop-filter:blur(6px)}
+.hero .hs-lbl{color:rgba(250,246,237,0.7)}
+.hero .hs-val{color:#FAF6ED}
+.hero .hs-sub{color:rgba(250,246,237,0.55)}
+.hero .hero-badge{color:#C9A84C}
+.hero .hero-extrait{background:rgba(201,168,76,0.18);color:#C9A84C;border-color:rgba(201,168,76,0.4)}
 .hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;max-width:1100px;margin:0 auto;width:100%}
 .hero-badge{display:inline-flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:20px}
 .hero-badge::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--gold);animation:pulse 2s infinite}
@@ -186,7 +195,138 @@ table.mx tr:hover td{background:rgba(217,207,188,.3)}
 
 /* FI animations */
 .fi{opacity:1;transform:none}
+
+/* ===================== LIGHT VERSION STYLES ===================== */
+/* Blur wrapper */
+.blurred {
+  filter: blur(5px);
+  opacity: 0.38;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Partial section with bottom fade */
+.partial-reveal {
+  position: relative;
+  overflow: hidden;
+}
+.partial-reveal .partial-content {
+  /* visible top, blurred content injected after */
+}
+.partial-fade-out {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 160px;
+  background: linear-gradient(to bottom, transparent, var(--paper-alt));
+  pointer-events: none;
+  z-index: 3;
+}
+.partial-fade-out.on-white {
+  background: linear-gradient(to bottom, transparent, var(--paper));
+}
+
+/* Lock overlay */
+.lock-wrap {
+  position: relative;
+}
+.lock-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  background: linear-gradient(to bottom,
+    rgba(250,246,237,0) 0%,
+    rgba(250,246,237,0.82) 25%,
+    rgba(250,246,237,0.97) 55%,
+    rgba(250,246,237,1) 100%);
+  padding: 40px 20px 60px;
+}
+.lock-overlay.alt {
+  background: linear-gradient(to bottom,
+    rgba(242,237,216,0) 0%,
+    rgba(242,237,216,0.82) 25%,
+    rgba(242,237,216,0.97) 55%,
+    rgba(242,237,216,1) 100%);
+}
+.lock-badge-pill {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  border: 1px solid rgba(201,168,76,.3);
+  background: rgba(201,168,76,.08);
+  padding: 5px 14px;
+  border-radius: 20px;
+  margin-bottom: 14px;
+}
+.lock-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 8px;
+  text-align: center;
+}
+.lock-sub {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 16px;
+  font-style: italic;
+  color: var(--ink-faint);
+  margin-bottom: 22px;
+  text-align: center;
+  max-width: 460px;
+  line-height: 1.6;
+}
+.lock-checks {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  margin-bottom: 26px;
+}
+.lock-check {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--ink-light);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.lock-check::before {
+  content: '✓';
+  color: var(--gold);
+  font-weight: 700;
+}
+.lock-btns {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* Hero extrait badge */
+.hero-extrait {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  background: rgba(201,168,76,.1);
+  color: var(--gold);
+  border: 1px solid rgba(201,168,76,.28);
+  padding: 5px 14px;
+  border-radius: 20px;
+  margin-bottom: 14px;
+}
 </style>
+
 </head>
 <body>
 
@@ -194,11 +334,11 @@ table.mx tr:hover td{background:rgba(217,207,188,.3)}
   <div class="nav-brand">Build<span>fluence</span></div>
   <div class="nav-links">
     <a href="#overview" class="nav-link">Vue d'ensemble</a>
-    <a href="#agences" class="nav-link">Agences</a>
-    <a href="#matrice" class="nav-link">Matrice</a>
-    <a href="#recommandations" class="nav-link">Plan d'action</a>
+    <a href="#agences" class="nav-link">Agences 🔒</a>
+    <a href="#matrice" class="nav-link">Matrice 🔒</a>
+    <a href="#recommandations" class="nav-link">Plan d'action 🔒</a>
   </div>
-  <a href="#cta" class="nav-cta">Contacter Buildfluence</a>
+  <a href="#cta" class="nav-cta" data-i18n="exchange" onclick="event.preventDefault();openExchange();">Échange Stratégique</a>
 </nav>
 <div id="prog"><div id="prog-fill"></div></div>
 
@@ -216,11 +356,12 @@ table.mx tr:hover td{background:rgba(217,207,188,.3)}
   <div class="hero-grid">
     <div>
       <div class="hero-badge">Buildfluence · Intelligence · Mai 2026</div>
+      <div class="hero-extrait">🔓 Extrait gratuit — Analyse complète dans l'Espace Premium</div>
       <h1 class="hero-h1">Les API mondiales ont changé de métier.<br><em>L'AMDIE excelle en Marketing Opérationnel.</em></h1>
       <p class="hero-sub">Benchmark des mécanismes d'attractivité numérique de 6 agences mondiales : analysés sur deux axes : Tech/Data et Marketing/Contact.</p>
       <div class="hero-ctas">
         <a href="#overview" class="btn-dark">Découvrir l'analyse →</a>
-        <a href="#cta" class="btn-outline">Contacter Buildfluence</a>
+        <a href="#cta" class="btn-outline" data-i18n="exchange" onclick="event.preventDefault();openExchange();">Échange Stratégique</a>
       </div>
     </div>
     <div class="hero-stats">
@@ -290,6 +431,7 @@ table.mx tr:hover td{background:rgba(217,207,188,.3)}
         <div class="api-ranking" id="api-ranking"></div>
       </div>
       <div>
+        <div class="gap-title" data-i18n="bubble_title">De la promotion à l'influence : où se situent les API ?</div>
         <div id="bubbleWrap">
           <canvas id="bubbleChart" role="img" aria-label="Graphique à bulles : Singapore EDB et Türkiye en tête avec scores Tech 88-90%, Morocco Now en bas à gauche avec Tech 12% et Marketing 28%">Positionnement des 6 API mondiales sur les axes Tech/Data et Marketing/Contact.</canvas>
         </div>
@@ -302,7 +444,7 @@ table.mx tr:hover td{background:rgba(217,207,188,.3)}
       </div>
     </div>
 
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:32px;margin-bottom:24px">
+    <div class="blurred" style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:32px;margin-bottom:24px">
       <div style="background:white;border:1px solid var(--rule);border-top:3px solid var(--gold);border-radius:4px;padding:18px 20px">
         <div style="font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:10px">Note méthodologique : système de notation</div>
         <p style="font-size:13px;color:var(--ink);line-height:1.65;margin-bottom:8px">Chaque agence est évaluée sur <strong>12 critères</strong> répartis sur deux axes : <strong>Tech/Data</strong> (outils numériques, SIG, simulateurs, données ouvertes) et <strong>Marketing Opérationnel</strong> (newsletter, événements, témoignages, présence digitale).</p>
@@ -315,7 +457,7 @@ table.mx tr:hover td{background:rgba(217,207,188,.3)}
       </div>
     </div>
 
-    <div class="gap-section">
+    <div class="gap-section partial-reveal"><div class="partial-fade-out on-white"></div>
       <div class="gap-title">Écart Morocco Now vs chaque concurrent : axe Tech/Data (points)</div>
       <div style="background:white;border:1px solid var(--rule);border-top:3px solid var(--alert);border-radius:4px;padding:14px 20px;margin-bottom:16px">
         <p style="font-size:13px;color:var(--ink);line-height:1.65"><strong>Comment lire ce graphique :</strong> Les barres représentent l'écart brut de score Tech/Data entre Morocco Now (12 points sur 100) et chaque concurrent. Un écart de +76 points avec Türkiye signifie que l'agence turque obtient 88/100 sur l'axe Tech/Data contre 12 pour Morocco Now. Ces scores sont calculés à partir de l'évaluation des outils numériques effectivement déployés et accessibles sur le site de chaque agence, vérifiés et documentés par Buildfluence en mai 2026.</p>
@@ -332,8 +474,26 @@ table.mx tr:hover td{background:rgba(217,207,188,.3)}
     <h2 class="section-title">Six modèles, <em>une leçon</em></h2>
     <p class="section-lead">Cliquez sur une agence pour explorer sa fiche complète : outils, stratégie, différenciateur et verdict Buildfluence.</p>
 
-    <div class="ag-grid" id="ag-grid"></div>
-    <div class="det-panel" id="det-panel"></div>
+    <div class="lock-wrap">
+      <div class="blurred" style="min-height:320px">
+        <div style="height:320px;background:var(--paper-alt);border-radius:8px;margin-top:20px"></div>
+      </div>
+      <div class="lock-overlay alt">
+        <div class="lock-badge-pill">🔒 Accès Premium · Espace Clients</div>
+        <div class="lock-title">6 fiches agences complètes</div>
+        <div class="lock-sub">Outils détaillés, verdicts sourcés et différenciateurs stratégiques pour chaque agence du panel mondial.</div>
+        <div class="lock-checks">
+          <div class="lock-check">6 fiches agences avec verdicts Buildfluence sourcés</div>
+          <div class="lock-check">Scores Tech/Data et Marketing Opérationnel détaillés</div>
+          <div class="lock-check">Différenciateur stratégique par agence</div>
+          <div class="lock-check">Sources vérifiées et cliquables</div>
+        </div>
+        <div class="lock-btns">
+          <a href="/acces-premium" target="_blank" class="btn-dark">Accéder à l'Espace Premium →</a>
+          <a href="#" class="btn-outline" data-i18n="exchange" onclick="event.preventDefault();openExchange();">Échange Stratégique</a>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -357,12 +517,38 @@ table.mx tr:hover td{background:rgba(217,207,188,.3)}
       <p style="font-size:12px;color:var(--ink-faint);line-height:1.6;margin-top:12px;font-style:italic">Chaque note est cliquable et renvoie vers la page du site de l'agence concernée, permettant de vérifier directement la véracité du critère évalué.</p>
     </div>
 
-    <div class="mx-totals" id="mx-totals"></div>
-    <div class="mx-wrap">
-      <table class="mx">
-        <thead><tr><th style="min-width:140px;padding-left:16px">Critère</th><th>🇸🇬 EDB</th><th>🇮🇳 India</th><th>🇪🇬 Egypt</th><th>🇰🇷 Korea</th><th>🇹🇷 Türkiye</th><th style="color:var(--red)">🇲🇦 Maroc</th></tr></thead>
-        <tbody id="mx-body"></tbody>
-      </table>
+    <div class="lock-wrap">
+      <!-- 4 visible rows placeholder to simulate PDF -->
+      <div style="overflow-x:auto;border:1px solid var(--rule);border-radius:8px;margin-bottom:0">
+        <table style="width:100%;border-collapse:collapse;font-size:12px;min-width:700px">
+          <thead><tr style="background:var(--dark)">
+            <th style="font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-faint);padding:12px 16px;border-bottom:1px solid var(--rule);text-align:left;min-width:140px">Critère</th>
+            <th style="font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-faint);padding:12px 10px;border-bottom:1px solid var(--rule);text-align:center">🇸🇬 EDB</th>
+            <th style="font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-faint);padding:12px 10px;border-bottom:1px solid var(--rule);text-align:center">🇮🇳 India</th>
+            <th style="font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-faint);padding:12px 10px;border-bottom:1px solid var(--rule);text-align:center">🇪🇬 Egypt</th>
+            <th style="font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-faint);padding:12px 10px;border-bottom:1px solid var(--rule);text-align:center">🇰🇷 Korea</th>
+            <th style="font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-faint);padding:12px 10px;border-bottom:1px solid var(--rule);text-align:center">🇹🇷 Türkiye</th>
+            <th style="font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-faint);padding:12px 10px;border-bottom:1px solid var(--rule);text-align:center;color:#E24B4A">🇲🇦 Maroc</th>
+          </tr></thead>
+          <tbody id="mx-body-light"></tbody>
+        </table>
+      </div>
+      <!-- blurred remaining rows -->
+      <div class="blurred" style="min-height:220px;background:var(--paper);border:1px solid var(--rule);border-top:none;border-radius:0 0 8px 8px;padding:10px"></div>
+      <div class="lock-overlay">
+        <div class="lock-badge-pill">🔒 4 critères sur 12 dévoilés</div>
+        <div class="lock-title">Matrice comparative complète</div>
+        <div class="lock-sub">12 critères évalués, sources vérifiables, notation 1 à 5 documentée. La matrice complète est réservée à l'Espace Premium.</div>
+        <div class="lock-checks">
+          <div class="lock-check">12 critères avec sources URL cliquables</div>
+          <div class="lock-check">Scores totaux pondérés par agence</div>
+          <div class="lock-check">8 critères supplémentaires déverrouillés</div>
+        </div>
+        <div class="lock-btns">
+          <a href="/acces-premium" target="_blank" class="btn-dark">Accéder à l'Espace Premium →</a>
+          <a href="#" class="btn-outline" data-i18n="exchange" onclick="event.preventDefault();openExchange();">Échange Stratégique</a>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -372,14 +558,44 @@ table.mx tr:hover td{background:rgba(217,207,188,.3)}
   <div class="wrap">
     <div class="eyebrow">04 / Plan de transformation</div>
     <h2 class="section-title">Six leviers <em>prioritaires</em></h2>
-    <p class="section-lead">AMDIE : évoluer d'une logique de 'visibilité' vers une stratégie d'Intelligence Investisseur.<br>Morocco Now : passer d'un 'portail institutionnel' à une plateforme d'Ingénierie décisionnelle pour investisseurs.</p>
+    <p class="section-lead" data-i18n="section-lead-recos"><strong style="color:#0D1B2A">AMDIE</strong> : évoluer d'une logique de <strong>'visibilité'</strong> vers une stratégie d'<strong style="color:#C9A84C">Intelligence Investisseur</strong>.<br><strong style="color:#0D1B2A">Morocco Now</strong> : passer d'un <strong>'portail institutionnel'</strong> à une plateforme d'<strong style="color:#C9A84C">Ingénierie décisionnelle</strong> pour investisseurs.</p>
 
     <div style="background:#F9F3E3;border:1px solid #D9CFBC;border-radius:8px;padding:20px 24px;margin-bottom:32px">
       <div style="font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:8px">La question clé pour AMDIE</div>
       <p style="font-size:14px;color:var(--ink-light);line-height:1.7">Un investisseur en <strong style="color:var(--gold)">FinTech ou AgroTech</strong> ne voudra plus qu'une agence lui 'réponde'.<br>Il attend qu'une plateforme <strong style="color:var(--gold)">accélère sa prise de décision</strong>.<br><br><em style="font-size:15px;color:var(--navy)">Est-ce qu'aujourd'hui Morocco Now incarne ce rôle ?</em></p>
     </div>
 
-    <div id="ins-list"></div>
+    <div class="lock-wrap">
+      <div class="blurred" style="min-height:420px;padding:32px">
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px">
+          <div style="background:var(--paper);border:1px solid var(--rule);border-radius:6px;padding:18px;min-height:120px">Lorem ipsum dolor sit amet consectetur</div>
+          <div style="background:var(--paper);border:1px solid var(--rule);border-radius:6px;padding:18px;min-height:120px">Lorem ipsum dolor sit amet consectetur</div>
+          <div style="background:var(--paper);border:1px solid var(--rule);border-radius:6px;padding:18px;min-height:120px">Lorem ipsum dolor sit amet consectetur</div>
+          <div style="background:var(--paper);border:1px solid var(--rule);border-radius:6px;padding:18px;min-height:120px">Lorem ipsum dolor sit amet consectetur</div>
+          <div style="background:var(--paper);border:1px solid var(--rule);border-radius:6px;padding:18px;min-height:120px">Lorem ipsum dolor sit amet consectetur</div>
+          <div style="background:var(--paper);border:1px solid var(--rule);border-radius:6px;padding:18px;min-height:120px">Lorem ipsum dolor sit amet consectetur</div>
+        </div>
+      </div>
+
+      <!-- Visible Frame: 6 Strategic Levers over blur -->
+      <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:20;width:min(680px,92%);background:var(--paper);border:1px solid var(--rule);border-top:3px solid var(--gold);border-radius:8px;padding:32px 36px;box-shadow:0 18px 50px rgba(13,27,42,0.18)">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:10px" data-i18n="levers_eyebrow">Plan de transformation</div>
+        <h3 style="font-family:'Playfair Display',serif;font-size:28px;font-weight:900;color:var(--navy);margin-bottom:6px" data-i18n="levers_title">6 Leviers Stratégiques</h3>
+        <p style="font-family:'Cormorant Garamond',serif;font-size:17px;font-style:italic;color:var(--ink-faint);margin-bottom:22px" data-i18n="levers_subtitle">Plan de transformation</p>
+        <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px 18px;margin-bottom:24px">
+          <div style="display:flex;align-items:center;gap:10px;font-size:13px;color:var(--ink-light);filter:blur(4px);user-select:none"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;color:var(--gold);min-width:22px">01</span>Lorem ipsum dolor sit amet</div>
+          <div style="display:flex;align-items:center;gap:10px;font-size:13px;color:var(--ink-light);filter:blur(4px);user-select:none"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;color:var(--gold);min-width:22px">02</span>Consectetur adipiscing elit sed</div>
+          <div style="display:flex;align-items:center;gap:10px;font-size:13px;color:var(--ink-light);filter:blur(4px);user-select:none"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;color:var(--gold);min-width:22px">03</span>Tempor incididunt ut labore</div>
+          <div style="display:flex;align-items:center;gap:10px;font-size:13px;color:var(--ink-light);filter:blur(4px);user-select:none"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;color:var(--gold);min-width:22px">04</span>Magna aliqua ut enim ad</div>
+          <div style="display:flex;align-items:center;gap:10px;font-size:13px;color:var(--ink-light);filter:blur(4px);user-select:none"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;color:var(--gold);min-width:22px">05</span>Minim veniam quis nostrud</div>
+          <div style="display:flex;align-items:center;gap:10px;font-size:13px;color:var(--ink-light);filter:blur(4px);user-select:none"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;color:var(--gold);min-width:22px">06</span>Exercitation ullamco laboris</div>
+        </div>
+        <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+          <a href="/acces-premium" target="_blank" class="btn-dark" data-i18n="lever_btn_access">Accéder à l'Espace Premium →</a>
+          <a href="#" class="btn-outline" data-i18n="exchange" onclick="event.preventDefault();openExchange();">Échange Stratégique</a>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -389,17 +605,10 @@ table.mx tr:hover td{background:rgba(217,207,188,.3)}
     <div class="cta-inner">
       <div class="cta-label">Buildfluence · Sovereign Decision Infrastructure</div>
       <h2 class="cta-title">Morocco Now peut prendre le virage</h2>
-      <p class="cta-sub">L'intelligence stratégique permanente est la condition pour passer de vitrine institutionnelle à plateforme décisionnelle souveraine.</p>
+      <p class="cta-sub">L'analyse complète avec fiches agences, matrice 12 critères et plan de transformation est disponible dans l'Espace Premium Buildfluence.</p>
       <div class="cta-btns">
-        <a href="mailto:contact@buildfluence.ai" class="btn-dark">Demander un brief stratégique →</a>
-        <a href="https://buildfluence.ai" class="btn-outline" target="_blank">Découvrir Buildfluence</a>
-      </div>
-      <div class="clients-row">
-        <span class="client">OCP</span>
-        <span class="client">Danone</span>
-        <span class="client">ADD</span>
-        <span class="client">Ginger International</span>
-        <span class="client">Présidence du Sénégal</span>
+        <a href="/acces-premium" target="_blank" class="btn-dark">Accéder à l'analyse complète →</a>
+        <a href="#" class="btn-outline" data-i18n="exchange" onclick="event.preventDefault();openExchange();">Échange Stratégique</a>
       </div>
     </div>
   </div>
@@ -559,7 +768,138 @@ function buildAgGrid(){
     const card=document.createElement('div');card.className='ag-card';
     card.style.cssText=`--card-color:${ag.borderColor}`;
     card.style.setProperty('border-color',ag.borderColor+'30');
-    card.innerHTML=`<style>.ag-card:nth-child(n)::before{background:${ag.borderColor}}</style><div class="ag-flag">${ag.flag}</div><div class="ag-name">${ag.name}</div><div class="ag-tag">${ag.tagline}</div><span class="ag-pill" style="background:${lvlBg[ag.level]};color:${lvlC[ag.level]}">${ag.lvlLabel}</span>`;
+    card.innerHTML=`<style>.ag-card:nth-child(n)::before{background:${ag.borderColor}}
+/* ===================== LIGHT VERSION STYLES ===================== */
+/* Blur wrapper */
+.blurred {
+  filter: blur(5px);
+  opacity: 0.38;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Partial section with bottom fade */
+.partial-reveal {
+  position: relative;
+  overflow: hidden;
+}
+.partial-reveal .partial-content {
+  /* visible top, blurred content injected after */
+}
+.partial-fade-out {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 160px;
+  background: linear-gradient(to bottom, transparent, var(--paper-alt));
+  pointer-events: none;
+  z-index: 3;
+}
+.partial-fade-out.on-white {
+  background: linear-gradient(to bottom, transparent, var(--paper));
+}
+
+/* Lock overlay */
+.lock-wrap {
+  position: relative;
+}
+.lock-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  background: linear-gradient(to bottom,
+    rgba(250,246,237,0) 0%,
+    rgba(250,246,237,0.82) 25%,
+    rgba(250,246,237,0.97) 55%,
+    rgba(250,246,237,1) 100%);
+  padding: 40px 20px 60px;
+}
+.lock-overlay.alt {
+  background: linear-gradient(to bottom,
+    rgba(242,237,216,0) 0%,
+    rgba(242,237,216,0.82) 25%,
+    rgba(242,237,216,0.97) 55%,
+    rgba(242,237,216,1) 100%);
+}
+.lock-badge-pill {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  border: 1px solid rgba(201,168,76,.3);
+  background: rgba(201,168,76,.08);
+  padding: 5px 14px;
+  border-radius: 20px;
+  margin-bottom: 14px;
+}
+.lock-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 8px;
+  text-align: center;
+}
+.lock-sub {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 16px;
+  font-style: italic;
+  color: var(--ink-faint);
+  margin-bottom: 22px;
+  text-align: center;
+  max-width: 460px;
+  line-height: 1.6;
+}
+.lock-checks {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  margin-bottom: 26px;
+}
+.lock-check {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--ink-light);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.lock-check::before {
+  content: '✓';
+  color: var(--gold);
+  font-weight: 700;
+}
+.lock-btns {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* Hero extrait badge */
+.hero-extrait {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  background: rgba(201,168,76,.1);
+  color: var(--gold);
+  border: 1px solid rgba(201,168,76,.28);
+  padding: 5px 14px;
+  border-radius: 20px;
+  margin-bottom: 14px;
+}
+</style>
+<div class="ag-flag">${ag.flag}</div><div class="ag-name">${ag.name}</div><div class="ag-tag">${ag.tagline}</div><span class="ag-pill" style="background:${lvlBg[ag.level]};color:${lvlC[ag.level]}">${ag.lvlLabel}</span>`;
     card.style.cssText+= `;`;
     const beforeStyle=document.createElement('style');
     beforeStyle.textContent=`#ag-grid .ag-card:nth-child(${Object.keys(AG).indexOf(id)+1})::before{background:${ag.borderColor}}`;
@@ -880,7 +1220,35 @@ dots.forEach((dot,i)=>{
 })();
 
 buildOverview();
-buildAgGrid();
+
+// Light version: show only 4 criteria rows
+(function(){
+  const MATRIX_LIGHT=[
+    {label:"SIG / Carte interactive",vals:[5,4,3,3,5,1]},
+    {label:"Newsletter investisseurs",vals:[4,3,2,4,5,1]},
+    {label:"Simulateurs investisseurs",vals:[4,5,3,3,5,1]},
+    {label:"Présence digitale",vals:[4,4,3,4,5,3]},
+  ];
+  const dc=['','d1','d2','d3','d4','d5'];
+  const tbody=document.getElementById('mx-body-light');
+  if(!tbody)return;
+  MATRIX_LIGHT.forEach(row=>{
+    const tr=document.createElement('tr');
+    const td0=document.createElement('td');
+    td0.style.cssText='text-align:left;font-size:11px;color:var(--ink-faint);padding:10px 10px 10px 16px;border-bottom:1px solid rgba(217,207,188,.4)';
+    td0.textContent=row.label;tr.appendChild(td0);
+    row.vals.forEach((v,ci)=>{
+      const td=document.createElement('td');
+      td.style.cssText='padding:10px;border-bottom:1px solid rgba(217,207,188,.4);text-align:center';
+      if(ci===5)td.style.background='rgba(226,75,74,.08)';
+      const d=document.createElement('span');
+      d.className='dot '+dc[v];d.textContent=v;
+      td.appendChild(d);tr.appendChild(td);
+    });
+    tbody.appendChild(tr);
+  });
+})();
+
 
 function showFlagTip(el, name) {
   const tip = document.getElementById('flag-tooltip');
@@ -896,6 +1264,219 @@ function hideFlagTip() {
   document.getElementById('flag-tooltip').style.display = 'none';
   document.querySelectorAll('.flag-item span').forEach(s => s.style.transform = '');
 }
+
+/* ===== Strategic Exchange trigger (bridges to parent React app) ===== */
+function openExchange(){
+  try {
+    if (window.parent && window.parent !== window) {
+      window.parent.postMessage({type:'open-strategic-exchange'}, '*');
+      return;
+    }
+  } catch(e) {}
+  try { window.dispatchEvent(new CustomEvent('open-strategic-exchange')); } catch(e){}
+  window.location.href = '/?openExchange=1';
+}
+
+/* ===== Bilingual FR/EN i18n ===== */
+(function(){
+  // Detect language: ?lang= URL param wins, else filename hint, else FR
+  var LANG = 'fr';
+  try {
+    var qp = new URLSearchParams(window.location.search).get('lang');
+    if (qp === 'en' || qp === 'fr') LANG = qp;
+    else if (/-en\.html$/i.test(window.location.pathname)) LANG = 'en';
+  } catch(e){}
+  window.__BF_LANG = LANG;
+  if (LANG !== 'en') return;
+
+  // Reflect lang attribute
+  document.documentElement.setAttribute('lang','en');
+  document.title = 'Global IPA Benchmark · Free Extract · Buildfluence Intelligence';
+
+  // Translation dictionary (FR exact text -> EN)
+  var DICT = {
+    // Nav
+    "Vue d'ensemble":"Overview",
+    "Agences 🔒":"Agencies 🔒",
+    "Matrice 🔒":"Matrix 🔒",
+    "Plan d'action 🔒":"Action plan 🔒",
+    "Échange Stratégique":"Strategic Exchange",
+    // Hero
+    "Buildfluence · Intelligence · Mai 2026":"Buildfluence · Intelligence · May 2026",
+    "🔓 Extrait gratuit — Analyse complète dans l'Espace Premium":"🔓 Free extract — Full analysis in the Premium Area",
+    "Benchmark des mécanismes d'attractivité numérique de 6 agences mondiales : analysés sur deux axes : Tech/Data et Marketing/Contact.":"Benchmark of digital attractiveness mechanisms of 6 global agencies — analyzed across two axes: Tech/Data and Marketing/Contact.",
+    "Découvrir l'analyse →":"Discover the analysis →",
+    "6 agences analysées · Panel mondial 2025-2026":"6 agencies analyzed · Global panel 2025-2026",
+    "Les 6 pays du benchmark":"The 6 benchmark countries",
+    "Score Morocco Now":"Morocco Now score",
+    "vs 4,9 pour le leader":"vs 4.9 for the leader",
+    "Critères évalués":"Criteria assessed",
+    "Tech, Data, Marketing":"Tech, Data, Marketing",
+    "Années de retard":"Years behind",
+    "Morocco Now vs leaders":"Morocco Now vs leaders",
+    // Overview section
+    "01 / Vue d'ensemble":"01 / Overview",
+    "Verdict Buildfluence":"Buildfluence Verdict",
+    "Classement global pondéré : Tech/Data + Marketing":"Weighted global ranking: Tech/Data + Marketing",
+    "De la promotion à l'influence : où se situent les API ?":"From promotion to influence: where do IPAs stand?",
+    "Niveau 5 : Leader":"Level 5: Leader",
+    "Niveau 4 : Avancé":"Level 4: Advanced",
+    "Niveau 3 : En transition":"Level 3: In transition",
+    "Niveau 1 : Vitrine":"Level 1: Showcase",
+    "Note méthodologique : système de notation":"Methodology note: scoring system",
+    "Note méthodologique : lecture du graphique à bulles":"Methodology note: reading the bubble chart",
+    "Écart Morocco Now vs chaque concurrent : axe Tech/Data (points)":"Morocco Now gap vs each competitor: Tech/Data axis (points)",
+    // Agencies
+    "02 / Fiches agences":"02 / Agency profiles",
+    "Cliquez sur une agence pour explorer sa fiche complète : outils, stratégie, différenciateur et verdict Buildfluence.":"Click an agency to explore its full profile: tools, strategy, differentiator and Buildfluence verdict.",
+    "🔒 Accès Premium · Espace Clients":"🔒 Premium Access · Client Area",
+    "6 fiches agences complètes":"6 complete agency profiles",
+    "Outils détaillés, verdicts sourcés et différenciateurs stratégiques pour chaque agence du panel mondial.":"Detailed tools, sourced verdicts and strategic differentiators for each agency in the global panel.",
+    "6 fiches agences avec verdicts Buildfluence sourcés":"6 agency profiles with sourced Buildfluence verdicts",
+    "Scores Tech/Data et Marketing Opérationnel détaillés":"Detailed Tech/Data and Operational Marketing scores",
+    "Différenciateur stratégique par agence":"Strategic differentiator per agency",
+    "Sources vérifiées et cliquables":"Verified and clickable sources",
+    "Accéder à l'Espace Premium →":"Access the Premium Area →",
+    // Matrix
+    "03 / Matrice comparative":"03 / Comparative matrix",
+    "Notation de 1 (absent) à 5 (excellent). Les cellules Morocco Now en rouge révèlent l'étendue du retard structurel sur tous les axes.":"Scoring from 1 (absent) to 5 (excellent). Morocco Now cells in red reveal the extent of structural lag across all axes.",
+    "Méthodologie de notation":"Scoring methodology",
+    "Excellent":"Excellent",
+    "Bon":"Good",
+    "Moyen":"Average",
+    "Faible":"Weak",
+    "Absent":"Absent",
+    "🔒 4 critères sur 12 dévoilés":"🔒 4 criteria out of 12 revealed",
+    "Matrice comparative complète":"Full comparative matrix",
+    "12 critères évalués, sources vérifiables, notation 1 à 5 documentée. La matrice complète est réservée à l'Espace Premium.":"12 evaluated criteria, verifiable sources, documented 1-to-5 scoring. The complete matrix is reserved for the Premium Area.",
+    "12 critères avec sources URL cliquables":"12 criteria with clickable URL sources",
+    "Scores totaux pondérés par agence":"Weighted total scores per agency",
+    "8 critères supplémentaires déverrouillés":"8 additional criteria unlocked",
+    // Recos
+    "04 / Plan de transformation":"04 / Transformation plan",
+    "La question clé pour AMDIE":"The key question for AMDIE",
+    "Plan de transformation":"Transformation Plan",
+    "6 Leviers Stratégiques":"6 Strategic Levers",
+    // CTA
+    "Morocco Now peut prendre le virage":"Morocco Now can take the turn",
+    "L'analyse complète avec fiches agences, matrice 12 critères et plan de transformation est disponible dans l'Espace Premium Buildfluence.":"The full analysis with agency profiles, 12-criteria matrix and transformation plan is available in the Buildfluence Premium Area.",
+    "Accéder à l'analyse complète →":"Access the full analysis →",
+    // Light matrix labels
+    "Critère":"Criterion",
+    "SIG / Carte interactive":"GIS / Interactive map",
+    "Newsletter investisseurs":"Investor newsletter",
+    "Simulateurs investisseurs":"Investor simulators",
+    "Présence digitale":"Digital presence",
+  };
+
+  // Replace text in matching nodes (exact textContent match after trim)
+  function walk(node){
+    if (node.nodeType === 3) {
+      var txt = node.nodeValue;
+      var key = txt && txt.trim();
+      if (key && DICT[key]) node.nodeValue = txt.replace(key, DICT[key]);
+      return;
+    }
+    if (node.nodeType !== 1) return;
+    var tag = node.tagName;
+    if (tag === 'SCRIPT' || tag === 'STYLE' || tag === 'NOSCRIPT' || tag === 'CANVAS') return;
+    for (var i=0; i<node.childNodes.length; i++) walk(node.childNodes[i]);
+  }
+
+  // Section titles (with <em>) — keep markup
+  var titleMap = {
+    "Positionnement mondial": "Global positioning",
+    "Six modèles, une leçon": "Six models, one lesson",
+    "12 critères, une vérité": "12 criteria, one truth",
+    "Six leviers prioritaires": "Six priority levers"
+  };
+  function fixSectionTitles(){
+    document.querySelectorAll('.section-title').forEach(function(h){
+      var plain = h.textContent.trim().replace(/\s+/g,' ');
+      var en = titleMap[plain];
+      if (en) {
+        var parts = en.split(' ');
+        var mid = Math.ceil(parts.length/2);
+        var left = parts.slice(0, mid).join(' ');
+        var right = parts.slice(mid).join(' ');
+        h.innerHTML = left + ' <em>' + right + '</em>';
+      }
+    });
+  }
+
+  // Section leads (rich HTML) — replace entirely
+  var leadMap = {};
+  leadMap['Chaque agence positionnée sur deux axes : maturité tech/data et intensité marketing. Morocco Now accuse un retard structurel considérable.'] = 'Each agency is positioned on two axes: tech/data maturity and marketing intensity. Morocco Now shows a considerable structural lag.';
+
+  function fixLeads(){
+    document.querySelectorAll('.section-lead').forEach(function(p){
+      var key = p.textContent.trim().replace(/\s+/g,' ');
+      if (leadMap[key]) p.textContent = leadMap[key];
+      if (p.getAttribute('data-i18n') === 'section-lead-recos') {
+        p.innerHTML = "<strong style=\"color:#0D1B2A\">AMDIE</strong>: evolve from a logic of <strong>'visibility'</strong> towards an <strong style=\"color:#C9A84C\">Investor Intelligence</strong> strategy.<br><strong style=\"color:#0D1B2A\">Morocco Now</strong>: shift from an <strong>'institutional portal'</strong> to a platform of <strong style=\"color:#C9A84C\">Decision Engineering</strong> for investors.";
+      }
+    });
+  }
+
+  // Hero H1 (preserves <em><br>)
+  function fixHero(){
+    var h1 = document.querySelector('.hero-h1');
+    if (h1) h1.innerHTML = "Global IPAs have changed their craft.<br><em>AMDIE excels in Operational Marketing.</em>";
+    // Question encart
+    document.querySelectorAll('p').forEach(function(p){
+      var t = p.textContent.replace(/\s+/g,' ').trim();
+      if (t.indexOf("FinTech ou AgroTech") !== -1) {
+        p.innerHTML = "A <strong style=\"color:var(--gold)\">FinTech or AgroTech</strong> investor will no longer want an agency to merely 'reply'.<br>They expect a platform to <strong style=\"color:var(--gold)\">accelerate their decision-making</strong>.<br><br><em style=\"font-size:15px;color:var(--navy)\">Does Morocco Now currently embody this role?</em>";
+      }
+      if (t.indexOf("12 critères") !== -1 && t.indexOf("Tech/Data") !== -1 && t.indexOf("Marketing Opérationnel") !== -1 && t.length < 600) {
+        p.innerHTML = 'Each agency is assessed on <strong>12 criteria</strong> spread across two axes: <strong>Tech/Data</strong> (digital tools, GIS, simulators, open data) and <strong>Operational Marketing</strong> (newsletter, events, testimonials, digital presence).';
+      }
+      if (t.indexOf("La notation va de") !== -1) {
+        p.innerHTML = 'Scoring ranges from <strong>1 (absent or non-existent)</strong> to <strong>5 (excellent, global best practice)</strong>. The global score is the weighted average of the 12 criteria, converted to a percentage for positioning on the bubble chart.';
+      }
+      if (t.indexOf("axe horizontal (Tech/Data") !== -1) {
+        p.innerHTML = "The horizontal axis (Tech/Data %) reflects the maturity of digital tools: GIS, fiscal simulators, licensing platforms and self-service FDI data. The vertical axis (Operational Marketing %) measures the intensity and consistency of communication actions and digital presence.";
+      }
+      if (t.indexOf("taille de chaque bulle") !== -1) {
+        p.innerHTML = 'The size of each bubble reflects the weighted global score. All tools were verified and documented directly on the agencies\' websites in May 2026.';
+      }
+      if (t.indexOf("Comment lire ce graphique") !== -1) {
+        p.innerHTML = '<strong>How to read this chart:</strong> The bars represent the raw Tech/Data score gap between Morocco Now (12 points out of 100) and each competitor. A gap of +76 points with Türkiye means the Turkish agency scores 88/100 on Tech/Data vs 12 for Morocco Now. These scores are computed from the evaluation of digital tools actually deployed and accessible on each agency\'s website, verified and documented by Buildfluence in May 2026.';
+      }
+      if (t.indexOf("Chaque agence a été évaluée en") !== -1) {
+        p.innerHTML = 'Each agency was evaluated in <strong>May 2026</strong> by Buildfluence analysts on the basis of a direct, documented visit to each institutional website. Scoring follows a 5-level grid:';
+      }
+    });
+    // Methodology level descriptors
+    document.querySelectorAll('div').forEach(function(d){
+      var map = {
+        "Best practice mondiale, outil pleinement opérationnel":"Global best practice, fully operational tool",
+        "Outil déployé et fonctionnel, quelques lacunes mineures":"Tool deployed and functional, a few minor gaps",
+        "Outil partiel ou en cours de développement":"Partial tool or under development",
+        "Présence minimale, outil peu accessible ou obsolète":"Minimal presence, tool barely accessible or obsolete",
+        "Critère inexistant ou introuvable sur le site de l'agence":"Criterion non-existent or not found on the agency's website"
+      };
+      var k = d.textContent.trim();
+      if (map[k]) d.textContent = map[k];
+    });
+  }
+
+  function applyAll(){
+    fixHero();
+    fixSectionTitles();
+    fixLeads();
+    walk(document.body);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function(){ setTimeout(applyAll, 50); });
+  } else {
+    setTimeout(applyAll, 50);
+  }
+  // Re-apply after dynamic builds (ranking, gap rows, matrix, insights)
+  setTimeout(applyAll, 1500);
+  setTimeout(applyAll, 3000);
+})();
 </script>
 </body>
 </html>

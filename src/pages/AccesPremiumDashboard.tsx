@@ -14,7 +14,8 @@ const AccesPremiumDashboard = () => {
     navigate("/acces-premium", { replace: true });
   };
 
-  const benchmarkSrc = lang === "en" ? "/benchmark-api-en.html" : "/benchmark-api-fr.html";
+  const benchmarkFile = lang === "en" ? "/benchmark-api-en.html" : "/benchmark-api-fr.html";
+  const benchmarkSrc = `${benchmarkFile}?lang=${lang}`;
 
   const sideCards = [
     { title: t("Baromètre Sectoriel", "Sector Barometer"), icon: "📊", desc: t("Indicateurs sectoriels stratégiques mis à jour en continu.", "Strategic sector indicators continuously updated.") },
