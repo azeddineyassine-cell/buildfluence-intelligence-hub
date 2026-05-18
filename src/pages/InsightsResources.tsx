@@ -355,36 +355,65 @@ const InsightsResources = () => {
               <span className="ir-card-cat">{card.category}</span>
               <div className="ir-card-date">{card.date}</div>
               <h2 className="ir-card-title">{card.title}</h2>
+              {card.subtitle && (
+                <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 10, letterSpacing: "0.22em", textTransform: "uppercase", color: "rgba(244,241,234,0.78)", marginTop: 8 }}>
+                  {card.subtitle}
+                </div>
+              )}
             </div>
 
             <div className="ir-card-overlay" aria-hidden>
               <div className="ir-overlay-inner">
                 <div className="ir-overlay-cat">{card.category} · {card.date}</div>
                 <h3 className="ir-overlay-title">{card.title}</h3>
+                {card.subtitle && (
+                  <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 10, letterSpacing: "0.22em", textTransform: "uppercase", color: "rgba(201,168,76,0.9)", marginBottom: 12 }}>
+                    {card.subtitle}
+                  </div>
+                )}
                 {card.overlayImage && (
                   <img
                     src={card.overlayImage}
                     alt=""
                     style={{
-                      width: '100%',
-                      height: 'auto',
-                      maxHeight: '240px',
-                      objectFit: 'cover',
-                      objectPosition: 'top',
-                      borderRadius: '2px',
-                      marginBottom: '14px',
+                      width: '100%', height: 'auto', maxHeight: '240px',
+                      objectFit: 'cover', objectPosition: 'top',
+                      borderRadius: '2px', marginBottom: '14px',
                       border: '1px solid rgba(201,168,76,0.35)',
                     }}
                   />
                 )}
                 <p className="ir-overlay-summary">{card.summary}</p>
-                <button
-                  type="button"
-                  className="ir-learn-more"
-                  onClick={(e) => { e.stopPropagation(); openCard(card); }}
-                >
-                  {t("En savoir plus", "Learn more")} →
-                </button>
+                {card.actions ? (
+                  <div style={{ display: "flex", flexWrap: "wrap", gap: 10, alignItems: "center" }}>
+                    {card.actions.map((a) => {
+                      const base: React.CSSProperties = {
+                        fontFamily: "'JetBrains Mono', monospace",
+                        fontSize: 11, fontWeight: 600, letterSpacing: "0.22em",
+                        textTransform: "uppercase", padding: "12px 18px",
+                        borderRadius: 2, cursor: "pointer", textDecoration: "none",
+                        display: "inline-flex", alignItems: "center", border: "1px solid transparent",
+                      };
+                      const style: React.CSSProperties =
+                        a.variant === "secondary"
+                          ? { ...base, background: "transparent", color: "#F4F1EA", borderColor: "rgba(244,241,234,0.4)" }
+                          : a.variant === "tertiary"
+                          ? { ...base, padding: "12px 4px", background: "transparent", color: "#C9A84C", letterSpacing: "0.2em" }
+                          : { ...base, background: "#C9A84C", color: "#0D1B2A" };
+                      return (
+                        <a key={a.label} href={a.href} target="_blank" rel="noopener noreferrer"
+                          onClick={(e) => e.stopPropagation()} style={style}>
+                          {a.label}
+                        </a>
+                      );
+                    })}
+                  </div>
+                ) : (
+                  <button type="button" className="ir-learn-more"
+                    onClick={(e) => { e.stopPropagation(); openCard(card); }}>
+                    {t("En savoir plus", "Learn more")} →
+                  </button>
+                )}
               </div>
             </div>
           </article>
