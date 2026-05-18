@@ -50,9 +50,26 @@ const Navbar = () => {
     window.addEventListener("scroll", onScroll);
     const onOpenAcces = () => goToAccesPremium();
     window.addEventListener("open-acces-premium", onOpenAcces as EventListener);
+    const onOpenExchange = () => setFormOpen(true);
+    window.addEventListener("open-strategic-exchange", onOpenExchange as EventListener);
+    const onMessage = (e: MessageEvent) => {
+      if (e?.data && (e.data as any).type === "open-strategic-exchange") setFormOpen(true);
+    };
+    window.addEventListener("message", onMessage);
+    // URL param fallback (when redirected from standalone HTML pages)
+    try {
+      const url = new URL(window.location.href);
+      if (url.searchParams.get("openExchange") === "1") {
+        setFormOpen(true);
+        url.searchParams.delete("openExchange");
+        window.history.replaceState({}, "", url.pathname + url.search + url.hash);
+      }
+    } catch { /* noop */ }
     return () => {
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("open-acces-premium", onOpenAcces as EventListener);
+      window.removeEventListener("open-strategic-exchange", onOpenExchange as EventListener);
+      window.removeEventListener("message", onMessage);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [session]);
