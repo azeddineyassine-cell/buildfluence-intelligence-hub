@@ -409,6 +409,11 @@ table.mx tr:hover td{background:rgba(217,207,188,.3)}
         <div class="hs-val" id="h4" style="color:var(--alert)">0</div>
         <div class="hs-sub">Morocco Now vs leaders</div>
       </div>
+      <div class="hs blue" style="border-top-color:var(--navy)">
+        <div class="hs-lbl">Leviers stratégiques</div>
+        <div class="hs-val" id="h5">0</div>
+        <div class="hs-sub">Plan d'innovation</div>
+      </div>
     </div>
   </div>
 </header>
@@ -710,6 +715,7 @@ function buildOverview(){
   if(document.getElementById('h2'))animCount(document.getElementById('h2'),1.2,'/5',1200,true);
   if(document.getElementById('h3'))animCount(document.getElementById('h3'),12,'',900,false);
   if(document.getElementById('h4'))animCount(document.getElementById('h4'),3,'+',1000,false);
+  if(document.getElementById('h5'))animCount(document.getElementById('h5'),6,'',900,false);
 
   const typingEl=document.getElementById('typing-text');
   if(typingEl){
@@ -1270,7 +1276,7 @@ function hideFlagTip() {
   document.querySelectorAll('.flag-item span').forEach(s => s.style.transform = '');
 }
 
-/* ===== Strategic Exchange trigger (bridges to parent React app) ===== */
+/* ===== Strategic Exchange trigger (in-page overlay modal) ===== */
 function openExchange(){
   try {
     if (window.parent && window.parent !== window) {
@@ -1279,7 +1285,12 @@ function openExchange(){
     }
   } catch(e) {}
   try { window.dispatchEvent(new CustomEvent('open-strategic-exchange')); } catch(e){}
-  window.location.href = '/?openExchange=1';
+  var ov = document.getElementById('bf-exchange-overlay');
+  if (ov) { ov.style.display = 'flex'; document.body.style.overflow = 'hidden'; }
+}
+function closeExchange(){
+  var ov = document.getElementById('bf-exchange-overlay');
+  if (ov) { ov.style.display = 'none'; document.body.style.overflow = ''; }
 }
 
 /* ===== Bilingual FR/EN i18n ===== */
@@ -1319,6 +1330,8 @@ function openExchange(){
     "Tech, Data, Marketing":"Tech, Data, Marketing",
     "Années de retard":"Years behind",
     "Morocco Now vs leaders":"Morocco Now vs leaders",
+    "Leviers stratégiques":"Strategic levers",
+    "Plan d'innovation":"Innovation plan",
     // Overview section
     "01 / Vue d'ensemble":"01 / Overview",
     "Verdict Buildfluence":"Buildfluence Verdict",
@@ -1492,6 +1505,116 @@ function openExchange(){
   setTimeout(applyAll, 1500);
   setTimeout(applyAll, 3000);
 })();
+</script>
+
+<!-- ===== Strategic Exchange Overlay Modal (in-page, no navigation) ===== -->
+<div id="bf-exchange-overlay" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(13,27,42,0.72);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);align-items:center;justify-content:center;padding:24px;font-family:'DM Sans',sans-serif" onclick="if(event.target===this)closeExchange()">
+  <div style="background:#F4F4F4;color:#1a2744;max-width:640px;width:100%;max-height:92vh;overflow-y:auto;border:1px solid #D1D5DB;border-radius:8px;padding:28px 30px;box-shadow:0 30px 80px rgba(0,0,0,0.35)">
+    <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:6px">
+      <h3 id="bf-ex-title" style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:#1a2744;margin:0;line-height:1.25">Demander mon échange stratégique</h3>
+      <button type="button" onclick="closeExchange()" aria-label="Fermer" style="background:transparent;border:none;color:#6B7280;font-size:24px;line-height:1;cursor:pointer;padding:0 4px">×</button>
+    </div>
+    <div id="bf-ex-secure" style="display:flex;align-items:center;gap:6px;color:#6B7280;font-size:12px;margin-bottom:18px">
+      <span aria-hidden="true">🔒</span><span>Communication sécurisée et confidentielle</span>
+    </div>
+    <form id="bf-ex-form" onsubmit="return submitExchange(event)" novalidate>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px">
+        <input required name="name" placeholder="Nom" maxlength="100" style="background:#fff;border:1px solid #D1D5DB;color:#1a2744;font-size:14px;padding:10px 12px;border-radius:6px;width:100%;box-sizing:border-box" />
+        <input required name="org" placeholder="Organisation" maxlength="100" style="background:#fff;border:1px solid #D1D5DB;color:#1a2744;font-size:14px;padding:10px 12px;border-radius:6px;width:100%;box-sizing:border-box" />
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px">
+        <input required name="poste" placeholder="Poste / Fonction" maxlength="100" style="background:#fff;border:1px solid #D1D5DB;color:#1a2744;font-size:14px;padding:10px 12px;border-radius:6px;width:100%;box-sizing:border-box" />
+        <input required type="email" name="email" placeholder="Email professionnel" maxlength="255" style="background:#fff;border:1px solid #D1D5DB;color:#1a2744;font-size:14px;padding:10px 12px;border-radius:6px;width:100%;box-sizing:border-box" />
+      </div>
+      <input type="tel" name="phone" placeholder="Téléphone" maxlength="20" style="background:#fff;border:1px solid #D1D5DB;color:#1a2744;font-size:14px;padding:10px 12px;border-radius:6px;width:100%;box-sizing:border-box;margin-bottom:12px" />
+      <textarea name="message" rows="4" placeholder="Votre message" maxlength="2000" style="background:#fff;border:1px solid #D1D5DB;color:#1a2744;font-size:14px;padding:10px 12px;border-radius:6px;width:100%;box-sizing:border-box;font-family:inherit;resize:vertical;margin-bottom:14px"></textarea>
+      <div id="bf-ex-status" style="font-size:12px;color:#6B7280;min-height:18px;margin-bottom:10px"></div>
+      <div style="display:flex;gap:10px;justify-content:flex-end">
+        <button type="button" onclick="closeExchange()" style="background:transparent;border:1px solid #D1D5DB;color:#1a2744;padding:10px 18px;border-radius:6px;font-size:13px;font-weight:600;cursor:pointer" id="bf-ex-cancel">Annuler</button>
+        <button type="submit" id="bf-ex-submit" style="background:#C9A84C;border:none;color:#0D1B2A;padding:10px 22px;border-radius:6px;font-size:13px;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;cursor:pointer">Envoyer</button>
+      </div>
+    </form>
+  </div>
+</div>
+<script>
+(function(){
+  // Localize modal labels in EN
+  if ((window.__BF_LANG||'fr') === 'en') {
+    var t = document.getElementById('bf-ex-title'); if (t) t.textContent = 'Request my strategic exchange';
+    var s = document.getElementById('bf-ex-secure'); if (s) s.children[1].textContent = 'Secure and confidential communication';
+    var f = document.getElementById('bf-ex-form');
+    if (f) {
+      var ph = { name:'Name', org:'Organisation', poste:'Position / Role', email:'Professional email', phone:'Phone', message:'Your message' };
+      Object.keys(ph).forEach(function(n){ var el=f.querySelector('[name="'+n+'"]'); if(el) el.placeholder = ph[n]; });
+    }
+    var c = document.getElementById('bf-ex-cancel'); if (c) c.textContent = 'Cancel';
+    var sb = document.getElementById('bf-ex-submit'); if (sb) sb.textContent = 'Send';
+  }
+  // ESC to close
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeExchange(); });
+})();
+window.submitExchange = async function(ev){
+  ev.preventDefault();
+  var form = ev.target;
+  var fd = new FormData(form);
+  var EN = (window.__BF_LANG||'fr') === 'en';
+  var status = document.getElementById('bf-ex-status');
+  var btn = document.getElementById('bf-ex-submit');
+  var SUPABASE_URL = 'https://uoupidbmoyqckxsxunvr.supabase.co';
+  var SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVvdXBpZGJtb3lxY2t4c3h1bnZyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQzMDMyNDQsImV4cCI6MjA4OTg3OTI0NH0.nSj8XaMnlZGaQBig0LxmvDcugjPUWaYo0Pr5VAp6bU4';
+  var payload = {
+    form_type: 'strategic_exchange',
+    name: fd.get('name'),
+    email: fd.get('email'),
+    organization: fd.get('org'),
+    position: fd.get('poste'),
+    phone: fd.get('phone') || null,
+    topic: null,
+    priority: EN ? 'Normal priority' : 'Priorité normale',
+    message: fd.get('message') || null
+  };
+  btn.disabled = true; btn.style.opacity = '0.7';
+  status.textContent = EN ? 'Sending…' : 'Envoi en cours…';
+  status.style.color = '#6B7280';
+  try {
+    var insertRes = await fetch(SUPABASE_URL + '/rest/v1/contact_submissions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'apikey': SUPABASE_ANON,
+        'Authorization': 'Bearer ' + SUPABASE_ANON,
+        'Prefer': 'return=minimal'
+      },
+      body: JSON.stringify(payload)
+    });
+    if (!insertRes.ok) throw new Error('insert_failed');
+    await fetch(SUPABASE_URL + '/functions/v1/send-email', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'apikey': SUPABASE_ANON,
+        'Authorization': 'Bearer ' + SUPABASE_ANON
+      },
+      body: JSON.stringify({
+        formType: 'strategic_exchange',
+        name: payload.name, email: payload.email,
+        organization: payload.organization, position: payload.position,
+        phone: payload.phone, topic: payload.topic,
+        priority: payload.priority, message: payload.message
+      })
+    }).catch(function(){});
+    status.style.color = '#0D7A5F';
+    status.textContent = EN ? 'Request sent. An advisor will contact you within 24h.' : 'Demande envoyée. Un conseiller vous contactera sous 24h.';
+    form.reset();
+    setTimeout(closeExchange, 1600);
+  } catch(err) {
+    status.style.color = '#A32D2D';
+    status.textContent = EN ? 'An error occurred. Please try again.' : 'Une erreur est survenue. Veuillez réessayer.';
+  } finally {
+    btn.disabled = false; btn.style.opacity = '1';
+  }
+  return false;
+};
 </script>
 </body>
 </html>

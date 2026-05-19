@@ -29,6 +29,7 @@ type Card = {
   logo?: string;
   gradient?: string;
   overlayImage?: string;
+  overlayBg?: string;
   subtitle?: string;
   actions?: CardAction[];
 };
@@ -98,7 +99,8 @@ const InsightsResources = () => {
         "Comparative analysis of digital attractiveness mechanisms of 6 global investment promotion agencies: Tech/Data and Marketing."
       ),
       href: "/benchmark-api-light.html",
-      image: "/Benchmark_API_image-1.png",
+      image: "/Benchmark_API_Drapeaux-1.png",
+      overlayBg: "/Benchmark_API_Analyse-2.png",
       actions: [
         { label: t("Voir l'analyse →", "View analysis →"), href: "/benchmark-api-light.html", variant: "primary" },
         { label: t("Accès complet →", "Full access →"), href: "/acces-premium", variant: "tertiary" },
@@ -367,7 +369,15 @@ const InsightsResources = () => {
               )}
             </div>
 
-            <div className="ir-card-overlay" aria-hidden>
+            <div
+              className="ir-card-overlay"
+              aria-hidden
+              style={card.overlayBg ? {
+                backgroundImage: `linear-gradient(rgba(13,27,42,0.82), rgba(13,27,42,0.88)), url(${card.overlayBg})`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+              } : undefined}
+            >
               <div className="ir-overlay-inner">
                 <div className="ir-overlay-cat">{card.category} · {card.date}</div>
                 <h3 className="ir-overlay-title">{card.title}</h3>
