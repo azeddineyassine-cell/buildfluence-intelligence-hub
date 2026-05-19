@@ -338,7 +338,7 @@ table.mx tr:hover td{background:rgba(217,207,188,.3)}
     <a href="#matrice" class="nav-link">Matrice 🔒</a>
     <a href="#recommandations" class="nav-link">Plan d'action 🔒</a>
   </div>
-  <a href="#cta" class="nav-cta" data-i18n="exchange" onclick="event.preventDefault();openExchange();">Échange Stratégique</a>
+  <a href="#cta" class="nav-cta" data-i18n="exchange" data-bf-action="exchange" onclick="return openExchange();">Échange Stratégique</a>
 </nav>
 <div id="prog"><div id="prog-fill"></div></div>
 
@@ -360,8 +360,8 @@ table.mx tr:hover td{background:rgba(217,207,188,.3)}
       <h1 class="hero-h1">Les API mondiales ont changé de métier.<br><em>L'AMDIE excelle en Marketing Opérationnel.</em></h1>
       <p class="hero-sub">Benchmark des mécanismes d'attractivité numérique de 6 agences mondiales : analysés sur deux axes : Tech/Data et Marketing/Contact.</p>
       <div class="hero-ctas">
-        <a href="#overview" class="btn-dark" onclick="event.preventDefault();scrollToOverview();">Découvrir l'analyse →</a>
-        <a href="#cta" class="btn-outline" data-i18n="exchange" onclick="event.preventDefault();openExchange();">Échange Stratégique</a>
+        <a href="#overview" class="btn-dark" data-bf-action="overview" onclick="return scrollToOverview();">Découvrir l'analyse →</a>
+        <a href="#cta" class="btn-outline" data-i18n="exchange" data-bf-action="exchange" onclick="return openExchange();">Échange Stratégique</a>
       </div>
     </div>
     <div class="hero-stats">
@@ -495,7 +495,7 @@ table.mx tr:hover td{background:rgba(217,207,188,.3)}
         </div>
         <div class="lock-btns">
           <a href="/acces-premium" target="_blank" class="btn-dark">Accéder à l'Espace Premium →</a>
-          <a href="#" class="btn-outline" data-i18n="exchange" onclick="event.preventDefault();openExchange();">Échange Stratégique</a>
+          <a href="#" class="btn-outline" data-i18n="exchange" data-bf-action="exchange" onclick="return openExchange();">Échange Stratégique</a>
         </div>
       </div>
     </div>
@@ -551,7 +551,7 @@ table.mx tr:hover td{background:rgba(217,207,188,.3)}
         </div>
         <div class="lock-btns">
           <a href="/acces-premium" target="_blank" class="btn-dark">Accéder à l'Espace Premium →</a>
-          <a href="#" class="btn-outline" data-i18n="exchange" onclick="event.preventDefault();openExchange();">Échange Stratégique</a>
+          <a href="#" class="btn-outline" data-i18n="exchange" data-bf-action="exchange" onclick="return openExchange();">Échange Stratégique</a>
         </div>
       </div>
     </div>
@@ -597,7 +597,7 @@ table.mx tr:hover td{background:rgba(217,207,188,.3)}
         </div>
         <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
           <a href="/acces-premium" target="_blank" class="btn-dark" data-i18n="lever_btn_access">Accéder à l'Espace Premium →</a>
-          <a href="#" class="btn-outline" data-i18n="exchange" onclick="event.preventDefault();openExchange();">Échange Stratégique</a>
+          <a href="#" class="btn-outline" data-i18n="exchange" data-bf-action="exchange" onclick="return openExchange();">Échange Stratégique</a>
         </div>
       </div>
     </div>
@@ -613,7 +613,7 @@ table.mx tr:hover td{background:rgba(217,207,188,.3)}
       <p class="cta-sub">L'analyse complète avec fiches agences, matrice 12 critères et plan de transformation est disponible dans l'Espace Premium Buildfluence.</p>
       <div class="cta-btns">
         <a href="/acces-premium" target="_blank" class="btn-dark">Accéder à l'analyse complète →</a>
-        <a href="#" class="btn-outline" data-i18n="exchange" onclick="event.preventDefault();openExchange();">Échange Stratégique</a>
+        <a href="#" class="btn-outline" data-i18n="exchange" data-bf-action="exchange" onclick="return openExchange();">Échange Stratégique</a>
       </div>
     </div>
   </div>
@@ -1167,6 +1167,20 @@ function closeExchange(){
   var ov = document.getElementById('bf-exchange-overlay');
   if (ov) { ov.style.display = 'none'; document.body.style.overflow = ''; }
 }
+
+document.addEventListener('click', function(e){
+  var trigger = e.target && e.target.closest ? e.target.closest('[data-bf-action]') : null;
+  if (!trigger) return;
+  var action = trigger.getAttribute('data-bf-action');
+  if (action === 'overview') {
+    e.preventDefault();
+    scrollToOverview();
+  }
+  if (action === 'exchange') {
+    e.preventDefault();
+    openExchange();
+  }
+});
 
 /* ===== Bilingual FR/EN i18n ===== */
 (function(){
