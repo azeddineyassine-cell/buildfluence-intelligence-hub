@@ -583,12 +583,12 @@ table.mx tr:hover td{background:rgba(217,207,188,.3)}
         <h3 style="font-family:'Playfair Display',serif;font-size:28px;font-weight:900;color:var(--navy);margin-bottom:6px" data-i18n="levers_title">6 Leviers Stratégiques</h3>
         <p style="font-family:'Cormorant Garamond',serif;font-size:17px;font-style:italic;color:var(--ink-faint);margin-bottom:22px" data-i18n="levers_subtitle">Plan de transformation</p>
         <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px 18px;margin-bottom:24px">
-          <div style="display:flex;align-items:center;gap:10px;font-size:13px;color:var(--ink-light);filter:blur(4px);user-select:none"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;color:var(--gold);min-width:22px">01</span>Lorem ipsum dolor sit amet</div>
-          <div style="display:flex;align-items:center;gap:10px;font-size:13px;color:var(--ink-light);filter:blur(4px);user-select:none"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;color:var(--gold);min-width:22px">02</span>Consectetur adipiscing elit sed</div>
-          <div style="display:flex;align-items:center;gap:10px;font-size:13px;color:var(--ink-light);filter:blur(4px);user-select:none"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;color:var(--gold);min-width:22px">03</span>Tempor incididunt ut labore</div>
-          <div style="display:flex;align-items:center;gap:10px;font-size:13px;color:var(--ink-light);filter:blur(4px);user-select:none"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;color:var(--gold);min-width:22px">04</span>Magna aliqua ut enim ad</div>
-          <div style="display:flex;align-items:center;gap:10px;font-size:13px;color:var(--ink-light);filter:blur(4px);user-select:none"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;color:var(--gold);min-width:22px">05</span>Minim veniam quis nostrud</div>
-          <div style="display:flex;align-items:center;gap:10px;font-size:13px;color:var(--ink-light);filter:blur(4px);user-select:none"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;color:var(--gold);min-width:22px">06</span>Exercitation ullamco laboris</div>
+          <div style="display:flex;align-items:center;gap:10px;font-size:13px;color:var(--ink-light);filter:blur(4px);user-select:none"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;color:var(--gold);min-width:22px">01</span>SIG investisseur et cartographie des opportunités</div>
+          <div style="display:flex;align-items:center;gap:10px;font-size:13px;color:var(--ink-light);filter:blur(4px);user-select:none"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;color:var(--gold);min-width:22px">02</span>Newsletter investisseurs et capitalisation terrain</div>
+          <div style="display:flex;align-items:center;gap:10px;font-size:13px;color:var(--ink-light);filter:blur(4px);user-select:none"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;color:var(--gold);min-width:22px">03</span>Simulateur d'incitations et scénarios d'implantation</div>
+          <div style="display:flex;align-items:center;gap:10px;font-size:13px;color:var(--ink-light);filter:blur(4px);user-select:none"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;color:var(--gold);min-width:22px">04</span>Success stories sectorielles vérifiables</div>
+          <div style="display:flex;align-items:center;gap:10px;font-size:13px;color:var(--ink-light);filter:blur(4px);user-select:none"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;color:var(--gold);min-width:22px">05</span>Comparateur de compétitivité dynamique</div>
+          <div style="display:flex;align-items:center;gap:10px;font-size:13px;color:var(--ink-light);filter:blur(4px);user-select:none"><span style="font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;color:var(--gold);min-width:22px">06</span>Aftercare numérique et relation post-investissement</div>
         </div>
         <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
           <a href="/acces-premium" target="_blank" class="btn-dark" data-i18n="lever_btn_access">Accéder à l'Espace Premium →</a>
@@ -713,9 +713,14 @@ function buildOverview(){
 
   const typingEl=document.getElementById('typing-text');
   if(typingEl){
-    setTimeout(()=>typeText(typingEl,
-      "Morocco Now opère encore comme une marque d'attractivité (Posture institutionnelle). Les Agences de Promotion d'Investissement (API) les plus avancées fonctionnent désormais comme des ‘ Investment Intelligence Platforms ’. Le centre de gravité mondial s'est déplacé de la ‘communication institutionnelle’ vers l'Ingénierie Décisionnelle. Et Morocco Now n'a pas encore pris ce virage.",
-      20),600);
+    let isEn=false;
+    try{
+      const qp=new URLSearchParams(window.location.search).get('lang');
+      isEn=qp==='en'||(/-en\.html$/i.test(window.location.pathname)&&qp!=='fr');
+    }catch(e){}
+    typingEl.innerHTML=isEn
+      ? "<strong style='color:#0D1B2A'>Morocco Now</strong> still operates as an attractiveness brand (institutional posture). The most advanced Investment Promotion Agencies (IPAs) now function as <strong style='color:#C9A84C'>Investor Intelligence</strong> platforms. The global centre of gravity has shifted from institutional communication to <strong style='color:#C9A84C'>Decision Engineering</strong>. And <strong style='color:#0D1B2A'>Morocco Now</strong> has not yet taken that turn."
+      : "<strong style='color:#0D1B2A'>Morocco Now</strong> opère encore comme une marque d'attractivité (posture institutionnelle). Les Agences de Promotion des Investissements (API) les plus avancées fonctionnent désormais comme des plateformes d'<strong style='color:#C9A84C'>Intelligence Investisseur</strong>. Le centre de gravité mondial s'est déplacé de la communication institutionnelle vers l'<strong style='color:#C9A84C'>Ingénierie décisionnelle</strong>. Et <strong style='color:#0D1B2A'>Morocco Now</strong> n'a pas encore pris ce virage.";
   }
 
   const order=[['turkey',4.9,'#633806'],['edb',4.8,'#3B6D11'],['korea',4.2,'#0C447C'],['india',4.1,'#185FA5'],['egypt',3.1,'#854F0B'],['morocco',1.2,'#E24B4A']];
@@ -1422,6 +1427,16 @@ function openExchange(){
   function fixHero(){
     var h1 = document.querySelector('.hero-h1');
     if (h1) h1.innerHTML = "Global IPAs have changed their craft.<br><em>AMDIE excels in Operational Marketing.</em>";
+    var bubbleTitle = document.querySelector('[data-i18n="bubble_title"]');
+    if (bubbleTitle) bubbleTitle.textContent = "From promotion to influence: where do IPAs stand?";
+    var leversEyebrow = document.querySelector('[data-i18n="levers_eyebrow"]');
+    if (leversEyebrow) leversEyebrow.textContent = "Transformation plan";
+    var leversTitle = document.querySelector('[data-i18n="levers_title"]');
+    if (leversTitle) leversTitle.textContent = "6 Strategic Levers";
+    var leversSubtitle = document.querySelector('[data-i18n="levers_subtitle"]');
+    if (leversSubtitle) leversSubtitle.textContent = "Transformation plan";
+    document.querySelectorAll('[data-i18n="exchange"]').forEach(function(el){ el.textContent = "Strategic Exchange"; });
+    document.querySelectorAll('[data-i18n="lever_btn_access"]').forEach(function(el){ el.textContent = "Access the Premium Area →"; });
     // Question encart
     document.querySelectorAll('p').forEach(function(p){
       var t = p.textContent.replace(/\s+/g,' ').trim();
