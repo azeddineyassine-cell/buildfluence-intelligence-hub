@@ -360,8 +360,8 @@ table.mx tr:hover td{background:rgba(217,207,188,.3)}
       <h1 class="hero-h1">Les API mondiales ont changé de métier.<br><em>L'AMDIE excelle en Marketing Opérationnel.</em></h1>
       <p class="hero-sub">Benchmark des mécanismes d'attractivité numérique de 6 agences mondiales : analysés sur deux axes : Tech/Data et Marketing/Contact.</p>
       <div class="hero-ctas">
-        <button type="button" class="btn-dark" data-bf-action="overview" onclick="return scrollToOverview();">Découvrir l'analyse →</button>
-        <button type="button" class="btn-outline" data-i18n="exchange" data-bf-action="exchange" onclick="return openExchange();">Échange Stratégique</button>
+        <button type="button" class="btn-dark" data-bf-action="overview" onpointerdown="scrollToOverview(); return false;" onclick="return scrollToOverview();">Découvrir l'analyse →</button>
+        <button type="button" class="btn-outline" data-i18n="exchange" data-bf-action="exchange" onpointerdown="openExchange(); return false;" onclick="return openExchange();">Échange Stratégique</button>
       </div>
     </div>
     <div class="hero-stats">
