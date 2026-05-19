@@ -108,7 +108,7 @@ const InsightsResources = () => {
 
   const visible = useMemo(
     () => (active === "all" ? CARDS : CARDS.filter((c) => c.filter === active)),
-    [active]
+    [active, lang]
   );
 
   const openCard = (card: Card) => {
