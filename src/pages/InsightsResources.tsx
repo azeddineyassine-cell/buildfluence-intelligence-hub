@@ -173,6 +173,11 @@ const InsightsResources = () => {
     background-size: cover; background-position: center;
     transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
   }
+  .ir-card-bg.contain {
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-color: var(--bf-navy);
+  }
   .ir-card:hover .ir-card-bg { transform: scale(1.06); }
 
   .ir-card-shade {
@@ -339,7 +344,7 @@ const InsightsResources = () => {
           >
             {card.image ? (
               <div
-                className="ir-card-bg"
+                className={`ir-card-bg ${card.id === "benchmark-api-mai-2026" ? "contain" : ""}`}
                 style={{ backgroundImage: `url(${card.image})` }}
                 aria-hidden
               />
