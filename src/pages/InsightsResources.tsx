@@ -369,7 +369,15 @@ const InsightsResources = () => {
               )}
             </div>
 
-            <div className="ir-card-overlay" aria-hidden>
+            <div
+              className="ir-card-overlay"
+              aria-hidden
+              style={card.overlayBg ? {
+                backgroundImage: `linear-gradient(rgba(13,27,42,0.82), rgba(13,27,42,0.88)), url(${card.overlayBg})`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+              } : undefined}
+            >
               <div className="ir-overlay-inner">
                 <div className="ir-overlay-cat">{card.category} · {card.date}</div>
                 <h3 className="ir-overlay-title">{card.title}</h3>
