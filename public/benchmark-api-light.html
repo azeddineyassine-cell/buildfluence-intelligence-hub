@@ -409,6 +409,11 @@ table.mx tr:hover td{background:rgba(217,207,188,.3)}
         <div class="hs-val" id="h4" style="color:var(--alert)">0</div>
         <div class="hs-sub">Morocco Now vs leaders</div>
       </div>
+      <div class="hs blue" style="border-top-color:var(--navy)">
+        <div class="hs-lbl">Leviers stratégiques</div>
+        <div class="hs-val" id="h5">0</div>
+        <div class="hs-sub">Plan d'innovation</div>
+      </div>
     </div>
   </div>
 </header>
@@ -710,6 +715,7 @@ function buildOverview(){
   if(document.getElementById('h2'))animCount(document.getElementById('h2'),1.2,'/5',1200,true);
   if(document.getElementById('h3'))animCount(document.getElementById('h3'),12,'',900,false);
   if(document.getElementById('h4'))animCount(document.getElementById('h4'),3,'+',1000,false);
+  if(document.getElementById('h5'))animCount(document.getElementById('h5'),6,'',900,false);
 
   const typingEl=document.getElementById('typing-text');
   if(typingEl){
@@ -1319,6 +1325,8 @@ function openExchange(){
     "Tech, Data, Marketing":"Tech, Data, Marketing",
     "Années de retard":"Years behind",
     "Morocco Now vs leaders":"Morocco Now vs leaders",
+    "Leviers stratégiques":"Strategic levers",
+    "Plan d'innovation":"Innovation plan",
     // Overview section
     "01 / Vue d'ensemble":"01 / Overview",
     "Verdict Buildfluence":"Buildfluence Verdict",
