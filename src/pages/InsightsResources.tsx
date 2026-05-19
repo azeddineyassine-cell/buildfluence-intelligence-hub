@@ -29,6 +29,7 @@ type Card = {
   logo?: string;
   gradient?: string;
   overlayImage?: string;
+  overlayBg?: string;
   subtitle?: string;
   actions?: CardAction[];
 };
@@ -99,7 +100,7 @@ const InsightsResources = () => {
       ),
       href: "/benchmark-api-light.html",
       image: "/Benchmark_API_Drapeaux-1.png",
-      overlayImage: "/Benchmark_API_Analyse-2.png",
+      overlayBg: "/Benchmark_API_Analyse-2.png",
       actions: [
         { label: t("Voir l'analyse →", "View analysis →"), href: "/benchmark-api-light.html", variant: "primary" },
         { label: t("Accès complet →", "Full access →"), href: "/acces-premium", variant: "tertiary" },
