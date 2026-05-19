@@ -1422,6 +1422,16 @@ function openExchange(){
   function fixHero(){
     var h1 = document.querySelector('.hero-h1');
     if (h1) h1.innerHTML = "Global IPAs have changed their craft.<br><em>AMDIE excels in Operational Marketing.</em>";
+    var bubbleTitle = document.querySelector('[data-i18n="bubble_title"]');
+    if (bubbleTitle) bubbleTitle.textContent = "From promotion to influence: where do IPAs stand?";
+    var leversEyebrow = document.querySelector('[data-i18n="levers_eyebrow"]');
+    if (leversEyebrow) leversEyebrow.textContent = "Transformation plan";
+    var leversTitle = document.querySelector('[data-i18n="levers_title"]');
+    if (leversTitle) leversTitle.textContent = "6 Strategic Levers";
+    var leversSubtitle = document.querySelector('[data-i18n="levers_subtitle"]');
+    if (leversSubtitle) leversSubtitle.textContent = "Transformation plan";
+    document.querySelectorAll('[data-i18n="exchange"]').forEach(function(el){ el.textContent = "Strategic Exchange"; });
+    document.querySelectorAll('[data-i18n="lever_btn_access"]').forEach(function(el){ el.textContent = "Access the Premium Area →"; });
     // Question encart
     document.querySelectorAll('p').forEach(function(p){
       var t = p.textContent.replace(/\s+/g,' ').trim();
