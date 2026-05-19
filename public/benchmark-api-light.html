@@ -713,9 +713,14 @@ function buildOverview(){
 
   const typingEl=document.getElementById('typing-text');
   if(typingEl){
-    setTimeout(()=>typeText(typingEl,
-      "Morocco Now opère encore comme une marque d'attractivité (Posture institutionnelle). Les Agences de Promotion d'Investissement (API) les plus avancées fonctionnent désormais comme des ‘ Investment Intelligence Platforms ’. Le centre de gravité mondial s'est déplacé de la ‘communication institutionnelle’ vers l'Ingénierie Décisionnelle. Et Morocco Now n'a pas encore pris ce virage.",
-      20),600);
+    let isEn=false;
+    try{
+      const qp=new URLSearchParams(window.location.search).get('lang');
+      isEn=qp==='en'||(/-en\.html$/i.test(window.location.pathname)&&qp!=='fr');
+    }catch(e){}
+    typingEl.innerHTML=isEn
+      ? "<strong style='color:#0D1B2A'>Morocco Now</strong> still operates as an attractiveness brand (institutional posture). The most advanced Investment Promotion Agencies (IPAs) now function as <strong style='color:#C9A84C'>Investor Intelligence</strong> platforms. The global centre of gravity has shifted from institutional communication to <strong style='color:#C9A84C'>Decision Engineering</strong>. And <strong style='color:#0D1B2A'>Morocco Now</strong> has not yet taken that turn."
+      : "<strong style='color:#0D1B2A'>Morocco Now</strong> opère encore comme une marque d'attractivité (posture institutionnelle). Les Agences de Promotion des Investissements (API) les plus avancées fonctionnent désormais comme des plateformes d'<strong style='color:#C9A84C'>Intelligence Investisseur</strong>. Le centre de gravité mondial s'est déplacé de la communication institutionnelle vers l'<strong style='color:#C9A84C'>Ingénierie décisionnelle</strong>. Et <strong style='color:#0D1B2A'>Morocco Now</strong> n'a pas encore pris ce virage.";
   }
 
   const order=[['turkey',4.9,'#633806'],['edb',4.8,'#3B6D11'],['korea',4.2,'#0C447C'],['india',4.1,'#185FA5'],['egypt',3.1,'#854F0B'],['morocco',1.2,'#E24B4A']];
