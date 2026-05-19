@@ -360,7 +360,7 @@ table.mx tr:hover td{background:rgba(217,207,188,.3)}
       <h1 class="hero-h1">Les API mondiales ont changé de métier.<br><em>L'AMDIE excelle en Marketing Opérationnel.</em></h1>
       <p class="hero-sub">Benchmark des mécanismes d'attractivité numérique de 6 agences mondiales : analysés sur deux axes : Tech/Data et Marketing/Contact.</p>
       <div class="hero-ctas">
-        <a href="#overview" class="btn-dark">Découvrir l'analyse →</a>
+        <a href="#overview" class="btn-dark" onclick="event.preventDefault();scrollToOverview();">Découvrir l'analyse →</a>
         <a href="#cta" class="btn-outline" data-i18n="exchange" onclick="event.preventDefault();openExchange();">Échange Stratégique</a>
       </div>
     </div>
@@ -1278,15 +1278,21 @@ function hideFlagTip() {
 
 /* ===== Strategic Exchange trigger (in-page overlay modal) ===== */
 function openExchange(){
+  // Notify parent (if embedded in iframe) but always show local overlay too
   try {
     if (window.parent && window.parent !== window) {
       window.parent.postMessage({type:'open-strategic-exchange'}, '*');
-      return;
     }
   } catch(e) {}
   try { window.dispatchEvent(new CustomEvent('open-strategic-exchange')); } catch(e){}
   var ov = document.getElementById('bf-exchange-overlay');
   if (ov) { ov.style.display = 'flex'; document.body.style.overflow = 'hidden'; }
+  return false;
+}
+function scrollToOverview(){
+  var el = document.getElementById('overview');
+  if (el) el.scrollIntoView({behavior:'smooth', block:'start'});
+  return false;
 }
 function closeExchange(){
   var ov = document.getElementById('bf-exchange-overlay');
