@@ -818,6 +818,60 @@ const SuccessStoriesPage = () => {
       resultsExtra: t("+ Cartographie complète des interconnexions internationales et identification des risques de conformité","+ Full mapping of international interconnections and identification of compliance risks"),
       tags: [t("DEEP DUE DILIGENCE","DEEP DUE DILIGENCE"), t("CONFORMITÉ INTERNATIONALE","INTERNATIONAL COMPLIANCE"), "KYC / AML-CFT", t("CARTOGRAPHIE D'ACTEURS","ACTOR MAPPING"), "🇲🇦 🌍"],
     },
+    {
+      id: "story-12",
+      num: "12",
+      thematique: "communication",
+      secteur: "sante",
+      thematiqueLabel: t("Ingénierie de communication","Communication engineering"),
+      miniTitle: t("Livre Blanc e-Santé","e-Health White Paper"),
+      miniPitch: t("Quand la vision stratégique accélère la politique publique.","When strategic vision accelerates public policy."),
+      miniSecteur: t("E-Santé · 🇲🇦 🌍","E-Health · 🇲🇦 🌍"),
+      eyebrow: t("E-Santé & Innovation publique","E-Health & Public innovation"),
+      logos: [
+        { label: "UM5" },
+        { label: "UM6SS" },
+        { label: t("OMS","WHO") },
+      ],
+      visualMain: (
+        <>
+          [ {t("1er Livre Blanc national","1st national White Paper")}<br />
+          <span style={{ color: "var(--bf-gold)" }}>"{t("La e-Santé au Maroc : Réalités, enjeux et leviers de développement","Morocco's e-Health: Realities, challenges and development levers")}"</span> ]
+        </>
+      ),
+      meta: [
+        { label: t("CLIENT","CLIENT"), value: "UM5 · UM6SS" },
+        { label: t("PÉRIODE","PERIOD"), value: "2021 / 2022" },
+        { label: t("GÉOGRAPHIE","GEOGRAPHY"), value: t("🇲🇦 Maroc · 🌍 International","🇲🇦 Morocco · 🌍 International") },
+      ],
+      titleBefore: t("Concevoir le 1er Livre Blanc sur la e-Santé au Maroc et ","Designing Morocco's 1st e-Health White Paper and "),
+      titleEm: t("influencer la politique publique","influencing public policy"),
+      storytelling: t(
+        "Le Maroc ne disposait d'aucune cartographie structurée de son écosystème e-santé. L'Université Mohammed V de Rabat et UM6SS, en partenariat avec Buildfluence, lancent le chantier du 1er Livre Blanc sur la e-Santé au Maroc : une initiative inédite à l'échelle nationale, préfacée par le Directeur Général de l'OMS Dr Tedros Adhanom Ghebreyesus et trois ministres marocains. Un vide stratégique majeur à combler, une opportunité de positionner le Maroc comme hub régional de la santé numérique.",
+        "Morocco had no structured mapping of its e-health ecosystem. Mohammed V University of Rabat and UM6SS, in partnership with Buildfluence, launched Morocco's first e-Health White Paper: an unprecedented national initiative, prefaced by WHO Director-General Dr Tedros Adhanom Ghebreyesus and three Moroccan ministers. A major strategic gap to fill, and an opportunity to position Morocco as a regional hub for digital health."
+      ),
+      mission: t(
+        "Produire une analyse stratégique complète de la réalité e-santé au Maroc, identifier les freins structurels et formuler des recommandations actionnables à destination des décideurs publics et des acteurs de l'écosystème santé national.",
+        "Produce a complete strategic analysis of e-health reality in Morocco, identify structural barriers and formulate actionable recommendations for public decision-makers and stakeholders of the national health ecosystem."
+      ),
+      objectives: [
+        t("Cartographier l'écosystème national et international de la santé numérique sur 193 pays","Map the national and international digital health ecosystem across 193 countries"),
+        t("Concevoir et analyser deux enquêtes digitales (qualitative et quantitative) auprès des professionnels et praticiens de la santé","Design and analyze two digital surveys (qualitative and quantitative) among health professionals and practitioners"),
+        t("Produire l'intégralité des data visualisations, la méthodologie en mode projet et l'étude de marché mondial de la santé digitale","Produce all data visualizations, the project-mode methodology and the global digital health market study"),
+        t("Formuler des recommandations stratégiques pour une Roadmap pragmatique e-santé au Maroc","Formulate strategic recommendations for a pragmatic e-Health roadmap in Morocco"),
+      ],
+      methodo: t(
+        "Intelligence stratégique en mode projet : conception des questionnaires des deux enquêtes digitales et analyse des données (qualitative et quantitative). Étude de marché mondial de la santé digitale appuyée sur des indices internationaux (UN-EGDI, WIPO-GII) couvrant 193 pays. Réalisation de l'intégralité des data visualisations du document. Entretiens avec les professionnels et praticiens de la santé. Benchmark des meilleures pratiques internationales en e-santé.",
+        "Strategic intelligence in project mode: design of questionnaires for both digital surveys and data analysis (qualitative and quantitative). Global digital health market study based on international indices (UN-EGDI, WIPO-GII) covering 193 countries. Full production of the document's data visualizations. Interviews with health professionals and practitioners. Benchmark of international best practices in e-health."
+      ),
+      kpis: [
+        { value: t("1er Livre Blanc","1st White Paper"), label: t("e-Santé au Maroc · Initiative nationale inédite","e-Health in Morocco · Unprecedented national initiative") },
+        { value: t("OMS + 3 Ministres","WHO + 3 Ministers"), label: t("Préfaces officielles et interventions ministérielles","Official prefaces and ministerial interventions") },
+        { value: "190M MAD", label: t("Appel d'offres Ministère de la Santé 2024 · Système intelligent","Ministry of Health 2024 tender · Intelligent system") },
+      ],
+      resultsExtra: t("★ Les recommandations du Livre Blanc ont directement alimenté l'appel d'offres 2024 du Ministère de la Santé pour la mise en place d'un système de santé intelligent incluant le Dossier Patient Partagé national 360°.","★ The White Paper's recommendations directly fed the Ministry of Health's 2024 tender to deploy an intelligent health system including the national 360° Shared Patient Record."),
+      tags: [t("E-SANTÉ","E-HEALTH"), t("TRANSFORMATION DIGITALE","DIGITAL TRANSFORMATION"), t("BENCHMARK INTERNATIONAL","INTERNATIONAL BENCHMARK"), t("POLITIQUE PUBLIQUE","PUBLIC POLICY"), t("RECHERCHE STRATÉGIQUE","STRATEGIC RESEARCH"), "🇲🇦 🌍"],
+    },
   ];
 
   const matches = (s: Story) =>
