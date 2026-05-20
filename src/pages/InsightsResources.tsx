@@ -448,8 +448,11 @@ const InsightsResources = () => {
                           : { ...base, background: "#C9A84C", color: "#0D1B2A" };
                       const isHtml = /\.html?(\?|$)/i.test(a.href);
                       const href = isHtml ? `${a.href}${a.href.includes("?") ? "&" : "?"}lang=${lang}` : a.href;
+                      const targetProps = a.sameTab
+                        ? {}
+                        : { target: "_blank", rel: "noopener noreferrer" };
                       return (
-                        <a key={a.label} href={href} target="_blank" rel="noopener noreferrer"
+                        <a key={a.label} href={href} {...targetProps}
                           onClick={(e) => e.stopPropagation()} style={style}>
                           {a.label}
                         </a>
