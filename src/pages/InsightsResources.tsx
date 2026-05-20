@@ -16,7 +16,7 @@ type Filter =
   | "nation-branding"
   | "threat-intelligence";
 
-type CardAction = { label: string; href: string; variant?: "primary" | "secondary" | "tertiary" };
+type CardAction = { label: string; href: string; variant?: "primary" | "secondary" | "tertiary"; sameTab?: boolean };
 type Card = {
   id: string;
   filter: Exclude<Filter, "all">;
@@ -32,6 +32,7 @@ type Card = {
   overlayBg?: string;
   subtitle?: string;
   actions?: CardAction[];
+  sameTab?: boolean;
 };
 
 const InsightsResources = () => {
@@ -106,6 +107,27 @@ const InsightsResources = () => {
         { label: t("Accès complet →", "Full access →"), href: "/acces-premium", variant: "tertiary" },
       ],
     },
+    {
+      id: "livre-blanc-esante",
+      filter: "intelligence-economique",
+      category: t("LIVRE BLANC", "WHITE PAPER"),
+      date: t("AVR 2022", "APR 2022"),
+      title: t(
+        "1er Livre Blanc sur la e-Santé au Maroc",
+        "Morocco's 1st e-Health White Paper"
+      ),
+      summary: t(
+        "Benchmark mondial · 2 enquêtes digitales · Préfacé par le DG de l'OMS et 3 ministres marocains. Impact direct : appel d'offres 190M MAD.",
+        "Global benchmark · 2 digital surveys · Prefaced by WHO Director-General and 3 Moroccan ministers. Direct impact: MAD 190M tender."
+      ),
+      href: "/insights/esante",
+      sameTab: true,
+      image: "/Healthcare-1.png",
+      overlayImage: "/Healthcare-2.png",
+      actions: [
+        { label: t("EN SAVOIR PLUS →", "LEARN MORE →"), href: "/insights/esante", variant: "primary", sameTab: true },
+      ],
+    },
   ];
 
   const visible = useMemo(
@@ -114,6 +136,10 @@ const InsightsResources = () => {
   );
 
   const openCard = (card: Card) => {
+    if (card.sameTab) {
+      window.location.href = card.href;
+      return;
+    }
     const sep = card.href.includes("?") ? "&" : "?";
     const url = `${card.href}${sep}lang=${lang}`;
     window.open(url, "_blank", "noopener,noreferrer");
@@ -422,8 +448,11 @@ const InsightsResources = () => {
                           : { ...base, background: "#C9A84C", color: "#0D1B2A" };
                       const isHtml = /\.html?(\?|$)/i.test(a.href);
                       const href = isHtml ? `${a.href}${a.href.includes("?") ? "&" : "?"}lang=${lang}` : a.href;
+                      const targetProps = a.sameTab
+                        ? {}
+                        : { target: "_blank", rel: "noopener noreferrer" };
                       return (
-                        <a key={a.label} href={href} target="_blank" rel="noopener noreferrer"
+                        <a key={a.label} href={href} {...targetProps}
                           onClick={(e) => e.stopPropagation()} style={style}>
                           {a.label}
                         </a>

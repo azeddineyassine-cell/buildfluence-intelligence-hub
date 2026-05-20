@@ -16,6 +16,8 @@ import PourquoiBuildfluence from "./pages/PourquoiBuildfluence";
 import SuccessStories from "./pages/SuccessStories";
 import InsightsResources from "./pages/InsightsResources";
 import Barometre from "./pages/Barometre";
+import InsightsEsante from "./pages/InsightsEsante";
+import SuccessStoryEsante from "./pages/SuccessStoryEsante";
 
 // Situation pages
 import DeciderSansVisibilite from "./pages/situations/DeciderSansVisibilite";
@@ -65,6 +67,8 @@ const App = () => (
             <Route path="/success-stories" element={<SuccessStories />} />
             <Route path="/insights-resources" element={<InsightsResources />} />
             <Route path="/barometre" element={<Barometre />} />
+            <Route path="/insights/esante" element={<InsightsEsante />} />
+            <Route path="/success-stories/esante" element={<SuccessStoryEsante />} />
 
             {/* Situations */}
             <Route path="/situations/decider-sans-visibilite" element={<DeciderSansVisibilite />} />

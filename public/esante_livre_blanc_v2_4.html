@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Livre Blanc e-Santé au Maroc · Buildfluence</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #0D1B2A;
+  --gold: #C9A84C;
+  --gold-light: rgba(201,168,76,.1);
+  --gold-border: rgba(201,168,76,.28);
+  --ink: #2C2C2A;
+  --ink-light: #5F5E5A;
+  --ink-faint: #888780;
+  --paper: #FAF6ED;
+  --paper-alt: #F2EDD8;
+  --paper-dark: #E8E0C8;
+  --rule: rgba(217,207,188,.55);
+  --white: #FFFDF7;
+  --teal: #0F6E56;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Cormorant Garamond',serif;background:var(--paper);color:var(--ink);line-height:1.7}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:100;background:var(--navy);display:flex;align-items:center;justify-content:space-between;padding:0 48px;height:56px;border-bottom:1px solid rgba(201,168,76,.2)}
+.nav-brand{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--gold)}
+.nav-links{display:flex;gap:28px}
+.nav-link{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.55);text-decoration:none;transition:color .2s}
+.nav-link:hover{color:var(--gold)}
+.nav-cta{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--navy);background:var(--gold);padding:8px 20px;border-radius:2px;text-decoration:none}
+
+/* HERO */
+.hero{position:relative;overflow:hidden;background:var(--paper-alt);padding:80px 60px 70px;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;border-bottom:1px solid var(--rule)}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 80% 50%,rgba(201,168,76,.07) 0%,transparent 70%),radial-gradient(ellipse 40% 60% at 10% 20%,rgba(15,110,86,.05) 0%,transparent 60%);pointer-events:none}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);border:1px solid var(--gold-border);background:var(--gold-light);padding:5px 14px;border-radius:20px;margin-bottom:22px}
+.hero-eyebrow{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--teal);margin-bottom:18px}
+.hero-title{font-family:'Playfair Display',serif;font-size:clamp(30px,3.8vw,50px);font-weight:900;line-height:1.08;color:var(--navy);margin-bottom:10px}
+.hero-title em{font-style:italic;color:var(--gold)}
+.hero-sub{font-size:16px;font-style:italic;color:var(--ink-light);line-height:1.7;margin-bottom:32px;max-width:480px}
+.hero-ctas{display:flex;gap:14px;flex-wrap:wrap}
+.btn-primary{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;background:var(--navy);color:var(--white);padding:13px 28px;border-radius:2px;text-decoration:none;display:inline-block;transition:opacity .2s}
+.btn-primary:hover{opacity:.82}
+.btn-outline{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;border:1px solid rgba(44,44,42,.3);color:var(--ink);padding:13px 28px;border-radius:2px;text-decoration:none;display:inline-block;transition:all .2s}
+.btn-outline:hover{border-color:var(--gold);color:var(--gold)}
+
+/* Hero stats */
+.hero-stats{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.hstat{background:var(--white);border:1px solid var(--rule);border-top:3px solid var(--gold);border-radius:4px;padding:20px 18px}
+.hstat.teal{border-top-color:var(--teal)}
+.hstat.navy{border-top-color:var(--navy)}
+.hstat.dark{border-top-color:#854F0B}
+.hstat-lbl{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:8px}
+.hstat-val{font-family:'Playfair Display',serif;font-size:32px;font-weight:900;color:var(--navy);line-height:1;margin-bottom:4px}
+.hstat-val.gold{color:var(--gold)}
+.hstat-val.teal{color:var(--teal)}
+.hstat-sub{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--ink-faint);letter-spacing:.08em;line-height:1.4}
+
+/* SECTION BASE */
+.section{padding:72px 60px}
+.section.alt{background:var(--paper-alt)}
+.section.white{background:var(--white)}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:14px;display:flex;align-items:center;gap:10px}
+.eyebrow::before{content:'';display:inline-block;width:28px;height:1px;background:var(--gold)}
+.section-title{font-family:'Playfair Display',serif;font-size:clamp(26px,3vw,40px);font-weight:700;line-height:1.15;color:var(--navy);margin-bottom:14px}
+.section-title em{font-style:italic;color:var(--gold)}
+.section-lead{font-size:17px;font-style:italic;color:var(--ink-light);max-width:700px;margin-bottom:40px;line-height:1.7}
+
+/* AUTHORITIES — photos N&B */
+.auth-section{background:var(--paper-dark);border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);padding:52px 60px}
+.auth-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:36px}
+.auth-card{background:var(--white);border:1px solid var(--rule);border-radius:4px;padding:24px 20px;text-align:center}
+.auth-photo{width:80px;height:80px;border-radius:50%;overflow:hidden;margin:0 auto 14px;border:2px solid var(--gold-border);filter:grayscale(100%) contrast(1.05)}
+.auth-photo img{width:100%;height:100%;object-fit:cover}
+.auth-name{font-family:'Playfair Display',serif;font-size:15px;font-weight:700;color:var(--navy);margin-bottom:4px;line-height:1.2}
+.auth-title{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:8px;line-height:1.4}
+.auth-role{font-size:13px;color:var(--ink-light);font-style:italic;line-height:1.5}
+
+/* VERDICT */
+.verdict{background:var(--paper-dark);border-left:3px solid var(--gold);border-radius:0 4px 4px 0;padding:22px 28px;margin-bottom:40px}
+.verdict-label{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
+.verdict-text{font-size:15px;color:var(--ink);line-height:1.75}
+.verdict-text strong{color:var(--navy)}
+.verdict-text em{color:var(--gold);font-style:italic}
+
+/* KPI */
+.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin:0 0 40px}
+.kpi{background:var(--white);border:1px solid var(--rule);border-radius:4px;padding:22px 16px;text-align:center}
+.kpi-val{font-family:'Playfair Display',serif;font-size:34px;font-weight:900;color:var(--navy);line-height:1;margin-bottom:6px}
+.kpi-val.gold{color:var(--gold)}
+.kpi-val.teal{color:var(--teal)}
+.kpi-lbl{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-faint);line-height:1.5}
+
+/* CONTRIBUTION */
+.contrib-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:32px}
+.contrib-card{background:var(--white);border:1px solid var(--rule);border-top:3px solid var(--navy);border-radius:4px;padding:24px 26px}
+.contrib-card.gold-top{border-top-color:var(--gold)}
+.contrib-num{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
+.contrib-title{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--navy);margin-bottom:10px}
+.contrib-body{font-size:14px;color:var(--ink-light);line-height:1.7}
+
+/* ACCORDION TIMELINE */
+.acc-wrap{margin-top:40px}
+.acc-item{border:1px solid var(--rule);border-radius:4px;margin-bottom:12px;overflow:hidden;background:var(--white)}
+.acc-item.active{border-color:var(--gold)}
+.acc-header{display:flex;align-items:center;gap:16px;padding:18px 24px;cursor:pointer;transition:background .2s;user-select:none}
+.acc-header:hover{background:var(--paper)}
+.acc-num{width:32px;height:32px;border-radius:50%;background:var(--gold-light);border:1px solid var(--gold-border);display:flex;align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:600;color:var(--gold);flex-shrink:0}
+.acc-item.active .acc-num{background:var(--gold);color:var(--navy)}
+.acc-date{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-faint);min-width:80px}
+.acc-title{flex:1;font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:var(--navy);line-height:1.3}
+.acc-tags{display:flex;gap:8px;flex-wrap:wrap}
+.acc-tag{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:4px 10px;border-radius:20px}
+.acc-tag.gold{color:#854F0B;background:var(--gold-light);border:1px solid rgba(201,168,76,.3)}
+.acc-tag.teal{color:var(--teal);background:rgba(15,110,86,.08);border:1px solid rgba(15,110,86,.2)}
+.acc-tag.red{color:#A32D2D;background:rgba(163,45,45,.07);border:1px solid rgba(163,45,45,.2)}
+.acc-chevron{font-size:18px;color:var(--ink-faint);transition:transform .3s;flex-shrink:0}
+.acc-item.active .acc-chevron{transform:rotate(180deg);color:var(--gold)}
+.acc-body{display:none;padding:0 24px 22px 72px;font-size:15px;color:var(--ink);line-height:1.75}
+.acc-item.active .acc-body{display:block}
+.acc-body strong{color:var(--navy)}
+.acc-body em{color:var(--gold);font-style:italic}
+
+/* RESULTS CARDS */
+.result-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:40px}
+.result-card{background:var(--white);border:1px solid var(--rule);border-top:3px solid var(--gold);border-radius:4px;padding:24px 22px}
+.result-num-lbl{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:6px}
+.result-val{font-family:'Playfair Display',serif;font-size:28px;font-weight:900;color:var(--navy);margin-bottom:6px;line-height:1}
+.result-val.gold{color:var(--gold)}
+.result-desc{font-size:14px;color:var(--ink-light);line-height:1.65}
+.result-note{background:var(--paper-alt);border:1px solid var(--rule);border-left:3px solid var(--teal);border-radius:0 4px 4px 0;padding:18px 22px;margin-top:0;font-size:14px;color:var(--ink);line-height:1.7}
+.result-note strong{color:var(--navy)}
+
+/* FLIP BOOK */
+.flipbook-wrap{border-radius:6px;overflow:hidden;border:1px solid var(--rule);margin-top:36px}
+.flipbook-header{background:var(--navy);padding:14px 24px;display:flex;align-items:center;justify-content:space-between}
+.flipbook-title{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.55)}
+.flipbook-open{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);text-decoration:none;border:1px solid var(--gold-border);padding:6px 16px;border-radius:2px}
+.flipbook-iframe{width:100%;height:680px;border:none;display:block}
+
+/* PERSO */
+.perso-section{background:var(--paper-alt);padding:72px 60px}
+.perso-quote{font-size:17px;font-style:italic;color:var(--ink);line-height:1.75;margin-bottom:32px;padding:22px 28px;background:var(--white);border-left:3px solid var(--gold);border-radius:0 4px 4px 0}
+.perso-quote cite{display:block;margin-top:12px;font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--gold);letter-spacing:.12em;font-style:normal}
+.perso-items{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.perso-item{background:var(--white);border:1px solid var(--rule);border-left:3px solid var(--gold);border-radius:0 4px 4px 0;padding:18px 22px}
+.perso-item-icon{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+.perso-item-text{font-size:14px;color:var(--ink-light);line-height:1.65}
+.perso-item-text strong{color:var(--navy)}
+
+/* CTA */
+.cta-section{background:var(--paper-dark);text-align:center;padding:80px 60px;border-top:1px solid var(--rule)}
+.cta-eyebrow{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
+.cta-title{font-family:'Playfair Display',serif;font-size:34px;font-weight:900;color:var(--navy);margin-bottom:10px;line-height:1.2}
+.cta-title em{font-style:italic;color:var(--gold)}
+.cta-sub{font-size:17px;font-style:italic;color:var(--ink-light);margin-bottom:32px;max-width:520px;margin-left:auto;margin-right:auto}
+.cta-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.btn-dark{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;background:var(--navy);color:var(--white);padding:13px 28px;border-radius:2px;text-decoration:none;display:inline-block}
+.btn-gold{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;background:var(--gold);color:var(--navy);padding:13px 28px;border-radius:2px;text-decoration:none;display:inline-block}
+
+/* FOOTER */
+footer{background:var(--navy);padding:28px 60px;display:flex;align-items:center;justify-content:space-between;border-top:1px solid rgba(201,168,76,.15)}
+.footer-brand{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
+.footer-copy{font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(255,255,255,.3);letter-spacing:.08em}
+
+@media(max-width:900px){
+  .hero{grid-template-columns:1fr;padding:48px 24px}
+  .hero-stats{grid-template-columns:1fr 1fr}
+  .section{padding:48px 24px}
+  .contrib-grid,.perso-items,.result-grid{grid-template-columns:1fr}
+  .kpi-grid{grid-template-columns:1fr 1fr}
+  .auth-grid{grid-template-columns:1fr 1fr}
+  nav{padding:0 20px}
+  .nav-links{display:none}
+  footer{flex-direction:column;gap:10px;text-align:center;padding:20px 24px}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-brand">Buildfluence · Intelligence</div>
+  <div class="nav-links">
+    <a href="#apercu" class="nav-link">Aperçu</a>
+    <a href="#prefaces" class="nav-link">Préfaces</a>
+    <a href="#contribution" class="nav-link">Contribution</a>
+    <a href="#impact" class="nav-link">Impact</a>
+    <a href="#document" class="nav-link">Document</a>
+  </div>
+  <a href="#contact" class="nav-cta">Échange Stratégique</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div style="position:relative;z-index:2">
+    <div class="hero-badge">1er Livre Blanc national · e-Santé au Maroc</div>
+    <div class="hero-eyebrow">Buildfluence · UM5 · UM6SS · 2021 / 2022</div>
+    <h1 class="hero-title">La e-Santé au Maroc :<br><em>Réalités, enjeux<br>et leviers.</em></h1>
+    <p class="hero-sub">Benchmark mondial, 2 enquêtes digitales, des entretiens avec les professionnels et praticiens de la santé, une initiative qui a changé le paysage de la santé numérique au Maroc.</p>
+    <div class="hero-ctas">
+      <a href="#document" class="btn-primary">Consulter le Livre Blanc</a>
+      <a href="#impact" class="btn-outline">Voir l'impact</a>
+    </div>
+  </div>
+  <div>
+    <div class="hero-stats">
+      <div class="hstat">
+        <div class="hstat-lbl">Pays analysés</div>
+        <div class="hstat-val" id="c1">0</div>
+        <div class="hstat-sub">Benchmark mondial e-santé</div>
+      </div>
+      <div class="hstat teal">
+        <div class="hstat-lbl">Enquêtes digitales</div>
+        <div class="hstat-val teal" id="c2">0</div>
+        <div class="hstat-sub">Qualitative et quantitative</div>
+      </div>
+      <div class="hstat navy">
+        <div class="hstat-lbl">Appel d'offres généré</div>
+        <div class="hstat-val gold" style="font-size:26px" id="c3">0M</div>
+        <div class="hstat-sub">MAD · Ministère de la Santé 2024</div>
+      </div>
+      <div class="hstat dark">
+        <div class="hstat-lbl">Hautes autorités</div>
+        <div class="hstat-val" id="c4">0</div>
+        <div class="hstat-sub">OMS + 3 Ministres marocains</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRÉFACES & INTERVENTIONS -->
+<section class="auth-section" id="prefaces">
+  <div class="eyebrow">Préfaces &amp; Interventions</div>
+  <h2 class="section-title">Des voix <em>institutionnelles</em> au plus haut niveau</h2>
+  <div class="auth-grid">
+    <div class="auth-card">
+      <div class="auth-photo"><img src="data:image/png;base64,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" alt="Dr Tedros Adhanom Ghebreyesus"></div>
+      <div class="auth-name">Dr Tedros Adhanom Ghebreyesus</div>
+      <div class="auth-title">Préface · Version anglaise</div>
+      <div class="auth-role">Directeur Général de l'Organisation Mondiale de la Santé (OMS)</div>
+    </div>
+    <div class="auth-card">
+      <div class="auth-photo"><img src="data:image/png;base64,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" alt="Khalid Ait Taleb"></div>
+      <div class="auth-name">Khalid Ait Taleb</div>
+      <div class="auth-title">Préface &amp; Intervention</div>
+      <div class="auth-role">Ministre de la Santé et de la Protection Sociale</div>
+    </div>
+    <div class="auth-card">
+      <div class="auth-photo"><img src="data:image/png;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/2wBDAQUFBQcGBw4ICA4eFBEUHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCACTAIQDASIAAhEBAxEB/8QAHAAAAAcBAQAAAAAAAAAAAAAAAAIDBAUGBwEI/8QAOBAAAgEDAwIEAwYEBgMAAAAAAQIDAAQRBRIhBjETQVFhByKBFDJCcZGhCBUjwRYkUmKx0TRy8f/EABoBAAIDAQEAAAAAAAAAAAAAAAAEAgMFAQb/xAApEQADAAICAgEDAgcAAAAAAAAAAQIDEQQhEjFBBRNRMmEUIlJxgbHB/9oADAMBAAIRAxEAPwBdHyacBuKaKCDilBuIPNWERUsKG+m+TXQ5oAc7vloCZVHzED3NQd9qbl/CtyQTwCBkmupp95c7WcSeuCaqyZpj2XY8F5PRL/a4WRjuBx5CirOruEVSWPYUrBor5B27McY9ac22nSwOQE3Ajj1pV82RxfT7+Ro0mBh12k8gHuaOu1gMEGnP8ul+XKbsZzny9qO2jSSQlo8xOTUp5k/JXXBv4Guz0ruw96aypf2MxFwjGLPcc4pxBcxygbWHtTUZJtbQreOoeqQfB7VwKc0rxiuDvUysIV4rm2liKGAeKAENp8qFL7BQoOjLZnmjqARXNwNdJGOK6cE3X0pjfEvItpCT4rnnHkKkCGxhRlj2HrXNOtViYyNkyN94nypfk5ftz+4xxsH3b0H0zTILchmUNJ2z6flU5FEoAAAWmluQ0g44/YVLwKpUHAYVhZbqntno8OOYWkKQxjYM4JpSNBkHbyKUVVOB+lAf0wScEeVVjS1oMVjHJGfXinECK4GCPpTUMgUDPfnGaVT5DkEAH3qUsps7c20UysjKpHbFULqjQLrTZfttnIDFv3OhOCB7Vf8AfjzGaT1BEubRo3AORimcV1D2hPPjm1plC02+S6gLj8J2n86eKy981EPp0mmak/gt/QcklM8g+tPA/mDkVtY78pTMDJHhTQ8MgFF8QCm4cGgDmplYsZuaFJYHrQoAbhq6HNcC4GaK3NADqJmCiYL2OATRhJx50nNJ4OlKeTluMUSEt4QOCxPkKyebe8mja+nwlj2Sltg4IyP+Kl7RiVAJAFQUb7EUZwQakrOSPjbyMc+tINGknok0fLHBziumUZIJx6U3VTuOxe9JDeue59qg0XJjougPzZYDzAowuoXOBnPpTFpJihCI2fzpAeMhDlDj8+1dkiyZhk3Ej08qWQ5znyqIilbAL5yadNd+EmfbPNMSxayJ6hsJGt5blBl/wqO59f7VCQAtApxg45B8quSTW9xpcsmN5yc48uBiqdbuWV8gjDkcjGa1uM9yYXKWrBsYV3tTgYKUXw+fKmRURJb0oU42L6UKAGgyRiht9aCnnvR+CaAC6gzHSM7tvhvgD1pTT8rEC3BPbJ7UlqMkYsfCfglwQfLvTXWb82WkvImHc9lz3rI5st5UbXAtLE9/BPW1mztvwcVL2kATgheKw+Dqfq2OYvZs8y5OFPb6U7j+K2r2Eog1jTJEY/i24zVT4z+GMzy5+Vo2p7iG3xkgk8UojQyYcDGe9Zpo3XGmamg2b1kP4GHerTPfyQ6Y88PJC5AzS1S10x2bmltFiWS2zyf1rlxNYRLmW4hjA7lnArD9f6q6kumMVgBHyR/uNRVh051FqoE2q61DbZP3ZZwD+5q+MEvtsVyclrqZN1iv9GvJvDtdTtpGB5VZATTm5iBAIIbyAFYZJosulFWtdWtZ5Aedtwv/AHWldL6zu0n/ADlwm6NeTuzU6xKVtFM5nXVFt0m1SS3vY/ECBVBHtVevdqy7doUjjHmfel7DW7uUuuk6fLcKx2ySnhABz386i2eIStHd30Qv5SziBecD0z2p7BSxylXRm54rLTcLehYP5Chv5702Dc80bg806Ii5ehSQbihQA0R+aU8XHmP1ogXB70Upz3oOCF9c299DfaZJEUkWHdCScBm8ufLms/0jU+qtaS9+2WcVrFp8ngvEse+Qn61fruJEl+0N3C4qL0nbba5qaSKGF0EnTJ78bT+9ZV1U1Utba9GzETURUvSfv+5Q9Q1rUX1OLTtJlu2Ykb2wQE+gqO1SXqU6qba9jupIFYgSspKsM8HPpWszdPxSkTKqo2c7lHOajdT6L1HUMYuJAnmTxiq1yEutFr4rfe2ZvZa3q2hx/wA1WytbgQyAMrLgjnvU1qvxO6p1CO3gj0K3sIrlwiyshIOfPkYqxXPSNmk+ldNRHxJLqdZbjjkRIcsT+fIrWeq+kdO1vpmXTUgjhYRg27KvKMPu11ZIem5RNYMjVeNNaPPGvWV1aaikV1eytGz7WYnaD68dqbXHStxe6001lMkWnEjBaf5sY5OO9ajZaNZdVabJa3ce3ULRzDeQY+aKReP0PcHzzSlp8P5rUKFMsiA8Lk8fSoLkXj6YPjTk7Xoo9l01qFrJhrePVbBuwPJA9c1MfCvpS2teuNbn8GRYoY4lSI52rvG4j37VoEVjBp9s02ozR2kCDlpmCgfU0TpGIRrqWropWPULjfCCMExKiop+pVj+RonK3NNHKwTNJMmXle3DwwbY1bCg9gKqN1aNH1UhwWxGzM3qeBUl1SrXWiTuJCjRSK5we+Mj+9csYnW3hknO6VowCT6ZOK5hTyZJksyVOLDd/nr/AIdC81xwV86cYXGaIwBrcPODcFjQpfbQrgDMk55rqnmjFc1xVwakcCzosiFH+6agJIlupUcO8U0Z+SRTgrng/T2qygA96rqDw7qSM+ZrO5saatGpwMm04fontNg1YBZItQgJ9JIBTHqvWOodNsWb+ZW0ZwfuwLn96e2t4kEAYnBC5BqgdSTXnUmrLpVqzOAczN5KtZ6pvo1lKS2/9l3+GMDNYw67dySXF/fLlppTkhM8Aeg9q0+G7RhsyOByKxrU9auunNKsrK2sZrmKFVj/AKXJUAU1h63lhLylpQDztIO79Ksap9nZyzHRYPi9o+EuepbG1IuIdvivF8rMg9SO9N+kJ9N1nTIpi93KGAyGu2P96Y6b1nrmuQXmmzaY8NnIhQSP3Kn1qqxWGp9L6kbqy3vZ/jRfw+9dqa0Qm4b2bTpug9PqBMdOgaTuHddxH1NE1FiJiFbIHb8qg+nOoo7y3DrLnKjnPen80wlb5eCfLzqny8l2dpKX0OrQ25R/tCJJGw5Vhxmo+SYu5Y/Qegpw0nhwlQOSMUwbIrS4UdOjH52R7Uf5Fy4x3rgbmmj5zXVYjzp8zx3n3oU3yaFGgOgV0jim/i+hpRZQe9BwUUVAa2PA1AOB97kVOq65qK6nQNFFMDgKcE0vyp8sbGuJXjlX7kRfX0gtnCt2B7Ci9NNBpmmrdXDKlzeNvbPfHkP0pvA4Cspwefmqt9SrfarqEVppsuzYRl/9ArJhfzG3VanZpM8sM0e8gNkDk1DyabJPcieO2ZuSQwGRTHQOmdXljH8yvUnODhmH6d+KlI+jb7wFY3LxluCokG3H0pjT/JWpb+GStg8CWsaz+GjqMEE9vpUN1Bq9tp+pRKxBWTjBOQaX/wACShz9ovsRE5CxjPHuarXU/Q9gqvNazSyToR8zSE4/IVGp/LJPc+kOo0Gn61usiTaTjxVUdkYnkD28/rVxt7nxbiFBy2z1rPempyiSx3LMZEbaPb0qy6VeEXZcyAhVA4NLPfky3pymW2V18Uov4QKSLAVUb/rjTdM11rDURLGXVXWQr8uDkD/irPBNFdW6XEEiyRuMqyng1t8fHUYls8/ybV5XoUJBoDbnIojA+VI7mBxzVxQh3kUKbh/WhQARR6V0hua4pNKIfWg4JglaLcwi5t2ifs37e9L4BPaukbcnyrmkwXRnt08lndywSKA6Haf+6N0vuEsk74Du+TS/UE6apqN/JaRK8enhVllXnOaaaU6CU7XIbdxg96y8+F470za4+f7k7LDLqd3aI7W28bu23nFMJde1iU/+bKvP3QeandHsrSdS07k8/dpxLpelqwZYCWBxhm4xS+0h2U9bIfTLvUbqQR+M8h7De55qRvoZ44xFNwdvlU5axaWFCNbxDHtg1HavPAqlFY7UGck5x7VzYWtGdXsbQalMwU/N2x61YuhdKn1bWrTTVyDO/wDUPovnUDdT/aL7avzfOcADvW8fBvpuPSrIancxj7ZMPlB/AvpT3A4rz5e/S9mfzOR9rH+7M3/jP6RGn3HTnUWnQH7MLU2EwUfdKHcpP5hm/Sqd8K9bNtaRWly58CQ4X/aa9J/HSSyn+GV8l+Ebbh03eTD/AO15O0U4gAAwM5FeknCntP5MB20jb8AjiiNGMVWeltfQQrZ3snIGI5D6ehqzMQ2CpBB888Vn5MdY3pl00qW0EMWTnNCu7iOKFQJ6ExHzTLU9X0/TR/mrlVb/AEA5J+lUTV+sdRut0ds32aI8fL3P1qtzTs5LO5du+Sc03HEb7sorJ+C9aj16kYK2Vpk+TSf9VUda6k1XUc+NdOqH8CHaP2qLLBvmzmkZJQrBnXKA5I9aZnFEekQdNmsfw2WUWp23U1vdKHjmRUYH3qD6v6eu+nNae3LMYs7o37ZFWv8Ahhu1vLnqScRLF4sysEHZR6VefiN03DrunY5S4i+aJx3z6flVWfiLk4tr2i7BmeK9fBjFhrj2kgeXgebZ4qRfqyNk5ZW54NQN5Zm3le3ut0M6cMjdj+VQlwkEbkhFc15nJhSemuzdx8ikvfRcj1PGvLyKo8jnkiou51i4ujJJuIR+APaoGDwA4REMs7/ciUZJrSOiuliojvtUjDS90hxwn5+ppzifT7zvSWl+SnPzvD2x38L+lGa6TV9TjwCcwxsP3Nblp7CKNc8VWdDi3AHb93yqX1C4a0spJj8oVePavTYuNGCFjgxcuWsteVGU/wATvUokjsen7eQ5kJklwfIVk+mqFjUEcLXevNUbXOsry7Z9yRt4aEHyHf8AfNF05wR3GfSheyqiQ3kHcCcU+03Vbm0kzFM4U+WeP0qMuHIjx60nasdm7uM1JpP2cRerfqdfCHixBn8yDihVQDnHehVP8Ni/pJedEA1FABoUKmiPyNtqqWKjGTSV2cRsR6GhQqDBmzfwrKo07VXAG5pgCfbFbPeKpBBHc4oUKtw/pRKvZkfxLtbabVlt5YI2jYEn5fmz/wC3cfrWTdTQxw6lbwRBljdwrAMeRQoUtyscVttLYxjppdM2LpDQNGtLSB7fTbdHZcs+3LE+5PNW22ghVuI1HNChWjjSULQvXbZYNDVRKcADiov4nyyR6BdFHKkQsRj8qFCoP9QI8n23I3Hkkkk0/tyVkUqcHNChVEnGP7rllB5G3NQelzzS6rKJJGYJwozwPpQoUX+qQXpk/uI7GhQoVYRP/9k=" alt="Abdellatif Miraoui"></div>
+      <div class="auth-name">Abdellatif Miraoui</div>
+      <div class="auth-title">Préface &amp; Intervention</div>
+      <div class="auth-role">Ministre de l'Enseignement Supérieur, de la Recherche Scientifique et de l'Innovation</div>
+    </div>
+    <div class="auth-card">
+      <div class="auth-photo"><img src="data:image/png;base64,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" alt="Ghita Mezzour"></div>
+      <div class="auth-name">Ghita Mezzour</div>
+      <div class="auth-title">Intervention</div>
+      <div class="auth-role">Ministre Déléguée chargée de la Transition Numérique et de la Réforme de l'Administration</div>
+    </div>
+  </div>
+</section>
+
+<!-- APERÇU -->
+<section class="section white" id="apercu">
+  <div class="eyebrow">01 / Aperçu</div>
+  <h2 class="section-title">Une initiative <em>inédite</em> à l'échelle nationale</h2>
+  <p class="section-lead">Le Maroc ne disposait d'aucune cartographie structurée de son écosystème e-santé. Ce livre blanc, premier du genre au Maroc, a comblé ce vide stratégique.</p>
+
+  <div class="verdict">
+    <div class="verdict-label">Verdict stratégique</div>
+    <div class="verdict-text">
+      Le Maroc possède <strong>des capacités pour exceller dans les technologies de la santé</strong>, mais ne bénéficiait pas d'un classement à l'image de ces performances. Ce paradoxe démontré, capital humain au-dessus de la moyenne régionale (UN-EGDI), innovation supérieure aux attentes (WIPO-GII), a conduit à une <em>recommandation centrale : passer d'une logique de présence à une stratégie de déploiement.</em>
+    </div>
+  </div>
+
+  <div class="kpi-grid">
+    <div class="kpi"><div class="kpi-val" id="k1">0</div><div class="kpi-lbl">Pays analysés · Benchmark mondial</div></div>
+    <div class="kpi"><div class="kpi-val teal" id="k2">0</div><div class="kpi-lbl">Enquêtes digitales · Quali &amp; Quanti</div></div>
+    <div class="kpi"><div class="kpi-val" id="k3">0</div><div class="kpi-lbl">Ministres préfaciers &amp; intervenants</div></div>
+    <div class="kpi"><div class="kpi-val gold" id="k4">0M</div><div class="kpi-lbl">MAD · Appel d'offres résultant 2024</div></div>
+  </div>
+</section>
+
+<!-- CONTRIBUTION -->
+<section class="section alt" id="contribution">
+  <div class="eyebrow">02 / Contributions Buildfluence</div>
+  <h2 class="section-title">Les piliers <em>intellectuels</em> et méthodologiques</h2>
+  <p class="section-lead">Les parties structurantes du Livre Blanc conçues et réalisées par Buildfluence.</p>
+
+  <div class="perso-quote">
+    « Buildfluence était une force de proposition tout au long de l'élaboration du livre blanc de la e-santé au Maroc en mettant en place une méthodologie en mode projet d'intelligence stratégique. Le but est d'arriver au-delà des recommandations à une déduction principale permettant de décliner une Roadmap pragmatique. »
+    <cite>Le Matin, Avril 2022</cite>
+  </div>
+
+  <div class="perso-items">
+    <div class="perso-item">
+      <div class="perso-item-icon">Data Visualisations</div>
+      <div class="perso-item-text">Conception et réalisation de <strong>l'intégralité des data visualisations</strong> du document : visualisations de données, cartographies et schémas conceptuels.</div>
+    </div>
+    <div class="perso-item">
+      <div class="perso-item-icon">Méthodologie</div>
+      <div class="perso-item-text">Élaboration de la <strong>méthodologie en mode projet</strong> d'intelligence stratégique structurant l'ensemble de la démarche de A à Z.</div>
+    </div>
+    <div class="perso-item">
+      <div class="perso-item-icon">Enquêtes digitales</div>
+      <div class="perso-item-text"><strong>Conception des questionnaires</strong> des deux enquêtes (qualitative et quantitative) et analyse complète des données collectées.</div>
+    </div>
+    <div class="perso-item">
+      <div class="perso-item-icon">Étude de marché mondial</div>
+      <div class="perso-item-text">Réalisation de l'<strong>étude de marché mondial de la santé digitale</strong> : benchmark 193 pays, indices UN-EGDI et WIPO-GII.</div>
+    </div>
+  </div>
+</section>
+
+<!-- IMPACT ACCORDION -->
+<section class="section white" id="impact">
+  <div class="eyebrow">03 / Impact &amp; Résultats</div>
+  <h2 class="section-title">Des recommandations qui ont<br><em>changé la politique publique</em></h2>
+  <p class="section-lead">Du Livre Blanc à l'appel d'offres de 190 millions MAD, un impact direct et mesurable sur la décision publique marocaine.</p>
+
+  <div class="result-grid">
+    <div class="result-card">
+      <div class="result-num-lbl">Résultat 01</div>
+      <div class="result-val gold">1er</div>
+      <div class="result-desc">Livre Blanc e-Santé au Maroc. Initiative inédite au niveau national, préfacée par le DG de l'OMS et trois ministres marocains.</div>
+    </div>
+    <div class="result-card">
+      <div class="result-num-lbl">Résultat 02</div>
+      <div class="result-val">190M <span style="font-size:16px;color:var(--ink-faint)">MAD</span></div>
+      <div class="result-desc">Appel d'offres du Ministère de la Santé 2024 pour un système de santé intelligent incluant le Dossier Patient Partagé national 360°.</div>
+    </div>
+  </div>
+  <div class="result-note" style="margin-bottom:40px">
+    <strong>★ Impact direct :</strong> Les recommandations du Livre Blanc ont directement alimenté l'appel d'offres 2024 du Ministère de la Santé pour la mise en place d'un système de santé intelligent incluant le Dossier Patient Partagé national 360°.
+  </div>
+
+  <!-- ACCORDION TIMELINE -->
+  <div class="acc-wrap">
+
+    <div class="acc-item active">
+      <div class="acc-header" onclick="toggle(this)">
+        <div class="acc-num">01</div>
+        <div class="acc-date">2021</div>
+        <div class="acc-title">Lancement du chantier</div>
+        <div class="acc-tags"><span class="acc-tag teal">Démarrage</span></div>
+        <div class="acc-chevron">▾</div>
+      </div>
+      <div class="acc-body">
+        Lancement du chantier en partenariat avec l'<strong>Université Mohammed V de Rabat et UM6SS</strong>. Mise en place de la méthodologie en mode projet d'intelligence stratégique, conception des deux enquêtes digitales et lancement de l'étude de marché mondial.
+      </div>
+    </div>
+
+    <div class="acc-item">
+      <div class="acc-header" onclick="toggle(this)">
+        <div class="acc-num">02</div>
+        <div class="acc-date">Avril 2022</div>
+        <div class="acc-title">Présentation officielle à Rabat</div>
+        <div class="acc-tags"><span class="acc-tag gold">Impact institutionnel</span></div>
+        <div class="acc-chevron">▾</div>
+      </div>
+      <div class="acc-body">
+        Présentation officielle du Livre Blanc à Rabat. Préfaces du <strong>Dr Tedros Adhanom Ghebreyesus</strong> (DG OMS) et de 3 ministres marocains. Signature de convention de partenariat pour le Centre d'Innovation e-Santé de l'UM5. Le document est immédiatement reconnu comme <em>référence nationale</em> par les institutions du secteur.
+      </div>
+    </div>
+
+    <div class="acc-item">
+      <div class="acc-header" onclick="toggle(this)">
+        <div class="acc-num">03</div>
+        <div class="acc-date">2022 / 2023</div>
+        <div class="acc-title">Adoption comme référence nationale</div>
+        <div class="acc-tags"><span class="acc-tag teal">Référence sectorielle</span></div>
+        <div class="acc-chevron">▾</div>
+      </div>
+      <div class="acc-body">
+        Le Livre Blanc devient <em>référence nationale</em> pour les décideurs du secteur de la santé numérique. Les recommandations sur le Dossier Patient Partagé et l'interopérabilité du système de santé sont reprises par les institutions publiques et les acteurs de l'écosystème.
+      </div>
+    </div>
+
+    <div class="acc-item">
+      <div class="acc-header" onclick="toggle(this)">
+        <div class="acc-num">04</div>
+        <div class="acc-date">Juillet 2024</div>
+        <div class="acc-title">Appel d'offres 190M MAD · Ministère de la Santé</div>
+        <div class="acc-tags"><span class="acc-tag red">★ Impact direct · 190M MAD</span></div>
+        <div class="acc-chevron">▾</div>
+      </div>
+      <div class="acc-body">
+        Le Ministère de la Santé lance un appel d'offres de <strong>190 millions MAD (16,8M €)</strong> pour l'acquisition et la mise en place d'un système de santé intelligent incluant le Dossier Patient Partagé national 360°. Une concrétisation directe des recommandations formulées dans le Livre Blanc.
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- DOCUMENT -->
+<section class="section alt" id="document">
+  <div class="eyebrow">04 / Document intégral</div>
+  <h2 class="section-title">Consulter le <em>Livre Blanc</em></h2>
+  <p class="section-lead">Version interactive complète. Feuilletez le document directement ici ou ouvrez-le en plein écran.</p>
+  <div class="flipbook-wrap">
+    <div class="flipbook-header">
+      <div class="flipbook-title">La e-Santé au Maroc : Réalités, enjeux et leviers · Buildfluence × UM5 × UM6SS · 2022</div>
+      <a href="https://heyzine.com/flip-book/e1284aa8c1.html" target="_blank" class="flipbook-open">Plein écran</a>
+    </div>
+    <iframe class="flipbook-iframe" src="https://heyzine.com/flip-book/e1284aa8c1.html" title="Livre Blanc e-Santé au Maroc" allowfullscreen></iframe>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="contact">
+  <div class="cta-eyebrow">Buildfluence · Sovereign Decision Infrastructure</div>
+  <h2 class="cta-title">Un projet de Livre Blanc<br><em>innovant ?</em> Parlons-en.</h2>
+  <p class="cta-sub">Intelligence stratégique, études sectorielles, benchmarks et recommandations actionnables pour les décideurs publics et privés.</p>
+  <div class="cta-btns">
+    <a href="#" class="btn-gold">Échange Stratégique</a>
+    <a href="/" class="btn-dark">Découvrir Buildfluence</a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-brand">Buildfluence · Intelligence Hub</div>
+  <div class="footer-copy">© 2026 Buildfluence · Tous droits réservés</div>
+</footer>
+
+<script>
+function toggle(header) {
+  const item = header.parentElement;
+  const isActive = item.classList.contains('active');
+  document.querySelectorAll('.acc-item').forEach(i => i.classList.remove('active'));
+  if (!isActive) item.classList.add('active');
+}
+
+function animCount(id, target, suffix, dur) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const start = performance.now();
+  const isFloat = target % 1 !== 0;
+  function upd(now) {
+    const p = Math.min((now - start) / dur, 1);
+    const e = 1 - Math.pow(1 - p, 3);
+    el.textContent = (isFloat ? (target * e).toFixed(1) : Math.round(target * e)) + (suffix || '');
+    if (p < 1) requestAnimationFrame(upd);
+  }
+  requestAnimationFrame(upd);
+}
+
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      animCount('c1', 193, '', 2000);
+      animCount('c2', 2, '', 800);
+      animCount('c3', 190, 'M', 2200);
+      animCount('c4', 4, '', 1000);
+      animCount('k1', 193, '', 2000);
+      animCount('k2', 2, '', 800);
+      animCount('k3', 3, '', 900);
+      animCount('k4', 190, 'M', 2200);
+      obs.disconnect();
+    }
+  });
+}, {threshold: 0.2});
+
+const hs = document.querySelector('.hero-stats');
+if (hs) obs.observe(hs);
+</script>
+</body>
+</html>
