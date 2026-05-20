@@ -24,7 +24,8 @@ type Thematique =
   | "due-diligence"
   | "attractivite"
   | "influence"
-  | "ecosysteme";
+  | "ecosysteme"
+  | "communication";
 
 type Secteur =
   | "all"
@@ -182,6 +183,7 @@ const SuccessStoriesPage = () => {
     { value: "attractivite", label: t("Attractivité & Rayonnement", "Attractiveness & Outreach") },
     { value: "influence", label: t("Influence & Soft Power", "Influence & Soft Power") },
     { value: "ecosysteme", label: t("Écosystème Concurrentiel", "Competitive Ecosystem") },
+    { value: "communication", label: t("Ingénierie de communication", "Communication engineering") },
   ];
 
   const SECTEURS: { value: Secteur; label: string }[] = [
