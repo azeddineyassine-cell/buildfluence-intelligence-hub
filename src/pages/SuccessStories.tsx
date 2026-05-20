@@ -908,31 +908,29 @@ const SuccessStoriesPage = () => {
       </header>
 
       <section className="ss-filters">
-        <div className="ss-filter-row">
-          <span className="ss-filter-label">{t("— Par thématique", "— By theme")}</span>
-          {THEMATIQUES.map((th) => (
-            <button
-              key={th.value}
-              className={`ss-filter-btn${thematique === th.value ? " active-thema" : ""}`}
-              onClick={() => setThematique(th.value)}
-              type="button"
-            >
-              {th.label}
-            </button>
-          ))}
-        </div>
-        <div className="ss-filter-row">
-          <span className="ss-filter-label">{t("— Par secteur", "— By sector")}</span>
-          {SECTEURS.map((s) => (
-            <button
-              key={s.value}
-              className={`ss-filter-btn${secteur === s.value ? " active-secteur" : ""}`}
-              onClick={() => setSecteur(s.value)}
-              type="button"
-            >
-              {s.label}
-            </button>
-          ))}
+        <div className="ss-filter-selects">
+          <select
+            className="ss-filter-select"
+            value={thematique}
+            onChange={(e) => setThematique(e.target.value as Thematique)}
+            aria-label={t("Filtrer par thématique", "Filter by topic")}
+          >
+            <option value="all">{t("Par Thématique ↓", "By Topic ↓")}</option>
+            {THEMATIQUES.filter((th) => th.value !== "all").map((th) => (
+              <option key={th.value} value={th.value}>{th.label}</option>
+            ))}
+          </select>
+          <select
+            className="ss-filter-select"
+            value={secteur}
+            onChange={(e) => setSecteur(e.target.value as Secteur)}
+            aria-label={t("Filtrer par secteur", "Filter by sector")}
+          >
+            <option value="all">{t("Par Secteur ↓", "By Sector ↓")}</option>
+            {SECTEURS.filter((s) => s.value !== "all").map((s) => (
+              <option key={s.value} value={s.value}>{s.label}</option>
+            ))}
+          </select>
         </div>
       </section>
 
@@ -964,19 +962,6 @@ const SuccessStoriesPage = () => {
               <div className="ss-mini-secteur-line">{s.miniSecteur}</div>
             </a>
           ))}
-          <a href="/success-stories/esante" className="ss-mini-card">
-            <div>
-              <span className="ss-mini-num">12.</span>
-              <span className="ss-mini-thema">{t("E-SANTÉ & INNOVATION PUBLIQUE", "E-HEALTH & PUBLIC INNOVATION")}</span>
-            </div>
-            <div className="ss-mini-title">
-              {t("Concevoir le 1er Livre Blanc sur la e-Santé au Maroc", "Designing Morocco's 1st e-Health White Paper")}
-            </div>
-            <div className="ss-mini-pitch">
-              {t("Quand la vision stratégique accélère la politique publique.", "When strategic vision accelerates public policy.")}
-            </div>
-            <div className="ss-mini-secteur-line">{t("E-SANTÉ · 🇲🇦 · 🌍", "E-HEALTH · 🇲🇦 · 🌍")}</div>
-          </a>
         </div>
       </section>
 
@@ -1031,7 +1016,7 @@ const SuccessStoriesPage = () => {
             </div>
 
             <div className="ss-content">
-              <div className="ss-num">{t("SUCCESS STORY · ", "SUCCESS STORY · ")}{s.num} / 11</div>
+              <div className="ss-num">{t("SUCCESS STORY · ", "SUCCESS STORY · ")}{s.num} / 12</div>
               <h2 className="ss-story-title">
                 {s.titleBefore}
                 <em>{s.titleEm}</em>
@@ -1099,6 +1084,22 @@ const SuccessStoriesPage = () => {
                   </span>
                 ))}
               </div>
+
+              <nav className="ss-story-nav" aria-label={t("Navigation entre stories", "Stories navigation")}>
+                {parseInt(s.num, 10) > 1 && (
+                  <a href={`#story-${String(parseInt(s.num, 10) - 1).padStart(2, "0")}`}>
+                    {t("← Story précédente", "← Previous Story")}
+                  </a>
+                )}
+                {parseInt(s.num, 10) < stories.length && (
+                  <a href={`#story-${String(parseInt(s.num, 10) + 1).padStart(2, "0")}`}>
+                    {t("Story suivante →", "Next Story →")}
+                  </a>
+                )}
+                <a className="all" href="/success-stories">
+                  {t("↩ Toutes les Success Stories", "↩ All Success Stories")}
+                </a>
+              </nav>
             </div>
           </article>
         ))}
