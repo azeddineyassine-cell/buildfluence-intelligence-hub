@@ -167,7 +167,14 @@ const SuccessStoriesCSS = `
     .ss-testimony { flex-direction: column; gap: 14px; }
     .ss-filter-label { min-width: auto; width: 100%; margin-bottom: 4px; }
     .ss-content { padding: 28px 22px; }
-  }
+  .ss-filter-selects { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
+  .ss-filter-select { background: #FFFFFF; border: 1px solid var(--bf-paper-deep); color: var(--bf-navy); font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; padding: 10px 32px 10px 14px; border-radius: 4px; cursor: pointer; appearance: none; -webkit-appearance: none; background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2210%22%20height%3D%226%22%20viewBox%3D%220%200%2010%206%22%3E%3Cpath%20fill%3D%22%23C9A84C%22%20d%3D%22M0%200l5%206%205-6z%22%2F%3E%3C%2Fsvg%3E"); background-repeat: no-repeat; background-position: right 12px center; min-width: 220px; transition: border-color 0.15s ease; }
+  .ss-filter-select:hover, .ss-filter-select:focus { border-color: var(--bf-gold); outline: none; }
+  .ss-story-nav { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; padding-top: 22px; border-top: 1px solid var(--bf-paper-deep); }
+  .ss-story-nav a { font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; padding: 10px 16px; border: 1px solid var(--bf-paper-deep); color: var(--bf-navy); text-decoration: none; border-radius: 2px; background: #FFFFFF; transition: all 0.15s ease; }
+  .ss-story-nav a:hover { border-color: var(--bf-gold); color: var(--bf-gold); }
+  .ss-story-nav a.all { background: var(--bf-navy); color: var(--bf-gold); border-color: var(--bf-navy); margin-left: auto; }
+  .ss-story-nav a.all:hover { background: var(--bf-navy-soft); color: var(--bf-gold); }
 `;
 
 const SuccessStoriesPage = () => {
