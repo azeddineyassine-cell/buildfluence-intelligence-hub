@@ -120,12 +120,11 @@ const InsightsResources = () => {
         "Benchmark mondial · 2 enquêtes digitales · Préfacé par le DG de l'OMS et 3 ministres marocains. Impact direct : appel d'offres 190M MAD.",
         "Global benchmark · 2 digital surveys · Prefaced by WHO Director-General and 3 Moroccan ministers. Direct impact: MAD 190M tender."
       ),
-      href: "/insights/esante",
-      sameTab: true,
+      href: "/esante_livre_blanc_v2_4.html",
       image: "/Healthcare-1.png",
       overlayImage: "/Healthcare-2.png",
       actions: [
-        { label: t("EN SAVOIR PLUS →", "LEARN MORE →"), href: "/insights/esante", variant: "primary", sameTab: true },
+        { label: t("EN SAVOIR PLUS →", "LEARN MORE →"), href: "/esante_livre_blanc_v2_4.html", variant: "primary" },
       ],
     },
   ];

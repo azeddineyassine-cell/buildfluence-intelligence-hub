@@ -24,7 +24,8 @@ type Thematique =
   | "due-diligence"
   | "attractivite"
   | "influence"
-  | "ecosysteme";
+  | "ecosysteme"
+  | "communication";
 
 type Secteur =
   | "all"
@@ -166,7 +167,16 @@ const SuccessStoriesCSS = `
     .ss-testimony { flex-direction: column; gap: 14px; }
     .ss-filter-label { min-width: auto; width: 100%; margin-bottom: 4px; }
     .ss-content { padding: 28px 22px; }
+    .ss-filter-select { min-width: 100%; }
   }
+  .ss-filter-selects { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
+  .ss-filter-select { background: #FFFFFF; border: 1px solid var(--bf-paper-deep); color: var(--bf-navy); font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; padding: 10px 32px 10px 14px; border-radius: 4px; cursor: pointer; appearance: none; -webkit-appearance: none; background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2210%22%20height%3D%226%22%20viewBox%3D%220%200%2010%206%22%3E%3Cpath%20fill%3D%22%23C9A84C%22%20d%3D%22M0%200l5%206%205-6z%22%2F%3E%3C%2Fsvg%3E"); background-repeat: no-repeat; background-position: right 12px center; min-width: 220px; transition: border-color 0.15s ease; }
+  .ss-filter-select:hover, .ss-filter-select:focus { border-color: var(--bf-gold); outline: none; }
+  .ss-story-nav { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; padding-top: 22px; border-top: 1px solid var(--bf-paper-deep); }
+  .ss-story-nav a { font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; padding: 10px 16px; border: 1px solid var(--bf-paper-deep); color: var(--bf-navy); text-decoration: none; border-radius: 2px; background: #FFFFFF; transition: all 0.15s ease; }
+  .ss-story-nav a:hover { border-color: var(--bf-gold); color: var(--bf-gold); }
+  .ss-story-nav a.all { background: var(--bf-navy); color: var(--bf-gold); border-color: var(--bf-navy); margin-left: auto; }
+  .ss-story-nav a.all:hover { background: var(--bf-navy-soft); color: var(--bf-gold); }
 `;
 
 const SuccessStoriesPage = () => {
@@ -182,6 +192,7 @@ const SuccessStoriesPage = () => {
     { value: "attractivite", label: t("Attractivité & Rayonnement", "Attractiveness & Outreach") },
     { value: "influence", label: t("Influence & Soft Power", "Influence & Soft Power") },
     { value: "ecosysteme", label: t("Écosystème Concurrentiel", "Competitive Ecosystem") },
+    { value: "communication", label: t("Ingénierie de communication", "Communication engineering") },
   ];
 
   const SECTEURS: { value: Secteur; label: string }[] = [
@@ -816,6 +827,60 @@ const SuccessStoriesPage = () => {
       resultsExtra: t("+ Cartographie complète des interconnexions internationales et identification des risques de conformité","+ Full mapping of international interconnections and identification of compliance risks"),
       tags: [t("DEEP DUE DILIGENCE","DEEP DUE DILIGENCE"), t("CONFORMITÉ INTERNATIONALE","INTERNATIONAL COMPLIANCE"), "KYC / AML-CFT", t("CARTOGRAPHIE D'ACTEURS","ACTOR MAPPING"), "🇲🇦 🌍"],
     },
+    {
+      id: "story-12",
+      num: "12",
+      thematique: "communication",
+      secteur: "sante",
+      thematiqueLabel: t("Ingénierie de communication","Communication engineering"),
+      miniTitle: t("Livre Blanc e-Santé","e-Health White Paper"),
+      miniPitch: t("Quand la vision stratégique accélère la politique publique.","When strategic vision accelerates public policy."),
+      miniSecteur: t("E-Santé · 🇲🇦 🌍","E-Health · 🇲🇦 🌍"),
+      eyebrow: t("E-Santé & Innovation publique","E-Health & Public innovation"),
+      logos: [
+        { label: "UM5" },
+        { label: "UM6SS" },
+        { label: t("OMS","WHO") },
+      ],
+      visualMain: (
+        <>
+          [ {t("1er Livre Blanc national","1st national White Paper")}<br />
+          <span style={{ color: "var(--bf-gold)" }}>"{t("La e-Santé au Maroc : Réalités, enjeux et leviers de développement","Morocco's e-Health: Realities, challenges and development levers")}"</span> ]
+        </>
+      ),
+      meta: [
+        { label: t("CLIENT","CLIENT"), value: "UM5 · UM6SS" },
+        { label: t("PÉRIODE","PERIOD"), value: "2021 / 2022" },
+        { label: t("GÉOGRAPHIE","GEOGRAPHY"), value: t("🇲🇦 Maroc · 🌍 International","🇲🇦 Morocco · 🌍 International") },
+      ],
+      titleBefore: t("Concevoir le 1er Livre Blanc sur la e-Santé au Maroc et ","Designing Morocco's 1st e-Health White Paper and "),
+      titleEm: t("influencer la politique publique","influencing public policy"),
+      storytelling: t(
+        "Le Maroc ne disposait d'aucune cartographie structurée de son écosystème e-santé. L'Université Mohammed V de Rabat et UM6SS, en partenariat avec Buildfluence, lancent le chantier du 1er Livre Blanc sur la e-Santé au Maroc : une initiative inédite à l'échelle nationale, préfacée par le Directeur Général de l'OMS Dr Tedros Adhanom Ghebreyesus et trois ministres marocains. Un vide stratégique majeur à combler, une opportunité de positionner le Maroc comme hub régional de la santé numérique.",
+        "Morocco had no structured mapping of its e-health ecosystem. Mohammed V University of Rabat and UM6SS, in partnership with Buildfluence, launched Morocco's first e-Health White Paper: an unprecedented national initiative, prefaced by WHO Director-General Dr Tedros Adhanom Ghebreyesus and three Moroccan ministers. A major strategic gap to fill, and an opportunity to position Morocco as a regional hub for digital health."
+      ),
+      mission: t(
+        "Produire une analyse stratégique complète de la réalité e-santé au Maroc, identifier les freins structurels et formuler des recommandations actionnables à destination des décideurs publics et des acteurs de l'écosystème santé national.",
+        "Produce a complete strategic analysis of e-health reality in Morocco, identify structural barriers and formulate actionable recommendations for public decision-makers and stakeholders of the national health ecosystem."
+      ),
+      objectives: [
+        t("Cartographier l'écosystème national et international de la santé numérique sur 193 pays","Map the national and international digital health ecosystem across 193 countries"),
+        t("Concevoir et analyser deux enquêtes digitales (qualitative et quantitative) auprès des professionnels et praticiens de la santé","Design and analyze two digital surveys (qualitative and quantitative) among health professionals and practitioners"),
+        t("Produire l'intégralité des data visualisations, la méthodologie en mode projet et l'étude de marché mondial de la santé digitale","Produce all data visualizations, the project-mode methodology and the global digital health market study"),
+        t("Formuler des recommandations stratégiques pour une Roadmap pragmatique e-santé au Maroc","Formulate strategic recommendations for a pragmatic e-Health roadmap in Morocco"),
+      ],
+      methodo: t(
+        "Intelligence stratégique en mode projet : conception des questionnaires des deux enquêtes digitales et analyse des données (qualitative et quantitative). Étude de marché mondial de la santé digitale appuyée sur des indices internationaux (UN-EGDI, WIPO-GII) couvrant 193 pays. Réalisation de l'intégralité des data visualisations du document. Entretiens avec les professionnels et praticiens de la santé. Benchmark des meilleures pratiques internationales en e-santé.",
+        "Strategic intelligence in project mode: design of questionnaires for both digital surveys and data analysis (qualitative and quantitative). Global digital health market study based on international indices (UN-EGDI, WIPO-GII) covering 193 countries. Full production of the document's data visualizations. Interviews with health professionals and practitioners. Benchmark of international best practices in e-health."
+      ),
+      kpis: [
+        { value: t("1er Livre Blanc","1st White Paper"), label: t("e-Santé au Maroc · Initiative nationale inédite","e-Health in Morocco · Unprecedented national initiative") },
+        { value: t("OMS + 3 Ministres","WHO + 3 Ministers"), label: t("Préfaces officielles et interventions ministérielles","Official prefaces and ministerial interventions") },
+        { value: "190M MAD", label: t("Appel d'offres Ministère de la Santé 2024 · Système intelligent","Ministry of Health 2024 tender · Intelligent system") },
+      ],
+      resultsExtra: t("★ Les recommandations du Livre Blanc ont directement alimenté l'appel d'offres 2024 du Ministère de la Santé pour la mise en place d'un système de santé intelligent incluant le Dossier Patient Partagé national 360°.","★ The White Paper's recommendations directly fed the Ministry of Health's 2024 tender to deploy an intelligent health system including the national 360° Shared Patient Record."),
+      tags: [t("E-SANTÉ","E-HEALTH"), t("TRANSFORMATION DIGITALE","DIGITAL TRANSFORMATION"), t("BENCHMARK INTERNATIONAL","INTERNATIONAL BENCHMARK"), t("POLITIQUE PUBLIQUE","PUBLIC POLICY"), t("RECHERCHE STRATÉGIQUE","STRATEGIC RESEARCH"), "🇲🇦 🌍"],
+    },
   ];
 
   const matches = (s: Story) =>
@@ -843,31 +908,29 @@ const SuccessStoriesPage = () => {
       </header>
 
       <section className="ss-filters">
-        <div className="ss-filter-row">
-          <span className="ss-filter-label">{t("— Par thématique", "— By theme")}</span>
-          {THEMATIQUES.map((th) => (
-            <button
-              key={th.value}
-              className={`ss-filter-btn${thematique === th.value ? " active-thema" : ""}`}
-              onClick={() => setThematique(th.value)}
-              type="button"
-            >
-              {th.label}
-            </button>
-          ))}
-        </div>
-        <div className="ss-filter-row">
-          <span className="ss-filter-label">{t("— Par secteur", "— By sector")}</span>
-          {SECTEURS.map((s) => (
-            <button
-              key={s.value}
-              className={`ss-filter-btn${secteur === s.value ? " active-secteur" : ""}`}
-              onClick={() => setSecteur(s.value)}
-              type="button"
-            >
-              {s.label}
-            </button>
-          ))}
+        <div className="ss-filter-selects">
+          <select
+            className="ss-filter-select"
+            value={thematique}
+            onChange={(e) => setThematique(e.target.value as Thematique)}
+            aria-label={t("Filtrer par thématique", "Filter by topic")}
+          >
+            <option value="all">{t("Par Thématique ↓", "By Topic ↓")}</option>
+            {THEMATIQUES.filter((th) => th.value !== "all").map((th) => (
+              <option key={th.value} value={th.value}>{th.label}</option>
+            ))}
+          </select>
+          <select
+            className="ss-filter-select"
+            value={secteur}
+            onChange={(e) => setSecteur(e.target.value as Secteur)}
+            aria-label={t("Filtrer par secteur", "Filter by sector")}
+          >
+            <option value="all">{t("Par Secteur ↓", "By Sector ↓")}</option>
+            {SECTEURS.filter((s) => s.value !== "all").map((s) => (
+              <option key={s.value} value={s.value}>{s.label}</option>
+            ))}
+          </select>
         </div>
       </section>
 
@@ -899,19 +962,6 @@ const SuccessStoriesPage = () => {
               <div className="ss-mini-secteur-line">{s.miniSecteur}</div>
             </a>
           ))}
-          <a href="/success-stories/esante" className="ss-mini-card">
-            <div>
-              <span className="ss-mini-num">12.</span>
-              <span className="ss-mini-thema">{t("E-SANTÉ & INNOVATION PUBLIQUE", "E-HEALTH & PUBLIC INNOVATION")}</span>
-            </div>
-            <div className="ss-mini-title">
-              {t("Concevoir le 1er Livre Blanc sur la e-Santé au Maroc", "Designing Morocco's 1st e-Health White Paper")}
-            </div>
-            <div className="ss-mini-pitch">
-              {t("Quand la vision stratégique accélère la politique publique.", "When strategic vision accelerates public policy.")}
-            </div>
-            <div className="ss-mini-secteur-line">{t("E-SANTÉ · 🇲🇦 · 🌍", "E-HEALTH · 🇲🇦 · 🌍")}</div>
-          </a>
         </div>
       </section>
 
@@ -966,7 +1016,7 @@ const SuccessStoriesPage = () => {
             </div>
 
             <div className="ss-content">
-              <div className="ss-num">{t("SUCCESS STORY · ", "SUCCESS STORY · ")}{s.num} / 11</div>
+              <div className="ss-num">{t("SUCCESS STORY · ", "SUCCESS STORY · ")}{s.num} / 12</div>
               <h2 className="ss-story-title">
                 {s.titleBefore}
                 <em>{s.titleEm}</em>
@@ -1034,6 +1084,22 @@ const SuccessStoriesPage = () => {
                   </span>
                 ))}
               </div>
+
+              <nav className="ss-story-nav" aria-label={t("Navigation entre stories", "Stories navigation")}>
+                {parseInt(s.num, 10) > 1 && (
+                  <a href={`#story-${String(parseInt(s.num, 10) - 1).padStart(2, "0")}`}>
+                    {t("← Story précédente", "← Previous Story")}
+                  </a>
+                )}
+                {parseInt(s.num, 10) < stories.length && (
+                  <a href={`#story-${String(parseInt(s.num, 10) + 1).padStart(2, "0")}`}>
+                    {t("Story suivante →", "Next Story →")}
+                  </a>
+                )}
+                <a className="all" href="/success-stories">
+                  {t("↩ Toutes les Success Stories", "↩ All Success Stories")}
+                </a>
+              </nav>
             </div>
           </article>
         ))}
