@@ -899,6 +899,19 @@ const SuccessStoriesPage = () => {
               <div className="ss-mini-secteur-line">{s.miniSecteur}</div>
             </a>
           ))}
+          <a href="/success-stories/esante" className="ss-mini-card">
+            <div>
+              <span className="ss-mini-num">12.</span>
+              <span className="ss-mini-thema">{t("E-SANTÉ & INNOVATION PUBLIQUE", "E-HEALTH & PUBLIC INNOVATION")}</span>
+            </div>
+            <div className="ss-mini-title">
+              {t("Concevoir le 1er Livre Blanc sur la e-Santé au Maroc", "Designing Morocco's 1st e-Health White Paper")}
+            </div>
+            <div className="ss-mini-pitch">
+              {t("Quand la vision stratégique accélère la politique publique.", "When strategic vision accelerates public policy.")}
+            </div>
+            <div className="ss-mini-secteur-line">{t("E-SANTÉ · 🇲🇦 · 🌍", "E-HEALTH · 🇲🇦 · 🌍")}</div>
+          </a>
         </div>
       </section>
 
