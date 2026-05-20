@@ -190,7 +190,7 @@ footer{background:var(--navy);padding:28px 60px;display:flex;align-items:center;
     <a href="#impact" class="nav-link">Impact</a>
     <a href="#document" class="nav-link">Document</a>
   </div>
-  <a href="#contact" class="nav-cta">Échange Stratégique</a>
+  <a href="#" onclick="event.preventDefault();window.open('/?openExchange=1','_blank','noopener');return false;" class="nav-cta">Échange Stratégique</a>
 </nav>
 
 <!-- HERO -->
@@ -403,9 +403,9 @@ footer{background:var(--navy);padding:28px 60px;display:flex;align-items:center;
   <div class="flipbook-wrap">
     <div class="flipbook-header">
       <div class="flipbook-title">La e-Santé au Maroc : Réalités, enjeux et leviers · Buildfluence × UM5 × UM6SS · 2022</div>
-      <a href="https://heyzine.com/flip-book/e1284aa8c1.html" target="_blank" class="flipbook-open">Plein écran</a>
+      <a id="flipbook-open" href="https://heyzine.com/flip-book/037378de6c.html" target="_blank" rel="noopener" class="flipbook-open">Plein écran</a>
     </div>
-    <iframe class="flipbook-iframe" src="https://heyzine.com/flip-book/e1284aa8c1.html" title="Livre Blanc e-Santé au Maroc" allowfullscreen></iframe>
+    <iframe id="flipbook-iframe" class="flipbook-iframe" src="https://heyzine.com/flip-book/037378de6c.html" title="Livre Blanc e-Santé au Maroc" allowfullscreen></iframe>
   </div>
 </section>
 
@@ -415,8 +415,8 @@ footer{background:var(--navy);padding:28px 60px;display:flex;align-items:center;
   <h2 class="cta-title">Un projet de Livre Blanc<br><em>innovant ?</em> Parlons-en.</h2>
   <p class="cta-sub">Intelligence stratégique, études sectorielles, benchmarks et recommandations actionnables pour les décideurs publics et privés.</p>
   <div class="cta-btns">
-    <a href="#" class="btn-gold">Échange Stratégique</a>
-    <a href="/" class="btn-dark">Découvrir Buildfluence</a>
+    <a href="#" onclick="event.preventDefault();window.open('/?openExchange=1','_blank','noopener');return false;" class="btn-gold">Échange Stratégique</a>
+    <a href="/pourquoi-buildfluence" target="_blank" rel="noopener" class="btn-dark">Découvrir Buildfluence</a>
   </div>
 </section>
 
@@ -465,6 +465,23 @@ const obs = new IntersectionObserver(entries => {
 
 const hs = document.querySelector('.hero-stats');
 if (hs) obs.observe(hs);
+
+// Language-aware Heyzine flipbook (FR default, EN via ?lang=en)
+(function(){
+  try {
+    var params = new URLSearchParams(window.location.search);
+    var lang = (params.get('lang') || 'fr').toLowerCase();
+    var urls = {
+      fr: 'https://heyzine.com/flip-book/037378de6c.html',
+      en: 'https://heyzine.com/flip-book/5daf7d326b.html'
+    };
+    var url = urls[lang] || urls.fr;
+    var iframe = document.getElementById('flipbook-iframe');
+    var open = document.getElementById('flipbook-open');
+    if (iframe) iframe.src = url;
+    if (open) open.href = url;
+  } catch (e) {}
+})();
 </script>
 </body>
 </html>
