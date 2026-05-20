@@ -16,7 +16,7 @@ type Filter =
   | "nation-branding"
   | "threat-intelligence";
 
-type CardAction = { label: string; href: string; variant?: "primary" | "secondary" | "tertiary" };
+type CardAction = { label: string; href: string; variant?: "primary" | "secondary" | "tertiary"; sameTab?: boolean };
 type Card = {
   id: string;
   filter: Exclude<Filter, "all">;
@@ -32,6 +32,7 @@ type Card = {
   overlayBg?: string;
   subtitle?: string;
   actions?: CardAction[];
+  sameTab?: boolean;
 };
 
 const InsightsResources = () => {
