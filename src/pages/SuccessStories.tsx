@@ -451,6 +451,11 @@ const SuccessStoriesPage = () => {
       ],
       resultsExtra: t("+ Repositionnement du CIDC en organisation orientée Intelligence Économique et approche Insight-Driven","+ Repositioning of the ICDT as an Economic Intelligence and Insight-Driven organization"),
       tags: [t("ORGANISATION INTERNATIONALE","INTERNATIONAL ORGANIZATION"), t("PLATEFORME D'ATTRACTIVITÉ","ATTRACTIVENESS PLATFORM"), t("INTELLIGENCE ÉCONOMIQUE","ECONOMIC INTELLIGENCE"), "MATCHMAKING", t("🇲🇦 🇸🇦 OCI","🇲🇦 🇸🇦 OIC")],
+      visualExtra: (
+        <a href="https://icdt-cidc.org/fr/" target="_blank" rel="noopener noreferrer">
+          <img src="/img4.png" alt="OCI / OIC" className="ss-vx-img" style={{ maxHeight: 180 }} />
+        </a>
+      ),
     },
     {
       id: "story-04",
