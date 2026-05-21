@@ -1593,7 +1593,7 @@ document.querySelectorAll('.filt').forEach(b=>{
       if(f==="entity" && (kind==="entity"||kind==="dead")) show = true;
       if(f==="person" && kind==="person") show = true;
       if(f==="offshore" && kind==="offshore") show = true;
-      if(f==="problem" && (verdict==="stop"||verdict==="watch")) show = true;
+      if(f==="problem" && verdict==="stop") show = true;
       if(!show) el.classList.add('dim');
     });
     // dim all links that don't connect two visible nodes
