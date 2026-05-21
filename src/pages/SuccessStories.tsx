@@ -947,7 +947,12 @@ const SuccessStoriesPage = () => {
       <section className="ss-mini-section">
         <div className="ss-mini-grid">
           {stories.map((s) => (
-            <a key={s.id} href={`#${s.id}`} className={`ss-mini-card${matches(s) ? "" : " ss-hidden"}`}>
+            <a
+              key={s.id}
+              href={`#${s.id}`}
+              onClick={(e) => { e.preventDefault(); openStory(s.id); }}
+              className={`ss-mini-card${matches(s) ? "" : " ss-hidden"}`}
+            >
               <div>
                 <span className="ss-mini-num">{s.num}.</span>
                 <span className="ss-mini-thema">{s.thematiqueLabel}</span>
@@ -972,6 +977,7 @@ const SuccessStoriesPage = () => {
               <div className="ss-mini-secteur-line">{s.miniSecteur}</div>
             </a>
           ))}
+
         </div>
       </section>
 
