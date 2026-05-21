@@ -193,6 +193,23 @@ const SuccessStoriesPage = () => {
     }, 50);
   };
 
+  useEffect(() => {
+    const applyHash = () => {
+      const h = window.location.hash.replace("#", "");
+      if (h && /^story-\d+$/.test(h)) {
+        setSelectedId(h);
+        setTimeout(() => {
+          const el = document.getElementById(h);
+          if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+        }, 80);
+      }
+    };
+    applyHash();
+    window.addEventListener("hashchange", applyHash);
+    return () => window.removeEventListener("hashchange", applyHash);
+  }, []);
+
+
 
   const THEMATIQUES: { value: Thematique; label: string }[] = [
     { value: "all", label: t("Toutes", "All") },
