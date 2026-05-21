@@ -1930,7 +1930,7 @@ const ChessboardsBlock = () => {
       <BlockHeader kicker={lang === "en" ? "B · METHODOLOGY" : "B · MÉTHODE"} title={isEn ? <>Chessboard analysis.<br />Three intersecting readings.</> : <>L'analyse par échiquiers.<br />Trois lectures qui se croisent.</>} />
       <div style={{ background: "rgba(16,62,140,0.04)", borderLeft: `4px solid ${NAVY2}`, padding: "22px 28px", borderRadius: 2, marginBottom: 28, maxWidth: 980 }}>
         <p className="italic" style={{ fontFamily: FONT_ITALIC, fontSize: 17, lineHeight: 1.55, color: NAVY3, margin: 0 }}>
-          {isEn ? <>Where most firms address one dimension at a time, <strong style={{ color: C.navy, fontFamily: "DM Sans, sans-serif", fontStyle: "normal", fontWeight: 600 }}>Buildfluence systematically cross-reads the three chessboards</strong> — geopolitical, economic and societal — to reveal the real mechanics of an information attack. This three-dimensional mix is what distinguishes our method.</> : <>Là où la plupart des cabinets traitent une dimension à la fois, <strong style={{ color: C.navy, fontFamily: "DM Sans, sans-serif", fontStyle: "normal", fontWeight: 600 }}>Buildfluence croise systématiquement les trois échiquiers</strong> — géopolitique, économique et sociétal — pour révéler la mécanique réelle d'une attaque informationnelle. C'est ce mix tridimensionnel qui distingue notre méthode.</>}
+          {isEn ? <>Where most firms address one dimension at a time, <strong style={{ color: C.navy, fontFamily: "DM Sans, sans-serif", fontStyle: "normal", fontWeight: 600 }}>Buildfluence systematically cross-reads the three chessboards</strong> geopolitical, economic and societal to reveal the real mechanics of an information attack. This three-dimensional mix is what distinguishes our method.</> : <>Là où la plupart des cabinets traitent une dimension à la fois, <strong style={{ color: C.navy, fontFamily: "DM Sans, sans-serif", fontStyle: "normal", fontWeight: 600 }}>Buildfluence croise systématiquement les trois échiquiers</strong> géopolitique, économique et sociétal pour révéler la mécanique réelle d'une attaque informationnelle. C'est ce mix tridimensionnel qui distingue notre méthode.</>}
         </p>
       </div>
       <div className="chess-grid">
@@ -2143,6 +2143,7 @@ type TimelineBadge = { label: string; tone?: "default" | "success" | "alert" };
 type TimelineNode = { date: string; title: string; tooltipTitle: string; bullets: string[]; badges: TimelineBadge[] };
 
 const MissionTimeline = ({ title, items }: { title: string; items: TimelineNode[] }) => {
+  const { lang } = useLanguage();
   const [active, setActive] = useState<number | null>(null);
   const wrapRef = useRef<HTMLDivElement | null>(null);
 
@@ -2225,6 +2226,9 @@ const MissionTimeline = ({ title, items }: { title: string; items: TimelineNode[
           })}
         </div>
       </div>
+      <p style={{ marginTop: 18, fontFamily: FONT_ITALIC, fontStyle: "italic", fontSize: 13, color: C.goldDim, textAlign: "center" }}>
+        {lang === "en" ? "Click on a node to discover the content" : "Cliquer sur un nœud pour découvrir le contenu"}
+      </p>
       <style>{`
         @media(max-width:760px){
           .mt-timeline .mt-line{display:none}
@@ -2252,7 +2256,7 @@ const OcpCaseFile = () => {
       title={lang === "en" ? "Strategic industrial group, targeted by international nuisance campaigns." : "Groupe industriel stratégique, ciblé par des campagnes de nuisance internationales."}
       emphasis={lang === "en" ? "nuisance campaigns" : "campagnes de nuisance"}
       body={lang === "en" ? <>Media and social agitation orchestrated by Northern European NGOs. The client needs to understand the <strong>amplification chains & useful idiots</strong>, and to neutralise the adversarial narrative before it reaches its key markets.</> : <>Agitation médiatique et sociale orchestrée par des ONG d'Europe du Nord. Le client a besoin de comprendre les <strong>chaînes d'amplification & idiots utiles</strong>, et de neutraliser le récit adverse avant qu'il n'atteigne ses marchés clés.</>}
-      quote={lang === "en" ? "The attack was invisible to traditional intelligence. It was in the mapping of relays that we saw the mechanics." : "L'attaque était invisible pour les veilles classiques. C'est dans la cartographie des relais qu'on a vu la mécanique."}
+      quote={lang === "en" ? "The most sophisticated attacks evade traditional monitoring systems. They reveal themselves through relay profiling, narrative mapping and the analysis of influence mechanisms." : "Les attaques les plus sophistiquées échappent aux dispositifs de veille traditionnelle. Elles se révèlent dans le Profiling des relais, la cartographie des narratifs et l'analyse des mécanismes d'influence."}
       meta={lang === "en" ? "Analyst note · OCP mission" : "Analyst note · OCP mission"}
     />
     <CaseStats stats={[{ value: "3", label: lang === "en" ? "Analytical chessboards" : "Échiquiers d'analyse" }, { value: "47", label: lang === "en" ? "Stakeholders mapped" : "Parties prenantes mappées" }, { value: "12", label: lang === "en" ? "Source NGOs identified" : "ONG sources identifiées" }, { value: "1", label: lang === "en" ? "President's dashboard" : "Tableau de bord Président" }]} />
@@ -2290,6 +2294,11 @@ const HealthCaseFile = () => {
       meta={lang === "en" ? "Post-mission debrief · Ministry of Health" : "Debrief post-mission · Ministère de la Santé"}
     />
     <CaseStats stats={[{ value: <><span>&lt;2</span><Unit>h</Unit></>, label: lang === "en" ? "War Room activation" : "Activation War Room" }, { value: <><span>14</span><Unit>{lang === "en" ? "d" : "j"}</Unit></>, label: lang === "en" ? "Crisis contained" : "Crise maîtrisée" }, { value: <><span>+38</span><Unit>%</Unit></>, label: lang === "en" ? "Minister digital image" : "Image digitale Ministre" }, { value: "1", label: lang === "en" ? "Cabinet supported" : "Cabinet accompagné" }]} />
+    <iframe
+      src="/H1N1_Crisis_Chart_v2.html"
+      title={lang === "en" ? "H1N1 Crisis Chart" : "Grippe A H1N1 · Suivi des sujets phares"}
+      style={{ width: "100%", height: 600, border: "none", borderRadius: 4, display: "block", marginTop: 32 }}
+    />
     <MissionTimeline
       title={lang === "en" ? "War Room Workflow" : "Déroulé de la War Room"}
       items={lang === "en" ? [
