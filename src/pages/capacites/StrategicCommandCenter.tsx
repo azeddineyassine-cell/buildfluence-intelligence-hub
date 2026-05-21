@@ -554,7 +554,7 @@ const StrategicCartography = () => {
                 lineHeight: 1.5,
               }}
             >
-              {t("Présent — écosystème sous contrôle", "Present — ecosystem under control")}
+              {t("Présent : écosystème sous contrôle", "Present: ecosystem under control")}
             </p>
           </div>
 
@@ -598,7 +598,7 @@ const StrategicCartography = () => {
                 lineHeight: 1.5,
               }}
             >
-              {t("Prédictif simulé — futurs testés", "Simulated predictive — tested futures")}
+              {t("Prédictif simulé : futurs testés", "Simulated predictive: tested futures")}
             </p>
           </div>
         </div>

@@ -237,8 +237,8 @@ export default function SituationsCritiques() {
         <div style={{ paddingRight: 28, paddingTop: 44 }}>
           {!cur && (
             <div>
-              <p style={{ fontSize: 12, color: "#6B7FA0", letterSpacing: "0.5px", margin: "0 0 16px 0", fontStyle: "italic" }}>
-                {t("Cliquer sur une situation pour explorer le process", "Click a situation to explore the process")}
+              <p style={{ fontSize: 12, color: "#6B7FA0", letterSpacing: "0.5px", margin: "0 0 16px 0", fontStyle: "italic", transform: "translateY(-4cm)" }}>
+                {t("Cliquer sur une situation pour explorer le process", "Click on a situation to explore the process")}
               </p>
               <p style={{ fontFamily: "Cormorant Garamond,serif", fontStyle: "italic", fontSize: 17, color: "#0A1628", lineHeight: 1.6, borderLeft: "3px solid #C9A84C", paddingLeft: 18, marginBottom: 20 }}>
                 {lang === "fr" ? (
