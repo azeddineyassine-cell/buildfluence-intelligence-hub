@@ -183,6 +183,16 @@ const SuccessStoriesPage = () => {
   const { t } = useLanguage();
   const [thematique, setThematique] = useState<Thematique>("all");
   const [secteur, setSecteur] = useState<Secteur>("all");
+  const [selectedId, setSelectedId] = useState<string | null>(null);
+
+  const openStory = (id: string) => {
+    setSelectedId(id);
+    setTimeout(() => {
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 50);
+  };
+
 
   const THEMATIQUES: { value: Thematique; label: string }[] = [
     { value: "all", label: t("Toutes", "All") },
