@@ -111,7 +111,7 @@ const SuccessStoriesCSS = `
   .ss-hidden { display: none !important; }
   .ss-stories { max-width: 1200px; margin: 60px auto 0; padding: 0 40px 120px; }
   .ss-story { background: #FAF8F2; border: 1px solid var(--bf-paper-deep); margin-bottom: 60px; overflow: hidden; display: grid; grid-template-columns: 1fr 1.6fr; scroll-margin-top: 40px; }
-  .ss-visual { background: var(--bf-navy); padding: 32px 28px; color: var(--bf-paper); display: flex; flex-direction: column; min-height: 100%; }
+  .ss-visual { background: #FFFFFF; padding: 32px 28px; color: var(--bf-paper); display: flex; flex-direction: column; min-height: 100%; }
   .ss-story-eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--bf-gold); margin-bottom: 22px; line-height: 1.5; }
   .ss-logos { display: flex; align-items: center; gap: 12px; margin-bottom: 22px; padding-bottom: 18px; border-bottom: 1px solid var(--bf-navy-soft); flex-wrap: wrap; }
   .ss-logo { background: var(--bf-paper); color: var(--bf-navy); font-family: 'Playfair Display', serif; font-weight: 600; font-size: 13px; padding: 9px 13px; border-radius: 0; line-height: 1.1; letter-spacing: 0.02em; white-space: pre-line; display: inline-flex; align-items: center; justify-content: center; min-height: 56px; }
