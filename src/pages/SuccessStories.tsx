@@ -383,6 +383,19 @@ const SuccessStoriesPage = () => {
         date: t("(lettre du 2 mars 2020)","(letter of March 2, 2020)"),
       },
       tags: [t("INTELLIGENCE STRATÉGIQUE","STRATEGIC INTELLIGENCE"), t("DÉSINFORMATION","DISINFORMATION"), t("CARTOGRAPHIE D'ACTEURS","ACTOR MAPPING"), "OSINT", t("🇲🇦 MAROC","🇲🇦 MOROCCO")],
+      visualExtra: (
+        <img src="/img3.png" alt={t("Boycott avril 2018 — Afriquia, Sidi Ali, Centrale","April 2018 boycott — Afriquia, Sidi Ali, Centrale")} className="ss-vx-img" style={{ maxHeight: 260 }} />
+      ),
+      contentExtra: (
+        <div className="ss-content-box">
+          <div className="ss-content-box-title">{t("3 questions se posent :","3 questions arise:")}</div>
+          <ol>
+            <li>{t("Est-ce un mouvement spontané exprimant un ras-le-bol social des plus démunis ?","Is this a spontaneous movement expressing the frustration of the most deprived?")}</li>
+            <li>{t("Est-ce un acte de manipulation d'opinion publique pour arranger un agenda électoral d'un parti politique ?","Is this an act of public opinion manipulation to serve a political party's electoral agenda?")}</li>
+            <li>{t("Est-ce une opération de déstabilisation politique montée de toutes pièces, plusieurs mois auparavant, par des acteurs étrangers ?","Is this a political destabilization operation orchestrated months in advance by foreign actors?")}</li>
+          </ol>
+        </div>
+      ),
     },
     {
       id: "story-03",
