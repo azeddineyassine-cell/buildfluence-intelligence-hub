@@ -1053,6 +1053,7 @@ const SuccessStoriesPage = () => {
                   ))}
                 </div>
               )}
+              {s.visualExtra && <div className="ss-visual-extra">{s.visualExtra}</div>}
               <div className="ss-meta">
                 {s.meta.map((m, i) => (
                   <div key={i} className="ss-meta-line">
