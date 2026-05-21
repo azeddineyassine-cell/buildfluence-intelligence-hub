@@ -912,6 +912,14 @@ const SuccessStoriesPage = () => {
       ],
       resultsExtra: t("+ Cartographie complète des interconnexions internationales et identification des risques de conformité","+ Full mapping of international interconnections and identification of compliance risks"),
       tags: [t("DEEP DUE DILIGENCE","DEEP DUE DILIGENCE"), t("CONFORMITÉ INTERNATIONALE","INTERNATIONAL COMPLIANCE"), "KYC / AML-CFT", t("CARTOGRAPHIE D'ACTEURS","ACTOR MAPPING"), "🇲🇦 🌍"],
+      visualExtra: (
+        <>
+          <img src="/img9.png" alt={t("Code feu vert / orange / rouge","Green / amber / red traffic-light")} className="ss-vx-img" style={{ maxHeight: 220 }} />
+          <a className="ss-vx-link" href="/solutions/deep-due-diligence">
+            {t("03 · Cas d'école · Un dossier confidentiel — Mission : protéger 400M$","03 · Case study · A confidential file — Mission: protect $400M")} ↗
+          </a>
+        </>
+      ),
     },
     {
       id: "story-12",
