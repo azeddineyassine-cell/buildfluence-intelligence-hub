@@ -66,6 +66,8 @@ type Story = {
   resultsExtra?: string;
   testimony?: Testimony;
   tags: string[];
+  visualExtra?: React.ReactNode;
+  contentExtra?: React.ReactNode;
 };
 
 const SuccessStoriesCSS = `
