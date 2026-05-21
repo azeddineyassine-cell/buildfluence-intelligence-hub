@@ -2143,6 +2143,7 @@ type TimelineBadge = { label: string; tone?: "default" | "success" | "alert" };
 type TimelineNode = { date: string; title: string; tooltipTitle: string; bullets: string[]; badges: TimelineBadge[] };
 
 const MissionTimeline = ({ title, items }: { title: string; items: TimelineNode[] }) => {
+  const { lang } = useLanguage();
   const [active, setActive] = useState<number | null>(null);
   const wrapRef = useRef<HTMLDivElement | null>(null);
 
@@ -2225,6 +2226,9 @@ const MissionTimeline = ({ title, items }: { title: string; items: TimelineNode[
           })}
         </div>
       </div>
+      <p style={{ marginTop: 18, fontFamily: FONT_ITALIC, fontStyle: "italic", fontSize: 13, color: C.goldDim, textAlign: "center" }}>
+        {lang === "en" ? "Click on a node to discover the content" : "Cliquer sur un nœud pour découvrir le contenu"}
+      </p>
       <style>{`
         @media(max-width:760px){
           .mt-timeline .mt-line{display:none}
