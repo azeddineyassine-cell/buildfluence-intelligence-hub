@@ -599,7 +599,7 @@ const SuccessStoriesPage = () => {
       miniPitch: t("Quand un club légendaire devient cible informationnelle.","When a legendary club becomes an informational target."),
       miniSecteur: t("Sport professionnel · 🇲🇦","Professional sport · 🇲🇦"),
       eyebrow: t("Sport professionnel & gouvernance","Professional sport & governance"),
-      logos: [{ label: "RAJA CLUB ATHLETIC", image: logoRaja, alt: "Raja Club Athletic" }, { label: "MARSA MAROC", italic: true }],
+      logos: [{ label: "RAJA CLUB ATHLETIC", image: logoRaja, alt: "Raja Club Athletic" }],
       visualMain: (
         <>
           [ {t("Architecture de veille multi-dossiers","Multi-domain monitoring architecture")}<br />
