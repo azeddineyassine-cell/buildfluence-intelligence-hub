@@ -1073,6 +1073,7 @@ const SuccessStoriesPage = () => {
 
               <div className="ss-section-label first">{t("— Storytelling", "— Storytelling")}</div>
               <p className="ss-storytelling">{s.storytelling}</p>
+              {s.contentExtra}
 
               <div className="ss-section-label">{t("— Mission", "— Mission")}</div>
               <div className="ss-mission">{s.mission}</div>
