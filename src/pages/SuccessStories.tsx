@@ -974,6 +974,18 @@ const SuccessStoriesPage = () => {
       ],
       resultsExtra: t("★ Les recommandations du Livre Blanc ont directement alimenté l'appel d'offres 2024 du Ministère de la Santé pour la mise en place d'un système de santé intelligent incluant le Dossier Patient Partagé national 360°.","★ The White Paper's recommendations directly fed the Ministry of Health's 2024 tender to deploy an intelligent health system including the national 360° Shared Patient Record."),
       tags: [t("E-SANTÉ","E-HEALTH"), t("TRANSFORMATION DIGITALE","DIGITAL TRANSFORMATION"), t("BENCHMARK INTERNATIONAL","INTERNATIONAL BENCHMARK"), t("POLITIQUE PUBLIQUE","PUBLIC POLICY"), t("RECHERCHE STRATÉGIQUE","STRATEGIC RESEARCH"), "🇲🇦 🌍"],
+      visualExtra: (
+        <>
+          <div className="ss-vx-logos">
+            <img src="/img_oms.png" alt={t("OMS","WHO")} onError={(e)=>{e.currentTarget.style.display='none';}} />
+            <img src="/img_um6ss.png" alt="UM6SS" onError={(e)=>{e.currentTarget.style.display='none';}} />
+            <img src="/img_um5.png" alt="UM5" onError={(e)=>{e.currentTarget.style.display='none';}} />
+          </div>
+          <a className="ss-vx-link" href="/esante_livre_blanc_v2_4.html?lang=fr" target="_blank" rel="noopener noreferrer">
+            {t("Consulter le Livre Blanc →","View the White Paper →")}
+          </a>
+        </>
+      ),
     },
   ];
 
