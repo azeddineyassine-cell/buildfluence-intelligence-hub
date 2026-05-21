@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import CTAFooter from "@/components/CTAFooter";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -111,7 +111,7 @@ const SuccessStoriesCSS = `
   .ss-hidden { display: none !important; }
   .ss-stories { max-width: 1200px; margin: 60px auto 0; padding: 0 40px 120px; }
   .ss-story { background: #FAF8F2; border: 1px solid var(--bf-paper-deep); margin-bottom: 60px; overflow: hidden; display: grid; grid-template-columns: 1fr 1.6fr; scroll-margin-top: 40px; }
-  .ss-visual { background: var(--bf-navy); padding: 32px 28px; color: var(--bf-paper); display: flex; flex-direction: column; min-height: 100%; }
+  .ss-visual { background: #FFFFFF; padding: 32px 28px; color: var(--bf-paper); display: flex; flex-direction: column; min-height: 100%; }
   .ss-story-eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--bf-gold); margin-bottom: 22px; line-height: 1.5; }
   .ss-logos { display: flex; align-items: center; gap: 12px; margin-bottom: 22px; padding-bottom: 18px; border-bottom: 1px solid var(--bf-navy-soft); flex-wrap: wrap; }
   .ss-logo { background: var(--bf-paper); color: var(--bf-navy); font-family: 'Playfair Display', serif; font-weight: 600; font-size: 13px; padding: 9px 13px; border-radius: 0; line-height: 1.1; letter-spacing: 0.02em; white-space: pre-line; display: inline-flex; align-items: center; justify-content: center; min-height: 56px; }
@@ -183,6 +183,33 @@ const SuccessStoriesPage = () => {
   const { t } = useLanguage();
   const [thematique, setThematique] = useState<Thematique>("all");
   const [secteur, setSecteur] = useState<Secteur>("all");
+  const [selectedId, setSelectedId] = useState<string | null>(null);
+
+  const openStory = (id: string) => {
+    setSelectedId(id);
+    setTimeout(() => {
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 50);
+  };
+
+  useEffect(() => {
+    const applyHash = () => {
+      const h = window.location.hash.replace("#", "");
+      if (h && /^story-\d+$/.test(h)) {
+        setSelectedId(h);
+        setTimeout(() => {
+          const el = document.getElementById(h);
+          if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+        }, 80);
+      }
+    };
+    applyHash();
+    window.addEventListener("hashchange", applyHash);
+    return () => window.removeEventListener("hashchange", applyHash);
+  }, []);
+
+
 
   const THEMATIQUES: { value: Thematique; label: string }[] = [
     { value: "all", label: t("Toutes", "All") },
@@ -937,7 +964,12 @@ const SuccessStoriesPage = () => {
       <section className="ss-mini-section">
         <div className="ss-mini-grid">
           {stories.map((s) => (
-            <a key={s.id} href={`#${s.id}`} className={`ss-mini-card${matches(s) ? "" : " ss-hidden"}`}>
+            <a
+              key={s.id}
+              href={`#${s.id}`}
+              onClick={(e) => { e.preventDefault(); openStory(s.id); }}
+              className={`ss-mini-card${matches(s) ? "" : " ss-hidden"}`}
+            >
               <div>
                 <span className="ss-mini-num">{s.num}.</span>
                 <span className="ss-mini-thema">{s.thematiqueLabel}</span>
@@ -962,12 +994,14 @@ const SuccessStoriesPage = () => {
               <div className="ss-mini-secteur-line">{s.miniSecteur}</div>
             </a>
           ))}
+
         </div>
       </section>
 
       <main className="ss-stories">
-        {stories.map((s) => (
-          <article key={s.id} id={s.id} className={`ss-story${matches(s) ? "" : " ss-hidden"}`}>
+        {stories.filter((s) => s.id === selectedId).map((s) => (
+          <article key={s.id} id={s.id} className="ss-story">
+
             <div className="ss-visual">
               <div className="ss-story-eyebrow">
                 {t("— Success Story · ", "— Success Story · ")}{s.num}
@@ -1087,19 +1121,34 @@ const SuccessStoriesPage = () => {
 
               <nav className="ss-story-nav" aria-label={t("Navigation entre stories", "Stories navigation")}>
                 {parseInt(s.num, 10) > 1 && (
-                  <a href={`#story-${String(parseInt(s.num, 10) - 1).padStart(2, "0")}`}>
+                  <a
+                    href={`#story-${String(parseInt(s.num, 10) - 1).padStart(2, "0")}`}
+                    onClick={(e) => { e.preventDefault(); openStory(`story-${String(parseInt(s.num, 10) - 1).padStart(2, "0")}`); }}
+                  >
                     {t("← Story précédente", "← Previous Story")}
                   </a>
                 )}
                 {parseInt(s.num, 10) < stories.length && (
-                  <a href={`#story-${String(parseInt(s.num, 10) + 1).padStart(2, "0")}`}>
+                  <a
+                    href={`#story-${String(parseInt(s.num, 10) + 1).padStart(2, "0")}`}
+                    onClick={(e) => { e.preventDefault(); openStory(`story-${String(parseInt(s.num, 10) + 1).padStart(2, "0")}`); }}
+                  >
                     {t("Story suivante →", "Next Story →")}
                   </a>
                 )}
-                <a className="all" href="/success-stories">
+                <a
+                  className="all"
+                  href="/success-stories"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setSelectedId(null);
+                    window.scrollTo({ top: 0, behavior: "smooth" });
+                  }}
+                >
                   {t("↩ Toutes les Success Stories", "↩ All Success Stories")}
                 </a>
               </nav>
+
             </div>
           </article>
         ))}
