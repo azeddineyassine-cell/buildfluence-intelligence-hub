@@ -66,6 +66,8 @@ type Story = {
   resultsExtra?: string;
   testimony?: Testimony;
   tags: string[];
+  visualExtra?: React.ReactNode;
+  contentExtra?: React.ReactNode;
 };
 
 const SuccessStoriesCSS = `
@@ -177,6 +179,17 @@ const SuccessStoriesCSS = `
   .ss-story-nav a:hover { border-color: var(--bf-gold); color: var(--bf-gold); }
   .ss-story-nav a.all { background: var(--bf-navy); color: var(--bf-gold); border-color: var(--bf-navy); margin-left: auto; }
   .ss-story-nav a.all:hover { background: var(--bf-navy-soft); color: var(--bf-gold); }
+  .ss-visual-extra { display: flex; flex-direction: column; gap: 14px; margin-bottom: 22px; }
+  .ss-visual-extra img.ss-vx-img { display: block; width: 100%; height: auto; max-height: 220px; object-fit: contain; background: #FFFFFF; border: 1px solid var(--bf-paper-deep); padding: 8px; }
+  .ss-visual-extra a.ss-vx-link { color: var(--bf-navy); text-decoration: underline; font-family: 'JetBrains Mono', monospace; font-size: 10.5px; letter-spacing: 0.08em; line-height: 1.5; display: inline-block; }
+  .ss-visual-extra a.ss-vx-link:hover { color: var(--bf-gold); }
+  .ss-visual-extra .ss-vx-logos { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+  .ss-visual-extra .ss-vx-logos img { height: 56px; width: auto; max-width: 100%; object-fit: contain; background: #FFFFFF; padding: 4px; border: 1px solid var(--bf-paper-deep); }
+  .ss-content-box { background: #FFF8E6; border-left: 3px solid var(--bf-gold); padding: 20px 24px; margin: 0 0 28px; }
+  .ss-content-box-title { font-family: 'Playfair Display', serif; font-weight: 600; font-size: 17px; color: var(--bf-navy); margin: 0 0 14px; }
+  .ss-content-box ol { list-style: none; counter-reset: q; padding-left: 0; margin: 0; }
+  .ss-content-box li { position: relative; padding-left: 32px; margin-bottom: 10px; counter-increment: q; font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 15.5px; color: var(--bf-ink); line-height: 1.55; }
+  .ss-content-box li::before { content: counter(q) "."; position: absolute; left: 0; top: 0; font-family: 'JetBrains Mono', monospace; font-style: normal; font-size: 11px; font-weight: 600; color: var(--bf-gold); }
 `;
 
 const SuccessStoriesPage = () => {
@@ -300,6 +313,17 @@ const SuccessStoriesPage = () => {
         date: t("(lettre du 2 février 2020)", "(letter of February 2, 2020)"),
       },
       tags: [t("AGROALIMENTAIRE","AGRI-FOOD"), t("GESTION DE CRISE","CRISIS MANAGEMENT"), t("RÉHABILITATION DE MARQUE","BRAND REHABILITATION"), t("DÉSINFORMATION","DISINFORMATION"), t("🇲🇦 MAROC","🇲🇦 MOROCCO")],
+      visualExtra: (
+        <>
+          <img src="/img1.png" alt={t("Raïbi Jamila — visuel produit","Raïbi Jamila — product visual")} className="ss-vx-img" />
+          <a href="https://fr.le360.ma/medias/video-rumeurs-et-reseaux-sociaux-quand-raibi-jamila-en-paie-le-prix-fort-137659/" target="_blank" rel="noopener noreferrer">
+            <img src="/img2.png" alt="le360" className="ss-vx-img" style={{ maxHeight: 80 }} />
+          </a>
+          <a className="ss-vx-link" href="https://medias24.com/2017/10/09/reseaux-sociaux-et-bad-buzz-raibi-jamila-un-cas-decole" target="_blank" rel="noopener noreferrer">
+            medias24 — {t("Réseaux sociaux et bad buzz : Raïbi Jamila, un cas d'école","Social media and bad buzz: Raïbi Jamila, a textbook case")} ↗
+          </a>
+        </>
+      ),
     },
     {
       id: "story-02",
@@ -318,9 +342,6 @@ const SuccessStoriesPage = () => {
           <span style={{ color: "var(--bf-gold)" }}>#كلنا_مقاطعون</span> ]
         </>
       ),
-      resources: [
-        { type: t("📄 Étude indépendante","📄 Independent study"), text: t("EPGE, \"Le boycott d'avril 2018 au Maroc\", septembre 2019","EPGE, \"The April 2018 boycott in Morocco\", September 2019") },
-      ],
       meta: [
         { label: t("CLIENT","CLIENT"), value: t("Cabinet européen d'intelligence","European intelligence firm") },
         { label: t("PÉRIODE","PERIOD"), value: "2018" },
@@ -362,6 +383,19 @@ const SuccessStoriesPage = () => {
         date: t("(lettre du 2 mars 2020)","(letter of March 2, 2020)"),
       },
       tags: [t("INTELLIGENCE STRATÉGIQUE","STRATEGIC INTELLIGENCE"), t("DÉSINFORMATION","DISINFORMATION"), t("CARTOGRAPHIE D'ACTEURS","ACTOR MAPPING"), "OSINT", t("🇲🇦 MAROC","🇲🇦 MOROCCO")],
+      visualExtra: (
+        <img src="/img3.png" alt={t("Boycott avril 2018 — Afriquia, Sidi Ali, Centrale","April 2018 boycott — Afriquia, Sidi Ali, Centrale")} className="ss-vx-img" style={{ maxHeight: 260 }} />
+      ),
+      contentExtra: (
+        <div className="ss-content-box">
+          <div className="ss-content-box-title">{t("3 questions se posent :","3 questions arise:")}</div>
+          <ol>
+            <li>{t("Est-ce un mouvement spontané exprimant un ras-le-bol social des plus démunis ?","Is this a spontaneous movement expressing the frustration of the most deprived?")}</li>
+            <li>{t("Est-ce un acte de manipulation d'opinion publique pour arranger un agenda électoral d'un parti politique ?","Is this an act of public opinion manipulation to serve a political party's electoral agenda?")}</li>
+            <li>{t("Est-ce une opération de déstabilisation politique montée de toutes pièces, plusieurs mois auparavant, par des acteurs étrangers ?","Is this a political destabilization operation orchestrated months in advance by foreign actors?")}</li>
+          </ol>
+        </div>
+      ),
     },
     {
       id: "story-03",
@@ -417,6 +451,11 @@ const SuccessStoriesPage = () => {
       ],
       resultsExtra: t("+ Repositionnement du CIDC en organisation orientée Intelligence Économique et approche Insight-Driven","+ Repositioning of the ICDT as an Economic Intelligence and Insight-Driven organization"),
       tags: [t("ORGANISATION INTERNATIONALE","INTERNATIONAL ORGANIZATION"), t("PLATEFORME D'ATTRACTIVITÉ","ATTRACTIVENESS PLATFORM"), t("INTELLIGENCE ÉCONOMIQUE","ECONOMIC INTELLIGENCE"), "MATCHMAKING", t("🇲🇦 🇸🇦 OCI","🇲🇦 🇸🇦 OIC")],
+      visualExtra: (
+        <a href="https://icdt-cidc.org/fr/" target="_blank" rel="noopener noreferrer">
+          <img src="/img4.png" alt="OCI / OIC" className="ss-vx-img" style={{ maxHeight: 180 }} />
+        </a>
+      ),
     },
     {
       id: "story-04",
@@ -478,6 +517,16 @@ const SuccessStoriesPage = () => {
         date: t("(lettre du 2 janvier 2020)","(letter of January 2, 2020)"),
       },
       tags: [t("SANTÉ PUBLIQUE","PUBLIC HEALTH"), t("COMMUNICATION DE CRISE","CRISIS COMMUNICATION"), "DATA INTELLIGENCE", "FACT-CHECKING", t("🇲🇦 MAROC","🇲🇦 MOROCCO")],
+      visualExtra: (
+        <>
+          <a href="https://medias24.com/2019/01/31/la-grippe-a-h1n1-au-menu-du-conseil-de-gouvernement/" target="_blank" rel="noopener noreferrer">
+            <img src="/img5.png" alt={t("Médias24 — H1N1 conseil de gouvernement","Médias24 — H1N1 government council")} className="ss-vx-img" style={{ maxHeight: 200 }} />
+          </a>
+          <a href="https://fr.le360.ma/societe/diapo-grippe-a-h1n1-rabat-la-situation-epidemiologique-expliquee-par-el-othmani-183394/" target="_blank" rel="noopener noreferrer">
+            <img src="/img6.png" alt={t("le360 — H1N1 expliqué par El Othmani","le360 — H1N1 explained by El Othmani")} className="ss-vx-img" style={{ maxHeight: 200 }} />
+          </a>
+        </>
+      ),
     },
     {
       id: "story-05",
@@ -550,7 +599,7 @@ const SuccessStoriesPage = () => {
       miniPitch: t("Quand un club légendaire devient cible informationnelle.","When a legendary club becomes an informational target."),
       miniSecteur: t("Sport professionnel · 🇲🇦","Professional sport · 🇲🇦"),
       eyebrow: t("Sport professionnel & gouvernance","Professional sport & governance"),
-      logos: [{ label: "RAJA CLUB ATHLETIC", image: logoRaja, alt: "Raja Club Athletic" }, { label: "MARSA MAROC", italic: true }],
+      logos: [{ label: "RAJA CLUB ATHLETIC", image: logoRaja, alt: "Raja Club Athletic" }],
       visualMain: (
         <>
           [ {t("Architecture de veille multi-dossiers","Multi-domain monitoring architecture")}<br />
@@ -592,6 +641,16 @@ const SuccessStoriesPage = () => {
       ],
       resultsExtra: t("+ Mission d'intelligence stratégique au service d'un acteur emblématique du sport marocain","+ Strategic intelligence mission serving an iconic player of Moroccan sport"),
       tags: [t("SPORT PROFESSIONNEL","PROFESSIONAL SPORT"), t("INTELLIGENCE STRATÉGIQUE","STRATEGIC INTELLIGENCE"), t("GESTION DE CRISE","CRISIS MANAGEMENT"), t("MONITORING NARRATIF","NARRATIVE MONITORING"), t("🇲🇦 MAROC","🇲🇦 MOROCCO")],
+      visualExtra: (
+        <>
+          <a href="https://www.hesport.com/الرجاء-يتحرك-لتحديث-حضوره-بمنصات-التو-436203.html" target="_blank" rel="noopener noreferrer">
+            <img src="/img7.png" alt="Marsa Maroc" className="ss-vx-img" style={{ maxHeight: 90 }} />
+          </a>
+          <a href="/Cas_client_RCA_v2.html?lang=fr" target="_blank" rel="noopener noreferrer">
+            <img src="/img8.png" alt={t("Raja Club Athletic — mission","Raja Club Athletic — mission")} className="ss-vx-img" style={{ maxHeight: 220 }} />
+          </a>
+        </>
+      ),
     },
     {
       id: "story-07",
@@ -853,6 +912,14 @@ const SuccessStoriesPage = () => {
       ],
       resultsExtra: t("+ Cartographie complète des interconnexions internationales et identification des risques de conformité","+ Full mapping of international interconnections and identification of compliance risks"),
       tags: [t("DEEP DUE DILIGENCE","DEEP DUE DILIGENCE"), t("CONFORMITÉ INTERNATIONALE","INTERNATIONAL COMPLIANCE"), "KYC / AML-CFT", t("CARTOGRAPHIE D'ACTEURS","ACTOR MAPPING"), "🇲🇦 🌍"],
+      visualExtra: (
+        <>
+          <img src="/img9.png" alt={t("Code feu vert / orange / rouge","Green / amber / red traffic-light")} className="ss-vx-img" style={{ maxHeight: 220 }} />
+          <a className="ss-vx-link" href="/solutions/deep-due-diligence">
+            {t("03 · Cas d'école · Un dossier confidentiel — Mission : protéger 400M$","03 · Case study · A confidential file — Mission: protect $400M")} ↗
+          </a>
+        </>
+      ),
     },
     {
       id: "story-12",
@@ -907,6 +974,18 @@ const SuccessStoriesPage = () => {
       ],
       resultsExtra: t("★ Les recommandations du Livre Blanc ont directement alimenté l'appel d'offres 2024 du Ministère de la Santé pour la mise en place d'un système de santé intelligent incluant le Dossier Patient Partagé national 360°.","★ The White Paper's recommendations directly fed the Ministry of Health's 2024 tender to deploy an intelligent health system including the national 360° Shared Patient Record."),
       tags: [t("E-SANTÉ","E-HEALTH"), t("TRANSFORMATION DIGITALE","DIGITAL TRANSFORMATION"), t("BENCHMARK INTERNATIONAL","INTERNATIONAL BENCHMARK"), t("POLITIQUE PUBLIQUE","PUBLIC POLICY"), t("RECHERCHE STRATÉGIQUE","STRATEGIC RESEARCH"), "🇲🇦 🌍"],
+      visualExtra: (
+        <>
+          <div className="ss-vx-logos">
+            <img src="/img_oms.png" alt={t("OMS","WHO")} onError={(e)=>{e.currentTarget.style.display='none';}} />
+            <img src="/img_um6ss.png" alt="UM6SS" onError={(e)=>{e.currentTarget.style.display='none';}} />
+            <img src="/img_um5.png" alt="UM5" onError={(e)=>{e.currentTarget.style.display='none';}} />
+          </div>
+          <a className="ss-vx-link" href="/esante_livre_blanc_v2_4.html?lang=fr" target="_blank" rel="noopener noreferrer">
+            {t("Consulter le Livre Blanc →","View the White Paper →")}
+          </a>
+        </>
+      ),
     },
   ];
 
@@ -1040,6 +1119,7 @@ const SuccessStoriesPage = () => {
                   ))}
                 </div>
               )}
+              {s.visualExtra && <div className="ss-visual-extra">{s.visualExtra}</div>}
               <div className="ss-meta">
                 {s.meta.map((m, i) => (
                   <div key={i} className="ss-meta-line">
@@ -1059,6 +1139,7 @@ const SuccessStoriesPage = () => {
 
               <div className="ss-section-label first">{t("— Storytelling", "— Storytelling")}</div>
               <p className="ss-storytelling">{s.storytelling}</p>
+              {s.contentExtra}
 
               <div className="ss-section-label">{t("— Mission", "— Mission")}</div>
               <div className="ss-mission">{s.mission}</div>
