@@ -2294,6 +2294,11 @@ const HealthCaseFile = () => {
       meta={lang === "en" ? "Post-mission debrief · Ministry of Health" : "Debrief post-mission · Ministère de la Santé"}
     />
     <CaseStats stats={[{ value: <><span>&lt;2</span><Unit>h</Unit></>, label: lang === "en" ? "War Room activation" : "Activation War Room" }, { value: <><span>14</span><Unit>{lang === "en" ? "d" : "j"}</Unit></>, label: lang === "en" ? "Crisis contained" : "Crise maîtrisée" }, { value: <><span>+38</span><Unit>%</Unit></>, label: lang === "en" ? "Minister digital image" : "Image digitale Ministre" }, { value: "1", label: lang === "en" ? "Cabinet supported" : "Cabinet accompagné" }]} />
+    <iframe
+      src="/H1N1_Crisis_Chart_v2.html"
+      title={lang === "en" ? "H1N1 Crisis Chart" : "Grippe A H1N1 · Suivi des sujets phares"}
+      style={{ width: "100%", height: 600, border: "none", borderRadius: 4, display: "block", marginTop: 32 }}
+    />
     <MissionTimeline
       title={lang === "en" ? "War Room Workflow" : "Déroulé de la War Room"}
       items={lang === "en" ? [
