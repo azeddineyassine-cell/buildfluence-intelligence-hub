@@ -147,7 +147,7 @@ const StrategicWorkflow = () => {
 
   const kpis = [
     { val: "$400M", lbl: t("sécurisés via Deep Due Diligence", "secured through Deep Due Diligence") },
-    { val: "180M MAD", lbl: t("générés via politique publique", "generated via public policy") },
+    { val: "190M MAD", lbl: t("générés via politique publique", "generated via public policy") },
     { val: "+14%", lbl: t("de parts de marché reconquises post-crise", "market share gained post-crisis") },
     { val: t("2 sem.", "2 wks"), lbl: t("crise nationale ramenée sous contrôle", "national crisis brought under control") },
   ];

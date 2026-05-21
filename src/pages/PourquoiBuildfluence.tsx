@@ -609,7 +609,7 @@ const PourquoiBuildfluence = () => {
               marginBottom: 16,
             }}
           >
-            {t("— Positionnement / Le Marché vs Buildfluence", "— Positioning / The Market vs Buildfluence")}
+            {t("Positionnement / Le Marché vs Buildfluence", "Positioning / The Market vs Buildfluence")}
           </div>
 
           {/* Titre */}
@@ -660,19 +660,15 @@ const PourquoiBuildfluence = () => {
                   </th>
                   <th>
                     <span className="col-name">{t("Cabinets de Stratégie", "Strategy Consultancies")}</span>
-                    <span className="col-sub">{t("type BCG, Roland Berger", "e.g. BCG, Roland Berger")}</span>
                   </th>
                   <th>
                     <span className="col-name">{t("Agrégateurs de Presse", "Press Aggregators")}</span>
-                    <span className="col-sub">{t("type Factiva, Europresse", "e.g. Factiva, Europresse")}</span>
                   </th>
                   <th>
                     <span className="col-name">{t("Cabinets de Veille / IE", "Monitoring / CI Firms")}</span>
-                    <span className="col-sub">{t("type Kantar, Cision", "e.g. Kantar, Cision")}</span>
                   </th>
                   <th>
                     <span className="col-name">{t("Agences d'Influence", "Influence Agencies")}</span>
-                    <span className="col-sub">{t("type Havas, Publicis", "e.g. Havas, Publicis")}</span>
                   </th>
                   <th className="bf-header">
                     <span className="col-name">Buildfluence</span>
@@ -729,13 +725,13 @@ const PourquoiBuildfluence = () => {
           <div className="pwb-notes">
             <div className="pwb-notes-eyebrow">{t("— Notes de lecture", "— Reading notes")}</div>
             <p className="pwb-note" data-num="¹">
-              <strong>{t("Sur l'agrégation de presse —", "On press aggregation —")}</strong> {t(
+              <strong>{t("Sur l'agrégation de presse", "On press aggregation")}</strong> {t(
                 "L'agrégation de presse est à l'intelligence économique ce que la météo est à la stratégie militaire : une entrée, jamais une sortie. Confondre les deux, c'est croire qu'avoir un thermomètre suffit pour gagner une bataille.",
                 "Press aggregation is to economic intelligence what weather is to military strategy: an input, never an output. To confuse the two is to believe that owning a thermometer is enough to win a battle."
               )}
             </p>
             <p className="pwb-note" data-num="²">
-              <strong>{t("Sur la dépendance technologique —", "On technological dependence —")}</strong> {t(
+              <strong>{t("Sur la dépendance technologique", "On technological dependence")}</strong> {t(
                 "Les solutions d'agrégation dominantes opèrent en cloud américain. Pour des données stratégiques marocaines, ce n'est pas un détail technique : c'est une vulnérabilité structurelle.",
                 "Dominant aggregation solutions operate on US cloud infrastructure. For strategic Moroccan data, this is not a technical detail: it is a structural vulnerability."
               )}
