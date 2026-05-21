@@ -517,6 +517,16 @@ const SuccessStoriesPage = () => {
         date: t("(lettre du 2 janvier 2020)","(letter of January 2, 2020)"),
       },
       tags: [t("SANTÉ PUBLIQUE","PUBLIC HEALTH"), t("COMMUNICATION DE CRISE","CRISIS COMMUNICATION"), "DATA INTELLIGENCE", "FACT-CHECKING", t("🇲🇦 MAROC","🇲🇦 MOROCCO")],
+      visualExtra: (
+        <>
+          <a href="https://medias24.com/2019/01/31/la-grippe-a-h1n1-au-menu-du-conseil-de-gouvernement/" target="_blank" rel="noopener noreferrer">
+            <img src="/img5.png" alt={t("Médias24 — H1N1 conseil de gouvernement","Médias24 — H1N1 government council")} className="ss-vx-img" style={{ maxHeight: 200 }} />
+          </a>
+          <a href="https://fr.le360.ma/societe/diapo-grippe-a-h1n1-rabat-la-situation-epidemiologique-expliquee-par-el-othmani-183394/" target="_blank" rel="noopener noreferrer">
+            <img src="/img6.png" alt={t("le360 — H1N1 expliqué par El Othmani","le360 — H1N1 explained by El Othmani")} className="ss-vx-img" style={{ maxHeight: 200 }} />
+          </a>
+        </>
+      ),
     },
     {
       id: "story-05",
