@@ -982,8 +982,9 @@ const SuccessStoriesPage = () => {
       </section>
 
       <main className="ss-stories">
-        {stories.map((s) => (
-          <article key={s.id} id={s.id} className={`ss-story${matches(s) ? "" : " ss-hidden"}`}>
+        {stories.filter((s) => s.id === selectedId).map((s) => (
+          <article key={s.id} id={s.id} className="ss-story">
+
             <div className="ss-visual">
               <div className="ss-story-eyebrow">
                 {t("— Success Story · ", "— Success Story · ")}{s.num}
