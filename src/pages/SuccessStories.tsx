@@ -179,6 +179,17 @@ const SuccessStoriesCSS = `
   .ss-story-nav a:hover { border-color: var(--bf-gold); color: var(--bf-gold); }
   .ss-story-nav a.all { background: var(--bf-navy); color: var(--bf-gold); border-color: var(--bf-navy); margin-left: auto; }
   .ss-story-nav a.all:hover { background: var(--bf-navy-soft); color: var(--bf-gold); }
+  .ss-visual-extra { display: flex; flex-direction: column; gap: 14px; margin-bottom: 22px; }
+  .ss-visual-extra img.ss-vx-img { display: block; width: 100%; height: auto; max-height: 220px; object-fit: contain; background: #FFFFFF; border: 1px solid var(--bf-paper-deep); padding: 8px; }
+  .ss-visual-extra a.ss-vx-link { color: var(--bf-navy); text-decoration: underline; font-family: 'JetBrains Mono', monospace; font-size: 10.5px; letter-spacing: 0.08em; line-height: 1.5; display: inline-block; }
+  .ss-visual-extra a.ss-vx-link:hover { color: var(--bf-gold); }
+  .ss-visual-extra .ss-vx-logos { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+  .ss-visual-extra .ss-vx-logos img { height: 56px; width: auto; max-width: 100%; object-fit: contain; background: #FFFFFF; padding: 4px; border: 1px solid var(--bf-paper-deep); }
+  .ss-content-box { background: #FFF8E6; border-left: 3px solid var(--bf-gold); padding: 20px 24px; margin: 0 0 28px; }
+  .ss-content-box-title { font-family: 'Playfair Display', serif; font-weight: 600; font-size: 17px; color: var(--bf-navy); margin: 0 0 14px; }
+  .ss-content-box ol { list-style: none; counter-reset: q; padding-left: 0; margin: 0; }
+  .ss-content-box li { position: relative; padding-left: 32px; margin-bottom: 10px; counter-increment: q; font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 15.5px; color: var(--bf-ink); line-height: 1.55; }
+  .ss-content-box li::before { content: counter(q) "."; position: absolute; left: 0; top: 0; font-family: 'JetBrains Mono', monospace; font-style: normal; font-size: 11px; font-weight: 600; color: var(--bf-gold); }
 `;
 
 const SuccessStoriesPage = () => {
