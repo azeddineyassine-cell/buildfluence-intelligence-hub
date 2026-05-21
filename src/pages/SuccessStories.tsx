@@ -641,6 +641,16 @@ const SuccessStoriesPage = () => {
       ],
       resultsExtra: t("+ Mission d'intelligence stratégique au service d'un acteur emblématique du sport marocain","+ Strategic intelligence mission serving an iconic player of Moroccan sport"),
       tags: [t("SPORT PROFESSIONNEL","PROFESSIONAL SPORT"), t("INTELLIGENCE STRATÉGIQUE","STRATEGIC INTELLIGENCE"), t("GESTION DE CRISE","CRISIS MANAGEMENT"), t("MONITORING NARRATIF","NARRATIVE MONITORING"), t("🇲🇦 MAROC","🇲🇦 MOROCCO")],
+      visualExtra: (
+        <>
+          <a href="https://www.hesport.com/الرجاء-يتحرك-لتحديث-حضوره-بمنصات-التو-436203.html" target="_blank" rel="noopener noreferrer">
+            <img src="/img7.png" alt="Marsa Maroc" className="ss-vx-img" style={{ maxHeight: 90 }} />
+          </a>
+          <a href="/Cas_client_RCA_v2.html?lang=fr" target="_blank" rel="noopener noreferrer">
+            <img src="/img8.png" alt={t("Raja Club Athletic — mission","Raja Club Athletic — mission")} className="ss-vx-img" style={{ maxHeight: 220 }} />
+          </a>
+        </>
+      ),
     },
     {
       id: "story-07",
