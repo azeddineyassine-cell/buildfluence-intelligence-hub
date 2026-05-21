@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Grippe A H1N1 · Suivi des sujets phares · Buildfluence</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+:root {
+  --navy: #0D1B2A;
+  --navy-mid: #152436;
+  --gold: #C9A84C;
+  --gold-light: rgba(201,168,76,.12);
+  --paper: #FAF6ED;
+  --paper-alt: #F2EDD8;
+  --ink: #2C2C2A;
+  --ink-light: #5F5E5A;
+  --ink-faint: #888780;
+  --rule: rgba(217,207,188,.5);
+  --red: #C0392B;
+  --red-light: rgba(192,57,43,.15);
+  --white: #FFFFFF;
+  --c1: #185FA5;   /* Ministère de la Santé */
+  --c2: #C9A84C;   /* Personnes agées */
+  --c3: #E24B4A;   /* Grippe A H1N1 */
+  --c4: #0C447C;   /* Enflonza */
+  --c5: #0F6E56;   /* Femmes enceintes */
+  --c6: #888780;   /* Surveillance */
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Cormorant Garamond', serif;
+  background: transparent;
+  color: var(--ink);
+  padding: 0;
+}
+
+/* ── HEADER ── */
+/* ── MAIN ── */
+.main { padding: 0; }
+
+/* ── CONTROLS ── */
+.controls {
+  display: flex; align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px; flex-wrap: wrap; gap: 12px;
+}
+.ctrl-left {
+  display: flex; gap: 8px; flex-wrap: wrap;
+}
+.series-btn {
+  display: flex; align-items: center; gap: 6px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 8.5px; font-weight: 600;
+  letter-spacing: .1em; text-transform: uppercase;
+  padding: 6px 12px; border-radius: 20px;
+  border: 1.5px solid transparent;
+  cursor: pointer; transition: all .2s;
+  background: white;
+}
+.series-btn.active { color: white; }
+.series-btn.inactive { opacity: .4; background: var(--paper-alt); }
+.series-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  flex-shrink: 0;
+}
+.ctrl-right { display: flex; gap: 8px; }
+.view-btn {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 8px; font-weight: 600;
+  letter-spacing: .14em; text-transform: uppercase;
+  padding: 6px 14px; border-radius: 3px;
+  border: 1px solid var(--rule);
+  cursor: pointer; background: white; color: var(--ink-faint);
+  transition: all .2s;
+}
+.view-btn.active {
+  background: var(--navy); color: var(--gold);
+  border-color: var(--navy);
+}
+
+/* ── CHART CONTAINER ── */
+.chart-wrap {
+  background: white;
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  padding: 24px 20px 16px;
+  margin-bottom: 20px;
+  position: relative;
+}
+.chart-label-y {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 7.5px; font-weight: 600;
+  letter-spacing: .14em; text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-bottom: 12px;
+}
+#mainChart { width: 100% !important; }
+
+/* ── ANNOTATIONS PANEL ── */
+.annotations {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 12px; margin-bottom: 20px;
+}
+.annot {
+  background: white; border: 1px solid var(--rule);
+  border-left: 3px solid var(--red);
+  padding: 12px 14px; cursor: pointer;
+  transition: all .2s;
+}
+.annot:hover { border-left-color: var(--gold); box-shadow: 0 2px 12px rgba(0,0,0,.08); }
+.annot-date {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 8px; font-weight: 600;
+  letter-spacing: .16em; text-transform: uppercase;
+  color: var(--red); margin-bottom: 4px;
+}
+.annot-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 12px; font-weight: 700;
+  color: var(--navy); margin-bottom: 4px;
+}
+.annot-desc {
+  font-size: 10.5px; color: var(--ink-light);
+  line-height: 1.55;
+}
+
+
+/* ── INSIGHT BOX ── */
+.insight {
+  background: var(--navy);
+  border-left: 3px solid var(--gold);
+  padding: 16px 20px; margin-bottom: 20px;
+}
+.insight-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 8px; font-weight: 600;
+  letter-spacing: .2em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 8px;
+}
+.insight-text {
+  font-size: 12px; color: rgba(255,255,255,.8);
+  line-height: 1.7;
+}
+.insight-text strong { color: white; }
+.insight-text em { color: var(--gold); font-style: italic; }
+
+/* ── TOOLTIP CUSTOM ── */
+.custom-tooltip {
+  position: fixed;
+  background: var(--navy);
+  border: 1px solid var(--gold);
+  border-radius: 4px;
+  padding: 12px 14px;
+  pointer-events: none;
+  z-index: 1000;
+  min-width: 180px;
+  display: none;
+  box-shadow: 0 8px 24px rgba(0,0,0,.3);
+}
+.tt-date {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 8px; font-weight: 600;
+  letter-spacing: .14em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 8px;
+  border-bottom: 1px solid rgba(201,168,76,.2);
+  padding-bottom: 6px;
+}
+.tt-item {
+  display: flex; align-items: center;
+  justify-content: space-between;
+  gap: 10px; margin-bottom: 4px;
+}
+.tt-series {
+  display: flex; align-items: center; gap: 6px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 8px; color: rgba(255,255,255,.7);
+}
+.tt-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.tt-val {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px; font-weight: 600; color: white;
+}
+
+
+@media (max-width: 700px) {
+  .hero, .main { padding: 24px 20px; }
+  .annotations { grid-template-columns: 1fr; }
+  .hero-kpis { gap: 10px; }
+  .doc-header { padding: 12px 20px; }
+}
+</style>
+</head>
+<body>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- SECTION TITLE -->
+  <div style="font-family:'JetBrains Mono',monospace;font-size:8px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:16px;display:flex;align-items:center;gap:10px"><span style="display:inline-block;width:20px;height:1px;background:currentColor"></span>Suivi des sujets phares · Analyse quotidienne</div>
+
+  <!-- INSIGHT -->
+  <div class="insight">
+    <div class="insight-label">Lecture stratégique Buildfluence</div>
+    <div class="insight-text">
+      La crise H1N1 de janvier-février 2019 révèle une <strong>corrélation directe</strong> entre les pics médiatiques et la montée des cas signalés. Le <em>Feb 1 constitue le point d'inflexion critique</em> : attaques contre le Ministre de la Santé, pic H1N1 et premiers décès surviennent simultanément. Fait révélateur : <strong>le Ministre de la Santé a essuyé davantage de critiques dans le débat public que le virus lui-même</strong>. La bataille narrative a éclipsé la bataille sanitaire. La surveillance des sujets phares a permis d'anticiper cette dérive médiatique 48h avant le pic institutionnel, et d'activer la contre-stratégie au bon moment.
+    </div>
+  </div>
+
+  <!-- CONTROLS -->
+  <div class="controls">
+    <div class="ctrl-left" id="seriesControls"></div>
+    <div class="ctrl-right">
+      <button class="view-btn active" onclick="setView('line')" id="btn-line">Courbes</button>
+      <button class="view-btn" onclick="setView('bar')" id="btn-bar">Barres</button>
+    </div>
+  </div>
+
+  <!-- CHART -->
+  <div class="chart-wrap">
+    <div class="chart-label-y">Nombre de mentions / signalements quotidiens</div>
+    <canvas id="mainChart" height="320"></canvas>
+  </div>
+
+  <!-- ANNOTATIONS -->
+  <div class="annotations">
+    <div class="annot" onclick="highlightDate(4)">
+      <div class="annot-date">Jan 31 · Jour 5</div>
+      <div class="annot-title">Montée en puissance H1N1</div>
+      <div class="annot-desc">Les signalements Grippe A H1N1 atteignent 13 mentions. Début d'une couverture médiatique intensive. Alerte Buildfluence émise J-2.</div>
+    </div>
+    <div class="annot" onclick="highlightDate(5)">
+      <div class="annot-date">Feb 1 · Jour 6 · Point critique</div>
+      <div class="annot-title">Attaques contre le Ministre · Pic de crise H1N1</div>
+      <div class="annot-desc">Pic simultané : Ministère de la Santé (20), H1N1 (14), Enflonza (17). Premières attaques institutionnelles coordonnées. 10aine de décès signalés.</div>
+    </div>
+    <div class="annot" onclick="highlightDate(0)">
+      <div class="annot-date">Jan 27 · Jour 1</div>
+      <div class="annot-title">Activation de la surveillance</div>
+      <div class="annot-desc">Déploiement de la cellule de veille Buildfluence. Premières données collectées sur 6 axes simultanés. Niveau d'alerte initial modéré.</div>
+    </div>
+    <div class="annot" onclick="highlightDate(6)">
+      <div class="annot-date">Feb 2 · Jour 7</div>
+      <div class="annot-title">Décrue post-pic</div>
+      <div class="annot-desc">Chute rapide des signalements après intervention institutionnelle. Efficacité de la réponse de communication mesurée en temps réel.</div>
+    </div>
+  </div>
+
+
+</div>
+
+<!-- CUSTOM TOOLTIP -->
+<div class="custom-tooltip" id="tooltip">
+  <div class="tt-date" id="tt-date"></div>
+  <div id="tt-items"></div>
+</div>
+
+<script>
+// ── DATA ──
+const LABELS = ['Jan 27','Jan 28','Jan 29','Jan 30','Jan 31','Feb 01','Feb 02'];
+const CRITICAL_IDX = 5; // Feb 01
+
+const SERIES = [
+  { key: 's1', label: 'Min. Santé',     short: 'Min. Santé',   color: '#185FA5', data: [3,5,1,2,13,20,2] },
+  { key: 's2', label: 'Personnes agées',short: 'Pers. Agées',  color: '#C9A84C', data: [9,10,5,6,8,9,1] },
+  { key: 's3', label: 'Grippe A H1N1',  short: 'H1N1',         color: '#E24B4A', data: [0,2,9,7,5,14,3] },
+  { key: 's4', label: 'Enflonza',       short: 'Enflonza',     color: '#0C447C', data: [0,1,13,5,3,17,5] },
+  { key: 's5', label: 'Femmes enc.',    short: 'Femmes enc.',  color: '#0F6E56', data: [13,15,11,4,7,3,0] },
+  { key: 's6', label: 'Surveillance',   short: 'Surveillance', color: '#888780', data: [17,19,8,12,4,2,0] },
+];
+
+let activeIdx = new Set([0,1,2,3,4,5]);
+let currentView = 'line';
+let chart = null;
+let highlightedDate = null;
+
+// ── INIT ──
+document.addEventListener('DOMContentLoaded', () => {
+  buildSeriesControls();
+  buildChart();
+});
+
+function buildSeriesControls() {
+  const wrap = document.getElementById('seriesControls');
+  SERIES.forEach((s, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'series-btn active';
+    btn.id = `sbtn-${i}`;
+    btn.style.color = s.color;
+    btn.style.borderColor = s.color;
+    btn.innerHTML = `<span class="series-dot" style="background:${s.color}"></span>${s.short}`;
+    btn.onclick = () => toggleSeries(i);
+    wrap.appendChild(btn);
+  });
+}
+
+function toggleSeries(i) {
+  if (activeIdx.has(i)) {
+    if (activeIdx.size === 1) return;
+    activeIdx.delete(i);
+    document.getElementById(`sbtn-${i}`).classList.replace('active','inactive');
+  } else {
+    activeIdx.add(i);
+    document.getElementById(`sbtn-${i}`).classList.replace('inactive','active');
+  }
+  updateChart();
+}
+
+function setView(v) {
+  currentView = v;
+  document.getElementById('btn-line').classList.toggle('active', v==='line');
+  document.getElementById('btn-bar').classList.toggle('active', v==='bar');
+  updateChart();
+}
+
+function buildChart() {
+  const ctx = document.getElementById('mainChart').getContext('2d');
+
+  // Annotation plugin (inline)
+  const annotPlugin = {
+    id: 'criticalLine',
+    afterDraw(chart) {
+      const idx = CRITICAL_IDX;
+      const meta = chart.getDatasetMeta(0);
+      if (!meta.data[idx]) return;
+      const x = meta.data[idx].x;
+      const {top, bottom} = chart.chartArea;
+      const {ctx: c} = chart;
+      c.save();
+      c.strokeStyle = 'rgba(192,57,43,.6)';
+      c.lineWidth = 1.5;
+      c.setLineDash([5,4]);
+      c.beginPath();
+      c.moveTo(x, top);
+      c.lineTo(x, bottom);
+      c.stroke();
+      // Label
+      c.fillStyle = 'rgba(192,57,43,.9)';
+      c.font = '600 9px JetBrains Mono, monospace';
+      c.textAlign = 'center';
+      c.fillText('⚠ POINT CRITIQUE', x, top - 6);
+      c.restore();
+    }
+  };
+
+  chart = new Chart(ctx, {
+    type: currentView === 'line' ? 'line' : 'bar',
+    plugins: [annotPlugin],
+    data: getChartData(),
+    options: getChartOptions(),
+  });
+}
+
+function getChartData() {
+  return {
+    labels: LABELS,
+    datasets: SERIES.map((s, i) => ({
+      label: s.label,
+      data: s.data,
+      borderColor: s.color,
+      backgroundColor: currentView === 'bar'
+        ? s.color + 'CC'
+        : s.color + '18',
+      pointBackgroundColor: s.data.map((_, di) =>
+        di === CRITICAL_IDX ? s.color : 'white'),
+      pointBorderColor: s.color,
+      pointBorderWidth: di => di === CRITICAL_IDX ? 3 : 1.5,
+      pointRadius: s.data.map((_, di) => di === CRITICAL_IDX ? 7 : 4),
+      pointHoverRadius: 8,
+      borderWidth: 2.5,
+      tension: 0.4,
+      fill: currentView === 'line',
+      hidden: !activeIdx.has(i),
+    }))
+  };
+}
+
+function getChartOptions() {
+  return {
+    responsive: true,
+    interaction: { mode: 'index', intersect: false },
+    plugins: {
+      legend: { display: false },
+      tooltip: {
+        enabled: false,
+        external: externalTooltip,
+      }
+    },
+    scales: {
+      x: {
+        grid: { color: 'rgba(217,207,188,.3)' },
+        ticks: {
+          font: { family: 'JetBrains Mono, monospace', size: 9, weight: '600' },
+          color: '#888780',
+        }
+      },
+      y: {
+        min: 0, max: 22,
+        grid: { color: 'rgba(217,207,188,.3)' },
+        ticks: {
+          font: { family: 'JetBrains Mono, monospace', size: 9 },
+          color: '#888780',
+          stepSize: 5,
+        }
+      }
+    },
+    animation: { duration: 600, easing: 'easeInOutQuart' }
+  };
+}
+
+function updateChart() {
+  chart.config.type = currentView === 'line' ? 'line' : 'bar';
+  chart.data = getChartData();
+  chart.options = getChartOptions();
+  chart.update();
+}
+
+function externalTooltip(context) {
+  const tt = document.getElementById('tooltip');
+  if (context.tooltip.opacity === 0) { tt.style.display = 'none'; return; }
+
+  const di = context.tooltip.dataPoints[0]?.dataIndex;
+  const date = LABELS[di];
+
+  document.getElementById('tt-date').textContent = date + (di === CRITICAL_IDX ? ' · ⚠ POINT CRITIQUE' : '');
+
+  const items = document.getElementById('tt-items');
+  items.innerHTML = '';
+  SERIES.forEach((s, i) => {
+    if (!activeIdx.has(i)) return;
+    const row = document.createElement('div');
+    row.className = 'tt-item';
+    row.innerHTML = `
+      <div class="tt-series">
+        <span class="tt-dot" style="background:${s.color}"></span>
+        ${s.short}
+      </div>
+      <span class="tt-val">${s.data[di]}</span>
+    `;
+    items.appendChild(row);
+  });
+
+  // Total
+  const total = SERIES.filter((_,i) => activeIdx.has(i)).reduce((a,s) => a+s.data[di], 0);
+  const totalRow = document.createElement('div');
+  totalRow.className = 'tt-item';
+  totalRow.style.cssText = 'border-top:1px solid rgba(201,168,76,.2);margin-top:6px;padding-top:6px';
+  totalRow.innerHTML = `
+    <div class="tt-series" style="color:var(--gold)">TOTAL</div>
+    <span class="tt-val" style="color:var(--gold)">${total}</span>
+  `;
+  items.appendChild(totalRow);
+
+  tt.style.display = 'block';
+  const pos = context.chart.canvas.getBoundingClientRect();
+  let left = pos.left + context.tooltip.caretX + 12;
+  let top = pos.top + context.tooltip.caretY - 10;
+  if (left + 200 > window.innerWidth) left = left - 220;
+  tt.style.left = left + 'px';
+  tt.style.top = top + 'px';
+}
+
+
+// ── HIGHLIGHT DATE ──
+function highlightDate(di) {
+  highlightedDate = di;
+  // Scroll chart into view
+  document.querySelector('.chart-wrap').scrollIntoView({ behavior: 'smooth', block: 'center' });
+  // Flash the vertical line
+  if (chart) {
+    const originalDraw = chart.options.animation;
+    chart.update('active');
+  }
+}
+</script>
+</body>
+</html>
