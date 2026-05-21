@@ -1104,19 +1104,34 @@ const SuccessStoriesPage = () => {
 
               <nav className="ss-story-nav" aria-label={t("Navigation entre stories", "Stories navigation")}>
                 {parseInt(s.num, 10) > 1 && (
-                  <a href={`#story-${String(parseInt(s.num, 10) - 1).padStart(2, "0")}`}>
+                  <a
+                    href={`#story-${String(parseInt(s.num, 10) - 1).padStart(2, "0")}`}
+                    onClick={(e) => { e.preventDefault(); openStory(`story-${String(parseInt(s.num, 10) - 1).padStart(2, "0")}`); }}
+                  >
                     {t("← Story précédente", "← Previous Story")}
                   </a>
                 )}
                 {parseInt(s.num, 10) < stories.length && (
-                  <a href={`#story-${String(parseInt(s.num, 10) + 1).padStart(2, "0")}`}>
+                  <a
+                    href={`#story-${String(parseInt(s.num, 10) + 1).padStart(2, "0")}`}
+                    onClick={(e) => { e.preventDefault(); openStory(`story-${String(parseInt(s.num, 10) + 1).padStart(2, "0")}`); }}
+                  >
                     {t("Story suivante →", "Next Story →")}
                   </a>
                 )}
-                <a className="all" href="/success-stories">
+                <a
+                  className="all"
+                  href="/success-stories"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setSelectedId(null);
+                    window.scrollTo({ top: 0, behavior: "smooth" });
+                  }}
+                >
                   {t("↩ Toutes les Success Stories", "↩ All Success Stories")}
                 </a>
               </nav>
+
             </div>
           </article>
         ))}
