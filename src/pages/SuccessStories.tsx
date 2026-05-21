@@ -342,9 +342,6 @@ const SuccessStoriesPage = () => {
           <span style={{ color: "var(--bf-gold)" }}>#كلنا_مقاطعون</span> ]
         </>
       ),
-      resources: [
-        { type: t("📄 Étude indépendante","📄 Independent study"), text: t("EPGE, \"Le boycott d'avril 2018 au Maroc\", septembre 2019","EPGE, \"The April 2018 boycott in Morocco\", September 2019") },
-      ],
       meta: [
         { label: t("CLIENT","CLIENT"), value: t("Cabinet européen d'intelligence","European intelligence firm") },
         { label: t("PÉRIODE","PERIOD"), value: "2018" },
