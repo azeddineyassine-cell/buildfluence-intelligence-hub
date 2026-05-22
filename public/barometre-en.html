@@ -396,7 +396,7 @@ a[href*="flourish"]{display:none!important}
         <span class="cp-rank">2<sup style="font-size:.38em">nd</sup></span>
         <span class="cp-method">Heatmap x Bubble Chart x Radial Analysis</span>
         <p class="cp-desc">Integrates sectoral depth, diversification, and stability. Reveals Morocco as the world's #1 in aeronautics. The only African country with a portfolio comparable to global leaders.</p>
-        <span class="cp-badge">Strategic Truth</span>
+        <a href="#podium" class="cp-badge" style="cursor:pointer;text-decoration:none;display:inline-block" onclick="event.preventDefault();document.getElementById('podium').scrollIntoView({behavior:'smooth',block:'start'});">Strategic Truth →</a>
       </div>
     </div>
     <div class="punch fi2">
@@ -653,13 +653,23 @@ a[href*="flourish"]{display:none!important}
     <div class="eyebrow fi">09 / Mapping Strategic Narratives</div>
     <h2 class="section-title fi">Invest Tag Mapping - <em lang="en">The Narrative Ecosystem</em></h2>
     <p class="section-lead fi">The colored ramifications are categorized by thematic families. The further from the center, the finer the granularity.</p>
-    <div class="fi" style="background:white;border:1px solid var(--rule);border-radius:2px;padding:0;position:relative;margin-bottom:28px;min-height:500px">
-      <div class="flourish-embed flourish-hierarchy" data-src="visualisation/25116187" style="min-height:500px;position:relative;">
-        <iframe src="https://flo.uri.sh/visualisation/25116187/embed" width="100%" height="500" frameborder="0" scrolling="no" style="display:block;width:100%;height:500px;" allowfullscreen></iframe>
-        <div style="position:absolute;bottom:0;right:0;width:220px;height:38px;background:#ffffff;z-index:9999;pointer-events:none;"></div>
+    <div class="fi" style="background:white;border:1px solid var(--rule);border-radius:2px;padding:24px;display:grid;grid-template-columns:1.35fr 1fr;gap:32px;align-items:start;margin-bottom:28px;">
+      <div style="position:relative;min-height:500px;">
+        <div class="flourish-embed flourish-hierarchy" data-src="visualisation/25116187" style="min-height:500px;position:relative;">
+          <iframe src="https://flo.uri.sh/visualisation/25116187/embed" width="100%" height="500" frameborder="0" scrolling="no" style="display:block;width:100%;height:500px;" allowfullscreen></iframe>
+          <div style="position:absolute;bottom:0;right:0;width:220px;height:38px;background:#ffffff;z-index:9999;pointer-events:none;"></div>
+        </div>
+      </div>
+      <div style="border-left:4px solid #8B1A1A;padding:8px 0 8px 22px;background:rgba(139,26,26,.03);font-size:15px;line-height:1.65;color:var(--ink);align-self:start;">
+        <p style="margin:0 0 12px;"><strong>Key Insight:</strong> The investor navigates a multidimensional information ecosystem. They consistently link "Finance &amp; Investing" to "Technology" and "key country regulations". Investment opportunities are always interpreted through a global lens:</p>
+        <ul style="margin:0;padding-left:20px;list-style:disc;">
+          <li><strong>Political environment</strong>,</li>
+          <li><strong>Technological innovation</strong>,</li>
+          <li><strong>Societal stability</strong>,</li>
+          <li><strong>Regulatory framework</strong>.</li>
+        </ul>
       </div>
     </div>
-    <div class="tag-insight fi2"><strong>Key Insight:</strong> Investors navigate a multidimensional information ecosystem. They always link "Finance & Investing" to "Technology" and "key countries' regulation". Investment opportunities are always interpreted through a global lens: <strong>Political environment, technological innovation, societal stability, and regulatory framework.</strong></div>
   </div>
 </section>
 

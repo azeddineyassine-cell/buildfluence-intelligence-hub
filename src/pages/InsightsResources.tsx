@@ -3,6 +3,7 @@ import Navbar from "@/components/Navbar";
 import CTAFooter from "@/components/CTAFooter";
 import { FormStrategicExchange } from "@/components/FormModals";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { supabase } from "@/integrations/supabase/client";
 import barometreCover from "@/assets/barometre-cover.png";
 import barometreEnR from "@/assets/barometre-enr.png";
 import rcaGradins from "@/assets/rca-gradins.png";
@@ -39,6 +40,7 @@ const InsightsResources = () => {
   const { t, lang } = useLanguage();
   const [active, setActive] = useState<Filter>("all");
   const [email, setEmail] = useState("");
+  const [newsStatus, setNewsStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [formOpen, setFormOpen] = useState(false);
 
   const FILTERS: { value: Filter; label: string }[] = [
@@ -479,11 +481,21 @@ const InsightsResources = () => {
           </p>
           <form
             className="ir-news-form"
-            onSubmit={(e) => {
+            onSubmit={async (e) => {
               e.preventDefault();
-              if (!email) return;
-              alert(t("Merci ! Votre inscription a bien été prise en compte.", "Thank you! Your subscription has been registered."));
-              setEmail("");
+              if (!email || newsStatus === "loading") return;
+              setNewsStatus("loading");
+              try {
+                const { error } = await supabase.functions.invoke("send-email", {
+                  body: { formType: "newsletter", email },
+                });
+                if (error) throw error;
+                setNewsStatus("success");
+                setEmail("");
+              } catch (err) {
+                console.error("Newsletter subscription failed:", err);
+                setNewsStatus("error");
+              }
             }}
           >
             <input
@@ -495,10 +507,22 @@ const InsightsResources = () => {
               className="ir-news-input"
               aria-label={t("Adresse e-mail", "Email address")}
             />
-            <button type="submit" className="ir-btn-gold">
-              {t("Je m'inscris", "Subscribe")} →
+            <button type="submit" className="ir-btn-gold" disabled={newsStatus === "loading"}>
+              {newsStatus === "loading"
+                ? t("Envoi...", "Sending...")
+                : t("Je m'inscris", "Subscribe")} →
             </button>
           </form>
+          {newsStatus === "success" && (
+            <p className="ir-news-note" style={{ color: "#C9A84C", marginTop: 14 }}>
+              {t("Merci ! Votre inscription a bien été prise en compte.", "Thank you! Your subscription has been registered.")}
+            </p>
+          )}
+          {newsStatus === "error" && (
+            <p className="ir-news-note" style={{ color: "#ff8a8a", marginTop: 14 }}>
+              {t("Une erreur est survenue. Merci de réessayer.", "An error occurred. Please try again.")}
+            </p>
+          )}
           <p className="ir-news-note">{t("Aucun spam · Données protégées · Désabonnement en 1 clic", "No spam · Protected data · One-click unsubscribe")}</p>
         </div>
       </section>
