@@ -23,7 +23,8 @@
   --teal: #0F6E56;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Cormorant Garamond',serif;background:var(--paper);color:var(--ink);line-height:1.7}
+html{background:var(--paper)}
+body{font-family:'Cormorant Garamond',serif;background:var(--paper);color:var(--ink);line-height:1.7;max-width:75vw;margin:0 auto}
 
 /* NAV */
 nav{position:sticky;top:0;z-index:100;background:var(--navy);display:flex;align-items:center;justify-content:space-between;padding:0 48px;height:56px;border-bottom:1px solid rgba(201,168,76,.2)}
@@ -466,7 +467,7 @@ const obs = new IntersectionObserver(entries => {
 const hs = document.querySelector('.hero-stats');
 if (hs) obs.observe(hs);
 
-// Language-aware Heyzine flipbook (FR default, EN via ?lang=en)
+// Language-aware Heyzine flipbook + full EN translation (FR default, EN via ?lang=en)
 (function(){
   try {
     var params = new URLSearchParams(window.location.search);
@@ -480,6 +481,154 @@ if (hs) obs.observe(hs);
     var open = document.getElementById('flipbook-open');
     if (iframe) iframe.src = url;
     if (open) open.href = url;
+
+    if (lang !== 'en') return;
+    document.documentElement.lang = 'en';
+    document.title = 'White Paper · e-Health in Morocco · Buildfluence';
+
+    // Replace text inside a node matching old text (uses innerHTML if html=true)
+    function setHTML(sel, html){ var el=document.querySelector(sel); if(el) el.innerHTML=html; }
+    function setText(sel, txt){ var el=document.querySelector(sel); if(el) el.textContent=txt; }
+    function setAll(sel, txt){ document.querySelectorAll(sel).forEach(function(el){ el.textContent=txt; }); }
+
+    // NAV
+    setText('.nav-brand','Buildfluence · Intelligence');
+    var navMap = {'Aperçu':'Overview','Préfaces':'Forewords','Contribution':'Contribution','Impact':'Impact','Document':'Document'};
+    document.querySelectorAll('.nav-link').forEach(function(a){ var k=a.textContent.trim(); if(navMap[k]) a.textContent=navMap[k]; });
+    setText('.nav-cta','Strategic Exchange');
+
+    // HERO
+    setText('.hero-badge','1st national White Paper · e-Health in Morocco');
+    setText('.hero-eyebrow','Buildfluence · UM5 · UM6SS · 2021 / 2022');
+    setHTML('.hero-title','e-Health in Morocco:<br><em>realities, challenges<br>and levers.</em>');
+    setText('.hero-sub','Global benchmark, 2 digital surveys, interviews with health professionals and practitioners — an initiative that reshaped the digital health landscape in Morocco.');
+    var heroBtns = document.querySelectorAll('.hero-ctas a');
+    if(heroBtns[0]) heroBtns[0].textContent='Read the White Paper';
+    if(heroBtns[1]) heroBtns[1].textContent='See the impact';
+
+    // HERO STATS
+    var hLbl = ['Countries analysed','Digital surveys',"Tender generated",'High-level authorities'];
+    var hSub = ['Global e-health benchmark','Qualitative & quantitative','MAD · Ministry of Health 2024','WHO + 3 Moroccan Ministers'];
+    document.querySelectorAll('.hero-stats .hstat').forEach(function(card,i){
+      var l=card.querySelector('.hstat-lbl'); if(l && hLbl[i]) l.textContent=hLbl[i];
+      var s=card.querySelector('.hstat-sub'); if(s && hSub[i]) s.textContent=hSub[i];
+    });
+
+    // PREFACES SECTION
+    var prefSec = document.getElementById('prefaces');
+    if(prefSec){
+      prefSec.querySelector('.eyebrow').textContent='Forewords & Interventions';
+      prefSec.querySelector('.section-title').innerHTML='<em>Institutional</em> voices at the highest level';
+    }
+    var authTitles = ['Foreword · English version','Foreword & Intervention','Foreword & Intervention','Intervention'];
+    var authRoles = [
+      "Director-General of the World Health Organization (WHO)",
+      'Minister of Health and Social Protection',
+      'Minister of Higher Education, Scientific Research and Innovation',
+      'Minister Delegate in charge of Digital Transition and Administration Reform'
+    ];
+    document.querySelectorAll('#prefaces .auth-card').forEach(function(card,i){
+      var t=card.querySelector('.auth-title'); if(t && authTitles[i]) t.textContent=authTitles[i];
+      var r=card.querySelector('.auth-role'); if(r && authRoles[i]) r.textContent=authRoles[i];
+    });
+
+    // APERÇU
+    var apSec = document.getElementById('apercu');
+    if(apSec){
+      apSec.querySelector('.eyebrow').textContent='01 / Overview';
+      apSec.querySelector('.section-title').innerHTML='An <em>unprecedented</em> initiative at national scale';
+      apSec.querySelector('.section-lead').textContent='Morocco had no structured mapping of its e-health ecosystem. This white paper — the first of its kind in Morocco — closed that strategic gap.';
+      apSec.querySelector('.verdict-label').textContent='Strategic verdict';
+      apSec.querySelector('.verdict-text').innerHTML='Morocco has <strong>the capabilities to excel in health technologies</strong>, but did not benefit from a ranking that reflects this performance. This paradox — human capital above the regional average (UN-EGDI), innovation above expectations (WIPO-GII) — led to a <em>central recommendation: move from a logic of presence to a deployment strategy.</em>';
+      var kpiLbl = ['Countries analysed · Global benchmark','Digital surveys · Quali & Quanti','Ministers as foreword authors & speakers','MAD · Resulting 2024 tender'];
+      apSec.querySelectorAll('.kpi-lbl').forEach(function(el,i){ if(kpiLbl[i]) el.textContent=kpiLbl[i]; });
+    }
+
+    // CONTRIBUTION
+    var ctrSec = document.getElementById('contribution');
+    if(ctrSec){
+      ctrSec.querySelector('.eyebrow').textContent='02 / Buildfluence contributions';
+      ctrSec.querySelector('.section-title').innerHTML='The <em>intellectual</em> and methodological pillars';
+      ctrSec.querySelector('.section-lead').textContent='The structuring parts of the White Paper designed and produced by Buildfluence.';
+      var q = ctrSec.querySelector('.perso-quote');
+      if(q){
+        var cite = q.querySelector('cite');
+        q.innerHTML = '« Buildfluence was a driving force throughout the development of the e-Health White Paper in Morocco, deploying a project-mode strategic intelligence methodology. The goal: go beyond recommendations to a core deduction that allows a pragmatic Roadmap to be drawn. »';
+        if(cite){ cite.textContent='Le Matin, April 2022'; q.appendChild(cite); }
+      }
+      var icons = ['Data visualisations','Methodology','Digital surveys','Global market study'];
+      var bodies = [
+        'Design and production of <strong>all data visualisations</strong> of the document: data visualisations, mappings and conceptual diagrams.',
+        'Development of the <strong>project-mode strategic intelligence methodology</strong> structuring the entire approach from A to Z.',
+        '<strong>Design of the questionnaires</strong> for both surveys (qualitative and quantitative) and full analysis of the collected data.',
+        'Production of the <strong>global digital health market study</strong>: benchmark of 193 countries, UN-EGDI and WIPO-GII indices.'
+      ];
+      ctrSec.querySelectorAll('.perso-item').forEach(function(it,i){
+        var ic=it.querySelector('.perso-item-icon'); if(ic && icons[i]) ic.textContent=icons[i];
+        var bd=it.querySelector('.perso-item-text'); if(bd && bodies[i]) bd.innerHTML=bodies[i];
+      });
+    }
+
+    // IMPACT
+    var imSec = document.getElementById('impact');
+    if(imSec){
+      imSec.querySelector('.eyebrow').textContent='03 / Impact & Results';
+      imSec.querySelector('.section-title').innerHTML='Recommendations that<br><em>changed public policy</em>';
+      imSec.querySelector('.section-lead').textContent='From the White Paper to the 190 million MAD tender — a direct and measurable impact on Moroccan public decision-making.';
+      var resLbl = ['Result 01','Result 02'];
+      var resDesc = [
+        'e-Health White Paper in Morocco. A national-scale unprecedented initiative, with forewords by the WHO Director-General and three Moroccan Ministers.',
+        '2024 Ministry of Health tender for an intelligent health system including the national 360° Shared Patient Record.'
+      ];
+      imSec.querySelectorAll('.result-card').forEach(function(c,i){
+        var l=c.querySelector('.result-num-lbl'); if(l && resLbl[i]) l.textContent=resLbl[i];
+        var d=c.querySelector('.result-desc'); if(d && resDesc[i]) d.textContent=resDesc[i];
+      });
+      var note = imSec.querySelector('.result-note');
+      if(note) note.innerHTML='<strong>★ Direct impact:</strong> The White Paper recommendations directly fed the 2024 Ministry of Health tender for the deployment of an intelligent health system including the national 360° Shared Patient Record.';
+
+      // Accordion
+      var accTitles = ['Project kick-off','Official launch in Rabat','Adoption as national reference','190M MAD tender · Ministry of Health'];
+      var accDates = ['2021','April 2022','2022 / 2023','July 2024'];
+      var accTags = ['Kick-off','Institutional impact','Sector reference','★ Direct impact · 190M MAD'];
+      var accBodies = [
+        "Project kick-off in partnership with <strong>Mohammed V University of Rabat and UM6SS</strong>. Implementation of the project-mode strategic intelligence methodology, design of the two digital surveys, and launch of the global market study.",
+        "Official launch of the White Paper in Rabat. Forewords by <strong>Dr Tedros Adhanom Ghebreyesus</strong> (WHO DG) and 3 Moroccan Ministers. Signature of a partnership agreement for the UM6SS e-Health Innovation Center.",
+        "The White Paper becomes a <em>national reference</em> for decision-makers in the digital health sector. Recommendations on the Shared Patient Record and health system interoperability are taken up by public institutions and ecosystem stakeholders.",
+        "The Ministry of Health launches a tender of <strong>190 million MAD (€16.8M)</strong> for the acquisition and deployment of an intelligent health system including the national 360° Shared Patient Record. A direct materialisation of the recommendations of the White Paper."
+      ];
+      imSec.querySelectorAll('.acc-item').forEach(function(item,i){
+        var t=item.querySelector('.acc-title'); if(t && accTitles[i]) t.textContent=accTitles[i];
+        var d=item.querySelector('.acc-date'); if(d && accDates[i]) d.textContent=accDates[i];
+        var tg=item.querySelector('.acc-tag'); if(tg && accTags[i]) tg.textContent=accTags[i];
+        var bd=item.querySelector('.acc-body'); if(bd && accBodies[i]) bd.innerHTML=accBodies[i];
+      });
+    }
+
+    // DOCUMENT
+    var doSec = document.getElementById('document');
+    if(doSec){
+      doSec.querySelector('.eyebrow').textContent='04 / Full document';
+      doSec.querySelector('.section-title').innerHTML='Read the <em>White Paper</em>';
+      doSec.querySelector('.section-lead').textContent='Full interactive version. Read the document directly here or open it in fullscreen.';
+      doSec.querySelector('.flipbook-title').textContent='e-Health in Morocco: realities, challenges and levers · Buildfluence × UM5 × UM6SS · 2022';
+      doSec.querySelector('.flipbook-open').textContent='Fullscreen';
+    }
+
+    // CTA
+    var cta = document.getElementById('contact');
+    if(cta){
+      cta.querySelector('.cta-eyebrow').textContent='Buildfluence · Sovereign Decision Infrastructure';
+      cta.querySelector('.cta-title').innerHTML='An <em>innovative</em> White Paper project?<br>Let\'s talk.';
+      cta.querySelector('.cta-sub').textContent='Strategic intelligence, sector studies, benchmarks and actionable recommendations for public and private decision-makers.';
+      var ctaBtns = cta.querySelectorAll('.cta-btns a');
+      if(ctaBtns[0]) ctaBtns[0].textContent='Strategic Exchange';
+      if(ctaBtns[1]) ctaBtns[1].textContent='Discover Buildfluence';
+    }
+
+    // FOOTER
+    setText('.footer-brand','Buildfluence · Intelligence Hub');
+    setText('.footer-copy','© 2026 Buildfluence · All rights reserved');
   } catch (e) {}
 })();
 </script>
