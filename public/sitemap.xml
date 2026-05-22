@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url><loc>https://buildfluence.ai/</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://buildfluence.ai/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://buildfluence.ai/?lang=en"/>
+  </url>
+  <url><loc>https://buildfluence.ai/situations-critiques</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://buildfluence.ai/situations-critiques"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://buildfluence.ai/situations-critiques?lang=en"/>
+  </url>
+  <url><loc>https://buildfluence.ai/capacites/strategic-workflow</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://buildfluence.ai/capacites/strategic-workflow"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://buildfluence.ai/capacites/strategic-workflow?lang=en"/>
+  </url>
+  <url><loc>https://buildfluence.ai/capacites/strategic-command-center</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://buildfluence.ai/capacites/strategic-command-center"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://buildfluence.ai/capacites/strategic-command-center?lang=en"/>
+  </url>
+  <url><loc>https://buildfluence.ai/capacites/strategic-intelligence-lab</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://buildfluence.ai/capacites/strategic-intelligence-lab"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://buildfluence.ai/capacites/strategic-intelligence-lab?lang=en"/>
+  </url>
+  <url><loc>https://buildfluence.ai/solutions/soft-power-influence</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://buildfluence.ai/solutions/soft-power-influence"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://buildfluence.ai/solutions/soft-power-influence?lang=en"/>
+  </url>
+  <url><loc>https://buildfluence.ai/solutions/deep-due-diligence</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://buildfluence.ai/solutions/deep-due-diligence"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://buildfluence.ai/solutions/deep-due-diligence?lang=en"/>
+  </url>
+  <url><loc>https://buildfluence.ai/success-stories</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://buildfluence.ai/success-stories"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://buildfluence.ai/success-stories?lang=en"/>
+  </url>
+  <url><loc>https://buildfluence.ai/insights-resources</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://buildfluence.ai/insights-resources"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://buildfluence.ai/insights-resources?lang=en"/>
+  </url>
+  <url><loc>https://buildfluence.ai/pourquoi-buildfluence</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://buildfluence.ai/pourquoi-buildfluence"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://buildfluence.ai/pourquoi-buildfluence?lang=en"/>
+  </url>
+  <url><loc>https://buildfluence.ai/barometre</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://buildfluence.ai/barometre"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://buildfluence.ai/barometre?lang=en"/>
+  </url>
+</urlset>
