@@ -40,6 +40,7 @@ const InsightsResources = () => {
   const { t, lang } = useLanguage();
   const [active, setActive] = useState<Filter>("all");
   const [email, setEmail] = useState("");
+  const [newsStatus, setNewsStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [formOpen, setFormOpen] = useState(false);
 
   const FILTERS: { value: Filter; label: string }[] = [
