@@ -232,3 +232,16 @@ html, body {
   margin: 0;
   padding: 0;
 }
+
+/* SEO · Entity linking (discreet hyperlinks to official sources) */
+.entity-link {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: rgba(201, 168, 76, 0.35);
+  text-underline-offset: 3px;
+  transition: text-decoration-color 0.2s;
+}
+.entity-link:hover,
+.entity-link:focus {
+  text-decoration-color: #c9a84c;
+}
