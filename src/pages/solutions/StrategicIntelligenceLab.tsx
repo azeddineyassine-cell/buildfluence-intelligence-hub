@@ -1638,6 +1638,7 @@ const CaseIntro = ({
   body,
   quote,
   meta,
+  confidentialLabel = "CONFIDENTIAL FILE",
 }: {
   kicker: string;
   title: string;
@@ -1645,6 +1646,7 @@ const CaseIntro = ({
   body: React.ReactNode;
   quote: string;
   meta: string;
+  confidentialLabel?: string;
 }) => {
   const titleParts = title.split(emphasis);
   return (
@@ -1662,7 +1664,7 @@ const CaseIntro = ({
             letterSpacing: ".3em",
           }}
         >
-          CONFIDENTIAL FILE
+          {confidentialLabel}
         </div>
         <div
           className="uppercase"
