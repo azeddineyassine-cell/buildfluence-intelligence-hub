@@ -316,6 +316,52 @@ const buildUseCaseData = (lang: "fr" | "en"): Record<string, UseCaseDetail> => {
         ? "Chaque région a ses atouts, ses concurrents et ses fenêtres d'opportunité. Buildfluence dote chaque CRI d'une intelligence territoriale équivalente à celle d'un État."
         : "Each region has its strengths, competitors and windows of opportunity. Buildfluence equips each CRI with territorial intelligence on a par with that of a State.",
     },
+    mcinet: {
+      eyebrow: fr ? "Use Case · Ministère de tutelle industrielle" : "Use Case · Industrial Supervisory Ministry",
+      title: "MCINET",
+      tagline: fr
+        ? "Ministère de l'Industrie et du Commerce. Architecte de la politique industrielle nationale et garant du cadre normatif du commerce intérieur et extérieur du Royaume."
+        : "Ministry of Industry and Trade. Architect of national industrial policy and guarantor of the regulatory framework for domestic and foreign trade.",
+      meta: [
+        { l: fr ? "Programme phare" : "Flagship programme", v: fr ? "Plan d'Accélération Industrielle (PAI)" : "Industrial Acceleration Plan (IAP)" },
+        { l: fr ? "Objectif export PAI" : "IAP export target", v: fr ? "100 Mds MAD" : "MAD 100 Bn" },
+        { l: fr ? "Emplois ciblés" : "Jobs targeted", v: fr ? "500 000" : "500,000" },
+      ],
+      cols: [
+        { h: fr ? "Périmètre MCINET" : "MCINET perimeter", items: fr ? [
+          "Définition et pilotage de la politique industrielle nationale",
+          "Régulation du commerce intérieur et protection du consommateur",
+          "Développement des zones industrielles et des écosystèmes sectoriels",
+          "Promotion des exportations et intégration aux chaînes de valeur mondiales",
+          "Normalisation, métrologie et accréditation (IMANOR)",
+        ] : [
+          "Definition and steering of national industrial policy",
+          "Regulation of domestic trade and consumer protection",
+          "Development of industrial zones and sectoral ecosystems",
+          "Export promotion and integration into global value chains",
+          "Standardisation, metrology and accreditation (IMANOR)",
+        ] },
+        { h: fr ? "Valeur Buildfluence dédiée" : "Dedicated Buildfluence value", items: fr ? [
+          "Veille concurrentielle continue sur les politiques industrielles comparées (Turquie, Vietnam, Égypte, Pologne)",
+          "Benchmark des zones franches mondiales et africaines pour éclairer la stratégie MCINET",
+          "Intelligence sur les décideurs industriels européens en phase de relocalisation",
+          "Cartographie des donneurs d'ordre aéronautiques, automobiles et énergétiques ciblant le Maroc",
+          "Production d'un Baromètre d'Attractivité Industrielle actionnable",
+        ] : [
+          "Continuous competitive watch on comparative industrial policies (Turkey, Vietnam, Egypt, Poland)",
+          "Benchmark of global and African free zones to inform MCINET strategy",
+          "Intelligence on European industrial decision-makers in relocation phase",
+          "Mapping of aerospace, automotive and energy principals targeting Morocco",
+          "Production of an actionable Industrial Attractiveness Barometer",
+        ] },
+      ],
+      bottomLogos: [
+        { label: "MCINET", src: logoMcinet },
+      ],
+      bfApport: fr
+        ? "Le Maroc dispose d'écosystèmes industriels structurés : automobile, aéronautique, textile : mais la bataille de l'attractivité se joue désormais sur l'intelligence et la réactivité. Buildfluence dote le MCINET d'une capacité de veille et d'anticipation équivalente à celle des agences industrielles les plus compétitives au monde."
+        : "Morocco has structured industrial ecosystems: automotive, aerospace, textile: but the battle for attractiveness is now fought on intelligence and responsiveness. Buildfluence equips MCINET with a monitoring and anticipation capacity on a par with the world's most competitive industrial agencies.",
+    },
   };
 };
 
