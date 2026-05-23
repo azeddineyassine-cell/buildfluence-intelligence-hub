@@ -25,6 +25,7 @@ import logoWorldbank from "@/assets/clients/worldbank.png";
 import logoHarvard from "@/assets/clients/harvard.png";
 import logoAmdie from "@/assets/clients/amdie.png";
 import logoMicepp from "@/assets/clients/micepp.png";
+import logoMcinet from "@/assets/clients/mcinet.png";
 import logoMoroccoNow from "@/assets/clients/morocco-now.png";
 import logoCgem from "@/assets/clients/cgem.png";
 import logoAsmex from "@/assets/clients/asmex.png";
@@ -55,7 +56,7 @@ import logoBad from "@/assets/clients/bad.png";
 const FED_LOGOS: Record<string, string> = { cgem: logoCgem, asmex: logoAsmex, amica: logoAmica, amip: logoAmip, amith: logoAmith, cnt: logoCnt, fenagri: logoFenagri };
 const API_LOGOS: Record<string, string> = { investhk: logoInvesthk, edbsg: logoEdbsg, apexbrasil: logoApexbrasil, investlt: logoInvestlt, investmx: logoInvestmx, investvn: logoInvestvn, investcl: logoInvestcl, investsa: logoInvestsa, czechinvest: logoCzechinvest };
 const COOP_LOGOS: Record<string, string> = { giz: logoGiz, afd: logoAfd, jica: logoJica, bei: logoBei, pnud: logoPnud, bm: logoBm, berd: logoBerd, isdb: logoIsdb, bad: logoBad };
-const AMDIE_LOGOS: Record<string, string> = { amdie: logoAmdie, micepp: logoMicepp, moroccoNow: logoMoroccoNow, medz: logoMedz, cri: logoCri };
+const AMDIE_LOGOS: Record<string, string> = { amdie: logoAmdie, micepp: logoMicepp, mcinet: logoMcinet, moroccoNow: logoMoroccoNow, medz: logoMedz, cri: logoCri };
 const SOURCE_LOGOS: Record<string, string> = {
   OFAC: logoOfac, "EU Sanctions": logoEuSanctions, ICIJ: logoIcij, GAFI: logoGafi, PitchBook: logoPitchbook, "D&B": logoDnb,
   "Growth Lab": logoGrowthlab, Statista: logoStatista, fDi: logoFdi, "World Bank": logoWorldbank, Harvard: logoHarvard,
@@ -314,6 +315,52 @@ const buildUseCaseData = (lang: "fr" | "en"): Record<string, UseCaseDetail> => {
       bfApport: fr
         ? "Chaque région a ses atouts, ses concurrents et ses fenêtres d'opportunité. Buildfluence dote chaque CRI d'une intelligence territoriale équivalente à celle d'un État."
         : "Each region has its strengths, competitors and windows of opportunity. Buildfluence equips each CRI with territorial intelligence on a par with that of a State.",
+    },
+    mcinet: {
+      eyebrow: fr ? "Use Case · Ministère de tutelle industrielle" : "Use Case · Industrial Supervisory Ministry",
+      title: "MCINET",
+      tagline: fr
+        ? "Ministère de l'Industrie et du Commerce. Architecte de la politique industrielle nationale et garant du cadre normatif du commerce intérieur et extérieur du Royaume."
+        : "Ministry of Industry and Trade. Architect of national industrial policy and guarantor of the regulatory framework for domestic and foreign trade.",
+      meta: [
+        { l: fr ? "Programme phare" : "Flagship programme", v: fr ? "Plan d'Accélération Industrielle (PAI)" : "Industrial Acceleration Plan (IAP)" },
+        { l: fr ? "Objectif export PAI" : "IAP export target", v: fr ? "100 Mds MAD" : "MAD 100 Bn" },
+        { l: fr ? "Emplois ciblés" : "Jobs targeted", v: fr ? "500 000" : "500,000" },
+      ],
+      cols: [
+        { h: fr ? "Périmètre MCINET" : "MCINET perimeter", items: fr ? [
+          "Définition et pilotage de la politique industrielle nationale",
+          "Régulation du commerce intérieur et protection du consommateur",
+          "Développement des zones industrielles et des écosystèmes sectoriels",
+          "Promotion des exportations et intégration aux chaînes de valeur mondiales",
+          "Normalisation, métrologie et accréditation (IMANOR)",
+        ] : [
+          "Definition and steering of national industrial policy",
+          "Regulation of domestic trade and consumer protection",
+          "Development of industrial zones and sectoral ecosystems",
+          "Export promotion and integration into global value chains",
+          "Standardisation, metrology and accreditation (IMANOR)",
+        ] },
+        { h: fr ? "Valeur Buildfluence dédiée" : "Dedicated Buildfluence value", items: fr ? [
+          "Veille concurrentielle continue sur les politiques industrielles comparées (Turquie, Vietnam, Égypte, Pologne)",
+          "Benchmark des zones franches mondiales et africaines pour éclairer la stratégie MCINET",
+          "Intelligence sur les décideurs industriels européens en phase de relocalisation",
+          "Cartographie des donneurs d'ordre aéronautiques, automobiles et énergétiques ciblant le Maroc",
+          "Production d'un Baromètre d'Attractivité Industrielle actionnable",
+        ] : [
+          "Continuous competitive watch on comparative industrial policies (Turkey, Vietnam, Egypt, Poland)",
+          "Benchmark of global and African free zones to inform MCINET strategy",
+          "Intelligence on European industrial decision-makers in relocation phase",
+          "Mapping of aerospace, automotive and energy principals targeting Morocco",
+          "Production of an actionable Industrial Attractiveness Barometer",
+        ] },
+      ],
+      bottomLogos: [
+        { label: "MCINET", src: logoMcinet },
+      ],
+      bfApport: fr
+        ? "Le Maroc dispose d'écosystèmes industriels structurés : automobile, aéronautique, textile : mais la bataille de l'attractivité se joue désormais sur l'intelligence et la réactivité. Buildfluence dote le MCINET d'une capacité de veille et d'anticipation équivalente à celle des agences industrielles les plus compétitives au monde."
+        : "Morocco has structured industrial ecosystems: automotive, aerospace, textile: but the battle for attractiveness is now fought on intelligence and responsiveness. Buildfluence equips MCINET with a monitoring and anticipation capacity on a par with the world's most competitive industrial agencies.",
     },
   };
 };
@@ -1161,6 +1208,7 @@ const MechanismSection = ({ open }: { open: OpenDetail }) => {
             <div className="sp-logo-grid pt-2.5" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 8, borderTop: "1px solid rgba(244,241,234,0.08)" }}>
               <LogoChip label="AMDIE" src={AMDIE_LOGOS.amdie} onClick={() => open({ kind: "useCase", data: useCases.amdie })} />
               <LogoChip label="MICEPP" src={AMDIE_LOGOS.micepp} onClick={() => open({ kind: "useCase", data: useCases.micepp })} />
+              <LogoChip label="MCINET" src={AMDIE_LOGOS.mcinet} onClick={() => open({ kind: "useCase", data: useCases.mcinet })} />
               <LogoChip label="MedZ" src={AMDIE_LOGOS.medz} onClick={() => open({ kind: "useCase", data: useCases.medz })} />
               <LogoChip label="CRI" src={AMDIE_LOGOS.cri} onClick={() => open({ kind: "useCase", data: useCases.cri })} />
               <LogoChip label="Morocco Now" src={AMDIE_LOGOS.moroccoNow} onClick={() => open({ kind: "moroccoNow" })} />

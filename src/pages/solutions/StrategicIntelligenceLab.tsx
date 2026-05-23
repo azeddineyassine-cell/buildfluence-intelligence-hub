@@ -1638,6 +1638,7 @@ const CaseIntro = ({
   body,
   quote,
   meta,
+  confidentialLabel = "CONFIDENTIAL FILE",
 }: {
   kicker: string;
   title: string;
@@ -1645,6 +1646,7 @@ const CaseIntro = ({
   body: React.ReactNode;
   quote: string;
   meta: string;
+  confidentialLabel?: string;
 }) => {
   const titleParts = title.split(emphasis);
   return (
@@ -1662,7 +1664,7 @@ const CaseIntro = ({
             letterSpacing: ".3em",
           }}
         >
-          CONFIDENTIAL FILE
+          {confidentialLabel}
         </div>
         <div
           className="uppercase"
@@ -2258,6 +2260,7 @@ const OcpCaseFile = () => {
       body={lang === "en" ? <>Media and social agitation orchestrated by Northern European NGOs. The client needs to understand the <strong>amplification chains & useful idiots</strong>, and to neutralise the adversarial narrative before it reaches its key markets.</> : <>Agitation médiatique et sociale orchestrée par des ONG d'Europe du Nord. Le client a besoin de comprendre les <strong>chaînes d'amplification & idiots utiles</strong>, et de neutraliser le récit adverse avant qu'il n'atteigne ses marchés clés.</>}
       quote={lang === "en" ? "The most sophisticated attacks evade traditional monitoring systems. They reveal themselves through relay profiling, narrative mapping and the analysis of influence mechanisms." : "Les attaques les plus sophistiquées échappent aux dispositifs de veille traditionnelle. Elles se révèlent dans le Profiling des relais, la cartographie des narratifs et l'analyse des mécanismes d'influence."}
       meta={lang === "en" ? "Analyst note · OCP mission" : "Analyst note · OCP mission"}
+      confidentialLabel="ECOSYSTEM INTELLIGENCE"
     />
     <CaseStats stats={[{ value: "3", label: lang === "en" ? "Analytical chessboards" : "Échiquiers d'analyse" }, { value: "47", label: lang === "en" ? "Stakeholders mapped" : "Parties prenantes mappées" }, { value: "12", label: lang === "en" ? "Source NGOs identified" : "ONG sources identifiées" }, { value: "1", label: lang === "en" ? "President's dashboard" : "Tableau de bord Président" }]} />
     <CommandTree />
@@ -2292,12 +2295,24 @@ const HealthCaseFile = () => {
       body={lang === "en" ? "The H1N1 crisis triggered a spiral of disinformation across media and social networks. The Ministry of Health needed to identify hostile sources, produce credible counter-narratives, and protect the Minister's image during the media storm." : "La crise H1N1 a enclenché une spirale de désinformation dans les médias et sur les réseaux sociaux. Le Ministère de la Santé avait besoin d'identifier les sources hostiles, de produire des contre-narratifs crédibles, et de protéger l'image du Ministre pendant la tempête médiatique."}
       quote={lang === "en" ? "In 2 weeks, the official narrative regained dominance. The War Room had done its job." : "En 2 semaines, le récit officiel est redevenu dominant. La War Room avait fait son travail."}
       meta={lang === "en" ? "Post-mission debrief · Ministry of Health" : "Debrief post-mission · Ministère de la Santé"}
+      confidentialLabel={lang === "en" ? "RAPID CRISIS EXIT" : "SORTIE RAPIDE DE CRISE"}
     />
     <CaseStats stats={[{ value: <><span>&lt;2</span><Unit>h</Unit></>, label: lang === "en" ? "War Room activation" : "Activation War Room" }, { value: <><span>14</span><Unit>{lang === "en" ? "d" : "j"}</Unit></>, label: lang === "en" ? "Crisis contained" : "Crise maîtrisée" }, { value: <><span>+38</span><Unit>%</Unit></>, label: lang === "en" ? "Minister digital image" : "Image digitale Ministre" }, { value: "1", label: lang === "en" ? "Cabinet supported" : "Cabinet accompagné" }]} />
     <iframe
       src="/H1N1_Crisis_Chart_v2.html"
       title={lang === "en" ? "H1N1 Crisis Chart" : "Grippe A H1N1 · Suivi des sujets phares"}
-      style={{ width: "100%", height: 600, border: "none", borderRadius: 4, display: "block", marginTop: 32 }}
+      scrolling="no"
+      onLoad={(e) => {
+        try {
+          const f = e.currentTarget as HTMLIFrameElement;
+          const doc = f.contentDocument;
+          if (doc) {
+            const h = Math.max(doc.body.scrollHeight, doc.documentElement.scrollHeight);
+            f.style.height = h + "px";
+          }
+        } catch { /* noop */ }
+      }}
+      style={{ width: "100%", height: 600, border: "none", borderRadius: 4, display: "block", marginTop: 32, overflow: "hidden" }}
     />
     <MissionTimeline
       title={lang === "en" ? "War Room Workflow" : "Déroulé de la War Room"}
