@@ -2301,7 +2301,18 @@ const HealthCaseFile = () => {
     <iframe
       src="/H1N1_Crisis_Chart_v2.html"
       title={lang === "en" ? "H1N1 Crisis Chart" : "Grippe A H1N1 · Suivi des sujets phares"}
-      style={{ width: "100%", height: 600, border: "none", borderRadius: 4, display: "block", marginTop: 32 }}
+      scrolling="no"
+      onLoad={(e) => {
+        try {
+          const f = e.currentTarget as HTMLIFrameElement;
+          const doc = f.contentDocument;
+          if (doc) {
+            const h = Math.max(doc.body.scrollHeight, doc.documentElement.scrollHeight);
+            f.style.height = h + "px";
+          }
+        } catch { /* noop */ }
+      }}
+      style={{ width: "100%", height: 600, border: "none", borderRadius: 4, display: "block", marginTop: 32, overflow: "hidden" }}
     />
     <MissionTimeline
       title={lang === "en" ? "War Room Workflow" : "Déroulé de la War Room"}
