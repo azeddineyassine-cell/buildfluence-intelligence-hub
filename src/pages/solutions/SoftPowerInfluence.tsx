@@ -25,6 +25,7 @@ import logoWorldbank from "@/assets/clients/worldbank.png";
 import logoHarvard from "@/assets/clients/harvard.png";
 import logoAmdie from "@/assets/clients/amdie.png";
 import logoMicepp from "@/assets/clients/micepp.png";
+import logoMcinet from "@/assets/clients/mcinet.png";
 import logoMoroccoNow from "@/assets/clients/morocco-now.png";
 import logoCgem from "@/assets/clients/cgem.png";
 import logoAsmex from "@/assets/clients/asmex.png";
@@ -55,7 +56,7 @@ import logoBad from "@/assets/clients/bad.png";
 const FED_LOGOS: Record<string, string> = { cgem: logoCgem, asmex: logoAsmex, amica: logoAmica, amip: logoAmip, amith: logoAmith, cnt: logoCnt, fenagri: logoFenagri };
 const API_LOGOS: Record<string, string> = { investhk: logoInvesthk, edbsg: logoEdbsg, apexbrasil: logoApexbrasil, investlt: logoInvestlt, investmx: logoInvestmx, investvn: logoInvestvn, investcl: logoInvestcl, investsa: logoInvestsa, czechinvest: logoCzechinvest };
 const COOP_LOGOS: Record<string, string> = { giz: logoGiz, afd: logoAfd, jica: logoJica, bei: logoBei, pnud: logoPnud, bm: logoBm, berd: logoBerd, isdb: logoIsdb, bad: logoBad };
-const AMDIE_LOGOS: Record<string, string> = { amdie: logoAmdie, micepp: logoMicepp, moroccoNow: logoMoroccoNow, medz: logoMedz, cri: logoCri };
+const AMDIE_LOGOS: Record<string, string> = { amdie: logoAmdie, micepp: logoMicepp, mcinet: logoMcinet, moroccoNow: logoMoroccoNow, medz: logoMedz, cri: logoCri };
 const SOURCE_LOGOS: Record<string, string> = {
   OFAC: logoOfac, "EU Sanctions": logoEuSanctions, ICIJ: logoIcij, GAFI: logoGafi, PitchBook: logoPitchbook, "D&B": logoDnb,
   "Growth Lab": logoGrowthlab, Statista: logoStatista, fDi: logoFdi, "World Bank": logoWorldbank, Harvard: logoHarvard,
@@ -1161,6 +1162,7 @@ const MechanismSection = ({ open }: { open: OpenDetail }) => {
             <div className="sp-logo-grid pt-2.5" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 8, borderTop: "1px solid rgba(244,241,234,0.08)" }}>
               <LogoChip label="AMDIE" src={AMDIE_LOGOS.amdie} onClick={() => open({ kind: "useCase", data: useCases.amdie })} />
               <LogoChip label="MICEPP" src={AMDIE_LOGOS.micepp} onClick={() => open({ kind: "useCase", data: useCases.micepp })} />
+              <LogoChip label="MCINET" src={AMDIE_LOGOS.mcinet} onClick={() => open({ kind: "useCase", data: useCases.mcinet })} />
               <LogoChip label="MedZ" src={AMDIE_LOGOS.medz} onClick={() => open({ kind: "useCase", data: useCases.medz })} />
               <LogoChip label="CRI" src={AMDIE_LOGOS.cri} onClick={() => open({ kind: "useCase", data: useCases.cri })} />
               <LogoChip label="Morocco Now" src={AMDIE_LOGOS.moroccoNow} onClick={() => open({ kind: "moroccoNow" })} />
