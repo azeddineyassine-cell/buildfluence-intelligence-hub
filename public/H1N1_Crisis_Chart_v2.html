@@ -108,24 +108,54 @@ body {
 .annot {
   background: white; border: 1px solid var(--rule);
   border-left: 3px solid var(--red);
-  padding: 12px 14px; cursor: pointer;
+  padding: 16px 20px; cursor: pointer;
   transition: all .2s;
 }
 .annot:hover { border-left-color: var(--gold); box-shadow: 0 2px 12px rgba(0,0,0,.08); }
 .annot-date {
   font-family: 'JetBrains Mono', monospace;
   font-size: 8px; font-weight: 600;
-  letter-spacing: .16em; text-transform: uppercase;
-  color: var(--red); margin-bottom: 4px;
+  letter-spacing: .2em; text-transform: uppercase;
+  color: var(--red); margin-bottom: 8px;
 }
 .annot-title {
-  font-family: 'Playfair Display', serif;
-  font-size: 12px; font-weight: 700;
-  color: var(--navy); margin-bottom: 4px;
+  font-family: 'DM Sans', 'Inter', system-ui, sans-serif;
+  font-size: 14px; font-weight: 700;
+  color: var(--navy); margin-bottom: 6px;
+  line-height: 1.35;
 }
 .annot-desc {
-  font-size: 10.5px; color: var(--ink-light);
-  line-height: 1.55;
+  font-family: 'DM Sans', 'Inter', system-ui, sans-serif;
+  font-size: 14px; color: var(--ink-light);
+  line-height: 1.7;
+}
+
+/* ── LESSONS BOX ── */
+.lessons {
+  background: white;
+  border: 1px solid var(--rule);
+  border-left: 3px solid var(--gold);
+  padding: 18px 22px; margin-bottom: 20px;
+}
+.lessons-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 8px; font-weight: 600;
+  letter-spacing: .2em; text-transform: uppercase;
+  color: var(--navy); margin-bottom: 12px;
+}
+.lessons ul { list-style: none; padding: 0; margin: 0; }
+.lessons li {
+  font-family: 'DM Sans', 'Inter', system-ui, sans-serif;
+  font-size: 14px; color: var(--ink);
+  line-height: 1.7; padding: 8px 0;
+  border-top: 1px solid var(--rule);
+}
+.lessons li:first-child { border-top: none; }
+.lessons li .ldate {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 8px; font-weight: 700;
+  letter-spacing: .2em; text-transform: uppercase;
+  color: var(--gold); margin-right: 10px;
 }
 
 
