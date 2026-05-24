@@ -21,13 +21,19 @@ const lightInputStyle = {
 
 export const FormStrategicExchange = ({ open, onClose }: { open: boolean; onClose: () => void }) => {
   const { toast } = useToast();
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const [submitting, setSubmitting] = useState(false);
+  const [success, setSuccess] = useState(false);
   const [thematique, setThematique] = useState("");
   const [priorite, setPriorite] = useState(t("Priorité normale", "Normal priority"));
 
   const thematiques = ["Solution", "Strategic Innovation", t("Situation critique", "Critical situation")];
   const priorites = [t("Priorité basse", "Low priority"), t("Priorité normale", "Normal priority"), t("Haute Priorité", "High priority")];
+
+  const handleClose = () => {
+    setSuccess(false);
+    onClose();
+  };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -35,106 +41,165 @@ export const FormStrategicExchange = ({ open, onClose }: { open: boolean; onClos
     const form = e.target as HTMLFormElement;
     const fd = new FormData(form);
 
+    const fullName = ((fd.get("name") as string) || "").trim();
+    const parts = fullName.split(/\s+/);
+    const prenom = parts[0] || "";
+    const nom = parts.slice(1).join(" ") || "";
+    const email = (fd.get("email") as string) || "";
+    const message = (fd.get("message") as string) || "";
+
+    // Insert into new leads table (langue captured from active site language)
+    const { error: leadError } = await supabase.from("leads").insert({
+      prenom,
+      nom,
+      email,
+      message: message || null,
+      langue: lang,
+      statut: "nouveau",
+    });
+
+    // Keep existing detailed submission record
     const { error } = await supabase.from("contact_submissions").insert({
       form_type: "strategic_exchange",
-      name: fd.get("name") as string,
-      email: fd.get("email") as string,
+      name: fullName,
+      email,
       organization: fd.get("org") as string,
       position: fd.get("poste") as string,
       phone: (fd.get("phone") as string) || null,
       topic: thematique || null,
       priority: priorite,
-      message: (fd.get("message") as string) || null,
+      message: message || null,
     });
 
-    setSubmitting(false);
-    if (error) {
+    if (leadError || error) {
+      setSubmitting(false);
       toast({ title: t("Erreur", "Error"), description: t("Une erreur est survenue. Veuillez réessayer.", "An error occurred. Please try again."), variant: "destructive" });
       return;
     }
-    // Send email notification - must await before closing modal
+
+    // Send visitor accusé + admin notification (bilingual)
     await supabase.functions.invoke('send-email', {
       body: {
         formType: "strategic_exchange",
-        name: fd.get("name") as string,
-        email: fd.get("email") as string,
+        prenom,
+        nom,
+        email,
+        message,
+        langue: lang,
+        // legacy fields kept for backward compat
+        name: fullName,
         organization: fd.get("org") as string,
         position: fd.get("poste") as string,
         phone: (fd.get("phone") as string) || null,
         topic: thematique || null,
         priority: priorite,
-        message: (fd.get("message") as string) || null,
       },
     });
-    toast({ title: t("Demande envoyée", "Request sent"), description: t("Un conseiller vous contactera sous 24h.", "An advisor will contact you within 24h.") });
+
+    setSubmitting(false);
     form.reset();
     setThematique("");
     setPriorite(t("Priorité normale", "Normal priority"));
-    onClose();
+    setSuccess(true);
   };
 
   return (
-    <Dialog open={open} onOpenChange={onClose}>
+    <Dialog open={open} onOpenChange={handleClose}>
       <DialogContent className="sm:max-w-2xl" style={{ background: '#F4F4F4', border: '1px solid #D1D5DB', color: '#1a2744' }}>
-        <DialogHeader>
-          <DialogTitle className="font-serif text-xl" style={{ color: '#1a2744' }}>{t("Demander mon échange stratégique", "Request my strategic exchange")}</DialogTitle>
-        </DialogHeader>
-        <div className="mt-1 flex items-center gap-2 text-xs" style={{ color: '#6B7280' }}>
-          <Lock className="h-3 w-3" /> {t("Communication sécurisée et confidentielle", "Secure and confidential communication")}
-        </div>
-        <form onSubmit={handleSubmit} className="mt-4 space-y-4">
-          <div className="grid gap-4 sm:grid-cols-2">
-            <Input required name="name" placeholder={t("Nom", "Name")} maxLength={100} style={lightInputStyle} />
-            <Input required name="org" placeholder="Organisation" maxLength={100} style={lightInputStyle} />
-          </div>
-          <div className="grid gap-4 sm:grid-cols-2">
-            <Input required name="poste" placeholder={t("Poste / Fonction", "Position / Role")} maxLength={100} style={lightInputStyle} />
-            <Input required type="email" name="email" placeholder={t("Email professionnel", "Professional email")} maxLength={255} style={lightInputStyle} />
-          </div>
-          <Input type="tel" name="phone" placeholder={t("Téléphone", "Phone")} maxLength={20} style={lightInputStyle} />
-
-          <div className="grid gap-4 sm:grid-cols-2">
-            <div>
-              <label className="mb-2 block text-xs font-semibold uppercase tracking-wider" style={{ color: '#6B7280' }}>{t("Thématique choisie", "Chosen topic")}</label>
-              <div className="space-y-2">
-                {thematiques.map((th) => (
-                  <label key={th} className="flex items-center gap-2 cursor-pointer text-sm" style={{ color: '#1a2744' }}>
-                    <input type="radio" name="thematique" value={th} checked={thematique === th} onChange={() => setThematique(th)} className="accent-yellow-400" />
-                    {th}
-                  </label>
-                ))}
-              </div>
+        {success ? (
+          <div className="py-10 px-2 text-center">
+            <div
+              className="mx-auto"
+              style={{
+                background: '#C9A84C',
+                color: '#0D1B2A',
+                fontFamily: '"JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace',
+                textTransform: 'uppercase',
+                fontSize: 13,
+                letterSpacing: '0.08em',
+                lineHeight: 1.7,
+                padding: '28px 28px',
+                borderRadius: 4,
+                maxWidth: 520,
+                fontWeight: 600,
+              }}
+            >
+              {t(
+                "Votre demande a bien été envoyée. Nous vous répondrons dans les 48 heures ouvrées.",
+                "Your request has been sent. We will get back to you within 48 business hours."
+              )}
             </div>
-            <div>
-              <label className="mb-2 block text-xs font-semibold uppercase tracking-wider" style={{ color: '#6B7280' }}>{t("Priorité", "Priority")}</label>
-              <div className="space-y-2">
-                {priorites.map((p) => (
-                  <label key={p} className="flex items-center gap-2 cursor-pointer text-sm" style={{ color: '#1a2744' }}>
-                    <input type="radio" name="priorite" value={p} checked={priorite === p} onChange={() => setPriorite(p)} className="accent-yellow-400" />
-                    {p}
-                  </label>
-                ))}
-              </div>
+            <button
+              onClick={handleClose}
+              className="mt-8 text-xs uppercase tracking-widest"
+              style={{ color: '#0D1B2A', borderBottom: '1px solid #0D1B2A', paddingBottom: 2 }}
+            >
+              {t("Fermer", "Close")}
+            </button>
+          </div>
+        ) : (
+          <>
+            <DialogHeader>
+              <DialogTitle className="font-serif text-xl" style={{ color: '#1a2744' }}>{t("Demander mon échange stratégique", "Request my strategic exchange")}</DialogTitle>
+            </DialogHeader>
+            <div className="mt-1 flex items-center gap-2 text-xs" style={{ color: '#6B7280' }}>
+              <Lock className="h-3 w-3" /> {t("Communication sécurisée et confidentielle", "Secure and confidential communication")}
             </div>
-          </div>
+            <form onSubmit={handleSubmit} className="mt-4 space-y-4">
+              <div className="grid gap-4 sm:grid-cols-2">
+                <Input required name="name" placeholder={t("Nom", "Name")} maxLength={100} style={lightInputStyle} />
+                <Input required name="org" placeholder="Organisation" maxLength={100} style={lightInputStyle} />
+              </div>
+              <div className="grid gap-4 sm:grid-cols-2">
+                <Input required name="poste" placeholder={t("Poste / Fonction", "Position / Role")} maxLength={100} style={lightInputStyle} />
+                <Input required type="email" name="email" placeholder={t("Email professionnel", "Professional email")} maxLength={255} style={lightInputStyle} />
+              </div>
+              <Input type="tel" name="phone" placeholder={t("Téléphone", "Phone")} maxLength={20} style={lightInputStyle} />
 
-          <textarea
-            name="message"
-            placeholder={t("Tapez votre texte...", "Type your message...")}
-            maxLength={1000}
-            rows={4}
-            className="w-full rounded-sm px-3 py-2.5 text-sm"
-            style={lightInputStyle}
-          />
+              <div className="grid gap-4 sm:grid-cols-2">
+                <div>
+                  <label className="mb-2 block text-xs font-semibold uppercase tracking-wider" style={{ color: '#6B7280' }}>{t("Thématique choisie", "Chosen topic")}</label>
+                  <div className="space-y-2">
+                    {thematiques.map((th) => (
+                      <label key={th} className="flex items-center gap-2 cursor-pointer text-sm" style={{ color: '#1a2744' }}>
+                        <input type="radio" name="thematique" value={th} checked={thematique === th} onChange={() => setThematique(th)} className="accent-yellow-400" />
+                        {th}
+                      </label>
+                    ))}
+                  </div>
+                </div>
+                <div>
+                  <label className="mb-2 block text-xs font-semibold uppercase tracking-wider" style={{ color: '#6B7280' }}>{t("Priorité", "Priority")}</label>
+                  <div className="space-y-2">
+                    {priorites.map((p) => (
+                      <label key={p} className="flex items-center gap-2 cursor-pointer text-sm" style={{ color: '#1a2744' }}>
+                        <input type="radio" name="priorite" value={p} checked={priorite === p} onChange={() => setPriorite(p)} className="accent-yellow-400" />
+                        {p}
+                      </label>
+                    ))}
+                  </div>
+                </div>
+              </div>
 
-          <button type="submit" disabled={submitting} className="btn-gold w-full disabled:opacity-50">
-            {submitting ? t("Envoi...", "Sending...") : t("SOUMETTRE MA DEMANDE", "SUBMIT MY REQUEST")}
-          </button>
+              <textarea
+                name="message"
+                placeholder={t("Tapez votre texte...", "Type your message...")}
+                maxLength={1000}
+                rows={4}
+                className="w-full rounded-sm px-3 py-2.5 text-sm"
+                style={lightInputStyle}
+              />
 
-          <div className="flex items-center justify-center gap-2 text-[11px]" style={{ color: '#6B7280' }}>
-            <Lock className="h-3 w-3" /> {t("Communication sécurisée et confidentielle", "Secure and confidential communication")}
-          </div>
-        </form>
+              <button type="submit" disabled={submitting} className="btn-gold w-full disabled:opacity-50">
+                {submitting ? t("Envoi...", "Sending...") : t("SOUMETTRE MA DEMANDE", "SUBMIT MY REQUEST")}
+              </button>
+
+              <div className="flex items-center justify-center gap-2 text-[11px]" style={{ color: '#6B7280' }}>
+                <Lock className="h-3 w-3" /> {t("Communication sécurisée et confidentielle", "Secure and confidential communication")}
+              </div>
+            </form>
+          </>
+        )}
       </DialogContent>
     </Dialog>
   );
