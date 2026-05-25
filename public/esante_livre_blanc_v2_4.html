@@ -496,6 +496,88 @@ const obs = new IntersectionObserver(entries => {
 const hs = document.querySelector('.hero-stats');
 if (hs) obs.observe(hs);
 
+function getEsanteExchangeLang() {
+  try { return (new URLSearchParams(window.location.search).get('lang') || 'fr').toLowerCase() === 'en' ? 'en' : 'fr'; } catch (e) { return 'fr'; }
+}
+
+function openEsanteExchange() {
+  var overlay = document.getElementById('esante-exchange-overlay');
+  if (overlay) { overlay.style.display = 'flex'; document.body.style.overflow = 'hidden'; }
+  return false;
+}
+
+function closeEsanteExchange() {
+  var overlay = document.getElementById('esante-exchange-overlay');
+  if (overlay) { overlay.style.display = 'none'; document.body.style.overflow = ''; }
+}
+
+document.addEventListener('click', function(e) {
+  var trigger = e.target && e.target.closest ? e.target.closest('[data-esante-exchange-trigger]') : null;
+  if (!trigger) return;
+  e.preventDefault();
+  openEsanteExchange();
+});
+
+document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeEsanteExchange(); });
+
+async function submitEsanteExchange(ev) {
+  ev.preventDefault();
+  var form = ev.target;
+  var fd = new FormData(form);
+  var lang = getEsanteExchangeLang();
+  var EN = lang === 'en';
+  var status = document.getElementById('esante-exchange-status');
+  var btn = document.getElementById('esante-exchange-submit');
+  var SUPABASE_URL = 'https://uoupidbmoyqckxsxunvr.supabase.co';
+  var SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJIUzI1NiIsInJlZiI6InVvdXBpZGJtb3lxY2t4c3h1bnZyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQzMDMyNDQsImV4cCI6MjA4OTg3OTI0NH0.nSj8XaMnlZGaQBig0LxmvDcugjPUWaYo0Pr5VAp6bU4';
+  var fullName = String(fd.get('name') || '').trim();
+  var parts = fullName.split(/\s+/);
+  var payload = {
+    form_type: 'strategic_exchange',
+    name: fullName,
+    email: String(fd.get('email') || '').trim(),
+    organization: String(fd.get('org') || '').trim(),
+    position: String(fd.get('poste') || '').trim(),
+    phone: String(fd.get('phone') || '').trim() || null,
+    topic: 'Livre Blanc e-Santé',
+    priority: EN ? 'Normal priority' : 'Priorité normale',
+    message: String(fd.get('message') || '').trim() || null
+  };
+  btn.disabled = true; btn.style.opacity = '0.7';
+  status.style.color = '#6B7280';
+  status.textContent = EN ? 'Sending...' : 'Envoi en cours...';
+  try {
+    var leadRes = await fetch(SUPABASE_URL + '/rest/v1/leads', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'apikey': SUPABASE_ANON, 'Authorization': 'Bearer ' + SUPABASE_ANON, 'Prefer': 'return=minimal' },
+      body: JSON.stringify({ prenom: parts[0] || '', nom: parts.slice(1).join(' ') || '', email: payload.email, message: payload.message, langue: lang, statut: 'nouveau' })
+    });
+    if (!leadRes.ok) throw new Error('lead_insert_failed');
+    var contactRes = await fetch(SUPABASE_URL + '/rest/v1/contact_submissions', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'apikey': SUPABASE_ANON, 'Authorization': 'Bearer ' + SUPABASE_ANON, 'Prefer': 'return=minimal' },
+      body: JSON.stringify(payload)
+    });
+    if (!contactRes.ok) throw new Error('contact_insert_failed');
+    var emailRes = await fetch(SUPABASE_URL + '/functions/v1/send-email', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'apikey': SUPABASE_ANON, 'Authorization': 'Bearer ' + SUPABASE_ANON },
+      body: JSON.stringify({ formType: 'strategic_exchange', prenom: parts[0] || '', nom: parts.slice(1).join(' ') || '', langue: lang, name: payload.name, email: payload.email, organization: payload.organization, position: payload.position, phone: payload.phone, topic: payload.topic, priority: payload.priority, message: payload.message })
+    });
+    if (!emailRes.ok) throw new Error('email_failed');
+    status.style.color = '#0D7A5F';
+    status.textContent = EN ? 'Your request has been sent. We will get back to you within 48 business hours.' : 'Votre demande a bien été envoyée. Nous vous répondrons dans les 48 heures ouvrées.';
+    form.reset();
+    setTimeout(closeEsanteExchange, 1800);
+  } catch (err) {
+    status.style.color = '#A32D2D';
+    status.textContent = EN ? 'An error occurred. Please try again.' : 'Une erreur est survenue. Veuillez réessayer.';
+  } finally {
+    btn.disabled = false; btn.style.opacity = '1';
+  }
+  return false;
+}
+
 // Language-aware Heyzine flipbook + full EN translation (FR default, EN via ?lang=en)
 (function(){
   try {
