@@ -1489,6 +1489,9 @@ window.submitExchange = async function(ev){
       },
       body: JSON.stringify({
         formType: 'strategic_exchange',
+        prenom: (payload.name||'').trim().split(/\s+/)[0]||'',
+        nom: (payload.name||'').trim().split(/\s+/).slice(1).join(' ')||'',
+        langue: EN ? 'en' : 'fr',
         name: payload.name, email: payload.email,
         organization: payload.organization, position: payload.position,
         phone: payload.phone, topic: payload.topic,
