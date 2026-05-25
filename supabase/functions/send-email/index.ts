@@ -60,11 +60,10 @@ function adminLeadHtml(d: { prenom: string; nom: string; email: string; organiza
   const langLabel = d.langue === 'en' ? 'EN' : 'FR'
   const fullName = `${d.prenom || ''} ${d.nom || ''}`.trim() || '—'
   const rows: [string, string][] = [
-    ['Prénom', d.prenom || '—'],
-    ['Nom', d.nom || '—'],
+    ['Nom / Prénom', fullName],
     ['Email', d.email || '—'],
     ['Organisation', d.organization || '—'],
-    ['Poste / Fonction', d.position || '—'],
+    ['Fonction', d.position || '—'],
     ['Téléphone', d.phone || '—'],
     ['Langue', langLabel],
     ['Thématique', d.topic || '—'],
@@ -73,17 +72,17 @@ function adminLeadHtml(d: { prenom: string; nom: string; email: string; organiza
     ['Date', d.createdAt],
     ['Statut', 'Nouveau'],
   ]
-  const rowsHtml = rows.map(([k, v]) => `<tr><td style="padding:10px 14px;font-weight:600;color:#0D1B2A;border-bottom:1px solid #ECECEC;vertical-align:top;width:38%;font-size:13px;">${escapeHtml(k)}</td><td style="padding:10px 14px;color:#1f2937;border-bottom:1px solid #ECECEC;font-size:13px;">${v}</td></tr>`).join('')
+  const rowsHtml = rows.map(([k, v]) => `<tr><td style="padding:10px 14px;font-weight:600;color:#0D1B2A !important;border-bottom:1px solid #ECECEC;vertical-align:top;width:38%;font-size:13px;">${escapeHtml(k)}</td><td style="padding:10px 14px;color:#0D1B2A !important;border-bottom:1px solid #ECECEC;font-size:13px;">${v}</td></tr>`).join('')
   return `
-  <div style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;max-width:640px;margin:0 auto;background:#ffffff;color:#0D1B2A;">
-    <div style="background:#ffffff;padding:28px 32px 18px;border-bottom:2px solid ${GOLD};">
+  <div style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;max-width:640px;margin:0 auto;background-color:#ffffff !important;color:#0D1B2A !important;">
+    <div style="background-color:#ffffff !important;color:#0D1B2A !important;padding:28px 32px 18px;border-bottom:2px solid ${GOLD};">
       <div style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:${GOLD};margin-bottom:8px;">Buildfluence · Nouveau lead</div>
-      <h2 style="margin:0;font-size:20px;font-weight:700;color:#0D1B2A;">Demande d'échange stratégique : ${escapeHtml(fullName)}</h2>
-      <p style="margin:8px 0 0;font-size:13px;color:#6B7280;">Reçue le ${escapeHtml(d.createdAt)} via buildfluence.ai</p>
+      <h2 style="margin:0;font-size:20px;font-weight:700;color:#0D1B2A !important;">Demande d'échange stratégique : ${escapeHtml(fullName)}</h2>
+      <p style="margin:8px 0 0;font-size:13px;color:#0D1B2A !important;">Reçue le ${escapeHtml(d.createdAt)} via buildfluence.ai</p>
     </div>
-    <div style="background:#ffffff;padding:8px 32px 28px;">
+    <div style="background-color:#ffffff !important;color:#0D1B2A !important;padding:8px 32px 28px;">
       <table style="width:100%;border-collapse:collapse;margin-top:12px;">${rowsHtml}</table>
-      <p style="margin-top:24px;font-size:12px;color:#94a3b8;">→ Connectez-vous au dashboard Buildfluence pour traiter cette demande.</p>
+      <p style="margin-top:24px;font-size:12px;color:#0D1B2A !important;opacity:0.6;">Connectez-vous au dashboard Buildfluence pour traiter cette demande.</p>
     </div>
   </div>`
 }
