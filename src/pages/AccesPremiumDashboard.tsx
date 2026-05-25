@@ -84,6 +84,65 @@ const AccesPremiumDashboard = () => {
           />
         </motion.section>
 
+        <motion.section
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4, delay: 0.1 }}
+          className="mb-12 p-8"
+          style={{ background: "rgba(255,255,255,0.03)", border: "1px solid rgba(201,168,76,0.25)" }}
+        >
+          <div
+            className="mb-4"
+            style={{
+              fontFamily: "'JetBrains Mono', monospace",
+              fontSize: "9px",
+              textTransform: "uppercase",
+              letterSpacing: "0.22em",
+              color: "#C9A84C",
+            }}
+          >
+            {t(
+              "Baromètre d'Investissement · 18 pays · 24 500 données · 9 secteurs stratégiques",
+              "Investment Barometer · 18 countries · 24,500 data points · 9 strategic sectors"
+            )}
+          </div>
+          <iframe
+            src="https://heyzine.com/flip-book/d864915be0.html"
+            title={t("Baromètre d'Investissement", "Investment Barometer")}
+            allowFullScreen
+            style={{
+              width: "100%",
+              height: "780px",
+              border: "none",
+              borderRadius: "4px",
+              display: "block",
+              overflow: "hidden",
+            }}
+          />
+          <div className="mt-6">
+            <a
+              href="https://cdnc.heyzine.com/files/uploaded/d864915be05bc87e9a8565a09a28b2c62b9c23d0.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                display: "inline-block",
+                border: "1px solid #C9A84C",
+                color: "#C9A84C",
+                background: "transparent",
+                fontFamily: "'JetBrains Mono', monospace",
+                textTransform: "uppercase",
+                padding: "10px 20px",
+                borderRadius: "2px",
+                fontSize: "11px",
+                letterSpacing: "0.22em",
+                textDecoration: "none",
+              }}
+            >
+              {t("TÉLÉCHARGER EN PDF", "DOWNLOAD PDF")}
+            </a>
+          </div>
+        </motion.section>
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {sideCards.map((c, i) => (
             <motion.div
