@@ -18,7 +18,6 @@ const AccesPremiumDashboard = () => {
   const benchmarkSrc = `${benchmarkFile}?lang=${lang}`;
 
   const sideCards = [
-    { title: t("Baromètre Sectoriel", "Sector Barometer"), icon: "📊", desc: t("Indicateurs sectoriels stratégiques mis à jour en continu.", "Strategic sector indicators continuously updated.") },
     { title: t("Observatoire d'Investissement", "Investment Observatory"), icon: "🔭", desc: t("Suivi des flux d'investissement et signaux faibles.", "Investment flow tracking and weak-signal monitoring.") },
   ];
 
