@@ -539,7 +539,7 @@ async function submitEsanteExchange(ev) {
     organization: String(fd.get('org') || '').trim(),
     position: String(fd.get('poste') || '').trim(),
     phone: String(fd.get('phone') || '').trim() || null,
-    topic: 'Livre Blanc e-Santé',
+    topic: EN ? 'e-Health White Paper' : 'Livre Blanc e-Santé',
     priority: EN ? 'Normal priority' : 'Priorité normale',
     message: String(fd.get('message') || '').trim() || null
   };
@@ -607,6 +607,14 @@ async function submitEsanteExchange(ev) {
     var navMap = {'Aperçu':'Overview','Préfaces':'Forewords','Contribution':'Contribution','Impact':'Impact','Document':'Document'};
     document.querySelectorAll('.nav-link').forEach(function(a){ var k=a.textContent.trim(); if(navMap[k]) a.textContent=navMap[k]; });
     setText('.nav-cta','Strategic Exchange');
+    setText('#esante-exchange-title','Request my strategic exchange');
+    var esanteSecure = document.querySelector('#esante-exchange-secure span:last-child'); if(esanteSecure) esanteSecure.textContent = 'Secure and confidential communication';
+    var esanteForm = document.getElementById('esante-exchange-form');
+    if(esanteForm){
+      var esantePlaceholders = { name:'Name', org:'Organisation', poste:'Position / Role', email:'Professional email', phone:'Phone', message:'Type your message...' };
+      Object.keys(esantePlaceholders).forEach(function(n){ var el=esanteForm.querySelector('[name="'+n+'"]'); if(el) el.placeholder = esantePlaceholders[n]; });
+    }
+    setText('#esante-exchange-submit','Submit my request');
 
     // HERO
     setText('.hero-badge','1st national White Paper · e-Health in Morocco');
