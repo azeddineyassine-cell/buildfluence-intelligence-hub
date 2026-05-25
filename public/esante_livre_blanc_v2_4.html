@@ -429,6 +429,32 @@ footer{background:var(--navy);padding:28px 60px;display:flex;align-items:center;
   <div class="footer-copy">© 2026 Buildfluence · Tous droits réservés</div>
 </footer>
 
+<div id="esante-exchange-overlay" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(13,27,42,0.72);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);align-items:center;justify-content:center;padding:24px;font-family:'Cormorant Garamond',serif" onclick="if(event.target===this)closeEsanteExchange()">
+  <div style="background:#F4F4F4;color:#1a2744;max-width:640px;width:100%;max-height:92vh;overflow-y:auto;border:1px solid #D1D5DB;border-radius:4px;padding:28px 30px;box-shadow:0 30px 80px rgba(0,0,0,0.35)">
+    <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:6px">
+      <h3 id="esante-exchange-title" style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:#1a2744;margin:0;line-height:1.25">Demander mon échange stratégique</h3>
+      <button type="button" onclick="closeEsanteExchange()" aria-label="Fermer" style="background:transparent;border:none;color:#6B7280;font-size:24px;line-height:1;cursor:pointer;padding:0 4px">×</button>
+    </div>
+    <div id="esante-exchange-secure" style="display:flex;align-items:center;gap:6px;color:#6B7280;font-size:12px;margin-bottom:18px;font-family:'JetBrains Mono',monospace">
+      <span aria-hidden="true">🔒</span><span>Communication sécurisée et confidentielle</span>
+    </div>
+    <form id="esante-exchange-form" onsubmit="return submitEsanteExchange(event)" novalidate>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px">
+        <input required name="name" placeholder="Nom" maxlength="100" style="background:#fff;border:1px solid #D1D5DB;color:#1a2744;font-size:14px;padding:10px 12px;border-radius:4px;width:100%;box-sizing:border-box" />
+        <input required name="org" placeholder="Organisation" maxlength="100" style="background:#fff;border:1px solid #D1D5DB;color:#1a2744;font-size:14px;padding:10px 12px;border-radius:4px;width:100%;box-sizing:border-box" />
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px">
+        <input required name="poste" placeholder="Poste / Fonction" maxlength="100" style="background:#fff;border:1px solid #D1D5DB;color:#1a2744;font-size:14px;padding:10px 12px;border-radius:4px;width:100%;box-sizing:border-box" />
+        <input required type="email" name="email" placeholder="Email professionnel" maxlength="255" style="background:#fff;border:1px solid #D1D5DB;color:#1a2744;font-size:14px;padding:10px 12px;border-radius:4px;width:100%;box-sizing:border-box" />
+      </div>
+      <input type="tel" name="phone" placeholder="Téléphone" maxlength="20" style="background:#fff;border:1px solid #D1D5DB;color:#1a2744;font-size:14px;padding:10px 12px;border-radius:4px;width:100%;box-sizing:border-box;margin-bottom:12px" />
+      <textarea name="message" rows="4" placeholder="Tapez votre texte..." maxlength="1000" style="background:#fff;border:1px solid #D1D5DB;color:#1a2744;font-size:14px;padding:10px 12px;border-radius:4px;width:100%;box-sizing:border-box;font-family:inherit;resize:vertical;margin-bottom:14px"></textarea>
+      <div id="esante-exchange-status" style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#6B7280;min-height:18px;margin-bottom:10px"></div>
+      <button type="submit" id="esante-exchange-submit" style="background:#C9A84C;border:none;color:#0D1B2A;padding:12px 22px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;cursor:pointer;width:100%">Soumettre ma demande</button>
+    </form>
+  </div>
+</div>
+
 <script>
 function toggle(header) {
   const item = header.parentElement;
