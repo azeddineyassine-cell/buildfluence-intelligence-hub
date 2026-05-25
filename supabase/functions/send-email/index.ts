@@ -58,17 +58,17 @@ function visitorEmailHtml(prenom: string, langue: string) {
 
 function adminLeadHtml(d: { prenom: string; nom: string; email: string; organization?: string; position?: string; phone?: string; langue: string; message: string; topic?: string; priority?: string; createdAt: string }) {
   const langLabel = d.langue === 'en' ? 'EN' : 'FR'
-  const fullName = `${d.prenom || ''} ${d.nom || ''}`.trim() || '—'
+  const fullName = `${d.prenom || ''} ${d.nom || ''}`.trim() || ''
   const rows: [string, string][] = [
     ['Nom / Prénom', fullName],
-    ['Email', d.email || '—'],
-    ['Organisation', d.organization || '—'],
-    ['Fonction', d.position || '—'],
-    ['Téléphone', d.phone || '—'],
+    ['Email', d.email || ''],
+    ['Organisation', d.organization || ''],
+    ['Fonction', d.position || ''],
+    ['Téléphone', d.phone || ''],
     ['Langue', langLabel],
-    ['Thématique', d.topic || '—'],
-    ['Priorité', d.priority || '—'],
-    ['Message', (d.message || '—').replace(/\n/g, '<br>')],
+    ['Thématique', d.topic || ''],
+    ['Priorité', d.priority || ''],
+    ['Message', (d.message || '').replace(/\n/g, '<br>')],
     ['Date', d.createdAt],
     ['Statut', 'Nouveau'],
   ]
@@ -116,7 +116,7 @@ Deno.serve(async (req) => {
     const body = await req.json()
     const { formType } = body
 
-    // === LEAD / Strategic Exchange — visitor accusé + admin notif ===
+    // === LEAD / Strategic Exchange: visitor accusé + admin notif ===
     if (formType === 'strategic_exchange' || formType === 'lead_strategic_exchange') {
       let prenom = (body.prenom || '').toString().trim()
       let nom = (body.nom || '').toString().trim()
@@ -169,7 +169,7 @@ Deno.serve(async (req) => {
       ? `Nouveau contact : ${name || 'Inconnu'}`
       : formType === 'newsletter'
       ? `Nouvelle inscription newsletter : ${name || email || 'Inconnu'}`
-      : `[Buildfluence] Nouvelle soumission — ${formType || 'Formulaire'}`
+      : `[Buildfluence] Nouvelle soumission: ${formType || 'Formulaire'}`
 
     const fields: [string, string | null | undefined][] = [
       ['Type de formulaire', formType],
