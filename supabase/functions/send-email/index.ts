@@ -16,19 +16,19 @@ function visitorEmailHtml(prenom: string, langue: string) {
   const isFr = langue !== 'en'
   const body = isFr
     ? `
-        <p style="margin:0 0 18px;">Bonjour <strong>${escapeHtml(prenom)}</strong>,</p>
-        <p style="margin:0 0 18px;">Merci sincèrement d'avoir pris le temps de nous contacter. C'est avec un réel plaisir que nous avons reçu votre demande d'échange stratégique.</p>
-        <p style="margin:0 0 18px;">Votre démarche nous importe et nous y accordons toute l'attention qu'elle mérite. Un membre de l'équipe <span style="color:${GOLD};font-weight:600;">Buildfluence</span> vous contactera personnellement dans les 48 heures ouvrées pour échanger avec vous.</p>
-        <p style="margin:0 0 28px;">En attendant, nous vous invitons à explorer notre univers sur <a href="${SITE_URL}" style="color:${GOLD};text-decoration:none;">buildfluence.ai</a>.</p>
-        <p style="margin:0 0 4px;">À très bientôt,</p>
+        <p style="margin:0 0 18px;color:${NAVY} !important;">Bonjour <strong>${escapeHtml(prenom)}</strong>,</p>
+        <p style="margin:0 0 18px;color:${NAVY} !important;">Merci sincèrement d'avoir pris le temps de nous contacter. C'est avec un réel plaisir que nous avons reçu votre demande d'échange stratégique.</p>
+        <p style="margin:0 0 18px;color:${NAVY} !important;">Votre démarche nous importe et nous y accordons toute l'attention qu'elle mérite. Un membre de l'équipe <span style="color:${GOLD};font-weight:600;">Buildfluence</span> vous contactera personnellement dans les 48 heures ouvrées pour échanger avec vous.</p>
+        <p style="margin:0 0 28px;color:${NAVY} !important;">En attendant, nous vous invitons à explorer notre univers sur <a href="${SITE_URL}" style="color:${GOLD};text-decoration:none;">buildfluence.ai</a>.</p>
+        <p style="margin:0 0 4px;color:${NAVY} !important;">À très bientôt,</p>
         <p style="margin:0;color:${GOLD};font-weight:600;">L'équipe Buildfluence</p>
       `
     : `
-        <p style="margin:0 0 18px;">Hello <strong>${escapeHtml(prenom)}</strong>,</p>
-        <p style="margin:0 0 18px;">Thank you sincerely for taking the time to reach out to us. It is with great pleasure that we received your strategic exchange request.</p>
-        <p style="margin:0 0 18px;">Your approach matters to us and we will give it the full attention it deserves. A member of the <span style="color:${GOLD};font-weight:600;">Buildfluence</span> team will personally get back to you within 48 business hours.</p>
-        <p style="margin:0 0 28px;">In the meantime, we invite you to explore our universe at <a href="${SITE_URL}" style="color:${GOLD};text-decoration:none;">buildfluence.ai</a>.</p>
-        <p style="margin:0 0 4px;">Looking forward to connecting with you,</p>
+        <p style="margin:0 0 18px;color:${NAVY} !important;">Hello <strong>${escapeHtml(prenom)}</strong>,</p>
+        <p style="margin:0 0 18px;color:${NAVY} !important;">Thank you sincerely for taking the time to reach out to us. It is with great pleasure that we received your strategic exchange request.</p>
+        <p style="margin:0 0 18px;color:${NAVY} !important;">Your approach matters to us and we will give it the full attention it deserves. A member of the <span style="color:${GOLD};font-weight:600;">Buildfluence</span> team will personally get back to you within 48 business hours.</p>
+        <p style="margin:0 0 28px;color:${NAVY} !important;">In the meantime, we invite you to explore our universe at <a href="${SITE_URL}" style="color:${GOLD};text-decoration:none;">buildfluence.ai</a>.</p>
+        <p style="margin:0 0 4px;color:${NAVY} !important;">Looking forward to connecting with you,</p>
         <p style="margin:0;color:${GOLD};font-weight:600;">The Buildfluence Team</p>
       `
 
