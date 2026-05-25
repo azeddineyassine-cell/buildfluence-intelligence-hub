@@ -58,17 +58,17 @@ function visitorEmailHtml(prenom: string, langue: string) {
 
 function adminLeadHtml(d: { prenom: string; nom: string; email: string; organization?: string; position?: string; phone?: string; langue: string; message: string; topic?: string; priority?: string; createdAt: string }) {
   const langLabel = d.langue === 'en' ? 'EN' : 'FR'
-  const fullName = `${d.prenom || ''} ${d.nom || ''}`.trim() || ''
+  const fullName = `${d.prenom || '-'} ${d.nom || '-'}`.trim() || '-'
   const rows: [string, string][] = [
     ['Nom / Prénom', fullName],
-    ['Email', d.email || ''],
-    ['Organisation', d.organization || ''],
-    ['Fonction', d.position || ''],
-    ['Téléphone', d.phone || ''],
+    ['Email', d.email || '-'],
+    ['Organisation', d.organization || '-'],
+    ['Fonction', d.position || '-'],
+    ['Téléphone', d.phone || '-'],
     ['Langue', langLabel],
-    ['Thématique', d.topic || ''],
-    ['Priorité', d.priority || ''],
-    ['Message', (d.message || '').replace(/\n/g, '<br>')],
+    ['Thématique', d.topic || '-'],
+    ['Priorité', d.priority || '-'],
+    ['Message', (d.message || '-').replace(/\n/g, '<br>')],
     ['Date', d.createdAt],
     ['Statut', 'Nouveau'],
   ]
@@ -118,21 +118,21 @@ Deno.serve(async (req) => {
 
     // === LEAD / Strategic Exchange: visitor accusé + admin notif ===
     if (formType === 'strategic_exchange' || formType === 'lead_strategic_exchange') {
-      let prenom = (body.prenom || '').toString().trim()
-      let nom = (body.nom || '').toString().trim()
+      let prenom = (body.prenom || '-').toString().trim()
+      let nom = (body.nom || '-').toString().trim()
       // Fallback: derive prenom/nom from full name if not provided
       if ((!prenom && !nom) && body.name) {
         const parts = String(body.name).trim().split(/\s+/)
-        prenom = parts[0] || ''
-        nom = parts.slice(1).join(' ') || ''
+        prenom = parts[0] || '-'
+        nom = parts.slice(1).join(' ') || '-'
       }
-      const email = (body.email || '').toString().trim()
-      const message = (body.message || '').toString()
-      const organization = (body.organization || body.org || '').toString().trim()
-      const position = (body.position || body.poste || '').toString().trim()
-      const phone = (body.phone || '').toString().trim()
-      const topic = (body.topic || '').toString().trim()
-      const priority = (body.priority || '').toString().trim()
+      const email = (body.email || '-').toString().trim()
+      const message = (body.message || '-').toString()
+      const organization = (body.organization || body.org || '-').toString().trim()
+      const position = (body.position || body.poste || '-').toString().trim()
+      const phone = (body.phone || '-').toString().trim()
+      const topic = (body.topic || '-').toString().trim()
+      const priority = (body.priority || '-').toString().trim()
       const langue = body.langue === 'en' ? 'en' : 'fr'
       const fullName = `${prenom} ${nom}`.trim() || email || (langue === 'fr' ? 'Inconnu' : 'Unknown')
       const createdAt = new Date().toLocaleString(langue === 'fr' ? 'fr-FR' : 'en-GB', { timeZone: 'Europe/Paris' })
