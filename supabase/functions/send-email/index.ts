@@ -35,20 +35,20 @@ function visitorEmailHtml(prenom: string, langue: string) {
   return `
   <!doctype html>
   <html><head><meta charset="utf-8"></head>
-  <body style="margin:0;padding:0;background:${NAVY};font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;">
-    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:${NAVY};padding:40px 20px;">
+  <body style="margin:0;padding:0;background-color:#ffffff !important;color:${NAVY} !important;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;">
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background-color:#ffffff !important;color:${NAVY} !important;padding:40px 20px;">
       <tr><td align="center">
-        <table role="presentation" width="560" cellpadding="0" cellspacing="0" style="max-width:560px;width:100%;background:${NAVY};">
+        <table role="presentation" width="560" cellpadding="0" cellspacing="0" style="max-width:560px;width:100%;background-color:#ffffff !important;color:${NAVY} !important;">
           <tr><td align="center" style="padding:8px 0 28px;">
             <img src="${LOGO_URL}" alt="Buildfluence" width="160" style="display:block;border:0;outline:none;max-width:160px;height:auto;" />
           </td></tr>
           <tr><td style="border-top:1px solid ${GOLD};height:1px;line-height:1px;font-size:0;">&nbsp;</td></tr>
-          <tr><td style="padding:36px 32px;color:${PAPER};font-size:15px;line-height:1.7;">
+          <tr><td style="padding:36px 32px;color:${NAVY} !important;font-size:15px;line-height:1.7;">
             ${body}
           </td></tr>
           <tr><td style="border-top:1px solid ${GOLD};height:1px;line-height:1px;font-size:0;">&nbsp;</td></tr>
-          <tr><td align="center" style="padding:20px 0 0;color:${PAPER};opacity:0.6;font-size:11px;letter-spacing:0.08em;">
-            <a href="${SITE_URL}" style="color:${PAPER};text-decoration:none;opacity:0.8;">buildfluence.ai</a>
+          <tr><td align="center" style="padding:20px 0 0;color:${NAVY} !important;opacity:0.6;font-size:11px;letter-spacing:0.08em;">
+            <a href="${SITE_URL}" style="color:${NAVY} !important;text-decoration:none;opacity:0.8;">buildfluence.ai</a>
           </td></tr>
         </table>
       </td></tr>
