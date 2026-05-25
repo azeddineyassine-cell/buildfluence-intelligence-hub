@@ -56,26 +56,34 @@ function visitorEmailHtml(prenom: string, langue: string) {
   </body></html>`
 }
 
-function adminLeadHtml(d: { prenom: string; nom: string; email: string; langue: string; message: string; createdAt: string }) {
+function adminLeadHtml(d: { prenom: string; nom: string; email: string; organization?: string; position?: string; phone?: string; langue: string; message: string; topic?: string; priority?: string; createdAt: string }) {
   const langLabel = d.langue === 'en' ? 'EN' : 'FR'
-  const rows = [
-    ['Prénom', d.prenom],
-    ['Nom', d.nom],
-    ['Email', d.email],
+  const fullName = `${d.prenom || ''} ${d.nom || ''}`.trim() || '—'
+  const rows: [string, string][] = [
+    ['Prénom', d.prenom || '—'],
+    ['Nom', d.nom || '—'],
+    ['Email', d.email || '—'],
+    ['Organisation', d.organization || '—'],
+    ['Poste / Fonction', d.position || '—'],
+    ['Téléphone', d.phone || '—'],
     ['Langue', langLabel],
+    ['Thématique', d.topic || '—'],
+    ['Priorité', d.priority || '—'],
     ['Message', (d.message || '—').replace(/\n/g, '<br>')],
     ['Date', d.createdAt],
     ['Statut', 'Nouveau'],
-  ].map(([k, v]) => `<tr><td style="padding:8px 12px;font-weight:600;color:#1e293b;border-bottom:1px solid #e5e7eb;vertical-align:top;">${k}</td><td style="padding:8px 12px;color:#334155;border-bottom:1px solid #e5e7eb;">${v}</td></tr>`).join('')
+  ]
+  const rowsHtml = rows.map(([k, v]) => `<tr><td style="padding:10px 14px;font-weight:600;color:#0D1B2A;border-bottom:1px solid #ECECEC;vertical-align:top;width:38%;font-size:13px;">${escapeHtml(k)}</td><td style="padding:10px 14px;color:#1f2937;border-bottom:1px solid #ECECEC;font-size:13px;">${v}</td></tr>`).join('')
   return `
-  <div style="font-family:Arial,sans-serif;max-width:620px;margin:0 auto;">
-    <div style="background:${NAVY};padding:24px 32px;border-radius:8px 8px 0 0;">
-      <h2 style="color:${GOLD};margin:0;font-size:18px;">🔔 Nouveau lead Buildfluence · ${escapeHtml(d.prenom)} ${escapeHtml(d.nom)}</h2>
+  <div style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;max-width:640px;margin:0 auto;background:#ffffff;color:#0D1B2A;">
+    <div style="background:#ffffff;padding:28px 32px 18px;border-bottom:2px solid ${GOLD};">
+      <div style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:${GOLD};margin-bottom:8px;">Buildfluence · Nouveau lead</div>
+      <h2 style="margin:0;font-size:20px;font-weight:700;color:#0D1B2A;">Demande d'échange stratégique : ${escapeHtml(fullName)}</h2>
+      <p style="margin:8px 0 0;font-size:13px;color:#6B7280;">Reçue le ${escapeHtml(d.createdAt)} via buildfluence.ai</p>
     </div>
-    <div style="background:#ffffff;padding:24px 32px;border:1px solid #e5e7eb;border-top:none;border-radius:0 0 8px 8px;">
-      <p style="margin:0 0 16px;color:#334155;font-size:14px;">Nouveau lead reçu sur buildfluence.ai</p>
-      <table style="width:100%;border-collapse:collapse;font-size:14px;">${rows}</table>
-      <p style="margin-top:24px;font-size:12px;color:#94a3b8;">→ Accéder au dashboard pour gérer ce lead.</p>
+    <div style="background:#ffffff;padding:8px 32px 28px;">
+      <table style="width:100%;border-collapse:collapse;margin-top:12px;">${rowsHtml}</table>
+      <p style="margin-top:24px;font-size:12px;color:#94a3b8;">→ Connectez-vous au dashboard Buildfluence pour traiter cette demande.</p>
     </div>
   </div>`
 }
