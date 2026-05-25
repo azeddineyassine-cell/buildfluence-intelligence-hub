@@ -119,11 +119,23 @@ Deno.serve(async (req) => {
 
     // === LEAD / Strategic Exchange — visitor accusé + admin notif ===
     if (formType === 'strategic_exchange' || formType === 'lead_strategic_exchange') {
-      const prenom = (body.prenom || '').toString().trim()
-      const nom = (body.nom || '').toString().trim()
+      let prenom = (body.prenom || '').toString().trim()
+      let nom = (body.nom || '').toString().trim()
+      // Fallback: derive prenom/nom from full name if not provided
+      if ((!prenom && !nom) && body.name) {
+        const parts = String(body.name).trim().split(/\s+/)
+        prenom = parts[0] || ''
+        nom = parts.slice(1).join(' ') || ''
+      }
       const email = (body.email || '').toString().trim()
       const message = (body.message || '').toString()
+      const organization = (body.organization || body.org || '').toString().trim()
+      const position = (body.position || body.poste || '').toString().trim()
+      const phone = (body.phone || '').toString().trim()
+      const topic = (body.topic || '').toString().trim()
+      const priority = (body.priority || '').toString().trim()
       const langue = body.langue === 'en' ? 'en' : 'fr'
+      const fullName = `${prenom} ${nom}`.trim() || email || (langue === 'fr' ? 'Inconnu' : 'Unknown')
       const createdAt = new Date().toLocaleString(langue === 'fr' ? 'fr-FR' : 'en-GB', { timeZone: 'Europe/Paris' })
 
       // Visitor confirmation
@@ -138,12 +150,12 @@ Deno.serve(async (req) => {
         })
       }
 
-      // Internal notification
+      // Internal notification (white, personalized)
       await sendResend(RESEND_API_KEY, {
         from: FROM,
         to: [ADMIN_EMAIL],
-        subject: `🔔 Nouveau lead Buildfluence · ${prenom} ${nom}`.trim(),
-        html: adminLeadHtml({ prenom, nom, email, langue, message, createdAt }),
+        subject: `Buildfluence · Nouveau lead : ${fullName}${organization ? ' (' + organization + ')' : ''}`,
+        html: adminLeadHtml({ prenom, nom, email, organization, position, phone, langue, message, topic, priority, createdAt }),
       })
 
       return new Response(JSON.stringify({ success: true }), {
