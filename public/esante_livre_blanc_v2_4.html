@@ -194,7 +194,7 @@ footer{background:var(--navy);padding:28px 60px;display:flex;align-items:center;
     <a href="#impact" class="nav-link">Impact</a>
     <a href="#document" class="nav-link">Document</a>
   </div>
-  <a href="#" onclick="event.preventDefault();window.location.href='/?openExchange=1';return false;" class="nav-cta">Échange Stratégique</a>
+  <a href="#" class="nav-cta" data-esante-exchange-trigger>Échange Stratégique</a>
 </nav>
 
 <!-- HERO -->
@@ -419,7 +419,7 @@ footer{background:var(--navy);padding:28px 60px;display:flex;align-items:center;
   <h2 class="cta-title">Un projet de Livre Blanc<br><em>innovant ?</em> Parlons-en.</h2>
   <p class="cta-sub">Intelligence stratégique, études sectorielles, benchmarks et recommandations actionnables pour les décideurs publics et privés.</p>
   <div class="cta-btns">
-    <a href="#" onclick="event.preventDefault();window.location.href='/?openExchange=1';return false;" class="btn-gold">Échange Stratégique</a>
+    <a href="#" class="btn-gold" data-esante-exchange-trigger>Échange Stratégique</a>
     <a href="/pourquoi-buildfluence" target="_blank" rel="noopener" class="btn-dark">Découvrir Buildfluence</a>
   </div>
 </section>
@@ -428,6 +428,32 @@ footer{background:var(--navy);padding:28px 60px;display:flex;align-items:center;
   <div class="footer-brand">Buildfluence · Intelligence Hub</div>
   <div class="footer-copy">© 2026 Buildfluence · Tous droits réservés</div>
 </footer>
+
+<div id="esante-exchange-overlay" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(13,27,42,0.72);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);align-items:center;justify-content:center;padding:24px;font-family:'Cormorant Garamond',serif" onclick="if(event.target===this)closeEsanteExchange()">
+  <div style="background:#F4F4F4;color:#1a2744;max-width:640px;width:100%;max-height:92vh;overflow-y:auto;border:1px solid #D1D5DB;border-radius:4px;padding:28px 30px;box-shadow:0 30px 80px rgba(0,0,0,0.35)">
+    <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:6px">
+      <h3 id="esante-exchange-title" style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:#1a2744;margin:0;line-height:1.25">Demander mon échange stratégique</h3>
+      <button type="button" onclick="closeEsanteExchange()" aria-label="Fermer" style="background:transparent;border:none;color:#6B7280;font-size:24px;line-height:1;cursor:pointer;padding:0 4px">×</button>
+    </div>
+    <div id="esante-exchange-secure" style="display:flex;align-items:center;gap:6px;color:#6B7280;font-size:12px;margin-bottom:18px;font-family:'JetBrains Mono',monospace">
+      <span aria-hidden="true">🔒</span><span>Communication sécurisée et confidentielle</span>
+    </div>
+    <form id="esante-exchange-form" onsubmit="return submitEsanteExchange(event)" novalidate>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px">
+        <input required name="name" placeholder="Nom" maxlength="100" style="background:#fff;border:1px solid #D1D5DB;color:#1a2744;font-size:14px;padding:10px 12px;border-radius:4px;width:100%;box-sizing:border-box" />
+        <input required name="org" placeholder="Organisation" maxlength="100" style="background:#fff;border:1px solid #D1D5DB;color:#1a2744;font-size:14px;padding:10px 12px;border-radius:4px;width:100%;box-sizing:border-box" />
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px">
+        <input required name="poste" placeholder="Poste / Fonction" maxlength="100" style="background:#fff;border:1px solid #D1D5DB;color:#1a2744;font-size:14px;padding:10px 12px;border-radius:4px;width:100%;box-sizing:border-box" />
+        <input required type="email" name="email" placeholder="Email professionnel" maxlength="255" style="background:#fff;border:1px solid #D1D5DB;color:#1a2744;font-size:14px;padding:10px 12px;border-radius:4px;width:100%;box-sizing:border-box" />
+      </div>
+      <input type="tel" name="phone" placeholder="Téléphone" maxlength="20" style="background:#fff;border:1px solid #D1D5DB;color:#1a2744;font-size:14px;padding:10px 12px;border-radius:4px;width:100%;box-sizing:border-box;margin-bottom:12px" />
+      <textarea name="message" rows="4" placeholder="Tapez votre texte..." maxlength="1000" style="background:#fff;border:1px solid #D1D5DB;color:#1a2744;font-size:14px;padding:10px 12px;border-radius:4px;width:100%;box-sizing:border-box;font-family:inherit;resize:vertical;margin-bottom:14px"></textarea>
+      <div id="esante-exchange-status" style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#6B7280;min-height:18px;margin-bottom:10px"></div>
+      <button type="submit" id="esante-exchange-submit" style="background:#C9A84C;border:none;color:#0D1B2A;padding:12px 22px;border-radius:4px;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;cursor:pointer;width:100%">Soumettre ma demande</button>
+    </form>
+  </div>
+</div>
 
 <script>
 function toggle(header) {
@@ -470,6 +496,88 @@ const obs = new IntersectionObserver(entries => {
 const hs = document.querySelector('.hero-stats');
 if (hs) obs.observe(hs);
 
+function getEsanteExchangeLang() {
+  try { return (new URLSearchParams(window.location.search).get('lang') || 'fr').toLowerCase() === 'en' ? 'en' : 'fr'; } catch (e) { return 'fr'; }
+}
+
+function openEsanteExchange() {
+  var overlay = document.getElementById('esante-exchange-overlay');
+  if (overlay) { overlay.style.display = 'flex'; document.body.style.overflow = 'hidden'; }
+  return false;
+}
+
+function closeEsanteExchange() {
+  var overlay = document.getElementById('esante-exchange-overlay');
+  if (overlay) { overlay.style.display = 'none'; document.body.style.overflow = ''; }
+}
+
+document.addEventListener('click', function(e) {
+  var trigger = e.target && e.target.closest ? e.target.closest('[data-esante-exchange-trigger]') : null;
+  if (!trigger) return;
+  e.preventDefault();
+  openEsanteExchange();
+});
+
+document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeEsanteExchange(); });
+
+async function submitEsanteExchange(ev) {
+  ev.preventDefault();
+  var form = ev.target;
+  var fd = new FormData(form);
+  var lang = getEsanteExchangeLang();
+  var EN = lang === 'en';
+  var status = document.getElementById('esante-exchange-status');
+  var btn = document.getElementById('esante-exchange-submit');
+  var SUPABASE_URL = 'https://uoupidbmoyqckxsxunvr.supabase.co';
+  var SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVvdXBpZGJtb3lxY2t4c3h1bnZyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQzMDMyNDQsImV4cCI6MjA4OTg3OTI0NH0.nSj8XaMnlZGaQBig0LxmvDcugjPUWaYo0Pr5VAp6bU4';
+  var fullName = String(fd.get('name') || '').trim();
+  var parts = fullName.split(/\s+/);
+  var payload = {
+    form_type: 'strategic_exchange',
+    name: fullName,
+    email: String(fd.get('email') || '').trim(),
+    organization: String(fd.get('org') || '').trim(),
+    position: String(fd.get('poste') || '').trim(),
+    phone: String(fd.get('phone') || '').trim() || null,
+    topic: EN ? 'e-Health White Paper' : 'Livre Blanc e-Santé',
+    priority: EN ? 'Normal priority' : 'Priorité normale',
+    message: String(fd.get('message') || '').trim() || null
+  };
+  btn.disabled = true; btn.style.opacity = '0.7';
+  status.style.color = '#6B7280';
+  status.textContent = EN ? 'Sending...' : 'Envoi en cours...';
+  try {
+    var leadRes = await fetch(SUPABASE_URL + '/rest/v1/leads', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'apikey': SUPABASE_ANON, 'Authorization': 'Bearer ' + SUPABASE_ANON, 'Prefer': 'return=minimal' },
+      body: JSON.stringify({ prenom: parts[0] || '', nom: parts.slice(1).join(' ') || '', email: payload.email, message: payload.message, langue: lang, statut: 'nouveau' })
+    });
+    if (!leadRes.ok) throw new Error('lead_insert_failed');
+    var contactRes = await fetch(SUPABASE_URL + '/rest/v1/contact_submissions', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'apikey': SUPABASE_ANON, 'Authorization': 'Bearer ' + SUPABASE_ANON, 'Prefer': 'return=minimal' },
+      body: JSON.stringify(payload)
+    });
+    if (!contactRes.ok) throw new Error('contact_insert_failed');
+    var emailRes = await fetch(SUPABASE_URL + '/functions/v1/send-email', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'apikey': SUPABASE_ANON, 'Authorization': 'Bearer ' + SUPABASE_ANON },
+      body: JSON.stringify({ formType: 'strategic_exchange', prenom: parts[0] || '', nom: parts.slice(1).join(' ') || '', langue: lang, name: payload.name, email: payload.email, organization: payload.organization, position: payload.position, phone: payload.phone, topic: payload.topic, priority: payload.priority, message: payload.message })
+    });
+    if (!emailRes.ok) throw new Error('email_failed');
+    status.style.color = '#0D7A5F';
+    status.textContent = EN ? 'Your request has been sent. We will get back to you within 48 business hours.' : 'Votre demande a bien été envoyée. Nous vous répondrons dans les 48 heures ouvrées.';
+    form.reset();
+    setTimeout(closeEsanteExchange, 1800);
+  } catch (err) {
+    status.style.color = '#A32D2D';
+    status.textContent = EN ? 'An error occurred. Please try again.' : 'Une erreur est survenue. Veuillez réessayer.';
+  } finally {
+    btn.disabled = false; btn.style.opacity = '1';
+  }
+  return false;
+}
+
 // Language-aware Heyzine flipbook + full EN translation (FR default, EN via ?lang=en)
 (function(){
   try {
@@ -499,6 +607,14 @@ if (hs) obs.observe(hs);
     var navMap = {'Aperçu':'Overview','Préfaces':'Forewords','Contribution':'Contribution','Impact':'Impact','Document':'Document'};
     document.querySelectorAll('.nav-link').forEach(function(a){ var k=a.textContent.trim(); if(navMap[k]) a.textContent=navMap[k]; });
     setText('.nav-cta','Strategic Exchange');
+    setText('#esante-exchange-title','Request my strategic exchange');
+    var esanteSecure = document.querySelector('#esante-exchange-secure span:last-child'); if(esanteSecure) esanteSecure.textContent = 'Secure and confidential communication';
+    var esanteForm = document.getElementById('esante-exchange-form');
+    if(esanteForm){
+      var esantePlaceholders = { name:'Name', org:'Organisation', poste:'Position / Role', email:'Professional email', phone:'Phone', message:'Type your message...' };
+      Object.keys(esantePlaceholders).forEach(function(n){ var el=esanteForm.querySelector('[name="'+n+'"]'); if(el) el.placeholder = esantePlaceholders[n]; });
+    }
+    setText('#esante-exchange-submit','Submit my request');
 
     // HERO
     setText('.hero-badge','1st national White Paper · e-Health in Morocco');
