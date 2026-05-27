@@ -116,7 +116,7 @@ const SuccessStoriesCSS = `
   .ss-visual { background: #FFFFFF; padding: 32px 28px; color: var(--bf-paper); display: flex; flex-direction: column; min-height: 100%; }
   .ss-story-eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--bf-gold); margin-bottom: 22px; line-height: 1.5; }
   .ss-logos { display: flex; align-items: center; gap: 12px; margin-bottom: 22px; padding-bottom: 18px; border-bottom: 1px solid var(--bf-navy-soft); flex-wrap: wrap; }
-  .ss-logo { background: var(--bf-paper); color: var(--bf-navy); font-family: 'Playfair Display', serif; font-weight: 600; font-size: 13px; padding: 9px 13px; border-radius: 0; line-height: 1.1; letter-spacing: 0.02em; white-space: pre-line; display: inline-flex; align-items: center; justify-content: center; min-height: 56px; }
+  .ss-logo { background: transparent; color: var(--bf-navy); font-family: 'Playfair Display', serif; font-weight: 600; font-size: 13px; padding: 9px 13px; border-radius: 0; line-height: 1.1; letter-spacing: 0.02em; white-space: pre-line; display: inline-flex; align-items: center; justify-content: center; min-height: 56px; }
   .ss-logo.italic { font-style: italic; font-size: 11px; }
   .ss-logo-img { display: block; height: 44px; width: auto; max-width: 160px; object-fit: contain; }
   .ss-visual-main { background: linear-gradient(135deg, var(--bf-navy-deeper), var(--bf-navy-soft)); border: 1px solid var(--bf-navy-soft); padding: 28px 20px; margin-bottom: 18px; text-align: center; color: var(--bf-ink-muted); font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 13px; min-height: 160px; display: flex; align-items: center; justify-content: center; line-height: 1.5; position: relative; }
@@ -127,8 +127,8 @@ const SuccessStoriesCSS = `
   .ss-res-link:hover { background: rgba(217, 188, 106, 0.12); color: var(--bf-gold); }
   .ss-res-type { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--bf-gold); display: block; margin-bottom: 2px; }
   .ss-meta { font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; line-height: 1.7; border-top: 1px solid var(--bf-navy-soft); padding-top: 16px; margin-top: auto; }
-  .ss-meta-line { color: rgba(244, 241, 234, 0.55); margin-bottom: 4px; }
-  .ss-meta-line strong { color: var(--bf-gold); font-weight: 500; }
+  .ss-meta-line { color: #000000; margin-bottom: 4px; }
+  .ss-meta-line strong { color: #000000; font-weight: 600; }
   .ss-content { padding: 40px 44px; }
   .ss-num { font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 500; letter-spacing: 0.25em; text-transform: uppercase; color: var(--bf-gold); margin-bottom: 14px; }
   .ss-story-title { font-family: 'Playfair Display', serif; font-weight: 600; font-size: 32px; color: var(--bf-navy); line-height: 1.15; margin: 0 0 28px; }
@@ -265,10 +265,6 @@ const SuccessStoriesPage = () => {
           <span style={{ color: "var(--bf-gold)" }}>"{t("Vidéo. Rumeurs et réseaux sociaux : quand Raïbi Jamila en paie le prix fort", "Video. Rumors and social media: when Raïbi Jamila pays the price")}"</span> ]
         </>
       ),
-      resources: [
-        { type: t("▶ Reportage exclusif", "▶ Exclusive report"), text: t("RTM, 45 minutes, 2017", "RTM, 45 minutes, 2017") },
-        { type: t("📰 Article média", "📰 Media article"), text: t("le360.com, \"Quand Raïbi Jamila en paie le prix fort\"", "le360.com, \"When Raïbi Jamila pays the price\"") },
-      ],
       meta: [
         { label: t("CLIENT", "CLIENT"), value: "Centrale Danone" },
         { label: t("PÉRIODE", "PERIOD"), value: "2015 / 2017" },
@@ -315,12 +311,11 @@ const SuccessStoriesPage = () => {
       tags: [t("AGROALIMENTAIRE","AGRI-FOOD"), t("GESTION DE CRISE","CRISIS MANAGEMENT"), t("RÉHABILITATION DE MARQUE","BRAND REHABILITATION"), t("DÉSINFORMATION","DISINFORMATION"), t("🇲🇦 MAROC","🇲🇦 MOROCCO")],
       visualExtra: (
         <>
-          <img src="/img1.png" alt={t("Raïbi Jamila — visuel produit","Raïbi Jamila — product visual")} className="ss-vx-img" />
+          <a href="https://medias24.com/2017/10/09/reseaux-sociaux-et-bad-buzz-raibi-jamila-un-cas-decole" target="_blank" rel="noopener noreferrer">
+            <img src="/img1.png" alt={t("Raïbi Jamila — visuel produit","Raïbi Jamila — product visual")} className="ss-vx-img" />
+          </a>
           <a href="https://fr.le360.ma/medias/video-rumeurs-et-reseaux-sociaux-quand-raibi-jamila-en-paie-le-prix-fort-137659/" target="_blank" rel="noopener noreferrer">
             <img src="/img2.png" alt="le360" className="ss-vx-img" style={{ maxHeight: 80 }} />
-          </a>
-          <a className="ss-vx-link" href="https://medias24.com/2017/10/09/reseaux-sociaux-et-bad-buzz-raibi-jamila-un-cas-decole" target="_blank" rel="noopener noreferrer">
-            medias24 — {t("Réseaux sociaux et bad buzz : Raïbi Jamila, un cas d'école","Social media and bad buzz: Raïbi Jamila, a textbook case")} ↗
           </a>
         </>
       ),
@@ -336,12 +331,7 @@ const SuccessStoriesPage = () => {
       miniSecteur: t("Intelligence stratégique · 🇲🇦","Strategic intelligence · 🇲🇦"),
       eyebrow: t("Intelligence stratégique internationale","International strategic intelligence"),
       logos: [{ label: t("CABINET EUROPÉEN\nD'INTELLIGENCE","EUROPEAN\nINTELLIGENCE FIRM"), italic: true }],
-      visualMain: (
-        <>
-          [ {t("Iconographie boycott 2018","2018 boycott iconography")}<br />
-          <span style={{ color: "var(--bf-gold)" }}>#كلنا_مقاطعون</span> ]
-        </>
-      ),
+      visualMain: null,
       meta: [
         { label: t("CLIENT","CLIENT"), value: t("Cabinet européen d'intelligence","European intelligence firm") },
         { label: t("PÉRIODE","PERIOD"), value: "2018" },
@@ -407,17 +397,8 @@ const SuccessStoriesPage = () => {
       miniPitch: t("Faire renaître une organisation 38 ans après sa création.","Reviving an organization 38 years after its creation."),
       miniSecteur: t("Organisation internationale · 🇸🇦 OCI","International organization · 🇸🇦 OIC"),
       eyebrow: t("Organisation internationale","International organization"),
-      logos: [{ label: "CIDC · OCI", image: logoCidc, alt: "CIDC – Islamic Centre for Development of Trade" }],
-      visualMain: (
-        <>
-          [ Doing Business Platform<br />
-          <span style={{ color: "var(--bf-gold)" }}>{t("+ Magazine TIJARIS bimensuel","+ Bi-monthly TIJARIS magazine")}</span> ]
-        </>
-      ),
-      resources: [
-        { type: t("🌐 Plateforme","🌐 Platform"), text: "Doing Business Platform · CIDC OIC" },
-        { type: t("📖 Publication","📖 Publication"), text: t("Magazine TIJARIS, bimensuel","TIJARIS magazine, bi-monthly") },
-      ],
+      logos: [{ label: "OIC", image: "/img4.png", alt: "Organisation of Islamic Cooperation" }],
+      visualMain: null,
       meta: [
         { label: t("CLIENT","CLIENT"), value: t("CIDC (organe OCI)","ICDT (OIC body)") },
         { label: t("SIÈGE","HQ"), value: t("🇲🇦 Casablanca","🇲🇦 Casablanca") },
@@ -453,7 +434,7 @@ const SuccessStoriesPage = () => {
       tags: [t("ORGANISATION INTERNATIONALE","INTERNATIONAL ORGANIZATION"), t("PLATEFORME D'ATTRACTIVITÉ","ATTRACTIVENESS PLATFORM"), t("INTELLIGENCE ÉCONOMIQUE","ECONOMIC INTELLIGENCE"), "MATCHMAKING", t("🇲🇦 🇸🇦 OCI","🇲🇦 🇸🇦 OIC")],
       visualExtra: (
         <a href="https://icdt-cidc.org/fr/" target="_blank" rel="noopener noreferrer">
-          <img src="/img4.png" alt="OCI / OIC" className="ss-vx-img" style={{ maxHeight: 180 }} />
+          <img src="/cidc_logo.png" alt="CIDC – Islamic Centre for Development of Trade" className="ss-vx-img" style={{ maxHeight: 180 }} />
         </a>
       ),
     },
@@ -671,7 +652,7 @@ const SuccessStoriesPage = () => {
       ),
       meta: [
         { label: t("CLIENT","CLIENT"), value: "OCP Group" },
-        { label: t("POSTE","ROLE"), value: "Strategic Communication Manager" },
+        
         { label: t("PÉRIODE","PERIOD"), value: "2014" },
         { label: t("GÉOGRAPHIE","GEOGRAPHY"), value: t("🇲🇦 Maroc","🇲🇦 Morocco") },
       ],
@@ -773,7 +754,7 @@ const SuccessStoriesPage = () => {
       miniPitch: t("Repositionner un acteur public dans son écosystème digital.","Repositioning a public player in its digital ecosystem."),
       miniSecteur: t("Établissement public · 🇲🇦","Public institution · 🇲🇦"),
       eyebrow: t("Établissement public & transformation digitale","Public institution & digital transformation"),
-      logos: [{ label: "#ADD", image: logoAdd, alt: "Digital Development Agency" }, { label: "GITEX AFRICA", italic: true }],
+      logos: [{ label: "#ADD", image: logoAdd, alt: "Digital Development Agency" }, { label: "GITEX AFRICA", image: "/gitex.png", alt: "GITEX Africa Morocco" }],
       visualMain: (
         <>
           [ {t("Architecture digitale ADD","ADD digital architecture")}<br />
@@ -984,6 +965,15 @@ const SuccessStoriesPage = () => {
           <a className="ss-vx-link" href="/esante_livre_blanc_v2_4.html?lang=fr" target="_blank" rel="noopener noreferrer">
             {t("Consulter le Livre Blanc →","View the White Paper →")}
           </a>
+          <a href="https://lematin.ma/express/2022/generalisation-le-sante-livre-blanc-mieux-identifier-contraintes/374458.html" target="_blank" rel="noopener noreferrer">
+            <img src="/press_lematin.png" alt={t("Le Matin — Livre Blanc e-Santé","Le Matin — e-Health White Paper")} className="ss-vx-img" />
+          </a>
+          <a href="https://leseco.ma/maroc/azeddine-yassine-la-culture-de-lentrepreneuriat-nest-pas-ancree-chez-les-jeunes-diplomes.html" target="_blank" rel="noopener noreferrer">
+            <img src="/press_leseco.png" alt="Les Eco — Azeddine Yassine" className="ss-vx-img" />
+          </a>
+          <a href="https://snrtnews.com/fr/article/e-sante-le-maroc-accueillera-officiellement-son-livre-blanc-ce-vendredi-38764" target="_blank" rel="noopener noreferrer">
+            <img src="/press_snrtnews.png" alt={t("SNRT News — Livre Blanc e-Santé","SNRT News — e-Health White Paper")} className="ss-vx-img" />
+          </a>
         </>
       ),
     },
@@ -1107,7 +1097,7 @@ const SuccessStoriesPage = () => {
                   </div>
                 ))}
               </div>
-              <div className="ss-visual-main">{s.visualMain}</div>
+              {s.visualMain && <div className="ss-visual-main">{s.visualMain}</div>}
               {s.resources && s.resources.length > 0 && (
                 <div className="ss-resources">
                   <div className="ss-res-label">{t("— Ressources liées", "— Related resources")}</div>
