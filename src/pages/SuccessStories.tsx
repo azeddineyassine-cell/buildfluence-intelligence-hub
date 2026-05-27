@@ -311,12 +311,11 @@ const SuccessStoriesPage = () => {
       tags: [t("AGROALIMENTAIRE","AGRI-FOOD"), t("GESTION DE CRISE","CRISIS MANAGEMENT"), t("RÉHABILITATION DE MARQUE","BRAND REHABILITATION"), t("DÉSINFORMATION","DISINFORMATION"), t("🇲🇦 MAROC","🇲🇦 MOROCCO")],
       visualExtra: (
         <>
-          <img src="/img1.png" alt={t("Raïbi Jamila — visuel produit","Raïbi Jamila — product visual")} className="ss-vx-img" />
+          <a href="https://medias24.com/2017/10/09/reseaux-sociaux-et-bad-buzz-raibi-jamila-un-cas-decole" target="_blank" rel="noopener noreferrer">
+            <img src="/img1.png" alt={t("Raïbi Jamila — visuel produit","Raïbi Jamila — product visual")} className="ss-vx-img" />
+          </a>
           <a href="https://fr.le360.ma/medias/video-rumeurs-et-reseaux-sociaux-quand-raibi-jamila-en-paie-le-prix-fort-137659/" target="_blank" rel="noopener noreferrer">
             <img src="/img2.png" alt="le360" className="ss-vx-img" style={{ maxHeight: 80 }} />
-          </a>
-          <a className="ss-vx-link" href="https://medias24.com/2017/10/09/reseaux-sociaux-et-bad-buzz-raibi-jamila-un-cas-decole" target="_blank" rel="noopener noreferrer">
-            medias24 — {t("Réseaux sociaux et bad buzz : Raïbi Jamila, un cas d'école","Social media and bad buzz: Raïbi Jamila, a textbook case")} ↗
           </a>
         </>
       ),
