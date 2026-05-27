@@ -397,17 +397,8 @@ const SuccessStoriesPage = () => {
       miniPitch: t("Faire renaître une organisation 38 ans après sa création.","Reviving an organization 38 years after its creation."),
       miniSecteur: t("Organisation internationale · 🇸🇦 OCI","International organization · 🇸🇦 OIC"),
       eyebrow: t("Organisation internationale","International organization"),
-      logos: [{ label: "CIDC · OCI", image: logoCidc, alt: "CIDC – Islamic Centre for Development of Trade" }],
-      visualMain: (
-        <>
-          [ Doing Business Platform<br />
-          <span style={{ color: "var(--bf-gold)" }}>{t("+ Magazine TIJARIS bimensuel","+ Bi-monthly TIJARIS magazine")}</span> ]
-        </>
-      ),
-      resources: [
-        { type: t("🌐 Plateforme","🌐 Platform"), text: "Doing Business Platform · CIDC OIC" },
-        { type: t("📖 Publication","📖 Publication"), text: t("Magazine TIJARIS, bimensuel","TIJARIS magazine, bi-monthly") },
-      ],
+      logos: [{ label: "OIC", image: "/img4.png", alt: "Organisation of Islamic Cooperation" }],
+      visualMain: null,
       meta: [
         { label: t("CLIENT","CLIENT"), value: t("CIDC (organe OCI)","ICDT (OIC body)") },
         { label: t("SIÈGE","HQ"), value: t("🇲🇦 Casablanca","🇲🇦 Casablanca") },
