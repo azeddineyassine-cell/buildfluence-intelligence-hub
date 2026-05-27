@@ -965,6 +965,15 @@ const SuccessStoriesPage = () => {
           <a className="ss-vx-link" href="/esante_livre_blanc_v2_4.html?lang=fr" target="_blank" rel="noopener noreferrer">
             {t("Consulter le Livre Blanc →","View the White Paper →")}
           </a>
+          <a href="https://lematin.ma/express/2022/generalisation-le-sante-livre-blanc-mieux-identifier-contraintes/374458.html" target="_blank" rel="noopener noreferrer">
+            <img src="/press_lematin.png" alt={t("Le Matin — Livre Blanc e-Santé","Le Matin — e-Health White Paper")} className="ss-vx-img" />
+          </a>
+          <a href="https://leseco.ma/maroc/azeddine-yassine-la-culture-de-lentrepreneuriat-nest-pas-ancree-chez-les-jeunes-diplomes.html" target="_blank" rel="noopener noreferrer">
+            <img src="/press_leseco.png" alt="Les Eco — Azeddine Yassine" className="ss-vx-img" />
+          </a>
+          <a href="https://snrtnews.com/fr/article/e-sante-le-maroc-accueillera-officiellement-son-livre-blanc-ce-vendredi-38764" target="_blank" rel="noopener noreferrer">
+            <img src="/press_snrtnews.png" alt={t("SNRT News — Livre Blanc e-Santé","SNRT News — e-Health White Paper")} className="ss-vx-img" />
+          </a>
         </>
       ),
     },
