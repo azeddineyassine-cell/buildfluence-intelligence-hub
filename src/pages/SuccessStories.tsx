@@ -1107,7 +1107,7 @@ const SuccessStoriesPage = () => {
                   </div>
                 ))}
               </div>
-              <div className="ss-visual-main">{s.visualMain}</div>
+              {s.visualMain && <div className="ss-visual-main">{s.visualMain}</div>}
               {s.resources && s.resources.length > 0 && (
                 <div className="ss-resources">
                   <div className="ss-res-label">{t("— Ressources liées", "— Related resources")}</div>
