@@ -116,7 +116,7 @@ const SuccessStoriesCSS = `
   .ss-visual { background: #FFFFFF; padding: 32px 28px; color: var(--bf-paper); display: flex; flex-direction: column; min-height: 100%; }
   .ss-story-eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--bf-gold); margin-bottom: 22px; line-height: 1.5; }
   .ss-logos { display: flex; align-items: center; gap: 12px; margin-bottom: 22px; padding-bottom: 18px; border-bottom: 1px solid var(--bf-navy-soft); flex-wrap: wrap; }
-  .ss-logo { background: var(--bf-paper); color: var(--bf-navy); font-family: 'Playfair Display', serif; font-weight: 600; font-size: 13px; padding: 9px 13px; border-radius: 0; line-height: 1.1; letter-spacing: 0.02em; white-space: pre-line; display: inline-flex; align-items: center; justify-content: center; min-height: 56px; }
+  .ss-logo { background: transparent; color: var(--bf-navy); font-family: 'Playfair Display', serif; font-weight: 600; font-size: 13px; padding: 9px 13px; border-radius: 0; line-height: 1.1; letter-spacing: 0.02em; white-space: pre-line; display: inline-flex; align-items: center; justify-content: center; min-height: 56px; }
   .ss-logo.italic { font-style: italic; font-size: 11px; }
   .ss-logo-img { display: block; height: 44px; width: auto; max-width: 160px; object-fit: contain; }
   .ss-visual-main { background: linear-gradient(135deg, var(--bf-navy-deeper), var(--bf-navy-soft)); border: 1px solid var(--bf-navy-soft); padding: 28px 20px; margin-bottom: 18px; text-align: center; color: var(--bf-ink-muted); font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 13px; min-height: 160px; display: flex; align-items: center; justify-content: center; line-height: 1.5; position: relative; }
@@ -127,8 +127,8 @@ const SuccessStoriesCSS = `
   .ss-res-link:hover { background: rgba(217, 188, 106, 0.12); color: var(--bf-gold); }
   .ss-res-type { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--bf-gold); display: block; margin-bottom: 2px; }
   .ss-meta { font-family: 'JetBrains Mono', monospace; font-size: 9px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; line-height: 1.7; border-top: 1px solid var(--bf-navy-soft); padding-top: 16px; margin-top: auto; }
-  .ss-meta-line { color: rgba(244, 241, 234, 0.55); margin-bottom: 4px; }
-  .ss-meta-line strong { color: var(--bf-gold); font-weight: 500; }
+  .ss-meta-line { color: #000000; margin-bottom: 4px; }
+  .ss-meta-line strong { color: #000000; font-weight: 600; }
   .ss-content { padding: 40px 44px; }
   .ss-num { font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 500; letter-spacing: 0.25em; text-transform: uppercase; color: var(--bf-gold); margin-bottom: 14px; }
   .ss-story-title { font-family: 'Playfair Display', serif; font-weight: 600; font-size: 32px; color: var(--bf-navy); line-height: 1.15; margin: 0 0 28px; }
