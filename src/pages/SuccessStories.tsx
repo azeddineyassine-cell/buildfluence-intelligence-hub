@@ -265,10 +265,6 @@ const SuccessStoriesPage = () => {
           <span style={{ color: "var(--bf-gold)" }}>"{t("Vidéo. Rumeurs et réseaux sociaux : quand Raïbi Jamila en paie le prix fort", "Video. Rumors and social media: when Raïbi Jamila pays the price")}"</span> ]
         </>
       ),
-      resources: [
-        { type: t("▶ Reportage exclusif", "▶ Exclusive report"), text: t("RTM, 45 minutes, 2017", "RTM, 45 minutes, 2017") },
-        { type: t("📰 Article média", "📰 Media article"), text: t("le360.com, \"Quand Raïbi Jamila en paie le prix fort\"", "le360.com, \"When Raïbi Jamila pays the price\"") },
-      ],
       meta: [
         { label: t("CLIENT", "CLIENT"), value: "Centrale Danone" },
         { label: t("PÉRIODE", "PERIOD"), value: "2015 / 2017" },
