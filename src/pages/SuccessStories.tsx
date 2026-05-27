@@ -331,12 +331,7 @@ const SuccessStoriesPage = () => {
       miniSecteur: t("Intelligence stratégique · 🇲🇦","Strategic intelligence · 🇲🇦"),
       eyebrow: t("Intelligence stratégique internationale","International strategic intelligence"),
       logos: [{ label: t("CABINET EUROPÉEN\nD'INTELLIGENCE","EUROPEAN\nINTELLIGENCE FIRM"), italic: true }],
-      visualMain: (
-        <>
-          [ {t("Iconographie boycott 2018","2018 boycott iconography")}<br />
-          <span style={{ color: "var(--bf-gold)" }}>#كلنا_مقاطعون</span> ]
-        </>
-      ),
+      visualMain: null,
       meta: [
         { label: t("CLIENT","CLIENT"), value: t("Cabinet européen d'intelligence","European intelligence firm") },
         { label: t("PÉRIODE","PERIOD"), value: "2018" },
