@@ -434,7 +434,7 @@ const SuccessStoriesPage = () => {
       tags: [t("ORGANISATION INTERNATIONALE","INTERNATIONAL ORGANIZATION"), t("PLATEFORME D'ATTRACTIVITÉ","ATTRACTIVENESS PLATFORM"), t("INTELLIGENCE ÉCONOMIQUE","ECONOMIC INTELLIGENCE"), "MATCHMAKING", t("🇲🇦 🇸🇦 OCI","🇲🇦 🇸🇦 OIC")],
       visualExtra: (
         <a href="https://icdt-cidc.org/fr/" target="_blank" rel="noopener noreferrer">
-          <img src="/img4.png" alt="OCI / OIC" className="ss-vx-img" style={{ maxHeight: 180 }} />
+          <img src="/cidc_logo.png" alt="CIDC – Islamic Centre for Development of Trade" className="ss-vx-img" style={{ maxHeight: 180 }} />
         </a>
       ),
     },
