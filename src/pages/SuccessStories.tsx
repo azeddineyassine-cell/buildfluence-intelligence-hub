@@ -754,7 +754,7 @@ const SuccessStoriesPage = () => {
       miniPitch: t("Repositionner un acteur public dans son écosystème digital.","Repositioning a public player in its digital ecosystem."),
       miniSecteur: t("Établissement public · 🇲🇦","Public institution · 🇲🇦"),
       eyebrow: t("Établissement public & transformation digitale","Public institution & digital transformation"),
-      logos: [{ label: "#ADD", image: logoAdd, alt: "Digital Development Agency" }, { label: "GITEX AFRICA", italic: true }],
+      logos: [{ label: "#ADD", image: logoAdd, alt: "Digital Development Agency" }, { label: "GITEX AFRICA", image: "/gitex.png", alt: "GITEX Africa Morocco" }],
       visualMain: (
         <>
           [ {t("Architecture digitale ADD","ADD digital architecture")}<br />
