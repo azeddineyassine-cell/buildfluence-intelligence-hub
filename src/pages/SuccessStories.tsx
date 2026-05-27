@@ -652,7 +652,7 @@ const SuccessStoriesPage = () => {
       ),
       meta: [
         { label: t("CLIENT","CLIENT"), value: "OCP Group" },
-        { label: t("POSTE","ROLE"), value: "Strategic Communication Manager" },
+        
         { label: t("PÉRIODE","PERIOD"), value: "2014" },
         { label: t("GÉOGRAPHIE","GEOGRAPHY"), value: t("🇲🇦 Maroc","🇲🇦 Morocco") },
       ],
