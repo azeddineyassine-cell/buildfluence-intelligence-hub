@@ -829,20 +829,13 @@
             updateTransform();
         }
 
-        // CHANGER DE LANGUE DYNAMIQUEMENT (BILINGUISME)
+        // CHANGER DE LANGUE DYNAMIQUEMENT (BILINGUISME - piloté par le store parent)
         function setLanguage(lang) {
             currentLang = lang;
-            
-            // Mise à jour de l'état des boutons de l'en-tête
-            const frBtn = document.getElementById('lang-fr-btn');
-            const enBtn = document.getElementById('lang-en-btn');
-            if (lang === 'FR') {
-                frBtn.className = "px-2 py-1 rounded bg-[#c9a84c] text-[#0d1b2a] cursor-pointer transition-all";
-                enBtn.className = "px-2 py-1 rounded hover:bg-[#c9a84c]/20 cursor-pointer transition-all";
-            } else {
-                enBtn.className = "px-2 py-1 rounded bg-[#c9a84c] text-[#0d1b2a] cursor-pointer transition-all";
-                frBtn.className = "px-2 py-1 rounded hover:bg-[#c9a84c]/20 cursor-pointer transition-all";
-            }
+
+            // En-tête (RENSEIGNEMENTS D'AFFAIRES / BUSINESS INTELLIGENCE)
+            const headerTag = document.getElementById('header-tag');
+            if (headerTag) headerTag.innerText = lang === 'FR' ? "RENSEIGNEMENTS D'AFFAIRES" : "BUSINESS INTELLIGENCE";
 
             // Traduction de la légende
             document.getElementById('legend-title').innerText = uiTranslations[lang].legendTitle;
