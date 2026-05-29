@@ -930,6 +930,15 @@
                 document.getElementById('inspect-threat').className = "font-bold text-amber-600";
             }
         }
+
+        // Expose handlers globally so inline onclick attributes resolve reliably
+        window.zoomIn = zoomIn;
+        window.zoomOut = zoomOut;
+        window.resetZoomPan = resetZoomPan;
+        window.inspectNetworkEntity = inspectNetworkEntity;
+        window.resetToDefaultDossier = resetToDefaultDossier;
+        window.setLanguage = setLanguage;
+
         // Applique la langue initiale (si EN via ?lang=en)
         document.addEventListener('DOMContentLoaded', function(){
           if (currentLang === 'EN') setLanguage('EN');
