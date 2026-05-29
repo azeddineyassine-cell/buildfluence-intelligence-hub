@@ -52,21 +52,23 @@
 </head>
 <body class="bg-[#f5f2eb] text-[#0d1b2a] font-sans h-screen overflow-hidden flex flex-col">
 
-    <!-- Barre Supérieure d'En-tête (RENSEIGNEMENTS D'AFFAIRES) -->
+    <!-- Barre Supérieure d'En-tête -->
     <header class="bg-[#fcfaf6] border-b border-[#c9a84c]/20 px-6 py-4 flex justify-between items-center shadow-sm shrink-0 z-50">
         <div>
-            <span class="text-[10px] uppercase tracking-[0.2em] text-[#c9a84c] font-black">Buildfluence · RENSEIGNEMENTS D'AFFAIRES</span>
+            <span class="text-[10px] uppercase tracking-[0.2em] text-[#c9a84c] font-black">Buildfluence · <span id="header-tag">RENSEIGNEMENTS D'AFFAIRES</span></span>
             <h1 class="text-xl font-serif text-[#0d1b2a] italic mt-0.5">OCP hostile network</h1>
         </div>
         <div class="flex items-center space-x-4">
-            <!-- Bouton Sélecteur de Langue (Bilinguisme) -->
-            <div class="bg-[#0d1b2a] text-white rounded-lg p-1 flex space-x-1 border border-[#c9a84c]/30 text-xs font-bold">
-                <button onclick="setLanguage('FR')" id="lang-fr-btn" class="px-2 py-1 rounded bg-[#c9a84c] text-[#0d1b2a] cursor-pointer transition-all">FR</button>
-                <button onclick="setLanguage('EN')" id="lang-en-btn" class="px-2 py-1 rounded hover:bg-[#c9a84c]/20 cursor-pointer transition-all">EN</button>
-            </div>
             <span class="text-xs font-mono text-red-600 font-bold bg-red-50 border border-red-200 px-3 py-1 rounded">RESTRICTED USE : BUILDFLUENCE</span>
         </div>
     </header>
+
+    <!-- Hover Card flottante -->
+    <div id="hover-card" class="hidden fixed pointer-events-none z-[100] bg-[#0d1b2a]/95 text-white border border-[#c9a84c]/60 rounded-lg shadow-2xl backdrop-blur-sm p-3 max-w-[260px]" style="font-size:11px;">
+        <div id="hc-name" class="font-extrabold text-[#c9a84c] text-[13px] tracking-tight"></div>
+        <div id="hc-level" class="mt-1 text-[10px] uppercase font-bold tracking-wider"></div>
+        <div id="hc-desc" class="mt-2 text-[11px] leading-snug text-gray-200 font-serif italic"></div>
+    </div>
 
     <!-- Zone Centrale du Canvas Cartographique -->
     <main class="flex-1 relative overflow-hidden flex">
