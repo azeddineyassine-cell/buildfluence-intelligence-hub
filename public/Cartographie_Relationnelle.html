@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buildfluence - Cartographie Relationnelle Cas OCP (Bilingue)</title>
+    <!-- Chargement de Tailwind CSS pour un design corporate premium -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Grille beige/sable vintage premium */
+        .grid-canvas {
+            background-color: #fcfaf6;
+            background-size: 50px 50px;
+            background-image: 
+                linear-gradient(to right, rgba(201, 168, 76, 0.12) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(201, 168, 76, 0.12) 1px, transparent 1px);
+        }
+
+        /* Animation de rotation douce pour le cercle d'état/connexion des nœuds */
+        @keyframes rotate-dashed {
+            to { transform: rotate(360deg); }
+        }
+        .anim-dash {
+            animation: rotate-dashed 20s linear infinite;
+            transform-origin: center;
+        }
+
+        /* Hack CSS pour texte vertical */
+        .vertical-text {
+            writing-mode: vertical-lr;
+            transform: rotate(180deg);
+        }
+
+        /* Transition fluide pour le zoom et le déplacement */
+        #interactive-network {
+            transition: transform 0.1s ease-out;
+            cursor: grab;
+        }
+        #interactive-network:active {
+            cursor: grabbing;
+        }
+        
+        /* Stylisation premium pour les boutons de zoom */
+        .nav-btn {
+            transition: all 0.2s ease-in-out;
+        }
+        .nav-btn:hover {
+            color: #ffffff;
+            background-color: #c9a84c;
+        }
+    </style>
+</head>
+<body class="bg-[#f5f2eb] text-[#0d1b2a] font-sans h-screen overflow-hidden flex flex-col">
+
+    <!-- Barre Supérieure d'En-tête (RENSEIGNEMENTS D'AFFAIRES) -->
+    <header class="bg-[#fcfaf6] border-b border-[#c9a84c]/20 px-6 py-4 flex justify-between items-center shadow-sm shrink-0 z-50">
+        <div>
+            <span class="text-[10px] uppercase tracking-[0.2em] text-[#c9a84c] font-black">Buildfluence · RENSEIGNEMENTS D'AFFAIRES</span>
+            <h1 class="text-xl font-serif text-[#0d1b2a] italic mt-0.5">OCP hostile network</h1>
+        </div>
+        <div class="flex items-center space-x-4">
+            <!-- Bouton Sélecteur de Langue (Bilinguisme) -->
+            <div class="bg-[#0d1b2a] text-white rounded-lg p-1 flex space-x-1 border border-[#c9a84c]/30 text-xs font-bold">
+                <button onclick="setLanguage('FR')" id="lang-fr-btn" class="px-2 py-1 rounded bg-[#c9a84c] text-[#0d1b2a] cursor-pointer transition-all">FR</button>
+                <button onclick="setLanguage('EN')" id="lang-en-btn" class="px-2 py-1 rounded hover:bg-[#c9a84c]/20 cursor-pointer transition-all">EN</button>
+            </div>
+            <span class="text-xs font-mono text-red-600 font-bold bg-red-50 border border-red-200 px-3 py-1 rounded">RESTRICTED USE : BUILDFLUENCE</span>
+        </div>
+    </header>
+
+    <!-- Zone Centrale du Canvas Cartographique -->
+    <main class="flex-1 relative overflow-hidden flex">
+        
+        <!-- CANVAS DE LA CARTOGRAPHIE (Utilise un SVG interactif) -->
+        <div class="flex-1 h-full relative grid-canvas" id="canvas-container">
+            
+            <!-- Outils de Navigation -->
+            <div class="absolute top-4 left-1/2 transform -translate-x-1/2 bg-[#0d1b2a] text-white px-4 py-2 rounded-lg flex items-center space-x-4 shadow-xl border border-[#c9a84c]/30 z-40">
+                <button onclick="zoomIn()" class="nav-btn text-[#c9a84c] font-bold px-2 cursor-pointer text-sm rounded">＋</button>
+                <div class="w-px h-4 bg-[#c9a84c]/20"></div>
+                <button onclick="zoomOut()" class="nav-btn text-[#c9a84c] font-bold px-2 cursor-pointer text-sm rounded">－</button>
+                <div class="w-px h-4 bg-[#c9a84c]/20"></div>
+                <button onclick="resetZoomPan()" class="nav-btn text-[#c9a84c] font-bold px-1 cursor-pointer text-xs rounded">☉</button>
+                <div class="w-px h-4 bg-[#c9a84c]/20"></div>
+                <span id="zoom-indicator" class="text-[10px] font-mono font-bold text-[#c9a84c]">100%</span>
+            </div>
+
+            <!-- Légende interactive -->
+            <div class="absolute bottom-4 left-4 bg-[#fcfaf6]/95 border border-[#c9a84c]/30 p-3 rounded-lg shadow-lg z-40 max-w-xs space-y-2">
+                <p id="legend-title" class="text-[9px] uppercase font-black text-[#c9a84c] tracking-wider border-b border-[#c9a84c]/20 pb-1 mb-2">Légende des Flux & Niveaux</p>
+                <div class="flex items-center space-x-2 text-xs">
+                    <span class="w-4 h-0.5 bg-blue-600 inline-block"></span>
+                    <span id="legend-blue" class="text-gray-700 font-medium">Flux de Soutien / Lobbying Politique</span>
+                </div>
+                <div class="flex items-center space-x-2 text-xs">
+                    <span class="w-4 h-0.5 border-t border-dashed border-red-600 inline-block"></span>
+                    <span id="legend-red" class="text-gray-700 font-medium">Vecteur de Menaces / Désinformation</span>
+                </div>
+                <div class="flex items-center space-x-2 text-xs">
+                    <span class="w-4 h-0.5 border-t border-dashed border-emerald-500 inline-block"></span>
+                    <span id="legend-green" class="text-gray-700 font-medium">Flux Financier / Sponsoring</span>
+                </div>
+            </div>
+
+            <!-- CANVAS INTERACTIF SVG -->
+            <svg id="svg-canvas" class="w-full h-full absolute top-0 left-0" style="transform-box: fill-box;">
+                <g id="interactive-network">
+                    
+                    <!-- DÉFINITIONS DES FLÈCHES DE LIAISONS (Markers SVG) -->
+                    <defs>
+                        <marker id="arrow-blue" viewBox="0 0 10 10" refX="28" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                            <path d="M 0 1 L 10 5 L 0 9 z" fill="#2563eb" />
+                        </marker>
+                        <marker id="arrow-red" viewBox="0 0 10 10" refX="28" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                            <path d="M 0 1 L 10 5 L 0 9 z" fill="#dc2626" />
+                        </marker>
+                        <marker id="arrow-green" viewBox="0 0 10 10" refX="28" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                            <path d="M 0 1 L 10 5 L 0 9 z" fill="#10b981" />
+                        </marker>
+                    </defs>
+
+                    <!-- LIAISONS / FLUX RELATIONNELS -->
+                    <!-- CNSSO -> WSRW (Menace : ROUGE) -->
+                    <path d="M 500 120 L 250 250" stroke="#dc2626" stroke-width="2" stroke-dasharray="6,4" marker-end="url(#arrow-red)"></path>
+                    
+                    <!-- CNSSO -> SWS (Lobbying politique : BLEU) -->
+                    <path d="M 500 120 L 420 250" stroke="#2563eb" stroke-width="2" marker-end="url(#arrow-blue)"></path>
+                    
+                    <!-- CNSSO -> Sahara Update (Désinformation : ROUGE) -->
+                    <path d="M 500 120 L 680 250" stroke="#dc2626" stroke-width="2" stroke-dasharray="6,4" marker-end="url(#arrow-red)"></path>
+
+                    <!-- CNSSO -> AWSA (Lobbying politique : BLEU) -->
+                    <path d="M 500 120 L 890 250" stroke="#2563eb" stroke-width="2" marker-end="url(#arrow-blue)"></path>
+
+                    <!-- Erik Hagen -> CNSSO (Président : ROUGE) -->
+                    <path d="M 500 250 L 500 120" stroke="#dc2626" stroke-width="2" marker-end="url(#arrow-red)"></path>
+
+                    <!-- Erik Hagen -> Sahara Update (Rédacteur : ROUGE) -->
+                    <path d="M 500 250 L 680 250" stroke="#dc2626" stroke-width="2" stroke-dasharray="6,4" marker-end="url(#arrow-red)"></path>
+
+                    <!-- Sara Eyckmans -> WSRW (Coordinatrice : ROUGE) -->
+                    <path d="M 120 370 L 250 250" stroke="#dc2626" stroke-width="2" marker-end="url(#arrow-red)"></path>
+
+                    <!-- Cate Lewis -> SWS (Conseillère : ROUGE) -->
+                    <path d="M 330 370 L 420 250" stroke="#dc2626" stroke-width="2" marker-end="url(#arrow-red)"></path>
+
+                    <!-- Lyn Allison -> AWSA (Lobbying géopolitique : BLEU) -->
+                    <path d="M 970 370 L 890 250" stroke="#2563eb" stroke-width="2" marker-end="url(#arrow-blue)"></path>
+
+                    <!-- INDUSTRI ENERGI -> WSRW (Sponsoring : VERT) -->
+                    <path d="M 250 510 L 250 250" stroke="#10b981" stroke-dasharray="5,3" stroke-width="2" marker-end="url(#arrow-green)"></path>
+
+                    <!-- SAIH -> SWS (Sponsoring : VERT) -->
+                    <path d="M 420 510 L 420 250" stroke="#10b981" stroke-dasharray="5,3" stroke-width="2" marker-end="url(#arrow-green)"></path>
+
+                    <!-- Norwegian MFA -> Sahara Update (Sponsor public : VERT) -->
+                    <path d="M 680 510 L 680 250" stroke="#10b981" stroke-dasharray="5,3" stroke-width="2" marker-end="url(#arrow-green)"></path>
+
+                    <!-- AUSTRALIAN SYNDICATES (AUWS) -> AWSA (Soutien : BLEU) -->
+                    <path d="M 890 510 L 890 250" stroke="#2563eb" stroke-width="2" marker-end="url(#arrow-blue)"></path>
+
+                    <!-- ÉTIQUETTES DE FLUX ALIGNÉES -->
+                    <!-- Alliance WSRW -->
+                    <g transform="translate(375, 185) rotate(-27.5)">
+                        <rect x="-45" y="-8" width="90" height="16" fill="#fcfaf6" rx="3" stroke="#dc2626" stroke-width="0.5"></rect>
+                        <text id="label-alliance" text-anchor="middle" y="3" font-size="7" font-family="monospace" fill="#dc2626" font-weight="bold">ALLIANCE DIRECTE</text>
+                    </g>
+
+                    <!-- Coordination CNSSO -> SWS -->
+                    <g transform="translate(460, 185) rotate(-58)">
+                        <rect x="-45" y="-8" width="90" height="16" fill="#fcfaf6" rx="3" stroke="#2563eb" stroke-width="0.5"></rect>
+                        <text id="label-coordination" text-anchor="middle" y="3" font-size="7" font-family="monospace" fill="#2563eb" font-weight="bold">COORDINATION</text>
+                    </g>
+
+                    <!-- Désinformation Sahara Update -->
+                    <g transform="translate(590, 185) rotate(35)">
+                        <rect x="-45" y="-8" width="90" height="16" fill="#fcfaf6" rx="3" stroke="#dc2626" stroke-width="0.5"></rect>
+                        <text id="label-propagande" text-anchor="middle" y="3" font-size="7" font-family="monospace" fill="#dc2626" font-weight="bold">PROPAGANDE</text>
+                    </g>
+
+                    <!-- Lobbying AWSA -->
+                    <g transform="translate(695, 185) rotate(18)">
+                        <rect x="-45" y="-8" width="90" height="16" fill="#fcfaf6" rx="3" stroke="#2563eb" stroke-width="0.5"></rect>
+                        <text id="label-lobby" text-anchor="middle" y="3" font-size="7" font-family="monospace" fill="#2563eb" font-weight="bold">LOBBY GEOPOLITIQUE</text>
+                    </g>
+
+                    <!-- Sponsor Industri Energi -->
+                    <g transform="translate(250, 380) rotate(90)">
+                        <rect x="-30" y="-8" width="60" height="16" fill="#fcfaf6" rx="3" stroke="#10b981" stroke-width="0.5"></rect>
+                        <text id="label-sponsor1" text-anchor="middle" y="3" font-size="7" font-family="monospace" fill="#10b981" font-weight="bold">FINANCEMENT</text>
+                    </g>
+
+                    <!-- Sponsor SAIH -->
+                    <g transform="translate(420, 380) rotate(90)">
+                        <rect x="-30" y="-8" width="60" height="16" fill="#fcfaf6" rx="3" stroke="#10b981" stroke-width="0.5"></rect>
+                        <text id="label-sponsor2" text-anchor="middle" y="3" font-size="7" font-family="monospace" fill="#10b981" font-weight="bold">PARTENAIRE</text>
+                    </g>
+
+                    <!-- Sponsor public Norvège -->
+                    <g transform="translate(680, 380) rotate(90)">
+                        <rect x="-30" y="-8" width="60" height="16" fill="#fcfaf6" rx="3" stroke="#10b981" stroke-width="0.5"></rect>
+                        <text id="label-sponsor3" text-anchor="middle" y="3" font-size="7" font-family="monospace" fill="#10b981" font-weight="bold">SUBVENTION</text>
+                    </g>
+
+
+                    <!-- NOEUDS INTERACTIFS : ORGANISATIONS ET LOGOS OFFICIELS -->
+                    <!-- NOEUD CNSSO (Logo image_c87b5f.png) -->
+                    <g transform="translate(500, 120)" class="cursor-pointer" onclick="inspectNetworkEntity('CNSSO')">
+                        <circle cx="0" cy="0" r="32" fill="#0d1b2a" stroke="#c9a84c" stroke-width="2"></circle>
+                        <circle cx="0" cy="0" r="36" fill="none" stroke="#c9a84c" stroke-width="1.5" stroke-dasharray="4,4" class="anim-dash"></circle>
+                        <clipPath id="logo-cnsso">
+                            <circle cx="0" cy="0" r="28"></circle>
+                        </clipPath>
+                        <g clip-path="url(#logo-cnsso)">
+                            <rect x="-28" y="-28" width="56" height="56" fill="#ffffff"></rect>
+                            <image xlink:href="image_c87b5f.png" x="-26" y="-26" width="52" height="52" preserveAspectRatio="xMidYMid meet" onerror="this.style.display='none'"></image>
+                            <text text-anchor="middle" y="5" font-family="Georgia, serif" font-weight="black" font-size="12" fill="#0d1b2a">CNSSO</text>
+                        </g>
+                        <text text-anchor="middle" y="54" font-size="9" font-weight="black" fill="#0d1b2a" tracking="wide">CNSSO / VEST-SAHARA</text>
+                        <text id="sub-cnsso" text-anchor="middle" y="64" font-size="7" font-weight="bold" fill="#dc2626" uppercase>PRIMARY THREAT · OSLO</text>
+                    </g>
+
+                    <!-- NOEUD WSRW (Logo image_c87b56.png) -->
+                    <g transform="translate(250, 250)" class="cursor-pointer" onclick="inspectNetworkEntity('WSRW')">
+                        <circle cx="0" cy="0" r="32" fill="#0d1b2a" stroke="#c9a84c" stroke-width="2"></circle>
+                        <circle cx="0" cy="0" r="36" fill="none" stroke="#c9a84c" stroke-width="1" stroke-dasharray="4,4" class="anim-dash"></circle>
+                        <clipPath id="logo-wsrw">
+                            <circle cx="0" cy="0" r="28"></circle>
+                        </clipPath>
+                        <g clip-path="url(#logo-wsrw)">
+                            <rect x="-28" y="-28" width="56" height="56" fill="#ffffff"></rect>
+                            <image xlink:href="image_c87b56.png" x="-26" y="-26" width="52" height="52" preserveAspectRatio="xMidYMid meet" onerror="this.style.display='none'"></image>
+                            <text text-anchor="middle" y="5" font-family="Georgia, serif" font-weight="black" font-size="12" fill="#0d1b2a">WSRW</text>
+                        </g>
+                        <text text-anchor="middle" y="52" font-size="9" font-weight="black" fill="#0d1b2a" tracking="wide">WSRW</text>
+                        <text id="sub-wsrw" text-anchor="middle" y="62" font-size="7" font-weight="bold" fill="#dc2626" uppercase>OFFENSIVE VECTOR · BRUSSELS</text>
+                    </g>
+
+                    <!-- NOEUD SWS -->
+                    <g transform="translate(420, 250)" class="cursor-pointer" onclick="inspectNetworkEntity('SWS')">
+                        <circle cx="0" cy="0" r="28" fill="#0d1b2a" stroke="#c9a84c" stroke-width="1.5"></circle>
+                        <circle cx="0" cy="0" r="32" fill="none" stroke="#c9a84c" stroke-width="0.8" stroke-dasharray="4,4" class="anim-dash"></circle>
+                        <text text-anchor="middle" y="5" font-family="Georgia, serif" font-weight="bold" font-size="14" fill="#c9a84c">SWS</text>
+                        <text text-anchor="middle" y="46" font-size="9" font-weight="black" fill="#0d1b2a" tracking="wide">SOLIDARITY WESTERN SAHARA</text>
+                        <text id="sub-sws" text-anchor="middle" y="56" font-size="7" font-weight="bold" fill="#6b7280" uppercase>LOBBYING NET · NL</text>
+                    </g>
+
+                    <!-- NOEUD Sahara Update -->
+                    <g transform="translate(680, 250)" class="cursor-pointer" onclick="inspectNetworkEntity('Sahara Update')">
+                        <circle cx="0" cy="0" r="28" fill="#0d1b2a" stroke="#c9a84c" stroke-width="1.5"></circle>
+                        <circle cx="0" cy="0" r="32" fill="none" stroke="#c9a84c" stroke-width="0.8" stroke-dasharray="4,4" class="anim-dash"></circle>
+                        <text text-anchor="middle" y="5" font-family="Georgia, serif" font-weight="bold" font-size="14" fill="#c9a84c">SU</text>
+                        <text text-anchor="middle" y="46" font-size="9" font-weight="black" fill="#0d1b2a" tracking="wide">SAHARA UPDATE</text>
+                        <text id="sub-su" text-anchor="middle" y="56" font-size="7" font-weight="bold" fill="#6b7280" uppercase>DISINFO OUTLET</text>
+                    </g>
+
+                    <!-- NOEUD AWSA -->
+                    <g transform="translate(890, 250)" class="cursor-pointer" onclick="inspectNetworkEntity('AWSA')">
+                        <circle cx="0" cy="0" r="28" fill="#0d1b2a" stroke="#c9a84c" stroke-width="1.5"></circle>
+                        <circle cx="0" cy="0" r="32" fill="none" stroke="#c9a84c" stroke-width="0.8" stroke-dasharray="4,4" class="anim-dash"></circle>
+                        <text text-anchor="middle" y="5" font-family="Georgia, serif" font-weight="bold" font-size="14" fill="#c9a84c">AWSA</text>
+                        <text text-anchor="middle" y="46" font-size="9" font-weight="black" fill="#0d1b2a" tracking="wide">AWSA</text>
+                        <text id="sub-awsa" text-anchor="middle" y="56" font-size="7" font-weight="bold" fill="#6b7280" uppercase>PACIFIC AXIS · AUSTRALIA</text>
+                    </g>
+
+
+                    <!-- IDIOTS UTILES (SPONSORS FINANCIERS - VERT) -->
+                    <!-- SPONSOR : INDUSTRI ENERGI (Logo image_c87b9d.png) -->
+                    <g transform="translate(250, 510)" class="cursor-pointer" onclick="inspectNetworkEntity('Industri Energi')">
+                        <circle cx="0" cy="0" r="26" fill="#0d1b2a" stroke="#c9a84c" stroke-width="1.5"></circle>
+                        <clipPath id="logo-industri">
+                            <circle cx="0" cy="0" r="22"></circle>
+                        </clipPath>
+                        <g clip-path="url(#logo-industri)">
+                            <rect x="-22" y="-22" width="44" height="44" fill="#ffffff"></rect>
+                            <image xlink:href="image_c87b9d.png" x="-20" y="-20" width="40" height="40" preserveAspectRatio="xMidYMid meet" onerror="this.style.display='none'"></image>
+                            <text text-anchor="middle" y="4" font-family="sans-serif" font-weight="bold" font-size="8" fill="#0d1b2a">IE</text>
+                        </g>
+                        <text text-anchor="middle" y="44" font-size="9" font-weight="black" fill="#0d1b2a">INDUSTRI ENERGI</text>
+                        <text id="sub-ie" text-anchor="middle" y="54" font-size="7" font-weight="bold" fill="#10b981">USEFUL IDIOT · NO SPONSOR</text>
+                    </g>
+
+                    <!-- PARTENAIRE : SAIH (Jeunesse Norvégienne) -->
+                    <g transform="translate(420, 510)" class="cursor-pointer" onclick="inspectNetworkEntity('SAIH')">
+                        <circle cx="0" cy="0" r="26" fill="#0d1b2a" stroke="#c9a84c" stroke-width="1.5"></circle>
+                        <text text-anchor="middle" y="5" font-family="Georgia, serif" font-weight="bold" font-size="13" fill="#c9a84c">SAIH</text>
+                        <text text-anchor="middle" y="44" font-size="9" font-weight="black" fill="#0d1b2a">JEUNESSE / SAIH</text>
+                        <text id="sub-saih" text-anchor="middle" y="54" font-size="7" font-weight="bold" fill="#10b981">USEFUL IDIOT · ACADEMIC RELAY</text>
+                    </g>
+
+                    <!-- GOUVERNEMENT : NORWEGIAN MINISTRY OF FOREIGN AFFAIRS (Logo image_c87bd3.png) -->
+                    <g transform="translate(680, 510)" class="cursor-pointer" onclick="inspectNetworkEntity('MFA')">
+                        <circle cx="0" cy="0" r="26" fill="#0d1b2a" stroke="#c9a84c" stroke-width="1.5"></circle>
+                        <clipPath id="logo-mfa">
+                            <circle cx="0" cy="0" r="22"></circle>
+                        </clipPath>
+                        <g clip-path="url(#logo-mfa)">
+                            <rect x="-22" y="-22" width="44" height="44" fill="#ffffff"></rect>
+                            <image xlink:href="image_c87bd3.png" x="-20" y="-20" width="40" height="40" preserveAspectRatio="xMidYMid meet" onerror="this.style.display='none'"></image>
+                            <text text-anchor="middle" y="4" font-family="sans-serif" font-weight="bold" font-size="8" fill="#0d1b2a">MFA</text>
+                        </g>
+                        <text text-anchor="middle" y="44" font-size="9" font-weight="black" fill="#0d1b2a">MINISTRY OF FOREIGN AFFAIRS</text>
+                        <text id="sub-mfa" text-anchor="middle" y="54" font-size="7" font-weight="bold" fill="#10b981">USEFUL IDIOT · PUBLIC SPONSOR</text>
+                    </g>
+
+                    <!-- SYNDICATS : AUSTRALIAN SYNDICATES (AUWS) -->
+                    <g transform="translate(890, 510)" class="cursor-pointer" onclick="inspectNetworkEntity('AUWS')">
+                        <circle cx="0" cy="0" r="26" fill="#0d1b2a" stroke="#c9a84c" stroke-width="1.5"></circle>
+                        <text text-anchor="middle" y="5" font-family="Georgia, serif" font-weight="bold" font-size="13" fill="#c9a84c">AUWS</text>
+                        <text text-anchor="middle" y="44" font-size="9" font-weight="black" fill="#0d1b2a">AUSTRALIAN SYNDICATES</text>
+                        <text id="sub-auws" text-anchor="middle" y="54" font-size="7" font-weight="bold" fill="#2563eb">USEFUL IDIOT · LABOR UNION</text>
+                    </g>
+
+
+                    <!-- ACTEURS PHYSIQUES CLÉS -->
+                    <!-- NOEUD ERIK HAGEN -->
+                    <g transform="translate(500, 250)" class="cursor-pointer" onclick="inspectNetworkEntity('Erik Hagen')">
+                        <circle cx="0" cy="0" r="24" fill="#fff" stroke="#dc2626" stroke-width="2.5" stroke-dasharray="3,3" class="anim-dash"></circle>
+                        <clipPath id="avatar-hagen">
+                            <circle cx="0" cy="0" r="20"></circle>
+                        </clipPath>
+                        <g clip-path="url(#avatar-hagen)">
+                            <rect x="-20" y="-20" width="40" height="40" fill="#f0e6d2"></rect>
+                            <circle cx="0" cy="-4" r="8" fill="#0d1b2a"></circle>
+                            <path d="M -13 17 C -13 7, 13 7, 13 17 Z" fill="#0d1b2a"></path>
+                            <circle cx="0" cy="-4" r="9" fill="none" stroke="#c9a84c" stroke-width="1"></circle>
+                            <rect x="-4" y="-5" width="8" height="2" fill="#c9a84c"></rect>
+                        </g>
+                        <text text-anchor="middle" y="38" font-size="9" font-weight="black" fill="#0d1b2a">ERIK HAGEN</text>
+                        <text id="sub-hagen" text-anchor="middle" y="48" font-size="7" font-weight="bold" fill="#dc2626" uppercase>OPERATIONAL BRAIN</text>
+                    </g>
+
+                    <!-- NOEUD SARA EYCKMANS -->
+                    <g transform="translate(120, 370)" class="cursor-pointer" onclick="inspectNetworkEntity('Sara Eyckmans')">
+                        <circle cx="0" cy="0" r="22" fill="#fff" stroke="#c9a84c" stroke-width="1.5"></circle>
+                        <clipPath id="avatar-sara">
+                            <circle cx="0" cy="0" r="18"></circle>
+                        </clipPath>
+                        <g clip-path="url(#avatar-sara)">
+                            <rect x="-18" y="-18" width="36" height="36" fill="#f0e6d2"></rect>
+                            <circle cx="0" cy="-3" r="7" fill="#0d1b2a"></circle>
+                            <path d="M -12 16 C -12 6, 12 6, 12 16 Z" fill="#0d1b2a"></path>
+                        </g>
+                        <text text-anchor="middle" y="34" font-size="9" font-weight="black" fill="#0d1b2a">SARA EYCKMANS</text>
+                        <text id="sub-sara" text-anchor="middle" y="44" font-size="7" font-weight="bold" fill-gray-500 uppercase>COORDINATOR · WSRW</text>
+                    </g>
+
+                    <!-- NOEUD CATE LEWIS -->
+                    <g transform="translate(330, 370)" class="cursor-pointer" onclick="inspectNetworkEntity('Cate Lewis')">
+                        <circle cx="0" cy="0" r="22" fill="#fff" stroke="#c9a84c" stroke-width="1.5"></circle>
+                        <clipPath id="avatar-cate">
+                            <circle cx="0" cy="0" r="18"></circle>
+                        </clipPath>
+                        <g clip-path="url(#avatar-cate)">
+                            <rect x="-18" y="-18" width="36" height="36" fill="#f0e6d2"></rect>
+                            <circle cx="0" cy="-3" r="7" fill="#0d1b2a"></circle>
+                            <path d="M -12 16 C -12 6, 12 6, 12 16 Z" fill="#0d1b2a"></path>
+                        </g>
+                        <text text-anchor="middle" y="34" font-size="9" font-weight="black" fill="#0d1b2a">CATE LEWIS</text>
+                        <text id="sub-cate" text-anchor="middle" y="44" font-size="7" font-weight="bold" fill-gray-500 uppercase>ADVISOR · SWS</text>
+                    </g>
+
+                    <!-- NOEUD LYN ALLISON -->
+                    <g transform="translate(970, 370)" class="cursor-pointer" onclick="inspectNetworkEntity('Lyn Allison')">
+                        <circle cx="0" cy="0" r="24" fill="#fff" stroke="#2563eb" stroke-width="2" stroke-dasharray="3,3" class="anim-dash"></circle>
+                        <clipPath id="avatar-lyn">
+                            <circle cx="0" cy="0" r="20"></circle>
+                        </clipPath>
+                        <g clip-path="url(#avatar-lyn)">
+                            <rect x="-20" y="-20" width="40" height="40" fill="#f0e6d2"></rect>
+                            <circle cx="0" cy="-4" r="7" fill="#0d1b2a"></circle>
+                            <path d="M -13 17 C -13 7, 13 7, 13 17 Z" fill="#0d1b2a"></path>
+                            <path d="M -10 -9 Q 0 -15 10 -9" fill="none" stroke="#c9a84c" stroke-width="3"></path>
+                        </g>
+                        <text text-anchor="middle" y="36" font-size="9" font-weight="black" fill="#0d1b2a">LYN ALLISON</text>
+                        <text id="sub-lyn" text-anchor="middle" y="46" font-size="7" font-weight="bold" fill="#2563eb" uppercase>CHAIRMAN · AWSA</text>
+                    </g>
+
+                </g>
+            </svg>
+        </div>
+
+        <!-- PANNEAU DESCRIPTIF DE DOSSIER (À droite) -->
+        <aside class="w-80 border-l border-[#c9a84c]/20 bg-[#fcfaf6] p-5 flex flex-col justify-between shadow-2xl shrink-0 z-30">
+            
+            <!-- VUE PAR DÉFAUT (AVANT CLIC / CHAPEAU D'ANALYSE) -->
+            <div id="inspector-default-view">
+                <div class="border-b border-gray-200 pb-3 mb-4">
+                    <h3 id="panel-title-pre" class="text-xs font-black text-[#c9a84c] uppercase tracking-wider">Target Dossier</h3>
+                    <h4 id="panel-title" class="text-base font-extrabold text-[#0d1b2a] mt-1">Analyse de l'Encerclement</h4>
+                </div>
+                <div class="bg-[#f5f2eb] p-4 rounded-lg border border-[#c9a84c]/20 space-y-3 text-xs text-gray-700">
+                    <p class="font-bold text-[#c9a84c] uppercase tracking-wider text-[10px]">📋 Executive Summary :</p>
+                    <p id="chapeau-text" class="leading-relaxed italic text-gray-600 font-serif border-l-2 border-[#c9a84c] pl-2">
+                        Décryptage du mode opératoire de campagnes de fragilisation contre l’OCP et Intérêts du Maroc orchestrées par une constellation d’ONG façades cachées sous le bandeau « humanitaires » et amplifiées par des « idiots utiles ».
+                    </p>
+                    <p id="help-text" class="leading-relaxed pt-2">
+                        <b>Cliquez sur n'importe quel élément de la cartographie</b> pour inspecter ses liaisons stratégiques, ses soutiens et son profil de dangerosité.
+                    </p>
+                </div>
+            </div>
+
+            <!-- VUE DÉTAILLÉE (AU CLIC SUR UN NOEUD) -->
+            <div id="inspector-content-view" class="hidden space-y-4">
+                <div class="border-b border-gray-200 pb-3">
+                    <span id="inspect-cat" class="text-[9px] uppercase font-black px-2 py-0.5 rounded bg-[#0d1b2a] text-[#c9a84c]">Catégorie</span>
+                    <h3 id="inspect-name" class="text-lg font-extrabold text-[#0d1b2a] mt-2 tracking-tight">Nom de l'acteur</h3>
+                </div>
+                
+                <div class="space-y-3 text-xs text-gray-700">
+                    <div class="grid grid-cols-2 gap-2">
+                        <div class="bg-[#f5f2eb] p-2 rounded border border-[#c9a84c]/20">
+                            <span id="label-field-net" class="text-gray-500 block text-[9px] uppercase font-bold">Réseau d'Action</span>
+                            <span id="inspect-power" class="text-[#0d1b2a] font-bold">Élevé</span>
+                        </div>
+                        <div class="bg-[#f5f2eb] p-2 rounded border border-[#c9a84c]/20">
+                            <span id="label-field-posture" class="text-gray-500 block text-[9px] uppercase font-bold">Posture OCP</span>
+                            <span id="inspect-threat" class="font-bold text-red-600">Danger</span>
+                        </div>
+                    </div>
+
+                    <div class="bg-[#f5f2eb] p-3 rounded-lg border border-[#c9a84c]/20 space-y-2">
+                        <span id="label-field-role" class="font-black text-gray-500 block text-[9px] uppercase tracking-wider">🛡️ Rôle & Renseignement :</span>
+                        <p id="inspect-desc" class="text-gray-600 leading-relaxed text-xs">Analyse stratégique complète de l'entité.</p>
+                    </div>
+
+                    <!-- Badge tactique d'Alerte -->
+                    <div id="tactical-threat-badge" class="p-2.5 rounded-lg border text-center font-bold text-[10px] uppercase tracking-wider">
+                        Alerte de Veille Active
+                    </div>
+                </div>
+
+                <!-- BOUTON RETOUR (Critique pour réinitialiser et relire le chapeau) -->
+                <button onclick="resetToDefaultDossier()" class="w-full mt-2 py-2.5 bg-[#0d1b2a] text-white hover:bg-[#c9a84c] hover:text-[#0d1b2a] rounded-lg text-center font-bold text-xs uppercase tracking-wider transition-all shadow-md cursor-pointer border border-[#c9a84c]/20">
+                    ← <span id="back-button-text">Retour à l'analyse générale</span>
+                </button>
+            </div>
+
+            <!-- Signature discrète de souveraineté en bas -->
+            <div class="text-[9px] text-[#c9a84c] border-t border-gray-100 pt-3 mt-4 flex justify-between items-center font-mono">
+                <span>BUILDFLUENCE INTEL</span>
+                <span class="text-red-500 font-bold">CLASSIFIED</span>
+            </div>
+        </aside>
+
+    </main>
+
+    <!-- CODE INTERACTIF JAVASCRIPT POUR LE ZOOM, DÉPLACEMENT ET BILINGUISME -->
+    <script>
+        // État de la langue de l'application — initialisé depuis ?lang=fr|en si présent
+        let currentLang = (function(){
+          try {
+            const p = new URLSearchParams(window.location.search).get('lang');
+            if (p && p.toLowerCase() === 'en') return 'EN';
+          } catch(e) {}
+          return 'FR';
+        })();
+        // Écoute les changements de langue émis par la page parente
+        window.addEventListener('message', function(e){
+          if (e && e.data && e.data.type === 'bf-lang' && (e.data.lang === 'FR' || e.data.lang === 'EN')) {
+            if (typeof setLanguage === 'function') setLanguage(e.data.lang);
+          }
+        });
+
+        // Traductions globales d'interface
+        const uiTranslations = {
+            FR: {
+                panelTitlePre: "Target Dossier",
+                panelTitle: "Analyse de l'Encerclement",
+                chapeauText: "Décryptage du mode opératoire de campagnes de fragilisation contre l’OCP et Intérêts du Maroc orchestrées par une constellation d’ONG façades cachées sous le bandeau « humanitaires » et amplifiées par des « idiots utiles ».",
+                helpText: "Cliquez sur n'importe quel élément de la cartographie pour inspecter ses liaisons stratégiques, ses soutiens et son profil de dangerosité.",
+                legendTitle: "Légende des Flux & Niveaux",
+                legendBlue: "Flux de Soutien / Lobbying Politique",
+                legendRed: "Vecteur de Menaces / Désinformation",
+                legendGreen: "Flux Financier / Sponsoring",
+                labelAlliance: "ALLIANCE DIRECTE",
+                labelCoordination: "COORDINATION",
+                labelPropagande: "PROPAGANDE",
+                labelLobby: "LOBBY GEOPOLITIQUE",
+                labelSponsor1: "FINANCEMENT",
+                labelSponsor2: "PARTENAIRE",
+                labelSponsor3: "SUBVENTION",
+                subCnsso: "MENACE PRINCIPALE · OSLO",
+                subWsrw: "VECTEUR OFFENSIF · BRUXELLES",
+                subSws: "RÉSEAU DE LOBBYING · NL",
+                subSu: "DIFFUSEUR DE PROPAGANDE",
+                subAwsa: "AXE PACIFIQUE · AUSTRALIE",
+                subIe: "IDIOT UTILE · HORS SPONSOR",
+                subSaih: "IDIOT UTILE · RELAIS ACADÉMIQUE",
+                subMfa: "IDIOT UTILE · SPONSOR PUBLIC",
+                subAuws: "IDIOT UTILE · SYNDICAT",
+                subHagen: "CERVEAU OPÉRATIONNEL",
+                subSara: "COORDINATRICE · WSRW",
+                subCate: "CONSEILLÈRE · SWS",
+                subLyn: "PRÉSIDENTE · AWSA",
+                backBtn: "Retour à l'analyse générale",
+                fieldNet: "Réseau d'Action",
+                fieldPosture: "Posture OCP",
+                fieldRole: "🛡️ Rôle & Renseignement :",
+                alertCritical: "🚨 Alerte Rouge : Tête de Pont Stratégique",
+                alertDanger: "⚠️ Danger : Vecteur d'Attaque Actif",
+                alertWarning: "⚙️ Idiot Utile : Relais d'Amplification"
+            },
+            EN: {
+                panelTitlePre: "Target Dossier",
+                panelTitle: "Encirclement Analysis",
+                chapeauText: "Decryption of the operational methods used in hostile campaigns against OCP and Moroccan Interests, orchestrated by a network of front NGOs disguised as 'humanitarians' and amplified by 'useful idiots'.",
+                helpText: "Click on any element of the cartography to inspect its strategic links, support systems, and threat profile.",
+                legendTitle: "Legend of Flows & Levels",
+                legendBlue: "Support Flow / Political Lobbying",
+                legendRed: "Threat Vector / Disinformation",
+                legendGreen: "Financial Flow / Sponsoring",
+                labelAlliance: "DIRECT ALLIANCE",
+                labelCoordination: "COORDINATION",
+                labelPropagande: "PROPAGANDA",
+                labelLobby: "GEOPOLITICAL LOBBY",
+                labelSponsor1: "FUNDING",
+                labelSponsor2: "PARTNER",
+                labelSponsor3: "GRANT",
+                subCnsso: "PRIMARY THREAT · OSLO",
+                subWsrw: "OFFENSIVE VECTOR · BRUSSELS",
+                subSws: "LOBBYING NET · NL",
+                subSu: "PROPAGANDA OUTLET",
+                subAwsa: "PACIFIC AXIS · AUSTRALIA",
+                subIe: "USEFUL IDIOT · NO SPONSOR",
+                subSaih: "USEFUL IDIOT · ACADEMIC RELAY",
+                subMfa: "USEFUL IDIOT · PUBLIC SPONSOR",
+                subAuws: "USEFUL IDIOT · LABOR UNION",
+                subHagen: "OPERATIONAL BRAIN",
+                subSara: "COORDINATOR · WSRW",
+                subCate: "ADVISOR · SWS",
+                subLyn: "CHAIRMAN · AWSA",
+                backBtn: "Back to General Analysis",
+                fieldNet: "Action Network",
+                fieldPosture: "OCP Posture",
+                fieldRole: "🛡️ Role & Intelligence:",
+                alertCritical: "🚨 Red Alert: Strategic Spearhead",
+                alertDanger: "⚠️ Danger: Active Attack Vector",
+                alertWarning: "⚙️ Useful Idiot: Amplification Relay"
+            }
+        };
+
+        // Base de Données d'Intelligence Économique Bilingue (Slide 3, 4, 5, 9 des Challenges OCP)
+        const database = {
+            "CNSSO": {
+                FR: {
+                    cat: "ONG / Centre d'études (Pivot)",
+                    power: "Scandinavie",
+                    threat: "HOSTILE / ENCERCLEMENT",
+                    desc: "Comité Norvégien de Soutien au Sahara Occidental. Fondé à Oslo en 1993. Il coordonne l'ensemble des relais d'Europe du Nord pour faire pression sur les banques et les parlements afin d'imposer un boycott unilatéral.",
+                    level: "critical"
+                },
+                EN: {
+                    cat: "NGO / Research Center (Pivot)",
+                    power: "Scandinavia",
+                    threat: "HOSTILE / ENCIRCLEMENT",
+                    desc: "Norwegian Support Committee for Western Sahara. Founded in Oslo in 1993. Co-ordinates all Northern European networks to lobby banks and parliaments to enforce a unilateral boycott.",
+                    level: "critical"
+                }
+            },
+            "WSRW": {
+                FR: {
+                    cat: "ONG / Réseau Activiste",
+                    power: "International",
+                    threat: "HOSTILE / OFFENSIF",
+                    desc: "Western Sahara Resource Watch. Mené par Sara Eyckmans. Spécialisé dans la 'Guerre Économique' : traque de cargos, lobbying d'intimidation auprès des acheteurs et dépôts de recours douaniers hostiles.",
+                    level: "danger"
+                },
+                EN: {
+                    cat: "NGO / Activist Network",
+                    power: "International",
+                    threat: "HOSTILE / OFFENSIVE",
+                    desc: "Western Sahara Resource Watch. Managed by Sara Eyckmans. Specializes in 'Economic Warfare': cargo tracking, intimidation of global buyers, and filing hostile customs recourses.",
+                    level: "danger"
+                }
+            },
+            "SWS": {
+                FR: {
+                    cat: "ONG d'Attaque Économique",
+                    power: "Europe de l'Ouest",
+                    threat: "HOSTILE / LOBBYING",
+                    desc: "Solidarity Western Sahara. Relais d'influence ciblant les institutions basées aux Pays-Bas. Utilise des argumentaires d'investissement éthique fallacieux pour forcer le désinvestissement.",
+                    level: "danger"
+                },
+                EN: {
+                    cat: "NGO / Economic Campaign",
+                    power: "Western Europe",
+                    threat: "HOSTILE / LOBBYING",
+                    desc: "Solidarity Western Sahara. Influence relay targeting institutions in the Netherlands. Deploys fallacious ethical investment arguments to force divestment.",
+                    level: "danger"
+                }
+            },
+            "SAIH": {
+                FR: {
+                    cat: "Fonds Étudiant / Partenaire",
+                    power: "Norvège",
+                    threat: "IDIOT UTILE / SPONSOR",
+                    desc: "Sert de couverture pour le recrutement de militants et la diffusion de thématiques orientées dans le milieu universitaire scandinave. Dispose d'un réseau de plus de 160 000 étudiants.",
+                    level: "warning"
+                },
+                EN: {
+                    cat: "Student Fund / Partner",
+                    power: "Norway",
+                    threat: "USEFUL IDIOT / SPONSOR",
+                    desc: "Acts as a cover for recruiting student activists and spreading targeted hostile narratives throughout Scandinavian universities. Controls a network of 160,000 students.",
+                    level: "warning"
+                }
+            },
+            "Sahara Update": {
+                FR: {
+                    cat: "Média de Parasitage",
+                    power: "Digital",
+                    threat: "DÉSINFORMATION",
+                    desc: "Canal d'information international manipulé directement par le CNSSO et Erik Hagen pour diffuser du contenu orienté, des faux rapports d'infractions et des dossiers à charge.",
+                    level: "danger"
+                },
+                EN: {
+                    cat: "Parasitic Media Outlet",
+                    power: "Digital",
+                    threat: "DISINFORMATION",
+                    desc: "International information channel directly controlled by CNSSO and Erik Hagen to circulate biased content, fake compliance breaches, and prosecution reports.",
+                    level: "danger"
+                }
+            },
+            "MFA": {
+                FR: {
+                    cat: "Gouvernement Norvégien",
+                    power: "Norvège",
+                    threat: "IDIOT UTILE / SPONSOR PUBLIC",
+                    desc: "Ministère norvégien des Affaires étrangères. Il agit indirectement comme un sponsor en subventionnant activement des ONG de front comme le CNSSO sous le label 'humanitaire'.",
+                    level: "warning"
+                },
+                EN: {
+                    cat: "Norwegian Government",
+                    power: "Norway",
+                    threat: "USEFUL IDIOT / PUBLIC SPONSOR",
+                    desc: "Norwegian Ministry of Foreign Affairs. Acts indirectly as a sponsor by actively funding front NGOs like CNSSO under the guise of 'humanitarian aid'.",
+                    level: "warning"
+                }
+            },
+            "AWSA": {
+                FR: {
+                    cat: "ONG d'Attaque Économique",
+                    power: "Océanie",
+                    threat: "HOSTILE / LOBBY GEOPOLITIQUE",
+                    desc: "Australia Western Sahara Association. Transitionne le militantisme vers les partis politiques locaux pour entraver l'accord commercial de fertilisants avec l'Australie.",
+                    level: "danger"
+                },
+                EN: {
+                    cat: "NGO / Economic Campaign",
+                    power: "Oceania",
+                    threat: "HOSTILE / GEOPOLITICAL LOBBY",
+                    desc: "Australia Western Sahara Association. Shifts activism into local political parties to disrupt fertilizer import agreements with Australia and New Zealand.",
+                    level: "danger"
+                }
+            },
+            "AUWS": {
+                FR: {
+                    cat: "Syndicat Ouvrier Océanien",
+                    power: "Australie",
+                    threat: "IDIOT UTILE / SYNDICAT",
+                    desc: "Union des Syndicats Australiens. Utilisée comme levier de perturbation sociale pour bloquer l'importation de minerai en faisant pression sur les compagnies maritimes.",
+                    level: "warning"
+                },
+                EN: {
+                    cat: "Oceanian Labor Union",
+                    power: "Australia",
+                    threat: "USEFUL IDIOT / LABOR UNION",
+                    desc: "Australian Trade Unions Association. Utilized as a social lever to disrupt cargo arrivals by putting pressure on local maritime and logistics shipping lines.",
+                    level: "warning"
+                }
+            },
+            "Industri Energi": {
+                FR: {
+                    cat: "Syndicat National",
+                    power: "Norvège",
+                    threat: "IDIOT UTILE / SPONSOR",
+                    desc: "Syndicat national de l'énergie. Principal sponsor de WSRW, offrant des subventions et financements pour bloquer l'importation de phosphate concurrent.",
+                    level: "warning"
+                },
+                EN: {
+                    cat: "National Labor Union",
+                    power: "Norway",
+                    threat: "USEFUL IDIOT / SPONSOR",
+                    desc: "National Energy Union. Principal sponsor of WSRW, providing heavy funding to block competitive phosphate shipments under ethical pretexts.",
+                    level: "warning"
+                }
+            },
+            "Erik Hagen": {
+                FR: {
+                    cat: "Leader d'opinion / Cerveau",
+                    power: "Global",
+                    threat: "HOSTILE / CRITIQUE",
+                    desc: "Président de Vest-Sahara et pivot de la déstabilisation d'OCP. Auteur exclusif des narratifs hostiles et infiltrateur actif des parlements nordiques.",
+                    level: "critical"
+                },
+                EN: {
+                    cat: "Opinion Leader / Brain",
+                    power: "Global",
+                    threat: "HOSTILE / CRITICAL",
+                    desc: "President of Vest-Sahara and prime orchestrator of the OCP campaign. Chief editor of attack timelines and expert at infiltrating Nordic legislative assemblies.",
+                    level: "critical"
+                }
+            },
+            "Sara Eyckmans": {
+                FR: {
+                    cat: "Coordinatrice de réseau",
+                    power: "Bruxelles (UE)",
+                    threat: "HOSTILE DIRECT",
+                    desc: "Responsable opérationnelle de WSRW. Coordonne les actions de guerre juridique aux portes de l'Europe, ciblant directement les transporteurs maritimes.",
+                    level: "danger"
+                },
+                EN: {
+                    cat: "Network Coordinator",
+                    power: "Brussels (EU)",
+                    threat: "DIRECT HOSTILE",
+                    desc: "Operational lead of WSRW. Directs legal actions and border blockades at EU ports of entry, targeting shipping companies.",
+                    level: "danger"
+                }
+            },
+            "Cate Lewis": {
+                FR: {
+                    cat: "Militante d'influence",
+                    power: "Europe du Nord",
+                    threat: "HOSTILE",
+                    desc: "Experte en communication pour Solidarity Western Sahara. Organise des actions d'influence ciblées pour contraindre les institutions financières néerlandaises.",
+                    level: "danger"
+                },
+                EN: {
+                    cat: "Influence Activist",
+                    power: "Northern Europe",
+                    threat: "HOSTILE",
+                    desc: "Communication lead for Solidarity Western Sahara. Deploys targeted pressure campaigns to freeze financial assets in Dutch banks.",
+                    level: "danger"
+                }
+            },
+            "Lyn Allison": {
+                FR: {
+                    cat: "Leader d'opinion politique",
+                    power: "Australie",
+                    threat: "HOSTILE / LOBBY",
+                    desc: "Ancienne sénatrice et présidente d'AWSA. Utilise son influence parlementaire pour entraver les accords d'importation de fertilisants en Océanie.",
+                    level: "danger"
+                },
+                EN: {
+                    cat: "Political Opinion Leader",
+                    power: "Australia",
+                    threat: "HOSTILE / LOBBY",
+                    desc: "Former Senator and chairman of AWSA. Uses direct parliamentary influence to question, delay, and target trade routes for Moroccan fertilizer inputs.",
+                    level: "danger"
+                }
+            }
+        };
+
+        // GESTION PAN & ZOOM DU CANVAS SVG
+        let zoom = 1.0;
+        let panX = 0;
+        let panY = 0;
+        let isDragging = false;
+        let startX, startY;
+
+        const networkGroup = document.getElementById('interactive-network');
+        const container = document.getElementById('canvas-container');
+
+        // Événement molette de souris pour zoomer
+        container.addEventListener('wheel', (e) => {
+            e.preventDefault();
+            const zoomFactor = 0.05;
+            if (e.deltaY < 0) {
+                zoom = Math.min(zoom + zoomFactor, 2.5);
+            } else {
+                zoom = Math.max(zoom - zoomFactor, 0.4);
+            }
+            updateTransform();
+        });
+
+        // Événement clic souris pour déplacer le canvas (Drag/Pan)
+        container.addEventListener('mousedown', (e) => {
+            if (e.button !== 0) return;
+            isDragging = true;
+            startX = e.clientX - panX;
+            startY = e.clientY - panY;
+        });
+
+        window.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+            panX = e.clientX - startX;
+            panY = e.clientY - startY;
+            updateTransform();
+        });
+
+        window.addEventListener('mouseup', () => {
+            isDragging = false;
+        });
+
+        function updateTransform() {
+            networkGroup.style.transform = `translate(${panX}px, ${panY}px) scale(${zoom})`;
+            document.getElementById('zoom-indicator').innerText = `${Math.round(zoom * 100)}%`;
+        }
+
+        function zoomIn() {
+            zoom = Math.min(zoom + 0.15, 2.5);
+            updateTransform();
+        }
+
+        function zoomOut() {
+            zoom = Math.max(zoom - 0.15, 0.4);
+            updateTransform();
+        }
+
+        function resetZoomPan() {
+            zoom = 1.0;
+            panX = 0;
+            panY = 0;
+            updateTransform();
+        }
+
+        // CHANGER DE LANGUE DYNAMIQUEMENT (BILINGUISME)
+        function setLanguage(lang) {
+            currentLang = lang;
+            
+            // Mise à jour de l'état des boutons de l'en-tête
+            const frBtn = document.getElementById('lang-fr-btn');
+            const enBtn = document.getElementById('lang-en-btn');
+            if (lang === 'FR') {
+                frBtn.className = "px-2 py-1 rounded bg-[#c9a84c] text-[#0d1b2a] cursor-pointer transition-all";
+                enBtn.className = "px-2 py-1 rounded hover:bg-[#c9a84c]/20 cursor-pointer transition-all";
+            } else {
+                enBtn.className = "px-2 py-1 rounded bg-[#c9a84c] text-[#0d1b2a] cursor-pointer transition-all";
+                frBtn.className = "px-2 py-1 rounded hover:bg-[#c9a84c]/20 cursor-pointer transition-all";
+            }
+
+            // Traduction de la légende
+            document.getElementById('legend-title').innerText = uiTranslations[lang].legendTitle;
+            document.getElementById('legend-blue').innerText = uiTranslations[lang].legendBlue;
+            document.getElementById('legend-red').innerText = uiTranslations[lang].legendRed;
+            document.getElementById('legend-green').innerText = uiTranslations[lang].legendGreen;
+
+            // Traduction des étiquettes de liaisons (Badges SVG)
+            document.getElementById('label-alliance').innerText = uiTranslations[lang].labelAlliance;
+            document.getElementById('label-coordination').innerText = uiTranslations[lang].labelCoordination;
+            document.getElementById('label-propagande').innerText = uiTranslations[lang].labelPropagande;
+            document.getElementById('label-lobby').innerText = uiTranslations[lang].labelLobby;
+            document.getElementById('label-sponsor1').innerText = uiTranslations[lang].labelSponsor1;
+            document.getElementById('label-sponsor2').innerText = uiTranslations[lang].labelSponsor2;
+            document.getElementById('label-sponsor3').innerText = uiTranslations[lang].labelSponsor3;
+
+            // Traduction des sous-titres des noeuds SVG
+            document.getElementById('sub-cnsso').innerText = uiTranslations[lang].subCnsso;
+            document.getElementById('sub-wsrw').innerText = uiTranslations[lang].subWsrw;
+            document.getElementById('sub-sws').innerText = uiTranslations[lang].subSws;
+            document.getElementById('sub-su').innerText = uiTranslations[lang].subSu;
+            document.getElementById('sub-awsa').innerText = uiTranslations[lang].subAwsa;
+            document.getElementById('sub-ie').innerText = uiTranslations[lang].subIe;
+            document.getElementById('sub-saih').innerText = uiTranslations[lang].subSaih;
+            document.getElementById('sub-mfa').innerText = uiTranslations[lang].subMfa;
+            document.getElementById('sub-auws').innerText = uiTranslations[lang].subAuws;
+            document.getElementById('sub-hagen').innerText = uiTranslations[lang].subHagen;
+            document.getElementById('sub-sara').innerText = uiTranslations[lang].subSara;
+            document.getElementById('sub-cate').innerText = uiTranslations[lang].subCate;
+            document.getElementById('sub-lyn').innerText = uiTranslations[lang].subLyn;
+
+            // Mise à jour du panneau de droite si on est sur la vue par défaut
+            if (document.getElementById('inspector-content-view').classList.contains('hidden')) {
+                resetToDefaultDossier();
+            } else {
+                // Si une entité est actuellement sélectionnée, rafraîchir ses textes
+                const selectedEntityName = document.getElementById('inspect-name').innerText;
+                inspectNetworkEntity(selectedEntityName);
+            }
+        }
+
+        // RÉINITIALISATION DE L'INSPECTEUR (RETOUR AU DOSSIER GENERAL)
+        function resetToDefaultDossier() {
+            document.getElementById('inspector-content-view').classList.add('hidden');
+            document.getElementById('inspector-default-view').classList.remove('hidden');
+
+            document.getElementById('panel-title-pre').innerText = uiTranslations[currentLang].panelTitlePre;
+            document.getElementById('panel-title').innerText = uiTranslations[currentLang].panelTitle;
+            document.getElementById('chapeau-text').innerText = uiTranslations[currentLang].chapeauText;
+            document.getElementById('help-text').innerHTML = `<b>${currentLang === 'FR' ? 'Cliquez sur n\'importe quel élément' : 'Click on any element'}</b> ${uiTranslations[currentLang].helpText.replace('Cliquez sur n\'importe quel élément', '').replace('Click on any element', '')}`;
+        }
+
+        // INSPECTEUR D'ENTITÉS INTERACTIF
+        function inspectNetworkEntity(id) {
+            // Récupère l'entité
+            const dataEntry = database[id];
+            if (!dataEntry) return;
+
+            // Sélectionne les données dans la langue active
+            const data = dataEntry[currentLang];
+
+            // Affiche la vue détaillée
+            document.getElementById('inspector-default-view').classList.add('hidden');
+            document.getElementById('inspector-content-view').classList.remove('hidden');
+
+            // Traduit les champs fixes
+            document.getElementById('back-button-text').innerText = uiTranslations[currentLang].backBtn;
+            document.getElementById('label-field-net').innerText = uiTranslations[currentLang].fieldNet;
+            document.getElementById('label-field-posture').innerText = uiTranslations[currentLang].fieldPosture;
+            document.getElementById('label-field-role').innerText = uiTranslations[currentLang].fieldRole;
+
+            // Remplit le contenu dynamique
+            document.getElementById('inspect-name').innerText = id;
+            document.getElementById('inspect-cat').innerText = data.cat;
+            document.getElementById('inspect-power').innerText = data.power;
+            document.getElementById('inspect-threat').innerText = data.threat;
+            document.getElementById('inspect-desc').innerText = data.desc;
+
+            // Applique la logique des alertes
+            const badge = document.getElementById('tactical-threat-badge');
+            if (dataEntry.FR.level === 'critical') {
+                badge.className = "p-2.5 rounded-lg border text-center font-bold text-[10px] uppercase tracking-wider bg-red-950/20 text-red-600 border-red-500/40";
+                badge.innerText = uiTranslations[currentLang].alertCritical;
+                document.getElementById('inspect-threat').className = "font-bold text-red-600";
+            } else if (dataEntry.FR.level === 'danger') {
+                badge.className = "p-2.5 rounded-lg border text-center font-bold text-[10px] uppercase tracking-wider bg-red-950/20 text-red-500 border-red-500/40";
+                badge.innerText = uiTranslations[currentLang].alertDanger;
+                document.getElementById('inspect-threat').className = "font-bold text-red-500";
+            } else if (dataEntry.FR.level === 'warning') {
+                badge.className = "p-2.5 rounded-lg border text-center font-bold text-[10px] uppercase tracking-wider bg-amber-950/20 text-amber-600 border-amber-500/40";
+                badge.innerText = uiTranslations[currentLang].alertWarning;
+                document.getElementById('inspect-threat').className = "font-bold text-amber-600";
+            }
+        }
+        // Applique la langue initiale (si EN via ?lang=en)
+        document.addEventListener('DOMContentLoaded', function(){
+          if (currentLang === 'EN') setLanguage('EN');
+          try { window.parent && window.parent.postMessage({ type: 'bf-carto-ready' }, '*'); } catch(e){}
+        });
+    </script>
+</body>
+</html>

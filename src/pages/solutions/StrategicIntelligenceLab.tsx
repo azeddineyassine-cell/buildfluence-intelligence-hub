@@ -2247,6 +2247,28 @@ const MissionTimeline = ({ title, items }: { title: string; items: TimelineNode[
   );
 };
 
+const RelationalCartography = () => {
+  const { lang } = useLanguage();
+  const iframeRef = useRef<HTMLIFrameElement | null>(null);
+  const initialLang = lang === "en" ? "en" : "fr";
+  useEffect(() => {
+    const win = iframeRef.current?.contentWindow;
+    if (!win) return;
+    try { win.postMessage({ type: "bf-lang", lang: lang === "en" ? "EN" : "FR" }, "*"); } catch {}
+  }, [lang]);
+  return (
+    <div className="case-block" style={{ padding: 0, overflow: "hidden" }}>
+      <iframe
+        ref={iframeRef}
+        src={`/Cartographie_Relationnelle.html?lang=${initialLang}`}
+        title={lang === "en" ? "Relational cartography — OCP hostile network" : "Cartographie relationnelle — Réseau hostile OCP"}
+        style={{ width: "100%", height: 820, border: 0, display: "block", background: "#f5f2eb" }}
+        loading="lazy"
+      />
+    </div>
+  );
+};
+
 const OcpCaseFile = () => {
   const { lang } = useLanguage();
   return (
@@ -2263,7 +2285,7 @@ const OcpCaseFile = () => {
       confidentialLabel="ECOSYSTEM INTELLIGENCE"
     />
     <CaseStats stats={[{ value: "3", label: lang === "en" ? "Analytical chessboards" : "Échiquiers d'analyse" }, { value: "47", label: lang === "en" ? "Stakeholders mapped" : "Parties prenantes mappées" }, { value: "12", label: lang === "en" ? "Source NGOs identified" : "ONG sources identifiées" }, { value: "1", label: lang === "en" ? "President's dashboard" : "Tableau de bord Président" }]} />
-    <CommandTree />
+    <RelationalCartography />
     <ChessboardsBlock />
     <StakeholderMatrix />
     <MissionTimeline
