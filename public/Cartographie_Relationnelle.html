@@ -933,8 +933,51 @@
         // Applique la langue initiale (si EN via ?lang=en)
         document.addEventListener('DOMContentLoaded', function(){
           if (currentLang === 'EN') setLanguage('EN');
+          else setLanguage('FR');
           try { window.parent && window.parent.postMessage({ type: 'bf-carto-ready' }, '*'); } catch(e){}
+
+          // HOVER CARD dynamique sur tous les noeuds interactifs
+          const hc = document.getElementById('hover-card');
+          const hcName = document.getElementById('hc-name');
+          const hcLevel = document.getElementById('hc-level');
+          const hcDesc = document.getElementById('hc-desc');
+          const levelLabels = {
+            FR: { critical: '🚨 Action stratégique : CRITIQUE', danger: '⚠️ Action stratégique : ÉLEVÉE', warning: '⚙️ Action stratégique : RELAIS' },
+            EN: { critical: '🚨 Strategic action: CRITICAL', danger: '⚠️ Strategic action: HIGH', warning: '⚙️ Strategic action: RELAY' }
+          };
+          const levelColors = { critical: '#fca5a5', danger: '#fda4af', warning: '#fcd34d' };
+
+          document.querySelectorAll('.node-interactive').forEach(function(node){
+            const id = node.getAttribute('data-entity');
+            node.addEventListener('mouseenter', function(e){
+              const entry = database[id];
+              if (!entry) return;
+              const d = entry[currentLang] || entry.FR;
+              hcName.innerText = id;
+              hcLevel.innerText = levelLabels[currentLang][d.level] || '';
+              hcLevel.style.color = levelColors[d.level] || '#c9a84c';
+              hcDesc.innerText = d.desc;
+              hc.classList.remove('hidden');
+            });
+            node.addEventListener('mousemove', function(e){
+              const pad = 16;
+              const w = hc.offsetWidth || 240;
+              const h = hc.offsetHeight || 100;
+              let x = e.clientX + pad;
+              let y = e.clientY + pad;
+              if (x + w > window.innerWidth) x = e.clientX - w - pad;
+              if (y + h > window.innerHeight) y = e.clientY - h - pad;
+              hc.style.left = x + 'px';
+              hc.style.top = y + 'px';
+            });
+            node.addEventListener('mouseleave', function(){
+              hc.classList.add('hidden');
+            });
+          });
         });
+    </script>
+</body>
+</html>
     </script>
 </body>
 </html>
