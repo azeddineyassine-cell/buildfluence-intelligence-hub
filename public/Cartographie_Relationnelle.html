@@ -773,44 +773,16 @@
         let isDragging = false;
         let startX, startY;
 
-        const networkGroup = document.getElementById('interactive-network');
-        const container = document.getElementById('canvas-container');
-
-        // Événement molette de souris pour zoomer
-        container.addEventListener('wheel', (e) => {
-            e.preventDefault();
-            const zoomFactor = 0.05;
-            if (e.deltaY < 0) {
-                zoom = Math.min(zoom + zoomFactor, 2.5);
-            } else {
-                zoom = Math.max(zoom - zoomFactor, 0.4);
-            }
-            updateTransform();
-        });
-
-        // Événement clic souris pour déplacer le canvas (Drag/Pan)
-        container.addEventListener('mousedown', (e) => {
-            if (e.button !== 0) return;
-            isDragging = true;
-            startX = e.clientX - panX;
-            startY = e.clientY - panY;
-        });
-
-        window.addEventListener('mousemove', (e) => {
-            if (!isDragging) return;
-            panX = e.clientX - startX;
-            panY = e.clientY - startY;
-            updateTransform();
-        });
-
-        window.addEventListener('mouseup', () => {
-            isDragging = false;
-        });
+        let networkGroup = null;
+        let container = null;
 
         function updateTransform() {
+            if (!networkGroup) return;
             networkGroup.style.transform = `translate(${panX}px, ${panY}px) scale(${zoom})`;
-            document.getElementById('zoom-indicator').innerText = `${Math.round(zoom * 100)}%`;
+            const ind = document.getElementById('zoom-indicator');
+            if (ind) ind.innerText = `${Math.round(zoom * 100)}%`;
         }
+
 
         function zoomIn() {
             zoom = Math.min(zoom + 0.15, 2.5);
@@ -930,11 +902,55 @@
                 document.getElementById('inspect-threat').className = "font-bold text-amber-600";
             }
         }
-        // Applique la langue initiale (si EN via ?lang=en)
-        document.addEventListener('DOMContentLoaded', function(){
-          if (currentLang === 'EN') setLanguage('EN');
-          else setLanguage('FR');
+
+        // Expose handlers globally so inline onclick attributes resolve reliably
+        window.zoomIn = zoomIn;
+        window.zoomOut = zoomOut;
+        window.resetZoomPan = resetZoomPan;
+        window.inspectNetworkEntity = inspectNetworkEntity;
+        window.resetToDefaultDossier = resetToDefaultDossier;
+        window.setLanguage = setLanguage;
+
+        // Bootstrap : initialise les références DOM, langue, pan/zoom et hover cards
+        function boot(){
+          // Refs DOM
+          networkGroup = document.getElementById('interactive-network');
+          container = document.getElementById('canvas-container');
+
+          // Langue initiale
+          try { if (currentLang === 'EN') setLanguage('EN'); else setLanguage('FR'); } catch(e) { console.error('setLanguage init failed', e); }
+
+          // Notifie le parent
           try { window.parent && window.parent.postMessage({ type: 'bf-carto-ready' }, '*'); } catch(e){}
+
+          // Pan & zoom — molette
+          if (container) {
+            container.addEventListener('wheel', function(e){
+              e.preventDefault();
+              const zf = 0.05;
+              if (e.deltaY < 0) zoom = Math.min(zoom + zf, 2.5);
+              else zoom = Math.max(zoom - zf, 0.4);
+              updateTransform();
+            }, { passive: false });
+
+            // Drag/pan — seulement si l'élément cliqué n'est pas un noeud interactif
+            container.addEventListener('mousedown', function(e){
+              if (e.button !== 0) return;
+              if (e.target && e.target.closest && e.target.closest('.node-interactive, .nav-btn, button')) return;
+              isDragging = true;
+              startX = e.clientX - panX;
+              startY = e.clientY - panY;
+            });
+          }
+
+          window.addEventListener('mousemove', function(e){
+            if (!isDragging) return;
+            panX = e.clientX - startX;
+            panY = e.clientY - startY;
+            updateTransform();
+          });
+
+          window.addEventListener('mouseup', function(){ isDragging = false; });
 
           // HOVER CARD dynamique sur tous les noeuds interactifs
           const hc = document.getElementById('hover-card');
@@ -949,9 +965,14 @@
 
           document.querySelectorAll('.node-interactive').forEach(function(node){
             const id = node.getAttribute('data-entity');
-            node.addEventListener('mouseenter', function(e){
-              const entry = database[id];
-              if (!entry) return;
+            // Click fallback (en plus de onclick inline)
+            node.addEventListener('click', function(e){
+              e.stopPropagation();
+              try { inspectNetworkEntity(id); } catch(err){ console.error('inspect failed', id, err); }
+            });
+            if (!hc) return;
+            node.addEventListener('mouseenter', function(){
+              const entry = database[id]; if (!entry) return;
               const d = entry[currentLang] || entry.FR;
               hcName.innerText = id;
               hcLevel.innerText = levelLabels[currentLang][d.level] || '';
@@ -963,15 +984,20 @@
               const pad = 16;
               const w = hc.offsetWidth || 240;
               const h = hc.offsetHeight || 100;
-              let x = e.clientX + pad;
-              let y = e.clientY + pad;
+              let x = e.clientX + pad, y = e.clientY + pad;
               if (x + w > window.innerWidth) x = e.clientX - w - pad;
               if (y + h > window.innerHeight) y = e.clientY - h - pad;
               hc.style.left = x + 'px';
               hc.style.top = y + 'px';
             });
-            node.addEventListener('mouseleave', function(){
-              hc.classList.add('hidden');
-            });
+            node.addEventListener('mouseleave', function(){ hc.classList.add('hidden'); });
           });
-        });
+
+          console.log('[Carto] boot complete · lang=', currentLang);
+        }
+
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', boot);
+        } else {
+          boot();
+        }
