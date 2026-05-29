@@ -447,8 +447,20 @@
 
     <!-- CODE INTERACTIF JAVASCRIPT POUR LE ZOOM, DÉPLACEMENT ET BILINGUISME -->
     <script>
-        // État de la langue de l'application
-        let currentLang = 'FR';
+        // État de la langue de l'application — initialisé depuis ?lang=fr|en si présent
+        let currentLang = (function(){
+          try {
+            const p = new URLSearchParams(window.location.search).get('lang');
+            if (p && p.toLowerCase() === 'en') return 'EN';
+          } catch(e) {}
+          return 'FR';
+        })();
+        // Écoute les changements de langue émis par la page parente
+        window.addEventListener('message', function(e){
+          if (e && e.data && e.data.type === 'bf-lang' && (e.data.lang === 'FR' || e.data.lang === 'EN')) {
+            if (typeof setLanguage === 'function') setLanguage(e.data.lang);
+          }
+        });
 
         // Traductions globales d'interface
         const uiTranslations = {
