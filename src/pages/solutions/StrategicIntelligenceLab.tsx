@@ -1737,118 +1737,23 @@ const Unit = ({ children }: { children: React.ReactNode }) => (
 
 const CommandTree = () => {
   const { lang } = useLanguage();
-  const ref = useRef<HTMLDivElement | null>(null);
-  const [hovered, setHovered] = useState<string | null>(null);
-
-  useEffect(() => {
-    const node = ref.current;
-    if (!node) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          node.classList.add("in-view");
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.3 }
-    );
-    observer.observe(node);
-    return () => observer.disconnect();
-  }, []);
-
-  const isEn = lang === "en";
-  const nodes = [
-    { id: "f1", level: "facade", x: 95, y: 50, w: 130, h: 50, name: "CNSSO", sub: isEn ? "Norwegian committee" : "Comité norvégien", fill: OLIVE, stroke: OLIVE_STROKE, d: 0 },
-    { id: "f2", level: "facade", x: 270, y: 50, w: 130, h: 50, name: "WSRW", sub: "Resource Watch", fill: OLIVE, stroke: OLIVE_STROKE, d: 120 },
-    { id: "f3", level: "facade", x: 445, y: 50, w: 130, h: 50, name: "SWS", sub: "Solidarity W. Sahara", fill: OLIVE, stroke: OLIVE_STROKE, d: 240 },
-    { id: "f4", level: "facade", x: 615, y: 50, w: 130, h: 50, name: "AWSA", sub: "Australia W.S. Assoc.", fill: OLIVE, stroke: OLIVE_STROKE, d: 360 },
-    { id: "s1", level: "sponsor", x: 95, y: 170, w: 130, h: 50, name: isEn ? "Norwegian MFA" : "MFA Norvégien", sub: isEn ? "State sponsor" : "Sponsor étatique", fill: NAVY2, stroke: "#0a2862", d: 700 },
-    { id: "s2", level: "sponsor", x: 200, y: 170, w: 130, h: 50, name: "Industri Energi", sub: isEn ? "Sector union" : "Syndicat sectoriel", fill: NAVY2, stroke: "#0a2862", d: 800 },
-    { id: "s3", level: "sponsor", x: 340, y: 170, w: 130, h: 50, name: "SAIH", sub: isEn ? "Student fund" : "Fonds étudiant", fill: NAVY2, stroke: "#0a2862", d: 900 },
-    { id: "s4", level: "sponsor", x: 470, y: 170, w: 130, h: 50, name: "Sahara Update", sub: isEn ? "Information hub" : "Centre information", fill: NAVY2, stroke: "#0a2862", d: 1000 },
-    { id: "s5", level: "sponsor", x: 615, y: 170, w: 130, h: 50, name: isEn ? "AU Trade Unions" : "Union Syndicats AU", sub: isEn ? "Relay coalition" : "Coalition relais", fill: NAVY2, stroke: "#0a2862", d: 1100 },
-    { id: "i1", level: "person", x: 150, y: 290, w: 130, h: 50, name: "Erik Hagen", sub: isEn ? "Coordinator" : "Coordinateur", fill: TERRACOTTA, stroke: TERRACOTTA_STROKE, d: 1300 },
-    { id: "i2", level: "person", x: 270, y: 290, w: 130, h: 50, name: "Sara Eykmans", sub: isEn ? "WSRW President" : "Présidente WSRW", fill: TERRACOTTA, stroke: TERRACOTTA_STROKE, d: 1400 },
-    { id: "i3", level: "person", x: 410, y: 290, w: 130, h: 50, name: "Cate Lewis", sub: isEn ? "SWS leadership" : "Direction SWS", fill: TERRACOTTA, stroke: TERRACOTTA_STROKE, d: 1500 },
-    { id: "i4", level: "person", x: 560, y: 290, w: 130, h: 50, name: "Lyn Allison", sub: isEn ? "AWSA President" : "Présidente AWSA", fill: TERRACOTTA, stroke: TERRACOTTA_STROKE, d: 1600 },
-  ];
-  const nodeMap = Object.fromEntries(nodes.map((node) => [node.id, node]));
-  const links = [
-    ["f1", "s1"], ["f2", "s2"], ["f2", "s3"], ["f3", "s3"], ["f3", "s4"], ["f4", "s5"],
-    ["f1", "i1"], ["s4", "i1"], ["f2", "i2"], ["f3", "i3"], ["f4", "i4"],
-  ];
-
-  const collectChain = (id: string) => {
-    const chain = new Set([id]);
-    let changed = true;
-    while (changed) {
-      changed = false;
-      links.forEach(([from, to]) => {
-        if (chain.has(from) && !chain.has(to)) {
-          chain.add(to);
-          changed = true;
-        }
-        if (chain.has(to) && !chain.has(from)) {
-          chain.add(from);
-          changed = true;
-        }
-      });
-    }
-    return chain;
-  };
-
-  const chain = hovered ? collectChain(hovered) : null;
-  const path = (from: string, to: string) => {
-    const a = nodeMap[from];
-    const b = nodeMap[to];
-    const x1 = a.x + a.w / 2;
-    const y1 = a.y + a.h;
-    const x2 = b.x + b.w / 2;
-    const y2 = b.y;
-    const mid = (y1 + y2) / 2;
-    return `M ${x1} ${y1} C ${x1} ${mid}, ${x2} ${mid}, ${x2} ${y2}`;
-  };
-
   return (
-    <div className="case-block command-tree" ref={ref}>
-      <style>{`
-        .command-tree .tree-node,.command-tree .tree-link{opacity:0;transition:opacity .5s ease,stroke .2s ease,stroke-width .2s ease}.command-tree.in-view .tree-node{opacity:1}.command-tree.in-view .tree-link{opacity:.5}.command-tree.in-view .tree-link{transition-delay:600ms}.command-tree .tree-node.highlight rect{stroke:${C.gold};stroke-width:2px}.command-tree .tree-node.dim{opacity:.18!important}.command-tree .tree-link.highlight{stroke:${C.gold};stroke-width:2px;opacity:1!important}.command-tree .tree-link.dim{opacity:.12!important}@media(max-width:640px){.tree-scroll{overflow-x:auto}}
-      `}</style>
-      <BlockHeader kicker={lang === "en" ? "A · DECODING" : "A · DÉCRYPTAGE"} title={lang === "en" ? <>The sponsor tree.<br />Front NGOs, funders and relays.</> : <>L'arbre des commanditaires.<br />ONG façades, financeurs et relais.</>} hint={lang === "en" ? "Hover over a front organization to reveal its chain" : "Survolez une façade pour révéler sa chaîne"} />
-      <div className="tree-scroll">
-        <svg className="command-tree" viewBox="0 0 760 380" width="100%" height="380" style={{ minWidth: 760 }}>
-          {links.map(([from, to], index) => {
-            const active = chain?.has(from) && chain?.has(to);
-            const dim = chain && !active;
-            return <path key={`${from}-${to}`} className={`tree-link ${active ? "highlight" : ""} ${dim ? "dim" : ""}`} d={path(from, to)} stroke={C.rule} strokeWidth={1.5} fill="none" />;
-          })}
-          {nodes.map((node) => {
-            const active = chain?.has(node.id);
-            const dim = chain && !active;
-            return (
-              <g
-                key={node.id}
-                className={`tree-node ${active ? "highlight" : ""} ${dim ? "dim" : ""}`}
-                style={{ transitionDelay: `${node.d}ms` }}
-                onMouseEnter={() => setHovered(node.id)}
-                onMouseLeave={() => setHovered(null)}
-              >
-                <rect x={node.x} y={node.y} width={node.w} height={node.h} rx={2} fill={node.fill} stroke={node.stroke} />
-                <text x={node.x + node.w / 2} y={node.y + 22} textAnchor="middle" style={{ fontFamily: "DM Sans, sans-serif", fontSize: 11.5, fontWeight: 500, fill: "#fff" }}>{node.name}</text>
-                <text x={node.x + node.w / 2} y={node.y + 37} textAnchor="middle" style={{ fontFamily: FONT_MONO, fontSize: 8.5, fill: "rgba(255,255,255,.65)", letterSpacing: ".12em" }}>{node.sub}</text>
-              </g>
-            );
-          })}
-        </svg>
-      </div>
-      <div className="case-legend">
-        <LegendItem color={OLIVE} label={lang === "en" ? "Visible front NGO" : "ONG façade visible"} />
-        <LegendItem color={NAVY2} label={lang === "en" ? "Sponsor / funder" : "Sponsor / financeur"} />
-        <LegendItem color={TERRACOTTA} label={lang === "en" ? "Identified individual relay" : "Relais individuel identifié"} />
-      </div>
+    <div className="case-block command-tree">
+      <BlockHeader
+        kicker={lang === "en" ? "A · DECODING" : "A · DÉCRYPTAGE"}
+        title={lang === "en" ? <>The sponsor tree.<br />Front NGOs, funders and relays.</> : <>L'arbre des commanditaires.<br />ONG façades, financeurs et relais.</>}
+        hint={lang === "en" ? "Click on a node to reveal its profile and chain of command." : "Cliquez sur un noeud pour révéler son profil et sa chaîne de commandement."}
+      />
+      <iframe
+        src="/OCP_Hostile_Network.html"
+        title={lang === "en" ? "OCP Hostile Network" : "Réseau hostile OCP"}
+        style={{ width: "100%", height: 620, border: "none", borderRadius: 4, display: "block" }}
+        allowFullScreen
+      />
     </div>
   );
 };
+
 
 const BlockHeader = ({ kicker, title, hint }: { kicker: string; title: React.ReactNode; hint?: string }) => (
   <div style={{ marginBottom: 22 }}>
