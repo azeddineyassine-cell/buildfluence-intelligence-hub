@@ -2201,7 +2201,7 @@ const OcpCaseFile = () => {
       confidentialLabel="ECOSYSTEM INTELLIGENCE"
     />
     <CaseStats stats={[{ value: "3", label: lang === "en" ? "Analytical chessboards" : "Échiquiers d'analyse" }, { value: "47", label: lang === "en" ? "Stakeholders mapped" : "Parties prenantes mappées" }, { value: "12", label: lang === "en" ? "Source NGOs identified" : "ONG sources identifiées" }, { value: "1", label: lang === "en" ? "President's dashboard" : "Tableau de bord Président" }]} />
-    <RelationalCartography />
+    <CommandTree />
     <ChessboardsBlock />
     <StakeholderMatrix />
     <MissionTimeline
