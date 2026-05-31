@@ -1753,13 +1753,20 @@ const CommandTree = () => {
         title={lang === "en" ? <>The sponsor tree.<br />Front NGOs, funders and relays.</> : <>L'arbre des commanditaires.<br />ONG façades, financeurs et relais.</>}
         hint={lang === "en" ? "Click on a node to reveal its profile and chain of command." : "Cliquez sur un noeud pour révéler son profil et sa chaîne de commandement."}
       />
-      <iframe
+     <iframe
         ref={iframeRef}
         src="/ocp_influence_map_v9.html?v=9"
         title={lang === "en" ? "OCP Hostile Network" : "Réseau hostile OCP"}
-        style={{ width: "100%", height: 900, border: "none", borderRadius: 4, display: "block" }}
+        style={{ width: "100%", height: 620, border: "none", borderRadius: 4, display: "block" }}
         allowFullScreen
-        onLoad={() => iframeRef.current?.contentWindow?.postMessage({ type: "SET_LANGUAGE", lang }, "*")}
+        onLoad={() => {
+          const f = iframeRef.current;
+          try {
+            const h = f?.contentWindow?.document?.documentElement?.scrollHeight;
+            if (f && h) f.style.height = h + "px";
+          } catch {}
+          f?.contentWindow?.postMessage({ type: "SET_LANGUAGE", lang }, "*");
+        }}
       />
     </div>
   );
