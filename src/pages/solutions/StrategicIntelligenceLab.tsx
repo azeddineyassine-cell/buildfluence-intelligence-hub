@@ -1757,7 +1757,7 @@ const CommandTree = () => {
         ref={iframeRef}
         src="/ocp_influence_map_v9.html?v=9"
         title={lang === "en" ? "OCP Hostile Network" : "Réseau hostile OCP"}
-        style={{ width: "100%", height: 620, border: "none", borderRadius: 4, display: "block" }}
+        style={{ width: "100%", height: 900, border: "none", borderRadius: 4, display: "block" }}
         allowFullScreen
         onLoad={() => iframeRef.current?.contentWindow?.postMessage({ type: "SET_LANGUAGE", lang }, "*")}
       />
