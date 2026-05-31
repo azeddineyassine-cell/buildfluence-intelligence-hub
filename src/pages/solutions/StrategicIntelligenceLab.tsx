@@ -1747,7 +1747,7 @@ const CommandTree = () => {
   }, [lang]);
 
   return (
-    <div className="case-block command-tree">
+    <div className="case-block command-tree" style={{ background: "transparent", border: "none", boxShadow: "none" }}>
       <BlockHeader
         kicker={lang === "en" ? "A · DECODING" : "A · DÉCRYPTAGE"}
         title={lang === "en" ? <>The sponsor tree.<br />Front NGOs, funders and relays.</> : <>L'arbre des commanditaires.<br />ONG façades, financeurs et relais.</>}
@@ -1757,7 +1757,7 @@ const CommandTree = () => {
         ref={iframeRef}
         src="/ocp_influence_map_v9.html?v=9"
         title={lang === "en" ? "OCP Hostile Network" : "Réseau hostile OCP"}
-        style={{ width: "100%", height: 620, border: "none", borderRadius: 4, display: "block" }}
+        style={{ width: "100vw", marginLeft: "calc(50% - 50vw)", height: 620, border: "none", display: "block" }}
         allowFullScreen
         onLoad={() => {
           const f = iframeRef.current;
