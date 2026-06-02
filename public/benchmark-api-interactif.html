@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Benchmark API Mondial · Interactif · Buildfluence Intelligence · 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700;1,900&family=Cormorant+Garamond:ital,wght@0,500;1,400;1,500;1,600&family=JetBrains+Mono:wght@400;500;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#FAF6ED; --paper2:#F3ECDC; --card:#FFFDF8;
+  --ink:#23201A; --ink-light:#5A5447; --ink-faint:#8A8170; --muted:#A9A08C;
+  --gold:#C9A84C; --gold-deep:#9A7B1E; --gold-pale:#E9DCB4;
+  --rule:#E3D9C3; --rule-soft:#EFE7D5;
+  --red:#D6453F; --green:#3B6D11; --blue:#185FA5;
+  --land:#E7DEC9; --grid:#EDE4CF;
+  --shadow:0 18px 40px -28px rgba(80,60,10,.35);
+  --display:'Playfair Display',serif; --serif:'Cormorant Garamond',serif;
+  --mono:'JetBrains Mono',monospace; --sans:'DM Sans',sans-serif;
+}
+[data-theme="dark"]{
+  --paper:#0D1B2A; --paper2:#102234; --card:#13263A;
+  --ink:#F2ECDC; --ink-light:#C2BBA8; --ink-faint:#8C9AAC; --muted:#6E7C8E;
+  --gold:#D9B65A; --gold-deep:#E2C879; --gold-pale:#3A4255;
+  --rule:#27384C; --rule-soft:#1C2C3E;
+  --red:#E24B4A; --green:#5FA32E; --blue:#5B9BD8;
+  --land:#1A2C3F; --grid:#1A2A3C;
+  --shadow:0 20px 50px -28px rgba(0,0,0,.6);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.65;overflow-x:hidden;transition:background .4s,color .4s;
+  background-image:radial-gradient(circle at 18% -10%,rgba(201,168,76,.07),transparent 45%),radial-gradient(circle at 95% 8%,rgba(201,168,76,.05),transparent 40%);}
+.wrap{max-width:1240px;margin:0 auto;padding:0 clamp(20px,4vw,56px)}
+
+.topbar{border-bottom:1px solid var(--rule);background:color-mix(in srgb,var(--paper) 85%,transparent);backdrop-filter:blur(8px);position:sticky;top:0;z-index:60}
+.topbar .wrap{display:flex;align-items:center;justify-content:space-between;gap:14px;min-height:52px;flex-wrap:wrap;padding-top:7px;padding-bottom:7px}
+.brand{font-family:var(--mono);font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--ink-light)}
+.brand b{color:var(--gold-deep);font-weight:700}
+.tb-right{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.count{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--red);border:1px solid color-mix(in srgb,var(--red) 40%,transparent);padding:5px 10px;border-radius:3px;white-space:nowrap}
+.count b{font-weight:700}
+.switch{display:flex;border:1px solid var(--rule);border-radius:4px;overflow:hidden}
+.switch button{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;background:transparent;color:var(--ink-faint);border:none;padding:6px 9px;cursor:pointer;transition:all .2s}
+.switch button.on{background:var(--ink);color:var(--paper)}
+.iconbtn{font-family:var(--mono);font-size:11px;background:transparent;border:1px solid var(--rule);color:var(--ink-light);border-radius:4px;padding:5px 10px;cursor:pointer;transition:all .2s}
+.iconbtn:hover{border-color:var(--gold)}
+
+.mininav{position:sticky;top:52px;z-index:55;background:color-mix(in srgb,var(--paper2) 92%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--rule)}
+.mininav .wrap{display:flex;gap:4px;flex-wrap:wrap;padding-top:8px;padding-bottom:8px}
+.mininav a{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-faint);text-decoration:none;padding:6px 10px;border:1px solid transparent;border-radius:3px;transition:all .2s}
+.mininav a:hover{color:var(--gold-deep);border-color:var(--rule);background:var(--card)}
+
+.hero{padding:clamp(40px,6vw,80px) 0 clamp(28px,3vw,44px)}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(24px,4vw,52px);align-items:center}
+@media(max-width:900px){.hero-grid{grid-template-columns:1fr}}
+.kicker{font-family:var(--mono);font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold-deep);margin-bottom:18px}
+.kicker .dot{display:inline-block;width:5px;height:5px;background:var(--gold);border-radius:50%;margin:0 8px 2px;vertical-align:middle}
+h1.hero-h1{font-family:var(--display);font-weight:900;font-size:clamp(32px,5vw,64px);line-height:1.02;letter-spacing:-.02em}
+h1.hero-h1 em{font-style:italic;color:var(--gold-deep)}
+.hero-sub{font-family:var(--serif);font-style:italic;font-size:clamp(16px,1.9vw,21px);color:var(--ink-light);margin-top:18px;max-width:48ch;line-height:1.5}
+.map-card{background:var(--card);border:1px solid var(--rule);border-radius:8px;padding:16px;box-shadow:var(--shadow)}
+.map-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.map-flags{font-size:16px;letter-spacing:2px}
+.map-title{font-family:var(--mono);font-size:8.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-faint)}
+.worldsvg{width:100%;height:auto;display:block;border-radius:5px;background:var(--paper2)}
+.geo-land{fill:var(--land);opacity:.85}
+.geo-grid{stroke:var(--grid);stroke-width:.6}
+.geo-arc{stroke:var(--gold);stroke-width:1;fill:none;stroke-dasharray:3 4;opacity:.5}
+.geo-node{cursor:pointer}
+.geo-node .ring{transition:r .3s,stroke-width .2s}
+.geo-node:hover .ring{stroke-width:3}
+.geo-flag{font-size:15px;pointer-events:none}
+.geo-cap{font-family:var(--mono);font-size:7.5px;fill:var(--ink-light);pointer-events:none;letter-spacing:.04em}
+.map-legend{display:flex;gap:12px;flex-wrap:wrap;margin-top:8px}
+.map-legend span{font-family:var(--mono);font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);display:flex;align-items:center;gap:5px}
+.map-legend i{width:9px;height:9px;border-radius:50%;display:inline-block}
+
+.statstrip{display:flex;flex-wrap:wrap;border:1px solid var(--rule);border-radius:5px;overflow:hidden;background:var(--card);margin-top:28px}
+.stat{flex:1 1 150px;padding:18px 20px;border-right:1px solid var(--rule)}
+.stat:last-child{border-right:none}
+.stat .n{font-family:var(--display);font-weight:700;font-size:clamp(26px,3.2vw,38px);line-height:1;color:var(--ink)}
+.stat .n.alert{color:var(--red)} .stat .n.win{color:var(--gold-deep)}
+.stat .l{font-family:var(--mono);font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint);margin-top:8px}
+
+.section{padding:clamp(36px,5vw,76px) 0;border-top:1px solid var(--rule)}
+.sec-head{display:flex;align-items:baseline;gap:14px;margin-bottom:6px;flex-wrap:wrap}
+.sec-num{font-family:var(--mono);font-size:12px;font-weight:700;color:var(--gold);letter-spacing:.1em}
+.sec-tag{font-family:var(--mono);font-size:9px;letter-spacing:.24em;text-transform:uppercase;color:var(--ink-faint)}
+h2.sec-title{font-family:var(--display);font-weight:700;font-size:clamp(24px,3.2vw,38px);line-height:1.08;letter-spacing:-.01em;margin:6px 0 12px;max-width:22ch}
+h2.sec-title em{font-style:italic;color:var(--gold-deep)}
+.sec-lead{font-family:var(--serif);font-style:italic;font-size:clamp(15px,1.6vw,18px);color:var(--ink-light);max-width:64ch;margin-bottom:28px;line-height:1.5}
+
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+
+/* annotation "à retenir" */
+.takeaway{display:flex;gap:14px;align-items:flex-start;background:var(--paper2);border-left:3px solid var(--gold);border-radius:0 5px 5px 0;padding:16px 20px;margin-top:18px}
+.takeaway .ti{font-family:var(--mono);font-size:8px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-deep);flex:0 0 auto;padding-top:3px}
+.takeaway p{font-size:14.5px;color:var(--ink-light);line-height:1.55}
+.takeaway b{color:var(--ink);font-weight:600}
+
+/* methodo cards */
+.qa-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:6px;overflow:hidden}
+@media(max-width:720px){.qa-grid{grid-template-columns:1fr}}
+.qa{background:var(--card);padding:22px 24px}
+.qa .q{font-family:var(--display);font-weight:700;font-size:17px;color:var(--ink);margin-bottom:8px}
+.qa .q span{color:var(--gold-deep)}
+.qa .a{font-size:14px;color:var(--ink-light);line-height:1.55}
+
+/* generic card */
+.card{background:var(--card);border:1px solid var(--rule);border-radius:6px;box-shadow:var(--shadow)}
+.pad{padding:clamp(14px,2vw,26px)}
+
+/* MODULE 1 bubble */
+.bubble-grid{display:grid;grid-template-columns:1fr 290px;gap:22px;align-items:stretch}
+@media(max-width:840px){.bubble-grid{grid-template-columns:1fr}}
+.chart-svg{width:100%;height:auto;display:block;font-family:var(--mono)}
+.bubble-axis-label{font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;fill:var(--ink-faint)}
+.bubble-node{cursor:pointer;transform-box:fill-box;transform-origin:center;transition:transform .25s ease}
+.bubble-node circle.fill{transition:r .9s cubic-bezier(.2,.8,.2,1)}
+.bubble-node:hover{transform:scale(1.06)}
+.bubble-flag{font-size:16px;pointer-events:none}
+.bubble-name{font-family:var(--mono);font-size:8px;letter-spacing:.04em;fill:var(--ink);pointer-events:none}
+.bub-quadrant{font-family:var(--mono);font-size:8px;letter-spacing:.16em;text-transform:uppercase;fill:var(--muted)}
+.bub-info{border-left:2px solid var(--gold);padding:6px 0 6px 18px;align-self:center}
+.bub-info .bi-flag{font-size:28px;line-height:1}
+.bub-info .bi-name{font-family:var(--display);font-weight:700;font-size:20px;margin-top:6px}
+.bub-info .bi-tag{font-family:var(--serif);font-style:italic;font-size:14px;color:var(--ink-light);margin-bottom:12px}
+.bub-info .bi-row{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-top:1px dashed var(--rule);font-family:var(--mono);font-size:9.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-faint)}
+.bub-info .bi-row b{font-family:var(--display);font-size:16px;color:var(--ink);letter-spacing:0}
+.bub-info .bi-verdict{font-family:var(--serif);font-style:italic;font-size:14px;color:var(--ink-light);margin-top:12px;line-height:1.5}
+.bub-info a{font-family:var(--mono);font-size:9px;letter-spacing:.1em;color:var(--gold-deep);text-decoration:none;display:inline-block;margin-top:10px;border-bottom:1px solid var(--gold-pale)}
+
+/* MODULE 2 matrix */
+.matrix-scroll{overflow-x:auto}
+table.matrix{border-collapse:collapse;width:100%;min-width:680px}
+table.matrix th,table.matrix td{border:1px solid var(--rule-soft);text-align:center}
+table.matrix thead th{position:sticky;top:0;background:var(--paper2);font-family:var(--mono);font-size:9px;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-light);padding:11px 6px;font-weight:500}
+table.matrix thead th .mflag{font-size:17px;display:block;margin-bottom:3px}
+table.matrix thead th.crit-h{text-align:left;width:230px;min-width:190px}
+table.matrix tbody th{text-align:left;font-family:var(--sans);font-weight:500;font-size:12.5px;color:var(--ink);padding:9px 13px;background:var(--card)}
+table.matrix tbody th .ax{display:block;font-family:var(--mono);font-size:7.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-deep);margin-top:3px}
+.cell{font-family:var(--mono);font-weight:700;font-size:13px;cursor:pointer;height:42px;color:#fff;transition:transform .12s,box-shadow .12s}
+.cell:hover{transform:scale(1.12);box-shadow:0 0 0 2px var(--ink);z-index:3;border-radius:3px}
+.cell.sel{box-shadow:0 0 0 3px var(--ink);z-index:4;border-radius:3px}
+tbody tr.hot th,thead th.hot{background:var(--gold-pale)!important;color:var(--ink)!important}
+.matrix-detail{border-top:1px solid var(--rule);padding:22px clamp(16px,2vw,28px);background:var(--paper2);min-height:96px;display:flex;gap:20px;align-items:center;flex-wrap:wrap}
+.md-score{flex:0 0 auto;width:72px;height:72px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--display);font-weight:700;font-size:29px;color:#fff}
+.md-body{flex:1 1 280px}
+.md-crit{font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-deep);margin-bottom:4px}
+.md-title{font-family:var(--display);font-weight:700;font-size:18px;margin-bottom:6px}
+.md-note{font-size:14px;color:var(--ink-light);line-height:1.55}
+.md-placeholder{font-family:var(--serif);font-style:italic;font-size:16px;color:var(--ink-faint)}
+.scale-legend{display:flex;gap:14px;flex-wrap:wrap;margin-top:14px;align-items:center}
+.scale-legend .sl{display:flex;align-items:center;gap:6px;font-family:var(--mono);font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint)}
+.scale-legend .sw{width:14px;height:14px;border-radius:3px;display:inline-block}
+
+/* MODULE 3 radar */
+.radar-grid{display:grid;grid-template-columns:1fr 250px;gap:28px;align-items:center}
+@media(max-width:840px){.radar-grid{grid-template-columns:1fr}}
+.radar-svg{width:100%;height:auto;display:block;overflow:visible}
+.radar-axis{stroke:var(--rule)} .radar-ring{fill:none;stroke:var(--rule-soft)}
+.radar-label{font-family:var(--mono);font-size:7.4px;fill:var(--ink-faint)}
+.radar-poly{stroke-width:2;transition:opacity .4s;pointer-events:none}
+.toggle-list{display:flex;flex-direction:column;gap:8px}
+.toggle{display:flex;align-items:center;gap:10px;border:1px solid var(--rule);background:var(--card);border-radius:4px;padding:9px 12px;cursor:pointer;font-family:var(--mono);font-size:11px;color:var(--ink-light);transition:all .2s;text-align:left;width:100%}
+.toggle .sw{width:13px;height:13px;border-radius:3px;flex-shrink:0;border:1.5px solid currentColor}
+.toggle .tflag{font-size:14px}.toggle .tname{flex:1}
+.toggle .tsc{font-family:var(--display);font-weight:700;font-size:14px;color:var(--ink)}
+.toggle.off{opacity:.45;filter:grayscale(.6)} .toggle.off .sw{background:transparent!important}
+.toggle:hover{border-color:var(--gold)} .toggle.locked{cursor:default;border-color:var(--red)}
+
+/* MODULE 4 duel */
+.duel-pick{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px}
+.duel-pick button{font-family:var(--mono);font-size:11px;color:var(--ink-light);background:var(--card);border:1px solid var(--rule);border-radius:4px;padding:10px 14px;cursor:pointer;display:flex;align-items:center;gap:8px;transition:all .2s}
+.duel-pick button .f{font-size:15px}
+.duel-pick button:hover{border-color:var(--gold)}
+.duel-pick button.active{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.duel-pick button.active .duel-sub{color:var(--gold)}
+.duel-sub{font-family:var(--mono);font-size:8px;color:var(--muted)}
+.duel-top{display:grid;grid-template-columns:1fr 60px 1fr}
+@media(max-width:680px){.duel-top{grid-template-columns:1fr}}
+.duel-side{padding:22px 24px}
+.duel-side.mor{background:color-mix(in srgb,var(--red) 9%,var(--card));border-bottom:3px solid var(--red)}
+.duel-side.opp{background:color-mix(in srgb,var(--gold) 11%,var(--card));border-bottom:3px solid var(--gold);text-align:right}
+.duel-vs{display:flex;align-items:center;justify-content:center;font-family:var(--display);font-style:italic;font-weight:700;font-size:17px;color:var(--muted);background:var(--paper2)}
+@media(max-width:680px){.duel-side.opp{text-align:left}.duel-vs{padding:8px}}
+.duel-flag{font-size:30px}
+.duel-name{font-family:var(--display);font-weight:700;font-size:19px;margin-top:5px}
+.duel-tag{font-family:var(--serif);font-style:italic;font-size:14px;color:var(--ink-light)}
+.duel-big{font-family:var(--display);font-weight:900;font-size:44px;line-height:1;margin-top:12px}
+.duel-big.mor{color:var(--red)} .duel-big.opp{color:var(--gold-deep)}
+.duel-big small{font-family:var(--mono);font-size:12px;font-weight:400;color:var(--ink-faint)}
+.duel-bars{padding:20px clamp(16px,2vw,26px)}
+.duel-bars h4{font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:14px}
+.dbar{margin-bottom:12px}
+.dbar-top{display:flex;justify-content:space-between;font-family:var(--mono);font-size:10px;color:var(--ink-light);margin-bottom:5px}
+.dbar-top .gap{color:var(--red);font-weight:700}
+.dbar-track{position:relative;height:9px;background:var(--rule-soft);border-radius:5px;overflow:hidden}
+.dbar-opp{position:absolute;left:0;top:0;height:100%;background:linear-gradient(90deg,var(--gold),var(--gold-deep));border-radius:5px;width:0;transition:width 1s cubic-bezier(.2,.8,.2,1)}
+.dbar-mor{position:absolute;left:0;top:0;height:100%;background:var(--red);border-radius:5px;width:0;opacity:.85;transition:width 1s cubic-bezier(.2,.8,.2,1)}
+.dbar-mor::after{content:"";position:absolute;right:-1px;top:-3px;width:2px;height:15px;background:var(--ink)}
+.duel-verdict{padding:0 clamp(16px,2vw,26px) 22px;display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:680px){.duel-verdict{grid-template-columns:1fr}}
+.dv-box{border:1px solid var(--rule);border-radius:5px;padding:15px 17px;background:var(--paper)}
+.dv-box .dvl{font-family:var(--mono);font-size:8.5px;letter-spacing:.18em;text-transform:uppercase;margin-bottom:7px}
+.dv-box.opp .dvl{color:var(--gold-deep)} .dv-box.mor .dvl{color:var(--red)}
+.dv-box .dvt{font-family:var(--serif);font-style:italic;font-size:15px;color:var(--ink);line-height:1.55}
+
+/* SIMULATOR */
+.sim-grid{display:grid;grid-template-columns:1fr 320px;gap:26px;align-items:start}
+@media(max-width:880px){.sim-grid{grid-template-columns:1fr}}
+.sim-lever{margin-bottom:16px}
+.sim-lever .sl-top{display:flex;justify-content:space-between;font-size:13px;color:var(--ink);margin-bottom:6px}
+.sim-lever .sl-top span:last-child{font-family:var(--mono);font-size:11px;color:var(--gold-deep);font-weight:700}
+input[type=range]{-webkit-appearance:none;width:100%;height:6px;border-radius:4px;background:var(--rule);outline:none}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:18px;height:18px;border-radius:50%;background:var(--gold-deep);cursor:pointer;border:3px solid var(--card);box-shadow:0 1px 4px rgba(0,0,0,.2)}
+input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;background:var(--gold-deep);cursor:pointer;border:3px solid var(--card)}
+.sim-panel{background:var(--ink);color:var(--paper);border-radius:8px;padding:24px;text-align:center;position:sticky;top:110px}
+.sim-panel .spl{font-family:var(--mono);font-size:8.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
+.sim-panel .spbig{font-family:var(--display);font-weight:900;font-size:60px;line-height:1;margin:6px 0;color:var(--paper)}
+.sim-panel .spfrom{font-family:var(--mono);font-size:10px;color:color-mix(in srgb,var(--paper) 60%,transparent)}
+.sim-mini{width:100%;height:auto;margin-top:14px}
+.sim-note{font-family:var(--serif);font-style:italic;font-size:13px;color:color-mix(in srgb,var(--paper) 72%,transparent);margin-top:12px;line-height:1.45}
+.sim-reset{margin-top:14px;font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;background:transparent;border:1px solid color-mix(in srgb,var(--paper) 30%,transparent);color:var(--paper);padding:8px 16px;border-radius:4px;cursor:pointer}
+
+/* FONCIER / MedZ vs JTC */
+.urgency{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:26px}
+@media(max-width:620px){.urgency{grid-template-columns:1fr}}
+.urg{background:var(--card);border:1px solid var(--rule);border-top:3px solid var(--red);border-radius:5px;padding:20px;text-align:center}
+.urg .un{font-family:var(--display);font-weight:900;font-size:40px;color:var(--red);line-height:1}
+.urg .ul{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);margin-top:8px}
+.guichet{display:grid;grid-template-columns:1fr 70px 1fr;gap:0;margin-bottom:26px;align-items:stretch}
+@media(max-width:620px){.guichet{grid-template-columns:1fr}}
+.gx{background:var(--card);border:1px solid var(--rule);border-radius:6px;padding:18px 20px}
+.gx .gxl{font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-deep);margin-bottom:6px}
+.gx .gxn{font-family:var(--display);font-weight:700;font-size:18px}
+.gx .gxd{font-size:13px;color:var(--ink-light);margin-top:6px;line-height:1.45}
+.gx-gap{display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:10px;color:var(--red);position:relative}
+.gx-gap::before{content:"⚡";font-size:22px}
+.jtc-table{border-collapse:collapse;width:100%;min-width:560px}
+.jtc-table th{font-family:var(--mono);font-size:8.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-light);background:var(--paper2);padding:11px 12px;text-align:left;border-bottom:1px solid var(--rule)}
+.jtc-table td{padding:13px 12px;border-bottom:1px solid var(--rule-soft);vertical-align:top;font-size:13px;color:var(--ink-light);line-height:1.45}
+.jtc-table tr:hover td{background:var(--paper2)}
+.jtc-gap{font-weight:600;color:var(--ink)}
+.jtc-stars{color:var(--gold);font-size:13px;letter-spacing:1px;white-space:nowrap}
+.jtc-stars .off{color:#BDB6A6}
+.jtc-table tfoot td{padding:14px 12px;border-top:2px solid var(--rule);font-family:var(--mono);font-size:13px;font-weight:700;color:var(--ink);background:var(--paper2)}
+.jtc-table tfoot .tt{display:inline-block;font-size:8px;letter-spacing:.14em;color:var(--gold-deep);margin-right:5px;vertical-align:middle}
+.provoc{background:linear-gradient(135deg,var(--red),#9E2A26);color:#fff;border-radius:8px;padding:clamp(22px,3vw,36px);margin-top:26px}
+.provoc .pl{font-family:var(--mono);font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.7)}
+.provoc p{font-family:var(--display);font-weight:700;font-size:clamp(18px,2.4vw,26px);line-height:1.25;margin-top:10px}
+.provoc p em{font-style:italic;color:#FFE0A0}
+
+/* VERDICT */
+.vtable{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--rule);border-radius:6px;overflow:hidden;margin-bottom:24px}
+@media(max-width:620px){.vtable{grid-template-columns:1fr}}
+.vcol{padding:22px 24px}
+.vcol.a{background:color-mix(in srgb,var(--red) 8%,var(--card))}
+.vcol.b{background:color-mix(in srgb,var(--gold) 10%,var(--card));border-left:1px solid var(--rule)}
+@media(max-width:620px){.vcol.b{border-left:none;border-top:1px solid var(--rule)}}
+.vcol .vh{font-family:var(--mono);font-size:9px;letter-spacing:.16em;text-transform:uppercase;margin-bottom:12px}
+.vcol.a .vh{color:var(--red)} .vcol.b .vh{color:var(--gold-deep)}
+.vcol ul{list-style:none}
+.vcol li{font-size:14px;color:var(--ink-light);padding:7px 0 7px 18px;position:relative;line-height:1.45}
+.vcol li::before{content:"";position:absolute;left:0;top:13px;width:6px;height:6px;border-radius:50%}
+.vcol.a li::before{background:var(--red)} .vcol.b li::before{background:var(--gold)}
+.verdict-quote{background:var(--ink);color:var(--paper);border-radius:8px;padding:clamp(24px,3.5vw,42px);text-align:center}
+.verdict-quote p{font-family:var(--display);font-style:italic;font-weight:700;font-size:clamp(19px,2.6vw,28px);line-height:1.3}
+.verdict-quote p em{color:var(--gold);font-style:italic}
+.verdict-quote .src{font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:color-mix(in srgb,var(--paper) 55%,transparent);margin-top:18px}
+.baro-links{display:flex;gap:12px;flex-wrap:wrap;margin-top:20px}
+.baro-links a{font-family:var(--mono);font-size:10px;letter-spacing:.06em;color:var(--ink);text-decoration:none;border:1px solid var(--rule);background:var(--card);border-radius:5px;padding:12px 16px;transition:all .2s;display:flex;gap:8px;align-items:center}
+.baro-links a:hover{border-color:var(--gold);color:var(--gold-deep)}
+.baro-links a b{color:var(--gold-deep)}
+
+/* PLAN */
+.chantier{margin-bottom:22px}
+.chantier h3{font-family:var(--display);font-weight:700;font-size:20px;margin-bottom:4px}
+.chantier h3 .cn{color:var(--gold-deep);font-family:var(--mono);font-size:13px;margin-right:8px}
+.chantier .csub{font-family:var(--serif);font-style:italic;font-size:14px;color:var(--ink-light);margin-bottom:12px}
+.lev-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:6px;overflow:hidden}
+.lever{background:var(--card);padding:18px 18px;transition:background .3s}
+.lever:hover{background:var(--paper2)}
+.lever .lt{font-family:var(--sans);font-weight:600;font-size:14px;line-height:1.3}
+.lever .lo{font-family:var(--mono);font-size:8px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-deep);margin-top:6px}
+
+.cta{margin-top:36px;background:linear-gradient(135deg,#23201A,#2E2920);border-radius:8px;padding:clamp(28px,4vw,46px);text-align:center;color:#FAF6ED}
+.cta h3{font-family:var(--display);font-weight:700;font-size:clamp(21px,3vw,30px);line-height:1.15;color:#fff}
+.cta h3 em{font-style:italic;color:var(--gold)}
+.cta p{font-family:var(--serif);font-style:italic;font-size:16px;color:rgba(250,246,237,.78);margin:13px auto 24px;max-width:52ch}
+.cta a{display:inline-block;font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#23201A;background:var(--gold);padding:14px 28px;border-radius:4px;text-decoration:none;font-weight:700;transition:transform .2s}
+.cta a:hover{transform:translateY(-2px)}
+footer{border-top:1px solid var(--rule);padding:24px 0;margin-top:8px}
+footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-family:var(--mono);font-size:8.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+footer .wrap b{color:var(--gold-deep)}
+</style>
+</head>
+<body>
+<div class="topbar"><div class="wrap">
+  <div class="brand" id="brand"></div>
+  <div class="tb-right">
+    <div class="count" id="countdown"></div>
+    <div class="switch"><button data-lang="fr">FR</button><button data-lang="en">EN</button></div>
+    <button class="iconbtn" id="themeBtn"></button>
+  </div>
+</div></div>
+<nav class="mininav"><div class="wrap" id="mininav"></div></nav>
+
+<header class="hero"><div class="wrap"><div class="hero-grid">
+  <div>
+    <div class="kicker reveal" id="heroKicker"></div>
+    <h1 class="hero-h1 reveal" id="heroH1"></h1>
+    <p class="hero-sub reveal" id="heroSub"></p>
+  </div>
+  <div class="map-card reveal">
+    <div class="map-head"><span class="map-flags">🇸🇬 🇮🇳 🇪🇬 🇰🇷 🇹🇷 🇲🇦</span><span class="map-title" id="mapTitle"></span></div>
+    <svg class="worldsvg" id="worldSvg" viewBox="0 0 1000 480" preserveAspectRatio="xMidYMid meet"></svg>
+    <div class="map-legend" id="mapLegend"></div>
+  </div>
+</div>
+<div class="statstrip reveal" id="statstrip"></div>
+</div></header>
+
+<section class="section" id="methodo"><div class="wrap">
+  <div class="sec-head reveal"><span class="sec-num">00</span><span class="sec-tag" id="m0tag"></span></div>
+  <h2 class="sec-title reveal" id="m0title"></h2>
+  <p class="sec-lead reveal" id="m0lead"></p>
+  <div class="qa-grid reveal" id="m0grid"></div>
+</div></section>
+
+<section class="section" id="m1"><div class="wrap">
+  <div class="sec-head reveal"><span class="sec-num">01</span><span class="sec-tag" id="m1tag"></span></div>
+  <h2 class="sec-title reveal" id="m1title"></h2>
+  <p class="sec-lead reveal" id="m1lead"></p>
+  <div class="card pad reveal"><div class="bubble-grid">
+    <div><svg class="chart-svg" id="bubbleSvg" viewBox="0 0 760 560" preserveAspectRatio="xMidYMid meet"></svg></div>
+    <div class="bub-info" id="bubInfo"></div>
+  </div></div>
+  <div class="takeaway reveal"><span class="ti" id="m1ti"></span><p id="m1note"></p></div>
+</div></section>
+
+<section class="section" id="m2"><div class="wrap">
+  <div class="sec-head reveal"><span class="sec-num">02</span><span class="sec-tag" id="m2tag"></span></div>
+  <h2 class="sec-title reveal" id="m2title"></h2>
+  <p class="sec-lead reveal" id="m2lead"></p>
+  <div class="card reveal" style="overflow:hidden">
+    <div class="matrix-scroll"><table class="matrix" id="matrixTable"></table></div>
+    <div class="matrix-detail" id="matrixDetail"></div>
+  </div>
+  <div class="scale-legend reveal" id="scaleLegend"></div>
+  <div class="takeaway reveal"><span class="ti" id="m2ti"></span><p id="m2note"></p></div>
+</div></section>
+
+<section class="section" id="m3"><div class="wrap">
+  <div class="sec-head reveal"><span class="sec-num">03</span><span class="sec-tag" id="m3tag"></span></div>
+  <h2 class="sec-title reveal" id="m3title"></h2>
+  <p class="sec-lead reveal" id="m3lead"></p>
+  <div class="card pad reveal"><div class="radar-grid">
+    <div><svg class="radar-svg" id="radarSvg" viewBox="0 0 520 520" preserveAspectRatio="xMidYMid meet"></svg></div>
+    <div class="toggle-list" id="toggleList"></div>
+  </div></div>
+  <div class="takeaway reveal"><span class="ti" id="m3ti"></span><p id="m3note"></p></div>
+</div></section>
+
+<section class="section" id="m4"><div class="wrap">
+  <div class="sec-head reveal"><span class="sec-num">04</span><span class="sec-tag" id="m4tag"></span></div>
+  <h2 class="sec-title reveal" id="m4title"></h2>
+  <p class="sec-lead reveal" id="m4lead"></p>
+  <div class="duel-pick reveal" id="duelPick"></div>
+  <div class="card reveal" style="overflow:hidden" id="duelCard"></div>
+  <div class="takeaway reveal"><span class="ti" id="m4ti"></span><p id="m4note"></p></div>
+</div></section>
+
+<section class="section" id="foncier"><div class="wrap">
+  <div class="sec-head reveal"><span class="sec-num">05</span><span class="sec-tag" id="m5tag"></span></div>
+  <h2 class="sec-title reveal" id="m5title"></h2>
+  <p class="sec-lead reveal" id="m5lead"></p>
+  <div class="urgency reveal" id="urgency"></div>
+  <div class="guichet reveal" id="guichet"></div>
+  <div class="card reveal" style="overflow:hidden;padding:0"><div style="overflow-x:auto"><table class="jtc-table" id="jtcTable"></table></div></div>
+  <div class="provoc reveal" id="provoc"></div>
+</div></section>
+
+<section class="section" id="sim"><div class="wrap">
+  <div class="sec-head reveal"><span class="sec-num">06</span><span class="sec-tag" id="m6tag"></span></div>
+  <h2 class="sec-title reveal" id="m6title"></h2>
+  <p class="sec-lead reveal" id="m6lead"></p>
+  <div class="card pad reveal"><div class="sim-grid">
+    <div id="simLevers"></div>
+    <div class="sim-panel">
+      <div class="spl" id="simPanelLabel"></div>
+      <div class="spbig" id="simScore">1.2</div>
+      <div class="spfrom" id="simFrom"></div>
+      <svg class="sim-mini" id="simMini" viewBox="0 0 300 180" preserveAspectRatio="xMidYMid meet"></svg>
+      <div class="sim-note" id="simNote"></div>
+      <button class="sim-reset" id="simReset"></button>
+    </div>
+  </div></div>
+</div></section>
+
+<section class="section" id="verdict"><div class="wrap">
+  <div class="sec-head reveal"><span class="sec-num">07</span><span class="sec-tag" id="m7tag"></span></div>
+  <h2 class="sec-title reveal" id="m7title"></h2>
+  <p class="sec-lead reveal" id="m7lead"></p>
+  <div class="vtable reveal" id="vtable"></div>
+  <div class="verdict-quote reveal" id="verdictQuote"></div>
+  <div class="baro-links reveal" id="baroLinks"></div>
+</div></section>
+
+<section class="section" id="plan"><div class="wrap">
+  <div class="sec-head reveal"><span class="sec-num">08</span><span class="sec-tag" id="m8tag"></span></div>
+  <h2 class="sec-title reveal" id="m8title"></h2>
+  <p class="sec-lead reveal" id="m8lead"></p>
+  <div id="planChantiers" class="reveal"></div>
+  <div class="cta reveal" id="cta"></div>
+</div></section>
+
+<footer><div class="wrap" id="footer"></div></footer>
+
+<script>
+/* =========================================================================
+   DONNÉES (100% issues du dossier Buildfluence). Champs texte = {fr,en}.
+   ========================================================================= */
+var ORDER=["edb","india","egypt","korea","turkey","morocco"];
+var GEO={edb:{lat:1.35,lon:103.8},india:{lat:28.6,lon:77.2},egypt:{lat:30,lon:31.2},korea:{lat:37.5,lon:127},turkey:{lat:39.9,lon:32.8},morocco:{lat:34,lon:-6.8}};
+var AG={
+ edb:{name:"Singapore EDB",short:"Singapore",flag:"🇸🇬",lvl:5,tech:90,market:85,global:4.8,color:"#3B6D11",url:"https://www.edb.gov.sg",
+   tagline:{fr:"L'écosystème comme service",en:"The ecosystem as a service"},
+   diff:{fr:"Tech.Pass / EntrePass : le visa devient un produit digital",en:"Tech.Pass / EntrePass: the visa becomes a digital product"},
+   verdict:{fr:"EDB ne vend pas un pays. Il vend un accès direct à un réseau mondial de R&D et de talent.",en:"EDB does not sell a country. It sells direct access to a global R&D and talent network."}},
+ india:{name:"Invest India",short:"India",flag:"🇮🇳",lvl:4,tech:80,market:65,global:4.1,color:"#185FA5",url:"https://www.investindia.gov.in",
+   tagline:{fr:"Transparence radicale",en:"Radical transparency"},
+   diff:{fr:"IILB : l'investisseur voit la parcelle et le prix avant de parler à quiconque",en:"IILB: the investor sees the plot and the price before talking to anyone"},
+   verdict:{fr:"L'investisseur manipule les couches GIS pour valider son business model seul. La transparence radicale.",en:"The investor manipulates the GIS layers to validate the business case alone. Radical transparency."}},
+ egypt:{name:"GAFI Égypte",short:"Égypte",flag:"🇪🇬",lvl:3,tech:55,market:50,global:3.1,color:"#A8740F",url:"https://www.investinegypt.gov.eg",
+   tagline:{fr:"Opportunités prêtes à l'emploi",en:"Ready-to-use opportunities"},
+   diff:{fr:"Golden License + Map : « voici la parcelle, le prix, le bouton pour soumettre »",en:"Golden License + Map: here is the plot, the price, the button to apply"},
+   verdict:{fr:"Le cas le plus instructif pour le Maroc : même point de départ il y a 3 ans, transformation accélérée depuis.",en:"The most instructive case for Morocco: same starting point 3 years ago, accelerated transformation since."}},
+ korea:{name:"Invest Korea",short:"Korea",flag:"🇰🇷",lvl:4,tech:72,market:82,global:4.2,color:"#0C447C",url:"https://www.investkorea.org",
+   tagline:{fr:"Protection post-investissement",en:"Post-investment protection"},
+   diff:{fr:"PINVEST Metaverse + Ombudsman numérique : la relation avant ET après la signature",en:"PINVEST Metaverse + digital Ombudsman: the relationship before AND after signing"},
+   verdict:{fr:"Invest Korea a compris que l'attractivité ne s'arrête pas à la signature.",en:"Invest Korea understood that attractiveness does not stop at signing."}},
+ turkey:{name:"Invest.gov.tr",short:"Türkiye",flag:"🇹🇷",lvl:5,tech:88,market:90,global:4.9,color:"#B0801C",url:"https://www.invest.gov.tr",
+   tagline:{fr:"Nexus of the World",en:"Nexus of the World"},
+   diff:{fr:"Carte + Comparateur + Newsletter + FDI Strategy : le pack complet en libre-service",en:"Map + Comparator + Newsletter + FDI Strategy: the full self-service pack"},
+   verdict:{fr:"+27,1 % de flux FDI au S1 2025. Le modèle le plus directement transposable pour Morocco Now.",en:"+27.1% FDI inflows in H1 2025. The most directly transposable model for Morocco Now."}},
+ morocco:{name:"Morocco Now (AMDIE)",short:"Morocco",flag:"🇲🇦",lvl:1,tech:12,market:28,global:1.2,color:"#D6453F",url:"https://www.morocconow.com",
+   tagline:{fr:"Conciergerie institutionnelle",en:"Institutional concierge"},
+   diff:{fr:"Accompagnement sur-mesure par conseillers experts (modèle 3 rendez-vous)",en:"Bespoke support by expert advisers (3-meeting model)"},
+   verdict:{fr:"Des actifs réels (Africa Gateway, Charte d'investissement, pipeline MAD 200 Mrd) mais numériquement invisibles. Le site est une vitrine ; les concurrents ont des cockpits.",en:"Real assets (Africa Gateway, Investment Charter, MAD 200bn pipeline) yet digitally invisible. The site is a showcase; competitors have cockpits."}}
+};
+var MATRIX=[
+ {label:{fr:"SIG / Carte interactive",en:"GIS / Interactive map"},axis:"T",vals:[5,5,4,3,5,1]},
+ {label:{fr:"Simulateurs investisseurs",en:"Investor simulators"},axis:"T",vals:[4,5,3,3,5,1]},
+ {label:{fr:"Données FDI exploitables",en:"Usable FDI data"},axis:"T",vals:[4,4,3,5,5,2]},
+ {label:{fr:"Newsletter investisseurs",en:"Investor newsletter"},axis:"M",vals:[4,3,2,4,5,1]},
+ {label:{fr:"Plateforme de licences",en:"Licensing platform"},axis:"T",vals:[5,5,4,3,3,1]},
+ {label:{fr:"Aftercare numérique",en:"Digital aftercare"},axis:"T",vals:[4,3,2,5,3,1]},
+ {label:{fr:"Comparateur compétitif",en:"Competitiveness comparator"},axis:"T",vals:[3,3,2,3,5,1]},
+ {label:{fr:"Témoignages structurés",en:"Structured testimonials"},axis:"M",vals:[5,4,3,4,5,2]},
+ {label:{fr:"Événements + matchmaking",en:"Events + matchmaking"},axis:"M",vals:[4,4,3,5,4,3]},
+ {label:{fr:"Contenu sectoriel régulier",en:"Regular sector content"},axis:"M",vals:[5,4,3,4,5,2]},
+ {label:{fr:"Présence LinkedIn",en:"LinkedIn presence"},axis:"M",vals:[4,4,3,4,5,3]},
+ {label:{fr:"Innovation digitale",en:"Digital innovation"},axis:"T",vals:[5,4,3,5,5,1]}
+];
+/* notes courtes par valeur (bilingues) */
+var NOTE={
+ 5:{fr:"Best practice mondiale : brique mature, libre-service, exploitable de bout en bout.",en:"World best practice: mature, self-service, end-to-end usable feature."},
+ 4:{fr:"Avancé : brique opérationnelle et bien intégrée au parcours investisseur.",en:"Advanced: operational feature, well integrated into the investor journey."},
+ 3:{fr:"En transition : amorce digitale, encore partielle ou statique.",en:"In transition: digital start, still partial or static."},
+ 2:{fr:"Faible : présence symbolique, sans valeur décisionnelle réelle.",en:"Weak: token presence, no real decision value."},
+ 1:{fr:"Absent : aucune brique. Pour Morocco Now, c'est la marque du modèle vitrine.",en:"Absent: no feature. For Morocco Now, the signature of the showcase model."}
+};
+var SCALE={1:"#D6453F",2:"#E3CE92",3:"#D4B863",4:"#C9A84C",5:"#9A7B1E"};
+var SCALE_TXT={1:"#fff",2:"#5A4A12",3:"#3A2E08",4:"#2A2206",5:"#fff"};
+/* MedZ vs JTC (depuis le draft Buildfluence) */
+var MEDZ=[
+ {gap:{fr:"Newsletter : dernière édition sept. 2024, 6 mois entre n°17 et n°18",en:"Newsletter: last edition Sep 2024, 6 months between #17 and #18"},impact:{fr:"Fréquence erratique",en:"Erratic frequency"},jtc:{fr:"« News & Stories » régulière et thématique, publications hebdomadaires, feature stories sectorielles",en:"Regular, thematic « News & Stories », weekly posts, sector feature stories"},medz:1,score:5},
+ {gap:{fr:"Minute Verte n°11 (mars 2023) puis abandon",en:"Minute Verte #11 (Mar 2023) then abandoned"},impact:{fr:"Perte de crédibilité éditoriale alors que l'ESG est décisif",en:"Editorial credibility loss while ESG is decisive"},jtc:{fr:"Infos industrielles ciblées (Aerospace, Automotive, Biomedical) + Sustainability Reports annuels",en:"Targeted industrial info (Aerospace, Automotive, Biomedical) + annual Sustainability Reports"},medz:1,score:5},
+ {gap:{fr:"Dernier rapport annuel : 2016",en:"Last annual report: 2016"},impact:{fr:"Opacité sur l'activité et la performance",en:"Opacity on activity and performance"},jtc:{fr:"Rapports d'activité et états financiers annuels : transparence et crédibilité institutionnelle",en:"Annual activity reports and financials: institutional transparency and credibility"},medz:1,score:4},
+ {gap:{fr:"Contenu institutionnel (actualités internes MedZ)",en:"Institutional content (internal MedZ news)"},impact:{fr:"Faible valeur stratégique pour investisseurs et partenaires",en:"Low strategic value for investors and partners"},jtc:{fr:"Données exclusives et analyses sectorielles : forte valeur décisionnelle",en:"Exclusive data and sector analyses: high decision value"},medz:2,score:5},
+ {gap:{fr:"Absence de données chiffrées publiques",en:"No public figures or KPIs"},impact:{fr:"Pas de KPI accessible, évaluation externe difficile",en:"No accessible KPI, external evaluation difficult"},jtc:{fr:"Tableaux de bord publics et interactifs en temps réel",en:"Public, interactive, real-time dashboards"},medz:1,score:5},
+ {gap:{fr:"Veille concurrentielle absente",en:"No competitive intelligence"},impact:{fr:"Vision isolée du positionnement territorial",en:"Isolated view of territorial positioning"},jtc:{fr:"Benchmark régional et international systématique",en:"Systematic regional and international benchmark"},medz:1,score:5},
+ {gap:{fr:"Format peu engageant (PDF statique)",en:"Low-engagement format (static PDF)"},impact:{fr:"Pas de narratif d'influence data-driven, image figée",en:"No data-driven influence narrative, frozen image"},jtc:{fr:"Plateforme interactive avec choix des critères, DataViz orientée décision",en:"Interactive platform with criteria selection, decision-oriented DataViz"},medz:1,score:5}
+];
+/* leviers transformation (simulateur) */
+var SIMLEVERS=[
+ {fr:"SIG investisseur et cartographie des opportunités",en:"Investor GIS and opportunity mapping"},
+ {fr:"Simulateur d'incitations et scénarios d'implantation",en:"Incentives simulator and location scenarios"},
+ {fr:"KPI et dashboards publics en temps réel",en:"Public real-time KPIs and dashboards"},
+ {fr:"Newsletter investisseurs et success stories",en:"Investor newsletter and success stories"},
+ {fr:"Comparateur de compétitivité dynamique",en:"Dynamic competitiveness comparator"},
+ {fr:"Aftercare numérique et relation post-investissement",en:"Digital aftercare and post-investment relationship"}
+];
+var PLAN=[
+ {n:"A",t:{fr:"Attractivité data-driven",en:"Data-driven attractiveness"},sub:{fr:"Rendre l'offre lisible, comparable et exploitable par l'investisseur lui-même.",en:"Make the offer readable, comparable and usable by the investor."},
+  items:[{fr:"SIG investisseur et cartographie des parcs",en:"Investor GIS and industrial-park mapping"},{fr:"Simulateur d'incitations (Charte 2022)",en:"Incentives simulator (2022 Charter)"},{fr:"KPI trimestriels et dashboards publics",en:"Quarterly KPIs and public dashboards"},{fr:"Comparateur de compétitivité",en:"Competitiveness comparator"}]},
+ {n:"B",t:{fr:"Valorisation éditoriale",en:"Editorial value creation"},sub:{fr:"Passer de la brochure au flux de preuves régulier et sourcé.",en:"Move from brochure to a regular, sourced stream of evidence."},
+  items:[{fr:"Newsletter investisseurs régulière",en:"Regular investor newsletter"},{fr:"Success stories sectorielles vérifiables",en:"Verifiable sector success stories"},{fr:"Études sectorielles courtes et percutantes",en:"Short, punchy sector studies"},{fr:"Livres blancs par axe stratégique",en:"White papers per strategic axis"}]},
+ {n:"C",t:{fr:"Plateforme décisionnelle et relation",en:"Decision platform and relationship"},sub:{fr:"Transformer la vitrine en cockpit, avant ET après la signature.",en:"Turn the showcase into a cockpit, before AND after signing."},
+  items:[{fr:"Site en plateforme data-driven (UX par profil)",en:"Site into a data-driven platform (UX per profile)"},{fr:"Aftercare numérique et Ombudsman",en:"Digital aftercare and Ombudsman"},{fr:"Influence Map et narratif d'attractivité",en:"Influence Map and attractiveness narrative"},{fr:"Coordination guichet unique AMDIE × MedZ",en:"One-stop-shop coordination AMDIE × MedZ"}]}
+];
+
+/* =========================================================================
+   I18N (chrome + sections)
+   ========================================================================= */
+var T={
+ fr:{
+  brand:"Buildfluence · Renseignements d'affaires",
+  nav:["Pourquoi","Positionnement","Matrice 6×12","Radar","Le duel","Foncier","Simulateur","Verdict","Recommandations"],
+  navIds:["methodo","m1","m2","m3","m4","foncier","sim","verdict","plan"],
+  count:"Fenêtre sur la CdM 2030 : <b>{d}</b> jours",
+  theme:["Mode sombre","Mode clair"],
+  heroKicker:"Benchmark API Mondial",heroKicker2:"Agences de promotion des investissements",
+  heroH1:["Les API mondiales ont changé de ","métier."],
+  heroSub:"De la vitrine institutionnelle à la plateforme self-service : 6 agences, 12 critères, 2 axes, et un verdict sans appel sur la position numérique de Morocco Now.",
+  mapTitle:"Les 6 pays du benchmark",
+  lvlNames:{5:"Niveau 5 · Leader",4:"Niveau 4 · Avancé",3:"Niveau 3 · En transition",1:"Niveau 1 · Vitrine"},
+  stats:[["6","Agences analysées"],["12","Critères · 2 axes"],["4.9 /5","Leader · Türkiye"],["1.2 /5","Morocco Now (AMDIE)"]],
+  m0tag:"Avant-propos · pourquoi et comment",m0title:["Pourquoi ce ","benchmark ?"],m0lead:"Avant les graphiques, la méthode. Cette étude ne juge pas une marque : elle mesure une capacité numérique, critère par critère, sur des faits publics et vérifiables.",
+  m0:[
+   {q:["Pourquoi ce ","benchmark ?"],a:"Parce que la compétition pour l'investissement direct étranger ne se joue plus en salons mais en ligne. La question n'est pas « le Maroc est-il attractif », mais « son agence donne-t-elle à l'investisseur les outils pour décider seul »."},
+   {q:["Le ","processus d'analyse"],a:"Audit des sites et plateformes publics des 6 agences, recensement des outils réellement disponibles à l'investisseur, puis notation comparée critère par critère sur deux axes : Tech/Data et Marketing opérationnel."},
+   {q:["Le choix des ","critères"],a:"12 critères regroupés en 2 axes couvrent le parcours investisseur complet : trouver (SIG, données), décider (simulateurs, comparateur, licences) et se projeter (newsletter, témoignages, aftercare, contenu)."},
+   {q:["La ","rigueur du scoring"],a:"Chaque critère est noté de 1 (absent) à 5 (best practice mondiale). La note décrit une capacité observable, pas une intention : un outil existe et fonctionne, ou il n'existe pas."},
+   {q:["La ","grille de notation"],a:"Elle repose exclusivement sur des éléments publics et reproductibles : présence d'un outil, fraîcheur des données, interactivité, régularité éditoriale. Aucune opinion, que des faits traçables."},
+   {q:["L'","objectif final"],a:"Transformer un constat en feuille de route. Montrer l'écart, le rendre jouable (simulateur), puis proposer les leviers concrets pour faire de Morocco Now une plateforme d'intelligence investisseur."}
+  ],
+  m1tag:"Positionnement · carte de maturité",m1title:["Tech/Data contre ","marketing opérationnel."],m1lead:"Chaque agence est placée selon sa maturité technologique (axe horizontal) et sa puissance de marketing investisseur (axe vertical). La taille de la bulle traduit le score global.",
+  m1ti:"À retenir",m1note:"<b>Morocco Now est seule dans le coin « vitrine ».</b> Les leaders (Türkiye, Singapore) occupent le quadrant haut-droit des cockpits self-service. L'écart n'est pas de degré, il est de nature : un site qui informe contre des plateformes qui font décider.",
+  biGlobal:"Score global",biTech:"Tech / Data",biMarket:"Marketing",biSource:"Source officielle ↗",
+  axX:"Maturité Tech / Data →",axY:"Marketing investisseur →",quadTop:"Cockpits · leaders",quadBot:"Vitrines · retard",
+  m2tag:"Matrice de capacités · 6 × 12",m2title:["La grille qui ","ne ment pas."],m2lead:"72 évaluations, de 1 (absent) à 5 (best practice). Cliquez n'importe quelle case pour le détail. La colonne marocaine se lit d'un coup d'œil.",
+  m2ti:"À retenir",m2note:"<b>La colonne Morocco Now est rouge sur 7 critères sur 12.</b> Ce n'est pas une faiblesse ponctuelle mais un trou systémique sur tout l'axe Tech/Data : ni SIG, ni simulateur, ni comparateur, ni licences en ligne.",
+  mdPlaceholder:"Cliquez une case de la grille pour révéler le détail.",
+  scaleLbl:{1:"Absent",2:"Faible",3:"En transition",4:"Avancé",5:"Best practice"},scaleTitle:"Échelle :",
+  m3tag:"Radar comparatif · superposable",m3title:["Superposez les ","signatures."],m3lead:"Activez ou désactivez les agences pour comparer leurs empreintes sur les 12 critères. Morocco Now reste affichée comme référence : l'écart devient visuel.",
+  m3ti:"À retenir",m3note:"<b>Les concurrents dessinent de grands polygones ; Morocco Now reste un petit triangle écrasé au centre.</b> Plus la forme est large et régulière, plus l'agence couvre le parcours investisseur de bout en bout.",
+  m4tag:"Le duel · Morocco Now face au monde",m4title:["Choisissez un ","adversaire."],m4lead:"Confrontez Morocco Now à un concurrent, critère par critère. Le trait noir marque le niveau marocain ; l'or, celui du concurrent. L'espace entre les deux, c'est le retard à combler.",
+  m4ti:"À retenir",m4note:"<b>Le retard se concentre sur les outils de décision.</b> Sur l'événementiel et le terrain, Morocco Now tient le rythme (114 initiatives, 129 délégations en 2024). C'est la traduction numérique de cet effort qui manque, pas l'effort.",
+  duelBars:"Écart critère par critère, trié par retard décroissant",duelOppLbl:"Ce que {x} fait, et pas encore le Maroc",duelMorLbl:"Lecture Buildfluence",
+  m5tag:"Angle mort · le foncier (MedZ)",m5title:["Le guichet unique ","fracturé."],m5lead:"L'investisseur ne voit pas deux agences : il voit un pays. Or le parcours se fracture entre AMDIE (la promesse) et MedZ, filiale CDG, qui détient le foncier industriel. Cette autonomie, présentée comme une force, est un angle mort.",
+  urg:[["15 mois","de silence · Newsletter MedZ"],["21 mois","d'abandon · Minute Verte"],["8 ans","d'opacité · dernier rapport annuel (2016)"]],
+  guichet:[{l:"En amont",n:"AMDIE · Morocco Now",d:"Promotion, image, accompagnement. La promesse d'attractivité."},{l:"En aval",n:"MedZ · Groupe CDG",d:"Foncier industriel, parcs, infrastructures. Référence fonctionnelle : JTC Singapour."}],
+  guichetGap:"Rupture",
+  jtcHead:["Lacune MedZ","Impact MedZ","Référence JTC (Singapour)","Impact JTC"],
+  jtcTotalLabel:"Total impact",
+  provocL:"Le réveil",provoc:"Un investisseur international compare le Maroc à <em>Singapour</em>, pas à lui-même. JTC publie ses données en temps réel depuis 55 ans ; MedZ n'a pas publié de rapport annuel depuis <em>2016</em>. La satisfaction de façade ne tiendra pas face à un concurrent qui, lui, donne tout à voir.",
+  m6tag:"Simulateur · projection illustrative",m6title:["Et si Morocco Now passait ","à l'action ?"],m6lead:"Activez les leviers de transformation et voyez la trajectoire potentielle du score global, et le déplacement de la bulle marocaine vers le quadrant des cockpits. Projection illustrative, fondée sur la grille de notation.",
+  simPanelLabel:"Score global projeté",simFrom:"Aujourd'hui : 1.2 / 5",simNote:"Glissez les curseurs : chaque levier active une brique numérique manquante.",simReset:"Réinitialiser",
+  m7tag:"Verdict Buildfluence",m7title:["Elles ont changé de ","métier."],m7lead:"Le constat central, expliqué : ce qui sépare une marque d'attractivité d'une plateforme d'intelligence investisseur.",
+  vA:{h:"Morocco Now · le modèle vitrine",items:["Un site institutionnel : on raconte le pays","Un catalogue sectoriel et des brochures PDF","La donnée reste interne, l'investisseur attend un rendez-vous","La relation s'arrête à la prise de contact"]},
+  vB:{h:"Les 5 autres · le modèle plateforme",items:["Une plateforme d'intelligence : l'investisseur décide seul","Cartes, simulateurs, comparateurs, licences en ligne","La donnée est publique, fraîche, exploitable","La relation se prolonge en aftercare numérique"]},
+  verdictQuote:"Morocco Now opère encore comme une <em>marque d'attractivité</em> (posture institutionnelle). Les API les plus avancées fonctionnent désormais comme des <em>plateformes d'intelligence investisseur</em>. Le centre de gravité mondial s'est déplacé de la communication institutionnelle vers l'<em>ingénierie décisionnelle</em>. Et Morocco Now n'a pas encore pris ce virage.",
+  verdictSrc:"Verdict Buildfluence · Benchmark API Mondial 2026",
+  baroIntro:"À relier au Baromètre d'investissement Buildfluence :",
+  baro:[{n:"06",t:"Boussole des investisseurs",u:"https://buildfluence.ai/barometre?lang=fr"},{n:"07",t:"Jeux d'influence des concurrents (Vietnam : l'arme numérique)",u:"https://buildfluence.ai/barometre?lang=fr"}],
+  m8tag:"Plan de transformation · 12 mois",m8title:["De la vitrine à la ","plateforme."],m8lead:"Les recommandations du Benchmark API et du Baromètre d'investissement, fusionnées en trois chantiers et onze leviers, avant que la fenêtre CdM 2030 ne se referme.",
+  ctaH:["Le benchmark montre l'écart.","L'échange stratégique trace la sortie."],ctaP:"Buildfluence transforme ce diagnostic en feuille de route : priorisation des leviers, maquettes d'outils, jalons sur 12 mois.",ctaBtn:"Demander mon échange stratégique →",
+  footL:"Buildfluence Intel · Benchmark API Mondial · 2026",footR:"Sources publiques vérifiées · Notation 1–5 · Restricted Use",copyright:"© 2026 Buildfluence · Tous droits réservés"
+ },
+ en:{
+  brand:"Buildfluence · Business Intelligence",
+  nav:["Why","Positioning","Matrix 6×12","Radar","The duel","Land","Simulator","Verdict","Recommendations"],
+  navIds:["methodo","m1","m2","m3","m4","foncier","sim","verdict","plan"],
+  count:"FIFA 2030 window: <b>{d}</b> days",
+  theme:["Dark mode","Light mode"],
+  heroKicker:"Global IPA Benchmark",heroKicker2:"Investment promotion agencies",
+  heroH1:["Investment agencies have changed ","jobs."],
+  heroSub:"From institutional showcase to self-service platform: 6 agencies, 12 criteria, 2 axes, and a clear verdict on the digital position of Morocco Now.",
+  mapTitle:"The 6 benchmark countries",
+  lvlNames:{5:"Level 5 · Leader",4:"Level 4 · Advanced",3:"Level 3 · In transition",1:"Level 1 · Showcase"},
+  stats:[["6","Agencies analysed"],["12","Criteria · 2 axes"],["4.9 /5","Leader · Türkiye"],["1.2 /5","Morocco Now (AMDIE)"]],
+  m0tag:"Foreword · why and how",m0title:["Why this ","benchmark?"],m0lead:"Before the charts, the method. This study does not judge a brand: it measures a digital capability, criterion by criterion, on public and verifiable facts.",
+  m0:[
+   {q:["Why this ","benchmark?"],a:"Because the competition for foreign direct investment is no longer won at trade shows but online. The question is not whether Morocco is attractive, but whether its agency gives investors the tools to decide on their own."},
+   {q:["The ","analysis process"],a:"Audit of the public sites and platforms of the 6 agencies, inventory of the tools actually available to investors, then comparative scoring criterion by criterion on two axes: Tech/Data and operational Marketing."},
+   {q:["The choice of ","criteria"],a:"12 criteria grouped into 2 axes cover the full investor journey: find (GIS, data), decide (simulators, comparator, licences) and project (newsletter, testimonials, aftercare, content)."},
+   {q:["Scoring ","rigour"],a:"Each criterion is scored from 1 (absent) to 5 (world best practice). The score describes an observable capability, not an intention: a tool exists and works, or it does not."},
+   {q:["The ","scoring grid"],a:"It rests only on public, reproducible elements: presence of a tool, freshness of data, interactivity, editorial regularity. No opinion, only traceable facts."},
+   {q:["The final ","objective"],a:"Turn a finding into a roadmap. Show the gap, make it playable (simulator), then propose the concrete levers to turn Morocco Now into an investor intelligence platform."}
+  ],
+  m1tag:"Positioning · maturity map",m1title:["Tech/Data versus ","operational marketing."],m1lead:"Each agency is placed by its technological maturity (horizontal axis) and its investor-marketing power (vertical axis). Bubble size reflects the global score.",
+  m1ti:"Key reading",m1note:"<b>Morocco Now sits alone in the « showcase » corner.</b> Leaders (Türkiye, Singapore) occupy the top-right self-service cockpit quadrant. The gap is not one of degree but of nature: a site that informs versus platforms that let you decide.",
+  biGlobal:"Global score",biTech:"Tech / Data",biMarket:"Marketing",biSource:"Official source ↗",
+  axX:"Tech / Data maturity →",axY:"Investor marketing →",quadTop:"Cockpits · leaders",quadBot:"Showcases · lagging",
+  m2tag:"Capability matrix · 6 × 12",m2title:["The grid that ","does not lie."],m2lead:"72 assessments, from 1 (absent) to 5 (best practice). Click any cell for the detail. The Moroccan column reads at a glance.",
+  m2ti:"Key reading",m2note:"<b>The Morocco Now column is red on 7 of 12 criteria.</b> Not a one-off weakness but a systemic hole across the whole Tech/Data axis: no GIS, no simulator, no comparator, no online licences.",
+  mdPlaceholder:"Click a cell in the grid to reveal the detail.",
+  scaleLbl:{1:"Absent",2:"Weak",3:"In transition",4:"Advanced",5:"Best practice"},scaleTitle:"Scale:",
+  m3tag:"Comparative radar · stackable",m3title:["Overlay the ","signatures."],m3lead:"Toggle agencies on or off to compare their footprints across the 12 criteria. Morocco Now stays on as a reference: the gap becomes visual.",
+  m3ti:"Key reading",m3note:"<b>Competitors draw wide polygons; Morocco Now stays a small triangle crushed at the centre.</b> The wider and more regular the shape, the more the agency covers the full investor journey.",
+  m4tag:"The duel · Morocco Now vs the world",m4title:["Pick an ","opponent."],m4lead:"Pit Morocco Now against a competitor, criterion by criterion. The black mark is the Moroccan level; gold is the competitor. The space between is the gap to close.",
+  m4ti:"Key reading",m4note:"<b>The gap concentrates on decision tools.</b> On events and fieldwork, Morocco Now keeps pace (114 initiatives, 129 delegations in 2024). What is missing is the digital translation of that effort, not the effort.",
+  duelBars:"Gap criterion by criterion, sorted by decreasing lag",duelOppLbl:"What {x} does, and Morocco does not yet",duelMorLbl:"Buildfluence reading",
+  m5tag:"Blind spot · land (MedZ)",m5title:["The one-stop shop, ","fractured."],m5lead:"Investors do not see two agencies: they see one country. Yet the journey fractures between AMDIE (the promise) and MedZ, a CDG subsidiary, which owns the industrial land. This autonomy, presented as a strength, is a blind spot.",
+  urg:[["15 months","of silence · MedZ Newsletter"],["21 months","abandoned · Minute Verte"],["8 years","of opacity · last annual report (2016)"]],
+  guichet:[{l:"Upstream",n:"AMDIE · Morocco Now",d:"Promotion, image, support. The promise of attractiveness."},{l:"Downstream",n:"MedZ · CDG Group",d:"Industrial land, parks, infrastructure. Functional reference: JTC Singapore."}],
+  guichetGap:"Break",
+  jtcHead:["MedZ gap","Impact MedZ","JTC reference (Singapore)","Impact JTC"],
+  jtcTotalLabel:"Total impact",
+  provocL:"The wake-up call",provoc:"An international investor compares Morocco to <em>Singapore</em>, not to itself. JTC has published real-time data for 55 years; MedZ has not published an annual report since <em>2016</em>. Surface-level satisfaction will not hold against a competitor who shows everything.",
+  m6tag:"Simulator · illustrative projection",m6title:["What if Morocco Now ","acted?"],m6lead:"Activate the transformation levers and watch the potential trajectory of the global score, and the Moroccan bubble moving toward the cockpit quadrant. Illustrative projection, based on the scoring grid.",
+  simPanelLabel:"Projected global score",simFrom:"Today: 1.2 / 5",simNote:"Drag the sliders: each lever activates a missing digital feature.",simReset:"Reset",
+  m7tag:"Buildfluence verdict",m7title:["They changed ","jobs."],m7lead:"The core finding, explained: what separates an attractiveness brand from an investor intelligence platform.",
+  vA:{h:"Morocco Now · the showcase model",items:["An institutional site: it tells the country's story","A sector catalogue and PDF brochures","Data stays internal, the investor waits for a meeting","The relationship ends at first contact"]},
+  vB:{h:"The other 5 · the platform model",items:["An intelligence platform: the investor decides alone","Maps, simulators, comparators, online licences","Data is public, fresh, usable","The relationship extends into digital aftercare"]},
+  verdictQuote:"Morocco Now still operates as an <em>attractiveness brand</em> (an institutional posture). The most advanced IPAs now operate as <em>investor intelligence platforms</em>. The world's centre of gravity has shifted from institutional communication toward <em>decision engineering</em>. And Morocco Now has not yet made that turn.",
+  verdictSrc:"Buildfluence verdict · Global IPA Benchmark 2026",
+  baroIntro:"To connect with the Buildfluence Investment Barometer:",
+  baro:[{n:"06",t:"Investor compass",u:"https://buildfluence.ai/barometre?lang=en"},{n:"07",t:"Competitors' influence games (Vietnam: the digital weapon)",u:"https://buildfluence.ai/barometre?lang=en"}],
+  m8tag:"Transformation plan · 12 months",m8title:["From showcase to ","platform."],m8lead:"The recommendations of the IPA Benchmark and the Investment Barometer, merged into three workstreams and eleven levers, before the FIFA 2030 window closes.",
+  ctaH:["The benchmark shows the gap.","The strategic exchange charts the way out."],ctaP:"Buildfluence turns this diagnosis into a roadmap: lever prioritisation, tool mock-ups, milestones over 12 months.",ctaBtn:"Request my strategic exchange →",
+  footL:"Buildfluence Intel · Global IPA Benchmark · 2026",footR:"Verified public sources · 1–5 scoring · Restricted Use",copyright:"© 2026 Buildfluence · All rights reserved"
+ }
+};
+
+/* =========================================================================
+   ÉTAT + HELPERS
+   ========================================================================= */
+var lang="fr", theme="light";
+function t(){return T[lang];}
+function L(v){return (v&&typeof v==="object"&&("fr" in v))?v[lang]:v;}
+function el(id){return document.getElementById(id);}
+function projX(lon){return (lon+180)/360*1000;}
+function projY(lat){return (90-lat)/180*480;}
+
+/* =========================================================================
+   RENDER : CHROME
+   ========================================================================= */
+function renderChrome(){
+ el("brand").innerHTML="<b>Buildfluence</b>"+t().brand.replace("Buildfluence","");
+ var nav=el("mininav");nav.innerHTML=t().nav.map(function(n,i){return '<a href="#'+t().navIds[i]+'">'+n+'</a>';}).join("");
+ document.querySelectorAll(".switch button").forEach(function(b){b.classList.toggle("on",b.dataset.lang===lang);});
+ el("themeBtn").textContent=theme==="light"?t().theme[0]:t().theme[1];
+ document.documentElement.lang=lang;
+}
+function renderHero(){
+ el("heroKicker").innerHTML=t().heroKicker+'<span class="dot"></span>'+t().heroKicker2;
+ el("heroH1").innerHTML=t().heroH1[0]+"<em>"+t().heroH1[1]+"</em>";
+ el("heroSub").textContent=t().heroSub;
+ el("mapTitle").textContent=t().mapTitle;
+ el("statstrip").innerHTML=t().stats.map(function(s,i){var cls=i===2?" win":(i===3?" alert":"");return '<div class="stat"><div class="n'+cls+'" data-cu="'+(i<2?s[0]:"")+'">'+s[0]+'</div><div class="l">'+s[1]+'</div></div>';}).join("");
+ renderWorld();
+ var lv=t().lvlNames;
+ el("mapLegend").innerHTML=[5,4,3,1].map(function(n){var c={5:AG.turkey.color,4:AG.korea.color,3:AG.egypt.color,1:AG.morocco.color}[n];return '<span><i style="background:'+c+'"></i>'+lv[n]+'</span>';}).join("");
+}
+function renderWorld(){
+ var s=el("worldSvg");var g="";
+ // graticule
+ for(var lo=-150;lo<=150;lo+=30){g+='<line class="geo-grid" x1="'+projX(lo)+'" y1="0" x2="'+projX(lo)+'" y2="480"/>';}
+ for(var la=-60;la<=60;la+=30){g+='<line class="geo-grid" x1="0" y1="'+projY(la)+'" x2="1000" y2="'+projY(la)+'"/>';}
+ // continents abstraits (décoratifs, faibles)
+ g+='<g class="geo-land">'+
+   '<path d="M120,150 q40,-60 120,-40 q60,20 40,90 q-20,80 -90,90 q-90,10 -100,-60 q-10,-50 30,-80 Z"/>'+
+   '<path d="M250,300 q30,-30 70,-10 q40,40 10,110 q-30,60 -70,30 q-40,-40 -30,-90 Z"/>'+
+   '<path d="M470,120 q60,-50 150,-25 q40,20 30,70 q-10,40 -70,55 q-30,60 -90,40 q-70,-25 -60,-100 q5,-40 30,-55 Z"/>'+
+   '<path d="M640,150 q120,-50 230,-10 q70,40 40,110 q-50,70 -150,55 q-120,-10 -170,-70 q-30,-50 0,-85 Z"/>'+
+   '<path d="M520,300 q60,-10 90,30 q10,50 -50,70 q-60,10 -70,-40 q-5,-45 30,-60 Z"/>'+
+   '</g>';
+ // arcs Morocco -> autres
+ var m=GEO.morocco;
+ ORDER.forEach(function(k){if(k==="morocco")return;var p=GEO[k];var mx=projX(m.lon),my=projY(m.lat),px=projX(p.lon),py=projY(p.lat);var cx=(mx+px)/2,cy=Math.min(my,py)-40;g+='<path class="geo-arc" d="M'+mx+','+my+' Q'+cx+','+cy+' '+px+','+py+'"/>';});
+ // nodes
+ ORDER.forEach(function(k){var a=AG[k];var p=GEO[k];var x=projX(p.lon),y=projY(p.lat);
+   g+='<g class="geo-node" data-k="'+k+'" tabindex="0">'+
+      '<circle class="ring" cx="'+x+'" cy="'+y+'" r="13" fill="'+a.color+'" fill-opacity="0.18" stroke="'+a.color+'" stroke-width="2"/>'+
+      '<text class="geo-flag" x="'+x+'" y="'+(y+5)+'" text-anchor="middle">'+a.flag+'</text>'+
+      '<text class="geo-cap" x="'+x+'" y="'+(y+26)+'" text-anchor="middle">'+a.short.toUpperCase()+'</text></g>';
+ });
+ s.innerHTML=g;
+ s.querySelectorAll(".geo-node").forEach(function(n){n.addEventListener("click",function(){location.hash="#m1";showBub(n.dataset.k);});n.addEventListener("mouseenter",function(){showBub(n.dataset.k);});});
+}
+
+/* =========================================================================
+   RENDER : METHODO
+   ========================================================================= */
+function renderMethodo(){
+ el("m0tag").textContent=t().m0tag;el("m0title").innerHTML=t().m0title[0]+"<em>"+t().m0title[1]+"</em>";el("m0lead").textContent=t().m0lead;
+ el("m0grid").innerHTML=t().m0.map(function(x){return '<div class="qa"><div class="q">'+x.q[0]+'<span>'+x.q[1]+'</span></div><div class="a">'+x.a+'</div></div>';}).join("");
+}
+
+/* =========================================================================
+   MODULE 1 : BUBBLE
+   ========================================================================= */
+function renderBubble(){
+ el("m1tag").textContent=t().m1tag;el("m1title").innerHTML=t().m1title[0]+"<em>"+t().m1title[1]+"</em>";el("m1lead").textContent=t().m1lead;
+ el("m1ti").textContent=t().m1ti;el("m1note").innerHTML=t().m1note;
+ var svg=el("bubbleSvg");var W=760,H=560,P=64;
+ function x(v){return P+(v/100)*(W-P-30);} function y(v){return (H-P)-(v/100)*(H-P-30);}
+ var parts='<rect x="'+P+'" y="30" width="'+(W-P-30)+'" height="'+(H-P-30)+'" fill="var(--card)"/>';
+ for(var g=0;g<=100;g+=25){parts+='<line x1="'+x(g)+'" y1="30" x2="'+x(g)+'" y2="'+(H-P)+'" stroke="var(--rule-soft)"/><line x1="'+P+'" y1="'+y(g)+'" x2="'+(W-30)+'" y2="'+y(g)+'" stroke="var(--rule-soft)"/>';}
+ parts+='<text class="bub-quadrant" x="'+(W-36)+'" y="46" text-anchor="end">'+t().quadTop+'</text>';
+ parts+='<text class="bub-quadrant" x="'+(P+8)+'" y="'+(H-P-8)+'">'+t().quadBot+'</text>';
+ parts+='<text class="bubble-axis-label" x="'+(W/2)+'" y="'+(H-18)+'" text-anchor="middle">'+t().axX+'</text>';
+ parts+='<text class="bubble-axis-label" x="18" y="'+(H/2)+'" text-anchor="middle" transform="rotate(-90 18 '+(H/2)+')">'+t().axY+'</text>';
+ // anti-chevauchement : décalage vertical des labels proches
+ var placed=[];
+ ORDER.forEach(function(k,i){var a=AG[k];var r=12+a.global*7.4;var cx=x(a.tech),cy=y(a.market);
+   var ly=cy+r+14;placed.forEach(function(pp){if(Math.abs(pp.x-cx)<70&&Math.abs(pp.y-ly)<14){ly=pp.y+14;}});placed.push({x:cx,y:ly});
+   parts+='<g class="bubble-node" data-k="'+k+'" tabindex="0">'+
+     '<circle class="fill" cx="'+cx+'" cy="'+cy+'" r="0" fill="'+a.color+'" fill-opacity="'+(k==="morocco"?.92:.78)+'" stroke="var(--card)" stroke-width="2" style="transition-delay:'+(i*90)+'ms"/>'+
+     '<text class="bubble-flag" x="'+cx+'" y="'+(cy+6)+'" text-anchor="middle">'+a.flag+'</text>'+
+     '<text class="bubble-name" x="'+cx+'" y="'+ly+'" text-anchor="middle">'+a.short+'</text></g>';
+ });
+ svg.innerHTML=parts;
+ requestAnimationFrame(function(){ORDER.forEach(function(k){var a=AG[k];svg.querySelector('g[data-k="'+k+'"] .fill').setAttribute("r",12+a.global*7.4);});});
+ svg.querySelectorAll(".bubble-node").forEach(function(n){var k=n.dataset.k;["mouseenter","focus","click"].forEach(function(ev){n.addEventListener(ev,function(){showBub(k);});});});
+ showBub("turkey");
+}
+function showBub(k){var a=AG[k];el("bubInfo").innerHTML='<div class="bi-flag">'+a.flag+'</div><div class="bi-name">'+a.name+'</div><div class="bi-tag">'+L(a.tagline)+'</div>'+
+   '<div class="bi-row">'+t().biGlobal+'<b style="color:'+a.color+'">'+a.global.toFixed(1)+'/5</b></div>'+
+   '<div class="bi-row">'+t().biTech+'<b>'+a.tech+'/100</b></div>'+
+   '<div class="bi-row">'+t().biMarket+'<b>'+a.market+'/100</b></div>'+
+   '<div class="bi-verdict">« '+L(a.verdict)+' »</div>'+
+   '<a href="'+a.url+'" target="_blank" rel="noopener">'+t().biSource+'</a>';}
+
+/* =========================================================================
+   MODULE 2 : MATRIX
+   ========================================================================= */
+function renderMatrix(){
+ el("m2tag").textContent=t().m2tag;el("m2title").innerHTML=t().m2title[0]+"<em>"+t().m2title[1]+"</em>";el("m2lead").textContent=t().m2lead;
+ el("m2ti").textContent=t().m2ti;el("m2note").innerHTML=t().m2note;
+ var head='<thead><tr><th class="crit-h">'+(lang==="fr"?"Critère":"Criterion")+'</th>';
+ ORDER.forEach(function(k){head+='<th data-col="'+k+'"><span class="mflag">'+AG[k].flag+'</span>'+AG[k].short+'</th>';});
+ head+='</tr></thead><tbody>';
+ var body="";
+ MATRIX.forEach(function(row,ri){body+='<tr data-row="'+ri+'"><th>'+L(row.label)+'<span class="ax">'+(row.axis==="T"?"Tech / Data":"Marketing")+'</span></th>';
+   row.vals.forEach(function(v,ci){body+='<td class="cell" data-row="'+ri+'" data-col="'+ci+'" data-v="'+v+'" style="background:'+SCALE[v]+';color:'+SCALE_TXT[v]+'">'+v+'</td>';});
+   body+='</tr>';});
+ el("matrixTable").innerHTML=head+body+'</tbody>';
+ el("matrixDetail").innerHTML='<div class="md-placeholder">'+t().mdPlaceholder+'</div>';
+ var tbl=el("matrixTable");var cells=[].slice.call(tbl.querySelectorAll(".cell"));var colHeads=[].slice.call(tbl.querySelectorAll("thead th[data-col]"));
+ function clearHot(){tbl.querySelectorAll(".hot").forEach(function(e){e.classList.remove("hot");});}
+ cells.forEach(function(c){
+   c.addEventListener("mouseenter",function(){clearHot();tbl.querySelector('tbody tr[data-row="'+c.dataset.row+'"] th').classList.add("hot");colHeads[+c.dataset.col].classList.add("hot");});
+   c.addEventListener("click",function(){cells.forEach(function(x){x.classList.remove("sel");});c.classList.add("sel");
+     var row=MATRIX[+c.dataset.row];var k=ORDER[+c.dataset.col];var v=+c.dataset.v;var a=AG[k];
+     el("matrixDetail").innerHTML='<div class="md-score" style="background:'+SCALE[v]+';color:'+SCALE_TXT[v]+'">'+v+'</div>'+
+       '<div class="md-body"><div class="md-crit">'+a.flag+' '+a.name+' · '+(row.axis==="T"?"Tech / Data":"Marketing")+'</div>'+
+       '<div class="md-title">'+L(row.label)+' · '+t().scaleLbl[v]+'</div><div class="md-note">'+L(NOTE[v])+'</div></div>';
+   });
+ });
+ tbl.addEventListener("mouseleave",clearHot);
+ el("scaleLegend").innerHTML='<span class="sl" style="color:var(--ink)">'+t().scaleTitle+'</span>'+[1,2,3,4,5].map(function(v){return '<span class="sl"><span class="sw" style="background:'+SCALE[v]+'"></span>'+v+' · '+t().scaleLbl[v]+'</span>';}).join("");
+}
+
+/* =========================================================================
+   MODULE 3 : RADAR
+   ========================================================================= */
+var radarState={};ORDER.forEach(function(k){radarState[k]=(k==="morocco"||k==="turkey");});
+function renderRadar(){
+ el("m3tag").textContent=t().m3tag;el("m3title").innerHTML=t().m3title[0]+"<em>"+t().m3title[1]+"</em>";el("m3lead").textContent=t().m3lead;
+ el("m3ti").textContent=t().m3ti;el("m3note").innerHTML=t().m3note;
+ var svg=el("radarSvg");var C=260,R=168,N=MATRIX.length;
+ function ang(i){return (-Math.PI/2)+(i*2*Math.PI/N);}
+ function pt(i,val){return [C+Math.cos(ang(i))*R*(val/5),C+Math.sin(ang(i))*R*(val/5)];}
+ var g="";
+ for(var ring=1;ring<=5;ring++){var p="";for(var i=0;i<N;i++){var c=pt(i,ring);p+=(i?"L":"M")+c[0].toFixed(1)+" "+c[1].toFixed(1)+" ";}g+='<path class="radar-ring" d="'+p+'Z"/>';}
+ for(var i2=0;i2<N;i2++){var e=pt(i2,5);g+='<line class="radar-axis" x1="'+C+'" y1="'+C+'" x2="'+e[0]+'" y2="'+e[1]+'"/>';
+   var l=pt(i2,5.5);var anchor=Math.abs(l[0]-C)<6?"middle":(l[0]>C?"start":"end");
+   g+='<text class="radar-label" x="'+l[0].toFixed(1)+'" y="'+l[1].toFixed(1)+'" text-anchor="'+anchor+'">'+L(MATRIX[i2].label)+'</text>';}
+ svg.innerHTML=g;
+ var layer=document.createElementNS("http://www.w3.org/2000/svg","g");svg.appendChild(layer);
+ function draw(){layer.innerHTML="";ORDER.forEach(function(k){if(!radarState[k])return;var a=AG[k];var p="";
+   for(var i=0;i<N;i++){var c=pt(i,MATRIX[i].vals[ORDER.indexOf(k)]);p+=(i?"L":"M")+c[0].toFixed(1)+" "+c[1].toFixed(1)+" ";}
+   layer.insertAdjacentHTML("beforeend",'<path class="radar-poly" d="'+p+'Z" stroke="'+a.color+'" fill="'+a.color+'" style="fill-opacity:'+(k==="morocco"?.20:.10)+'"/>');
+   for(var j=0;j<N;j++){var d=pt(j,MATRIX[j].vals[ORDER.indexOf(k)]);layer.insertAdjacentHTML("beforeend",'<circle cx="'+d[0].toFixed(1)+'" cy="'+d[1].toFixed(1)+'" r="'+(k==="morocco"?3.2:2.4)+'" fill="'+a.color+'"/>');}
+ });}
+ draw();
+ el("toggleList").innerHTML=ORDER.map(function(k){var a=AG[k];var locked=k==="morocco";
+   return '<button class="toggle '+(radarState[k]?"":"off")+' '+(locked?"locked":"")+'" data-k="'+k+'" style="color:'+a.color+'">'+
+     '<span class="sw" style="background:'+(radarState[k]?a.color:"transparent")+'"></span><span class="tflag">'+a.flag+'</span>'+
+     '<span class="tname" style="color:var(--ink-light)">'+a.short+'</span><span class="tsc">'+a.global.toFixed(1)+'</span></button>';}).join("");
+ el("toggleList").querySelectorAll(".toggle").forEach(function(b){var k=b.dataset.k;b.addEventListener("click",function(){if(k==="morocco")return;radarState[k]=!radarState[k];b.classList.toggle("off",!radarState[k]);b.querySelector(".sw").style.background=radarState[k]?AG[k].color:"transparent";draw();});});
+}
+
+/* =========================================================================
+   MODULE 4 : DUEL
+   ========================================================================= */
+var duelCur="turkey";
+function renderDuel(){
+ el("m4tag").textContent=t().m4tag;el("m4title").innerHTML=t().m4title[0]+"<em>"+t().m4title[1]+"</em>";el("m4lead").textContent=t().m4lead;
+ el("m4ti").textContent=t().m4ti;el("m4note").innerHTML=t().m4note;
+ var opps=ORDER.filter(function(k){return k!=="morocco";});
+ el("duelPick").innerHTML=opps.map(function(k){return '<button data-k="'+k+'" class="'+(k===duelCur?"active":"")+'"><span class="f">'+AG[k].flag+'</span><span>'+AG[k].short+'<br><span class="duel-sub">'+AG[k].global.toFixed(1)+'/5</span></span></button>';}).join("");
+ el("duelPick").querySelectorAll("button").forEach(function(b){b.addEventListener("click",function(){duelCur=b.dataset.k;el("duelPick").querySelectorAll("button").forEach(function(x){x.classList.remove("active");});b.classList.add("active");drawDuel();});});
+ drawDuel();
+}
+function drawDuel(){var a=AG[duelCur];var mor=AG.morocco;var oi=ORDER.indexOf(duelCur);var mi=ORDER.indexOf("morocco");
+ var rows=MATRIX.map(function(row,ri){return {row:row,gap:row.vals[oi]-row.vals[mi]};}).sort(function(x,y){return y.gap-x.gap;});
+ var bars=rows.map(function(o){var ov=o.row.vals[oi],mv=o.row.vals[mi];
+   return '<div class="dbar"><div class="dbar-top"><span>'+L(o.row.label)+'</span><span>'+mv+' vs '+ov+' '+(o.gap>0?'<span class="gap">+'+o.gap+'</span>':'')+'</span></div>'+
+     '<div class="dbar-track"><div class="dbar-opp" data-w="'+(ov/5*100)+'"></div><div class="dbar-mor" data-w="'+(mv/5*100)+'"></div></div></div>';}).join("");
+ el("duelCard").innerHTML='<div class="duel-top">'+
+   '<div class="duel-side mor"><div class="duel-flag">'+mor.flag+'</div><div class="duel-name">'+mor.name+'</div><div class="duel-tag">'+L(mor.tagline)+'</div><div class="duel-big mor">'+mor.global.toFixed(1)+'<small> /5</small></div></div>'+
+   '<div class="duel-vs">vs</div>'+
+   '<div class="duel-side opp"><div class="duel-flag">'+a.flag+'</div><div class="duel-name">'+a.name+'</div><div class="duel-tag">'+L(a.tagline)+'</div><div class="duel-big opp">'+a.global.toFixed(1)+'<small> /5</small></div></div></div>'+
+   '<div class="duel-bars"><h4>'+t().duelBars+'</h4>'+bars+'</div>'+
+   '<div class="duel-verdict"><div class="dv-box opp"><div class="dvl">'+t().duelOppLbl.replace("{x}",a.short)+'</div><div class="dvt">'+L(a.diff)+'.</div></div>'+
+   '<div class="dv-box mor"><div class="dvl">'+t().duelMorLbl+'</div><div class="dvt">« '+L(a.verdict)+' »</div></div></div>';
+ requestAnimationFrame(function(){el("duelCard").querySelectorAll(".dbar-opp,.dbar-mor").forEach(function(e){e.style.width=e.dataset.w+"%";});});
+}
+
+/* =========================================================================
+   MODULE 5 : FONCIER (MedZ vs JTC)
+   ========================================================================= */
+function renderFoncier(){
+ el("m5tag").textContent=t().m5tag;el("m5title").innerHTML=t().m5title[0]+"<em>"+t().m5title[1]+"</em>";el("m5lead").textContent=t().m5lead;
+ el("urgency").innerHTML=t().urg.map(function(u){return '<div class="urg"><div class="un">'+u[0]+'</div><div class="ul">'+u[1]+'</div></div>';}).join("");
+ var gx=t().guichet;
+ el("guichet").innerHTML='<div class="gx"><div class="gxl">'+gx[0].l+'</div><div class="gxn">'+gx[0].n+'</div><div class="gxd">'+gx[0].d+'</div></div>'+
+   '<div class="gx-gap">'+t().guichetGap+'</div>'+
+   '<div class="gx"><div class="gxl">'+gx[1].l+'</div><div class="gxn">'+gx[1].n+'</div><div class="gxd">'+gx[1].d+'</div></div>';
+ var h=t().jtcHead;
+ var head='<thead><tr><th>'+h[0]+'</th><th>'+h[1]+'</th><th>'+h[2]+'</th><th>'+h[3]+'</th></tr></thead><tbody>';
+ function fstars(n){var x="";for(var i=1;i<=5;i++){x+=(i<=n?'★':'<span class="off">★</span>');}return x;}
+ var medzTot=0,jtcTot=0,mx=MEDZ.length*5;
+ var body=MEDZ.map(function(r){medzTot+=r.medz;jtcTot+=r.score;
+   return '<tr><td class="jtc-gap">'+L(r.gap)+'</td>'+
+     '<td>'+L(r.impact)+'<div class="jtc-stars" style="margin-top:7px">'+fstars(r.medz)+'</div></td>'+
+     '<td>'+L(r.jtc)+'</td>'+
+     '<td class="jtc-stars">'+fstars(r.score)+'</td></tr>';}).join("");
+ var foot='<tr class="jtc-total"><td>'+t().jtcTotalLabel+'</td>'+
+   '<td><span class="tt">MedZ</span> '+medzTot+' / '+mx+'</td><td></td>'+
+   '<td><span class="tt">JTC</span> '+jtcTot+' / '+mx+'</td></tr>';
+ el("jtcTable").innerHTML=head+body+'</tbody><tfoot>'+foot+'</tfoot>';
+ el("provoc").innerHTML='<div class="pl">'+t().provocL+'</div><p>'+t().provoc+'</p>';
+}
+
+/* =========================================================================
+   MODULE 6 : SIMULATEUR what-if
+   ========================================================================= */
+var simVals=[0,0,0,0,0,0];
+function renderSim(){
+ el("m6tag").textContent=t().m6tag;el("m6title").innerHTML=t().m6title[0]+"<em>"+t().m6title[1]+"</em>";el("m6lead").textContent=t().m6lead;
+ el("simPanelLabel").textContent=t().simPanelLabel;el("simFrom").textContent=t().simFrom;el("simNote").textContent=t().simNote;el("simReset").textContent=t().simReset;
+ el("simLevers").innerHTML=SIMLEVERS.map(function(lv,i){return '<div class="sim-lever"><div class="sl-top"><span>'+L(lv)+'</span><span id="slv'+i+'">'+simVals[i]+'%</span></div>'+
+   '<input type="range" min="0" max="100" value="'+simVals[i]+'" data-i="'+i+'"></div>';}).join("");
+ el("simLevers").querySelectorAll("input").forEach(function(inp){inp.addEventListener("input",function(){var i=+inp.dataset.i;simVals[i]=+inp.value;el("slv"+i).textContent=inp.value+"%";computeSim();});});
+ el("simReset").onclick=function(){simVals=[0,0,0,0,0,0];renderSim();computeSim();};
+ computeSim();
+}
+function computeSim(){
+ // projection illustrative : base 1.2, plafond réaliste ~4.6, chaque levier pèse équitablement
+ var avg=simVals.reduce(function(s,v){return s+v;},0)/600; // 0..1
+ var base=1.2, ceil=4.6;
+ var score=base+(ceil-base)*avg;
+ el("simScore").textContent=score.toFixed(1);
+ // bulle : interpole de (12,28) vers (80,82)
+ var tech=12+(80-12)*avg, market=28+(82-28)*avg;
+ var s=el("simMini");var W=300,H=180,P=26;
+ function x(v){return P+(v/100)*(W-P-10);} function y(v){return (H-P)-(v/100)*(H-P-10);}
+ var g='<rect x="'+P+'" y="6" width="'+(W-P-10)+'" height="'+(H-P-6)+'" fill="color-mix(in srgb,var(--paper) 7%,transparent)"/>';
+ g+='<text x="'+(W/2)+'" y="'+(H-6)+'" text-anchor="middle" font-family="var(--mono)" font-size="7" fill="color-mix(in srgb,var(--paper) 55%,transparent)">Tech/Data →</text>';
+ // position actuelle
+ g+='<circle cx="'+x(12)+'" cy="'+y(28)+'" r="6" fill="#D6453F" fill-opacity=".5"/>';
+ // flèche de trajectoire
+ g+='<line x1="'+x(12)+'" y1="'+y(28)+'" x2="'+x(tech)+'" y2="'+y(market)+'" stroke="#D9B65A" stroke-width="1.5" stroke-dasharray="3 3"/>';
+ // position projetée
+ g+='<circle cx="'+x(tech)+'" cy="'+y(market)+'" r="'+(7+avg*8)+'" fill="#D9B65A" fill-opacity=".85"/><text x="'+x(tech)+'" y="'+(y(market)+4)+'" text-anchor="middle" font-size="11">🇲🇦</text>';
+ s.innerHTML=g;
+}
+
+/* =========================================================================
+   MODULE 7 : VERDICT
+   ========================================================================= */
+function renderVerdict(){
+ el("m7tag").textContent=t().m7tag;el("m7title").innerHTML=t().m7title[0]+"<em>"+t().m7title[1]+"</em>";el("m7lead").textContent=t().m7lead;
+ el("vtable").innerHTML='<div class="vcol a"><div class="vh">'+t().vA.h+'</div><ul>'+t().vA.items.map(function(x){return '<li>'+x+'</li>';}).join("")+'</ul></div>'+
+   '<div class="vcol b"><div class="vh">'+t().vB.h+'</div><ul>'+t().vB.items.map(function(x){return '<li>'+x+'</li>';}).join("")+'</ul></div>';
+ el("verdictQuote").innerHTML='<p>'+t().verdictQuote+'</p><div class="src">'+t().verdictSrc+'</div>';
+ el("baroLinks").innerHTML='<span style="font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint);align-self:center">'+t().baroIntro+'</span>'+
+   t().baro.map(function(b){return '<a href="'+b.u+'" target="_blank" rel="noopener"><b>'+b.n+'</b> '+b.t+' ↗</a>';}).join("");
+}
+
+/* =========================================================================
+   MODULE 8 : PLAN + CTA + FOOTER
+   ========================================================================= */
+function renderPlan(){
+ el("m8tag").textContent=t().m8tag;el("m8title").innerHTML=t().m8title[0]+"<em>"+t().m8title[1]+"</em>";el("m8lead").textContent=t().m8lead;
+ el("planChantiers").innerHTML=PLAN.map(function(c){return '<div class="chantier"><h3><span class="cn">'+c.n+'</span>'+L(c.t)+'</h3><div class="csub">'+L(c.sub)+'</div>'+
+   '<div class="lev-row">'+c.items.map(function(it,i){return '<div class="lever"><div class="lt">'+L(it)+'</div><div class="lo">'+c.n+'.'+(i+1)+'</div></div>';}).join("")+'</div></div>';}).join("");
+ el("cta").innerHTML='<h3>'+t().ctaH[0]+'<br><em>'+t().ctaH[1]+'</em></h3><p>'+t().ctaP+'</p><a href="#m4">'+t().ctaBtn+'</a>';
+ el("footer").innerHTML='<span><b>Buildfluence Intel</b>'+t().footL.replace("Buildfluence Intel","")+'</span><span>'+t().copyright+'</span><span>'+t().footR+'</span>';
+}
+
+/* =========================================================================
+   COUNTDOWN + COUNT-UP + ORCHESTRATION
+   ========================================================================= */
+function updateCountdown(){var target=new Date("2030-06-08T00:00:00");var now=new Date();var d=Math.max(0,Math.ceil((target-now)/86400000));el("countdown").innerHTML=t().count.replace("{d}",d.toLocaleString(lang==="fr"?"fr-FR":"en-US"));}
+function countUp(){document.querySelectorAll("[data-cu]").forEach(function(e){var target=parseFloat(e.getAttribute("data-cu"));if(!target)return;var cur=0;var step=target/30;var iv=setInterval(function(){cur+=step;if(cur>=target){cur=target;clearInterval(iv);}e.textContent=Number.isInteger(target)?Math.round(cur):cur.toFixed(1);},22);});}
+
+function renderAll(){renderChrome();renderHero();renderMethodo();renderBubble();renderMatrix();renderRadar();renderDuel();renderFoncier();renderSim();renderVerdict();renderPlan();updateCountdown();}
+
+function setLang(l){lang=l;renderAll();}
+function setTheme(th){theme=th;document.documentElement.setAttribute("data-theme",th);el("themeBtn").textContent=theme==="light"?t().theme[0]:t().theme[1];}
+
+document.querySelectorAll(".switch button").forEach(function(b){b.addEventListener("click",function(){setLang(b.dataset.lang);});});
+el("themeBtn").addEventListener("click",function(){setTheme(theme==="light"?"dark":"light");});
+
+/* synchronisation langue quand intégré dans l'app (postMessage) */
+window.addEventListener("message",function(e){var d=e.data||{};var l=null;
+ if(d.type==="SET_LANGUAGE"&&d.lang){l=String(d.lang).toLowerCase().indexOf("en")===0?"en":"fr";}
+ if(d.type==="bf-lang"&&d.lang){l=String(d.lang).toLowerCase().indexOf("en")===0?"en":"fr";}
+ if(l){var sw=document.querySelector(".switch");if(sw){sw.style.display="none";}if(l!==lang){setLang(l);}}
+});
+
+/* boot : langue initiale depuis ?lang= (passée par l'app) */
+try{var _qp=new URLSearchParams(location.search).get("lang");if(_qp&&_qp.toLowerCase().indexOf("en")===0){lang="en";}}catch(e){}
+renderAll();
+setInterval(updateCountdown,3600000);
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target);if(e.target.id==="statstrip"){countUp();}}});},{threshold:.12});
+document.querySelectorAll(".reveal").forEach(function(el2,i){el2.style.transitionDelay=(Math.min(i,6)*55)+"ms";io.observe(el2);});
+</script>
+</body>
+</html>
