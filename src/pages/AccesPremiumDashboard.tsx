@@ -22,8 +22,7 @@ const AccesPremiumDashboard = () => {
     navigate("/acces-premium", { replace: true });
   };
 
-  const benchmarkFile = lang === "en" ? "/benchmark-api-en.html" : "/benchmark-api-fr.html";
-  const benchmarkSrc = `${benchmarkFile}?lang=${lang}`;
+  const benchmarkSrc = `/benchmark-api-interactif.html?lang=${lang}`;
 
   const cards: DashboardCard[] = [
     {
