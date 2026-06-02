@@ -67,15 +67,15 @@ const AccesPremiumDashboard = () => {
   ];
 
   return (
-    <div className="min-h-screen" style={{ background: "#0D1B2A" }}>
+    <div className="min-h-screen" style={{ background: "#FFFFFF" }}>
       <header
         className="flex items-center justify-between px-8 py-6 border-b"
-        style={{ borderColor: "rgba(255,255,255,0.08)" }}
+        style={{ borderColor: "rgba(0,0,0,0.08)" }}
       >
         <a href="/" className="flex items-center gap-3">
           <img src={logoBuildfluence} alt="Buildfluence" className="h-9 w-auto" />
           <span className="font-serif text-lg tracking-tight">
-            <span className="font-bold" style={{ color: "#FFFFFF" }}>Build</span>
+            <span className="font-bold" style={{ color: "#1A2A4A" }}>Build</span>
             <span className="font-bold" style={{ color: "#FFDE59" }}>fluence</span>
           </span>
         </a>
@@ -89,7 +89,7 @@ const AccesPremiumDashboard = () => {
       </header>
 
       <main className="max-w-[1600px] mx-auto px-8 py-16">
-        <h1 className="font-serif text-[40px] font-bold mb-12" style={{ color: "#FFFFFF" }}>
+        <h1 className="font-serif text-[40px] font-bold mb-12" style={{ color: "#1A1A1A" }}>
           {t("Accès Premium : Espace Réservé Clients", "Premium Access : Reserved Client Area")}
         </h1>
 
