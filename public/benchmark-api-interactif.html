@@ -134,15 +134,29 @@ h2.sec-title em{font-style:italic;color:var(--gold-deep)}
 .bub-info a{font-family:var(--mono);font-size:9px;letter-spacing:.1em;color:var(--gold-deep);text-decoration:none;display:inline-block;margin-top:10px;border-bottom:1px solid var(--gold-pale)}
 
 /* MODULE 2 matrix */
+.matrix-grid{display:grid;grid-template-columns:1fr 290px;gap:22px;align-items:start}
+@media(max-width:860px){.matrix-grid{grid-template-columns:1fr}}
+.matrix-side{border-left:2px solid var(--gold);padding-left:18px;align-self:stretch;min-height:250px}
+@media(max-width:860px){.matrix-side{border-left:none;border-top:1px solid var(--rule);padding-left:0;padding-top:18px}}
+.ms-top{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.ms-flag{font-size:24px}
+.ms-ag{font-family:var(--display);font-weight:700;font-size:17px;color:var(--ink)}
+.ms-crit{font-family:var(--sans);font-weight:600;font-size:14px;color:var(--ink)}
+.ms-ax{display:block;font-family:var(--mono);font-size:7.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-deep);margin-top:3px}
+.ms-score{width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--display);font-weight:700;font-size:25px;margin:14px 0 6px}
+.ms-lvl{font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:10px}
+.ms-note{font-size:13.5px;color:var(--ink-light);line-height:1.55;margin-bottom:16px}
+.ms-link{display:inline-block;font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--gold-deep);text-decoration:none;border:1px solid var(--gold);border-radius:5px;padding:9px 14px;transition:all .2s}
+.ms-link:hover{background:var(--gold);color:#23201A}
 .matrix-scroll{overflow-x:auto}
-table.matrix{border-collapse:collapse;width:100%;min-width:680px}
+table.matrix{border-collapse:collapse;width:100%;min-width:540px}
 table.matrix th,table.matrix td{border:1px solid var(--rule-soft);text-align:center}
-table.matrix thead th{position:sticky;top:0;background:var(--paper2);font-family:var(--mono);font-size:9px;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-light);padding:11px 6px;font-weight:500}
+table.matrix thead th{position:sticky;top:0;background:var(--paper2);font-family:var(--mono);font-size:9px;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-light);padding:8px 4px;font-weight:500}
 table.matrix thead th .mflag{font-size:17px;display:block;margin-bottom:3px}
-table.matrix thead th.crit-h{text-align:left;width:230px;min-width:190px}
-table.matrix tbody th{text-align:left;font-family:var(--sans);font-weight:500;font-size:12.5px;color:var(--ink);padding:9px 13px;background:var(--card)}
+table.matrix thead th.crit-h{text-align:left;width:150px;min-width:120px}
+table.matrix tbody th{text-align:left;font-family:var(--sans);font-weight:500;font-size:11.5px;color:var(--ink);padding:7px 10px;background:var(--card)}
 table.matrix tbody th .ax{display:block;font-family:var(--mono);font-size:7.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-deep);margin-top:3px}
-.cell{font-family:var(--mono);font-weight:700;font-size:13px;cursor:pointer;height:42px;color:#fff;transition:transform .12s,box-shadow .12s}
+.cell{font-family:var(--mono);font-weight:700;font-size:12px;cursor:pointer;height:34px;color:#fff;transition:transform .12s,box-shadow .12s}
 .cell:hover{transform:scale(1.12);box-shadow:0 0 0 2px var(--ink);z-index:3;border-radius:3px}
 .cell.sel{box-shadow:0 0 0 3px var(--ink);z-index:4;border-radius:3px}
 tbody tr.hot th,thead th.hot{background:var(--gold-pale)!important;color:var(--ink)!important}
@@ -184,7 +198,7 @@ tbody tr.hot th,thead th.hot{background:var(--gold-pale)!important;color:var(--i
 @media(max-width:680px){.duel-top{grid-template-columns:1fr}}
 .duel-side{padding:22px 24px}
 .duel-side.mor{background:color-mix(in srgb,var(--red) 9%,var(--card));border-bottom:3px solid var(--red)}
-.duel-side.opp{background:color-mix(in srgb,var(--gold) 11%,var(--card));border-bottom:3px solid var(--gold);text-align:right}
+.duel-side.opp{background:color-mix(in srgb,var(--gold) 11%,var(--card));border-bottom:3px solid var(--gold);text-align:left}
 .duel-vs{display:flex;align-items:center;justify-content:center;font-family:var(--display);font-style:italic;font-weight:700;font-size:17px;color:var(--muted);background:var(--paper2)}
 @media(max-width:680px){.duel-side.opp{text-align:left}.duel-vs{padding:8px}}
 .duel-flag{font-size:30px}
@@ -193,6 +207,10 @@ tbody tr.hot th,thead th.hot{background:var(--gold-pale)!important;color:var(--i
 .duel-big{font-family:var(--display);font-weight:900;font-size:44px;line-height:1;margin-top:12px}
 .duel-big.mor{color:var(--red)} .duel-big.opp{color:var(--gold-deep)}
 .duel-big small{font-family:var(--mono);font-size:12px;font-weight:400;color:var(--ink-faint)}
+.duel-cmt{margin-top:14px;border-top:1px dashed var(--rule);padding-top:12px;text-align:left}
+.duel-cmt .dcl{font-family:var(--mono);font-size:8px;letter-spacing:.16em;text-transform:uppercase;margin-bottom:6px}
+.duel-side.mor .dcl{color:var(--red)} .duel-side.opp .dcl{color:var(--gold-deep)}
+.duel-cmt .dct{font-family:var(--serif);font-style:italic;font-size:14px;color:var(--ink);line-height:1.5}
 .duel-bars{padding:20px clamp(16px,2vw,26px)}
 .duel-bars h4{font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:14px}
 .dbar{margin-bottom:12px}
@@ -245,9 +263,9 @@ input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;bac
 .jtc-table td{padding:13px 12px;border-bottom:1px solid var(--rule-soft);vertical-align:top;font-size:13px;color:var(--ink-light);line-height:1.45}
 .jtc-table tr:hover td{background:var(--paper2)}
 .jtc-gap{font-weight:600;color:var(--ink)}
-.jtc-stars{color:var(--gold);font-size:13px;letter-spacing:1px;white-space:nowrap}
-.jtc-stars .off{color:#BDB6A6}
-.jtc-table tfoot td{padding:14px 12px;border-top:2px solid var(--rule);font-family:var(--mono);font-size:13px;font-weight:700;color:var(--ink);background:var(--paper2)}
+.jtc-stars{color:#FFC400;font-size:14px;letter-spacing:1px;white-space:nowrap;-webkit-text-stroke:0.6px #C99A00}
+.jtc-stars .off{color:#BDB6A6;-webkit-text-stroke:0}
+.jtc-table tfoot td{padding:14px 12px;border-top:2px solid var(--rule);font-family:var(--mono);font-size:13px;font-weight:700;color:var(--ink);background:var(--paper2);white-space:nowrap}
 .jtc-table tfoot .tt{display:inline-block;font-size:8px;letter-spacing:.14em;color:var(--gold-deep);margin-right:5px;vertical-align:middle}
 .provoc{background:linear-gradient(135deg,var(--red),#9E2A26);color:#fff;border-radius:8px;padding:clamp(22px,3vw,36px);margin-top:26px}
 .provoc .pl{font-family:var(--mono);font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.7)}
@@ -281,11 +299,19 @@ input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;bac
 .chantier h3{font-family:var(--display);font-weight:700;font-size:20px;margin-bottom:4px}
 .chantier h3 .cn{color:var(--gold-deep);font-family:var(--mono);font-size:13px;margin-right:8px}
 .chantier .csub{font-family:var(--serif);font-style:italic;font-size:14px;color:var(--ink-light);margin-bottom:12px}
-.lev-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:6px;overflow:hidden}
-.lever{background:var(--card);padding:18px 18px;transition:background .3s}
-.lever:hover{background:var(--paper2)}
+.lev-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px}
+.lever{background:var(--card);border:1px solid var(--rule);border-radius:6px;overflow:hidden;transition:border-color .2s}
+.lever[open]{border-color:var(--gold)}
+.lever summary{list-style:none;cursor:pointer;padding:15px 16px;display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+.lever summary::-webkit-details-marker{display:none}
+.lever summary:hover{background:var(--paper2)}
+.lever .lhead{display:flex;flex-direction:column}
 .lever .lt{font-family:var(--sans);font-weight:600;font-size:14px;line-height:1.3}
 .lever .lo{font-family:var(--mono);font-size:8px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-deep);margin-top:6px}
+.lever .lplus{font-family:var(--mono);font-size:18px;color:var(--gold);flex:0 0 auto;line-height:1;transition:transform .25s}
+.lever[open] .lplus{transform:rotate(45deg)}
+.lever .lx{padding:0 16px 15px;font-size:12.5px;color:var(--ink-light);line-height:1.55}
+.lever .lx::before{content:"";display:block;border-top:1px dashed var(--rule);margin-bottom:11px}
 
 .cta{margin-top:36px;background:linear-gradient(135deg,#23201A,#2E2920);border-radius:8px;padding:clamp(28px,4vw,46px);text-align:center;color:#FAF6ED}
 .cta h3{font-family:var(--display);font-weight:700;font-size:clamp(21px,3vw,30px);line-height:1.15;color:#fff}
@@ -296,6 +322,59 @@ input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;bac
 footer{border-top:1px solid var(--rule);padding:24px 0;margin-top:8px}
 footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-family:var(--mono);font-size:8.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
 footer .wrap b{color:var(--gold-deep)}
+/* COST SIMULATOR */
+.cost-grid{display:grid;grid-template-columns:340px 1fr;gap:26px;align-items:start}
+@media(max-width:880px){.cost-grid{grid-template-columns:1fr}}
+.cost-inputs{background:var(--card);border:1px solid var(--rule);border-radius:8px;padding:22px}
+.cmode{display:flex;border:1px solid var(--rule);border-radius:5px;overflow:hidden;margin-bottom:18px}
+.cmode button{flex:1;font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;background:transparent;color:var(--ink-faint);border:none;padding:10px;cursor:pointer;transition:all .2s}
+.cmode button.on{background:var(--ink);color:var(--paper)}
+.cfield{margin-bottom:16px}
+.cfield label{display:block;font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:7px}
+.cfield .cval{float:right;color:var(--gold-deep);font-weight:700;letter-spacing:0}
+.cselect{width:100%;font-family:var(--sans);font-size:13px;color:var(--ink);background:var(--paper2);border:1px solid var(--rule);border-radius:5px;padding:9px 11px;cursor:pointer}
+.cpills{display:flex;gap:6px}
+.cpills button{flex:1;font-family:var(--mono);font-size:11px;background:var(--paper2);border:1px solid var(--rule);color:var(--ink-light);border-radius:5px;padding:9px;cursor:pointer;transition:all .2s}
+.cpills button.on{background:var(--gold);color:#23201A;border-color:var(--gold);font-weight:700}
+.cresults{min-width:0}
+.cblocks{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:18px}
+@media(max-width:560px){.cblocks{grid-template-columns:1fr}}
+.cblock{background:var(--card);border:1px solid var(--rule);border-radius:6px;padding:15px 17px;border-left:3px solid var(--gold)}
+.cblock.capex{border-left-color:var(--blue)}
+.cblock .cbl{font-family:var(--mono);font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint)}
+.cblock .cbn{font-family:var(--display);font-weight:700;font-size:21px;color:var(--ink);margin-top:4px;line-height:1.1}
+.cblock .cbd{font-size:11px;color:var(--ink-faint);margin-top:4px;line-height:1.35}
+.cfisc{background:var(--paper2);border:1px dashed var(--gold);border-radius:6px;padding:15px 17px;margin-bottom:18px}
+.cfisc .cbl{font-family:var(--mono);font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-deep);margin-bottom:6px}
+.cfisc p{font-size:13px;color:var(--ink-light);line-height:1.5}
+.cchart-card{background:var(--card);border:1px solid var(--rule);border-radius:8px;padding:20px;box-shadow:var(--shadow)}
+.cchart-top{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.cchart-top .ctot{font-family:var(--display);font-weight:900;font-size:30px;color:var(--gold-deep);line-height:1}
+.cchart-top .ctotl{font-family:var(--mono);font-size:8.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-faint)}
+.cchart-svg{width:100%;height:auto;display:block}
+.clegend{display:flex;gap:14px;flex-wrap:wrap;margin-top:12px}
+.clegend span{font-family:var(--mono);font-size:8.5px;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-faint);display:flex;align-items:center;gap:5px}
+.clegend i{width:10px;height:10px;border-radius:2px;display:inline-block}
+.chyp{margin-top:18px;border:1px solid var(--rule);border-radius:6px;overflow:hidden}
+.chyp summary{cursor:pointer;font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--gold-deep);padding:13px 18px;background:var(--paper2);list-style:none}
+.chyp summary::-webkit-details-marker{display:none}
+.chyp summary::before{content:"+ ";color:var(--gold);font-weight:700}
+.chyp[open] summary::before{content:"– "}
+.chyp-body{padding:16px 18px;font-size:12.5px;color:var(--ink-light);line-height:1.55}
+.chyp-body table{width:100%;border-collapse:collapse;margin:10px 0}
+.chyp-body td{padding:6px 8px;border-bottom:1px solid var(--rule-soft);font-family:var(--mono);font-size:11px}
+.chyp-body td:last-child{text-align:right;color:var(--ink);font-weight:500}
+.chyp-body .src{font-size:11px;color:var(--ink-faint);margin-top:10px;line-height:1.5}
+.cdisc{font-family:var(--serif);font-style:italic;font-size:13.5px;color:var(--ink-light);margin-top:16px;padding-left:16px;border-left:3px solid var(--gold)}
+.croi-kpis{display:flex;gap:14px;flex-wrap:wrap;margin:8px 0 14px}
+.croi-kpi{flex:1 1 160px;background:var(--paper2);border:1px solid var(--rule);border-radius:6px;padding:14px 16px}
+.croi-kpi .ck-l{font-family:var(--mono);font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:5px}
+.croi-kpi .ck-n{font-family:var(--display);font-weight:700;font-size:22px;color:var(--ink-light)}
+.croi-kpi .ck-n.ok{color:var(--green)}
+.croi-hyp-row{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:start;margin-top:18px}
+@media(max-width:880px){.croi-hyp-row{grid-template-columns:1fr}}
+.croi-hyp-row>.cchart-card{margin-top:0}
+.croi-hyp-row>.chyp{margin-top:0;align-self:stretch}
 </style>
 </head>
 <body>
@@ -346,9 +425,11 @@ footer .wrap b{color:var(--gold-deep)}
   <div class="sec-head reveal"><span class="sec-num">02</span><span class="sec-tag" id="m2tag"></span></div>
   <h2 class="sec-title reveal" id="m2title"></h2>
   <p class="sec-lead reveal" id="m2lead"></p>
-  <div class="card reveal" style="overflow:hidden">
-    <div class="matrix-scroll"><table class="matrix" id="matrixTable"></table></div>
-    <div class="matrix-detail" id="matrixDetail"></div>
+  <div class="card reveal pad">
+    <div class="matrix-grid">
+      <div class="matrix-scroll"><table class="matrix" id="matrixTable"></table></div>
+      <div class="matrix-side" id="matrixDetail"></div>
+    </div>
   </div>
   <div class="scale-legend reveal" id="scaleLegend"></div>
   <div class="takeaway reveal"><span class="ti" id="m2ti"></span><p id="m2note"></p></div>
@@ -384,8 +465,18 @@ footer .wrap b{color:var(--gold-deep)}
   <div class="provoc reveal" id="provoc"></div>
 </div></section>
 
+<section class="section" id="cout"><div class="wrap">
+  <div class="sec-head reveal"><span class="sec-num">06</span><span class="sec-tag" id="mctag"></span></div>
+  <h2 class="sec-title reveal" id="mctitle"></h2>
+  <p class="sec-lead reveal" id="mclead"></p>
+  <div class="cost-grid reveal">
+    <div class="cost-inputs" id="costInputs"></div>
+    <div class="cresults" id="costResults"></div>
+  </div>
+</div></section>
+
 <section class="section" id="sim"><div class="wrap">
-  <div class="sec-head reveal"><span class="sec-num">06</span><span class="sec-tag" id="m6tag"></span></div>
+  <div class="sec-head reveal"><span class="sec-num">07</span><span class="sec-tag" id="m6tag"></span></div>
   <h2 class="sec-title reveal" id="m6title"></h2>
   <p class="sec-lead reveal" id="m6lead"></p>
   <div class="card pad reveal"><div class="sim-grid">
@@ -402,7 +493,7 @@ footer .wrap b{color:var(--gold-deep)}
 </div></section>
 
 <section class="section" id="verdict"><div class="wrap">
-  <div class="sec-head reveal"><span class="sec-num">07</span><span class="sec-tag" id="m7tag"></span></div>
+  <div class="sec-head reveal"><span class="sec-num">08</span><span class="sec-tag" id="m7tag"></span></div>
   <h2 class="sec-title reveal" id="m7title"></h2>
   <p class="sec-lead reveal" id="m7lead"></p>
   <div class="vtable reveal" id="vtable"></div>
@@ -411,7 +502,7 @@ footer .wrap b{color:var(--gold-deep)}
 </div></section>
 
 <section class="section" id="plan"><div class="wrap">
-  <div class="sec-head reveal"><span class="sec-num">08</span><span class="sec-tag" id="m8tag"></span></div>
+  <div class="sec-head reveal"><span class="sec-num">09</span><span class="sec-tag" id="m8tag"></span></div>
   <h2 class="sec-title reveal" id="m8title"></h2>
   <p class="sec-lead reveal" id="m8lead"></p>
   <div id="planChantiers" class="reveal"></div>
@@ -497,21 +588,53 @@ var SIMLEVERS=[
 ];
 var PLAN=[
  {n:"A",t:{fr:"Attractivité data-driven",en:"Data-driven attractiveness"},sub:{fr:"Rendre l'offre lisible, comparable et exploitable par l'investisseur lui-même.",en:"Make the offer readable, comparable and usable by the investor."},
-  items:[{fr:"SIG investisseur et cartographie des parcs",en:"Investor GIS and industrial-park mapping"},{fr:"Simulateur d'incitations (Charte 2022)",en:"Incentives simulator (2022 Charter)"},{fr:"KPI trimestriels et dashboards publics",en:"Quarterly KPIs and public dashboards"},{fr:"Comparateur de compétitivité",en:"Competitiveness comparator"}]},
+  items:[
+   {fr:"SIG investisseur et cartographie des parcs",en:"Investor GIS and industrial-park mapping",x:{fr:"Une carte en ligne où l'investisseur filtre les parcs par région, surface et prix, puis télécharge la fiche. Invest India et la Türkiye le proposent déjà.",en:"An online map where the investor filters parks by region, area and price, then downloads the fact sheet. Invest India and Türkiye already offer this."}},
+   {fr:"Simulateur d'incitations (Charte 2022)",en:"Incentives simulator (2022 Charter)",x:{fr:"L'investisseur saisit son secteur et son montant, et obtient primes, exonérations et taux d'IS applicables. C'est le simulateur prototypé au module 06.",en:"The investor enters sector and amount and gets the applicable grants, exemptions and CIT rate. This is the simulator prototyped in module 06."}},
+   {fr:"KPI trimestriels et dashboards publics",en:"Quarterly KPIs and public dashboards",x:{fr:"Des tableaux de bord publics rafraîchis chaque trimestre: flux d'IDE, emplois créés, taux d'occupation. La référence mondiale: stats.jtc.gov.sg.",en:"Public dashboards refreshed each quarter: FDI inflows, jobs created, occupancy rates. The world reference: stats.jtc.gov.sg."}},
+   {fr:"Comparateur de compétitivité",en:"Competitiveness comparator",x:{fr:"Un comparateur Maroc contre pays concurrents sur les coûts, délais et incitations. C'est ce que fait invest.gov.tr en libre-service.",en:"A comparator of Morocco versus competitor countries on costs, lead times and incentives. invest.gov.tr offers exactly this, self-service."}}
+  ]},
  {n:"B",t:{fr:"Valorisation éditoriale",en:"Editorial value creation"},sub:{fr:"Passer de la brochure au flux de preuves régulier et sourcé.",en:"Move from brochure to a regular, sourced stream of evidence."},
-  items:[{fr:"Newsletter investisseurs régulière",en:"Regular investor newsletter"},{fr:"Success stories sectorielles vérifiables",en:"Verifiable sector success stories"},{fr:"Études sectorielles courtes et percutantes",en:"Short, punchy sector studies"},{fr:"Livres blancs par axe stratégique",en:"White papers per strategic axis"}]},
+  items:[
+   {fr:"Newsletter investisseurs régulière",en:"Regular investor newsletter",x:{fr:"Une lettre mensuelle datée et archivée, jamais erratique. Rappel du module Foncier: MedZ est resté 15 mois sans newsletter.",en:"A monthly, dated and archived letter, never erratic. As the Land module shows, MedZ went 15 months without a newsletter."}},
+   {fr:"Success stories sectorielles vérifiables",en:"Verifiable sector success stories",x:{fr:"Des cas chiffrés (montant investi, emplois, délai) avec le nom de l'investisseur, pas du storytelling vague.",en:"Quantified cases (amount invested, jobs, lead time) with the investor's name, not vague storytelling."}},
+   {fr:"Études sectorielles courtes et percutantes",en:"Short, punchy sector studies",x:{fr:"Des notes de deux pages par filière (auto, aéro, pharma), actualisées, qu'un investisseur peut citer dans son business case.",en:"Two-page notes per industry (auto, aero, pharma), kept current, that an investor can cite in a business case."}},
+   {fr:"Livres blancs par axe stratégique",en:"White papers per strategic axis",x:{fr:"Un document de référence annuel qui installe le Maroc en voix d'autorité, par exemple sur le hub batteries pour véhicules électriques.",en:"An annual reference document positioning Morocco as an authority, for example on the EV battery hub."}}
+  ]},
  {n:"C",t:{fr:"Plateforme décisionnelle et relation",en:"Decision platform and relationship"},sub:{fr:"Transformer la vitrine en cockpit, avant ET après la signature.",en:"Turn the showcase into a cockpit, before AND after signing."},
-  items:[{fr:"Site en plateforme data-driven (UX par profil)",en:"Site into a data-driven platform (UX per profile)"},{fr:"Aftercare numérique et Ombudsman",en:"Digital aftercare and Ombudsman"},{fr:"Influence Map et narratif d'attractivité",en:"Influence Map and attractiveness narrative"},{fr:"Coordination guichet unique AMDIE × MedZ",en:"One-stop-shop coordination AMDIE × MedZ"}]}
+  items:[
+   {fr:"Site en plateforme data-driven (UX par profil)",en:"Site into a data-driven platform (UX per profile)",x:{fr:"Trois parcours distincts: investisseur, partenaire, institution, chacun avec ses outils. Morocco Now ne propose aujourd'hui qu'un parcours vitrine unique.",en:"Three distinct journeys: investor, partner, institution, each with its own tools. Morocco Now today offers a single showcase journey."}},
+   {fr:"Aftercare numérique et Ombudsman",en:"Digital aftercare and Ombudsman",x:{fr:"Un espace de suivi post-implantation et un médiateur en ligne. Invest Korea dispose d'un Ombudsman numérique dédié.",en:"A post-setup tracking space and an online mediator. Invest Korea runs a dedicated digital Ombudsman."}},
+   {fr:"Influence Map et narratif d'attractivité",en:"Influence Map and attractiveness narrative",x:{fr:"Une cartographie des récits et des relais d'influence, pour occuper le terrain narratif avant les concurrents.",en:"A map of narratives and influence relays, to own the narrative ground before competitors do."}},
+   {fr:"Coordination guichet unique AMDIE × MedZ",en:"One-stop-shop coordination AMDIE × MedZ",x:{fr:"Un parcours unifié où l'investisseur ne voit qu'un interlocuteur, pas deux agences cloisonnées. C'est l'angle mort identifié au module Foncier.",en:"A unified journey where the investor sees one counterpart, not two siloed agencies. This is the blind spot flagged in the Land module."}}
+  ]}
 ];
 
 /* =========================================================================
    I18N (chrome + sections)
    ========================================================================= */
+/* Simulateur de coût d'implantation : hypothèses calibrables (valeurs illustratives) */
+var COSTK={charges:0.21, mois:12, infl:0.03, amort:8, ramp:[0.5,0.8,1]};
+var RATES={MAD:1, EUR:10.8, USD:9.2, GBP:12.7};
+var SYM={MAD:"MAD", EUR:"€", USD:"$", GBP:"£"};
+var SECTORS=[
+ {key:"pharma",name:{fr:"Pharmaceutique",en:"Pharmaceuticals"},sal:8500,m2emp:35,constr:9000,equip:450000,fixM2:1200,varEmp:120000,split:{fon:0.57,equ:0.43}},
+ {key:"auto",name:{fr:"Automobile",en:"Automotive"},sal:6500,m2emp:45,constr:6000,equip:380000,fixM2:900,varEmp:160000,split:{fon:0.62,equ:0.38}},
+ {key:"aero",name:{fr:"Aéronautique",en:"Aerospace"},sal:9500,m2emp:55,constr:8000,equip:600000,fixM2:1100,varEmp:140000,split:{fon:0.58,equ:0.42}},
+ {key:"agro",name:{fr:"Agroalimentaire",en:"Agri-food"},sal:4500,m2emp:40,constr:5000,equip:300000,fixM2:1000,varEmp:180000,split:{fon:0.65,equ:0.35}},
+ {key:"offshore",name:{fr:"Offshoring / Services",en:"Offshoring / Services"},sal:7000,m2emp:12,constr:7000,equip:90000,fixM2:1400,varEmp:30000,split:{fon:0.75,equ:0.25}}
+];
+var REGIMES=[
+ {key:"common",name:{fr:"Droit commun",en:"Standard regime"},is:"20%",isNote:{fr:"IS à 20 % pour un bénéfice net inférieur à 100 M MAD, à partir de 2026.",en:"CIT at 20% for net profit below MAD 100m, from 2026."}},
+ {key:"zai",name:{fr:"Zone d'accélération industrielle",en:"Industrial acceleration zone"},is:"20%",isNote:{fr:"IS plafonné à 20 %, dividendes versés aux non-résidents exonérés.",en:"CIT capped at 20%, dividends to non-residents exempt."}},
+ {key:"zfe",name:{fr:"Zone franche d'exportation",en:"Export free zone"},is:"0 % / 8,75 %",isNote:{fr:"0 % d'IS les 5 premières années, puis 8,75 % (sous condition d'exportation).",en:"0% CIT for the first 5 years, then 8.75% (export condition)."}}
+];
+var cost={mode:"taille",sector:"pharma",regime:"zai",horizon:5,currency:"MAD",surface:5000,effectif:120,budget:80000000,revenue:90000000,revTouched:false};
 var T={
  fr:{
   brand:"Buildfluence · Renseignements d'affaires",
-  nav:["Pourquoi","Positionnement","Matrice 6×12","Radar","Le duel","Foncier","Simulateur","Verdict","Recommandations"],
-  navIds:["methodo","m1","m2","m3","m4","foncier","sim","verdict","plan"],
+  nav:["Pourquoi","Positionnement","Matrice 6×12","Radar","Le duel","Foncier","Simulateur","Leviers","Verdict","Recommandations"],
+  navIds:["methodo","m1","m2","m3","m4","foncier","cout","sim","verdict","plan"],
   count:"Fenêtre sur la CdM 2030 : <b>{d}</b> jours",
   theme:["Mode sombre","Mode clair"],
   heroKicker:"Benchmark API Mondial",heroKicker2:"Agences de promotion des investissements",
@@ -549,7 +672,7 @@ var T={
   jtcHead:["Lacune MedZ","Impact MedZ","Référence JTC (Singapour)","Impact JTC"],
   jtcTotalLabel:"Total impact",
   provocL:"Le réveil",provoc:"Un investisseur international compare le Maroc à <em>Singapour</em>, pas à lui-même. JTC publie ses données en temps réel depuis 55 ans ; MedZ n'a pas publié de rapport annuel depuis <em>2016</em>. La satisfaction de façade ne tiendra pas face à un concurrent qui, lui, donne tout à voir.",
-  m6tag:"Simulateur · projection illustrative",m6title:["Et si Morocco Now passait ","à l'action ?"],m6lead:"Activez les leviers de transformation et voyez la trajectoire potentielle du score global, et le déplacement de la bulle marocaine vers le quadrant des cockpits. Projection illustrative, fondée sur la grille de notation.",
+  m6tag:"Six leviers · projection illustrative",m6title:["Et si Morocco Now passait ","à l'action ?"],m6lead:"Activez les leviers de transformation et voyez la trajectoire potentielle du score global, et le déplacement de la bulle marocaine vers le quadrant des cockpits. Projection illustrative, fondée sur la grille de notation.",
   simPanelLabel:"Score global projeté",simFrom:"Aujourd'hui : 1.2 / 5",simNote:"Glissez les curseurs : chaque levier active une brique numérique manquante.",simReset:"Réinitialiser",
   m7tag:"Verdict Buildfluence",m7title:["Elles ont changé de ","métier."],m7lead:"Le constat central, expliqué : ce qui sépare une marque d'attractivité d'une plateforme d'intelligence investisseur.",
   vA:{h:"Morocco Now · le modèle vitrine",items:["Un site institutionnel : on raconte le pays","Un catalogue sectoriel et des brochures PDF","La donnée reste interne, l'investisseur attend un rendez-vous","La relation s'arrête à la prise de contact"]},
@@ -560,12 +683,40 @@ var T={
   baro:[{n:"06",t:"Boussole des investisseurs",u:"https://buildfluence.ai/barometre?lang=fr"},{n:"07",t:"Jeux d'influence des concurrents (Vietnam : l'arme numérique)",u:"https://buildfluence.ai/barometre?lang=fr"}],
   m8tag:"Plan de transformation · 12 mois",m8title:["De la vitrine à la ","plateforme."],m8lead:"Les recommandations du Benchmark API et du Baromètre d'investissement, fusionnées en trois chantiers et onze leviers, avant que la fenêtre CdM 2030 ne se referme.",
   ctaH:["Le benchmark montre l'écart.","L'échange stratégique trace la sortie."],ctaP:"Buildfluence transforme ce diagnostic en feuille de route : priorisation des leviers, maquettes d'outils, jalons sur 12 mois.",ctaBtn:"Demander mon échange stratégique →",
+  mctag:"Simulateur des coûts d'investissement",
+  mctitle:["Combien coûte une ","implantation au Maroc ?"],
+  mclead:"Mettez-vous à la place d'un investisseur étranger. Choisissez un secteur, décrivez le projet (par taille ou par budget), et obtenez une estimation simplifiée des coûts: foncier, RH, charges fixes et variables, sur 1, 3 ou 5 ans.",
+  cMode:["Par taille","Par budget"],
+  cSector:"Secteur",cRegime:"Régime fiscal",cHorizon:"Horizon",cCurrency:"Devise",
+  cSurface:"Surface (m²)",cEffectif:"Effectif (employés)",cBudget:"Budget d'investissement (MAD)",
+  cInitial:"Investissement initial",cInitialD:"Foncier, construction et équipements (an 1)",
+  cFoncier:"Foncier + construction",cEquip:"Équipements",
+  cRH:"RH chargée / an",cRHD:"Salaires bruts + charges patronales",
+  cFixes:"Charges fixes / an",cFixesD:"Énergie, maintenance, assurances",
+  cVar:"Charges variables / an",cVarD:"Matières, logistique, consommables",
+  cFiscLabel:"Régime fiscal applicable",
+  cTotalLabel:"Coût cumulé sur {n} ans",cYear:"An",
+  cLegend:{initial:"Investissement initial",rh:"RH chargée",fixes:"Charges fixes",var:"Charges variables"},
+  cHyp:"Hypothèses (modifiables)",
+  cHypIntro:"Estimation simplifiée. Les paramètres ci-dessous sont des hypothèses illustratives, à calibrer avec vos données réelles.",
+  cSrc:"Ancrages publics : IS 2026 (DGI, loi de finances 50-25), SMIG 2026 à 17,92 DH/h soit environ 3 422 DH/mois (décret 2.25.983). Foncier, énergie et matières : hypothèses sectorielles indicatives.",
+  cDisc:"Estimation pédagogique et non contractuelle. C'est exactement le type d'outil self-service que les agences de promotion les plus avancées offrent à l'investisseur, et que ce benchmark identifie comme manquant chez Morocco Now.",
+  cRevenue:"Chiffre d'affaires annuel (à maturité)",
+  cRoiTitle:"Rentabilité et retour sur investissement",
+  cBreakEven:"1er résultat net positif",
+  cPayback:"Récupération de l'investissement",
+  cNotReached:"au-delà de {n} ans",
+  cNetResult:"Résultat net positif",
+  cNetResultNeg:"Résultat net négatif",
+  cCumCash:"Trésorerie cumulée",
+  cRoiNote:"Le chiffre d'affaires est votre hypothèse: ajustez-le librement. Le régime fiscal pèse fortement: une zone franche (0 % d'IS pendant 5 ans) accélère nettement la récupération. Montée en charge supposée: 50 % en an 1, 80 % en an 2, 100 % ensuite; amortissement sur 8 ans.",
+  mxVerify:"Vérifier sur {x} ↗",
   footL:"Buildfluence Intel · Benchmark API Mondial · 2026",footR:"Sources publiques vérifiées · Notation 1–5 · Restricted Use",copyright:"© 2026 Buildfluence · Tous droits réservés"
  },
  en:{
   brand:"Buildfluence · Business Intelligence",
-  nav:["Why","Positioning","Matrix 6×12","Radar","The duel","Land","Simulator","Verdict","Recommendations"],
-  navIds:["methodo","m1","m2","m3","m4","foncier","sim","verdict","plan"],
+  nav:["Why","Positioning","Matrix 6×12","Radar","The duel","Land","Simulator","Levers","Verdict","Recommendations"],
+  navIds:["methodo","m1","m2","m3","m4","foncier","cout","sim","verdict","plan"],
   count:"FIFA 2030 window: <b>{d}</b> days",
   theme:["Dark mode","Light mode"],
   heroKicker:"Global IPA Benchmark",heroKicker2:"Investment promotion agencies",
@@ -603,7 +754,7 @@ var T={
   jtcHead:["MedZ gap","Impact MedZ","JTC reference (Singapore)","Impact JTC"],
   jtcTotalLabel:"Total impact",
   provocL:"The wake-up call",provoc:"An international investor compares Morocco to <em>Singapore</em>, not to itself. JTC has published real-time data for 55 years; MedZ has not published an annual report since <em>2016</em>. Surface-level satisfaction will not hold against a competitor who shows everything.",
-  m6tag:"Simulator · illustrative projection",m6title:["What if Morocco Now ","acted?"],m6lead:"Activate the transformation levers and watch the potential trajectory of the global score, and the Moroccan bubble moving toward the cockpit quadrant. Illustrative projection, based on the scoring grid.",
+  m6tag:"Six levers · illustrative projection",m6title:["What if Morocco Now ","acted?"],m6lead:"Activate the transformation levers and watch the potential trajectory of the global score, and the Moroccan bubble moving toward the cockpit quadrant. Illustrative projection, based on the scoring grid.",
   simPanelLabel:"Projected global score",simFrom:"Today: 1.2 / 5",simNote:"Drag the sliders: each lever activates a missing digital feature.",simReset:"Reset",
   m7tag:"Buildfluence verdict",m7title:["They changed ","jobs."],m7lead:"The core finding, explained: what separates an attractiveness brand from an investor intelligence platform.",
   vA:{h:"Morocco Now · the showcase model",items:["An institutional site: it tells the country's story","A sector catalogue and PDF brochures","Data stays internal, the investor waits for a meeting","The relationship ends at first contact"]},
@@ -614,6 +765,34 @@ var T={
   baro:[{n:"06",t:"Investor compass",u:"https://buildfluence.ai/barometre?lang=en"},{n:"07",t:"Competitors' influence games (Vietnam: the digital weapon)",u:"https://buildfluence.ai/barometre?lang=en"}],
   m8tag:"Transformation plan · 12 months",m8title:["From showcase to ","platform."],m8lead:"The recommendations of the IPA Benchmark and the Investment Barometer, merged into three workstreams and eleven levers, before the FIFA 2030 window closes.",
   ctaH:["The benchmark shows the gap.","The strategic exchange charts the way out."],ctaP:"Buildfluence turns this diagnosis into a roadmap: lever prioritisation, tool mock-ups, milestones over 12 months.",ctaBtn:"Request my strategic exchange →",
+  mctag:"Investment cost simulator",
+  mctitle:["How much does a Morocco ","setup cost?"],
+  mclead:"Step into a foreign investor's shoes. Pick a sector, describe the project (by size or by budget), and get a simplified cost estimate: land, HR, fixed and variable charges, over 1, 3 or 5 years.",
+  cMode:["By size","By budget"],
+  cSector:"Sector",cRegime:"Tax regime",cHorizon:"Horizon",cCurrency:"Currency",
+  cSurface:"Floor area (m²)",cEffectif:"Headcount (employees)",cBudget:"Investment budget (MAD)",
+  cInitial:"Initial investment",cInitialD:"Land, construction and equipment (year 1)",
+  cFoncier:"Land + construction",cEquip:"Equipment",
+  cRH:"Loaded payroll / yr",cRHD:"Gross salaries + employer charges",
+  cFixes:"Fixed charges / yr",cFixesD:"Energy, maintenance, insurance",
+  cVar:"Variable charges / yr",cVarD:"Materials, logistics, consumables",
+  cFiscLabel:"Applicable tax regime",
+  cTotalLabel:"Cumulative cost over {n} years",cYear:"Y",
+  cLegend:{initial:"Initial investment",rh:"Loaded payroll",fixes:"Fixed charges",var:"Variable charges"},
+  cHyp:"Assumptions (editable)",
+  cHypIntro:"Simplified estimate. The parameters below are illustrative assumptions, to be calibrated with your real data.",
+  cSrc:"Public anchors: 2026 CIT (DGI, finance law 50-25), 2026 SMIG at MAD 17.92/h, about MAD 3,422/month (decree 2.25.983). Land, energy and materials: indicative sector assumptions.",
+  cDisc:"Educational, non-contractual estimate. This is exactly the kind of self-service tool that the most advanced promotion agencies give investors, and which this benchmark flags as missing at Morocco Now.",
+  cRevenue:"Annual revenue (at maturity)",
+  cRoiTitle:"Profitability and return on investment",
+  cBreakEven:"First net profit",
+  cPayback:"Investment recovered",
+  cNotReached:"beyond {n} years",
+  cNetResult:"Net profit",
+  cNetResultNeg:"Net loss",
+  cCumCash:"Cumulative cash",
+  cRoiNote:"Revenue is your own assumption: adjust it freely. The tax regime weighs heavily: a free zone (0% CIT for 5 years) clearly speeds up payback. Assumed ramp-up: 50% in year 1, 80% in year 2, 100% after; amortization over 8 years.",
+  mxVerify:"Verify on {x} ↗",
   footL:"Buildfluence Intel · Global IPA Benchmark · 2026",footR:"Verified public sources · 1–5 scoring · Restricted Use",copyright:"© 2026 Buildfluence · All rights reserved"
  }
 };
@@ -735,16 +914,18 @@ function renderMatrix(){
  el("matrixDetail").innerHTML='<div class="md-placeholder">'+t().mdPlaceholder+'</div>';
  var tbl=el("matrixTable");var cells=[].slice.call(tbl.querySelectorAll(".cell"));var colHeads=[].slice.call(tbl.querySelectorAll("thead th[data-col]"));
  function clearHot(){tbl.querySelectorAll(".hot").forEach(function(e){e.classList.remove("hot");});}
- cells.forEach(function(c){
-   c.addEventListener("mouseenter",function(){clearHot();tbl.querySelector('tbody tr[data-row="'+c.dataset.row+'"] th').classList.add("hot");colHeads[+c.dataset.col].classList.add("hot");});
-   c.addEventListener("click",function(){cells.forEach(function(x){x.classList.remove("sel");});c.classList.add("sel");
-     var row=MATRIX[+c.dataset.row];var k=ORDER[+c.dataset.col];var v=+c.dataset.v;var a=AG[k];
-     el("matrixDetail").innerHTML='<div class="md-score" style="background:'+SCALE[v]+';color:'+SCALE_TXT[v]+'">'+v+'</div>'+
-       '<div class="md-body"><div class="md-crit">'+a.flag+' '+a.name+' · '+(row.axis==="T"?"Tech / Data":"Marketing")+'</div>'+
-       '<div class="md-title">'+L(row.label)+' · '+t().scaleLbl[v]+'</div><div class="md-note">'+L(NOTE[v])+'</div></div>';
-   });
+ function showMx(ri,ci){var row=MATRIX[ri],k=ORDER[ci],v=row.vals[ci],a=AG[k];
+   el("matrixDetail").innerHTML='<div class="ms-top"><span class="ms-flag">'+a.flag+'</span><span class="ms-ag">'+a.name+'</span></div>'+
+     '<div class="ms-crit">'+L(row.label)+'<span class="ms-ax">'+(row.axis==="T"?"Tech / Data":"Marketing")+'</span></div>'+
+     '<div class="ms-score" style="background:'+SCALE[v]+';color:'+SCALE_TXT[v]+'">'+v+'</div>'+
+     '<div class="ms-lvl">'+t().scaleLbl[v]+'</div><div class="ms-note">'+L(NOTE[v])+'</div>'+
+     '<a class="ms-link" href="'+a.url+'" target="_blank" rel="noopener">'+t().mxVerify.replace("{x}",a.short)+'</a>';}
+ cells.forEach(function(c){var ri=+c.dataset.row,ci=+c.dataset.col;
+   c.addEventListener("mouseenter",function(){clearHot();tbl.querySelector('tbody tr[data-row="'+ri+'"] th').classList.add("hot");colHeads[ci].classList.add("hot");showMx(ri,ci);});
+   c.addEventListener("click",function(){cells.forEach(function(x){x.classList.remove("sel");});c.classList.add("sel");showMx(ri,ci);});
  });
  tbl.addEventListener("mouseleave",clearHot);
+ showMx(0,0);
  el("scaleLegend").innerHTML='<span class="sl" style="color:var(--ink)">'+t().scaleTitle+'</span>'+[1,2,3,4,5].map(function(v){return '<span class="sl"><span class="sw" style="background:'+SCALE[v]+'"></span>'+v+' · '+t().scaleLbl[v]+'</span>';}).join("");
 }
 
@@ -796,12 +977,12 @@ function drawDuel(){var a=AG[duelCur];var mor=AG.morocco;var oi=ORDER.indexOf(du
    return '<div class="dbar"><div class="dbar-top"><span>'+L(o.row.label)+'</span><span>'+mv+' vs '+ov+' '+(o.gap>0?'<span class="gap">+'+o.gap+'</span>':'')+'</span></div>'+
      '<div class="dbar-track"><div class="dbar-opp" data-w="'+(ov/5*100)+'"></div><div class="dbar-mor" data-w="'+(mv/5*100)+'"></div></div></div>';}).join("");
  el("duelCard").innerHTML='<div class="duel-top">'+
-   '<div class="duel-side mor"><div class="duel-flag">'+mor.flag+'</div><div class="duel-name">'+mor.name+'</div><div class="duel-tag">'+L(mor.tagline)+'</div><div class="duel-big mor">'+mor.global.toFixed(1)+'<small> /5</small></div></div>'+
+   '<div class="duel-side mor"><div class="duel-flag">'+mor.flag+'</div><div class="duel-name">'+mor.name+'</div><div class="duel-tag">'+L(mor.tagline)+'</div><div class="duel-big mor">'+mor.global.toFixed(1)+'<small> /5</small></div>'+
+     '<div class="duel-cmt"><div class="dcl">'+t().duelMorLbl+'</div><div class="dct">« '+L(a.verdict)+' »</div></div></div>'+
    '<div class="duel-vs">vs</div>'+
-   '<div class="duel-side opp"><div class="duel-flag">'+a.flag+'</div><div class="duel-name">'+a.name+'</div><div class="duel-tag">'+L(a.tagline)+'</div><div class="duel-big opp">'+a.global.toFixed(1)+'<small> /5</small></div></div></div>'+
-   '<div class="duel-bars"><h4>'+t().duelBars+'</h4>'+bars+'</div>'+
-   '<div class="duel-verdict"><div class="dv-box opp"><div class="dvl">'+t().duelOppLbl.replace("{x}",a.short)+'</div><div class="dvt">'+L(a.diff)+'.</div></div>'+
-   '<div class="dv-box mor"><div class="dvl">'+t().duelMorLbl+'</div><div class="dvt">« '+L(a.verdict)+' »</div></div></div>';
+   '<div class="duel-side opp"><div class="duel-flag">'+a.flag+'</div><div class="duel-name">'+a.name+'</div><div class="duel-tag">'+L(a.tagline)+'</div><div class="duel-big opp">'+a.global.toFixed(1)+'<small> /5</small></div>'+
+     '<div class="duel-cmt"><div class="dcl">'+t().duelOppLbl.replace("{x}",a.short)+'</div><div class="dct">'+L(a.diff)+'.</div></div></div></div>'+
+   '<div class="duel-bars"><h4>'+t().duelBars+'</h4>'+bars+'</div>';
  requestAnimationFrame(function(){el("duelCard").querySelectorAll(".dbar-opp,.dbar-mor").forEach(function(e){e.style.width=e.dataset.w+"%";});});
 }
 
@@ -823,7 +1004,7 @@ function renderFoncier(){
    return '<tr><td class="jtc-gap">'+L(r.gap)+'</td>'+
      '<td>'+L(r.impact)+'<div class="jtc-stars" style="margin-top:7px">'+fstars(r.medz)+'</div></td>'+
      '<td>'+L(r.jtc)+'</td>'+
-     '<td class="jtc-stars">'+fstars(r.score)+'</td></tr>';}).join("");
+     '<td><div class="jtc-stars">'+fstars(r.score)+'</div></td></tr>';}).join("");
  var foot='<tr class="jtc-total"><td>'+t().jtcTotalLabel+'</td>'+
    '<td><span class="tt">MedZ</span> '+medzTot+' / '+mx+'</td><td></td>'+
    '<td><span class="tt">JTC</span> '+jtcTot+' / '+mx+'</td></tr>';
@@ -868,6 +1049,167 @@ function computeSim(){
 /* =========================================================================
    MODULE 7 : VERDICT
    ========================================================================= */
+/* =========================================================================
+   MODULE 07 : SIMULATEUR DE COÛT D'IMPLANTATION
+   ========================================================================= */
+function money(mad){var v=mad/RATES[cost.currency];return Math.round(v).toLocaleString(lang==="fr"?"fr-FR":"en-US")+" "+SYM[cost.currency];}
+function shortMoney(mad){var x=mad/RATES[cost.currency];var sym=SYM[cost.currency];
+ if(x>=1e6){var m=x/1e6;return (m>=10?Math.round(m):m.toFixed(1)).toString().replace(".",lang==="fr"?",":".")+"M "+sym;}
+ if(x>=1e3){return Math.round(x/1e3)+"k "+sym;}
+ return Math.round(x)+" "+sym;}
+function renderCost(){
+ el("mctag").textContent=t().mctag;
+ el("mctitle").innerHTML=t().mctitle[0]+"<em>"+t().mctitle[1]+"</em>";
+ el("mclead").textContent=t().mclead;
+ var secOpts=SECTORS.map(function(x){return '<option value="'+x.key+'"'+(x.key===cost.sector?" selected":"")+'>'+L(x.name)+'</option>';}).join("");
+ var regOpts=REGIMES.map(function(x){return '<option value="'+x.key+'"'+(x.key===cost.regime?" selected":"")+'>'+L(x.name)+'</option>';}).join("");
+ var curOpts=["MAD","EUR","USD","GBP"].map(function(c){return '<option value="'+c+'"'+(c===cost.currency?" selected":"")+'>'+c+'</option>';}).join("");
+ var unitY=lang==="fr"?"an":"yr";
+ var dyn="";
+ if(cost.mode==="taille"){
+   dyn='<div class="cfield"><label>'+t().cSurface+'<span class="cval" id="cSurfaceV">'+cost.surface.toLocaleString()+'</span></label><input type="range" id="cSurface" min="500" max="50000" step="500" value="'+cost.surface+'"></div>'+
+       '<div class="cfield"><label>'+t().cEffectif+'<span class="cval" id="cEffectifV">'+cost.effectif.toLocaleString()+'</span></label><input type="range" id="cEffectif" min="10" max="2000" step="10" value="'+cost.effectif+'"></div>';
+ } else {
+   dyn='<div class="cfield"><label>'+t().cBudget+'<span class="cval" id="cBudgetV">'+cost.budget.toLocaleString()+'</span></label><input type="range" id="cBudget" min="5000000" max="500000000" step="5000000" value="'+cost.budget+'"></div>';
+ }
+ el("costInputs").innerHTML=
+   '<div class="cmode"><button data-m="taille" class="'+(cost.mode==="taille"?"on":"")+'">'+t().cMode[0]+'</button><button data-m="budget" class="'+(cost.mode==="budget"?"on":"")+'">'+t().cMode[1]+'</button></div>'+
+   '<div class="cfield"><label>'+t().cSector+'</label><select class="cselect" id="cSector">'+secOpts+'</select></div>'+
+   '<div class="cfield"><label>'+t().cRegime+'</label><select class="cselect" id="cRegime">'+regOpts+'</select></div>'+
+   dyn+
+   '<div class="cfield"><label>'+t().cRevenue+'<span class="cval" id="cRevenueV">'+cost.revenue.toLocaleString()+'</span></label><input type="range" id="cRevenue" min="5000000" max="1000000000" step="5000000" value="'+cost.revenue+'"></div>'+
+   '<div class="cfield"><label>'+t().cHorizon+'</label><div class="cpills" id="cHorizon">'+[1,3,5].map(function(h){return '<button data-h="'+h+'" class="'+(h===cost.horizon?"on":"")+'">'+h+' '+unitY+(h>1?"s":"")+'</button>';}).join("")+'</div></div>'+
+   '<div class="cfield"><label>'+t().cCurrency+'</label><select class="cselect" id="cCurrency">'+curOpts+'</select></div>';
+ el("costInputs").querySelectorAll(".cmode button").forEach(function(b){b.onclick=function(){cost.mode=b.dataset.m;renderCost();};});
+ el("cSector").onchange=function(){cost.sector=this.value;computeCost();};
+ el("cRegime").onchange=function(){cost.regime=this.value;computeCost();};
+ el("cCurrency").onchange=function(){cost.currency=this.value;computeCost();};
+ el("cRevenue").oninput=function(){cost.revenue=+this.value;cost.revTouched=true;el("cRevenueV").textContent=cost.revenue.toLocaleString();computeCost();};
+ el("cHorizon").querySelectorAll("button").forEach(function(b){b.onclick=function(){cost.horizon=+b.dataset.h;el("cHorizon").querySelectorAll("button").forEach(function(x){x.classList.remove("on");});b.classList.add("on");computeCost();};});
+ if(cost.mode==="taille"){
+   el("cSurface").oninput=function(){cost.surface=+this.value;el("cSurfaceV").textContent=cost.surface.toLocaleString();computeCost();};
+   el("cEffectif").oninput=function(){cost.effectif=+this.value;el("cEffectifV").textContent=cost.effectif.toLocaleString();computeCost();};
+ } else {
+   el("cBudget").oninput=function(){cost.budget=+this.value;el("cBudgetV").textContent=cost.budget.toLocaleString();computeCost();};
+ }
+ computeCost();
+}
+function computeCost(){
+ var s=SECTORS.filter(function(x){return x.key===cost.sector;})[0];
+ var reg=REGIMES.filter(function(x){return x.key===cost.regime;})[0];
+ var surface,effectif,initial;
+ if(cost.mode==="taille"){
+   surface=cost.surface;effectif=cost.effectif;
+   initial=surface*s.constr+effectif*s.equip;
+ } else {
+   var fonB=cost.budget*s.split.fon, equB=cost.budget*s.split.equ;
+   surface=fonB/s.constr; effectif=Math.max(1,Math.round(equB/s.equip));
+   initial=cost.budget;
+ }
+ var rh=effectif*s.sal*COSTK.mois*(1+COSTK.charges);
+ var fixes=surface*s.fixM2;
+ var vari=effectif*s.varEmp;
+ var opex=rh+fixes+vari;
+  if(!cost.revTouched){cost.revenue=Math.round(initial);var _rs=el("cRevenue");if(_rs){_rs.value=cost.revenue;}var _rv=el("cRevenueV");if(_rv){_rv.textContent=cost.revenue.toLocaleString(lang==="fr"?"fr-FR":"en-US");}}
+ var amort=initial/COSTK.amort, beNet=0, payback=0, cumCash=-initial, pnl=[];
+ for(var py=1;py<=cost.horizon;py++){
+   var pf=Math.pow(1+COSTK.infl,py-1), rmp=COSTK.ramp[Math.min(py,3)-1];
+   var rev=cost.revenue*rmp, vC=vari*pf*rmp, oC=rh*pf+fixes*pf+vC;
+   var ebitda=rev-oC, rbt=ebitda-amort;
+   var rate=(cost.regime==="zfe")?(py<=5?0:0.0875):0.20;
+   var isv=rbt>0?rbt*rate:0, net=rbt-isv;
+   cumCash+=(ebitda-isv);
+   if(beNet===0&&net>0)beNet=py;
+   if(payback===0&&cumCash>=0)payback=py;
+   pnl.push({y:py,net:net,cum:cumCash});
+ }
+ var _tt=t();
+ var beTxt=beNet?(_tt.cYear+" "+beNet):_tt.cNotReached.replace("{n}",cost.horizon);
+ var pbTxt=payback?(_tt.cYear+" "+payback):_tt.cNotReached.replace("{n}",cost.horizon);
+ var roiHtml='<div class="cchart-card"><div class="cchart-top"><div class="ctotl">'+_tt.cRoiTitle+'</div></div>'+
+   '<div class="croi-kpis">'+
+     '<div class="croi-kpi"><div class="ck-l">'+_tt.cBreakEven+'</div><div class="ck-n'+(beNet?" ok":"")+'">'+beTxt+'</div></div>'+
+     '<div class="croi-kpi"><div class="ck-l">'+_tt.cPayback+'</div><div class="ck-n'+(payback?" ok":"")+'">'+pbTxt+'</div></div>'+
+   '</div>'+
+   '<svg class="cchart-svg" id="roiChart" viewBox="0 0 600 240" preserveAspectRatio="xMidYMid meet"></svg>'+
+   '<div class="clegend"><span><i style="background:var(--green)"></i>'+_tt.cNetResult+'</span><span><i style="background:var(--red)"></i>'+_tt.cNetResultNeg+'</span><span><i style="background:var(--gold-deep)"></i>'+_tt.cCumCash+'</span></div>'+
+   '<div class="cdisc" style="margin-top:12px">'+_tt.cRoiNote+'</div></div>';
+ var years=[],cum=0;
+ for(var y=1;y<=cost.horizon;y++){
+   var f=Math.pow(1+COSTK.infl,y-1);
+   var cap=(y===1)?initial:0;
+   var row={y:y,cap:cap,rh:rh*f,fixes:fixes*f,vari:vari*f};
+   row.tot=cap+row.rh+row.fixes+row.vari;cum+=row.tot;years.push(row);
+ }
+ var tt=t();
+ var html='<div class="cblocks">'+
+   '<div class="cblock capex"><div class="cbl">'+tt.cInitial+'</div><div class="cbn">'+money(initial)+'</div><div class="cbd">'+tt.cInitialD+'</div></div>'+
+   '<div class="cblock"><div class="cbl">'+tt.cRH+'</div><div class="cbn">'+money(rh)+'</div><div class="cbd">'+tt.cRHD+'</div></div>'+
+   '<div class="cblock"><div class="cbl">'+tt.cFixes+'</div><div class="cbn">'+money(fixes)+'</div><div class="cbd">'+tt.cFixesD+'</div></div>'+
+   '<div class="cblock"><div class="cbl">'+tt.cVar+'</div><div class="cbn">'+money(vari)+'</div><div class="cbd">'+tt.cVarD+'</div></div>'+
+   '</div>'+
+   '<div class="cfisc"><div class="cbl">'+tt.cFiscLabel+' · '+L(reg.name)+' (IS '+reg.is+')</div><p>'+L(reg.isNote)+'</p></div>'+
+   '<div class="cchart-card"><div class="cchart-top"><div><div class="ctotl">'+tt.cTotalLabel.replace("{n}",cost.horizon)+'</div><div class="ctot">'+money(cum)+'</div></div></div>'+
+   '<svg class="cchart-svg" id="costChart" viewBox="0 0 600 280" preserveAspectRatio="xMidYMid meet"></svg>'+
+   '<div class="clegend">'+
+     '<span><i style="background:var(--blue)"></i>'+tt.cLegend.initial+'</span>'+
+     '<span><i style="background:#9A7B1E"></i>'+tt.cLegend.rh+'</span>'+
+     '<span><i style="background:var(--gold)"></i>'+tt.cLegend.fixes+'</span>'+
+     '<span><i style="background:#D4B863"></i>'+tt.cLegend.var+'</span>'+
+   '</div></div>'+
+   '<div class="croi-hyp-row">'+roiHtml+'<details class="chyp" open><summary>'+tt.cHyp+'</summary><div class="chyp-body"><p>'+tt.cHypIntro+'</p><table>'+
+     '<tr><td>'+L(s.name)+' · '+(lang==="fr"?"salaire moyen":"avg salary")+'</td><td>'+s.sal.toLocaleString()+' MAD/'+(lang==="fr"?"mois":"mo")+'</td></tr>'+
+     '<tr><td>'+tt.cFoncier+'</td><td>'+s.constr.toLocaleString()+' MAD/m²</td></tr>'+
+     '<tr><td>'+tt.cEquip+'</td><td>'+s.equip.toLocaleString()+' MAD/'+(lang==="fr"?"poste":"job")+'</td></tr>'+
+     '<tr><td>'+(lang==="fr"?"Charges fixes":"Fixed charges")+'</td><td>'+s.fixM2.toLocaleString()+' MAD/m²/'+(lang==="fr"?"an":"yr")+'</td></tr>'+
+     '<tr><td>'+(lang==="fr"?"Charges variables":"Variable charges")+'</td><td>'+s.varEmp.toLocaleString()+' MAD/'+(lang==="fr"?"emploi/an":"job/yr")+'</td></tr>'+
+     '<tr><td>'+(lang==="fr"?"Charges patronales":"Employer charges")+'</td><td>'+Math.round(COSTK.charges*100)+'%</td></tr>'+
+     '<tr><td>'+(lang==="fr"?"Inflation annuelle":"Annual inflation")+'</td><td>'+Math.round(COSTK.infl*100)+'%</td></tr>'+
+   '</table><div class="src">'+tt.cSrc+'</div></div></details></div>'+
+   '<div class="cdisc">'+tt.cDisc+'</div>';
+ el("costResults").innerHTML=html;
+ drawCostChart(years);
+ drawRoiChart(pnl);
+}
+function drawRoiChart(pnl){
+ var svg=el("roiChart");if(!svg)return;
+ var W=600,H=240,PL=66,PB=30,PT=14;
+ var maxN=0,minN=0,maxC=-Infinity,minC=Infinity;
+ pnl.forEach(function(p){if(p.net>maxN)maxN=p.net;if(p.net<minN)minN=p.net;if(p.cum>maxC)maxC=p.cum;if(p.cum<minC)minC=p.cum;});
+ var hi=Math.max(maxN,maxC,0), lo=Math.min(minN,minC,0); if(hi===lo)hi=lo+1;
+ function Y(v){return PT+(H-PT-PB)*(1-(v-lo)/(hi-lo));}
+ var n=pnl.length, slot=(W-PL-16)/n, bw=Math.min(56,slot*0.46);
+ var g='<line x1="'+PL+'" y1="'+Y(0).toFixed(1)+'" x2="'+(W-10)+'" y2="'+Y(0).toFixed(1)+'" stroke="var(--ink-faint)" stroke-dasharray="2 3"/>';
+ [hi,0,lo].forEach(function(v){g+='<text x="'+(PL-8)+'" y="'+(Y(v)+3).toFixed(1)+'" text-anchor="end" font-family="var(--mono)" font-size="8" fill="var(--ink-faint)">'+shortMoney(v)+'</text>';});
+ pnl.forEach(function(p,idx){var cx=PL+slot*idx+slot/2, x=cx-bw/2, y0=Y(0), yv=Y(p.net), top=Math.min(y0,yv), hh=Math.abs(yv-y0);
+   g+='<rect x="'+x.toFixed(1)+'" y="'+top.toFixed(1)+'" width="'+bw.toFixed(1)+'" height="'+Math.max(0.5,hh).toFixed(1)+'" fill="'+(p.net>=0?"var(--green)":"var(--red)")+'" opacity="0.82"/>';
+   g+='<text x="'+cx.toFixed(1)+'" y="'+(H-PB+15)+'" text-anchor="middle" font-family="var(--mono)" font-size="9" fill="var(--ink-light)">'+t().cYear+" "+p.y+'</text>';});
+ var pts=pnl.map(function(p,idx){var cx=PL+slot*idx+slot/2;return cx.toFixed(1)+","+Y(p.cum).toFixed(1);}).join(" ");
+ g+='<polyline points="'+pts+'" fill="none" stroke="var(--gold-deep)" stroke-width="2.5"/>';
+ pnl.forEach(function(p,idx){var cx=PL+slot*idx+slot/2;g+='<circle cx="'+cx.toFixed(1)+'" cy="'+Y(p.cum).toFixed(1)+'" r="3.6" fill="var(--gold-deep)"/>';});
+ svg.innerHTML=g;
+}
+function drawCostChart(years){
+ var svg=el("costChart");if(!svg)return;
+ var W=600,H=280,PL=66,PB=34,PT=14;var max=0;
+ years.forEach(function(y){if(y.tot>max)max=y.tot;});if(max<=0)max=1;
+ var n=years.length;var slot=(W-PL-16)/n;var bw=Math.min(76,slot*0.6);
+ var g="";
+ for(var i=0;i<=4;i++){var gy=PT+(H-PT-PB)*(i/4);var val=max*(1-i/4);
+   g+='<line x1="'+PL+'" y1="'+gy.toFixed(1)+'" x2="'+(W-10)+'" y2="'+gy.toFixed(1)+'" stroke="var(--rule-soft)"/>';
+   g+='<text x="'+(PL-8)+'" y="'+(gy+3).toFixed(1)+'" text-anchor="end" font-family="var(--mono)" font-size="8" fill="var(--ink-faint)">'+shortMoney(val)+'</text>';}
+ years.forEach(function(y,idx){
+   var cx=PL+slot*idx+slot/2;var x=cx-bw/2;
+   var segs=[["cap","var(--blue)"],["rh","#9A7B1E"],["fixes","var(--gold)"],["vari","#D4B863"]];
+   var acc=0;
+   segs.forEach(function(sg){var v=y[sg[0]];if(v<=0)return;var hh=(H-PT-PB)*(v/max);var yy=(H-PB)-acc-hh;acc+=hh;
+     g+='<rect x="'+x.toFixed(1)+'" y="'+yy.toFixed(1)+'" width="'+bw.toFixed(1)+'" height="'+Math.max(0,hh).toFixed(1)+'" fill="'+sg[1]+'"/>';});
+   g+='<text x="'+cx.toFixed(1)+'" y="'+(H-PB+16)+'" text-anchor="middle" font-family="var(--mono)" font-size="9" fill="var(--ink-light)">'+t().cYear+" "+y.y+'</text>';
+   g+='<text x="'+cx.toFixed(1)+'" y="'+((H-PB)-acc-6).toFixed(1)+'" text-anchor="middle" font-family="var(--mono)" font-size="8" font-weight="700" fill="var(--ink)">'+shortMoney(y.tot)+'</text>';
+ });
+ svg.innerHTML=g;
+}
+
 function renderVerdict(){
  el("m7tag").textContent=t().m7tag;el("m7title").innerHTML=t().m7title[0]+"<em>"+t().m7title[1]+"</em>";el("m7lead").textContent=t().m7lead;
  el("vtable").innerHTML='<div class="vcol a"><div class="vh">'+t().vA.h+'</div><ul>'+t().vA.items.map(function(x){return '<li>'+x+'</li>';}).join("")+'</ul></div>'+
@@ -883,9 +1225,17 @@ function renderVerdict(){
 function renderPlan(){
  el("m8tag").textContent=t().m8tag;el("m8title").innerHTML=t().m8title[0]+"<em>"+t().m8title[1]+"</em>";el("m8lead").textContent=t().m8lead;
  el("planChantiers").innerHTML=PLAN.map(function(c){return '<div class="chantier"><h3><span class="cn">'+c.n+'</span>'+L(c.t)+'</h3><div class="csub">'+L(c.sub)+'</div>'+
-   '<div class="lev-row">'+c.items.map(function(it,i){return '<div class="lever"><div class="lt">'+L(it)+'</div><div class="lo">'+c.n+'.'+(i+1)+'</div></div>';}).join("")+'</div></div>';}).join("");
+   '<div class="lev-row">'+c.items.map(function(it,i){return '<details class="lever"><summary><span class="lhead"><span class="lt">'+L(it)+'</span><span class="lo">'+c.n+'.'+(i+1)+'</span></span><span class="lplus">+</span></summary><div class="lx">'+L(it.x)+'</div></details>';}).join("")+'</div></div>';}).join("");
  el("cta").innerHTML='<h3>'+t().ctaH[0]+'<br><em>'+t().ctaH[1]+'</em></h3><p>'+t().ctaP+'</p><a href="#m4">'+t().ctaBtn+'</a>';
  el("footer").innerHTML='<span><b>Buildfluence Intel</b>'+t().footL.replace("Buildfluence Intel","")+'</span><span>'+t().copyright+'</span><span>'+t().footR+'</span>';
+ if(window.matchMedia&&window.matchMedia("(hover:hover)").matches){
+   document.querySelectorAll("#planChantiers .lever").forEach(function(d){
+     d.addEventListener("mouseenter",function(){d.open=true;});
+     d.addEventListener("mouseleave",function(){d.open=false;});
+     var sm=d.querySelector("summary");
+     if(sm){sm.addEventListener("click",function(ev){ev.preventDefault();});}
+   });
+ }
 }
 
 /* =========================================================================
@@ -894,7 +1244,7 @@ function renderPlan(){
 function updateCountdown(){var target=new Date("2030-06-08T00:00:00");var now=new Date();var d=Math.max(0,Math.ceil((target-now)/86400000));el("countdown").innerHTML=t().count.replace("{d}",d.toLocaleString(lang==="fr"?"fr-FR":"en-US"));}
 function countUp(){document.querySelectorAll("[data-cu]").forEach(function(e){var target=parseFloat(e.getAttribute("data-cu"));if(!target)return;var cur=0;var step=target/30;var iv=setInterval(function(){cur+=step;if(cur>=target){cur=target;clearInterval(iv);}e.textContent=Number.isInteger(target)?Math.round(cur):cur.toFixed(1);},22);});}
 
-function renderAll(){renderChrome();renderHero();renderMethodo();renderBubble();renderMatrix();renderRadar();renderDuel();renderFoncier();renderSim();renderVerdict();renderPlan();updateCountdown();}
+function renderAll(){renderChrome();renderHero();renderMethodo();renderBubble();renderMatrix();renderRadar();renderDuel();renderFoncier();renderSim();renderCost();renderVerdict();renderPlan();updateCountdown();}
 
 function setLang(l){lang=l;renderAll();}
 function setTheme(th){theme=th;document.documentElement.setAttribute("data-theme",th);el("themeBtn").textContent=theme==="light"?t().theme[0]:t().theme[1];}
