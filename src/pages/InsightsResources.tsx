@@ -201,8 +201,9 @@ const InsightsResources = () => {
     transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
   }
   .ir-card-bg.contain {
-    background-size: contain;
+    background-size: cover;
     background-repeat: no-repeat;
+    background-position: top center;
     background-color: var(--bf-navy);
   }
   .ir-card:hover .ir-card-bg { transform: scale(1.06); }
