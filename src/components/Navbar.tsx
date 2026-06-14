@@ -142,9 +142,9 @@ const Navbar = () => {
           route: "/solutions/strategic-intelligence-lab#threat-intelligence",
         },
         {
-          label: t("Expérimentations & POCs", "Experiments & POCs"),
+          label: t("Modélisations & POCs", "Modeling & POCs"),
           desc: t("Prototypes et modèles prédictifs", "Prototypes and predictive models"),
-          route: "/solutions/strategic-intelligence-lab#experimentations-pocs",
+          route: "/solutions/strategic-intelligence-lab#modelisations-pocs",
         },
       ],
     },
