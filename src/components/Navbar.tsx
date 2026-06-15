@@ -36,17 +36,26 @@ const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [formOpen, setFormOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
+  const [accesModalOpen, setAccesModalOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
   const { session } = useAuth();
+
+  const openAccesLogin = () => {
+    window.open('/acces-premium', '_blank');
+  };
 
   const goToAccesPremium = () => {
     if (session) {
       navigate("/acces-premium/dashboard");
       window.scrollTo(0, 0);
-    } else {
-      window.open('/acces-premium', '_blank');
+      return;
     }
+    if (!PREMIUM_ACCESS_OPEN) {
+      setAccesModalOpen(true);
+      return;
+    }
+    openAccesLogin();
   };
 
   useEffect(() => {
