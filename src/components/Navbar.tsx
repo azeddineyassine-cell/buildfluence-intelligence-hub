@@ -25,6 +25,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate, useLocation } from "react-router-dom";
 import { FormStrategicExchange } from "./FormModals";
 import { useAuth } from "@/hooks/useAuth";
+import SearchOverlay from "./SearchOverlay";
 
 const Navbar = () => {
   const { lang, setLang, t } = useLanguage();
@@ -32,6 +33,7 @@ const Navbar = () => {
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [scrolled, setScrolled] = useState(false);
   const [formOpen, setFormOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
   const { session } = useAuth();
@@ -47,6 +49,13 @@ const Navbar = () => {
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
+    const onSearchKey = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
+        e.preventDefault();
+        setSearchOpen((v) => !v);
+      }
+    };
+    window.addEventListener("keydown", onSearchKey);
     window.addEventListener("scroll", onScroll);
     const onOpenAcces = () => goToAccesPremium();
     window.addEventListener("open-acces-premium", onOpenAcces as EventListener);
@@ -67,6 +76,7 @@ const Navbar = () => {
     } catch { /* noop */ }
     return () => {
       window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("keydown", onSearchKey);
       window.removeEventListener("open-acces-premium", onOpenAcces as EventListener);
       window.removeEventListener("open-strategic-exchange", onOpenExchange as EventListener);
       window.removeEventListener("message", onMessage);
@@ -526,6 +536,18 @@ const Navbar = () => {
             ))}
 
             <button
+              onClick={() => setSearchOpen(true)}
+              aria-label={t("Rechercher", "Search")}
+              title={t("Rechercher (Ctrl/Cmd+K)", "Search (Ctrl/Cmd+K)")}
+              className="flex items-center justify-center transition-colors"
+              style={{ color: "#4A5568" }}
+              onMouseOver={(e) => (e.currentTarget.style.color = "#0D1B2A")}
+              onMouseOut={(e) => (e.currentTarget.style.color = "#4A5568")}
+            >
+              <Search className="h-4 w-4" />
+            </button>
+
+            <button
               onClick={() => setLang(lang === "fr" ? "en" : "fr")}
               className="flex items-center gap-1.5 text-[12px] font-medium cursor-pointer transition-colors"
               style={{ color: "#8A8F9E" }}
@@ -548,9 +570,18 @@ const Navbar = () => {
             </button>
           </div>
 
-          <button onClick={() => setOpen(!open)} className="xl:hidden" style={{ color: "#0D1B2A" }} aria-label="Menu">
-            {open ? <X size={24} /> : <Menu size={24} />}
-          </button>
+          <div className="flex items-center gap-2 xl:hidden">
+            <button
+              onClick={() => setSearchOpen(true)}
+              aria-label={t("Rechercher", "Search")}
+              style={{ color: "#0D1B2A" }}
+            >
+              <Search size={22} />
+            </button>
+            <button onClick={() => setOpen(!open)} style={{ color: "#0D1B2A" }} aria-label="Menu">
+              {open ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
         </div>
 
         <AnimatePresence>
@@ -599,6 +630,7 @@ const Navbar = () => {
       </nav>
 
       <FormStrategicExchange open={formOpen} onClose={() => setFormOpen(false)} />
+      <SearchOverlay open={searchOpen} onClose={() => setSearchOpen(false)} />
 
     </>
   );
