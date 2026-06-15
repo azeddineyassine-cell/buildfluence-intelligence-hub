@@ -26,6 +26,8 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { FormStrategicExchange } from "./FormModals";
 import { useAuth } from "@/hooks/useAuth";
 import SearchOverlay from "./SearchOverlay";
+import AccesPremiumRequestModal from "./AccesPremiumRequestModal";
+import { PREMIUM_ACCESS_OPEN } from "@/config/premiumAccess";
 
 const Navbar = () => {
   const { lang, setLang, t } = useLanguage();
