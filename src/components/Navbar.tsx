@@ -642,6 +642,11 @@ const Navbar = () => {
 
       <FormStrategicExchange open={formOpen} onClose={() => setFormOpen(false)} />
       <SearchOverlay open={searchOpen} onClose={() => setSearchOpen(false)} />
+      <AccesPremiumRequestModal
+        open={accesModalOpen}
+        onClose={() => setAccesModalOpen(false)}
+        onLoginClick={openAccesLogin}
+      />
 
     </>
   );
