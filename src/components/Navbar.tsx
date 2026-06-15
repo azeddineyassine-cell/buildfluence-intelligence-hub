@@ -536,6 +536,18 @@ const Navbar = () => {
             ))}
 
             <button
+              onClick={() => setSearchOpen(true)}
+              aria-label={t("Rechercher", "Search")}
+              title={t("Rechercher (Ctrl/Cmd+K)", "Search (Ctrl/Cmd+K)")}
+              className="flex items-center justify-center transition-colors"
+              style={{ color: "#4A5568" }}
+              onMouseOver={(e) => (e.currentTarget.style.color = "#0D1B2A")}
+              onMouseOut={(e) => (e.currentTarget.style.color = "#4A5568")}
+            >
+              <Search className="h-4 w-4" />
+            </button>
+
+            <button
               onClick={() => setLang(lang === "fr" ? "en" : "fr")}
               className="flex items-center gap-1.5 text-[12px] font-medium cursor-pointer transition-colors"
               style={{ color: "#8A8F9E" }}
@@ -558,9 +570,18 @@ const Navbar = () => {
             </button>
           </div>
 
-          <button onClick={() => setOpen(!open)} className="xl:hidden" style={{ color: "#0D1B2A" }} aria-label="Menu">
-            {open ? <X size={24} /> : <Menu size={24} />}
-          </button>
+          <div className="flex items-center gap-2 xl:hidden">
+            <button
+              onClick={() => setSearchOpen(true)}
+              aria-label={t("Rechercher", "Search")}
+              style={{ color: "#0D1B2A" }}
+            >
+              <Search size={22} />
+            </button>
+            <button onClick={() => setOpen(!open)} style={{ color: "#0D1B2A" }} aria-label="Menu">
+              {open ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
         </div>
 
         <AnimatePresence>
@@ -609,6 +630,7 @@ const Navbar = () => {
       </nav>
 
       <FormStrategicExchange open={formOpen} onClose={() => setFormOpen(false)} />
+      <SearchOverlay open={searchOpen} onClose={() => setSearchOpen(false)} />
 
     </>
   );
