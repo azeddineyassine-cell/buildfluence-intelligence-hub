@@ -1,16 +1,19 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import logoBuildfluence from "@/assets/Logo_Buildfluence.png";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
+import AccesPremiumRequestModal from "@/components/AccesPremiumRequestModal";
 
 const AccesPremium = () => {
   const { t } = useLanguage();
   const { session, loading } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
+  const [modalOpen, setModalOpen] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [submitting, setSubmitting] = useState(false);
@@ -19,6 +22,11 @@ const AccesPremium = () => {
   useEffect(() => {
     if (!loading && session) navigate("/acces-premium/dashboard", { replace: true });
   }, [loading, session, navigate]);
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    if (params.get("invite") === "1") setModalOpen(true);
+  }, [location.search]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -114,6 +122,11 @@ const AccesPremium = () => {
           </button>
         </form>
       </motion.div>
+      <AccesPremiumRequestModal
+        open={modalOpen}
+        onClose={() => setModalOpen(false)}
+        onLoginClick={() => setModalOpen(false)}
+      />
     </div>
   );
 };
