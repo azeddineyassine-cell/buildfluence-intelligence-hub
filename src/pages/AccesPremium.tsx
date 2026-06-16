@@ -122,6 +122,11 @@ const AccesPremium = () => {
           </button>
         </form>
       </motion.div>
+      <AccesPremiumRequestModal
+        open={modalOpen}
+        onClose={() => setModalOpen(false)}
+        onLoginClick={() => setModalOpen(false)}
+      />
     </div>
   );
 };
