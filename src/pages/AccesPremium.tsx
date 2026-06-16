@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import logoBuildfluence from "@/assets/Logo_Buildfluence.png";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
+import AccesPremiumRequestModal from "@/components/AccesPremiumRequestModal";
 
 const AccesPremium = () => {
   const { t } = useLanguage();
