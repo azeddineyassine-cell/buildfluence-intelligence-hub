@@ -12,6 +12,8 @@ const AccesPremium = () => {
   const { t } = useLanguage();
   const { session, loading } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
+  const [modalOpen, setModalOpen] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [submitting, setSubmitting] = useState(false);
@@ -20,6 +22,11 @@ const AccesPremium = () => {
   useEffect(() => {
     if (!loading && session) navigate("/acces-premium/dashboard", { replace: true });
   }, [loading, session, navigate]);
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    if (params.get("invite") === "1") setModalOpen(true);
+  }, [location.search]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
