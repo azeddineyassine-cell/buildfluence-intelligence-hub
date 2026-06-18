@@ -8,13 +8,11 @@ import SolutionsSection from "@/components/SolutionsSection";
 import AdvancedCapabilities from "@/components/AdvancedCapabilities";
 import SuccessStoriesSection from "@/components/SuccessStoriesSection";
 import TestimonialsSection from "@/components/TestimonialsSection";
-import NewClientModal from "@/components/NewClientModal";
 
 import CTAFooter from "@/components/CTAFooter";
 
 const Index = () => (
   <div className="min-h-screen bg-background">
-    <NewClientModal />
     <Navbar />
     <HeroSection />
     <ClientProofStrip />
