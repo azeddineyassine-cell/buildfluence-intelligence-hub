@@ -18,6 +18,7 @@ import SuccessStories from "./pages/SuccessStories";
 import InsightsResources from "./pages/InsightsResources";
 import Barometre from "./pages/Barometre";
 import InsightsEsante from "./pages/InsightsEsante";
+import PolitiqueConfidentialite from "./pages/PolitiqueConfidentialite";
 
 
 // Situation pages
@@ -69,6 +70,7 @@ const App = () => (
             <Route path="/insights-resources" element={<InsightsResources />} />
             <Route path="/barometre" element={<Barometre />} />
             <Route path="/insights/esante" element={<InsightsEsante />} />
+            <Route path="/politique-de-confidentialite" element={<PolitiqueConfidentialite />} />
             
 
             {/* Situations */}

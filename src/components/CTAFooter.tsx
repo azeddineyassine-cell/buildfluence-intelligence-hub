@@ -162,8 +162,8 @@ const CTAFooter = () => {
                 {t("CLIQUEZ ICI POUR SIGN UP", "CLICK HERE TO SIGN UP")}
               </button>
               <p className="mt-4 text-[12px]" style={{ color: 'rgba(255,255,255,0.35)' }}>
-                <Link to="/contact" className="no-underline underline-offset-2 hover:underline" style={{ color: 'rgba(255,255,255,0.5)' }}>
-                  Privacy Policy
+                <Link to="/politique-de-confidentialite" className="no-underline underline-offset-2 hover:underline" style={{ color: 'rgba(255,255,255,0.5)' }}>
+                  {t("Politique de confidentialité", "Privacy Policy")}
                 </Link>
               </p>
             </div>
