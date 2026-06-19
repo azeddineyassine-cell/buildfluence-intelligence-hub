@@ -173,7 +173,7 @@ const CTAFooter = () => {
             <span className="text-[12px]" style={{ color: 'rgba(255,255,255,0.22)' }}>
               {t("© 2026 Buildfluence. Tous droits réservés.", "© 2026 Buildfluence. All rights reserved.")}
             </span>
-            <div className="flex gap-6">
+            <div className="flex gap-6 flex-wrap">
               {[
                 { label: t("Vos situations critiques", "Your Critical Situations"), href: "/situations-critiques" },
                 { label: "Insights & Resources", href: "#insights" },
@@ -190,6 +190,20 @@ const CTAFooter = () => {
                   {link.label}
                 </a>
               ))}
+              <button
+                type="button"
+                onClick={() => {
+                  if (typeof window !== "undefined") {
+                    window.dispatchEvent(new Event("cookie-consent-open"));
+                  }
+                }}
+                className="text-[11px] no-underline transition-colors"
+                style={{ color: 'rgba(255,255,255,0.3)', background: 'none', border: 'none', padding: 0, cursor: 'pointer' }}
+                onMouseOver={(e) => (e.currentTarget.style.color = 'rgba(255,255,255,0.7)')}
+                onMouseOut={(e) => (e.currentTarget.style.color = 'rgba(255,255,255,0.3)')}
+              >
+                {t("Gérer les cookies", "Manage cookies")}
+              </button>
             </div>
           </div>
         </div>
