@@ -29,6 +29,7 @@ const ISDHeroPanel = () => {
         background: "hsl(var(--navy))",
         borderRadius: "14px",
         padding: "26px 26px 24px",
+        boxShadow: "0 24px 60px -12px rgba(31, 58, 95, 0.35)",
       }}
     >
       {/* Sceau Premier Livre Blanc */}
