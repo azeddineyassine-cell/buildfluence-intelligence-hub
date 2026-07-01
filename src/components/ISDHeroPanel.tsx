@@ -35,7 +35,7 @@ const ISDHeroPanel = () => {
       <div
         className="absolute flex flex-col items-center justify-center"
         style={{
-          top: "22px",
+          top: "44px",
           right: "24px",
           width: "76px",
           height: "76px",
