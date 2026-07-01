@@ -19,6 +19,7 @@ import InsightsResources from "./pages/InsightsResources";
 import Barometre from "./pages/Barometre";
 import InsightsEsante from "./pages/InsightsEsante";
 import PolitiqueConfidentialite from "./pages/PolitiqueConfidentialite";
+import EnqueteISD from "./pages/EnqueteISD";
 
 
 // Situation pages
@@ -68,6 +69,7 @@ const App = () => (
             <Route path="/pourquoi-buildfluence" element={<PourquoiBuildfluence />} />
             <Route path="/success-stories" element={<SuccessStories />} />
             <Route path="/insights-resources" element={<InsightsResources />} />
+            <Route path="/insights-resources/enquete-isd" element={<EnqueteISD />} />
             <Route path="/barometre" element={<Barometre />} />
             <Route path="/insights/esante" element={<InsightsEsante />} />
             <Route path="/politique-de-confidentialite" element={<PolitiqueConfidentialite />} />

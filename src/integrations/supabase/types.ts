@@ -95,6 +95,132 @@ export type Database = {
         }
         Relationships: []
       }
+      isd_responses: {
+        Row: {
+          appro: Json | null
+          approfondissement: boolean
+          commentaire_ouvert: string | null
+          contact_email: string | null
+          contact_fonction: string | null
+          contact_nom: string | null
+          contact_organisation: string | null
+          created_at: string
+          dd_realisation: string | null
+          fonction: string | null
+          id: string
+          niveau: string | null
+          outil_carto: string[] | null
+          outil_crise: string[] | null
+          outil_donnee: string[] | null
+          outil_signaux: string[] | null
+          q1: number | null
+          q10: number | null
+          q11: number | null
+          q12: number | null
+          q2: number | null
+          q3: number | null
+          q4: number | null
+          q5: number | null
+          q6: number | null
+          q7: number | null
+          q8: number | null
+          q9: number | null
+          score_global: number | null
+          score_p1: number | null
+          score_p2: number | null
+          score_p3: number | null
+          score_p4: number | null
+          secteur: string | null
+          type_organisation: string | null
+          veille_capitalisation: string | null
+          veille_organisation: string | null
+          veille_outil: string | null
+          veille_thematiques: string[] | null
+        }
+        Insert: {
+          appro?: Json | null
+          approfondissement?: boolean
+          commentaire_ouvert?: string | null
+          contact_email?: string | null
+          contact_fonction?: string | null
+          contact_nom?: string | null
+          contact_organisation?: string | null
+          created_at?: string
+          dd_realisation?: string | null
+          fonction?: string | null
+          id?: string
+          niveau?: string | null
+          outil_carto?: string[] | null
+          outil_crise?: string[] | null
+          outil_donnee?: string[] | null
+          outil_signaux?: string[] | null
+          q1?: number | null
+          q10?: number | null
+          q11?: number | null
+          q12?: number | null
+          q2?: number | null
+          q3?: number | null
+          q4?: number | null
+          q5?: number | null
+          q6?: number | null
+          q7?: number | null
+          q8?: number | null
+          q9?: number | null
+          score_global?: number | null
+          score_p1?: number | null
+          score_p2?: number | null
+          score_p3?: number | null
+          score_p4?: number | null
+          secteur?: string | null
+          type_organisation?: string | null
+          veille_capitalisation?: string | null
+          veille_organisation?: string | null
+          veille_outil?: string | null
+          veille_thematiques?: string[] | null
+        }
+        Update: {
+          appro?: Json | null
+          approfondissement?: boolean
+          commentaire_ouvert?: string | null
+          contact_email?: string | null
+          contact_fonction?: string | null
+          contact_nom?: string | null
+          contact_organisation?: string | null
+          created_at?: string
+          dd_realisation?: string | null
+          fonction?: string | null
+          id?: string
+          niveau?: string | null
+          outil_carto?: string[] | null
+          outil_crise?: string[] | null
+          outil_donnee?: string[] | null
+          outil_signaux?: string[] | null
+          q1?: number | null
+          q10?: number | null
+          q11?: number | null
+          q12?: number | null
+          q2?: number | null
+          q3?: number | null
+          q4?: number | null
+          q5?: number | null
+          q6?: number | null
+          q7?: number | null
+          q8?: number | null
+          q9?: number | null
+          score_global?: number | null
+          score_p1?: number | null
+          score_p2?: number | null
+          score_p3?: number | null
+          score_p4?: number | null
+          secteur?: string | null
+          type_organisation?: string | null
+          veille_capitalisation?: string | null
+          veille_organisation?: string | null
+          veille_outil?: string | null
+          veille_thematiques?: string[] | null
+        }
+        Relationships: []
+      }
       leads: {
         Row: {
           created_at: string
