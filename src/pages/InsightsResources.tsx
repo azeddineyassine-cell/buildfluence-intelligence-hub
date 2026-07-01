@@ -54,11 +54,35 @@ const InsightsResources = () => {
 
   const CARDS: Card[] = [
     {
+      id: "enquete-isd-2026",
+      filter: "intelligence-economique",
+      category: t("Étude nationale", "National study"),
+      date: t("2026 · Enquête ouverte", "2026 · Survey open"),
+      title: t(
+        "État de la maturité en intelligence stratégique au Maroc",
+        "The state of strategic intelligence maturity in Morocco"
+      ),
+      subtitle: t(
+        "AUTODIAGNOSTIC · 4 PILIERS · 13 DIMENSIONS",
+        "SELF-ASSESSMENT · 4 PILLARS · 13 DIMENSIONS"
+      ),
+      summary: t(
+        "Mesurez votre souveraineté décisionnelle en 10 minutes et entrez dans la première étude nationale et sectorielle, socle du premier Livre Blanc du domaine.",
+        "Assess your decision sovereignty in 10 minutes and join the first national and sectoral study, foundation of the field's first White Paper."
+      ),
+      href: "/insights-resources/enquete-isd",
+      sameTab: true,
+      gradient: "linear-gradient(150deg, #1F3A5F, #152A45)",
+      actions: [
+        { label: t("Participer à l'étude →", "Join the study →"), href: "/insights-resources/enquete-isd", variant: "primary", sameTab: true },
+      ],
+    },
+    {
       id: "barometre-sep-2025",
       filter: "barometre",
       category: t("Baromètre", "Barometer"),
       date: "Sep 2025",
-      title: t("Baromètre d'Investissement — Sep 2025", "Investment Barometer — Sep 2025"),
+      title: t("Baromètre d'Investissement · Sep 2025", "Investment Barometer · Sep 2025"),
       summary: t(
         "Vietnam, Afrique du Sud, Mexique… Le Maroc peut-il rivaliser ? 9 secteurs, 24 600 données, 18 pays concurrents analysés sur 31 jours d'observation continue.",
         "Vietnam, South Africa, Mexico… Can Morocco compete? 9 sectors, 24,600 data points, 18 competing countries analyzed over 31 days of continuous observation."
@@ -87,7 +111,7 @@ const InsightsResources = () => {
     {
       id: "benchmark-api-mai-2026",
       filter: "intelligence-economique",
-      category: t("Extrait gratuit", "Free extract"),
+      category: t("Aperçu", "Preview"),
       date: t("Mai 2026", "May 2026"),
       title: t(
         "Benchmark des Agences de Promotion des Investissements (API)",
