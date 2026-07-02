@@ -104,6 +104,7 @@ export type Database = {
           contact_fonction: string | null
           contact_nom: string | null
           contact_organisation: string | null
+          contact_telephone: string | null
           created_at: string
           dd_realisation: string | null
           fonction: string | null
@@ -135,6 +136,7 @@ export type Database = {
           veille_capitalisation: string | null
           veille_organisation: string | null
           veille_outil: string | null
+          veille_outil_precision: string | null
           veille_thematiques: string[] | null
         }
         Insert: {
@@ -145,6 +147,7 @@ export type Database = {
           contact_fonction?: string | null
           contact_nom?: string | null
           contact_organisation?: string | null
+          contact_telephone?: string | null
           created_at?: string
           dd_realisation?: string | null
           fonction?: string | null
@@ -176,6 +179,7 @@ export type Database = {
           veille_capitalisation?: string | null
           veille_organisation?: string | null
           veille_outil?: string | null
+          veille_outil_precision?: string | null
           veille_thematiques?: string[] | null
         }
         Update: {
@@ -186,6 +190,7 @@ export type Database = {
           contact_fonction?: string | null
           contact_nom?: string | null
           contact_organisation?: string | null
+          contact_telephone?: string | null
           created_at?: string
           dd_realisation?: string | null
           fonction?: string | null
@@ -217,6 +222,7 @@ export type Database = {
           veille_capitalisation?: string | null
           veille_organisation?: string | null
           veille_outil?: string | null
+          veille_outil_precision?: string | null
           veille_thematiques?: string[] | null
         }
         Relationships: []
