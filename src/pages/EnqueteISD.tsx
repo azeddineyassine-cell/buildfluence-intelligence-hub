@@ -1126,8 +1126,6 @@ const ContactScreen = ({ lang, state, setState, onSubmit, onPrev, submitting }: 
 // éditorial, pas une formule de scoring.
 // =========================================================================
 const ResultScreen = ({ lang, result, onExchange }: { lang: "fr" | "en"; result: IsdResult; onExchange: () => void }) => {
-  const RECHARTS = require("recharts");
-  const { RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar, ResponsiveContainer } = RECHARTS;
 
   const NIVEAUX = [
     { key: "Embryonnaire", fr: { name: "Embryonnaire", desc: "aucun dispositif structuré, décisions à l'intuition et à la réaction." }, en: { name: "Embryonic", desc: "no structured setup, decisions driven by intuition and reaction." } },
