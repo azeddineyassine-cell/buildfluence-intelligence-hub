@@ -1072,12 +1072,12 @@ const ContactScreen = ({ lang, state, setState, onSubmit, onPrev, submitting }: 
   const inputStyle = { background: "#fff", borderColor: "rgba(31,58,95,0.25)", color: NAVY };
   return (
     <div>
-      <Overline>{t2("REMISE DIFFÉRÉE", "DEFERRED DELIVERY", lang)}</Overline>
-      <H2>{t2("Vos réponses sont sur le point d'être enregistrées.", "Your answers are about to be recorded.", lang)}</H2>
+      <Overline>{t2("REMISE IMMÉDIATE DU DIAGNOSTIC", "IMMEDIATE DIAGNOSIS DELIVERY", lang)}</Overline>
+      <H2>{t2("Dernière étape avant votre diagnostic.", "One last step before your diagnosis.", lang)}</H2>
       <Body>
         {t2(
-          "Votre diagnostic personnalisé vous sera remis à l'issue de l'étude État de la maturité 2026.",
-          "Your personalized diagnosis will be delivered after the 2026 Maturity Report study.",
+          "Votre Indice de Souveraineté Décisionnelle et votre radar par pilier vous seront affichés à l'écran dès l'enregistrement. Votre positionnement national sera révélé à l'issue de l'étude 2026.",
+          "Your Decision Sovereignty Index and pillar-level radar will be displayed on screen as soon as your answers are recorded. Your national positioning will be revealed at the conclusion of the 2026 study.",
           lang,
         )}
       </Body>
@@ -1099,33 +1099,224 @@ const ContactScreen = ({ lang, state, setState, onSubmit, onPrev, submitting }: 
           <Label style={{ color: NAVY }}>Email</Label>
           <Input style={inputStyle} type="email" value={state.contact_email} onChange={(e) => setState({ ...state, contact_email: e.target.value })} maxLength={254} />
         </div>
+        <div style={{ gridColumn: "1 / -1" }}>
+          <Label style={{ color: NAVY }}>
+            {t2("Téléphone", "Phone", lang)}{" "}
+            <span style={{ opacity: 0.6, fontWeight: 400 }}>({t2("facultatif", "optional", lang)})</span>
+          </Label>
+          <Input style={inputStyle} type="tel" value={state.contact_telephone} onChange={(e) => setState({ ...state, contact_telephone: e.target.value })} maxLength={40} />
+        </div>
       </div>
 
       <div style={{ display: "flex", gap: 12, marginTop: 24 }}>
         <GhostButton onClick={onPrev}>{t2("Retour", "Back", lang)}</GhostButton>
         <GoldButton onClick={onSubmit} disabled={!canGo || submitting}>
-          {submitting ? t2("Envoi…", "Sending…", lang) : t2("Enregistrer mes réponses", "Save my answers", lang)}
+          {submitting ? t2("Envoi…", "Sending…", lang) : t2("Obtenir mon diagnostic", "Get my diagnosis", lang)}
         </GoldButton>
       </div>
     </div>
   );
 };
 
-const FinalDoneScreen = ({ lang, onExchange }: { lang: "fr" | "en"; onExchange: () => void }) => (
-  <div style={{ paddingTop: 40 }}>
-    <Overline>{t2("ENREGISTRÉ", "RECORDED", lang)}</Overline>
-    <H1>{t2("Vos réponses sont enregistrées.", "Your answers have been recorded.", lang)}</H1>
-    <Body>
-      {t2(
-        "Votre diagnostic personnalisé vous sera remis à l'issue de l'étude État de la maturité 2026.",
-        "Your personalized diagnosis will be delivered after the 2026 Maturity Report study.",
+// =========================================================================
+// Écran de résultat : Indice, échelle, radar, lecture, recommandations, CTA.
+// Ne dépend d'aucune formule locale : lit uniquement les scores renvoyés
+// par l'Edge function. Le mapping recommandations -> solution est du contenu
+// éditorial, pas une formule de scoring.
+// =========================================================================
+const ResultScreen = ({ lang, result, onExchange }: { lang: "fr" | "en"; result: IsdResult; onExchange: () => void }) => {
+  const RECHARTS = require("recharts");
+  const { RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar, ResponsiveContainer } = RECHARTS;
+
+  const NIVEAUX = [
+    { key: "Embryonnaire", fr: { name: "Embryonnaire", desc: "aucun dispositif structuré, décisions à l'intuition et à la réaction." }, en: { name: "Embryonic", desc: "no structured setup, decisions driven by intuition and reaction." } },
+    { key: "Réactif", fr: { name: "Réactif", desc: "actions ponctuelles, déclenchées après l'événement, sans outil ni processus." }, en: { name: "Reactive", desc: "occasional actions, triggered after the event, with no tool or process." } },
+    { key: "Émergent", fr: { name: "Émergent", desc: "premières démarches structurées, partielles et non systématiques." }, en: { name: "Emerging", desc: "first structured initiatives, partial and not systematic." } },
+    { key: "Structuré", fr: { name: "Structuré", desc: "processus formalisés, outillés et pilotés régulièrement." }, en: { name: "Structured", desc: "formal, tool-supported processes, steered regularly." } },
+    { key: "Souverain", fr: { name: "Souverain", desc: "dispositif intégré, proactif et anticipatif, créateur d'avantage stratégique." }, en: { name: "Sovereign", desc: "integrated, proactive and anticipatory setup, creating strategic advantage." } },
+  ];
+
+  const pillars = [
+    { key: "p1", name: t2("Souveraineté décisionnelle", "Decision sovereignty", lang), value: result.score_p1 },
+    { key: "p2", name: t2("Veille stratégique", "Strategic monitoring", lang), value: result.score_p2 },
+    { key: "p3", name: t2("Risk Management", "Risk Management", lang), value: result.score_p3 },
+    { key: "p4", name: t2("Due Diligence & Intelligence d'affaires", "Due Diligence & Business Intelligence", lang), value: result.score_p4 },
+  ];
+
+  const strongest = pillars.reduce((a, b) => (b.value > a.value ? b : a), pillars[0]);
+  const weakest = pillars.reduce((a, b) => (b.value < a.value ? b : a), pillars[0]);
+
+  const SOLUTIONS = {
+    sil: {
+      name: t2("Strategic Intelligence Lab", "Strategic Intelligence Lab", lang),
+      href: "/solutions/strategic-intelligence-lab",
+    },
+    ddd: {
+      name: t2("Deep Due Diligence", "Deep Due Diligence", lang),
+      href: "/solutions/deep-due-diligence",
+    },
+    spi: {
+      name: t2("Soft Power and Influence", "Soft Power and Influence", lang),
+      href: "/solutions/soft-power-influence",
+    },
+  };
+
+  const prioritySolution = (weakest.key === "p4") ? SOLUTIONS.ddd : SOLUTIONS.sil;
+  const q11Weak = result.q11 !== null && result.q11 <= 2;
+
+  const recos: { text: string; solution: { name: string; href: string } }[] = [
+    {
+      text: t2(
+        `Renforcer en priorité le pilier « ${weakest.name} », votre point d'appui le plus fragile aujourd'hui.`,
+        `Prioritize strengthening the pillar "${weakest.name}", your most fragile foothold today.`,
         lang,
-      )}
-    </Body>
-    <div style={{ marginTop: 24 }}>
-      <GoldButton onClick={onExchange}>{t2("Demander un échange stratégique", "Request a strategic exchange", lang)}</GoldButton>
+      ),
+      solution: prioritySolution,
+    },
+    {
+      text: t2(
+        `Capitaliser sur votre point fort « ${strongest.name} » pour ancrer une gouvernance de décision plus intégrée.`,
+        `Leverage your strength "${strongest.name}" to anchor a more integrated decision governance.`,
+        lang,
+      ),
+      solution: SOLUTIONS.sil,
+    },
+  ];
+  if (q11Weak) {
+    recos.push({
+      text: t2(
+        "Structurer une trajectoire d'influence et de rayonnement pour convertir votre légitimité en ascendant stratégique.",
+        "Structure an influence and outreach trajectory to convert your legitimacy into strategic ascendancy.",
+        lang,
+      ),
+      solution: SOLUTIONS.spi,
+    });
+  }
+
+  const nivKey = result.niveau;
+  const ctaLabel = (nivKey === "Embryonnaire" || nivKey === "Réactif")
+    ? t2("Activer un POC de diagnostic souverain", "Activate a sovereign diagnosis POC", lang)
+    : (nivKey === "Souverain")
+      ? t2("Recevoir le Livre Blanc 2026", "Receive the 2026 White Paper", lang)
+      : t2("Demander un échange stratégique", "Request a strategic exchange", lang);
+
+  const nivIndex = Math.max(0, NIVEAUX.findIndex((n) => n.key === nivKey));
+
+  return (
+    <div>
+      <Overline>{t2("VOTRE DIAGNOSTIC ISD", "YOUR ISD DIAGNOSIS", lang)}</Overline>
+      <H1>{t2("Indice de Souveraineté Décisionnelle", "Decision Sovereignty Index", lang)}</H1>
+
+      {/* Score global + niveau */}
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, margin: "16px 0 28px" }}>
+        <div style={{ background: "#fff", borderTop: `3px solid ${GOLD}`, padding: 20 }}>
+          <div style={{ fontFamily: "'JetBrains Mono', ui-monospace, monospace", fontSize: 11, letterSpacing: "0.2em", color: NAVY, opacity: 0.7 }}>
+            {t2("INDICE GLOBAL", "GLOBAL INDEX", lang)}
+          </div>
+          <div style={{ fontFamily: "'Playfair Display', serif", color: NAVY, fontSize: 44, fontWeight: 700, lineHeight: 1 }}>
+            {result.score_global.toFixed(2)}
+            <span style={{ fontSize: 20, color: NAVY, opacity: 0.5 }}> / 4</span>
+          </div>
+        </div>
+        <div style={{ background: NAVY, color: "#fff", padding: 20 }}>
+          <div style={{ fontFamily: "'JetBrains Mono', ui-monospace, monospace", fontSize: 11, letterSpacing: "0.2em", color: GOLD }}>
+            {t2("NIVEAU ATTEINT", "LEVEL REACHED", lang)}
+          </div>
+          <div style={{ fontFamily: "'Playfair Display', serif", fontSize: 30, fontWeight: 600, marginTop: 4 }}>
+            {NIVEAUX[nivIndex][lang].name}
+          </div>
+          <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 13, marginTop: 6, opacity: 0.85 }}>
+            {NIVEAUX[nivIndex][lang].desc}
+          </div>
+        </div>
+      </div>
+
+      {/* Échelle 5 niveaux */}
+      <div style={{ margin: "28px 0" }}>
+        <Overline>{t2("ÉCHELLE DES 5 NIVEAUX", "5-LEVEL SCALE", lang)}</Overline>
+        <div style={{ marginTop: 12 }}>
+          {NIVEAUX.map((n, i) => {
+            const active = i === nivIndex;
+            return (
+              <div key={n.key} style={{
+                display: "grid", gridTemplateColumns: "auto 1fr", gap: 16, alignItems: "flex-start",
+                padding: "12px 16px", marginBottom: 6,
+                background: active ? "#fff" : "transparent",
+                borderLeft: `3px solid ${active ? GOLD : "rgba(31,58,95,0.15)"}`,
+                borderRadius: 2,
+              }}>
+                <div style={{ fontFamily: "'Playfair Display', serif", color: active ? GOLD : NAVY, fontSize: 22, fontWeight: 700, opacity: active ? 1 : 0.6, minWidth: 24 }}>{i}</div>
+                <div>
+                  <div style={{ fontFamily: "'DM Sans', sans-serif", color: NAVY, fontSize: 14, fontWeight: active ? 700 : 600 }}>{n[lang].name}</div>
+                  <div style={{ fontFamily: "'DM Sans', sans-serif", color: NAVY, fontSize: 13, opacity: 0.75, lineHeight: 1.5 }}>{n[lang].desc}</div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* Radar */}
+      <div style={{ margin: "28px 0", background: "#fff", padding: 20, borderTop: `3px solid ${GOLD}` }}>
+        <Overline>{t2("RADAR DES 4 PILIERS", "4-PILLAR RADAR", lang)}</Overline>
+        <div style={{ width: "100%", height: 360, marginTop: 12 }}>
+          <ResponsiveContainer width="100%" height="100%">
+            <RadarChart data={pillars} outerRadius="72%">
+              <PolarGrid stroke="rgba(31,58,95,0.25)" />
+              <PolarAngleAxis dataKey="name" tick={{ fill: NAVY, fontSize: 11, fontFamily: "'DM Sans', sans-serif" }} />
+              <PolarRadiusAxis angle={90} domain={[0, 4]} tick={{ fill: NAVY, fontSize: 10 }} stroke="rgba(31,58,95,0.2)" />
+              <Radar name="ISD" dataKey="value" stroke={GOLD} fill={GOLD} fillOpacity={0.35} strokeWidth={2} />
+            </RadarChart>
+          </ResponsiveContainer>
+        </div>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", gap: 8, marginTop: 8 }}>
+          {pillars.map((p) => (
+            <div key={p.key} style={{ fontFamily: "'JetBrains Mono', ui-monospace, monospace", fontSize: 11, color: NAVY }}>
+              <span style={{ color: GOLD }}>■</span> {p.name} : <strong>{p.value.toFixed(2)}</strong>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Lecture et recommandations */}
+      <div style={{ margin: "28px 0" }}>
+        <Overline>{t2("LECTURE ET RECOMMANDATIONS", "READING AND RECOMMENDATIONS", lang)}</Overline>
+        <H2>{t2("Points d'appui et priorités", "Strengths and priorities", lang)}</H2>
+        <Body>
+          {t2(
+            `Votre point fort : ${strongest.name} (${strongest.value.toFixed(2)}). Votre priorité : ${weakest.name} (${weakest.value.toFixed(2)}).`,
+            `Your strength: ${strongest.name} (${strongest.value.toFixed(2)}). Your priority: ${weakest.name} (${weakest.value.toFixed(2)}).`,
+            lang,
+          )}
+        </Body>
+        <div>
+          {recos.map((r, i) => (
+            <div key={i} style={{ background: "#fff", borderLeft: `3px solid ${GOLD}`, padding: "14px 16px", marginBottom: 10 }}>
+              <div style={{ fontFamily: "'DM Sans', sans-serif", color: NAVY, fontSize: 14, lineHeight: 1.55 }}>{r.text}</div>
+              <a href={r.solution.href} style={{ display: "inline-block", marginTop: 8, fontFamily: "'JetBrains Mono', ui-monospace, monospace", fontSize: 11, letterSpacing: "0.15em", textTransform: "uppercase", color: GOLD, textDecoration: "none" }}>
+                {t2("Solution recommandée", "Recommended solution", lang)} : {r.solution.name} →
+              </a>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Bloc positionnement national */}
+      <div style={{ margin: "28px 0", padding: "14px 18px", background: "rgba(31,58,95,0.06)", borderLeft: `3px solid ${NAVY}`, fontFamily: "'DM Sans', sans-serif", color: NAVY, fontSize: 13, lineHeight: 1.6 }}>
+        {t2(
+          "Votre positionnement national vous sera révélé à l'issue de l'étude 2026.",
+          "Your national positioning will be revealed at the conclusion of the 2026 study.",
+          lang,
+        )}
+      </div>
+
+      {/* CTA calibré par température */}
+      <div style={{ marginTop: 24, display: "flex", gap: 12, flexWrap: "wrap" }}>
+        <GoldButton onClick={onExchange}>{ctaLabel}</GoldButton>
+      </div>
     </div>
-  </div>
-);
+  );
+};
+
 
 export default EnqueteISD;
