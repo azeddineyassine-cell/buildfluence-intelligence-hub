@@ -967,6 +967,19 @@ const VeilleScreen = ({ lang, state, setState, onNext, onPrev }: any) => {
       </div>
 
       <SingleChoice label={`V2 · ${t2("Outil (choix unique, le plus avancé atteint)", "Tool (single choice, most advanced reached)", lang)}`} options={VEILLE_OUTIL[lang]} value={currentOutil} onChange={setOutil} />
+      {(state.veille_outil === "Plateforme de veille dédiée" || state.veille_outil === "Cellule interne outillée") && (
+        <div style={{ marginTop: -8, marginBottom: 20, paddingLeft: 12, borderLeft: `2px solid ${GOLD}` }}>
+          <div style={{ fontFamily: "'JetBrains Mono', ui-monospace, monospace", fontSize: 11, letterSpacing: "0.15em", textTransform: "uppercase", color: NAVY, marginBottom: 8 }}>
+            {t2("Précisez", "Please specify", lang)}
+          </div>
+          <Input
+            value={state.veille_outil_precision}
+            onChange={(e: any) => setState({ ...state, veille_outil_precision: e.target.value })}
+            maxLength={500}
+            style={{ background: "#fff", borderColor: "rgba(31,58,95,0.25)", color: NAVY }}
+          />
+        </div>
+      )}
       <SingleChoice label={`V3 · ${t2("Organisation du service (choix unique)", "Service organization (single choice)", lang)}`} options={VEILLE_ORG[lang]} value={currentOrg} onChange={setOrg} />
       <SingleChoice label={`V4 · ${t2("Capitalisation et production de contenu (choix unique)", "Capitalization and content production (single choice)", lang)}`} options={VEILLE_CAPI[lang]} value={currentCapi} onChange={setCapi} />
 
