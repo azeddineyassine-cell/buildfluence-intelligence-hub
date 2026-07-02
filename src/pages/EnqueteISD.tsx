@@ -815,13 +815,13 @@ const ScreenHome = ({ lang, onStart, onPrev }: { lang: "fr" | "en"; onStart: () 
 
       <div
         className="isd-pillars-grid"
-        style={{ display: "grid", gap: 16, margin: "24px 0 32px" }}
+        style={{ display: "grid", gap: 18, margin: "24px 0 32px" }}
       >
         {pillars.map((p) => (
-          <div key={p.num} style={{ background: "#fff", borderTop: `3px solid ${GOLD}`, padding: 20 }}>
-            <div style={{ fontFamily: "'Playfair Display', serif", color: GOLD, fontSize: 24, fontWeight: 700, marginBottom: 6 }}>{p.num}</div>
-            <div style={{ fontFamily: "'Playfair Display', serif", color: NAVY, fontSize: 16, fontWeight: 600, lineHeight: 1.25, marginBottom: 8 }}>{p.title[lang]}</div>
-            <div style={{ fontFamily: "'JetBrains Mono', ui-monospace, monospace", fontSize: 11, color: NAVY, opacity: 0.7, lineHeight: 1.5 }}>{p.dims[lang]}</div>
+          <div key={p.num} className="isd-pillar-card">
+            <div className="isd-pillar-card-num">{p.num}</div>
+            <div className="isd-pillar-card-title">{p.title[lang]}</div>
+            <div className="isd-pillar-card-dims">{p.dims[lang]}</div>
           </div>
         ))}
       </div>
@@ -830,6 +830,13 @@ const ScreenHome = ({ lang, onStart, onPrev }: { lang: "fr" | "en"; onStart: () 
         .isd-pillars-grid { grid-template-columns: 1fr; }
         @media (min-width: 640px) { .isd-pillars-grid { grid-template-columns: repeat(2, 1fr); } }
         @media (min-width: 1024px) { .isd-pillars-grid { grid-template-columns: repeat(4, 1fr); } }
+        .isd-pillar-card { background: #1F3A5F; border: 1px solid rgba(201,168,76,0.25); padding: 28px 22px; position: relative; overflow: hidden; transition: transform .35s, border-color .35s, box-shadow .35s; }
+        .isd-pillar-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: #C9A84C; transform: scaleX(0); transform-origin: left; transition: transform .35s ease; }
+        .isd-pillar-card:hover { transform: translateY(-4px); border-color: #C9A84C; box-shadow: 0 12px 30px -10px rgba(31,58,95,0.35); }
+        .isd-pillar-card:hover::before { transform: scaleX(1); }
+        .isd-pillar-card-num { font-family: 'Playfair Display', serif; color: #C9A84C; font-size: 28px; font-weight: 700; line-height: 1; margin-bottom: 14px; }
+        .isd-pillar-card-title { font-family: 'Playfair Display', serif; color: #FAF6ED; font-size: 18px; font-weight: 600; line-height: 1.3; margin-bottom: 12px; }
+        .isd-pillar-card-dims { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 11px; color: rgba(250,246,237,0.7); line-height: 1.6; letter-spacing: 0.02em; }
       `}</style>
 
       <div style={{ display: "flex", gap: 12 }}>
