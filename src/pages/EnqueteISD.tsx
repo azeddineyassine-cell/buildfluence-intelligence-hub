@@ -502,16 +502,16 @@ const EnqueteISD = () => {
   const navigate = useNavigate();
   const [s, setS] = useState<State>(initialState);
   const [submitting, setSubmitting] = useState(false);
-  const [done, setDone] = useState(false);
+  const [result, setResult] = useState<IsdResult | null>(null);
 
   // 4 étapes fonctionnelles pour la barre (Piliers I·II·III·IV)
   const totalPillars = 4;
   const pillarActive = useMemo(() => {
-    if (s.step <= 1) return 0;
-    if (s.step >= 2 && s.step <= 4) return 1; // P1 (Q1-Q3)
-    if (s.step === 5) return 2; // Veille
-    if (s.step >= 6 && s.step <= 10) return 3; // P3 (Q4-Q8)
-    if (s.step >= 11 && s.step <= 14) return 4; // P4 (Q9-Q12)
+    if (s.step <= 2) return 0;
+    if (s.step >= 3 && s.step <= 5) return 1; // P1 (Q1-Q3)
+    if (s.step === 6) return 2; // Veille
+    if (s.step >= 7 && s.step <= 11) return 3; // P3 (Q4-Q8)
+    if (s.step >= 12 && s.step <= 15) return 4; // P4 (Q9-Q12)
     return 4;
   }, [s.step]);
 
@@ -531,6 +531,7 @@ const EnqueteISD = () => {
         q9: s.answers.q9, q10: s.answers.q10, q11: s.answers.q11, q12: s.answers.q12,
         veille_thematiques: s.veille_thematiques,
         veille_outil: s.veille_outil,
+        veille_outil_precision: s.veille_outil_precision || null,
         veille_organisation: s.veille_organisation,
         veille_capitalisation: s.veille_capitalisation,
         outil_donnee: (s.tools.outil_donnee as string[]) || [],
@@ -543,12 +544,22 @@ const EnqueteISD = () => {
         commentaire_ouvert: s.commentaire_ouvert || null,
         contact_nom: s.contact_nom, contact_fonction: s.contact_fonction,
         contact_organisation: s.contact_organisation, contact_email: s.contact_email,
+        contact_telephone: s.contact_telephone || null,
       };
       const { data, error } = await supabase.functions.invoke("score-isd", { body: payload });
-      if (error || !(data as any)?.success) {
+      const d: any = data;
+      if (error || !(d?.success || d?.ok)) {
         throw new Error(error?.message || "submission_failed");
       }
-      setDone(true);
+      setResult({
+        score_global: Number(d.score_global ?? 0),
+        niveau: String(d.niveau ?? ""),
+        score_p1: Number(d.score_p1 ?? 0),
+        score_p2: Number(d.score_p2 ?? 0),
+        score_p3: Number(d.score_p3 ?? 0),
+        score_p4: Number(d.score_p4 ?? 0),
+        q11: d.q11 == null ? null : Number(d.q11),
+      });
       window.scrollTo(0, 0);
     } catch (e) {
       toast({
@@ -575,12 +586,12 @@ const EnqueteISD = () => {
             <span>{t("Enquête ISD", "ISD Survey")}</span>
           </nav>
 
-          {done ? (
-            <FinalDoneScreen lang={lang} onExchange={() => window.dispatchEvent(new Event("open-strategic-exchange"))} />
+          {result ? (
+            <ResultScreen lang={lang} result={result} onExchange={() => window.dispatchEvent(new Event("open-strategic-exchange"))} />
           ) : (
             <>
-              {/* Barre de progression par piliers */}
-              {s.step > 0 && (
+              {/* Barre de progression par piliers (masquée sur Intro, Piliers overview, Tagging) */}
+              {s.step > 2 && (
                 <div style={{ marginBottom: 32 }}>
                   <div style={{ display: "flex", gap: 8, marginBottom: 8 }}>
                     {Array.from({ length: totalPillars }).map((_, i) => (
@@ -593,71 +604,78 @@ const EnqueteISD = () => {
                 </div>
               )}
 
-              {s.step === 0 && <ScreenHome lang={lang} onStart={goNext} />}
+              {s.step === 0 && <IntroScreen lang={lang} onNext={goNext} />}
+              {s.step === 1 && <ScreenHome lang={lang} onStart={goNext} onPrev={goPrev} />}
 
-              {s.step === 1 && (
+              {s.step === 2 && (
                 <ScreenTagging
                   lang={lang} state={s} setState={setS}
-                  onNext={goNext} onPrev={() => navigate(-1)}
+                  onNext={goNext} onPrev={goPrev}
                 />
               )}
 
               {/* Questions notées : mappe step -> question index */}
-              {s.step >= 2 && s.step <= 4 && (
-                <QuestionScreen lang={lang} qdef={QUESTIONS[s.step - 2]}
-                  value={s.answers[QUESTIONS[s.step - 2].key] ?? null}
-                  onValue={(v) => setAnswer(QUESTIONS[s.step - 2].key, v)}
-                  toolValue={QUESTIONS[s.step - 2].tool ? s.tools[QUESTIONS[s.step - 2].tool!.field] as any : null}
-                  onToolValue={(v) => QUESTIONS[s.step - 2].tool && setTool(QUESTIONS[s.step - 2].tool!.field, v)}
+              {s.step >= 3 && s.step <= 5 && (
+                <QuestionScreen lang={lang} qdef={QUESTIONS[s.step - 3]}
+                  value={s.answers[QUESTIONS[s.step - 3].key] ?? null}
+                  onValue={(v) => setAnswer(QUESTIONS[s.step - 3].key, v)}
+                  toolValue={QUESTIONS[s.step - 3].tool ? s.tools[QUESTIONS[s.step - 3].tool!.field] as any : null}
+                  onToolValue={(v) => QUESTIONS[s.step - 3].tool && setTool(QUESTIONS[s.step - 3].tool!.field, v)}
                   onNext={goNext} onPrev={goPrev}
                 />
               )}
 
-              {s.step === 5 && (
+              {s.step === 6 && (
                 <VeilleScreen lang={lang} state={s} setState={setS} onNext={goNext} onPrev={goPrev} />
               )}
 
-              {s.step >= 6 && s.step <= 10 && (
-                <QuestionScreen lang={lang} qdef={QUESTIONS[s.step - 6 + 3]}
-                  value={s.answers[QUESTIONS[s.step - 6 + 3].key] ?? null}
-                  onValue={(v) => setAnswer(QUESTIONS[s.step - 6 + 3].key, v)}
-                  toolValue={QUESTIONS[s.step - 6 + 3].tool ? s.tools[QUESTIONS[s.step - 6 + 3].tool!.field] as any : null}
-                  onToolValue={(v) => QUESTIONS[s.step - 6 + 3].tool && setTool(QUESTIONS[s.step - 6 + 3].tool!.field, v)}
+              {s.step >= 7 && s.step <= 11 && (
+                <QuestionScreen lang={lang} qdef={QUESTIONS[s.step - 4]}
+                  value={s.answers[QUESTIONS[s.step - 4].key] ?? null}
+                  onValue={(v) => setAnswer(QUESTIONS[s.step - 4].key, v)}
+                  toolValue={QUESTIONS[s.step - 4].tool ? s.tools[QUESTIONS[s.step - 4].tool!.field] as any : null}
+                  onToolValue={(v) => QUESTIONS[s.step - 4].tool && setTool(QUESTIONS[s.step - 4].tool!.field, v)}
                   onNext={goNext} onPrev={goPrev}
                 />
               )}
 
-              {s.step >= 11 && s.step <= 14 && (
-                <QuestionScreen lang={lang} qdef={QUESTIONS[s.step - 11 + 8]}
-                  value={s.answers[QUESTIONS[s.step - 11 + 8].key] ?? null}
-                  onValue={(v) => setAnswer(QUESTIONS[s.step - 11 + 8].key, v)}
-                  toolValue={QUESTIONS[s.step - 11 + 8].tool ? s.tools[QUESTIONS[s.step - 11 + 8].tool!.field] as any : null}
-                  onToolValue={(v) => QUESTIONS[s.step - 11 + 8].tool && setTool(QUESTIONS[s.step - 11 + 8].tool!.field, v)}
+              {s.step >= 12 && s.step <= 15 && (
+                <QuestionScreen lang={lang} qdef={QUESTIONS[s.step - 4]}
+                  value={s.answers[QUESTIONS[s.step - 4].key] ?? null}
+                  onValue={(v) => setAnswer(QUESTIONS[s.step - 4].key, v)}
+                  toolValue={QUESTIONS[s.step - 4].tool ? s.tools[QUESTIONS[s.step - 4].tool!.field] as any : null}
+                  onToolValue={(v) => QUESTIONS[s.step - 4].tool && setTool(QUESTIONS[s.step - 4].tool!.field, v)}
                   onNext={goNext} onPrev={goPrev}
-                />
-              )}
-
-              {s.step === 15 && (
-                <OptInScreen lang={lang}
-                  onYes={() => setS((p) => ({ ...p, approfondissement: true, step: 16 }))}
-                  onNo={() => setS((p) => ({ ...p, approfondissement: false, step: 17 }))}
-                  onPrev={goPrev}
                 />
               )}
 
               {s.step === 16 && (
-                <ApproScreen lang={lang} state={s} setState={setS} onNext={() => setS((p) => ({ ...p, step: 17 }))} onPrev={goPrev} />
+                <OptInScreen lang={lang}
+                  onYes={() => setS((p) => ({ ...p, approfondissement: true, step: 17 }))}
+                  onNo={() => setS((p) => ({ ...p, approfondissement: false, step: 18 }))}
+                  onPrev={goPrev}
+                />
               )}
 
               {s.step === 17 && (
-                <OpenScreen lang={lang} state={s} setState={setS} onNext={goNext} onPrev={goPrev} />
+                <ApproScreen lang={lang} state={s} setState={setS} onNext={() => setS((p) => ({ ...p, step: 18 }))} onPrev={goPrev} />
               )}
 
               {s.step === 18 && (
+                <OpenScreen lang={lang} state={s} setState={setS} onNext={goNext} onPrev={goPrev} />
+              )}
+
+              {s.step === 19 && (
                 <ContactScreen lang={lang} state={s} setState={setS} onSubmit={submit} onPrev={goPrev} submitting={submitting} />
               )}
             </>
           )}
+        </div>
+      </main>
+      <CTAFooter />
+    </div>
+  );
+
         </div>
       </main>
       <CTAFooter />
