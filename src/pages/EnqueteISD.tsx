@@ -1,6 +1,6 @@
 import { useState, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
-import { ShieldCheck, Radar, Map, Target } from "lucide-react";
+import { ShieldCheck, Radar as RadarIcon, Map, Target } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import CTAFooter from "@/components/CTAFooter";
 import { useLanguage } from "@/contexts/LanguageContext";
