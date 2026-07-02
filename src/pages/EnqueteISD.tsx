@@ -10,6 +10,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import { toast } from "@/hooks/use-toast";
+import { RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar, ResponsiveContainer } from "recharts";
 
 // =========================================================================
 // Enquête ISD — parcours linéaire, un instrument, deux finalités.
@@ -470,41 +471,48 @@ const GhostButton = ({ children, onClick }: { children: React.ReactNode; onClick
 // Page principale
 // =========================================================================
 type State = {
-  step: number; // 0 accueil, 1 taggage, 2..13 questions P1/Veille/P3/P4, 14 opt-in, 15 appro, 16 commentaire, 17 contact
+  step: number; // 0 intro, 1 piliers, 2 taggage, 3..5 Q1-Q3, 6 veille, 7..11 Q4-Q8, 12..15 Q9-Q12, 16 opt-in, 17 appro, 18 commentaire, 19 contact
   secteur: string; type_organisation: string; fonction: string;
   answers: Record<string, Scale>;
   tools: Record<string, string[] | string | null>;
-  veille_thematiques: string[]; veille_outil: string | null; veille_organisation: string | null; veille_capitalisation: string | null;
+  veille_thematiques: string[]; veille_outil: string | null; veille_outil_precision: string; veille_organisation: string | null; veille_capitalisation: string | null;
   approfondissement: boolean | null;
   appro: Record<string, string>;
   commentaire_ouvert: string;
-  contact_nom: string; contact_fonction: string; contact_organisation: string; contact_email: string;
+  contact_nom: string; contact_fonction: string; contact_organisation: string; contact_email: string; contact_telephone: string;
 };
 
 const initialState: State = {
   step: 0, secteur: "", type_organisation: "", fonction: "",
   answers: {}, tools: {},
-  veille_thematiques: [], veille_outil: null, veille_organisation: null, veille_capitalisation: null,
+  veille_thematiques: [], veille_outil: null, veille_outil_precision: "", veille_organisation: null, veille_capitalisation: null,
   approfondissement: null, appro: {},
   commentaire_ouvert: "",
-  contact_nom: "", contact_fonction: "", contact_organisation: "", contact_email: "",
+  contact_nom: "", contact_fonction: "", contact_organisation: "", contact_email: "", contact_telephone: "",
 };
+
+type IsdResult = {
+  score_global: number; niveau: string;
+  score_p1: number; score_p2: number; score_p3: number; score_p4: number;
+  q11: number | null;
+};
+
 
 const EnqueteISD = () => {
   const { lang, t } = useLanguage();
   const navigate = useNavigate();
   const [s, setS] = useState<State>(initialState);
   const [submitting, setSubmitting] = useState(false);
-  const [done, setDone] = useState(false);
+  const [result, setResult] = useState<IsdResult | null>(null);
 
   // 4 étapes fonctionnelles pour la barre (Piliers I·II·III·IV)
   const totalPillars = 4;
   const pillarActive = useMemo(() => {
-    if (s.step <= 1) return 0;
-    if (s.step >= 2 && s.step <= 4) return 1; // P1 (Q1-Q3)
-    if (s.step === 5) return 2; // Veille
-    if (s.step >= 6 && s.step <= 10) return 3; // P3 (Q4-Q8)
-    if (s.step >= 11 && s.step <= 14) return 4; // P4 (Q9-Q12)
+    if (s.step <= 2) return 0;
+    if (s.step >= 3 && s.step <= 5) return 1; // P1 (Q1-Q3)
+    if (s.step === 6) return 2; // Veille
+    if (s.step >= 7 && s.step <= 11) return 3; // P3 (Q4-Q8)
+    if (s.step >= 12 && s.step <= 15) return 4; // P4 (Q9-Q12)
     return 4;
   }, [s.step]);
 
@@ -524,6 +532,7 @@ const EnqueteISD = () => {
         q9: s.answers.q9, q10: s.answers.q10, q11: s.answers.q11, q12: s.answers.q12,
         veille_thematiques: s.veille_thematiques,
         veille_outil: s.veille_outil,
+        veille_outil_precision: s.veille_outil_precision || null,
         veille_organisation: s.veille_organisation,
         veille_capitalisation: s.veille_capitalisation,
         outil_donnee: (s.tools.outil_donnee as string[]) || [],
@@ -536,12 +545,22 @@ const EnqueteISD = () => {
         commentaire_ouvert: s.commentaire_ouvert || null,
         contact_nom: s.contact_nom, contact_fonction: s.contact_fonction,
         contact_organisation: s.contact_organisation, contact_email: s.contact_email,
+        contact_telephone: s.contact_telephone || null,
       };
       const { data, error } = await supabase.functions.invoke("score-isd", { body: payload });
-      if (error || !(data as any)?.success) {
+      const d: any = data;
+      if (error || !(d?.success || d?.ok)) {
         throw new Error(error?.message || "submission_failed");
       }
-      setDone(true);
+      setResult({
+        score_global: Number(d.score_global ?? 0),
+        niveau: String(d.niveau ?? ""),
+        score_p1: Number(d.score_p1 ?? 0),
+        score_p2: Number(d.score_p2 ?? 0),
+        score_p3: Number(d.score_p3 ?? 0),
+        score_p4: Number(d.score_p4 ?? 0),
+        q11: d.q11 == null ? null : Number(d.q11),
+      });
       window.scrollTo(0, 0);
     } catch (e) {
       toast({
@@ -568,12 +587,12 @@ const EnqueteISD = () => {
             <span>{t("Enquête ISD", "ISD Survey")}</span>
           </nav>
 
-          {done ? (
-            <FinalDoneScreen lang={lang} onExchange={() => window.dispatchEvent(new Event("open-strategic-exchange"))} />
+          {result ? (
+            <ResultScreen lang={lang} result={result} onExchange={() => window.dispatchEvent(new Event("open-strategic-exchange"))} />
           ) : (
             <>
-              {/* Barre de progression par piliers */}
-              {s.step > 0 && (
+              {/* Barre de progression par piliers (masquée sur Intro, Piliers overview, Tagging) */}
+              {s.step > 2 && (
                 <div style={{ marginBottom: 32 }}>
                   <div style={{ display: "flex", gap: 8, marginBottom: 8 }}>
                     {Array.from({ length: totalPillars }).map((_, i) => (
@@ -586,67 +605,68 @@ const EnqueteISD = () => {
                 </div>
               )}
 
-              {s.step === 0 && <ScreenHome lang={lang} onStart={goNext} />}
+              {s.step === 0 && <IntroScreen lang={lang} onNext={goNext} />}
+              {s.step === 1 && <ScreenHome lang={lang} onStart={goNext} onPrev={goPrev} />}
 
-              {s.step === 1 && (
+              {s.step === 2 && (
                 <ScreenTagging
                   lang={lang} state={s} setState={setS}
-                  onNext={goNext} onPrev={() => navigate(-1)}
+                  onNext={goNext} onPrev={goPrev}
                 />
               )}
 
               {/* Questions notées : mappe step -> question index */}
-              {s.step >= 2 && s.step <= 4 && (
-                <QuestionScreen lang={lang} qdef={QUESTIONS[s.step - 2]}
-                  value={s.answers[QUESTIONS[s.step - 2].key] ?? null}
-                  onValue={(v) => setAnswer(QUESTIONS[s.step - 2].key, v)}
-                  toolValue={QUESTIONS[s.step - 2].tool ? s.tools[QUESTIONS[s.step - 2].tool!.field] as any : null}
-                  onToolValue={(v) => QUESTIONS[s.step - 2].tool && setTool(QUESTIONS[s.step - 2].tool!.field, v)}
+              {s.step >= 3 && s.step <= 5 && (
+                <QuestionScreen lang={lang} qdef={QUESTIONS[s.step - 3]}
+                  value={s.answers[QUESTIONS[s.step - 3].key] ?? null}
+                  onValue={(v) => setAnswer(QUESTIONS[s.step - 3].key, v)}
+                  toolValue={QUESTIONS[s.step - 3].tool ? s.tools[QUESTIONS[s.step - 3].tool!.field] as any : null}
+                  onToolValue={(v) => QUESTIONS[s.step - 3].tool && setTool(QUESTIONS[s.step - 3].tool!.field, v)}
                   onNext={goNext} onPrev={goPrev}
                 />
               )}
 
-              {s.step === 5 && (
+              {s.step === 6 && (
                 <VeilleScreen lang={lang} state={s} setState={setS} onNext={goNext} onPrev={goPrev} />
               )}
 
-              {s.step >= 6 && s.step <= 10 && (
-                <QuestionScreen lang={lang} qdef={QUESTIONS[s.step - 6 + 3]}
-                  value={s.answers[QUESTIONS[s.step - 6 + 3].key] ?? null}
-                  onValue={(v) => setAnswer(QUESTIONS[s.step - 6 + 3].key, v)}
-                  toolValue={QUESTIONS[s.step - 6 + 3].tool ? s.tools[QUESTIONS[s.step - 6 + 3].tool!.field] as any : null}
-                  onToolValue={(v) => QUESTIONS[s.step - 6 + 3].tool && setTool(QUESTIONS[s.step - 6 + 3].tool!.field, v)}
+              {s.step >= 7 && s.step <= 11 && (
+                <QuestionScreen lang={lang} qdef={QUESTIONS[s.step - 4]}
+                  value={s.answers[QUESTIONS[s.step - 4].key] ?? null}
+                  onValue={(v) => setAnswer(QUESTIONS[s.step - 4].key, v)}
+                  toolValue={QUESTIONS[s.step - 4].tool ? s.tools[QUESTIONS[s.step - 4].tool!.field] as any : null}
+                  onToolValue={(v) => QUESTIONS[s.step - 4].tool && setTool(QUESTIONS[s.step - 4].tool!.field, v)}
                   onNext={goNext} onPrev={goPrev}
                 />
               )}
 
-              {s.step >= 11 && s.step <= 14 && (
-                <QuestionScreen lang={lang} qdef={QUESTIONS[s.step - 11 + 8]}
-                  value={s.answers[QUESTIONS[s.step - 11 + 8].key] ?? null}
-                  onValue={(v) => setAnswer(QUESTIONS[s.step - 11 + 8].key, v)}
-                  toolValue={QUESTIONS[s.step - 11 + 8].tool ? s.tools[QUESTIONS[s.step - 11 + 8].tool!.field] as any : null}
-                  onToolValue={(v) => QUESTIONS[s.step - 11 + 8].tool && setTool(QUESTIONS[s.step - 11 + 8].tool!.field, v)}
+              {s.step >= 12 && s.step <= 15 && (
+                <QuestionScreen lang={lang} qdef={QUESTIONS[s.step - 4]}
+                  value={s.answers[QUESTIONS[s.step - 4].key] ?? null}
+                  onValue={(v) => setAnswer(QUESTIONS[s.step - 4].key, v)}
+                  toolValue={QUESTIONS[s.step - 4].tool ? s.tools[QUESTIONS[s.step - 4].tool!.field] as any : null}
+                  onToolValue={(v) => QUESTIONS[s.step - 4].tool && setTool(QUESTIONS[s.step - 4].tool!.field, v)}
                   onNext={goNext} onPrev={goPrev}
-                />
-              )}
-
-              {s.step === 15 && (
-                <OptInScreen lang={lang}
-                  onYes={() => setS((p) => ({ ...p, approfondissement: true, step: 16 }))}
-                  onNo={() => setS((p) => ({ ...p, approfondissement: false, step: 17 }))}
-                  onPrev={goPrev}
                 />
               )}
 
               {s.step === 16 && (
-                <ApproScreen lang={lang} state={s} setState={setS} onNext={() => setS((p) => ({ ...p, step: 17 }))} onPrev={goPrev} />
+                <OptInScreen lang={lang}
+                  onYes={() => setS((p) => ({ ...p, approfondissement: true, step: 17 }))}
+                  onNo={() => setS((p) => ({ ...p, approfondissement: false, step: 18 }))}
+                  onPrev={goPrev}
+                />
               )}
 
               {s.step === 17 && (
-                <OpenScreen lang={lang} state={s} setState={setS} onNext={goNext} onPrev={goPrev} />
+                <ApproScreen lang={lang} state={s} setState={setS} onNext={() => setS((p) => ({ ...p, step: 18 }))} onPrev={goPrev} />
               )}
 
               {s.step === 18 && (
+                <OpenScreen lang={lang} state={s} setState={setS} onNext={goNext} onPrev={goPrev} />
+              )}
+
+              {s.step === 19 && (
                 <ContactScreen lang={lang} state={s} setState={setS} onSubmit={submit} onPrev={goPrev} submitting={submitting} />
               )}
             </>
@@ -658,10 +678,71 @@ const EnqueteISD = () => {
   );
 };
 
+
 // =========================================================================
 // Sous-écrans
 // =========================================================================
-const ScreenHome = ({ lang, onStart }: { lang: "fr" | "en"; onStart: () => void }) => {
+const IntroScreen = ({ lang, onNext }: { lang: "fr" | "en"; onNext: () => void }) => {
+  const blocks = [
+    {
+      title: t2("Pourquoi cette étude ?", "Why this study?", lang),
+      body: t2(
+        "Vous évoluez dans un environnement marqué par l'accélération des risques, une concurrence accrue et la multiplication des signaux faibles. La qualité de vos décisions est devenue un avantage concurrentiel déterminant. Pourtant, aucun référentiel ne mesurait jusqu'ici la maturité des organisations marocaines en la matière.",
+        "You operate in an environment marked by accelerating risks, heightened competition and a proliferation of weak signals. The quality of your decisions has become a decisive competitive advantage. Yet no reference framework has, until now, measured the maturity of Moroccan organizations in this field.",
+        lang,
+      ),
+      items: null as string[] | null,
+    },
+    {
+      title: t2("Qu'est-ce que vous obtenez ?", "What do you get?", lang),
+      body: null as string | null,
+      items: [
+        t2("un autodiagnostic confidentiel de votre maturité en intelligence stratégique", "a confidential self-assessment of your strategic intelligence maturity", lang),
+        t2("la réception immédiate, à la fin du questionnaire, de votre Indice de Souveraineté Décisionnelle et de votre radar par pilier", "immediate delivery, at the end of the questionnaire, of your Decision Sovereignty Index and your pillar-level radar", lang),
+        t2("votre positionnement national, révélé à l'issue de l'étude", "your national positioning, revealed at the conclusion of the study", lang),
+        t2("des recommandations prioritaires pour renforcer votre souveraineté décisionnelle", "priority recommendations to strengthen your decision sovereignty", lang),
+      ],
+    },
+    {
+      title: t2("Objectif de l'étude ?", "Objective of the study?", lang),
+      body: null,
+      items: [
+        t2("évaluer le niveau de maturité des organisations marocaines en intelligence stratégique et en souveraineté décisionnelle", "assess the maturity level of Moroccan organizations in strategic intelligence and decision sovereignty", lang),
+        t2("élaborer et diffuser le premier benchmark national de référence du domaine", "produce and share the first national reference benchmark for the field", lang),
+        t2("produire un indice de maturité par organisation, par secteur et par catégorie d'acteurs", "produce a maturity index by organization, by sector and by actor category", lang),
+      ],
+    },
+  ];
+  return (
+    <div>
+      <Overline>{t2("ÉTUDE NATIONALE 2026", "NATIONAL STUDY 2026", lang)}</Overline>
+      <H1>{t2("État de la maturité en souveraineté décisionnelle au Maroc", "The state of decision sovereignty maturity in Morocco", lang)}</H1>
+
+      {blocks.map((b, idx) => (
+        <div key={idx} style={{ marginTop: idx === 0 ? 8 : 24, paddingTop: idx === 0 ? 0 : 20, borderTop: idx === 0 ? "none" : "1px solid rgba(31,58,95,0.12)" }}>
+          <H2>{b.title}</H2>
+          {b.body && <Body>{b.body}</Body>}
+          {b.items && (
+            <ul style={{ margin: "8px 0 0", padding: 0, listStyle: "none" }}>
+              {b.items.map((it, i) => (
+                <li key={i} style={{ display: "flex", gap: 12, alignItems: "flex-start", padding: "8px 0", fontFamily: "'DM Sans', sans-serif", color: NAVY, fontSize: 15, lineHeight: 1.6 }}>
+                  <span style={{ color: GOLD, fontWeight: 700, marginTop: 2 }}>·</span>
+                  <span>{it}</span>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      ))}
+
+      <div style={{ marginTop: 32 }}>
+        <GoldButton onClick={onNext}>{t2("Découvrir les 4 piliers", "Discover the 4 pillars", lang)}</GoldButton>
+      </div>
+    </div>
+  );
+};
+
+const ScreenHome = ({ lang, onStart, onPrev }: { lang: "fr" | "en"; onStart: () => void; onPrev: () => void }) => {
   const pillars = [
     { num: "I", title: { fr: "Souveraineté décisionnelle", en: "Decision sovereignty" }, dims: { fr: "Anticipation · donnée · gouvernance", en: "Anticipation · data · governance" } },
     { num: "II", title: { fr: "Veille stratégique", en: "Strategic monitoring" }, dims: { fr: "Concurrence · secteur · géopolitique · techno", en: "Competitive · sectoral · geopolitical · tech" } },
@@ -674,7 +755,10 @@ const ScreenHome = ({ lang, onStart }: { lang: "fr" | "en"; onStart: () => void 
       <H1>{t2("Où se situe votre souveraineté décisionnelle ?", "Where does your decision sovereignty stand?", lang)}</H1>
       <Body>{t2("Quatre piliers, treize dimensions. Répondez à partir de votre réalité, sans vous noter. 10 minutes.", "Four pillars, thirteen dimensions. Answer from your reality, without rating yourself. 10 minutes.", lang)}</Body>
 
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: 16, margin: "24px 0 32px" }}>
+      <div
+        className="isd-pillars-grid"
+        style={{ display: "grid", gap: 16, margin: "24px 0 32px" }}
+      >
         {pillars.map((p) => (
           <div key={p.num} style={{ background: "#fff", borderTop: `3px solid ${GOLD}`, padding: 20 }}>
             <div style={{ fontFamily: "'Playfair Display', serif", color: GOLD, fontSize: 24, fontWeight: 700, marginBottom: 6 }}>{p.num}</div>
@@ -684,10 +768,20 @@ const ScreenHome = ({ lang, onStart }: { lang: "fr" | "en"; onStart: () => void 
         ))}
       </div>
 
-      <GoldButton onClick={onStart}>{t2("Commencer le diagnostic", "Start the diagnosis", lang)}</GoldButton>
+      <style>{`
+        .isd-pillars-grid { grid-template-columns: 1fr; }
+        @media (min-width: 640px) { .isd-pillars-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (min-width: 1024px) { .isd-pillars-grid { grid-template-columns: repeat(4, 1fr); } }
+      `}</style>
+
+      <div style={{ display: "flex", gap: 12 }}>
+        <GhostButton onClick={onPrev}>{t2("Retour", "Back", lang)}</GhostButton>
+        <GoldButton onClick={onStart}>{t2("Commencer le diagnostic", "Start the diagnosis", lang)}</GoldButton>
+      </div>
     </div>
   );
 };
+
 
 const Select = ({ label, value, onChange, options }: { label: string; value: string; onChange: (v: string) => void; options: string[] }) => (
   <div style={{ marginBottom: 20 }}>
@@ -874,6 +968,19 @@ const VeilleScreen = ({ lang, state, setState, onNext, onPrev }: any) => {
       </div>
 
       <SingleChoice label={`V2 · ${t2("Outil (choix unique, le plus avancé atteint)", "Tool (single choice, most advanced reached)", lang)}`} options={VEILLE_OUTIL[lang]} value={currentOutil} onChange={setOutil} />
+      {(state.veille_outil === "Plateforme de veille dédiée" || state.veille_outil === "Cellule interne outillée") && (
+        <div style={{ marginTop: -8, marginBottom: 20, paddingLeft: 12, borderLeft: `2px solid ${GOLD}` }}>
+          <div style={{ fontFamily: "'JetBrains Mono', ui-monospace, monospace", fontSize: 11, letterSpacing: "0.15em", textTransform: "uppercase", color: NAVY, marginBottom: 8 }}>
+            {t2("Précisez", "Please specify", lang)}
+          </div>
+          <Input
+            value={state.veille_outil_precision}
+            onChange={(e: any) => setState({ ...state, veille_outil_precision: e.target.value })}
+            maxLength={500}
+            style={{ background: "#fff", borderColor: "rgba(31,58,95,0.25)", color: NAVY }}
+          />
+        </div>
+      )}
       <SingleChoice label={`V3 · ${t2("Organisation du service (choix unique)", "Service organization (single choice)", lang)}`} options={VEILLE_ORG[lang]} value={currentOrg} onChange={setOrg} />
       <SingleChoice label={`V4 · ${t2("Capitalisation et production de contenu (choix unique)", "Capitalization and content production (single choice)", lang)}`} options={VEILLE_CAPI[lang]} value={currentCapi} onChange={setCapi} />
 
@@ -966,12 +1073,12 @@ const ContactScreen = ({ lang, state, setState, onSubmit, onPrev, submitting }: 
   const inputStyle = { background: "#fff", borderColor: "rgba(31,58,95,0.25)", color: NAVY };
   return (
     <div>
-      <Overline>{t2("REMISE DIFFÉRÉE", "DEFERRED DELIVERY", lang)}</Overline>
-      <H2>{t2("Vos réponses sont sur le point d'être enregistrées.", "Your answers are about to be recorded.", lang)}</H2>
+      <Overline>{t2("REMISE IMMÉDIATE DU DIAGNOSTIC", "IMMEDIATE DIAGNOSIS DELIVERY", lang)}</Overline>
+      <H2>{t2("Dernière étape avant votre diagnostic.", "One last step before your diagnosis.", lang)}</H2>
       <Body>
         {t2(
-          "Votre diagnostic personnalisé vous sera remis à l'issue de l'étude État de la maturité 2026.",
-          "Your personalized diagnosis will be delivered after the 2026 Maturity Report study.",
+          "Votre Indice de Souveraineté Décisionnelle et votre radar par pilier vous seront affichés à l'écran dès l'enregistrement. Votre positionnement national sera révélé à l'issue de l'étude 2026.",
+          "Your Decision Sovereignty Index and pillar-level radar will be displayed on screen as soon as your answers are recorded. Your national positioning will be revealed at the conclusion of the 2026 study.",
           lang,
         )}
       </Body>
@@ -993,33 +1100,222 @@ const ContactScreen = ({ lang, state, setState, onSubmit, onPrev, submitting }: 
           <Label style={{ color: NAVY }}>Email</Label>
           <Input style={inputStyle} type="email" value={state.contact_email} onChange={(e) => setState({ ...state, contact_email: e.target.value })} maxLength={254} />
         </div>
+        <div style={{ gridColumn: "1 / -1" }}>
+          <Label style={{ color: NAVY }}>
+            {t2("Téléphone", "Phone", lang)}{" "}
+            <span style={{ opacity: 0.6, fontWeight: 400 }}>({t2("facultatif", "optional", lang)})</span>
+          </Label>
+          <Input style={inputStyle} type="tel" value={state.contact_telephone} onChange={(e) => setState({ ...state, contact_telephone: e.target.value })} maxLength={40} />
+        </div>
       </div>
 
       <div style={{ display: "flex", gap: 12, marginTop: 24 }}>
         <GhostButton onClick={onPrev}>{t2("Retour", "Back", lang)}</GhostButton>
         <GoldButton onClick={onSubmit} disabled={!canGo || submitting}>
-          {submitting ? t2("Envoi…", "Sending…", lang) : t2("Enregistrer mes réponses", "Save my answers", lang)}
+          {submitting ? t2("Envoi…", "Sending…", lang) : t2("Obtenir mon diagnostic", "Get my diagnosis", lang)}
         </GoldButton>
       </div>
     </div>
   );
 };
 
-const FinalDoneScreen = ({ lang, onExchange }: { lang: "fr" | "en"; onExchange: () => void }) => (
-  <div style={{ paddingTop: 40 }}>
-    <Overline>{t2("ENREGISTRÉ", "RECORDED", lang)}</Overline>
-    <H1>{t2("Vos réponses sont enregistrées.", "Your answers have been recorded.", lang)}</H1>
-    <Body>
-      {t2(
-        "Votre diagnostic personnalisé vous sera remis à l'issue de l'étude État de la maturité 2026.",
-        "Your personalized diagnosis will be delivered after the 2026 Maturity Report study.",
+// =========================================================================
+// Écran de résultat : Indice, échelle, radar, lecture, recommandations, CTA.
+// Ne dépend d'aucune formule locale : lit uniquement les scores renvoyés
+// par l'Edge function. Le mapping recommandations -> solution est du contenu
+// éditorial, pas une formule de scoring.
+// =========================================================================
+const ResultScreen = ({ lang, result, onExchange }: { lang: "fr" | "en"; result: IsdResult; onExchange: () => void }) => {
+
+  const NIVEAUX = [
+    { key: "Embryonnaire", fr: { name: "Embryonnaire", desc: "aucun dispositif structuré, décisions à l'intuition et à la réaction." }, en: { name: "Embryonic", desc: "no structured setup, decisions driven by intuition and reaction." } },
+    { key: "Réactif", fr: { name: "Réactif", desc: "actions ponctuelles, déclenchées après l'événement, sans outil ni processus." }, en: { name: "Reactive", desc: "occasional actions, triggered after the event, with no tool or process." } },
+    { key: "Émergent", fr: { name: "Émergent", desc: "premières démarches structurées, partielles et non systématiques." }, en: { name: "Emerging", desc: "first structured initiatives, partial and not systematic." } },
+    { key: "Structuré", fr: { name: "Structuré", desc: "processus formalisés, outillés et pilotés régulièrement." }, en: { name: "Structured", desc: "formal, tool-supported processes, steered regularly." } },
+    { key: "Souverain", fr: { name: "Souverain", desc: "dispositif intégré, proactif et anticipatif, créateur d'avantage stratégique." }, en: { name: "Sovereign", desc: "integrated, proactive and anticipatory setup, creating strategic advantage." } },
+  ];
+
+  const pillars = [
+    { key: "p1", name: t2("Souveraineté décisionnelle", "Decision sovereignty", lang), value: result.score_p1 },
+    { key: "p2", name: t2("Veille stratégique", "Strategic monitoring", lang), value: result.score_p2 },
+    { key: "p3", name: t2("Risk Management", "Risk Management", lang), value: result.score_p3 },
+    { key: "p4", name: t2("Due Diligence & Intelligence d'affaires", "Due Diligence & Business Intelligence", lang), value: result.score_p4 },
+  ];
+
+  const strongest = pillars.reduce((a, b) => (b.value > a.value ? b : a), pillars[0]);
+  const weakest = pillars.reduce((a, b) => (b.value < a.value ? b : a), pillars[0]);
+
+  const SOLUTIONS = {
+    sil: {
+      name: t2("Strategic Intelligence Lab", "Strategic Intelligence Lab", lang),
+      href: "/solutions/strategic-intelligence-lab",
+    },
+    ddd: {
+      name: t2("Deep Due Diligence", "Deep Due Diligence", lang),
+      href: "/solutions/deep-due-diligence",
+    },
+    spi: {
+      name: t2("Soft Power and Influence", "Soft Power and Influence", lang),
+      href: "/solutions/soft-power-influence",
+    },
+  };
+
+  const prioritySolution = (weakest.key === "p4") ? SOLUTIONS.ddd : SOLUTIONS.sil;
+  const q11Weak = result.q11 !== null && result.q11 <= 2;
+
+  const recos: { text: string; solution: { name: string; href: string } }[] = [
+    {
+      text: t2(
+        `Renforcer en priorité le pilier « ${weakest.name} », votre point d'appui le plus fragile aujourd'hui.`,
+        `Prioritize strengthening the pillar "${weakest.name}", your most fragile foothold today.`,
         lang,
-      )}
-    </Body>
-    <div style={{ marginTop: 24 }}>
-      <GoldButton onClick={onExchange}>{t2("Demander un échange stratégique", "Request a strategic exchange", lang)}</GoldButton>
+      ),
+      solution: prioritySolution,
+    },
+    {
+      text: t2(
+        `Capitaliser sur votre point fort « ${strongest.name} » pour ancrer une gouvernance de décision plus intégrée.`,
+        `Leverage your strength "${strongest.name}" to anchor a more integrated decision governance.`,
+        lang,
+      ),
+      solution: SOLUTIONS.sil,
+    },
+  ];
+  if (q11Weak) {
+    recos.push({
+      text: t2(
+        "Structurer une trajectoire d'influence et de rayonnement pour convertir votre légitimité en ascendant stratégique.",
+        "Structure an influence and outreach trajectory to convert your legitimacy into strategic ascendancy.",
+        lang,
+      ),
+      solution: SOLUTIONS.spi,
+    });
+  }
+
+  const nivKey = result.niveau;
+  const ctaLabel = (nivKey === "Embryonnaire" || nivKey === "Réactif")
+    ? t2("Activer un POC de diagnostic souverain", "Activate a sovereign diagnosis POC", lang)
+    : (nivKey === "Souverain")
+      ? t2("Recevoir le Livre Blanc 2026", "Receive the 2026 White Paper", lang)
+      : t2("Demander un échange stratégique", "Request a strategic exchange", lang);
+
+  const nivIndex = Math.max(0, NIVEAUX.findIndex((n) => n.key === nivKey));
+
+  return (
+    <div>
+      <Overline>{t2("VOTRE DIAGNOSTIC ISD", "YOUR ISD DIAGNOSIS", lang)}</Overline>
+      <H1>{t2("Indice de Souveraineté Décisionnelle", "Decision Sovereignty Index", lang)}</H1>
+
+      {/* Score global + niveau */}
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, margin: "16px 0 28px" }}>
+        <div style={{ background: "#fff", borderTop: `3px solid ${GOLD}`, padding: 20 }}>
+          <div style={{ fontFamily: "'JetBrains Mono', ui-monospace, monospace", fontSize: 11, letterSpacing: "0.2em", color: NAVY, opacity: 0.7 }}>
+            {t2("INDICE GLOBAL", "GLOBAL INDEX", lang)}
+          </div>
+          <div style={{ fontFamily: "'Playfair Display', serif", color: NAVY, fontSize: 44, fontWeight: 700, lineHeight: 1 }}>
+            {result.score_global.toFixed(2)}
+            <span style={{ fontSize: 20, color: NAVY, opacity: 0.5 }}> / 4</span>
+          </div>
+        </div>
+        <div style={{ background: NAVY, color: "#fff", padding: 20 }}>
+          <div style={{ fontFamily: "'JetBrains Mono', ui-monospace, monospace", fontSize: 11, letterSpacing: "0.2em", color: GOLD }}>
+            {t2("NIVEAU ATTEINT", "LEVEL REACHED", lang)}
+          </div>
+          <div style={{ fontFamily: "'Playfair Display', serif", fontSize: 30, fontWeight: 600, marginTop: 4 }}>
+            {NIVEAUX[nivIndex][lang].name}
+          </div>
+          <div style={{ fontFamily: "'DM Sans', sans-serif", fontSize: 13, marginTop: 6, opacity: 0.85 }}>
+            {NIVEAUX[nivIndex][lang].desc}
+          </div>
+        </div>
+      </div>
+
+      {/* Échelle 5 niveaux */}
+      <div style={{ margin: "28px 0" }}>
+        <Overline>{t2("ÉCHELLE DES 5 NIVEAUX", "5-LEVEL SCALE", lang)}</Overline>
+        <div style={{ marginTop: 12 }}>
+          {NIVEAUX.map((n, i) => {
+            const active = i === nivIndex;
+            return (
+              <div key={n.key} style={{
+                display: "grid", gridTemplateColumns: "auto 1fr", gap: 16, alignItems: "flex-start",
+                padding: "12px 16px", marginBottom: 6,
+                background: active ? "#fff" : "transparent",
+                borderLeft: `3px solid ${active ? GOLD : "rgba(31,58,95,0.15)"}`,
+                borderRadius: 2,
+              }}>
+                <div style={{ fontFamily: "'Playfair Display', serif", color: active ? GOLD : NAVY, fontSize: 22, fontWeight: 700, opacity: active ? 1 : 0.6, minWidth: 24 }}>{i}</div>
+                <div>
+                  <div style={{ fontFamily: "'DM Sans', sans-serif", color: NAVY, fontSize: 14, fontWeight: active ? 700 : 600 }}>{n[lang].name}</div>
+                  <div style={{ fontFamily: "'DM Sans', sans-serif", color: NAVY, fontSize: 13, opacity: 0.75, lineHeight: 1.5 }}>{n[lang].desc}</div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* Radar */}
+      <div style={{ margin: "28px 0", background: "#fff", padding: 20, borderTop: `3px solid ${GOLD}` }}>
+        <Overline>{t2("RADAR DES 4 PILIERS", "4-PILLAR RADAR", lang)}</Overline>
+        <div style={{ width: "100%", height: 360, marginTop: 12 }}>
+          <ResponsiveContainer width="100%" height="100%">
+            <RadarChart data={pillars} outerRadius="72%">
+              <PolarGrid stroke="rgba(31,58,95,0.25)" />
+              <PolarAngleAxis dataKey="name" tick={{ fill: NAVY, fontSize: 11, fontFamily: "'DM Sans', sans-serif" }} />
+              <PolarRadiusAxis angle={90} domain={[0, 4]} tick={{ fill: NAVY, fontSize: 10 }} stroke="rgba(31,58,95,0.2)" />
+              <Radar name="ISD" dataKey="value" stroke={GOLD} fill={GOLD} fillOpacity={0.35} strokeWidth={2} />
+            </RadarChart>
+          </ResponsiveContainer>
+        </div>
+        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))", gap: 8, marginTop: 8 }}>
+          {pillars.map((p) => (
+            <div key={p.key} style={{ fontFamily: "'JetBrains Mono', ui-monospace, monospace", fontSize: 11, color: NAVY }}>
+              <span style={{ color: GOLD }}>■</span> {p.name} : <strong>{p.value.toFixed(2)}</strong>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Lecture et recommandations */}
+      <div style={{ margin: "28px 0" }}>
+        <Overline>{t2("LECTURE ET RECOMMANDATIONS", "READING AND RECOMMENDATIONS", lang)}</Overline>
+        <H2>{t2("Points d'appui et priorités", "Strengths and priorities", lang)}</H2>
+        <Body>
+          {t2(
+            `Votre point fort : ${strongest.name} (${strongest.value.toFixed(2)}). Votre priorité : ${weakest.name} (${weakest.value.toFixed(2)}).`,
+            `Your strength: ${strongest.name} (${strongest.value.toFixed(2)}). Your priority: ${weakest.name} (${weakest.value.toFixed(2)}).`,
+            lang,
+          )}
+        </Body>
+        <div>
+          {recos.map((r, i) => (
+            <div key={i} style={{ background: "#fff", borderLeft: `3px solid ${GOLD}`, padding: "14px 16px", marginBottom: 10 }}>
+              <div style={{ fontFamily: "'DM Sans', sans-serif", color: NAVY, fontSize: 14, lineHeight: 1.55 }}>{r.text}</div>
+              <a href={r.solution.href} style={{ display: "inline-block", marginTop: 8, fontFamily: "'JetBrains Mono', ui-monospace, monospace", fontSize: 11, letterSpacing: "0.15em", textTransform: "uppercase", color: GOLD, textDecoration: "none" }}>
+                {t2("Solution recommandée", "Recommended solution", lang)} : {r.solution.name} →
+              </a>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Bloc positionnement national */}
+      <div style={{ margin: "28px 0", padding: "14px 18px", background: "rgba(31,58,95,0.06)", borderLeft: `3px solid ${NAVY}`, fontFamily: "'DM Sans', sans-serif", color: NAVY, fontSize: 13, lineHeight: 1.6 }}>
+        {t2(
+          "Votre positionnement national vous sera révélé à l'issue de l'étude 2026.",
+          "Your national positioning will be revealed at the conclusion of the 2026 study.",
+          lang,
+        )}
+      </div>
+
+      {/* CTA calibré par température */}
+      <div style={{ marginTop: 24, display: "flex", gap: 12, flexWrap: "wrap" }}>
+        <GoldButton onClick={onExchange}>{ctaLabel}</GoldButton>
+      </div>
     </div>
-  </div>
-);
+  );
+};
+
 
 export default EnqueteISD;
