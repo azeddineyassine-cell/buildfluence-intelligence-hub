@@ -681,7 +681,67 @@ const EnqueteISD = () => {
 // =========================================================================
 // Sous-écrans
 // =========================================================================
-const ScreenHome = ({ lang, onStart }: { lang: "fr" | "en"; onStart: () => void }) => {
+const IntroScreen = ({ lang, onNext }: { lang: "fr" | "en"; onNext: () => void }) => {
+  const blocks = [
+    {
+      title: t2("Pourquoi cette étude ?", "Why this study?", lang),
+      body: t2(
+        "Vous évoluez dans un environnement marqué par l'accélération des risques, une concurrence accrue et la multiplication des signaux faibles. La qualité de vos décisions est devenue un avantage concurrentiel déterminant. Pourtant, aucun référentiel ne mesurait jusqu'ici la maturité des organisations marocaines en la matière.",
+        "You operate in an environment marked by accelerating risks, heightened competition and a proliferation of weak signals. The quality of your decisions has become a decisive competitive advantage. Yet no reference framework has, until now, measured the maturity of Moroccan organizations in this field.",
+        lang,
+      ),
+      items: null as string[] | null,
+    },
+    {
+      title: t2("Qu'est-ce que vous obtenez ?", "What do you get?", lang),
+      body: null as string | null,
+      items: [
+        t2("un autodiagnostic confidentiel de votre maturité en intelligence stratégique", "a confidential self-assessment of your strategic intelligence maturity", lang),
+        t2("la réception immédiate, à la fin du questionnaire, de votre Indice de Souveraineté Décisionnelle et de votre radar par pilier", "immediate delivery, at the end of the questionnaire, of your Decision Sovereignty Index and your pillar-level radar", lang),
+        t2("votre positionnement national, révélé à l'issue de l'étude", "your national positioning, revealed at the conclusion of the study", lang),
+        t2("des recommandations prioritaires pour renforcer votre souveraineté décisionnelle", "priority recommendations to strengthen your decision sovereignty", lang),
+      ],
+    },
+    {
+      title: t2("Objectif de l'étude ?", "Objective of the study?", lang),
+      body: null,
+      items: [
+        t2("évaluer le niveau de maturité des organisations marocaines en intelligence stratégique et en souveraineté décisionnelle", "assess the maturity level of Moroccan organizations in strategic intelligence and decision sovereignty", lang),
+        t2("élaborer et diffuser le premier benchmark national de référence du domaine", "produce and share the first national reference benchmark for the field", lang),
+        t2("produire un indice de maturité par organisation, par secteur et par catégorie d'acteurs", "produce a maturity index by organization, by sector and by actor category", lang),
+      ],
+    },
+  ];
+  return (
+    <div>
+      <Overline>{t2("ÉTUDE NATIONALE 2026", "NATIONAL STUDY 2026", lang)}</Overline>
+      <H1>{t2("État de la maturité en souveraineté décisionnelle au Maroc", "The state of decision sovereignty maturity in Morocco", lang)}</H1>
+
+      {blocks.map((b, idx) => (
+        <div key={idx} style={{ marginTop: idx === 0 ? 8 : 24, paddingTop: idx === 0 ? 0 : 20, borderTop: idx === 0 ? "none" : "1px solid rgba(31,58,95,0.12)" }}>
+          <H2>{b.title}</H2>
+          {b.body && <Body>{b.body}</Body>}
+          {b.items && (
+            <ul style={{ margin: "8px 0 0", padding: 0, listStyle: "none" }}>
+              {b.items.map((it, i) => (
+                <li key={i} style={{ display: "flex", gap: 12, alignItems: "flex-start", padding: "8px 0", fontFamily: "'DM Sans', sans-serif", color: NAVY, fontSize: 15, lineHeight: 1.6 }}>
+                  <span style={{ color: GOLD, fontWeight: 700, marginTop: 2 }}>·</span>
+                  <span>{it}</span>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      ))}
+
+      <div style={{ marginTop: 32 }}>
+        <GoldButton onClick={onNext}>{t2("Découvrir les 4 piliers", "Discover the 4 pillars", lang)}</GoldButton>
+      </div>
+    </div>
+  );
+};
+
+const ScreenHome = ({ lang, onStart, onPrev }: { lang: "fr" | "en"; onStart: () => void; onPrev: () => void }) => {
   const pillars = [
     { num: "I", title: { fr: "Souveraineté décisionnelle", en: "Decision sovereignty" }, dims: { fr: "Anticipation · donnée · gouvernance", en: "Anticipation · data · governance" } },
     { num: "II", title: { fr: "Veille stratégique", en: "Strategic monitoring" }, dims: { fr: "Concurrence · secteur · géopolitique · techno", en: "Competitive · sectoral · geopolitical · tech" } },
@@ -694,7 +754,10 @@ const ScreenHome = ({ lang, onStart }: { lang: "fr" | "en"; onStart: () => void 
       <H1>{t2("Où se situe votre souveraineté décisionnelle ?", "Where does your decision sovereignty stand?", lang)}</H1>
       <Body>{t2("Quatre piliers, treize dimensions. Répondez à partir de votre réalité, sans vous noter. 10 minutes.", "Four pillars, thirteen dimensions. Answer from your reality, without rating yourself. 10 minutes.", lang)}</Body>
 
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))", gap: 16, margin: "24px 0 32px" }}>
+      <div
+        className="isd-pillars-grid"
+        style={{ display: "grid", gap: 16, margin: "24px 0 32px" }}
+      >
         {pillars.map((p) => (
           <div key={p.num} style={{ background: "#fff", borderTop: `3px solid ${GOLD}`, padding: 20 }}>
             <div style={{ fontFamily: "'Playfair Display', serif", color: GOLD, fontSize: 24, fontWeight: 700, marginBottom: 6 }}>{p.num}</div>
@@ -704,10 +767,20 @@ const ScreenHome = ({ lang, onStart }: { lang: "fr" | "en"; onStart: () => void 
         ))}
       </div>
 
-      <GoldButton onClick={onStart}>{t2("Commencer le diagnostic", "Start the diagnosis", lang)}</GoldButton>
+      <style>{`
+        .isd-pillars-grid { grid-template-columns: 1fr; }
+        @media (min-width: 640px) { .isd-pillars-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (min-width: 1024px) { .isd-pillars-grid { grid-template-columns: repeat(4, 1fr); } }
+      `}</style>
+
+      <div style={{ display: "flex", gap: 12 }}>
+        <GhostButton onClick={onPrev}>{t2("Retour", "Back", lang)}</GhostButton>
+        <GoldButton onClick={onStart}>{t2("Commencer le diagnostic", "Start the diagnosis", lang)}</GoldButton>
+      </div>
     </div>
   );
 };
+
 
 const Select = ({ label, value, onChange, options }: { label: string; value: string; onChange: (v: string) => void; options: string[] }) => (
   <div style={{ marginBottom: 20 }}>
