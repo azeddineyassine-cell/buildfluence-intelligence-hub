@@ -684,59 +684,116 @@ const EnqueteISD = () => {
 // Sous-écrans
 // =========================================================================
 const IntroScreen = ({ lang, onNext }: { lang: "fr" | "en"; onNext: () => void }) => {
-  const blocks = [
+  const cards = [
     {
-      title: t2("Pourquoi cette étude ?", "Why this study?", lang),
-      body: t2(
-        "Vous évoluez dans un environnement marqué par l'accélération des risques, une concurrence accrue et la multiplication des signaux faibles. La qualité de vos décisions est devenue un avantage concurrentiel déterminant. Pourtant, aucun référentiel ne mesurait jusqu'ici la maturité des organisations marocaines en la matière.",
-        "You operate in an environment marked by accelerating risks, heightened competition and a proliferation of weak signals. The quality of your decisions has become a decisive competitive advantage. Yet no reference framework has, until now, measured the maturity of Moroccan organizations in this field.",
-        lang,
-      ),
-      items: null as string[] | null,
+      num: "01",
+      icon: <ShieldCheck size={22} strokeWidth={1.6} />,
+      title: t2("Autodiagnostic confidentiel", "Confidential self-diagnosis", lang),
+      desc: t2("Votre maturité en intelligence stratégique, sans jugement, en 10 minutes.", "Your strategic intelligence maturity, without judgment, in 10 minutes.", lang),
     },
     {
-      title: t2("Qu'est-ce que vous obtenez ?", "What do you get?", lang),
-      body: null as string | null,
-      items: [
-        t2("un autodiagnostic confidentiel de votre maturité en intelligence stratégique", "a confidential self-assessment of your strategic intelligence maturity", lang),
-        t2("la réception immédiate, à la fin du questionnaire, de votre Indice de Souveraineté Décisionnelle et de votre radar par pilier", "immediate delivery, at the end of the questionnaire, of your Decision Sovereignty Index and your pillar-level radar", lang),
-        t2("votre positionnement national, révélé à l'issue de l'étude", "your national positioning, revealed at the conclusion of the study", lang),
-        t2("des recommandations prioritaires pour renforcer votre souveraineté décisionnelle", "priority recommendations to strengthen your decision sovereignty", lang),
-      ],
+      num: "02",
+      icon: <RadarIcon size={22} strokeWidth={1.6} />,
+      title: t2("Résultat immédiat", "Immediate result", lang),
+      desc: t2("Votre Indice de Souveraineté Décisionnelle et votre radar par pilier, dès la fin du questionnaire.", "Your Decision Sovereignty Index and your pillar-level radar, as soon as you finish the questionnaire.", lang),
     },
     {
-      title: t2("Objectif de l'étude ?", "Objective of the study?", lang),
-      body: null,
-      items: [
-        t2("évaluer le niveau de maturité des organisations marocaines en intelligence stratégique et en souveraineté décisionnelle", "assess the maturity level of Moroccan organizations in strategic intelligence and decision sovereignty", lang),
-        t2("élaborer et diffuser le premier benchmark national de référence du domaine", "produce and share the first national reference benchmark for the field", lang),
-        t2("produire un indice de maturité par organisation, par secteur et par catégorie d'acteurs", "produce a maturity index by organization, by sector and by actor category", lang),
-      ],
+      num: "03",
+      icon: <Map size={22} strokeWidth={1.6} />,
+      title: t2("Positionnement national", "National positioning", lang),
+      desc: t2("Votre situation face aux autres organisations, révélée à l'issue de l'étude.", "Your position relative to other organizations, revealed at the end of the study.", lang),
+    },
+    {
+      num: "04",
+      icon: <Target size={22} strokeWidth={1.6} />,
+      title: t2("Recommandations prioritaires", "Priority recommendations", lang),
+      desc: t2("Les leviers concrets pour renforcer votre souveraineté décisionnelle.", "Concrete levers to strengthen your decision sovereignty.", lang),
     },
   ];
+
+  const objectives = [
+    t2("évaluer le niveau de maturité des organisations marocaines en intelligence stratégique et en souveraineté décisionnelle", "assess the maturity level of Moroccan organizations in strategic intelligence and decision sovereignty", lang),
+    t2("élaborer et diffuser le premier benchmark national de référence du domaine", "produce and share the first national reference benchmark for the field", lang),
+    t2("produire un indice de maturité par organisation, par secteur et par catégorie d'acteurs", "produce a maturity index by organization, by sector and by actor category", lang),
+  ];
+
   return (
-    <div>
-      <Overline>{t2("ÉTUDE NATIONALE 2026", "NATIONAL STUDY 2026", lang)}</Overline>
-      <H1>{t2("État de la maturité en souveraineté décisionnelle au Maroc", "The state of decision sovereignty maturity in Morocco", lang)}</H1>
+    <div className="isd-intro">
+      <style>{`
+        .isd-intro { padding: 24px 0 40px; }
+        .isd-intro-header { margin-bottom: 56px; }
+        .isd-intro-title { font-family: 'Playfair Display', serif; color: #1F3A5F; font-size: clamp(36px, 5vw, 56px); line-height: 1.05; font-weight: 700; margin: 12px 0 0; letter-spacing: -0.02em; }
+        .isd-intro-band { width: 100vw; margin-left: calc(-50vw + 50%); background: #1F3A5F; padding: 64px 0; }
+        .isd-intro-band-inner { max-width: 960px; margin: 0 auto; padding: 0 24px; }
+        .isd-intro-band-label { font-family: 'Playfair Display', serif; color: #C9A84C; font-size: clamp(24px, 3vw, 32px); font-weight: 600; margin-bottom: 20px; }
+        .isd-intro-band-text { font-family: 'DM Sans', sans-serif; color: #FAF6ED; font-size: clamp(18px, 2.2vw, 24px); line-height: 1.55; margin: 0; padding-left: 28px; border-left: 2px solid #C9A84C; max-width: 820px; }
+        .isd-intro-section { margin-top: 72px; }
+        .isd-intro-section-title { font-family: 'Playfair Display', serif; color: #1F3A5F; font-size: clamp(26px, 3vw, 34px); font-weight: 600; margin-bottom: 32px; }
+        .isd-intro-cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+        .isd-intro-card { background: #1F3A5F; border: 1px solid rgba(201,168,76,0.25); padding: 32px 24px; text-align: center; position: relative; overflow: hidden; transition: transform .35s, border-color .35s, box-shadow .35s; }
+        .isd-intro-card:hover { transform: translateY(-6px); border-color: #C9A84C; box-shadow: 0 12px 30px -10px rgba(31,58,95,0.25); }
+        .isd-intro-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: #C9A84C; transform: scaleX(0); transform-origin: left; transition: transform .35s ease; }
+        .isd-intro-card:hover::before { transform: scaleX(1); }
+        .isd-intro-card-icon { width: 50px; height: 50px; border-radius: 50%; background: rgba(201,168,76,0.1); border: 1px solid rgba(201,168,76,0.3); display: inline-flex; align-items: center; justify-content: center; color: #C9A84C; transition: background .3s, border-color .3s, color .3s; }
+        .isd-intro-card:hover .isd-intro-card-icon { background: #C9A84C; border-color: #C9A84C; color: #1F3A5F; }
+        .isd-intro-card-num { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 10px; color: #C9A84C; letter-spacing: 0.25em; text-transform: uppercase; margin-top: 18px; }
+        .isd-intro-card-title { font-family: 'Playfair Display', serif; font-size: 17px; font-weight: 700; color: #FAF6ED; line-height: 1.25; margin-top: 10px; }
+        .isd-intro-card-desc { font-family: 'DM Sans', sans-serif; font-size: 14px; color: rgba(250,246,237,0.75); line-height: 1.5; margin-top: 10px; }
+        .isd-intro-panel { background: #152A45; border: 1px solid rgba(201,168,76,0.35); border-top: 3px solid #C9A84C; padding: 36px 40px; margin-top: 72px; }
+        .isd-intro-panel-label { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 10px; color: #C9A84C; letter-spacing: 0.25em; text-transform: uppercase; margin-bottom: 12px; }
+        .isd-intro-panel-title { font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 600; color: #FAF6ED; margin-bottom: 24px; }
+        .isd-intro-panel-list { list-style: none; padding: 0; margin: 0; }
+        .isd-intro-panel-list li { font-family: 'DM Sans', sans-serif; font-size: 15px; color: rgba(250,246,237,0.9); line-height: 1.6; padding: 10px 0 10px 22px; border-bottom: 1px dashed rgba(201,168,76,0.15); position: relative; }
+        .isd-intro-panel-list li:last-child { border-bottom: none; }
+        .isd-intro-panel-list li::before { content: '›'; color: #C9A84C; position: absolute; left: 0; font-weight: 600; font-size: 16px; }
+        .isd-intro-cta { margin-top: 56px; }
+        @media (max-width: 1024px) { .isd-intro-cards { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 640px) { .isd-intro-cards { grid-template-columns: 1fr; } .isd-intro-panel { padding: 28px 24px; } .isd-intro-band { padding: 48px 0; } }
+      `}</style>
 
-      {blocks.map((b, idx) => (
-        <div key={idx} style={{ marginTop: idx === 0 ? 8 : 24, paddingTop: idx === 0 ? 0 : 20, borderTop: idx === 0 ? "none" : "1px solid rgba(31,58,95,0.12)" }}>
-          <H2>{b.title}</H2>
-          {b.body && <Body>{b.body}</Body>}
-          {b.items && (
-            <ul style={{ margin: "8px 0 0", padding: 0, listStyle: "none" }}>
-              {b.items.map((it, i) => (
-                <li key={i} style={{ display: "flex", gap: 12, alignItems: "flex-start", padding: "8px 0", fontFamily: "'DM Sans', sans-serif", color: NAVY, fontSize: 15, lineHeight: 1.6 }}>
-                  <span style={{ color: GOLD, fontWeight: 700, marginTop: 2 }}>·</span>
-                  <span>{it}</span>
-                </li>
-              ))}
-            </ul>
-          )}
+      <div className="isd-intro-header">
+        <Overline>{t2("ÉTUDE NATIONALE 2026", "NATIONAL STUDY 2026", lang)}</Overline>
+        <h1 className="isd-intro-title">{t2("État de la maturité en souveraineté décisionnelle au Maroc", "The state of decision sovereignty maturity in Morocco", lang)}</h1>
+      </div>
+
+      <div className="isd-intro-band">
+        <div className="isd-intro-band-inner">
+          <div className="isd-intro-band-label">{t2("Pourquoi cette étude ?", "Why this study?", lang)}</div>
+          <p className="isd-intro-band-text">
+            {t2(
+              "Vous évoluez dans un environnement marqué par l'accélération des risques, une concurrence accrue et la multiplication des signaux faibles. La qualité de vos décisions est devenue un avantage concurrentiel déterminant. Pourtant, aucun référentiel ne mesurait jusqu'ici la maturité des organisations marocaines en la matière.",
+              "You operate in an environment marked by accelerating risks, heightened competition and a proliferation of weak signals. The quality of your decisions has become a decisive competitive advantage. Yet no reference framework has, until now, measured the maturity of Moroccan organizations in this field.",
+              lang,
+            )}
+          </p>
         </div>
-      ))}
+      </div>
 
-      <div style={{ marginTop: 32 }}>
+      <div className="isd-intro-section">
+        <h2 className="isd-intro-section-title">{t2("Qu'est-ce que vous obtenez ?", "What do you get?", lang)}</h2>
+        <div className="isd-intro-cards">
+          {cards.map((c) => (
+            <div key={c.num} className="isd-intro-card">
+              <div className="isd-intro-card-icon">{c.icon}</div>
+              <div className="isd-intro-card-num">{c.num}</div>
+              <div className="isd-intro-card-title">{c.title}</div>
+              <div className="isd-intro-card-desc">{c.desc}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="isd-intro-panel">
+        <div className="isd-intro-panel-label">{t2("OBJECTIFS", "OBJECTIVES", lang)}</div>
+        <h2 className="isd-intro-panel-title">{t2("Objectif de l'étude ?", "Objective of the study?", lang)}</h2>
+        <ul className="isd-intro-panel-list">
+          {objectives.map((obj, i) => (
+            <li key={i}>{obj}</li>
+          ))}
+        </ul>
+      </div>
+
+      <div className="isd-intro-cta">
         <GoldButton onClick={onNext}>{t2("Découvrir les 4 piliers", "Discover the 4 pillars", lang)}</GoldButton>
       </div>
     </div>
