@@ -59,8 +59,8 @@ const InsightsResources = () => {
       category: t("Étude nationale", "National study"),
       date: t("2026 · Enquête ouverte", "2026 · Survey open"),
       title: t(
-        "État de la maturité en intelligence stratégique au Maroc",
-        "The state of strategic intelligence maturity in Morocco"
+        "État de la maturité en souveraineté décisionnelle au Maroc",
+        "The state of decision sovereignty maturity in Morocco"
       ),
       subtitle: t(
         "AUTODIAGNOSTIC · 4 PILIERS · 13 DIMENSIONS",
