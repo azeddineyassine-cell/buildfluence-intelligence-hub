@@ -1266,8 +1266,78 @@ const ResultScreen = ({ lang, result, onExchange }: { lang: "fr" | "en"; result:
 
   const nivIndex = Math.max(0, NIVEAUX.findIndex((n) => n.key === nivKey));
 
+  // Feuille de route : 3 priorités séquencées, du pilier le plus faible au moins faible
+  const pillarLever: Record<string, { fr: string; en: string }> = {
+    p1: {
+      fr: "Structurer une gouvernance de décision fondée sur l'anticipation et la donnée.",
+      en: "Structure a decision governance rooted in anticipation and data.",
+    },
+    p2: {
+      fr: "Déployer un dispositif de veille multi-axes piloté en continu.",
+      en: "Deploy a multi-axis intelligence setup steered continuously.",
+    },
+    p3: {
+      fr: "Cartographier les risques et outiller la gestion de crise et des signaux.",
+      en: "Map risks and equip crisis and signal management.",
+    },
+    p4: {
+      fr: "Sécuriser investissements et partenariats par une due diligence approfondie.",
+      en: "Secure investments and partnerships through in-depth due diligence.",
+    },
+  };
+  const sorted = [...pillars].sort((a, b) => a.value - b.value);
+  const roadmap = sorted.slice(0, 3).map((p, idx) => {
+    let solution = p.key === "p4" ? SOLUTIONS.ddd : SOLUTIONS.sil;
+    if (q11Weak && p.key === "p1") solution = SOLUTIONS.spi;
+    return {
+      idx: idx + 1,
+      pillarName: p.name,
+      pillarValue: p.value,
+      lever: t2(pillarLever[p.key].fr, pillarLever[p.key].en, lang),
+      solution,
+    };
+  });
+
+  const waitingPhrase = t2(
+    "Ce document est votre synthèse immédiate. Votre feuille de route complète, personnalisée et détaillée par pilier vous sera adressée à l'issue de l'étude nationale 2026, accompagnée de votre positionnement.",
+    "This document is your immediate summary. Your complete roadmap, personalized and detailed by pillar, will be sent to you at the end of the 2026 national study, together with your positioning.",
+    lang,
+  );
+
   return (
-    <div>
+    <div className="isd-print-area">
+      <style>{`
+        @media print {
+          @page { size: A4; margin: 16mm; }
+          body { background: #FAF6ED !important; }
+          body * { visibility: hidden !important; }
+          .isd-print-area, .isd-print-area * { visibility: visible !important; }
+          .isd-print-area { position: absolute; left: 0; top: 0; width: 100%; padding: 0 !important; background: #FAF6ED !important; }
+          .no-print { display: none !important; }
+          .isd-print-header, .isd-print-footer { display: block !important; visibility: visible !important; }
+          .isd-print-header { text-align: center; margin-bottom: 18px; padding-bottom: 12px; border-bottom: 1px solid rgba(31,58,95,0.25); }
+          .isd-print-footer { text-align: center; margin-top: 24px; padding-top: 12px; border-top: 1px solid rgba(31,58,95,0.25); font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 10px; letter-spacing: 0.2em; color: #1F3A5F; }
+          .isd-print-area a { color: #1F3A5F !important; text-decoration: none !important; }
+          .isd-roadmap-card { break-inside: avoid; }
+        }
+        .isd-print-header, .isd-print-footer { display: none; }
+        .isd-roadmap-card { background: #fff; border: 1px solid rgba(31,58,95,0.12); border-left: 3px solid ${GOLD}; padding: 20px 22px; margin-bottom: 14px; transition: box-shadow .25s, transform .25s; }
+        .isd-roadmap-card:hover { box-shadow: 0 8px 22px -12px rgba(31,58,95,0.25); transform: translateY(-2px); }
+        .isd-roadmap-tag { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: ${GOLD}; }
+        .isd-roadmap-pillar { font-family: 'Playfair Display', serif; color: ${NAVY}; font-size: 18px; font-weight: 700; margin-top: 6px; line-height: 1.25; }
+        .isd-roadmap-lever { font-family: 'DM Sans', sans-serif; color: ${NAVY}; font-size: 14px; line-height: 1.55; margin-top: 8px; }
+        .isd-roadmap-solution { display: inline-block; margin-top: 12px; font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: ${GOLD}; text-decoration: none; }
+      `}</style>
+
+      <div className="isd-print-header">
+        <div style={{ fontFamily: "'JetBrains Mono', ui-monospace, monospace", fontSize: 10, letterSpacing: "0.25em", color: GOLD }}>
+          {t2("ÉTUDE NATIONALE 2026", "NATIONAL STUDY 2026", lang)}
+        </div>
+        <div style={{ fontFamily: "'Playfair Display', serif", color: NAVY, fontSize: 18, fontWeight: 700, marginTop: 6 }}>
+          {t2("État de la maturité en souveraineté décisionnelle au Maroc", "The state of decision sovereignty maturity in Morocco", lang)}
+        </div>
+      </div>
+
       <Overline>{t2("VOTRE DIAGNOSTIC ISD", "YOUR ISD DIAGNOSIS", lang)}</Overline>
       <H1>{t2("Indice de Souveraineté Décisionnelle", "Decision Sovereignty Index", lang)}</H1>
 
@@ -1342,26 +1412,35 @@ const ResultScreen = ({ lang, result, onExchange }: { lang: "fr" | "en"; result:
         </div>
       </div>
 
-      {/* Lecture et recommandations */}
+      {/* Feuille de route */}
       <div style={{ margin: "28px 0" }}>
-        <Overline>{t2("LECTURE ET RECOMMANDATIONS", "READING AND RECOMMENDATIONS", lang)}</Overline>
-        <H2>{t2("Points d'appui et priorités", "Strengths and priorities", lang)}</H2>
+        <Overline>{t2("FEUILLE DE ROUTE", "ROADMAP", lang)}</Overline>
+        <H2>{t2("Feuille de route", "Roadmap", lang)}</H2>
         <Body>
           {t2(
-            `Votre point fort : ${strongest.name} (${strongest.value.toFixed(2)}). Votre priorité : ${weakest.name} (${weakest.value.toFixed(2)}).`,
-            `Your strength: ${strongest.name} (${strongest.value.toFixed(2)}). Your priority: ${weakest.name} (${weakest.value.toFixed(2)}).`,
+            `Votre point fort : ${strongest.name} (${strongest.value.toFixed(2)}). Trois priorités séquencées, de la plus urgente à consolider à la plus stratégique à ancrer.`,
+            `Your strength: ${strongest.name} (${strongest.value.toFixed(2)}). Three sequenced priorities, from the most urgent to consolidate to the most strategic to anchor.`,
             lang,
           )}
         </Body>
-        <div>
-          {recos.map((r, i) => (
-            <div key={i} style={{ background: "#fff", borderLeft: `3px solid ${GOLD}`, padding: "14px 16px", marginBottom: 10 }}>
-              <div style={{ fontFamily: "'DM Sans', sans-serif", color: NAVY, fontSize: 14, lineHeight: 1.55 }}>{r.text}</div>
-              <a href={r.solution.href} style={{ display: "inline-block", marginTop: 8, fontFamily: "'JetBrains Mono', ui-monospace, monospace", fontSize: 11, letterSpacing: "0.15em", textTransform: "uppercase", color: GOLD, textDecoration: "none" }}>
-                {t2("Solution recommandée", "Recommended solution", lang)} : {r.solution.name} →
+        <div style={{ marginTop: 8 }}>
+          {roadmap.map((r) => (
+            <div key={r.idx} className="isd-roadmap-card">
+              <div className="isd-roadmap-tag">
+                {t2(`PRIORITÉ ${r.idx}`, `PRIORITY ${r.idx}`, lang)} · {t2("PILIER", "PILLAR", lang)} : {r.pillarName}
+              </div>
+              <div className="isd-roadmap-pillar">{r.pillarName}</div>
+              <div className="isd-roadmap-lever">{r.lever}</div>
+              <a href={r.solution.href} className="isd-roadmap-solution">
+                {t2("Solution Buildfluence", "Buildfluence solution", lang)} : {r.solution.name} →
               </a>
             </div>
           ))}
+        </div>
+
+        {/* Phrase d'attente */}
+        <div style={{ marginTop: 18, padding: "14px 18px", background: "rgba(31,58,95,0.06)", borderLeft: `3px solid ${GOLD}`, fontFamily: "'DM Sans', sans-serif", color: NAVY, fontSize: 13, lineHeight: 1.65, fontStyle: "italic" }}>
+          {waitingPhrase}
         </div>
       </div>
 
@@ -1374,10 +1453,15 @@ const ResultScreen = ({ lang, result, onExchange }: { lang: "fr" | "en"; result:
         )}
       </div>
 
-      {/* CTA calibré par température */}
-      <div style={{ marginTop: 24, display: "flex", gap: 12, flexWrap: "wrap" }}>
+      {/* CTA calibré par température + PDF */}
+      <div className="no-print" style={{ marginTop: 24, display: "flex", gap: 12, flexWrap: "wrap" }}>
         <GoldButton onClick={onExchange}>{ctaLabel}</GoldButton>
+        <GhostButton onClick={() => window.print()}>
+          {t2("Télécharger ma synthèse (PDF)", "Download my summary (PDF)", lang)}
+        </GhostButton>
       </div>
+
+      <div className="isd-print-footer">© Buildfluence</div>
     </div>
   );
 };
