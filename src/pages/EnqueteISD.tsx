@@ -730,15 +730,15 @@ const IntroScreen = ({ lang, onNext }: { lang: "fr" | "en"; onNext: () => void }
         .isd-intro-section { margin-top: 72px; }
         .isd-intro-section-title { font-family: 'Playfair Display', serif; color: #1F3A5F; font-size: clamp(26px, 3vw, 34px); font-weight: 600; margin-bottom: 32px; }
         .isd-intro-cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
-        .isd-intro-card { background: #1F3A5F; border: 1px solid rgba(201,168,76,0.25); padding: 32px 24px; text-align: center; position: relative; overflow: hidden; transition: transform .35s, border-color .35s, box-shadow .35s; }
+        .isd-intro-card { background: #1F3A5F; border: 1px solid rgba(201,168,76,0.25); padding: 48px 28px 44px; text-align: center; position: relative; overflow: hidden; transition: transform .35s, border-color .35s, box-shadow .35s; }
         .isd-intro-card:hover { transform: translateY(-6px); border-color: #C9A84C; box-shadow: 0 12px 30px -10px rgba(31,58,95,0.25); }
         .isd-intro-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: #C9A84C; transform: scaleX(0); transform-origin: left; transition: transform .35s ease; }
         .isd-intro-card:hover::before { transform: scaleX(1); }
-        .isd-intro-card-icon { width: 50px; height: 50px; border-radius: 50%; background: rgba(201,168,76,0.1); border: 1px solid rgba(201,168,76,0.3); display: inline-flex; align-items: center; justify-content: center; color: #C9A84C; transition: background .3s, border-color .3s, color .3s; }
+        .isd-intro-card-icon { width: 58px; height: 58px; border-radius: 50%; background: rgba(201,168,76,0.1); border: 1px solid rgba(201,168,76,0.3); display: inline-flex; align-items: center; justify-content: center; color: #C9A84C; transition: background .3s, border-color .3s, color .3s; }
         .isd-intro-card:hover .isd-intro-card-icon { background: #C9A84C; border-color: #C9A84C; color: #1F3A5F; }
-        .isd-intro-card-num { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 10px; color: #C9A84C; letter-spacing: 0.25em; text-transform: uppercase; margin-top: 18px; }
-        .isd-intro-card-title { font-family: 'Playfair Display', serif; font-size: 17px; font-weight: 700; color: #FAF6ED; line-height: 1.25; margin-top: 10px; }
-        .isd-intro-card-desc { font-family: 'DM Sans', sans-serif; font-size: 14px; color: rgba(250,246,237,0.75); line-height: 1.5; margin-top: 10px; }
+        .isd-intro-card-num { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 10px; color: #C9A84C; letter-spacing: 0.25em; text-transform: uppercase; margin-top: 26px; }
+        .isd-intro-card-title { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; color: #FAF6ED; line-height: 1.25; margin-top: 14px; }
+        .isd-intro-card-desc { font-family: 'DM Sans', sans-serif; font-size: 15px; color: rgba(250,246,237,0.78); line-height: 1.6; margin-top: 14px; }
         .isd-intro-panel { background: #152A45; border: 1px solid rgba(201,168,76,0.35); border-top: 3px solid #C9A84C; padding: 36px 40px; margin-top: 72px; }
         .isd-intro-panel-label { font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 10px; color: #C9A84C; letter-spacing: 0.25em; text-transform: uppercase; margin-bottom: 12px; }
         .isd-intro-panel-title { font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 600; color: #FAF6ED; margin-bottom: 24px; }
