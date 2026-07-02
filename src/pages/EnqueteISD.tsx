@@ -470,25 +470,32 @@ const GhostButton = ({ children, onClick }: { children: React.ReactNode; onClick
 // Page principale
 // =========================================================================
 type State = {
-  step: number; // 0 accueil, 1 taggage, 2..13 questions P1/Veille/P3/P4, 14 opt-in, 15 appro, 16 commentaire, 17 contact
+  step: number; // 0 intro, 1 piliers, 2 taggage, 3..5 Q1-Q3, 6 veille, 7..11 Q4-Q8, 12..15 Q9-Q12, 16 opt-in, 17 appro, 18 commentaire, 19 contact
   secteur: string; type_organisation: string; fonction: string;
   answers: Record<string, Scale>;
   tools: Record<string, string[] | string | null>;
-  veille_thematiques: string[]; veille_outil: string | null; veille_organisation: string | null; veille_capitalisation: string | null;
+  veille_thematiques: string[]; veille_outil: string | null; veille_outil_precision: string; veille_organisation: string | null; veille_capitalisation: string | null;
   approfondissement: boolean | null;
   appro: Record<string, string>;
   commentaire_ouvert: string;
-  contact_nom: string; contact_fonction: string; contact_organisation: string; contact_email: string;
+  contact_nom: string; contact_fonction: string; contact_organisation: string; contact_email: string; contact_telephone: string;
 };
 
 const initialState: State = {
   step: 0, secteur: "", type_organisation: "", fonction: "",
   answers: {}, tools: {},
-  veille_thematiques: [], veille_outil: null, veille_organisation: null, veille_capitalisation: null,
+  veille_thematiques: [], veille_outil: null, veille_outil_precision: "", veille_organisation: null, veille_capitalisation: null,
   approfondissement: null, appro: {},
   commentaire_ouvert: "",
-  contact_nom: "", contact_fonction: "", contact_organisation: "", contact_email: "",
+  contact_nom: "", contact_fonction: "", contact_organisation: "", contact_email: "", contact_telephone: "",
 };
+
+type IsdResult = {
+  score_global: number; niveau: string;
+  score_p1: number; score_p2: number; score_p3: number; score_p4: number;
+  q11: number | null;
+};
+
 
 const EnqueteISD = () => {
   const { lang, t } = useLanguage();
