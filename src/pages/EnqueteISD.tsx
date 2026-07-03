@@ -41,7 +41,10 @@ const FONCTIONS = {
   en: ["Executive Management", "Strategy Direction", "Risk Manager", "Communications Lead", "Other"],
 };
 
-// --- Ancrages échelle 0-4 par question (FR) ---
+// --- Ancrages échelle 0-4 par question (FR/EN, logique de maturité) ---
+// Certains ancrages contiennent une mention entre parenthèses de type
+// « (Précisez) » ou « (Lesquels) » : lorsqu'ils sont sélectionnés, un champ
+// texte libre s'affiche. Ces précisions taguent la réponse mais ne notent pas.
 type QDef = {
   key: string;
   pillar: 1 | 3 | 4;
@@ -49,12 +52,8 @@ type QDef = {
   dim: { fr: string; en: string };
   question: { fr: string; en: string };
   anchors: { fr: string[]; en: string[] };
-  tool?: {
-    label: { fr: string; en: string };
-    multi: boolean;
-    options: { fr: string[]; en: string[] };
-    field: "outil_donnee" | "outil_carto" | "outil_crise" | "outil_signaux" | "dd_realisation";
-  };
+  // Indices d'ancrages qui déclenchent un champ « précisez » (texte libre).
+  precisionAt?: number[];
 };
 
 const QUESTIONS: QDef[] = [
@@ -62,103 +61,98 @@ const QUESTIONS: QDef[] = [
     key: "q1", pillar: 1, numero: "Q1",
     dim: { fr: "Anticipation", en: "Anticipation" },
     question: {
-      fr: "Comment vos décisions stratégiques intègrent-elles l'anticipation des ruptures ?",
-      en: "How do your strategic decisions integrate anticipation of disruptions?",
+      fr: "Comment anticipez-vous les ruptures et évolutions de votre environnement ?",
+      en: "How do you anticipate disruptions and shifts in your environment?",
     },
     anchors: {
       fr: [
-        "Nous décidons à l'instant, sans regard prospectif.",
-        "Nous réagissons aux ruptures une fois qu'elles surviennent.",
-        "Quelques exercices de scénarios, ponctuels et non reliés aux décisions.",
-        "Démarche prospective formalisée, alimentant nos décisions clés.",
-        "Anticipation systématique des ruptures, intégrée et créatrice d'avantage.",
+        "Aucune anticipation.",
+        "Anticipation informelle, au coup par coup.",
+        "Démarches ponctuelles (études, consultants).",
+        "Dispositif interne régulier de prospective. (Précisez)",
+        "Veille prospective continue, outils dédiés et alertes automatisées. (Lesquels)",
       ],
       en: [
-        "We decide in the moment, with no forward view.",
-        "We react to disruptions once they occur.",
-        "Some occasional scenario exercises, not linked to decisions.",
-        "Formalized foresight approach feeding our key decisions.",
-        "Systematic anticipation of disruptions, embedded and value-creating.",
+        "No anticipation.",
+        "Informal anticipation, case by case.",
+        "Occasional initiatives (studies, consultants).",
+        "Regular in-house foresight setup. (Please specify)",
+        "Continuous foresight, dedicated tools and automated alerts. (Which ones)",
       ],
     },
+    precisionAt: [3, 4],
   },
   {
     key: "q2", pillar: 1, numero: "Q2",
     dim: { fr: "Donnée dans la décision", en: "Data in decision-making" },
     question: {
-      fr: "Dans quelle mesure vos décisions majeures s'appuient-elles sur des données structurées ?",
-      en: "To what extent do your major decisions rely on structured data?",
+      fr: "Quelle place la donnée occupe-t-elle dans vos décisions ?",
+      en: "What place does data hold in your decisions?",
     },
     anchors: {
       fr: [
-        "Décisions à l'intuition, sans donnée mobilisée.",
-        "Données regardées après coup, pour justifier une décision déjà prise.",
-        "Données disponibles mais dispersées, mobilisées de façon inégale.",
-        "Données structurées intégrées au processus de décision.",
-        "Décision pilotée par la donnée, en temps quasi réel, sur indicateurs maîtrisés.",
+        "Décisions fondées principalement sur l'intuition.",
+        "Données utilisées occasionnellement, après coup.",
+        "Données consultées régulièrement. (Par quel moyen)",
+        "Données structurant la majorité des décisions. (Précisez)",
+        "Décisions pilotées par tableaux de bord et analyses avancées. (Plus de précisions)",
       ],
       en: [
-        "Decisions made on intuition, no data mobilized.",
-        "Data reviewed after the fact to justify a decision already made.",
-        "Data available but scattered, mobilized unevenly.",
-        "Structured data embedded in the decision process.",
-        "Data-driven decision-making, near real-time, on mastered indicators.",
+        "Decisions mainly based on intuition.",
+        "Data used occasionally, after the fact.",
+        "Data consulted regularly. (By what means)",
+        "Data structuring most decisions. (Please specify)",
+        "Decisions steered by dashboards and advanced analytics. (More detail)",
       ],
     },
-    tool: {
-      label: { fr: "Comment vos données de décision sont-elles structurées et exploitées ?", en: "How is your decision data structured and used?" },
-      multi: true, field: "outil_donnee",
-      options: {
-        fr: ["Saisie manuelle / Excel", "Base de données ou ERP", "Entrepôt de données (data warehouse)", "Outil de BI ou dashboards", "Aucune structuration formelle"],
-        en: ["Manual entry / Excel", "Database or ERP", "Data warehouse", "BI tool or dashboards", "No formal structuring"],
-      },
-    },
+    precisionAt: [2, 3, 4],
   },
   {
     key: "q3", pillar: 1, numero: "Q3",
     dim: { fr: "Gouvernance de l'information", en: "Information governance" },
     question: {
-      fr: "Comment l'information stratégique est-elle collectée, qualifiée, protégée et diffusée en interne ?",
-      en: "How is strategic information collected, qualified, protected and shared internally?",
+      fr: "Comment la responsabilité de l'information stratégique est-elle portée ?",
+      en: "How is responsibility for strategic information carried?",
     },
     anchors: {
       fr: [
-        "Aucune gouvernance, circulation informelle.",
-        "Circulation au gré des personnes, sans règle ni protection.",
-        "Premières règles, appliquées partiellement, sans responsable clair.",
-        "Gouvernance formalisée, responsabilités et protection définies.",
-        "Information pilotée comme un actif, sécurisée et valorisée.",
+        "Aucun responsable identifié.",
+        "Responsabilités dispersées.",
+        "Référent identifié.",
+        "Fonction dédiée. (Statut)",
+        "Gouvernance pilotée au niveau Direction / COMEX.",
       ],
       en: [
-        "No governance, informal circulation.",
-        "Circulation driven by individuals, no rules or protection.",
-        "Initial rules, partially applied, no clear owner.",
-        "Formal governance, responsibilities and protection defined.",
-        "Information managed as an asset, secured and valued.",
+        "No identified owner.",
+        "Scattered responsibilities.",
+        "Identified referent.",
+        "Dedicated function. (Status)",
+        "Governance steered at Executive / ExCom level.",
       ],
     },
+    precisionAt: [3],
   },
   {
     key: "q4", pillar: 3, numero: "Q4",
-    dim: { fr: "Process IE", en: "Business Intelligence process" },
+    dim: { fr: "Process d'intelligence économique", en: "Business intelligence process" },
     question: {
-      fr: "Disposez-vous d'un processus formalisé d'intelligence économique (besoins, collecte, analyse, diffusion) ?",
-      en: "Do you have a formal business intelligence process (needs, collection, analysis, dissemination)?",
+      fr: "Quel est le degré de formalisation de votre processus d'IE ?",
+      en: "How formal is your business-intelligence process?",
     },
     anchors: {
       fr: [
         "Aucun processus.",
-        "Démarches isolées, ponctuelles.",
-        "Premières briques, non systématisées.",
-        "Cycle IE formalisé, du besoin à la diffusion.",
-        "IE intégrée au pilotage, boucle continue.",
+        "Quelques pratiques isolées.",
+        "Processus documentés.",
+        "Processus intégrés dans plusieurs directions.",
+        "Processus industrialisés avec indicateurs de performance.",
       ],
       en: [
         "No process.",
-        "Isolated, occasional actions.",
-        "Initial building blocks, not systematized.",
-        "Formal BI cycle, from need to dissemination.",
-        "BI embedded in steering, continuous loop.",
+        "A few isolated practices.",
+        "Documented processes.",
+        "Processes integrated across several departments.",
+        "Industrialized processes with performance indicators.",
       ],
     },
   },
@@ -166,225 +160,205 @@ const QUESTIONS: QDef[] = [
     key: "q5", pillar: 3, numero: "Q5",
     dim: { fr: "Cartographie des risques", en: "Risk mapping" },
     question: {
-      fr: "Disposez-vous d'une cartographie actualisée et reliée à vos décisions stratégiques ?",
-      en: "Do you have an up-to-date risk map connected to your strategic decisions?",
+      fr: "Comment votre cartographie des risques est-elle tenue ?",
+      en: "How is your risk map maintained?",
     },
     anchors: {
       fr: [
         "Aucune cartographie.",
-        "Risques identifiés après incident.",
-        "Cartographie non actualisée ni reliée aux décisions.",
-        "Cartographie formalisée, actualisée, revue périodiquement.",
-        "Cartographie dynamique, intégrée au pilotage et aux scénarios.",
+        "Réalisée après incident.",
+        "Mise à jour occasionnelle.",
+        "Révision régulière. (Par quel moyen)",
+        "Cartographie dynamique à suivi permanent, pilotée par un logiciel GRC (Gouvernance, Risques, Conformité) ou équivalent. (Précisez la solution)",
       ],
       en: [
-        "No mapping.",
-        "Risks identified after incidents.",
-        "Mapping not updated nor linked to decisions.",
-        "Formal, regularly reviewed and updated mapping.",
-        "Dynamic mapping, embedded in steering and scenarios.",
+        "No map.",
+        "Produced after an incident.",
+        "Occasional updates.",
+        "Regular reviews. (By what means)",
+        "Dynamic, continuously monitored map, steered by GRC software or equivalent. (Please specify the solution)",
       ],
     },
-    tool: {
-      label: { fr: "Avec quel outil ?", en: "With which tool?" },
-      multi: true, field: "outil_carto",
-      options: {
-        fr: ["Excel / tableur", "Solution GRC dédiée", "Module ERP", "Outil interne maison", "Aucun outil"],
-        en: ["Excel / spreadsheet", "Dedicated GRC solution", "ERP module", "In-house tool", "No tool"],
-      },
-    },
+    precisionAt: [3, 4],
   },
   {
     key: "q6", pillar: 3, numero: "Q6",
     dim: { fr: "Gestion des crises", en: "Crisis management" },
     question: {
-      fr: "Comment êtes-vous préparés à gérer une crise (cellule, protocoles, simulations) ?",
-      en: "How prepared are you to handle a crisis (unit, protocols, simulations)?",
+      fr: "Quelle est votre préparation à la gestion de crise ?",
+      en: "How prepared are you for crisis management?",
     },
     anchors: {
       fr: [
-        "Aucune préparation.",
-        "Réaction au cas par cas.",
-        "Procédures non testées.",
-        "Cellule et protocoles activables.",
-        "Dispositif éprouvé, simulé régulièrement.",
+        "Aucun dispositif.",
+        "Réaction improvisée.",
+        "Procédure documentée.",
+        "Cellule de crise organisée.",
+        "Dispositif testé régulièrement avec exercices. (Précisez)",
       ],
       en: [
-        "No preparation.",
-        "Case-by-case reaction.",
-        "Untested procedures.",
-        "Activatable unit and protocols.",
-        "Proven setup, regularly simulated.",
+        "No setup.",
+        "Improvised response.",
+        "Documented procedure.",
+        "Organized crisis unit.",
+        "Regularly tested setup with exercises. (Please specify)",
       ],
     },
-    tool: {
-      label: { fr: "Comment est-il préparé ?", en: "How is it prepared?" },
-      multi: true, field: "outil_crise",
-      options: {
-        fr: ["Aucun", "Procédures écrites non testées", "Cellule désignée", "Simulations régulières", "Prestataire spécialisé"],
-        en: ["None", "Written untested procedures", "Designated unit", "Regular simulations", "Specialized provider"],
-      },
-    },
+    precisionAt: [4],
   },
   {
     key: "q7", pillar: 3, numero: "Q7",
     dim: { fr: "Détection des signaux faibles", en: "Weak signal detection" },
     question: {
-      fr: "Comment captez-vous et traitez-vous les signaux faibles avant qu'ils ne deviennent des menaces ?",
-      en: "How do you capture and process weak signals before they become threats?",
+      fr: "Comment captez-vous les signaux faibles ?",
+      en: "How do you capture weak signals?",
     },
     anchors: {
       fr: [
-        "Aucun mécanisme.",
-        "Vus une fois devenus des problèmes.",
-        "Détection dépendante de quelques personnes.",
-        "Mécanisme structuré de captation et remontée.",
-        "Détection anticipative outillée, reliée à la décision.",
+        "Aucun suivi.",
+        "Détection au hasard.",
+        "Signalement manuel.",
+        "Veille organisée. (Quelle solution)",
+        "Détection assistée par IA ou automatisation. (Quels outils)",
       ],
       en: [
-        "No mechanism.",
-        "Seen only once they become problems.",
-        "Detection reliant on a few individuals.",
-        "Structured capture and escalation mechanism.",
-        "Anticipative, tool-supported detection linked to decisions.",
+        "No tracking.",
+        "Random detection.",
+        "Manual reporting.",
+        "Organized monitoring. (Which solution)",
+        "AI-assisted or automated detection. (Which tools)",
       ],
     },
-    tool: {
-      label: { fr: "Quel dispositif ?", en: "Which setup?" },
-      multi: true, field: "outil_signaux",
-      options: {
-        fr: ["Aucun", "Remontées informelles", "Cellule de veille dédiée", "Outil de détection ou scoring", "Prestataire spécialisé"],
-        en: ["None", "Informal reporting", "Dedicated monitoring unit", "Detection or scoring tool", "Specialized provider"],
-      },
-    },
+    precisionAt: [3, 4],
   },
   {
     key: "q8", pillar: 3, numero: "Q8",
     dim: { fr: "Dispositifs de résilience", en: "Resilience arrangements" },
     question: {
-      fr: "Quels dispositifs garantissent la continuité de votre activité face à un choc majeur ?",
-      en: "What arrangements ensure business continuity in the face of a major shock?",
+      fr: "Quel est votre niveau de résilience face à un choc majeur ?",
+      en: "What is your resilience level in the face of a major shock?",
     },
     anchors: {
       fr: [
-        "Aucun dispositif.",
-        "Réponse improvisée.",
-        "Plans partiels ou obsolètes.",
-        "Plan de continuité formalisé et maintenu.",
-        "Résilience éprouvée, testée, intégrée à la gouvernance.",
+        "Aucun plan.",
+        "Quelques mesures.",
+        "Plans documentés.",
+        "Plans testés régulièrement.",
+        "Résilience intégrée avec amélioration continue. (Précisez)",
       ],
       en: [
-        "No arrangements.",
-        "Improvised response.",
-        "Partial or outdated plans.",
-        "Formal, maintained continuity plan.",
-        "Tested resilience, embedded in governance.",
+        "No plan.",
+        "A few measures.",
+        "Documented plans.",
+        "Regularly tested plans.",
+        "Integrated resilience with continuous improvement. (Please specify)",
       ],
     },
+    precisionAt: [4],
   },
   {
     key: "q9", pillar: 4, numero: "Q9",
     dim: { fr: "Évaluation des investisseurs", en: "Investor evaluation" },
     question: {
-      fr: "Comment évaluez-vous la fiabilité et les intentions réelles d'un investisseur ou partenaire financier ?",
-      en: "How do you assess the reliability and true intentions of an investor or financial partner?",
+      fr: "Comment évaluez-vous la fiabilité d'un investisseur ou partenaire financier ?",
+      en: "How do you assess the reliability of an investor or financial partner?",
     },
     anchors: {
       fr: [
         "Aucune évaluation.",
-        "Vérifications sommaires.",
-        "Contrôles partiels.",
-        "Processus formalisé avant engagement.",
-        "Due diligence approfondie sur intentions et arrière-plan.",
+        "Vérifications ponctuelles.",
+        "Évaluation selon quelques critères.",
+        "Due diligence structurée.",
+        "Évaluation multicritère continue avec outils spécialisés. (Lesquels)",
       ],
       en: [
         "No evaluation.",
-        "Basic checks.",
-        "Partial controls.",
-        "Formal process before commitment.",
-        "In-depth due diligence on intentions and background.",
+        "Occasional checks.",
+        "Evaluation on a few criteria.",
+        "Structured due diligence.",
+        "Continuous multi-criteria evaluation with specialized tools. (Which ones)",
       ],
     },
-    tool: {
-      label: { fr: "Vos due diligences sont réalisées :", en: "Your due diligence is carried out:" },
-      multi: false, field: "dd_realisation",
-      options: {
-        fr: ["En interne", "Par un cabinet externe", "En mixte", "Au cas par cas", "Jamais formellement"],
-        en: ["In-house", "By an external firm", "Mixed", "Case-by-case", "Never formally"],
-      },
-    },
+    precisionAt: [4],
+    // Note: l'ancrage 3 déclenche un sous-choix Interne/Externe + Marocain/Étranger
+    // géré spécifiquement dans QuestionScreen.
   },
   {
     key: "q10", pillar: 4, numero: "Q10",
     dim: { fr: "Vérification des partenaires", en: "Partner verification" },
     question: {
-      fr: "Comment vérifiez-vous l'intégrité et la solidité de vos partenaires avant un engagement ?",
-      en: "How do you verify the integrity and soundness of partners before commitment?",
+      fr: "Comment vérifiez-vous vos partenaires avant engagement ?",
+      en: "How do you verify partners before commitment?",
     },
     anchors: {
       fr: [
         "Aucune vérification.",
-        "Informelle, bouche-à-oreille.",
-        "Contrôles ponctuels.",
-        "Processus formalisé et documenté.",
-        "Vérification approfondie, réputation et réseau inclus.",
+        "Recherche internet.",
+        "Vérifications documentaires.",
+        "Due diligence systématique.",
+        "Surveillance continue des partenaires. (Précisez)",
       ],
       en: [
         "No verification.",
-        "Informal, word-of-mouth.",
-        "Occasional controls.",
-        "Formal, documented process.",
-        "In-depth verification including reputation and network.",
+        "Internet search.",
+        "Documentary checks.",
+        "Systematic due diligence.",
+        "Continuous partner monitoring. (Please specify)",
       ],
     },
+    precisionAt: [4],
   },
+  // Ordre d'affichage : Compliance (numéro Q11) AVANT Influence (numéro Q12)
+  // Colonnes DB conservées : q12 = Compliance, q11 = Influence.
   {
-    key: "q11", pillar: 4, numero: "Q11",
-    dim: { fr: "Influence et rayonnement", en: "Influence and outreach" },
-    question: {
-      fr: "Comment pilotez-vous votre influence, votre attractivité et votre rayonnement dans votre écosystème ?",
-      en: "How do you steer your influence, attractiveness and outreach within your ecosystem?",
-    },
-    anchors: {
-      fr: [
-        "Rayonnement subi, aucune stratégie.",
-        "Actions ponctuelles, réactives.",
-        "Présence entretenue, sans stratégie structurée.",
-        "Stratégie d'influence formalisée, relations clés pilotées.",
-        "Influence active et mesurée, créatrice d'ascendant.",
-      ],
-      en: [
-        "Passive outreach, no strategy.",
-        "Occasional, reactive actions.",
-        "Maintained presence, no structured strategy.",
-        "Formal influence strategy, key relationships managed.",
-        "Active, measured influence, creating ascendancy.",
-      ],
-    },
-  },
-  {
-    key: "q12", pillar: 4, numero: "Q12",
+    key: "q12", pillar: 4, numero: "Q11",
     dim: { fr: "Compliance et risques tiers", en: "Compliance and third-party risks" },
     question: {
-      fr: "Comment maîtrisez-vous les risques de conformité liés à vos tiers (fournisseurs, intermédiaires) ?",
-      en: "How do you master compliance risks related to third parties (suppliers, intermediaries)?",
+      fr: "Comment maîtrisez-vous les risques de conformité liés à vos tiers ?",
+      en: "How do you master compliance risks related to your third parties?",
     },
     anchors: {
       fr: [
-        "Aucune maîtrise.",
-        "Réactif, après incident.",
-        "Conformité partielle, non étendue aux tiers.",
-        "Dispositif de conformité tiers formalisé.",
-        "Maîtrise continue, outillée et auditée.",
+        "Aucune maîtrise des risques tiers.",
+        "Traitement réactif, après incident ou contrôle.",
+        "Démarche de conformité documentée, non étendue aux tiers.",
+        "Dispositif de conformité tiers formalisé et piloté.",
+        "Maîtrise continue, outillée et auditée. (Précisez l'outil)",
       ],
       en: [
-        "No control.",
-        "Reactive, after incident.",
-        "Partial compliance, not extended to third parties.",
-        "Formal third-party compliance setup.",
-        "Continuous, tool-supported and audited control.",
+        "No control over third-party risks.",
+        "Reactive handling, after incident or audit.",
+        "Documented compliance approach, not extended to third parties.",
+        "Formalized and steered third-party compliance setup.",
+        "Continuous, tool-supported and audited control. (Please specify the tool)",
       ],
     },
+    precisionAt: [4],
+  },
+  {
+    key: "q11", pillar: 4, numero: "Q12",
+    dim: { fr: "Influence et rayonnement", en: "Influence and outreach" },
+    question: {
+      fr: "Comment pilotez-vous votre influence et votre rayonnement ?",
+      en: "How do you steer your influence and outreach?",
+    },
+    anchors: {
+      fr: [
+        "Aucune stratégie.",
+        "Communication réactive.",
+        "Actions ponctuelles d'influence.",
+        "Stratégie structurée. (Quelles solutions ? Service ou personnels dédiés ?)",
+        "Influence pilotée avec indicateurs et veille réputationnelle. (Plus de précisions)",
+      ],
+      en: [
+        "No strategy.",
+        "Reactive communication.",
+        "Occasional influence actions.",
+        "Structured strategy. (Which solutions? Dedicated team or staff?)",
+        "Influence steered with indicators and reputation monitoring. (More detail)",
+      ],
+    },
+    precisionAt: [3, 4],
   },
 ];
 
@@ -395,17 +369,18 @@ const VEILLE_THEMES = {
   en: ["Competitive", "Sectoral", "Geopolitical / regulatory", "Technological", "Image / reputation", "Tenders", "Patents / IP", "None"],
 };
 const VEILLE_OUTIL = {
-  fr: ["Alertes manuelles (type Google Alerts)", "Plateforme de veille dédiée", "Prestataire externe", "Cellule interne outillée", "Aucun"],
-  en: ["Manual alerts (Google Alerts type)", "Dedicated monitoring platform", "External provider", "In-house equipped unit", "None"],
+  fr: ["Aucun", "Alertes manuelles", "Plateforme de veille dédiée", "Prestataire externe", "Cellule interne outillée"],
+  en: ["None", "Manual alerts", "Dedicated monitoring platform", "External provider", "In-house equipped unit"],
 };
 const VEILLE_ORG = {
   fr: ["Aucune", "Chacun fait sa veille", "Référent informel", "Cellule interne dédiée", "Externalisée", "Mixte"],
   en: ["None", "Everyone monitors on their own", "Informal referent", "Dedicated in-house unit", "Outsourced", "Mixed"],
 };
 const VEILLE_CAPI = {
-  fr: ["Aucune", "Notes internes ponctuelles", "Base de connaissance partagée", "Newsletter ou magazine interne régulier", "Diffusion externe (rayonnement)"],
-  en: ["None", "Occasional internal notes", "Shared knowledge base", "Regular internal newsletter or magazine", "External publication (outreach)"],
+  fr: ["Aucune", "Notes internes ponctuelles", "Base de connaissance partagée", "Newsletter ou magazine interne", "Diffusion externe (rayonnement)"],
+  en: ["None", "Occasional internal notes", "Shared knowledge base", "Internal newsletter or magazine", "External publication (outreach)"],
 };
+
 
 const APPRO_FREQ = {
   fr: ["Jamais", "Ponctuellement", "Annuellement", "Trimestriellement", "En continu"],
@@ -472,11 +447,20 @@ const GhostButton = ({ children, onClick }: { children: React.ReactNode; onClick
 // Page principale
 // =========================================================================
 type State = {
-  step: number; // 0 intro, 1 piliers, 2 taggage, 3..5 Q1-Q3, 6 veille, 7..11 Q4-Q8, 12..15 Q9-Q12, 16 opt-in, 17 appro, 18 commentaire, 19 contact
+  step: number;
   secteur: string; type_organisation: string; fonction: string;
   answers: Record<string, Scale>;
-  tools: Record<string, string[] | string | null>;
-  veille_thematiques: string[]; veille_outil: string | null; veille_outil_precision: string; veille_organisation: string | null; veille_capitalisation: string | null;
+  precisions: Record<string, string>;
+  // Q9 anchor 3 : mode Interne/Externe et, si externe, origine Marocain/Étranger.
+  q9_dd_mode: "interne" | "externe" | null;
+  dd_cabinet_origine: "marocain" | "etranger" | null;
+  veille_thematiques: string[];
+  veille_outil: string | null;
+  veille_outil_precision: string;
+  veille_prestataire_origine: "marocain" | "etranger" | null;
+  veille_organisation: string | null;
+  veille_externalisation_origine: "marocain" | "etranger" | null;
+  veille_capitalisation: string[];
   approfondissement: boolean | null;
   appro: Record<string, string>;
   commentaire_ouvert: string;
@@ -485,8 +469,12 @@ type State = {
 
 const initialState: State = {
   step: 0, secteur: "", type_organisation: "", fonction: "",
-  answers: {}, tools: {},
-  veille_thematiques: [], veille_outil: null, veille_outil_precision: "", veille_organisation: null, veille_capitalisation: null,
+  answers: {}, precisions: {},
+  q9_dd_mode: null, dd_cabinet_origine: null,
+  veille_thematiques: [], veille_outil: null, veille_outil_precision: "",
+  veille_prestataire_origine: null,
+  veille_organisation: null, veille_externalisation_origine: null,
+  veille_capitalisation: [],
   approfondissement: null, appro: {},
   commentaire_ouvert: "",
   contact_nom: "", contact_fonction: "", contact_organisation: "", contact_email: "", contact_telephone: "",
@@ -496,7 +484,10 @@ type IsdResult = {
   score_global: number; niveau: string;
   score_p1: number; score_p2: number; score_p3: number; score_p4: number;
   q11: number | null;
+  foreign_dependency?: boolean;
 };
+
+
 
 
 const EnqueteISD = () => {
@@ -518,7 +509,7 @@ const EnqueteISD = () => {
   }, [s.step]);
 
   const setAnswer = (key: string, val: Scale) => setS((p) => ({ ...p, answers: { ...p.answers, [key]: val } }));
-  const setTool = (field: string, val: string[] | string | null) => setS((p) => ({ ...p, tools: { ...p.tools, [field]: val } }));
+  const setPrecision = (key: string, val: string) => setS((p) => ({ ...p, precisions: { ...p.precisions, [key]: val } }));
 
   const goNext = () => setS((p) => ({ ...p, step: p.step + 1 }));
   const goPrev = () => setS((p) => ({ ...p, step: Math.max(0, p.step - 1) }));
@@ -526,6 +517,10 @@ const EnqueteISD = () => {
   const submit = async () => {
     setSubmitting(true);
     try {
+      // Précisions consolidées + Q9 mode (interne/externe) stocké dans precisions
+      const precisions: Record<string, any> = { ...s.precisions };
+      if (s.q9_dd_mode) precisions.q9_mode = s.q9_dd_mode;
+
       const payload = {
         secteur: s.secteur, type_organisation: s.type_organisation, fonction: s.fonction,
         q1: s.answers.q1, q2: s.answers.q2, q3: s.answers.q3,
@@ -534,13 +529,12 @@ const EnqueteISD = () => {
         veille_thematiques: s.veille_thematiques,
         veille_outil: s.veille_outil,
         veille_outil_precision: s.veille_outil_precision || null,
+        veille_prestataire_origine: s.veille_prestataire_origine,
         veille_organisation: s.veille_organisation,
+        veille_externalisation_origine: s.veille_externalisation_origine,
         veille_capitalisation: s.veille_capitalisation,
-        outil_donnee: (s.tools.outil_donnee as string[]) || [],
-        outil_carto: (s.tools.outil_carto as string[]) || [],
-        outil_crise: (s.tools.outil_crise as string[]) || [],
-        outil_signaux: (s.tools.outil_signaux as string[]) || [],
-        dd_realisation: (s.tools.dd_realisation as string) || null,
+        dd_cabinet_origine: s.dd_cabinet_origine,
+        precisions,
         approfondissement: !!s.approfondissement,
         appro: s.appro,
         commentaire_ouvert: s.commentaire_ouvert || null,
@@ -561,7 +555,9 @@ const EnqueteISD = () => {
         score_p3: Number(d.score_p3 ?? 0),
         score_p4: Number(d.score_p4 ?? 0),
         q11: d.q11 == null ? null : Number(d.q11),
+        foreign_dependency: !!d.foreign_dependency,
       });
+
       window.scrollTo(0, 0);
     } catch (e) {
       toast({
@@ -621,8 +617,7 @@ const EnqueteISD = () => {
                 <QuestionScreen lang={lang} qdef={QUESTIONS[s.step - 3]}
                   value={s.answers[QUESTIONS[s.step - 3].key] ?? null}
                   onValue={(v) => setAnswer(QUESTIONS[s.step - 3].key, v)}
-                  toolValue={QUESTIONS[s.step - 3].tool ? s.tools[QUESTIONS[s.step - 3].tool!.field] as any : null}
-                  onToolValue={(v) => QUESTIONS[s.step - 3].tool && setTool(QUESTIONS[s.step - 3].tool!.field, v)}
+                  state={s} setState={setS} setPrecision={setPrecision}
                   onNext={goNext} onPrev={goPrev}
                 />
               )}
@@ -635,8 +630,7 @@ const EnqueteISD = () => {
                 <QuestionScreen lang={lang} qdef={QUESTIONS[s.step - 4]}
                   value={s.answers[QUESTIONS[s.step - 4].key] ?? null}
                   onValue={(v) => setAnswer(QUESTIONS[s.step - 4].key, v)}
-                  toolValue={QUESTIONS[s.step - 4].tool ? s.tools[QUESTIONS[s.step - 4].tool!.field] as any : null}
-                  onToolValue={(v) => QUESTIONS[s.step - 4].tool && setTool(QUESTIONS[s.step - 4].tool!.field, v)}
+                  state={s} setState={setS} setPrecision={setPrecision}
                   onNext={goNext} onPrev={goPrev}
                 />
               )}
@@ -645,11 +639,11 @@ const EnqueteISD = () => {
                 <QuestionScreen lang={lang} qdef={QUESTIONS[s.step - 4]}
                   value={s.answers[QUESTIONS[s.step - 4].key] ?? null}
                   onValue={(v) => setAnswer(QUESTIONS[s.step - 4].key, v)}
-                  toolValue={QUESTIONS[s.step - 4].tool ? s.tools[QUESTIONS[s.step - 4].tool!.field] as any : null}
-                  onToolValue={(v) => QUESTIONS[s.step - 4].tool && setTool(QUESTIONS[s.step - 4].tool!.field, v)}
+                  state={s} setState={setS} setPrecision={setPrecision}
                   onNext={goNext} onPrev={goPrev}
                 />
               )}
+
 
               {s.step === 16 && (
                 <OptInScreen lang={lang}
@@ -881,12 +875,38 @@ const ScreenTagging = ({ lang, state, setState, onNext, onPrev }: any) => {
   );
 };
 
-const QuestionScreen = ({ lang, qdef, value, onValue, toolValue, onToolValue, onNext, onPrev }: {
+const OriginPicker = ({ lang, value, onChange }: { lang: "fr" | "en"; value: "marocain" | "etranger" | null; onChange: (v: "marocain" | "etranger") => void }) => (
+  <div style={{ display: "flex", gap: 8, marginTop: 8 }}>
+    {(["marocain", "etranger"] as const).map((k) => {
+      const label = k === "marocain" ? t2("Marocain", "Moroccan", lang) : t2("Étranger", "Foreign", lang);
+      const active = value === k;
+      return (
+        <button key={k} type="button" onClick={() => onChange(k)} style={{
+          background: active ? NAVY : "#fff",
+          color: active ? "#fff" : NAVY,
+          border: `1px solid ${active ? NAVY : "rgba(31,58,95,0.25)"}`,
+          padding: "6px 14px", fontSize: 12, cursor: "pointer", borderRadius: 2,
+          fontFamily: "'DM Sans', sans-serif",
+        }}>{label}</button>
+      );
+    })}
+  </div>
+);
+
+const QuestionScreen = ({ lang, qdef, value, onValue, state, setState, setPrecision, onNext, onPrev }: {
   lang: "fr" | "en"; qdef: QDef; value: Scale; onValue: (v: Scale) => void;
-  toolValue: string[] | string | null; onToolValue: (v: string[] | string | null) => void;
+  state: State; setState: React.Dispatch<React.SetStateAction<State>>;
+  setPrecision: (key: string, val: string) => void;
   onNext: () => void; onPrev: () => void;
 }) => {
-  const canGo = value !== null;
+  // Bloque le passage tant que le contexte Q9 (interne/externe + origine si externe) n'est pas résolu.
+  const q9Blocked = qdef.key === "q9" && value === 3 && (
+    !state.q9_dd_mode || (state.q9_dd_mode === "externe" && !state.dd_cabinet_origine)
+  );
+  const canGo = value !== null && !q9Blocked;
+
+  const precisionActive = value !== null && qdef.precisionAt?.includes(value as number);
+
   return (
     <div>
       <Overline>{`${qdef.numero} · ${qdef.dim[lang]}`}</Overline>
@@ -896,29 +916,70 @@ const QuestionScreen = ({ lang, qdef, value, onValue, toolValue, onToolValue, on
         {qdef.anchors[lang].map((anchor, i) => {
           const active = value === i;
           return (
-            <button key={i} type="button" onClick={() => onValue(i as Scale)} style={{
-              display: "block", width: "100%", textAlign: "left",
-              background: active ? NAVY : "#fff",
-              color: active ? "#fff" : NAVY,
-              border: `1px solid ${active ? NAVY : "rgba(31,58,95,0.2)"}`,
-              borderLeft: `3px solid ${GOLD}`,
-              padding: "14px 16px", marginBottom: 8, cursor: "pointer",
-              fontFamily: "'DM Sans', sans-serif", fontSize: 14, lineHeight: 1.5, borderRadius: 2,
-              transition: "all 0.15s",
-            }}>
-              <div style={{ fontFamily: "'JetBrains Mono', ui-monospace, monospace", fontSize: 10, letterSpacing: "0.18em", opacity: 0.7, marginBottom: 4 }}>
-                {LEVEL_LABELS[lang][i]}
-              </div>
-              {anchor}
-            </button>
+            <div key={i}>
+              <button type="button" onClick={() => onValue(i as Scale)} style={{
+                display: "block", width: "100%", textAlign: "left",
+                background: active ? NAVY : "#fff",
+                color: active ? "#fff" : NAVY,
+                border: `1px solid ${active ? NAVY : "rgba(31,58,95,0.2)"}`,
+                borderLeft: `3px solid ${GOLD}`,
+                padding: "14px 16px", marginBottom: 8, cursor: "pointer",
+                fontFamily: "'DM Sans', sans-serif", fontSize: 14, lineHeight: 1.5, borderRadius: 2,
+                transition: "all 0.15s",
+              }}>
+                <div style={{ fontFamily: "'JetBrains Mono', ui-monospace, monospace", fontSize: 10, letterSpacing: "0.18em", opacity: 0.7, marginBottom: 4 }}>
+                  {LEVEL_LABELS[lang][i]}
+                </div>
+                {anchor}
+              </button>
+
+              {/* Q9 anchor 3 : Interne/Externe + Marocain/Étranger si externe */}
+              {active && qdef.key === "q9" && i === 3 && (
+                <div style={{ margin: "0 0 12px 12px", padding: "10px 14px", borderLeft: `2px solid ${GOLD}`, background: "rgba(31,58,95,0.04)" }}>
+                  <div style={{ fontFamily: "'JetBrains Mono', ui-monospace, monospace", fontSize: 11, letterSpacing: "0.15em", textTransform: "uppercase", color: NAVY, marginBottom: 6 }}>
+                    {t2("Interne ou externe ?", "In-house or external?", lang)}
+                  </div>
+                  <div style={{ display: "flex", gap: 8 }}>
+                    {(["interne", "externe"] as const).map((k) => {
+                      const label = k === "interne" ? t2("Interne", "In-house", lang) : t2("Externe", "External", lang);
+                      const on = state.q9_dd_mode === k;
+                      return (
+                        <button key={k} type="button" onClick={() => setState((p) => ({ ...p, q9_dd_mode: k, dd_cabinet_origine: k === "interne" ? null : p.dd_cabinet_origine }))} style={{
+                          background: on ? NAVY : "#fff", color: on ? "#fff" : NAVY,
+                          border: `1px solid ${on ? NAVY : "rgba(31,58,95,0.25)"}`,
+                          padding: "6px 14px", fontSize: 12, cursor: "pointer", borderRadius: 2, fontFamily: "'DM Sans', sans-serif",
+                        }}>{label}</button>
+                      );
+                    })}
+                  </div>
+                  {state.q9_dd_mode === "externe" && (
+                    <div style={{ marginTop: 10 }}>
+                      <div style={{ fontFamily: "'JetBrains Mono', ui-monospace, monospace", fontSize: 11, letterSpacing: "0.15em", textTransform: "uppercase", color: NAVY }}>
+                        {t2("Cabinet Marocain ou Étranger ?", "Moroccan or Foreign firm?", lang)}
+                      </div>
+                      <OriginPicker lang={lang} value={state.dd_cabinet_origine} onChange={(v) => setState((p) => ({ ...p, dd_cabinet_origine: v }))} />
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
           );
         })}
       </div>
 
-      {qdef.tool && (
-        <ToolBlock lang={lang} label={qdef.tool.label[lang]} multi={qdef.tool.multi} options={qdef.tool.options[lang]}
-          value={toolValue} onChange={onToolValue}
-        />
+      {/* Champ « précisez » conditionnel (texte libre, ne score pas) */}
+      {precisionActive && (
+        <div style={{ marginTop: -4, marginBottom: 16, padding: "12px 16px", borderLeft: `2px solid ${GOLD}`, background: "rgba(31,58,95,0.04)" }}>
+          <div style={{ fontFamily: "'JetBrains Mono', ui-monospace, monospace", fontSize: 11, letterSpacing: "0.15em", textTransform: "uppercase", color: NAVY, marginBottom: 8 }}>
+            {t2("Précisez", "Please specify", lang)}
+          </div>
+          <Input
+            value={state.precisions[qdef.key] ?? ""}
+            onChange={(e: any) => setPrecision(qdef.key, e.target.value)}
+            maxLength={500}
+            style={{ background: "#fff", borderColor: "rgba(31,58,95,0.25)", color: NAVY }}
+          />
+        </div>
       )}
 
       <div style={{ display: "flex", gap: 12, marginTop: 24 }}>
@@ -929,52 +990,28 @@ const QuestionScreen = ({ lang, qdef, value, onValue, toolValue, onToolValue, on
   );
 };
 
-const ToolBlock = ({ lang, label, multi, options, value, onChange }: {
-  lang: "fr" | "en"; label: string; multi: boolean; options: string[];
-  value: string[] | string | null; onChange: (v: string[] | string | null) => void;
-}) => {
-  const toggle = (opt: string) => {
-    if (multi) {
-      const cur = (Array.isArray(value) ? value : []) as string[];
-      onChange(cur.includes(opt) ? cur.filter((x) => x !== opt) : [...cur, opt]);
-    } else {
-      onChange(value === opt ? null : opt);
-    }
-  };
-  const selected = (opt: string) => multi ? (Array.isArray(value) && value.includes(opt)) : value === opt;
-  return (
-    <div style={{ borderTop: `1px solid rgba(31,58,95,0.15)`, paddingTop: 20, marginTop: 8 }}>
-      <div style={{ fontFamily: "'JetBrains Mono', ui-monospace, monospace", fontSize: 11, letterSpacing: "0.15em", textTransform: "uppercase", color: GOLD, marginBottom: 6 }}>
-        {t2("OUTILLAGE", "TOOLING", lang)} · {t2("ne note pas", "not scored", lang)}
-      </div>
-      <Body>{label}</Body>
-      <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
-        {options.map((opt) => (
-          <button key={opt} type="button" onClick={() => toggle(opt)} style={{
-            background: selected(opt) ? NAVY : "#fff",
-            color: selected(opt) ? "#fff" : NAVY,
-            border: `1px solid ${selected(opt) ? NAVY : "rgba(31,58,95,0.25)"}`,
-            padding: "8px 14px", fontFamily: "'DM Sans', sans-serif", fontSize: 13,
-            cursor: "pointer", borderRadius: 2,
-          }}>{opt}</button>
-        ))}
-      </div>
-    </div>
-  );
-};
+
 
 const VeilleScreen = ({ lang, state, setState, onNext, onPrev }: any) => {
   const toggleTheme = (opt: string) => {
     const cur: string[] = state.veille_thematiques;
     setState({ ...state, veille_thematiques: cur.includes(opt) ? cur.filter((x: string) => x !== opt) : [...cur, opt] });
   };
-  const canGo = state.veille_thematiques.length > 0 && state.veille_outil && state.veille_organisation && state.veille_capitalisation;
+  const toggleCapi = (opt: string) => {
+    const cur: string[] = state.veille_capitalisation || [];
+    setState({ ...state, veille_capitalisation: cur.includes(opt) ? cur.filter((x: string) => x !== opt) : [...cur, opt] });
+  };
+
+  // Sous-choix bloquants : si Prestataire externe -> origine requise ; si Externalisée -> origine requise.
+  const outilBlocked = state.veille_outil === "Prestataire externe" && !state.veille_prestataire_origine;
+  const orgBlocked = state.veille_organisation === "Externalisée" && !state.veille_externalisation_origine;
+  const canGo = state.veille_thematiques.length > 0 && state.veille_outil && state.veille_organisation && (state.veille_capitalisation?.length > 0) && !outilBlocked && !orgBlocked;
 
   const themesFr = VEILLE_THEMES.fr;
   const themesLang = VEILLE_THEMES[lang];
 
   const SingleChoice = ({ label, options, value, onChange }: { label: string; options: string[]; value: string | null; onChange: (v: string) => void }) => (
-    <div style={{ marginBottom: 20 }}>
+    <div style={{ marginBottom: 12 }}>
       <div style={{ fontFamily: "'JetBrains Mono', ui-monospace, monospace", fontSize: 11, letterSpacing: "0.15em", textTransform: "uppercase", color: NAVY, marginBottom: 8 }}>{label}</div>
       <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
         {options.map((opt) => (
@@ -989,28 +1026,44 @@ const VeilleScreen = ({ lang, state, setState, onNext, onPrev }: any) => {
     </div>
   );
 
-  // Mapping displayed (lang) -> canonical (fr) for storage
+  const MultiChoice = ({ label, canonical, display, values, onToggle }: { label: string; canonical: string[]; display: string[]; values: string[]; onToggle: (canonical: string) => void }) => (
+    <div style={{ marginBottom: 20 }}>
+      <div style={{ fontFamily: "'JetBrains Mono', ui-monospace, monospace", fontSize: 11, letterSpacing: "0.15em", textTransform: "uppercase", color: NAVY, marginBottom: 8 }}>{label}</div>
+      <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
+        {display.map((opt, i) => {
+          const c = canonical[i];
+          const active = values.includes(c);
+          return (
+            <button key={opt} type="button" onClick={() => onToggle(c)} style={{
+              background: active ? NAVY : "#fff",
+              color: active ? "#fff" : NAVY,
+              border: `1px solid ${active ? NAVY : "rgba(31,58,95,0.25)"}`,
+              padding: "8px 14px", fontSize: 13, cursor: "pointer", borderRadius: 2, fontFamily: "'DM Sans', sans-serif",
+            }}>{opt}</button>
+          );
+        })}
+      </div>
+    </div>
+  );
+
   const setOutil = (v: string) => {
     const idx = VEILLE_OUTIL[lang].indexOf(v);
-    setState({ ...state, veille_outil: VEILLE_OUTIL.fr[idx] });
+    const canon = VEILLE_OUTIL.fr[idx];
+    setState({ ...state, veille_outil: canon, veille_prestataire_origine: canon === "Prestataire externe" ? state.veille_prestataire_origine : null });
   };
   const setOrg = (v: string) => {
     const idx = VEILLE_ORG[lang].indexOf(v);
-    setState({ ...state, veille_organisation: VEILLE_ORG.fr[idx] });
-  };
-  const setCapi = (v: string) => {
-    const idx = VEILLE_CAPI[lang].indexOf(v);
-    setState({ ...state, veille_capitalisation: VEILLE_CAPI.fr[idx] });
+    const canon = VEILLE_ORG.fr[idx];
+    setState({ ...state, veille_organisation: canon, veille_externalisation_origine: canon === "Externalisée" ? state.veille_externalisation_origine : null });
   };
   const currentOutil = state.veille_outil ? VEILLE_OUTIL[lang][VEILLE_OUTIL.fr.indexOf(state.veille_outil)] : null;
   const currentOrg = state.veille_organisation ? VEILLE_ORG[lang][VEILLE_ORG.fr.indexOf(state.veille_organisation)] : null;
-  const currentCapi = state.veille_capitalisation ? VEILLE_CAPI[lang][VEILLE_CAPI.fr.indexOf(state.veille_capitalisation)] : null;
 
   return (
     <div>
       <Overline>{t2("PILIER II · VEILLE STRATÉGIQUE", "PILLAR II · STRATEGIC MONITORING", lang)}</Overline>
       <H2>{t2("Quatre axes factuels de votre veille", "Four factual axes of your monitoring", lang)}</H2>
-      <Body>{t2("Ce bloc ne s'auto-note pas : il décrit votre réalité.", "This block is not self-scored: it describes your reality.", lang)}</Body>
+      <Body>{t2("Décrivez votre réalité pour chacun des quatre axes.", "Describe your reality for each of the four axes.", lang)}</Body>
 
       <div style={{ marginBottom: 20 }}>
         <div style={{ fontFamily: "'JetBrains Mono', ui-monospace, monospace", fontSize: 11, letterSpacing: "0.15em", textTransform: "uppercase", color: NAVY, marginBottom: 8 }}>
@@ -1032,11 +1085,11 @@ const VeilleScreen = ({ lang, state, setState, onNext, onPrev }: any) => {
         </div>
       </div>
 
-      <SingleChoice label={`V2 · ${t2("Outil (choix unique, le plus avancé atteint)", "Tool (single choice, most advanced reached)", lang)}`} options={VEILLE_OUTIL[lang]} value={currentOutil} onChange={setOutil} />
-      {(state.veille_outil === "Plateforme de veille dédiée" || state.veille_outil === "Cellule interne outillée") && (
-        <div style={{ marginTop: -8, marginBottom: 20, paddingLeft: 12, borderLeft: `2px solid ${GOLD}` }}>
+      <SingleChoice label={`V2 · ${t2("Outil (choix unique)", "Tool (single choice)", lang)}`} options={VEILLE_OUTIL[lang]} value={currentOutil} onChange={setOutil} />
+      {state.veille_outil === "Plateforme de veille dédiée" && (
+        <div style={{ marginBottom: 20, padding: "10px 14px", borderLeft: `2px solid ${GOLD}`, background: "rgba(31,58,95,0.04)" }}>
           <div style={{ fontFamily: "'JetBrains Mono', ui-monospace, monospace", fontSize: 11, letterSpacing: "0.15em", textTransform: "uppercase", color: NAVY, marginBottom: 8 }}>
-            {t2("Précisez", "Please specify", lang)}
+            {t2("Laquelle", "Which one", lang)}
           </div>
           <Input
             value={state.veille_outil_precision}
@@ -1046,8 +1099,29 @@ const VeilleScreen = ({ lang, state, setState, onNext, onPrev }: any) => {
           />
         </div>
       )}
+      {state.veille_outil === "Prestataire externe" && (
+        <div style={{ marginBottom: 20, padding: "10px 14px", borderLeft: `2px solid ${GOLD}`, background: "rgba(31,58,95,0.04)" }}>
+          <div style={{ fontFamily: "'JetBrains Mono', ui-monospace, monospace", fontSize: 11, letterSpacing: "0.15em", textTransform: "uppercase", color: NAVY }}>
+            {t2("Prestataire Marocain ou Étranger ?", "Moroccan or Foreign provider?", lang)}
+          </div>
+          <OriginPicker lang={lang} value={state.veille_prestataire_origine} onChange={(v) => setState({ ...state, veille_prestataire_origine: v })} />
+        </div>
+      )}
+
       <SingleChoice label={`V3 · ${t2("Organisation du service (choix unique)", "Service organization (single choice)", lang)}`} options={VEILLE_ORG[lang]} value={currentOrg} onChange={setOrg} />
-      <SingleChoice label={`V4 · ${t2("Capitalisation et production de contenu (choix unique)", "Capitalization and content production (single choice)", lang)}`} options={VEILLE_CAPI[lang]} value={currentCapi} onChange={setCapi} />
+      {state.veille_organisation === "Externalisée" && (
+        <div style={{ marginBottom: 20, padding: "10px 14px", borderLeft: `2px solid ${GOLD}`, background: "rgba(31,58,95,0.04)" }}>
+          <div style={{ fontFamily: "'JetBrains Mono', ui-monospace, monospace", fontSize: 11, letterSpacing: "0.15em", textTransform: "uppercase", color: NAVY }}>
+            {t2("Cabinet Marocain ou Étranger ?", "Moroccan or Foreign firm?", lang)}
+          </div>
+          <OriginPicker lang={lang} value={state.veille_externalisation_origine} onChange={(v) => setState({ ...state, veille_externalisation_origine: v })} />
+        </div>
+      )}
+
+      <MultiChoice
+        label={`V4 · ${t2("Capitalisation et production de contenu (multi-choix)", "Capitalization and content production (multi-select)", lang)}`}
+        canonical={VEILLE_CAPI.fr} display={VEILLE_CAPI[lang]} values={state.veille_capitalisation || []} onToggle={toggleCapi}
+      />
 
       <div style={{ display: "flex", gap: 12, marginTop: 24 }}>
         <GhostButton onClick={onPrev}>{t2("Retour", "Back", lang)}</GhostButton>
@@ -1056,6 +1130,8 @@ const VeilleScreen = ({ lang, state, setState, onNext, onPrev }: any) => {
     </div>
   );
 };
+
+
 
 const OptInScreen = ({ lang, onYes, onNo, onPrev }: { lang: "fr" | "en"; onYes: () => void; onNo: () => void; onPrev: () => void }) => (
   <div>
@@ -1443,6 +1519,23 @@ const ResultScreen = ({ lang, result, onExchange }: { lang: "fr" | "en"; result:
           {waitingPhrase}
         </div>
       </div>
+
+      {/* Point de vigilance souveraineté — s'affiche uniquement si dépendance étrangère détectée. Ne score pas. */}
+      {result.foreign_dependency && (
+        <div style={{ margin: "28px 0", padding: "16px 20px", background: "#fff", borderTop: `3px solid ${GOLD}`, borderLeft: `1px solid rgba(31,58,95,0.15)`, borderRight: `1px solid rgba(31,58,95,0.15)`, borderBottom: `1px solid rgba(31,58,95,0.15)` }}>
+          <div style={{ fontFamily: "'JetBrains Mono', ui-monospace, monospace", fontSize: 10, letterSpacing: "0.25em", textTransform: "uppercase", color: GOLD, marginBottom: 8 }}>
+            {t2("POINT DE VIGILANCE SOUVERAINETÉ", "SOVEREIGNTY WATCH POINT", lang)}
+          </div>
+          <div style={{ fontFamily: "'DM Sans', sans-serif", color: NAVY, fontSize: 14, lineHeight: 1.65 }}>
+            {t2(
+              "Une partie de votre dispositif repose sur des prestataires étrangers. Une montée en autonomie sur ce volet renforcerait votre souveraineté décisionnelle.",
+              "Part of your setup relies on foreign providers. Building greater autonomy on this front would strengthen your decision sovereignty.",
+              lang,
+            )}
+          </div>
+        </div>
+      )}
+
 
       {/* Bloc positionnement national */}
       <div style={{ margin: "28px 0", padding: "14px 18px", background: "rgba(31,58,95,0.06)", borderLeft: `3px solid ${NAVY}`, fontFamily: "'DM Sans', sans-serif", color: NAVY, fontSize: 13, lineHeight: 1.6 }}>
