@@ -41,7 +41,10 @@ const FONCTIONS = {
   en: ["Executive Management", "Strategy Direction", "Risk Manager", "Communications Lead", "Other"],
 };
 
-// --- Ancrages échelle 0-4 par question (FR) ---
+// --- Ancrages échelle 0-4 par question (FR/EN, logique de maturité) ---
+// Certains ancrages contiennent une mention entre parenthèses de type
+// « (Précisez) » ou « (Lesquels) » : lorsqu'ils sont sélectionnés, un champ
+// texte libre s'affiche. Ces précisions taguent la réponse mais ne notent pas.
 type QDef = {
   key: string;
   pillar: 1 | 3 | 4;
@@ -49,12 +52,8 @@ type QDef = {
   dim: { fr: string; en: string };
   question: { fr: string; en: string };
   anchors: { fr: string[]; en: string[] };
-  tool?: {
-    label: { fr: string; en: string };
-    multi: boolean;
-    options: { fr: string[]; en: string[] };
-    field: "outil_donnee" | "outil_carto" | "outil_crise" | "outil_signaux" | "dd_realisation";
-  };
+  // Indices d'ancrages qui déclenchent un champ « précisez » (texte libre).
+  precisionAt?: number[];
 };
 
 const QUESTIONS: QDef[] = [
@@ -62,103 +61,98 @@ const QUESTIONS: QDef[] = [
     key: "q1", pillar: 1, numero: "Q1",
     dim: { fr: "Anticipation", en: "Anticipation" },
     question: {
-      fr: "Comment vos décisions stratégiques intègrent-elles l'anticipation des ruptures ?",
-      en: "How do your strategic decisions integrate anticipation of disruptions?",
+      fr: "Comment anticipez-vous les ruptures et évolutions de votre environnement ?",
+      en: "How do you anticipate disruptions and shifts in your environment?",
     },
     anchors: {
       fr: [
-        "Nous décidons à l'instant, sans regard prospectif.",
-        "Nous réagissons aux ruptures une fois qu'elles surviennent.",
-        "Quelques exercices de scénarios, ponctuels et non reliés aux décisions.",
-        "Démarche prospective formalisée, alimentant nos décisions clés.",
-        "Anticipation systématique des ruptures, intégrée et créatrice d'avantage.",
+        "Aucune anticipation.",
+        "Anticipation informelle, au coup par coup.",
+        "Démarches ponctuelles (études, consultants).",
+        "Dispositif interne régulier de prospective. (Précisez)",
+        "Veille prospective continue, outils dédiés et alertes automatisées. (Lesquels)",
       ],
       en: [
-        "We decide in the moment, with no forward view.",
-        "We react to disruptions once they occur.",
-        "Some occasional scenario exercises, not linked to decisions.",
-        "Formalized foresight approach feeding our key decisions.",
-        "Systematic anticipation of disruptions, embedded and value-creating.",
+        "No anticipation.",
+        "Informal anticipation, case by case.",
+        "Occasional initiatives (studies, consultants).",
+        "Regular in-house foresight setup. (Please specify)",
+        "Continuous foresight, dedicated tools and automated alerts. (Which ones)",
       ],
     },
+    precisionAt: [3, 4],
   },
   {
     key: "q2", pillar: 1, numero: "Q2",
     dim: { fr: "Donnée dans la décision", en: "Data in decision-making" },
     question: {
-      fr: "Dans quelle mesure vos décisions majeures s'appuient-elles sur des données structurées ?",
-      en: "To what extent do your major decisions rely on structured data?",
+      fr: "Quelle place la donnée occupe-t-elle dans vos décisions ?",
+      en: "What place does data hold in your decisions?",
     },
     anchors: {
       fr: [
-        "Décisions à l'intuition, sans donnée mobilisée.",
-        "Données regardées après coup, pour justifier une décision déjà prise.",
-        "Données disponibles mais dispersées, mobilisées de façon inégale.",
-        "Données structurées intégrées au processus de décision.",
-        "Décision pilotée par la donnée, en temps quasi réel, sur indicateurs maîtrisés.",
+        "Décisions fondées principalement sur l'intuition.",
+        "Données utilisées occasionnellement, après coup.",
+        "Données consultées régulièrement. (Par quel moyen)",
+        "Données structurant la majorité des décisions. (Précisez)",
+        "Décisions pilotées par tableaux de bord et analyses avancées. (Plus de précisions)",
       ],
       en: [
-        "Decisions made on intuition, no data mobilized.",
-        "Data reviewed after the fact to justify a decision already made.",
-        "Data available but scattered, mobilized unevenly.",
-        "Structured data embedded in the decision process.",
-        "Data-driven decision-making, near real-time, on mastered indicators.",
+        "Decisions mainly based on intuition.",
+        "Data used occasionally, after the fact.",
+        "Data consulted regularly. (By what means)",
+        "Data structuring most decisions. (Please specify)",
+        "Decisions steered by dashboards and advanced analytics. (More detail)",
       ],
     },
-    tool: {
-      label: { fr: "Comment vos données de décision sont-elles structurées et exploitées ?", en: "How is your decision data structured and used?" },
-      multi: true, field: "outil_donnee",
-      options: {
-        fr: ["Saisie manuelle / Excel", "Base de données ou ERP", "Entrepôt de données (data warehouse)", "Outil de BI ou dashboards", "Aucune structuration formelle"],
-        en: ["Manual entry / Excel", "Database or ERP", "Data warehouse", "BI tool or dashboards", "No formal structuring"],
-      },
-    },
+    precisionAt: [2, 3, 4],
   },
   {
     key: "q3", pillar: 1, numero: "Q3",
     dim: { fr: "Gouvernance de l'information", en: "Information governance" },
     question: {
-      fr: "Comment l'information stratégique est-elle collectée, qualifiée, protégée et diffusée en interne ?",
-      en: "How is strategic information collected, qualified, protected and shared internally?",
+      fr: "Comment la responsabilité de l'information stratégique est-elle portée ?",
+      en: "How is responsibility for strategic information carried?",
     },
     anchors: {
       fr: [
-        "Aucune gouvernance, circulation informelle.",
-        "Circulation au gré des personnes, sans règle ni protection.",
-        "Premières règles, appliquées partiellement, sans responsable clair.",
-        "Gouvernance formalisée, responsabilités et protection définies.",
-        "Information pilotée comme un actif, sécurisée et valorisée.",
+        "Aucun responsable identifié.",
+        "Responsabilités dispersées.",
+        "Référent identifié.",
+        "Fonction dédiée. (Statut)",
+        "Gouvernance pilotée au niveau Direction / COMEX.",
       ],
       en: [
-        "No governance, informal circulation.",
-        "Circulation driven by individuals, no rules or protection.",
-        "Initial rules, partially applied, no clear owner.",
-        "Formal governance, responsibilities and protection defined.",
-        "Information managed as an asset, secured and valued.",
+        "No identified owner.",
+        "Scattered responsibilities.",
+        "Identified referent.",
+        "Dedicated function. (Status)",
+        "Governance steered at Executive / ExCom level.",
       ],
     },
+    precisionAt: [3],
   },
   {
     key: "q4", pillar: 3, numero: "Q4",
-    dim: { fr: "Process IE", en: "Business Intelligence process" },
+    dim: { fr: "Process d'intelligence économique", en: "Business intelligence process" },
     question: {
-      fr: "Disposez-vous d'un processus formalisé d'intelligence économique (besoins, collecte, analyse, diffusion) ?",
-      en: "Do you have a formal business intelligence process (needs, collection, analysis, dissemination)?",
+      fr: "Quel est le degré de formalisation de votre processus d'IE ?",
+      en: "How formal is your business-intelligence process?",
     },
     anchors: {
       fr: [
         "Aucun processus.",
-        "Démarches isolées, ponctuelles.",
-        "Premières briques, non systématisées.",
-        "Cycle IE formalisé, du besoin à la diffusion.",
-        "IE intégrée au pilotage, boucle continue.",
+        "Quelques pratiques isolées.",
+        "Processus documentés.",
+        "Processus intégrés dans plusieurs directions.",
+        "Processus industrialisés avec indicateurs de performance.",
       ],
       en: [
         "No process.",
-        "Isolated, occasional actions.",
-        "Initial building blocks, not systematized.",
-        "Formal BI cycle, from need to dissemination.",
-        "BI embedded in steering, continuous loop.",
+        "A few isolated practices.",
+        "Documented processes.",
+        "Processes integrated across several departments.",
+        "Industrialized processes with performance indicators.",
       ],
     },
   },
@@ -166,225 +160,205 @@ const QUESTIONS: QDef[] = [
     key: "q5", pillar: 3, numero: "Q5",
     dim: { fr: "Cartographie des risques", en: "Risk mapping" },
     question: {
-      fr: "Disposez-vous d'une cartographie actualisée et reliée à vos décisions stratégiques ?",
-      en: "Do you have an up-to-date risk map connected to your strategic decisions?",
+      fr: "Comment votre cartographie des risques est-elle tenue ?",
+      en: "How is your risk map maintained?",
     },
     anchors: {
       fr: [
         "Aucune cartographie.",
-        "Risques identifiés après incident.",
-        "Cartographie non actualisée ni reliée aux décisions.",
-        "Cartographie formalisée, actualisée, revue périodiquement.",
-        "Cartographie dynamique, intégrée au pilotage et aux scénarios.",
+        "Réalisée après incident.",
+        "Mise à jour occasionnelle.",
+        "Révision régulière. (Par quel moyen)",
+        "Cartographie dynamique à suivi permanent, pilotée par un logiciel GRC (Gouvernance, Risques, Conformité) ou équivalent. (Précisez la solution)",
       ],
       en: [
-        "No mapping.",
-        "Risks identified after incidents.",
-        "Mapping not updated nor linked to decisions.",
-        "Formal, regularly reviewed and updated mapping.",
-        "Dynamic mapping, embedded in steering and scenarios.",
+        "No map.",
+        "Produced after an incident.",
+        "Occasional updates.",
+        "Regular reviews. (By what means)",
+        "Dynamic, continuously monitored map, steered by GRC software or equivalent. (Please specify the solution)",
       ],
     },
-    tool: {
-      label: { fr: "Avec quel outil ?", en: "With which tool?" },
-      multi: true, field: "outil_carto",
-      options: {
-        fr: ["Excel / tableur", "Solution GRC dédiée", "Module ERP", "Outil interne maison", "Aucun outil"],
-        en: ["Excel / spreadsheet", "Dedicated GRC solution", "ERP module", "In-house tool", "No tool"],
-      },
-    },
+    precisionAt: [3, 4],
   },
   {
     key: "q6", pillar: 3, numero: "Q6",
     dim: { fr: "Gestion des crises", en: "Crisis management" },
     question: {
-      fr: "Comment êtes-vous préparés à gérer une crise (cellule, protocoles, simulations) ?",
-      en: "How prepared are you to handle a crisis (unit, protocols, simulations)?",
+      fr: "Quelle est votre préparation à la gestion de crise ?",
+      en: "How prepared are you for crisis management?",
     },
     anchors: {
       fr: [
-        "Aucune préparation.",
-        "Réaction au cas par cas.",
-        "Procédures non testées.",
-        "Cellule et protocoles activables.",
-        "Dispositif éprouvé, simulé régulièrement.",
+        "Aucun dispositif.",
+        "Réaction improvisée.",
+        "Procédure documentée.",
+        "Cellule de crise organisée.",
+        "Dispositif testé régulièrement avec exercices. (Précisez)",
       ],
       en: [
-        "No preparation.",
-        "Case-by-case reaction.",
-        "Untested procedures.",
-        "Activatable unit and protocols.",
-        "Proven setup, regularly simulated.",
+        "No setup.",
+        "Improvised response.",
+        "Documented procedure.",
+        "Organized crisis unit.",
+        "Regularly tested setup with exercises. (Please specify)",
       ],
     },
-    tool: {
-      label: { fr: "Comment est-il préparé ?", en: "How is it prepared?" },
-      multi: true, field: "outil_crise",
-      options: {
-        fr: ["Aucun", "Procédures écrites non testées", "Cellule désignée", "Simulations régulières", "Prestataire spécialisé"],
-        en: ["None", "Written untested procedures", "Designated unit", "Regular simulations", "Specialized provider"],
-      },
-    },
+    precisionAt: [4],
   },
   {
     key: "q7", pillar: 3, numero: "Q7",
     dim: { fr: "Détection des signaux faibles", en: "Weak signal detection" },
     question: {
-      fr: "Comment captez-vous et traitez-vous les signaux faibles avant qu'ils ne deviennent des menaces ?",
-      en: "How do you capture and process weak signals before they become threats?",
+      fr: "Comment captez-vous les signaux faibles ?",
+      en: "How do you capture weak signals?",
     },
     anchors: {
       fr: [
-        "Aucun mécanisme.",
-        "Vus une fois devenus des problèmes.",
-        "Détection dépendante de quelques personnes.",
-        "Mécanisme structuré de captation et remontée.",
-        "Détection anticipative outillée, reliée à la décision.",
+        "Aucun suivi.",
+        "Détection au hasard.",
+        "Signalement manuel.",
+        "Veille organisée. (Quelle solution)",
+        "Détection assistée par IA ou automatisation. (Quels outils)",
       ],
       en: [
-        "No mechanism.",
-        "Seen only once they become problems.",
-        "Detection reliant on a few individuals.",
-        "Structured capture and escalation mechanism.",
-        "Anticipative, tool-supported detection linked to decisions.",
+        "No tracking.",
+        "Random detection.",
+        "Manual reporting.",
+        "Organized monitoring. (Which solution)",
+        "AI-assisted or automated detection. (Which tools)",
       ],
     },
-    tool: {
-      label: { fr: "Quel dispositif ?", en: "Which setup?" },
-      multi: true, field: "outil_signaux",
-      options: {
-        fr: ["Aucun", "Remontées informelles", "Cellule de veille dédiée", "Outil de détection ou scoring", "Prestataire spécialisé"],
-        en: ["None", "Informal reporting", "Dedicated monitoring unit", "Detection or scoring tool", "Specialized provider"],
-      },
-    },
+    precisionAt: [3, 4],
   },
   {
     key: "q8", pillar: 3, numero: "Q8",
     dim: { fr: "Dispositifs de résilience", en: "Resilience arrangements" },
     question: {
-      fr: "Quels dispositifs garantissent la continuité de votre activité face à un choc majeur ?",
-      en: "What arrangements ensure business continuity in the face of a major shock?",
+      fr: "Quel est votre niveau de résilience face à un choc majeur ?",
+      en: "What is your resilience level in the face of a major shock?",
     },
     anchors: {
       fr: [
-        "Aucun dispositif.",
-        "Réponse improvisée.",
-        "Plans partiels ou obsolètes.",
-        "Plan de continuité formalisé et maintenu.",
-        "Résilience éprouvée, testée, intégrée à la gouvernance.",
+        "Aucun plan.",
+        "Quelques mesures.",
+        "Plans documentés.",
+        "Plans testés régulièrement.",
+        "Résilience intégrée avec amélioration continue. (Précisez)",
       ],
       en: [
-        "No arrangements.",
-        "Improvised response.",
-        "Partial or outdated plans.",
-        "Formal, maintained continuity plan.",
-        "Tested resilience, embedded in governance.",
+        "No plan.",
+        "A few measures.",
+        "Documented plans.",
+        "Regularly tested plans.",
+        "Integrated resilience with continuous improvement. (Please specify)",
       ],
     },
+    precisionAt: [4],
   },
   {
     key: "q9", pillar: 4, numero: "Q9",
     dim: { fr: "Évaluation des investisseurs", en: "Investor evaluation" },
     question: {
-      fr: "Comment évaluez-vous la fiabilité et les intentions réelles d'un investisseur ou partenaire financier ?",
-      en: "How do you assess the reliability and true intentions of an investor or financial partner?",
+      fr: "Comment évaluez-vous la fiabilité d'un investisseur ou partenaire financier ?",
+      en: "How do you assess the reliability of an investor or financial partner?",
     },
     anchors: {
       fr: [
         "Aucune évaluation.",
-        "Vérifications sommaires.",
-        "Contrôles partiels.",
-        "Processus formalisé avant engagement.",
-        "Due diligence approfondie sur intentions et arrière-plan.",
+        "Vérifications ponctuelles.",
+        "Évaluation selon quelques critères.",
+        "Due diligence structurée.",
+        "Évaluation multicritère continue avec outils spécialisés. (Lesquels)",
       ],
       en: [
         "No evaluation.",
-        "Basic checks.",
-        "Partial controls.",
-        "Formal process before commitment.",
-        "In-depth due diligence on intentions and background.",
+        "Occasional checks.",
+        "Evaluation on a few criteria.",
+        "Structured due diligence.",
+        "Continuous multi-criteria evaluation with specialized tools. (Which ones)",
       ],
     },
-    tool: {
-      label: { fr: "Vos due diligences sont réalisées :", en: "Your due diligence is carried out:" },
-      multi: false, field: "dd_realisation",
-      options: {
-        fr: ["En interne", "Par un cabinet externe", "En mixte", "Au cas par cas", "Jamais formellement"],
-        en: ["In-house", "By an external firm", "Mixed", "Case-by-case", "Never formally"],
-      },
-    },
+    precisionAt: [4],
+    // Note: l'ancrage 3 déclenche un sous-choix Interne/Externe + Marocain/Étranger
+    // géré spécifiquement dans QuestionScreen.
   },
   {
     key: "q10", pillar: 4, numero: "Q10",
     dim: { fr: "Vérification des partenaires", en: "Partner verification" },
     question: {
-      fr: "Comment vérifiez-vous l'intégrité et la solidité de vos partenaires avant un engagement ?",
-      en: "How do you verify the integrity and soundness of partners before commitment?",
+      fr: "Comment vérifiez-vous vos partenaires avant engagement ?",
+      en: "How do you verify partners before commitment?",
     },
     anchors: {
       fr: [
         "Aucune vérification.",
-        "Informelle, bouche-à-oreille.",
-        "Contrôles ponctuels.",
-        "Processus formalisé et documenté.",
-        "Vérification approfondie, réputation et réseau inclus.",
+        "Recherche internet.",
+        "Vérifications documentaires.",
+        "Due diligence systématique.",
+        "Surveillance continue des partenaires. (Précisez)",
       ],
       en: [
         "No verification.",
-        "Informal, word-of-mouth.",
-        "Occasional controls.",
-        "Formal, documented process.",
-        "In-depth verification including reputation and network.",
+        "Internet search.",
+        "Documentary checks.",
+        "Systematic due diligence.",
+        "Continuous partner monitoring. (Please specify)",
       ],
     },
+    precisionAt: [4],
   },
+  // Ordre d'affichage : Compliance (numéro Q11) AVANT Influence (numéro Q12)
+  // Colonnes DB conservées : q12 = Compliance, q11 = Influence.
   {
-    key: "q11", pillar: 4, numero: "Q11",
-    dim: { fr: "Influence et rayonnement", en: "Influence and outreach" },
-    question: {
-      fr: "Comment pilotez-vous votre influence, votre attractivité et votre rayonnement dans votre écosystème ?",
-      en: "How do you steer your influence, attractiveness and outreach within your ecosystem?",
-    },
-    anchors: {
-      fr: [
-        "Rayonnement subi, aucune stratégie.",
-        "Actions ponctuelles, réactives.",
-        "Présence entretenue, sans stratégie structurée.",
-        "Stratégie d'influence formalisée, relations clés pilotées.",
-        "Influence active et mesurée, créatrice d'ascendant.",
-      ],
-      en: [
-        "Passive outreach, no strategy.",
-        "Occasional, reactive actions.",
-        "Maintained presence, no structured strategy.",
-        "Formal influence strategy, key relationships managed.",
-        "Active, measured influence, creating ascendancy.",
-      ],
-    },
-  },
-  {
-    key: "q12", pillar: 4, numero: "Q12",
+    key: "q12", pillar: 4, numero: "Q11",
     dim: { fr: "Compliance et risques tiers", en: "Compliance and third-party risks" },
     question: {
-      fr: "Comment maîtrisez-vous les risques de conformité liés à vos tiers (fournisseurs, intermédiaires) ?",
-      en: "How do you master compliance risks related to third parties (suppliers, intermediaries)?",
+      fr: "Comment maîtrisez-vous les risques de conformité liés à vos tiers ?",
+      en: "How do you master compliance risks related to your third parties?",
     },
     anchors: {
       fr: [
-        "Aucune maîtrise.",
-        "Réactif, après incident.",
-        "Conformité partielle, non étendue aux tiers.",
-        "Dispositif de conformité tiers formalisé.",
-        "Maîtrise continue, outillée et auditée.",
+        "Aucune maîtrise des risques tiers.",
+        "Traitement réactif, après incident ou contrôle.",
+        "Démarche de conformité documentée, non étendue aux tiers.",
+        "Dispositif de conformité tiers formalisé et piloté.",
+        "Maîtrise continue, outillée et auditée. (Précisez l'outil)",
       ],
       en: [
-        "No control.",
-        "Reactive, after incident.",
-        "Partial compliance, not extended to third parties.",
-        "Formal third-party compliance setup.",
-        "Continuous, tool-supported and audited control.",
+        "No control over third-party risks.",
+        "Reactive handling, after incident or audit.",
+        "Documented compliance approach, not extended to third parties.",
+        "Formalized and steered third-party compliance setup.",
+        "Continuous, tool-supported and audited control. (Please specify the tool)",
       ],
     },
+    precisionAt: [4],
+  },
+  {
+    key: "q11", pillar: 4, numero: "Q12",
+    dim: { fr: "Influence et rayonnement", en: "Influence and outreach" },
+    question: {
+      fr: "Comment pilotez-vous votre influence et votre rayonnement ?",
+      en: "How do you steer your influence and outreach?",
+    },
+    anchors: {
+      fr: [
+        "Aucune stratégie.",
+        "Communication réactive.",
+        "Actions ponctuelles d'influence.",
+        "Stratégie structurée. (Quelles solutions ? Service ou personnels dédiés ?)",
+        "Influence pilotée avec indicateurs et veille réputationnelle. (Plus de précisions)",
+      ],
+      en: [
+        "No strategy.",
+        "Reactive communication.",
+        "Occasional influence actions.",
+        "Structured strategy. (Which solutions? Dedicated team or staff?)",
+        "Influence steered with indicators and reputation monitoring. (More detail)",
+      ],
+    },
+    precisionAt: [3, 4],
   },
 ];
 
