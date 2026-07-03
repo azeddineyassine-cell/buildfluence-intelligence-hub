@@ -1520,6 +1520,23 @@ const ResultScreen = ({ lang, result, onExchange }: { lang: "fr" | "en"; result:
         </div>
       </div>
 
+      {/* Point de vigilance souveraineté — s'affiche uniquement si dépendance étrangère détectée. Ne score pas. */}
+      {result.foreign_dependency && (
+        <div style={{ margin: "28px 0", padding: "16px 20px", background: "#fff", borderTop: `3px solid ${GOLD}`, borderLeft: `1px solid rgba(31,58,95,0.15)`, borderRight: `1px solid rgba(31,58,95,0.15)`, borderBottom: `1px solid rgba(31,58,95,0.15)` }}>
+          <div style={{ fontFamily: "'JetBrains Mono', ui-monospace, monospace", fontSize: 10, letterSpacing: "0.25em", textTransform: "uppercase", color: GOLD, marginBottom: 8 }}>
+            {t2("POINT DE VIGILANCE SOUVERAINETÉ", "SOVEREIGNTY WATCH POINT", lang)}
+          </div>
+          <div style={{ fontFamily: "'DM Sans', sans-serif", color: NAVY, fontSize: 14, lineHeight: 1.65 }}>
+            {t2(
+              "Une partie de votre dispositif repose sur des prestataires étrangers. Une montée en autonomie sur ce volet renforcerait votre souveraineté décisionnelle.",
+              "Part of your setup relies on foreign providers. Building greater autonomy on this front would strengthen your decision sovereignty.",
+              lang,
+            )}
+          </div>
+        </div>
+      )}
+
+
       {/* Bloc positionnement national */}
       <div style={{ margin: "28px 0", padding: "14px 18px", background: "rgba(31,58,95,0.06)", borderLeft: `3px solid ${NAVY}`, fontFamily: "'DM Sans', sans-serif", color: NAVY, fontSize: 13, lineHeight: 1.6 }}>
         {t2(
