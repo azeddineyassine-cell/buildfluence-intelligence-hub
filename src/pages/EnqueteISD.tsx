@@ -369,17 +369,18 @@ const VEILLE_THEMES = {
   en: ["Competitive", "Sectoral", "Geopolitical / regulatory", "Technological", "Image / reputation", "Tenders", "Patents / IP", "None"],
 };
 const VEILLE_OUTIL = {
-  fr: ["Alertes manuelles (type Google Alerts)", "Plateforme de veille dédiée", "Prestataire externe", "Cellule interne outillée", "Aucun"],
-  en: ["Manual alerts (Google Alerts type)", "Dedicated monitoring platform", "External provider", "In-house equipped unit", "None"],
+  fr: ["Aucun", "Alertes manuelles", "Plateforme de veille dédiée", "Prestataire externe", "Cellule interne outillée"],
+  en: ["None", "Manual alerts", "Dedicated monitoring platform", "External provider", "In-house equipped unit"],
 };
 const VEILLE_ORG = {
   fr: ["Aucune", "Chacun fait sa veille", "Référent informel", "Cellule interne dédiée", "Externalisée", "Mixte"],
   en: ["None", "Everyone monitors on their own", "Informal referent", "Dedicated in-house unit", "Outsourced", "Mixed"],
 };
 const VEILLE_CAPI = {
-  fr: ["Aucune", "Notes internes ponctuelles", "Base de connaissance partagée", "Newsletter ou magazine interne régulier", "Diffusion externe (rayonnement)"],
-  en: ["None", "Occasional internal notes", "Shared knowledge base", "Regular internal newsletter or magazine", "External publication (outreach)"],
+  fr: ["Aucune", "Notes internes ponctuelles", "Base de connaissance partagée", "Newsletter ou magazine interne", "Diffusion externe (rayonnement)"],
+  en: ["None", "Occasional internal notes", "Shared knowledge base", "Internal newsletter or magazine", "External publication (outreach)"],
 };
+
 
 const APPRO_FREQ = {
   fr: ["Jamais", "Ponctuellement", "Annuellement", "Trimestriellement", "En continu"],
