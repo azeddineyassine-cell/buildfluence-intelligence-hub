@@ -616,8 +616,7 @@ const EnqueteISD = () => {
                 <QuestionScreen lang={lang} qdef={QUESTIONS[s.step - 3]}
                   value={s.answers[QUESTIONS[s.step - 3].key] ?? null}
                   onValue={(v) => setAnswer(QUESTIONS[s.step - 3].key, v)}
-                  toolValue={QUESTIONS[s.step - 3].tool ? s.tools[QUESTIONS[s.step - 3].tool!.field] as any : null}
-                  onToolValue={(v) => QUESTIONS[s.step - 3].tool && setTool(QUESTIONS[s.step - 3].tool!.field, v)}
+                  state={s} setState={setS} setPrecision={setPrecision}
                   onNext={goNext} onPrev={goPrev}
                 />
               )}
@@ -630,8 +629,7 @@ const EnqueteISD = () => {
                 <QuestionScreen lang={lang} qdef={QUESTIONS[s.step - 4]}
                   value={s.answers[QUESTIONS[s.step - 4].key] ?? null}
                   onValue={(v) => setAnswer(QUESTIONS[s.step - 4].key, v)}
-                  toolValue={QUESTIONS[s.step - 4].tool ? s.tools[QUESTIONS[s.step - 4].tool!.field] as any : null}
-                  onToolValue={(v) => QUESTIONS[s.step - 4].tool && setTool(QUESTIONS[s.step - 4].tool!.field, v)}
+                  state={s} setState={setS} setPrecision={setPrecision}
                   onNext={goNext} onPrev={goPrev}
                 />
               )}
@@ -640,11 +638,11 @@ const EnqueteISD = () => {
                 <QuestionScreen lang={lang} qdef={QUESTIONS[s.step - 4]}
                   value={s.answers[QUESTIONS[s.step - 4].key] ?? null}
                   onValue={(v) => setAnswer(QUESTIONS[s.step - 4].key, v)}
-                  toolValue={QUESTIONS[s.step - 4].tool ? s.tools[QUESTIONS[s.step - 4].tool!.field] as any : null}
-                  onToolValue={(v) => QUESTIONS[s.step - 4].tool && setTool(QUESTIONS[s.step - 4].tool!.field, v)}
+                  state={s} setState={setS} setPrecision={setPrecision}
                   onNext={goNext} onPrev={goPrev}
                 />
               )}
+
 
               {s.step === 16 && (
                 <OptInScreen lang={lang}
