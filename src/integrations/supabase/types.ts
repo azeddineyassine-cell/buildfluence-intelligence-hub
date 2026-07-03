@@ -106,6 +106,7 @@ export type Database = {
           contact_organisation: string | null
           contact_telephone: string | null
           created_at: string
+          dd_cabinet_origine: string | null
           dd_realisation: string | null
           fonction: string | null
           id: string
@@ -114,6 +115,7 @@ export type Database = {
           outil_crise: string[] | null
           outil_donnee: string[] | null
           outil_signaux: string[] | null
+          precisions: Json | null
           q1: number | null
           q10: number | null
           q11: number | null
@@ -133,10 +135,12 @@ export type Database = {
           score_p4: number | null
           secteur: string | null
           type_organisation: string | null
-          veille_capitalisation: string | null
+          veille_capitalisation: string[] | null
+          veille_externalisation_origine: string | null
           veille_organisation: string | null
           veille_outil: string | null
           veille_outil_precision: string | null
+          veille_prestataire_origine: string | null
           veille_thematiques: string[] | null
         }
         Insert: {
@@ -149,6 +153,7 @@ export type Database = {
           contact_organisation?: string | null
           contact_telephone?: string | null
           created_at?: string
+          dd_cabinet_origine?: string | null
           dd_realisation?: string | null
           fonction?: string | null
           id?: string
@@ -157,6 +162,7 @@ export type Database = {
           outil_crise?: string[] | null
           outil_donnee?: string[] | null
           outil_signaux?: string[] | null
+          precisions?: Json | null
           q1?: number | null
           q10?: number | null
           q11?: number | null
@@ -176,10 +182,12 @@ export type Database = {
           score_p4?: number | null
           secteur?: string | null
           type_organisation?: string | null
-          veille_capitalisation?: string | null
+          veille_capitalisation?: string[] | null
+          veille_externalisation_origine?: string | null
           veille_organisation?: string | null
           veille_outil?: string | null
           veille_outil_precision?: string | null
+          veille_prestataire_origine?: string | null
           veille_thematiques?: string[] | null
         }
         Update: {
@@ -192,6 +200,7 @@ export type Database = {
           contact_organisation?: string | null
           contact_telephone?: string | null
           created_at?: string
+          dd_cabinet_origine?: string | null
           dd_realisation?: string | null
           fonction?: string | null
           id?: string
@@ -200,6 +209,7 @@ export type Database = {
           outil_crise?: string[] | null
           outil_donnee?: string[] | null
           outil_signaux?: string[] | null
+          precisions?: Json | null
           q1?: number | null
           q10?: number | null
           q11?: number | null
@@ -219,10 +229,12 @@ export type Database = {
           score_p4?: number | null
           secteur?: string | null
           type_organisation?: string | null
-          veille_capitalisation?: string | null
+          veille_capitalisation?: string[] | null
+          veille_externalisation_origine?: string | null
           veille_organisation?: string | null
           veille_outil?: string | null
           veille_outil_precision?: string | null
+          veille_prestataire_origine?: string | null
           veille_thematiques?: string[] | null
         }
         Relationships: []
