@@ -7,9 +7,7 @@ const corsHeaders = {
 }
 
 // =====================================================================
-// SCORING_CONFIG — valeurs par défaut, à calibrer.
-// Ne JAMAIS exposer ce bloc au client. Tout ajustement se fait ici
-// via GitHub sans toucher au front.
+// SCORING_CONFIG — jamais exposé au client. Ajustable ici uniquement.
 // =====================================================================
 const SCORING_CONFIG = {
   poidsPiliers: { p1: 0.25, p2: 0.25, p3: 0.25, p4: 0.25 },
@@ -23,7 +21,7 @@ const SCORING_CONFIG = {
     ],
     v2Outil: {
       'Aucun': 0,
-      'Alertes manuelles (type Google Alerts)': 1,
+      'Alertes manuelles': 1,
       'Prestataire externe': 2,
       'Plateforme de veille dédiée': 3,
       'Cellule interne outillée': 4,
@@ -40,7 +38,7 @@ const SCORING_CONFIG = {
       'Aucune': 0,
       'Notes internes ponctuelles': 1,
       'Base de connaissance partagée': 2,
-      'Newsletter ou magazine interne régulier': 3,
+      'Newsletter ou magazine interne': 3,
       'Diffusion externe (rayonnement)': 4,
     } as Record<string, number>,
   },
@@ -74,9 +72,15 @@ function mapV1Largeur(thematiques: string[]): number {
   return 0
 }
 
-function mapOrdinal(map: Record<string, number>, v: string | undefined): number {
+function mapOrdinal(map: Record<string, number>, v: string | undefined | null): number {
   if (!v) return 0
   return map[v] ?? 0
+}
+
+function mapV4Max(items: string[]): number {
+  const map = SCORING_CONFIG.veille.v4Capitalisation
+  const scores = (items || []).map((v) => map[v] ?? 0)
+  return scores.length ? Math.max(...scores) : 0
 }
 
 function computeNiveau(global: number): string {
@@ -110,20 +114,22 @@ Deno.serve(async (req) => {
     const q8 = clampInt(body.q8)
     const q9 = clampInt(body.q9)
     const q10 = clampInt(body.q10)
-    const q11 = clampInt(body.q11)
-    const q12 = clampInt(body.q12)
+    const q11 = clampInt(body.q11) // INFLUENCE (colonne conservée)
+    const q12 = clampInt(body.q12) // COMPLIANCE (colonne conservée)
 
     const veille_thematiques: string[] = Array.isArray(body.veille_thematiques) ? body.veille_thematiques.map((s: any) => String(s)) : []
     const veille_outil = body.veille_outil ? String(body.veille_outil) : null
     const veille_outil_precision = body.veille_outil_precision ? String(body.veille_outil_precision).slice(0, 500) : null
     const veille_organisation = body.veille_organisation ? String(body.veille_organisation) : null
-    const veille_capitalisation = body.veille_capitalisation ? String(body.veille_capitalisation) : null
+    const veille_capitalisation: string[] = Array.isArray(body.veille_capitalisation)
+      ? body.veille_capitalisation.map((s: any) => String(s))
+      : []
 
-    const outil_donnee = Array.isArray(body.outil_donnee) ? body.outil_donnee.map((s: any) => String(s)) : []
-    const outil_carto = Array.isArray(body.outil_carto) ? body.outil_carto.map((s: any) => String(s)) : []
-    const outil_crise = Array.isArray(body.outil_crise) ? body.outil_crise.map((s: any) => String(s)) : []
-    const outil_signaux = Array.isArray(body.outil_signaux) ? body.outil_signaux.map((s: any) => String(s)) : []
-    const dd_realisation = body.dd_realisation ? String(body.dd_realisation) : null
+    const veille_prestataire_origine = body.veille_prestataire_origine ? String(body.veille_prestataire_origine) : null
+    const veille_externalisation_origine = body.veille_externalisation_origine ? String(body.veille_externalisation_origine) : null
+    const dd_cabinet_origine = body.dd_cabinet_origine ? String(body.dd_cabinet_origine) : null
+
+    const precisions = body.precisions && typeof body.precisions === 'object' ? body.precisions : {}
 
     const approfondissement = Boolean(body.approfondissement)
     const appro = body.appro && typeof body.appro === 'object' ? body.appro : null
@@ -143,9 +149,11 @@ Deno.serve(async (req) => {
       })
     }
 
-    // --- Scoring (serveur uniquement) ---
+    // --- Scoring ---
     const p1Vals = [q1, q2, q3].filter((v): v is number => v !== null)
+    // P3 = Q4..Q8
     const p3Vals = [q4, q5, q6, q7, q8].filter((v): v is number => v !== null)
+    // P4 = Q9..Q12 (q11=Influence, q12=Compliance)
     const p4Vals = [q9, q10, q11, q12].filter((v): v is number => v !== null)
 
     const score_p1 = round2(avg(p1Vals))
@@ -153,9 +161,9 @@ Deno.serve(async (req) => {
     const score_p4 = round2(avg(p4Vals))
 
     const v1 = mapV1Largeur(veille_thematiques)
-    const v2 = mapOrdinal(SCORING_CONFIG.veille.v2Outil, veille_outil || undefined)
-    const v3 = mapOrdinal(SCORING_CONFIG.veille.v3Organisation, veille_organisation || undefined)
-    const v4 = mapOrdinal(SCORING_CONFIG.veille.v4Capitalisation, veille_capitalisation || undefined)
+    const v2 = mapOrdinal(SCORING_CONFIG.veille.v2Outil, veille_outil)
+    const v3 = mapOrdinal(SCORING_CONFIG.veille.v3Organisation, veille_organisation)
+    const v4 = mapV4Max(veille_capitalisation)
     const score_p2 = round2(avg([v1, v2, v3, v4]))
 
     const w = SCORING_CONFIG.poidsPiliers
@@ -163,6 +171,12 @@ Deno.serve(async (req) => {
       score_p1 * w.p1 + score_p2 * w.p2 + score_p3 * w.p3 + score_p4 * w.p4,
     )
     const niveau = computeNiveau(score_global)
+
+    const foreignDependency = (
+      veille_prestataire_origine === 'etranger' ||
+      veille_externalisation_origine === 'etranger' ||
+      dd_cabinet_origine === 'etranger'
+    )
 
     // --- Persistance ---
     const SUPABASE_URL = Deno.env.get('SUPABASE_URL')!
@@ -175,7 +189,8 @@ Deno.serve(async (req) => {
         secteur, type_organisation, fonction,
         q1, q2, q3, q4, q5, q6, q7, q8, q9, q10, q11, q12,
         veille_thematiques, veille_outil, veille_outil_precision, veille_organisation, veille_capitalisation,
-        outil_donnee, outil_carto, outil_crise, outil_signaux, dd_realisation,
+        veille_prestataire_origine, veille_externalisation_origine, dd_cabinet_origine,
+        precisions,
         approfondissement, appro,
         commentaire_ouvert,
         contact_nom, contact_fonction, contact_organisation, contact_email, contact_telephone,
@@ -200,6 +215,11 @@ Deno.serve(async (req) => {
       const GOLD = '#C9A84C'
       const li = (k: string, v: any) => `<tr><td style="padding:4px 8px 4px 0;font-weight:600;vertical-align:top;">${k}</td><td style="padding:4px 0;">${v ?? '-'}</td></tr>`
       const list = (arr: string[]) => (arr && arr.length ? arr.join(', ') : '-')
+      const esc = (s: any) => String(s ?? '').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      const precisionsRows = Object.entries(precisions || {})
+        .filter(([, v]) => v && (typeof v === 'string' ? v.trim() !== '' : true))
+        .map(([k, v]) => `<div><strong>${esc(k)} :</strong> ${esc(typeof v === 'string' ? v : JSON.stringify(v))}</div>`)
+        .join('')
       const html = `
         <div style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;max-width:680px;margin:0 auto;background:#FAF6ED;color:${NAVY};padding:28px;">
           <div style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:${GOLD};margin-bottom:8px;">Buildfluence · Enquête ISD · État de la maturité en souveraineté décisionnelle au Maroc</div>
@@ -218,37 +238,39 @@ Deno.serve(async (req) => {
             <div>P1 Souveraineté décisionnelle : <strong>${score_p1}</strong></div>
             <div>P2 Veille stratégique : <strong>${score_p2}</strong></div>
             <div>P3 Risk Management : <strong>${score_p3}</strong></div>
-            <div>P4 Due Diligence & Intelligence d'affaires : <strong>${score_p4}</strong></div>
+            <div>P4 Due Diligence &amp; Intelligence d'affaires : <strong>${score_p4}</strong></div>
             <div style="margin-top:8px;">Indice global : <strong>${score_global}</strong> · Niveau atteint : <strong>${niveau}</strong></div>
+          </div>
+
+          <div style="margin-top:16px;padding:12px 16px;background:#fff;border-left:3px solid ${foreignDependency ? GOLD : NAVY};font-size:13px;">
+            <div style="font-weight:700;">Dépendance étrangère : ${foreignDependency ? 'oui' : 'non'}</div>
+            <div style="margin-top:6px;font-size:12px;line-height:1.6;">
+              <div>Prestataire de veille (V2) : ${veille_prestataire_origine ?? '-'}</div>
+              <div>Externalisation veille (V3) : ${veille_externalisation_origine ?? '-'}</div>
+              <div>Cabinet due diligence (Q9) : ${dd_cabinet_origine ?? '-'}</div>
+            </div>
           </div>
 
           <div style="margin-top:16px;padding:12px 16px;background:#fff;border-left:3px solid ${NAVY};font-size:12px;line-height:1.6;">
             <div style="font-weight:600;margin-bottom:6px;">Échelle des 5 niveaux</div>
-            <div>0 Embryonnaire : aucun dispositif structuré, décisions à l'intuition et à la réaction.</div>
-            <div>1 Réactif : actions ponctuelles, déclenchées après l'événement, sans outil ni processus.</div>
-            <div>2 Émergent : premières démarches structurées, partielles et non systématiques.</div>
+            <div>0 Embryonnaire : aucun dispositif structuré.</div>
+            <div>1 Réactif : actions ponctuelles, déclenchées après l'événement.</div>
+            <div>2 Émergent : premières démarches structurées, non systématiques.</div>
             <div>3 Structuré : processus formalisés, outillés et pilotés régulièrement.</div>
-            <div>4 Souverain : dispositif intégré, proactif et anticipatif, créateur d'avantage stratégique.</div>
+            <div>4 Souverain : dispositif intégré, proactif et anticipatif.</div>
           </div>
 
           <div style="margin-top:16px;padding:12px 16px;background:#fff;border-left:3px solid ${GOLD};font-size:12px;line-height:1.7;">
             <div style="font-weight:600;margin-bottom:6px;">Détail Veille (P2)</div>
             <div><strong>Thématiques :</strong> ${list(veille_thematiques)}</div>
-            <div><strong>Outil (V2) :</strong> ${veille_outil ?? '-'}${veille_outil_precision ? ' · précision : ' + veille_outil_precision : ''}</div>
+            <div><strong>Outil (V2) :</strong> ${veille_outil ?? '-'}${veille_outil_precision ? ' · précision : ' + esc(veille_outil_precision) : ''}</div>
             <div><strong>Organisation (V3) :</strong> ${veille_organisation ?? '-'}</div>
-            <div><strong>Capitalisation (V4) :</strong> ${veille_capitalisation ?? '-'}</div>
+            <div><strong>Capitalisation (V4) :</strong> ${list(veille_capitalisation)}</div>
           </div>
 
-          <div style="margin-top:16px;padding:12px 16px;background:#fff;border-left:3px solid ${GOLD};font-size:12px;line-height:1.7;">
-            <div style="font-weight:600;margin-bottom:6px;">Outillage capté</div>
-            <div><strong>Données (Q2) :</strong> ${list(outil_donnee)}</div>
-            <div><strong>Cartographie (Q5) :</strong> ${list(outil_carto)}</div>
-            <div><strong>Crise (Q6) :</strong> ${list(outil_crise)}</div>
-            <div><strong>Signaux faibles (Q7) :</strong> ${list(outil_signaux)}</div>
-            <div><strong>Due diligences (Q9) :</strong> ${dd_realisation ?? '-'}</div>
-          </div>
+          ${precisionsRows ? `<div style="margin-top:16px;padding:12px 16px;background:#fff;border-left:3px solid ${GOLD};font-size:12px;line-height:1.7;"><div style="font-weight:600;margin-bottom:6px;">Précisions saisies</div>${precisionsRows}</div>` : ''}
 
-          ${commentaire_ouvert ? `<div style="margin-top:16px;padding:12px 16px;background:#fff;border-left:3px solid ${NAVY};font-size:12px;"><div style="font-weight:600;margin-bottom:6px;">Commentaire ouvert</div><div>${commentaire_ouvert.replace(/</g, '&lt;')}</div></div>` : ''}
+          ${commentaire_ouvert ? `<div style="margin-top:16px;padding:12px 16px;background:#fff;border-left:3px solid ${NAVY};font-size:12px;"><div style="font-weight:600;margin-bottom:6px;">Commentaire ouvert</div><div>${esc(commentaire_ouvert)}</div></div>` : ''}
 
           <p style="margin-top:20px;font-size:11px;color:${NAVY};opacity:0.6;">ID réponse : ${inserted?.id ?? '-'}</p>
         </div>`
@@ -259,7 +281,7 @@ Deno.serve(async (req) => {
           body: JSON.stringify({
             from: 'Buildfluence <noreply@buildfluence.ai>',
             to: [INTERNAL_TO],
-            subject: `Buildfluence · Enquête ISD (souveraineté décisionnelle) : ${niveau} · ${score_global}`,
+            subject: `Buildfluence · Enquête ISD : ${niveau} · ${score_global}${foreignDependency ? ' · dépendance étrangère' : ''}`,
             html,
           }),
         })
@@ -269,7 +291,6 @@ Deno.serve(async (req) => {
       }
     }
 
-    // Renvoi au client : résultats calculés uniquement (jamais SCORING_CONFIG).
     return new Response(
       JSON.stringify({
         ok: true,
@@ -281,6 +302,7 @@ Deno.serve(async (req) => {
         score_p3,
         score_p4,
         q11,
+        foreign_dependency: foreignDependency,
       }),
       {
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
