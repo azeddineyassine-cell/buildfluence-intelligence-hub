@@ -997,13 +997,21 @@ const VeilleScreen = ({ lang, state, setState, onNext, onPrev }: any) => {
     const cur: string[] = state.veille_thematiques;
     setState({ ...state, veille_thematiques: cur.includes(opt) ? cur.filter((x: string) => x !== opt) : [...cur, opt] });
   };
-  const canGo = state.veille_thematiques.length > 0 && state.veille_outil && state.veille_organisation && state.veille_capitalisation;
+  const toggleCapi = (opt: string) => {
+    const cur: string[] = state.veille_capitalisation || [];
+    setState({ ...state, veille_capitalisation: cur.includes(opt) ? cur.filter((x: string) => x !== opt) : [...cur, opt] });
+  };
+
+  // Sous-choix bloquants : si Prestataire externe -> origine requise ; si Externalisée -> origine requise.
+  const outilBlocked = state.veille_outil === "Prestataire externe" && !state.veille_prestataire_origine;
+  const orgBlocked = state.veille_organisation === "Externalisée" && !state.veille_externalisation_origine;
+  const canGo = state.veille_thematiques.length > 0 && state.veille_outil && state.veille_organisation && (state.veille_capitalisation?.length > 0) && !outilBlocked && !orgBlocked;
 
   const themesFr = VEILLE_THEMES.fr;
   const themesLang = VEILLE_THEMES[lang];
 
   const SingleChoice = ({ label, options, value, onChange }: { label: string; options: string[]; value: string | null; onChange: (v: string) => void }) => (
-    <div style={{ marginBottom: 20 }}>
+    <div style={{ marginBottom: 12 }}>
       <div style={{ fontFamily: "'JetBrains Mono', ui-monospace, monospace", fontSize: 11, letterSpacing: "0.15em", textTransform: "uppercase", color: NAVY, marginBottom: 8 }}>{label}</div>
       <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
         {options.map((opt) => (
@@ -1018,28 +1026,44 @@ const VeilleScreen = ({ lang, state, setState, onNext, onPrev }: any) => {
     </div>
   );
 
-  // Mapping displayed (lang) -> canonical (fr) for storage
+  const MultiChoice = ({ label, canonical, display, values, onToggle }: { label: string; canonical: string[]; display: string[]; values: string[]; onToggle: (canonical: string) => void }) => (
+    <div style={{ marginBottom: 20 }}>
+      <div style={{ fontFamily: "'JetBrains Mono', ui-monospace, monospace", fontSize: 11, letterSpacing: "0.15em", textTransform: "uppercase", color: NAVY, marginBottom: 8 }}>{label}</div>
+      <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
+        {display.map((opt, i) => {
+          const c = canonical[i];
+          const active = values.includes(c);
+          return (
+            <button key={opt} type="button" onClick={() => onToggle(c)} style={{
+              background: active ? NAVY : "#fff",
+              color: active ? "#fff" : NAVY,
+              border: `1px solid ${active ? NAVY : "rgba(31,58,95,0.25)"}`,
+              padding: "8px 14px", fontSize: 13, cursor: "pointer", borderRadius: 2, fontFamily: "'DM Sans', sans-serif",
+            }}>{opt}</button>
+          );
+        })}
+      </div>
+    </div>
+  );
+
   const setOutil = (v: string) => {
     const idx = VEILLE_OUTIL[lang].indexOf(v);
-    setState({ ...state, veille_outil: VEILLE_OUTIL.fr[idx] });
+    const canon = VEILLE_OUTIL.fr[idx];
+    setState({ ...state, veille_outil: canon, veille_prestataire_origine: canon === "Prestataire externe" ? state.veille_prestataire_origine : null });
   };
   const setOrg = (v: string) => {
     const idx = VEILLE_ORG[lang].indexOf(v);
-    setState({ ...state, veille_organisation: VEILLE_ORG.fr[idx] });
-  };
-  const setCapi = (v: string) => {
-    const idx = VEILLE_CAPI[lang].indexOf(v);
-    setState({ ...state, veille_capitalisation: VEILLE_CAPI.fr[idx] });
+    const canon = VEILLE_ORG.fr[idx];
+    setState({ ...state, veille_organisation: canon, veille_externalisation_origine: canon === "Externalisée" ? state.veille_externalisation_origine : null });
   };
   const currentOutil = state.veille_outil ? VEILLE_OUTIL[lang][VEILLE_OUTIL.fr.indexOf(state.veille_outil)] : null;
   const currentOrg = state.veille_organisation ? VEILLE_ORG[lang][VEILLE_ORG.fr.indexOf(state.veille_organisation)] : null;
-  const currentCapi = state.veille_capitalisation ? VEILLE_CAPI[lang][VEILLE_CAPI.fr.indexOf(state.veille_capitalisation)] : null;
 
   return (
     <div>
       <Overline>{t2("PILIER II · VEILLE STRATÉGIQUE", "PILLAR II · STRATEGIC MONITORING", lang)}</Overline>
       <H2>{t2("Quatre axes factuels de votre veille", "Four factual axes of your monitoring", lang)}</H2>
-      <Body>{t2("Ce bloc ne s'auto-note pas : il décrit votre réalité.", "This block is not self-scored: it describes your reality.", lang)}</Body>
+      <Body>{t2("Décrivez votre réalité pour chacun des quatre axes.", "Describe your reality for each of the four axes.", lang)}</Body>
 
       <div style={{ marginBottom: 20 }}>
         <div style={{ fontFamily: "'JetBrains Mono', ui-monospace, monospace", fontSize: 11, letterSpacing: "0.15em", textTransform: "uppercase", color: NAVY, marginBottom: 8 }}>
@@ -1061,11 +1085,11 @@ const VeilleScreen = ({ lang, state, setState, onNext, onPrev }: any) => {
         </div>
       </div>
 
-      <SingleChoice label={`V2 · ${t2("Outil (choix unique, le plus avancé atteint)", "Tool (single choice, most advanced reached)", lang)}`} options={VEILLE_OUTIL[lang]} value={currentOutil} onChange={setOutil} />
-      {(state.veille_outil === "Plateforme de veille dédiée" || state.veille_outil === "Cellule interne outillée") && (
-        <div style={{ marginTop: -8, marginBottom: 20, paddingLeft: 12, borderLeft: `2px solid ${GOLD}` }}>
+      <SingleChoice label={`V2 · ${t2("Outil (choix unique)", "Tool (single choice)", lang)}`} options={VEILLE_OUTIL[lang]} value={currentOutil} onChange={setOutil} />
+      {state.veille_outil === "Plateforme de veille dédiée" && (
+        <div style={{ marginBottom: 20, padding: "10px 14px", borderLeft: `2px solid ${GOLD}`, background: "rgba(31,58,95,0.04)" }}>
           <div style={{ fontFamily: "'JetBrains Mono', ui-monospace, monospace", fontSize: 11, letterSpacing: "0.15em", textTransform: "uppercase", color: NAVY, marginBottom: 8 }}>
-            {t2("Précisez", "Please specify", lang)}
+            {t2("Laquelle", "Which one", lang)}
           </div>
           <Input
             value={state.veille_outil_precision}
@@ -1075,8 +1099,29 @@ const VeilleScreen = ({ lang, state, setState, onNext, onPrev }: any) => {
           />
         </div>
       )}
+      {state.veille_outil === "Prestataire externe" && (
+        <div style={{ marginBottom: 20, padding: "10px 14px", borderLeft: `2px solid ${GOLD}`, background: "rgba(31,58,95,0.04)" }}>
+          <div style={{ fontFamily: "'JetBrains Mono', ui-monospace, monospace", fontSize: 11, letterSpacing: "0.15em", textTransform: "uppercase", color: NAVY }}>
+            {t2("Prestataire Marocain ou Étranger ?", "Moroccan or Foreign provider?", lang)}
+          </div>
+          <OriginPicker lang={lang} value={state.veille_prestataire_origine} onChange={(v) => setState({ ...state, veille_prestataire_origine: v })} />
+        </div>
+      )}
+
       <SingleChoice label={`V3 · ${t2("Organisation du service (choix unique)", "Service organization (single choice)", lang)}`} options={VEILLE_ORG[lang]} value={currentOrg} onChange={setOrg} />
-      <SingleChoice label={`V4 · ${t2("Capitalisation et production de contenu (choix unique)", "Capitalization and content production (single choice)", lang)}`} options={VEILLE_CAPI[lang]} value={currentCapi} onChange={setCapi} />
+      {state.veille_organisation === "Externalisée" && (
+        <div style={{ marginBottom: 20, padding: "10px 14px", borderLeft: `2px solid ${GOLD}`, background: "rgba(31,58,95,0.04)" }}>
+          <div style={{ fontFamily: "'JetBrains Mono', ui-monospace, monospace", fontSize: 11, letterSpacing: "0.15em", textTransform: "uppercase", color: NAVY }}>
+            {t2("Cabinet Marocain ou Étranger ?", "Moroccan or Foreign firm?", lang)}
+          </div>
+          <OriginPicker lang={lang} value={state.veille_externalisation_origine} onChange={(v) => setState({ ...state, veille_externalisation_origine: v })} />
+        </div>
+      )}
+
+      <MultiChoice
+        label={`V4 · ${t2("Capitalisation et production de contenu (multi-choix)", "Capitalization and content production (multi-select)", lang)}`}
+        canonical={VEILLE_CAPI.fr} display={VEILLE_CAPI[lang]} values={state.veille_capitalisation || []} onToggle={toggleCapi}
+      />
 
       <div style={{ display: "flex", gap: 12, marginTop: 24 }}>
         <GhostButton onClick={onPrev}>{t2("Retour", "Back", lang)}</GhostButton>
@@ -1085,6 +1130,8 @@ const VeilleScreen = ({ lang, state, setState, onNext, onPrev }: any) => {
     </div>
   );
 };
+
+
 
 const OptInScreen = ({ lang, onYes, onNo, onPrev }: { lang: "fr" | "en"; onYes: () => void; onNo: () => void; onPrev: () => void }) => (
   <div>
