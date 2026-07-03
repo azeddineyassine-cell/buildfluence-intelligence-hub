@@ -874,12 +874,38 @@ const ScreenTagging = ({ lang, state, setState, onNext, onPrev }: any) => {
   );
 };
 
-const QuestionScreen = ({ lang, qdef, value, onValue, toolValue, onToolValue, onNext, onPrev }: {
+const OriginPicker = ({ lang, value, onChange }: { lang: "fr" | "en"; value: "marocain" | "etranger" | null; onChange: (v: "marocain" | "etranger") => void }) => (
+  <div style={{ display: "flex", gap: 8, marginTop: 8 }}>
+    {(["marocain", "etranger"] as const).map((k) => {
+      const label = k === "marocain" ? t2("Marocain", "Moroccan", lang) : t2("Étranger", "Foreign", lang);
+      const active = value === k;
+      return (
+        <button key={k} type="button" onClick={() => onChange(k)} style={{
+          background: active ? NAVY : "#fff",
+          color: active ? "#fff" : NAVY,
+          border: `1px solid ${active ? NAVY : "rgba(31,58,95,0.25)"}`,
+          padding: "6px 14px", fontSize: 12, cursor: "pointer", borderRadius: 2,
+          fontFamily: "'DM Sans', sans-serif",
+        }}>{label}</button>
+      );
+    })}
+  </div>
+);
+
+const QuestionScreen = ({ lang, qdef, value, onValue, state, setState, setPrecision, onNext, onPrev }: {
   lang: "fr" | "en"; qdef: QDef; value: Scale; onValue: (v: Scale) => void;
-  toolValue: string[] | string | null; onToolValue: (v: string[] | string | null) => void;
+  state: State; setState: React.Dispatch<React.SetStateAction<State>>;
+  setPrecision: (key: string, val: string) => void;
   onNext: () => void; onPrev: () => void;
 }) => {
-  const canGo = value !== null;
+  // Bloque le passage tant que le contexte Q9 (interne/externe + origine si externe) n'est pas résolu.
+  const q9Blocked = qdef.key === "q9" && value === 3 && (
+    !state.q9_dd_mode || (state.q9_dd_mode === "externe" && !state.dd_cabinet_origine)
+  );
+  const canGo = value !== null && !q9Blocked;
+
+  const precisionActive = value !== null && qdef.precisionAt?.includes(value as number);
+
   return (
     <div>
       <Overline>{`${qdef.numero} · ${qdef.dim[lang]}`}</Overline>
@@ -889,29 +915,70 @@ const QuestionScreen = ({ lang, qdef, value, onValue, toolValue, onToolValue, on
         {qdef.anchors[lang].map((anchor, i) => {
           const active = value === i;
           return (
-            <button key={i} type="button" onClick={() => onValue(i as Scale)} style={{
-              display: "block", width: "100%", textAlign: "left",
-              background: active ? NAVY : "#fff",
-              color: active ? "#fff" : NAVY,
-              border: `1px solid ${active ? NAVY : "rgba(31,58,95,0.2)"}`,
-              borderLeft: `3px solid ${GOLD}`,
-              padding: "14px 16px", marginBottom: 8, cursor: "pointer",
-              fontFamily: "'DM Sans', sans-serif", fontSize: 14, lineHeight: 1.5, borderRadius: 2,
-              transition: "all 0.15s",
-            }}>
-              <div style={{ fontFamily: "'JetBrains Mono', ui-monospace, monospace", fontSize: 10, letterSpacing: "0.18em", opacity: 0.7, marginBottom: 4 }}>
-                {LEVEL_LABELS[lang][i]}
-              </div>
-              {anchor}
-            </button>
+            <div key={i}>
+              <button type="button" onClick={() => onValue(i as Scale)} style={{
+                display: "block", width: "100%", textAlign: "left",
+                background: active ? NAVY : "#fff",
+                color: active ? "#fff" : NAVY,
+                border: `1px solid ${active ? NAVY : "rgba(31,58,95,0.2)"}`,
+                borderLeft: `3px solid ${GOLD}`,
+                padding: "14px 16px", marginBottom: 8, cursor: "pointer",
+                fontFamily: "'DM Sans', sans-serif", fontSize: 14, lineHeight: 1.5, borderRadius: 2,
+                transition: "all 0.15s",
+              }}>
+                <div style={{ fontFamily: "'JetBrains Mono', ui-monospace, monospace", fontSize: 10, letterSpacing: "0.18em", opacity: 0.7, marginBottom: 4 }}>
+                  {LEVEL_LABELS[lang][i]}
+                </div>
+                {anchor}
+              </button>
+
+              {/* Q9 anchor 3 : Interne/Externe + Marocain/Étranger si externe */}
+              {active && qdef.key === "q9" && i === 3 && (
+                <div style={{ margin: "0 0 12px 12px", padding: "10px 14px", borderLeft: `2px solid ${GOLD}`, background: "rgba(31,58,95,0.04)" }}>
+                  <div style={{ fontFamily: "'JetBrains Mono', ui-monospace, monospace", fontSize: 11, letterSpacing: "0.15em", textTransform: "uppercase", color: NAVY, marginBottom: 6 }}>
+                    {t2("Interne ou externe ?", "In-house or external?", lang)}
+                  </div>
+                  <div style={{ display: "flex", gap: 8 }}>
+                    {(["interne", "externe"] as const).map((k) => {
+                      const label = k === "interne" ? t2("Interne", "In-house", lang) : t2("Externe", "External", lang);
+                      const on = state.q9_dd_mode === k;
+                      return (
+                        <button key={k} type="button" onClick={() => setState((p) => ({ ...p, q9_dd_mode: k, dd_cabinet_origine: k === "interne" ? null : p.dd_cabinet_origine }))} style={{
+                          background: on ? NAVY : "#fff", color: on ? "#fff" : NAVY,
+                          border: `1px solid ${on ? NAVY : "rgba(31,58,95,0.25)"}`,
+                          padding: "6px 14px", fontSize: 12, cursor: "pointer", borderRadius: 2, fontFamily: "'DM Sans', sans-serif",
+                        }}>{label}</button>
+                      );
+                    })}
+                  </div>
+                  {state.q9_dd_mode === "externe" && (
+                    <div style={{ marginTop: 10 }}>
+                      <div style={{ fontFamily: "'JetBrains Mono', ui-monospace, monospace", fontSize: 11, letterSpacing: "0.15em", textTransform: "uppercase", color: NAVY }}>
+                        {t2("Cabinet Marocain ou Étranger ?", "Moroccan or Foreign firm?", lang)}
+                      </div>
+                      <OriginPicker lang={lang} value={state.dd_cabinet_origine} onChange={(v) => setState((p) => ({ ...p, dd_cabinet_origine: v }))} />
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
           );
         })}
       </div>
 
-      {qdef.tool && (
-        <ToolBlock lang={lang} label={qdef.tool.label[lang]} multi={qdef.tool.multi} options={qdef.tool.options[lang]}
-          value={toolValue} onChange={onToolValue}
-        />
+      {/* Champ « précisez » conditionnel (texte libre, ne score pas) */}
+      {precisionActive && (
+        <div style={{ marginTop: -4, marginBottom: 16, padding: "12px 16px", borderLeft: `2px solid ${GOLD}`, background: "rgba(31,58,95,0.04)" }}>
+          <div style={{ fontFamily: "'JetBrains Mono', ui-monospace, monospace", fontSize: 11, letterSpacing: "0.15em", textTransform: "uppercase", color: NAVY, marginBottom: 8 }}>
+            {t2("Précisez", "Please specify", lang)}
+          </div>
+          <Input
+            value={state.precisions[qdef.key] ?? ""}
+            onChange={(e: any) => setPrecision(qdef.key, e.target.value)}
+            maxLength={500}
+            style={{ background: "#fff", borderColor: "rgba(31,58,95,0.25)", color: NAVY }}
+          />
+        </div>
       )}
 
       <div style={{ display: "flex", gap: 12, marginTop: 24 }}>
@@ -922,39 +989,7 @@ const QuestionScreen = ({ lang, qdef, value, onValue, toolValue, onToolValue, on
   );
 };
 
-const ToolBlock = ({ lang, label, multi, options, value, onChange }: {
-  lang: "fr" | "en"; label: string; multi: boolean; options: string[];
-  value: string[] | string | null; onChange: (v: string[] | string | null) => void;
-}) => {
-  const toggle = (opt: string) => {
-    if (multi) {
-      const cur = (Array.isArray(value) ? value : []) as string[];
-      onChange(cur.includes(opt) ? cur.filter((x) => x !== opt) : [...cur, opt]);
-    } else {
-      onChange(value === opt ? null : opt);
-    }
-  };
-  const selected = (opt: string) => multi ? (Array.isArray(value) && value.includes(opt)) : value === opt;
-  return (
-    <div style={{ borderTop: `1px solid rgba(31,58,95,0.15)`, paddingTop: 20, marginTop: 8 }}>
-      <div style={{ fontFamily: "'JetBrains Mono', ui-monospace, monospace", fontSize: 11, letterSpacing: "0.15em", textTransform: "uppercase", color: GOLD, marginBottom: 6 }}>
-        {t2("OUTILLAGE", "TOOLING", lang)} · {t2("ne note pas", "not scored", lang)}
-      </div>
-      <Body>{label}</Body>
-      <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
-        {options.map((opt) => (
-          <button key={opt} type="button" onClick={() => toggle(opt)} style={{
-            background: selected(opt) ? NAVY : "#fff",
-            color: selected(opt) ? "#fff" : NAVY,
-            border: `1px solid ${selected(opt) ? NAVY : "rgba(31,58,95,0.25)"}`,
-            padding: "8px 14px", fontFamily: "'DM Sans', sans-serif", fontSize: 13,
-            cursor: "pointer", borderRadius: 2,
-          }}>{opt}</button>
-        ))}
-      </div>
-    </div>
-  );
-};
+
 
 const VeilleScreen = ({ lang, state, setState, onNext, onPrev }: any) => {
   const toggleTheme = (opt: string) => {
