@@ -508,7 +508,7 @@ const EnqueteISD = () => {
   }, [s.step]);
 
   const setAnswer = (key: string, val: Scale) => setS((p) => ({ ...p, answers: { ...p.answers, [key]: val } }));
-  const setTool = (field: string, val: string[] | string | null) => setS((p) => ({ ...p, tools: { ...p.tools, [field]: val } }));
+  const setPrecision = (key: string, val: string) => setS((p) => ({ ...p, precisions: { ...p.precisions, [key]: val } }));
 
   const goNext = () => setS((p) => ({ ...p, step: p.step + 1 }));
   const goPrev = () => setS((p) => ({ ...p, step: Math.max(0, p.step - 1) }));
@@ -516,6 +516,10 @@ const EnqueteISD = () => {
   const submit = async () => {
     setSubmitting(true);
     try {
+      // Précisions consolidées + Q9 mode (interne/externe) stocké dans precisions
+      const precisions: Record<string, any> = { ...s.precisions };
+      if (s.q9_dd_mode) precisions.q9_mode = s.q9_dd_mode;
+
       const payload = {
         secteur: s.secteur, type_organisation: s.type_organisation, fonction: s.fonction,
         q1: s.answers.q1, q2: s.answers.q2, q3: s.answers.q3,
@@ -524,13 +528,12 @@ const EnqueteISD = () => {
         veille_thematiques: s.veille_thematiques,
         veille_outil: s.veille_outil,
         veille_outil_precision: s.veille_outil_precision || null,
+        veille_prestataire_origine: s.veille_prestataire_origine,
         veille_organisation: s.veille_organisation,
+        veille_externalisation_origine: s.veille_externalisation_origine,
         veille_capitalisation: s.veille_capitalisation,
-        outil_donnee: (s.tools.outil_donnee as string[]) || [],
-        outil_carto: (s.tools.outil_carto as string[]) || [],
-        outil_crise: (s.tools.outil_crise as string[]) || [],
-        outil_signaux: (s.tools.outil_signaux as string[]) || [],
-        dd_realisation: (s.tools.dd_realisation as string) || null,
+        dd_cabinet_origine: s.dd_cabinet_origine,
+        precisions,
         approfondissement: !!s.approfondissement,
         appro: s.appro,
         commentaire_ouvert: s.commentaire_ouvert || null,
@@ -551,7 +554,9 @@ const EnqueteISD = () => {
         score_p3: Number(d.score_p3 ?? 0),
         score_p4: Number(d.score_p4 ?? 0),
         q11: d.q11 == null ? null : Number(d.q11),
+        foreign_dependency: !!d.foreign_dependency,
       });
+
       window.scrollTo(0, 0);
     } catch (e) {
       toast({
