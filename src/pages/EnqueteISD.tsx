@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { ShieldCheck, Radar as RadarIcon, Map, Target } from "lucide-react";
 import Navbar from "@/components/Navbar";
@@ -517,6 +517,11 @@ const EnqueteISD = () => {
   const [s, setS] = useState<State>(initialState);
   const [submitting, setSubmitting] = useState(false);
   const [result, setResult] = useState<IsdResult | null>(null);
+
+  // Remonter automatiquement en haut de page à chaque changement d'écran.
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [result ? "result" : s.step]);
 
   // 4 étapes fonctionnelles pour la barre (Piliers I·II·III·IV)
   const totalPillars = 4;
