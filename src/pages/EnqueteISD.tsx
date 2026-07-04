@@ -1519,7 +1519,7 @@ const ResultScreen = ({ lang, result, origins, onExchange }: { lang: "fr" | "en"
 
       {/* Échelle 5 niveaux */}
       <div style={{ margin: "28px 0" }}>
-        <Overline>{t2("ÉCHELLE DES 5 NIVEAUX", "5-LEVEL SCALE", lang)}</Overline>
+        <Overline icon={ListOrdered}>{t2("ÉCHELLE DES 5 NIVEAUX", "5-LEVEL SCALE", lang)}</Overline>
         <div style={{ marginTop: 12 }}>
           {NIVEAUX.map((n, i) => {
             const active = i === nivIndex;
