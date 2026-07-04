@@ -1649,20 +1649,51 @@ const ResultScreen = ({ lang, result, origins, onExchange }: { lang: "fr" | "en"
       </div>
 
       {/* Point de vigilance souveraineté — s'affiche uniquement si dépendance étrangère détectée. Ne score pas. */}
-      {result.foreign_dependency && (
-        <div style={{ margin: "28px 0", padding: "16px 20px", background: "#fff", borderTop: `3px solid ${GOLD}`, borderLeft: `1px solid rgba(31,58,95,0.15)`, borderRight: `1px solid rgba(31,58,95,0.15)`, borderBottom: `1px solid rgba(31,58,95,0.15)` }}>
-          <div style={{ fontFamily: "'JetBrains Mono', ui-monospace, monospace", fontSize: 10, letterSpacing: "0.25em", textTransform: "uppercase", color: GOLD, marginBottom: 8 }}>
-            {t2("POINT DE VIGILANCE SOUVERAINETÉ", "SOVEREIGNTY WATCH POINT", lang)}
-          </div>
-          <div style={{ fontFamily: "'DM Sans', sans-serif", color: NAVY, fontSize: 14, lineHeight: 1.65 }}>
-            {t2(
-              "Une partie de votre dispositif repose sur des prestataires étrangers. Une montée en autonomie sur ce volet renforcerait votre souveraineté décisionnelle.",
-              "Part of your setup relies on foreign providers. Building greater autonomy on this front would strengthen your decision sovereignty.",
-              lang,
+      {result.foreign_dependency && (() => {
+        const volets: { label: string; nature: string }[] = [];
+        if (origins.dd_cabinet_origine === "etranger") {
+          volets.push({
+            label: t2("Due diligence (Q9)", "Due diligence (Q9)", lang),
+            nature: t2("cabinet externe étranger", "foreign external firm", lang),
+          });
+        }
+        if (origins.veille_prestataire_origine === "etranger") {
+          volets.push({
+            label: t2("Veille — outil (V2)", "Monitoring — tool (V2)", lang),
+            nature: t2("prestataire externe étranger", "foreign external provider", lang),
+          });
+        }
+        if (origins.veille_externalisation_origine === "etranger") {
+          volets.push({
+            label: t2("Veille — organisation (V3)", "Monitoring — organization (V3)", lang),
+            nature: t2("cabinet externe étranger", "foreign external firm", lang),
+          });
+        }
+        return (
+          <div style={{ margin: "28px 0", padding: "16px 20px", background: "#fff", borderTop: `3px solid ${GOLD}`, borderLeft: `1px solid rgba(31,58,95,0.15)`, borderRight: `1px solid rgba(31,58,95,0.15)`, borderBottom: `1px solid rgba(31,58,95,0.15)` }}>
+            <div style={{ fontFamily: "'JetBrains Mono', ui-monospace, monospace", fontSize: 10, letterSpacing: "0.25em", textTransform: "uppercase", color: GOLD, marginBottom: 8 }}>
+              {t2("POINT DE VIGILANCE SOUVERAINETÉ", "SOVEREIGNTY WATCH POINT", lang)}
+            </div>
+            <div style={{ fontFamily: "'DM Sans', sans-serif", color: NAVY, fontSize: 14, lineHeight: 1.65, marginBottom: volets.length ? 10 : 0 }}>
+              {t2(
+                "Une partie de votre dispositif repose sur des prestataires étrangers. Une montée en autonomie sur ce volet renforcerait votre souveraineté décisionnelle.",
+                "Part of your setup relies on foreign providers. Building greater autonomy on this front would strengthen your decision sovereignty.",
+                lang,
+              )}
+            </div>
+            {volets.length > 0 && (
+              <ul style={{ margin: 0, padding: 0, listStyle: "none", fontFamily: "'DM Sans', sans-serif", color: NAVY, fontSize: 13, lineHeight: 1.7 }}>
+                {volets.map((v, i) => (
+                  <li key={i} style={{ paddingLeft: 14, position: "relative" }}>
+                    <span style={{ position: "absolute", left: 0, color: GOLD }}>›</span>
+                    <strong>{v.label} :</strong> {v.nature}.
+                  </li>
+                ))}
+              </ul>
             )}
           </div>
-        </div>
-      )}
+        );
+      })()}
 
 
       {/* Bloc positionnement national */}
