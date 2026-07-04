@@ -611,10 +611,18 @@ const EnqueteISD = () => {
           </nav>
 
           {result ? (
-            <ResultScreen lang={lang} result={result} onExchange={() => window.dispatchEvent(new Event("open-strategic-exchange"))} />
+            <ResultScreen
+              lang={lang}
+              result={result}
+              origins={{
+                dd_cabinet_origine: s.dd_cabinet_origine,
+                veille_prestataire_origine: s.veille_prestataire_origine,
+                veille_externalisation_origine: s.veille_externalisation_origine,
+              }}
+              onExchange={() => window.dispatchEvent(new Event("open-strategic-exchange"))}
+            />
           ) : (
             <>
-              {/* Barre de progression par piliers (masquée sur Intro, Piliers overview, Tagging) */}
               {s.step > 2 && (
                 <div style={{ marginBottom: 32 }}>
                   <div style={{ display: "flex", gap: 8, marginBottom: 8 }}>
@@ -638,7 +646,6 @@ const EnqueteISD = () => {
                 />
               )}
 
-              {/* Questions notées : mappe step -> question index */}
               {s.step >= 3 && s.step <= 5 && (
                 <QuestionScreen lang={lang} qdef={QUESTIONS[s.step - 3]}
                   value={s.answers[QUESTIONS[s.step - 3].key] ?? null}
@@ -670,24 +677,12 @@ const EnqueteISD = () => {
                 />
               )}
 
-
+              {/* Approfondissement retiré : après Q12 -> question ouverte -> contact. */}
               {s.step === 16 && (
-                <OptInScreen lang={lang}
-                  onYes={() => setS((p) => ({ ...p, approfondissement: true, step: 17 }))}
-                  onNo={() => setS((p) => ({ ...p, approfondissement: false, step: 18 }))}
-                  onPrev={goPrev}
-                />
-              )}
-
-              {s.step === 17 && (
-                <ApproScreen lang={lang} state={s} setState={setS} onNext={() => setS((p) => ({ ...p, step: 18 }))} onPrev={goPrev} />
-              )}
-
-              {s.step === 18 && (
                 <OpenScreen lang={lang} state={s} setState={setS} onNext={goNext} onPrev={goPrev} />
               )}
 
-              {s.step === 19 && (
+              {s.step === 17 && (
                 <ContactScreen lang={lang} state={s} setState={setS} onSubmit={submit} onPrev={goPrev} submitting={submitting} />
               )}
             </>
