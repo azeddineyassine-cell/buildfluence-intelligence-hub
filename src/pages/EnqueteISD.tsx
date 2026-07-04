@@ -1490,7 +1490,7 @@ const ResultScreen = ({ lang, result, origins, onExchange }: { lang: "fr" | "en"
         </div>
       </div>
 
-      <Overline>{t2("VOTRE DIAGNOSTIC ISD", "YOUR ISD DIAGNOSIS", lang)}</Overline>
+      <Overline icon={Gauge}>{t2("VOTRE DIAGNOSTIC ISD", "YOUR ISD DIAGNOSIS", lang)}</Overline>
       <H1>{t2("Indice de Souveraineté Décisionnelle", "Decision Sovereignty Index", lang)}</H1>
 
       {/* Score global + niveau */}
