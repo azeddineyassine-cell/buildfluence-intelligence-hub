@@ -12,6 +12,27 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import { toast } from "@/hooks/use-toast";
 import { RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar, ResponsiveContainer } from "recharts";
+import jsPDF from "jspdf";
+import html2canvas from "html2canvas";
+
+// Libellés spécifiques par (question, ancrage) pour les champs de précision.
+// Si absent, un libellé générique « Précisez / Please specify » est utilisé.
+const PRECISION_LABELS: Record<string, Record<number, { fr: string; en: string }>> = {
+  q1: { 3: { fr: "Quel dispositif ?", en: "Which setup?" }, 4: { fr: "Lesquels ?", en: "Which ones?" } },
+  q2: { 2: { fr: "Par quel moyen ?", en: "By what means?" }, 3: { fr: "Précisez", en: "Please specify" }, 4: { fr: "Précisez", en: "Please specify" } },
+  q3: { 3: { fr: "Quel statut ?", en: "What status?" } },
+  q5: { 3: { fr: "Par quel moyen ?", en: "By what means?" }, 4: { fr: "Quelle solution ?", en: "Which solution?" } },
+  q6: { 4: { fr: "Précisez", en: "Please specify" } },
+  q7: { 3: { fr: "Quelle solution ?", en: "Which solution?" }, 4: { fr: "Quels outils ?", en: "Which tools?" } },
+  q8: { 4: { fr: "Précisez", en: "Please specify" } },
+  q9: { 4: { fr: "Lesquels ?", en: "Which ones?" } },
+  q10: { 4: { fr: "Précisez", en: "Please specify" } },
+  q11: { 3: { fr: "Quelles solutions ? Service ou personnels dédiés ?", en: "Which solutions? Dedicated team or staff?" }, 4: { fr: "Précisez", en: "Please specify" } },
+  q12: { 4: { fr: "Quel outil ?", en: "Which tool?" } },
+};
+
+// Retire les parenthèses de repérage des intitulés d'options avant affichage.
+const stripParens = (s: string) => s.replace(/\s*\([^)]*\)/g, "").replace(/\s+\./g, ".").trim();
 
 // =========================================================================
 // Enquête ISD — parcours linéaire, un instrument, deux finalités.
