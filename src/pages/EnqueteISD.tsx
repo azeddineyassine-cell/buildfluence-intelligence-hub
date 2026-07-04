@@ -1566,7 +1566,7 @@ const ResultScreen = ({ lang, result, origins, onExchange }: { lang: "fr" | "en"
 
       {/* Feuille de route */}
       <div style={{ margin: "28px 0" }}>
-        <Overline>{t2("FEUILLE DE ROUTE", "ROADMAP", lang)}</Overline>
+        <Overline icon={Route}>{t2("FEUILLE DE ROUTE", "ROADMAP", lang)}</Overline>
         <H2>{t2("Feuille de route", "Roadmap", lang)}</H2>
         <Body>
           {t2(
