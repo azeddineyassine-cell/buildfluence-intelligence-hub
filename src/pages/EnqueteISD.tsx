@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import React, { useState, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { ShieldCheck, Radar as RadarIcon, Map, Target } from "lucide-react";
 import Navbar from "@/components/Navbar";
