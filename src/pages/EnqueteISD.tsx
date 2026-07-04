@@ -1160,64 +1160,8 @@ const VeilleScreen = ({ lang, state, setState, onNext, onPrev }: any) => {
 
 
 
-const OptInScreen = ({ lang, onYes, onNo, onPrev }: { lang: "fr" | "en"; onYes: () => void; onNo: () => void; onPrev: () => void }) => (
-  <div>
-    <Overline>{t2("APPROFONDISSEMENT", "DEEP-DIVE", lang)}</Overline>
-    <H2>{t2("Souhaitez-vous votre diagnostic affiné ?", "Would you like a refined diagnosis?", lang)}</H2>
-    <Body>{t2("Un item additionnel par sous-dimension, deux minutes de plus.", "One additional item per sub-dimension, two more minutes.", lang)}</Body>
-    <div style={{ display: "flex", gap: 12, marginTop: 16 }}>
-      <GoldButton onClick={onYes}>{t2("Oui, affiner", "Yes, refine", lang)}</GoldButton>
-      <GhostButton onClick={onNo}>{t2("Non, passer", "No, skip", lang)}</GhostButton>
-    </div>
-    <div style={{ marginTop: 24 }}>
-      <GhostButton onClick={onPrev}>{t2("Retour", "Back", lang)}</GhostButton>
-    </div>
-  </div>
-);
+// Écran d'approfondissement retiré : redondant avec les 12 questions.
 
-const ApproScreen = ({ lang, state, setState, onNext, onPrev }: any) => {
-  const set = (key: string, val: string) => setState({ ...state, appro: { ...state.appro, [key]: val } });
-  const allDone = APPRO_ITEMS.every((it) => state.appro[it.key]);
-  return (
-    <div>
-      <Overline>{t2("APPROFONDISSEMENT", "DEEP-DIVE", lang)}</Overline>
-      <H2>{t2("Précisions par sous-dimension", "Sub-dimension details", lang)}</H2>
-      <Body>{t2("Choisissez l'énoncé qui décrit votre réalité pour chaque sous-dimension.", "Pick the statement that describes your reality for each sub-dimension.", lang)}</Body>
-
-      {APPRO_ITEMS.map((it) => {
-        const opts = it.type === "freq" ? APPRO_FREQ[lang] : APPRO_RESP[lang];
-        const optsFr = it.type === "freq" ? APPRO_FREQ.fr : APPRO_RESP.fr;
-        const current = state.appro[it.key];
-        return (
-          <div key={it.key} style={{ marginBottom: 20, paddingBottom: 16, borderBottom: "1px solid rgba(31,58,95,0.1)" }}>
-            <div style={{ fontFamily: "'JetBrains Mono', ui-monospace, monospace", fontSize: 11, letterSpacing: "0.15em", textTransform: "uppercase", color: NAVY, marginBottom: 6 }}>
-              {it.label[lang]} · {it.type === "freq" ? t2("Fréquence", "Frequency", lang) : t2("Responsabilité", "Ownership", lang)}
-            </div>
-            <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
-              {opts.map((opt, i) => {
-                const canonical = optsFr[i];
-                const active = current === canonical;
-                return (
-                  <button key={opt} type="button" onClick={() => set(it.key, canonical)} style={{
-                    background: active ? NAVY : "#fff",
-                    color: active ? "#fff" : NAVY,
-                    border: `1px solid ${active ? NAVY : "rgba(31,58,95,0.25)"}`,
-                    padding: "6px 12px", fontSize: 12, cursor: "pointer", borderRadius: 2, fontFamily: "'DM Sans', sans-serif",
-                  }}>{opt}</button>
-                );
-              })}
-            </div>
-          </div>
-        );
-      })}
-
-      <div style={{ display: "flex", gap: 12, marginTop: 24 }}>
-        <GhostButton onClick={onPrev}>{t2("Retour", "Back", lang)}</GhostButton>
-        <GoldButton onClick={onNext} disabled={!allDone}>{t2("Continuer", "Continue", lang)}</GoldButton>
-      </div>
-    </div>
-  );
-};
 
 const OpenScreen = ({ lang, state, setState, onNext, onPrev }: any) => (
   <div>
