@@ -1491,7 +1491,7 @@ const ResultScreen = ({ lang, result, onExchange }: { lang: "fr" | "en"; result:
   };
 
   return (
-    <div className="isd-print-area">
+    <div className="isd-print-area" ref={pdfRef}>
       <style>{`
         @media print {
           @page { size: A4; margin: 16mm; }
