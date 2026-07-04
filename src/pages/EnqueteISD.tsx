@@ -518,6 +518,11 @@ const EnqueteISD = () => {
   const [submitting, setSubmitting] = useState(false);
   const [result, setResult] = useState<IsdResult | null>(null);
 
+  // Remonter automatiquement en haut de page à chaque changement d'écran.
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [result ? "result" : s.step]);
+
   // 4 étapes fonctionnelles pour la barre (Piliers I·II·III·IV)
   const totalPillars = 4;
   const pillarActive = useMemo(() => {
