@@ -226,8 +226,8 @@ const ISDHeroPanel = () => {
             }}
           >
             {t(
-              "votre diagnostic personnalisé (indice, radar, feuille de route).",
-              "your personalized diagnosis (index, radar, roadmap)."
+              "Votre diagnostic personnalisé (indice, radar, feuille de route).",
+              "Your personalized diagnosis (index, radar, roadmap)."
             )}
           </p>
         </div>
@@ -253,8 +253,8 @@ const ISDHeroPanel = () => {
             }}
           >
             {t(
-              "le premier Livre Blanc national de la souveraineté décisionnelle · Benchmark sectoriel · Tendances nationales · Feuille de route.",
-              "the first national White Paper on decision sovereignty · Sectoral benchmark · National trends · Roadmap."
+              "Le premier Livre Blanc national de la souveraineté décisionnelle · Benchmark sectoriel · Tendances nationales · Feuille de route.",
+              "The first national White Paper on decision sovereignty · Sectoral benchmark · National trends · Roadmap."
             )}
           </p>
         </div>
