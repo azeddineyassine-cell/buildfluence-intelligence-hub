@@ -1008,27 +1008,6 @@ const QuestionScreen = ({ lang, qdef, value, onValue, state, setState, setPrecis
         })}
       </div>
 
-                </div>
-              )}
-            </div>
-          );
-        })}
-      </div>
-
-      {/* Champ « précisez » conditionnel (texte libre, ne score pas) */}
-      {precisionActive && (
-        <div style={{ marginTop: -4, marginBottom: 16, padding: "12px 16px", borderLeft: `2px solid ${GOLD}`, background: "rgba(31,58,95,0.04)" }}>
-          <div style={{ fontFamily: "'JetBrains Mono', ui-monospace, monospace", fontSize: 11, letterSpacing: "0.15em", textTransform: "uppercase", color: NAVY, marginBottom: 8 }}>
-            {t2("Précisez", "Please specify", lang)}
-          </div>
-          <Input
-            value={state.precisions[qdef.key] ?? ""}
-            onChange={(e: any) => setPrecision(qdef.key, e.target.value)}
-            maxLength={500}
-            style={{ background: "#fff", borderColor: "rgba(31,58,95,0.25)", color: NAVY }}
-          />
-        </div>
-      )}
 
       <div style={{ display: "flex", gap: 12, marginTop: 24 }}>
         <GhostButton onClick={onPrev}>{t2("Retour", "Back", lang)}</GhostButton>
