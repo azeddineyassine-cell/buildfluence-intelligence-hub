@@ -1394,18 +1394,30 @@ const ResultScreen = ({ lang, result, origins, onExchange }: { lang: "fr" | "en"
       en: "Secure investments and partnerships through in-depth due diligence.",
     },
   };
+  const solutionForPillar = (pKey: string) => (pKey === "p4" ? SOLUTIONS.ddd : SOLUTIONS.sil);
   const sorted = [...pillars].sort((a, b) => a.value - b.value);
-  const roadmap = sorted.slice(0, 3).map((p, idx) => {
-    let solution = p.key === "p4" ? SOLUTIONS.ddd : SOLUTIONS.sil;
-    if (q11Weak && p.key === "p1") solution = SOLUTIONS.spi;
-    return {
+  const roadmap: { idx: number; pillarName: string; pillarValue: number; lever: string; solution: { name: string; href: string } }[] =
+    sorted.slice(0, 3).map((p, idx) => ({
       idx: idx + 1,
       pillarName: p.name,
       pillarValue: p.value,
       lever: t2(pillarLever[p.key].fr, pillarLever[p.key].en, lang),
-      solution,
-    };
-  });
+      solution: solutionForPillar(p.key),
+    }));
+  // Sous-dimension Influence & rayonnement (q11) : si point faible ciblé, priorité SPI additionnelle.
+  if (q11Weak) {
+    roadmap.push({
+      idx: roadmap.length + 1,
+      pillarName: t2("Influence et rayonnement", "Influence and outreach", lang),
+      pillarValue: result.q11 ?? 0,
+      lever: t2(
+        "Structurer une trajectoire d'influence et de rayonnement pour convertir votre légitimité en ascendant stratégique.",
+        "Structure an influence and outreach trajectory to convert your legitimacy into strategic ascendancy.",
+        lang,
+      ),
+      solution: SOLUTIONS.spi,
+    });
+  }
 
   const waitingPhrase = t2(
     "Ce document est votre synthèse immédiate. Votre feuille de route complète, personnalisée et détaillée par pilier vous sera adressée à l'issue de l'étude nationale 2026, accompagnée de votre positionnement.",
