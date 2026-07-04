@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { BookOpen } from "lucide-react";
+import { Gauge, Radar, Search } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 /**
@@ -18,6 +18,24 @@ const ISDHeroPanel = () => {
   const creme = "#FAF6ED";
   const cremeMut = "rgba(250,246,237,0.74)";
   const orLine = "hsl(var(--gold) / 0.42)";
+
+  const triptyque = [
+    {
+      icon: Gauge,
+      label: t("MESURER", "MEASURE"),
+      desc: t("votre maturité décisionnelle", "your decision maturity"),
+    },
+    {
+      icon: Search,
+      label: t("ÉVALUER", "EVALUATE"),
+      desc: t("vos angles de vulnérabilité", "your vulnerability angles"),
+    },
+    {
+      icon: Radar,
+      label: t("POSITIONNER", "POSITION"),
+      desc: t("votre rayonnement", "your reach"),
+    },
+  ];
 
   return (
     <motion.div
@@ -112,7 +130,7 @@ const ISDHeroPanel = () => {
           fontWeight: 600,
           fontSize: "27px",
           lineHeight: 1.13,
-          margin: "0 0 12px",
+          margin: "0 0 18px",
           maxWidth: "80%",
           color: "#fff",
         }}
@@ -123,41 +141,126 @@ const ISDHeroPanel = () => {
         )}
       </p>
 
-      {/* Sous-texte */}
+      {/* Triptyque à impact */}
+      <div
+        className="grid grid-cols-3"
+        style={{ gap: "10px", marginBottom: "16px" }}
+      >
+        {triptyque.map((item) => (
+          <div
+            key={item.label}
+            className="flex flex-col items-center text-center"
+            style={{ gap: "6px" }}
+          >
+            <item.icon
+              size={20}
+              strokeWidth={1.8}
+              style={{ color: "hsl(var(--gold))", flexShrink: 0 }}
+            />
+            <span
+              style={{
+                fontFamily: "'JetBrains Mono', monospace",
+                fontSize: "10px",
+                letterSpacing: "0.1em",
+                fontWeight: 500,
+                color: "hsl(var(--gold))",
+                lineHeight: 1.2,
+              }}
+            >
+              {item.label}
+            </span>
+            <span
+              style={{
+                fontSize: "11px",
+                lineHeight: 1.35,
+                color: creme,
+              }}
+            >
+              {item.desc}
+            </span>
+          </div>
+        ))}
+      </div>
+
+      {/* Ligne de contrat */}
       <p
         style={{
-          fontSize: "13.5px",
-          lineHeight: 1.6,
+          fontFamily: "'JetBrains Mono', monospace",
+          fontSize: "11px",
+          letterSpacing: "0.1em",
           color: cremeMut,
-          margin: "0 0 18px",
-          maxWidth: "82%",
+          margin: "0 0 16px",
+          lineHeight: 1.5,
         }}
       >
         {t(
-          "Votre score, votre radar des 4 piliers, en 10 minutes. Diagnostic personnalisé remis à l'issue de l'étude.",
-          "Your score, your 4-pillar radar, in 10 minutes. Personalized diagnosis delivered at the end of the study."
+          "10 MIN · 4 PILIERS · 13 DIMENSIONS · DIAGNOSTIC IMMÉDIAT",
+          "10 MIN · 4 PILLARS · 13 DIMENSIONS · IMMEDIATE DIAGNOSIS"
         )}
       </p>
 
       {/* Filet or */}
       <div style={{ height: "1px", background: orLine, margin: "0 0 16px" }} />
 
-      {/* Enjeu national */}
-      <div className="flex items-start" style={{ gap: "12px", marginBottom: "20px" }}>
-        <BookOpen size={22} style={{ color: "hsl(var(--gold))", marginTop: "2px", flexShrink: 0 }} />
-        <p style={{ fontSize: "13px", lineHeight: 1.55, color: "#fff", margin: 0, maxWidth: "88%" }}>
-          {t("Votre réponse construit la ", "Your response builds the ")}
-          <span style={{ color: "hsl(var(--gold))" }}>
-            {t("première étude nationale et sectorielle", "first national and sectoral study")}
+      {/* Les deux livrables */}
+      <div style={{ marginBottom: "20px" }}>
+        <div style={{ marginBottom: "12px" }}>
+          <span
+            style={{
+              fontFamily: "'JetBrains Mono', monospace",
+              fontSize: "10px",
+              letterSpacing: "0.1em",
+              textTransform: "uppercase",
+              color: "hsl(var(--gold))",
+              fontWeight: 500,
+            }}
+          >
+            {t("Immédiat, pour vous :", "Immediate, for you:")}
           </span>
-          {t(
-            " de la souveraineté décisionnelle au Maroc, socle du premier Livre Blanc du domaine.",
-            " of decision sovereignty in Morocco, foundation of the field's first White Paper."
-          )}
-        </p>
+          <p
+            style={{
+              fontSize: "13px",
+              lineHeight: 1.5,
+              color: creme,
+              margin: "4px 0 0",
+            }}
+          >
+            {t(
+              "votre diagnostic personnalisé (indice, radar, feuille de route).",
+              "your personalized diagnosis (index, radar, roadmap)."
+            )}
+          </p>
+        </div>
+        <div>
+          <span
+            style={{
+              fontFamily: "'JetBrains Mono', monospace",
+              fontSize: "10px",
+              letterSpacing: "0.1em",
+              textTransform: "uppercase",
+              color: "hsl(var(--gold))",
+              fontWeight: 500,
+            }}
+          >
+            {t("À l'issue de l'étude :", "At the end of the study:")}
+          </span>
+          <p
+            style={{
+              fontSize: "13px",
+              lineHeight: 1.5,
+              color: creme,
+              margin: "4px 0 0",
+            }}
+          >
+            {t(
+              "le premier Livre Blanc national de la souveraineté décisionnelle · Benchmark sectoriel · Tendances nationales · Feuille de route.",
+              "the first national White Paper on decision sovereignty · Sectoral benchmark · National trends · Roadmap."
+            )}
+          </p>
+        </div>
       </div>
 
-      {/* CTA + meta */}
+      {/* CTA */}
       <div className="flex items-center flex-wrap" style={{ gap: "18px" }}>
         <button
           onClick={go}
@@ -178,16 +281,6 @@ const ISDHeroPanel = () => {
         >
           {t("Évaluer ma maturité", "Assess my maturity")}
         </button>
-        <span
-          style={{
-            fontFamily: "'JetBrains Mono', monospace",
-            fontSize: "11px",
-            letterSpacing: "0.1em",
-            color: cremeMut,
-          }}
-        >
-          {t("10 MIN · 4 PILIERS · 13 DIMENSIONS", "10 MIN · 4 PILLARS · 13 DIMENSIONS")}
-        </span>
       </div>
     </motion.div>
   );
