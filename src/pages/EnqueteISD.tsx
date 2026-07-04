@@ -1544,7 +1544,7 @@ const ResultScreen = ({ lang, result, origins, onExchange }: { lang: "fr" | "en"
 
       {/* Radar */}
       <div style={{ margin: "28px 0", background: "#fff", padding: 20, borderTop: `3px solid ${GOLD}` }}>
-        <Overline>{t2("RADAR DES 4 PILIERS", "4-PILLAR RADAR", lang)}</Overline>
+        <Overline icon={RadarIcon}>{t2("RADAR DES 4 PILIERS", "4-PILLAR RADAR", lang)}</Overline>
         <div style={{ width: "100%", height: 360, marginTop: 12 }}>
           <ResponsiveContainer width="100%" height="100%">
             <RadarChart data={pillars} outerRadius="72%">
