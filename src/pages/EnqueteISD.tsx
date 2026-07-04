@@ -1770,7 +1770,7 @@ const ResultScreen = ({ lang, result, origins, onExchange }: { lang: "fr" | "en"
         </GhostButton>
       </div>
 
-      <div className="isd-print-footer">© Buildfluence</div>
+      <div className="isd-print-footer">© Buildfluence · buildfluence.ai · info@buildfluence.ai</div>
     </div>
   );
 };
