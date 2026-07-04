@@ -1293,7 +1293,13 @@ const ContactScreen = ({ lang, state, setState, onSubmit, onPrev, submitting }: 
 // par l'Edge function. Le mapping recommandations -> solution est du contenu
 // éditorial, pas une formule de scoring.
 // =========================================================================
-const ResultScreen = ({ lang, result, onExchange }: { lang: "fr" | "en"; result: IsdResult; onExchange: () => void }) => {
+type Origins = {
+  dd_cabinet_origine: "marocain" | "etranger" | null;
+  veille_prestataire_origine: "marocain" | "etranger" | null;
+  veille_externalisation_origine: "marocain" | "etranger" | null;
+};
+
+const ResultScreen = ({ lang, result, origins, onExchange }: { lang: "fr" | "en"; result: IsdResult; origins: Origins; onExchange: () => void }) => {
 
   const NIVEAUX = [
     { key: "Embryonnaire", fr: { name: "Embryonnaire", desc: "aucun dispositif structuré, décisions à l'intuition et à la réaction." }, en: { name: "Embryonic", desc: "no structured setup, decisions driven by intuition and reaction." } },
