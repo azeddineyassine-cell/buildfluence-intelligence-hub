@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import React, { useState, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { ShieldCheck, Radar as RadarIcon, Map, Target } from "lucide-react";
 import Navbar from "@/components/Navbar";
@@ -12,6 +12,27 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import { toast } from "@/hooks/use-toast";
 import { RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar, ResponsiveContainer } from "recharts";
+import jsPDF from "jspdf";
+import html2canvas from "html2canvas";
+
+// Libellés spécifiques par (question, ancrage) pour les champs de précision.
+// Si absent, un libellé générique « Précisez / Please specify » est utilisé.
+const PRECISION_LABELS: Record<string, Record<number, { fr: string; en: string }>> = {
+  q1: { 3: { fr: "Quel dispositif ?", en: "Which setup?" }, 4: { fr: "Lesquels ?", en: "Which ones?" } },
+  q2: { 2: { fr: "Par quel moyen ?", en: "By what means?" }, 3: { fr: "Précisez", en: "Please specify" }, 4: { fr: "Précisez", en: "Please specify" } },
+  q3: { 3: { fr: "Quel statut ?", en: "What status?" } },
+  q5: { 3: { fr: "Par quel moyen ?", en: "By what means?" }, 4: { fr: "Quelle solution ?", en: "Which solution?" } },
+  q6: { 4: { fr: "Précisez", en: "Please specify" } },
+  q7: { 3: { fr: "Quelle solution ?", en: "Which solution?" }, 4: { fr: "Quels outils ?", en: "Which tools?" } },
+  q8: { 4: { fr: "Précisez", en: "Please specify" } },
+  q9: { 4: { fr: "Lesquels ?", en: "Which ones?" } },
+  q10: { 4: { fr: "Précisez", en: "Please specify" } },
+  q11: { 3: { fr: "Quelles solutions ? Service ou personnels dédiés ?", en: "Which solutions? Dedicated team or staff?" }, 4: { fr: "Précisez", en: "Please specify" } },
+  q12: { 4: { fr: "Quel outil ?", en: "Which tool?" } },
+};
+
+// Retire les parenthèses de repérage des intitulés d'options avant affichage.
+const stripParens = (s: string) => s.replace(/\s*\([^)]*\)/g, "").replace(/\s+\./g, ".").trim();
 
 // =========================================================================
 // Enquête ISD — parcours linéaire, un instrument, deux finalités.
@@ -915,6 +936,11 @@ const QuestionScreen = ({ lang, qdef, value, onValue, state, setState, setPrecis
       <div style={{ marginTop: 20, marginBottom: 24 }}>
         {qdef.anchors[lang].map((anchor, i) => {
           const active = value === i;
+          const showPrecision = active && qdef.precisionAt?.includes(i);
+          const precisionLabelObj = PRECISION_LABELS[qdef.key]?.[i];
+          const precisionLabel = precisionLabelObj
+            ? t2(precisionLabelObj.fr, precisionLabelObj.en, lang)
+            : t2("Précisez", "Please specify", lang);
           return (
             <div key={i}>
               <button type="button" onClick={() => onValue(i as Scale)} style={{
@@ -930,8 +956,23 @@ const QuestionScreen = ({ lang, qdef, value, onValue, state, setState, setPrecis
                 <div style={{ fontFamily: "'JetBrains Mono', ui-monospace, monospace", fontSize: 10, letterSpacing: "0.18em", opacity: 0.7, marginBottom: 4 }}>
                   {LEVEL_LABELS[lang][i]}
                 </div>
-                {anchor}
+                {stripParens(anchor)}
               </button>
+
+              {/* Champ de précision conditionnel, immédiatement sous l'option cochée */}
+              {showPrecision && (
+                <div style={{ margin: "0 0 12px 12px", padding: "10px 14px", borderLeft: `2px solid ${GOLD}`, background: "rgba(31,58,95,0.04)" }}>
+                  <div style={{ fontFamily: "'JetBrains Mono', ui-monospace, monospace", fontSize: 11, letterSpacing: "0.15em", textTransform: "uppercase", color: NAVY, marginBottom: 8 }}>
+                    {precisionLabel}
+                  </div>
+                  <Input
+                    value={state.precisions[qdef.key] ?? ""}
+                    onChange={(e: any) => setPrecision(qdef.key, e.target.value)}
+                    maxLength={500}
+                    style={{ background: "#fff", borderColor: "rgba(31,58,95,0.25)", color: NAVY }}
+                  />
+                </div>
+              )}
 
               {/* Q9 anchor 3 : Interne/Externe + Marocain/Étranger si externe */}
               {active && qdef.key === "q9" && i === 3 && (
@@ -967,20 +1008,6 @@ const QuestionScreen = ({ lang, qdef, value, onValue, state, setState, setPrecis
         })}
       </div>
 
-      {/* Champ « précisez » conditionnel (texte libre, ne score pas) */}
-      {precisionActive && (
-        <div style={{ marginTop: -4, marginBottom: 16, padding: "12px 16px", borderLeft: `2px solid ${GOLD}`, background: "rgba(31,58,95,0.04)" }}>
-          <div style={{ fontFamily: "'JetBrains Mono', ui-monospace, monospace", fontSize: 11, letterSpacing: "0.15em", textTransform: "uppercase", color: NAVY, marginBottom: 8 }}>
-            {t2("Précisez", "Please specify", lang)}
-          </div>
-          <Input
-            value={state.precisions[qdef.key] ?? ""}
-            onChange={(e: any) => setPrecision(qdef.key, e.target.value)}
-            maxLength={500}
-            style={{ background: "#fff", borderColor: "rgba(31,58,95,0.25)", color: NAVY }}
-          />
-        </div>
-      )}
 
       <div style={{ display: "flex", gap: 12, marginTop: 24 }}>
         <GhostButton onClick={onPrev}>{t2("Retour", "Back", lang)}</GhostButton>
@@ -1380,8 +1407,91 @@ const ResultScreen = ({ lang, result, onExchange }: { lang: "fr" | "en"; result:
     lang,
   );
 
+  const [pdfBusy, setPdfBusy] = useState(false);
+  const pdfRef = React.useRef<HTMLDivElement>(null);
+
+  const handleDownloadPdf = async () => {
+    if (!pdfRef.current || pdfBusy) return;
+    setPdfBusy(true);
+    try {
+      const el = pdfRef.current;
+      const canvas = await html2canvas(el, {
+        scale: 2,
+        backgroundColor: "#FAF6ED",
+        useCORS: true,
+        logging: false,
+        ignoreElements: (node) => node instanceof HTMLElement && node.classList.contains("no-print"),
+      });
+      const pdf = new jsPDF({ unit: "mm", format: "a4", orientation: "portrait" });
+      const pageW = pdf.internal.pageSize.getWidth();
+      const pageH = pdf.internal.pageSize.getHeight();
+      const margin = 10;
+      const headerH = 16;
+      const footerH = 12;
+      const contentW = pageW - margin * 2;
+      const contentH = pageH - headerH - footerH;
+      const scale = contentW / canvas.width; // px -> mm
+      const pageSlicePx = Math.floor(contentH / scale);
+      const title = t2(
+        "État de la maturité en souveraineté décisionnelle au Maroc",
+        "The state of decision sovereignty maturity in Morocco",
+        lang,
+      );
+      const kicker = t2("ÉTUDE NATIONALE 2026", "NATIONAL STUDY 2026", lang);
+
+      let sY = 0;
+      let pageNum = 0;
+      while (sY < canvas.height) {
+        const sliceH = Math.min(pageSlicePx, canvas.height - sY);
+        const slice = document.createElement("canvas");
+        slice.width = canvas.width;
+        slice.height = sliceH;
+        const ctx = slice.getContext("2d");
+        if (!ctx) break;
+        ctx.fillStyle = "#FAF6ED";
+        ctx.fillRect(0, 0, slice.width, slice.height);
+        ctx.drawImage(canvas, 0, sY, canvas.width, sliceH, 0, 0, canvas.width, sliceH);
+        const imgData = slice.toDataURL("image/jpeg", 0.92);
+        if (pageNum > 0) pdf.addPage();
+        // Header
+        pdf.setTextColor(201, 168, 76);
+        pdf.setFont("helvetica", "bold");
+        pdf.setFontSize(8);
+        pdf.text(kicker, pageW / 2, 8, { align: "center" });
+        pdf.setTextColor(31, 58, 95);
+        pdf.setFont("helvetica", "bold");
+        pdf.setFontSize(10);
+        pdf.text(title, pageW / 2, 13, { align: "center" });
+        pdf.setDrawColor(201, 168, 76);
+        pdf.setLineWidth(0.3);
+        pdf.line(margin, headerH - 1, pageW - margin, headerH - 1);
+        // Image
+        pdf.addImage(imgData, "JPEG", margin, headerH, contentW, sliceH * scale);
+        // Footer
+        pdf.setDrawColor(31, 58, 95);
+        pdf.setLineWidth(0.2);
+        pdf.line(margin, pageH - footerH + 2, pageW - margin, pageH - footerH + 2);
+        pdf.setTextColor(31, 58, 95);
+        pdf.setFont("helvetica", "normal");
+        pdf.setFontSize(8);
+        pdf.text("© Buildfluence", pageW / 2, pageH - 5, { align: "center" });
+        sY += sliceH;
+        pageNum += 1;
+      }
+      pdf.save("Diagnostic-ISD-Buildfluence.pdf");
+    } catch (e) {
+      toast({
+        title: t2("Téléchargement impossible", "Download failed", lang),
+        description: t2("Merci de réessayer.", "Please try again.", lang),
+        variant: "destructive",
+      });
+    } finally {
+      setPdfBusy(false);
+    }
+  };
+
   return (
-    <div className="isd-print-area">
+    <div className="isd-print-area" ref={pdfRef}>
       <style>{`
         @media print {
           @page { size: A4; margin: 16mm; }
@@ -1549,8 +1659,10 @@ const ResultScreen = ({ lang, result, onExchange }: { lang: "fr" | "en"; result:
       {/* CTA calibré par température + PDF */}
       <div className="no-print" style={{ marginTop: 24, display: "flex", gap: 12, flexWrap: "wrap" }}>
         <GoldButton onClick={onExchange}>{ctaLabel}</GoldButton>
-        <GhostButton onClick={() => window.print()}>
-          {t2("Télécharger ma synthèse (PDF)", "Download my summary (PDF)", lang)}
+        <GhostButton onClick={handleDownloadPdf}>
+          {pdfBusy
+            ? t2("Génération…", "Generating…", lang)
+            : t2("Télécharger ma synthèse (PDF)", "Download my summary (PDF)", lang)}
         </GhostButton>
       </div>
 
