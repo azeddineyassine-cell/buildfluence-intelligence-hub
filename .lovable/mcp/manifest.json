@@ -1,0 +1,102 @@
+{
+  "version": 1,
+  "sdk_version": "0.20.0",
+  "path": "/functions/v1/mcp",
+  "auth": {
+    "type": "none"
+  },
+  "mcp": {
+    "server": {
+      "name": "buildfluence-mcp",
+      "version": "0.1.0",
+      "title": "Buildfluence MCP"
+    },
+    "tools": [
+      {
+        "name": "list_critical_situations",
+        "title": "List critical situations",
+        "description": "Return the 8 critical strategic situations Buildfluence addresses (Sovereign Decision Infrastructure use cases).",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {}
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "list_solutions_and_capabilities",
+        "title": "List solutions & capabilities",
+        "description": "Return Buildfluence's 3 strategic solutions and 4 advanced capabilities.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {}
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "submit_access_request",
+        "title": "Submit premium access request",
+        "description": "Submit a request for Buildfluence Premium access. Persists the request and notifies the Buildfluence team.",
+        "annotations": {
+          "readOnlyHint": false,
+          "destructiveHint": false,
+          "idempotentHint": false,
+          "openWorldHint": true
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "minLength": 1,
+              "description": "Full name of the requester."
+            },
+            "email": {
+              "type": "string",
+              "format": "email",
+              "pattern": "^(?!\\.)(?!.*\\.\\.)([A-Za-z0-9_'+\\-\\.]*)[A-Za-z0-9_+-]@([A-Za-z0-9][A-Za-z0-9\\-]*\\.)+[A-Za-z]{2,}$",
+              "description": "Professional email address."
+            },
+            "organization": {
+              "description": "Company or organization.",
+              "type": "string"
+            },
+            "phone": {
+              "description": "Phone number (optional).",
+              "type": "string"
+            },
+            "message": {
+              "description": "Context or message for the Buildfluence team.",
+              "type": "string"
+            },
+            "langue": {
+              "description": "Preferred language (fr or en).",
+              "type": "string",
+              "enum": [
+                "fr",
+                "en"
+              ]
+            }
+          },
+          "required": [
+            "name",
+            "email"
+          ]
+        },
+        "outputSchema": null
+      }
+    ]
+  }
+}
