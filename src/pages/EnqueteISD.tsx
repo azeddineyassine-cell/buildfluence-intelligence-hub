@@ -1,6 +1,7 @@
 import React, { useState, useMemo, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { ShieldCheck, Radar as RadarIcon, Map, Target } from "lucide-react";
+import { ShieldCheck, Radar as RadarIcon, Map, Target, Gauge, ListOrdered, Route, ShieldAlert } from "lucide-react";
+import logoBuildfluence from "@/assets/Logo_Buildfluence.png";
 import Navbar from "@/components/Navbar";
 import CTAFooter from "@/components/CTAFooter";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -432,8 +433,11 @@ const APPRO_ITEMS: { key: string; label: { fr: string; en: string }; type: "freq
 // =========================================================================
 // Composants d'UI internes
 // =========================================================================
-const Overline = ({ children }: { children: React.ReactNode }) => (
-  <div style={{ fontFamily: "'JetBrains Mono', ui-monospace, monospace", fontSize: 11, letterSpacing: "0.22em", textTransform: "uppercase", color: GOLD }}>{children}</div>
+const Overline = ({ children, icon: Icon }: { children: React.ReactNode; icon?: React.ComponentType<any> }) => (
+  <div style={{ display: "inline-flex", alignItems: "center", gap: 8, fontFamily: "'JetBrains Mono', ui-monospace, monospace", fontSize: 11, letterSpacing: "0.22em", textTransform: "uppercase", color: GOLD }}>
+    {Icon ? <Icon size={14} strokeWidth={1.5} color={GOLD} style={{ flexShrink: 0 }} /> : null}
+    <span>{children}</span>
+  </div>
 );
 
 const H1 = ({ children }: { children: React.ReactNode }) => (
@@ -1372,6 +1376,17 @@ const ResultScreen = ({ lang, result, origins, onExchange }: { lang: "fr" | "en"
   const [pdfBusy, setPdfBusy] = useState(false);
   const pdfRef = React.useRef<HTMLDivElement>(null);
 
+  const loadImageAsDataURL = async (src: string): Promise<string> => {
+    const res = await fetch(src);
+    const blob = await res.blob();
+    return await new Promise<string>((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(String(reader.result));
+      reader.onerror = reject;
+      reader.readAsDataURL(blob);
+    });
+  };
+
   const handleDownloadPdf = async () => {
     if (!pdfRef.current || pdfBusy) return;
     setPdfBusy(true);
@@ -1389,7 +1404,7 @@ const ResultScreen = ({ lang, result, origins, onExchange }: { lang: "fr" | "en"
       const pageH = pdf.internal.pageSize.getHeight();
       const margin = 10;
       const headerH = 16;
-      const footerH = 12;
+      const footerH = 14;
       const contentW = pageW - margin * 2;
       const contentH = pageH - headerH - footerH;
       const scale = contentW / canvas.width; // px -> mm
@@ -1401,8 +1416,110 @@ const ResultScreen = ({ lang, result, origins, onExchange }: { lang: "fr" | "en"
       );
       const kicker = t2("ÉTUDE NATIONALE 2026", "NATIONAL STUDY 2026", lang);
 
+      const drawFooter = () => {
+        pdf.setDrawColor(31, 58, 95);
+        pdf.setLineWidth(0.2);
+        pdf.line(margin, pageH - footerH + 2, pageW - margin, pageH - footerH + 2);
+        pdf.setTextColor(31, 58, 95);
+        pdf.setFont("helvetica", "normal");
+        pdf.setFontSize(8);
+        pdf.text("© Buildfluence · buildfluence.ai · info@buildfluence.ai", pageW / 2, pageH - 8, { align: "center" });
+        pdf.setTextColor(31, 58, 95);
+        pdf.setFontSize(7);
+        pdf.text(
+          t2(
+            "Pour approfondir votre diagnostic, écrivez-nous à info@buildfluence.ai.",
+            "To go deeper into your diagnosis, write to us at info@buildfluence.ai.",
+            lang,
+          ),
+          pageW / 2, pageH - 4, { align: "center" }
+        );
+      };
+
+      // ============ COVER PAGE ============
+      try {
+        const logoData = await loadImageAsDataURL(logoBuildfluence);
+        const logoW = 42;
+        const logoH = 42;
+        pdf.addImage(logoData, "PNG", (pageW - logoW) / 2, 22, logoW, logoH);
+      } catch {
+        /* logo optional */
+      }
+
+      // Kicker
+      pdf.setTextColor(201, 168, 76);
+      pdf.setFont("helvetica", "bold");
+      pdf.setFontSize(10);
+      pdf.text(kicker, pageW / 2, 76, { align: "center" });
+
+      // Title (Playfair unavailable in jsPDF core — use helvetica bold navy)
+      pdf.setTextColor(31, 58, 95);
+      pdf.setFont("helvetica", "bold");
+      pdf.setFontSize(20);
+      const titleLines = pdf.splitTextToSize(title, pageW - 40);
+      pdf.text(titleLines, pageW / 2, 92, { align: "center" });
+      const titleH = titleLines.length * 8;
+
+      // Subtitle
+      pdf.setFont("helvetica", "normal");
+      pdf.setFontSize(12);
+      pdf.setTextColor(31, 58, 95);
+      pdf.text(
+        t2(
+          "Diagnostic personnalisé · Indice de Souveraineté Décisionnelle",
+          "Personalized diagnosis · Decision Sovereignty Index",
+          lang,
+        ),
+        pageW / 2, 96 + titleH, { align: "center" }
+      );
+
+      // Gold rule
+      pdf.setDrawColor(201, 168, 76);
+      pdf.setLineWidth(0.6);
+      pdf.line(pageW / 2 - 20, 104 + titleH, pageW / 2 + 20, 104 + titleH);
+
+      // Date
+      const now = new Date();
+      const dd = String(now.getDate()).padStart(2, "0");
+      const mm = String(now.getMonth() + 1).padStart(2, "0");
+      const yyyy = now.getFullYear();
+      const dateStr = lang === "fr"
+        ? `Établi le ${dd}/${mm}/${yyyy}`
+        : `Issued on ${dd}/${mm}/${yyyy}`;
+      pdf.setFont("helvetica", "italic");
+      pdf.setFontSize(11);
+      pdf.setTextColor(31, 58, 95);
+      pdf.text(dateStr, pageW / 2, 114 + titleH, { align: "center" });
+
+      // Valorisation paragraph
+      const paragraph = t2(
+        "Buildfluence conduit la première étude nationale consacrée à la souveraineté décisionnelle des organisations marocaines. À travers un référentiel inédit de quatre piliers et treize dimensions, cette démarche vise à établir le premier état des lieux rigoureux de la maturité en intelligence stratégique au Maroc, et à en faire un bien commun au service des décideurs. Ce diagnostic personnalisé constitue votre première pierre à cet édifice national.",
+        "Buildfluence is conducting the first national study dedicated to the decision sovereignty of Moroccan organizations. Through an unprecedented framework of four pillars and thirteen dimensions, this initiative aims to establish the first rigorous assessment of strategic intelligence maturity in Morocco, and to make it a common good serving decision-makers. This personalized diagnosis is your first contribution to this national edifice.",
+        lang,
+      );
+      pdf.setFont("helvetica", "normal");
+      pdf.setFontSize(11);
+      pdf.setTextColor(31, 58, 95);
+      const paraLines = pdf.splitTextToSize(paragraph, pageW - 40);
+      pdf.text(paraLines, pageW / 2, 128 + titleH, { align: "center", maxWidth: pageW - 40 });
+
+      // Contact block at bottom of cover
+      pdf.setDrawColor(201, 168, 76);
+      pdf.setLineWidth(0.3);
+      pdf.line(margin + 20, pageH - 34, pageW - margin - 20, pageH - 34);
+      pdf.setFont("helvetica", "bold");
+      pdf.setFontSize(10);
+      pdf.setTextColor(201, 168, 76);
+      pdf.text(t2("CONTACT", "CONTACT", lang), pageW / 2, pageH - 28, { align: "center" });
+      pdf.setFont("helvetica", "normal");
+      pdf.setFontSize(11);
+      pdf.setTextColor(31, 58, 95);
+      pdf.text("buildfluence.ai  ·  info@buildfluence.ai", pageW / 2, pageH - 22, { align: "center" });
+
+      drawFooter();
+
+      // ============ DIAGNOSTIC PAGES ============
       let sY = 0;
-      let pageNum = 0;
       while (sY < canvas.height) {
         const sliceH = Math.min(pageSlicePx, canvas.height - sY);
         const slice = document.createElement("canvas");
@@ -1414,7 +1531,7 @@ const ResultScreen = ({ lang, result, origins, onExchange }: { lang: "fr" | "en"
         ctx.fillRect(0, 0, slice.width, slice.height);
         ctx.drawImage(canvas, 0, sY, canvas.width, sliceH, 0, 0, canvas.width, sliceH);
         const imgData = slice.toDataURL("image/jpeg", 0.92);
-        if (pageNum > 0) pdf.addPage();
+        pdf.addPage();
         // Header
         pdf.setTextColor(201, 168, 76);
         pdf.setFont("helvetica", "bold");
@@ -1430,15 +1547,8 @@ const ResultScreen = ({ lang, result, origins, onExchange }: { lang: "fr" | "en"
         // Image
         pdf.addImage(imgData, "JPEG", margin, headerH, contentW, sliceH * scale);
         // Footer
-        pdf.setDrawColor(31, 58, 95);
-        pdf.setLineWidth(0.2);
-        pdf.line(margin, pageH - footerH + 2, pageW - margin, pageH - footerH + 2);
-        pdf.setTextColor(31, 58, 95);
-        pdf.setFont("helvetica", "normal");
-        pdf.setFontSize(8);
-        pdf.text("© Buildfluence", pageW / 2, pageH - 5, { align: "center" });
+        drawFooter();
         sY += sliceH;
-        pageNum += 1;
       }
       pdf.save("Diagnostic-ISD-Buildfluence.pdf");
     } catch (e) {
@@ -1486,7 +1596,7 @@ const ResultScreen = ({ lang, result, origins, onExchange }: { lang: "fr" | "en"
         </div>
       </div>
 
-      <Overline>{t2("VOTRE DIAGNOSTIC ISD", "YOUR ISD DIAGNOSIS", lang)}</Overline>
+      <Overline icon={Gauge}>{t2("VOTRE DIAGNOSTIC ISD", "YOUR ISD DIAGNOSIS", lang)}</Overline>
       <H1>{t2("Indice de Souveraineté Décisionnelle", "Decision Sovereignty Index", lang)}</H1>
 
       {/* Score global + niveau */}
@@ -1515,7 +1625,7 @@ const ResultScreen = ({ lang, result, origins, onExchange }: { lang: "fr" | "en"
 
       {/* Échelle 5 niveaux */}
       <div style={{ margin: "28px 0" }}>
-        <Overline>{t2("ÉCHELLE DES 5 NIVEAUX", "5-LEVEL SCALE", lang)}</Overline>
+        <Overline icon={ListOrdered}>{t2("ÉCHELLE DES 5 NIVEAUX", "5-LEVEL SCALE", lang)}</Overline>
         <div style={{ marginTop: 12 }}>
           {NIVEAUX.map((n, i) => {
             const active = i === nivIndex;
@@ -1540,7 +1650,7 @@ const ResultScreen = ({ lang, result, origins, onExchange }: { lang: "fr" | "en"
 
       {/* Radar */}
       <div style={{ margin: "28px 0", background: "#fff", padding: 20, borderTop: `3px solid ${GOLD}` }}>
-        <Overline>{t2("RADAR DES 4 PILIERS", "4-PILLAR RADAR", lang)}</Overline>
+        <Overline icon={RadarIcon}>{t2("RADAR DES 4 PILIERS", "4-PILLAR RADAR", lang)}</Overline>
         <div style={{ width: "100%", height: 360, marginTop: 12 }}>
           <ResponsiveContainer width="100%" height="100%">
             <RadarChart data={pillars} outerRadius="72%">
@@ -1562,7 +1672,7 @@ const ResultScreen = ({ lang, result, origins, onExchange }: { lang: "fr" | "en"
 
       {/* Feuille de route */}
       <div style={{ margin: "28px 0" }}>
-        <Overline>{t2("FEUILLE DE ROUTE", "ROADMAP", lang)}</Overline>
+        <Overline icon={Route}>{t2("FEUILLE DE ROUTE", "ROADMAP", lang)}</Overline>
         <H2>{t2("Feuille de route", "Roadmap", lang)}</H2>
         <Body>
           {t2(
@@ -1615,8 +1725,9 @@ const ResultScreen = ({ lang, result, origins, onExchange }: { lang: "fr" | "en"
         }
         return (
           <div style={{ margin: "28px 0", padding: "16px 20px", background: "#fff", borderTop: `3px solid ${GOLD}`, borderLeft: `1px solid rgba(31,58,95,0.15)`, borderRight: `1px solid rgba(31,58,95,0.15)`, borderBottom: `1px solid rgba(31,58,95,0.15)` }}>
-            <div style={{ fontFamily: "'JetBrains Mono', ui-monospace, monospace", fontSize: 10, letterSpacing: "0.25em", textTransform: "uppercase", color: GOLD, marginBottom: 8 }}>
-              {t2("POINT DE VIGILANCE SOUVERAINETÉ", "SOVEREIGNTY WATCH POINT", lang)}
+            <div style={{ display: "inline-flex", alignItems: "center", gap: 8, fontFamily: "'JetBrains Mono', ui-monospace, monospace", fontSize: 10, letterSpacing: "0.25em", textTransform: "uppercase", color: GOLD, marginBottom: 8 }}>
+              <ShieldAlert size={14} strokeWidth={1.5} color={GOLD} style={{ flexShrink: 0 }} />
+              <span>{t2("POINT DE VIGILANCE SOUVERAINETÉ", "SOVEREIGNTY WATCH POINT", lang)}</span>
             </div>
             <div style={{ fontFamily: "'DM Sans', sans-serif", color: NAVY, fontSize: 14, lineHeight: 1.65, marginBottom: volets.length ? 10 : 0 }}>
               {t2(
@@ -1659,7 +1770,7 @@ const ResultScreen = ({ lang, result, origins, onExchange }: { lang: "fr" | "en"
         </GhostButton>
       </div>
 
-      <div className="isd-print-footer">© Buildfluence</div>
+      <div className="isd-print-footer">© Buildfluence · buildfluence.ai · info@buildfluence.ai</div>
     </div>
   );
 };
