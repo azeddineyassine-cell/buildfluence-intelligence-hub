@@ -1407,6 +1407,89 @@ const ResultScreen = ({ lang, result, onExchange }: { lang: "fr" | "en"; result:
     lang,
   );
 
+  const [pdfBusy, setPdfBusy] = useState(false);
+  const pdfRef = React.useRef<HTMLDivElement>(null);
+
+  const handleDownloadPdf = async () => {
+    if (!pdfRef.current || pdfBusy) return;
+    setPdfBusy(true);
+    try {
+      const el = pdfRef.current;
+      const canvas = await html2canvas(el, {
+        scale: 2,
+        backgroundColor: "#FAF6ED",
+        useCORS: true,
+        logging: false,
+        ignoreElements: (node) => node instanceof HTMLElement && node.classList.contains("no-print"),
+      });
+      const pdf = new jsPDF({ unit: "mm", format: "a4", orientation: "portrait" });
+      const pageW = pdf.internal.pageSize.getWidth();
+      const pageH = pdf.internal.pageSize.getHeight();
+      const margin = 10;
+      const headerH = 16;
+      const footerH = 12;
+      const contentW = pageW - margin * 2;
+      const contentH = pageH - headerH - footerH;
+      const scale = contentW / canvas.width; // px -> mm
+      const pageSlicePx = Math.floor(contentH / scale);
+      const title = t2(
+        "État de la maturité en souveraineté décisionnelle au Maroc",
+        "The state of decision sovereignty maturity in Morocco",
+        lang,
+      );
+      const kicker = t2("ÉTUDE NATIONALE 2026", "NATIONAL STUDY 2026", lang);
+
+      let sY = 0;
+      let pageNum = 0;
+      while (sY < canvas.height) {
+        const sliceH = Math.min(pageSlicePx, canvas.height - sY);
+        const slice = document.createElement("canvas");
+        slice.width = canvas.width;
+        slice.height = sliceH;
+        const ctx = slice.getContext("2d");
+        if (!ctx) break;
+        ctx.fillStyle = "#FAF6ED";
+        ctx.fillRect(0, 0, slice.width, slice.height);
+        ctx.drawImage(canvas, 0, sY, canvas.width, sliceH, 0, 0, canvas.width, sliceH);
+        const imgData = slice.toDataURL("image/jpeg", 0.92);
+        if (pageNum > 0) pdf.addPage();
+        // Header
+        pdf.setTextColor(201, 168, 76);
+        pdf.setFont("helvetica", "bold");
+        pdf.setFontSize(8);
+        pdf.text(kicker, pageW / 2, 8, { align: "center" });
+        pdf.setTextColor(31, 58, 95);
+        pdf.setFont("helvetica", "bold");
+        pdf.setFontSize(10);
+        pdf.text(title, pageW / 2, 13, { align: "center" });
+        pdf.setDrawColor(201, 168, 76);
+        pdf.setLineWidth(0.3);
+        pdf.line(margin, headerH - 1, pageW - margin, headerH - 1);
+        // Image
+        pdf.addImage(imgData, "JPEG", margin, headerH, contentW, sliceH * scale);
+        // Footer
+        pdf.setDrawColor(31, 58, 95);
+        pdf.setLineWidth(0.2);
+        pdf.line(margin, pageH - footerH + 2, pageW - margin, pageH - footerH + 2);
+        pdf.setTextColor(31, 58, 95);
+        pdf.setFont("helvetica", "normal");
+        pdf.setFontSize(8);
+        pdf.text("© Buildfluence", pageW / 2, pageH - 5, { align: "center" });
+        sY += sliceH;
+        pageNum += 1;
+      }
+      pdf.save("Diagnostic-ISD-Buildfluence.pdf");
+    } catch (e) {
+      toast({
+        title: t2("Téléchargement impossible", "Download failed", lang),
+        description: t2("Merci de réessayer.", "Please try again.", lang),
+        variant: "destructive",
+      });
+    } finally {
+      setPdfBusy(false);
+    }
+  };
+
   return (
     <div className="isd-print-area">
       <style>{`
