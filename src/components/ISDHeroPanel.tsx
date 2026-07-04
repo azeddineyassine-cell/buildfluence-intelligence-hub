@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { BookOpen, Gauge, Radar, Search } from "lucide-react";
+import { Gauge, Radar, Search } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 /**
