@@ -1376,6 +1376,17 @@ const ResultScreen = ({ lang, result, origins, onExchange }: { lang: "fr" | "en"
   const [pdfBusy, setPdfBusy] = useState(false);
   const pdfRef = React.useRef<HTMLDivElement>(null);
 
+  const loadImageAsDataURL = async (src: string): Promise<string> => {
+    const res = await fetch(src);
+    const blob = await res.blob();
+    return await new Promise<string>((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(String(reader.result));
+      reader.onerror = reject;
+      reader.readAsDataURL(blob);
+    });
+  };
+
   const handleDownloadPdf = async () => {
     if (!pdfRef.current || pdfBusy) return;
     setPdfBusy(true);
@@ -1393,7 +1404,7 @@ const ResultScreen = ({ lang, result, origins, onExchange }: { lang: "fr" | "en"
       const pageH = pdf.internal.pageSize.getHeight();
       const margin = 10;
       const headerH = 16;
-      const footerH = 12;
+      const footerH = 14;
       const contentW = pageW - margin * 2;
       const contentH = pageH - headerH - footerH;
       const scale = contentW / canvas.width; // px -> mm
@@ -1405,8 +1416,110 @@ const ResultScreen = ({ lang, result, origins, onExchange }: { lang: "fr" | "en"
       );
       const kicker = t2("ÉTUDE NATIONALE 2026", "NATIONAL STUDY 2026", lang);
 
+      const drawFooter = () => {
+        pdf.setDrawColor(31, 58, 95);
+        pdf.setLineWidth(0.2);
+        pdf.line(margin, pageH - footerH + 2, pageW - margin, pageH - footerH + 2);
+        pdf.setTextColor(31, 58, 95);
+        pdf.setFont("helvetica", "normal");
+        pdf.setFontSize(8);
+        pdf.text("© Buildfluence · buildfluence.ai · info@buildfluence.ai", pageW / 2, pageH - 8, { align: "center" });
+        pdf.setTextColor(31, 58, 95);
+        pdf.setFontSize(7);
+        pdf.text(
+          t2(
+            "Pour approfondir votre diagnostic, écrivez-nous à info@buildfluence.ai.",
+            "To go deeper into your diagnosis, write to us at info@buildfluence.ai.",
+            lang,
+          ),
+          pageW / 2, pageH - 4, { align: "center" }
+        );
+      };
+
+      // ============ COVER PAGE ============
+      try {
+        const logoData = await loadImageAsDataURL(logoBuildfluence);
+        const logoW = 42;
+        const logoH = 42;
+        pdf.addImage(logoData, "PNG", (pageW - logoW) / 2, 22, logoW, logoH);
+      } catch {
+        /* logo optional */
+      }
+
+      // Kicker
+      pdf.setTextColor(201, 168, 76);
+      pdf.setFont("helvetica", "bold");
+      pdf.setFontSize(10);
+      pdf.text(kicker, pageW / 2, 76, { align: "center" });
+
+      // Title (Playfair unavailable in jsPDF core — use helvetica bold navy)
+      pdf.setTextColor(31, 58, 95);
+      pdf.setFont("helvetica", "bold");
+      pdf.setFontSize(20);
+      const titleLines = pdf.splitTextToSize(title, pageW - 40);
+      pdf.text(titleLines, pageW / 2, 92, { align: "center" });
+      const titleH = titleLines.length * 8;
+
+      // Subtitle
+      pdf.setFont("helvetica", "normal");
+      pdf.setFontSize(12);
+      pdf.setTextColor(31, 58, 95);
+      pdf.text(
+        t2(
+          "Diagnostic personnalisé · Indice de Souveraineté Décisionnelle",
+          "Personalized diagnosis · Decision Sovereignty Index",
+          lang,
+        ),
+        pageW / 2, 96 + titleH, { align: "center" }
+      );
+
+      // Gold rule
+      pdf.setDrawColor(201, 168, 76);
+      pdf.setLineWidth(0.6);
+      pdf.line(pageW / 2 - 20, 104 + titleH, pageW / 2 + 20, 104 + titleH);
+
+      // Date
+      const now = new Date();
+      const dd = String(now.getDate()).padStart(2, "0");
+      const mm = String(now.getMonth() + 1).padStart(2, "0");
+      const yyyy = now.getFullYear();
+      const dateStr = lang === "fr"
+        ? `Établi le ${dd}/${mm}/${yyyy}`
+        : `Issued on ${dd}/${mm}/${yyyy}`;
+      pdf.setFont("helvetica", "italic");
+      pdf.setFontSize(11);
+      pdf.setTextColor(31, 58, 95);
+      pdf.text(dateStr, pageW / 2, 114 + titleH, { align: "center" });
+
+      // Valorisation paragraph
+      const paragraph = t2(
+        "Buildfluence conduit la première étude nationale consacrée à la souveraineté décisionnelle des organisations marocaines. À travers un référentiel inédit de quatre piliers et treize dimensions, cette démarche vise à établir le premier état des lieux rigoureux de la maturité en intelligence stratégique au Maroc, et à en faire un bien commun au service des décideurs. Ce diagnostic personnalisé constitue votre première pierre à cet édifice national.",
+        "Buildfluence is conducting the first national study dedicated to the decision sovereignty of Moroccan organizations. Through an unprecedented framework of four pillars and thirteen dimensions, this initiative aims to establish the first rigorous assessment of strategic intelligence maturity in Morocco, and to make it a common good serving decision-makers. This personalized diagnosis is your first contribution to this national edifice.",
+        lang,
+      );
+      pdf.setFont("helvetica", "normal");
+      pdf.setFontSize(11);
+      pdf.setTextColor(31, 58, 95);
+      const paraLines = pdf.splitTextToSize(paragraph, pageW - 40);
+      pdf.text(paraLines, pageW / 2, 128 + titleH, { align: "center", maxWidth: pageW - 40 });
+
+      // Contact block at bottom of cover
+      pdf.setDrawColor(201, 168, 76);
+      pdf.setLineWidth(0.3);
+      pdf.line(margin + 20, pageH - 34, pageW - margin - 20, pageH - 34);
+      pdf.setFont("helvetica", "bold");
+      pdf.setFontSize(10);
+      pdf.setTextColor(201, 168, 76);
+      pdf.text(t2("CONTACT", "CONTACT", lang), pageW / 2, pageH - 28, { align: "center" });
+      pdf.setFont("helvetica", "normal");
+      pdf.setFontSize(11);
+      pdf.setTextColor(31, 58, 95);
+      pdf.text("buildfluence.ai  ·  info@buildfluence.ai", pageW / 2, pageH - 22, { align: "center" });
+
+      drawFooter();
+
+      // ============ DIAGNOSTIC PAGES ============
       let sY = 0;
-      let pageNum = 0;
       while (sY < canvas.height) {
         const sliceH = Math.min(pageSlicePx, canvas.height - sY);
         const slice = document.createElement("canvas");
@@ -1418,7 +1531,7 @@ const ResultScreen = ({ lang, result, origins, onExchange }: { lang: "fr" | "en"
         ctx.fillRect(0, 0, slice.width, slice.height);
         ctx.drawImage(canvas, 0, sY, canvas.width, sliceH, 0, 0, canvas.width, sliceH);
         const imgData = slice.toDataURL("image/jpeg", 0.92);
-        if (pageNum > 0) pdf.addPage();
+        pdf.addPage();
         // Header
         pdf.setTextColor(201, 168, 76);
         pdf.setFont("helvetica", "bold");
@@ -1434,15 +1547,8 @@ const ResultScreen = ({ lang, result, origins, onExchange }: { lang: "fr" | "en"
         // Image
         pdf.addImage(imgData, "JPEG", margin, headerH, contentW, sliceH * scale);
         // Footer
-        pdf.setDrawColor(31, 58, 95);
-        pdf.setLineWidth(0.2);
-        pdf.line(margin, pageH - footerH + 2, pageW - margin, pageH - footerH + 2);
-        pdf.setTextColor(31, 58, 95);
-        pdf.setFont("helvetica", "normal");
-        pdf.setFontSize(8);
-        pdf.text("© Buildfluence", pageW / 2, pageH - 5, { align: "center" });
+        drawFooter();
         sY += sliceH;
-        pageNum += 1;
       }
       pdf.save("Diagnostic-ISD-Buildfluence.pdf");
     } catch (e) {
