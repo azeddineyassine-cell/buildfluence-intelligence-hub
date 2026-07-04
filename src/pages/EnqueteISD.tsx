@@ -936,6 +936,11 @@ const QuestionScreen = ({ lang, qdef, value, onValue, state, setState, setPrecis
       <div style={{ marginTop: 20, marginBottom: 24 }}>
         {qdef.anchors[lang].map((anchor, i) => {
           const active = value === i;
+          const showPrecision = active && qdef.precisionAt?.includes(i);
+          const precisionLabelObj = PRECISION_LABELS[qdef.key]?.[i];
+          const precisionLabel = precisionLabelObj
+            ? t2(precisionLabelObj.fr, precisionLabelObj.en, lang)
+            : t2("Précisez", "Please specify", lang);
           return (
             <div key={i}>
               <button type="button" onClick={() => onValue(i as Scale)} style={{
@@ -951,8 +956,23 @@ const QuestionScreen = ({ lang, qdef, value, onValue, state, setState, setPrecis
                 <div style={{ fontFamily: "'JetBrains Mono', ui-monospace, monospace", fontSize: 10, letterSpacing: "0.18em", opacity: 0.7, marginBottom: 4 }}>
                   {LEVEL_LABELS[lang][i]}
                 </div>
-                {anchor}
+                {stripParens(anchor)}
               </button>
+
+              {/* Champ de précision conditionnel, immédiatement sous l'option cochée */}
+              {showPrecision && (
+                <div style={{ margin: "0 0 12px 12px", padding: "10px 14px", borderLeft: `2px solid ${GOLD}`, background: "rgba(31,58,95,0.04)" }}>
+                  <div style={{ fontFamily: "'JetBrains Mono', ui-monospace, monospace", fontSize: 11, letterSpacing: "0.15em", textTransform: "uppercase", color: NAVY, marginBottom: 8 }}>
+                    {precisionLabel}
+                  </div>
+                  <Input
+                    value={state.precisions[qdef.key] ?? ""}
+                    onChange={(e: any) => setPrecision(qdef.key, e.target.value)}
+                    maxLength={500}
+                    style={{ background: "#fff", borderColor: "rgba(31,58,95,0.25)", color: NAVY }}
+                  />
+                </div>
+              )}
 
               {/* Q9 anchor 3 : Interne/Externe + Marocain/Étranger si externe */}
               {active && qdef.key === "q9" && i === 3 && (
@@ -981,6 +1001,13 @@ const QuestionScreen = ({ lang, qdef, value, onValue, state, setState, setPrecis
                       <OriginPicker lang={lang} value={state.dd_cabinet_origine} onChange={(v) => setState((p) => ({ ...p, dd_cabinet_origine: v }))} />
                     </div>
                   )}
+                </div>
+              )}
+            </div>
+          );
+        })}
+      </div>
+
                 </div>
               )}
             </div>
