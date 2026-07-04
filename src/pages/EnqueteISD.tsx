@@ -433,8 +433,11 @@ const APPRO_ITEMS: { key: string; label: { fr: string; en: string }; type: "freq
 // =========================================================================
 // Composants d'UI internes
 // =========================================================================
-const Overline = ({ children }: { children: React.ReactNode }) => (
-  <div style={{ fontFamily: "'JetBrains Mono', ui-monospace, monospace", fontSize: 11, letterSpacing: "0.22em", textTransform: "uppercase", color: GOLD }}>{children}</div>
+const Overline = ({ children, icon: Icon }: { children: React.ReactNode; icon?: React.ComponentType<{ size?: number; strokeWidth?: number; color?: string; style?: React.CSSProperties }> }) => (
+  <div style={{ display: "inline-flex", alignItems: "center", gap: 8, fontFamily: "'JetBrains Mono', ui-monospace, monospace", fontSize: 11, letterSpacing: "0.22em", textTransform: "uppercase", color: GOLD }}>
+    {Icon ? <Icon size={14} strokeWidth={1.5} color={GOLD} style={{ flexShrink: 0 }} /> : null}
+    <span>{children}</span>
+  </div>
 );
 
 const H1 = ({ children }: { children: React.ReactNode }) => (
