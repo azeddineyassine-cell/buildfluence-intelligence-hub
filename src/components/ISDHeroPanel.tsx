@@ -23,17 +23,17 @@ const ISDHeroPanel = () => {
     {
       icon: Gauge,
       label: t("MESURER", "MEASURE"),
-      desc: t("votre maturité décisionnelle", "your decision maturity"),
+      desc: t("Votre maturité décisionnelle", "Your decision maturity"),
     },
     {
       icon: Search,
       label: t("ÉVALUER", "EVALUATE"),
-      desc: t("vos angles de vulnérabilité", "your vulnerability angles"),
+      desc: t("Vos angles de vulnérabilité", "Your vulnerability angles"),
     },
     {
       icon: Radar,
       label: t("POSITIONNER", "POSITION"),
-      desc: t("votre rayonnement", "your reach"),
+      desc: t("Votre rayonnement", "Your reach"),
     },
   ];
 
