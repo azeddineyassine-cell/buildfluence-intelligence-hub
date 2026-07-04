@@ -1659,8 +1659,10 @@ const ResultScreen = ({ lang, result, onExchange }: { lang: "fr" | "en"; result:
       {/* CTA calibré par température + PDF */}
       <div className="no-print" style={{ marginTop: 24, display: "flex", gap: 12, flexWrap: "wrap" }}>
         <GoldButton onClick={onExchange}>{ctaLabel}</GoldButton>
-        <GhostButton onClick={() => window.print()}>
-          {t2("Télécharger ma synthèse (PDF)", "Download my summary (PDF)", lang)}
+        <GhostButton onClick={handleDownloadPdf}>
+          {pdfBusy
+            ? t2("Génération…", "Generating…", lang)
+            : t2("Télécharger ma synthèse (PDF)", "Download my summary (PDF)", lang)}
         </GhostButton>
       </div>
 
