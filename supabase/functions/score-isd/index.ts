@@ -244,12 +244,13 @@ Deno.serve(async (req) => {
 
           <div style="margin-top:16px;padding:12px 16px;background:#fff;border-left:3px solid ${foreignDependency ? GOLD : NAVY};font-size:13px;">
             <div style="font-weight:700;">Dépendance étrangère : ${foreignDependency ? 'oui' : 'non'}</div>
-            <div style="margin-top:6px;font-size:12px;line-height:1.6;">
-              <div>Prestataire de veille (V2) : ${veille_prestataire_origine ?? '-'}</div>
-              <div>Externalisation veille (V3) : ${veille_externalisation_origine ?? '-'}</div>
-              <div>Cabinet due diligence (Q9) : ${dd_cabinet_origine ?? '-'}</div>
+            <div style="margin-top:6px;font-size:12px;line-height:1.7;">
+              <div><strong>Due diligence (Q9) — cabinet :</strong> ${dd_cabinet_origine ? (dd_cabinet_origine === 'etranger' ? 'Étranger' : 'Marocain') : 'non renseigné / interne'}</div>
+              <div><strong>Veille — prestataire (V2) :</strong> ${veille_prestataire_origine ? (veille_prestataire_origine === 'etranger' ? 'Étranger' : 'Marocain') : 'non renseigné / non externalisé'}</div>
+              <div><strong>Veille — organisation externalisée (V3) :</strong> ${veille_externalisation_origine ? (veille_externalisation_origine === 'etranger' ? 'Étranger' : 'Marocain') : 'non renseigné / non externalisé'}</div>
             </div>
           </div>
+
 
           <div style="margin-top:16px;padding:12px 16px;background:#fff;border-left:3px solid ${NAVY};font-size:12px;line-height:1.6;">
             <div style="font-weight:600;margin-bottom:6px;">Échelle des 5 niveaux</div>

@@ -611,10 +611,18 @@ const EnqueteISD = () => {
           </nav>
 
           {result ? (
-            <ResultScreen lang={lang} result={result} onExchange={() => window.dispatchEvent(new Event("open-strategic-exchange"))} />
+            <ResultScreen
+              lang={lang}
+              result={result}
+              origins={{
+                dd_cabinet_origine: s.dd_cabinet_origine,
+                veille_prestataire_origine: s.veille_prestataire_origine,
+                veille_externalisation_origine: s.veille_externalisation_origine,
+              }}
+              onExchange={() => window.dispatchEvent(new Event("open-strategic-exchange"))}
+            />
           ) : (
             <>
-              {/* Barre de progression par piliers (masquée sur Intro, Piliers overview, Tagging) */}
               {s.step > 2 && (
                 <div style={{ marginBottom: 32 }}>
                   <div style={{ display: "flex", gap: 8, marginBottom: 8 }}>
@@ -638,7 +646,6 @@ const EnqueteISD = () => {
                 />
               )}
 
-              {/* Questions notées : mappe step -> question index */}
               {s.step >= 3 && s.step <= 5 && (
                 <QuestionScreen lang={lang} qdef={QUESTIONS[s.step - 3]}
                   value={s.answers[QUESTIONS[s.step - 3].key] ?? null}
@@ -670,24 +677,12 @@ const EnqueteISD = () => {
                 />
               )}
 
-
+              {/* Approfondissement retiré : après Q12 -> question ouverte -> contact. */}
               {s.step === 16 && (
-                <OptInScreen lang={lang}
-                  onYes={() => setS((p) => ({ ...p, approfondissement: true, step: 17 }))}
-                  onNo={() => setS((p) => ({ ...p, approfondissement: false, step: 18 }))}
-                  onPrev={goPrev}
-                />
-              )}
-
-              {s.step === 17 && (
-                <ApproScreen lang={lang} state={s} setState={setS} onNext={() => setS((p) => ({ ...p, step: 18 }))} onPrev={goPrev} />
-              )}
-
-              {s.step === 18 && (
                 <OpenScreen lang={lang} state={s} setState={setS} onNext={goNext} onPrev={goPrev} />
               )}
 
-              {s.step === 19 && (
+              {s.step === 17 && (
                 <ContactScreen lang={lang} state={s} setState={setS} onSubmit={submit} onPrev={goPrev} submitting={submitting} />
               )}
             </>
@@ -1165,64 +1160,8 @@ const VeilleScreen = ({ lang, state, setState, onNext, onPrev }: any) => {
 
 
 
-const OptInScreen = ({ lang, onYes, onNo, onPrev }: { lang: "fr" | "en"; onYes: () => void; onNo: () => void; onPrev: () => void }) => (
-  <div>
-    <Overline>{t2("APPROFONDISSEMENT", "DEEP-DIVE", lang)}</Overline>
-    <H2>{t2("Souhaitez-vous votre diagnostic affiné ?", "Would you like a refined diagnosis?", lang)}</H2>
-    <Body>{t2("Un item additionnel par sous-dimension, deux minutes de plus.", "One additional item per sub-dimension, two more minutes.", lang)}</Body>
-    <div style={{ display: "flex", gap: 12, marginTop: 16 }}>
-      <GoldButton onClick={onYes}>{t2("Oui, affiner", "Yes, refine", lang)}</GoldButton>
-      <GhostButton onClick={onNo}>{t2("Non, passer", "No, skip", lang)}</GhostButton>
-    </div>
-    <div style={{ marginTop: 24 }}>
-      <GhostButton onClick={onPrev}>{t2("Retour", "Back", lang)}</GhostButton>
-    </div>
-  </div>
-);
+// Écran d'approfondissement retiré : redondant avec les 12 questions.
 
-const ApproScreen = ({ lang, state, setState, onNext, onPrev }: any) => {
-  const set = (key: string, val: string) => setState({ ...state, appro: { ...state.appro, [key]: val } });
-  const allDone = APPRO_ITEMS.every((it) => state.appro[it.key]);
-  return (
-    <div>
-      <Overline>{t2("APPROFONDISSEMENT", "DEEP-DIVE", lang)}</Overline>
-      <H2>{t2("Précisions par sous-dimension", "Sub-dimension details", lang)}</H2>
-      <Body>{t2("Choisissez l'énoncé qui décrit votre réalité pour chaque sous-dimension.", "Pick the statement that describes your reality for each sub-dimension.", lang)}</Body>
-
-      {APPRO_ITEMS.map((it) => {
-        const opts = it.type === "freq" ? APPRO_FREQ[lang] : APPRO_RESP[lang];
-        const optsFr = it.type === "freq" ? APPRO_FREQ.fr : APPRO_RESP.fr;
-        const current = state.appro[it.key];
-        return (
-          <div key={it.key} style={{ marginBottom: 20, paddingBottom: 16, borderBottom: "1px solid rgba(31,58,95,0.1)" }}>
-            <div style={{ fontFamily: "'JetBrains Mono', ui-monospace, monospace", fontSize: 11, letterSpacing: "0.15em", textTransform: "uppercase", color: NAVY, marginBottom: 6 }}>
-              {it.label[lang]} · {it.type === "freq" ? t2("Fréquence", "Frequency", lang) : t2("Responsabilité", "Ownership", lang)}
-            </div>
-            <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
-              {opts.map((opt, i) => {
-                const canonical = optsFr[i];
-                const active = current === canonical;
-                return (
-                  <button key={opt} type="button" onClick={() => set(it.key, canonical)} style={{
-                    background: active ? NAVY : "#fff",
-                    color: active ? "#fff" : NAVY,
-                    border: `1px solid ${active ? NAVY : "rgba(31,58,95,0.25)"}`,
-                    padding: "6px 12px", fontSize: 12, cursor: "pointer", borderRadius: 2, fontFamily: "'DM Sans', sans-serif",
-                  }}>{opt}</button>
-                );
-              })}
-            </div>
-          </div>
-        );
-      })}
-
-      <div style={{ display: "flex", gap: 12, marginTop: 24 }}>
-        <GhostButton onClick={onPrev}>{t2("Retour", "Back", lang)}</GhostButton>
-        <GoldButton onClick={onNext} disabled={!allDone}>{t2("Continuer", "Continue", lang)}</GoldButton>
-      </div>
-    </div>
-  );
-};
 
 const OpenScreen = ({ lang, state, setState, onNext, onPrev }: any) => (
   <div>
@@ -1298,7 +1237,13 @@ const ContactScreen = ({ lang, state, setState, onSubmit, onPrev, submitting }: 
 // par l'Edge function. Le mapping recommandations -> solution est du contenu
 // éditorial, pas une formule de scoring.
 // =========================================================================
-const ResultScreen = ({ lang, result, onExchange }: { lang: "fr" | "en"; result: IsdResult; onExchange: () => void }) => {
+type Origins = {
+  dd_cabinet_origine: "marocain" | "etranger" | null;
+  veille_prestataire_origine: "marocain" | "etranger" | null;
+  veille_externalisation_origine: "marocain" | "etranger" | null;
+};
+
+const ResultScreen = ({ lang, result, origins, onExchange }: { lang: "fr" | "en"; result: IsdResult; origins: Origins; onExchange: () => void }) => {
 
   const NIVEAUX = [
     { key: "Embryonnaire", fr: { name: "Embryonnaire", desc: "aucun dispositif structuré, décisions à l'intuition et à la réaction." }, en: { name: "Embryonic", desc: "no structured setup, decisions driven by intuition and reaction." } },
@@ -1393,18 +1338,30 @@ const ResultScreen = ({ lang, result, onExchange }: { lang: "fr" | "en"; result:
       en: "Secure investments and partnerships through in-depth due diligence.",
     },
   };
+  const solutionForPillar = (pKey: string) => (pKey === "p4" ? SOLUTIONS.ddd : SOLUTIONS.sil);
   const sorted = [...pillars].sort((a, b) => a.value - b.value);
-  const roadmap = sorted.slice(0, 3).map((p, idx) => {
-    let solution = p.key === "p4" ? SOLUTIONS.ddd : SOLUTIONS.sil;
-    if (q11Weak && p.key === "p1") solution = SOLUTIONS.spi;
-    return {
+  const roadmap: { idx: number; pillarName: string; pillarValue: number; lever: string; solution: { name: string; href: string } }[] =
+    sorted.slice(0, 3).map((p, idx) => ({
       idx: idx + 1,
       pillarName: p.name,
       pillarValue: p.value,
       lever: t2(pillarLever[p.key].fr, pillarLever[p.key].en, lang),
-      solution,
-    };
-  });
+      solution: solutionForPillar(p.key),
+    }));
+  // Sous-dimension Influence & rayonnement (q11) : si point faible ciblé, priorité SPI additionnelle.
+  if (q11Weak) {
+    roadmap.push({
+      idx: roadmap.length + 1,
+      pillarName: t2("Influence et rayonnement", "Influence and outreach", lang),
+      pillarValue: result.q11 ?? 0,
+      lever: t2(
+        "Structurer une trajectoire d'influence et de rayonnement pour convertir votre légitimité en ascendant stratégique.",
+        "Structure an influence and outreach trajectory to convert your legitimacy into strategic ascendancy.",
+        lang,
+      ),
+      solution: SOLUTIONS.spi,
+    });
+  }
 
   const waitingPhrase = t2(
     "Ce document est votre synthèse immédiate. Votre feuille de route complète, personnalisée et détaillée par pilier vous sera adressée à l'issue de l'étude nationale 2026, accompagnée de votre positionnement.",
@@ -1636,20 +1593,51 @@ const ResultScreen = ({ lang, result, onExchange }: { lang: "fr" | "en"; result:
       </div>
 
       {/* Point de vigilance souveraineté — s'affiche uniquement si dépendance étrangère détectée. Ne score pas. */}
-      {result.foreign_dependency && (
-        <div style={{ margin: "28px 0", padding: "16px 20px", background: "#fff", borderTop: `3px solid ${GOLD}`, borderLeft: `1px solid rgba(31,58,95,0.15)`, borderRight: `1px solid rgba(31,58,95,0.15)`, borderBottom: `1px solid rgba(31,58,95,0.15)` }}>
-          <div style={{ fontFamily: "'JetBrains Mono', ui-monospace, monospace", fontSize: 10, letterSpacing: "0.25em", textTransform: "uppercase", color: GOLD, marginBottom: 8 }}>
-            {t2("POINT DE VIGILANCE SOUVERAINETÉ", "SOVEREIGNTY WATCH POINT", lang)}
-          </div>
-          <div style={{ fontFamily: "'DM Sans', sans-serif", color: NAVY, fontSize: 14, lineHeight: 1.65 }}>
-            {t2(
-              "Une partie de votre dispositif repose sur des prestataires étrangers. Une montée en autonomie sur ce volet renforcerait votre souveraineté décisionnelle.",
-              "Part of your setup relies on foreign providers. Building greater autonomy on this front would strengthen your decision sovereignty.",
-              lang,
+      {result.foreign_dependency && (() => {
+        const volets: { label: string; nature: string }[] = [];
+        if (origins.dd_cabinet_origine === "etranger") {
+          volets.push({
+            label: t2("Due diligence (Q9)", "Due diligence (Q9)", lang),
+            nature: t2("cabinet externe étranger", "foreign external firm", lang),
+          });
+        }
+        if (origins.veille_prestataire_origine === "etranger") {
+          volets.push({
+            label: t2("Veille — outil (V2)", "Monitoring — tool (V2)", lang),
+            nature: t2("prestataire externe étranger", "foreign external provider", lang),
+          });
+        }
+        if (origins.veille_externalisation_origine === "etranger") {
+          volets.push({
+            label: t2("Veille — organisation (V3)", "Monitoring — organization (V3)", lang),
+            nature: t2("cabinet externe étranger", "foreign external firm", lang),
+          });
+        }
+        return (
+          <div style={{ margin: "28px 0", padding: "16px 20px", background: "#fff", borderTop: `3px solid ${GOLD}`, borderLeft: `1px solid rgba(31,58,95,0.15)`, borderRight: `1px solid rgba(31,58,95,0.15)`, borderBottom: `1px solid rgba(31,58,95,0.15)` }}>
+            <div style={{ fontFamily: "'JetBrains Mono', ui-monospace, monospace", fontSize: 10, letterSpacing: "0.25em", textTransform: "uppercase", color: GOLD, marginBottom: 8 }}>
+              {t2("POINT DE VIGILANCE SOUVERAINETÉ", "SOVEREIGNTY WATCH POINT", lang)}
+            </div>
+            <div style={{ fontFamily: "'DM Sans', sans-serif", color: NAVY, fontSize: 14, lineHeight: 1.65, marginBottom: volets.length ? 10 : 0 }}>
+              {t2(
+                "Une partie de votre dispositif repose sur des prestataires étrangers. Une montée en autonomie sur ce volet renforcerait votre souveraineté décisionnelle.",
+                "Part of your setup relies on foreign providers. Building greater autonomy on this front would strengthen your decision sovereignty.",
+                lang,
+              )}
+            </div>
+            {volets.length > 0 && (
+              <ul style={{ margin: 0, padding: 0, listStyle: "none", fontFamily: "'DM Sans', sans-serif", color: NAVY, fontSize: 13, lineHeight: 1.7 }}>
+                {volets.map((v, i) => (
+                  <li key={i} style={{ paddingLeft: 14, position: "relative" }}>
+                    <span style={{ position: "absolute", left: 0, color: GOLD }}>›</span>
+                    <strong>{v.label} :</strong> {v.nature}.
+                  </li>
+                ))}
+              </ul>
             )}
           </div>
-        </div>
-      )}
+        );
+      })()}
 
 
       {/* Bloc positionnement national */}
