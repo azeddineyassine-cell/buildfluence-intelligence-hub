@@ -1619,8 +1619,9 @@ const ResultScreen = ({ lang, result, origins, onExchange }: { lang: "fr" | "en"
         }
         return (
           <div style={{ margin: "28px 0", padding: "16px 20px", background: "#fff", borderTop: `3px solid ${GOLD}`, borderLeft: `1px solid rgba(31,58,95,0.15)`, borderRight: `1px solid rgba(31,58,95,0.15)`, borderBottom: `1px solid rgba(31,58,95,0.15)` }}>
-            <div style={{ fontFamily: "'JetBrains Mono', ui-monospace, monospace", fontSize: 10, letterSpacing: "0.25em", textTransform: "uppercase", color: GOLD, marginBottom: 8 }}>
-              {t2("POINT DE VIGILANCE SOUVERAINETÉ", "SOVEREIGNTY WATCH POINT", lang)}
+            <div style={{ display: "inline-flex", alignItems: "center", gap: 8, fontFamily: "'JetBrains Mono', ui-monospace, monospace", fontSize: 10, letterSpacing: "0.25em", textTransform: "uppercase", color: GOLD, marginBottom: 8 }}>
+              <ShieldAlert size={14} strokeWidth={1.5} color={GOLD} style={{ flexShrink: 0 }} />
+              <span>{t2("POINT DE VIGILANCE SOUVERAINETÉ", "SOVEREIGNTY WATCH POINT", lang)}</span>
             </div>
             <div style={{ fontFamily: "'DM Sans', sans-serif", color: NAVY, fontSize: 14, lineHeight: 1.65, marginBottom: volets.length ? 10 : 0 }}>
               {t2(
