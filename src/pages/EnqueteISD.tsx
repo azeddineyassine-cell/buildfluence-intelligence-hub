@@ -1375,6 +1375,7 @@ const ResultScreen = ({ lang, result, origins, onExchange }: { lang: "fr" | "en"
 
   const [pdfBusy, setPdfBusy] = useState(false);
   const pdfRef = React.useRef<HTMLDivElement>(null);
+  const radarRef = React.useRef<HTMLDivElement>(null);
 
   const loadImageAsDataURL = async (src: string): Promise<string> => {
     const res = await fetch(src);
@@ -1388,27 +1389,20 @@ const ResultScreen = ({ lang, result, origins, onExchange }: { lang: "fr" | "en"
   };
 
   const handleDownloadPdf = async () => {
-    if (!pdfRef.current || pdfBusy) return;
+    if (pdfBusy) return;
     setPdfBusy(true);
     try {
-      const el = pdfRef.current;
-      const canvas = await html2canvas(el, {
-        scale: 2,
-        backgroundColor: "#FAF6ED",
-        useCORS: true,
-        logging: false,
-        ignoreElements: (node) => node instanceof HTMLElement && node.classList.contains("no-print"),
-      });
       const pdf = new jsPDF({ unit: "mm", format: "a4", orientation: "portrait" });
       const pageW = pdf.internal.pageSize.getWidth();
       const pageH = pdf.internal.pageSize.getHeight();
-      const margin = 10;
-      const headerH = 16;
-      const footerH = 14;
+      const margin = 12;
+      const headerH = 18;
+      const footerH = 16;
       const contentW = pageW - margin * 2;
-      const contentH = pageH - headerH - footerH;
-      const scale = contentW / canvas.width; // px -> mm
-      const pageSlicePx = Math.floor(contentH / scale);
+      const contentTop = headerH + 4;
+      const contentBottom = pageH - footerH - 2;
+      const contentH = contentBottom - contentTop;
+
       const title = t2(
         "État de la maturité en souveraineté décisionnelle au Maroc",
         "The state of decision sovereignty maturity in Morocco",
@@ -1417,14 +1411,13 @@ const ResultScreen = ({ lang, result, origins, onExchange }: { lang: "fr" | "en"
       const kicker = t2("ÉTUDE NATIONALE 2026", "NATIONAL STUDY 2026", lang);
 
       const drawFooter = () => {
-        pdf.setDrawColor(31, 58, 95);
-        pdf.setLineWidth(0.2);
+        pdf.setDrawColor(201, 168, 76);
+        pdf.setLineWidth(0.3);
         pdf.line(margin, pageH - footerH + 2, pageW - margin, pageH - footerH + 2);
         pdf.setTextColor(31, 58, 95);
         pdf.setFont("helvetica", "normal");
         pdf.setFontSize(8);
-        pdf.text("© Buildfluence · buildfluence.ai · info@buildfluence.ai", pageW / 2, pageH - 8, { align: "center" });
-        pdf.setTextColor(31, 58, 95);
+        pdf.text("© Buildfluence · buildfluence.ai · info@buildfluence.ai", pageW / 2, pageH - 9, { align: "center" });
         pdf.setFontSize(7);
         pdf.text(
           t2(
@@ -1432,8 +1425,24 @@ const ResultScreen = ({ lang, result, origins, onExchange }: { lang: "fr" | "en"
             "To go deeper into your diagnosis, write to us at info@buildfluence.ai.",
             lang,
           ),
-          pageW / 2, pageH - 4, { align: "center" }
+          pageW / 2, pageH - 5, { align: "center" }
         );
+      };
+
+      const drawContentChrome = () => {
+        // Top header (repeated on every diagnostic page)
+        pdf.setTextColor(201, 168, 76);
+        pdf.setFont("helvetica", "bold");
+        pdf.setFontSize(8);
+        pdf.text(kicker, pageW / 2, 9, { align: "center" });
+        pdf.setTextColor(31, 58, 95);
+        pdf.setFont("helvetica", "bold");
+        pdf.setFontSize(10);
+        pdf.text(title, pageW / 2, 14, { align: "center" });
+        pdf.setDrawColor(201, 168, 76);
+        pdf.setLineWidth(0.3);
+        pdf.line(margin, headerH - 1, pageW - margin, headerH - 1);
+        drawFooter();
       };
 
       // ============ COVER PAGE ============
@@ -1442,56 +1451,49 @@ const ResultScreen = ({ lang, result, origins, onExchange }: { lang: "fr" | "en"
         const logoW = 42;
         const logoH = 42;
         pdf.addImage(logoData, "PNG", (pageW - logoW) / 2, 22, logoW, logoH);
-      } catch {
-        /* logo optional */
-      }
+      } catch { /* logo optional */ }
 
-      // Kicker
+      pdf.setTextColor(31, 58, 95);
+      pdf.setFont("helvetica", "italic");
+      pdf.setFontSize(9);
+      pdf.text("Sovereign Decision Infrastructure", pageW / 2, 68, { align: "center" });
+
       pdf.setTextColor(201, 168, 76);
       pdf.setFont("helvetica", "bold");
       pdf.setFontSize(10);
-      pdf.text(kicker, pageW / 2, 76, { align: "center" });
+      pdf.text(t2("ÉTUDE NATIONALE 2026 · PAR BUILDFLUENCE", "NATIONAL STUDY 2026 · BY BUILDFLUENCE", lang), pageW / 2, 80, { align: "center" });
 
-      // Title (Playfair unavailable in jsPDF core — use helvetica bold navy)
       pdf.setTextColor(31, 58, 95);
       pdf.setFont("helvetica", "bold");
       pdf.setFontSize(20);
       const titleLines = pdf.splitTextToSize(title, pageW - 40);
-      pdf.text(titleLines, pageW / 2, 92, { align: "center" });
+      pdf.text(titleLines, pageW / 2, 96, { align: "center" });
       const titleH = titleLines.length * 8;
 
-      // Subtitle
       pdf.setFont("helvetica", "normal");
       pdf.setFontSize(12);
-      pdf.setTextColor(31, 58, 95);
       pdf.text(
         t2(
           "Diagnostic personnalisé · Indice de Souveraineté Décisionnelle",
           "Personalized diagnosis · Decision Sovereignty Index",
           lang,
         ),
-        pageW / 2, 96 + titleH, { align: "center" }
+        pageW / 2, 100 + titleH, { align: "center" }
       );
 
-      // Gold rule
       pdf.setDrawColor(201, 168, 76);
       pdf.setLineWidth(0.6);
-      pdf.line(pageW / 2 - 20, 104 + titleH, pageW / 2 + 20, 104 + titleH);
+      pdf.line(pageW / 2 - 22, 108 + titleH, pageW / 2 + 22, 108 + titleH);
 
-      // Date
       const now = new Date();
       const dd = String(now.getDate()).padStart(2, "0");
       const mm = String(now.getMonth() + 1).padStart(2, "0");
       const yyyy = now.getFullYear();
-      const dateStr = lang === "fr"
-        ? `Établi le ${dd}/${mm}/${yyyy}`
-        : `Issued on ${dd}/${mm}/${yyyy}`;
+      const dateStr = lang === "fr" ? `Établi le ${dd}/${mm}/${yyyy}` : `Issued on ${dd}/${mm}/${yyyy}`;
       pdf.setFont("helvetica", "italic");
       pdf.setFontSize(11);
-      pdf.setTextColor(31, 58, 95);
-      pdf.text(dateStr, pageW / 2, 114 + titleH, { align: "center" });
+      pdf.text(dateStr, pageW / 2, 118 + titleH, { align: "center" });
 
-      // Valorisation paragraph
       const paragraph = t2(
         "Buildfluence conduit la première étude nationale consacrée à la souveraineté décisionnelle des organisations marocaines. À travers un référentiel inédit de quatre piliers et treize dimensions, cette démarche vise à établir le premier état des lieux rigoureux de la maturité en intelligence stratégique au Maroc, et à en faire un bien commun au service des décideurs. Ce diagnostic personnalisé constitue votre première pierre à cet édifice national.",
         "Buildfluence is conducting the first national study dedicated to the decision sovereignty of Moroccan organizations. Through an unprecedented framework of four pillars and thirteen dimensions, this initiative aims to establish the first rigorous assessment of strategic intelligence maturity in Morocco, and to make it a common good serving decision-makers. This personalized diagnosis is your first contribution to this national edifice.",
@@ -1499,57 +1501,231 @@ const ResultScreen = ({ lang, result, origins, onExchange }: { lang: "fr" | "en"
       );
       pdf.setFont("helvetica", "normal");
       pdf.setFontSize(11);
-      pdf.setTextColor(31, 58, 95);
-      const paraLines = pdf.splitTextToSize(paragraph, pageW - 40);
-      pdf.text(paraLines, pageW / 2, 128 + titleH, { align: "center", maxWidth: pageW - 40 });
+      const paraLines = pdf.splitTextToSize(paragraph, pageW - 44);
+      pdf.text(paraLines, pageW / 2, 132 + titleH, { align: "center", maxWidth: pageW - 44 });
 
-      // Contact block at bottom of cover
+      // Cover footer (gold rule + contact only — no repeated content header)
       pdf.setDrawColor(201, 168, 76);
       pdf.setLineWidth(0.3);
-      pdf.line(margin + 20, pageH - 34, pageW - margin - 20, pageH - 34);
-      pdf.setFont("helvetica", "bold");
-      pdf.setFontSize(10);
-      pdf.setTextColor(201, 168, 76);
-      pdf.text(t2("CONTACT", "CONTACT", lang), pageW / 2, pageH - 28, { align: "center" });
-      pdf.setFont("helvetica", "normal");
-      pdf.setFontSize(11);
+      pdf.line(margin, pageH - footerH + 2, pageW - margin, pageH - footerH + 2);
       pdf.setTextColor(31, 58, 95);
-      pdf.text("buildfluence.ai  ·  info@buildfluence.ai", pageW / 2, pageH - 22, { align: "center" });
+      pdf.setFont("helvetica", "normal");
+      pdf.setFontSize(8);
+      pdf.text("© Buildfluence · buildfluence.ai · info@buildfluence.ai", pageW / 2, pageH - 7, { align: "center" });
 
-      drawFooter();
+      // ============ CONTENT PAGES ============
+      // Render each block into an offscreen HTML container, rasterize as one image,
+      // then paginate so no block ever splits across pages.
+      const BLOCK_PX_WIDTH = 900; // px width for offscreen render → scales to contentW
+      const pxToMm = contentW / BLOCK_PX_WIDTH;
 
-      // ============ DIAGNOSTIC PAGES ============
-      let sY = 0;
-      while (sY < canvas.height) {
-        const sliceH = Math.min(pageSlicePx, canvas.height - sY);
-        const slice = document.createElement("canvas");
-        slice.width = canvas.width;
-        slice.height = sliceH;
-        const ctx = slice.getContext("2d");
-        if (!ctx) break;
-        ctx.fillStyle = "#FAF6ED";
-        ctx.fillRect(0, 0, slice.width, slice.height);
-        ctx.drawImage(canvas, 0, sY, canvas.width, sliceH, 0, 0, canvas.width, sliceH);
-        const imgData = slice.toDataURL("image/jpeg", 0.92);
-        pdf.addPage();
-        // Header
-        pdf.setTextColor(201, 168, 76);
-        pdf.setFont("helvetica", "bold");
-        pdf.setFontSize(8);
-        pdf.text(kicker, pageW / 2, 8, { align: "center" });
-        pdf.setTextColor(31, 58, 95);
-        pdf.setFont("helvetica", "bold");
-        pdf.setFontSize(10);
-        pdf.text(title, pageW / 2, 13, { align: "center" });
-        pdf.setDrawColor(201, 168, 76);
-        pdf.setLineWidth(0.3);
-        pdf.line(margin, headerH - 1, pageW - margin, headerH - 1);
-        // Image
-        pdf.addImage(imgData, "JPEG", margin, headerH, contentW, sliceH * scale);
-        // Footer
-        drawFooter();
-        sY += sliceH;
+      const renderBlockToCanvas = async (html: string): Promise<HTMLCanvasElement> => {
+        const holder = document.createElement("div");
+        holder.style.cssText = `position:fixed;left:-20000px;top:0;width:${BLOCK_PX_WIDTH}px;background:#FAF6ED;padding:0;margin:0;`;
+        holder.innerHTML = html;
+        document.body.appendChild(holder);
+        try {
+          const c = await html2canvas(holder, {
+            scale: 2,
+            backgroundColor: "#FAF6ED",
+            useCORS: true,
+            logging: false,
+          });
+          return c;
+        } finally {
+          document.body.removeChild(holder);
+        }
+      };
+
+      // Pre-rasterize the live radar (with its legend) as one non-breakable image
+      let radarImgData = "";
+      let radarRatio = 1;
+      if (radarRef.current) {
+        const rc = await html2canvas(radarRef.current, {
+          scale: 2,
+          backgroundColor: "#FFFFFF",
+          useCORS: true,
+          logging: false,
+        });
+        radarImgData = rc.toDataURL("image/png");
+        radarRatio = rc.height / rc.width;
       }
+
+      // Start first content page
+      pdf.addPage();
+      drawContentChrome();
+      let cursorY = contentTop;
+
+      const placeBlock = async (html: string) => {
+        const c = await renderBlockToCanvas(html);
+        const wMm = contentW;
+        let hMm = (c.height / c.width) * wMm;
+        // If a single block exceeds a full content page, cap width to fit height (rare)
+        if (hMm > contentH) {
+          const scale = contentH / hMm;
+          hMm = contentH;
+          const newW = wMm * scale;
+          const offsetX = margin + (contentW - newW) / 2;
+          pdf.addPage();
+          drawContentChrome();
+          pdf.addImage(c.toDataURL("image/jpeg", 0.92), "JPEG", offsetX, contentTop, newW, hMm);
+          cursorY = contentTop + hMm + 6;
+          return;
+        }
+        if (cursorY + hMm > contentBottom) {
+          pdf.addPage();
+          drawContentChrome();
+          cursorY = contentTop;
+        }
+        pdf.addImage(c.toDataURL("image/jpeg", 0.92), "JPEG", margin, cursorY, wMm, hMm);
+        cursorY += hMm + 6;
+      };
+
+      // ---- shared style tokens ----
+      const CSS = `
+        font-family:'DM Sans',sans-serif;color:#1F3A5F;
+      `;
+      const overline = (label: string) => `
+        <div style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12px;letter-spacing:0.22em;text-transform:uppercase;color:#C9A84C;margin-bottom:10px;">${label}</div>
+      `;
+
+      // Block 1 — Indice global + niveau
+      await placeBlock(`
+        <div style="${CSS}display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+          <div style="background:#fff;border-top:3px solid #C9A84C;padding:22px;">
+            <div style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12px;letter-spacing:0.2em;color:#1F3A5F;opacity:0.7;">${t2("INDICE GLOBAL","GLOBAL INDEX",lang)}</div>
+            <div style="font-family:'Playfair Display',serif;color:#1F3A5F;font-size:52px;font-weight:700;line-height:1;margin-top:6px;">
+              ${result.score_global.toFixed(2)}<span style="font-size:22px;opacity:0.5;"> / 4</span>
+            </div>
+          </div>
+          <div style="background:#1F3A5F;color:#fff;padding:22px;">
+            <div style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12px;letter-spacing:0.2em;color:#C9A84C;">${t2("NIVEAU ATTEINT","LEVEL REACHED",lang)}</div>
+            <div style="font-family:'Playfair Display',serif;font-size:32px;font-weight:600;margin-top:6px;line-height:1.15;">${NIVEAUX[nivIndex][lang].name}</div>
+            <div style="font-family:'DM Sans',sans-serif;font-size:14px;margin-top:8px;opacity:0.9;line-height:1.5;">${NIVEAUX[nivIndex][lang].desc}</div>
+          </div>
+        </div>
+      `);
+
+      // Block 2 — Échelle des 5 niveaux
+      const scaleRows = NIVEAUX.map((n, i) => {
+        const active = i === nivIndex;
+        return `
+          <div style="display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:flex-start;padding:12px 16px;margin-bottom:6px;background:${active ? "#fff" : "transparent"};border-left:3px solid ${active ? "#C9A84C" : "rgba(31,58,95,0.15)"};">
+            <div style="font-family:'Playfair Display',serif;color:${active ? "#C9A84C" : "#1F3A5F"};font-size:24px;font-weight:700;opacity:${active ? 1 : 0.6};min-width:26px;">${i}</div>
+            <div>
+              <div style="font-family:'DM Sans',sans-serif;color:#1F3A5F;font-size:15px;font-weight:${active ? 700 : 600};">${n[lang].name}</div>
+              <div style="font-family:'DM Sans',sans-serif;color:#1F3A5F;font-size:13px;opacity:0.75;line-height:1.5;">${n[lang].desc}</div>
+            </div>
+          </div>`;
+      }).join("");
+      await placeBlock(`
+        <div style="${CSS}">
+          ${overline(t2("ÉCHELLE DES 5 NIVEAUX","5-LEVEL SCALE",lang))}
+          ${scaleRows}
+        </div>
+      `);
+
+      // Block 3 — Radar + légende
+      if (radarImgData) {
+        const legendHtml = pillars.map((p) => `
+          <div style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12px;color:#1F3A5F;">
+            <span style="color:#C9A84C;">■</span> ${p.name} : <strong>${p.value.toFixed(2)}</strong>
+          </div>
+        `).join("");
+        await placeBlock(`
+          <div style="${CSS}background:#fff;border-top:3px solid #C9A84C;padding:22px;">
+            ${overline(t2("RADAR DES 4 PILIERS","4-PILLAR RADAR",lang))}
+            <img src="${radarImgData}" style="display:block;width:70%;margin:8px auto 12px;height:auto;aspect-ratio:${(1/radarRatio).toFixed(3)};" />
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px;">
+              ${legendHtml}
+            </div>
+          </div>
+        `);
+      }
+
+      // Block 4a — Feuille de route (intro)
+      await placeBlock(`
+        <div style="${CSS}">
+          ${overline(t2("FEUILLE DE ROUTE","ROADMAP",lang))}
+          <div style="font-family:'Playfair Display',serif;color:#1F3A5F;font-size:26px;font-weight:600;margin:4px 0 12px;">${t2("Feuille de route","Roadmap",lang)}</div>
+          <div style="font-family:'DM Sans',sans-serif;color:#1F3A5F;font-size:15px;line-height:1.6;">
+            ${t2(
+              `Votre point fort : ${strongest.name} (${strongest.value.toFixed(2)}). Trois priorités séquencées, de la plus urgente à consolider à la plus stratégique à ancrer.`,
+              `Your strength: ${strongest.name} (${strongest.value.toFixed(2)}). Three sequenced priorities, from the most urgent to consolidate to the most strategic to anchor.`,
+              lang,
+            )}
+          </div>
+        </div>
+      `);
+
+      // Blocks 4b — one card per priority (each entire, non-breakable)
+      for (const r of roadmap) {
+        await placeBlock(`
+          <div style="${CSS}background:#fff;border:1px solid rgba(31,58,95,0.12);border-left:3px solid #C9A84C;padding:20px 22px;">
+            <div style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px;letter-spacing:0.25em;text-transform:uppercase;color:#C9A84C;">
+              ${t2(`PRIORITÉ ${r.idx}`,`PRIORITY ${r.idx}`,lang)} · ${t2("PILIER","PILLAR",lang)} : ${r.pillarName}
+            </div>
+            <div style="font-family:'Playfair Display',serif;color:#1F3A5F;font-size:20px;font-weight:700;margin-top:6px;line-height:1.25;">${r.pillarName}</div>
+            <div style="font-family:'DM Sans',sans-serif;color:#1F3A5F;font-size:15px;line-height:1.55;margin-top:8px;">${r.lever}</div>
+            <div style="margin-top:12px;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12px;letter-spacing:0.15em;text-transform:uppercase;color:#C9A84C;">
+              ${t2("Solution Buildfluence","Buildfluence solution",lang)} : ${r.solution.name} →
+            </div>
+          </div>
+        `);
+      }
+
+      // Block 5 — phrase d'attente
+      await placeBlock(`
+        <div style="${CSS}padding:16px 20px;background:rgba(31,58,95,0.06);border-left:3px solid #C9A84C;font-family:'DM Sans',sans-serif;color:#1F3A5F;font-size:14px;line-height:1.65;font-style:italic;">
+          ${waitingPhrase}
+        </div>
+      `);
+
+      // Block 6 — point de vigilance souveraineté (conditionnel)
+      if (result.foreign_dependency) {
+        const volets: { label: string; nature: string }[] = [];
+        if (origins.dd_cabinet_origine === "etranger") {
+          volets.push({ label: t2("Due diligence (Q9)","Due diligence (Q9)",lang), nature: t2("cabinet externe étranger","foreign external firm",lang) });
+        }
+        if (origins.veille_prestataire_origine === "etranger") {
+          volets.push({ label: t2("Veille — outil (V2)","Monitoring — tool (V2)",lang), nature: t2("prestataire externe étranger","foreign external provider",lang) });
+        }
+        if (origins.veille_externalisation_origine === "etranger") {
+          volets.push({ label: t2("Veille — organisation (V3)","Monitoring — organization (V3)",lang), nature: t2("cabinet externe étranger","foreign external firm",lang) });
+        }
+        const voletsHtml = volets.length
+          ? `<ul style="margin:10px 0 0;padding:0;list-style:none;font-family:'DM Sans',sans-serif;color:#1F3A5F;font-size:13px;line-height:1.7;">
+              ${volets.map(v => `<li style="padding-left:14px;position:relative;"><span style="position:absolute;left:0;color:#C9A84C;">›</span><strong>${v.label} :</strong> ${v.nature}.</li>`).join("")}
+             </ul>`
+          : "";
+        await placeBlock(`
+          <div style="${CSS}background:#fff;border-top:3px solid #C9A84C;border-left:1px solid rgba(31,58,95,0.15);border-right:1px solid rgba(31,58,95,0.15);border-bottom:1px solid rgba(31,58,95,0.15);padding:18px 22px;">
+            <div style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px;letter-spacing:0.25em;text-transform:uppercase;color:#C9A84C;margin-bottom:8px;">
+              ${t2("POINT DE VIGILANCE SOUVERAINETÉ","SOVEREIGNTY WATCH POINT",lang)}
+            </div>
+            <div style="font-family:'DM Sans',sans-serif;color:#1F3A5F;font-size:14px;line-height:1.65;">
+              ${t2(
+                "Une partie de votre dispositif repose sur des prestataires étrangers. Une montée en autonomie sur ce volet renforcerait votre souveraineté décisionnelle.",
+                "Part of your setup relies on foreign providers. Building greater autonomy on this front would strengthen your decision sovereignty.",
+                lang,
+              )}
+            </div>
+            ${voletsHtml}
+          </div>
+        `);
+      }
+
+      // Block 7 — positionnement national différé
+      await placeBlock(`
+        <div style="${CSS}padding:14px 18px;background:rgba(31,58,95,0.06);border-left:3px solid #1F3A5F;font-family:'DM Sans',sans-serif;color:#1F3A5F;font-size:13px;line-height:1.6;">
+          ${t2(
+            "Votre positionnement national vous sera révélé à l'issue de l'étude 2026.",
+            "Your national positioning will be revealed at the conclusion of the 2026 study.",
+            lang,
+          )}
+        </div>
+      `);
+
       pdf.save("Diagnostic-ISD-Buildfluence.pdf");
     } catch (e) {
       toast({
