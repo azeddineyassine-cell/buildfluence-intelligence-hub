@@ -216,9 +216,24 @@ Deno.serve(async (req) => {
       const li = (k: string, v: any) => `<tr><td style="padding:4px 8px 4px 0;font-weight:600;vertical-align:top;">${k}</td><td style="padding:4px 0;">${v ?? '-'}</td></tr>`
       const list = (arr: string[]) => (arr && arr.length ? arr.join(', ') : '-')
       const esc = (s: any) => String(s ?? '').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      const PRECISION_LABELS: Record<string, string> = {
+        q1: 'Anticipation',
+        q2: 'Donnée dans la décision',
+        q3: 'Gouvernance de l\u2019information',
+        q4: 'Process d\u2019intelligence économique',
+        q5: 'Cartographie des risques',
+        q6: 'Gestion des crises',
+        q7: 'Détection des signaux faibles',
+        q8: 'Dispositifs de résilience',
+        q9: 'Évaluation des investisseurs',
+        q9_mode: 'Due Diligence investisseurs',
+        q10: 'Vérification des partenaires',
+        q11: 'Compliance et risques tiers',
+        q12: 'Influence et rayonnement',
+      }
       const precisionsRows = Object.entries(precisions || {})
         .filter(([, v]) => v && (typeof v === 'string' ? v.trim() !== '' : true))
-        .map(([k, v]) => `<div><strong>${esc(k)} :</strong> ${esc(typeof v === 'string' ? v : JSON.stringify(v))}</div>`)
+        .map(([k, v]) => `<div><strong>${esc(PRECISION_LABELS[k] ?? k)} :</strong> ${esc(typeof v === 'string' ? v : JSON.stringify(v))}</div>`)
         .join('')
       const html = `
         <div style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;max-width:680px;margin:0 auto;background:#FAF6ED;color:${NAVY};padding:28px;">

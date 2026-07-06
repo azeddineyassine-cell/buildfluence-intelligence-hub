@@ -1388,6 +1388,17 @@ const ResultScreen = ({ lang, result, origins, onExchange }: { lang: "fr" | "en"
     });
   };
 
+  const loadImageWithSize = async (src: string): Promise<{ dataUrl: string; width: number; height: number }> => {
+    const dataUrl = await loadImageAsDataURL(src);
+    const dims = await new Promise<{ width: number; height: number }>((resolve, reject) => {
+      const img = new Image();
+      img.onload = () => resolve({ width: img.naturalWidth, height: img.naturalHeight });
+      img.onerror = reject;
+      img.src = dataUrl;
+    });
+    return { dataUrl, ...dims };
+  };
+
   const handleDownloadPdf = async () => {
     if (pdfBusy) return;
     setPdfBusy(true);
@@ -1417,16 +1428,7 @@ const ResultScreen = ({ lang, result, origins, onExchange }: { lang: "fr" | "en"
         pdf.setTextColor(31, 58, 95);
         pdf.setFont("helvetica", "normal");
         pdf.setFontSize(8);
-        pdf.text("© Buildfluence · buildfluence.ai · info@buildfluence.ai", pageW / 2, pageH - 9, { align: "center" });
-        pdf.setFontSize(7);
-        pdf.text(
-          t2(
-            "Pour approfondir votre diagnostic, écrivez-nous à info@buildfluence.ai.",
-            "To go deeper into your diagnosis, write to us at info@buildfluence.ai.",
-            lang,
-          ),
-          pageW / 2, pageH - 5, { align: "center" }
-        );
+        pdf.text("© Buildfluence · www.buildfluence.ai · info@buildfluence.ai", pageW / 2, pageH - 7, { align: "center" });
       };
 
       const drawContentChrome = () => {
@@ -1447,27 +1449,23 @@ const ResultScreen = ({ lang, result, origins, onExchange }: { lang: "fr" | "en"
 
       // ============ COVER PAGE ============
       try {
-        const logoData = await loadImageAsDataURL(logoBuildfluence);
-        const logoW = 42;
-        const logoH = 42;
-        pdf.addImage(logoData, "PNG", (pageW - logoW) / 2, 22, logoW, logoH);
+        const logoInfo = await loadImageWithSize(logoBuildfluence);
+        const targetW = 90; // mm — large centered logo (contains wordmark + baseline)
+        const ratio = logoInfo.height / logoInfo.width;
+        const targetH = targetW * ratio;
+        pdf.addImage(logoInfo.dataUrl, "PNG", (pageW - targetW) / 2, 26, targetW, targetH);
       } catch { /* logo optional */ }
-
-      pdf.setTextColor(31, 58, 95);
-      pdf.setFont("helvetica", "italic");
-      pdf.setFontSize(9);
-      pdf.text("Sovereign Decision Infrastructure", pageW / 2, 68, { align: "center" });
 
       pdf.setTextColor(201, 168, 76);
       pdf.setFont("helvetica", "bold");
       pdf.setFontSize(10);
-      pdf.text(t2("ÉTUDE NATIONALE 2026 · PAR BUILDFLUENCE", "NATIONAL STUDY 2026 · BY BUILDFLUENCE", lang), pageW / 2, 80, { align: "center" });
+      pdf.text(t2("ÉTUDE NATIONALE 2026 · PAR BUILDFLUENCE", "NATIONAL STUDY 2026 · BY BUILDFLUENCE", lang), pageW / 2, 100, { align: "center" });
 
       pdf.setTextColor(31, 58, 95);
       pdf.setFont("helvetica", "bold");
       pdf.setFontSize(20);
       const titleLines = pdf.splitTextToSize(title, pageW - 40);
-      pdf.text(titleLines, pageW / 2, 96, { align: "center" });
+      pdf.text(titleLines, pageW / 2, 116, { align: "center" });
       const titleH = titleLines.length * 8;
 
       pdf.setFont("helvetica", "normal");
@@ -1478,12 +1476,12 @@ const ResultScreen = ({ lang, result, origins, onExchange }: { lang: "fr" | "en"
           "Personalized diagnosis · Decision Sovereignty Index",
           lang,
         ),
-        pageW / 2, 100 + titleH, { align: "center" }
+        pageW / 2, 120 + titleH, { align: "center" }
       );
 
       pdf.setDrawColor(201, 168, 76);
       pdf.setLineWidth(0.6);
-      pdf.line(pageW / 2 - 22, 108 + titleH, pageW / 2 + 22, 108 + titleH);
+      pdf.line(pageW / 2 - 22, 128 + titleH, pageW / 2 + 22, 128 + titleH);
 
       const now = new Date();
       const dd = String(now.getDate()).padStart(2, "0");
@@ -1492,7 +1490,7 @@ const ResultScreen = ({ lang, result, origins, onExchange }: { lang: "fr" | "en"
       const dateStr = lang === "fr" ? `Établi le ${dd}/${mm}/${yyyy}` : `Issued on ${dd}/${mm}/${yyyy}`;
       pdf.setFont("helvetica", "italic");
       pdf.setFontSize(11);
-      pdf.text(dateStr, pageW / 2, 118 + titleH, { align: "center" });
+      pdf.text(dateStr, pageW / 2, 138 + titleH, { align: "center" });
 
       const paragraph = t2(
         "Buildfluence conduit la première étude nationale consacrée à la souveraineté décisionnelle des organisations marocaines. À travers un référentiel inédit de quatre piliers et treize dimensions, cette démarche vise à établir le premier état des lieux rigoureux de la maturité en intelligence stratégique au Maroc, et à en faire un bien commun au service des décideurs. Ce diagnostic personnalisé constitue votre première pierre à cet édifice national.",
@@ -1502,16 +1500,10 @@ const ResultScreen = ({ lang, result, origins, onExchange }: { lang: "fr" | "en"
       pdf.setFont("helvetica", "normal");
       pdf.setFontSize(11);
       const paraLines = pdf.splitTextToSize(paragraph, pageW - 44);
-      pdf.text(paraLines, pageW / 2, 132 + titleH, { align: "center", maxWidth: pageW - 44 });
+      pdf.text(paraLines, pageW / 2, 152 + titleH, { align: "center", maxWidth: pageW - 44 });
 
-      // Cover footer (gold rule + contact only — no repeated content header)
-      pdf.setDrawColor(201, 168, 76);
-      pdf.setLineWidth(0.3);
-      pdf.line(margin, pageH - footerH + 2, pageW - margin, pageH - footerH + 2);
-      pdf.setTextColor(31, 58, 95);
-      pdf.setFont("helvetica", "normal");
-      pdf.setFontSize(8);
-      pdf.text("© Buildfluence · buildfluence.ai · info@buildfluence.ai", pageW / 2, pageH - 7, { align: "center" });
+      // Cover footer
+      drawFooter();
 
       // ============ CONTENT PAGES ============
       // Render each block into an offscreen HTML container, rasterize as one image,
@@ -1625,41 +1617,46 @@ const ResultScreen = ({ lang, result, origins, onExchange }: { lang: "fr" | "en"
         </div>
       `);
 
-      // Block 3 — Radar + légende
+      // Block 3 — Radar (l'image rasterisée contient déjà titre + légende)
       if (radarImgData) {
-        const legendHtml = pillars.map((p) => `
-          <div style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12px;color:#1F3A5F;">
-            <span style="color:#C9A84C;">■</span> ${p.name} : <strong>${p.value.toFixed(2)}</strong>
-          </div>
-        `).join("");
         await placeBlock(`
-          <div style="${CSS}background:#fff;border-top:3px solid #C9A84C;padding:22px;">
-            ${overline(t2("RADAR DES 4 PILIERS","4-PILLAR RADAR",lang))}
-            <img src="${radarImgData}" style="display:block;width:70%;margin:8px auto 12px;height:auto;aspect-ratio:${(1/radarRatio).toFixed(3)};" />
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px;">
-              ${legendHtml}
-            </div>
+          <div style="${CSS}background:#fff;border-top:3px solid #C9A84C;padding:14px 22px 18px;">
+            <img src="${radarImgData}" style="display:block;width:100%;margin:0 auto;height:auto;aspect-ratio:${(1/radarRatio).toFixed(3)};" />
           </div>
         `);
       }
 
-      // Block 4a — Feuille de route (intro)
-      await placeBlock(`
+      // Block 4 — Feuille de route (intro + première priorité groupées pour éviter l'orphelin)
+      const firstPriority = roadmap[0];
+      const introHtml = `
         <div style="${CSS}">
           ${overline(t2("FEUILLE DE ROUTE","ROADMAP",lang))}
           <div style="font-family:'Playfair Display',serif;color:#1F3A5F;font-size:26px;font-weight:600;margin:4px 0 12px;">${t2("Feuille de route","Roadmap",lang)}</div>
-          <div style="font-family:'DM Sans',sans-serif;color:#1F3A5F;font-size:15px;line-height:1.6;">
+          <div style="font-family:'DM Sans',sans-serif;color:#1F3A5F;font-size:15px;line-height:1.6;margin-bottom:14px;">
             ${t2(
               `Votre point fort : ${strongest.name} (${strongest.value.toFixed(2)}). Trois priorités séquencées, de la plus urgente à consolider à la plus stratégique à ancrer.`,
               `Your strength: ${strongest.name} (${strongest.value.toFixed(2)}). Three sequenced priorities, from the most urgent to consolidate to the most strategic to anchor.`,
               lang,
             )}
           </div>
+          ${firstPriority ? `
+            <div style="background:#fff;border:1px solid rgba(31,58,95,0.12);border-left:3px solid #C9A84C;padding:20px 22px;">
+              <div style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px;letter-spacing:0.25em;text-transform:uppercase;color:#C9A84C;">
+                ${t2(`PRIORITÉ ${firstPriority.idx}`,`PRIORITY ${firstPriority.idx}`,lang)} · ${t2("PILIER","PILLAR",lang)} : ${firstPriority.pillarName}
+              </div>
+              <div style="font-family:'Playfair Display',serif;color:#1F3A5F;font-size:20px;font-weight:700;margin-top:6px;line-height:1.25;">${firstPriority.pillarName}</div>
+              <div style="font-family:'DM Sans',sans-serif;color:#1F3A5F;font-size:15px;line-height:1.55;margin-top:8px;">${firstPriority.lever}</div>
+              <div style="margin-top:12px;font-family:'JetBrains Mono',ui-monospace,monospace;font-size:12px;letter-spacing:0.15em;text-transform:uppercase;color:#C9A84C;">
+                ${t2("Solution Buildfluence","Buildfluence solution",lang)} : ${firstPriority.solution.name} →
+              </div>
+            </div>
+          ` : ""}
         </div>
-      `);
+      `;
+      await placeBlock(introHtml);
 
-      // Blocks 4b — one card per priority (each entire, non-breakable)
-      for (const r of roadmap) {
+      // Priorités restantes — un bloc atomique par carte
+      for (const r of roadmap.slice(1)) {
         await placeBlock(`
           <div style="${CSS}background:#fff;border:1px solid rgba(31,58,95,0.12);border-left:3px solid #C9A84C;padding:20px 22px;">
             <div style="font-family:'JetBrains Mono',ui-monospace,monospace;font-size:11px;letter-spacing:0.25em;text-transform:uppercase;color:#C9A84C;">
@@ -1946,7 +1943,7 @@ const ResultScreen = ({ lang, result, origins, onExchange }: { lang: "fr" | "en"
         </GhostButton>
       </div>
 
-      <div className="isd-print-footer">© Buildfluence · buildfluence.ai · info@buildfluence.ai</div>
+      <div className="isd-print-footer">© Buildfluence · www.buildfluence.ai · info@buildfluence.ai</div>
     </div>
   );
 };
