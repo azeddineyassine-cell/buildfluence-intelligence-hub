@@ -150,8 +150,8 @@ const InsightsResources = () => {
         "Global benchmark · 2 digital surveys · Prefaced by WHO Director-General and 3 Moroccan ministers. Direct impact: MAD 190M tender."
       ),
       href: "/esante_livre_blanc_v2_4.html",
-      image: "/Healthcare-1.png",
-      overlayImage: "/Healthcare-2.png",
+      image: "/Healthcare-1.webp",
+      overlayImage: "/Healthcare-2.webp",
       actions: [
         { label: t("EN SAVOIR PLUS →", "LEARN MORE →"), href: "/esante_livre_blanc_v2_4.html", variant: "primary" },
       ],
