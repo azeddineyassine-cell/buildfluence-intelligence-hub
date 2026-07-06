@@ -4,10 +4,12 @@ import CTAFooter from "@/components/CTAFooter";
 import { FormStrategicExchange } from "@/components/FormModals";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { supabase } from "@/integrations/supabase/client";
-import barometreCover from "@/assets/barometre-cover.png";
-import barometreEnR from "@/assets/barometre-enr.png";
-import rcaGradins from "@/assets/rca-gradins.png";
-import rcaEquipe from "@/assets/rca-equipe.png";
+import barometreCover from "@/assets/barometre-cover.webp";
+import barometreEnR from "@/assets/barometre-enr.webp";
+import rcaGradins from "@/assets/rca-gradins.webp";
+import rcaEquipe from "@/assets/rca-equipe.webp";
+import isdDecision from "@/assets/isd-decision.webp";
+import isdEnquete from "@/assets/isd-enquete.webp";
 
 type Filter =
   | "all"
@@ -72,7 +74,8 @@ const InsightsResources = () => {
       ),
       href: "/insights-resources/enquete-isd",
       sameTab: true,
-      gradient: "linear-gradient(150deg, #1F3A5F, #152A45)",
+      image: isdDecision,
+      overlayBg: isdEnquete,
       actions: [
         { label: t("Participer à l'étude →", "Join the study →"), href: "/insights-resources/enquete-isd", variant: "primary", sameTab: true },
       ],
@@ -126,8 +129,8 @@ const InsightsResources = () => {
         "Comparative analysis of digital attractiveness mechanisms of 6 global investment promotion agencies: Tech/Data and Marketing."
       ),
       href: "/benchmark-api-light.html",
-      image: "/Benchmark_API_Drapeaux-1.png",
-      overlayBg: "/Benchmark_API_Analyse-2.png",
+      image: "/Benchmark_API_Drapeaux-1.webp",
+      overlayBg: "/Benchmark_API_Analyse-2.webp",
       actions: [
         { label: t("Voir l'analyse →", "View analysis →"), href: "/benchmark-api-light.html", variant: "primary" },
         { label: t("Accès complet →", "Full access →"), href: "/acces-premium", variant: "tertiary" },
@@ -147,8 +150,8 @@ const InsightsResources = () => {
         "Global benchmark · 2 digital surveys · Prefaced by WHO Director-General and 3 Moroccan ministers. Direct impact: MAD 190M tender."
       ),
       href: "/esante_livre_blanc_v2_4.html",
-      image: "/Healthcare-1.png",
-      overlayImage: "/Healthcare-2.png",
+      image: "/Healthcare-1.webp",
+      overlayImage: "/Healthcare-2.webp",
       actions: [
         { label: t("EN SAVOIR PLUS →", "LEARN MORE →"), href: "/esante_livre_blanc_v2_4.html", variant: "primary" },
       ],
@@ -447,6 +450,10 @@ const InsightsResources = () => {
                   <img
                     src={card.overlayImage}
                     alt=""
+                    loading="lazy"
+                    decoding="async"
+                    width={1000}
+                    height={600}
                     style={{
                       width: '100%', height: 'auto', maxHeight: '240px',
                       objectFit: 'cover', objectPosition: 'top',
