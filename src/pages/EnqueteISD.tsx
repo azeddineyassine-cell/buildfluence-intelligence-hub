@@ -1449,21 +1449,17 @@ const ResultScreen = ({ lang, result, origins, onExchange }: { lang: "fr" | "en"
 
       // ============ COVER PAGE ============
       try {
-        const logoData = await loadImageAsDataURL(logoBuildfluence);
-        const logoW = 42;
-        const logoH = 42;
-        pdf.addImage(logoData, "PNG", (pageW - logoW) / 2, 22, logoW, logoH);
+        const logoInfo = await loadImageWithSize(logoBuildfluence);
+        const targetW = 90; // mm — large centered logo (contains wordmark + baseline)
+        const ratio = logoInfo.height / logoInfo.width;
+        const targetH = targetW * ratio;
+        pdf.addImage(logoInfo.dataUrl, "PNG", (pageW - targetW) / 2, 26, targetW, targetH);
       } catch { /* logo optional */ }
-
-      pdf.setTextColor(31, 58, 95);
-      pdf.setFont("helvetica", "italic");
-      pdf.setFontSize(9);
-      pdf.text("Sovereign Decision Infrastructure", pageW / 2, 68, { align: "center" });
 
       pdf.setTextColor(201, 168, 76);
       pdf.setFont("helvetica", "bold");
       pdf.setFontSize(10);
-      pdf.text(t2("ÉTUDE NATIONALE 2026 · PAR BUILDFLUENCE", "NATIONAL STUDY 2026 · BY BUILDFLUENCE", lang), pageW / 2, 80, { align: "center" });
+      pdf.text(t2("ÉTUDE NATIONALE 2026 · PAR BUILDFLUENCE", "NATIONAL STUDY 2026 · BY BUILDFLUENCE", lang), pageW / 2, 100, { align: "center" });
 
       pdf.setTextColor(31, 58, 95);
       pdf.setFont("helvetica", "bold");
