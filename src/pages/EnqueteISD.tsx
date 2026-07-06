@@ -1428,16 +1428,7 @@ const ResultScreen = ({ lang, result, origins, onExchange }: { lang: "fr" | "en"
         pdf.setTextColor(31, 58, 95);
         pdf.setFont("helvetica", "normal");
         pdf.setFontSize(8);
-        pdf.text("© Buildfluence · buildfluence.ai · info@buildfluence.ai", pageW / 2, pageH - 9, { align: "center" });
-        pdf.setFontSize(7);
-        pdf.text(
-          t2(
-            "Pour approfondir votre diagnostic, écrivez-nous à info@buildfluence.ai.",
-            "To go deeper into your diagnosis, write to us at info@buildfluence.ai.",
-            lang,
-          ),
-          pageW / 2, pageH - 5, { align: "center" }
-        );
+        pdf.text("© Buildfluence · www.buildfluence.ai · info@buildfluence.ai", pageW / 2, pageH - 7, { align: "center" });
       };
 
       const drawContentChrome = () => {
