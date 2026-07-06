@@ -1504,8 +1504,6 @@ const ResultScreen = ({ lang, result, origins, onExchange }: { lang: "fr" | "en"
 
       // Cover footer
       drawFooter();
-      pdf.setFontSize(8);
-      pdf.text("© Buildfluence · buildfluence.ai · info@buildfluence.ai", pageW / 2, pageH - 7, { align: "center" });
 
       // ============ CONTENT PAGES ============
       // Render each block into an offscreen HTML container, rasterize as one image,
