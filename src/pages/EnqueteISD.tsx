@@ -1465,7 +1465,7 @@ const ResultScreen = ({ lang, result, origins, onExchange }: { lang: "fr" | "en"
       pdf.setFont("helvetica", "bold");
       pdf.setFontSize(20);
       const titleLines = pdf.splitTextToSize(title, pageW - 40);
-      pdf.text(titleLines, pageW / 2, 96, { align: "center" });
+      pdf.text(titleLines, pageW / 2, 116, { align: "center" });
       const titleH = titleLines.length * 8;
 
       pdf.setFont("helvetica", "normal");
@@ -1476,12 +1476,12 @@ const ResultScreen = ({ lang, result, origins, onExchange }: { lang: "fr" | "en"
           "Personalized diagnosis · Decision Sovereignty Index",
           lang,
         ),
-        pageW / 2, 100 + titleH, { align: "center" }
+        pageW / 2, 120 + titleH, { align: "center" }
       );
 
       pdf.setDrawColor(201, 168, 76);
       pdf.setLineWidth(0.6);
-      pdf.line(pageW / 2 - 22, 108 + titleH, pageW / 2 + 22, 108 + titleH);
+      pdf.line(pageW / 2 - 22, 128 + titleH, pageW / 2 + 22, 128 + titleH);
 
       const now = new Date();
       const dd = String(now.getDate()).padStart(2, "0");
@@ -1490,7 +1490,7 @@ const ResultScreen = ({ lang, result, origins, onExchange }: { lang: "fr" | "en"
       const dateStr = lang === "fr" ? `Établi le ${dd}/${mm}/${yyyy}` : `Issued on ${dd}/${mm}/${yyyy}`;
       pdf.setFont("helvetica", "italic");
       pdf.setFontSize(11);
-      pdf.text(dateStr, pageW / 2, 118 + titleH, { align: "center" });
+      pdf.text(dateStr, pageW / 2, 138 + titleH, { align: "center" });
 
       const paragraph = t2(
         "Buildfluence conduit la première étude nationale consacrée à la souveraineté décisionnelle des organisations marocaines. À travers un référentiel inédit de quatre piliers et treize dimensions, cette démarche vise à établir le premier état des lieux rigoureux de la maturité en intelligence stratégique au Maroc, et à en faire un bien commun au service des décideurs. Ce diagnostic personnalisé constitue votre première pierre à cet édifice national.",
@@ -1500,14 +1500,10 @@ const ResultScreen = ({ lang, result, origins, onExchange }: { lang: "fr" | "en"
       pdf.setFont("helvetica", "normal");
       pdf.setFontSize(11);
       const paraLines = pdf.splitTextToSize(paragraph, pageW - 44);
-      pdf.text(paraLines, pageW / 2, 132 + titleH, { align: "center", maxWidth: pageW - 44 });
+      pdf.text(paraLines, pageW / 2, 152 + titleH, { align: "center", maxWidth: pageW - 44 });
 
-      // Cover footer (gold rule + contact only — no repeated content header)
-      pdf.setDrawColor(201, 168, 76);
-      pdf.setLineWidth(0.3);
-      pdf.line(margin, pageH - footerH + 2, pageW - margin, pageH - footerH + 2);
-      pdf.setTextColor(31, 58, 95);
-      pdf.setFont("helvetica", "normal");
+      // Cover footer
+      drawFooter();
       pdf.setFontSize(8);
       pdf.text("© Buildfluence · buildfluence.ai · info@buildfluence.ai", pageW / 2, pageH - 7, { align: "center" });
 
