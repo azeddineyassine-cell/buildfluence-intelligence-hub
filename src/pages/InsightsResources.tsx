@@ -74,7 +74,8 @@ const InsightsResources = () => {
       ),
       href: "/insights-resources/enquete-isd",
       sameTab: true,
-      gradient: "linear-gradient(150deg, #1F3A5F, #152A45)",
+      image: isdDecision,
+      overlayBg: isdEnquete,
       actions: [
         { label: t("Participer à l'étude →", "Join the study →"), href: "/insights-resources/enquete-isd", variant: "primary", sameTab: true },
       ],
