@@ -1388,6 +1388,17 @@ const ResultScreen = ({ lang, result, origins, onExchange }: { lang: "fr" | "en"
     });
   };
 
+  const loadImageWithSize = async (src: string): Promise<{ dataUrl: string; width: number; height: number }> => {
+    const dataUrl = await loadImageAsDataURL(src);
+    const dims = await new Promise<{ width: number; height: number }>((resolve, reject) => {
+      const img = new Image();
+      img.onload = () => resolve({ width: img.naturalWidth, height: img.naturalHeight });
+      img.onerror = reject;
+      img.src = dataUrl;
+    });
+    return { dataUrl, ...dims };
+  };
+
   const handleDownloadPdf = async () => {
     if (pdfBusy) return;
     setPdfBusy(true);
