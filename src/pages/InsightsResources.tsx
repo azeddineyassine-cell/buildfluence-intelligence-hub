@@ -450,6 +450,10 @@ const InsightsResources = () => {
                   <img
                     src={card.overlayImage}
                     alt=""
+                    loading="lazy"
+                    decoding="async"
+                    width={1000}
+                    height={600}
                     style={{
                       width: '100%', height: 'auto', maxHeight: '240px',
                       objectFit: 'cover', objectPosition: 'top',
