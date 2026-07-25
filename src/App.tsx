@@ -3,6 +3,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HelmetProvider } from "react-helmet-async";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 import { AuthProvider } from "@/hooks/useAuth";
 import ProtectedRoute from "@/components/ProtectedRoute";
@@ -46,6 +47,7 @@ import CompetitiveVelocityEngine from "./pages/capacites/CompetitiveVelocityEngi
 const queryClient = new QueryClient();
 
 const App = () => (
+  <HelmetProvider>
   <LanguageProvider>
     <AuthProvider>
     <QueryClientProvider client={queryClient}>
@@ -104,6 +106,7 @@ const App = () => (
     </QueryClientProvider>
     </AuthProvider>
   </LanguageProvider>
+  </HelmetProvider>
 );
 
 export default App;
