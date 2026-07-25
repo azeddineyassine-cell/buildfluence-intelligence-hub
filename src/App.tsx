@@ -47,6 +47,7 @@ import CompetitiveVelocityEngine from "./pages/capacites/CompetitiveVelocityEngi
 const queryClient = new QueryClient();
 
 const App = () => (
+  <HelmetProvider>
   <LanguageProvider>
     <AuthProvider>
     <QueryClientProvider client={queryClient}>
@@ -105,6 +106,7 @@ const App = () => (
     </QueryClientProvider>
     </AuthProvider>
   </LanguageProvider>
+  </HelmetProvider>
 );
 
 export default App;
