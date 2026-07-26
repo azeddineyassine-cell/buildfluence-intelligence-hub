@@ -1,9 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 import Navbar from "@/components/Navbar";
 import CTAFooter from "@/components/CTAFooter";
+import SEO from "@/components/SEO";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { useLanguage } from "@/contexts/LanguageContext";
+
 
 const DeepDueDiligence = () => {
   const iframeRef = useRef<HTMLIFrameElement>(null);
