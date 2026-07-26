@@ -1617,8 +1617,17 @@ const SoftPowerInfluence = () => {
 
 
   return (
+    <>
+      <SEO
+        titleFr="Soft Power & Influence · Rayonnement institutionnel"
+        titleEn="Soft Power and Influence · Institutional Reach"
+        descriptionFr={"Construire le rayonnement institutionnel : stratégies d'influence, cartographie des relais et pilotage de la perception à l'international."}
+        descriptionEn="Building institutional reach: influence strategies, mapping of relays and international perception management for states and institutions."
+        path="/solutions/soft-power-influence"
+      />
     <div className="min-h-screen" style={{ background: "#FAF6ED" }}>
       <Navbar />
+
       <main className="pt-24">
         <section className="sp-section">
           <div className="sp-container">
