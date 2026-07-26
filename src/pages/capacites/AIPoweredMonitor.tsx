@@ -4,6 +4,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import StrategicOrbitDiagram from "@/components/StrategicOrbitDiagram";
 import TimelineEmbed from "@/components/TimelineEmbed";
 import { FormCustom } from "@/components/FormCustom";
+import SEO from "@/components/SEO";
 import { motion } from "framer-motion";
 
 const FlipCard = ({ front, back }: { front: React.ReactNode; back: React.ReactNode }) => {

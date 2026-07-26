@@ -1,6 +1,7 @@
 import { useState } from "react";
 import DetailPageLayout from "@/components/DetailPageLayout";
 import { FormCustom } from "@/components/FormCustom";
+import SEO from "@/components/SEO";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const StrategicWorkflow = () => {

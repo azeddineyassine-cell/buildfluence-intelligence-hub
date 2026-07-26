@@ -4,6 +4,7 @@ import CTAFooter from "@/components/CTAFooter";
 import { FormCustom } from "@/components/FormCustom";
 import { motion } from "framer-motion";
 import { useLanguage } from "@/contexts/LanguageContext";
+import SEO from "@/components/SEO";
 import logoFondBlanc from "@/assets/logo-buildfluence-fond-blanc.png";
 
 const SEG_COLORS = ["#1B3E6A", "#1e4878", "#1B3E6A", "#1e4878", "#1B3E6A", "#1e4878"];

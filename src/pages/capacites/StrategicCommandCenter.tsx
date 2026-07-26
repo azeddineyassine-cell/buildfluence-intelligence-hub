@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import DetailPageLayout from "@/components/DetailPageLayout";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { FormCustom } from "@/components/FormCustom";
+import SEO from "@/components/SEO";
 import { motion, AnimatePresence } from "framer-motion";
 
 /* ====================================================================
