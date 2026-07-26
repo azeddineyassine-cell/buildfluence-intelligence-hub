@@ -1732,7 +1732,9 @@ const SoftPowerInfluence = () => {
         }
       `}</style>
     </div>
+    </>
   );
+
 };
 
 export default SoftPowerInfluence;
