@@ -1,6 +1,7 @@
 import { useLanguage } from "@/contexts/LanguageContext";
 import Navbar from "@/components/Navbar";
 import CTAFooter from "@/components/CTAFooter";
+import SEO from "@/components/SEO";
 
 const PolitiqueConfidentialite = () => {
   const { t } = useLanguage();
