@@ -213,6 +213,14 @@ export default function SituationsCritiques() {
   const nav = (d: number) => sel !== null && setSel((sel + d + 8) % 8);
 
   return (
+  <>
+    <SEO
+      titleFr="Les 8 situations critiques du décideur"
+      titleEn="8 Critical Situations Facing Decision-Makers"
+      descriptionFr="Les menaces que vous ne voyez pas sont les plus destructrices. Huit situations critiques où Buildfluence change l'issue. Identifiez la vôtre."
+      descriptionEn="The threats you cannot see are the most destructive. Eight critical situations where Buildfluence changes the outcome. Identify yours."
+      path="/situations-critiques"
+    />
     <div style={{ background: "#F4F1EA", minHeight: "100vh", fontFamily: "DM Sans,sans-serif" }}>
       <Navbar />
       <div style={{ textAlign: "center", padding: "96px 24px 0", background: "#F4F1EA" }}>
@@ -383,5 +391,6 @@ export default function SituationsCritiques() {
       </div>
       <FormDiagnostic open={diagOpen} onClose={() => setDiagOpen(false)} situation={cur ? cur.title : ""} />
     </div>
+  </>
   );
 }

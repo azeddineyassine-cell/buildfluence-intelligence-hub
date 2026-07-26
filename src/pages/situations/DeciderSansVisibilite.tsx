@@ -8,6 +8,14 @@ import SEO from "@/components/SEO";
 const DeciderSansVisibilite = () => {
   const { t } = useLanguage();
   return (
+  <>
+    <SEO
+      titleFr="Décider sans visibilité"
+      titleEn="Deciding Without Visibility"
+      descriptionFr="Le manque d'information fiable transforme chaque décision stratégique en pari hasardeux. Buildfluence restaure la visibilité avant l'engagement."
+      descriptionEn="Lack of reliable information turns every strategic decision into a hazardous gamble. Buildfluence restores visibility before you commit."
+      path="/situations/decider-sans-visibilite"
+    />
     <DetailPageLayout
       title={t("Décider sans visibilité", "Deciding without visibility")}
       chapeau={t("Manque d'information fiable transformant chaque décision stratégique en pari hasardeux", "Lack of reliable information turning every strategic decision into a hazardous gamble")}
@@ -67,6 +75,7 @@ const DeciderSansVisibilite = () => {
         <Link to="/solutions/strategic-intelligence-lab" className="mt-2 inline-block font-semibold text-primary hover:underline">Strategic Foresight Lab</Link>
       </DetailBlock>
     </DetailPageLayout>
+  </>
   );
 };
 

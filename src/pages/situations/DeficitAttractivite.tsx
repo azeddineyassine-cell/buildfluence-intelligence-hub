@@ -7,6 +7,14 @@ import SEO from "@/components/SEO";
 const DeficitAttractivite = () => {
   const { t } = useLanguage();
   return (
+  <>
+    <SEO
+      titleFr="Perdre la bataille de l'attractivité"
+      titleEn="Losing the Battle for Attractiveness"
+      descriptionFr="Avoir des atouts sans rayonnement, c'est laisser les autres capter la valeur à votre place. Transformez vos atouts en attractivité mesurable."
+      descriptionEn="Having assets without influence means letting others capture value in your place. Turn your assets into measurable investment attractiveness."
+      path="/situations/deficit-attractivite"
+    />
     <DetailPageLayout
       title={t("Perdre la bataille de l'attractivité", "Losing the battle for attractiveness")}
       chapeau={t("Avoir des atouts sans rayonnement, c'est laisser les autres capter la valeur à votre place.", "Having assets without influence means letting others capture value in your place.")}
@@ -55,6 +63,7 @@ const DeficitAttractivite = () => {
         <Link to="/solutions/soft-power-influence" className="mt-2 inline-block font-semibold text-primary hover:underline">Territorial Influence Lab</Link>
       </DetailBlock>
     </DetailPageLayout>
+  </>
   );
 };
 
