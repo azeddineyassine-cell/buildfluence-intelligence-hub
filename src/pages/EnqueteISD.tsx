@@ -602,6 +602,14 @@ const EnqueteISD = () => {
   };
 
   return (
+    <>
+      <SEO
+        titleFr="Enquête ISD · Souveraineté décisionnelle au Maroc"
+        titleEn="ISD Survey · Decision Sovereignty in Morocco"
+        descriptionFr={"Étude nationale sur l'état de la maturité en souveraineté décisionnelle au Maroc. Autodiagnostic individuel et livre blanc agrégé."}
+        descriptionEn="National study on the state of decision sovereignty maturity in Morocco. Individual self-assessment and aggregated white paper."
+        path="/insights-resources/enquete-isd"
+      />
     <div style={{ background: CREAM, minHeight: "100vh" }}>
       <Navbar />
       <main style={{ paddingTop: 100, paddingBottom: 64 }}>
