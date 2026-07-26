@@ -2,7 +2,9 @@ import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate, useLocation } from "react-router-dom";
 import DetailPageLayout from "@/components/DetailPageLayout";
+import SEO from "@/components/SEO";
 import { useLanguage } from "@/contexts/LanguageContext";
+
 
 import ConstructionInfluence from "@/components/ConstructionInfluence";
 
