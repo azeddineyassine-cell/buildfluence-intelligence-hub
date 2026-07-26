@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { useToast } from "@/hooks/use-toast";
 import { Lock } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import SEO from "@/components/SEO";
 import { supabase } from "@/integrations/supabase/client";
 
 const SUPABASE_FUNCTIONS_URL = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/send-email`;
@@ -97,6 +98,14 @@ const Contact = () => {
   };
 
   return (
+    <>
+      <SEO
+        titleFr="Réserver un échange stratégique · Buildfluence"
+        titleEn="Book a Strategic Exchange · Buildfluence"
+        descriptionFr={"Échangez avec un analyste senior Buildfluence sur votre situation. Réponse sous 48 heures ouvrées, sous couvert de confidentialité."}
+        descriptionEn="Talk to a Buildfluence senior analyst about your situation. Response within 48 business hours, under strict confidentiality."
+        path="/contact"
+      />
     <div className="min-h-screen bg-background">
       <Navbar />
       <section className="pt-32 pb-28">
@@ -180,6 +189,7 @@ const Contact = () => {
       </section>
       <CTAFooter />
     </div>
+    </>
   );
 };
 

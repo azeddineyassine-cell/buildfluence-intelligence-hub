@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import logoBuildfluence from "@/assets/Logo_Buildfluence.png";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useAuth } from "@/hooks/useAuth";
+import SEO from "@/components/SEO";
 
 type DashboardCard = {
   eyebrow: string;
@@ -67,6 +68,15 @@ const AccesPremiumDashboard = () => {
   ];
 
   return (
+    <>
+      <SEO
+        titleFr="Tableau de bord · Accès Premium Buildfluence"
+        titleEn="Dashboard · Buildfluence Premium Access"
+        descriptionFr="Tableau de bord client Buildfluence. Page réservée, non indexée."
+        descriptionEn="Buildfluence client dashboard. Restricted page, not indexed."
+        path="/acces-premium/dashboard"
+        noindex
+      />
     <div className="min-h-screen" style={{ background: "#FFFFFF" }}>
       <header
         className="flex items-center justify-between px-8 py-6 border-b"
@@ -170,6 +180,7 @@ const AccesPremiumDashboard = () => {
         </div>
       </main>
     </div>
+    </>
   );
 };
 

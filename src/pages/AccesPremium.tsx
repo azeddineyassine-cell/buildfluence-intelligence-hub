@@ -7,6 +7,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import AccesPremiumRequestModal from "@/components/AccesPremiumRequestModal";
+import SEO from "@/components/SEO";
 
 const AccesPremium = () => {
   const { t } = useLanguage();
@@ -54,6 +55,14 @@ const AccesPremium = () => {
   };
 
   return (
+    <>
+      <SEO
+        titleFr="Accès Premium · Espace client institutionnel"
+        titleEn="Premium Access · Institutional Client Area"
+        descriptionFr={"Espace client institutionnel Buildfluence. Accès aux livrables, tableaux de bord et ressources réservés aux clients sous mandat."}
+        descriptionEn="Buildfluence institutional client area. Access to deliverables, dashboards and resources reserved for clients under mandate."
+        path="/acces-premium"
+      />
     <div className="min-h-screen flex flex-col items-center justify-center px-6 py-12" style={{ background: "#FFFFFF" }}>
       <a href="/" className="mb-10 flex items-center gap-3">
         <img src={logoBuildfluence} alt="Buildfluence" className="h-12 w-auto" />
@@ -128,6 +137,7 @@ const AccesPremium = () => {
         onLoginClick={() => setModalOpen(false)}
       />
     </div>
+    </>
   );
 };
 
