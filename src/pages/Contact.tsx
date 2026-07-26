@@ -98,6 +98,14 @@ const Contact = () => {
   };
 
   return (
+    <>
+      <SEO
+        titleFr="Réserver un échange stratégique · Buildfluence"
+        titleEn="Book a Strategic Exchange · Buildfluence"
+        descriptionFr={"Échangez avec un analyste senior Buildfluence sur votre situation. Réponse sous 48 heures ouvrées, sous couvert de confidentialité."}
+        descriptionEn="Talk to a Buildfluence senior analyst about your situation. Response within 48 business hours, under strict confidentiality."
+        path="/contact"
+      />
     <div className="min-h-screen bg-background">
       <Navbar />
       <section className="pt-32 pb-28">
