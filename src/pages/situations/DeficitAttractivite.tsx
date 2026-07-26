@@ -2,6 +2,7 @@ import DetailPageLayout, { DetailBlock, DetailList } from "@/components/DetailPa
 import StickyClientCase from "@/components/StickyClientCase";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Link } from "react-router-dom";
+import SEO from "@/components/SEO";
 
 const DeficitAttractivite = () => {
   const { t } = useLanguage();

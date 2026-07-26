@@ -3,6 +3,7 @@ import StickyClientCase from "@/components/StickyClientCase";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Link } from "react-router-dom";
 import presidenceSenegalLogo from "@/assets/clients/presidence-senegal.jpg";
+import SEO from "@/components/SEO";
 
 const DeciderSansVisibilite = () => {
   const { t } = useLanguage();

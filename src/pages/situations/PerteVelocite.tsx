@@ -3,6 +3,7 @@ import StickyClientCase from "@/components/StickyClientCase";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Link } from "react-router-dom";
 import ocpLogo from "@/assets/clients/ocp.png";
+import SEO from "@/components/SEO";
 
 const PerteVelocite = () => {
   const { t } = useLanguage();

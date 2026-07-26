@@ -3,6 +3,7 @@ import StickyClientCase from "@/components/StickyClientCase";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Link } from "react-router-dom";
 import ministereSanteLogo from "@/assets/clients/ministere-sante.jpg";
+import SEO from "@/components/SEO";
 
 const CrisesNonMaitrisees = () => {
   const { t } = useLanguage();

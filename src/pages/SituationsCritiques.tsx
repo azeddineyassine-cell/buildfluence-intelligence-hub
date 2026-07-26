@@ -9,6 +9,7 @@ import ocpLogo from "@/assets/clients/ocp.png";
 import cidcLogo from "@/assets/clients/cidc.jpg";
 import addLogo from "@/assets/clients/add.png";
 import rajaLogo from "@/assets/clients/raja-club-athletic.jpg";
+import SEO from "@/components/SEO";
 
 const POS: Record<string, { x: number; y: number }> = {
   top: { x: 280, y: 132 }, topRight: { x: 385, y: 175 }, right: { x: 428, y: 280 },
