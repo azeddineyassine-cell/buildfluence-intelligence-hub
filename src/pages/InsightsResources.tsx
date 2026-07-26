@@ -571,6 +571,7 @@ const InsightsResources = () => {
       <CTAFooter />
       <FormStrategicExchange open={formOpen} onClose={() => setFormOpen(false)} />
     </div>
+    </>
   );
 };
 
