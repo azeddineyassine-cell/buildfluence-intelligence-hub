@@ -4,6 +4,7 @@ import CTAFooter from "@/components/CTAFooter";
 import { FormCustom } from "@/components/FormCustom";
 import { motion } from "framer-motion";
 import { useLanguage } from "@/contexts/LanguageContext";
+import SEO from "@/components/SEO";
 import logoFondBlanc from "@/assets/logo-buildfluence-fond-blanc.png";
 
 const SEG_COLORS = ["#1B3E6A", "#1e4878", "#1B3E6A", "#1e4878", "#1B3E6A", "#1e4878"];
@@ -100,6 +101,14 @@ const CompetitiveVelocityEngine = () => {
   const CX = 250, CY = 250, R_INNER = 85, R_OUTER = 220;
 
   return (
+    <>
+      <SEO
+        titleFr="Competitive Velocity Engine · Avantage décisionnel"
+        titleEn="Competitive Velocity Engine · Decision Advantage"
+        descriptionFr="Décision, géopolitique, market intelligence : le moteur qui convertit vos signaux de marché en vitesse d'exécution face à la concurrence."
+        descriptionEn="Decision, geopolitics and market intelligence: the engine converting market signals into execution speed against your competitors."
+        path="/capacites/competitive-velocity-engine"
+      />
     <div style={{ fontFamily: "'Inter', sans-serif", background: "#F0F7FF", color: "#0D1B2A", minHeight: "100vh", overflowX: "hidden" }}>
       <Navbar />
 
@@ -310,6 +319,7 @@ const CompetitiveVelocityEngine = () => {
         ]}
       />
     </div>
+    </>
   );
 };
 

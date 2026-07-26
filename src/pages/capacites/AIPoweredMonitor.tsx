@@ -4,6 +4,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import StrategicOrbitDiagram from "@/components/StrategicOrbitDiagram";
 import TimelineEmbed from "@/components/TimelineEmbed";
 import { FormCustom } from "@/components/FormCustom";
+import SEO from "@/components/SEO";
 import { motion } from "framer-motion";
 
 const FlipCard = ({ front, back }: { front: React.ReactNode; back: React.ReactNode }) => {
@@ -83,6 +84,14 @@ const AIPoweredMonitor = () => {
   ];
 
   return (
+    <>
+      <SEO
+        titleFr="AI Powered Monitor · Veille augmentée par l'IA"
+        titleEn="AI Powered Monitor · AI-Augmented Monitoring"
+        descriptionFr={"L'IA qui transforme le bruit en signal décisionnel. Veille multicanale sur le web, les brevets, les publications scientifiques et la presse."}
+        descriptionEn="AI that transforms noise into decision signals. Multi-channel monitoring across web, patents, scientific publications and press aggregators."
+        path="/capacites/ai-powered-monitor"
+      />
     <DetailPageLayout
       title={t("Des plateformes de pouvoir décisionnel", "Decision-making power platforms")}
       titleClassName="text-center"
@@ -160,6 +169,7 @@ const AIPoweredMonitor = () => {
         ]}
       />
     </DetailPageLayout>
+    </>
   );
 };
 

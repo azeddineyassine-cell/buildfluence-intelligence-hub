@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import DetailPageLayout from "@/components/DetailPageLayout";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { FormCustom } from "@/components/FormCustom";
+import SEO from "@/components/SEO";
 import { motion, AnimatePresence } from "framer-motion";
 
 /* ====================================================================
@@ -1135,6 +1136,14 @@ const StrategicCommandCenter = () => {
   ];
 
   return (
+    <>
+      <SEO
+        titleFr="Strategic Command Center · De la donnée à la décision"
+        titleEn="Strategic Command Center · From Data to Decision"
+        descriptionFr="De la donnée brute à la décision stratégique. Vue temps réel sur vos sujets critiques, consolidée dans un centre de commandement unique."
+        descriptionEn="From raw data to strategic decision. Real-time view of your critical topics, consolidated in a single institutional command centre."
+        path="/capacites/strategic-command-center"
+      />
     <div className="[&>div]:!bg-[#F5F3E9]" style={{ background: "#F5F3E9", width: "100%", minHeight: "100vh" }}>
       <DetailPageLayout
         title={t("Strategic Command Center", "Strategic Command Center")}
@@ -1299,6 +1308,7 @@ const StrategicCommandCenter = () => {
         />
       </DetailPageLayout>
     </div>
+    </>
   );
 };
 
