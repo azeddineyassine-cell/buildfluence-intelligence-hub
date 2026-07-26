@@ -4,6 +4,7 @@ import Navbar from "@/components/Navbar";
 import CTAFooter from "@/components/CTAFooter";
 import TestimonialsSection from "@/components/TestimonialsSection";
 import { useLanguage } from "@/contexts/LanguageContext";
+import SEO from "@/components/SEO";
 
 // === Palette ===
 const C = {
@@ -202,7 +203,15 @@ const PourquoiBuildfluence = () => {
   const activePoleData = polesData.find((p) => p.id === activePole);
 
   return (
-    <div style={{ background: C.navy, minHeight: "100vh" }}>
+    <>
+      <SEO
+        titleFr="Pourquoi Buildfluence · Une génération hybride"
+        titleEn="Why Buildfluence · A New Hybrid Generation"
+        descriptionFr="Ce n'est pas un cabinet, c'est une nouvelle génération hybride : intelligence stratégique, influence et technologie propriétaire réunies."
+        descriptionEn="This is not a consultancy. It is a new hybrid generation combining strategic intelligence, influence and proprietary technology."
+        path="/pourquoi-buildfluence"
+      />
+      <div style={{ background: C.navy, minHeight: "100vh" }}>
       <Navbar />
       <PageStyles />
 
@@ -894,6 +903,7 @@ const PourquoiBuildfluence = () => {
 
       <CTAFooter />
     </div>
+    </>
   );
 };
 
