@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import SEO from "@/components/SEO";
+
 import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import Navbar from "@/components/Navbar";
@@ -1611,20 +1613,21 @@ const SoftPowerInfluence = () => {
   const open: OpenDetail = (d) => setDetail(d);
   const close = () => setDetail(null);
 
-  useEffect(() => {
-    document.title = lang === "fr"
-      ? "Soft Power & Influence — Buildfluence"
-      : "Soft Power & Influence — Buildfluence";
-    const meta = document.querySelector('meta[name="description"]');
-    const desc = lang === "fr"
-      ? "Pilier II — Capter, transformer, influencer. Mécanisme propriétaire de rayonnement et d'attractivité Buildfluence."
-      : "Pillar II — Capture, transform, influence. Buildfluence's proprietary reach and attractiveness mechanism.";
-    if (meta) meta.setAttribute("content", desc);
-  }, [lang]);
+
+
 
   return (
+    <>
+      <SEO
+        titleFr="Soft Power & Influence · Rayonnement institutionnel"
+        titleEn="Soft Power and Influence · Institutional Reach"
+        descriptionFr={"Construire le rayonnement institutionnel : stratégies d'influence, cartographie des relais et pilotage de la perception à l'international."}
+        descriptionEn="Building institutional reach: influence strategies, mapping of relays and international perception management for states and institutions."
+        path="/solutions/soft-power-influence"
+      />
     <div className="min-h-screen" style={{ background: "#FAF6ED" }}>
       <Navbar />
+
       <main className="pt-24">
         <section className="sp-section">
           <div className="sp-container">
@@ -1729,7 +1732,9 @@ const SoftPowerInfluence = () => {
         }
       `}</style>
     </div>
+    </>
   );
+
 };
 
 export default SoftPowerInfluence;

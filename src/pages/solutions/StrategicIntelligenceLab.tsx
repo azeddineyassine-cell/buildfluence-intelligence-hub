@@ -2,7 +2,9 @@ import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate, useLocation } from "react-router-dom";
 import DetailPageLayout from "@/components/DetailPageLayout";
+import SEO from "@/components/SEO";
 import { useLanguage } from "@/contexts/LanguageContext";
+
 
 import ConstructionInfluence from "@/components/ConstructionInfluence";
 
@@ -2302,7 +2304,16 @@ const StrategicIntelligenceLab = () => {
   }, [location.hash]);
 
   return (
+    <>
+      <SEO
+        titleFr="Strategic Intelligence Lab · Veille et cartographie"
+        titleEn="Strategic Intelligence Lab · Monitoring and Mapping"
+        descriptionFr={"Cartographier le champ de bataille avant d'y entrer. De la veille continue au mode crise, trois niveaux d'intelligence stratégique opérationnelle."}
+        descriptionEn="Map the battlefield before entering it. From continuous monitoring to crisis mode, three levels of operational strategic intelligence."
+        path="/solutions/strategic-intelligence-lab"
+      />
     <DetailPageLayout
+
       title="Strategic Intelligence Lab"
       topBand={
         <div
@@ -2438,7 +2449,9 @@ const StrategicIntelligenceLab = () => {
       {/* SECTION 03 */}
       <ModelisationsSection />
     </DetailPageLayout>
+    </>
   );
+
 };
 
 export default StrategicIntelligenceLab;

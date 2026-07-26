@@ -1,9 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 import Navbar from "@/components/Navbar";
 import CTAFooter from "@/components/CTAFooter";
+import SEO from "@/components/SEO";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { useLanguage } from "@/contexts/LanguageContext";
+
 
 const DeepDueDiligence = () => {
   const iframeRef = useRef<HTMLIFrameElement>(null);
@@ -14,20 +16,8 @@ const DeepDueDiligence = () => {
   const [submitted, setSubmitted] = useState(false);
   const [formOpen, setFormOpen] = useState(false);
 
-  useEffect(() => {
-    document.title = "Deep Due Diligence Buildfluence";
-    const metaDesc = document.querySelector('meta[name="description"]');
-    const desc =
-      "Le risque n'est jamais visible. Il se loge dans l'angle mort. Investigation stratégique trois niveaux pour sécuriser vos engagements.";
-    if (metaDesc) {
-      metaDesc.setAttribute("content", desc);
-    } else {
-      const m = document.createElement("meta");
-      m.name = "description";
-      m.content = desc;
-      document.head.appendChild(m);
-    }
-  }, []);
+
+
 
   // Intercept clicks within the iframe to support hash navigation to outer form + level anchors
   const handleIframeLoad = () => {
@@ -165,8 +155,17 @@ const DeepDueDiligence = () => {
   };
 
   return (
+    <>
+      <SEO
+        titleFr="Deep Due Diligence · Investigation stratégique"
+        titleEn="Deep Due Diligence · Strategic Investigation"
+        descriptionFr={"Le risque n'est jamais visible, il se loge dans l'angle mort. Investigation stratégique en trois niveaux pour sécuriser vos engagements."}
+        descriptionEn="Risk is never visible. It sits in the blind spot. Three-level strategic investigation to secure your commitments and partnerships."
+        path="/solutions/deep-due-diligence"
+      />
     <div className="min-h-screen" style={{ background: "#FAF6ED" }}>
       <Navbar />
+
       <main style={{ paddingTop: 80 }}>
         <iframe
           ref={iframeRef}
@@ -393,7 +392,9 @@ const DeepDueDiligence = () => {
       </main>
       <CTAFooter />
     </div>
+    </>
   );
+
 };
 
 export default DeepDueDiligence;
