@@ -124,6 +124,7 @@ const PolitiqueConfidentialite = () => {
       </main>
       <CTAFooter />
     </div>
+    </>
   );
 };
 
