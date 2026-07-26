@@ -903,6 +903,7 @@ const PourquoiBuildfluence = () => {
 
       <CTAFooter />
     </div>
+    </>
   );
 };
 
@@ -1291,7 +1292,6 @@ const PageStyles = () => (
       section { padding-left: 0; padding-right: 0; }
     }
   `}</style>
-    </>
-  );
+);
 
 export default PourquoiBuildfluence;
