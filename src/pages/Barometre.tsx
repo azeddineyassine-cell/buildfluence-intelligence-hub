@@ -18,6 +18,13 @@ const Barometre = () => {
 
   return (
     <>
+      <SEO
+        titleFr="Baromètre d'investissement · Buildfluence"
+        titleEn="Investment Barometer · Buildfluence"
+        descriptionFr={"Baromètre Buildfluence de l'attractivité et des flux d'investissement. Lecture chiffrée des dynamiques de marché pour les décideurs."}
+        descriptionEn="Buildfluence barometer of investment attractiveness and flows. A data-driven read of market dynamics for institutional decision-makers."
+        path="/barometre"
+      />
       <iframe
         src={src}
         style={{
