@@ -1,13 +1,22 @@
 import DetailPageLayout, { DetailBlock, DetailList } from "@/components/DetailPageLayout";
 import StickyClientCase from "@/components/StickyClientCase";
 import { useLanguage } from "@/contexts/LanguageContext";
+import SEO from "@/components/SEO";
 import { Link } from "react-router-dom";
 import rajaLogo from "@/assets/clients/raja-club-athletic.jpg";
 
 const GouvernerSousPression = () => {
   const { t } = useLanguage();
   return (
-    <DetailPageLayout
+    <>
+      <SEO
+        titleFr="Gouverner sous pression médiatique"
+        titleEn="Governing Under Media Pressure"
+        descriptionFr="Dans un environnement sur-exposé, ne laissez pas l'émotion dicter vos décisions. Pilotage institutionnel sous pression médiatique et émotionnelle."
+        descriptionEn="In an over-exposed environment, don't let emotion dictate your decisions. Institutional steering under media and emotional pressure."
+        path="/situations/gouverner-sous-pression"
+      />
+      <DetailPageLayout
       title={t("Gouverner sous pression médiatique et émotionnelle", "Governing under media and emotional pressure")}
       chapeau={t("Dans un environnement sur-exposé, ne laissez pas l'émotion dicter vos décisions", "In an over-exposed environment, don't let emotion dictate your decisions")}
       prevSituation={{ label: "Investir sous risque", path: "/situations/investir-sous-risque" }}
@@ -84,6 +93,7 @@ const GouvernerSousPression = () => {
         </p>
       </div>
     </DetailPageLayout>
+    </>
   );
 };
 

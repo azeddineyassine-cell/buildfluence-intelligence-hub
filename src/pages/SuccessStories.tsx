@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import CTAFooter from "@/components/CTAFooter";
 import { useLanguage } from "@/contexts/LanguageContext";
+import SEO from "@/components/SEO";
 import logoCentraleDanone from "@/assets/clients/centrale-danone.jpg";
 import logoCidc from "@/assets/clients/cidc.jpg";
 import logoMinistereSante from "@/assets/clients/ministere-sante.jpg";
@@ -984,7 +985,15 @@ const SuccessStoriesPage = () => {
     (secteur === "all" || s.secteur === secteur);
 
   return (
-    <div className="ss-page" style={{ minHeight: "100vh" }}>
+    <>
+      <SEO
+        titleFr="Success Stories · Là où l'intelligence change l'issue"
+        titleEn="Success Stories · Where Intelligence Changes Outcomes"
+        descriptionFr="Missions livrées pour des gouvernements, institutions internationales et grands comptes. Gestion de crise, désinformation, due diligence."
+        descriptionEn="Missions delivered for governments, international institutions and large corporates. Crisis management, disinformation and due diligence."
+        path="/success-stories"
+      />
+      <div className="ss-page" style={{ minHeight: "100vh" }}>
       <style>{SuccessStoriesCSS}</style>
       <Navbar />
 
@@ -1227,6 +1236,7 @@ const SuccessStoriesPage = () => {
 
       <CTAFooter />
     </div>
+    </>
   );
 };
 

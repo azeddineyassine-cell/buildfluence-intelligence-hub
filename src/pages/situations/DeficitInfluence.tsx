@@ -1,6 +1,7 @@
 import DetailPageLayout, { DetailBlock, DetailList } from "@/components/DetailPageLayout";
 import StickyClientCase from "@/components/StickyClientCase";
 import { useLanguage } from "@/contexts/LanguageContext";
+import SEO from "@/components/SEO";
 import { Link } from "react-router-dom";
 import cidcLogo from "@/assets/clients/cidc.jpg";
 import addLogo from "@/assets/clients/add.png";
@@ -8,7 +9,15 @@ import addLogo from "@/assets/clients/add.png";
 const DeficitInfluence = () => {
   const { t } = useLanguage();
   return (
-    <DetailPageLayout
+    <>
+      <SEO
+        titleFr="Déficit d'influence institutionnel"
+        titleEn="Institutional Influence Deficit"
+        descriptionFr="Quand certains écrivent l'histoire, d'autres la subissent. Stratégies d'influence institutionnelle pour gouvernements et organisations internationales."
+        descriptionEn="When some write history, others endure it. Institutional influence strategies for governments and international organisations."
+        path="/situations/deficit-influence"
+      />
+      <DetailPageLayout
       title={t("Déficit d'influence institutionnel", "Institutional influence deficit")}
       chapeau={t("Quand certains écrivent l'histoire, d'autres la subissent.", "When some write history, others endure it.")}
       prevSituation={{ label: "Perte de vélocité", path: "/situations/perte-velocite" }}
@@ -82,6 +91,7 @@ const DeficitInfluence = () => {
         <Link to="/solutions/soft-power-influence" className="mt-2 inline-block font-semibold text-primary hover:underline">Political Intelligence</Link>
       </DetailBlock>
     </DetailPageLayout>
+    </>
   );
 };
 

@@ -1,12 +1,21 @@
 import DetailPageLayout, { DetailBlock, DetailList } from "@/components/DetailPageLayout";
 import StickyClientCase from "@/components/StickyClientCase";
 import { useLanguage } from "@/contexts/LanguageContext";
+import SEO from "@/components/SEO";
 import { Link } from "react-router-dom";
 
 const InvestirSousRisque = () => {
   const { t } = useLanguage();
   return (
-    <DetailPageLayout
+    <>
+      <SEO
+        titleFr="Investir sous risque invisible · Due diligence"
+        titleEn="Investing Under Invisible Risk · Due Diligence"
+        descriptionFr="Miser sans connaissance profonde, chaque investissement devient une loterie. Due diligence approfondie pour sécuriser vos engagements financiers."
+        descriptionEn="Betting without deep knowledge turns every investment into a lottery. Deep due diligence to secure your financial commitments and deals."
+        path="/situations/investir-sous-risque"
+      />
+      <DetailPageLayout
       title={t("Investir sous risque invisible", "Investing under invisible risk")}
       chapeau={t("Miser sans connaissance profonde : chaque investissement devient une loterie", "Betting without deep knowledge: every investment becomes a lottery")}
       prevSituation={{ label: "Déficit d'influence", path: "/situations/deficit-influence" }}
@@ -72,6 +81,7 @@ const InvestirSousRisque = () => {
         </div>
       </DetailBlock>
     </DetailPageLayout>
+    </>
   );
 };
 
