@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import logoBuildfluence from "@/assets/Logo_Buildfluence.png";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useAuth } from "@/hooks/useAuth";
+import SEO from "@/components/SEO";
 
 type DashboardCard = {
   eyebrow: string;
