@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import SEO from "@/components/SEO";
+
 import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import Navbar from "@/components/Navbar";
