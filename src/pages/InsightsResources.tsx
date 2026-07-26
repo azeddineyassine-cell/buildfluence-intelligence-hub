@@ -3,6 +3,7 @@ import Navbar from "@/components/Navbar";
 import CTAFooter from "@/components/CTAFooter";
 import { FormStrategicExchange } from "@/components/FormModals";
 import { useLanguage } from "@/contexts/LanguageContext";
+import SEO from "@/components/SEO";
 import { supabase } from "@/integrations/supabase/client";
 import barometreCover from "@/assets/barometre-cover.webp";
 import barometreEnR from "@/assets/barometre-enr.webp";
