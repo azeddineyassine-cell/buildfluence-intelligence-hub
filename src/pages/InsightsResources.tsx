@@ -175,6 +175,14 @@ const InsightsResources = () => {
   };
 
   return (
+    <>
+      <SEO
+        titleFr="Insights & Resources · Analyses et benchmarks"
+        titleEn="Insights and Resources · Analysis and Benchmarks"
+        descriptionFr={"Analyses, baromètres, livres blancs et benchmarks sur la gestion de crise, l'influence et l'attractivité des investissements."}
+        descriptionEn="Analysis, barometers, white papers and benchmarks on crisis management, influence and investment attractiveness worldwide."
+        path="/insights-resources"
+      />
     <div className="ir-page">
       <Navbar />
       <style>{`
