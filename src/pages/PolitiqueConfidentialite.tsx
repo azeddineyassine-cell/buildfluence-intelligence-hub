@@ -73,6 +73,15 @@ const PolitiqueConfidentialite = () => {
   ];
 
   return (
+    <>
+      <SEO
+        titleFr="Politique de confidentialité · Buildfluence"
+        titleEn="Privacy Policy · Buildfluence"
+        descriptionFr="Politique de confidentialité de Buildfluence et traitement des données personnelles."
+        descriptionEn="Buildfluence privacy policy and personal data processing information."
+        path="/politique-de-confidentialite"
+        noindex
+      />
     <div className="min-h-screen" style={{ background: "hsl(var(--cream))" }}>
       <Navbar />
       <main className="pt-32 pb-24 px-6">
