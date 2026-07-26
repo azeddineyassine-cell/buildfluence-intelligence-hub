@@ -1611,16 +1611,8 @@ const SoftPowerInfluence = () => {
   const open: OpenDetail = (d) => setDetail(d);
   const close = () => setDetail(null);
 
-  useEffect(() => {
-    document.title = lang === "fr"
-      ? "Soft Power & Influence — Buildfluence"
-      : "Soft Power & Influence — Buildfluence";
-    const meta = document.querySelector('meta[name="description"]');
-    const desc = lang === "fr"
-      ? "Pilier II — Capter, transformer, influencer. Mécanisme propriétaire de rayonnement et d'attractivité Buildfluence."
-      : "Pillar II — Capture, transform, influence. Buildfluence's proprietary reach and attractiveness mechanism.";
-    if (meta) meta.setAttribute("content", desc);
-  }, [lang]);
+
+
 
   return (
     <div className="min-h-screen" style={{ background: "#FAF6ED" }}>
