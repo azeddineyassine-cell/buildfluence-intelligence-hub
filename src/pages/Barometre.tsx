@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { FormStrategicExchange } from "@/components/FormModals";
 import { useLanguage } from "@/contexts/LanguageContext";
+import SEO from "@/components/SEO";
 
 const Barometre = () => {
   const { lang } = useLanguage();
