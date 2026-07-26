@@ -392,7 +392,9 @@ const DeepDueDiligence = () => {
       </main>
       <CTAFooter />
     </div>
+    </>
   );
+
 };
 
 export default DeepDueDiligence;
