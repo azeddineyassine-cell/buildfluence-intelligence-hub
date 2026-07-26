@@ -201,6 +201,14 @@ const StrategicWorkflow = () => {
   const [f1Open, setF1Open] = useState(false);
 
   return (
+    <>
+      <SEO
+        titleFr="Strategic Workflow · Méthode en phases"
+        titleEn="Strategic Workflow · Phased Method"
+        descriptionFr={"De l'évaluation des besoins au déploiement opérationnel : la méthode Buildfluence en phases, avec preuve de valeur en moins d'une semaine."}
+        descriptionEn="From needs assessment to operational deployment: the Buildfluence phased method, with proof of value delivered in under one week."
+        path="/capacites/strategic-workflow"
+      />
     <DetailPageLayout title="" chapeau="">
       <div style={{ background: "#F0F7FF", minHeight: "100vh", fontFamily: "'Inter', sans-serif", color: "#0D1B2A", width: "100vw", position: "relative", left: "calc(-50vw + 50%)", marginLeft: 0, marginRight: 0 }}>
         {/* HERO */}
@@ -612,6 +620,7 @@ const StrategicWorkflow = () => {
         ]}
       />
     </DetailPageLayout>
+    </>
   );
 };
 
