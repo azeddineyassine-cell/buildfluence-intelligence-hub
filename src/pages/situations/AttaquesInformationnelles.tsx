@@ -3,10 +3,19 @@ import StickyClientCase from "@/components/StickyClientCase";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Link } from "react-router-dom";
 import centraleDanoneLogo from "@/assets/clients/centrale-danone.jpg";
+import SEO from "@/components/SEO";
 
 const AttaquesInformationnelles = () => {
   const { t } = useLanguage();
   return (
+  <>
+    <SEO
+      titleFr="Subir des attaques informationnelles"
+      titleEn="Countering Information Attacks and Disinformation"
+      descriptionFr="Manipulations et désinformation altèrent la perception de la réalité et sabotent vos décisions stratégiques. Détectez, qualifiez, neutralisez."
+      descriptionEn="Manipulation and disinformation distort perception and sabotage strategic decisions. Detect, qualify and neutralise information attacks."
+      path="/situations/attaques-informationnelles"
+    />
     <DetailPageLayout
       title={t("Subir des attaques informationnelles", "Suffering information attacks")}
       chapeau={t("Vulnérabilité aux manipulations et désinformations qui altèrent la perception de la réalité et sabotent les décisions stratégiques", "Vulnerability to manipulations and disinformation that alter the perception of reality and sabotage strategic decisions")}
@@ -61,6 +70,7 @@ const AttaquesInformationnelles = () => {
         <Link to="/solutions/strategic-intelligence-lab" className="mt-2 inline-block font-semibold text-primary hover:underline">Threat Intelligence</Link>
       </DetailBlock>
     </DetailPageLayout>
+  </>
   );
 };
 

@@ -3,10 +3,19 @@ import StickyClientCase from "@/components/StickyClientCase";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Link } from "react-router-dom";
 import ocpLogo from "@/assets/clients/ocp.png";
+import SEO from "@/components/SEO";
 
 const PerteVelocite = () => {
   const { t } = useLanguage();
   return (
+  <>
+    <SEO
+      titleFr="Perdre en vélocité face aux concurrents"
+      titleEn="Losing Velocity Against Competitors"
+      descriptionFr="Naviguer sans radar pendant que d'autres tracent leur route grâce aux signaux du marché. Reprenez l'avantage informationnel sur vos concurrents."
+      descriptionEn="Navigating without radar while others chart their course using market signals. Regain the informational edge over your competitors."
+      path="/situations/perte-velocite"
+    />
     <DetailPageLayout
       title={t("Perdre en vélocité face aux concurrents", "Losing velocity against competitors")}
       chapeau={t("Naviguer sans radar pendant que d'autres tracent leur route grâce aux signaux du marché", "Navigating without radar while others chart their course using market signals")}
@@ -64,6 +73,7 @@ const PerteVelocite = () => {
         ]} />
       </DetailBlock>
     </DetailPageLayout>
+  </>
   );
 };
 

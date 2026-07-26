@@ -3,10 +3,19 @@ import StickyClientCase from "@/components/StickyClientCase";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Link } from "react-router-dom";
 import ministereSanteLogo from "@/assets/clients/ministere-sante.jpg";
+import SEO from "@/components/SEO";
 
 const CrisesNonMaitrisees = () => {
   const { t } = useLanguage();
   return (
+  <>
+    <SEO
+      titleFr="Sombrer dans une crise non maîtrisée"
+      titleEn="Sinking Into an Uncontrolled Crisis"
+      descriptionFr="Ignorer les étincelles mène à l'incendie. Détection des signaux faibles et pilotage de crise pour les institutions et les grands comptes."
+      descriptionEn="Ignoring sparks leads to fire. Weak-signal detection and crisis management for governments, institutions and large corporates worldwide."
+      path="/situations/crises-non-maitrisees"
+    />
     <DetailPageLayout
       title={t("Sombrer dans une crise non maîtrisée", "Sinking into an uncontrolled crisis")}
       chapeau={t("Ignorer les étincelles mène à l'incendie", "Ignoring sparks leads to fire")}
@@ -54,6 +63,7 @@ const CrisesNonMaitrisees = () => {
         <Link to="/solutions/strategic-intelligence-lab" className="mt-2 inline-block font-semibold text-primary hover:underline">Crisis Management</Link>
       </DetailBlock>
     </DetailPageLayout>
+  </>
   );
 };
 
