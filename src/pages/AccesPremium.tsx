@@ -137,6 +137,7 @@ const AccesPremium = () => {
         onLoginClick={() => setModalOpen(false)}
       />
     </div>
+    </>
   );
 };
 
