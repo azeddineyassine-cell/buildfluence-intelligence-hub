@@ -2449,7 +2449,9 @@ const StrategicIntelligenceLab = () => {
       {/* SECTION 03 */}
       <ModelisationsSection />
     </DetailPageLayout>
+    </>
   );
+
 };
 
 export default StrategicIntelligenceLab;
