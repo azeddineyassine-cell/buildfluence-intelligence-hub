@@ -180,6 +180,7 @@ const AccesPremiumDashboard = () => {
         </div>
       </main>
     </div>
+    </>
   );
 };
 
