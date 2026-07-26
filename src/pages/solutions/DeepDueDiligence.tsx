@@ -155,8 +155,17 @@ const DeepDueDiligence = () => {
   };
 
   return (
+    <>
+      <SEO
+        titleFr="Deep Due Diligence · Investigation stratégique"
+        titleEn="Deep Due Diligence · Strategic Investigation"
+        descriptionFr={"Le risque n'est jamais visible, il se loge dans l'angle mort. Investigation stratégique en trois niveaux pour sécuriser vos engagements."}
+        descriptionEn="Risk is never visible. It sits in the blind spot. Three-level strategic investigation to secure your commitments and partnerships."
+        path="/solutions/deep-due-diligence"
+      />
     <div className="min-h-screen" style={{ background: "#FAF6ED" }}>
       <Navbar />
+
       <main style={{ paddingTop: 80 }}>
         <iframe
           ref={iframeRef}
