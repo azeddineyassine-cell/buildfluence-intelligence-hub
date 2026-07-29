@@ -180,7 +180,7 @@ const IPShell = ({ activeSlug, children }: Props) => {
             </div>
           </div>
           <div className="top-actions">
-            <div className="idx-badge">IBDN®</div>
+            <button type="button" className="idx-badge" style={{ border: "none", cursor: "pointer" }} onClick={() => navigate(METHODO_ROUTE)} title="À propos de l'IBDN®">IBDN®</button>
             <div className="fond-group">
               <span className="flabel">Fond</span>
               <div className="theme-toggle">
