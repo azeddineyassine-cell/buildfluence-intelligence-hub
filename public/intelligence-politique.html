@@ -642,9 +642,19 @@
     const qp = new URLSearchParams(window.location.search).get('panel');
     if(qp && SLUG_TO_TAB[qp]) activateTab(SLUG_TO_TAB[qp], { silent:true });
   } catch(e){}
+  function applyTheme(t, opts){
+    if(t !== 'dark' && t !== 'light') return;
+    document.documentElement.setAttribute('data-theme', t);
+    document.querySelectorAll('[data-theme-btn]').forEach(x=>x.classList.toggle('active', x.dataset.themeBtn===t));
+    try{ localStorage.setItem('ip-theme', t); }catch(e){}
+    if(!opts || !opts.silent){
+      try{ window.parent.postMessage({ type:'ip-theme', theme:t }, '*'); }catch(e){}
+    }
+  }
   window.addEventListener('message', (e)=>{
     const d = e.data;
     if(d && d.type==='ip-set-panel' && SLUG_TO_TAB[d.slug]) activateTab(SLUG_TO_TAB[d.slug], { silent:true });
+    if(d && d.type==='ip-set-theme') applyTheme(d.theme, { silent:true });
   });
 
   let registered = false;
