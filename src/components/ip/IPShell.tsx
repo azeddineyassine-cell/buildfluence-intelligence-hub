@@ -153,21 +153,14 @@ interface Props {
 const IPShell = ({ activeSlug, children }: Props) => {
   const { session, signOut } = useAuth();
   const navigate = useNavigate();
-  const [theme, setTheme] = useState<"dark" | "light">(() => {
-    if (typeof window === "undefined") return "dark";
-    return (localStorage.getItem(THEME_KEY) as "dark" | "light") || "dark";
-  });
+  const { theme, setTheme } = useIPTheme();
   const [authOpen, setAuthOpen] = useState(false);
-
-  useEffect(() => {
-    localStorage.setItem(THEME_KEY, theme);
-  }, [theme]);
 
   return (
     <div className="ip-scope" data-theme={theme}>
       <style>{SCOPED_CSS}</style>
       <div className="demo-flag">
-        Maquette de démonstration · données fictives, aucune donnée électorale réelle
+        Buildfluence · Sovereign Decision Infrastructure
       </div>
 
       <header className="top">
