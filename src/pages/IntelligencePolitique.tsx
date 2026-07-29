@@ -2,7 +2,9 @@ import { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import SEO from "@/components/SEO";
 import { useLanguage } from "@/contexts/LanguageContext";
-import IPGatingOverlay from "@/components/ip/IPGatingOverlay";
+import IPClassements from "./ip/IPClassements";
+import IPCartographie from "./ip/IPCartographie";
+import IPActeurs from "./ip/IPActeurs";
 
 type PanelSlug =
   | "dashboard"
@@ -79,19 +81,23 @@ const SLUG_TO_ROUTE: Record<string, string> = {
   "a-propos": "/insights-resources/intelligence-politique/a-propos",
 };
 
+const IFRAME_PANELS = new Set<PanelSlug>(["dashboard", "opinion", "methodologie", "a-propos"]);
+
 const IntelligencePolitique = ({ panel = "dashboard" }: Props) => {
   const { lang } = useLanguage();
   const navigate = useNavigate();
   const iframeRef = useRef<HTMLIFrameElement | null>(null);
   const meta = SEO_BY_PANEL[panel];
+  const useIframe = IFRAME_PANELS.has(panel);
 
   useEffect(() => {
+    if (!useIframe) return;
     const prev = document.body.style.overflow;
     document.body.style.overflow = "hidden";
     return () => {
       document.body.style.overflow = prev;
     };
-  }, []);
+  }, [useIframe]);
 
   // Sync URL when the iframe user clicks internal tabs
   useEffect(() => {
@@ -107,22 +113,31 @@ const IntelligencePolitique = ({ panel = "dashboard" }: Props) => {
     return () => window.removeEventListener("message", onMsg);
   }, [navigate]);
 
-  // When the panel prop changes (route change), tell the iframe to switch panel without reloading
+  // When the panel prop changes (and we're on iframe route), sync the iframe panel
   useEffect(() => {
+    if (!useIframe) return;
     const win = iframeRef.current?.contentWindow;
     if (!win) return;
     win.postMessage({ type: "ip-set-panel", slug: panel }, "*");
-  }, [panel]);
+  }, [panel, useIframe]);
+
+  const seo = (
+    <SEO
+      titleFr={meta.titleFr}
+      titleEn={meta.titleEn}
+      descriptionFr={meta.descFr}
+      descriptionEn={meta.descEn}
+      path={meta.path}
+    />
+  );
+
+  if (panel === "classements") return (<>{seo}<IPClassements /></>);
+  if (panel === "cartographie") return (<>{seo}<IPCartographie /></>);
+  if (panel === "acteurs") return (<>{seo}<IPActeurs /></>);
 
   return (
     <>
-      <SEO
-        titleFr={meta.titleFr}
-        titleEn={meta.titleEn}
-        descriptionFr={meta.descFr}
-        descriptionEn={meta.descEn}
-        path={meta.path}
-      />
+      {seo}
       <div style={{ position: "fixed", inset: 0, background: "#0D1B2A" }}>
         <iframe
           ref={iframeRef}
@@ -130,9 +145,6 @@ const IntelligencePolitique = ({ panel = "dashboard" }: Props) => {
           title="Intelligence Politique"
           style={{ width: "100%", height: "100%", border: 0, display: "block" }}
         />
-        {(panel === "classements" || panel === "cartographie" || panel === "acteurs") && (
-          <IPGatingOverlay panel={panel} />
-        )}
       </div>
     </>
   );
