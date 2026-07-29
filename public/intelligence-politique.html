@@ -77,24 +77,24 @@
   .cta-link{display:inline-block; background:var(--gold); color:var(--navy); font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:0.1em; text-transform:uppercase; padding:13px 22px; border-radius:2px; font-weight:700; text-decoration:none; cursor:pointer;}
 
   .graph-card h2{font-size:22px; margin-bottom:16px;}
-  .graph-wrap{background:var(--navy-deep); border-radius:2px; padding:22px; height:100%;}
-  .graph-legend{display:flex; gap:18px; flex-wrap:wrap; margin-bottom:14px; font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:0.06em; color:var(--ivory); text-transform:uppercase;}
+  .graph-wrap{background:var(--card); border:1px solid var(--line); border-radius:2px; padding:22px; height:100%;}
+  .graph-legend{display:flex; gap:18px; flex-wrap:wrap; margin-bottom:14px; font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:0.06em; color:var(--text); text-transform:uppercase;}
   .graph-legend span{display:flex; align-items:center; gap:6px;}
   .dot{width:8px; height:8px; border-radius:50%; display:inline-block;}
 
-  .ibdn-card{background:var(--navy-deep); border:1px solid var(--gold-dim); border-radius:2px; padding:24px; color:var(--ivory);}
+  .ibdn-card{background:var(--card); border:1px solid var(--line); border-radius:2px; padding:24px; color:var(--text);}
   .ibdn-card .ihead{font-size:21px; font-style:italic;}
   .ibdn-card .isub{font-family:'JetBrains Mono',monospace; font-size:8.5px; letter-spacing:0.1em; color:var(--gold-dim); margin-top:4px; margin-bottom:16px;}
   .gauge{display:flex; justify-content:center; margin-bottom:16px;}
   .dim-row{display:flex; align-items:center; gap:9px; padding:5px 0; font-size:12px;}
   .dim-row .bullet{width:5px; height:5px; border-radius:50%; background:var(--gold); flex-shrink:0;}
   .dim-row .dlabel{width:82px; font-family:'JetBrains Mono',monospace; font-size:9.5px; letter-spacing:0.03em; text-transform:uppercase; color:var(--gold-soft);}
-  .dim-row .track{flex:1; height:5px; background:rgba(245,241,232,0.12); border-radius:2px; overflow:hidden;}
+  .dim-row .track{flex:1; height:5px; background:rgba(138,117,55,0.18); border-radius:2px; overflow:hidden;}
   .dim-row .fill{display:block; height:100%; background:var(--gold);}
   .dim-row .dval{width:48px; text-align:right; font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--gold-soft);}
-  .ibdn-evo{margin-top:16px; padding-top:14px; border-top:1px solid rgba(201,168,76,0.2);}
+  .ibdn-evo{margin-top:16px; padding-top:14px; border-top:1px solid var(--line);}
   .ibdn-evo .up{color:var(--growth); font-family:'JetBrains Mono',monospace; font-weight:700; font-size:13.5px;}
-  .ibdn-evo .updated{font-family:'JetBrains Mono',monospace; font-size:9px; color:rgba(245,241,232,0.45); margin-top:6px; text-transform:uppercase; letter-spacing:0.05em;}
+  .ibdn-evo .updated{font-family:'JetBrains Mono',monospace; font-size:9px; color:var(--text-dim); margin-top:6px; text-transform:uppercase; letter-spacing:0.05em;}
 
   /* ---- kpi bar ---- */
   .kpi-bar{display:flex; background:var(--navy-deep); overflow-x:auto;}
@@ -106,7 +106,7 @@
   .kpi .klabel{font-family:'JetBrains Mono',monospace; font-size:8px; letter-spacing:0.1em; color:rgba(245,241,232,0.5); text-transform:uppercase;}
 
   /* ---- mass row ---- */
-  .section-pad{padding:44px 5vw;}
+  .section-pad{padding:44px 0;}
   .mass-row{display:grid; grid-template-columns:1fr 1fr 1.3fr 1.3fr 1fr; gap:16px;}
   @media (max-width:1200px){.mass-row{grid-template-columns:1fr 1fr; grid-auto-rows:auto;}}
   .card{background:var(--card); border:1px solid var(--line); border-radius:2px; padding:18px;}
@@ -216,7 +216,7 @@
 </head>
 <body>
 
-<div class="demo-flag">Maquette de démonstration · données fictives, aucune donnée électorale réelle</div>
+<div class="demo-flag">Buildfluence · Sovereign Decision Infrastructure</div>
 
 <header class="top">
   <div class="brandrow">
@@ -233,7 +233,7 @@
       </div>
     </div>
     <div class="top-actions">
-      <div class="idx-badge">IBDN®</div>
+      <button type="button" class="idx-badge" style="border:none; cursor:pointer;" onclick="activateTab('methodologie')" title="À propos de l'IBDN®">IBDN®</button>
       <div class="fond-group">
         <span class="flabel">Fond</span>
         <div class="theme-toggle">
@@ -316,18 +316,18 @@
             <span><i class="dot" style="background:var(--alert);"></i>Tonalité négative</span>
             <span><i class="dot" style="background:#4a6a8a;"></i>Thématique (attracteur)</span>
           </div>
-          <svg viewBox="0 0 460 300" style="width:100%; height:auto;">
+          <svg viewBox="0 0 460 220" style="width:100%; height:auto;">
             <g stroke="rgba(201,168,76,0.35)" stroke-width="1">
-              <line x1="90" y1="70" x2="220" y2="140"/><line x1="90" y1="70" x2="70" y2="200"/>
-              <line x1="220" y1="140" x2="340" y2="80"/><line x1="220" y1="140" x2="300" y2="210"/>
-              <line x1="70" y1="200" x2="220" y2="140"/>
+              <line x1="90" y1="55" x2="220" y2="110"/><line x1="90" y1="55" x2="70" y2="160"/>
+              <line x1="220" y1="110" x2="340" y2="60"/><line x1="220" y1="110" x2="300" y2="170"/>
+              <line x1="70" y1="160" x2="220" y2="110"/>
             </g>
             <g font-family="JetBrains Mono" font-size="8.5" fill="#F5F1E8" text-anchor="middle">
-              <circle cx="90" cy="70" r="26" fill="var(--growth)"/><text x="90" y="74">PARTI A</text>
-              <circle cx="220" cy="140" r="15" fill="#4a6a8a"/><text x="220" y="144" fill="#0D1B2A">POUVOIR</text>
-              <circle cx="340" cy="80" r="20" fill="var(--alert)"/><text x="340" y="84">PARTI B</text>
-              <circle cx="70" cy="200" r="11" fill="var(--gold)"/><text x="70" y="204" fill="#0D1B2A">CAND. 1</text>
-              <circle cx="300" cy="210" r="13" fill="#4a6a8a"/><text x="300" y="214" fill="#0D1B2A">EMPLOI</text>
+              <circle cx="90" cy="55" r="24" fill="var(--growth)"/><text x="90" y="59">PARTI A</text>
+              <circle cx="220" cy="110" r="14" fill="#4a6a8a"/><text x="220" y="114" fill="#0D1B2A">POUVOIR</text>
+              <circle cx="340" cy="60" r="19" fill="var(--alert)"/><text x="340" y="64">PARTI B</text>
+              <circle cx="70" cy="160" r="10" fill="var(--gold)"/><text x="70" y="164" fill="#0D1B2A">CAND. 1</text>
+              <circle cx="300" cy="170" r="12" fill="#4a6a8a"/><text x="300" y="174" fill="#0D1B2A">EMPLOI</text>
             </g>
           </svg>
         </div>
@@ -340,8 +340,8 @@
           <svg width="130" height="130" viewBox="0 0 150 150">
             <circle cx="75" cy="75" r="62" fill="none" stroke="rgba(245,241,232,0.12)" stroke-width="10"/>
             <circle cx="75" cy="75" r="62" fill="none" stroke="#C9A84C" stroke-width="10" stroke-linecap="round" stroke-dasharray="389.5" stroke-dashoffset="109" transform="rotate(-90 75 75)"/>
-            <text x="75" y="80" text-anchor="middle" font-family="Playfair Display" font-weight="900" font-size="28" fill="#F5F1E8">72</text>
-            <text x="75" y="98" text-anchor="middle" font-family="JetBrains Mono" font-size="9" fill="#8a7537">/ 100</text>
+            <text x="75" y="80" text-anchor="middle" font-family="Playfair Display" font-weight="900" font-size="28" fill="currentColor">72</text>
+            <text x="75" y="98" text-anchor="middle" font-family="JetBrains Mono" font-size="9" fill="var(--gold-dim)">/ 100</text>
           </svg>
         </div>
         <div class="dim-row"><span class="bullet"></span><span class="dlabel">Visibilité</span><span class="track"><span class="fill" style="width:78%;"></span></span><span class="dval">78/100</span></div>
@@ -533,6 +533,21 @@
   <section class="panel" id="methodologie" style="padding:44px 5vw;">
     <div class="eyebrow">Crédibilité et gouvernance</div>
     <h2 style="font-size:28px; margin-bottom:22px;">Méthodologie</h2>
+    <div class="card" style="margin-bottom:22px;">
+      <h3 style="font-size:19px; margin-bottom:14px;">Le principe de l'IBDN<em>®</em></h3>
+      <p class="lead" style="font-size:15.5px; color:var(--text-dim); margin-bottom:12px;">
+        L'IBDN® (Indice Buildfluence de Dynamique Narrative) est un indicateur composite construit à partir de données ouvertes : presse, télévision, radio, réseaux sociaux publics, forums et communiqués officiels. Il traduit en une lecture synthétique la place qu'occupent partis et personnalités dans le débat public marocain.
+      </p>
+      <p class="lead" style="font-size:15.5px; color:var(--text-dim); margin-bottom:12px;">
+        Ce qu'il mesure : la <strong>présence</strong> (être cité et visible), l'<strong>influence</strong> (être relayé par des sources qui comptent) et la <strong>dynamique narrative</strong> (durer, se propager, être associé aux grands enjeux, évoluer positivement ou négativement dans le temps).
+      </p>
+      <p class="lead" style="font-size:15.5px; color:var(--text-dim); margin-bottom:12px;">
+        Ce qu'il ne mesure jamais : une <strong>intention de vote</strong>, une <strong>prédiction électorale</strong>, ni un pronostic de résultat. L'IBDN® n'est ni un sondage, ni un baromètre d'opinion : c'est une lecture de la scène narrative telle qu'elle apparaît publiquement.
+      </p>
+      <p class="mono" style="font-size:10px; color:var(--gold-dim); margin-top:14px; letter-spacing:0.06em;">
+        La pondération exacte entre les 8 dimensions n'est pas publiée. Elle relève de la méthode propriétaire Buildfluence et fait l'objet d'une validation méthodologique continue.
+      </p>
+    </div>
     <div class="grid cols-2" style="align-items:start;">
       <div class="card">
         <h3 style="font-size:17px; margin-bottom:12px;">Les 8 dimensions de l'IBDN®</h3>
@@ -586,13 +601,13 @@
     </div>
   </div>
   <div class="footer-bottom">
-    <div class="footer-copy">© 2026 Buildfluence · Tous droits réservés</div>
+    <div class="footer-copy">© 2026 <a href="https://buildfluence.ai" style="color:inherit; text-decoration:underline;">Buildfluence</a> · Tous droits réservés</div>
     <div class="footer-disclaimer">
       Analyses réalisées exclusivement à partir de données ouvertes (OSINT), sans microciblage ni profilage des électeurs.<br>
       Respect des données personnelles conforme à la réglementation marocaine CNDP et, le cas échéant, au RGPD européen.
     </div>
     <div class="footer-links">
-      <a href="#">À propos de l'IBDN®</a>
+      <a href="#" onclick="event.preventDefault(); activateTab('methodologie');">À propos de l'IBDN®</a>
       <a href="#">Mentions légales</a>
       <a href="#">Contact</a>
     </div>
@@ -627,9 +642,19 @@
     const qp = new URLSearchParams(window.location.search).get('panel');
     if(qp && SLUG_TO_TAB[qp]) activateTab(SLUG_TO_TAB[qp], { silent:true });
   } catch(e){}
+  function applyTheme(t, opts){
+    if(t !== 'dark' && t !== 'light') return;
+    document.documentElement.setAttribute('data-theme', t);
+    document.querySelectorAll('[data-theme-btn]').forEach(x=>x.classList.toggle('active', x.dataset.themeBtn===t));
+    try{ localStorage.setItem('ip-theme', t); }catch(e){}
+    if(!opts || !opts.silent){
+      try{ window.parent.postMessage({ type:'ip-theme', theme:t }, '*'); }catch(e){}
+    }
+  }
   window.addEventListener('message', (e)=>{
     const d = e.data;
     if(d && d.type==='ip-set-panel' && SLUG_TO_TAB[d.slug]) activateTab(SLUG_TO_TAB[d.slug], { silent:true });
+    if(d && d.type==='ip-set-theme') applyTheme(d.theme, { silent:true });
   });
 
   let registered = false;
@@ -661,12 +686,15 @@
   }
 
   document.querySelectorAll('[data-theme-btn]').forEach(b=>{
-    b.addEventListener('click', ()=>{
-      document.querySelectorAll('[data-theme-btn]').forEach(x=>x.classList.remove('active'));
-      b.classList.add('active');
-      document.documentElement.setAttribute('data-theme', b.dataset.themeBtn);
-    });
+    b.addEventListener('click', ()=>applyTheme(b.dataset.themeBtn));
   });
+  try {
+    const qs = new URLSearchParams(window.location.search);
+    const qt = qs.get('theme');
+    const stored = (function(){ try{ return localStorage.getItem('ip-theme'); }catch(e){ return null; } })();
+    const initial = (qt === 'light' || qt === 'dark') ? qt : (stored === 'light' || stored === 'dark' ? stored : 'dark');
+    applyTheme(initial, { silent:true });
+  } catch(e){}
 
   const actorButtons = document.querySelectorAll('.actor-picker button:not([disabled])');
   actorButtons.forEach(btn=>btn.addEventListener('click', ()=>{ actorButtons.forEach(b=>b.classList.remove('active')); btn.classList.add('active'); }));

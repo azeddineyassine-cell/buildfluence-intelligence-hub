@@ -1,9 +1,10 @@
-import { ReactNode, useEffect, useState } from "react";
+import { ReactNode, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
+import { useIPTheme } from "@/contexts/ThemeContext";
 import IPAuthModal from "./IPAuthModal";
 
-const THEME_KEY = "ip-theme";
+const METHODO_ROUTE = "/insights-resources/intelligence-politique/methodologie";
 
 const TABS: Array<{
   slug: string;
@@ -152,21 +153,14 @@ interface Props {
 const IPShell = ({ activeSlug, children }: Props) => {
   const { session, signOut } = useAuth();
   const navigate = useNavigate();
-  const [theme, setTheme] = useState<"dark" | "light">(() => {
-    if (typeof window === "undefined") return "dark";
-    return (localStorage.getItem(THEME_KEY) as "dark" | "light") || "dark";
-  });
+  const { theme, setTheme } = useIPTheme();
   const [authOpen, setAuthOpen] = useState(false);
-
-  useEffect(() => {
-    localStorage.setItem(THEME_KEY, theme);
-  }, [theme]);
 
   return (
     <div className="ip-scope" data-theme={theme}>
       <style>{SCOPED_CSS}</style>
       <div className="demo-flag">
-        Maquette de démonstration · données fictives, aucune donnée électorale réelle
+        Buildfluence · Sovereign Decision Infrastructure
       </div>
 
       <header className="top">
@@ -186,7 +180,7 @@ const IPShell = ({ activeSlug, children }: Props) => {
             </div>
           </div>
           <div className="top-actions">
-            <div className="idx-badge">IBDN®</div>
+            <button type="button" className="idx-badge" style={{ border: "none", cursor: "pointer" }} onClick={() => navigate(METHODO_ROUTE)} title="À propos de l'IBDN®">IBDN®</button>
             <div className="fond-group">
               <span className="flabel">Fond</span>
               <div className="theme-toggle">
@@ -226,7 +220,9 @@ const IPShell = ({ activeSlug, children }: Props) => {
       <main className="ip-main">{children}</main>
 
       <footer className="ip-footer">
-        © Buildfluence · Maquette de démonstration · IBDN®
+        © <a href="https://buildfluence.ai" style={{ color: "inherit", textDecoration: "underline" }}>Buildfluence</a>
+        {" · "}
+        <Link to={METHODO_ROUTE} style={{ color: "inherit", textDecoration: "underline" }}>À propos de l'IBDN®</Link>
       </footer>
 
       <IPAuthModal open={authOpen} onClose={() => setAuthOpen(false)} />

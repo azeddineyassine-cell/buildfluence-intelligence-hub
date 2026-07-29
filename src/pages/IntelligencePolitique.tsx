@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import SEO from "@/components/SEO";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useIPTheme } from "@/contexts/ThemeContext";
 import IPClassements from "./ip/IPClassements";
 import IPCartographie from "./ip/IPCartographie";
 import IPActeurs from "./ip/IPActeurs";
@@ -85,6 +86,7 @@ const IFRAME_PANELS = new Set<PanelSlug>(["dashboard", "opinion", "methodologie"
 
 const IntelligencePolitique = ({ panel = "dashboard" }: Props) => {
   const { lang } = useLanguage();
+  const { theme } = useIPTheme();
   const navigate = useNavigate();
   const iframeRef = useRef<HTMLIFrameElement | null>(null);
   const meta = SEO_BY_PANEL[panel];
@@ -121,6 +123,14 @@ const IntelligencePolitique = ({ panel = "dashboard" }: Props) => {
     win.postMessage({ type: "ip-set-panel", slug: panel }, "*");
   }, [panel, useIframe]);
 
+  // Sync theme changes to the iframe (in case the parent flips theme while iframe stays mounted)
+  useEffect(() => {
+    if (!useIframe) return;
+    const win = iframeRef.current?.contentWindow;
+    if (!win) return;
+    win.postMessage({ type: "ip-set-theme", theme }, "*");
+  }, [theme, useIframe]);
+
   const seo = (
     <SEO
       titleFr={meta.titleFr}
@@ -138,10 +148,10 @@ const IntelligencePolitique = ({ panel = "dashboard" }: Props) => {
   return (
     <>
       {seo}
-      <div style={{ position: "fixed", inset: 0, background: "#0D1B2A" }}>
+      <div style={{ position: "fixed", inset: 0, background: theme === "light" ? "#FAF6ED" : "#0D1B2A" }}>
         <iframe
           ref={iframeRef}
-          src={`/intelligence-politique.html?lang=${lang}&panel=${panel}`}
+          src={`/intelligence-politique.html?lang=${lang}&panel=${panel}&theme=${theme}`}
           title="Intelligence Politique"
           style={{ width: "100%", height: "100%", border: 0, display: "block" }}
         />

@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import { LanguageProvider } from "@/contexts/LanguageContext";
+import { ThemeProvider } from "@/contexts/ThemeContext";
 import { AuthProvider } from "@/hooks/useAuth";
 import ProtectedRoute from "@/components/ProtectedRoute";
 import CookieConsent from "@/components/CookieConsent";
@@ -50,6 +51,7 @@ const queryClient = new QueryClient();
 const App = () => (
   <HelmetProvider>
   <LanguageProvider>
+    <ThemeProvider>
     <AuthProvider>
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
@@ -113,6 +115,7 @@ const App = () => (
       </TooltipProvider>
     </QueryClientProvider>
     </AuthProvider>
+    </ThemeProvider>
   </LanguageProvider>
   </HelmetProvider>
 );
