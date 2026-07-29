@@ -86,6 +86,7 @@ const IFRAME_PANELS = new Set<PanelSlug>(["dashboard", "opinion", "methodologie"
 
 const IntelligencePolitique = ({ panel = "dashboard" }: Props) => {
   const { lang } = useLanguage();
+  const { theme, setTheme } = useIPTheme();
   const navigate = useNavigate();
   const iframeRef = useRef<HTMLIFrameElement | null>(null);
   const meta = SEO_BY_PANEL[panel];
@@ -121,6 +122,14 @@ const IntelligencePolitique = ({ panel = "dashboard" }: Props) => {
     if (!win) return;
     win.postMessage({ type: "ip-set-panel", slug: panel }, "*");
   }, [panel, useIframe]);
+
+  // Sync theme changes to the iframe (in case the parent flips theme while iframe stays mounted)
+  useEffect(() => {
+    if (!useIframe) return;
+    const win = iframeRef.current?.contentWindow;
+    if (!win) return;
+    win.postMessage({ type: "ip-set-theme", theme }, "*");
+  }, [theme, useIframe]);
 
   const seo = (
     <SEO
