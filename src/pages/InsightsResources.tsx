@@ -11,6 +11,8 @@ import rcaGradins from "@/assets/rca-gradins.webp";
 import rcaEquipe from "@/assets/rca-equipe.webp";
 import isdDecision from "@/assets/isd-decision.webp";
 import isdEnquete from "@/assets/isd-enquete.webp";
+import face1Ip from "@/assets/face1-legislatives-maroc.png.asset.json";
+import face2Ip from "@/assets/face2-narrative-graph.png.asset.json";
 
 type Filter =
   | "all"
@@ -56,6 +58,31 @@ const InsightsResources = () => {
   ];
 
   const CARDS: Card[] = [
+    {
+      id: "intelligence-politique-2026",
+      filter: "intelligence-economique",
+      category: t("Intelligence Politique", "Political Intelligence"),
+      date: t("Législatives Maroc 2026", "Morocco Legislative 2026"),
+      title: t(
+        "Intelligence Politique · Législatives Maroc 2026",
+        "Political Intelligence · Morocco Legislative 2026"
+      ),
+      subtitle: t(
+        "IBDN® · GRAPHE NARRATIF · 12 RÉGIONS",
+        "IBDN® · NARRATIVE GRAPH · 12 REGIONS"
+      ),
+      summary: t(
+        "Plateforme d'analyse de données sur la dynamique narrative des partis, personnalités et thématiques politiques. Analyse de données, pas de conseil ni d'orientation politique.",
+        "Data-analysis platform on the narrative dynamics of parties, personalities and political themes. Data analysis, not advisory or political guidance."
+      ),
+      href: "/insights-resources/intelligence-politique",
+      sameTab: true,
+      image: face1Ip.url,
+      overlayBg: face2Ip.url,
+      actions: [
+        { label: t("Explorer la plateforme ›", "Explore the platform ›"), href: "/insights-resources/intelligence-politique", variant: "primary", sameTab: true },
+      ],
+    },
     {
       id: "enquete-isd-2026",
       filter: "intelligence-economique",
