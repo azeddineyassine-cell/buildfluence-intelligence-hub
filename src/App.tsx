@@ -21,6 +21,7 @@ import Barometre from "./pages/Barometre";
 import InsightsEsante from "./pages/InsightsEsante";
 import PolitiqueConfidentialite from "./pages/PolitiqueConfidentialite";
 import EnqueteISD from "./pages/EnqueteISD";
+import IntelligencePolitique from "./pages/IntelligencePolitique";
 
 
 // Situation pages
@@ -72,6 +73,7 @@ const App = () => (
             <Route path="/success-stories" element={<SuccessStories />} />
             <Route path="/insights-resources" element={<InsightsResources />} />
             <Route path="/insights-resources/enquete-isd" element={<EnqueteISD />} />
+            <Route path="/insights-resources/intelligence-politique" element={<IntelligencePolitique />} />
             <Route path="/barometre" element={<Barometre />} />
             <Route path="/insights/esante" element={<InsightsEsante />} />
             <Route path="/politique-de-confidentialite" element={<PolitiqueConfidentialite />} />
