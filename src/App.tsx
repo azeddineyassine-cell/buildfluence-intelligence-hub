@@ -21,6 +21,7 @@ import Barometre from "./pages/Barometre";
 import InsightsEsante from "./pages/InsightsEsante";
 import PolitiqueConfidentialite from "./pages/PolitiqueConfidentialite";
 import EnqueteISD from "./pages/EnqueteISD";
+import IntelligencePolitique from "./pages/IntelligencePolitique";
 
 
 // Situation pages
