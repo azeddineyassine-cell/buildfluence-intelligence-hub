@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import SEO from "@/components/SEO";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useIPTheme } from "@/contexts/ThemeContext";
 import IPClassements from "./ip/IPClassements";
 import IPCartographie from "./ip/IPCartographie";
 import IPActeurs from "./ip/IPActeurs";
