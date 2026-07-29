@@ -151,7 +151,7 @@ const IntelligencePolitique = ({ panel = "dashboard" }: Props) => {
       <div style={{ position: "fixed", inset: 0, background: "#0D1B2A" }}>
         <iframe
           ref={iframeRef}
-          src={`/intelligence-politique.html?lang=${lang}&panel=${panel}`}
+          src={`/intelligence-politique.html?lang=${lang}&panel=${panel}&theme=${theme}`}
           title="Intelligence Politique"
           style={{ width: "100%", height: "100%", border: 0, display: "block" }}
         />
