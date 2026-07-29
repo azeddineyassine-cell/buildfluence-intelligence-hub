@@ -1,9 +1,10 @@
-import { ReactNode, useEffect, useState } from "react";
+import { ReactNode, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
+import { useIPTheme } from "@/contexts/ThemeContext";
 import IPAuthModal from "./IPAuthModal";
 
-const THEME_KEY = "ip-theme";
+const METHODO_ROUTE = "/insights-resources/intelligence-politique/methodologie";
 
 const TABS: Array<{
   slug: string;
