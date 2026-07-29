@@ -86,7 +86,7 @@ const IFRAME_PANELS = new Set<PanelSlug>(["dashboard", "opinion", "methodologie"
 
 const IntelligencePolitique = ({ panel = "dashboard" }: Props) => {
   const { lang } = useLanguage();
-  const { theme, setTheme } = useIPTheme();
+  const { theme } = useIPTheme();
   const navigate = useNavigate();
   const iframeRef = useRef<HTMLIFrameElement | null>(null);
   const meta = SEO_BY_PANEL[panel];
