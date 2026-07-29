@@ -686,12 +686,15 @@
   }
 
   document.querySelectorAll('[data-theme-btn]').forEach(b=>{
-    b.addEventListener('click', ()=>{
-      document.querySelectorAll('[data-theme-btn]').forEach(x=>x.classList.remove('active'));
-      b.classList.add('active');
-      document.documentElement.setAttribute('data-theme', b.dataset.themeBtn);
-    });
+    b.addEventListener('click', ()=>applyTheme(b.dataset.themeBtn));
   });
+  try {
+    const qs = new URLSearchParams(window.location.search);
+    const qt = qs.get('theme');
+    const stored = (function(){ try{ return localStorage.getItem('ip-theme'); }catch(e){ return null; } })();
+    const initial = (qt === 'light' || qt === 'dark') ? qt : (stored === 'light' || stored === 'dark' ? stored : 'dark');
+    applyTheme(initial, { silent:true });
+  } catch(e){}
 
   const actorButtons = document.querySelectorAll('.actor-picker button:not([disabled])');
   actorButtons.forEach(btn=>btn.addEventListener('click', ()=>{ actorButtons.forEach(b=>b.classList.remove('active')); btn.classList.add('active'); }));
