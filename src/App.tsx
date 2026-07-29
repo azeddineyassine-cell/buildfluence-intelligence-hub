@@ -51,6 +51,7 @@ const queryClient = new QueryClient();
 const App = () => (
   <HelmetProvider>
   <LanguageProvider>
+    <ThemeProvider>
     <AuthProvider>
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
