@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import SEO from "@/components/SEO";
 import { useLanguage } from "@/contexts/LanguageContext";
+import IPGatingOverlay from "@/components/ip/IPGatingOverlay";
 
 type PanelSlug =
   | "dashboard"
@@ -129,6 +130,9 @@ const IntelligencePolitique = ({ panel = "dashboard" }: Props) => {
           title="Intelligence Politique"
           style={{ width: "100%", height: "100%", border: 0, display: "block" }}
         />
+        {(panel === "classements" || panel === "cartographie" || panel === "acteurs") && (
+          <IPGatingOverlay panel={panel} />
+        )}
       </div>
     </>
   );
