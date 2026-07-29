@@ -115,6 +115,7 @@ const App = () => (
       </TooltipProvider>
     </QueryClientProvider>
     </AuthProvider>
+    </ThemeProvider>
   </LanguageProvider>
   </HelmetProvider>
 );
