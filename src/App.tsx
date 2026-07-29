@@ -73,7 +73,13 @@ const App = () => (
             <Route path="/success-stories" element={<SuccessStories />} />
             <Route path="/insights-resources" element={<InsightsResources />} />
             <Route path="/insights-resources/enquete-isd" element={<EnqueteISD />} />
-            <Route path="/insights-resources/intelligence-politique" element={<IntelligencePolitique />} />
+            <Route path="/insights-resources/intelligence-politique" element={<IntelligencePolitique panel="dashboard" />} />
+            <Route path="/insights-resources/intelligence-politique/classements" element={<IntelligencePolitique panel="classements" />} />
+            <Route path="/insights-resources/intelligence-politique/opinion" element={<IntelligencePolitique panel="opinion" />} />
+            <Route path="/insights-resources/intelligence-politique/cartographie" element={<IntelligencePolitique panel="cartographie" />} />
+            <Route path="/insights-resources/intelligence-politique/acteurs" element={<IntelligencePolitique panel="acteurs" />} />
+            <Route path="/insights-resources/intelligence-politique/methodologie" element={<IntelligencePolitique panel="methodologie" />} />
+            <Route path="/insights-resources/intelligence-politique/a-propos" element={<IntelligencePolitique panel="a-propos" />} />
             <Route path="/barometre" element={<Barometre />} />
             <Route path="/insights/esante" element={<InsightsEsante />} />
             <Route path="/politique-de-confidentialite" element={<PolitiqueConfidentialite />} />

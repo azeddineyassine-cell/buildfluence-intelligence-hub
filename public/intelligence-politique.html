@@ -612,12 +612,25 @@
 <script>
   const tbtns = document.querySelectorAll('#tabs button');
   const panels = document.querySelectorAll('.panel');
-  function activateTab(name){
+  const SLUG_TO_TAB = { 'dashboard':'dashboard','classements':'classements','opinion':'opinion','cartographie':'cartographie','acteurs':'acteurs','methodologie':'methodologie','a-propos':'apropos','apropos':'apropos' };
+  const TAB_TO_SLUG = { 'dashboard':'dashboard','classements':'classements','opinion':'opinion','cartographie':'cartographie','acteurs':'acteurs','methodologie':'methodologie','apropos':'a-propos' };
+  function activateTab(name, opts){
     tbtns.forEach(x=>x.classList.toggle('active', x.dataset.tab===name));
     panels.forEach(p=>p.classList.toggle('active', p.id===name));
     window.scrollTo({top:0, behavior:'smooth'});
+    if(!opts || !opts.silent){
+      try{ window.parent.postMessage({ type:'ip-tab', slug: TAB_TO_SLUG[name] || 'dashboard' }, '*'); }catch(e){}
+    }
   }
   tbtns.forEach(b=>b.addEventListener('click', ()=>activateTab(b.dataset.tab)));
+  try {
+    const qp = new URLSearchParams(window.location.search).get('panel');
+    if(qp && SLUG_TO_TAB[qp]) activateTab(SLUG_TO_TAB[qp], { silent:true });
+  } catch(e){}
+  window.addEventListener('message', (e)=>{
+    const d = e.data;
+    if(d && d.type==='ip-set-panel' && SLUG_TO_TAB[d.slug]) activateTab(SLUG_TO_TAB[d.slug], { silent:true });
+  });
 
   let registered = false;
   let pendingTarget = null;
