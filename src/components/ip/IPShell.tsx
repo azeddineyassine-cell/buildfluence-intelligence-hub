@@ -220,7 +220,9 @@ const IPShell = ({ activeSlug, children }: Props) => {
       <main className="ip-main">{children}</main>
 
       <footer className="ip-footer">
-        © Buildfluence · Maquette de démonstration · IBDN®
+        © <a href="https://buildfluence.ai" style={{ color: "inherit", textDecoration: "underline" }}>Buildfluence</a>
+        {" · "}
+        <Link to={METHODO_ROUTE} style={{ color: "inherit", textDecoration: "underline" }}>À propos de l'IBDN®</Link>
       </footer>
 
       <IPAuthModal open={authOpen} onClose={() => setAuthOpen(false)} />
