@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Intelligence Politique · Buildfluence</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700;1,900&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=JetBrains+Mono:wght@500;600;700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+  :root{
+    --navy:#0D1B2A; --navy-mid:#1a2d44; --navy-light:#142235; --navy-deep:#08111c;
+    --gold:#C9A84C; --gold-soft:#d4b866; --gold-dim:#8a7537; --gold-hover:#e0c88a;
+    --ivory:#F5F1E8; --paper:#FAF6ED; --rule:#D9CFBC; --alert:#E06D4F; --growth:#7C9A6C;
+  }
+  html[data-theme="dark"]{ --bg:var(--navy); --bg-alt:var(--navy-mid); --card:var(--navy-light); --text:var(--ivory); --text-dim:rgba(245,241,232,0.62); --line:rgba(201,168,76,0.2); }
+  html[data-theme="light"]{ --bg:var(--paper); --bg-alt:#efe8d6; --card:#ffffff; --text:var(--navy); --text-dim:var(--navy-mid); --line:var(--rule); }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--bg); color:var(--text); font-family:'DM Sans', sans-serif; -webkit-font-smoothing:antialiased;}
+  h1,h2,h3{font-family:'Playfair Display', serif; font-weight:900;}
+  em{font-style:italic; color:var(--gold);}
+  .lead{font-family:'Cormorant Garamond', serif; font-style:italic; font-weight:500;}
+  .mono{font-family:'JetBrains Mono', monospace; letter-spacing:0.12em; text-transform:uppercase;}
+  .eyebrow{display:flex; align-items:center; gap:12px; font-family:'JetBrains Mono',monospace; font-size:10.5px; font-weight:600; letter-spacing:0.28em; text-transform:uppercase; color:var(--gold-dim); margin-bottom:18px;}
+  .eyebrow::before,.eyebrow::after{content:""; flex:0 0 24px; height:1px; background:var(--gold);}
+
+  .demo-flag{background:var(--navy-deep); color:var(--gold-dim); font-family:'JetBrains Mono',monospace; font-size:9.5px; letter-spacing:0.14em; text-align:center; padding:6px;}
+
+  /* ---- header ---- */
+  header.top{background:var(--bg-alt); padding:16px 5vw;}
+  .brandrow{display:flex; justify-content:space-between; align-items:center; gap:16px; flex-wrap:wrap;}
+  .brand-left{display:flex; align-items:center; gap:14px;}
+  .flag{width:40px; height:27px; border-radius:2px; overflow:hidden; flex-shrink:0;}
+  .flag svg{display:block; width:100%; height:100%;}
+  .brandmark{font-family:'Playfair Display', serif; font-weight:900; font-size:22px; line-height:1;}
+  .brandsub{font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:0.2em; color:var(--gold-dim); text-transform:uppercase; margin-top:4px;}
+  .top-actions{display:flex; align-items:center; gap:10px; flex-wrap:wrap;}
+  .idx-badge{font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:0.12em; color:var(--navy); background:var(--gold); padding:10px 14px; border-radius:2px; font-weight:700; height:38px; display:flex; align-items:center;}
+  .fond-group{display:flex; align-items:center; gap:8px;}
+  .fond-group .flabel{font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:0.16em; color:var(--text-dim); text-transform:uppercase;}
+  .theme-toggle{display:flex; border:1px solid var(--gold-dim); border-radius:2px; overflow:hidden; height:38px;}
+  .theme-toggle button{background:none; border:none; color:var(--text-dim); font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:0.1em; text-transform:uppercase; padding:0 13px; cursor:pointer;}
+  .theme-toggle button.active{background:var(--gold); color:var(--navy); font-weight:700;}
+  .btn{font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:0.1em; text-transform:uppercase; padding:0 18px; height:38px; border-radius:2px; cursor:pointer; border:1px solid var(--gold-dim); background:none; color:var(--text);}
+  .btn-gold{background:var(--gold); color:var(--navy); border-color:var(--gold); font-weight:700;}
+
+  /* ---- nav ---- */
+  nav.tabs{display:flex; background:var(--bg-alt); padding:0 5vw; border-top:1px solid var(--line); overflow-x:auto;}
+  nav.tabs button{flex:1; min-width:150px; background:none; border:none; border-bottom:2px solid transparent; cursor:pointer; padding:14px 10px 12px; display:flex; flex-direction:column; align-items:center; gap:4px; color:var(--text-dim);}
+  nav.tabs button .row{display:flex; align-items:center; gap:7px;}
+  nav.tabs button .tab-label{font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:0.1em; text-transform:uppercase; color:var(--text);}
+  nav.tabs button .tab-sub{font-family:'Cormorant Garamond'; font-style:italic; font-size:12.5px; color:var(--text-dim); white-space:nowrap;}
+  nav.tabs button.active{border-bottom-color:var(--gold);}
+  nav.tabs button.active .tab-label, nav.tabs button.active .tab-sub{color:var(--gold-soft);}
+  nav.tabs button svg{color:var(--gold-dim);}
+  nav.tabs button.active svg{color:var(--gold);}
+
+  main{max-width:1360px; margin:0 auto;}
+  .panel{display:none; animation:fade .3s ease;}
+  .panel.active{display:block;}
+  @keyframes fade{from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:translateY(0);}}
+
+  /* ---- hero ---- */
+  .hero{display:grid; grid-template-columns:1fr 1.15fr 0.8fr; gap:34px; padding:48px 5vw 40px; align-items:start;}
+  @media (max-width:1080px){.hero{grid-template-columns:1fr; padding:36px 5vw;}}
+  .hero h1{font-size:clamp(28px,3.2vw,38px); line-height:1.18; margin-bottom:16px;}
+  .hero .lead{font-size:16px; color:var(--text-dim); max-width:460px;}
+  .ibdn-note{margin-top:12px; font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:0.04em; color:var(--gold-dim); border-left:2px solid var(--gold-dim); padding-left:12px; max-width:460px; text-transform:none;}
+  .feat-row{display:flex; gap:26px; margin-top:30px; flex-wrap:wrap;}
+  .feat{max-width:150px;}
+  .feat svg{color:var(--gold); margin-bottom:8px;}
+  .feat .ftitle{font-family:'Playfair Display'; font-weight:700; font-size:15px; margin-bottom:4px;}
+  .feat .fdesc{font-size:12px; color:var(--text-dim); line-height:1.4;}
+  .hero-cta{margin-top:30px;}
+  .cta-link{display:inline-block; background:var(--gold); color:var(--navy); font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:0.1em; text-transform:uppercase; padding:13px 22px; border-radius:2px; font-weight:700; text-decoration:none; cursor:pointer;}
+
+  .graph-card h2{font-size:22px; margin-bottom:16px;}
+  .graph-wrap{background:var(--navy-deep); border-radius:2px; padding:22px; height:100%;}
+  .graph-legend{display:flex; gap:18px; flex-wrap:wrap; margin-bottom:14px; font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:0.06em; color:var(--ivory); text-transform:uppercase;}
+  .graph-legend span{display:flex; align-items:center; gap:6px;}
+  .dot{width:8px; height:8px; border-radius:50%; display:inline-block;}
+
+  .ibdn-card{background:var(--navy-deep); border:1px solid var(--gold-dim); border-radius:2px; padding:24px; color:var(--ivory);}
+  .ibdn-card .ihead{font-size:21px; font-style:italic;}
+  .ibdn-card .isub{font-family:'JetBrains Mono',monospace; font-size:8.5px; letter-spacing:0.1em; color:var(--gold-dim); margin-top:4px; margin-bottom:16px;}
+  .gauge{display:flex; justify-content:center; margin-bottom:16px;}
+  .dim-row{display:flex; align-items:center; gap:9px; padding:5px 0; font-size:12px;}
+  .dim-row .bullet{width:5px; height:5px; border-radius:50%; background:var(--gold); flex-shrink:0;}
+  .dim-row .dlabel{width:82px; font-family:'JetBrains Mono',monospace; font-size:9.5px; letter-spacing:0.03em; text-transform:uppercase; color:var(--gold-soft);}
+  .dim-row .track{flex:1; height:5px; background:rgba(245,241,232,0.12); border-radius:2px; overflow:hidden;}
+  .dim-row .fill{display:block; height:100%; background:var(--gold);}
+  .dim-row .dval{width:48px; text-align:right; font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--gold-soft);}
+  .ibdn-evo{margin-top:16px; padding-top:14px; border-top:1px solid rgba(201,168,76,0.2);}
+  .ibdn-evo .up{color:var(--growth); font-family:'JetBrains Mono',monospace; font-weight:700; font-size:13.5px;}
+  .ibdn-evo .updated{font-family:'JetBrains Mono',monospace; font-size:9px; color:rgba(245,241,232,0.45); margin-top:6px; text-transform:uppercase; letter-spacing:0.05em;}
+
+  /* ---- kpi bar ---- */
+  .kpi-bar{display:flex; background:var(--navy-deep); overflow-x:auto;}
+  .kpi{flex:1; min-width:180px; display:flex; align-items:center; gap:12px; padding:20px 5vw; border-right:1px solid rgba(201,168,76,0.14); color:var(--ivory);}
+  .kpi:first-child{padding-left:5vw;}
+  .kpi:last-child{border-right:none;}
+  .kpi svg{color:var(--gold); flex-shrink:0;}
+  .kpi .kval{font-family:'Playfair Display'; font-weight:900; font-size:19px;}
+  .kpi .klabel{font-family:'JetBrains Mono',monospace; font-size:8px; letter-spacing:0.1em; color:rgba(245,241,232,0.5); text-transform:uppercase;}
+
+  /* ---- mass row ---- */
+  .section-pad{padding:44px 5vw;}
+  .mass-row{display:grid; grid-template-columns:1fr 1fr 1.3fr 1.3fr 1fr; gap:16px;}
+  @media (max-width:1200px){.mass-row{grid-template-columns:1fr 1fr; grid-auto-rows:auto;}}
+  .card{background:var(--card); border:1px solid var(--line); border-radius:2px; padding:18px;}
+  .panel-title{display:flex; justify-content:space-between; align-items:baseline; margin-bottom:12px; gap:8px;}
+  .panel-title .pt-name{font-family:'JetBrains Mono',monospace; font-size:9.5px; letter-spacing:0.08em; text-transform:uppercase; color:var(--text-dim); line-height:1.3;}
+  .panel-title .pt-link{font-family:'JetBrains Mono',monospace; font-size:8.5px; letter-spacing:0.06em; text-transform:uppercase; color:var(--gold); cursor:pointer; white-space:nowrap;}
+  .lineitem{display:flex; align-items:center; gap:9px; padding:7px 0;}
+  .lineitem .rank{font-family:'Playfair Display'; font-style:italic; font-size:12px; color:var(--gold-dim); width:12px;}
+  .lineitem .avatar{width:24px; height:24px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-family:'JetBrains Mono',monospace; font-size:8.5px; font-weight:700; color:#fff; flex-shrink:0;}
+  .lineitem .lname{flex:1; font-size:12.5px;}
+  .lineitem .lscore{font-family:'Playfair Display'; font-weight:700; font-size:13.5px; width:24px; text-align:right;}
+  .lineitem .ldelta{font-family:'JetBrains Mono',monospace; font-size:9.5px; width:52px; text-align:right;}
+  .up{color:var(--growth);} .down{color:var(--alert);}
+  .seeall{margin-top:6px; font-family:'JetBrains Mono',monospace; font-size:8.5px; letter-spacing:0.06em; text-transform:uppercase; color:var(--gold); text-align:center; cursor:pointer;}
+
+  .donut-wrap{position:relative;}
+  .donut-center{position:absolute; inset:0; display:flex; align-items:center; justify-content:center; flex-direction:column; pointer-events:none;}
+  .donut-center span{font-family:'JetBrains Mono',monospace; font-size:8px; letter-spacing:0.06em; text-transform:uppercase; color:var(--text-dim); text-align:center; line-height:1.3;}
+  .opinion-legend{margin-top:10px;}
+  .opinion-legend .oi{display:flex; align-items:center; gap:7px; font-size:11px; padding:3px 0;}
+  .opinion-legend .oi .sw{width:8px; height:8px; border-radius:50%; flex-shrink:0;}
+  .opinion-legend .oi .oname{flex:1;}
+  .opinion-legend .oi .opct{font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--text-dim);}
+
+  .map-mini-legend{display:flex; flex-direction:column; gap:4px; margin-top:8px;}
+  .map-mini-legend .row{display:flex; align-items:center; gap:6px; font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:0.04em; text-transform:uppercase; color:var(--text-dim);}
+  .map-mini-legend .sw{width:16px; height:8px; border-radius:1px;}
+
+  /* ---- dims ---- */
+  .dims-title{font-family:'JetBrains Mono',monospace; font-size:11.5px; letter-spacing:0.12em; text-transform:uppercase; color:var(--gold-dim); text-align:center; margin-bottom:28px;}
+  .dims-grid{display:grid; grid-template-columns:repeat(8,1fr); gap:12px;}
+  @media (max-width:1100px){.dims-grid{grid-template-columns:repeat(4,1fr);}}
+  @media (max-width:640px){.dims-grid{grid-template-columns:repeat(2,1fr);}}
+  .dim-card{text-align:center; padding:6px;}
+  .dim-card svg{color:var(--gold); margin-bottom:8px;}
+  .dim-card .dtitle{font-family:'JetBrains Mono',monospace; font-size:9.5px; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:6px;}
+  .dim-card .ddesc{font-size:11px; color:var(--text-dim); line-height:1.4;}
+
+  /* ---- gates ---- */
+  .gated-public{position:relative; overflow:hidden;}
+  .gated-public .blur-target{filter:blur(6px); user-select:none;}
+  .gate-public-overlay{position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px; background:linear-gradient(180deg, transparent, var(--card) 55%); text-align:center; padding:12px;}
+  .gate-public-overlay .tip{font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:var(--text-dim);}
+  .gate-premium{background:var(--navy-deep); border:1px solid var(--gold-dim); border-radius:2px; padding:30px; text-align:center; color:var(--ivory);}
+  .gate-premium .lock{width:32px; height:32px; margin:0 auto 12px; border:1px solid var(--gold); border-radius:2px; display:flex; align-items:center; justify-content:center; color:var(--gold);}
+  .gate-premium h3{font-size:21px; color:var(--gold-soft); margin-bottom:8px;}
+  .gate-premium p{font-family:'Cormorant Garamond'; font-style:italic; font-size:16px; color:rgba(245,241,232,0.75); max-width:420px; margin:0 auto 16px;}
+  .gate-status{margin-top:10px; font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:0.1em; color:var(--growth); text-transform:uppercase; display:none;}
+
+  .modal-veil{position:fixed; inset:0; background:rgba(8,17,28,0.72); display:none; align-items:center; justify-content:center; z-index:50; padding:20px;}
+  .modal-veil.open{display:flex;}
+  .modal-box{background:var(--card); border:1px solid var(--gold-dim); border-radius:2px; padding:32px; max-width:400px; text-align:center;}
+  .modal-box h3{font-size:21px; margin-bottom:10px;}
+  .modal-box p{font-family:'Cormorant Garamond'; font-style:italic; font-size:16px; color:var(--text-dim); margin-bottom:18px;}
+  .modal-box input{width:100%; padding:11px 12px; border:1px solid var(--line); border-radius:2px; background:var(--bg); color:var(--text); font-family:'DM Sans'; margin-bottom:12px;}
+  .modal-close{margin-top:14px; font-family:'JetBrains Mono',monospace; font-size:9.5px; letter-spacing:0.1em; text-transform:uppercase; color:var(--text-dim); cursor:pointer;}
+
+  section.block{padding:0 5vw; margin-top:50px;}
+  .block-head{margin-bottom:18px;}
+  .block-head h2{font-size:24px;}
+  .grid{display:grid; gap:18px;}
+  .grid.cols-2{grid-template-columns:repeat(2,1fr);}
+  @media (max-width:900px){.grid.cols-2{grid-template-columns:1fr;}}
+
+  .rank-row{display:flex; align-items:center; gap:16px; padding:14px 0; border-bottom:1px solid var(--line);}
+  .rank-row:last-child{border-bottom:none;}
+  .rank-name{width:130px; font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:0.06em; text-transform:uppercase;}
+  .rank-score{font-family:'Playfair Display'; font-weight:700; font-size:18px; width:70px;}
+  .delta{font-family:'JetBrains Mono', monospace; font-size:12px; font-weight:700;}
+
+  .heatmap{display:grid; grid-template-columns:repeat(4,1fr); gap:10px;}
+  @media (max-width:760px){.heatmap{grid-template-columns:repeat(2,1fr);}}
+  .region{border-radius:2px; padding:16px 14px; color:#F5F1E8; min-height:92px; display:flex; flex-direction:column; justify-content:space-between;}
+  .region .rname{font-family:'JetBrains Mono',monospace; font-size:9.5px; letter-spacing:0.06em; text-transform:uppercase; opacity:.85;}
+  .region .rtheme{font-family:'Cormorant Garamond'; font-style:italic; font-size:15px;}
+  .region.locked{filter:blur(5px);}
+
+  .actor-picker{display:flex; gap:10px; margin-bottom:22px; flex-wrap:wrap;}
+  .actor-picker button{font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:0.1em; text-transform:uppercase; padding:8px 14px; border:1px solid var(--line); background:var(--card); color:var(--text); border-radius:2px; cursor:pointer;}
+  .actor-picker button.active{background:var(--gold); color:var(--navy); border-color:var(--gold);}
+  .radar-layout{display:grid; grid-template-columns:1.1fr 1fr; gap:30px; align-items:center;}
+  @media (max-width:820px){.radar-layout{grid-template-columns:1fr;}}
+
+  table.pond{width:100%; border-collapse:collapse; margin-top:6px;}
+  table.pond th{text-align:left; font-family:'JetBrains Mono',monospace; font-size:9.5px; letter-spacing:0.1em; text-transform:uppercase; color:var(--gold-dim); border-bottom:1px solid var(--line); padding:9px 6px;}
+  table.pond td{padding:11px 6px; border-bottom:1px solid var(--line); font-size:14px;}
+  .src-tags{display:flex; flex-wrap:wrap; gap:8px; margin-top:12px;}
+  .src-tags span{font-family:'JetBrains Mono',monospace; font-size:9.5px; letter-spacing:0.06em; text-transform:uppercase; border:1px solid var(--line); padding:6px 10px; border-radius:2px; color:var(--text-dim);}
+
+  /* ---- footer ---- */
+  footer{background:var(--navy-deep); color:var(--ivory);}
+  .newsletter{background:var(--navy-mid); padding:26px 5vw; display:grid; grid-template-columns:1fr 1.6fr 1fr; gap:30px; align-items:center;}
+  @media (max-width:900px){.newsletter{grid-template-columns:1fr; text-align:center;}}
+  .nl-left{display:flex; align-items:center; gap:14px;}
+  .nl-left svg{color:var(--gold); flex-shrink:0;}
+  .ntitle{font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:0.08em; text-transform:uppercase; margin-bottom:4px;}
+  .ndesc{font-size:12.5px; color:rgba(245,241,232,0.6); max-width:260px;}
+  .nl-mid{font-family:'Cormorant Garamond'; font-style:italic; font-size:17px; color:var(--gold-soft); text-align:center; line-height:1.5;}
+  .nl-right{display:flex; gap:8px;}
+  .nl-right input{flex:1; padding:11px 12px; border:1px solid var(--line); border-radius:2px; background:var(--navy-deep); color:var(--ivory); font-family:'DM Sans'; font-size:12.5px;}
+  .footer-bottom{border-top:1px solid rgba(201,168,76,0.15); padding:22px 5vw 30px; text-align:center;}
+  .footer-copy{font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:0.12em; text-transform:uppercase; color:var(--gold-dim); margin-bottom:12px;}
+  .footer-disclaimer{font-family:'Cormorant Garamond'; font-style:italic; font-size:13px; color:rgba(245,241,232,0.5); line-height:1.7; margin-bottom:16px;}
+  .footer-links{display:flex; justify-content:center; gap:26px; flex-wrap:wrap;}
+  .footer-links a{font-family:'JetBrains Mono',monospace; font-size:9.5px; letter-spacing:0.1em; text-transform:uppercase; color:var(--gold-soft); text-decoration:none;}
+</style>
+</head>
+<body>
+
+<div class="demo-flag">Maquette de démonstration · données fictives, aucune donnée électorale réelle</div>
+
+<header class="top">
+  <div class="brandrow">
+    <div class="brand-left">
+      <div class="flag">
+        <svg viewBox="0 0 3 2" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+          <rect width="3" height="2" fill="#C1272D"/>
+          <path d="M1.5,0.5 L1.79,1.35 L1.02,0.79 L1.98,0.79 L1.21,1.35 Z" fill="none" stroke="#006233" stroke-width="0.05"/>
+        </svg>
+      </div>
+      <div>
+        <div class="brandmark">Intelligence <em>Politique</em></div>
+        <div class="brandsub">Buildfluence · Législatives Maroc 2026</div>
+      </div>
+    </div>
+    <div class="top-actions">
+      <div class="idx-badge">IBDN®</div>
+      <div class="fond-group">
+        <span class="flabel">Fond</span>
+        <div class="theme-toggle">
+          <button class="active" data-theme-btn="dark">Sombre</button>
+          <button data-theme-btn="light">Clair</button>
+        </div>
+      </div>
+      <button class="btn">Se connecter</button>
+      <button class="btn btn-gold" onclick="openSignup()">S'inscrire gratuitement</button>
+    </div>
+  </div>
+</header>
+
+<nav class="tabs" id="tabs">
+  <button class="active" data-tab="dashboard">
+    <div class="row"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/></svg><span class="tab-label">Tableau de bord</span></div>
+    <div class="tab-sub">Que se passe-t-il aujourd'hui ?</div>
+  </button>
+  <button data-tab="classements">
+    <div class="row"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="12" width="4" height="9"/><rect x="10" y="7" width="4" height="14"/><rect x="17" y="3" width="4" height="18"/></svg><span class="tab-label">Classements</span></div>
+    <div class="tab-sub">Qui progresse ? Qui recule ?</div>
+  </button>
+  <button data-tab="opinion">
+    <div class="row"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 15 0 0 1 0 18a9 15 0 0 1 0-18Z"/></svg><span class="tab-label">Opinion</span></div>
+    <div class="tab-sub">Quels sujets dominent le débat ?</div>
+  </button>
+  <button data-tab="cartographie">
+    <div class="row"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6l6-2 6 2 6-2v14l-6 2-6-2-6 2Z"/><path d="M9 4v14M15 6v14"/></svg><span class="tab-label">Cartographie</span></div>
+    <div class="tab-sub">Où se concentrent les dynamiques ?</div>
+  </button>
+  <button data-tab="acteurs">
+    <div class="row"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2"/><circle cx="10" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg><span class="tab-label">Acteurs</span></div>
+    <div class="tab-sub">Qui façonne le débat ?</div>
+  </button>
+  <button data-tab="methodologie">
+    <div class="row"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="M7 8h10M7 12h10M7 16h6"/></svg><span class="tab-label">Méthodologie</span></div>
+    <div class="tab-sub">Comment nos analyses sont produites</div>
+  </button>
+  <button data-tab="apropos">
+    <div class="row"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 16v-4M12 8h.01"/></svg><span class="tab-label">À propos</span></div>
+    <div class="tab-sub">Notre mission et nos engagements</div>
+  </button>
+</nav>
+
+<main>
+
+  <!-- ============ TABLEAU DE BORD ============ -->
+  <section class="panel active" id="dashboard">
+
+    <!-- HERO -->
+    <div class="hero">
+      <div>
+        <div class="eyebrow">Intelligence politique · Maroc 2026</div>
+        <h1>Comprendre maintenant.<br><em>Décider aujourd'hui.</em><br>Anticiper demain.</h1>
+        <p class="lead">IBDN® (Indice Buildfluence de Dynamique Narrative) mesure en temps réel la présence, l'influence et la dynamique des partis et personnalités politiques à partir des médias et des réseaux sociaux.</p>
+        <div class="ibdn-note">L'IBDN® ne mesure jamais une intention de vote. Ce n'est ni un sondage, ni une prédiction électorale.</div>
+
+        <div class="feat-row">
+          <div class="feat">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8Z"/></svg>
+            <div class="ftitle">Sovereign Data</div>
+            <div class="fdesc">Analyse continue sur plus de 15 000 sources.</div>
+          </div>
+          <div class="feat">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M17 21v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2"/><circle cx="10" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            <div class="ftitle">Pour tous</div>
+            <div class="fdesc">Citoyens, médias, chercheurs, candidats et partis.</div>
+          </div>
+        </div>
+
+        <div class="hero-cta" style="margin-top:20px;"><a class="cta-link" href="#apercu">Découvrir le tableau de bord ›</a></div>
+      </div>
+
+      <div class="graph-card">
+        <h2>Political Narrative <em>Graph</em></h2>
+        <div class="graph-wrap">
+          <div class="graph-legend">
+            <span><i class="dot" style="background:var(--growth);"></i>Tonalité positive</span>
+            <span><i class="dot" style="background:var(--gold);"></i>Tonalité neutre</span>
+            <span><i class="dot" style="background:var(--alert);"></i>Tonalité négative</span>
+            <span><i class="dot" style="background:#4a6a8a;"></i>Thématique (attracteur)</span>
+          </div>
+          <svg viewBox="0 0 460 300" style="width:100%; height:auto;">
+            <g stroke="rgba(201,168,76,0.35)" stroke-width="1">
+              <line x1="90" y1="70" x2="220" y2="140"/><line x1="90" y1="70" x2="70" y2="200"/>
+              <line x1="220" y1="140" x2="340" y2="80"/><line x1="220" y1="140" x2="300" y2="210"/>
+              <line x1="70" y1="200" x2="220" y2="140"/>
+            </g>
+            <g font-family="JetBrains Mono" font-size="8.5" fill="#F5F1E8" text-anchor="middle">
+              <circle cx="90" cy="70" r="26" fill="var(--growth)"/><text x="90" y="74">PARTI A</text>
+              <circle cx="220" cy="140" r="15" fill="#4a6a8a"/><text x="220" y="144" fill="#0D1B2A">POUVOIR</text>
+              <circle cx="340" cy="80" r="20" fill="var(--alert)"/><text x="340" y="84">PARTI B</text>
+              <circle cx="70" cy="200" r="11" fill="var(--gold)"/><text x="70" y="204" fill="#0D1B2A">CAND. 1</text>
+              <circle cx="300" cy="210" r="13" fill="#4a6a8a"/><text x="300" y="214" fill="#0D1B2A">EMPLOI</text>
+            </g>
+          </svg>
+        </div>
+      </div>
+
+      <div class="ibdn-card">
+        <div class="ihead">IBDN<em>®</em></div>
+        <div class="isub">Indice Buildfluence de Dynamique Narrative</div>
+        <div class="gauge">
+          <svg width="130" height="130" viewBox="0 0 150 150">
+            <circle cx="75" cy="75" r="62" fill="none" stroke="rgba(245,241,232,0.12)" stroke-width="10"/>
+            <circle cx="75" cy="75" r="62" fill="none" stroke="#C9A84C" stroke-width="10" stroke-linecap="round" stroke-dasharray="389.5" stroke-dashoffset="109" transform="rotate(-90 75 75)"/>
+            <text x="75" y="80" text-anchor="middle" font-family="Playfair Display" font-weight="900" font-size="28" fill="#F5F1E8">72</text>
+            <text x="75" y="98" text-anchor="middle" font-family="JetBrains Mono" font-size="9" fill="#8a7537">/ 100</text>
+          </svg>
+        </div>
+        <div class="dim-row"><span class="bullet"></span><span class="dlabel">Visibilité</span><span class="track"><span class="fill" style="width:78%;"></span></span><span class="dval">78/100</span></div>
+        <div class="dim-row"><span class="bullet"></span><span class="dlabel">Influence</span><span class="track"><span class="fill" style="width:70%;"></span></span><span class="dval">70/100</span></div>
+        <div class="dim-row"><span class="bullet"></span><span class="dlabel">Engagement</span><span class="track"><span class="fill" style="width:75%;"></span></span><span class="dval">75/100</span></div>
+        <div class="dim-row"><span class="bullet"></span><span class="dlabel">Propagation</span><span class="track"><span class="fill" style="width:68%;"></span></span><span class="dval">68/100</span></div>
+        <div class="dim-row"><span class="bullet"></span><span class="dlabel">Persistance</span><span class="track"><span class="fill" style="width:71%;"></span></span><span class="dval">71/100</span></div>
+        <div class="dim-row"><span class="bullet"></span><span class="dlabel">Tonalité</span><span class="track"><span class="fill" style="width:65%;"></span></span><span class="dval">65/100</span></div>
+        <div class="dim-row"><span class="bullet"></span><span class="dlabel">Thématiques</span><span class="track"><span class="fill" style="width:73%;"></span></span><span class="dval">73/100</span></div>
+        <div class="dim-row"><span class="bullet"></span><span class="dlabel">Dynamique</span><span class="track"><span class="fill" style="width:80%;"></span></span><span class="dval">80/100</span></div>
+        <div class="ibdn-evo">
+          <span class="up">↑ +3,8 pts</span> <span class="mono" style="font-size:9px; color:var(--text-dim);">Évolution 24h</span>
+          <div class="updated">Dernière mise à jour : Aujourd'hui à 08:30</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- KPI BAR -->
+    <div class="kpi-bar">
+      <div class="kpi"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6"/></svg><div><div class="kval">15 482 317</div><div class="klabel">Documents analysés</div></div></div>
+      <div class="kpi"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4" width="18" height="18" rx="1"/><path d="M3 9h18"/></svg><div><div class="kval">4 823</div><div class="klabel">Articles aujourd'hui</div></div></div>
+      <div class="kpi"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="6" width="15" height="12" rx="1"/><path d="m22 8-5 4 5 4Z"/></svg><div><div class="kval">63</div><div class="klabel">Médias surveillés</div></div></div>
+      <div class="kpi"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg><div><div class="kval">24 h / 24</div><div class="klabel">Sovereign Data active</div></div></div>
+      <div class="kpi"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg><div><div class="kval">2,1 M</div><div class="klabel">Interactions aujourd'hui</div></div></div>
+    </div>
+
+    <!-- MASS ROW -->
+    <div class="section-pad" id="apercu">
+      <div class="mass-row">
+        <div class="card">
+          <div class="panel-title"><span class="pt-name">Top 10<br>Partis</span><span class="pt-link" onclick="goTo('classements')">Voir le classement ›</span></div>
+          <div class="lineitem"><span class="rank">1</span><span class="avatar" style="background:var(--growth);">A</span><span class="lname">Parti A</span><span class="lscore">78</span><span class="ldelta up">↑ +4,8</span></div>
+          <div class="lineitem"><span class="rank">2</span><span class="avatar" style="background:var(--gold-dim);">B</span><span class="lname">Parti B</span><span class="lscore">65</span><span class="ldelta up">↑ +2,1</span></div>
+          <div class="lineitem"><span class="rank">3</span><span class="avatar" style="background:#4a6a8a;">C</span><span class="lname">Parti C</span><span class="lscore">61</span><span class="ldelta down">↓ -1,2</span></div>
+          <div class="lineitem"><span class="rank">4</span><span class="avatar" style="background:#7a5ca8;">D</span><span class="lname">Parti D</span><span class="lscore">58</span><span class="ldelta up">↑ +0,6</span></div>
+          <div class="lineitem"><span class="rank">5</span><span class="avatar" style="background:var(--alert);">E</span><span class="lname">Parti E</span><span class="lscore">55</span><span class="ldelta down">↓ -0,8</span></div>
+          <div class="seeall" onclick="goTo('classements')">Voir les 10 partis ›</div>
+        </div>
+
+        <div class="card">
+          <div class="panel-title"><span class="pt-name">Top 10<br>Personnalités</span><span class="pt-link" onclick="goTo('classements')">Voir le classement ›</span></div>
+          <div class="lineitem"><span class="rank">1</span><span class="avatar" style="background:var(--growth);">C1</span><span class="lname">Candidat 1</span><span class="lscore">72</span><span class="ldelta up">↑ +4,6</span></div>
+          <div class="lineitem"><span class="rank">2</span><span class="avatar" style="background:var(--gold-dim);">C2</span><span class="lname">Candidat 2</span><span class="lscore">66</span><span class="ldelta up">↑ +1,9</span></div>
+          <div class="lineitem"><span class="rank">3</span><span class="avatar" style="background:#4a6a8a;">C3</span><span class="lname">Candidat 3</span><span class="lscore">61</span><span class="ldelta down">↓ -0,7</span></div>
+          <div class="lineitem"><span class="rank">4</span><span class="avatar" style="background:#7a5ca8;">C4</span><span class="lname">Candidat 4</span><span class="lscore">57</span><span class="ldelta up">↑ +0,6</span></div>
+          <div class="lineitem"><span class="rank">5</span><span class="avatar" style="background:var(--alert);">C5</span><span class="lname">Candidat 5</span><span class="lscore">56</span><span class="ldelta up">↑ +1,2</span></div>
+          <div class="seeall" onclick="goTo('classements')">Voir les 10 personnalités ›</div>
+        </div>
+
+        <div class="card">
+          <div class="panel-title"><span class="pt-name">Évolution globale<br><span style="text-transform:none; font-style:italic; font-family:'Cormorant Garamond'; font-size:11px;">(7 jours)</span></span></div>
+          <canvas id="evoChart" height="180"></canvas>
+        </div>
+
+        <div class="card">
+          <div class="panel-title"><span class="pt-name">Opinion · Enjeux clés</span><span class="pt-link" onclick="goTo('opinion')">Voir tout ›</span></div>
+          <div class="donut-wrap">
+            <canvas id="opinionChart" height="160"></canvas>
+            <div class="donut-center"><span>Part des<br>conversations</span></div>
+          </div>
+          <div class="opinion-legend">
+            <div class="oi"><span class="sw" style="background:#4AA0B8;"></span><span class="oname">Pouvoir d'achat</span><span class="opct">28%</span></div>
+            <div class="oi"><span class="sw" style="background:var(--gold);"></span><span class="oname">Emploi & Jeunesse</span><span class="opct">19%</span></div>
+            <div class="oi"><span class="sw" style="background:var(--growth);"></span><span class="oname">Santé</span><span class="opct">14%</span></div>
+            <div class="oi"><span class="sw" style="background:#8A5CB8;"></span><span class="oname">Éducation</span><span class="opct">12%</span></div>
+            <div class="oi"><span class="sw" style="background:var(--alert);"></span><span class="oname">Sécurité</span><span class="opct">10%</span></div>
+            <div class="oi"><span class="sw" style="background:rgba(245,241,232,0.3);"></span><span class="oname">Autres</span><span class="opct">17%</span></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="panel-title"><span class="pt-name">Cartographie<br>des dynamiques</span><span class="pt-link" onclick="goTo('cartographie')">Voir la carte ›</span></div>
+          <svg viewBox="0 0 200 260" style="width:100%; max-width:130px; margin:6px auto; display:block;">
+            <path d="M95,10 L138,7 L168,20 L192,38 L204,84 L208,144 L196,200 L182,250 L155,280 L112,286 L78,272 L60,230 L48,174 L42,116 L46,62 L68,26 Z" fill="none" stroke="var(--gold)" stroke-width="1.3"/>
+            <ellipse cx="100" cy="70" rx="42" ry="34" fill="var(--alert)" opacity="0.8"/>
+            <ellipse cx="120" cy="140" rx="34" ry="30" fill="var(--alert)" opacity="0.5"/>
+            <ellipse cx="95" cy="200" rx="28" ry="30" fill="var(--alert)" opacity="0.3"/>
+          </svg>
+          <div class="map-mini-legend">
+            <div class="row"><span class="sw" style="background:var(--alert); opacity:.9;"></span>Très forte</div>
+            <div class="row"><span class="sw" style="background:var(--alert); opacity:.6;"></span>Forte</div>
+            <div class="row"><span class="sw" style="background:var(--alert); opacity:.35;"></span>Moyenne</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="dims-title" style="margin-top:44px;">L'IBDN® : un indice, 8 dimensions, une vision claire</div>
+      <div class="dims-grid">
+        <div class="dim-card"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="3"/><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7-10-7-10-7Z"/></svg><div class="dtitle">Visibilité</div><div class="ddesc">Être cité et visible dans les médias et réseaux.</div></div>
+        <div class="dim-card"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8Z"/></svg><div class="dtitle">Influence</div><div class="ddesc">Être relayé par des sources influentes et crédibles.</div></div>
+        <div class="dim-card"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.8 1-1a5.5 5.5 0 0 0 0-7.6Z"/></svg><div class="dtitle">Engagement</div><div class="ddesc">Susciter des réactions, interactions et partages.</div></div>
+        <div class="dim-card"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 12a8 8 0 0 1 14-5M20 4v5h-5M20 12a8 8 0 0 1-14 5M4 20v-5h5"/></svg><div class="dtitle">Propagation</div><div class="ddesc">Se propager rapidement dans l'espace public.</div></div>
+        <div class="dim-card"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg><div class="dtitle">Persistance</div><div class="ddesc">Durer dans le temps et rester présent.</div></div>
+        <div class="dim-card"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4" width="18" height="14" rx="1"/><path d="M8 21h8M12 18v3"/></svg><div class="dtitle">Tonalité</div><div class="ddesc">Être perçu positivement, négativement ou neutre.</div></div>
+        <div class="dim-card"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 21V9l8-6 8 6v12"/><path d="M9 21v-7h6v7"/></svg><div class="dtitle">Thématiques</div><div class="ddesc">Être associé aux grands enjeux de la campagne.</div></div>
+        <div class="dim-card"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg><div class="dtitle">Dynamique</div><div class="ddesc">Progresser, stagner ou reculer dans le temps.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CLASSEMENTS ============ -->
+  <section class="panel" id="classements" style="padding:44px 5vw;">
+    <div class="eyebrow">Qui progresse, qui recule</div>
+    <h2 style="font-size:28px; margin-bottom:22px;">Classements</h2>
+    <div class="card gated-public" id="gate-classements">
+      <div class="blur-target">
+        <div class="rank-row"><div class="rank-name">Parti A</div><div class="rank-score">78</div><div class="delta up">▲ +4,8 (7j)</div></div>
+        <div class="rank-row"><div class="rank-name">Parti B</div><div class="rank-score">65</div><div class="delta up">▲ +2,1 (7j)</div></div>
+        <div class="rank-row"><div class="rank-name">Parti C</div><div class="rank-score">61</div><div class="delta down">▼ -1,2 (7j)</div></div>
+        <div class="rank-row"><div class="rank-name">Parti D</div><div class="rank-score">58</div><div class="delta up">▲ +0,6 (7j)</div></div>
+      </div>
+      <div class="gate-public-overlay">
+        <div class="tip">Inscrivez-vous gratuitement pour voir le classement complet</div>
+        <button class="btn btn-gold" onclick="openSignup()">S'inscrire gratuitement</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ OPINION ============ -->
+  <section class="panel" id="opinion" style="padding:44px 5vw;">
+    <div class="eyebrow">Quels sujets dominent le débat</div>
+    <h2 style="font-size:28px; margin-bottom:22px;">Opinion</h2>
+    <div class="grid cols-2">
+      <div class="card"><canvas id="opinionChart2"></canvas></div>
+      <div class="card">
+        <h3 style="font-size:18px; margin-bottom:14px;">Part de conversation par thématique</h3>
+        <p class="lead" style="font-size:15.5px; color:var(--text-dim);">Répartition sur les 7 derniers jours, toutes sources confondues. Le détail par acteur et par territoire est disponible après inscription gratuite.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CARTOGRAPHIE ============ -->
+  <section class="panel" id="cartographie" style="padding:44px 5vw;">
+    <div class="eyebrow">Où se concentrent les dynamiques</div>
+    <h2 style="font-size:28px; margin-bottom:22px;">Cartographie <em>Territoriale</em></h2>
+    <div class="heatmap">
+      <div class="region" style="background:var(--growth);"><div class="rname">Casablanca-Settat</div><div class="rtheme">Emploi</div></div>
+      <div class="region" style="background:var(--gold-dim);"><div class="rname">Rabat-Salé-Kénitra</div><div class="rtheme">Administration</div></div>
+      <div class="region locked" style="background:#4a6a8a;"><div class="rname">Fès-Meknès</div><div class="rtheme">Éducation</div></div>
+      <div class="region locked" style="background:var(--alert); opacity:.85;"><div class="rname">Marrakech-Safi</div><div class="rtheme">Eau</div></div>
+      <div class="region locked" style="background:#4a6a8a;"><div class="rname">Tanger-Tétouan</div><div class="rtheme">Investissement</div></div>
+      <div class="region locked" style="background:var(--growth);"><div class="rname">Souss-Massa</div><div class="rtheme">Agriculture</div></div>
+      <div class="region locked" style="background:var(--gold-dim);"><div class="rname">Oriental</div><div class="rtheme">Sécurité</div></div>
+      <div class="region locked" style="background:#4a6a8a;"><div class="rname">Béni Mellal</div><div class="rtheme">Pouvoir d'achat</div></div>
+    </div>
+    <div class="gate-premium" style="margin-top:26px;">
+      <div class="lock">⚷</div>
+      <h3>La donnée gratuite n'a pas de valeur.</h3>
+      <p>2 régions sur 12 sont accessibles librement. La cartographie complète, mise à jour quotidiennement, est réservée aux accès sur invitation.</p>
+      <button class="btn btn-gold" onclick="requestInvite(this)">Demander une invitation</button>
+      <div class="gate-status">Demande envoyée · notre équipe vous recontacte</div>
+    </div>
+  </section>
+
+  <!-- ============ ACTEURS ============ -->
+  <section class="panel" id="acteurs" style="padding:44px 5vw;">
+    <div class="eyebrow">Qui façonne le débat</div>
+    <h2 style="font-size:28px; margin-bottom:22px;">Acteurs</h2>
+    <div class="actor-picker">
+      <button class="active" data-actor="0">Candidat 1</button>
+      <button disabled title="Accès sur invitation">Candidat 2 🔒</button>
+      <button disabled title="Accès sur invitation">Candidat 3 🔒</button>
+    </div>
+    <div class="radar-layout">
+      <div>
+        <svg viewBox="0 0 320 320" style="width:100%; max-width:380px;">
+          <g stroke="var(--line)" fill="none">
+            <polygon points="160,30 270,90 270,230 160,290 50,230 50,90"/>
+            <polygon points="160,65 235,105 235,215 160,255 85,215 85,105"/>
+            <polygon points="160,100 200,122 200,198 160,220 120,198 120,122"/>
+          </g>
+          <polygon points="160,50 235,112 225,215 160,270 95,205 90,105" fill="rgba(201,168,76,0.32)" stroke="var(--gold)" stroke-width="2"/>
+          <g font-family="JetBrains Mono" font-size="9" fill="var(--text)" text-anchor="middle">
+            <text x="160" y="18">Popularité</text><text x="284" y="88">Crédibilité</text>
+            <text x="284" y="236">Influence</text><text x="160" y="306">Mobilisation</text>
+            <text x="36" y="236">Engagement</text><text x="36" y="88">Leadership</text>
+          </g>
+        </svg>
+      </div>
+      <div class="card">
+        <div class="mono" style="font-size:9.5px; color:var(--gold-dim);">Candidat 1 · Parti A</div>
+        <h3 style="font-size:20px; margin:8px 0 12px;">Profil narratif</h3>
+        <p class="lead" style="font-size:15.5px; color:var(--text-dim);">Forte centralité sur « pouvoir d'achat » et « Sahara », engagement en hausse sur 14 jours, tonalité neutre à positive.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ MÉTHODOLOGIE ============ -->
+  <section class="panel" id="methodologie" style="padding:44px 5vw;">
+    <div class="eyebrow">Crédibilité et gouvernance</div>
+    <h2 style="font-size:28px; margin-bottom:22px;">Méthodologie</h2>
+    <div class="grid cols-2" style="align-items:start;">
+      <div class="card">
+        <h3 style="font-size:17px; margin-bottom:12px;">Les 8 dimensions de l'IBDN®</h3>
+        <table class="pond">
+          <tr><th>Dimension</th><th>Définition</th></tr>
+          <tr><td>Visibilité</td><td>Présence et volume dédupliqué de mentions</td></tr>
+          <tr><td>Influence</td><td>Importance des sources et relais</td></tr>
+          <tr><td>Engagement</td><td>Réactions, partages, commentaires</td></tr>
+          <tr><td>Propagation</td><td>Diffusion d'un récit sur une période courte</td></tr>
+          <tr><td>Persistance</td><td>Capacité d'un signal à durer dans le temps</td></tr>
+          <tr><td>Tonalité</td><td>Orientation du discours, avec incertitude</td></tr>
+          <tr><td>Thématiques</td><td>Association aux enjeux structurants</td></tr>
+          <tr><td>Dynamique globale</td><td>Variation consolidée des dimensions</td></tr>
+        </table>
+        <p class="mono" style="font-size:9.5px; color:var(--text-dim); margin-top:12px; letter-spacing:0.06em;">Pondérations en cours de validation méthodologique · non publiées à ce stade</p>
+      </div>
+      <div class="card" style="background:var(--navy-deep); color:var(--ivory); border-color:var(--gold-dim);">
+        <h3 style="font-size:17px; margin-bottom:12px; color:var(--ivory);">Gouvernance & sources</h3>
+        <p class="lead" style="font-size:15px; color:var(--ivory);">L'IBDN® ne constitue pas une prédiction électorale et ne mesure jamais une intention de vote. Toute valeur affichée est reliée à une période, un périmètre de sources et une version de méthode.</p>
+        <div class="src-tags" style="margin-top:14px;">
+          <span>Presse</span><span>TV / Radio</span><span>Facebook</span><span>X</span><span>TikTok</span><span>YouTube</span><span>Forums</span><span>Communiqués officiels</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ À PROPOS ============ -->
+  <section class="panel" id="apropos" style="padding:44px 5vw;">
+    <div class="eyebrow">Notre mission</div>
+    <h2 style="font-size:28px; margin-bottom:18px;">À propos</h2>
+    <div class="card" style="max-width:680px;">
+      <p class="lead" style="font-size:17px; color:var(--text-dim);">Buildfluence conçoit une infrastructure souveraine de décision : intelligence stratégique, due diligence et influence, augmentées par l'IA. Intelligence Politique en est la déclinaison électorale, fondée sur l'analyse quotidienne de données ouvertes, sans microciblage ni profilage des électeurs.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="newsletter">
+    <div class="nl-left">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="4" width="20" height="16" rx="1"/><path d="m2 6 10 7L22 6"/></svg>
+      <div>
+        <div class="ntitle">Recevez votre brief quotidien</div>
+        <div class="ndesc">L'essentiel de la dynamique politique tous les matins dans votre email.</div>
+      </div>
+    </div>
+    <div class="nl-mid">La 1ère plateforme marocaine d'intelligence politique fondée sur l'analyse quotidienne des données ouvertes pour comprendre les dynamiques du débat public.</div>
+    <div class="nl-right">
+      <input type="email" placeholder="Votre adresse email">
+      <button class="btn btn-gold">S'inscrire</button>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2026 Buildfluence · Tous droits réservés</div>
+    <div class="footer-disclaimer">
+      Analyses réalisées exclusivement à partir de données ouvertes (OSINT), sans microciblage ni profilage des électeurs.<br>
+      Respect des données personnelles conforme à la réglementation marocaine CNDP et, le cas échéant, au RGPD européen.
+    </div>
+    <div class="footer-links">
+      <a href="#">À propos de l'IBDN®</a>
+      <a href="#">Mentions légales</a>
+      <a href="#">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<div class="modal-veil" id="signupModal">
+  <div class="modal-box">
+    <h3>Accédez aux données détaillées</h3>
+    <p>Inscription gratuite, sans carte bancaire.</p>
+    <input type="email" placeholder="Votre adresse email">
+    <button class="btn btn-gold" style="width:100%;" onclick="confirmSignup()">S'inscrire gratuitement</button>
+    <div class="modal-close" onclick="closeSignup()">Continuer sans s'inscrire</div>
+  </div>
+</div>
+
+<script>
+  const tbtns = document.querySelectorAll('#tabs button');
+  const panels = document.querySelectorAll('.panel');
+  function activateTab(name){
+    tbtns.forEach(x=>x.classList.toggle('active', x.dataset.tab===name));
+    panels.forEach(p=>p.classList.toggle('active', p.id===name));
+    window.scrollTo({top:0, behavior:'smooth'});
+  }
+  tbtns.forEach(b=>b.addEventListener('click', ()=>activateTab(b.dataset.tab)));
+
+  let registered = false;
+  let pendingTarget = null;
+  function goTo(name){
+    if(!registered){ pendingTarget = name; openSignup(); return; }
+    activateTab(name);
+  }
+  function openSignup(){ document.getElementById('signupModal').classList.add('open'); }
+  function closeSignup(){
+    document.getElementById('signupModal').classList.remove('open');
+    if(pendingTarget){ activateTab(pendingTarget); pendingTarget=null; }
+  }
+  function confirmSignup(){
+    registered = true;
+    document.querySelectorAll('.gated-public').forEach(g=>{
+      g.classList.remove('gated-public');
+      const overlay = g.querySelector('.gate-public-overlay');
+      if(overlay) overlay.remove();
+      g.querySelectorAll('.blur-target').forEach(el=>el.classList.remove('blur-target'));
+    });
+    closeSignup();
+  }
+  function requestInvite(btn){
+    const status = btn.parentElement.querySelector('.gate-status');
+    status.style.display = 'block';
+    btn.disabled = true;
+    btn.style.opacity = 0.6;
+  }
+
+  document.querySelectorAll('[data-theme-btn]').forEach(b=>{
+    b.addEventListener('click', ()=>{
+      document.querySelectorAll('[data-theme-btn]').forEach(x=>x.classList.remove('active'));
+      b.classList.add('active');
+      document.documentElement.setAttribute('data-theme', b.dataset.themeBtn);
+    });
+  });
+
+  const actorButtons = document.querySelectorAll('.actor-picker button:not([disabled])');
+  actorButtons.forEach(btn=>btn.addEventListener('click', ()=>{ actorButtons.forEach(b=>b.classList.remove('active')); btn.classList.add('active'); }));
+
+  Chart.defaults.font.family = "'DM Sans', sans-serif";
+  Chart.defaults.color = 'rgba(245,241,232,0.55)';
+
+  new Chart(document.getElementById('evoChart'), {
+    type:'line',
+    data:{ labels:['J-6','J-5','J-4','J-3','J-2','J-1','Auj.'],
+      datasets:[
+        {label:'Parti A', data:[64,66,65,68,70,69,72], borderColor:'#4AA0B8', backgroundColor:'transparent', tension:.35, pointRadius:0, borderWidth:2},
+        {label:'Parti B', data:[60,61,63,62,64,63,65], borderColor:'#C9A84C', backgroundColor:'transparent', tension:.35, pointRadius:0, borderWidth:2},
+        {label:'Parti C', data:[63,62,61,63,60,62,61], borderColor:'#B84A5C', backgroundColor:'transparent', tension:.35, pointRadius:0, borderWidth:2},
+        {label:'Parti D', data:[55,56,57,56,58,57,58], borderColor:'#8A5CB8', backgroundColor:'transparent', tension:.35, pointRadius:0, borderWidth:2}
+      ]},
+    options:{responsive:true, plugins:{legend:{display:true, position:'bottom', labels:{boxWidth:8, font:{size:8}}}},
+      scales:{ x:{grid:{color:'rgba(217,207,188,0.06)'}, ticks:{font:{size:8}}}, y:{min:0, max:100, grid:{color:'rgba(217,207,188,0.06)'}, ticks:{font:{size:8}}} } }
+  });
+
+  const opinionData = {
+    labels:["Pouvoir d'achat","Emploi & Jeunesse","Santé","Éducation","Sécurité","Autres"],
+    datasets:[{ data:[28,19,14,12,10,17], backgroundColor:['#4AA0B8','#C9A84C','#7C9A6C','#8A5CB8','#E06D4F','rgba(245,241,232,0.3)'], borderColor:'#142235', borderWidth:2 }]
+  };
+  new Chart(document.getElementById('opinionChart'), { type:'doughnut', data:opinionData, options:{responsive:true, cutout:'68%', plugins:{legend:{display:false}}} });
+  new Chart(document.getElementById('opinionChart2'), { type:'doughnut', data:opinionData, options:{responsive:true, cutout:'62%', plugins:{legend:{position:'bottom', labels:{boxWidth:10, font:{size:10}}}}} });
+</script>
+
+</body>
+</html>
