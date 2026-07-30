@@ -89,6 +89,8 @@ const SLUG_TO_ROUTE: Record<string, string> = {
   "opinion": "/insights-resources/intelligence-politique/opinion",
   "cartographie": "/insights-resources/intelligence-politique/cartographie",
   "acteurs": "/insights-resources/intelligence-politique/acteurs",
+  "dynamiques": "/insights-resources/intelligence-politique/dynamiques-politiques",
+
   "methodologie": "/insights-resources/intelligence-politique/methodologie",
   "a-propos": "/insights-resources/intelligence-politique/a-propos",
 };
