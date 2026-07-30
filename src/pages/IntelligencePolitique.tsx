@@ -6,6 +6,7 @@ import { useIPTheme } from "@/contexts/ThemeContext";
 import IPClassements from "./ip/IPClassements";
 import IPCartographie from "./ip/IPCartographie";
 import IPActeurs from "./ip/IPActeurs";
+import IPDynamiques from "./ip/IPDynamiques";
 
 type PanelSlug =
   | "dashboard"
@@ -13,8 +14,10 @@ type PanelSlug =
   | "opinion"
   | "cartographie"
   | "acteurs"
+  | "dynamiques"
   | "methodologie"
   | "a-propos";
+
 
 interface Props {
   panel?: PanelSlug;
@@ -56,7 +59,15 @@ const SEO_BY_PANEL: Record<PanelSlug, { titleFr: string; titleEn: string; descFr
     descEn: "Multidimensional analysis of political actors: popularity, credibility, influence, mobilization, engagement, leadership.",
     path: "/insights-resources/intelligence-politique/acteurs",
   },
+  "dynamiques": {
+    titleFr: "Dynamiques Politiques · Intelligence Politique",
+    titleEn: "Political Dynamics · Political Intelligence",
+    descFr: "Cartographie relationnelle des rapports de force : partis, leaders, sujets de débat et opinion citoyenne. Maquette de démonstration Buildfluence.",
+    descEn: "Relational mapping of power dynamics: parties, leaders, debate topics and citizen opinion. Buildfluence demonstration mockup.",
+    path: "/insights-resources/intelligence-politique/dynamiques-politiques",
+  },
   "methodologie": {
+
     titleFr: "Méthodologie · Intelligence Politique",
     titleEn: "Methodology · Political Intelligence",
     descFr: "Méthodologie de l'IBDN® : huit dimensions, gouvernance et sources. Buildfluence, infrastructure souveraine de décision.",
@@ -78,6 +89,8 @@ const SLUG_TO_ROUTE: Record<string, string> = {
   "opinion": "/insights-resources/intelligence-politique/opinion",
   "cartographie": "/insights-resources/intelligence-politique/cartographie",
   "acteurs": "/insights-resources/intelligence-politique/acteurs",
+  "dynamiques": "/insights-resources/intelligence-politique/dynamiques-politiques",
+
   "methodologie": "/insights-resources/intelligence-politique/methodologie",
   "a-propos": "/insights-resources/intelligence-politique/a-propos",
 };
@@ -144,6 +157,8 @@ const IntelligencePolitique = ({ panel = "dashboard" }: Props) => {
   if (panel === "classements") return (<>{seo}<IPClassements /></>);
   if (panel === "cartographie") return (<>{seo}<IPCartographie /></>);
   if (panel === "acteurs") return (<>{seo}<IPActeurs /></>);
+  if (panel === "dynamiques") return (<>{seo}<IPDynamiques /></>);
+
 
   return (
     <>

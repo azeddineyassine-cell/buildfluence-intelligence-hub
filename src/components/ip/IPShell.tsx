@@ -59,6 +59,16 @@ const TABS: Array<{
     ),
   },
   {
+    slug: "dynamiques",
+    route: "/insights-resources/intelligence-politique/dynamiques-politiques",
+    label: "Dynamiques Politiques",
+    sub: "Rapports de force et équilibres du débat",
+    icon: (
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="5" cy="6" r="2" /><circle cx="19" cy="6" r="2" /><circle cx="12" cy="18" r="2" /><path d="M6.7 7.2 10.6 16.4M17.3 7.2 13.4 16.4M7 6h10" /></svg>
+    ),
+  },
+  {
+
     slug: "methodologie",
     route: "/insights-resources/intelligence-politique/methodologie",
     label: "Méthodologie",
@@ -110,7 +120,7 @@ const SCOPED_CSS = `
 .ip-scope nav.tabs{display:flex;background:var(--bg-alt);padding:0 5vw;border-top:1px solid var(--line);overflow-x:auto;}
 .ip-scope nav.tabs a{flex:1;min-width:150px;background:none;border:none;border-bottom:2px solid transparent;cursor:pointer;padding:14px 10px 12px;display:flex;flex-direction:column;align-items:center;gap:4px;color:var(--text-dim);text-decoration:none;}
 .ip-scope nav.tabs a .row{display:flex;align-items:center;gap:7px;}
-.ip-scope nav.tabs a .tab-label{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--text);}
+.ip-scope nav.tabs a .tab-label{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--text);white-space:nowrap;}
 .ip-scope nav.tabs a .tab-sub{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:12.5px;color:var(--text-dim);white-space:nowrap;}
 .ip-scope nav.tabs a.active{border-bottom-color:var(--gold);}
 .ip-scope nav.tabs a.active .tab-label,.ip-scope nav.tabs a.active .tab-sub{color:var(--gold-soft);}
