@@ -62,8 +62,9 @@ const TABS: Array<{
     slug: "dynamiques",
     route: "/insights-resources/intelligence-politique/dynamiques-politiques",
     label: "Dynamiques Politiques",
-    sub: "Rapports de force et équilibres du débat",
+    sub: "Rapports de force",
     icon: (
+
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="5" cy="6" r="2" /><circle cx="19" cy="6" r="2" /><circle cx="12" cy="18" r="2" /><path d="M6.7 7.2 10.6 16.4M17.3 7.2 13.4 16.4M7 6h10" /></svg>
     ),
   },
