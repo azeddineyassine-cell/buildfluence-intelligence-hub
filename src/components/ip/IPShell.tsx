@@ -120,7 +120,7 @@ const SCOPED_CSS = `
 .ip-scope nav.tabs{display:flex;background:var(--bg-alt);padding:0 5vw;border-top:1px solid var(--line);overflow-x:auto;}
 .ip-scope nav.tabs a{flex:1;min-width:150px;background:none;border:none;border-bottom:2px solid transparent;cursor:pointer;padding:14px 10px 12px;display:flex;flex-direction:column;align-items:center;gap:4px;color:var(--text-dim);text-decoration:none;}
 .ip-scope nav.tabs a .row{display:flex;align-items:center;gap:7px;}
-.ip-scope nav.tabs a .tab-label{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--text);}
+.ip-scope nav.tabs a .tab-label{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:0.1em;text-transform:uppercase;color:var(--text);white-space:nowrap;}
 .ip-scope nav.tabs a .tab-sub{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:12.5px;color:var(--text-dim);white-space:nowrap;}
 .ip-scope nav.tabs a.active{border-bottom-color:var(--gold);}
 .ip-scope nav.tabs a.active .tab-label,.ip-scope nav.tabs a.active .tab-sub{color:var(--gold-soft);}
