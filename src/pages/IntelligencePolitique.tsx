@@ -157,6 +157,8 @@ const IntelligencePolitique = ({ panel = "dashboard" }: Props) => {
   if (panel === "classements") return (<>{seo}<IPClassements /></>);
   if (panel === "cartographie") return (<>{seo}<IPCartographie /></>);
   if (panel === "acteurs") return (<>{seo}<IPActeurs /></>);
+  if (panel === "dynamiques") return (<>{seo}<IPDynamiques /></>);
+
 
   return (
     <>
