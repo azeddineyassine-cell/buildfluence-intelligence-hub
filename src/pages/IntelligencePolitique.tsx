@@ -6,6 +6,7 @@ import { useIPTheme } from "@/contexts/ThemeContext";
 import IPClassements from "./ip/IPClassements";
 import IPCartographie from "./ip/IPCartographie";
 import IPActeurs from "./ip/IPActeurs";
+import IPDynamiques from "./ip/IPDynamiques";
 
 type PanelSlug =
   | "dashboard"
@@ -13,8 +14,10 @@ type PanelSlug =
   | "opinion"
   | "cartographie"
   | "acteurs"
+  | "dynamiques"
   | "methodologie"
   | "a-propos";
+
 
 interface Props {
   panel?: PanelSlug;
