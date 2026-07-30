@@ -26,7 +26,7 @@ const PARTIES = ['PAM', 'RNI', 'PJD', 'USFP', 'Istiqlal', 'Autres']
 const TONALITES = ['positive', 'neutre', 'négative']
 
 const MODEL = 'google/gemini-2.5-flash'
-const BATCH_SIZE = 50
+const BATCH_SIZE = 200
 
 function buildPrompt(title: string, text: string) {
   return [
