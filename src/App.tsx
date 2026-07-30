@@ -80,6 +80,8 @@ const App = () => (
             <Route path="/insights-resources/intelligence-politique/opinion" element={<IntelligencePolitique panel="opinion" />} />
             <Route path="/insights-resources/intelligence-politique/cartographie" element={<IntelligencePolitique panel="cartographie" />} />
             <Route path="/insights-resources/intelligence-politique/acteurs" element={<IntelligencePolitique panel="acteurs" />} />
+            <Route path="/insights-resources/intelligence-politique/dynamiques-politiques" element={<IntelligencePolitique panel="dynamiques" />} />
+
             <Route path="/insights-resources/intelligence-politique/methodologie" element={<IntelligencePolitique panel="methodologie" />} />
             <Route path="/insights-resources/intelligence-politique/a-propos" element={<IntelligencePolitique panel="a-propos" />} />
             <Route path="/barometre" element={<Barometre />} />
