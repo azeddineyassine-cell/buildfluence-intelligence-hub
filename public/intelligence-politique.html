@@ -268,6 +268,10 @@
     <div class="row"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2"/><circle cx="10" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg><span class="tab-label">Acteurs</span></div>
     <div class="tab-sub">Qui façonne le débat ?</div>
   </button>
+  <button data-tab="dynamiques">
+    <div class="row"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="5" cy="6" r="2"/><circle cx="19" cy="6" r="2"/><circle cx="12" cy="18" r="2"/><path d="M6.8 7.2 10.6 16.4M17.2 7.2 13.4 16.4M7 6h10"/></svg><span class="tab-label" style="white-space:nowrap;">Dynamiques Politiques</span></div>
+    <div class="tab-sub">Quels rapports de force structurent le débat ?</div>
+  </button>
   <button data-tab="methodologie">
     <div class="row"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="M7 8h10M7 12h10M7 16h6"/></svg><span class="tab-label">Méthodologie</span></div>
     <div class="tab-sub">Comment nos analyses sont produites</div>
@@ -627,8 +631,8 @@
 <script>
   const tbtns = document.querySelectorAll('#tabs button');
   const panels = document.querySelectorAll('.panel');
-  const SLUG_TO_TAB = { 'dashboard':'dashboard','classements':'classements','opinion':'opinion','cartographie':'cartographie','acteurs':'acteurs','methodologie':'methodologie','a-propos':'apropos','apropos':'apropos' };
-  const TAB_TO_SLUG = { 'dashboard':'dashboard','classements':'classements','opinion':'opinion','cartographie':'cartographie','acteurs':'acteurs','methodologie':'methodologie','apropos':'a-propos' };
+  const SLUG_TO_TAB = { 'dashboard':'dashboard','classements':'classements','opinion':'opinion','cartographie':'cartographie','acteurs':'acteurs','dynamiques':'dynamiques','dynamiques-politiques':'dynamiques','methodologie':'methodologie','a-propos':'apropos','apropos':'apropos' };
+  const TAB_TO_SLUG = { 'dashboard':'dashboard','classements':'classements','opinion':'opinion','cartographie':'cartographie','acteurs':'acteurs','dynamiques':'dynamiques','methodologie':'methodologie','apropos':'a-propos' };
   function activateTab(name, opts){
     tbtns.forEach(x=>x.classList.toggle('active', x.dataset.tab===name));
     panels.forEach(p=>p.classList.toggle('active', p.id===name));
