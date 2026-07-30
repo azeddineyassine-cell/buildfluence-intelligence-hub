@@ -95,6 +95,44 @@ export type Database = {
         }
         Relationships: []
       }
+      content_analysis: {
+        Row: {
+          id: string
+          parties_mentionnees: Json
+          processed_at: string
+          raw_content_id: string
+          score_pertinence: number | null
+          theme: string | null
+          tonalite: string | null
+        }
+        Insert: {
+          id?: string
+          parties_mentionnees?: Json
+          processed_at?: string
+          raw_content_id: string
+          score_pertinence?: number | null
+          theme?: string | null
+          tonalite?: string | null
+        }
+        Update: {
+          id?: string
+          parties_mentionnees?: Json
+          processed_at?: string
+          raw_content_id?: string
+          score_pertinence?: number | null
+          theme?: string | null
+          tonalite?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "content_analysis_raw_content_id_fkey"
+            columns: ["raw_content_id"]
+            isOneToOne: false
+            referencedRelation: "raw_content"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       invitation_requests: {
         Row: {
           created_at: string
@@ -320,6 +358,74 @@ export type Database = {
           id?: string
           role?: Database["public"]["Enums"]["app_role"]
           updated_at?: string
+        }
+        Relationships: []
+      }
+      raw_content: {
+        Row: {
+          collected_at: string
+          id: string
+          processed: boolean
+          published_at: string | null
+          raw_text: string | null
+          source_id: string
+          title: string | null
+          url: string
+        }
+        Insert: {
+          collected_at?: string
+          id?: string
+          processed?: boolean
+          published_at?: string | null
+          raw_text?: string | null
+          source_id: string
+          title?: string | null
+          url: string
+        }
+        Update: {
+          collected_at?: string
+          id?: string
+          processed?: boolean
+          published_at?: string | null
+          raw_text?: string | null
+          source_id?: string
+          title?: string | null
+          url?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "raw_content_source_id_fkey"
+            columns: ["source_id"]
+            isOneToOne: false
+            referencedRelation: "sources"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      sources: {
+        Row: {
+          active: boolean
+          created_at: string
+          id: string
+          name: string
+          type: string
+          url: string
+        }
+        Insert: {
+          active?: boolean
+          created_at?: string
+          id?: string
+          name: string
+          type?: string
+          url: string
+        }
+        Update: {
+          active?: boolean
+          created_at?: string
+          id?: string
+          name?: string
+          type?: string
+          url?: string
         }
         Relationships: []
       }
