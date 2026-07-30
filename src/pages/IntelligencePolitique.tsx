@@ -59,7 +59,15 @@ const SEO_BY_PANEL: Record<PanelSlug, { titleFr: string; titleEn: string; descFr
     descEn: "Multidimensional analysis of political actors: popularity, credibility, influence, mobilization, engagement, leadership.",
     path: "/insights-resources/intelligence-politique/acteurs",
   },
+  "dynamiques": {
+    titleFr: "Dynamiques Politiques · Intelligence Politique",
+    titleEn: "Political Dynamics · Political Intelligence",
+    descFr: "Cartographie relationnelle des rapports de force : partis, leaders, sujets de débat et opinion citoyenne. Maquette de démonstration Buildfluence.",
+    descEn: "Relational mapping of power dynamics: parties, leaders, debate topics and citizen opinion. Buildfluence demonstration mockup.",
+    path: "/insights-resources/intelligence-politique/dynamiques-politiques",
+  },
   "methodologie": {
+
     titleFr: "Méthodologie · Intelligence Politique",
     titleEn: "Methodology · Political Intelligence",
     descFr: "Méthodologie de l'IBDN® : huit dimensions, gouvernance et sources. Buildfluence, infrastructure souveraine de décision.",
