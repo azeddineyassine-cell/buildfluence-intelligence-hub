@@ -18,3 +18,4 @@
 .recent-card #ip-recent{max-height:230px}
 .ip-recent-row{grid-template-columns:1fr auto auto;align-items:baseline;overflow-wrap:anywhere}
 .ip-recent-row a{display:block;overflow-wrap:anywhere}
+.metrics div.metric-demo{position:relative}.metrics div.metric-demo b{color:#9bafbd;font-size:12px}.metrics div.metric-demo .demo-flag{position:absolute;right:10px;top:8px}

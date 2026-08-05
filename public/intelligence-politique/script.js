@@ -45,7 +45,7 @@ function renderActorProfile(){const x=people[actorIndex];$('#profile-avatar').te
 function drawRadar(){const canvas=$('#radar-chart');if(!canvas.offsetParent)return;const [c,w,h]=setupCanvas(canvas,300),x=people[actorIndex],cx=w/2,cy=h/2+3,R=Math.min(w,h)*.36,n=6;c.clearRect(0,0,w,h);const labels=['Visibilité','Crédibilité','Influence','Mobilisation','Engagement','Leadership'];for(let r=1;r<=4;r++){c.beginPath();for(let i=0;i<n;i++){let a=-Math.PI/2+i*Math.PI*2/n,px=cx+Math.cos(a)*R*r/4,py=cy+Math.sin(a)*R*r/4;i?c.lineTo(px,py):c.moveTo(px,py)}c.closePath();c.strokeStyle='#7894a535';c.stroke()}c.beginPath();x.radar.forEach((v,i)=>{let a=-Math.PI/2+i*Math.PI*2/n,px=cx+Math.cos(a)*R*v/100,py=cy+Math.sin(a)*R*v/100;i?c.lineTo(px,py):c.moveTo(px,py)});c.closePath();c.fillStyle=x.color+'55';c.fill();c.strokeStyle='#e1ad35';c.lineWidth=2;c.stroke();c.font='10px DM Sans';c.fillStyle='#aebdc7';c.textAlign='center';labels.forEach((l,i)=>{let a=-Math.PI/2+i*Math.PI*2/n;c.fillText(l,cx+Math.cos(a)*(R+26),cy+Math.sin(a)*(R+18)+3)})}
 $('#actor-search').oninput=renderActorList;renderActorList();renderActorProfile();
 
-const steps=[['01','▽','OBSERVER','Collecte des données ouvertes',['Presse · Réseaux · Institutions','15 000+ sources · FR · AR','Collecte continue 24/7'],'#22c2bf'],['02','♧','COMPRENDRE','Intelligence augmentée',['IA et analyse humaine','Détection des acteurs','Contrôle qualité permanent'],'#a96bc7'],['03','⌕','ANALYSER','Analyse narrative',['8 thématiques clés','Tonalité et intensité','Tendances quotidiennes'],'#e0a92c'],['04','⌘','RELIER','Cartographie relationnelle',['Alliances et oppositions','Influence et proximité','Réseaux de diffusion'],'#4c9bd4'],['05','IBDN','MESURER','Indice IBDN®',['8 dimensions','Score unique sur 100','Temps réel et comparaisons'],'#91b64c'],['06','⚖','GARANTIR','Gouvernance éthique',['Neutralité et transparence','Validation humaine','Conformité CNDP & RGPD'],'#e4a82e']];
+const steps=[['01','▽','OBSERVER','Collecte des données ouvertes',['Presse · Réseaux · Institutions','Sources publiques FR · AR','Collecte périodique planifiée'],'#22c2bf'],['02','♧','COMPRENDRE','Intelligence augmentée',['IA et analyse humaine','Détection des acteurs','Contrôle qualité permanent'],'#a96bc7'],['03','⌕','ANALYSER','Analyse narrative',['8 thématiques clés','Tonalité et intensité','Tendances quotidiennes'],'#e0a92c'],['04','⌘','RELIER','Cartographie relationnelle',['Alliances et oppositions','Influence et proximité','Réseaux de diffusion'],'#4c9bd4'],['05','IBDN','MESURER','Indice IBDN®',['8 dimensions','Score unique sur 100','Comparaisons (démonstration)'],'#91b64c'],['06','⚖','GARANTIR','Gouvernance éthique',['Neutralité et transparence','Validation humaine','Conformité CNDP & RGPD'],'#e4a82e']];
 $('#process').innerHTML=steps.map(s=>`<article class="step" style="--c:${s[5]}"><span class="step-num">${s[0]}</span><div class="step-icon">${s[1]}</div><h2>${s[2]}</h2><p>${s[3]}</p><ul>${s[4].map(x=>`<li>${x}</li>`).join('')}</ul></article>`).join('');
 
 // Réseau relationnel interactif
@@ -83,6 +83,12 @@ addEventListener('resize',()=>{drawTrend();drawSentiment();drawRadar();resizeNet
   set('#kpi-documents',nf.format(k.document_count||0));
   set('#kpi-documents-24h',nf.format(k.documents_24h||0));
   set('#kpi-sources',nf.format(k.source_count||0));
+  const fresh=k.freshest_publication_at||k.dataset_imported_at;
+  set('#kpi-freshest',fresh?dt(fresh):'Données indisponibles');
+  const hs=$('#hero-sources-label');
+  if(hs)hs.textContent=`${nf.format(k.source_count||0)} sources présentes dans le jeu analysé`;
+  const hf=$('#ip-head-freshness');
+  if(hf)hf.innerHTML=`<i></i> DERNIÈRE PUBLICATION ANALYSÉE : ${fresh?dt(fresh):'—'}`;
  }
 
  function toActor(r,i){
