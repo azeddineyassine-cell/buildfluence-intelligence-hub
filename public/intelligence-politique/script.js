@@ -83,6 +83,12 @@ addEventListener('resize',()=>{drawTrend();drawSentiment();drawRadar();resizeNet
   set('#kpi-documents',nf.format(k.document_count||0));
   set('#kpi-documents-24h',nf.format(k.documents_24h||0));
   set('#kpi-sources',nf.format(k.source_count||0));
+  const fresh=k.freshest_publication_at||k.dataset_imported_at;
+  set('#kpi-freshest',fresh?dt(fresh):'Données indisponibles');
+  const hs=$('#hero-sources-label');
+  if(hs)hs.textContent=`${nf.format(k.source_count||0)} sources présentes dans le jeu analysé`;
+  const hf=$('#ip-head-freshness');
+  if(hf)hf.innerHTML=`<i></i> DERNIÈRE PUBLICATION ANALYSÉE : ${fresh?dt(fresh):'—'}`;
  }
 
  function toActor(r,i){
