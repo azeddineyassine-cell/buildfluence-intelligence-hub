@@ -163,6 +163,239 @@ export type Database = {
         }
         Relationships: []
       }
+      ip_actors: {
+        Row: {
+          acronym: string | null
+          actor_id: string
+          actor_type: string
+          canonical_name_ar: string | null
+          canonical_name_fr: string
+          created_at: string
+          current_role_fr: string | null
+          monitoring_status: string | null
+          party_id: string | null
+          public_display_status: string | null
+          rank_scope: number | null
+          source_ids: string | null
+          updated_at: string
+          verification_status: string | null
+        }
+        Insert: {
+          acronym?: string | null
+          actor_id: string
+          actor_type: string
+          canonical_name_ar?: string | null
+          canonical_name_fr: string
+          created_at?: string
+          current_role_fr?: string | null
+          monitoring_status?: string | null
+          party_id?: string | null
+          public_display_status?: string | null
+          rank_scope?: number | null
+          source_ids?: string | null
+          updated_at?: string
+          verification_status?: string | null
+        }
+        Update: {
+          acronym?: string | null
+          actor_id?: string
+          actor_type?: string
+          canonical_name_ar?: string | null
+          canonical_name_fr?: string
+          created_at?: string
+          current_role_fr?: string | null
+          monitoring_status?: string | null
+          party_id?: string | null
+          public_display_status?: string | null
+          rank_scope?: number | null
+          source_ids?: string | null
+          updated_at?: string
+          verification_status?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "ip_actors_party_id_fkey"
+            columns: ["party_id"]
+            isOneToOne: false
+            referencedRelation: "ip_actors"
+            referencedColumns: ["actor_id"]
+          },
+          {
+            foreignKeyName: "ip_actors_party_id_fkey"
+            columns: ["party_id"]
+            isOneToOne: false
+            referencedRelation: "v_ip_actor_ranking"
+            referencedColumns: ["actor_id"]
+          },
+        ]
+      }
+      ip_mention_actors: {
+        Row: {
+          actor_id: string
+          actor_type: string
+          alias_id: string | null
+          alias_used: string | null
+          canonical_name: string
+          confidence: number
+          context_result: string | null
+          context_rule: string | null
+          human_decision: string | null
+          match_field: string | null
+          mention_id: number
+          priority: number | null
+          review_status: string
+          reviewed_at: string | null
+        }
+        Insert: {
+          actor_id: string
+          actor_type: string
+          alias_id?: string | null
+          alias_used?: string | null
+          canonical_name: string
+          confidence: number
+          context_result?: string | null
+          context_rule?: string | null
+          human_decision?: string | null
+          match_field?: string | null
+          mention_id: number
+          priority?: number | null
+          review_status: string
+          reviewed_at?: string | null
+        }
+        Update: {
+          actor_id?: string
+          actor_type?: string
+          alias_id?: string | null
+          alias_used?: string | null
+          canonical_name?: string
+          confidence?: number
+          context_result?: string | null
+          context_rule?: string | null
+          human_decision?: string | null
+          match_field?: string | null
+          mention_id?: number
+          priority?: number | null
+          review_status?: string
+          reviewed_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "ip_mention_actors_actor_id_fkey"
+            columns: ["actor_id"]
+            isOneToOne: false
+            referencedRelation: "ip_actors"
+            referencedColumns: ["actor_id"]
+          },
+          {
+            foreignKeyName: "ip_mention_actors_actor_id_fkey"
+            columns: ["actor_id"]
+            isOneToOne: false
+            referencedRelation: "v_ip_actor_ranking"
+            referencedColumns: ["actor_id"]
+          },
+          {
+            foreignKeyName: "ip_mention_actors_mention_id_fkey"
+            columns: ["mention_id"]
+            isOneToOne: false
+            referencedRelation: "ip_mentions"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "ip_mention_actors_mention_id_fkey"
+            columns: ["mention_id"]
+            isOneToOne: false
+            referencedRelation: "v_ip_recent_mentions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      ip_mentions: {
+        Row: {
+          actor_count: number
+          alert_id: number | null
+          alert_name: string | null
+          country: string | null
+          cumulative_reach: number | null
+          description: string | null
+          direct_party_ids: string | null
+          direct_reach: number | null
+          domain_reach: number | null
+          id: number
+          imported_at: string
+          inferred_party_ids: string | null
+          language: string | null
+          matched_actor_ids: string | null
+          max_confidence: number
+          personality_ids: string | null
+          published_at: string | null
+          review_status: string
+          score: number | null
+          source_name: string | null
+          source_type: string | null
+          source_url: string | null
+          tags: string | null
+          title: string | null
+          tone: string | null
+          url: string | null
+        }
+        Insert: {
+          actor_count?: number
+          alert_id?: number | null
+          alert_name?: string | null
+          country?: string | null
+          cumulative_reach?: number | null
+          description?: string | null
+          direct_party_ids?: string | null
+          direct_reach?: number | null
+          domain_reach?: number | null
+          id: number
+          imported_at?: string
+          inferred_party_ids?: string | null
+          language?: string | null
+          matched_actor_ids?: string | null
+          max_confidence?: number
+          personality_ids?: string | null
+          published_at?: string | null
+          review_status: string
+          score?: number | null
+          source_name?: string | null
+          source_type?: string | null
+          source_url?: string | null
+          tags?: string | null
+          title?: string | null
+          tone?: string | null
+          url?: string | null
+        }
+        Update: {
+          actor_count?: number
+          alert_id?: number | null
+          alert_name?: string | null
+          country?: string | null
+          cumulative_reach?: number | null
+          description?: string | null
+          direct_party_ids?: string | null
+          direct_reach?: number | null
+          domain_reach?: number | null
+          id?: number
+          imported_at?: string
+          inferred_party_ids?: string | null
+          language?: string | null
+          matched_actor_ids?: string | null
+          max_confidence?: number
+          personality_ids?: string | null
+          published_at?: string | null
+          review_status?: string
+          score?: number | null
+          source_name?: string | null
+          source_type?: string | null
+          source_url?: string | null
+          tags?: string | null
+          title?: string | null
+          tone?: string | null
+          url?: string | null
+        }
+        Relationships: []
+      }
       isd_responses: {
         Row: {
           appro: Json | null
@@ -434,7 +667,83 @@ export type Database = {
       }
     }
     Views: {
-      [_ in never]: never
+      v_ip_actor_ranking: {
+        Row: {
+          acronym: string | null
+          actor_id: string | null
+          actor_type: string | null
+          avg_match_confidence: number | null
+          canonical_name_ar: string | null
+          canonical_name_fr: string | null
+          current_role_fr: string | null
+          direct_reach: number | null
+          latest_mention_at: string | null
+          mention_count: number | null
+          negative_count: number | null
+          neutral_count: number | null
+          party_id: string | null
+          positive_count: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "ip_actors_party_id_fkey"
+            columns: ["party_id"]
+            isOneToOne: false
+            referencedRelation: "ip_actors"
+            referencedColumns: ["actor_id"]
+          },
+          {
+            foreignKeyName: "ip_actors_party_id_fkey"
+            columns: ["party_id"]
+            isOneToOne: false
+            referencedRelation: "v_ip_actor_ranking"
+            referencedColumns: ["actor_id"]
+          },
+        ]
+      }
+      v_ip_kpis: {
+        Row: {
+          dataset_imported_at: string | null
+          document_count: number | null
+          documents_24h: number | null
+          freshest_publication_at: string | null
+          mentions_pending_review: number | null
+          source_count: number | null
+        }
+        Relationships: []
+      }
+      v_ip_recent_mentions: {
+        Row: {
+          actor_id: string | null
+          canonical_name_fr: string | null
+          confidence: number | null
+          country: string | null
+          id: number | null
+          language: string | null
+          published_at: string | null
+          source_name: string | null
+          source_type: string | null
+          title: string | null
+          tone: string | null
+          url: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "ip_mention_actors_actor_id_fkey"
+            columns: ["actor_id"]
+            isOneToOne: false
+            referencedRelation: "ip_actors"
+            referencedColumns: ["actor_id"]
+          },
+          {
+            foreignKeyName: "ip_mention_actors_actor_id_fkey"
+            columns: ["actor_id"]
+            isOneToOne: false
+            referencedRelation: "v_ip_actor_ranking"
+            referencedColumns: ["actor_id"]
+          },
+        ]
+      }
     }
     Functions: {
       [_ in never]: never
