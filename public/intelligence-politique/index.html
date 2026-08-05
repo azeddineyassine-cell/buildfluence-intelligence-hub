@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Buildfluence Intelligence Politique — prototype interactif Maroc 2026">
+  <title>Buildfluence — Intelligence Politique</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=DM+Sans:wght@400;500;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="masthead">
+    <div class="brand"><span class="flag">★</span><span><strong>Build<span>fluence</span></strong><small>INTELLIGENCE POLITIQUE</small></span></div>
+    <div class="edition"><strong>Intelligence Politique</strong><small>LÉGISLATIVES MAROC 2026</small></div>
+    <div class="head-actions"><span class="live"><i></i> VEILLE ACTIVE 24/7</span><button class="ghost" data-modal>SE CONNECTER</button><button class="gold" data-modal>S’INSCRIRE</button></div>
+  </header>
+
+  <nav class="tabs" aria-label="Menu principal">
+    <button class="active" data-view="dashboard"><span class="nav-icon">⌂</span><strong>TABLEAU DE BORD</strong><small>Que se passe-t-il aujourd’hui ?</small></button>
+    <button data-view="classement"><span class="nav-icon">♜</span><strong>CLASSEMENT</strong><small>Qui progresse ? Qui recule ?</small></button>
+    <button data-view="opinion"><span class="nav-icon">◉</span><strong>OPINION</strong><small>Quels sujets dominent le débat ?</small></button>
+    <button data-view="acteurs"><span class="nav-icon">♙</span><strong>ACTEURS</strong><small>Qui façonne le débat ?</small></button>
+    <button data-view="dynamiques"><span class="nav-icon">⌘</span><strong>DYNAMIQUES POLITIQUES</strong><small>Comment les acteurs interagissent-ils ?</small></button>
+    <button data-view="methodologie"><span class="nav-icon">▤</span><strong>MÉTHODOLOGIE</strong><small>Comment nos analyses sont-elles produites ?</small></button>
+    <button data-view="apropos"><span class="nav-icon">ⓘ</span><strong>À PROPOS</strong><small>Notre mission et nos engagements</small></button>
+  </nav>
+
+  <main>
+    <section class="view active" id="dashboard">
+      <div class="hero">
+        <div class="hero-copy"><p class="kicker">LA PREMIÈRE PLATEFORME MAROCAINE D’INTELLIGENCE POLITIQUE</p><h1>Comprendre maintenant.<br><em>Décider aujourd’hui.</em><br>Anticiper demain.</h1><p>L’IBDN® mesure en temps réel la présence, l’influence et la dynamique des partis et personnalités politiques à partir des médias, réseaux sociaux et sources institutionnelles.</p><div class="hero-points"><span><b>ϟ</b>Données en temps réel<small>15 000+ sources suivies</small></span><span><b>◎</b>Analyse indépendante<small>Méthode transparente</small></span><span><b>♢</b>Lecture pour tous<small>Citoyens, médias, décideurs</small></span></div><button class="gold explore" data-jump="classement">EXPLORER LES INDICATEURS →</button></div>
+        <div class="hero-image"><img src="assets/vote-morocco.png" alt="Urne électorale aux couleurs du Maroc"></div>
+        <aside class="score-card"><header><span><b>IBDN®</b><small>INDICE DE DYNAMIQUE NARRATIVE</small></span><i>+3,8 pts</i></header><div class="score-body"><div class="score-ring"><strong>72</strong><small>/100</small></div><div class="score-bars" id="score-bars"></div></div><footer>Dernière mise à jour · Aujourd’hui à 08:30</footer></aside>
+      </div>
+      <div class="metrics"><div><b>15 482 317</b><small>DOCUMENTS ANALYSÉS</small></div><div><b>4 823</b><small>ARTICLES AUJOURD’HUI</small></div><div><b>63</b><small>MÉDIAS SURVEILLÉS</small></div><div><b>24 h / 24</b><small>VEILLE ACTIVE</small></div><div><b>2,1 M</b><small>INTERACTIONS AUJOURD’HUI</small></div></div>
+      <div class="dash-grid">
+        <article class="card compact"><div class="card-head"><h2>TOP PARTIS</h2><button data-jump="classement">VOIR TOUT →</button></div><div id="mini-parties"></div></article>
+        <article class="card compact"><div class="card-head"><h2>TOP PERSONNALITÉS</h2><button data-jump="acteurs">VOIR TOUT →</button></div><div id="mini-people"></div></article>
+        <article class="card chart-card"><div class="card-head"><h2>ÉVOLUTION GLOBALE <small>7 JOURS</small></h2></div><canvas id="trend-chart" aria-label="Évolution des scores sur sept jours"></canvas></article>
+        <article class="card debate-card"><div class="card-head"><h2>DÉBAT PUBLIC — ENJEUX CLÉS</h2><button data-jump="opinion">ANALYSER →</button></div><div class="donut-wrap"><div class="donut"><span>PART<small>DES CONVERSATIONS</small></span></div><div id="theme-mini"></div></div></article>
+      </div>
+      <div class="dimensions-strip"><h2>L’IBDN® : UN INDICE, 8 DIMENSIONS, UNE VISION CLAIRE</h2><div id="dimension-strip"></div></div>
+    </section>
+
+    <section class="view" id="classement">
+      <div class="page-title"><p class="kicker">QUI PROGRESSE ? QUI RECULE ?</p><h1>Classement <em>IBDN®</em></h1><p>Comparez la dynamique narrative des partis et personnalités sur la période sélectionnée.</p></div>
+      <div class="toolbar"><div class="segmented" id="rank-type"><button class="active" data-type="parties">Partis politiques</button><button data-type="people">Personnalités</button></div><label>Période<select id="rank-period"><option value="7">7 derniers jours</option><option value="30">30 derniers jours</option><option value="90">3 derniers mois</option></select></label><label class="search">Rechercher<input id="rank-search" type="search" placeholder="Nom d’un acteur…"></label></div>
+      <div class="ranking-layout"><article class="card"><div class="rank-table-head"><span>#</span><span>ACTEUR</span><span>SCORE IBDN®</span><span>ÉVOLUTION</span><span>VISIBILITÉ</span></div><div id="ranking-table"></div></article><aside class="card insight"><p class="kicker">SIGNAL DU JOUR</p><h2>Une dynamique portée par l’emploi</h2><p>La progression des acteurs en tête est corrélée à une présence accrue sur les thèmes de l’emploi et du pouvoir d’achat.</p><div class="insight-stat"><strong>+18%</strong><span>de mentions sur 7 jours</span></div></aside></div>
+    </section>
+
+    <section class="view" id="opinion">
+      <div class="page-title"><p class="kicker">LE POULS DU DÉBAT PUBLIC</p><h1>Opinion & <em>enjeux</em></h1><p>Les sujets qui structurent la conversation politique, leur tonalité et leur évolution.</p></div>
+      <div class="opinion-grid"><article class="card big-donut"><div class="card-head"><h2>PART DES CONVERSATIONS</h2><div class="segmented small" id="opinion-period"><button class="active">7J</button><button>30J</button></div></div><div class="opinion-viz"><div class="donut large"><span id="selected-share">28%<small>POUVOIR D’ACHAT</small></span></div><div id="theme-list"></div></div></article><article class="card sentiment"><div class="card-head"><h2>TONALITÉ DU DÉBAT</h2></div><div class="sentiment-score"><strong id="sentiment-value">42%</strong><span>positif</span></div><div class="sentiment-bar"><i></i><i></i><i></i></div><div class="sentiment-labels"><span>Positif 42%</span><span>Neutre 37%</span><span>Négatif 21%</span></div><h3>Évolution horaire</h3><canvas id="sentiment-chart"></canvas></article></div>
+    </section>
+
+    <section class="view" id="acteurs">
+      <div class="page-title"><p class="kicker">QUI FAÇONNE LE DÉBAT ?</p><h1>Acteurs <em>politiques</em></h1><p>Explorez les profils narratifs, les forces thématiques et les trajectoires d’influence.</p></div>
+      <div class="actor-layout"><aside class="card actor-list"><label>Rechercher un acteur<input id="actor-search" type="search" placeholder="Nom, parti ou fonction…"></label><div id="actor-list"></div></aside><article class="card actor-profile"><div class="profile-head"><div class="profile-avatar" id="profile-avatar"></div><div><p class="kicker" id="profile-party"></p><h2 id="profile-name"></h2><span id="profile-role"></span></div><div class="profile-score"><strong id="profile-score"></strong><small>IBDN® /100</small></div></div><div class="profile-grid"><div><h3>PROFIL NARRATIF</h3><canvas id="radar-chart" width="420" height="300"></canvas></div><div><h3>THÉMATIQUES ASSOCIÉES</h3><div id="actor-themes"></div><blockquote id="actor-summary"></blockquote></div></div></article></div>
+    </section>
+
+    <section class="view" id="dynamiques">
+      <div class="page-title network-title"><div><p class="kicker">ÉLECTIONS LÉGISLATIVES — MAROC 2026</p><h1>Réseau relationnel du <em>débat politique</em></h1><p>Survolez un nœud pour isoler ses relations. Utilisez les filtres pour explorer alliances, proximité, influence et opposition.</p></div><div class="network-stats"><span><strong>12 842</strong>liens détectés</span><span><strong>48 731</strong>mentions analysées</span><span><strong>289</strong>sujets émergents</span></div></div>
+      <div class="network-toolbar"><div class="relation-filters"><button class="active" data-relation="all">Toutes</button><button data-relation="alliance">Alliance</button><button data-relation="proximite">Proximité</button><button data-relation="influence">Influence</button><button data-relation="opposition">Opposition</button></div><span>Glissez pour explorer · molette pour zoomer</span></div>
+      <div class="network-shell"><canvas id="network-canvas" aria-label="Réseau interactif des dynamiques politiques"></canvas><div class="network-legend"><span class="alliance">Soutien / Alliance</span><span class="proximite">Proximité / Affinité</span><span class="influence">Influence / Impact</span><span class="opposition">Opposition / Critique</span></div><div class="network-tooltip" id="network-tooltip"></div></div>
+    </section>
+
+    <section class="view" id="methodologie">
+      <div class="page-title centered"><p class="kicker">COMMENT ÇA FONCTIONNE</p><h1>Les 6 étapes de l’<em>Intelligence Politique®</em></h1><p>Chaque jour, des millions de données publiques deviennent une intelligence décisionnelle grâce à l’IA, l’analyse humaine et une méthodologie propriétaire.</p></div>
+      <div class="process" id="process"></div>
+      <div class="method-bottom"><article class="card"><p class="kicker">TROIS RÉSULTATS POLITIQUES</p><div class="outcomes"><div><b>◉</b><strong>COMPRÉHENSION</strong><small>Une lecture claire et factuelle du débat public.</small></div><div><b>◫</b><strong>TRANSPARENCE</strong><small>Une méthode ouverte, sourcée et explicable.</small></div><div><b>↗</b><strong>ANTICIPATION</strong><small>Identifier les signaux faibles et les tendances.</small></div></div></article><article class="card ethics"><p class="kicker">GOUVERNANCE ÉTHIQUE</p><h2>Ce que l’indice mesure — et ce qu’il ne mesure pas.</h2><p>L’IBDN® observe la dynamique du débat public. Il ne prédit pas les résultats électoraux et ne mesure jamais une intention de vote.</p></article></div>
+    </section>
+
+    <section class="view" id="apropos">
+      <div class="about-hero"><p class="kicker">NOTRE MISSION</p><h1>Rendre les dynamiques politiques <em>lisibles, vérifiables et utiles.</em></h1><p>Buildfluence conçoit une infrastructure marocaine souveraine d’intelligence stratégique. La plateforme transforme des données ouvertes en compréhension partagée, sans microciblage ni profilage des électeurs.</p></div>
+      <div class="about-grid"><article class="card"><b>01</b><h2>Indépendance</h2><p>Une lecture factuelle, non partisane et méthodologiquement traçable.</p></article><article class="card"><b>02</b><h2>Souveraineté</h2><p>Une plateforme conçue au Maroc, au service de la compréhension du Maroc.</p></article><article class="card"><b>03</b><h2>Responsabilité</h2><p>Données ouvertes, conformité CNDP et RGPD, contrôle humain permanent.</p></article></div>
+      <div class="manifesto"><blockquote>« Les données racontent ce qui s’est passé. Les relations expliquent pourquoi. L’IBDN® révèle ce qui change. »</blockquote><span>Buildfluence Intelligence Politique®</span></div>
+    </section>
+  </main>
+
+  <footer><div><strong>Build<span>fluence</span></strong><small>Intelligence Politique · Maroc 2026</small></div><p>Analyses réalisées exclusivement à partir de données ouvertes (OSINT), sans microciblage ni profilage des électeurs.</p><nav><button data-jump="methodologie">Méthodologie</button><button data-jump="apropos">À propos</button><a href="mailto:contact@buildfluence.ma">Contact</a></nav></footer>
+
+  <dialog id="access-modal"><button class="close" aria-label="Fermer">×</button><p class="kicker">ACCÈS BUILDFLUENCE</p><h2>Explorez l’intelligence politique.</h2><p>Ce prototype simule le parcours d’accès. Aucun compte ne sera créé.</p><form id="access-form"><label>Adresse email<input type="email" required placeholder="vous@exemple.ma"></label><button class="gold" type="submit">CONTINUER</button></form></dialog>
+  <script src="script.js"></script>
+</body>
+</html>
