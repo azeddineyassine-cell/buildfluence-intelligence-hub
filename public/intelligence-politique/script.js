@@ -92,7 +92,7 @@ addEventListener('resize',()=>{drawTrend();drawSentiment();drawRadar();resizeNet
   const name=r.canonical_name_fr;
   return {name,sub:r.current_role_fr||r.acronym||'',score:r.mention_count||0,delta:balance,
    reach:Number(r.direct_reach||0),vis:0,color:colors[i%colors.length],
-   initials:(r.acronym||name).replace(/[^A-Za-zÀ-ÿ ]/g,'').trim().split(/\s+/).map(w=>w[0]).join('').slice(0,3).toUpperCase(),
+   initials:(r.acronym?r.acronym.replace(/[^A-Za-z]/g,'').slice(0,3):name.trim().split(/\s+/).map(w=>w[0]).join('').slice(0,2)).toUpperCase(),
    latest:r.latest_mention_at,nameAr:r.canonical_name_ar};
  }
 
