@@ -64,3 +64,94 @@ function drawNetwork(){if(!nctx)return;nctx.clearRect(0,0,nw,nh);links.forEach(l
 function pointer(e){const r=nc.getBoundingClientRect();return{x:e.clientX-r.left,y:e.clientY-r.top}}
 nc.onpointermove=e=>{const p=pointer(e);if(drag){pan.x+=(p.x-last.x)/zoom;pan.y+=(p.y-last.y)/zoom;last=p;drawNetwork();return}let found=-1;nodes.forEach((n,i)=>{let q=nodePos(n);if(Math.hypot(p.x-q.x,p.y-q.y)<30*zoom)found=i});if(found!==hover){hover=found;drawNetwork()}if(found>=0){const n=nodes[found],count=links.filter(l=>l.a===found||l.b===found).length;nt.style.display='block';nt.style.left=Math.min(p.x+15,nw-170)+'px';nt.style.top=Math.min(p.y+15,nh-65)+'px';nt.innerHTML=`<strong>${n.name}</strong><small>${count} relations détectées</small>`}else nt.style.display='none'};nc.onpointerdown=e=>{drag=true;last=pointer(e);nc.setPointerCapture(e.pointerId)};nc.onpointerup=()=>drag=false;nc.onpointerleave=()=>{drag=false;hover=-1;nt.style.display='none';drawNetwork()};nc.onwheel=e=>{e.preventDefault();zoom=Math.max(.7,Math.min(1.7,zoom*(e.deltaY>0?.9:1.1)));drawNetwork()};$$('.relation-filters button').forEach(b=>b.onclick=()=>{$$('.relation-filters button').forEach(x=>x.classList.remove('active'));b.classList.add('active');filter=b.dataset.relation;drawNetwork()});
 addEventListener('resize',()=>{drawTrend();drawSentiment();drawRadar();resizeNetwork()});drawTrend();
+
+/* ===== Données réelles · Edge Function publique ip-public-data ===== */
+(function(){
+ const API='https://uoupidbmoyqckxsxunvr.supabase.co/functions/v1/ip-public-data';
+ const CACHE='ip_public_data_v1', TTL=300000, TIMEOUT=9000;
+ const nf=new Intl.NumberFormat('fr-FR');
+ const banner=$('#ip-data-banner');
+ const isAr=s=>/[\u0600-\u06FF]/.test(s||'');
+ const dt=v=>{try{return new Date(v).toLocaleString('fr-FR',{dateStyle:'short',timeStyle:'short'})}catch(e){return '—'}};
+
+ function showBanner(msg,error){if(!banner)return;banner.textContent=msg;banner.classList.toggle('error',!!error);banner.hidden=false}
+ function readCache(){try{const c=JSON.parse(localStorage.getItem(CACHE)||'null');return c&&c.payload?c:null}catch(e){return null}}
+ function writeCache(payload){try{localStorage.setItem(CACHE,JSON.stringify({at:Date.now(),payload}))}catch(e){}}
+
+ function applyKpis(k){if(!k)return;
+  const set=(id,v)=>{const el=$(id);if(el)el.textContent=v};
+  set('#kpi-documents',nf.format(k.document_count||0));
+  set('#kpi-documents-24h',nf.format(k.documents_24h||0));
+  set('#kpi-sources',nf.format(k.source_count||0));
+ }
+
+ function toActor(r,i){
+  const colors=['#2797ce','#3f70bc','#e47b2c','#c84583','#db4551','#6caf48','#d0ad3c','#57a5ba','#8d7fd1'];
+  const total=(r.positive_count||0)+(r.negative_count||0)+(r.neutral_count||0);
+  const balance=total?((r.positive_count-r.negative_count)/total*100):0;
+  const name=r.canonical_name_fr;
+  return {name,sub:r.current_role_fr||r.acronym||'',score:r.mention_count||0,delta:balance,
+   reach:Number(r.direct_reach||0),vis:0,color:colors[i%colors.length],
+   initials:(r.acronym?r.acronym.replace(/[^A-Za-z]/g,'').slice(0,3):name.trim().split(/\s+/).map(w=>w[0]).join('').slice(0,2)).toUpperCase(),
+   latest:r.latest_mention_at,nameAr:r.canonical_name_ar};
+ }
+
+ function apply(data){
+  applyKpis(data.kpis);
+  const rank=(data.ranking||[]).filter(r=>(r.mention_count||0)>0);
+  const rp=rank.filter(r=>r.actor_type==='parti').map(toActor);
+  const rs=rank.filter(r=>r.actor_type!=='parti').map(toActor);
+  [rp,rs].forEach(list=>{const max=Math.max(1,...list.map(x=>x.reach));list.forEach(x=>x.vis=Math.round(x.reach/max*100))});
+
+  const rowsHtml=list=>list.slice(0,5).map((x,i)=>`<div class="mini-row"><span>${i+1}</span><i class="badge" style="--c:${x.color}">${x.initials}</i><strong>${x.name}</strong><b>${nf.format(x.score)}</b><em class="${x.delta<0?'down':''}">${x.delta>=0?'↑':'↓'} ${Math.abs(x.delta).toFixed(1)}%</em></div>`).join('');
+  if(rp.length)$('#mini-parties').innerHTML=rowsHtml(rp);
+  if(rs.length)$('#mini-people').innerHTML=rowsHtml(rs);
+
+  if(rp.length||rs.length){
+   renderRanking=function(){
+    const q=$('#rank-search').value.toLowerCase();
+    const data=(rankMode==='parties'?rp:rs).filter(x=>(x.name+x.sub).toLowerCase().includes(q));
+    $('#ranking-table').innerHTML=data.map((x,i)=>`<div class="rank-row"><span>${String(i+1).padStart(2,'0')}</span><div class="rank-actor"><i class="actor-dot" style="--c:${x.color}">${x.initials}</i><span><strong>${x.name}</strong><small>${x.sub}</small></span></div><span class="score-pill">${nf.format(x.score)}</span><span class="delta ${x.delta<0?'down':''}">${x.delta>=0?'▲':'▼'} ${Math.abs(x.delta).toFixed(1)} %</span><div class="visibility"><i style="width:${x.vis}%"></i></div></div>`).join('');
+   };
+   renderRanking();
+  }
+
+  const rec=$('#ip-recent'), st=$('#ip-recent-state');
+  const seen=new Set(), items=[];
+  (data.recent||[]).forEach(m=>{if(seen.has(m.id))return;seen.add(m.id);items.push(m)});
+  if(rec){
+   rec.innerHTML=items.slice(0,15).map(m=>{const ar=isAr(m.title);
+    return `<div class="ip-recent-row"${ar?' dir="rtl"':''}><a href="${m.url}" target="_blank" rel="noopener noreferrer">${(m.title||'Sans titre').replace(/</g,'&lt;')}</a><small>${m.source_name||m.source_type||''}</small><small>${m.canonical_name_fr||''} · ${dt(m.published_at)}</small></div>`}).join('');
+   if(st)st.textContent=items.length?`${items.length} mentions validées`:'aucune mention';
+  }
+
+  const fresh=data.kpis&&(data.kpis.freshest_publication_at||data.kpis.dataset_imported_at);
+  showBanner(`Données réelles validées · dernière publication analysée : ${dt(fresh)} · ${nf.format((data.kpis&&data.kpis.mentions_pending_review)||0)} mentions en attente de revue, exclues des agrégats publics. Les blocs IBDN® restent en démonstration.`,false);
+ }
+
+ function fallback(cached){
+  const when=cached?dt(cached.at):'inconnue';
+  showBanner(`Données temporairement indisponibles — dernière actualisation connue : ${when}`,true);
+  const st=$('#ip-recent-state');if(st)st.textContent='indisponible';
+  const rec=$('#ip-recent');if(rec&&!rec.children.length)rec.innerHTML='<div class="ip-recent-row"><small>Aucune donnée disponible pour le moment.</small></div>';
+ }
+
+ async function load(){
+  const cached=readCache();
+  if(cached&&Date.now()-cached.at<TTL){try{apply(cached.payload);return}catch(e){}}
+  const ctrl=new AbortController(), t=setTimeout(()=>ctrl.abort(),TIMEOUT);
+  try{
+   const res=await fetch(API,{signal:ctrl.signal,headers:{'Accept':'application/json'}});
+   clearTimeout(t);
+   if(!res.ok)throw new Error('http_'+res.status);
+   const json=await res.json();
+   if(json.status!=='ok')throw new Error('payload');
+   writeCache(json);apply(json);
+  }catch(e){
+   clearTimeout(t);
+   if(cached){try{apply(cached.payload)}catch(_){}}
+   fallback(cached);
+  }
+ }
+ load();
+})();
