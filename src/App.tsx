@@ -76,7 +76,7 @@ const App = () => (
             <Route path="/success-stories" element={<SuccessStories />} />
             <Route path="/insights-resources" element={<InsightsResources />} />
             <Route path="/insights-resources/enquete-isd" element={<EnqueteISD />} />
-            <Route path="/insights-resources/intelligence-politique" element={<IntelligencePolitique panel="dashboard" />} />
+            <Route path="/insights-resources/intelligence-politique" element={<IntelligencePolitiquePage />} />
             <Route path="/insights-resources/intelligence-politique/classements" element={<IntelligencePolitique panel="classements" />} />
             <Route path="/insights-resources/intelligence-politique/opinion" element={<IntelligencePolitique panel="opinion" />} />
             <Route path="/insights-resources/intelligence-politique/cartographie" element={<IntelligencePolitique panel="cartographie" />} />
