@@ -14,3 +14,7 @@
 .ip-recent-row a:hover{color:#e1ad35;text-decoration:underline}
 .ip-recent-row small{color:#7d94a3;font:600 9px/1.4 'DM Sans',sans-serif;letter-spacing:.04em;text-transform:uppercase;white-space:nowrap}
 .ip-recent-row[dir="rtl"] a{text-align:right}
+.dash-grid .recent-card{grid-column:1/-1}
+.recent-card #ip-recent{max-height:230px}
+.ip-recent-row{grid-template-columns:1fr auto auto;align-items:baseline;overflow-wrap:anywhere}
+.ip-recent-row a{display:block;overflow-wrap:anywhere}
