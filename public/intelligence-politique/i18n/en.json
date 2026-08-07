@@ -138,8 +138,8 @@
   },
   "graph": {
     "kicker": "LEGISLATIVE ELECTIONS | MOROCCO 2026",
-    "h1Html": "Political Narrative <em>Graph</em>",
-    "p1": "The Political Narrative Graph, a relational map of narrative dynamics, brings together the interactions between parties, political figures, the main political narratives and the dynamics of public opinion. It gives an overall reading of the balance of power and highlights the convergences, oppositions and influences that shape the political debate.",
+    "h1Html": "<bdi dir=\"ltr\">Political Narrative <em>Graph</em></bdi>",
+    "p1": "The <bdi dir=\"ltr\">Political Narrative Graph</bdi>, a relational map of narrative dynamics, brings together the interactions between parties, political figures, the main political narratives and the dynamics of public opinion. It gives an overall reading of the balance of power and highlights the convergences, oppositions and influences that shape the political debate.",
     "p2": "It is computed by co-occurrence across 9,002 unique URLs. Link thickness reflects frequency, and colour indicates the dominant tone or an explicit affiliation.",
     "statUrlsHtml": "<strong>9,002</strong>unique URLs retained",
     "statNodesHtml": "<strong>23</strong>documented nodes",
