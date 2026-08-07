@@ -405,5 +405,13 @@
   },
   "common": {
     "labelValue": "{label}: {value}"
+  },
+  "theme": {
+    "label": "المظهر",
+    "light": "فاتح",
+    "dark": "داكن",
+    "aria": "اختيار المظهر",
+    "ariaLight": "تفعيل المظهر الفاتح",
+    "ariaDark": "تفعيل المظهر الداكن"
   }
 }
