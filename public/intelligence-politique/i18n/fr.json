@@ -138,8 +138,8 @@
   },
   "graph": {
     "kicker": "ÉLECTIONS LÉGISLATIVES | MAROC 2026",
-    "h1Html": "Political Narrative <em>Graph</em>",
-    "p1": "Le Political Narrative Graph, cartographie relationnelle des dynamiques narratives, synthétise les interactions entre les partis, les personnalités politiques, les principaux narratifs politiques et les dynamiques de l’opinion publique. Il offre une lecture globale des rapports de force et met en évidence les convergences, les oppositions et les influences qui structurent le débat politique.",
+    "h1Html": "<bdi dir=\"ltr\">Political Narrative <em>Graph</em></bdi>",
+    "p1": "Le <bdi dir=\"ltr\">Political Narrative Graph</bdi>, cartographie relationnelle des dynamiques narratives, synthétise les interactions entre les partis, les personnalités politiques, les principaux narratifs politiques et les dynamiques de l’opinion publique. Il offre une lecture globale des rapports de force et met en évidence les convergences, les oppositions et les influences qui structurent le débat politique.",
     "p2": "Elle est calculée par cooccurrence dans 9 002 URL uniques. L’épaisseur des liens traduit leur fréquence ; leur couleur indique la tonalité dominante ou l’affiliation explicite.",
     "statUrlsHtml": "<strong>9 002</strong>URL uniques retenues",
     "statNodesHtml": "<strong>23</strong>nœuds documentés",
