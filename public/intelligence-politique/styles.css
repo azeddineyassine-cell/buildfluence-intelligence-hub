@@ -186,3 +186,6 @@ body.is-rtl .network-columns{direction:ltr}
 [data-theme="light"] .donut:after,[data-theme="light"] .score-ring:after{background:var(--surface)}
 [data-theme="light"] #network-tooltip,[data-theme="light"] .data-tooltip{background:var(--overlay);color:var(--text);border:1px solid var(--line)}
 [data-theme="light"] footer{background:var(--surface-2);color:var(--text)}
+
+/* Sélecteur de fond · compacité sur petits écrans */
+@media(max-width:900px){.theme-switch>span{display:none}}
