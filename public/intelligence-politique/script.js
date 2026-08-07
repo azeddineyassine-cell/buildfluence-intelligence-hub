@@ -1,6 +1,6 @@
 const $=(s,p=document)=>p.querySelector(s), $$=(s,p=document)=>[...p.querySelectorAll(s)];
 const T=(k,v)=>window.BFI18N.t(k,v);
-const nf=n=>Number(n).toLocaleString('fr-FR');
+const nf=n=>{const lg=(window.BFI18N&&window.BFI18N.lang)||'fr';const s=Number(n).toLocaleString(lg==='en'?'en-US':'fr-FR');return lg==='ar'&&/\s/.test(s)?'\u2066'+s+'\u2069':s;};
 
 /* Données observées, inchangées. Seuls les libellés passent par les fichiers de traduction. */
 const parties=[

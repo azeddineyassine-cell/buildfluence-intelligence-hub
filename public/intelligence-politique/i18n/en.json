@@ -9,7 +9,7 @@
     "tagline": "SOVEREIGN DECISION INFRASTRUCTURE",
     "edition": "Political Intelligence",
     "editionSub": "MOROCCO LEGISLATIVE ELECTIONS 2026",
-    "liveHtml": "<i></i> LIVE MONITORING 24/7",
+    "liveHtml": "<i></i> 24/7 LIVE MONITORING",
     "login": "SIGN IN",
     "signup": "SIGN UP",
     "langAria": "Language selection"
@@ -22,7 +22,7 @@
     "classementSub": "Who is gaining ground? Who is losing it?",
     "opinionTitle": "OPINION",
     "opinionSub": "Which topics dominate the debate?",
-    "acteursTitle": "MEDIA",
+    "acteursTitle": "MEDIA OUTLETS",
     "acteursSub": "Who amplifies the debate?",
     "dynamiquesTitle": "POLITICAL DYNAMICS",
     "dynamiquesSub": "How do actors interact?",
@@ -40,7 +40,7 @@
     "point3Html": "<b>♢</b>Auditable analysis<small>Sources, period and exclusions stated</small>",
     "explore": "EXPLORE THE SOURCES →",
     "heroImgAlt": "Political Narrative Graph of the 2026 Moroccan legislative elections",
-    "sheetEyebrow": "KEY FIGURES OF THE STUDY",
+    "sheetEyebrow": "KEY FIGURES",
     "sheetTitle": "FACT SHEET",
     "sheetBadge": "CONSOLIDATED DATA",
     "period": "PERIOD",
@@ -139,7 +139,7 @@
   "graph": {
     "kicker": "LEGISLATIVE ELECTIONS | MOROCCO 2026",
     "h1Html": "Political Narrative <em>Graph</em>",
-    "p1": "This relational map brings together the interactions between parties, political figures, the main political narratives and the dynamics of public opinion. It gives an overall reading of the balance of power and highlights the convergences, oppositions and influences that shape the political debate.",
+    "p1": "The Political Narrative Graph, a relational map of narrative dynamics, brings together the interactions between parties, political figures, the main political narratives and the dynamics of public opinion. It gives an overall reading of the balance of power and highlights the convergences, oppositions and influences that shape the political debate.",
     "p2": "It is computed by co-occurrence across 9,002 unique URLs. Link thickness reflects frequency, and colour indicates the dominant tone or an explicit affiliation.",
     "statUrlsHtml": "<strong>9,002</strong>unique URLs retained",
     "statNodesHtml": "<strong>23</strong>documented nodes",
@@ -330,7 +330,7 @@
         ]
       },
       {
-        "title": "SAFEGUARD",
+        "title": "ENSURE QUALITY AND INTEGRITY",
         "desc": "Ethical governance",
         "items": [
           "Neutrality and transparency",
@@ -384,7 +384,7 @@
       "baraka": "Secretary General of the Istiqlal"
     },
     "graphLabels": {
-      "Sebta / migration": "Sebta / migration",
+      "Sebta / migration": "Ceuta / migration",
       "Emploi / chômage": "Employment / unemployment",
       "Eau / sécheresse": "Water / drought",
       "Justice": "Justice",
@@ -397,8 +397,8 @@
     },
     "strongMentions": [
       "Employment: inequalities persist despite falling unemployment",
-      "Did disinformation trigger the Sebta crisis?",
-      "Benkirane criticises the government’s handling of the Sebta crisis",
+      "Did disinformation trigger the Ceuta crisis?",
+      "Benkirane criticises the government’s handling of the Ceuta crisis",
       "The RNI presents the outcome of the Plan Maroc Vert",
       "2030 World Cup: announced economic benefits and jobs"
     ]
