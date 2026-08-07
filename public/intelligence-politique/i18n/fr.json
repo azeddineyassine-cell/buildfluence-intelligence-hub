@@ -405,5 +405,13 @@
   },
   "common": {
     "labelValue": "{label} : {value}"
+  },
+  "theme": {
+    "label": "FOND",
+    "light": "CLAIR",
+    "dark": "SOMBRE",
+    "aria": "Choix du fond",
+    "ariaLight": "Activer le fond clair",
+    "ariaDark": "Activer le fond sombre"
   }
 }

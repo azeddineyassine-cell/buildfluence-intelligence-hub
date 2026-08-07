@@ -405,5 +405,13 @@
   },
   "common": {
     "labelValue": "{label}: {value}"
+  },
+  "theme": {
+    "label": "THEME",
+    "light": "LIGHT",
+    "dark": "DARK",
+    "aria": "Theme selection",
+    "ariaLight": "Switch to light theme",
+    "ariaDark": "Switch to dark theme"
   }
 }
