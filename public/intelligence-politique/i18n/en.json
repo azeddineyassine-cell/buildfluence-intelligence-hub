@@ -9,7 +9,7 @@
     "tagline": "SOVEREIGN DECISION INFRASTRUCTURE",
     "edition": "Political Intelligence",
     "editionSub": "MOROCCO LEGISLATIVE ELECTIONS 2026",
-    "liveHtml": "<i></i> MONITORING ACTIVE 24/7",
+    "liveHtml": "<i></i> LIVE MONITORING 24/7",
     "login": "SIGN IN",
     "signup": "SIGN UP",
     "langAria": "Language selection"
@@ -19,11 +19,11 @@
     "dashboardTitle": "DASHBOARD",
     "dashboardSub": "What is happening today?",
     "classementTitle": "RANKING",
-    "classementSub": "Who is rising? Who is falling?",
+    "classementSub": "Who is gaining ground? Who is losing it?",
     "opinionTitle": "OPINION",
     "opinionSub": "Which topics dominate the debate?",
     "acteursTitle": "MEDIA",
-    "acteursSub": "Who carries the debate?",
+    "acteursSub": "Who amplifies the debate?",
     "dynamiquesTitle": "POLITICAL DYNAMICS",
     "dynamiquesSub": "How do actors interact?",
     "methodologieTitle": "METHODOLOGY",
@@ -35,26 +35,26 @@
     "kicker": "MOROCCO’S FIRST POLITICAL INTELLIGENCE PLATFORM",
     "h1Html": "Understand now<br><em>Decide today</em><br>Anticipate tomorrow",
     "intro": "IBDN® (Buildfluence Narrative Dynamics Index) measures in real time the presence, influence and momentum of political parties and leaders, based on media and social networks.",
-    "point1Html": "<b>ϟ</b>Consolidated exports<small>3 documented perimeters</small>",
-    "point2Html": "<b>◎</b>Observed base<small>11,654 rows analysed</small>",
-    "point3Html": "<b>♢</b>Traceable reading<small>Sources, period and exclusions stated</small>",
+    "point1Html": "<b>ϟ</b>Consolidated exports<small>3 documented scopes</small>",
+    "point2Html": "<b>◎</b>Observed dataset<small>11,654 rows analysed</small>",
+    "point3Html": "<b>♢</b>Auditable analysis<small>Sources, period and exclusions stated</small>",
     "explore": "EXPLORE THE SOURCES →",
     "heroImgAlt": "Political Narrative Graph of the 2026 Moroccan legislative elections",
-    "sheetEyebrow": "STUDY BENCHMARKS",
-    "sheetTitle": "TECHNICAL SHEET",
+    "sheetEyebrow": "KEY FIGURES OF THE STUDY",
+    "sheetTitle": "FACT SHEET",
     "sheetBadge": "CONSOLIDATED DATA",
     "period": "PERIOD",
     "periodValue": "29.07 to 05.08.2026",
     "mentions": "MENTIONS ANALYSED",
     "mentionsValue": "11,654 rows",
-    "scope": "PERIMETER",
+    "scope": "SCOPE",
     "scopeValue": "3 monitoring corpora",
-    "method": "PROPRIETARY METHOD",
+    "method": "PROPRIETARY METHODOLOGY",
     "methodValue": "IBDN®, 8 dimensions",
     "tools": "TOOLS",
     "toolsValue": "Monitoring, AI, BI, human expertise",
     "goal": "OBJECTIVE",
-    "goalValue": "Read narrative dynamics",
+    "goalValue": "Interpret narrative dynamics",
     "graphLabel": "RELATIONAL GRAPH",
     "graphValueHtml": "9,002 unique URLs, after deduplication and exclusions",
     "metricPress": "MOROCCAN PRESS",
@@ -68,7 +68,7 @@
     "analyze": "ANALYSE →",
     "dailyVolumeHtml": "DAILY VOLUME | MOROCCAN PRESS <small>29.07 - 05.08</small>",
     "chartAria": "Daily trend of Moroccan press mentions",
-    "chartHint": "Hover the curve to display the daily volume",
+    "chartHint": "Hover over the curve to see the daily volume",
     "validatedTopics": "VALIDATED TOPICS | MOROCCAN PRESS",
     "donutHtml": "88<small>TAGGED MENTIONS</small>",
     "strongTitleHtml": "VALIDATED STRONG MENTIONS <small>SOURCE LINKS</small>",
@@ -76,11 +76,11 @@
     "open": "OPEN ↗",
     "traceHtml": "<strong>Traceability.</strong> Data from the Excel exports and PDF dashboards provided, from 29 July to 5 August 2026. The total of 11,654 corresponds to the rows of the three consolidated corpora. The relational graph uses 9,002 unique URLs after deduplicating overlaps between corpora and excluding Wikipedia and Wiktionary. Strong mentions come from the “Favourites/Tags” selections and link to their source URL. Reach is an estimate provided by the monitoring tool.",
     "dimsTitle": "IBDN®: ONE INDEX, 8 DIMENSIONS, ONE CLEAR VIEW",
-    "mentionsShort": "{n} ment."
+    "mentionsShort": "{n} mentions"
   },
   "rank": {
-    "kicker": "MOST PRESENT SOURCES",
-    "h1Html": "Web <em>monitoring</em> ranking",
+    "kicker": "MOST VISIBLE SOURCES",
+    "h1Html": "<em>Web monitoring</em> ranking",
     "intro": "Compare domains by volume of mentions, source influence and estimated reach in the 4 August exports.",
     "tabPoliticalParties": "Political parties",
     "tabLeaders": "Political leaders",
@@ -95,9 +95,9 @@
     "colIntensity": "RELATIVE INTENSITY",
     "rowMentions": "{n} mentions",
     "insightKicker": "READING THE EXPORTS",
-    "insightTitle": "Frequency and influence are not the same thing.",
+    "insightTitle": "Frequency and influence are not the same.",
     "insightText": "The “Parties” and “Leaders” modes rely on the validated mentions available. The Press modes show source influence and volume.",
-    "pendingHtml": "<strong>Leaders’ tonality balance:</strong> not published at this stage. The dedicated query is pending; no provisional value is computed.",
+    "pendingHtml": "<strong>Leaders’ tone balance:</strong> not published at this stage. The dedicated query is pending, and no provisional value is computed.",
     "statLabel": "main analysis period"
   },
   "opinion": {
@@ -105,14 +105,14 @@
     "h1Html": "Tonality & <em>channels</em>",
     "intro": "Analysis of 6,988 mentions, excluding Wikipedia and Wiktionary, from 30 July to 5 August 2026.",
     "channelSplit": "BREAKDOWN BY CHANNEL",
-    "toneTitleHtml": "TONALITY OF THE DEBATE <small>30.07 - 05.08</small>",
+    "toneTitleHtml": "TONE OF THE DEBATE <small>30.07 - 05.08</small>",
     "negative": "negative",
     "labelNegative": "Negative 46.4%",
     "labelNeutral": "Neutral 31.6%",
     "labelPositive": "Positive 22.0%",
-    "evolution": "Daily volume trend, interactive hover",
+    "evolution": "Daily volume trend, hover for details",
     "mentionsUnit": "{n} mentions",
-    "percentUnit": "{n} %"
+    "percentUnit": "{n}%"
   },
   "media": {
     "kicker": "MEDIA ANALYSIS",
@@ -122,7 +122,7 @@
     "descNat": "Explore the most influential Moroccan media in the Moroccan press export.",
     "switchIntl": "International sources",
     "switchNat": "National sources",
-    "searchLabel": "Search a source",
+    "searchLabel": "Search for a source",
     "searchPlaceholder": "Domain name…",
     "influenceOf100": "INFLUENCE /100",
     "sourceProfile": "SOURCE PROFILE",
@@ -139,15 +139,15 @@
   "graph": {
     "kicker": "LEGISLATIVE ELECTIONS | MOROCCO 2026",
     "h1Html": "Political Narrative <em>Graph</em>",
-    "p1": "This relational map synthesises the interactions between parties, political figures, the main political narratives and the dynamics of public opinion. It offers a global reading of the balance of power and highlights the convergences, oppositions and influences that structure the political debate.",
-    "p2": "It is computed by co-occurrence across 9,002 unique URLs. Link thickness reflects frequency; colour indicates the dominant tonality or the explicit affiliation.",
+    "p1": "This relational map brings together the interactions between parties, political figures, the main political narratives and the dynamics of public opinion. It gives an overall reading of the balance of power and highlights the convergences, oppositions and influences that shape the political debate.",
+    "p2": "It is computed by co-occurrence across 9,002 unique URLs. Link thickness reflects frequency, and colour indicates the dominant tone or an explicit affiliation.",
     "statUrlsHtml": "<strong>9,002</strong>unique URLs retained",
     "statNodesHtml": "<strong>23</strong>documented nodes",
     "statRelationsHtml": "<strong>55</strong>weighted relations",
     "whyHtml": "<strong>Why 9,002 and not 11,654?</strong> 11,654 is the total number of rows across the three corpora. The graph relies on 9,002 unique URLs after deduplicating overlaps and excluding Wikipedia and Wiktionary.",
-    "legendPositive": "Positive tonality / affiliation",
-    "legendNeutral": "Neutral tonality",
-    "legendNegative": "Negative tonality",
+    "legendPositive": "Positive tone / affiliation",
+    "legendNeutral": "Neutral tone",
+    "legendNegative": "Negative tone",
     "filterAll": "All",
     "filterAlliance": "Positive / affiliation",
     "filterProximite": "Neutral / proximity",
@@ -156,19 +156,19 @@
     "hint": "Drag to explore · scroll to zoom",
     "colParties": "POLITICAL PARTIES",
     "colLeaders": "POLITICAL LEADERS",
-    "colThemes": "TOPICS OF THE POLITICAL DEBATE",
+    "colThemes": "POLITICAL DEBATE TOPICS",
     "colOpinion": "CITIZEN OPINION",
     "canvasAria": "Interactive network of political dynamics",
     "noteHtml": "<strong>Total co-occurrences displayed.</strong> In a node tooltip, this total adds up the frequencies of all its visible relations. It is neither an influence score nor a voting intention.",
     "tipMentions": "{n} mentions",
     "tipRelations": "{n} relations",
     "tipCooc": "Total co-occurrences of relations: {n}",
-    "tipDisclaimer": "Sum of frequencies, not a score."
+    "tipDisclaimer": "A sum of frequencies, not a score."
   },
   "method": {
     "kicker": "HOW IT WORKS",
-    "h1Html": "The 6 steps of <em>Political Intelligence®</em>",
-    "intro": "Every day, millions of public data points become decision intelligence through AI, human analysis and a proprietary methodology.",
+    "h1Html": "The six steps of <em>Political Intelligence®</em>",
+    "intro": "Every day, millions of public data points are turned into decision intelligence through AI, human analysis and a proprietary methodology.",
     "ibdnKicker": "PROPRIETARY METHODOLOGY",
     "ibdnTitle": "What is the IBDN®?",
     "ibdnP1": "The IBDN® (Buildfluence Narrative Dynamics Index) measures, day after day, the ability of a party or a political figure to occupy, influence and shift the Moroccan information space, based on open data from the press, media, social networks and institutional sources.",
@@ -183,7 +183,7 @@
     "out3Sub": "Identifying weak signals.",
     "ethicsKicker": "ETHICAL GOVERNANCE",
     "ethicsTitle": "What the index measures, and what it does not.",
-    "ethicsText": "Open sources, human quality control, a displayed observation period and explicit limitations. The leaders’ tonality balance will be added upon receipt of the dedicated query, with no invented provisional value."
+    "ethicsText": "Open sources, human quality control, a stated observation period and explicit limitations. The leaders’ tone balance will be added once the dedicated query is available, and no provisional value will be invented."
   },
   "about": {
     "kicker": "OUR MISSION",
@@ -195,7 +195,7 @@
     "c2Text": "A platform designed in Morocco, serving the understanding of Morocco.",
     "c3": "Responsibility",
     "c3Text": "Open data, CNDP and GDPR compliance, permanent human control.",
-    "quote": "“Data tells what happened. Relations explain why. The IBDN® reveals what is changing.”",
+    "quote": "“Data tells what happened. Relationships explain why. The IBDN® reveals what is changing.”",
     "signature": "Buildfluence Political Intelligence®"
   },
   "footer": {
@@ -216,35 +216,144 @@
   },
   "data": {
     "dims": [
-      { "label": "VISIBILITY", "desc": "Presence across media and networks." },
-      { "label": "INFLUENCE", "desc": "Amplification by influential sources." },
-      { "label": "ENGAGEMENT", "desc": "Reactions, interactions and shares." },
-      { "label": "PROPAGATION", "desc": "Speed at which a narrative spreads." },
-      { "label": "PERSISTENCE", "desc": "Ability to last over time." },
-      { "label": "TONALITY", "desc": "Positive, neutral or negative orientation." },
-      { "label": "TOPICS", "desc": "Association with major issues." },
-      { "label": "MOMENTUM", "desc": "Progress, stagnation or decline." }
+      {
+        "label": "VISIBILITY",
+        "desc": "Presence across media and networks."
+      },
+      {
+        "label": "INFLUENCE",
+        "desc": "Amplification by influential sources."
+      },
+      {
+        "label": "ENGAGEMENT",
+        "desc": "Reactions, interactions and shares."
+      },
+      {
+        "label": "SPREAD",
+        "desc": "Speed at which a narrative spreads."
+      },
+      {
+        "label": "PERSISTENCE",
+        "desc": "Ability to last over time."
+      },
+      {
+        "label": "TONE",
+        "desc": "Positive, neutral or negative orientation."
+      },
+      {
+        "label": "TOPICS",
+        "desc": "Association with major issues."
+      },
+      {
+        "label": "MOMENTUM",
+        "desc": "Progress, stagnation or decline."
+      }
     ],
     "ibdnDims": [
-      { "label": "Visibility", "desc": "Presence and deduplicated volume of mentions" },
-      { "label": "Influence", "desc": "Weight of sources and amplifiers" },
-      { "label": "Engagement", "desc": "Reactions, shares and comments" },
-      { "label": "Propagation", "desc": "Spread of a narrative over a short period" },
-      { "label": "Persistence", "desc": "Ability of a signal to last over time" },
-      { "label": "Tonality", "desc": "Orientation of discourse, with uncertainty" },
-      { "label": "Topics", "desc": "Association with structuring issues" },
-      { "label": "Overall momentum", "desc": "Consolidated variation across dimensions" }
+      {
+        "label": "Visibility",
+        "desc": "Presence and deduplicated volume of mentions"
+      },
+      {
+        "label": "Influence",
+        "desc": "Weight of sources and amplifiers"
+      },
+      {
+        "label": "Engagement",
+        "desc": "Reactions, shares and comments"
+      },
+      {
+        "label": "Spread",
+        "desc": "Diffusion of a narrative over a short period"
+      },
+      {
+        "label": "Persistence",
+        "desc": "Ability of a signal to last over time"
+      },
+      {
+        "label": "Tone",
+        "desc": "Direction of the discourse, with a margin of uncertainty"
+      },
+      {
+        "label": "Topics",
+        "desc": "Association with structuring issues"
+      },
+      {
+        "label": "Overall momentum",
+        "desc": "Consolidated variation across dimensions"
+      }
     ],
     "steps": [
-      { "title": "OBSERVE", "desc": "Open data collection", "items": ["Press · Networks · Institutions", "15,000+ sources · FR · AR", "Continuous collection 24/7"] },
-      { "title": "UNDERSTAND", "desc": "Augmented intelligence", "items": ["AI and human analysis", "Actor detection", "Permanent quality control"] },
-      { "title": "ANALYSE", "desc": "Narrative analysis", "items": ["8 key topics", "Tonality and intensity", "Daily trends"] },
-      { "title": "CONNECT", "desc": "Relational mapping", "items": ["Alliances and oppositions", "Influence and proximity", "Diffusion networks"] },
-      { "title": "MEASURE", "desc": "IBDN® index", "items": ["8 dimensions", "Single score out of 100", "Real time and comparisons"] },
-      { "title": "GUARANTEE", "desc": "Ethical governance", "items": ["Neutrality and transparency", "Human validation", "CNDP & GDPR compliance"] }
+      {
+        "title": "OBSERVE",
+        "desc": "Open data collection",
+        "items": [
+          "Press · Networks · Institutions",
+          "15,000+ sources · FR · AR",
+          "Continuous collection 24/7"
+        ]
+      },
+      {
+        "title": "UNDERSTAND",
+        "desc": "Augmented intelligence",
+        "items": [
+          "AI and human analysis",
+          "Actor identification",
+          "Permanent quality control"
+        ]
+      },
+      {
+        "title": "ANALYSE",
+        "desc": "Narrative analysis",
+        "items": [
+          "8 key topics",
+          "Tone and intensity",
+          "Daily trends"
+        ]
+      },
+      {
+        "title": "CONNECT",
+        "desc": "Relational mapping",
+        "items": [
+          "Alliances and oppositions",
+          "Influence and proximity",
+          "Dissemination networks"
+        ]
+      },
+      {
+        "title": "MEASURE",
+        "desc": "IBDN® index",
+        "items": [
+          "8 dimensions",
+          "Single score out of 100",
+          "Real time and comparisons"
+        ]
+      },
+      {
+        "title": "SAFEGUARD",
+        "desc": "Ethical governance",
+        "items": [
+          "Neutrality and transparency",
+          "Human validation",
+          "CNDP & GDPR compliance"
+        ]
+      }
     ],
-    "channels": ["X / Twitter", "Facebook", "News", "Blogs", "Other channels"],
-    "pressTopics": ["Unemployment", "Justice", "Energy transition", "Social justice", "Inflation", "Drought"],
+    "channels": [
+      "X / Twitter",
+      "Facebook",
+      "News",
+      "Blogs",
+      "Other channels"
+    ],
+    "pressTopics": [
+      "Unemployment",
+      "Justice",
+      "Energy transition",
+      "Social justice",
+      "Inflation",
+      "Drought"
+    ],
     "sub": {
       "reachUnknown": "Reach not provided",
       "reachEstimated": "Estimated reach: {reach}",
@@ -252,8 +361,14 @@
       "mentionsReach": "{mentions} mentions · reach {reach}",
       "validatedStrong": "Validated strong mentions"
     },
-    "party": { "international": "INTERNATIONAL PRESS", "national": "NATIONAL PRESS" },
-    "role": { "media": "Media outlet", "moroccanMedia": "Moroccan media outlet" },
+    "party": {
+      "international": "INTERNATIONAL PRESS",
+      "national": "NATIONAL PRESS"
+    },
+    "role": {
+      "media": "Media outlet",
+      "moroccanMedia": "Moroccan media outlet"
+    },
     "summary": {
       "intlFirst": "International source identified in the Parties and Leaders report, influence {score}/100.",
       "intl": "International source identified in the report, influence {score}/100.",
@@ -262,11 +377,11 @@
       "nat": "Influence {score}/100, {mentions} mentions and an estimated reach of {reach} in the Moroccan press export."
     },
     "leaderRoles": {
-      "akhannouch": "Head of Government · president of the RNI",
-      "lachgar": "First secretary of the USFP",
-      "benkirane": "Secretary general of the PJD",
-      "benabdallah": "Secretary general of the PPS",
-      "baraka": "Secretary general of the Istiqlal"
+      "akhannouch": "Head of Government · President of the RNI",
+      "lachgar": "First Secretary of the USFP",
+      "benkirane": "Secretary General of the PJD",
+      "benabdallah": "Secretary General of the PPS",
+      "baraka": "Secretary General of the Istiqlal"
     },
     "graphLabels": {
       "Sebta / migration": "Sebta / migration",
@@ -282,10 +397,13 @@
     },
     "strongMentions": [
       "Employment: inequalities persist despite falling unemployment",
-      "Did disinformation trigger the Ceuta crisis?",
+      "Did disinformation trigger the Sebta crisis?",
       "Benkirane criticises the government’s handling of the Sebta crisis",
-      "The RNI presents the results of the Plan Maroc Vert",
-      "2030 World Cup: economic benefits and jobs announced"
+      "The RNI presents the outcome of the Plan Maroc Vert",
+      "2030 World Cup: announced economic benefits and jobs"
     ]
+  },
+  "common": {
+    "labelValue": "{label}: {value}"
   }
 }
