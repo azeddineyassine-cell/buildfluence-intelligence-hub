@@ -22,7 +22,7 @@
     "classementSub": "Qui progresse ? Qui recule ?",
     "opinionTitle": "OPINION",
     "opinionSub": "Quels sujets dominent le débat ?",
-    "acteursTitle": "MEDIA",
+    "acteursTitle": "MÉDIAS",
     "acteursSub": "Qui relaie le débat ?",
     "dynamiquesTitle": "DYNAMIQUES POLITIQUES",
     "dynamiquesSub": "Comment les acteurs interagissent-ils ?",
@@ -216,35 +216,144 @@
   },
   "data": {
     "dims": [
-      { "label": "VISIBILITÉ", "desc": "Présence dans les médias et réseaux." },
-      { "label": "INFLUENCE", "desc": "Relais par des sources influentes." },
-      { "label": "ENGAGEMENT", "desc": "Réactions, interactions et partages." },
-      { "label": "PROPAGATION", "desc": "Vitesse de diffusion du récit." },
-      { "label": "PERSISTANCE", "desc": "Capacité à durer dans le temps." },
-      { "label": "TONALITÉ", "desc": "Orientation positive, neutre ou négative." },
-      { "label": "THÉMATIQUES", "desc": "Association aux grands enjeux." },
-      { "label": "DYNAMIQUE", "desc": "Progression, stagnation ou recul." }
+      {
+        "label": "VISIBILITÉ",
+        "desc": "Présence dans les médias et réseaux."
+      },
+      {
+        "label": "INFLUENCE",
+        "desc": "Relais par des sources influentes."
+      },
+      {
+        "label": "ENGAGEMENT",
+        "desc": "Réactions, interactions et partages."
+      },
+      {
+        "label": "PROPAGATION",
+        "desc": "Vitesse de diffusion du récit."
+      },
+      {
+        "label": "PERSISTANCE",
+        "desc": "Capacité à durer dans le temps."
+      },
+      {
+        "label": "TONALITÉ",
+        "desc": "Orientation positive, neutre ou négative."
+      },
+      {
+        "label": "THÉMATIQUES",
+        "desc": "Association aux grands enjeux."
+      },
+      {
+        "label": "DYNAMIQUE",
+        "desc": "Progression, stagnation ou recul."
+      }
     ],
     "ibdnDims": [
-      { "label": "Visibilité", "desc": "Présence et volume dédupliqué de mentions" },
-      { "label": "Influence", "desc": "Importance des sources et relais" },
-      { "label": "Engagement", "desc": "Réactions, partages et commentaires" },
-      { "label": "Propagation", "desc": "Diffusion d’un récit sur une période courte" },
-      { "label": "Persistance", "desc": "Capacité d’un signal à durer dans le temps" },
-      { "label": "Tonalité", "desc": "Orientation du discours, avec incertitude" },
-      { "label": "Thématiques", "desc": "Association aux enjeux structurants" },
-      { "label": "Dynamique globale", "desc": "Variation consolidée des dimensions" }
+      {
+        "label": "Visibilité",
+        "desc": "Présence et volume dédupliqué de mentions"
+      },
+      {
+        "label": "Influence",
+        "desc": "Importance des sources et relais"
+      },
+      {
+        "label": "Engagement",
+        "desc": "Réactions, partages et commentaires"
+      },
+      {
+        "label": "Propagation",
+        "desc": "Diffusion d’un récit sur une période courte"
+      },
+      {
+        "label": "Persistance",
+        "desc": "Capacité d’un signal à durer dans le temps"
+      },
+      {
+        "label": "Tonalité",
+        "desc": "Orientation du discours, avec incertitude"
+      },
+      {
+        "label": "Thématiques",
+        "desc": "Association aux enjeux structurants"
+      },
+      {
+        "label": "Dynamique globale",
+        "desc": "Variation consolidée des dimensions"
+      }
     ],
     "steps": [
-      { "title": "OBSERVER", "desc": "Collecte des données ouvertes", "items": ["Presse · Réseaux · Institutions", "15 000+ sources · FR · AR", "Collecte continue 24/7"] },
-      { "title": "COMPRENDRE", "desc": "Intelligence augmentée", "items": ["IA et analyse humaine", "Détection des acteurs", "Contrôle qualité permanent"] },
-      { "title": "ANALYSER", "desc": "Analyse narrative", "items": ["8 thématiques clés", "Tonalité et intensité", "Tendances quotidiennes"] },
-      { "title": "RELIER", "desc": "Cartographie relationnelle", "items": ["Alliances et oppositions", "Influence et proximité", "Réseaux de diffusion"] },
-      { "title": "MESURER", "desc": "Indice IBDN®", "items": ["8 dimensions", "Score unique sur 100", "Temps réel et comparaisons"] },
-      { "title": "GARANTIR", "desc": "Gouvernance éthique", "items": ["Neutralité et transparence", "Validation humaine", "Conformité CNDP & RGPD"] }
+      {
+        "title": "OBSERVER",
+        "desc": "Collecte des données ouvertes",
+        "items": [
+          "Presse · Réseaux · Institutions",
+          "15 000+ sources · FR · AR",
+          "Collecte continue 24/7"
+        ]
+      },
+      {
+        "title": "COMPRENDRE",
+        "desc": "Intelligence augmentée",
+        "items": [
+          "IA et analyse humaine",
+          "Détection des acteurs",
+          "Contrôle qualité permanent"
+        ]
+      },
+      {
+        "title": "ANALYSER",
+        "desc": "Analyse narrative",
+        "items": [
+          "8 thématiques clés",
+          "Tonalité et intensité",
+          "Tendances quotidiennes"
+        ]
+      },
+      {
+        "title": "RELIER",
+        "desc": "Cartographie relationnelle",
+        "items": [
+          "Alliances et oppositions",
+          "Influence et proximité",
+          "Réseaux de diffusion"
+        ]
+      },
+      {
+        "title": "MESURER",
+        "desc": "Indice IBDN®",
+        "items": [
+          "8 dimensions",
+          "Score unique sur 100",
+          "Temps réel et comparaisons"
+        ]
+      },
+      {
+        "title": "GARANTIR",
+        "desc": "Gouvernance éthique",
+        "items": [
+          "Neutralité et transparence",
+          "Validation humaine",
+          "Conformité CNDP & RGPD"
+        ]
+      }
     ],
-    "channels": ["X / Twitter", "Facebook", "Actualités", "Blogs", "Autres canaux"],
-    "pressTopics": ["Chômage", "Justice", "Transition énergétique", "Justice sociale", "Inflation", "Sécheresse"],
+    "channels": [
+      "X / Twitter",
+      "Facebook",
+      "Actualités",
+      "Blogs",
+      "Autres canaux"
+    ],
+    "pressTopics": [
+      "Chômage",
+      "Justice",
+      "Transition énergétique",
+      "Justice sociale",
+      "Inflation",
+      "Sécheresse"
+    ],
     "sub": {
       "reachUnknown": "Portée non renseignée",
       "reachEstimated": "Portée estimée : {reach}",
@@ -252,8 +361,14 @@
       "mentionsReach": "{mentions} mentions · portée {reach}",
       "validatedStrong": "Mentions fortes validées"
     },
-    "party": { "international": "PRESSE INTERNATIONALE", "national": "PRESSE NATIONALE" },
-    "role": { "media": "Média", "moroccanMedia": "Média marocain" },
+    "party": {
+      "international": "PRESSE INTERNATIONALE",
+      "national": "PRESSE NATIONALE"
+    },
+    "role": {
+      "media": "Média",
+      "moroccanMedia": "Média marocain"
+    },
     "summary": {
       "intlFirst": "Source internationale identifiée dans le rapport Partis et Leaders, influence {score}/100.",
       "intl": "Source internationale identifiée dans le rapport, influence {score}/100.",
@@ -287,5 +402,8 @@
       "Le RNI présente le bilan du Plan Maroc Vert",
       "Coupe du monde 2030 : retombées économiques et emplois annoncés"
     ]
+  },
+  "common": {
+    "labelValue": "{label} : {value}"
   }
 }

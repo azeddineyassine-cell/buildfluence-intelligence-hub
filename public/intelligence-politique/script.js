@@ -76,7 +76,7 @@ function normalize(values){const max=Math.max(...values);return values.map(v=>v/
 const dataTooltip=document.body.appendChild(Object.assign(document.createElement('div'),{className:'data-tooltip'}));
 function showDataTooltip(e,text){dataTooltip.textContent=text;dataTooltip.style.display='block';dataTooltip.style.left=`${e.clientX+14}px`;dataTooltip.style.top=`${e.clientY+14}px`}
 function hideDataTooltip(){dataTooltip.style.display='none'}
-function bindCanvasTooltip(canvas,labels,values){canvas.onmousemove=e=>{const r=canvas.getBoundingClientRect(),i=Math.max(0,Math.min(values.length-1,Math.round((e.clientX-r.left)/(r.width/(values.length-1)))));showDataTooltip(e,`${labels[i]} : ${T('opinion.mentionsUnit',{n:nf(values[i])})}`)};canvas.onmouseleave=hideDataTooltip}
+function bindCanvasTooltip(canvas,labels,values){canvas.onmousemove=e=>{const r=canvas.getBoundingClientRect(),i=Math.max(0,Math.min(values.length-1,Math.round((e.clientX-r.left)/(r.width/(values.length-1)))));showDataTooltip(e,T('common.labelValue',{label:labels[i],value:T('opinion.mentionsUnit',{n:nf(values[i])})}))};canvas.onmouseleave=hideDataTooltip}
 function drawTrend(){const canvas=$('#trend-chart'),values=[291,206,259,184,180,339,355,350],labels=['29/07','30/07','31/07','01/08','02/08','03/08','04/08','05/08'];lineChart(canvas,[{color:'#299bd9',data:normalize(values)}],labels);bindCanvasTooltip(canvas,labels,values)}
 function drawSentiment(){const canvas=$('#sentiment-chart'),values=[137,326,264,413,911,2136,2801],labels=['30/07','31/07','01/08','02/08','03/08','04/08','05/08'];lineChart(canvas,[{color:'#ed5361',data:normalize(values)}],labels);bindCanvasTooltip(canvas,labels,values)}
 
