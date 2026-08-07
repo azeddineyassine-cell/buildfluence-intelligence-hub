@@ -84,7 +84,7 @@ window.BFI18N = (function () {
     if (!host || host.dataset.ready) return;
     host.dataset.ready = '1';
     host.innerHTML = SUPPORTED.map(
-      (l) => `<button type="button" data-lang="${l}" lang="${l}">${LABELS[l]}</button>`
+      (l) => `<button type="button" data-lang="${l}" lang="${l}" aria-label="${LABELS[l]}">${LABELS[l]}</button>`
     ).join('');
     host.querySelectorAll('button').forEach((b) => (b.onclick = () => set(b.dataset.lang)));
   }
