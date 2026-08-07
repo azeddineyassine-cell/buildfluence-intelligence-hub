@@ -164,10 +164,10 @@ body.is-rtl .network-columns{direction:ltr}
 .is-rtl .hero-copy>p:not(.kicker),.is-rtl .page-title p:last-child{font-family:var(--sans);font-style:normal}
 
 /* Sélecteur de thème */
-.theme-switch{display:flex;align-items:center;gap:6px;border:1px solid var(--line);padding:3px 6px;background:var(--surface)}
-.theme-switch>span{font:600 9px var(--mono);letter-spacing:.2em;color:var(--gold-dim);text-transform:uppercase}
+.theme-switch{display:flex;align-items:center;gap:4px;border:1px solid var(--line);padding:2px 5px;background:var(--surface)}
+.theme-switch>span{font:600 8px var(--mono);letter-spacing:.2em;color:var(--gold-dim);text-transform:uppercase}
 .is-rtl .theme-switch>span{font-family:var(--sans);letter-spacing:0;text-transform:none}
-.theme-switch button{border:1px solid transparent;background:none;color:var(--muted);font:600 10px var(--cond);letter-spacing:.6px;padding:4px 8px;cursor:pointer}
+.theme-switch button{border:1px solid transparent;background:none;color:var(--text-2);font:600 10px var(--cond);letter-spacing:.6px;padding:3px 7px;cursor:pointer}
 .theme-switch button:hover{color:var(--text);background:var(--hover-veil)}
 .theme-switch button[aria-pressed="true"]{background:var(--gold);color:var(--on-gold);border-color:var(--gold)}
 .theme-switch button:focus-visible,.lang-switch button:focus-visible,
