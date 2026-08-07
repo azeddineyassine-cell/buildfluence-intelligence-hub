@@ -139,7 +139,7 @@
   "graph": {
     "kicker": "ÉLECTIONS LÉGISLATIVES | MAROC 2026",
     "h1Html": "Political Narrative <em>Graph</em>",
-    "p1": "Cette cartographie relationnelle synthétise les interactions entre les partis, les personnalités politiques, les principaux narratifs politiques et les dynamiques de l’opinion publique. Elle offre une lecture globale des rapports de force et met en évidence les convergences, les oppositions et les influences qui structurent le débat politique.",
+    "p1": "Le Political Narrative Graph, cartographie relationnelle des dynamiques narratives, synthétise les interactions entre les partis, les personnalités politiques, les principaux narratifs politiques et les dynamiques de l’opinion publique. Il offre une lecture globale des rapports de force et met en évidence les convergences, les oppositions et les influences qui structurent le débat politique.",
     "p2": "Elle est calculée par cooccurrence dans 9 002 URL uniques. L’épaisseur des liens traduit leur fréquence ; leur couleur indique la tonalité dominante ou l’affiliation explicite.",
     "statUrlsHtml": "<strong>9 002</strong>URL uniques retenues",
     "statNodesHtml": "<strong>23</strong>nœuds documentés",
@@ -397,7 +397,7 @@
     },
     "strongMentions": [
       "Emploi : les inégalités persistent malgré le recul du chômage",
-      "La désinformation a-t-elle déclenché la crise de Ceuta ?",
+      "La désinformation a-t-elle déclenché la crise de Sebta ?",
       "Benkirane critique la gestion gouvernementale de la crise de Sebta",
       "Le RNI présente le bilan du Plan Maroc Vert",
       "Coupe du monde 2030 : retombées économiques et emplois annoncés"
