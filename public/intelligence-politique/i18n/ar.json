@@ -81,7 +81,7 @@
     "scopes": "4 نطاقات",
     "scopesValueHtml": "الأحزاب السياسية<br>القيادات السياسية<br>مواضيع النقاش السياسي<br>رأي المواطنين",
     "methodValueHtml": "<bdi dir=\"ltr\">IBDN®</bdi>: 8 أبعاد<br><bdi dir=\"ltr\">Political Narrative Graph</bdi>",
-    "toolsValueHtml": "ذكاء البيانات<br>الرصد<br>الذكاء الاصطناعي<br><bdi dir=\"ltr\">BI</bdi> ذكاء الأعمال<br>الخبرة البشرية"
+    "toolsValueHtml": "ذكاء البيانات<br>الرصد<br>الذكاء الاصطناعي<br>ذكاء الأعمال <bdi dir=\"ltr\">(BI)</bdi><br>الخبرة البشرية"
   },
   "rank": {
     "kicker": "المصادر الأكثر حضوراً",
