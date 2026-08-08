@@ -25,9 +25,10 @@
 .sentiment-bar i:nth-child(3) { background: var(--green); }
 .sentiment-score strong { color: var(--red); }
 
-.technical-sheet header { height: 72px; }
+.technical-sheet header { height: auto; min-height: 72px; align-items: flex-start; }
 .technical-sheet header b { font-size: 20px; }
 .technical-sheet header i { color: var(--gold); font-size: 9px; }
+.technical-sheet header i.sheet-badge-stack { display: block; line-height: 1.45; text-align: end; white-space: normal; }
 .technical-grid { padding: 13px 18px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px 14px; }
 .technical-grid div { border-left: 2px solid var(--line-gold); padding-left: 9px; }
 .technical-grid small { display: block; color: var(--muted); font: 700 8px var(--cond); letter-spacing: .7px; }

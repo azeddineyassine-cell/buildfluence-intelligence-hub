@@ -26,8 +26,8 @@
     "acteursSub": "Qui relaie le débat ?",
     "dynamiquesTitle": "DYNAMIQUES POLITIQUES",
     "dynamiquesSub": "Comment les acteurs interagissent-ils ?",
-    "methodologieTitle": "MÉTHODOLOGIE",
-    "methodologieSub": "Comment nos analyses sont-elles produites ?",
+    "methodologieTitle": "ARCHITECTURE",
+    "methodologieSub": "Comment le dispositif est-il structuré ?",
     "aproposTitle": "À PROPOS",
     "aproposSub": "Notre mission et nos engagements"
   },
@@ -41,7 +41,7 @@
     "explore": "EXPLORER LES SOURCES →",
     "heroImgAlt": "Political Narrative Graph des élections législatives marocaines 2026",
     "sheetEyebrow": "REPÈRES DE L’ÉTUDE",
-    "sheetTitle": "FICHE TECHNIQUE",
+    "sheetTitle": "FICHE SIGNALÉTIQUE",
     "sheetBadge": "DONNÉES CONSOLIDÉES",
     "period": "PÉRIODE",
     "periodValue": "29.07 au 05.08.2026",
@@ -76,7 +76,12 @@
     "open": "OUVRIR ↗",
     "traceHtml": "<strong>Traçabilité.</strong> Données issues des exports Excel et tableaux de bord PDF transmis, du 29 juillet au 5 août 2026. Le total de 11 654 correspond aux lignes des trois corpus consolidés. Le graphe relationnel utilise 9 002 URL uniques après déduplication des recouvrements entre corpus et exclusion de Wikipédia et Wiktionary. Les mentions fortes proviennent des sélections « Favoris/Tags » et renvoient vers leur URL source. La portée est une estimation fournie par l’outil de veille.",
     "dimsTitle": "L’IBDN® : UN INDICE, 8 DIMENSIONS, UNE VISION CLAIRE",
-    "mentionsShort": "{n} ment."
+    "mentionsShort": "{n} ment.",
+    "sheetBadgeHtml": "BIG DATA<br>ANALYTICS &amp; AI PROCESSING<br>CONTRÔLE QUALITÉ<br>PRODUCTION",
+    "scopes": "4 SCOPES",
+    "scopesValueHtml": "Partis Politiques<br>Leaders Politiques<br>Sujets de Débat Politique<br>Opinion Citoyenne",
+    "methodValueHtml": "IBDN® : 8 dimensions<br>Political Narrative Graph",
+    "toolsValueHtml": "Data Intelligence<br>Veille<br>IA<br>BI<br>Expertise Humaine"
   },
   "rank": {
     "kicker": "SOURCES LES PLUS PRÉSENTES",

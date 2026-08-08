@@ -26,8 +26,8 @@
     "acteursSub": "Who amplifies the debate?",
     "dynamiquesTitle": "POLITICAL DYNAMICS",
     "dynamiquesSub": "How do actors interact?",
-    "methodologieTitle": "METHODOLOGY",
-    "methodologieSub": "How are our analyses produced?",
+    "methodologieTitle": "ARCHITECTURE",
+    "methodologieSub": "How is the system structured?",
     "aproposTitle": "ABOUT",
     "aproposSub": "Our mission and our commitments"
   },
@@ -41,7 +41,7 @@
     "explore": "EXPLORE THE SOURCES →",
     "heroImgAlt": "Political Narrative Graph of the 2026 Moroccan legislative elections",
     "sheetEyebrow": "KEY FIGURES",
-    "sheetTitle": "FACT SHEET",
+    "sheetTitle": "IDENTITY PROFILE",
     "sheetBadge": "CONSOLIDATED DATA",
     "period": "PERIOD",
     "periodValue": "29.07 to 05.08.2026",
@@ -49,7 +49,7 @@
     "mentionsValue": "11,654 rows",
     "scope": "SCOPE",
     "scopeValue": "3 monitoring corpora",
-    "method": "PROPRIETARY METHODOLOGY",
+    "method": "PROPRIETARY METHOD",
     "methodValue": "IBDN®, 8 dimensions",
     "tools": "TOOLS",
     "toolsValue": "Monitoring, AI, BI, human expertise",
@@ -76,7 +76,12 @@
     "open": "OPEN ↗",
     "traceHtml": "<strong>Traceability.</strong> Data from the Excel exports and PDF dashboards provided, from 29 July to 5 August 2026. The total of 11,654 corresponds to the rows of the three consolidated corpora. The relational graph uses 9,002 unique URLs after deduplicating overlaps between corpora and excluding Wikipedia and Wiktionary. Strong mentions come from the “Favourites/Tags” selections and link to their source URL. Reach is an estimate provided by the monitoring tool.",
     "dimsTitle": "IBDN®: ONE INDEX, 8 DIMENSIONS, ONE CLEAR VIEW",
-    "mentionsShort": "{n} mentions"
+    "mentionsShort": "{n} mentions",
+    "sheetBadgeHtml": "BIG DATA<br>ANALYTICS &amp; AI PROCESSING<br>QUALITY CONTROL<br>PRODUCTION",
+    "scopes": "4 SCOPES",
+    "scopesValueHtml": "Political Parties<br>Political Leaders<br>Political Debate Topics<br>Citizen Opinion",
+    "methodValueHtml": "IBDN®: 8 dimensions<br>Political Narrative Graph",
+    "toolsValueHtml": "Data Intelligence<br>Monitoring<br>AI<br>BI<br>Human Expertise"
   },
   "rank": {
     "kicker": "MOST VISIBLE SOURCES",
