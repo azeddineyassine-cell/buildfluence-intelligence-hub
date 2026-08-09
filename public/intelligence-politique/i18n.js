@@ -52,7 +52,6 @@
     });
     document.querySelectorAll('[data-language]').forEach(button => button.classList.toggle('active', button.dataset.language === lang));
     localStorage.setItem('buildfluence-language', lang);
-    window.dispatchEvent(new CustomEvent('bf:lang', { detail: { lang } }));
   }
 
   function applyTheme(theme) {
