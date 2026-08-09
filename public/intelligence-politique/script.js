@@ -25,21 +25,10 @@ const nationalMedia=[
  {name:'ar.hibapress.com',sub:'7 mentions · portée 40 334',party:'PRESSE NATIONALE',role:'Média marocain',score:49,delta:7,vis:26,color:'#328fbd',initials:'HP',themes:[49,26,11,29],summary:'Influence 49/100, 7 mentions et portée estimée à 40 334 dans l’export Presse marocaine.'},
  {name:'fnh.ma',sub:'51 mentions · portée 47 640',party:'PRESSE NATIONALE',role:'Média marocain',score:48,delta:51,vis:30,color:'#347fa6',initials:'FNH',themes:[48,30,82,53],summary:'Influence 48/100, 51 mentions et portée estimée à 47 640 dans l’export Presse marocaine.'}
 ];
-const politicalParties=[
- {name:'RNI',sub:'Mentions fortes validées',score:5,delta:5,vis:100,color:'#2797ce'},
- {name:'PJD',sub:'Mentions fortes validées',score:5,delta:5,vis:100,color:'#e47b2c'},
- {name:'Parti de l’Istiqlal',sub:'Mentions fortes validées',score:5,delta:5,vis:100,color:'#c84583'},
- {name:'PAM',sub:'Mentions fortes validées',score:1,delta:1,vis:20,color:'#3f70bc'},
- {name:'Mouvement Populaire',sub:'Mentions fortes validées',score:1,delta:1,vis:20,color:'#d0ad3c'},
- {name:'USFP',sub:'Mentions fortes validées',score:1,delta:1,vis:20,color:'#db4551'}
-];
-const leaders=[
- {name:'Aziz Akhannouch',sub:'Chef du gouvernement · président du RNI',score:34,delta:34,vis:100,color:'#278fc2',initials:'AA',image:'assets/person-1.png'},
- {name:'Driss Lachgar',sub:'Premier secrétaire de l’USFP',score:17,delta:17,vis:50,color:'#db4551',initials:'DL',image:'https://prod.cdn-medias.jeuneafrique.com/cdn-cgi/image/q=auto,f=auto,metadata=none,width=240,fit=cover/https://prod.cdn-medias.jeuneafrique.com/medias/2017/03/30/rs39257_ja13120412580001-scr.jpg'},
- {name:'Abdellah Benkirane',sub:'Secrétaire général du PJD',score:11,delta:11,vis:32,color:'#de792d',initials:'AB',image:'assets/person-3.png'},
- {name:'Mohamed Nabil Benabdallah',sub:'Secrétaire général du PPS',score:5,delta:5,vis:15,color:'#6eae4e',initials:'NB',image:'assets/person-4.png'},
- {name:'Nizar Baraka',sub:'Secrétaire général de l’Istiqlal',score:4,delta:4,vis:12,color:'#c64b82',initials:'NB',image:'assets/person-2.png'}
-];
+// Occurrences qualifiées (référentiel manuel 26.07 - 07.08.2026) — chargées depuis qualified-occurrences.json
+const politicalParties=[];
+const leaders=[];
+
 const themes=[['X / Twitter',36.0,'#259cd8'],['Facebook',28.6,'#5d79cf'],['Actualités',21.9,'#8cab36'],['Blogs',9.0,'#e0b235'],['Autres canaux',4.5,'#9955b4']];
 const dims=[['◉','VISIBILITÉ','Présence dans les médias et réseaux.'],['ϟ','INFLUENCE','Relais par des sources influentes.'],['◌','ENGAGEMENT','Réactions, interactions et partages.'],['↗','PROPAGATION','Vitesse de diffusion du récit.'],['◷','PERSISTANCE','Capacité à durer dans le temps.'],['◈','TONALITÉ','Orientation positive, neutre ou négative.'],['⚑','THÉMATIQUES','Association aux grands enjeux.'],['⌁','DYNAMIQUE','Progression, stagnation ou recul.']];
 const ibdnDefinitions=[['Visibilité','Présence et volume dédupliqué de mentions'],['Influence','Importance des sources et relais'],['Engagement','Réactions, partages et commentaires'],['Propagation','Diffusion d’un récit sur une période courte'],['Persistance','Capacité d’un signal à durer dans le temps'],['Tonalité','Orientation du discours, avec incertitude'],['Thématiques','Association aux enjeux structurants'],['Dynamique globale','Variation consolidée des dimensions']];
@@ -77,8 +66,61 @@ function metricPercent(x,data){const value=metricValue(x);if(value==null)return 
 function metricTooltip(x,data){const pct=metricPercent(x,data);if(pct==null)return `Portée non renseignée. ${x.name} reste classable par mentions et par influence, mais pas par portée.`;if(rankMetric==='influence')return `Influence : ${x.score}/100. Score fourni par nos outils. Ce score n’est pas l’IBDN®.`;if(rankMetric==='reach'){const ref=reachReferences[rankMode];return `Portée relative : ${pct.toLocaleString('fr-FR',{maximumFractionDigits:1})} %. Portée estimée : ${x.reach.toLocaleString('fr-FR')}. Référence du corpus : ${ref.toLocaleString('fr-FR')}. Calcul : ${x.reach.toLocaleString('fr-FR')} ÷ ${ref.toLocaleString('fr-FR')}.`}const max=Math.max(...data.map(y=>y.delta));return `Volume relatif : ${pct.toLocaleString('fr-FR',{maximumFractionDigits:1})} %. ${x.delta.toLocaleString('fr-FR')} mentions sur un maximum de ${max.toLocaleString('fr-FR')}. Période : 29 juillet au 5 août 2026.`}
 function updateRankingGuide(){const copy=metricCopy[rankMetric];$('#rank-value-head').textContent=copy.head;$('#rank-intensity-head').textContent=copy.intensity;$('#ranking-guide-copy').textContent=copy.copy;$$('[data-rank-metric]').forEach(b=>{const available=metricAvailable(b.dataset.rankMetric);b.disabled=!available;b.classList.toggle('active',b.dataset.rankMetric===rankMetric);b.title=available?'':'Donnée non disponible pour ce périmètre';})}
 function bindRankingTooltips(){$$('.metric-bar').forEach(el=>{const show=e=>showDataTooltip(e,el.dataset.tooltip);el.onmousemove=show;el.onmouseleave=hideDataTooltip;el.onfocus=e=>showDataTooltip({clientX:el.getBoundingClientRect().left,clientY:el.getBoundingClientRect().bottom},el.dataset.tooltip);el.onblur=hideDataTooltip})}
-function renderRanking(){if(!metricAvailable(rankMetric))rankMetric='mentions';updateRankingGuide();const q=$('#rank-search').value.toLowerCase(),source=rankingData[rankMode],data=source.filter(x=>(x.name+x.sub).toLowerCase().includes(q)).sort((a,b)=>(metricValue(b)??-1)-(metricValue(a)??-1));$('#ranking-table').innerHTML=data.map((x,i)=>{const pct=metricPercent(x,source),tip=metricTooltip(x,source),mentions=`${x.delta} mention${x.delta>1?'s':''}`;return `<div class="rank-row"><span>${String(i+1).padStart(2,'0')}</span><div class="rank-actor">${visualFor(x)}<span><strong>${x.name}</strong><small>${x.sub}</small></span></div><span class="score-pill">${metricLabel(x)}</span><span class="delta">${mentions}</span><div class="visibility metric-bar ${pct==null?'unavailable':''}" tabindex="0" role="img" aria-label="${tip}" data-tooltip="${tip.replaceAll('"','&quot;')}"><i style="width:${Math.min(100,pct??0)}%"></i></div></div>`}).join('');bindRankingTooltips()}
+function renderRanking(){if(occurrenceMode())return renderOccurrenceRanking();$('#occurrence-note').hidden=true;$('#occurrence-source').hidden=true;$('#ranking-guide-copy').hidden=false;$('.ranking-options').hidden=false;$('#ranking-guide-title').hidden=false;$('.ranking-guide .insight-stat').hidden=false;$('.ranking-principle').hidden=false;$('#rank-actor-head').textContent='ACTEUR / SOURCE';$('#rank-secondary-head').textContent='MENTIONS';if(!metricAvailable(rankMetric))rankMetric='mentions';updateRankingGuide();const q=$('#rank-search').value.toLowerCase(),source=rankingData[rankMode],data=source.filter(x=>(x.name+x.sub).toLowerCase().includes(q)).sort((a,b)=>(metricValue(b)??-1)-(metricValue(a)??-1));$('#ranking-table').innerHTML=data.map((x,i)=>{const pct=metricPercent(x,source),tip=metricTooltip(x,source),mentions=`${x.delta} mention${x.delta>1?'s':''}`;return `<div class="rank-row"><span>${String(i+1).padStart(2,'0')}</span><div class="rank-actor">${visualFor(x)}<span><strong>${x.name}</strong><small>${x.sub}</small></span></div><span class="score-pill">${metricLabel(x)}</span><span class="delta">${mentions}</span><div class="visibility metric-bar ${pct==null?'unavailable':''}" tabindex="0" role="img" aria-label="${tip}" data-tooltip="${tip.replaceAll('"','&quot;')}"><i style="width:${Math.min(100,pct??0)}%"></i></div></div>`}).join('');bindRankingTooltips()}
+
+/* ——— Occurrences qualifiées : référentiel manuel 26.07 - 07.08.2026 ——— */
+let qualified=null;
+const occurrenceMode=()=>qualified&&['politicalParties','leaders'].includes(rankMode);
+const currentLang=()=>{const l=document.documentElement.lang;return ['fr','en','ar'].includes(l)?l:'fr'};
+const qLabels=()=>qualified.labels[currentLang()];
+const numLocale=()=>currentLang()==='fr'?'fr-FR':'en-GB';
+const fmtNumber=v=>v.toLocaleString(numLocale());
+const fmtPercent=v=>`${v.toLocaleString(numLocale(),{maximumFractionDigits:1})} %`;
+const esc=s=>String(s).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('"','&quot;');
+const isolate=name=>`<bdi dir="ltr">${esc(name)}</bdi>`;
+function renderOccurrenceRanking(){
+  const isParties=rankMode==='politicalParties',L=qLabels(),period=qualified.period[currentLang()];
+  const max=isParties?qualified.maxParty:qualified.maxLeader;
+  const source=isParties?qualified.parties:qualified.leaders;
+  $('.ranking-options').hidden=true;$('#ranking-guide-copy').hidden=true;$('#ranking-guide-title').hidden=true;$('.ranking-guide .insight-stat').hidden=true;$('.ranking-principle').hidden=true;
+  $('#rank-actor-head').textContent=isParties?L.partyHead:L.leaderHead;
+  $('#rank-value-head').textContent=L.occurrencesHead;
+  $('#rank-secondary-head').textContent=L.periodHead;
+  $('#rank-intensity-head').textContent=L.intensityHead;
+  const note=$('#occurrence-note');note.hidden=false;
+  note.innerHTML=`<h3>${isParties?L.partiesNoteTitle:L.leadersNoteTitle}</h3><p>${isParties?L.partiesNoteText1:L.leadersNoteText1}</p><p>${isParties?L.partiesNoteText2:L.leadersNoteText2}</p>`;
+  const src=$('#occurrence-source');src.hidden=false;src.textContent=L.sourceNote;
+  const q=$('#rank-search').value.toLowerCase();
+  const rows=source.filter(x=>x.name.toLowerCase().includes(q)).sort((a,b)=>{
+    if(a.occurrences==null&&b.occurrences==null)return 0;
+    if(a.occurrences==null)return 1;if(b.occurrences==null)return -1;
+    return b.occurrences-a.occurrences;});
+  $('#ranking-table').innerHTML=rows.map((x,i)=>{
+    const reported=x.occurrences!=null,pct=reported?x.occurrences/max*100:null;
+    const baseTip=isParties?L.partyTooltip:L.leaderTooltip;
+    const valueTip=reported?baseTip:L.notReportedTooltip;
+    const barTip=reported?`${isParties?L.partyBarTooltip:L.leaderBarTooltip} ${fmtPercent(pct)}`:L.notReportedTooltip;
+    const barAria=`${x.name} — ${reported?`${fmtNumber(x.occurrences)} ${L.occurrencesUnit}, ${L.intensityHead} ${fmtPercent(pct)}`:L.notReported}. ${barTip}`;
+    return `<div class="rank-row occurrence-row"><span>${String(i+1).padStart(2,'0')}</span><div class="rank-actor">${visualFor({...x,name:x.name})}<span><strong>${isolate(x.name)}</strong><small>${esc(L.manualCount)}</small></span></div><span class="score-pill ${reported?'':'unavailable'}" tabindex="0" role="img" aria-label="${esc(x.name+' — '+(reported?fmtNumber(x.occurrences)+' '+L.occurrencesUnit:L.notReported)+'. '+valueTip)}" data-tooltip="${esc(valueTip)}">${reported?fmtNumber(x.occurrences):esc(L.notReported)}</span><span class="delta occurrence-period">${esc(period)}</span><div class="visibility metric-bar ${reported?'':'unavailable'}" tabindex="0" role="img" aria-label="${esc(barAria)}" data-tooltip="${esc(barTip)}"><i style="width:${reported?Math.min(100,pct):0}%"></i></div></div>`}).join('');
+  $$('.score-pill[data-tooltip]').forEach(el=>{el.onmousemove=e=>showDataTooltip(e,el.dataset.tooltip);el.onmouseleave=hideDataTooltip;el.onfocus=()=>{const r=el.getBoundingClientRect();showDataTooltip({clientX:r.left,clientY:r.bottom},el.dataset.tooltip)};el.onblur=hideDataTooltip});
+  bindRankingTooltips();
+}
+function renderEmergingTopics(){
+  if(!qualified)return;const L=qLabels(),lang=currentLang(),period=qualified.period[lang];
+  $('#emerging-topics-title').textContent=L.topicsTitle;
+  $('#emerging-topics-period').textContent=`${L.periodPrefix} : ${period}`;
+  $('#emerging-topics-sub').textContent=L.topicsSubtitle;
+  $('#emerging-topics-source').textContent=L.sourceNote;
+  $('#emerging-topics-list').innerHTML=qualified.topics.map(t=>{
+    const pct=t.occurrences/qualified.maxTopic*100,name=t.name[lang]||t.name.fr;
+    const aria=`${name} — ${fmtNumber(t.occurrences)} ${L.occurrencesUnit}, ${L.intensityHead} ${fmtPercent(pct)}. ${L.topicsTooltip}`;
+    return `<div class="topic-row"><span class="topic-name">${esc(name)}</span><span class="topic-value">${fmtNumber(t.occurrences)} ${esc(L.occurrencesUnit)}</span><div class="topic-bar metric-bar" tabindex="0" role="img" aria-label="${esc(aria)}" data-tooltip="${esc(L.topicsTooltip)}"><i style="width:${pct}%;--c:${t.color}"></i></div><span class="topic-pct">${esc(fmtPercent(pct))}</span></div>`}).join('');
+  bindRankingTooltips();
+}
 $$('#rank-type button').forEach(b=>b.onclick=()=>{$$('#rank-type button').forEach(x=>x.classList.remove('active'));b.classList.add('active');rankMode=b.dataset.type;renderRanking()});$$('[data-rank-metric]').forEach(b=>b.onclick=()=>{if(b.disabled)return;rankMetric=b.dataset.rankMetric;renderRanking()});$('#rank-search').oninput=renderRanking;renderRanking();
+fetch('qualified-occurrences.json').then(r=>r.json()).then(data=>{qualified=data;renderRanking();renderEmergingTopics()}).catch(()=>{});
+addEventListener('bf:lang',()=>{if(!qualified)return;renderRanking();renderEmergingTopics()});
+
 
 const strongMentions=[
  {title:'Emploi : les inégalités persistent malgré le recul du chômage',source:'Le Matin',date:'05/08/2026',tone:'neutral',url:'https://lematin.ma/videos/emploi-les-inegalites-persistent-malgre-le-recul-du-chomage/359441'},
