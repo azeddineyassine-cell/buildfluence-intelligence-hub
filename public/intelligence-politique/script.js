@@ -25,21 +25,10 @@ const nationalMedia=[
  {name:'ar.hibapress.com',sub:'7 mentions · portée 40 334',party:'PRESSE NATIONALE',role:'Média marocain',score:49,delta:7,vis:26,color:'#328fbd',initials:'HP',themes:[49,26,11,29],summary:'Influence 49/100, 7 mentions et portée estimée à 40 334 dans l’export Presse marocaine.'},
  {name:'fnh.ma',sub:'51 mentions · portée 47 640',party:'PRESSE NATIONALE',role:'Média marocain',score:48,delta:51,vis:30,color:'#347fa6',initials:'FNH',themes:[48,30,82,53],summary:'Influence 48/100, 51 mentions et portée estimée à 47 640 dans l’export Presse marocaine.'}
 ];
-const politicalParties=[
- {name:'RNI',sub:'Mentions fortes validées',score:5,delta:5,vis:100,color:'#2797ce'},
- {name:'PJD',sub:'Mentions fortes validées',score:5,delta:5,vis:100,color:'#e47b2c'},
- {name:'Parti de l’Istiqlal',sub:'Mentions fortes validées',score:5,delta:5,vis:100,color:'#c84583'},
- {name:'PAM',sub:'Mentions fortes validées',score:1,delta:1,vis:20,color:'#3f70bc'},
- {name:'Mouvement Populaire',sub:'Mentions fortes validées',score:1,delta:1,vis:20,color:'#d0ad3c'},
- {name:'USFP',sub:'Mentions fortes validées',score:1,delta:1,vis:20,color:'#db4551'}
-];
-const leaders=[
- {name:'Aziz Akhannouch',sub:'Chef du gouvernement · président du RNI',score:34,delta:34,vis:100,color:'#278fc2',initials:'AA',image:'assets/person-1.png'},
- {name:'Driss Lachgar',sub:'Premier secrétaire de l’USFP',score:17,delta:17,vis:50,color:'#db4551',initials:'DL',image:'https://prod.cdn-medias.jeuneafrique.com/cdn-cgi/image/q=auto,f=auto,metadata=none,width=240,fit=cover/https://prod.cdn-medias.jeuneafrique.com/medias/2017/03/30/rs39257_ja13120412580001-scr.jpg'},
- {name:'Abdellah Benkirane',sub:'Secrétaire général du PJD',score:11,delta:11,vis:32,color:'#de792d',initials:'AB',image:'assets/person-3.png'},
- {name:'Mohamed Nabil Benabdallah',sub:'Secrétaire général du PPS',score:5,delta:5,vis:15,color:'#6eae4e',initials:'NB',image:'assets/person-4.png'},
- {name:'Nizar Baraka',sub:'Secrétaire général de l’Istiqlal',score:4,delta:4,vis:12,color:'#c64b82',initials:'NB',image:'assets/person-2.png'}
-];
+// Occurrences qualifiées (référentiel manuel 26.07 - 07.08.2026) — chargées depuis qualified-occurrences.json
+const politicalParties=[];
+const leaders=[];
+
 const themes=[['X / Twitter',36.0,'#259cd8'],['Facebook',28.6,'#5d79cf'],['Actualités',21.9,'#8cab36'],['Blogs',9.0,'#e0b235'],['Autres canaux',4.5,'#9955b4']];
 const dims=[['◉','VISIBILITÉ','Présence dans les médias et réseaux.'],['ϟ','INFLUENCE','Relais par des sources influentes.'],['◌','ENGAGEMENT','Réactions, interactions et partages.'],['↗','PROPAGATION','Vitesse de diffusion du récit.'],['◷','PERSISTANCE','Capacité à durer dans le temps.'],['◈','TONALITÉ','Orientation positive, neutre ou négative.'],['⚑','THÉMATIQUES','Association aux grands enjeux.'],['⌁','DYNAMIQUE','Progression, stagnation ou recul.']];
 const ibdnDefinitions=[['Visibilité','Présence et volume dédupliqué de mentions'],['Influence','Importance des sources et relais'],['Engagement','Réactions, partages et commentaires'],['Propagation','Diffusion d’un récit sur une période courte'],['Persistance','Capacité d’un signal à durer dans le temps'],['Tonalité','Orientation du discours, avec incertitude'],['Thématiques','Association aux enjeux structurants'],['Dynamique globale','Variation consolidée des dimensions']];
