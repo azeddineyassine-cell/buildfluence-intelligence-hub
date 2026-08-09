@@ -21,3 +21,4 @@
 html[dir="rtl"] .topic-row,html[dir="rtl"] .occurrence-note{text-align:right}
 @media (prefers-reduced-motion:reduce){.topic-bar i{transition:none}}
 @media(max-width:720px){.topic-row{grid-template-columns:1fr auto;gap:6px}.topic-bar{grid-column:1/-1}.topic-pct{display:none}}
+[hidden]{display:none!important}
