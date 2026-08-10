@@ -120,3 +120,18 @@ function drawNetwork(){if(!nctx)return;const light=document.documentElement.data
 function pointer(e){const r=nc.getBoundingClientRect();return{x:e.clientX-r.left,y:e.clientY-r.top}}
 nc.onpointermove=e=>{const p=pointer(e);if(drag&&zoom>1){pan.x+=(p.x-last.x)/zoom;pan.y+=(p.y-last.y)/zoom;last=p;drawNetwork();return}let found=-1;nodes.forEach((n,i)=>{let q=nodePos(n);if(Math.hypot(p.x-q.x,p.y-q.y)<(nodeRadius(n)+6)*zoom)found=i});if(found!==hover){hover=found;drawNetwork()}if(found>=0){const n=nodes[found],related=links.filter(l=>l.a===found||l.b===found),weight=related.reduce((s,l)=>s+l.weight,0);nt.style.display='block';nt.style.left=Math.min(p.x+15,nw-260)+'px';nt.style.top=Math.min(p.y+15,nh-100)+'px';nt.innerHTML=`<strong>${n.name}</strong><small>${n.mentions.toLocaleString('fr-FR')} mentions · ${related.length} relations<br>Total des cooccurrences des relations : ${weight.toLocaleString('fr-FR')}<br>Somme des fréquences, ce n’est pas un score.</small>`}else nt.style.display='none'};nc.onpointerdown=e=>{if(zoom<=1)return;drag=true;last=pointer(e);nc.setPointerCapture(e.pointerId)};nc.onpointerup=()=>drag=false;nc.onpointerleave=()=>{drag=false;hover=-1;nt.style.display='none';drawNetwork()};nc.onwheel=e=>{e.preventDefault();setNetworkZoom(zoom*(e.deltaY>0?.9:1.1))};$('#network-zoom-in').onclick=()=>setNetworkZoom(zoom+.1);$('#network-zoom-out').onclick=()=>setNetworkZoom(zoom-.1);$('#network-zoom-reset').onclick=resetNetworkView;$$('.relation-filters button').forEach(b=>b.onclick=()=>{$$('.relation-filters button').forEach(x=>x.classList.remove('active'));b.classList.add('active');filter=b.dataset.relation;drawNetwork()});updateZoomValue();
 addEventListener('resize',()=>{drawTrend();drawSentiment();drawRadar();resizeNetwork()});drawTrend();
+
+/* ===== ARCHITECTURE · traductions locales branchées sur le mécanisme existant (html[lang]) ===== */
+(() => {
+  const root = document.getElementById('methodologie');
+  if (!root) return;
+  const applyArchLanguage = () => {
+    const lang = ['fr', 'en', 'ar'].includes(document.documentElement.lang) ? document.documentElement.lang : 'fr';
+    root.querySelectorAll('[data-arch-fr]').forEach(el => {
+      const html = el.dataset['arch' + lang.charAt(0).toUpperCase() + lang.slice(1)];
+      if (typeof html === 'string' && el.innerHTML !== html) el.innerHTML = html;
+    });
+  };
+  applyArchLanguage();
+  new MutationObserver(applyArchLanguage).observe(document.documentElement, { attributes: true, attributeFilter: ['lang', 'dir'] });
+})();

@@ -23,9 +23,7 @@ html[data-theme="light"] #methodologie{--arch-bg:#faf6ed;--arch-card:#fff;--arch
 .arch-node .arch-ico{width:34px;height:34px;border:1px solid var(--arch-rule);border-radius:2px}
 .arch-node strong{display:block;font:600 10.5px/1.35 var(--mono,"JetBrains Mono",monospace);letter-spacing:.7px;color:var(--arch-text)}
 .arch-node p{margin:5px 0 0;font-size:11px;line-height:1.5;color:var(--arch-muted)}
-.arch-sources .arch-node:after,.arch-outputs .arch-node:before{content:"";position:absolute;top:50%;width:14px;border-top:1px solid var(--arch-cyan)}
-.arch-sources .arch-node:after{inset-inline-end:-15px}
-.arch-outputs .arch-node:before{inset-inline-start:-15px}
+/* anciens petits traits supprimés — remplacés par le collecteur unique et le hub de sortie */
 .arch-chips{list-style:none;display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 0;padding:0}
 .arch-chips li{border:1px solid var(--arch-rule);border-radius:2px;padding:5px 8px;font:500 9px var(--mono,"JetBrains Mono",monospace);letter-spacing:.8px;color:var(--arch-muted)}
 .arch-platform{background:var(--arch-card);border:1px solid var(--arch-rule);border-radius:2px;padding:14px}
@@ -73,6 +71,72 @@ html[dir="rtl"] .arch-tip{transform:translateX(50%)}
 .arch-dim:hover .arch-tip,.arch-dim:focus-visible .arch-tip{opacity:1;visibility:visible}
 .arch-signature{margin:0;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:8px;font:600 11px var(--mono,"JetBrains Mono",monospace);letter-spacing:1.1px;color:var(--arch-gold)}
 .arch-mention{margin:10px auto 0;max-width:760px;font-size:10.5px;line-height:1.6;color:var(--arch-muted)}
-@media (max-width:1180px){.arch-grid{grid-template-columns:1fr}.arch-sources .arch-node:after,.arch-outputs .arch-node:before{top:auto;bottom:-10px;inset-inline:50% auto;width:0;height:9px;border-top:0;border-inline-start:1px solid var(--arch-cyan)}.arch-dim-grid{grid-template-columns:repeat(4,minmax(0,1fr))}.arch-layers ul{grid-template-columns:1fr}}
+@media (max-width:1180px){.arch-grid{grid-template-columns:1fr}.arch-dim-grid{grid-template-columns:repeat(4,minmax(0,1fr))}.arch-layers ul{grid-template-columns:1fr}}
 @media (max-width:700px){.arch-step{grid-template-columns:28px 1fr}.arch-step .arch-ico{display:none}.arch-dim-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.arch-tip{width:150px}.arch-gov{display:grid}}
 @media (prefers-reduced-motion:reduce){.arch-node,.arch-step,.arch-dim{transition:none}.arch-node:hover,.arch-step:hover,.arch-dim:hover,.arch-dim:focus-visible{transform:none}}
+
+/* ===== ARCHITECTURE · amélioration : panneaux, titres, connecteurs, couches ===== */
+#methodologie{--architecture-panel-light:#ece8de;--arch-panel:#142235;--arch-panel-text:#f5f1e8;--arch-panel-rule:rgba(201,168,76,.35);--arch-flowline:#3fa9b4;--arch-tint-cyan:rgba(63,169,180,.14);--arch-tint-violet:rgba(143,107,199,.16);--arch-tint-gold:rgba(201,168,76,.14);background:#08111c}
+html[data-theme="light"] #methodologie{--arch-panel:var(--architecture-panel-light);--arch-panel-text:#0d1b2a;--arch-panel-rule:#d9cfbc;--arch-flowline:#1d6f7c;--arch-tint-cyan:#e6f1f3;--arch-tint-violet:#efeaf7;--arch-tint-gold:#f6f0dd;background:transparent}
+#methodologie .arch-panel{background:var(--arch-panel);color:var(--arch-panel-text);border:1px solid var(--arch-panel-rule);border-radius:2px;padding:14px;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+html[data-theme="dark"] #methodologie .arch-panel{box-shadow:0 1px 4px rgba(0,0,0,.35)}
+#methodologie .arch-panel .arch-node{background:transparent}
+.arch-grid{align-items:stretch}
+.arch-col-title{display:flex;align-items:center;min-height:46px;margin:0 0 10px;padding:0 0 8px;border-bottom:2px solid var(--arch-gold);color:var(--arch-panel-text)!important;font:700 11px/1.3 var(--mono,"JetBrains Mono",monospace);letter-spacing:.2em;text-transform:uppercase}
+.arch-col-title .arch-title-text{background:linear-gradient(transparent 58%,var(--arch-tint-gold) 58%);padding:1px 3px}
+.arch-platform-head{text-align:start}
+/* Flux vertical des sources */
+.arch-flow{display:grid;gap:0}
+.arch-vlink{display:grid;place-items:center;height:22px;position:relative;color:var(--arch-flowline)}
+.arch-vlink:before{content:"";width:0;height:14px;border-inline-start:1px solid var(--arch-flowline)}
+.arch-vlink i{position:absolute;bottom:-2px;font-size:9px;font-style:normal;line-height:1}
+@media (max-width:700px){.arch-vlink{height:16px}}
+/* OSINT */
+.arch-osint{margin:9px 0 0;font:600 10px var(--mono,"JetBrains Mono",monospace);letter-spacing:.16em;text-transform:uppercase;color:var(--arch-gold)}
+/* Collecteur unique + grande flèche */
+.arch-collector{margin-top:10px;position:relative;border:1px solid var(--arch-flowline);border-radius:2px;padding:8px 10px;display:flex;align-items:center;gap:10px;justify-content:space-between}
+.arch-collector:before{content:"";position:absolute;top:-11px;inset-inline:14px 14px;border-top:1px dashed var(--arch-flowline)}
+.arch-collector-label{font:600 9.5px var(--mono,"JetBrains Mono",monospace);letter-spacing:.14em;color:var(--arch-flowline)}
+.arch-collector-arrow{font-size:15px;line-height:1;color:var(--arch-flowline)}
+html[dir="rtl"] .arch-collector-arrow{transform:scaleX(-1)}
+/* Regroupements de phases */
+.arch-group{border:1px solid var(--arch-rule);border-inline-start:3px solid var(--c-group,var(--arch-gold));border-radius:2px;padding:9px 11px;margin-top:10px}
+.arch-group-a{--c-group:var(--arch-cyan)}
+.arch-group-b{--c-group:var(--arch-violet)}
+.arch-group-c{--c-group:var(--arch-gold)}
+.arch-group-title{margin:0 0 6px;font:700 9.5px/1.4 var(--mono,"JetBrains Mono",monospace);letter-spacing:.16em;text-transform:uppercase;color:var(--c-group)}
+.arch-group .arch-steps{margin:0}
+.arch-group-link{display:grid;place-items:center;height:20px;color:var(--arch-flowline);position:relative}
+.arch-group-link:before{content:"";width:0;height:12px;border-inline-start:1px solid var(--arch-flowline)}
+.arch-group-link i{position:absolute;bottom:-1px;font-size:9px;font-style:normal;line-height:1}
+.arch-group-c .arch-gov{margin-top:8px}
+/* Couches transversales colorées */
+.arch-layers li{border-style:solid}
+.arch-layers .arch-layer-cyan{--c:var(--arch-cyan);background:var(--arch-tint-cyan)}
+.arch-layers .arch-layer-violet{--c:var(--arch-violet);background:var(--arch-tint-violet)}
+.arch-layers .arch-layer-gold{--c:var(--arch-gold);background:var(--arch-tint-gold)}
+.arch-layers ul{align-items:stretch}
+.arch-layers li{align-content:start;height:100%}
+/* Hub de sortie + quatre flèches */
+.arch-hub{position:relative;border:1px solid var(--arch-flowline);border-radius:2px;padding:8px 10px;display:flex;align-items:center;gap:9px;margin-bottom:12px}
+.arch-hub-arrow{font-size:15px;line-height:1;color:var(--arch-flowline)}
+html[dir="rtl"] .arch-hub-arrow{transform:scaleX(-1)}
+.arch-hub-label{font:600 9.5px var(--mono,"JetBrains Mono",monospace);letter-spacing:.14em;color:var(--arch-flowline)}
+.arch-branches{position:relative;display:grid;gap:9px;padding-inline-start:26px}
+.arch-branches:before{content:"";position:absolute;inset-inline-start:8px;top:-12px;bottom:26px;border-inline-start:1px solid var(--arch-flowline)}
+.arch-branches .arch-node:before{content:"";position:absolute;top:50%;inset-inline-start:-18px;width:14px;border-top:1px solid var(--arch-flowline)}
+.arch-branches .arch-node:after{content:"▶";position:absolute;top:calc(50% - 6px);inset-inline-start:-7px;font-size:8px;line-height:1;color:var(--arch-flowline)}
+html[dir="rtl"] .arch-branches .arch-node:after{transform:scaleX(-1)}
+/* Publics destinataires */
+.arch-audience-list{margin:0;font-size:10.5px;line-height:1.7;color:var(--arch-panel-text);overflow-wrap:anywhere}
+/* Infobulles accessibles (chips et couches) */
+.arch-chip-tip{position:relative;cursor:help}
+.arch-chip-tip:focus-visible{outline:2px solid var(--arch-gold);outline-offset:2px}
+.arch-chip-tip .arch-tip{width:220px;text-transform:none;letter-spacing:normal}
+.arch-chip-tip:hover .arch-tip,.arch-chip-tip:focus-visible .arch-tip,.arch-chip-tip:focus-within .arch-tip{opacity:1;visibility:visible}
+@media (max-width:1180px){.arch-branches{padding-inline-start:22px}}
+@media (max-width:700px){.arch-branches{padding-inline-start:0}.arch-branches:before{display:none}.arch-branches .arch-node:before,.arch-branches .arch-node:after{display:none}.arch-col-title{min-height:0}.arch-collector,.arch-hub{flex-wrap:wrap}}
+@media (prefers-reduced-motion:reduce){.arch-collector-arrow,.arch-hub-arrow{animation:none!important}}
+#methodologie .arch-col{align-content:start}
+#methodologie .arch-hub{min-height:0}
+.arch-collector{margin-top:16px}
