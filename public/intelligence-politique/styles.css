@@ -23,9 +23,7 @@ html[data-theme="light"] #methodologie{--arch-bg:#faf6ed;--arch-card:#fff;--arch
 .arch-node .arch-ico{width:34px;height:34px;border:1px solid var(--arch-rule);border-radius:2px}
 .arch-node strong{display:block;font:600 10.5px/1.35 var(--mono,"JetBrains Mono",monospace);letter-spacing:.7px;color:var(--arch-text)}
 .arch-node p{margin:5px 0 0;font-size:11px;line-height:1.5;color:var(--arch-muted)}
-.arch-sources .arch-node:after,.arch-outputs .arch-node:before{content:"";position:absolute;top:50%;width:14px;border-top:1px solid var(--arch-cyan)}
-.arch-sources .arch-node:after{inset-inline-end:-15px}
-.arch-outputs .arch-node:before{inset-inline-start:-15px}
+/* anciens petits traits supprimés — remplacés par le collecteur unique et le hub de sortie */
 .arch-chips{list-style:none;display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 0;padding:0}
 .arch-chips li{border:1px solid var(--arch-rule);border-radius:2px;padding:5px 8px;font:500 9px var(--mono,"JetBrains Mono",monospace);letter-spacing:.8px;color:var(--arch-muted)}
 .arch-platform{background:var(--arch-card);border:1px solid var(--arch-rule);border-radius:2px;padding:14px}
