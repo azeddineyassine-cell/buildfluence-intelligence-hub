@@ -71,6 +71,6 @@ html[dir="rtl"] .arch-tip{transform:translateX(50%)}
 .arch-dim:hover .arch-tip,.arch-dim:focus-visible .arch-tip{opacity:1;visibility:visible}
 .arch-signature{margin:0;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:8px;font:600 11px var(--mono,"JetBrains Mono",monospace);letter-spacing:1.1px;color:var(--arch-gold)}
 .arch-mention{margin:10px auto 0;max-width:760px;font-size:10.5px;line-height:1.6;color:var(--arch-muted)}
-@media (max-width:1180px){.arch-grid{grid-template-columns:1fr}.arch-sources .arch-node:after,.arch-outputs .arch-node:before{top:auto;bottom:-10px;inset-inline:50% auto;width:0;height:9px;border-top:0;border-inline-start:1px solid var(--arch-cyan)}.arch-dim-grid{grid-template-columns:repeat(4,minmax(0,1fr))}.arch-layers ul{grid-template-columns:1fr}}
+@media (max-width:1180px){.arch-grid{grid-template-columns:1fr}.arch-dim-grid{grid-template-columns:repeat(4,minmax(0,1fr))}.arch-layers ul{grid-template-columns:1fr}}
 @media (max-width:700px){.arch-step{grid-template-columns:28px 1fr}.arch-step .arch-ico{display:none}.arch-dim-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.arch-tip{width:150px}.arch-gov{display:grid}}
 @media (prefers-reduced-motion:reduce){.arch-node,.arch-step,.arch-dim{transition:none}.arch-node:hover,.arch-step:hover,.arch-dim:hover,.arch-dim:focus-visible{transform:none}}
