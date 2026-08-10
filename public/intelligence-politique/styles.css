@@ -137,3 +137,6 @@ html[dir="rtl"] .arch-branches .arch-node:after{transform:scaleX(-1)}
 @media (max-width:1180px){.arch-branches{padding-inline-start:22px}}
 @media (max-width:700px){.arch-branches{padding-inline-start:0}.arch-branches:before{display:none}.arch-branches .arch-node:before,.arch-branches .arch-node:after{display:none}.arch-col-title{min-height:0}.arch-collector,.arch-hub{flex-wrap:wrap}}
 @media (prefers-reduced-motion:reduce){.arch-collector-arrow,.arch-hub-arrow{animation:none!important}}
+#methodologie .arch-col{align-content:start}
+#methodologie .arch-hub{min-height:0}
+.arch-collector{margin-top:16px}
