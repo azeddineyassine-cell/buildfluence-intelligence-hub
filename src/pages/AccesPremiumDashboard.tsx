@@ -82,7 +82,7 @@ const AccesPremiumDashboard = () => {
         className="flex items-center justify-between px-8 py-6 border-b"
         style={{ borderColor: "rgba(0,0,0,0.08)" }}
       >
-        <a href="/" className="flex items-center gap-3">
+        <a href="/" aria-label="Retour à l’accueil Buildfluence" className="flex items-center gap-3 no-underline">
           <img src={logoBuildfluence} alt="Buildfluence" className="h-9 w-auto" />
           <span className="font-serif text-lg tracking-tight">
             <span className="font-bold" style={{ color: "#1A2A4A" }}>Build</span>
