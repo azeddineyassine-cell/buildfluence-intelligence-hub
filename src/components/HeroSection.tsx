@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { FormStrategicExchange } from "./FormModals";
-import ISDHeroPanel from "./ISDHeroPanel";
+import HeroInsightsCarousel from "./HeroInsightsCarousel";
 
 const HeroSection = () => {
   const [formOpen, setFormOpen] = useState(false);
@@ -121,9 +121,9 @@ const HeroSection = () => {
               </motion.div>
             </div>
 
-            {/* Colonne droite : panneau Enquête ISD (emplacement haut-droite) */}
+            {/* Colonne droite : conteneur éditorial rotatif */}
             <div className="mt-12 lg:mt-2">
-              <ISDHeroPanel />
+              <HeroInsightsCarousel />
             </div>
           </div>
         </div>
