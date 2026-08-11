@@ -1,8 +1,11 @@
+Exit code: 0
+Wall time: 1.7 seconds
+Output:
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { FormStrategicExchange } from "./FormModals";
-import ISDHeroPanel from "./ISDHeroPanel";
+import StrategicPrioritiesPanel from "./StrategicPrioritiesPanel";
 
 const HeroSection = () => {
   const [formOpen, setFormOpen] = useState(false);
@@ -12,7 +15,7 @@ const HeroSection = () => {
     <>
       <section className="pt-16" style={{ background: '#fff' }}>
         <div className="mx-auto max-w-[1600px] px-12 pb-10 pt-12">
-          <div className="grid grid-cols-1 lg:grid-cols-[1fr_minmax(340px,400px)] lg:gap-16 lg:items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_minmax(400px,470px)] lg:gap-12 lg:items-start">
             {/* Colonne gauche : contenu hero existant */}
             <div>
               <motion.p
@@ -38,11 +41,11 @@ const HeroSection = () => {
                 }}
               >
                 {t(
-                  "Construire l'architecture qui sécurise vos ",
+                  "Construire l'architecture qui sÃ©curise vos ",
                   "Building the architecture that secures your "
                 )}
                 <em className="not-italic" style={{ color: 'hsl(var(--gold))' }}>
-                  {t("décisions stratégiques", "strategic decisions")}
+                  {t("dÃ©cisions stratÃ©giques", "strategic decisions")}
                 </em>
               </motion.h1>
 
@@ -54,14 +57,14 @@ const HeroSection = () => {
                 style={{ color: 'hsl(var(--navy))', maxWidth: '700px', opacity: 0.88 }}
               >
                 {t(
-                  "Nous bâtissons des écosystèmes géo-décisionnels souverains permettant d'anticiper les ruptures, neutraliser les menaces et prendre ",
+                  "Nous bÃ¢tissons des Ã©cosystÃ¨mes gÃ©o-dÃ©cisionnels souverains permettant d'anticiper les ruptures, neutraliser les menaces et prendre ",
                   "We build sovereign geo-decisional ecosystems enabling anticipation of disruptions, neutralization of threats and gaining "
                 )}
                 <strong className="font-bold italic">
-                  {t("l'ascendant stratégique", "the strategic edge")}
+                  {t("l'ascendant stratÃ©gique", "the strategic edge")}
                 </strong>
                 {t(
-                  ", même dans des espaces instables, hostiles ou hyper-concurrentiels.",
+                  ", mÃªme dans des espaces instables, hostiles ou hyper-concurrentiels.",
                   ", even in unstable, hostile or hyper-competitive environments."
                 )}
               </motion.p>
@@ -103,7 +106,7 @@ const HeroSection = () => {
                   onMouseOver={(e) => (e.currentTarget.style.background = 'hsl(218 50% 13%)')}
                   onMouseOut={(e) => (e.currentTarget.style.background = 'hsl(var(--navy))')}
                 >
-                  {t("Demander un échange stratégique", "Request a strategic exchange")}
+                  {t("Demander un Ã©change stratÃ©gique", "Request a strategic exchange")}
                 </button>
                 <a
                   href="/solutions/soft-power-influence"
@@ -116,14 +119,14 @@ const HeroSection = () => {
                   onMouseOver={(e) => (e.currentTarget.style.color = 'hsl(var(--gold))')}
                   onMouseOut={(e) => (e.currentTarget.style.color = 'hsl(var(--navy))')}
                 >
-                  {t("Découvrez notre Processus de Rayonnement →", "Discover our Outreach Process →")}
+                  {t("DÃ©couvrez notre Processus de Rayonnement â†’", "Discover our Outreach Process â†’")}
                 </a>
               </motion.div>
             </div>
 
-            {/* Colonne droite : panneau Enquête ISD (emplacement haut-droite) */}
-            <div className="mt-12 lg:mt-2">
-              <ISDHeroPanel />
+            {/* Colonne droite : trois prioritÃ©s stratÃ©giques de poids Ã©gal */}
+            <div className="mt-12 lg:mt-0">
+              <StrategicPrioritiesPanel />
             </div>
           </div>
         </div>
@@ -135,3 +138,4 @@ const HeroSection = () => {
 };
 
 export default HeroSection;
+
