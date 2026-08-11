@@ -1,6 +1,3 @@
-Exit code: 0
-Wall time: 2.3 seconds
-Output:
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -14,22 +11,25 @@ const StrategicPrioritiesPanel = () => {
     {
       eyebrow: t("Intelligence politique", "Political intelligence"),
       title: t(
-        "1Ã¨re Plateforme dâ€™Intelligence Politique au Maroc",
-        "Moroccoâ€™s first Political Intelligence Platform"
+        "1\u00e8re Plateforme d\u2019Intelligence Politique au Maroc",
+        "Morocco\u2019s first Political Intelligence Platform"
       ),
-      meta: t("Partis Â· Leaders politiques", "Parties Â· Political leaders"),
+      meta: t("Partis \u00b7 Leaders politiques", "Parties \u00b7 Political leaders"),
       cta: t("Explorer la plateforme", "Explore the platform"),
       href: "/insights-resources/intelligence-politique",
       image: face1Ip.url,
     },
     {
-      eyebrow: t("Ã‰tude nationale 2026", "National study 2026"),
+      eyebrow: t("\u00c9tude nationale 2026", "National study 2026"),
       title: t(
-        "MaturitÃ© en souverainetÃ© dÃ©cisionnelle",
+        "Maturit\u00e9 en souverainet\u00e9 d\u00e9cisionnelle",
         "Decision sovereignty maturity"
       ),
-      meta: t("Autodiagnostic Â· 4 piliers Â· 13 dimensions", "Self-assessment Â· 4 pillars Â· 13 dimensions"),
-      cta: t("Ã‰valuer ma maturitÃ©", "Assess my maturity"),
+      meta: t(
+        "Autodiagnostic \u00b7 4 piliers \u00b7 13 dimensions",
+        "Self-assessment \u00b7 4 pillars \u00b7 13 dimensions"
+      ),
+      cta: t("\u00c9valuer ma maturit\u00e9", "Assess my maturity"),
       href: "/insights-resources/enquete-isd",
       image: isdDecision,
     },
@@ -39,8 +39,11 @@ const StrategicPrioritiesPanel = () => {
         "Agences de Promotion des Investissements",
         "Investment Promotion Agencies"
       ),
-      meta: t("6 agences Â· 12 critÃ¨res Â· 6 leviers", "6 agencies Â· 12 criteria Â· 6 levers"),
-      cta: t("Voir lâ€™analyse", "View the analysis"),
+      meta: t(
+        "6 agences \u00b7 12 crit\u00e8res \u00b7 6 leviers",
+        "6 agencies \u00b7 12 criteria \u00b7 6 levers"
+      ),
+      cta: t("Voir l\u2019analyse", "View the analysis"),
       href: "/benchmark-api-light.html",
       image: "/Benchmark_API_Drapeaux-1.webp",
     },
@@ -51,7 +54,7 @@ const StrategicPrioritiesPanel = () => {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.65, delay: 0.2 }}
-      aria-label={t("Trois prioritÃ©s stratÃ©giques", "Three strategic priorities")}
+      aria-label={t("Trois priorit\u00e9s strat\u00e9giques", "Three strategic priorities")}
       className="space-y-3"
     >
       <div className="flex items-center gap-3 pb-1">
@@ -60,7 +63,7 @@ const StrategicPrioritiesPanel = () => {
           className="text-[10px] font-semibold uppercase tracking-[0.24em]"
           style={{ color: "hsl(var(--gold))", fontFamily: "'JetBrains Mono', monospace" }}
         >
-          {t("Trois prioritÃ©s stratÃ©giques", "Three strategic priorities")}
+          {t("Trois priorit\u00e9s strat\u00e9giques", "Three strategic priorities")}
         </p>
       </div>
 
@@ -114,4 +117,3 @@ const StrategicPrioritiesPanel = () => {
 };
 
 export default StrategicPrioritiesPanel;
-
