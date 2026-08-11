@@ -84,6 +84,31 @@ const InsightsResources = () => {
       ],
     },
     {
+      id: "benchmark-api-mai-2026",
+      filter: "intelligence-economique",
+      category: t("Aperçu", "Preview"),
+      date: t("Mai 2026", "May 2026"),
+      title: t(
+        "Benchmark des Agences de Promotion des Investissements (API)",
+        "Investment Promotion Agencies (IPA) Benchmark"
+      ),
+      subtitle: t(
+        "6 AGENCES – 12 CRITÈRES – 6 LEVIERS STRATÉGIQUES",
+        "6 AGENCIES – 12 CRITERIA – 6 STRATEGIC LEVERS"
+      ),
+      summary: t(
+        "Analyse comparative des mécanismes d'attractivité numérique de 6 agences mondiales sur deux axes : Tech/Data et Marketing.",
+        "Comparative analysis of digital attractiveness mechanisms of 6 global investment promotion agencies: Tech/Data and Marketing."
+      ),
+      href: "/benchmark-api-light.html",
+      image: "/Benchmark_API_Drapeaux-1.webp",
+      overlayBg: "/Benchmark_API_Analyse-2.webp",
+      actions: [
+        { label: t("Voir l'analyse →", "View analysis →"), href: "/benchmark-api-light.html", variant: "primary" },
+        { label: t("Accès complet →", "Full access →"), href: "/acces-premium", variant: "tertiary" },
+      ],
+    },
+    {
       id: "enquete-isd-2026",
       filter: "intelligence-economique",
       category: t("Étude nationale", "National study"),
@@ -109,20 +134,6 @@ const InsightsResources = () => {
       ],
     },
     {
-      id: "barometre-sep-2025",
-      filter: "barometre",
-      category: t("Baromètre", "Barometer"),
-      date: "Sep 2025",
-      title: t("Baromètre d'Investissement · Sep 2025", "Investment Barometer · Sep 2025"),
-      summary: t(
-        "Vietnam, Afrique du Sud, Mexique… Le Maroc peut-il rivaliser ? 9 secteurs, 24 600 données, 18 pays concurrents analysés sur 31 jours d'observation continue.",
-        "Vietnam, South Africa, Mexico… Can Morocco compete? 9 sectors, 24,600 data points, 18 competing countries analyzed over 31 days of continuous observation."
-      ),
-      href: "/barometre",
-      image: barometreCover,
-      overlayImage: barometreEnR,
-    },
-    {
       id: "raja-club-athletic",
       filter: "veille-sport",
       category: t("Veille Sport", "Sports Intelligence"),
@@ -140,29 +151,18 @@ const InsightsResources = () => {
       overlayImage: rcaEquipe,
     },
     {
-      id: "benchmark-api-mai-2026",
-      filter: "intelligence-economique",
-      category: t("Aperçu", "Preview"),
-      date: t("Mai 2026", "May 2026"),
-      title: t(
-        "Benchmark des Agences de Promotion des Investissements (API)",
-        "Investment Promotion Agencies (IPA) Benchmark"
-      ),
-      subtitle: t(
-        "6 AGENCES – 12 CRITÈRES – 6 LEVIERS STRATÉGIQUES",
-        "6 AGENCIES – 12 CRITERIA – 6 STRATEGIC LEVERS"
-      ),
+      id: "barometre-sep-2025",
+      filter: "barometre",
+      category: t("Baromètre", "Barometer"),
+      date: "Sep 2025",
+      title: t("Baromètre d'Investissement · Sep 2025", "Investment Barometer · Sep 2025"),
       summary: t(
-        "Analyse comparative des mécanismes d'attractivité numérique de 6 agences mondiales sur deux axes : Tech/Data et Marketing.",
-        "Comparative analysis of digital attractiveness mechanisms of 6 global investment promotion agencies: Tech/Data and Marketing."
+        "Vietnam, Afrique du Sud, Mexique… Le Maroc peut-il rivaliser ? 9 secteurs, 24 600 données, 18 pays concurrents analysés sur 31 jours d'observation continue.",
+        "Vietnam, South Africa, Mexico… Can Morocco compete? 9 sectors, 24,600 data points, 18 competing countries analyzed over 31 days of continuous observation."
       ),
-      href: "/benchmark-api-light.html",
-      image: "/Benchmark_API_Drapeaux-1.webp",
-      overlayBg: "/Benchmark_API_Analyse-2.webp",
-      actions: [
-        { label: t("Voir l'analyse →", "View analysis →"), href: "/benchmark-api-light.html", variant: "primary" },
-        { label: t("Accès complet →", "Full access →"), href: "/acces-premium", variant: "tertiary" },
-      ],
+      href: "/barometre",
+      image: barometreCover,
+      overlayImage: barometreEnR,
     },
     {
       id: "livre-blanc-esante",
