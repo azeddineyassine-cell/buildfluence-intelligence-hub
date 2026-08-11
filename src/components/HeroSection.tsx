@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { FormStrategicExchange } from "./FormModals";
-import ISDHeroPanel from "./ISDHeroPanel";
+import HeroInsightsCarousel from "./HeroInsightsCarousel";
 
 const HeroSection = () => {
   const [formOpen, setFormOpen] = useState(false);
