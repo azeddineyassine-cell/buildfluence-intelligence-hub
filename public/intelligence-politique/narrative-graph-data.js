@@ -1,4 +1,4 @@
-window.narrativeGraphData={
+window.narrativeGraphData=window.canonicalMonitoringData?.graph||{
   documents:9002,
   methodology:'Cooccurrences dans une même mention après déduplication des URL et exclusion de Wikipédia/Wiktionary.',
   nodes:[
