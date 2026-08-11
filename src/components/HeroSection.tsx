@@ -121,9 +121,9 @@ const HeroSection = () => {
               </motion.div>
             </div>
 
-            {/* Colonne droite : panneau Enquête ISD (emplacement haut-droite) */}
+            {/* Colonne droite : conteneur éditorial rotatif */}
             <div className="mt-12 lg:mt-2">
-              <ISDHeroPanel />
+              <HeroInsightsCarousel />
             </div>
           </div>
         </div>
