@@ -1,6 +1,3 @@
-Exit code: 0
-Wall time: 1.7 seconds
-Output:
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -41,11 +38,11 @@ const HeroSection = () => {
                 }}
               >
                 {t(
-                  "Construire l'architecture qui sÃ©curise vos ",
+                  "Construire l'architecture qui sécurise vos ",
                   "Building the architecture that secures your "
                 )}
                 <em className="not-italic" style={{ color: 'hsl(var(--gold))' }}>
-                  {t("dÃ©cisions stratÃ©giques", "strategic decisions")}
+                  {t("décisions stratégiques", "strategic decisions")}
                 </em>
               </motion.h1>
 
@@ -57,14 +54,14 @@ const HeroSection = () => {
                 style={{ color: 'hsl(var(--navy))', maxWidth: '700px', opacity: 0.88 }}
               >
                 {t(
-                  "Nous bÃ¢tissons des Ã©cosystÃ¨mes gÃ©o-dÃ©cisionnels souverains permettant d'anticiper les ruptures, neutraliser les menaces et prendre ",
+                  "Nous bâtissons des écosystèmes géo-décisionnels souverains permettant d'anticiper les ruptures, neutraliser les menaces et prendre ",
                   "We build sovereign geo-decisional ecosystems enabling anticipation of disruptions, neutralization of threats and gaining "
                 )}
                 <strong className="font-bold italic">
-                  {t("l'ascendant stratÃ©gique", "the strategic edge")}
+                  {t("l'ascendant stratégique", "the strategic edge")}
                 </strong>
                 {t(
-                  ", mÃªme dans des espaces instables, hostiles ou hyper-concurrentiels.",
+                  ", même dans des espaces instables, hostiles ou hyper-concurrentiels.",
                   ", even in unstable, hostile or hyper-competitive environments."
                 )}
               </motion.p>
@@ -106,7 +103,7 @@ const HeroSection = () => {
                   onMouseOver={(e) => (e.currentTarget.style.background = 'hsl(218 50% 13%)')}
                   onMouseOut={(e) => (e.currentTarget.style.background = 'hsl(var(--navy))')}
                 >
-                  {t("Demander un Ã©change stratÃ©gique", "Request a strategic exchange")}
+                  {t("Demander un échange stratégique", "Request a strategic exchange")}
                 </button>
                 <a
                   href="/solutions/soft-power-influence"
@@ -119,12 +116,12 @@ const HeroSection = () => {
                   onMouseOver={(e) => (e.currentTarget.style.color = 'hsl(var(--gold))')}
                   onMouseOut={(e) => (e.currentTarget.style.color = 'hsl(var(--navy))')}
                 >
-                  {t("DÃ©couvrez notre Processus de Rayonnement â†’", "Discover our Outreach Process â†’")}
+                  {t("Découvrez notre Processus de Rayonnement →", "Discover our Outreach Process →")}
                 </a>
               </motion.div>
             </div>
 
-            {/* Colonne droite : trois prioritÃ©s stratÃ©giques de poids Ã©gal */}
+            {/* Colonne droite : trois priorités stratégiques de poids égal */}
             <div className="mt-12 lg:mt-0">
               <StrategicPrioritiesPanel />
             </div>
@@ -138,4 +135,3 @@ const HeroSection = () => {
 };
 
 export default HeroSection;
-
