@@ -105,10 +105,6 @@ const HeroInsightsCarousel = () => {
 
   const slide = slides[index];
 
-  const open = () => {
-    window.location.href = slide.href;
-  };
-
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -125,10 +121,8 @@ const HeroInsightsCarousel = () => {
     >
       <a
         href={slide.href}
-        onClick={(e) => {
-          e.preventDefault();
-          open();
-        }}
+        target="_blank"
+        rel="noopener noreferrer"
         className="relative block overflow-hidden"
         style={{
           borderRadius: "2px",

@@ -304,11 +304,12 @@ const Navbar = () => {
         <div className="container flex h-20 items-center justify-between">
           <a
             href="/"
+            aria-label="Retour à l’accueil Buildfluence"
             onClick={(e) => {
               e.preventDefault();
               navigate("/");
             }}
-            className="flex items-center gap-2"
+            className="flex items-center gap-2 no-underline"
           >
             <img src={logoBuildfluence} alt="Buildfluence" className="h-10 w-auto" />
             <span className="font-serif text-xl tracking-tight">

@@ -175,7 +175,12 @@ const IPShell = ({ activeSlug, children }: Props) => {
 
       <header className="top">
         <div className="brandrow">
-          <div className="brand-left">
+          <Link
+            to="/"
+            aria-label="Retour à l’accueil Buildfluence"
+            className="brand-left"
+            style={{ color: "inherit", textDecoration: "none" }}
+          >
             <div className="flag">
               <svg viewBox="0 0 3 2" preserveAspectRatio="xMidYMid slice">
                 <rect width="3" height="2" fill="#C1272D" />
@@ -188,7 +193,7 @@ const IPShell = ({ activeSlug, children }: Props) => {
               </div>
               <div className="brandsub">Buildfluence · Législatives Maroc 2026</div>
             </div>
-          </div>
+          </Link>
           <div className="top-actions">
             <button type="button" className="idx-badge" style={{ border: "none", cursor: "pointer" }} onClick={() => navigate(METHODO_ROUTE)} title="À propos de l'IBDN®">IBDN®</button>
             <div className="fond-group">
