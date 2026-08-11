@@ -64,7 +64,7 @@ const AccesPremium = () => {
         path="/acces-premium"
       />
     <div className="min-h-screen flex flex-col items-center justify-center px-6 py-12" style={{ background: "#FFFFFF" }}>
-      <a href="/" className="mb-10 flex items-center gap-3">
+      <a href="/" aria-label="Retour à l’accueil Buildfluence" className="mb-10 flex items-center gap-3 no-underline">
         <img src={logoBuildfluence} alt="Buildfluence" className="h-12 w-auto" />
         <span className="font-serif text-2xl tracking-tight">
           <span className="font-bold" style={{ color: "#0D1B2A" }}>Build</span>
