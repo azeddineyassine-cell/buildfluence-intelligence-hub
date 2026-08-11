@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { FormStrategicExchange } from "./FormModals";
-import ISDHeroPanel from "./ISDHeroPanel";
+import StrategicPrioritiesPanel from "./StrategicPrioritiesPanel";
 
 const HeroSection = () => {
   const [formOpen, setFormOpen] = useState(false);
@@ -12,7 +12,7 @@ const HeroSection = () => {
     <>
       <section className="pt-16" style={{ background: '#fff' }}>
         <div className="mx-auto max-w-[1600px] px-12 pb-10 pt-12">
-          <div className="grid grid-cols-1 lg:grid-cols-[1fr_minmax(340px,400px)] lg:gap-16 lg:items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_minmax(400px,470px)] lg:gap-12 lg:items-start">
             {/* Colonne gauche : contenu hero existant */}
             <div>
               <motion.p
@@ -121,9 +121,9 @@ const HeroSection = () => {
               </motion.div>
             </div>
 
-            {/* Colonne droite : panneau Enquête ISD (emplacement haut-droite) */}
-            <div className="mt-12 lg:mt-2">
-              <ISDHeroPanel />
+            {/* Colonne droite : trois priorités stratégiques de poids égal */}
+            <div className="mt-12 lg:mt-0">
+              <StrategicPrioritiesPanel />
             </div>
           </div>
         </div>
