@@ -1,3 +1,6 @@
+Exit code: 0
+Wall time: 1.7 seconds
+Output:
 import { useMemo, useState } from "react";
 import Navbar from "@/components/Navbar";
 import CTAFooter from "@/components/CTAFooter";
@@ -50,9 +53,9 @@ const InsightsResources = () => {
 
   const FILTERS: { value: Filter; label: string }[] = [
     { value: "all", label: t("Tous", "All") },
-    { value: "barometre", label: t("Baromètre", "Barometer") },
+    { value: "barometre", label: t("BaromÃ¨tre", "Barometer") },
     { value: "veille-sport", label: t("Veille Sport", "Sports Intelligence") },
-    { value: "intelligence-economique", label: t("Intelligence Économique", "Economic Intelligence") },
+    { value: "intelligence-economique", label: t("Intelligence Ã‰conomique", "Economic Intelligence") },
     { value: "nation-branding", label: "Nation Branding" },
     { value: "threat-intelligence", label: "Threat Intelligence" },
   ];
@@ -62,17 +65,17 @@ const InsightsResources = () => {
       id: "intelligence-politique-2026",
       filter: "intelligence-economique",
       category: t("Intelligence Politique", "Political Intelligence"),
-      date: t("Législatives Maroc 2026", "Morocco Legislative 2026"),
+      date: t("LÃ©gislatives Maroc 2026", "Morocco Legislative 2026"),
       title: t(
-        "Intelligence Politique · Législatives Maroc 2026",
-        "Political Intelligence · Morocco Legislative 2026"
+        "1Ã¨re Plateforme dâ€™Intelligence Politique au Maroc",
+        "Moroccoâ€™s first Political Intelligence Platform"
       ),
       subtitle: t(
-        "IBDN® · GRAPHE NARRATIF · 12 RÉGIONS",
-        "IBDN® · NARRATIVE GRAPH · 12 REGIONS"
+        "IBDNÂ® Â· GRAPHE NARRATIF Â· PARTIS Â· LEADERS POLITIQUES",
+        "IBDNÂ® Â· NARRATIVE GRAPH Â· PARTIES Â· POLITICAL LEADERS"
       ),
       summary: t(
-        "Plateforme d'analyse de données sur la dynamique narrative des partis, personnalités et thématiques politiques. Analyse de données, pas de conseil ni d'orientation politique.",
+        "Plateforme d'analyse de donnÃ©es sur la dynamique narrative des partis, personnalitÃ©s et thÃ©matiques politiques. Analyse de donnÃ©es, pas de conseil ni d'orientation politique.",
         "Data-analysis platform on the narrative dynamics of parties, personalities and political themes. Data analysis, not advisory or political guidance."
       ),
       href: "/insights-resources/intelligence-politique",
@@ -80,24 +83,49 @@ const InsightsResources = () => {
       image: face1Ip.url,
       overlayBg: face2Ip.url,
       actions: [
-        { label: t("Explorer la plateforme ›", "Explore the platform ›"), href: "/insights-resources/intelligence-politique", variant: "primary", sameTab: true },
+        { label: t("Explorer la plateforme â€º", "Explore the platform â€º"), href: "/insights-resources/intelligence-politique", variant: "primary", sameTab: true },
+      ],
+    },
+    {
+      id: "benchmark-api-mai-2026",
+      filter: "intelligence-economique",
+      category: t("AperÃ§u", "Preview"),
+      date: t("Mai 2026", "May 2026"),
+      title: t(
+        "Benchmark des Agences de Promotion des Investissements (API)",
+        "Investment Promotion Agencies (IPA) Benchmark"
+      ),
+      subtitle: t(
+        "6 AGENCES â€“ 12 CRITÃˆRES â€“ 6 LEVIERS STRATÃ‰GIQUES",
+        "6 AGENCIES â€“ 12 CRITERIA â€“ 6 STRATEGIC LEVERS"
+      ),
+      summary: t(
+        "Analyse comparative des mÃ©canismes d'attractivitÃ© numÃ©rique de 6 agences mondiales sur deux axes : Tech/Data et Marketing.",
+        "Comparative analysis of digital attractiveness mechanisms of 6 global investment promotion agencies: Tech/Data and Marketing."
+      ),
+      href: "/benchmark-api-light.html",
+      image: "/Benchmark_API_Drapeaux-1.webp",
+      overlayBg: "/Benchmark_API_Analyse-2.webp",
+      actions: [
+        { label: t("Voir l'analyse â†’", "View analysis â†’"), href: "/benchmark-api-light.html", variant: "primary" },
+        { label: t("AccÃ¨s complet â†’", "Full access â†’"), href: "/acces-premium", variant: "tertiary" },
       ],
     },
     {
       id: "enquete-isd-2026",
       filter: "intelligence-economique",
-      category: t("Étude nationale", "National study"),
-      date: t("2026 · Enquête ouverte", "2026 · Survey open"),
+      category: t("Ã‰tude nationale", "National study"),
+      date: t("2026 Â· EnquÃªte ouverte", "2026 Â· Survey open"),
       title: t(
-        "État de la maturité en souveraineté décisionnelle au Maroc",
+        "Ã‰tat de la maturitÃ© en souverainetÃ© dÃ©cisionnelle au Maroc",
         "The state of decision sovereignty maturity in Morocco"
       ),
       subtitle: t(
-        "AUTODIAGNOSTIC · 4 PILIERS · 13 DIMENSIONS",
-        "SELF-ASSESSMENT · 4 PILLARS · 13 DIMENSIONS"
+        "AUTODIAGNOSTIC Â· 4 PILIERS Â· 13 DIMENSIONS",
+        "SELF-ASSESSMENT Â· 4 PILLARS Â· 13 DIMENSIONS"
       ),
       summary: t(
-        "Mesurez votre souveraineté décisionnelle en 10 minutes et entrez dans la première étude nationale et sectorielle, socle du premier Livre Blanc du domaine.",
+        "Mesurez votre souverainetÃ© dÃ©cisionnelle en 10 minutes et entrez dans la premiÃ¨re Ã©tude nationale et sectorielle, socle du premier Livre Blanc du domaine.",
         "Assess your decision sovereignty in 10 minutes and join the first national and sectoral study, foundation of the field's first White Paper."
       ),
       href: "/insights-resources/enquete-isd",
@@ -105,22 +133,8 @@ const InsightsResources = () => {
       image: isdDecision,
       overlayBg: isdEnquete,
       actions: [
-        { label: t("Participer à l'étude →", "Join the study →"), href: "/insights-resources/enquete-isd", variant: "primary", sameTab: true },
+        { label: t("Participer Ã  l'Ã©tude â†’", "Join the study â†’"), href: "/insights-resources/enquete-isd", variant: "primary", sameTab: true },
       ],
-    },
-    {
-      id: "barometre-sep-2025",
-      filter: "barometre",
-      category: t("Baromètre", "Barometer"),
-      date: "Sep 2025",
-      title: t("Baromètre d'Investissement · Sep 2025", "Investment Barometer · Sep 2025"),
-      summary: t(
-        "Vietnam, Afrique du Sud, Mexique… Le Maroc peut-il rivaliser ? 9 secteurs, 24 600 données, 18 pays concurrents analysés sur 31 jours d'observation continue.",
-        "Vietnam, South Africa, Mexico… Can Morocco compete? 9 sectors, 24,600 data points, 18 competing countries analyzed over 31 days of continuous observation."
-      ),
-      href: "/barometre",
-      image: barometreCover,
-      overlayImage: barometreEnR,
     },
     {
       id: "raja-club-athletic",
@@ -132,7 +146,7 @@ const InsightsResources = () => {
         "Raja Club Athletic: intelligence as an institutional shield"
       ),
       summary: t(
-        "Comment le premier club de football marocain a transformé la pression médiatique en avantage décisionnel grâce à une cellule de veille souveraine. Période : Juil. 2026 - Mars 2027.",
+        "Comment le premier club de football marocain a transformÃ© la pression mÃ©diatique en avantage dÃ©cisionnel grÃ¢ce Ã  une cellule de veille souveraine. PÃ©riode : Juil. 2026 - Mars 2027.",
         "How Morocco's leading football club turned media pressure into a decision-making advantage through a sovereign intelligence unit. Period: Jul. 2026 - Mar. 2027."
       ),
       href: lang === "en" ? "/Cas_client_RCA_v2-en.html" : "/Cas_client_RCA_v2.html",
@@ -140,29 +154,18 @@ const InsightsResources = () => {
       overlayImage: rcaEquipe,
     },
     {
-      id: "benchmark-api-mai-2026",
-      filter: "intelligence-economique",
-      category: t("Aperçu", "Preview"),
-      date: t("Mai 2026", "May 2026"),
-      title: t(
-        "Benchmark des Agences de Promotion des Investissements (API)",
-        "Investment Promotion Agencies (IPA) Benchmark"
-      ),
-      subtitle: t(
-        "6 AGENCES – 12 CRITÈRES – 6 LEVIERS STRATÉGIQUES",
-        "6 AGENCIES – 12 CRITERIA – 6 STRATEGIC LEVERS"
-      ),
+      id: "barometre-sep-2025",
+      filter: "barometre",
+      category: t("BaromÃ¨tre", "Barometer"),
+      date: "Sep 2025",
+      title: t("BaromÃ¨tre d'Investissement Â· Sep 2025", "Investment Barometer Â· Sep 2025"),
       summary: t(
-        "Analyse comparative des mécanismes d'attractivité numérique de 6 agences mondiales sur deux axes : Tech/Data et Marketing.",
-        "Comparative analysis of digital attractiveness mechanisms of 6 global investment promotion agencies: Tech/Data and Marketing."
+        "Vietnam, Afrique du Sud, Mexiqueâ€¦ Le Maroc peut-il rivaliser ? 9 secteurs, 24 600 donnÃ©es, 18 pays concurrents analysÃ©s sur 31 jours d'observation continue.",
+        "Vietnam, South Africa, Mexicoâ€¦ Can Morocco compete? 9 sectors, 24,600 data points, 18 competing countries analyzed over 31 days of continuous observation."
       ),
-      href: "/benchmark-api-light.html",
-      image: "/Benchmark_API_Drapeaux-1.webp",
-      overlayBg: "/Benchmark_API_Analyse-2.webp",
-      actions: [
-        { label: t("Voir l'analyse →", "View analysis →"), href: "/benchmark-api-light.html", variant: "primary" },
-        { label: t("Accès complet →", "Full access →"), href: "/acces-premium", variant: "tertiary" },
-      ],
+      href: "/barometre",
+      image: barometreCover,
+      overlayImage: barometreEnR,
     },
     {
       id: "livre-blanc-esante",
@@ -170,18 +173,18 @@ const InsightsResources = () => {
       category: t("LIVRE BLANC", "WHITE PAPER"),
       date: t("AVR 2022", "APR 2022"),
       title: t(
-        "1er Livre Blanc sur la e-Santé au Maroc",
+        "1er Livre Blanc sur la e-SantÃ© au Maroc",
         "Morocco's 1st e-Health White Paper"
       ),
       summary: t(
-        "Benchmark mondial · 2 enquêtes digitales · Préfacé par le DG de l'OMS et 3 ministres marocains. Impact direct : appel d'offres 190M MAD.",
-        "Global benchmark · 2 digital surveys · Prefaced by WHO Director-General and 3 Moroccan ministers. Direct impact: MAD 190M tender."
+        "Benchmark mondial Â· 2 enquÃªtes digitales Â· PrÃ©facÃ© par le DG de l'OMS et 3 ministres marocains. Impact direct : appel d'offres 190M MAD.",
+        "Global benchmark Â· 2 digital surveys Â· Prefaced by WHO Director-General and 3 Moroccan ministers. Direct impact: MAD 190M tender."
       ),
       href: "/esante_livre_blanc_v2_4.html",
       image: "/Healthcare-1.webp",
       overlayImage: "/Healthcare-2.webp",
       actions: [
-        { label: t("EN SAVOIR PLUS →", "LEARN MORE →"), href: "/esante_livre_blanc_v2_4.html", variant: "primary" },
+        { label: t("EN SAVOIR PLUS â†’", "LEARN MORE â†’"), href: "/esante_livre_blanc_v2_4.html", variant: "primary" },
       ],
     },
   ];
@@ -204,9 +207,9 @@ const InsightsResources = () => {
   return (
     <>
       <SEO
-        titleFr="Insights & Resources · Analyses et benchmarks"
-        titleEn="Insights and Resources · Analysis and Benchmarks"
-        descriptionFr={"Analyses, baromètres, livres blancs et benchmarks sur la gestion de crise, l'influence et l'attractivité des investissements."}
+        titleFr="Insights & Resources Â· Analyses et benchmarks"
+        titleEn="Insights and Resources Â· Analysis and Benchmarks"
+        descriptionFr={"Analyses, baromÃ¨tres, livres blancs et benchmarks sur la gestion de crise, l'influence et l'attractivitÃ© des investissements."}
         descriptionEn="Analysis, barometers, white papers and benchmarks on crisis management, influence and investment attractiveness worldwide."
         path="/insights-resources"
       />
@@ -398,20 +401,20 @@ const InsightsResources = () => {
       `}</style>
 
       <section className="ir-hero">
-        <div className="ir-eyebrow">{t("Intelligence · Ressources · Analyses", "Intelligence · Resources · Analysis")}</div>
+        <div className="ir-eyebrow">{t("Intelligence Â· Ressources Â· Analyses", "Intelligence Â· Resources Â· Analysis")}</div>
         <h1 className="ir-title">
           Insights & <em>Resources</em>
         </h1>
         <p className="ir-chapeau">
           {t(
-            "Décryptages stratégiques, baromètres d'investissement et analyses de compétitivité pour décider avant les autres.",
+            "DÃ©cryptages stratÃ©giques, baromÃ¨tres d'investissement et analyses de compÃ©titivitÃ© pour dÃ©cider avant les autres.",
             "Strategic insights, investment barometers and competitiveness analyses to decide ahead of the others."
           )}
         </p>
       </section>
 
-      <section className="ir-filters" aria-label={t("Filtres thématiques", "Thematic filters")}>
-        <span className="ir-filter-label">{t("Thématique", "Theme")}</span>
+      <section className="ir-filters" aria-label={t("Filtres thÃ©matiques", "Thematic filters")}>
+        <span className="ir-filter-label">{t("ThÃ©matique", "Theme")}</span>
         {FILTERS.map((f) => (
           <button
             key={f.value}
@@ -475,7 +478,7 @@ const InsightsResources = () => {
               } : undefined}
             >
               <div className="ir-overlay-inner">
-                <div className="ir-overlay-cat">{card.category} · {card.date}</div>
+                <div className="ir-overlay-cat">{card.category} Â· {card.date}</div>
                 <h3 className="ir-overlay-title">{card.title}</h3>
                 {card.subtitle && (
                   <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: 10, letterSpacing: "0.22em", textTransform: "uppercase", color: "rgba(201,168,76,0.9)", marginBottom: 12 }}>
@@ -531,7 +534,7 @@ const InsightsResources = () => {
                 ) : (
                   <button type="button" className="ir-learn-more"
                     onClick={(e) => { e.stopPropagation(); openCard(card); }}>
-                    {t("En savoir plus", "Learn more")} →
+                    {t("En savoir plus", "Learn more")} â†’
                   </button>
                 )}
               </div>
@@ -542,10 +545,10 @@ const InsightsResources = () => {
 
       <section className="ir-newsletter">
         <div className="ir-newsletter-inner">
-          <div className="ir-news-eyebrow">{t("Newsletter · Baromètre", "Newsletter · Barometer")}</div>
-          <h2 className="ir-news-title">{t("Recevez le prochain Baromètre en avant-première", "Receive the next Barometer in preview")}</h2>
+          <div className="ir-news-eyebrow">{t("Newsletter Â· BaromÃ¨tre", "Newsletter Â· Barometer")}</div>
+          <h2 className="ir-news-title">{t("Recevez le prochain BaromÃ¨tre en avant-premiÃ¨re", "Receive the next Barometer in preview")}</h2>
           <p className="ir-news-sub">
-            {t("Décryptages exclusifs et analyses concurrentielles.", "Exclusive insights and competitive analyses.")}
+            {t("DÃ©cryptages exclusifs et analyses concurrentielles.", "Exclusive insights and competitive analyses.")}
           </p>
           <form
             className="ir-news-form"
@@ -578,20 +581,20 @@ const InsightsResources = () => {
             <button type="submit" className="ir-btn-gold" disabled={newsStatus === "loading"}>
               {newsStatus === "loading"
                 ? t("Envoi...", "Sending...")
-                : t("Je m'inscris", "Subscribe")} →
+                : t("Je m'inscris", "Subscribe")} â†’
             </button>
           </form>
           {newsStatus === "success" && (
             <p className="ir-news-note" style={{ color: "#C9A84C", marginTop: 14 }}>
-              {t("Merci ! Votre inscription a bien été prise en compte.", "Thank you! Your subscription has been registered.")}
+              {t("Merci ! Votre inscription a bien Ã©tÃ© prise en compte.", "Thank you! Your subscription has been registered.")}
             </p>
           )}
           {newsStatus === "error" && (
             <p className="ir-news-note" style={{ color: "#ff8a8a", marginTop: 14 }}>
-              {t("Une erreur est survenue. Merci de réessayer.", "An error occurred. Please try again.")}
+              {t("Une erreur est survenue. Merci de rÃ©essayer.", "An error occurred. Please try again.")}
             </p>
           )}
-          <p className="ir-news-note">{t("Aucun spam · Données protégées · Désabonnement en 1 clic", "No spam · Protected data · One-click unsubscribe")}</p>
+          <p className="ir-news-note">{t("Aucun spam Â· DonnÃ©es protÃ©gÃ©es Â· DÃ©sabonnement en 1 clic", "No spam Â· Protected data Â· One-click unsubscribe")}</p>
         </div>
       </section>
 
@@ -607,3 +610,4 @@ export const __noop = () => {};
 
 
 export default InsightsResources;
+
