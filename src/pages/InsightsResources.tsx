@@ -64,12 +64,12 @@ const InsightsResources = () => {
       category: t("Intelligence Politique", "Political Intelligence"),
       date: t("Législatives Maroc 2026", "Morocco Legislative 2026"),
       title: t(
-        "Intelligence Politique · Législatives Maroc 2026",
-        "Political Intelligence · Morocco Legislative 2026"
+        "1ère Plateforme d'Intelligence Politique au Maroc",
+        "Morocco's First Political Intelligence Platform"
       ),
       subtitle: t(
-        "IBDN® · GRAPHE NARRATIF · 12 RÉGIONS",
-        "IBDN® · NARRATIVE GRAPH · 12 REGIONS"
+        "IBDN® · GRAPHE NARRATIF · PARTIS · LEADERS POLITIQUES",
+        "IBDN® · NARRATIVE GRAPH · PARTIES · POLITICAL LEADERS"
       ),
       summary: t(
         "Plateforme d'analyse de données sur la dynamique narrative des partis, personnalités et thématiques politiques. Analyse de données, pas de conseil ni d'orientation politique.",
