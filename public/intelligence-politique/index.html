@@ -11,6 +11,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Cormorant+Garamond:ital,wght@1,400;1,500&family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@500;600;700&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="monitoring.css">
+  <link rel="stylesheet" href="strategic-signals.css">
 </head>
 <body>
   <header class="masthead">
@@ -25,6 +26,7 @@
     <button data-view="opinion"><span class="nav-icon">◉</span><strong>OPINION</strong><small>Quels sujets dominent le débat ?</small></button>
     <button data-view="acteurs"><span class="nav-icon">♙</span><strong>MEDIA</strong><small>Qui relaie le débat ?</small></button>
     <button data-view="dynamiques"><span class="nav-icon">⌘</span><strong>DYNAMIQUES POLITIQUES</strong><small>Comment les acteurs interagissent-ils ?</small></button>
+    <button data-view="signals"><span class="nav-icon">✦</span><strong>STRATEGIC SIGNALS</strong><small data-graph-fr="Quels signaux faut-il retenir ?" data-graph-en="Which signals matter now?" data-graph-ar="ما الإشارات التي ينبغي رصدها؟">Quels signaux faut-il retenir ?</small></button>
     <button data-view="methodologie"><span class="nav-icon">▤</span><strong>ARCHITECTURE</strong><small>Comment le dispositif est-il structuré ?</small></button>
     <button data-view="apropos"><span class="nav-icon">ⓘ</span><strong>À PROPOS</strong><small>Notre mission et nos engagements</small></button>
   </nav>
@@ -32,9 +34,9 @@
   <main>
     <section class="view active" id="dashboard">
       <div class="hero">
-        <div class="hero-copy"><p class="kicker">LA PREMIÈRE PLATEFORME MAROCAINE D’INTELLIGENCE POLITIQUE</p><h1>Comprendre maintenant<br><em>Décider aujourd’hui</em><br>Anticiper demain</h1><p>IBDN® (Indice Buildfluence de Dynamique Narrative) mesure en temps réel la présence, l’influence et la dynamique des partis et leaders politiques à partir des médias et des réseaux sociaux.</p><div class="hero-points"><span><b>ϟ</b>Exports consolidés<small>3 périmètres documentés</small></span><span><b>◎</b>Base observée<small><b data-overall-documents>9 000</b> URL uniques</small></span><span><b>♢</b>Lecture traçable<small>Sources, période et exclusions précisées</small></span></div><div class="hero-actions"><button class="gold explore" data-jump="classement">EXPLORER LES SOURCES →</button></div></div>
+        <div class="hero-copy"><p class="kicker">LA PREMIÈRE PLATEFORME MAROCAINE D’INTELLIGENCE POLITIQUE</p><h1>Comprendre maintenant<br><em>Décider aujourd’hui</em><br>Anticiper demain</h1><p>Une lecture documentée de la visibilité, des tonalités, des sujets et des relations qui structurent le débat politique marocain.</p><div class="hero-points"><span><b>ϟ</b>Exports consolidés<small>3 périmètres documentés</small></span><span><b>◎</b>Base observée<small><b data-overall-documents>9 000</b> URL uniques</small></span><span><b>♢</b>Lecture traçable<small>Sources, période et exclusions précisées</small></span></div><div class="hero-actions"><button class="gold explore" data-jump="signals">VOIR LES SIGNAUX →</button></div></div>
         <div class="hero-image"><img src="assets/political-narrative-graph.png" alt="Political Narrative Graph des élections législatives marocaines 2026"></div>
-        <aside class="score-card technical-sheet"><header><span><small>REPÈRES DE L’ÉTUDE</small><b>FICHE SIGNALÉTIQUE</b></span></header><div class="technical-grid"><div><small>PÉRIODE</small><strong>29.07 au 05.08.2026</strong></div><div><small>URL UNIQUES</small><strong><b data-overall-documents>9 000</b></strong></div><div><small>4 SCOPES</small><strong><span>Partis Politiques</span><span>Leaders Politiques</span><span>Sujets de Débat Politique</span><span>Opinion Citoyenne</span></strong></div><div><small>MÉTHODE PROPRIÉTAIRE</small><strong><span>IBDN® : 8 dimensions</span><span>Political Narrative Graph</span></strong></div><div><small>OUTILS</small><strong>Data Intelligence, Veille, IA, BI, Expertise Humaine</strong></div><div><small>OBJECTIF</small><strong>Lire les dynamiques narratives</strong></div></div><div class="technical-capabilities" aria-label="Chaîne de production"><span>BIG DATA</span><span>ANALYTICS &amp; AI PROCESSING</span><span>CONTRÔLE QUALITÉ</span><span>PRODUCTION</span></div><footer><strong>GRAPHE RELATIONNEL</strong><span><b data-graph-documents>7&nbsp;421</b> URL uniques, acteurs et opinion</span></footer></aside>
+        <aside class="score-card technical-sheet"><header><span><small>REPÈRES DE L’ÉTUDE</small><b>FICHE SIGNALÉTIQUE</b></span></header><div class="technical-grid"><div><small>PÉRIODE</small><strong>29.07 au 05.08.2026</strong></div><div><small>URL UNIQUES</small><strong><b data-overall-documents>9 000</b></strong></div><div><small>4 SCOPES</small><strong><span>Partis Politiques</span><span>Leaders Politiques</span><span>Sujets de Débat Politique</span><span>Opinion Citoyenne</span></strong></div><div><small>LECTURES ANALYTIQUES</small><strong><span>Strategic Signals</span><span>Political Narrative Graph</span></strong></div><div><small>OUTILS</small><strong>Data Intelligence, Veille, IA, BI, Expertise Humaine</strong></div><div><small>OBJECTIF</small><strong>Lire les dynamiques narratives</strong></div></div><div class="technical-capabilities" aria-label="Chaîne de production"><span>BIG DATA</span><span>ANALYTICS &amp; AI PROCESSING</span><span>CONTRÔLE QUALITÉ</span><span>PRODUCTION</span></div><footer><strong>GRAPHE RELATIONNEL</strong><span><b data-graph-documents>7&nbsp;421</b> URL uniques, acteurs et opinion</span></footer></aside>
       </div>
       <div class="metrics"><div><small>PRESSE MAROCAINE</small><b data-press-documents>2 168</b></div><div><small>OPINION CITOYENNE</small><b data-opinion-documents>5 498</b></div><div><small>PARTIS & LEADERS</small><b data-actor-documents>2 060</b></div><div><small>PÉRIODE D’ANALYSE</small><b>29.07 - 05.08</b></div><div><small>UNITÉ COMMUNE</small><b>URL UNIQUE</b></div></div>
       <div class="dash-grid">
@@ -45,7 +47,6 @@
       </div>
       <article class="card strong-mentions"><div class="card-head"><h2>MENTIONS FORTES VALIDÉES <small>LIENS SOURCES</small></h2><span>Période : 3 au 5 août 2026</span></div><div id="strong-mentions-list"></div></article>
       <p class="trace-note"><strong>Traçabilité.</strong> Trois corpus distincts partagent la même unité, l’URL unique : <b data-actor-documents>2 060</b> pour Partis et Leaders, <b data-press-documents>2 168</b> pour la Presse marocaine et <b data-opinion-documents>5 498</b> pour l’Opinion citoyenne. Le graphe relie les acteurs aux sujets détectés dans les deux corpus concernés, sans confondre leurs périmètres.</p>
-      <div class="dimensions-strip"><h2>L’IBDN® : UN INDICE, 8 DIMENSIONS, UNE VISION CLAIRE</h2><div id="dimension-strip"></div></div>
     </section>
 
     <section class="view" id="classement">
@@ -73,6 +74,8 @@
       <div class="network-shell"><div class="network-columns"><span data-graph-fr="PARTIS POLITIQUES" data-graph-en="POLITICAL PARTIES" data-graph-ar="الأحزاب السياسية">PARTIS POLITIQUES</span><span data-graph-fr="LEADERS POLITIQUES" data-graph-en="POLITICAL LEADERS" data-graph-ar="القادة السياسيون">LEADERS POLITIQUES</span><span data-graph-fr="SUJETS DU DÉBAT POLITIQUE" data-graph-en="POLITICAL DEBATE ISSUES" data-graph-ar="مواضيع النقاش السياسي">SUJETS DU DÉBAT POLITIQUE</span><span data-graph-fr="TONALITÉS" data-graph-en="TONES" data-graph-ar="النبرات">TONALITÉS</span></div><canvas id="network-canvas" aria-label="Réseau interactif des dynamiques politiques" data-graph-aria-fr="Réseau interactif des dynamiques politiques" data-graph-aria-en="Interactive political dynamics network" data-graph-aria-ar="شبكة تفاعلية للديناميات السياسية"></canvas><div class="network-zoom" role="group" aria-label="Contrôles du zoom" data-graph-aria-fr="Contrôles du zoom" data-graph-aria-en="Zoom controls" data-graph-aria-ar="أدوات التكبير"><button type="button" id="network-zoom-in" aria-label="Agrandir le graphe" data-graph-aria-fr="Agrandir le graphe" data-graph-aria-en="Zoom in on graph" data-graph-aria-ar="تكبير الرسم">+</button><button type="button" id="network-zoom-out" aria-label="Réduire le graphe" data-graph-aria-fr="Réduire le graphe" data-graph-aria-en="Zoom out of graph" data-graph-aria-ar="تصغير الرسم">−</button><button type="button" id="network-zoom-reset" aria-label="Recentrer le graphe" data-graph-aria-fr="Recentrer le graphe" data-graph-aria-en="Recenter graph" data-graph-aria-ar="إعادة توسيط الرسم">⊙</button><output id="network-zoom-value" aria-live="polite">100%</output></div><div class="network-tooltip" id="network-tooltip"></div></div>
       <p class="network-note"><strong data-graph-fr="Fréquences relationnelles." data-graph-en="Relational frequencies." data-graph-ar="تواتر العلاقات.">Fréquences relationnelles.</strong> <span data-graph-fr="Dans l’infobulle d’un nœud, le total additionne les fréquences de ses relations visibles : tonalité directe, sujet associé ou affiliation. Il ne s’agit ni d’un score d’influence ni d’une intention de vote." data-graph-en="In a node tooltip, the total adds the frequencies of its visible links: direct tone, associated issue or affiliation. It is neither an influence score nor a voting intention." data-graph-ar="يجمع الإجمالي في نافذة العقدة تواترات روابطها الظاهرة: النبرة المباشرة أو الموضوع المرتبط أو الانتماء. وهو ليس مؤشر تأثير ولا نية تصويت.">Dans l’infobulle d’un nœud, le total additionne les fréquences de ses relations visibles : tonalité directe, sujet associé ou affiliation. Il ne s’agit ni d’un score d’influence ni d’une intention de vote.</span></p>
     </section>
+
+    <section class="view" id="signals" aria-labelledby="signals-title"></section>
 
     <section class="view" id="methodologie">
       <div class="arch-head">
@@ -126,7 +129,7 @@
             <ol class="arch-steps" start="3">
               <li class="arch-step" style="--c:var(--arch-violet)"><span class="arch-step-num">03</span><span class="arch-ico" aria-hidden="true">⌕</span><div><h3>ANALYSER</h3><p>Identifier les narratifs, les acteurs, la tonalité, les tendances et les signaux émergents.</p></div></li>
               <li class="arch-step" style="--c:var(--arch-violet)"><span class="arch-step-num">04</span><span class="arch-ico" aria-hidden="true">⌘</span><div><h3>RELIER</h3><p>Cartographier les cooccurrences, les écosystèmes d’acteurs et les relations documentées.</p><p class="arch-warn"><span aria-hidden="true">⚠</span>Une cooccurrence médiatique ne constitue pas à elle seule une alliance, une opposition ou une relation d’influence confirmée.</p></div></li>
-              <li class="arch-step" style="--c:var(--arch-violet)"><span class="arch-step-num">05</span><span class="arch-ico" aria-hidden="true">◫</span><div><h3>MESURER</h3><p>Produire les indicateurs disponibles et préparer les dimensions de <bdi dir="ltr">IBDN®</bdi></p><p class="arch-warn"><span aria-hidden="true">⚠</span><bdi dir="ltr">IBDN®</bdi> <span class="arch-warn-text">non calculé tant que les données nécessaires aux huit dimensions ne sont pas complètes et validées.</span></p></div></li>
+              <li class="arch-step" style="--c:var(--arch-violet)"><span class="arch-step-num">05</span><span class="arch-ico" aria-hidden="true">◫</span><div><h3>MESURER</h3><p>Produire des indicateurs disponibles, séparés, traçables et documentés.</p><p class="arch-warn"><span aria-hidden="true">✓</span><span class="arch-warn-text">Aucun score composite n’est affiché sans données complètes et méthodologie validée.</span></p></div></li>
             </ol>
           </section>
           <span class="arch-group-link" aria-hidden="true"><i>▼</i></span>
@@ -172,7 +175,7 @@
       </div>
 
       <section class="arch-dimensions" aria-labelledby="arch-dim-title">
-        <h2 id="arch-dim-title">LES 8 DIMENSIONS DE L’<bdi dir="ltr" class="arch-inline-name">IBDN®</bdi></h2>
+        <h2 id="arch-dim-title">LES INDICATEURS ANALYTIQUES DISPONIBLES</h2>
         <ul class="arch-dim-grid">
           <li><button type="button" class="arch-dim" aria-describedby="dim-tip-1"><span class="arch-ico" aria-hidden="true">◉</span><strong>VISIBILITÉ</strong><span class="arch-tip" id="dim-tip-1" role="tooltip">Présence et volume de mentions dédupliquées.</span></button></li>
           <li><button type="button" class="arch-dim" aria-describedby="dim-tip-2"><span class="arch-ico" aria-hidden="true">◌</span><strong>ENGAGEMENT</strong><span class="arch-tip" id="dim-tip-2" role="tooltip">Réactions, partages et commentaires observés.</span></button></li>
@@ -183,17 +186,17 @@
           <li><button type="button" class="arch-dim" aria-describedby="dim-tip-7"><span class="arch-ico" aria-hidden="true">◈</span><strong>TONALITÉ</strong><span class="arch-tip" id="dim-tip-7" role="tooltip">Orientation du discours, avec incertitude explicitée.</span></button></li>
           <li><button type="button" class="arch-dim" aria-describedby="dim-tip-8"><span class="arch-ico" aria-hidden="true">⌁</span><strong>DYNAMIQUE GLOBALE</strong><span class="arch-tip" id="dim-tip-8" role="tooltip">Variation consolidée de l’ensemble des dimensions.</span></button></li>
         </ul>
-        <p class="arch-signature"><bdi dir="ltr">IBDN®</bdi><i aria-hidden="true">•</i><span>INDICE <bdi dir="ltr">BUILDFLUENCE</bdi> DE DYNAMIQUE NARRATIVE</span></p>
+        <p class="arch-signature"><bdi dir="ltr">STRATEGIC SIGNALS</bdi><i aria-hidden="true">•</i><span>LECTURES ANALYTIQUES <bdi dir="ltr">BUILDFLUENCE</bdi></span></p>
         <p class="arch-quote">Intelligence politique souveraine, explicable et contrôlée humainement.</p>
-        <p class="arch-mention">Les huit dimensions décrivent le référentiel méthodologique. Le score <bdi dir="ltr">IBDN®</bdi> <span class="arch-mention-text">réel n’est affiché que lorsque toutes les données nécessaires sont disponibles et validées.</span></p>
+        <p class="arch-mention">Chaque indicateur est présenté séparément avec son périmètre, sa formule et ses limites. Aucun score composite n’est produit à partir de données incomplètes.</p>
       </section>
-      <div class="method-bottom"><article class="card"><p class="kicker">LECTURE RESPONSABLE</p><p class="ibdn-principle">L’IBDN® décrit une présence et une dynamique dans le débat public. Il ne mesure jamais une intention de vote et ne constitue ni un sondage ni une prédiction électorale.</p><div class="outcomes"><div><b>◉</b><strong>COMPRÉHENSION</strong><small>Une lecture claire et factuelle du débat public.</small></div><div><b>◫</b><strong>TRANSPARENCE</strong><small>Une méthode sourcée et explicable.</small></div><div><b>↗</b><strong>ANTICIPATION</strong><small>Identifier les signaux faibles.</small></div></div></article><article class="card ethics"><p class="kicker">GOUVERNANCE ÉTHIQUE</p><h2>Ce que l’indice mesure, et ce qu’il ne mesure pas.</h2><p>Sources ouvertes, contrôle qualité humain, période d’observation affichée et limites explicitées. La balance de tonalité des leaders sera ajoutée dès réception de la requête dédiée, sans valeur provisoire inventée.</p></article></div>
+      <div class="method-bottom"><article class="card"><p class="kicker">LECTURE RESPONSABLE</p><p class="ibdn-principle">Les indicateurs décrivent une présence, des tonalités et des relations dans le débat public. Ils ne mesurent jamais une intention de vote et ne constituent ni un sondage ni une prédiction électorale.</p><div class="outcomes"><div><b>◉</b><strong>COMPRÉHENSION</strong><small>Une lecture claire et factuelle du débat public.</small></div><div><b>◫</b><strong>TRANSPARENCE</strong><small>Une méthode sourcée et explicable.</small></div><div><b>↗</b><strong>ANTICIPATION</strong><small>Identifier les signaux faibles.</small></div></div></article><article class="card ethics"><p class="kicker">GOUVERNANCE ÉTHIQUE</p><h2>Ce que les indicateurs mesurent, et ce qu’ils ne mesurent pas.</h2><p>Sources ouvertes, contrôle qualité humain, période d’observation affichée, formules documentées et limites explicitées.</p></article></div>
     </section>
 
     <section class="view" id="apropos">
       <div class="about-hero"><p class="kicker">NOTRE MISSION</p><h1>Rendre les dynamiques politiques <em>lisibles, vérifiables et utiles.</em></h1><p>Buildfluence conçoit une infrastructure marocaine souveraine d’intelligence stratégique. La plateforme transforme des données ouvertes en compréhension partagée, sans microciblage ni profilage des électeurs.</p></div>
       <div class="about-grid"><article class="card"><b>01</b><h2>Indépendance</h2><p>Une lecture factuelle, non partisane et méthodologiquement traçable.</p></article><article class="card"><b>02</b><h2>Souveraineté</h2><p>Une plateforme conçue au Maroc, au service de la compréhension du Maroc.</p></article><article class="card"><b>03</b><h2>Responsabilité</h2><p>Données ouvertes, conformité CNDP et RGPD, contrôle humain permanent.</p></article></div>
-      <div class="manifesto"><blockquote>« Les données racontent ce qui s’est passé. Les relations expliquent pourquoi. L’IBDN® révèle ce qui change. »</blockquote><span>Buildfluence Intelligence Politique®</span></div>
+      <div class="manifesto"><blockquote>« Les données racontent ce qui s’est passé. Les relations révèlent ce qui structure le débat. »</blockquote><span>Buildfluence Intelligence Politique®</span></div>
     </section>
   </main>
 
@@ -204,5 +207,6 @@
   <script src="canonical-monitoring-data.js"></script>
   <script src="narrative-graph-data.js"></script>
   <script src="script.js"></script>
+  <script src="strategic-signals.js"></script>
 </body>
 </html>
