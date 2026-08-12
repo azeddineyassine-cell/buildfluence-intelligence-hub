@@ -157,14 +157,7 @@ html[dir="rtl"] .network-example.topic { border-right-color: #a66bc9; }
 .network-toolbar .network-legend { position: static; flex: none; padding: 0; background: none; border: 0; border-radius: 0; gap: 12px; }
 .network-toolbar .network-legend span { white-space: nowrap; }
 .network-toolbar .network-legend span:before { width: 15px; }
-.ibdn-principle { margin: 0 0 18px; color: #a9bac4; line-height: 1.65; }
-.ibdn-focus { margin-top: 35px; padding: 26px; display: grid; grid-template-columns: .9fr 1.5fr; gap: 34px; }
-.ibdn-focus h2 { margin: 4px 0 12px; font: 700 30px var(--serif); }
-.ibdn-focus p:not(.kicker) { color: #a9bac4; line-height: 1.7; }
-.ibdn-dimensions { display: grid; grid-template-columns: 1fr 1fr; gap: 1px 20px; }
-.ibdn-dimension { display: grid; grid-template-columns: 125px 1fr; gap: 12px; padding: 9px 5px; border-bottom: 1px solid var(--line); }
-.ibdn-dimension strong { color: var(--gold); font: 700 11px var(--cond); }
-.ibdn-dimension span { color: #c2cfd6; font-size: 10px; }
+.indicator-principle { margin: 0 0 18px; color: #a9bac4; line-height: 1.65; }
 .media-switch { width: max-content; margin: -12px 0 14px; }
 
 @media (max-width: 1150px) { #strong-mentions-list { grid-template-columns: repeat(2, 1fr); } }
@@ -216,12 +209,10 @@ html[dir="rtl"] .network-example.topic { border-right-color: #a66bc9; }
   .network-toolbar { height: auto; padding: 8px 0; flex-wrap: wrap; }
   .network-toolbar .network-legend { width: 100%; flex-wrap: wrap; }
   .network-reading-guide { grid-template-columns: 1fr; }
-  .ibdn-focus { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 760px) {
-  .technical-grid, .ibdn-dimensions { grid-template-columns: 1fr; }
-  .ibdn-dimension { grid-template-columns: 105px 1fr; }
+  .technical-grid { grid-template-columns: 1fr; }
 }
 
 /* Référence visuelle validée, thème clair. */
@@ -374,18 +365,14 @@ html[data-theme="light"] .step ul {
   color: #5C6670;
   font-size: 8px;
 }
-html[data-theme="light"] .ibdn-focus,
 html[data-theme="light"] .method-bottom .card {
   border: 1px solid #D9CFBC;
   border-radius: 2px;
   background: #FFFFFF;
 }
-html[data-theme="light"] .ibdn-focus h2,
 html[data-theme="light"] .ethics h2 { color: #0D1B2A; font-family: "Playfair Display", serif; }
-html[data-theme="light"] .ibdn-focus p:not(.kicker),
-html[data-theme="light"] .ibdn-principle,
+html[data-theme="light"] .indicator-principle,
 html[data-theme="light"] .ethics > p:last-child { color: #44515C; }
-html[data-theme="light"] .ibdn-dimension span { color: #0D1B2A; }
 html[data-theme="light"] .outcomes strong { color: #0097A7; }
 html[data-theme="light"] .outcomes small { color: #5C6670; }
 
