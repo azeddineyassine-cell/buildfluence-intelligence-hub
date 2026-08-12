@@ -49,15 +49,12 @@ const nationalMedia=parties;
 const politicalParties=(canonicalMonitoring?.politicalParties?.length?canonicalMonitoring.politicalParties:legacyPoliticalParties).map(withToneSummary);
 const leaders=(canonicalMonitoring?.leaders?.length?canonicalMonitoring.leaders:legacyLeaders).map(withToneSummary);
 const themes=[['X / Twitter',36.0,'#259cd8'],['Facebook',28.6,'#5d79cf'],['Actualités',21.9,'#8cab36'],['Blogs',9.0,'#e0b235'],['Autres canaux',4.5,'#9955b4']];
-const dims=[['◉','VISIBILITÉ','Présence dans les médias et réseaux.'],['ϟ','INFLUENCE','Relais par des sources influentes.'],['◌','ENGAGEMENT','Réactions, interactions et partages.'],['↗','PROPAGATION','Vitesse de diffusion du récit.'],['◷','PERSISTANCE','Capacité à durer dans le temps.'],['◈','TONALITÉ','Orientation positive, neutre ou négative.'],['⚑','THÉMATIQUES','Association aux grands enjeux.'],['⌁','DYNAMIQUE','Progression, stagnation ou recul.']];
-const ibdnDefinitions=[['Visibilité','Présence et volume dédupliqué de mentions'],['Influence','Importance des sources et relais'],['Engagement','Réactions, partages et commentaires'],['Propagation','Diffusion d’un récit sur une période courte'],['Persistance','Capacité d’un signal à durer dans le temps'],['Tonalité','Orientation du discours, avec incertitude'],['Thématiques','Association aux enjeux structurants'],['Dynamique globale','Variation consolidée des dimensions']];
 
 function activateView(id){$$('.view').forEach(v=>v.classList.toggle('active',v.id===id));$$('.tabs button').forEach(b=>b.classList.toggle('active',b.dataset.view===id));scrollTo({top:0,behavior:'smooth'});if(id==='dashboard'){drawTrend();setTimeout(drawTrend,50)}if(id==='opinion')setTimeout(drawSentiment,50);if(id==='acteurs')setTimeout(drawRadar,50);if(id==='dynamiques')setTimeout(()=>{resetNetworkView();resizeNetwork()},50)}
 $$('[data-view]').forEach(b=>b.onclick=()=>activateView(b.dataset.view));$$('[data-jump]').forEach(b=>b.onclick=()=>activateView(b.dataset.jump));
 $$('[data-media-jump]').forEach(b=>b.onclick=()=>{activateView('acteurs');const target=$(`#media-type [data-media="${b.dataset.mediaJump}"]`);if(target)setTimeout(()=>target.click(),0)});
 const modal=$('#access-modal');$$('[data-modal]').forEach(b=>b.onclick=()=>modal.showModal());$('.close',modal).onclick=()=>modal.close();$('#access-form').onsubmit=e=>{e.preventDefault();modal.close();e.target.reset()};
 
-if($('#dimension-strip'))$('#dimension-strip').innerHTML=dims.map(d=>`<div class="dimension"><b>${d[0]}</b><strong>${d[1]}<small>${d[2]}</small></strong></div>`).join('');
 function visualFor(x){const initials=x.initials||x.name.slice(0,3),src=x.image||(x.name.includes('.')?`https://www.google.com/s2/favicons?domain=${encodeURIComponent(x.name)}&sz=128`:null);return `<i class="actor-dot" style="--c:${x.color}"><span>${initials}</span>${src?`<img src="${src}" alt="" loading="lazy">`:''}</i>`}
 function miniRows(data){return data.slice(0,5).map((x,i)=>`<div class="mini-row"><span>${i+1}</span>${visualFor(x).replace('actor-dot','badge')}<strong>${x.name}</strong><b>${x.score}</b><em>${x.delta} ment.</em></div>`).join('')}
 const pressTopics=[['Chômage',52,'#259cd8'],['Justice',11,'#5d79cf'],['Transition énergétique',7,'#8cab36'],['Justice sociale',5,'#e0b235'],['Inflation',4,'#d95461'],['Sécheresse',3,'#9955b4']];
@@ -144,7 +141,7 @@ addEventListener('resize',()=>{drawTrend();drawSentiment();drawRadar();resizeNet
   if (!root) return;
   const applyArchLanguage = () => {
     const lang = ['fr', 'en', 'ar'].includes(document.documentElement.lang) ? document.documentElement.lang : 'fr';
-    root.querySelectorAll('[data-arch-fr]').forEach(el => {
+    document.querySelectorAll('[data-arch-fr]').forEach(el => {
       const html = el.dataset['arch' + lang.charAt(0).toUpperCase() + lang.slice(1)];
       if (typeof html === 'string' && el.innerHTML !== html) el.innerHTML = html;
     });
