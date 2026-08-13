@@ -211,21 +211,63 @@
   function renderActorPicker(){const partyEl=root.querySelector('#ss-party-pick'),leaderEl=root.querySelector('#ss-leader-pick'),eligible=eligibleActors(),visibleParties=parties.filter(x=>eligible.includes(x)),visibleLeaders=leaders.filter(x=>eligible.includes(x));if(!eligible.some(x=>x.name===state.orbitActor))state.orbitActor=eligible[0]?.name||'';partyEl.innerHTML=`<option value="">${t('partySelect')}</option>`+visibleParties.map(x=>`<option value="${x.name}" ${x.name===state.orbitActor?'selected':''}>${x.name}</option>`).join('');leaderEl.innerHTML=`<option value="">${t('leaderSelect')}</option>`+visibleLeaders.map(x=>`<option value="${x.name}" ${x.name===state.orbitActor?'selected':''}>${x.name}</option>`).join('');partyEl.disabled=!visibleParties.length;leaderEl.disabled=!visibleLeaders.length;root.querySelector('.ss-party-select').classList.toggle('disabled',!visibleParties.length);root.querySelector('.ss-leader-select').classList.toggle('disabled',!visibleLeaders.length);}
   function renderOrbits(actor=state.orbitActor) {
     renderActorPicker(); actor=state.orbitActor;
-    const svg=root.querySelector('#ss-topic-orbit');
-    if(!actor){svg.innerHTML=`<text class="ss-empty-svg" x="410" y="235" text-anchor="middle">${t('noData')}</text>`;return;}
-    const visibleTopics=state.active.has('topic')?actorTopics(actor):[], max=Math.max(...visibleTopics.map(x=>x.value),1), sum=visibleTopics.reduce((s,x)=>s+x.value,0), cx=410,cy=235,rx=300,ry=150;
-    if(!visibleTopics.length){svg.innerHTML=`<circle class="ss-topic-core" cx="410" cy="235" r="48"/><text x="410" y="240" text-anchor="middle">${infoFor(actor).short}</text><text class="ss-empty-svg" x="410" y="330" text-anchor="middle">${t('noData')}</text>`;select(actor);return;}
-    svg.innerHTML=`<ellipse class="ss-topic-ring" cx="410" cy="235" rx="300" ry="150"/><ellipse class="ss-topic-ring" cx="410" cy="235" rx="190" ry="92"/><circle class="ss-topic-halo" cx="410" cy="235" r="65"/><circle class="ss-topic-core" cx="410" cy="235" r="48"/><text x="410" y="229" text-anchor="middle">${infoFor(actor).short}</text><text x="410" y="249" text-anchor="middle" fill="#c9a84c">${fmt(sum)} relations</text><text class="ss-topic-caption" x="410" y="455" text-anchor="middle">${t('orbitHint')}</text>`+visibleTopics.map((rel,i)=>{const a=(-90+i*360/visibleTopics.length)*Math.PI/180,x=cx+rx*Math.cos(a),y=cy+ry*Math.sin(a),share=sum?rel.value/sum*100:0,r=18+rel.value/max*19;return `<line class="ss-topic-spoke" data-index="${i}" x1="${cx}" y1="${cy}" x2="${x}" y2="${y}"/><g class="ss-topic-node" data-index="${i}" transform="translate(${x} ${y})"><circle class="petal" r="${r}"/><text class="value" text-anchor="middle" y="-2">${fmt(rel.value)}</text><text class="share" text-anchor="middle" y="14">${fmt(share,1)}%</text><text text-anchor="middle" y="${r+17}">${label(rel.name)}</text></g>`}).join('');
-    const choose=i=>{const rel=visibleTopics[i],share=sum?rel.value/sum*100:0;svg.querySelectorAll('[data-index]').forEach(x=>x.classList.toggle('hot',+x.dataset.index===i));select(actor,{...rel,share});};
-    svg.querySelectorAll('.ss-topic-node').forEach(n=>n.addEventListener('click',()=>choose(+n.dataset.index)));
-    choose(Math.max(0,visibleTopics.findIndex(x=>x.value===max)));
+    const svg=root.querySelector('#ss-topic-orbit'), table=root.querySelector('#ss-orbit-table');
+    if(!actor){svg.innerHTML=`<text class="ss-empty-svg" x="410" y="235" text-anchor="middle">${t('noData')}</text>`;table.innerHTML='';return;}
+    const rels=(state.active.has('topic')?actorTopics(actor):[]).filter(x=>x.value>0);
+    const core=infoFor(actor), cx=410, cy=235;
+    if(!rels.length){
+      svg.innerHTML=`<circle class="ss-topic-core" cx="${cx}" cy="${cy}" r="48"/><text x="${cx}" y="${cy+5}" text-anchor="middle">${core.short}</text><text class="ss-empty-svg" x="${cx}" y="${cy+95}" text-anchor="middle">${t('noData')}</text>`;
+      table.innerHTML=''; select(actor); return;
+    }
+    const sum=rels.reduce((s,x)=>s+x.value,0), maxVal=Math.max(...rels.map(x=>x.value));
+    const ranked=[...rels].sort((a,b)=>b.value-a.value);
+    const rings=[{rx:150,ry:80},{rx:238,ry:126},{rx:322,ry:170}];
+    const ringIndex=i=>Math.min(2,Math.floor(i/Math.ceil(ranked.length/3)));
+    const nodes=ranked.map((rel,i)=>{
+      const ring=ringIndex(i), peers=ranked.filter((_,j)=>ringIndex(j)===ring), pos=peers.indexOf(rel);
+      const a=(-90+(pos+ (ring?0.5:0))*360/Math.max(1,peers.length))*Math.PI/180;
+      const topic=topicFor(rel.name), mentions=topic?topic.mentions:0;
+      const r=14+Math.sqrt(mentions)/6;
+      return {...rel, ring, mentions, r, x:cx+rings[ring].rx*Math.cos(a), y:cy+rings[ring].ry*Math.sin(a), share:sum?rel.value/sum*100:0, index:ranked.indexOf(rel)};
+    });
+    const scene=`<g id="ss-orbit-scene" transform="translate(${cx} ${cy}) scale(${state.orbitZoom}) translate(${-cx} ${-cy})">`+
+      rings.map((g,i)=>`<ellipse class="ss-topic-ring" cx="${cx}" cy="${cy}" rx="${g.rx}" ry="${g.ry}"/><text class="ss-ring-tag" x="${cx}" y="${cy-g.ry-6}" text-anchor="middle">${t('ring'+(i+1))}</text>`).join('')+
+      nodes.map(n=>`<line class="ss-topic-spoke" data-index="${n.index}" x1="${cx}" y1="${cy}" x2="${n.x}" y2="${n.y}" style="stroke-width:${(1+ n.value/maxVal*4).toFixed(2)}"/>`).join('')+
+      `<circle class="ss-topic-halo" cx="${cx}" cy="${cy}" r="65"/><circle class="ss-topic-core" cx="${cx}" cy="${cy}" r="48"/><text x="${cx}" y="${cy-4}" text-anchor="middle">${core.short}</text><text x="${cx}" y="${cy+16}" text-anchor="middle" fill="#c9a84c">${fmt(sum)}</text>`+
+      nodes.map(n=>`<g class="ss-topic-node" data-index="${n.index}" tabindex="0" role="button" aria-label="${label(n.name)} · ${fmt(n.value)} · ${fmt(n.share,1)}%" transform="translate(${n.x} ${n.y})"><circle class="petal" r="${n.r.toFixed(1)}"/><text class="value" text-anchor="middle" y="-1">${fmt(n.value)}</text><text class="share" text-anchor="middle" y="13">${fmt(n.share,1)}%</text><text text-anchor="middle" y="${(n.r+17).toFixed(1)}">${label(n.name)}</text></g>`).join('')+`</g>`;
+    svg.innerHTML=scene;
+    const dominant=d=>{const e=Object.entries(d.tones).sort((a,b)=>b[1]-a[1])[0];return e?t(e[0]):t('unavailable');};
+    table.innerHTML=`<thead><tr><th>#</th><th>${t('colTopic')}</th><th>${t('colWeight')}</th><th>${t('colShare')}</th><th>${t('colTone')}</th><th>${t('urls')}</th></tr></thead><tbody>`+
+      nodes.map((n,i)=>`<tr data-index="${n.index}" tabindex="0"><td>${i+1}</td><td>${label(n.name)}</td><td>${fmt(n.value)}</td><td>${fmt(n.share,1)}%</td><td>${dominant(infoFor(n.name))}</td><td>${fmt(n.mentions)}</td></tr>`).join('')+`</tbody>`;
+    const choose=index=>{const n=nodes.find(x=>x.index===index);if(!n)return;svg.querySelectorAll('[data-index]').forEach(x=>x.classList.toggle('hot',+x.dataset.index===index));table.querySelectorAll('tbody tr').forEach(tr=>tr.classList.toggle('selected',+tr.dataset.index===index));select(actor,{name:n.name,value:n.value,share:n.share});};
+    svg.querySelectorAll('.ss-topic-node').forEach(n=>{
+      n.addEventListener('click',()=>choose(+n.dataset.index));
+      n.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();choose(+n.dataset.index);}});
+    });
+    table.querySelectorAll('tbody tr').forEach(tr=>{
+      tr.addEventListener('click',()=>choose(+tr.dataset.index));
+      tr.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();choose(+tr.dataset.index);}});
+    });
+    choose(nodes[0].index);
   }
 
-  function applyFilters(){renderGalaxy();renderPlane();renderActorPicker();if(state.tab==='orbits')renderOrbits();const current=graphNodes.find(n=>n.name===state.selected);if(current&&!state.active.has(current.kind)){const next=galaxyNodes.find(n=>state.active.has(n.kind));if(next)select(next.name);}}
-  ['#ss-party-pick','#ss-leader-pick'].forEach(selector=>root.querySelector(selector).addEventListener('change',e=>{if(!e.target.value)return;state.orbitActor=e.target.value;renderOrbits();}));
-  root.querySelectorAll('[data-ss-tab]').forEach(b=>b.addEventListener('click',()=>{state.tab=b.dataset.ssTab;root.querySelectorAll('[data-ss-tab]').forEach(x=>x.classList.toggle('active',x===b));root.querySelectorAll('[data-ss-view]').forEach(x=>x.classList.toggle('active',x.dataset.ssView===state.tab));root.querySelector('#ss-relation-detail').hidden=state.tab!=='orbits'||!state.orbitRelation;if(state.tab==='positions')renderPlane();if(state.tab==='orbits')renderOrbits();}));
+  function applyFilters(){renderGalaxy();renderMatrix();renderActorPicker();if(state.tab==='orbits')renderOrbits();const current=graphNodes.find(n=>n.name===state.selected);if(current&&!state.active.has(current.kind)){const next=galaxyNodes.find(n=>state.active.has(n.kind));if(next)select(next.name);}}
+  ['#ss-party-pick','#ss-leader-pick'].forEach(selector=>root.querySelector(selector).addEventListener('change',e=>{if(!e.target.value)return;state.orbitActor=e.target.value;state.orbitZoom=1;renderOrbits();}));
+  root.querySelector('#ss-rank-sort').addEventListener('change',e=>{state.rankSort=e.target.value;renderMatrix();});
+  root.querySelectorAll('[data-orbit-mode]').forEach(b=>b.addEventListener('click',()=>{state.orbitMode=b.dataset.orbitMode;root.querySelectorAll('[data-orbit-mode]').forEach(x=>x.classList.toggle('active',x===b));root.querySelectorAll('[data-orbit-pane]').forEach(p=>p.classList.toggle('active',p.dataset.orbitPane===state.orbitMode));}));
+  root.querySelectorAll('[data-orbit-cmd]').forEach(b=>b.addEventListener('click',()=>{
+    const cmd=b.dataset.orbitCmd;
+    if(cmd==='in')state.orbitZoom=Math.min(2,+(state.orbitZoom+0.2).toFixed(2));
+    else if(cmd==='out')state.orbitZoom=Math.max(0.6,+(state.orbitZoom-0.2).toFixed(2));
+    else state.orbitZoom=1;
+    if(cmd==='center'||cmd==='reset')state.orbitRelation=null;
+    renderOrbits();
+  }));
+  root.querySelectorAll('[data-ss-tab]').forEach(b=>b.addEventListener('click',()=>{state.tab=b.dataset.ssTab;root.querySelectorAll('[data-ss-tab]').forEach(x=>x.classList.toggle('active',x===b));root.querySelectorAll('[data-ss-view]').forEach(x=>x.classList.toggle('active',x.dataset.ssView===state.tab));root.querySelector('#ss-relation-detail').hidden=state.tab!=='orbits'||!state.orbitRelation;if(state.tab==='positions')renderMatrix();if(state.tab==='orbits')renderOrbits();}));
   root.querySelectorAll('[data-ss-filter]').forEach(b=>b.addEventListener('click',()=>{const kind=b.dataset.ssFilter;state.active.has(kind)?state.active.delete(kind):state.active.add(kind);b.classList.toggle('active',state.active.has(kind));applyFilters();}));
-  function translate(){root.querySelectorAll('[data-ss]').forEach(el=>el.textContent=t(el.dataset.ss));root.querySelectorAll('[data-ss-html]').forEach(el=>el.innerHTML=t(el.dataset.ssHtml));renderGalaxy();renderPlane();renderActorPicker();state.tab==='orbits'?renderOrbits():select(state.selected);}
+  function translate(){root.querySelectorAll('[data-ss]').forEach(el=>el.textContent=t(el.dataset.ss));root.querySelectorAll('[data-ss-html]').forEach(el=>el.innerHTML=t(el.dataset.ssHtml));renderGalaxy();renderMatrix();renderActorPicker();state.tab==='orbits'?renderOrbits():select(state.selected);}
   new MutationObserver(translate).observe(document.documentElement,{attributes:true,attributeFilter:['lang','dir']});
+  window.addEventListener('bf:theme',()=>{renderGalaxy();renderMatrix();if(state.tab==='orbits')renderOrbits();});
+  let resizeTimer; window.addEventListener('resize',()=>{clearTimeout(resizeTimer);resizeTimer=setTimeout(()=>{hideTip();renderMatrix();if(state.tab==='orbits')renderOrbits();},180);});
   translate();
 })();
