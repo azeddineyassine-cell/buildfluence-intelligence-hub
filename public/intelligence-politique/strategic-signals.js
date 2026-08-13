@@ -11,7 +11,17 @@
   const toneNodeNames = { positive: 'Positive', neutral: 'Neutre', negative: 'Négative' };
   const nodeKind = { parti: 'party', acteur: 'leader', theme: 'topic' };
   const toneKind = name => name === 'Positive' ? 'positive' : name === 'Neutre' ? 'neutral' : 'negative';
-  const state = { active: new Set(['party','leader','topic','positive','neutral','negative']), tab: 'galaxy', selected: 'RNI', orbitActor: 'RNI', orbitRelation: null, rankSort:'visibility', orbitMode:'graph', orbitZoom:1 };
+  const state = { active: new Set(['party','leader','topic','positive','neutral','negative']), tab: 'galaxy', selected: 'RNI', orbitActor: 'RNI', orbitRelation: null, rankSort:'visibility', rankCat:'all', detail:null, orbitMode:'graph', orbitZoom:1 };
+
+  /* Pictogrammes Lucide (tracés officiels, inline — bundle statique hors React) */
+  const ICONS = {
+    party:'<line x1="3" x2="21" y1="22" y2="22"/><line x1="6" x2="6" y1="18" y2="11"/><line x1="10" x2="10" y1="18" y2="11"/><line x1="14" x2="14" y1="18" y2="11"/><line x1="18" x2="18" y1="18" y2="11"/><polygon points="12 2 20 7 4 7"/>',
+    leader:'<circle cx="12" cy="8" r="5"/><path d="M20 21a8 8 0 0 0-16 0"/>',
+    topic:'<path d="M14 9a2 2 0 0 1-2 2H6l-4 4V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2Z"/><path d="M18 9h2a2 2 0 0 1 2 2v11l-4-4h-6a2 2 0 0 1-2-2v-1"/>',
+    tone:'<path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/>'
+  };
+  const iconKind = k => (k==='party'||k==='leader'||k==='topic') ? k : 'tone';
+  const icon = (kind,size=15) => `<svg class="ss-ico" viewBox="0 0 24 24" width="${size}" height="${size}" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">${ICONS[iconKind(kind)]}</svg>`;
 
   const copy = {
     fr: { kicker:'SIGNALS AT A GLANCE', title:'STRATEGIC <em>SIGNALS</em>', sub:'Une galaxie décisionnelle des positions, tensions et connexions politiques', galaxy:'Galaxie décisionnelle', footprint:'Influence narrative', orbits:'Orbites thématiques', filters:'Filtres', parties:'Partis', leaders:'Leaders', topics:'Sujets', positive:'Positif', neutral:'Neutre', negative:'Négatif', frame:'CADRE D’ANALYSE', visibility:'Visibilité relative', urls:'URL uniques', balance:'Balance narrative', mainTopic:'Sujet principal', relations:'Relations thématiques', reading:'Lecture décisionnelle', method:'Calculs fondés sur des URL uniques dédupliquées. Balance = (positif − négatif) ÷ total. Cette lecture ne mesure ni popularité ni intention de vote.', positionTitle:'Matrice d’influence narrative', positionIntro:'Trois territoires de tonalité positionnent chaque acteur et sujet selon sa balance narrative et sa visibilité relative.', xAxis:'Balance narrative : négative ← 0 → positive', yAxis:'Visibilité relative /100', orbitTitle:'Orbites thématiques', orbitIntro:'Sélectionnez un parti ou un leader. Chaque sujet gravite selon son poids relationnel documenté.', orbitHint:'Cliquez sur une orbite pour analyser cette relation dans le panneau de droite.', actor:'Acteur observé', partySelect:'PARTIS POLITIQUES', leaderSelect:'LEADERS POLITIQUES', period:'29.07 au 05.08.2026', noData:'Aucune entité active pour ces filtres.', relation:'RELATION SÉLECTIONNÉE', exposure:'de l’exposition thématique documentée', actorTopic:'relation acteur-sujet', globalTone:'Le total consolidé couvre le corpus du graphe. Le total sujet couvre uniquement le corpus Opinion citoyenne.', partyKind:'Parti politique', leaderKind:'Leader politique', topicKind:'Sujet du débat', impactKind:'Impact réputationnel' },
@@ -23,7 +33,12 @@
     en: { docRelations:'documented actor–issue relations', matrixIntro:'Four analytical quadrants position each entity by narrative balance (horizontal axis) and relative visibility (vertical axis). Marker size encodes unique URL volume only.', xAxisNew:'NARRATIVE BALANCE  −100 → +100', yAxisNew:'RELATIVE VISIBILITY  0 → 100', q1:'CARRIERS', q2:'UNDER TENSION', q3:'LATENT RISKS', q4:'EMERGING SIGNALS', q1Def:'High visibility, positive balance', q2Def:'High visibility, negative balance', q3Def:'Low visibility, negative balance', q4Def:'Low visibility, positive balance', threshold:'Split thresholds: visibility 50 / 100 and balance 0.', legend:'LEGEND', legShapes:'Shape = category: square party · circle leader · diamond issue · bar tone', legSize:'Size = unique URLs (4 tiers)', ranking:'RANKING', sortBy:'SORT', sortVis:'Visibility', sortBal:'Balance', sortUrls:'Unique URLs', colEntity:'Entity', colCategory:'Category', colQuadrant:'Quadrant', resetFilters:'Re-enable all filters', graphView:'GRAPH', tableView:'TABLE', recenter:'Recenter', zoomIn:'Zoom in', zoomOut:'Zoom out', resetView:'Reset', orbitLegendTitle:'HOW TO READ', orbitLegend:'Core = observed actor. Orbit radius = strength rank of the documented relationship. Link thickness = relationship weight. Node size = issue unique URLs. Angle carries no meaning.', ring1:'ORBIT 1 · STRONG LINKS', ring2:'ORBIT 2 · MEDIUM LINKS', ring3:'ORBIT 3 · WEAK LINKS', colTopic:'Issue', colWeight:'Weight', colShare:'Exposure', colTone:'Dominant tone', loading:'Loading canonical data…', unavailable:'Not available', keyboardHint:'Use Tab to move across entities, arrow keys within a quadrant, Enter to select.', synced:'Selection synchronised with thematic orbits.' },
     ar: { docRelations:'علاقة موثقة بين فاعل وموضوع', matrixIntro:'تحدد أربعة أرباع تحليلية موقع كل كيان حسب التوازن السردي (المحور الأفقي) والظهور النسبي (المحور العمودي). يعبر حجم العلامة عن حجم الروابط الفريدة فقط.', xAxisNew:'التوازن السردي  −100 → +100', yAxisNew:'الظهور النسبي  0 → 100', q1:'حاملو السرد', q2:'تحت الضغط', q3:'مخاطر كامنة', q4:'إشارات ناشئة', q1Def:'ظهور مرتفع وتوازن إيجابي', q2Def:'ظهور مرتفع وتوازن سلبي', q3Def:'ظهور منخفض وتوازن سلبي', q4Def:'ظهور منخفض وتوازن إيجابي', threshold:'حدود الفصل: الظهور 50 / 100 والتوازن 0.', legend:'المفتاح', legShapes:'الشكل = الفئة: مربع حزب · دائرة قائد · معين موضوع · شريط نبرة', legSize:'الحجم = الروابط الفريدة (أربع درجات)', ranking:'الترتيب', sortBy:'الترتيب حسب', sortVis:'الظهور', sortBal:'التوازن', sortUrls:'روابط فريدة', colEntity:'الكيان', colCategory:'الفئة', colQuadrant:'الربع', resetFilters:'إعادة تنشيط جميع المرشحات', graphView:'الرسم', tableView:'الجدول', recenter:'إعادة التمركز', zoomIn:'تكبير', zoomOut:'تصغير', resetView:'إعادة التعيين', orbitLegendTitle:'كيفية القراءة', orbitLegend:'النواة = الفاعل المرصود. نصف قطر المدار = رتبة قوة العلاقة الموثقة. سماكة الرابط = وزن العلاقة. حجم العقدة = الروابط الفريدة للموضوع. الزاوية غير دالة.', ring1:'المدار 1 · روابط قوية', ring2:'المدار 2 · روابط متوسطة', ring3:'المدار 3 · روابط ضعيفة', colTopic:'الموضوع', colWeight:'الوزن', colShare:'التعرض', colTone:'النبرة السائدة', loading:'جار تحميل البيانات المرجعية…', unavailable:'غير متوفر', keyboardHint:'استخدم Tab للتنقل بين الكيانات، والأسهم داخل الربع، وEnter للاختيار.', synced:'تم مزامنة الاختيار مع المدارات الموضوعاتية.' }
   };
-  Object.keys(copy).forEach(k => Object.assign(copy[k], extraCopy[k]));
+  const v34Copy = {
+    fr: { legShapes:'Pictogramme = catégorie : institution → parti · personnalité → leader · conversation → sujet · indicateur → tonalité', legQuad:'Couleur et texture = quadrant. Le libellé du quadrant reste affiché : la couleur n’est jamais le seul repère.', legDot:'Le repère central de 3 px marque la position exacte de l’entité. Aucun point n’est déplacé.', xAxisNew:'BALANCE NARRATIVE', yAxisNew:'VISIBILITÉ RELATIVE', showBy:'AFFICHER', catAll:'Tous', catParties:'Partis politiques', catLeaders:'Leaders politiques', catTopics:'Sujets du débat', rankScope:'Le filtre d’affichage agit uniquement sur ce classement, pas sur la matrice.', detailTitle:'FICHE DÉTAILLÉE', close:'Fermer', category:'Catégorie', toneSplit:'Positif / Neutre / Négatif', periodLabel:'Période', methodLabel:'Méthode', openDetail:'Ouvrir la fiche détaillée' },
+    en: { legShapes:'Pictogram = category: institution → party · figure → leader · conversation → issue · gauge → tone', legQuad:'Colour and texture = quadrant. The quadrant label always remains visible: colour is never the only cue.', legDot:'The 3 px centre mark shows the exact position of the entity. No point is displaced.', xAxisNew:'NARRATIVE BALANCE', yAxisNew:'RELATIVE VISIBILITY', showBy:'SHOW', catAll:'All', catParties:'Political parties', catLeaders:'Political leaders', catTopics:'Debate issues', rankScope:'The display filter applies to this ranking only, not to the matrix.', detailTitle:'DETAIL CARD', close:'Close', category:'Category', toneSplit:'Positive / Neutral / Negative', periodLabel:'Period', methodLabel:'Method', openDetail:'Open the detail card' },
+    ar: { legShapes:'الرمز = الفئة: مؤسسة → حزب · شخصية → قائد · محادثة → موضوع · مؤشر → نبرة', legQuad:'اللون والملمس = الربع. يظل عنوان الربع ظاهرا: اللون ليس المؤشر الوحيد أبدا.', legDot:'تشير النقطة المركزية بحجم 3 بكسل إلى الموقع الدقيق للكيان. لا يتم إزاحة أي نقطة.', xAxisNew:'التوازن السردي', yAxisNew:'الظهور النسبي', showBy:'إظهار', catAll:'الكل', catParties:'الأحزاب السياسية', catLeaders:'القادة السياسيون', catTopics:'مواضيع النقاش', rankScope:'يطبق مرشح الإظهار على هذا الترتيب فقط، وليس على المصفوفة.', detailTitle:'بطاقة تفصيلية', close:'إغلاق', category:'الفئة', toneSplit:'إيجابي / محايد / سلبي', periodLabel:'الفترة', methodLabel:'المنهجية', openDetail:'فتح البطاقة التفصيلية' }
+  };
+  Object.keys(copy).forEach(k => Object.assign(copy[k], extraCopy[k], v34Copy[k]));
   const localizedTopics = {
     en:{'Sebta / migration':'Ceuta / migration','Emploi / chômage':'Employment / unemployment','Eau / sécheresse':'Water / drought','Santé':'Health','Éducation':'Education'},
     ar:{'Sebta / migration':'سبتة / الهجرة','Emploi / chômage':'التشغيل / البطالة','Eau / sécheresse':'الماء / الجفاف','Santé':'الصحة','Éducation':'التعليم','Justice':'العدالة','Corruption':'الفساد'}
@@ -66,6 +81,7 @@
   <div class="ss-layout"><div class="ss-stage"><div class="ss-view active" data-ss-view="galaxy"><svg id="ss-galaxy-svg" viewBox="0 0 920 650" aria-label="Strategic Signals"></svg></div>
   <div class="ss-view" data-ss-view="positions"><div class="ss-positions"><h2 data-ss="positionTitle"></h2><p class="ss-lede" data-ss="matrixIntro"></p>
   <div class="ss-matrix-wrap"><span class="ss-axis-title y" data-ss="yAxisNew"></span>
+  <div class="ss-yticks" aria-hidden="true">${[100,75,50,25,0].map(v=>`<span>${v}</span>`).join('')}</div>
   <div class="ss-plane" id="ss-plane" role="group" tabindex="-1">
     <div class="ss-quad q2"><span class="ss-quad-tag"><b>Q2</b><em data-ss="q2"></em><small data-ss="q2Def"></small></span></div>
     <div class="ss-quad q1"><span class="ss-quad-tag"><b>Q1</b><em data-ss="q1"></em><small data-ss="q1Def"></small></span></div>
@@ -74,10 +90,16 @@
     <i class="ss-mid-x" aria-hidden="true"></i><i class="ss-mid-y" aria-hidden="true"></i>
     <div class="ss-markers" id="ss-markers"></div>
   </div>
+  <div class="ss-xticks" aria-hidden="true"><span class="neg">−100</span><span class="zero">0</span><span class="pos">+100</span></div>
   <span class="ss-axis-title x" data-ss="xAxisNew"></span></div>
   <div class="ss-tip" id="ss-tip" role="tooltip" hidden></div>
-  <div class="ss-legend"><p class="kicker" data-ss="legend"></p><ul><li><span class="ss-key party" aria-hidden="true"></span><span class="ss-key leader" aria-hidden="true"></span><span class="ss-key topic" aria-hidden="true"></span><span class="ss-key tone" aria-hidden="true"></span><span data-ss="legShapes"></span></li><li id="ss-size-legend"></li><li data-ss="threshold"></li><li data-ss="keyboardHint"></li></ul></div>
-  <details class="ss-ranking"><summary><span data-ss="ranking"></span> <b id="ss-rank-count"></b></summary><div class="ss-rank-tools"><label><span data-ss="sortBy"></span><select id="ss-rank-sort"><option value="visibility" data-ss="sortVis"></option><option value="balance" data-ss="sortBal"></option><option value="urls" data-ss="sortUrls"></option></select></label></div><div class="ss-table-scroll"><table class="ss-table" id="ss-rank-table"></table></div></details></div></div>
+  <div class="ss-legend"><p class="kicker" data-ss="legend"></p><ul><li><span class="ss-key party">${icon('party',13)}</span><span class="ss-key leader">${icon('leader',13)}</span><span class="ss-key topic">${icon('topic',13)}</span><span class="ss-key tone">${icon('tone',13)}</span><span data-ss="legShapes"></span></li><li id="ss-size-legend"></li><li data-ss="legQuad"></li><li data-ss="legDot"></li><li data-ss="threshold"></li><li data-ss="keyboardHint"></li></ul></div>
+  <details class="ss-ranking"><summary><span data-ss="ranking"></span> <b id="ss-rank-count"></b></summary>
+    <div class="ss-rank-tools"><label><span data-ss="sortBy"></span><select id="ss-rank-sort"><option value="visibility" data-ss="sortVis"></option><option value="balance" data-ss="sortBal"></option><option value="urls" data-ss="sortUrls"></option></select></label>
+      <label><span data-ss="showBy"></span><select id="ss-rank-cat"><option value="all" data-ss="catAll"></option><option value="party" data-ss="catParties"></option><option value="leader" data-ss="catLeaders"></option><option value="topic" data-ss="catTopics"></option></select></label>
+      <small data-ss="rankScope"></small></div>
+    <div class="ss-rank-body"><div class="ss-table-scroll"><table class="ss-table" id="ss-rank-table"></table></div>
+    <aside class="ss-detail" id="ss-detail" role="dialog" aria-modal="false" aria-labelledby="ss-detail-name" hidden></aside></div></details></div></div>
   <div class="ss-view" data-ss-view="orbits"><div class="ss-orbits"><div class="ss-orbits-head"><div><h2 data-ss="orbitTitle"></h2><p class="ss-lede" data-ss="orbitIntro"></p></div><div class="ss-actor-pickers"><label class="ss-actor-select ss-party-select"><span data-ss="partySelect"></span><select id="ss-party-pick"></select></label><label class="ss-actor-select ss-leader-select"><span data-ss="leaderSelect"></span><select id="ss-leader-pick"></select></label></div></div>
   <div class="ss-orbit-bar"><div class="ss-seg" role="tablist"><button class="active" data-orbit-mode="graph" data-ss="graphView"></button><button data-orbit-mode="table" data-ss="tableView"></button></div>
   <div class="ss-orbit-controls"><button data-orbit-cmd="in" aria-label="+"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg><span data-ss="zoomIn"></span></button><button data-orbit-cmd="out" aria-label="−"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.3-4.3M8 11h6"/></svg><span data-ss="zoomOut"></span></button><button data-orbit-cmd="center"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/></svg><span data-ss="recenter"></span></button><button data-orbit-cmd="reset"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg><span data-ss="resetView"></span></button></div></div>
@@ -146,7 +168,7 @@
   function showTip(target,row){
     const tip=tipEl(), d=row.d, total=d.tones.positive+d.tones.neutral+d.tones.negative;
     const pct=key=>total?fmt(d.tones[key]/total*100,1)+'%':t('unavailable');
-    tip.innerHTML=`<strong>${label(d.name)}</strong><em>${d.kind} · ${t(row.quad)}</em>
+    tip.innerHTML=`<strong>${label(d.name)}</strong><em class="ss-tip-kind ${row.quad}">${icon(row.kind,13)}<span>${d.kind} · ${t(row.quad)}</span></em>
       <span>${t('urls')}<b>${fmt(d.urls)}</b></span>
       <span>${t('visibility')}<b>${fmt(d.visibility,1)} / 100</b></span>
       <span>${t('balance')}<b>${row.balance>0?'+':''}${fmt(row.balance,1)}</b></span>
@@ -178,10 +200,10 @@
     data.sort((a,b)=>b.vis-a.vis);
     data.forEach(row=>{
       const btn=document.createElement('button');
-      btn.type='button'; btn.className=`ss-mk ${row.kind} t${tier(row.urls)}${row.d.name===state.selected?' selected':''}`;
+      btn.type='button'; btn.className=`ss-mk ${row.kind} ${row.quad} t${tier(row.urls)}${row.d.name===state.selected?' selected':''}`;
       btn.dataset.name=row.d.name; btn.dataset.quad=row.quad;
       btn.style.left=((row.balance+100)/2)+'%'; btn.style.bottom=Math.max(0,Math.min(100,row.vis))+'%';
-      btn.innerHTML=`<i class="ss-mk-shape" aria-hidden="true"></i><span class="ss-mk-label">${label(row.d.name)}<small>${fmt(row.urls)}</small></span>`;
+      btn.innerHTML=`<i class="ss-mk-shape" aria-hidden="true">${icon(row.kind)}</i><i class="ss-mk-dot" aria-hidden="true"></i><span class="ss-mk-label">${label(row.d.name)}<small>${fmt(row.urls)}</small></span>`;
       btn.setAttribute('aria-label',`${label(row.d.name)} · ${row.d.kind} · ${t('urls')} ${fmt(row.urls)} · ${t('visibility')} ${fmt(row.vis,1)} · ${t('balance')} ${fmt(row.balance,1)}`);
       btn.addEventListener('mouseenter',()=>showTip(btn,row));
       btn.addEventListener('focus',()=>showTip(btn,row));
@@ -201,17 +223,52 @@
     renderRanking(data);
   }
 
+  let rankData = [];
   function renderRanking(data) {
-    const table=root.querySelector('#ss-rank-table'), sort=state.rankSort;
-    if(!data.length){table.innerHTML='';return;}
-    const rows=[...data].sort((a,b)=>sort==='balance'?b.balance-a.balance:sort==='urls'?b.urls-a.urls:b.vis-a.vis);
+    rankData = data;
+    const table=root.querySelector('#ss-rank-table'), sort=state.rankSort, cat=state.rankCat;
+    const count=root.querySelector('#ss-rank-count');
+    if(!data.length){table.innerHTML=''; count.textContent='0'; closeDetail(); return;}
+    const filtered=cat==='all' ? [...data] : data.filter(r=>r.kind===cat);
+    count.textContent = cat==='all' ? fmt(data.length) : `${fmt(filtered.length)} / ${fmt(data.length)}`;
+    const rows=filtered.sort((a,b)=>sort==='balance'?b.balance-a.balance:sort==='urls'?b.urls-a.urls:b.vis-a.vis);
     table.innerHTML=`<thead><tr><th>#</th><th>${t('colEntity')}</th><th>${t('colCategory')}</th><th>${t('colQuadrant')}</th><th>${t('visibility')}</th><th>${t('balance')}</th><th>${t('urls')}</th></tr></thead><tbody>`+
-      rows.map((r,i)=>`<tr data-name="${r.d.name}" tabindex="0" class="${r.d.name===state.selected?'selected':''}"><td>${i+1}</td><td>${label(r.d.name)}</td><td>${r.d.kind}</td><td>${t(r.quad)}</td><td>${fmt(r.vis,1)}</td><td>${r.balance>0?'+':''}${fmt(r.balance,1)}</td><td>${fmt(r.urls)}</td></tr>`).join('')+`</tbody>`;
+      rows.map((r,i)=>`<tr data-name="${r.d.name}" tabindex="0" aria-label="${label(r.d.name)} — ${t('openDetail')}" class="${r.kind}${r.d.name===state.selected?' selected':''}"><td>${i+1}</td><td><span class="ss-cell-ico">${icon(r.kind,13)}</span>${label(r.d.name)}</td><td>${r.d.kind}</td><td><span class="ss-quad-chip ${r.quad}">${t(r.quad)}</span></td><td>${fmt(r.vis,1)}</td><td>${r.balance>0?'+':''}${fmt(r.balance,1)}</td><td>${fmt(r.urls)}</td></tr>`).join('')+`</tbody>`;
     table.querySelectorAll('tbody tr').forEach(tr=>{
-      tr.addEventListener('click',()=>select(tr.dataset.name));
-      tr.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();select(tr.dataset.name);}});
+      tr.addEventListener('click',()=>{select(tr.dataset.name);openDetail(tr.dataset.name);});
+      tr.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();select(tr.dataset.name);openDetail(tr.dataset.name);}});
     });
+    if(state.detail && rows.some(r=>r.d.name===state.detail)) openDetail(state.detail,true); else if(state.detail) closeDetail();
   }
+
+  function openDetail(name,keepFocus){
+    const row=rankData.find(r=>r.d.name===name); if(!row)return;
+    state.detail=name;
+    const panel=root.querySelector('#ss-detail'), d=row.d, total=d.tones.positive+d.tones.neutral+d.tones.negative;
+    const pct=key=>total?fmt(d.tones[key]/total*100,1)+'%':t('unavailable');
+    const rels=(row.kind==='party'||row.kind==='leader')
+      ? actorTopics(d.name).filter(x=>x.value>0).sort((a,b)=>b.value-a.value).slice(0,4).map(x=>`<li><span>${label(x.name)}</span><b>${fmt(x.value)}</b></li>`).join('')
+      : '';
+    panel.innerHTML=`<div class="ss-detail-head"><p class="kicker">${t('detailTitle')}</p><button type="button" class="ss-detail-close" aria-label="${t('close')}">✕</button></div>
+      <h3 id="ss-detail-name">${icon(row.kind,16)}<span>${label(d.name)}</span></h3>
+      <p class="ss-detail-kind"><span class="ss-quad-chip ${row.quad}">${t(row.quad)}</span></p>
+      <dl><div><dt>${t('category')}</dt><dd>${d.kind}</dd></div>
+      <div><dt>${t('visibility')}</dt><dd>${fmt(d.visibility,1)} / 100</dd></div>
+      <div><dt>${t('balance')}</dt><dd>${row.balance>0?'+':''}${fmt(row.balance,1)}</dd></div>
+      <div><dt>${t('urls')}</dt><dd>${fmt(d.urls)}</dd></div>
+      <div><dt>${t('mainTopic')}</dt><dd>${label(d.topic)}</dd></div>
+      <div><dt>${t('toneSplit')}</dt><dd>${pct('positive')} · ${pct('neutral')} · ${pct('negative')}</dd></div>
+      <div><dt>${t('relations')}</dt><dd>${fmt(d.links)}</dd></div></dl>
+      ${rels?`<ul class="ss-detail-rels">${rels}</ul>`:''}
+      <p class="ss-detail-meta"><b>${t('periodLabel')}</b> ${t('period')}</p>
+      <p class="ss-detail-meta"><b>${t('methodLabel')}</b> ${t('method')}</p>`;
+    panel.hidden=false;
+    panel.querySelector('.ss-detail-close').addEventListener('click',()=>{closeDetail();focusRow(name);});
+    if(!keepFocus) panel.setAttribute('tabindex','-1');
+    syncSelection();
+  }
+  function closeDetail(){const panel=root.querySelector('#ss-detail'); if(panel){panel.hidden=true; panel.innerHTML='';} state.detail=null;}
+  function focusRow(name){const tr=root.querySelector(`#ss-rank-table tbody tr[data-name="${CSS.escape(name)}"]`); if(tr)tr.focus();}
 
   function eligibleActors(){return actors.filter(x=>state.active.has(x.actorId.startsWith('party_')?'party':'leader'));}
   function renderActorPicker(){const partyEl=root.querySelector('#ss-party-pick'),leaderEl=root.querySelector('#ss-leader-pick'),eligible=eligibleActors(),visibleParties=parties.filter(x=>eligible.includes(x)),visibleLeaders=leaders.filter(x=>eligible.includes(x));if(!eligible.some(x=>x.name===state.orbitActor))state.orbitActor=eligible[0]?.name||'';partyEl.innerHTML=`<option value="">${t('partySelect')}</option>`+visibleParties.map(x=>`<option value="${x.name}" ${x.name===state.orbitActor?'selected':''}>${x.name}</option>`).join('');leaderEl.innerHTML=`<option value="">${t('leaderSelect')}</option>`+visibleLeaders.map(x=>`<option value="${x.name}" ${x.name===state.orbitActor?'selected':''}>${x.name}</option>`).join('');partyEl.disabled=!visibleParties.length;leaderEl.disabled=!visibleLeaders.length;root.querySelector('.ss-party-select').classList.toggle('disabled',!visibleParties.length);root.querySelector('.ss-leader-select').classList.toggle('disabled',!visibleLeaders.length);}
@@ -260,6 +317,8 @@
   function applyFilters(){renderGalaxy();renderMatrix();renderActorPicker();if(state.tab==='orbits')renderOrbits();const current=graphNodes.find(n=>n.name===state.selected);if(current&&!state.active.has(current.kind)){const next=galaxyNodes.find(n=>state.active.has(n.kind));if(next)select(next.name);}}
   ['#ss-party-pick','#ss-leader-pick'].forEach(selector=>root.querySelector(selector).addEventListener('change',e=>{if(!e.target.value)return;state.orbitActor=e.target.value;state.orbitZoom=1;renderOrbits();}));
   root.querySelector('#ss-rank-sort').addEventListener('change',e=>{state.rankSort=e.target.value;renderMatrix();});
+  root.querySelector('#ss-rank-cat').addEventListener('change',e=>{state.rankCat=e.target.value;renderMatrix();});
+  root.querySelector('.ss-ranking').addEventListener('keydown',e=>{if(e.key==='Escape'&&state.detail){const name=state.detail;e.stopPropagation();closeDetail();focusRow(name);}});
   root.querySelectorAll('[data-orbit-mode]').forEach(b=>b.addEventListener('click',()=>{state.orbitMode=b.dataset.orbitMode;root.querySelectorAll('[data-orbit-mode]').forEach(x=>x.classList.toggle('active',x===b));root.querySelectorAll('[data-orbit-pane]').forEach(p=>p.classList.toggle('active',p.dataset.orbitPane===state.orbitMode));}));
   root.querySelectorAll('[data-orbit-cmd]').forEach(b=>b.addEventListener('click',()=>{
     const cmd=b.dataset.orbitCmd;
