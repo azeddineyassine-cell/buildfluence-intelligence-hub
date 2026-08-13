@@ -223,17 +223,52 @@
     renderRanking(data);
   }
 
+  let rankData = [];
   function renderRanking(data) {
-    const table=root.querySelector('#ss-rank-table'), sort=state.rankSort;
-    if(!data.length){table.innerHTML='';return;}
-    const rows=[...data].sort((a,b)=>sort==='balance'?b.balance-a.balance:sort==='urls'?b.urls-a.urls:b.vis-a.vis);
+    rankData = data;
+    const table=root.querySelector('#ss-rank-table'), sort=state.rankSort, cat=state.rankCat;
+    const count=root.querySelector('#ss-rank-count');
+    if(!data.length){table.innerHTML=''; count.textContent='0'; closeDetail(); return;}
+    const filtered=cat==='all' ? [...data] : data.filter(r=>r.kind===cat);
+    count.textContent = cat==='all' ? fmt(data.length) : `${fmt(filtered.length)} / ${fmt(data.length)}`;
+    const rows=filtered.sort((a,b)=>sort==='balance'?b.balance-a.balance:sort==='urls'?b.urls-a.urls:b.vis-a.vis);
     table.innerHTML=`<thead><tr><th>#</th><th>${t('colEntity')}</th><th>${t('colCategory')}</th><th>${t('colQuadrant')}</th><th>${t('visibility')}</th><th>${t('balance')}</th><th>${t('urls')}</th></tr></thead><tbody>`+
-      rows.map((r,i)=>`<tr data-name="${r.d.name}" tabindex="0" class="${r.d.name===state.selected?'selected':''}"><td>${i+1}</td><td>${label(r.d.name)}</td><td>${r.d.kind}</td><td>${t(r.quad)}</td><td>${fmt(r.vis,1)}</td><td>${r.balance>0?'+':''}${fmt(r.balance,1)}</td><td>${fmt(r.urls)}</td></tr>`).join('')+`</tbody>`;
+      rows.map((r,i)=>`<tr data-name="${r.d.name}" tabindex="0" aria-label="${label(r.d.name)} — ${t('openDetail')}" class="${r.d.name===state.selected?'selected':''}"><td>${i+1}</td><td><span class="ss-cell-ico">${icon(r.kind,13)}</span>${label(r.d.name)}</td><td>${r.d.kind}</td><td><span class="ss-quad-chip ${r.quad}">${t(r.quad)}</span></td><td>${fmt(r.vis,1)}</td><td>${r.balance>0?'+':''}${fmt(r.balance,1)}</td><td>${fmt(r.urls)}</td></tr>`).join('')+`</tbody>`;
     table.querySelectorAll('tbody tr').forEach(tr=>{
-      tr.addEventListener('click',()=>select(tr.dataset.name));
-      tr.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();select(tr.dataset.name);}});
+      tr.addEventListener('click',()=>{select(tr.dataset.name);openDetail(tr.dataset.name);});
+      tr.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();select(tr.dataset.name);openDetail(tr.dataset.name);}});
     });
+    if(state.detail && rows.some(r=>r.d.name===state.detail)) openDetail(state.detail,true); else if(state.detail) closeDetail();
   }
+
+  function openDetail(name,keepFocus){
+    const row=rankData.find(r=>r.d.name===name); if(!row)return;
+    state.detail=name;
+    const panel=root.querySelector('#ss-detail'), d=row.d, total=d.tones.positive+d.tones.neutral+d.tones.negative;
+    const pct=key=>total?fmt(d.tones[key]/total*100,1)+'%':t('unavailable');
+    const rels=(row.kind==='party'||row.kind==='leader')
+      ? actorTopics(d.name).filter(x=>x.value>0).sort((a,b)=>b.value-a.value).slice(0,4).map(x=>`<li><span>${label(x.name)}</span><b>${fmt(x.value)}</b></li>`).join('')
+      : '';
+    panel.innerHTML=`<div class="ss-detail-head"><p class="kicker">${t('detailTitle')}</p><button type="button" class="ss-detail-close" aria-label="${t('close')}">✕</button></div>
+      <h3 id="ss-detail-name">${icon(row.kind,16)}<span>${label(d.name)}</span></h3>
+      <p class="ss-detail-kind"><span class="ss-quad-chip ${row.quad}">${t(row.quad)}</span></p>
+      <dl><div><dt>${t('category')}</dt><dd>${d.kind}</dd></div>
+      <div><dt>${t('visibility')}</dt><dd>${fmt(d.visibility,1)} / 100</dd></div>
+      <div><dt>${t('balance')}</dt><dd>${row.balance>0?'+':''}${fmt(row.balance,1)}</dd></div>
+      <div><dt>${t('urls')}</dt><dd>${fmt(d.urls)}</dd></div>
+      <div><dt>${t('mainTopic')}</dt><dd>${label(d.topic)}</dd></div>
+      <div><dt>${t('toneSplit')}</dt><dd>${pct('positive')} · ${pct('neutral')} · ${pct('negative')}</dd></div>
+      <div><dt>${t('relations')}</dt><dd>${fmt(d.links)}</dd></div></dl>
+      ${rels?`<ul class="ss-detail-rels">${rels}</ul>`:''}
+      <p class="ss-detail-meta"><b>${t('periodLabel')}</b> ${t('period')}</p>
+      <p class="ss-detail-meta"><b>${t('methodLabel')}</b> ${t('method')}</p>`;
+    panel.hidden=false;
+    panel.querySelector('.ss-detail-close').addEventListener('click',()=>{closeDetail();focusRow(name);});
+    if(!keepFocus) panel.setAttribute('tabindex','-1');
+    syncSelection();
+  }
+  function closeDetail(){const panel=root.querySelector('#ss-detail'); if(panel){panel.hidden=true; panel.innerHTML='';} state.detail=null;}
+  function focusRow(name){const tr=root.querySelector(`#ss-rank-table tbody tr[data-name="${CSS.escape(name)}"]`); if(tr)tr.focus();}
 
   function eligibleActors(){return actors.filter(x=>state.active.has(x.actorId.startsWith('party_')?'party':'leader'));}
   function renderActorPicker(){const partyEl=root.querySelector('#ss-party-pick'),leaderEl=root.querySelector('#ss-leader-pick'),eligible=eligibleActors(),visibleParties=parties.filter(x=>eligible.includes(x)),visibleLeaders=leaders.filter(x=>eligible.includes(x));if(!eligible.some(x=>x.name===state.orbitActor))state.orbitActor=eligible[0]?.name||'';partyEl.innerHTML=`<option value="">${t('partySelect')}</option>`+visibleParties.map(x=>`<option value="${x.name}" ${x.name===state.orbitActor?'selected':''}>${x.name}</option>`).join('');leaderEl.innerHTML=`<option value="">${t('leaderSelect')}</option>`+visibleLeaders.map(x=>`<option value="${x.name}" ${x.name===state.orbitActor?'selected':''}>${x.name}</option>`).join('');partyEl.disabled=!visibleParties.length;leaderEl.disabled=!visibleLeaders.length;root.querySelector('.ss-party-select').classList.toggle('disabled',!visibleParties.length);root.querySelector('.ss-leader-select').classList.toggle('disabled',!visibleLeaders.length);}
