@@ -13,7 +13,7 @@
 .ss-filters strong { margin-right:5px; font:700 10px var(--cond); letter-spacing:.08em; }
 .ss-filter { padding:7px 10px; border:1px solid var(--line); border-radius:2px; background:transparent; color:var(--text); cursor:pointer; }
 .ss-filter.active { color:#0D1B2A; background:var(--gold); border-color:var(--gold); }
-.ss-layout { display:grid; grid-template-columns:minmax(0,1fr) 370px; min-height:620px; border:1px solid var(--line); border-radius:2px; overflow:hidden; }
+.ss-layout { display:grid; grid-template-columns:minmax(0,1fr) 370px; min-height:620px; border:1px solid var(--line); border-radius:2px; }
 .ss-stage { min-width:0; position:relative; overflow:hidden; background:radial-gradient(circle at 48% 48%,#12344a,#031522 72%); }
 .ss-view { display:none; min-height:620px; }
 .ss-view.active { display:block; }
