@@ -274,5 +274,10 @@
   new MutationObserver(translate).observe(document.documentElement,{attributes:true,attributeFilter:['lang','dir']});
   window.addEventListener('bf:theme',()=>{renderGalaxy();renderMatrix();if(state.tab==='orbits')renderOrbits();});
   let resizeTimer; window.addEventListener('resize',()=>{clearTimeout(resizeTimer);resizeTimer=setTimeout(()=>{hideTip();renderMatrix();if(state.tab==='orbits')renderOrbits();},180);});
+  if (window.matchMedia('(max-width:680px)').matches) {
+    root.querySelector('.ss-ranking').open = true;
+    const tableBtn = root.querySelector('[data-orbit-mode="table"]');
+    if (tableBtn) tableBtn.click();
+  }
   translate();
 })();
