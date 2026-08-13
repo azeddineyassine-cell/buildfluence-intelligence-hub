@@ -129,12 +129,82 @@
     highlightGalaxy();
   }
 
-  function renderPlane() {
-    const plane=root.querySelector('#ss-plane'); plane.querySelectorAll('.ss-bubble,.ss-empty').forEach(x=>x.remove());
-    const rows=[...parties.filter(()=>state.active.has('party')).map(x=>({name:x.name,kind:'party'})),...leaders.filter(()=>state.active.has('leader')).map(x=>({name:x.name,kind:'leader'})),...topics.filter(()=>state.active.has('topic')).map(x=>({name:x.name,kind:'topic'})),...Object.entries(toneNodeNames).filter(([k])=>state.active.has(k)).map(([k,name])=>({name,kind:k}))];
-    if(!rows.length){plane.insertAdjacentHTML('beforeend',`<p class="ss-empty">${t('noData')}</p>`);return;}
-    const placed=[];
-    rows.forEach((item,i)=>{const d=infoFor(item.name),b=balanceOf(d),btn=document.createElement('button');let x=Math.max(6,Math.min(94,50+b/2)),y=Math.max(8,Math.min(90,8+d.visibility*.82)),attempt=0;while(placed.some(p=>Math.abs(p.x-x)<13&&Math.abs(p.y-y)<9)&&attempt<30){const ring=Math.floor(attempt/4)+1;x=Math.max(6,Math.min(94,x+([1,-1,1,-1][attempt%4])*ring*4.5));y=Math.max(8,Math.min(90,y+([1,1,-1,-1][attempt%4])*ring*4.5));attempt++;}placed.push({x,y});btn.className=`ss-bubble ${item.kind}`;btn.style.left=x+'%';btn.style.bottom=y+'%';let visual='';if(item.kind==='leader')visual=leaderPortraits[item.name]?`<img src="${leaderPortraits[item.name]}" alt="">`:`<i class="ss-monogram">${d.short}</i>`;else if(item.kind==='party')visual=`<i class="ss-institution" aria-hidden="true">▥</i>`;else if(item.kind==='topic')visual=`<i class="ss-topic-icon" aria-hidden="true">${topicIcons[item.name]||'◆'}</i>`;else visual=`<i class="ss-tone-symbol">${d.short}</i>`;btn.innerHTML=`${visual}<span><strong>${label(d.name)}</strong><small>${fmt(d.urls)} URL</small></span>`;btn.title=`${label(d.name)} · ${fmt(d.urls)} URL`;btn.setAttribute('aria-label',btn.title);btn.onclick=()=>select(item.name);plane.appendChild(btn);});
+  const quadrantOf = (bal,vis) => vis>=50 ? (bal>=0?'q1':'q2') : (bal>=0?'q4':'q3');
+  const matrixRows = () => [
+    ...(state.active.has('party') ? parties.map(x=>({name:x.name,kind:'party'})) : []),
+    ...(state.active.has('leader') ? leaders.map(x=>({name:x.name,kind:'leader'})) : []),
+    ...(state.active.has('topic') ? topics.map(x=>({name:x.name,kind:'topic'})) : []),
+    ...Object.entries(toneNodeNames).filter(([k])=>state.active.has(k)).map(([k,name])=>({name,kind:k}))
+  ];
+  const tipEl = () => root.querySelector('#ss-tip');
+  function showTip(target,row){
+    const tip=tipEl(), d=row.d, total=d.tones.positive+d.tones.neutral+d.tones.negative;
+    const pct=key=>total?fmt(d.tones[key]/total*100,1)+'%':t('unavailable');
+    tip.innerHTML=`<strong>${label(d.name)}</strong><em>${d.kind} · ${t(row.quad)}</em>
+      <span>${t('urls')}<b>${fmt(d.urls)}</b></span>
+      <span>${t('visibility')}<b>${fmt(d.visibility,1)} / 100</b></span>
+      <span>${t('balance')}<b>${row.balance>0?'+':''}${fmt(row.balance,1)}</b></span>
+      <span>${t('positive')} / ${t('neutral')} / ${t('negative')}<b>${pct('positive')} · ${pct('neutral')} · ${pct('negative')}</b></span>
+      <span>${t('mainTopic')}<b>${label(d.topic)}</b></span>
+      <span>${t('relations')}<b>${fmt(d.links)}</b></span>
+      <small>${t('period')}</small>`;
+    tip.hidden=false;
+    const plane=root.querySelector('#ss-plane').getBoundingClientRect(), box=target.getBoundingClientRect();
+    const left=Math.max(4,Math.min(plane.width-tip.offsetWidth-4,box.left-plane.left+box.width/2-tip.offsetWidth/2));
+    const top=box.top-plane.top-tip.offsetHeight-10;
+    tip.style.left=left+'px'; tip.style.top=(top<4?box.top-plane.top+box.height+10:top)+'px';
+  }
+  const hideTip = () => { tipEl().hidden=true; };
+
+  function renderMatrix() {
+    const plane=root.querySelector('#ss-plane'), markers=root.querySelector('#ss-markers');
+    plane.querySelectorAll('.ss-empty').forEach(x=>x.remove()); markers.innerHTML=''; hideTip();
+    const data=matrixRows().map(item=>{const d=infoFor(item.name),balance=balanceOf(d);return {...item,d,balance,vis:d.visibility,urls:d.urls,quad:quadrantOf(balance,d.visibility)};});
+    root.querySelector('#ss-rank-count').textContent=fmt(data.length);
+    if(!data.length){
+      plane.insertAdjacentHTML('beforeend',`<p class="ss-empty">${t('noData')}<button type="button" class="ss-reset-filters">${t('resetFilters')}</button></p>`);
+      plane.querySelector('.ss-reset-filters').addEventListener('click',()=>{['party','leader','topic','positive','neutral','negative'].forEach(k=>state.active.add(k));root.querySelectorAll('[data-ss-filter]').forEach(b=>b.classList.add('active'));applyFilters();});
+      renderRanking([]); return;
+    }
+    const values=data.map(x=>x.urls).sort((a,b)=>a-b), q=p=>values[Math.min(values.length-1,Math.floor(p*values.length))];
+    const b1=q(.25),b2=q(.5),b3=q(.75), tier=u=>u<=b1?1:u<=b2?2:u<=b3?3:4;
+    root.querySelector('#ss-size-legend').textContent=`${t('legSize')} : ≤ ${fmt(b1)} · ≤ ${fmt(b2)} · ≤ ${fmt(b3)} · > ${fmt(b3)}`;
+    data.sort((a,b)=>b.vis-a.vis);
+    data.forEach(row=>{
+      const btn=document.createElement('button');
+      btn.type='button'; btn.className=`ss-mk ${row.kind} t${tier(row.urls)}${row.d.name===state.selected?' selected':''}`;
+      btn.dataset.name=row.d.name; btn.dataset.quad=row.quad;
+      btn.style.left=((row.balance+100)/2)+'%'; btn.style.bottom=Math.max(0,Math.min(100,row.vis))+'%';
+      btn.innerHTML=`<i class="ss-mk-shape" aria-hidden="true"></i><span class="ss-mk-label">${label(row.d.name)}<small>${fmt(row.urls)}</small></span>`;
+      btn.setAttribute('aria-label',`${label(row.d.name)} · ${row.d.kind} · ${t('urls')} ${fmt(row.urls)} · ${t('visibility')} ${fmt(row.vis,1)} · ${t('balance')} ${fmt(row.balance,1)}`);
+      btn.addEventListener('mouseenter',()=>showTip(btn,row));
+      btn.addEventListener('focus',()=>showTip(btn,row));
+      btn.addEventListener('mouseleave',hideTip);
+      btn.addEventListener('blur',hideTip);
+      btn.addEventListener('click',()=>select(row.d.name));
+      btn.addEventListener('keydown',e=>{
+        if(!['ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].includes(e.key))return;
+        e.preventDefault();
+        const peers=[...markers.querySelectorAll(`.ss-mk[data-quad="${row.quad}"]`)];
+        const step=(e.key==='ArrowRight'||e.key==='ArrowDown')?1:-1;
+        const next=peers[(peers.indexOf(btn)+step+peers.length)%peers.length];
+        if(next)next.focus();
+      });
+      markers.appendChild(btn);
+    });
+    renderRanking(data);
+  }
+
+  function renderRanking(data) {
+    const table=root.querySelector('#ss-rank-table'), sort=state.rankSort;
+    if(!data.length){table.innerHTML='';return;}
+    const rows=[...data].sort((a,b)=>sort==='balance'?b.balance-a.balance:sort==='urls'?b.urls-a.urls:b.vis-a.vis);
+    table.innerHTML=`<thead><tr><th>#</th><th>${t('colEntity')}</th><th>${t('colCategory')}</th><th>${t('colQuadrant')}</th><th>${t('visibility')}</th><th>${t('balance')}</th><th>${t('urls')}</th></tr></thead><tbody>`+
+      rows.map((r,i)=>`<tr data-name="${r.d.name}" tabindex="0" class="${r.d.name===state.selected?'selected':''}"><td>${i+1}</td><td>${label(r.d.name)}</td><td>${r.d.kind}</td><td>${t(r.quad)}</td><td>${fmt(r.vis,1)}</td><td>${r.balance>0?'+':''}${fmt(r.balance,1)}</td><td>${fmt(r.urls)}</td></tr>`).join('')+`</tbody>`;
+    table.querySelectorAll('tbody tr').forEach(tr=>{
+      tr.addEventListener('click',()=>select(tr.dataset.name));
+      tr.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();select(tr.dataset.name);}});
+    });
   }
 
   function eligibleActors(){return actors.filter(x=>state.active.has(x.actorId.startsWith('party_')?'party':'leader'));}
