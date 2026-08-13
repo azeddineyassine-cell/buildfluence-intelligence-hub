@@ -30,6 +30,7 @@
 .ss-analysis { padding:18px 19px; border-left:1px solid var(--line); background:#071d30; }
 .ss-analysis .kicker { margin:0 0 12px; }.ss-identity { display:grid; grid-template-columns:60px 1fr; gap:12px; align-items:center; margin-bottom:13px; }
 .ss-avatar { width:60px; height:60px; border:2px solid var(--gold); border-radius:50%; display:grid; place-items:center; background:#142235; font:700 17px var(--serif); }
+.ss-avatar img{width:100%;height:100%;border-radius:50%;object-fit:cover}.ss-star.leader image{pointer-events:none}.ss-star .leader-num{paint-order:stroke;stroke:var(--ss-bg);stroke-width:3px;fill:var(--gold)}
 .ss-identity h2 { margin:0; font:700 24px var(--serif); }.ss-kind { margin:4px 0 0; color:var(--muted); }
 .ss-metric { display:flex; justify-content:space-between; gap:14px; padding:9px 0; border-top:1px solid var(--line); }.ss-metric span { color:var(--muted); }.ss-metric b { text-align:right; }
 .ss-tonebar { display:flex; height:9px; margin:13px 0 6px; }.ss-tonebar i:nth-child(1){background:var(--ss-positive)}.ss-tonebar i:nth-child(2){background:var(--ss-neutral)}.ss-tonebar i:nth-child(3){background:var(--ss-negative)}

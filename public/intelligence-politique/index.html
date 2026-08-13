@@ -9,13 +9,14 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Cormorant+Garamond:ital,wght@1,400;1,500&family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@500;600;700&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="monitoring.css">
-  <link rel="stylesheet" href="strategic-signals.css">
+  <link rel="stylesheet" href="styles.css?v=20260813-2">
+  <link rel="stylesheet" href="monitoring.css?v=20260813-2">
+  <link rel="stylesheet" href="strategic-signals.css?v=20260813-2">
+  <link rel="stylesheet" href="opinion-insights.css">
 </head>
 <body>
   <header class="masthead">
-    <a class="brand brand-link" href="/" target="_top" aria-label="Retour à l’accueil Buildfluence"><img class="flag" src="assets/morocco-flag.png" alt="Drapeau du Maroc"><span><strong>Build<span>fluence</span></strong><small>SOVEREIGN DECISION INFRASTRUCTURE</small></span></a>
+    <a class="brand brand-link" href="https://www.buildfluence.ai" target="_blank" rel="noopener noreferrer" aria-label="Ouvrir le site Buildfluence dans un nouvel onglet"><img class="flag" src="assets/morocco-flag.png" alt="Drapeau du Maroc"><span><strong>Build<span>fluence</span></strong><small>SOVEREIGN DECISION INFRASTRUCTURE</small></span></a>
     <div class="edition"><strong>Intelligence Politique</strong><small>LÉGISLATIVES MAROC 2026</small></div>
     <div class="head-actions"><div class="theme-switch" role="group" aria-label="Thème"><span data-i18n="themeLabel">FOND</span><button type="button" data-theme-choice="light" data-i18n="light">CLAIR</button><button type="button" data-theme-choice="dark" data-i18n="dark">SOMBRE</button></div><div class="language-switch" role="group" aria-label="Langue"><button type="button" data-language="fr">FR</button><button type="button" data-language="ar">العربية</button><button type="button" data-language="en">EN</button></div><button class="gold" data-modal data-i18n="signup">S’INSCRIRE</button></div>
   </header>
@@ -55,10 +56,7 @@
       <div class="ranking-layout"><article class="card"><div class="rank-table-head"><span>#</span><span>ACTEUR / SOURCE</span><span id="rank-value-head">MENTIONS OBSERVÉES</span><span>MENTIONS</span><span id="rank-intensity-head">INTENSITÉ RELATIVE · MENTIONS</span></div><div id="ranking-table"></div></article><aside class="card insight ranking-guide"><p class="kicker">COMMENT LIRE CE CLASSEMENT ?</p><h2 id="ranking-guide-title">Trois lectures complémentaires.</h2><div class="ranking-options" role="group" aria-label="Critère de classement"><button class="active" type="button" data-rank-metric="mentions"><strong>PAR MENTIONS</strong><span>Fréquence de présence</span></button><button type="button" data-rank-metric="influence"><strong>PAR INFLUENCE</strong><span>Capacité d’influence /100</span></button><button type="button" data-rank-metric="reach"><strong>PAR PORTÉE RELATIVE</strong><span>Audience potentielle estimée</span></button></div><p id="ranking-guide-copy">Classe les acteurs ou les sources selon le nombre de contenus détectés pendant la période. Cette mesure indique la fréquence de présence, pas l’influence.</p><p class="ranking-principle" data-arch-fr="Ces mesures répondent à des questions différentes. Elles sont présentées séparément et ne doivent pas être additionnées." data-arch-en="These measures answer different questions. They are presented separately and must not be added together." data-arch-ar="تجيب هذه المقاييس عن أسئلة مختلفة. وتعرض بشكل منفصل ولا ينبغي جمعها.">Ces mesures répondent à des questions différentes. Elles sont présentées séparément et ne doivent pas être additionnées.</p><div class="insight-stat"><strong>29.07 - 05.08</strong><span>période principale d’analyse</span></div></aside></div>
     </section>
 
-    <section class="view" id="opinion">
-      <div class="page-title"><p class="kicker">OPINION CITOYENNE</p><h1>Tonalité & <em>canaux</em></h1><p>Analyse de <b data-opinion-documents>5 498</b> URL uniques, hors Wikipédia et Wiktionary, du 29 juillet au 5 août 2026.</p></div>
-      <div class="opinion-grid"><article class="card big-donut"><div class="card-head"><h2>RÉPARTITION PAR CANAL</h2></div><div class="opinion-viz"><div class="donut large interactive-donut" data-donut="opinion"><span id="selected-share">36,0%<small>X / TWITTER</small></span></div><div id="theme-list"></div></div></article><article class="card sentiment"><div class="card-head"><h2>TONALITÉ DU DÉBAT <small>30.07 - 05.08</small></h2></div><div class="sentiment-score"><strong id="sentiment-value">46,4%</strong><span>négatif</span></div><div class="sentiment-bar"><i></i><i></i><i></i></div><div class="sentiment-labels"><span>Négatif 46,4%</span><span>Neutre 31,6%</span><span>Positif 22,0%</span></div><h3>Évolution quotidienne du volume, survol interactif</h3><canvas id="sentiment-chart"></canvas></article></div>
-    </section>
+    <section class="view" id="opinion"><div id="opinion-insights"></div></section>
 
     <section class="view" id="acteurs">
       <div class="page-title"><p class="kicker" id="media-kicker">ANALYSE MÉDIAS</p><h1 id="media-title">Sources <em>internationales</em></h1><p id="media-description">Explorez les médias internationaux identifiés dans les rapports de veille.</p></div>
@@ -80,7 +78,7 @@
     <section class="view" id="methodologie">
       <div class="arch-head">
         <p class="kicker">ARCHITECTURE DÉCISIONNELLE SOUVERAINE</p>
-        <h1>PROCESSUS FONCTIONNEL TECHNOLOGIQUE</h1>
+        <h1><em class="arch-process" data-arch-fr="PROCESSUS" data-arch-en="PROCESS" data-arch-ar="المسار">PROCESSUS</em> <span data-arch-fr="FONCTIONNEL TECHNOLOGIQUE" data-arch-en="FUNCTIONAL TECHNOLOGICAL" data-arch-ar="الوظيفي التقني">FONCTIONNEL TECHNOLOGIQUE</span></h1>
         <p class="arch-sub"><span>Veille et intelligence économique</span><span>Intelligence artificielle</span><span><bdi dir="ltr">Business Intelligence</bdi></span><span>Analyse humaine</span><span>Contrôle qualité</span></p>
       </div>
 
@@ -203,7 +201,8 @@
   <script src="i18n.js"></script>
   <script src="canonical-monitoring-data.js"></script>
   <script src="narrative-graph-data.js"></script>
-  <script src="script.js"></script>
-  <script src="strategic-signals.js"></script>
+  <script src="script.js?v=20260813-2"></script>
+  <script src="strategic-signals.js?v=20260813-2"></script>
+  <script src="opinion-insights.js"></script>
 </body>
 </html>
