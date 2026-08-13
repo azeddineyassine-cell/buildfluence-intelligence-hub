@@ -191,14 +191,16 @@ html[dir="rtl"] .ss-table th,html[dir="rtl"] .ss-table td { text-align:right; }
 /* Classement : outils, chips, fiche détaillée */
 .ss-rank-tools { display:flex; align-items:center; gap:16px; flex-wrap:wrap; }
 .ss-rank-tools small { color:var(--ss-soft); font-size:9px; }
-.ss-rank-body { display:grid; grid-template-columns:minmax(0,1fr) 300px; align-items:start; }
-.ss-rank-body:has(.ss-detail[hidden]) { grid-template-columns:minmax(0,1fr); }
+.ss-rank-body { display:block; }
 .ss-cell-ico { display:inline-grid; place-items:center; margin-inline-end:6px; vertical-align:-2px; color:var(--gold); }
 .ss-table tbody tr.party .ss-cell-ico { color:var(--ss-positive); }
 .ss-quad-chip { display:inline-block; padding:2px 6px; border-radius:2px; font:600 8px var(--cond); letter-spacing:.09em; text-transform:uppercase; border:1px solid currentColor; }
 .ss-quad-chip.q1 { color:var(--ss-q1); } .ss-quad-chip.q2 { color:var(--ss-q2); }
 .ss-quad-chip.q3 { color:var(--ss-q3); } .ss-quad-chip.q4 { color:color-mix(in srgb,var(--ss-q4) 80%,var(--ss-ink)); }
-.ss-detail { border-inline-start:1px solid var(--line); background:var(--ss-card); padding:13px 14px; }
+.ss-detail { margin-top:15px; padding-top:13px; border-top:2px solid var(--gold); overflow-wrap:anywhere; }
+.ss-legend-keys { list-style:none; margin:0 0 9px; padding:0; display:grid; gap:5px; }
+.ss-legend-keys li { display:flex; align-items:center; gap:8px; }
+.ss-legend-keys .ss-key { flex:0 0 20px; display:inline-flex; align-items:center; justify-content:center; }
 .ss-detail-head { display:flex; align-items:center; justify-content:space-between; gap:10px; }
 .ss-detail-head .kicker { margin:0; }
 .ss-detail-close { border:1px solid var(--line); border-radius:2px; background:transparent; color:var(--ss-soft); cursor:pointer; width:22px; height:22px; }
@@ -214,7 +216,7 @@ html[dir="rtl"] .ss-table th,html[dir="rtl"] .ss-table td { text-align:right; }
 .ss-detail-rels li b { color:var(--gold); }
 .ss-detail-meta { margin:9px 0 0; font-size:9px; color:var(--ss-soft); }
 .ss-detail-meta b { color:var(--ss-ink); }
-@media(max-width:1000px){ .ss-rank-body,.ss-rank-body:has(.ss-detail[hidden]) { grid-template-columns:minmax(0,1fr); } .ss-detail { border-inline-start:0; border-top:1px solid var(--gold); } }
+@media(min-width:1051px){ .ss-analysis { position:sticky; top:12px; align-self:start; max-height:calc(100vh - 24px); overflow:auto; } }
 @media(max-width:680px){ .ss-matrix-wrap { grid-template-columns:20px 26px minmax(0,1fr); } .ss-mk .ss-ico,.ss-mk.t3 .ss-ico,.ss-mk.t4 .ss-ico { width:13px; height:13px; } }
 .ss-matrix-wrap { margin-top:38px; }
 .ss-xticks .neg { inset-inline-start:auto; left:0; right:auto; transform:none; }
