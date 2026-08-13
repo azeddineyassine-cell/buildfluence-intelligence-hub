@@ -168,7 +168,7 @@
   function showTip(target,row){
     const tip=tipEl(), d=row.d, total=d.tones.positive+d.tones.neutral+d.tones.negative;
     const pct=key=>total?fmt(d.tones[key]/total*100,1)+'%':t('unavailable');
-    tip.innerHTML=`<strong>${label(d.name)}</strong><em>${d.kind} · ${t(row.quad)}</em>
+    tip.innerHTML=`<strong>${label(d.name)}</strong><em class="ss-tip-kind ${row.quad}">${icon(row.kind,13)}<span>${d.kind} · ${t(row.quad)}</span></em>
       <span>${t('urls')}<b>${fmt(d.urls)}</b></span>
       <span>${t('visibility')}<b>${fmt(d.visibility,1)} / 100</b></span>
       <span>${t('balance')}<b>${row.balance>0?'+':''}${fmt(row.balance,1)}</b></span>
