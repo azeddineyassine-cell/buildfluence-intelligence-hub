@@ -11,13 +11,19 @@
   const toneNodeNames = { positive: 'Positive', neutral: 'Neutre', negative: 'Négative' };
   const nodeKind = { parti: 'party', acteur: 'leader', theme: 'topic' };
   const toneKind = name => name === 'Positive' ? 'positive' : name === 'Neutre' ? 'neutral' : 'negative';
-  const state = { active: new Set(['party','leader','topic','positive','neutral','negative']), tab: 'galaxy', selected: 'RNI', orbitActor: 'RNI', orbitRelation: null };
+  const state = { active: new Set(['party','leader','topic','positive','neutral','negative']), tab: 'galaxy', selected: 'RNI', orbitActor: 'RNI', orbitRelation: null, rankSort:'visibility', orbitMode:'graph', orbitZoom:1 };
 
   const copy = {
     fr: { kicker:'SIGNALS AT A GLANCE', title:'STRATEGIC <em>SIGNALS</em>', sub:'Une galaxie décisionnelle des positions, tensions et connexions politiques', galaxy:'Galaxie décisionnelle', footprint:'Influence narrative', orbits:'Orbites thématiques', filters:'Filtres', parties:'Partis', leaders:'Leaders', topics:'Sujets', positive:'Positif', neutral:'Neutre', negative:'Négatif', frame:'CADRE D’ANALYSE', visibility:'Visibilité relative', urls:'URL uniques', balance:'Balance narrative', mainTopic:'Sujet principal', relations:'Relations thématiques', reading:'Lecture décisionnelle', method:'Calculs fondés sur des URL uniques dédupliquées. Balance = (positif − négatif) ÷ total. Cette lecture ne mesure ni popularité ni intention de vote.', positionTitle:'Matrice d’influence narrative', positionIntro:'Trois territoires de tonalité positionnent chaque acteur et sujet selon sa balance narrative et sa visibilité relative.', xAxis:'Balance narrative : négative ← 0 → positive', yAxis:'Visibilité relative /100', orbitTitle:'Orbites thématiques', orbitIntro:'Sélectionnez un parti ou un leader. Chaque sujet gravite selon son poids relationnel documenté.', orbitHint:'Cliquez sur une orbite pour analyser cette relation dans le panneau de droite.', actor:'Acteur observé', partySelect:'PARTIS POLITIQUES', leaderSelect:'LEADERS POLITIQUES', period:'29.07 au 05.08.2026', noData:'Aucune entité active pour ces filtres.', relation:'RELATION SÉLECTIONNÉE', exposure:'de l’exposition thématique documentée', actorTopic:'relation acteur-sujet', globalTone:'Le total consolidé couvre le corpus du graphe. Le total sujet couvre uniquement le corpus Opinion citoyenne.', partyKind:'Parti politique', leaderKind:'Leader politique', topicKind:'Sujet du débat', impactKind:'Impact réputationnel' },
     en: { kicker:'SIGNALS AT A GLANCE', title:'STRATEGIC <em>SIGNALS</em>', sub:'A decision galaxy of political positions, tensions and connections', galaxy:'Decision galaxy', footprint:'Narrative influence', orbits:'Thematic orbits', filters:'Filters', parties:'Parties', leaders:'Leaders', topics:'Issues', positive:'Positive', neutral:'Neutral', negative:'Negative', frame:'ANALYSIS FRAME', visibility:'Relative visibility', urls:'Unique URLs', balance:'Narrative balance', mainTopic:'Main issue', relations:'Thematic links', reading:'Decision reading', method:'Calculations use deduplicated unique URLs. Balance = (positive − negative) ÷ total. This reading measures neither popularity nor voting intention.', positionTitle:'Narrative influence matrix', positionIntro:'Three tone territories position each actor and issue by narrative balance and relative visibility.', xAxis:'Narrative balance: negative ← 0 → positive', yAxis:'Relative visibility /100', orbitTitle:'Thematic orbits', orbitIntro:'Select a party or a leader. Each issue orbits according to its documented relational weight.', orbitHint:'Select an orbit to analyse the relationship in the right-hand panel.', actor:'Observed actor', partySelect:'POLITICAL PARTIES', leaderSelect:'POLITICAL LEADERS', period:'29 Jul to 5 Aug 2026', noData:'No active entity for these filters.', relation:'SELECTED RELATIONSHIP', exposure:'of documented thematic exposure', actorTopic:'actor-issue relationship', globalTone:'The consolidated total covers the graph corpus. The issue total covers only the Citizen Opinion corpus.', partyKind:'Political party', leaderKind:'Political leader', topicKind:'Debate issue', impactKind:'Reputational impact' },
     ar: { kicker:'إشارات في لمحة', title:'<em>الإشارات</em> الاستراتيجية', sub:'مجرة قرار للمواقف والتوترات والروابط السياسية', galaxy:'مجرة القرار', footprint:'التأثير السردي', orbits:'المدارات الموضوعاتية', filters:'المرشحات', parties:'الأحزاب', leaders:'القادة', topics:'المواضيع', positive:'إيجابي', neutral:'محايد', negative:'سلبي', frame:'إطار التحليل', visibility:'الظهور النسبي', urls:'روابط فريدة', balance:'التوازن السردي', mainTopic:'الموضوع الرئيسي', relations:'الروابط الموضوعاتية', reading:'قراءة قرارية', method:'تستند الحسابات إلى روابط فريدة بعد إزالة التكرار. التوازن = (الإيجابي − السلبي) ÷ الإجمالي. لا تقيس هذه القراءة الشعبية ولا نية التصويت.', positionTitle:'مصفوفة التأثير السردي', positionIntro:'توزع ثلاثة مجالات للنبرة كل فاعل وموضوع حسب التوازن السردي والظهور النسبي.', xAxis:'التوازن السردي: سلبي ← 0 → إيجابي', yAxis:'الظهور النسبي /100', orbitTitle:'المدارات الموضوعاتية', orbitIntro:'اختر حزبا أو قائدا. يدور كل موضوع بحسب وزنه العلائقي الموثق.', orbitHint:'اضغط على مدار لتحليل العلاقة في اللوحة اليمنى.', actor:'الفاعل المرصود', partySelect:'الأحزاب السياسية', leaderSelect:'القادة السياسيون', period:'29 يوليو إلى 5 أغسطس 2026', noData:'لا يوجد كيان نشط وفق هذه المرشحات.', relation:'العلاقة المختارة', exposure:'من التعرض الموضوعاتي الموثق', actorTopic:'علاقة فاعل بموضوع', globalTone:'يغطي الإجمالي الموحد corpus الرسم، بينما يغطي إجمالي المواضيع corpus الرأي المواطن فقط.', partyKind:'حزب سياسي', leaderKind:'قائد سياسي', topicKind:'موضوع النقاش', impactKind:'الأثر على السمعة' }
   };
+  const extraCopy = {
+    fr: { docRelations:'relations acteur-sujet documentées', matrixIntro:'Quatre quadrants analytiques positionnent chaque entité selon sa balance narrative (axe horizontal) et sa visibilité relative (axe vertical). La taille du marqueur code uniquement le volume d’URL uniques.', xAxisNew:'BALANCE NARRATIVE  −100 → +100', yAxisNew:'VISIBILITÉ RELATIVE  0 → 100', q1:'PORTEURS', q2:'SOUS TENSION', q3:'RISQUES LATENTS', q4:'SIGNAUX ÉMERGENTS', q1Def:'Forte visibilité, balance positive', q2Def:'Forte visibilité, balance négative', q3Def:'Faible visibilité, balance négative', q4Def:'Faible visibilité, balance positive', threshold:'Seuil de séparation : visibilité 50 / 100 et balance 0.', legend:'LÉGENDE', legShapes:'Forme = catégorie : carré parti · cercle leader · losange sujet · barre tonalité', legSize:'Taille = URL uniques (4 paliers)', ranking:'CLASSEMENT', sortBy:'TRI', sortVis:'Visibilité', sortBal:'Balance', sortUrls:'URL uniques', colEntity:'Entité', colCategory:'Catégorie', colQuadrant:'Quadrant', resetFilters:'Réactiver tous les filtres', graphView:'GRAPHE', tableView:'TABLEAU', recenter:'Recentrer', zoomIn:'Zoom avant', zoomOut:'Zoom arrière', resetView:'Réinitialiser', orbitLegendTitle:'LECTURE DU GRAPHE', orbitLegend:'Noyau = acteur observé. Rayon d’orbite = rang de force de la relation documentée. Épaisseur du lien = poids de relation. Taille du nœud = URL uniques du sujet. L’angle n’est pas signifiant.', ring1:'ORBITE 1 · RELATIONS FORTES', ring2:'ORBITE 2 · RELATIONS MOYENNES', ring3:'ORBITE 3 · RELATIONS FAIBLES', colTopic:'Sujet', colWeight:'Poids', colShare:'Exposition', colTone:'Ton dominant', loading:'Chargement des données canoniques…', unavailable:'Non disponible', keyboardHint:'Utilisez Tab pour parcourir les entités, les flèches pour naviguer dans le quadrant, Entrée pour sélectionner.', synced:'Sélection synchronisée avec les orbites thématiques.' },
+    en: { docRelations:'documented actor–issue relations', matrixIntro:'Four analytical quadrants position each entity by narrative balance (horizontal axis) and relative visibility (vertical axis). Marker size encodes unique URL volume only.', xAxisNew:'NARRATIVE BALANCE  −100 → +100', yAxisNew:'RELATIVE VISIBILITY  0 → 100', q1:'CARRIERS', q2:'UNDER TENSION', q3:'LATENT RISKS', q4:'EMERGING SIGNALS', q1Def:'High visibility, positive balance', q2Def:'High visibility, negative balance', q3Def:'Low visibility, negative balance', q4Def:'Low visibility, positive balance', threshold:'Split thresholds: visibility 50 / 100 and balance 0.', legend:'LEGEND', legShapes:'Shape = category: square party · circle leader · diamond issue · bar tone', legSize:'Size = unique URLs (4 tiers)', ranking:'RANKING', sortBy:'SORT', sortVis:'Visibility', sortBal:'Balance', sortUrls:'Unique URLs', colEntity:'Entity', colCategory:'Category', colQuadrant:'Quadrant', resetFilters:'Re-enable all filters', graphView:'GRAPH', tableView:'TABLE', recenter:'Recenter', zoomIn:'Zoom in', zoomOut:'Zoom out', resetView:'Reset', orbitLegendTitle:'HOW TO READ', orbitLegend:'Core = observed actor. Orbit radius = strength rank of the documented relationship. Link thickness = relationship weight. Node size = issue unique URLs. Angle carries no meaning.', ring1:'ORBIT 1 · STRONG LINKS', ring2:'ORBIT 2 · MEDIUM LINKS', ring3:'ORBIT 3 · WEAK LINKS', colTopic:'Issue', colWeight:'Weight', colShare:'Exposure', colTone:'Dominant tone', loading:'Loading canonical data…', unavailable:'Not available', keyboardHint:'Use Tab to move across entities, arrow keys within a quadrant, Enter to select.', synced:'Selection synchronised with thematic orbits.' },
+    ar: { docRelations:'علاقة موثقة بين فاعل وموضوع', matrixIntro:'تحدد أربعة أرباع تحليلية موقع كل كيان حسب التوازن السردي (المحور الأفقي) والظهور النسبي (المحور العمودي). يعبر حجم العلامة عن حجم الروابط الفريدة فقط.', xAxisNew:'التوازن السردي  −100 → +100', yAxisNew:'الظهور النسبي  0 → 100', q1:'حاملو السرد', q2:'تحت الضغط', q3:'مخاطر كامنة', q4:'إشارات ناشئة', q1Def:'ظهور مرتفع وتوازن إيجابي', q2Def:'ظهور مرتفع وتوازن سلبي', q3Def:'ظهور منخفض وتوازن سلبي', q4Def:'ظهور منخفض وتوازن إيجابي', threshold:'حدود الفصل: الظهور 50 / 100 والتوازن 0.', legend:'المفتاح', legShapes:'الشكل = الفئة: مربع حزب · دائرة قائد · معين موضوع · شريط نبرة', legSize:'الحجم = الروابط الفريدة (أربع درجات)', ranking:'الترتيب', sortBy:'الترتيب حسب', sortVis:'الظهور', sortBal:'التوازن', sortUrls:'روابط فريدة', colEntity:'الكيان', colCategory:'الفئة', colQuadrant:'الربع', resetFilters:'إعادة تنشيط جميع المرشحات', graphView:'الرسم', tableView:'الجدول', recenter:'إعادة التمركز', zoomIn:'تكبير', zoomOut:'تصغير', resetView:'إعادة التعيين', orbitLegendTitle:'كيفية القراءة', orbitLegend:'النواة = الفاعل المرصود. نصف قطر المدار = رتبة قوة العلاقة الموثقة. سماكة الرابط = وزن العلاقة. حجم العقدة = الروابط الفريدة للموضوع. الزاوية غير دالة.', ring1:'المدار 1 · روابط قوية', ring2:'المدار 2 · روابط متوسطة', ring3:'المدار 3 · روابط ضعيفة', colTopic:'الموضوع', colWeight:'الوزن', colShare:'التعرض', colTone:'النبرة السائدة', loading:'جار تحميل البيانات المرجعية…', unavailable:'غير متوفر', keyboardHint:'استخدم Tab للتنقل بين الكيانات، والأسهم داخل الربع، وEnter للاختيار.', synced:'تم مزامنة الاختيار مع المدارات الموضوعاتية.' }
+  };
+  Object.keys(copy).forEach(k => Object.assign(copy[k], extraCopy[k]));
   const localizedTopics = {
     en:{'Sebta / migration':'Ceuta / migration','Emploi / chômage':'Employment / unemployment','Eau / sécheresse':'Water / drought','Santé':'Health','Éducation':'Education'},
     ar:{'Sebta / migration':'سبتة / الهجرة','Emploi / chômage':'التشغيل / البطالة','Eau / sécheresse':'الماء / الجفاف','Santé':'الصحة','Éducation':'التعليم','Justice':'العدالة','Corruption':'الفساد'}
@@ -32,6 +38,7 @@
   const femaleLeaders = new Set(['Fatima Ezzahra El Mansouri']);
   const leaderPortraits = Object.fromEntries(leaders.map(leader=>[leader.name,femaleLeaders.has(leader.name)?'assets/avatar-leader-female.svg':'assets/avatar-leader-male.svg']));
   const topicIcons = {'Sebta / migration':'⇄','Emploi / chômage':'▣','Eau / sécheresse':'◒','Justice':'⚖','Corruption':'◇','Santé':'✚','Éducation':'▤'};
+  const short = txt => txt.length>17 ? txt.slice(0,16)+'…' : txt;
   const rowFor = name => actors.find(x => x.name === name);
   const topicFor = name => topics.find(x => x.name === name);
   const actorTopics = name => topics.map(topic => ({ name:topic.name, value:(edges.find(e=>e[0]===name && e[1]===topic.name && e[3]==='influence') || [])[2] || 0 }));
@@ -57,8 +64,26 @@
   <div class="ss-tabs"><button class="active" data-ss-tab="galaxy" data-ss="galaxy"></button><button data-ss-tab="positions" data-ss="footprint"></button><button data-ss-tab="orbits" data-ss="orbits"></button></div>
   <div class="ss-filters"><strong data-ss="filters"></strong>${[['party','parties'],['leader','leaders'],['topic','topics'],['positive','positive'],['neutral','neutral'],['negative','negative']].map(x=>`<button class="ss-filter active" data-ss-filter="${x[0]}" data-ss="${x[1]}"></button>`).join('')}</div>
   <div class="ss-layout"><div class="ss-stage"><div class="ss-view active" data-ss-view="galaxy"><svg id="ss-galaxy-svg" viewBox="0 0 920 650" aria-label="Strategic Signals"></svg></div>
-  <div class="ss-view" data-ss-view="positions"><div class="ss-positions"><h2 data-ss="positionTitle"></h2><p data-ss="positionIntro"></p><div class="ss-plane" id="ss-plane"><span class="ss-axis x" data-ss="xAxis"></span><span class="ss-axis y" data-ss="yAxis"></span></div></div></div>
-  <div class="ss-view" data-ss-view="orbits"><div class="ss-orbits"><div class="ss-orbits-head"><div><h2 data-ss="orbitTitle"></h2><p data-ss="orbitIntro"></p></div><div class="ss-actor-pickers"><label class="ss-actor-select ss-party-select"><span data-ss="partySelect"></span><select id="ss-party-pick"></select></label><label class="ss-actor-select ss-leader-select"><span data-ss="leaderSelect"></span><select id="ss-leader-pick"></select></label></div></div><svg class="ss-topic-orbit" id="ss-topic-orbit" viewBox="0 0 820 470"></svg></div></div></div>
+  <div class="ss-view" data-ss-view="positions"><div class="ss-positions"><h2 data-ss="positionTitle"></h2><p class="ss-lede" data-ss="matrixIntro"></p>
+  <div class="ss-matrix-wrap"><span class="ss-axis-title y" data-ss="yAxisNew"></span>
+  <div class="ss-plane" id="ss-plane" role="group" tabindex="-1">
+    <div class="ss-quad q2"><span class="ss-quad-tag"><b>Q2</b><em data-ss="q2"></em><small data-ss="q2Def"></small></span></div>
+    <div class="ss-quad q1"><span class="ss-quad-tag"><b>Q1</b><em data-ss="q1"></em><small data-ss="q1Def"></small></span></div>
+    <div class="ss-quad q3"><span class="ss-quad-tag"><b>Q3</b><em data-ss="q3"></em><small data-ss="q3Def"></small></span></div>
+    <div class="ss-quad q4"><span class="ss-quad-tag"><b>Q4</b><em data-ss="q4"></em><small data-ss="q4Def"></small></span></div>
+    <i class="ss-mid-x" aria-hidden="true"></i><i class="ss-mid-y" aria-hidden="true"></i>
+    <div class="ss-markers" id="ss-markers"></div>
+  </div>
+  <span class="ss-axis-title x" data-ss="xAxisNew"></span></div>
+  <div class="ss-tip" id="ss-tip" role="tooltip" hidden></div>
+  <div class="ss-legend"><p class="kicker" data-ss="legend"></p><ul><li><span class="ss-key party" aria-hidden="true"></span><span class="ss-key leader" aria-hidden="true"></span><span class="ss-key topic" aria-hidden="true"></span><span class="ss-key tone" aria-hidden="true"></span><span data-ss="legShapes"></span></li><li id="ss-size-legend"></li><li data-ss="threshold"></li><li data-ss="keyboardHint"></li></ul></div>
+  <details class="ss-ranking"><summary><span data-ss="ranking"></span> <b id="ss-rank-count"></b></summary><div class="ss-rank-tools"><label><span data-ss="sortBy"></span><select id="ss-rank-sort"><option value="visibility" data-ss="sortVis"></option><option value="balance" data-ss="sortBal"></option><option value="urls" data-ss="sortUrls"></option></select></label></div><div class="ss-table-scroll"><table class="ss-table" id="ss-rank-table"></table></div></details></div></div>
+  <div class="ss-view" data-ss-view="orbits"><div class="ss-orbits"><div class="ss-orbits-head"><div><h2 data-ss="orbitTitle"></h2><p class="ss-lede" data-ss="orbitIntro"></p></div><div class="ss-actor-pickers"><label class="ss-actor-select ss-party-select"><span data-ss="partySelect"></span><select id="ss-party-pick"></select></label><label class="ss-actor-select ss-leader-select"><span data-ss="leaderSelect"></span><select id="ss-leader-pick"></select></label></div></div>
+  <div class="ss-orbit-bar"><div class="ss-seg" role="tablist"><button class="active" data-orbit-mode="graph" data-ss="graphView"></button><button data-orbit-mode="table" data-ss="tableView"></button></div>
+  <div class="ss-orbit-controls"><button data-orbit-cmd="in" aria-label="+"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.3-4.3M11 8v6M8 11h6"/></svg><span data-ss="zoomIn"></span></button><button data-orbit-cmd="out" aria-label="−"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.3-4.3M8 11h6"/></svg><span data-ss="zoomOut"></span></button><button data-orbit-cmd="center"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/></svg><span data-ss="recenter"></span></button><button data-orbit-cmd="reset"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg><span data-ss="resetView"></span></button></div></div>
+  <div class="ss-orbit-panes"><div class="ss-orbit-pane active" data-orbit-pane="graph"><svg class="ss-topic-orbit" id="ss-topic-orbit" viewBox="0 0 820 470" role="group"></svg></div>
+  <div class="ss-orbit-pane" data-orbit-pane="table"><div class="ss-table-scroll"><table class="ss-table" id="ss-orbit-table"></table></div></div></div>
+  <div class="ss-legend"><p class="kicker" data-ss="orbitLegendTitle"></p><ul><li data-ss="orbitLegend"></li><li data-ss="orbitHint"></li></ul></div></div></div></div>
   <aside class="ss-analysis"><p class="kicker" data-ss="frame"></p><div class="ss-identity"><div class="ss-avatar" id="ss-avatar"></div><div><h2 id="ss-name"></h2><p class="ss-kind" id="ss-kind"></p></div></div>
   ${[['visibility','ss-vis'],['urls','ss-urls'],['balance','ss-balance'],['mainTopic','ss-main-topic'],['relations','ss-relations']].map(x=>`<div class="ss-metric"><span data-ss="${x[0]}"></span><b id="${x[1]}"></b></div>`).join('')}
   <div class="ss-tonebar"><i id="ss-pos"></i><i id="ss-neu"></i><i id="ss-neg"></i></div><div class="ss-tone-labels"><span id="ss-pl"></span><span id="ss-nl"></span><span id="ss-gl"></span></div>
@@ -98,40 +123,162 @@
     const avatar=root.querySelector('#ss-avatar'),leaderImage=leaderPortraits[d.name];avatar.innerHTML=leaderImage?`<img src="${leaderImage}" alt="" aria-hidden="true">`:d.short; root.querySelector('#ss-name').textContent=label(d.name); root.querySelector('#ss-kind').textContent=d.kind;
     root.querySelector('#ss-vis').textContent=`${fmt(d.visibility,1)} / 100`; root.querySelector('#ss-urls').textContent=fmt(d.urls); root.querySelector('#ss-balance').textContent=`${balance>0?'+':''}${fmt(balance,1)}`; root.querySelector('#ss-main-topic').textContent=label(d.topic); root.querySelector('#ss-relations').textContent=fmt(d.links);
     [['pos','positive','pl','+ '],['neu','neutral','nl','= '],['neg','negative','gl','− ']].forEach(([id,key,lid,prefix])=>{const pct=total?d.tones[key]/total*100:0;const on=state.active.has(key);root.querySelector('#ss-'+id).style.width=on?pct+'%':'0';root.querySelector('#ss-'+lid).textContent=on?prefix+fmt(pct,1)+'%':'';});
-    const facts=relation ? [`${fmt(relation.value)} relations acteur-sujet documentées.`,`${fmt(relation.share,1)}% ${t('exposure')}.`,lang()==='en'?'This is an observed co-occurrence, not causality.':lang()==='ar'?'هذا تزامن مرصود وليس علاقة سببية.':'Il s’agit d’une cooccurrence observée, pas d’un lien de causalité.'] : d.facts;
+    const facts=relation ? [`${fmt(relation.value)} ${t('docRelations')}.`,`${fmt(relation.share,1)}% ${t('exposure')}.`,lang()==='en'?'This is an observed co-occurrence, not causality.':lang()==='ar'?'هذا تزامن مرصود وليس علاقة سببية.':'Il s’agit d’une cooccurrence observée, pas d’un lien de causalité.'] : d.facts;
     root.querySelector('#ss-insight').textContent=relation ? `${label(name)} × ${label(relation.name)}` : d.type==='tone' ? t('globalTone') : d.type==='topic' ? `${label(d.name)} : ${t('actorTopic')}.` : `${label(d.topic)} · ${t('actorTopic')}.`; facts.forEach((f,i)=>root.querySelector('#ss-fact-'+(i+1)).textContent=f);
     const detail=root.querySelector('#ss-relation-detail'); detail.hidden=!relation;
     if(relation){root.querySelector('#ss-relation-title').textContent=`${label(name)} × ${label(relation.name)}`;root.querySelector('#ss-relation-value').textContent=fmt(relation.value);root.querySelector('#ss-relation-copy').textContent=`${fmt(relation.share,1)}% ${t('exposure')}.`;}
-    highlightGalaxy();
+    highlightGalaxy(); syncSelection();
   }
 
-  function renderPlane() {
-    const plane=root.querySelector('#ss-plane'); plane.querySelectorAll('.ss-bubble,.ss-empty').forEach(x=>x.remove());
-    const rows=[...parties.filter(()=>state.active.has('party')).map(x=>({name:x.name,kind:'party'})),...leaders.filter(()=>state.active.has('leader')).map(x=>({name:x.name,kind:'leader'})),...topics.filter(()=>state.active.has('topic')).map(x=>({name:x.name,kind:'topic'})),...Object.entries(toneNodeNames).filter(([k])=>state.active.has(k)).map(([k,name])=>({name,kind:k}))];
-    if(!rows.length){plane.insertAdjacentHTML('beforeend',`<p class="ss-empty">${t('noData')}</p>`);return;}
-    const placed=[];
-    rows.forEach((item,i)=>{const d=infoFor(item.name),b=balanceOf(d),btn=document.createElement('button');let x=Math.max(6,Math.min(94,50+b/2)),y=Math.max(8,Math.min(90,8+d.visibility*.82)),attempt=0;while(placed.some(p=>Math.abs(p.x-x)<13&&Math.abs(p.y-y)<9)&&attempt<30){const ring=Math.floor(attempt/4)+1;x=Math.max(6,Math.min(94,x+([1,-1,1,-1][attempt%4])*ring*4.5));y=Math.max(8,Math.min(90,y+([1,1,-1,-1][attempt%4])*ring*4.5));attempt++;}placed.push({x,y});btn.className=`ss-bubble ${item.kind}`;btn.style.left=x+'%';btn.style.bottom=y+'%';let visual='';if(item.kind==='leader')visual=leaderPortraits[item.name]?`<img src="${leaderPortraits[item.name]}" alt="">`:`<i class="ss-monogram">${d.short}</i>`;else if(item.kind==='party')visual=`<i class="ss-institution" aria-hidden="true">▥</i>`;else if(item.kind==='topic')visual=`<i class="ss-topic-icon" aria-hidden="true">${topicIcons[item.name]||'◆'}</i>`;else visual=`<i class="ss-tone-symbol">${d.short}</i>`;btn.innerHTML=`${visual}<span><strong>${label(d.name)}</strong><small>${fmt(d.urls)} URL</small></span>`;btn.title=`${label(d.name)} · ${fmt(d.urls)} URL`;btn.setAttribute('aria-label',btn.title);btn.onclick=()=>select(item.name);plane.appendChild(btn);});
+  function syncSelection(){
+    root.querySelectorAll('#ss-markers .ss-mk').forEach(el=>el.classList.toggle('selected',el.dataset.name===state.selected));
+    root.querySelectorAll('#ss-rank-table tbody tr').forEach(tr=>tr.classList.toggle('selected',tr.dataset.name===state.selected));
+  }
+
+  const quadrantOf = (bal,vis) => vis>=50 ? (bal>=0?'q1':'q2') : (bal>=0?'q4':'q3');
+  const matrixRows = () => [
+    ...(state.active.has('party') ? parties.map(x=>({name:x.name,kind:'party'})) : []),
+    ...(state.active.has('leader') ? leaders.map(x=>({name:x.name,kind:'leader'})) : []),
+    ...(state.active.has('topic') ? topics.map(x=>({name:x.name,kind:'topic'})) : []),
+    ...Object.entries(toneNodeNames).filter(([k])=>state.active.has(k)).map(([k,name])=>({name,kind:k}))
+  ];
+  const tipEl = () => root.querySelector('#ss-tip');
+  function showTip(target,row){
+    const tip=tipEl(), d=row.d, total=d.tones.positive+d.tones.neutral+d.tones.negative;
+    const pct=key=>total?fmt(d.tones[key]/total*100,1)+'%':t('unavailable');
+    tip.innerHTML=`<strong>${label(d.name)}</strong><em>${d.kind} · ${t(row.quad)}</em>
+      <span>${t('urls')}<b>${fmt(d.urls)}</b></span>
+      <span>${t('visibility')}<b>${fmt(d.visibility,1)} / 100</b></span>
+      <span>${t('balance')}<b>${row.balance>0?'+':''}${fmt(row.balance,1)}</b></span>
+      <span>${t('positive')} / ${t('neutral')} / ${t('negative')}<b>${pct('positive')} · ${pct('neutral')} · ${pct('negative')}</b></span>
+      <span>${t('mainTopic')}<b>${label(d.topic)}</b></span>
+      <span>${t('relations')}<b>${fmt(d.links)}</b></span>
+      <small>${t('period')}</small>`;
+    tip.hidden=false;
+    const plane=root.querySelector('#ss-plane').getBoundingClientRect(), box=target.getBoundingClientRect();
+    const left=Math.max(4,Math.min(plane.width-tip.offsetWidth-4,box.left-plane.left+box.width/2-tip.offsetWidth/2));
+    const top=box.top-plane.top-tip.offsetHeight-10;
+    tip.style.left=left+'px'; tip.style.top=(top<4?box.top-plane.top+box.height+10:top)+'px';
+  }
+  const hideTip = () => { tipEl().hidden=true; };
+
+  function renderMatrix() {
+    const plane=root.querySelector('#ss-plane'), markers=root.querySelector('#ss-markers');
+    plane.querySelectorAll('.ss-empty').forEach(x=>x.remove()); markers.innerHTML=''; hideTip();
+    const data=matrixRows().map(item=>{const d=infoFor(item.name),balance=balanceOf(d);return {...item,d,balance,vis:d.visibility,urls:d.urls,quad:quadrantOf(balance,d.visibility)};});
+    root.querySelector('#ss-rank-count').textContent=fmt(data.length);
+    if(!data.length){
+      plane.insertAdjacentHTML('beforeend',`<p class="ss-empty">${t('noData')}<button type="button" class="ss-reset-filters">${t('resetFilters')}</button></p>`);
+      plane.querySelector('.ss-reset-filters').addEventListener('click',()=>{['party','leader','topic','positive','neutral','negative'].forEach(k=>state.active.add(k));root.querySelectorAll('[data-ss-filter]').forEach(b=>b.classList.add('active'));applyFilters();});
+      renderRanking([]); return;
+    }
+    const values=data.map(x=>x.urls).sort((a,b)=>a-b), q=p=>values[Math.min(values.length-1,Math.floor(p*values.length))];
+    const b1=q(.25),b2=q(.5),b3=q(.75), tier=u=>u<=b1?1:u<=b2?2:u<=b3?3:4;
+    root.querySelector('#ss-size-legend').textContent=`${t('legSize')} : ≤ ${fmt(b1)} · ≤ ${fmt(b2)} · ≤ ${fmt(b3)} · > ${fmt(b3)}`;
+    data.sort((a,b)=>b.vis-a.vis);
+    data.forEach(row=>{
+      const btn=document.createElement('button');
+      btn.type='button'; btn.className=`ss-mk ${row.kind} t${tier(row.urls)}${row.d.name===state.selected?' selected':''}`;
+      btn.dataset.name=row.d.name; btn.dataset.quad=row.quad;
+      btn.style.left=((row.balance+100)/2)+'%'; btn.style.bottom=Math.max(0,Math.min(100,row.vis))+'%';
+      btn.innerHTML=`<i class="ss-mk-shape" aria-hidden="true"></i><span class="ss-mk-label">${label(row.d.name)}<small>${fmt(row.urls)}</small></span>`;
+      btn.setAttribute('aria-label',`${label(row.d.name)} · ${row.d.kind} · ${t('urls')} ${fmt(row.urls)} · ${t('visibility')} ${fmt(row.vis,1)} · ${t('balance')} ${fmt(row.balance,1)}`);
+      btn.addEventListener('mouseenter',()=>showTip(btn,row));
+      btn.addEventListener('focus',()=>showTip(btn,row));
+      btn.addEventListener('mouseleave',hideTip);
+      btn.addEventListener('blur',hideTip);
+      btn.addEventListener('click',()=>select(row.d.name));
+      btn.addEventListener('keydown',e=>{
+        if(!['ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].includes(e.key))return;
+        e.preventDefault();
+        const peers=[...markers.querySelectorAll(`.ss-mk[data-quad="${row.quad}"]`)];
+        const step=(e.key==='ArrowRight'||e.key==='ArrowDown')?1:-1;
+        const next=peers[(peers.indexOf(btn)+step+peers.length)%peers.length];
+        if(next)next.focus();
+      });
+      markers.appendChild(btn);
+    });
+    renderRanking(data);
+  }
+
+  function renderRanking(data) {
+    const table=root.querySelector('#ss-rank-table'), sort=state.rankSort;
+    if(!data.length){table.innerHTML='';return;}
+    const rows=[...data].sort((a,b)=>sort==='balance'?b.balance-a.balance:sort==='urls'?b.urls-a.urls:b.vis-a.vis);
+    table.innerHTML=`<thead><tr><th>#</th><th>${t('colEntity')}</th><th>${t('colCategory')}</th><th>${t('colQuadrant')}</th><th>${t('visibility')}</th><th>${t('balance')}</th><th>${t('urls')}</th></tr></thead><tbody>`+
+      rows.map((r,i)=>`<tr data-name="${r.d.name}" tabindex="0" class="${r.d.name===state.selected?'selected':''}"><td>${i+1}</td><td>${label(r.d.name)}</td><td>${r.d.kind}</td><td>${t(r.quad)}</td><td>${fmt(r.vis,1)}</td><td>${r.balance>0?'+':''}${fmt(r.balance,1)}</td><td>${fmt(r.urls)}</td></tr>`).join('')+`</tbody>`;
+    table.querySelectorAll('tbody tr').forEach(tr=>{
+      tr.addEventListener('click',()=>select(tr.dataset.name));
+      tr.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();select(tr.dataset.name);}});
+    });
   }
 
   function eligibleActors(){return actors.filter(x=>state.active.has(x.actorId.startsWith('party_')?'party':'leader'));}
   function renderActorPicker(){const partyEl=root.querySelector('#ss-party-pick'),leaderEl=root.querySelector('#ss-leader-pick'),eligible=eligibleActors(),visibleParties=parties.filter(x=>eligible.includes(x)),visibleLeaders=leaders.filter(x=>eligible.includes(x));if(!eligible.some(x=>x.name===state.orbitActor))state.orbitActor=eligible[0]?.name||'';partyEl.innerHTML=`<option value="">${t('partySelect')}</option>`+visibleParties.map(x=>`<option value="${x.name}" ${x.name===state.orbitActor?'selected':''}>${x.name}</option>`).join('');leaderEl.innerHTML=`<option value="">${t('leaderSelect')}</option>`+visibleLeaders.map(x=>`<option value="${x.name}" ${x.name===state.orbitActor?'selected':''}>${x.name}</option>`).join('');partyEl.disabled=!visibleParties.length;leaderEl.disabled=!visibleLeaders.length;root.querySelector('.ss-party-select').classList.toggle('disabled',!visibleParties.length);root.querySelector('.ss-leader-select').classList.toggle('disabled',!visibleLeaders.length);}
   function renderOrbits(actor=state.orbitActor) {
     renderActorPicker(); actor=state.orbitActor;
-    const svg=root.querySelector('#ss-topic-orbit');
-    if(!actor){svg.innerHTML=`<text class="ss-empty-svg" x="410" y="235" text-anchor="middle">${t('noData')}</text>`;return;}
-    const visibleTopics=state.active.has('topic')?actorTopics(actor):[], max=Math.max(...visibleTopics.map(x=>x.value),1), sum=visibleTopics.reduce((s,x)=>s+x.value,0), cx=410,cy=235,rx=300,ry=150;
-    if(!visibleTopics.length){svg.innerHTML=`<circle class="ss-topic-core" cx="410" cy="235" r="48"/><text x="410" y="240" text-anchor="middle">${infoFor(actor).short}</text><text class="ss-empty-svg" x="410" y="330" text-anchor="middle">${t('noData')}</text>`;select(actor);return;}
-    svg.innerHTML=`<ellipse class="ss-topic-ring" cx="410" cy="235" rx="300" ry="150"/><ellipse class="ss-topic-ring" cx="410" cy="235" rx="190" ry="92"/><circle class="ss-topic-halo" cx="410" cy="235" r="65"/><circle class="ss-topic-core" cx="410" cy="235" r="48"/><text x="410" y="229" text-anchor="middle">${infoFor(actor).short}</text><text x="410" y="249" text-anchor="middle" fill="#c9a84c">${fmt(sum)} relations</text><text class="ss-topic-caption" x="410" y="455" text-anchor="middle">${t('orbitHint')}</text>`+visibleTopics.map((rel,i)=>{const a=(-90+i*360/visibleTopics.length)*Math.PI/180,x=cx+rx*Math.cos(a),y=cy+ry*Math.sin(a),share=sum?rel.value/sum*100:0,r=18+rel.value/max*19;return `<line class="ss-topic-spoke" data-index="${i}" x1="${cx}" y1="${cy}" x2="${x}" y2="${y}"/><g class="ss-topic-node" data-index="${i}" transform="translate(${x} ${y})"><circle class="petal" r="${r}"/><text class="value" text-anchor="middle" y="-2">${fmt(rel.value)}</text><text class="share" text-anchor="middle" y="14">${fmt(share,1)}%</text><text text-anchor="middle" y="${r+17}">${label(rel.name)}</text></g>`}).join('');
-    const choose=i=>{const rel=visibleTopics[i],share=sum?rel.value/sum*100:0;svg.querySelectorAll('[data-index]').forEach(x=>x.classList.toggle('hot',+x.dataset.index===i));select(actor,{...rel,share});};
-    svg.querySelectorAll('.ss-topic-node').forEach(n=>n.addEventListener('click',()=>choose(+n.dataset.index)));
-    choose(Math.max(0,visibleTopics.findIndex(x=>x.value===max)));
+    const svg=root.querySelector('#ss-topic-orbit'), table=root.querySelector('#ss-orbit-table');
+    if(!actor){svg.innerHTML=`<text class="ss-empty-svg" x="410" y="235" text-anchor="middle">${t('noData')}</text>`;table.innerHTML='';return;}
+    const rels=(state.active.has('topic')?actorTopics(actor):[]).filter(x=>x.value>0);
+    const core=infoFor(actor), cx=410, cy=235;
+    if(!rels.length){
+      svg.innerHTML=`<circle class="ss-topic-core" cx="${cx}" cy="${cy}" r="48"/><text x="${cx}" y="${cy+5}" text-anchor="middle">${core.short}</text><text class="ss-empty-svg" x="${cx}" y="${cy+95}" text-anchor="middle">${t('noData')}</text>`;
+      table.innerHTML=''; select(actor); return;
+    }
+    const sum=rels.reduce((s,x)=>s+x.value,0), maxVal=Math.max(...rels.map(x=>x.value));
+    const ranked=[...rels].sort((a,b)=>b.value-a.value);
+    const rings=[{rx:140,ry:70},{rx:222,ry:108},{rx:300,ry:142}];
+    const ringIndex=i=>Math.min(2,Math.floor(i/Math.ceil(ranked.length/3)));
+    const nodes=ranked.map((rel,i)=>{
+      const ring=ringIndex(i), peers=ranked.filter((_,j)=>ringIndex(j)===ring), pos=peers.indexOf(rel);
+      const a=(-90+ring*22+pos*360/Math.max(1,peers.length))*Math.PI/180;
+      const topic=topicFor(rel.name), mentions=topic?topic.mentions:0;
+      const r=14+Math.sqrt(mentions)/6;
+      return {...rel, ring, mentions, r, x:cx+rings[ring].rx*Math.cos(a), y:cy+rings[ring].ry*Math.sin(a), share:sum?rel.value/sum*100:0, index:ranked.indexOf(rel)};
+    });
+    const scene=`<g id="ss-orbit-scene" transform="translate(${cx} ${cy}) scale(${state.orbitZoom}) translate(${-cx} ${-cy})">`+
+      rings.map((g,i)=>`<ellipse class="ss-topic-ring" cx="${cx}" cy="${cy}" rx="${g.rx}" ry="${g.ry}"/><text class="ss-ring-tag" x="${cx}" y="${cy+g.ry+13}" text-anchor="middle">${t('ring'+(i+1))}</text>`).join('')+
+      nodes.map(n=>`<line class="ss-topic-spoke" data-index="${n.index}" x1="${cx}" y1="${cy}" x2="${n.x}" y2="${n.y}" style="stroke-width:${(1+ n.value/maxVal*4).toFixed(2)}"/>`).join('')+
+      `<circle class="ss-topic-halo" cx="${cx}" cy="${cy}" r="65"/><circle class="ss-topic-core" cx="${cx}" cy="${cy}" r="48"/><text x="${cx}" y="${cy-4}" text-anchor="middle">${core.short}</text><text x="${cx}" y="${cy+16}" text-anchor="middle" fill="#c9a84c">${fmt(sum)}</text>`+
+      nodes.map(n=>`<g class="ss-topic-node" data-index="${n.index}" tabindex="0" role="button" aria-label="${label(n.name)} · ${fmt(n.value)} · ${fmt(n.share,1)}%" transform="translate(${n.x} ${n.y})"><circle class="petal" r="${n.r.toFixed(1)}"/><text class="value" text-anchor="middle" y="-1">${fmt(n.value)}</text><text class="share" text-anchor="middle" y="13">${fmt(n.share,1)}%</text><text text-anchor="middle" y="${(n.r+16).toFixed(1)}">${short(label(n.name))}</text></g>`).join('')+`</g>`;
+    svg.innerHTML=scene;
+    const dominant=d=>{const e=Object.entries(d.tones).sort((a,b)=>b[1]-a[1])[0];return e?t(e[0]):t('unavailable');};
+    table.innerHTML=`<thead><tr><th>#</th><th>${t('colTopic')}</th><th>${t('colWeight')}</th><th>${t('colShare')}</th><th>${t('colTone')}</th><th>${t('urls')}</th></tr></thead><tbody>`+
+      nodes.map((n,i)=>`<tr data-index="${n.index}" tabindex="0"><td>${i+1}</td><td>${label(n.name)}</td><td>${fmt(n.value)}</td><td>${fmt(n.share,1)}%</td><td>${dominant(infoFor(n.name))}</td><td>${fmt(n.mentions)}</td></tr>`).join('')+`</tbody>`;
+    const choose=index=>{const n=nodes.find(x=>x.index===index);if(!n)return;svg.querySelectorAll('[data-index]').forEach(x=>x.classList.toggle('hot',+x.dataset.index===index));table.querySelectorAll('tbody tr').forEach(tr=>tr.classList.toggle('selected',+tr.dataset.index===index));select(actor,{name:n.name,value:n.value,share:n.share});};
+    svg.querySelectorAll('.ss-topic-node').forEach(n=>{
+      n.addEventListener('click',()=>choose(+n.dataset.index));
+      n.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();choose(+n.dataset.index);}});
+    });
+    table.querySelectorAll('tbody tr').forEach(tr=>{
+      tr.addEventListener('click',()=>choose(+tr.dataset.index));
+      tr.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();choose(+tr.dataset.index);}});
+    });
+    choose(nodes[0].index);
   }
 
-  function applyFilters(){renderGalaxy();renderPlane();renderActorPicker();if(state.tab==='orbits')renderOrbits();const current=graphNodes.find(n=>n.name===state.selected);if(current&&!state.active.has(current.kind)){const next=galaxyNodes.find(n=>state.active.has(n.kind));if(next)select(next.name);}}
-  ['#ss-party-pick','#ss-leader-pick'].forEach(selector=>root.querySelector(selector).addEventListener('change',e=>{if(!e.target.value)return;state.orbitActor=e.target.value;renderOrbits();}));
-  root.querySelectorAll('[data-ss-tab]').forEach(b=>b.addEventListener('click',()=>{state.tab=b.dataset.ssTab;root.querySelectorAll('[data-ss-tab]').forEach(x=>x.classList.toggle('active',x===b));root.querySelectorAll('[data-ss-view]').forEach(x=>x.classList.toggle('active',x.dataset.ssView===state.tab));root.querySelector('#ss-relation-detail').hidden=state.tab!=='orbits'||!state.orbitRelation;if(state.tab==='positions')renderPlane();if(state.tab==='orbits')renderOrbits();}));
+  function applyFilters(){renderGalaxy();renderMatrix();renderActorPicker();if(state.tab==='orbits')renderOrbits();const current=graphNodes.find(n=>n.name===state.selected);if(current&&!state.active.has(current.kind)){const next=galaxyNodes.find(n=>state.active.has(n.kind));if(next)select(next.name);}}
+  ['#ss-party-pick','#ss-leader-pick'].forEach(selector=>root.querySelector(selector).addEventListener('change',e=>{if(!e.target.value)return;state.orbitActor=e.target.value;state.orbitZoom=1;renderOrbits();}));
+  root.querySelector('#ss-rank-sort').addEventListener('change',e=>{state.rankSort=e.target.value;renderMatrix();});
+  root.querySelectorAll('[data-orbit-mode]').forEach(b=>b.addEventListener('click',()=>{state.orbitMode=b.dataset.orbitMode;root.querySelectorAll('[data-orbit-mode]').forEach(x=>x.classList.toggle('active',x===b));root.querySelectorAll('[data-orbit-pane]').forEach(p=>p.classList.toggle('active',p.dataset.orbitPane===state.orbitMode));}));
+  root.querySelectorAll('[data-orbit-cmd]').forEach(b=>b.addEventListener('click',()=>{
+    const cmd=b.dataset.orbitCmd;
+    if(cmd==='in')state.orbitZoom=Math.min(2,+(state.orbitZoom+0.2).toFixed(2));
+    else if(cmd==='out')state.orbitZoom=Math.max(0.6,+(state.orbitZoom-0.2).toFixed(2));
+    else state.orbitZoom=1;
+    if(cmd==='center'||cmd==='reset')state.orbitRelation=null;
+    renderOrbits();
+  }));
+  root.querySelectorAll('[data-ss-tab]').forEach(b=>b.addEventListener('click',()=>{state.tab=b.dataset.ssTab;root.querySelectorAll('[data-ss-tab]').forEach(x=>x.classList.toggle('active',x===b));root.querySelectorAll('[data-ss-view]').forEach(x=>x.classList.toggle('active',x.dataset.ssView===state.tab));root.querySelector('#ss-relation-detail').hidden=state.tab!=='orbits'||!state.orbitRelation;if(state.tab==='positions')renderMatrix();if(state.tab==='orbits')renderOrbits();}));
   root.querySelectorAll('[data-ss-filter]').forEach(b=>b.addEventListener('click',()=>{const kind=b.dataset.ssFilter;state.active.has(kind)?state.active.delete(kind):state.active.add(kind);b.classList.toggle('active',state.active.has(kind));applyFilters();}));
-  function translate(){root.querySelectorAll('[data-ss]').forEach(el=>el.textContent=t(el.dataset.ss));root.querySelectorAll('[data-ss-html]').forEach(el=>el.innerHTML=t(el.dataset.ssHtml));renderGalaxy();renderPlane();renderActorPicker();state.tab==='orbits'?renderOrbits():select(state.selected);}
+  function translate(){root.querySelectorAll('[data-ss]').forEach(el=>el.textContent=t(el.dataset.ss));root.querySelectorAll('[data-ss-html]').forEach(el=>el.innerHTML=t(el.dataset.ssHtml));renderGalaxy();renderMatrix();renderActorPicker();state.tab==='orbits'?renderOrbits():select(state.selected);}
   new MutationObserver(translate).observe(document.documentElement,{attributes:true,attributeFilter:['lang','dir']});
+  window.addEventListener('bf:theme',()=>{renderGalaxy();renderMatrix();if(state.tab==='orbits')renderOrbits();});
+  let resizeTimer; window.addEventListener('resize',()=>{clearTimeout(resizeTimer);resizeTimer=setTimeout(()=>{hideTip();renderMatrix();if(state.tab==='orbits')renderOrbits();},180);});
+  if (window.matchMedia('(max-width:680px)').matches) {
+    root.querySelector('.ss-ranking').open = true;
+    const tableBtn = root.querySelector('[data-orbit-mode="table"]');
+    if (tableBtn) tableBtn.click();
+  }
   translate();
 })();
