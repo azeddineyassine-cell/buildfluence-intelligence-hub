@@ -11,7 +11,17 @@
   const toneNodeNames = { positive: 'Positive', neutral: 'Neutre', negative: 'Négative' };
   const nodeKind = { parti: 'party', acteur: 'leader', theme: 'topic' };
   const toneKind = name => name === 'Positive' ? 'positive' : name === 'Neutre' ? 'neutral' : 'negative';
-  const state = { active: new Set(['party','leader','topic','positive','neutral','negative']), tab: 'galaxy', selected: 'RNI', orbitActor: 'RNI', orbitRelation: null, rankSort:'visibility', orbitMode:'graph', orbitZoom:1 };
+  const state = { active: new Set(['party','leader','topic','positive','neutral','negative']), tab: 'galaxy', selected: 'RNI', orbitActor: 'RNI', orbitRelation: null, rankSort:'visibility', rankCat:'all', detail:null, orbitMode:'graph', orbitZoom:1 };
+
+  /* Pictogrammes Lucide (tracés officiels, inline — bundle statique hors React) */
+  const ICONS = {
+    party:'<line x1="3" x2="21" y1="22" y2="22"/><line x1="6" x2="6" y1="18" y2="11"/><line x1="10" x2="10" y1="18" y2="11"/><line x1="14" x2="14" y1="18" y2="11"/><line x1="18" x2="18" y1="18" y2="11"/><polygon points="12 2 20 7 4 7"/>',
+    leader:'<circle cx="12" cy="8" r="5"/><path d="M20 21a8 8 0 0 0-16 0"/>',
+    topic:'<path d="M14 9a2 2 0 0 1-2 2H6l-4 4V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2Z"/><path d="M18 9h2a2 2 0 0 1 2 2v11l-4-4h-6a2 2 0 0 1-2-2v-1"/>',
+    tone:'<path d="m12 14 4-4"/><path d="M3.34 19a10 10 0 1 1 17.32 0"/>'
+  };
+  const iconKind = k => (k==='party'||k==='leader'||k==='topic') ? k : 'tone';
+  const icon = (kind,size=15) => `<svg class="ss-ico" viewBox="0 0 24 24" width="${size}" height="${size}" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">${ICONS[iconKind(kind)]}</svg>`;
 
   const copy = {
     fr: { kicker:'SIGNALS AT A GLANCE', title:'STRATEGIC <em>SIGNALS</em>', sub:'Une galaxie décisionnelle des positions, tensions et connexions politiques', galaxy:'Galaxie décisionnelle', footprint:'Influence narrative', orbits:'Orbites thématiques', filters:'Filtres', parties:'Partis', leaders:'Leaders', topics:'Sujets', positive:'Positif', neutral:'Neutre', negative:'Négatif', frame:'CADRE D’ANALYSE', visibility:'Visibilité relative', urls:'URL uniques', balance:'Balance narrative', mainTopic:'Sujet principal', relations:'Relations thématiques', reading:'Lecture décisionnelle', method:'Calculs fondés sur des URL uniques dédupliquées. Balance = (positif − négatif) ÷ total. Cette lecture ne mesure ni popularité ni intention de vote.', positionTitle:'Matrice d’influence narrative', positionIntro:'Trois territoires de tonalité positionnent chaque acteur et sujet selon sa balance narrative et sa visibilité relative.', xAxis:'Balance narrative : négative ← 0 → positive', yAxis:'Visibilité relative /100', orbitTitle:'Orbites thématiques', orbitIntro:'Sélectionnez un parti ou un leader. Chaque sujet gravite selon son poids relationnel documenté.', orbitHint:'Cliquez sur une orbite pour analyser cette relation dans le panneau de droite.', actor:'Acteur observé', partySelect:'PARTIS POLITIQUES', leaderSelect:'LEADERS POLITIQUES', period:'29.07 au 05.08.2026', noData:'Aucune entité active pour ces filtres.', relation:'RELATION SÉLECTIONNÉE', exposure:'de l’exposition thématique documentée', actorTopic:'relation acteur-sujet', globalTone:'Le total consolidé couvre le corpus du graphe. Le total sujet couvre uniquement le corpus Opinion citoyenne.', partyKind:'Parti politique', leaderKind:'Leader politique', topicKind:'Sujet du débat', impactKind:'Impact réputationnel' },
