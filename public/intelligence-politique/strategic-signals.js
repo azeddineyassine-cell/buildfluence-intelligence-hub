@@ -38,6 +38,7 @@
   const femaleLeaders = new Set(['Fatima Ezzahra El Mansouri']);
   const leaderPortraits = Object.fromEntries(leaders.map(leader=>[leader.name,femaleLeaders.has(leader.name)?'assets/avatar-leader-female.svg':'assets/avatar-leader-male.svg']));
   const topicIcons = {'Sebta / migration':'⇄','Emploi / chômage':'▣','Eau / sécheresse':'◒','Justice':'⚖','Corruption':'◇','Santé':'✚','Éducation':'▤'};
+  const short = txt => txt.length>17 ? txt.slice(0,16)+'…' : txt;
   const rowFor = name => actors.find(x => x.name === name);
   const topicFor = name => topics.find(x => x.name === name);
   const actorTopics = name => topics.map(topic => ({ name:topic.name, value:(edges.find(e=>e[0]===name && e[1]===topic.name && e[3]==='influence') || [])[2] || 0 }));
@@ -226,20 +227,20 @@
     }
     const sum=rels.reduce((s,x)=>s+x.value,0), maxVal=Math.max(...rels.map(x=>x.value));
     const ranked=[...rels].sort((a,b)=>b.value-a.value);
-    const rings=[{rx:150,ry:80},{rx:238,ry:126},{rx:322,ry:170}];
+    const rings=[{rx:140,ry:78},{rx:222,ry:120},{rx:300,ry:158}];
     const ringIndex=i=>Math.min(2,Math.floor(i/Math.ceil(ranked.length/3)));
     const nodes=ranked.map((rel,i)=>{
       const ring=ringIndex(i), peers=ranked.filter((_,j)=>ringIndex(j)===ring), pos=peers.indexOf(rel);
-      const a=(-90+(pos+ (ring?0.5:0))*360/Math.max(1,peers.length))*Math.PI/180;
+      const a=(-90+ring*22+pos*360/Math.max(1,peers.length))*Math.PI/180;
       const topic=topicFor(rel.name), mentions=topic?topic.mentions:0;
       const r=14+Math.sqrt(mentions)/6;
       return {...rel, ring, mentions, r, x:cx+rings[ring].rx*Math.cos(a), y:cy+rings[ring].ry*Math.sin(a), share:sum?rel.value/sum*100:0, index:ranked.indexOf(rel)};
     });
     const scene=`<g id="ss-orbit-scene" transform="translate(${cx} ${cy}) scale(${state.orbitZoom}) translate(${-cx} ${-cy})">`+
-      rings.map((g,i)=>`<ellipse class="ss-topic-ring" cx="${cx}" cy="${cy}" rx="${g.rx}" ry="${g.ry}"/><text class="ss-ring-tag" x="${cx}" y="${cy-g.ry-6}" text-anchor="middle">${t('ring'+(i+1))}</text>`).join('')+
+      rings.map((g,i)=>`<ellipse class="ss-topic-ring" cx="${cx}" cy="${cy}" rx="${g.rx}" ry="${g.ry}"/><text class="ss-ring-tag" x="${cx}" y="${cy+g.ry+13}" text-anchor="middle">${t('ring'+(i+1))}</text>`).join('')+
       nodes.map(n=>`<line class="ss-topic-spoke" data-index="${n.index}" x1="${cx}" y1="${cy}" x2="${n.x}" y2="${n.y}" style="stroke-width:${(1+ n.value/maxVal*4).toFixed(2)}"/>`).join('')+
       `<circle class="ss-topic-halo" cx="${cx}" cy="${cy}" r="65"/><circle class="ss-topic-core" cx="${cx}" cy="${cy}" r="48"/><text x="${cx}" y="${cy-4}" text-anchor="middle">${core.short}</text><text x="${cx}" y="${cy+16}" text-anchor="middle" fill="#c9a84c">${fmt(sum)}</text>`+
-      nodes.map(n=>`<g class="ss-topic-node" data-index="${n.index}" tabindex="0" role="button" aria-label="${label(n.name)} · ${fmt(n.value)} · ${fmt(n.share,1)}%" transform="translate(${n.x} ${n.y})"><circle class="petal" r="${n.r.toFixed(1)}"/><text class="value" text-anchor="middle" y="-1">${fmt(n.value)}</text><text class="share" text-anchor="middle" y="13">${fmt(n.share,1)}%</text><text text-anchor="middle" y="${(n.r+17).toFixed(1)}">${label(n.name)}</text></g>`).join('')+`</g>`;
+      nodes.map(n=>`<g class="ss-topic-node" data-index="${n.index}" tabindex="0" role="button" aria-label="${label(n.name)} · ${fmt(n.value)} · ${fmt(n.share,1)}%" transform="translate(${n.x} ${n.y})"><circle class="petal" r="${n.r.toFixed(1)}"/><text class="value" text-anchor="middle" y="-1">${fmt(n.value)}</text><text class="share" text-anchor="middle" y="13">${fmt(n.share,1)}%</text><text text-anchor="middle" y="${(n.r+16).toFixed(1)}">${short(label(n.name))}</text></g>`).join('')+`</g>`;
     svg.innerHTML=scene;
     const dominant=d=>{const e=Object.entries(d.tones).sort((a,b)=>b[1]-a[1])[0];return e?t(e[0]):t('unavailable');};
     table.innerHTML=`<thead><tr><th>#</th><th>${t('colTopic')}</th><th>${t('colWeight')}</th><th>${t('colShare')}</th><th>${t('colTone')}</th><th>${t('urls')}</th></tr></thead><tbody>`+
