@@ -47,8 +47,9 @@ const parties=prepareMedia(canonicalMonitoring?.nationalMedia?.length?canonicalM
 const people=prepareMedia(canonicalMonitoring?.internationalMedia?.length?canonicalMonitoring.internationalMedia:legacyPeople);
 const nationalMedia=parties;
 const politicalParties=(canonicalMonitoring?.politicalParties?.length?canonicalMonitoring.politicalParties:legacyPoliticalParties).map(withToneSummary);
-const leaders=(canonicalMonitoring?.leaders?.length?canonicalMonitoring.leaders:legacyLeaders).map(withToneSummary);
-const themes=[['X / Twitter',36.0,'#259cd8'],['Facebook',28.6,'#5d79cf'],['Actualités',21.9,'#8cab36'],['Blogs',9.0,'#e0b235'],['Autres canaux',4.5,'#9955b4']];
+const femaleLeaders=new Set(['Fatima Ezzahra El Mansouri']);
+const leaderAvatar=name=>femaleLeaders.has(name)?'assets/avatar-leader-female.svg':'assets/avatar-leader-male.svg';
+const leaders=(canonicalMonitoring?.leaders?.length?canonicalMonitoring.leaders:legacyLeaders).map(x=>({...withToneSummary(x),image:leaderAvatar(x.name)}));
 
 function activateView(id){$$('.view').forEach(v=>v.classList.toggle('active',v.id===id));$$('.tabs button').forEach(b=>b.classList.toggle('active',b.dataset.view===id));scrollTo({top:0,behavior:'smooth'});if(id==='dashboard'){drawTrend();setTimeout(drawTrend,50)}if(id==='opinion')setTimeout(drawSentiment,50);if(id==='acteurs')setTimeout(drawRadar,50);if(id==='dynamiques')setTimeout(()=>{resetNetworkView();resizeNetwork()},50)}
 $$('[data-view]').forEach(b=>b.onclick=()=>activateView(b.dataset.view));$$('[data-jump]').forEach(b=>b.onclick=()=>activateView(b.dataset.jump));
@@ -66,7 +67,7 @@ function normalize(values){const max=Math.max(...values);return values.map(v=>v/
 const dataTooltip=document.body.appendChild(Object.assign(document.createElement('div'),{className:'data-tooltip'}));
 function showDataTooltip(e,text){dataTooltip.textContent=text;dataTooltip.style.display='block';dataTooltip.style.left=`${e.clientX+14}px`;dataTooltip.style.top=`${e.clientY+14}px`}
 function hideDataTooltip(){dataTooltip.style.display='none'}
-function bindCanvasTooltip(canvas,labels,values){canvas.onmousemove=e=>{const r=canvas.getBoundingClientRect(),i=Math.max(0,Math.min(values.length-1,Math.round((e.clientX-r.left)/(r.width/(values.length-1)))));showDataTooltip(e,`${labels[i]} : ${values[i].toLocaleString('fr-FR')} mentions`)};canvas.onmouseleave=hideDataTooltip}
+function bindCanvasTooltip(canvas,labels,values){if(!canvas)return;canvas.onmousemove=e=>{const r=canvas.getBoundingClientRect(),i=Math.max(0,Math.min(values.length-1,Math.round((e.clientX-r.left)/(r.width/(values.length-1)))));showDataTooltip(e,`${labels[i]} : ${values[i].toLocaleString('fr-FR')} mentions`)};canvas.onmouseleave=hideDataTooltip}
 function drawTrend(){const canvas=$('#trend-chart'),values=[291,206,259,184,180,339,355,350],labels=['29/07','30/07','31/07','01/08','02/08','03/08','04/08','05/08'];lineChart(canvas,[{color:'#299bd9',data:normalize(values)}],labels);bindCanvasTooltip(canvas,labels,values)}
 function drawSentiment(){const canvas=$('#sentiment-chart'),values=[137,326,264,413,911,2136,2801],labels=['30/07','31/07','01/08','02/08','03/08','04/08','05/08'];lineChart(canvas,[{color:'#ed5361',data:normalize(values)}],labels);bindCanvasTooltip(canvas,labels,values)}
 
@@ -93,10 +94,8 @@ const strongMentions=[
 ];
 $('#strong-mentions-list').innerHTML=strongMentions.map(m=>`<a class="strong-mention" href="${m.url}" target="_blank" rel="noopener noreferrer"><span class="tone-dot ${m.tone}"></span><strong>${m.title}</strong><small>${m.source} · ${m.date}</small><b>OUVRIR ↗</b></a>`).join('');
 
-$('#theme-list').innerHTML=themes.map((t,i)=>`<div class="theme-row ${i===0?'active':''}" data-theme="${i}"><i style="--c:${t[2]}"></i><span>${t[0]}</span><b>${t[1]}%</b></div>`).join('');$$('.theme-row').forEach(r=>r.onclick=()=>{$$('.theme-row').forEach(x=>x.classList.remove('active'));r.classList.add('active');const t=themes[+r.dataset.theme];$('#selected-share').innerHTML=`${t[1]}%<small>${t[0].toUpperCase()}</small>`});$$('#opinion-period button').forEach(b=>b.onclick=()=>{$$('#opinion-period button').forEach(x=>x.classList.remove('active'));b.classList.add('active')});
 function bindDonutTooltip(element,items,valueLabel){if(!element)return;element.onmousemove=e=>{const r=element.getBoundingClientRect(),x=e.clientX-r.left-r.width/2,y=e.clientY-r.top-r.height/2;let angle=(Math.atan2(y,x)*180/Math.PI+450)%360,cumulative=0,index=items.length-1;const total=items.reduce((sum,item)=>sum+item[1],0);for(let i=0;i<items.length;i++){cumulative+=items[i][1]/total*360;if(angle<=cumulative){index=i;break}}const item=items[index];showDataTooltip(e,`${item[0]} : ${valueLabel(item[1])}`)};element.onmouseleave=hideDataTooltip}
 bindDonutTooltip($('[data-donut="press"]'),pressTopics,v=>`${v.toLocaleString('fr-FR')} mentions`);
-bindDonutTooltip($('[data-donut="opinion"]'),themes,v=>`${v.toLocaleString('fr-FR')} %`);
 
 let mediaMode='international',actorIndex=0;const currentMedia=()=>mediaMode==='national'?nationalMedia:people;
 function renderActorList(){const data=currentMedia(),q=$('#actor-search').value.toLowerCase();$('#actor-list').innerHTML=data.map((x,i)=>({x,i})).filter(o=>(o.x.name+o.x.sub).toLowerCase().includes(q)).map(o=>`<div class="actor-item ${o.i===actorIndex?'active':''}" data-actor="${o.i}">${visualFor(o.x)}<span><strong>${o.x.name}</strong><small>${o.x.sub}</small></span><b>${o.x.score}</b></div>`).join('');$$('.actor-item').forEach(el=>el.onclick=()=>{actorIndex=+el.dataset.actor;renderActorList();renderActorProfile()})}

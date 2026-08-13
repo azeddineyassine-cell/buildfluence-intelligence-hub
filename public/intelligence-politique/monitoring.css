@@ -118,12 +118,14 @@ html[data-theme="light"] .network-tooltip { background: #FFFFFFEE; color: #0D1B2
 .strong-mentions { margin-top: 9px; }
 .strong-mentions .card-head > span { color: #8198a7; font-size: 8px; }
 #strong-mentions-list { display: grid; grid-template-columns: repeat(5, 1fr); }
-.strong-mention { min-height: 112px; padding: 14px; border-right: 1px solid var(--line); color: inherit; text-decoration: none; display: grid; grid-template-columns: 10px 1fr; gap: 6px 8px; }
+.strong-mention { min-height: 112px; padding: 14px; border-right: 1px solid var(--line); border-top:2px solid transparent; color: inherit; text-decoration: none; display: grid; grid-template-columns: 10px 1fr; gap: 6px 8px; background:linear-gradient(145deg,#14223566,#08111c22); transition:transform .22s ease,background .22s ease,border-color .22s ease,box-shadow .22s ease; }
 .strong-mention:last-child { border-right: 0; }
-.strong-mention:hover { background: #ffffff08; }
+.strong-mention:hover,.strong-mention:focus-visible { position:relative;z-index:2;background:linear-gradient(145deg,#1A2D44,#142235);border-top-color:var(--gold);transform:translateY(-5px);box-shadow:0 12px 24px #0005,0 0 0 1px #c9a84c55;outline:0; }
 .strong-mention strong { font-size: 10px; line-height: 1.45; }
 .strong-mention small { grid-column: 2; color: #8299a8; font-size: 8px; }
 .strong-mention b { grid-column: 2; color: #39aede; font: 700 8px var(--cond); }
+.strong-mention:hover b,.strong-mention:focus-visible b{color:var(--gold)}
+html[data-theme="light"] .strong-mention{background:linear-gradient(145deg,#fff,#F5F1E8)}html[data-theme="light"] .strong-mention:hover,html[data-theme="light"] .strong-mention:focus-visible{background:linear-gradient(145deg,#fff,#F1E6C8);box-shadow:0 12px 24px #0d1b2a20,0 0 0 1px #c9a84c88}
 .tone-dot { width: 7px; height: 7px; margin-top: 4px; border-radius: 50%; background: #7d91a0; }
 .tone-dot.positive { background: var(--green); }
 .tone-dot.negative { background: var(--red); }
@@ -394,7 +396,7 @@ html[data-theme="light"] .outcomes small { color: #5C6670; }
   background: #FFFFFF;
 }
 .rank-actor .actor-dot img { padding: 3px; }
-.rank-actor .actor-dot:has(img[src*="person-"]) img { padding: 0; object-position: center top; }
+.rank-actor .actor-dot:has(img[src*="person-"]) img,.rank-actor .actor-dot:has(img[src*="avatar-leader-"]) img { padding: 0; object-position: center; }
 .ranking-guide { padding: 24px; }
 .ranking-guide h2 { margin-bottom: 16px; }
 .ranking-options { display: grid; gap: 7px; }
