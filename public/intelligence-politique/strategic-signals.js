@@ -200,10 +200,10 @@
     data.sort((a,b)=>b.vis-a.vis);
     data.forEach(row=>{
       const btn=document.createElement('button');
-      btn.type='button'; btn.className=`ss-mk ${row.kind} t${tier(row.urls)}${row.d.name===state.selected?' selected':''}`;
+      btn.type='button'; btn.className=`ss-mk ${row.kind} ${row.quad} t${tier(row.urls)}${row.d.name===state.selected?' selected':''}`;
       btn.dataset.name=row.d.name; btn.dataset.quad=row.quad;
       btn.style.left=((row.balance+100)/2)+'%'; btn.style.bottom=Math.max(0,Math.min(100,row.vis))+'%';
-      btn.innerHTML=`<i class="ss-mk-shape" aria-hidden="true"></i><span class="ss-mk-label">${label(row.d.name)}<small>${fmt(row.urls)}</small></span>`;
+      btn.innerHTML=`<i class="ss-mk-shape" aria-hidden="true">${icon(row.kind)}</i><i class="ss-mk-dot" aria-hidden="true"></i><span class="ss-mk-label">${label(row.d.name)}<small>${fmt(row.urls)}</small></span>`;
       btn.setAttribute('aria-label',`${label(row.d.name)} · ${row.d.kind} · ${t('urls')} ${fmt(row.urls)} · ${t('visibility')} ${fmt(row.vis,1)} · ${t('balance')} ${fmt(row.balance,1)}`);
       btn.addEventListener('mouseenter',()=>showTip(btn,row));
       btn.addEventListener('focus',()=>showTip(btn,row));
