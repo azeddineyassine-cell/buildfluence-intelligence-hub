@@ -317,6 +317,8 @@
   function applyFilters(){renderGalaxy();renderMatrix();renderActorPicker();if(state.tab==='orbits')renderOrbits();const current=graphNodes.find(n=>n.name===state.selected);if(current&&!state.active.has(current.kind)){const next=galaxyNodes.find(n=>state.active.has(n.kind));if(next)select(next.name);}}
   ['#ss-party-pick','#ss-leader-pick'].forEach(selector=>root.querySelector(selector).addEventListener('change',e=>{if(!e.target.value)return;state.orbitActor=e.target.value;state.orbitZoom=1;renderOrbits();}));
   root.querySelector('#ss-rank-sort').addEventListener('change',e=>{state.rankSort=e.target.value;renderMatrix();});
+  root.querySelector('#ss-rank-cat').addEventListener('change',e=>{state.rankCat=e.target.value;renderMatrix();});
+  root.querySelector('.ss-ranking').addEventListener('keydown',e=>{if(e.key==='Escape'&&state.detail){const name=state.detail;e.stopPropagation();closeDetail();focusRow(name);}});
   root.querySelectorAll('[data-orbit-mode]').forEach(b=>b.addEventListener('click',()=>{state.orbitMode=b.dataset.orbitMode;root.querySelectorAll('[data-orbit-mode]').forEach(x=>x.classList.toggle('active',x===b));root.querySelectorAll('[data-orbit-pane]').forEach(p=>p.classList.toggle('active',p.dataset.orbitPane===state.orbitMode));}));
   root.querySelectorAll('[data-orbit-cmd]').forEach(b=>b.addEventListener('click',()=>{
     const cmd=b.dataset.orbitCmd;
