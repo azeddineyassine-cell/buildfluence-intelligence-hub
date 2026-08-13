@@ -216,3 +216,4 @@ html[dir="rtl"] .ss-table th,html[dir="rtl"] .ss-table td { text-align:right; }
 .ss-detail-meta b { color:var(--ss-ink); }
 @media(max-width:1000px){ .ss-rank-body,.ss-rank-body:has(.ss-detail[hidden]) { grid-template-columns:minmax(0,1fr); } .ss-detail { border-inline-start:0; border-top:1px solid var(--gold); } }
 @media(max-width:680px){ .ss-matrix-wrap { grid-template-columns:20px 26px minmax(0,1fr); } .ss-mk .ss-ico,.ss-mk.t3 .ss-ico,.ss-mk.t4 .ss-ico { width:13px; height:13px; } }
+.ss-matrix-wrap { margin-top:38px; }
