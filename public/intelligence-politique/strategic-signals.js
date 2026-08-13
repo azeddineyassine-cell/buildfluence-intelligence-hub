@@ -233,7 +233,7 @@
     count.textContent = cat==='all' ? fmt(data.length) : `${fmt(filtered.length)} / ${fmt(data.length)}`;
     const rows=filtered.sort((a,b)=>sort==='balance'?b.balance-a.balance:sort==='urls'?b.urls-a.urls:b.vis-a.vis);
     table.innerHTML=`<thead><tr><th>#</th><th>${t('colEntity')}</th><th>${t('colCategory')}</th><th>${t('colQuadrant')}</th><th>${t('visibility')}</th><th>${t('balance')}</th><th>${t('urls')}</th></tr></thead><tbody>`+
-      rows.map((r,i)=>`<tr data-name="${r.d.name}" tabindex="0" aria-label="${label(r.d.name)} — ${t('openDetail')}" class="${r.d.name===state.selected?'selected':''}"><td>${i+1}</td><td><span class="ss-cell-ico">${icon(r.kind,13)}</span>${label(r.d.name)}</td><td>${r.d.kind}</td><td><span class="ss-quad-chip ${r.quad}">${t(r.quad)}</span></td><td>${fmt(r.vis,1)}</td><td>${r.balance>0?'+':''}${fmt(r.balance,1)}</td><td>${fmt(r.urls)}</td></tr>`).join('')+`</tbody>`;
+      rows.map((r,i)=>`<tr data-name="${r.d.name}" tabindex="0" aria-label="${label(r.d.name)} — ${t('openDetail')}" class="${r.kind}${r.d.name===state.selected?' selected':''}"><td>${i+1}</td><td><span class="ss-cell-ico">${icon(r.kind,13)}</span>${label(r.d.name)}</td><td>${r.d.kind}</td><td><span class="ss-quad-chip ${r.quad}">${t(r.quad)}</span></td><td>${fmt(r.vis,1)}</td><td>${r.balance>0?'+':''}${fmt(r.balance,1)}</td><td>${fmt(r.urls)}</td></tr>`).join('')+`</tbody>`;
     table.querySelectorAll('tbody tr').forEach(tr=>{
       tr.addEventListener('click',()=>{select(tr.dataset.name);openDetail(tr.dataset.name);});
       tr.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();select(tr.dataset.name);openDetail(tr.dataset.name);}});
