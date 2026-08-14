@@ -1,6 +1,5 @@
 /* ===== OPINION — Cockpit du débat observé. Tokens officiels Buildfluence uniquement. ===== */
 #opinion-insights{padding-bottom:24px}
-.oi-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 .oi-head{padding:34px 4px 20px}
 .oi-head h1{margin:0 0 12px;font:700 clamp(32px,3.8vw,50px)/1.05 var(--serif)}
 .oi-head h1 em{color:var(--gold);font-style:italic}
@@ -11,27 +10,15 @@
 .oi-sub{margin:6px 0 0;max-width:900px;color:var(--muted);font:400 13px/1.6 var(--sans)}
 .oi-label{margin:18px 0 8px;color:var(--gold);font:700 10px/1.4 var(--cond);letter-spacing:.08em;text-transform:uppercase}
 
-/* Synthèse exécutive */
-.oi-synthesis{margin-bottom:16px}
-.oi-syn-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:10px}
-.oi-syn{display:grid;gap:6px;padding:16px;border:1px solid var(--line);border-left:2px solid var(--gold);border-radius:2px;background:var(--panel);color:var(--text);text-align:start;cursor:pointer;transition:.2s ease}
-[dir=rtl] .oi-syn{border-left:1px solid var(--line);border-right:2px solid var(--gold)}
-.oi-syn:hover{border-color:var(--gold);transform:translateY(-2px)}
-.oi-syn small{color:var(--muted);font:700 9.5px/1.4 var(--cond);letter-spacing:.07em;text-transform:uppercase}
-.oi-syn strong{font:700 16px/1.25 var(--serif)}
-.oi-syn b{color:var(--gold);font:700 26px/1 var(--serif)}
-.oi-syn span{color:var(--muted);font:500 10.5px var(--cond)}
-.oi-syn em{color:var(--muted);font:italic 400 12.5px/1.5 var(--quote,var(--sans))}
 
 /* Barre d'outils */
 .oi-toolbar{display:flex;flex-wrap:wrap;align-items:center;gap:10px;padding:12px;margin-bottom:16px;border:1px solid var(--line);border-radius:2px;background:var(--panel)}
-.oi-search input{min-width:220px;min-height:40px;padding:0 12px;border:1px solid var(--line);border-radius:2px;background:transparent;color:var(--text);font:500 13px var(--sans)}
 .oi-seg{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
 .oi-seg small{color:var(--muted);font:700 9.5px var(--cond);letter-spacing:.07em}
 .oi-seg button,.oi-btn{min-height:40px;padding:0 14px;border:1px solid var(--line);border-radius:2px;background:transparent;color:var(--text);font:700 10.5px var(--cond);letter-spacing:.06em;cursor:pointer;transition:.2s ease}
 .oi-seg button:hover,.oi-btn:hover{border-color:var(--gold)}
 .oi-seg button.on,.oi-btn.on{background:var(--gold);border-color:var(--gold);color:#0D1B2A}
-.oi-toolbar :focus-visible,.oi-table tr:focus-visible,.oi-dot:focus-visible,.oi-tnode:focus-visible,.oi-syn:focus-visible,.oi-close:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.oi-toolbar :focus-visible,.oi-table tr:focus-visible,.oi-dot:focus-visible,.oi-tnode:focus-visible,.oi-close:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
 
 /* Cockpit + fiche */
 .oi-grid{display:grid;align-items:start;grid-template-columns:minmax(0,1.9fr) minmax(320px,1fr);gap:14px;margin-bottom:14px}
@@ -81,8 +68,6 @@
 .oi-table tbody tr.on{background:color-mix(in srgb,var(--gold) 16%,transparent)}
 .oi-table tbody th{font:700 13px var(--sans)}
 
-/* Croisement sujets-acteurs */
-.oi-cross{margin-bottom:14px}
 .oi-constellation{width:100%;height:auto}
 .oi-constellation .oi-edge{stroke:var(--gold);stroke-opacity:.32}
 .oi-constellation .oi-anode circle{fill:var(--line)}
@@ -91,17 +76,7 @@
 .oi-constellation .oi-tnode circle{fill:color-mix(in srgb,var(--gold) 22%,transparent);stroke:var(--gold);stroke-width:1.5}
 .oi-constellation .oi-tnode.on circle{stroke-width:3}
 .oi-constellation .oi-tnode text{fill:var(--text);font:700 11px var(--cond)}
-.oi-linklist{margin-top:16px}
 
-/* États indisponibles */
-.oi-unavailable{padding:18px;border:1px dashed var(--line);border-radius:2px;text-align:center}
-.oi-unavailable strong{display:block;color:var(--gold);font:700 13px var(--cond);letter-spacing:.1em}
-.oi-unavailable>p{max-width:760px;margin:10px auto 0;color:var(--muted);font:400 13.5px/1.7 var(--sans)}
-.oi-unavailable small{display:block;max-width:820px;margin:14px auto 0;color:var(--muted);font:400 12px/1.6 var(--sans)}
-.oi-ghost{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:14px}
-.oi-ghost span{padding:8px 12px;border:1px solid var(--line);border-radius:2px;color:var(--muted);font:700 9.5px var(--cond);letter-spacing:.06em;opacity:.55}
-.oi-need{display:grid;gap:5px;max-width:640px;margin:6px auto 0;padding-inline-start:18px;color:var(--muted);font:500 12.5px/1.6 var(--sans);text-align:start}
-.oi-timeline,.oi-signals{margin-bottom:14px}
 
 /* Méthodologie */
 .oi-metho-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px}
@@ -111,15 +86,13 @@
 .oi-warn{margin:16px 0 0;padding:14px;border:1px solid var(--gold);border-radius:2px;color:var(--text);font:italic 400 13.5px/1.7 var(--quote,var(--sans))}
 
 @media (max-width:1100px){
-  .oi-syn-grid{grid-template-columns:repeat(2,1fr)}
   .oi-grid{grid-template-columns:1fr}
   .oi-metho-grid{grid-template-columns:1fr 1fr}
 }
 @media (max-width:720px){
-  .oi-syn-grid,.oi-metho-grid{grid-template-columns:1fr}
+  .oi-metho-grid{grid-template-columns:1fr}
   .oi-card{padding:16px}
   .oi-toolbar{gap:8px}
-  .oi-search input{min-width:100%}
   .oi-seg,.oi-btn{width:100%}
   .oi-seg{justify-content:space-between}
   .oi-seg button{flex:1}
@@ -128,7 +101,6 @@
 }
 @media (prefers-reduced-motion:reduce){
   #opinion-insights *{transition:none!important;animation:none!important}
-  .oi-syn:hover{transform:none}
 }
 
 /* ===== Entrée en entonnoir : trois camemberts ===== */
