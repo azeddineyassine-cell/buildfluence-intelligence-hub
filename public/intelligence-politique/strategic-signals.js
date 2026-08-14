@@ -38,7 +38,58 @@
     en: { legShapes:'Pictogram = category: institution → party · figure → leader · conversation → issue · gauge → tone', legQuad:'Colour and texture = analytical quadrant (visibility × balance), not a tone. The quadrant label always remains visible: colour is never the only cue.', legDot:'The 3 px centre mark shows the exact position of the entity. No point is displaced.', xAxisNew:'NARRATIVE BALANCE', yAxisNew:'RELATIVE VISIBILITY', showBy:'SHOW', catAll:'All', catParties:'Political parties', catLeaders:'Political leaders', catTopics:'Debate issues', rankScope:'The display filter applies to this ranking only, not to the matrix.', detailTitle:'DETAIL CARD', close:'Close', category:'Category', toneSplit:'Positive / Neutral / Negative', periodLabel:'Period', methodLabel:'Method', openDetail:'Open the detail card' },
     ar: { legShapes:'الرمز = الفئة: مؤسسة → حزب · شخصية → قائد · محادثة → موضوع · مؤشر → نبرة', legQuad:'اللون والملمس = الربع التحليلي (الظهور × التوازن)، وليس نبرة. يظل عنوان الربع ظاهرا: اللون ليس المؤشر الوحيد أبدا.', legDot:'تشير النقطة المركزية بحجم 3 بكسل إلى الموقع الدقيق للكيان. لا يتم إزاحة أي نقطة.', xAxisNew:'التوازن السردي', yAxisNew:'الظهور النسبي', showBy:'إظهار', catAll:'الكل', catParties:'الأحزاب السياسية', catLeaders:'القادة السياسيون', catTopics:'مواضيع النقاش', rankScope:'يطبق مرشح الإظهار على هذا الترتيب فقط، وليس على المصفوفة.', detailTitle:'بطاقة تفصيلية', close:'إغلاق', category:'الفئة', toneSplit:'إيجابي / محايد / سلبي', periodLabel:'الفترة', methodLabel:'المنهجية', openDetail:'فتح البطاقة التفصيلية' }
   };
-  Object.keys(copy).forEach(k => Object.assign(copy[k], extraCopy[k], v34Copy[k]));
+  const gxCopy = {
+    fr: {
+      gxTitle:'Galaxie décisionnelle', gxIntro:'Quels acteurs et sujets structurent le débat, et par quelles relations documentées ? Quatre couronnes concentriques : sujets, leaders, partis, tonalités. Les positions sont déterministes et reproductibles.',
+      searchLabel:'RECHERCHE', searchPh:'Rechercher une entité…', noResult:'Aucune entité correspondante.',
+      modeGalaxy:'GALAXIE', modeFocus:'MODE FOCALISÉ', modeTable:'TABLEAU',
+      gxIn:'Zoom avant', gxOut:'Zoom arrière', gxCenter:'Recentrer', gxReset:'Réinitialiser', gxFull:'Plein écran', gxExit:'Quitter le plein écran',
+      readTitle:'LECTURE DE LA GALAXIE',
+      read1:'Ce que montre la galaxie : les 28 entités du débat et leurs 128 cooccurrences documentées sur 7 421 URL uniques.',
+      read2:'Comment lire : la couronne indique la catégorie, la taille du nœud le volume d’URL uniques, l’épaisseur du lien le volume de la relation.',
+      read3:'Ce que la galaxie ne dit pas : l’angle et la distance entre deux nœuds ne signifient rien. Une cooccurrence n’est ni une influence, ni une alliance, ni une causalité, ni une popularité, ni une intention de vote.',
+      read4:'Méthode : URL canoniques uniques dédupliquées, wikipedia.org et wiktionary.org exclus, période 29.07 → 05.08.2026.',
+      ringTopics:'COURONNE 1 · SUJETS', ringLeaders:'COURONNE 2 · LEADERS', ringParties:'COURONNE 3 · PARTIS', ringTones:'COURONNE 4 · TONALITÉS',
+      gxDegree:'Relations documentées', gxWeight:'Poids relationnel cumulé', gxRelList:'RELATIONS DOCUMENTÉES',
+      relInfluence:'Exposition documentée', relAlliance:'Cooccurrence positive', relProximite:'Cooccurrence neutre', relOpposition:'Cooccurrence négative',
+      colDegree:'Relations', colWeight:'Poids cumulé', gxKeyboard:'Clavier : Tab pour atteindre la scène, ← → pour parcourir la couronne, ↑ ↓ pour changer de couronne, Entrée pour sélectionner, Échap pour quitter le plein écran.',
+      gxLimit:'Cette lecture ne mesure ni popularité, ni intention de vote, ni causalité.', focusTitle:'Voisinage documenté'
+    },
+    en: {
+      gxTitle:'Decision galaxy', gxIntro:'Which actors and issues structure the debate, and through which documented relations? Four concentric crowns: issues, leaders, parties, tones. Positions are deterministic and reproducible.',
+      searchLabel:'SEARCH', searchPh:'Search an entity…', noResult:'No matching entity.',
+      modeGalaxy:'GALAXY', modeFocus:'FOCUS MODE', modeTable:'TABLE',
+      gxIn:'Zoom in', gxOut:'Zoom out', gxCenter:'Recenter', gxReset:'Reset', gxFull:'Full screen', gxExit:'Exit full screen',
+      readTitle:'HOW TO READ THE GALAXY',
+      read1:'What the galaxy shows: the 28 entities of the debate and their 128 documented co-occurrences across 7,421 unique URLs.',
+      read2:'How to read it: the crown gives the category, node size the unique-URL volume, link thickness the volume of the relation.',
+      read3:'What the galaxy does not say: angle and distance between two nodes carry no meaning. A co-occurrence is neither influence, nor alliance, nor causality, nor popularity, nor voting intention.',
+      read4:'Method: deduplicated canonical unique URLs, wikipedia.org and wiktionary.org excluded, period 29 Jul → 5 Aug 2026.',
+      ringTopics:'CROWN 1 · ISSUES', ringLeaders:'CROWN 2 · LEADERS', ringParties:'CROWN 3 · PARTIES', ringTones:'CROWN 4 · TONES',
+      gxDegree:'Documented relations', gxWeight:'Cumulated relational weight', gxRelList:'DOCUMENTED RELATIONS',
+      relInfluence:'Documented exposure', relAlliance:'Positive co-occurrence', relProximite:'Neutral co-occurrence', relOpposition:'Negative co-occurrence',
+      colDegree:'Relations', colWeight:'Cumulated weight', gxKeyboard:'Keyboard: Tab to reach the scene, ← → to move along the crown, ↑ ↓ to change crown, Enter to select, Esc to exit full screen.',
+      gxLimit:'This reading measures neither popularity, nor voting intention, nor causality.', focusTitle:'Documented neighbourhood'
+    },
+    ar: {
+      gxTitle:'مجرة القرار', gxIntro:'أي الفاعلين والمواضيع تبني النقاش، وبأي علاقات موثقة؟ أربع حلقات متمركزة: المواضيع، القادة، الأحزاب، النبرات. المواقع محددة وقابلة للتكرار.',
+      searchLabel:'البحث', searchPh:'ابحث عن كيان…', noResult:'لا يوجد كيان مطابق.',
+      modeGalaxy:'المجرة', modeFocus:'وضع التركيز', modeTable:'الجدول',
+      gxIn:'تكبير', gxOut:'تصغير', gxCenter:'إعادة التمركز', gxReset:'إعادة التعيين', gxFull:'ملء الشاشة', gxExit:'الخروج من ملء الشاشة',
+      readTitle:'كيف تُقرأ المجرة',
+      read1:'ما تعرضه المجرة: 28 كيانا في النقاش و128 تزامنا موثقا عبر 7 421 رابطا فريدا.',
+      read2:'كيفية القراءة: الحلقة تحدد الفئة، وحجم العقدة يعبر عن حجم الروابط الفريدة، وسماكة الرابط عن حجم العلاقة.',
+      read3:'ما لا تقوله المجرة: الزاوية والمسافة بين عقدتين لا تعنيان شيئا. التزامن ليس تأثيرا ولا تحالفا ولا سببية ولا شعبية ولا نية تصويت.',
+      read4:'المنهجية: روابط فريدة بعد إزالة التكرار، مع استثناء wikipedia.org و wiktionary.org، الفترة 29.07 → 05.08.2026.',
+      ringTopics:'الحلقة 1 · المواضيع', ringLeaders:'الحلقة 2 · القادة', ringParties:'الحلقة 3 · الأحزاب', ringTones:'الحلقة 4 · النبرات',
+      gxDegree:'علاقات موثقة', gxWeight:'الوزن العلائقي التراكمي', gxRelList:'العلاقات الموثقة',
+      relInfluence:'تعرض موثق', relAlliance:'تزامن إيجابي', relProximite:'تزامن محايد', relOpposition:'تزامن سلبي',
+      colDegree:'العلاقات', colWeight:'الوزن التراكمي', gxKeyboard:'لوحة المفاتيح: Tab للوصول إلى المشهد، ← → للتنقل داخل الحلقة، ↑ ↓ لتغيير الحلقة، Enter للاختيار، Esc للخروج من ملء الشاشة.',
+      gxLimit:'لا تقيس هذه القراءة الشعبية ولا نية التصويت ولا السببية.', focusTitle:'الجوار الموثق'
+    }
+  };
+  Object.keys(copy).forEach(k => Object.assign(copy[k], extraCopy[k], v34Copy[k], gxCopy[k]));
+
   const localizedTopics = {
     en:{'Sebta / migration':'Ceuta / migration','Emploi / chômage':'Employment / unemployment','Eau / sécheresse':'Water / drought','Santé':'Health','Éducation':'Education'},
     ar:{'Sebta / migration':'سبتة / الهجرة','Emploi / chômage':'التشغيل / البطالة','Eau / sécheresse':'الماء / الجفاف','Santé':'الصحة','Éducation':'التعليم','Justice':'العدالة','Corruption':'الفساد'}
