@@ -264,7 +264,7 @@
                     <p class="ab-sit-situation"></p>
                     <p class="ab-sit-line"><span class="ab-sit-lbl">Intervention</span><span class="ab-sit-val ab-sit-inter"></span></p>
                     <p class="ab-sit-line"><span class="ab-sit-lbl">Résultat vérifié</span><span class="ab-sit-val ab-sit-result"></span></p>
-                    <p class="ab-sit-foot"><a class="ab-sit-link" href="#" target="_top">Voir la référence ↗</a><span class="ab-sit-tag"></span></p>
+                    <p class="ab-sit-foot"><a class="ab-sit-link" href="#" target="_top">Voir la référence ↗</a><span class="ab-sit-tag"></span><span class="sd-hidden" hidden><span class="sd-tag-public">Référence publique représentative</span></span></p>
                   </div>
                   <button type="button" class="ab-sit-close" aria-label="Fermer la fiche de référence">×</button>
                 </div>
@@ -380,7 +380,7 @@
           elSituation.textContent = txt(sit, '.ab-sit-name');
           elInter.textContent = txt(sit, '.sd-inter');
           elResult.textContent = txt(sit, '.sd-result');
-          tag.textContent = txt(sit, '.sd-entity') + (conf ? '' : ' · ' + (detail.dataset.tagPublic || 'Référence publique représentative'));
+          tag.textContent = txt(sit, '.sd-entity') + (conf ? '' : ' · ' + (card.querySelector('.sd-tag-public')?.textContent || '').trim());
           link.setAttribute('href', sit.dataset.href);
           if (conf) {
             logo.hidden = true; logo.removeAttribute('src'); pict.hidden = false;
@@ -396,7 +396,6 @@
           current = null; card.hidden = true; empty.hidden = false;
           sits.forEach(s => s.classList.remove('is-active'));
         };
-        detail.dataset.tagPublic = 'Référence publique représentative';
 
         sits.forEach(sit => {
           sit.addEventListener('mouseenter', () => { if (!coarse()) render(sit); });
