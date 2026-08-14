@@ -370,12 +370,12 @@
         const link = card.querySelector('.ab-sit-link');
         const tag = card.querySelector('.ab-sit-tag');
         const closeBtn = card.querySelector('.ab-sit-close');
-        let current = null;
+        let current = null, lastRender = 0;
         const txt = (sit, cls) => (sit.querySelector(cls)?.textContent || '').trim();
 
         const render = (sit) => {
           if (!sit) return;
-          current = sit;
+          current = sit; lastRender = Date.now();
           const conf = sit.dataset.confidential === '1';
           elSituation.textContent = txt(sit, '.ab-sit-name');
           elInter.textContent = txt(sit, '.sd-inter');
@@ -401,7 +401,8 @@
           sit.addEventListener('mouseenter', () => { if (!coarse()) render(sit); });
           sit.addEventListener('focus', () => render(sit));
           sit.addEventListener('click', () => {
-            if (current === sit) { window.top.location.href = sit.dataset.href; return; }
+            const ready = current === sit && (!coarse() || Date.now() - lastRender > 450);
+            if (ready) { window.top.location.href = sit.dataset.href; return; }
             render(sit);
           });
           sit.addEventListener('keydown', (e) => { if (e.key === 'Escape') { reset(); sit.blur(); } });
