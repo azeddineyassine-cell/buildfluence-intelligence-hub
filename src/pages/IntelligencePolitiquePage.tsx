@@ -30,7 +30,7 @@ const IntelligencePolitiquePage = () => {
         style={{ position: "fixed", inset: 0, background: "#020f1b" }}
       >
         <iframe
-          src="/intelligence-politique/index.html?v=20260814-3"
+          src="/intelligence-politique/index.html?v=20260815-1"
           title="Intelligence Politique"
           style={{ width: "100%", height: "100%", border: 0, display: "block" }}
         />
