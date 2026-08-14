@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Cormorant+Garamond:ital,wght@1,400;1,500&family=DM+Sans:wght@400;500;700&family=JetBrains+Mono:wght@500;600;700&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20260814-1">
+  <link rel="stylesheet" href="styles.css?v=20260814-2">
   <link rel="stylesheet" href="monitoring.css?v=20260813-2">
   <link rel="stylesheet" href="strategic-signals.css?v=20260813-7">
   <link rel="stylesheet" href="opinion-insights.css">
@@ -342,18 +342,21 @@
 
       /* ---- Secteurs : révélation logo (hover/focus desktop, appuis successifs mobile) ---- */
       const coarse = () => window.matchMedia('(hover:none)').matches || window.innerWidth <= 640;
-      const refs = [...document.querySelectorAll('.ab-ref')];
-      const closeRefs = (except) => refs.forEach(r => { if (r !== except) r.classList.remove('is-open'); });
-      refs.forEach(ref => {
-        ref.addEventListener('click', (e) => {
-          if (!coarse()) return;
-          if (!ref.classList.contains('is-open')) { e.preventDefault(); closeRefs(ref); ref.classList.add('is-open'); }
-        });
-        ref.addEventListener('keydown', (e) => {
-          if (e.key === ' ' || e.key === 'Spacebar') { e.preventDefault(); ref.click(); }
-          if (e.key === 'Escape') ref.classList.remove('is-open');
-        });
-        ref.addEventListener('blur', () => { if (!coarse()) ref.classList.remove('is-open'); });
+      const refsRoot = document.querySelector('.ab-refs');
+      const refs = () => [...document.querySelectorAll('.ab-ref')];
+      const closeRefs = (except) => refs().forEach(r => { if (r !== except) r.classList.remove('is-open'); });
+      refsRoot?.addEventListener('click', (e) => {
+        const ref = e.target.closest('.ab-ref');
+        if (!ref || !coarse()) return;
+        if (!ref.classList.contains('is-open')) {
+          e.preventDefault(); closeRefs(ref); ref.classList.add('is-open');
+        }
+      });
+      refsRoot?.addEventListener('keydown', (e) => {
+        const ref = e.target.closest('.ab-ref');
+        if (!ref) return;
+        if (e.key === ' ' || e.key === 'Spacebar') { e.preventDefault(); ref.click(); }
+        if (e.key === 'Escape') { e.preventDefault(); ref.classList.remove('is-open'); ref.blur(); }
       });
 
       /* ---- Situations traitées : fiche adjacente ---- */
@@ -397,15 +400,27 @@
           sits.forEach(s => s.classList.remove('is-active'));
         };
 
-        sits.forEach(sit => {
-          sit.addEventListener('mouseenter', () => { if (!coarse()) render(sit); });
-          sit.addEventListener('focus', () => render(sit));
-          sit.addEventListener('click', () => {
-            const ready = current === sit && (!coarse() || Date.now() - lastRender > 450);
-            if (ready) { window.top.location.href = sit.dataset.href; return; }
-            render(sit);
-          });
-          sit.addEventListener('keydown', (e) => { if (e.key === 'Escape') { reset(); sit.blur(); } });
+        const sitsRoot = document.querySelector('.ab-sits');
+        sitsRoot?.addEventListener('pointerover', (e) => {
+          const sit = e.target.closest('.ab-sit');
+          if (sit && !coarse()) render(sit);
+        });
+        sitsRoot?.addEventListener('focusin', (e) => {
+          const sit = e.target.closest('.ab-sit');
+          if (sit) render(sit);
+        });
+        sitsRoot?.addEventListener('click', (e) => {
+          const sit = e.target.closest('.ab-sit');
+          if (!sit) return;
+          const ready = current === sit && (!coarse() || Date.now() - lastRender > 450);
+          if (ready) { window.top.location.href = sit.dataset.href; return; }
+          render(sit);
+        });
+        sitsRoot?.addEventListener('keydown', (e) => {
+          const sit = e.target.closest('.ab-sit');
+          if (!sit) return;
+          if (e.key === ' ' || e.key === 'Spacebar') { e.preventDefault(); sit.click(); }
+          if (e.key === 'Escape') { e.preventDefault(); reset(); sit.blur(); }
         });
         closeBtn.addEventListener('click', reset);
         document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !card.hidden) reset(); });
