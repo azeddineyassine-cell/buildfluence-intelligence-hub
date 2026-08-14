@@ -55,8 +55,8 @@ const SEO_BY_PANEL: Record<PanelSlug, { titleFr: string; titleEn: string; descFr
   "acteurs": {
     titleFr: "Acteurs · Intelligence Politique",
     titleEn: "Actors · Political Intelligence",
-    descFr: "Analyse multidimensionnelle des acteurs politiques : popularité, crédibilité, influence, mobilisation, engagement, leadership.",
-    descEn: "Multidimensional analysis of political actors: popularity, credibility, influence, mobilization, engagement, leadership.",
+    descFr: "Analyse multidimensionnelle des acteurs politiques : visibilité, crédibilité, influence, mobilisation, engagement, leadership.",
+    descEn: "Multidimensional analysis of political actors: visibility, credibility, influence, mobilization, engagement, leadership.",
     path: "/insights-resources/intelligence-politique/acteurs",
   },
   "dynamiques": {

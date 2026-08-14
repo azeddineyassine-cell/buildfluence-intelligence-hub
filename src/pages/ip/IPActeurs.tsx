@@ -37,7 +37,7 @@ const PREMIUM_ACTORS: Actor[] = [
   },
 ];
 
-const DIMS = ["Popularité", "Crédibilité", "Influence", "Mobilisation", "Engagement", "Leadership"];
+const DIMS = ["Visibilité", "Crédibilité", "Influence", "Mobilisation", "Engagement", "Leadership"];
 
 const Radar = ({ values }: { values: [number, number, number, number, number, number] }) => {
   // Hexagon radar
