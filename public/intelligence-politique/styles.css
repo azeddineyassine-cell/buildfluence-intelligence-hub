@@ -263,3 +263,4 @@ html[data-theme="dark"] #apropos{--ab-bg:linear-gradient(145deg,#142235,#0D1B2A)
   .ab-sit-detail{min-height:0}
 }
 @media (prefers-reduced-motion:reduce){.ab-ref,.ab-sit,.ab-ref-name,.ab-sit-name,.ab-ref-reveal{transition:none}}
+#apropos [hidden]{display:none!important}
