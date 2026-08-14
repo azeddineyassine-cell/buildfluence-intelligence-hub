@@ -268,3 +268,6 @@ html[data-theme="light"] .ss-ring-label { fill:#66717b; }
   .ss-star .ss-node-label { display:none; }
   .ss-star.hot .ss-node-label,.ss-star:focus-visible .ss-node-label { display:block; }
 }
+/* lisibilité de la galaxie hors sélection */
+#ss-gx-scene .ss-star.dim { opacity:.42; }
+#ss-gx-scene .ss-ray.dim { opacity:.07; }
