@@ -222,3 +222,53 @@ html[dir="rtl"] .ss-table th,html[dir="rtl"] .ss-table td { text-align:right; }
 .ss-xticks .neg { inset-inline-start:auto; left:0; right:auto; transform:none; }
 .ss-xticks .zero { inset-inline-start:auto; left:50%; transform:translateX(-50%); }
 .ss-xticks .pos { inset-inline-end:auto; right:0; left:auto; transform:none; }
+
+/* ============ Galaxie décisionnelle — refonte couronnes (v5) ============ */
+.ss-galaxy { padding:18px 20px 22px; display:flex; flex-direction:column; gap:14px; }
+.ss-galaxy-head { display:flex; gap:18px; align-items:flex-start; justify-content:space-between; flex-wrap:wrap; }
+.ss-galaxy-head h2 { margin:0 0 4px; }
+.ss-search { position:relative; display:flex; flex-direction:column; gap:5px; min-width:230px; flex:0 0 auto; }
+.ss-search > span { font:600 9px var(--cond); letter-spacing:.12em; color:var(--ss-soft); }
+.ss-search input { width:100%; padding:8px 10px; border:1px solid var(--line); border-radius:2px; background:var(--ss-card); color:var(--ss-ink); font-size:12px; }
+.ss-search input:focus-visible { outline:2px solid var(--gold); outline-offset:1px; }
+.ss-search ul { position:absolute; z-index:6; top:100%; inset-inline:0; margin:3px 0 0; padding:0; list-style:none; background:var(--ss-card); border:1px solid var(--line); border-radius:2px; max-height:220px; overflow:auto; }
+.ss-search li button { display:block; width:100%; padding:7px 10px; text-align:start; background:none; border:0; color:var(--ss-ink); font-size:12px; cursor:pointer; }
+.ss-search li button:hover,.ss-search li button:focus-visible { background:color-mix(in srgb,var(--gold) 16%,transparent); outline:none; }
+.ss-search li.empty { padding:7px 10px; font-size:11px; color:var(--ss-soft); }
+.ss-galaxy-bar { display:flex; gap:10px; align-items:center; justify-content:space-between; flex-wrap:wrap; }
+.ss-galaxy-controls { display:flex; gap:6px; flex-wrap:wrap; }
+.ss-galaxy-controls button { display:inline-flex; align-items:center; gap:5px; padding:6px 9px; border:1px solid var(--line); border-radius:2px; background:var(--ss-card); color:var(--ss-ink); font:600 9px var(--cond); letter-spacing:.1em; text-transform:uppercase; cursor:pointer; }
+.ss-galaxy-controls button:hover { border-color:var(--gold); }
+.ss-galaxy-controls button:focus-visible { outline:2px solid var(--gold); outline-offset:1px; }
+.ss-galaxy-panes { position:relative; }
+.ss-galaxy-pane { display:none; }
+.ss-galaxy-pane.active { display:block; }
+#ss-gx-scene { touch-action:none; cursor:grab; overflow:hidden; }
+#ss-gx-scene.is-dragging { cursor:grabbing; }
+.ss-gx-core { fill:none; stroke:var(--gold); stroke-width:1; opacity:.5; }
+.ss-ring-label { font:600 8px var(--cond); letter-spacing:.14em; fill:var(--ss-soft); pointer-events:none; }
+.ss-ray.dashed { stroke-dasharray:4 4; }
+.ss-star:focus-visible { outline:none; }
+.ss-star:focus-visible .halo { stroke-width:4; opacity:1; }
+.ss-galaxy.is-full { position:fixed; inset:0; z-index:80; background:var(--ss-bg); overflow:auto; }
+.ss-galaxy.is-full #ss-galaxy-svg { height:calc(100vh - 260px); min-height:420px; }
+.ss-rel-list { border-top:1px solid var(--line); margin-top:12px; padding-top:10px; }
+.ss-rel-list ul { list-style:none; margin:6px 0 8px; padding:0; display:flex; flex-direction:column; gap:4px; }
+.ss-rel-list li { display:grid; grid-template-columns:1fr auto auto; gap:8px; align-items:baseline; font-size:11px; }
+.ss-rel-list li em { font-style:normal; font-size:9px; letter-spacing:.08em; text-transform:uppercase; color:var(--ss-soft); font-family:var(--cond); }
+.ss-rel-list li b { color:var(--gold); font-variant-numeric:tabular-nums; }
+.ss-limit { font-size:10px; color:var(--ss-soft); margin:0; }
+html[data-theme="light"] .ss-ring-label { fill:#66717b; }
+@media(max-width:1050px){ .ss-galaxy.is-full #ss-galaxy-svg { height:70vh; } }
+@media(max-width:680px){
+  .ss-galaxy { padding:14px; }
+  .ss-search { min-width:0; width:100%; }
+  .ss-galaxy-controls { width:100%; }
+  .ss-galaxy-controls button { flex:1 1 auto; justify-content:center; }
+  .ss-star .ss-node-label { display:none; }
+  .ss-star.hot .ss-node-label,.ss-star:focus-visible .ss-node-label { display:block; }
+}
+/* lisibilité de la galaxie hors sélection */
+#ss-gx-scene .ss-star.dim { opacity:.42; }
+#ss-gx-scene .ss-ray.dim { opacity:.07; }
+@media(max-width:680px){ #ss-gx-scene #ss-galaxy-svg { height:auto; aspect-ratio:1/1; } }

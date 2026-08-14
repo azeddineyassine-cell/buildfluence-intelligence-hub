@@ -11,7 +11,7 @@
   const toneNodeNames = { positive: 'Positive', neutral: 'Neutre', negative: 'Négative' };
   const nodeKind = { parti: 'party', acteur: 'leader', theme: 'topic' };
   const toneKind = name => name === 'Positive' ? 'positive' : name === 'Neutre' ? 'neutral' : 'negative';
-  const state = { active: new Set(['party','leader','topic','positive','neutral','negative']), tab: 'galaxy', selected: 'RNI', orbitActor: 'RNI', orbitRelation: null, rankSort:'visibility', rankCat:'all', detail:null, orbitMode:'graph', orbitZoom:1 };
+  const state = { active: new Set(['party','leader','topic','positive','neutral','negative']), tab: 'galaxy', selected: 'RNI', orbitActor: 'RNI', orbitRelation: null, rankSort:'visibility', rankCat:'all', detail:null, orbitMode:'graph', orbitZoom:1, gxMode:'galaxy', gxZoom:1, gxPan:{x:0,y:0}, gxSort:'urls', gxSortDir:'desc' };
 
   /* Pictogrammes Lucide (tracés officiels, inline — bundle statique hors React) */
   const ICONS = {
@@ -38,7 +38,58 @@
     en: { legShapes:'Pictogram = category: institution → party · figure → leader · conversation → issue · gauge → tone', legQuad:'Colour and texture = analytical quadrant (visibility × balance), not a tone. The quadrant label always remains visible: colour is never the only cue.', legDot:'The 3 px centre mark shows the exact position of the entity. No point is displaced.', xAxisNew:'NARRATIVE BALANCE', yAxisNew:'RELATIVE VISIBILITY', showBy:'SHOW', catAll:'All', catParties:'Political parties', catLeaders:'Political leaders', catTopics:'Debate issues', rankScope:'The display filter applies to this ranking only, not to the matrix.', detailTitle:'DETAIL CARD', close:'Close', category:'Category', toneSplit:'Positive / Neutral / Negative', periodLabel:'Period', methodLabel:'Method', openDetail:'Open the detail card' },
     ar: { legShapes:'الرمز = الفئة: مؤسسة → حزب · شخصية → قائد · محادثة → موضوع · مؤشر → نبرة', legQuad:'اللون والملمس = الربع التحليلي (الظهور × التوازن)، وليس نبرة. يظل عنوان الربع ظاهرا: اللون ليس المؤشر الوحيد أبدا.', legDot:'تشير النقطة المركزية بحجم 3 بكسل إلى الموقع الدقيق للكيان. لا يتم إزاحة أي نقطة.', xAxisNew:'التوازن السردي', yAxisNew:'الظهور النسبي', showBy:'إظهار', catAll:'الكل', catParties:'الأحزاب السياسية', catLeaders:'القادة السياسيون', catTopics:'مواضيع النقاش', rankScope:'يطبق مرشح الإظهار على هذا الترتيب فقط، وليس على المصفوفة.', detailTitle:'بطاقة تفصيلية', close:'إغلاق', category:'الفئة', toneSplit:'إيجابي / محايد / سلبي', periodLabel:'الفترة', methodLabel:'المنهجية', openDetail:'فتح البطاقة التفصيلية' }
   };
-  Object.keys(copy).forEach(k => Object.assign(copy[k], extraCopy[k], v34Copy[k]));
+  const gxCopy = {
+    fr: {
+      gxTitle:'Galaxie décisionnelle', gxIntro:'Quels acteurs et sujets structurent le débat, et par quelles relations documentées ? Quatre couronnes concentriques : sujets, leaders, partis, tonalités. Les positions sont déterministes et reproductibles.',
+      searchLabel:'RECHERCHE', searchPh:'Rechercher une entité…', noResult:'Aucune entité correspondante.',
+      modeGalaxy:'GALAXIE', modeFocus:'MODE FOCALISÉ', modeTable:'TABLEAU',
+      gxIn:'Zoom avant', gxOut:'Zoom arrière', gxCenter:'Recentrer', gxReset:'Réinitialiser', gxFull:'Plein écran', gxExit:'Quitter le plein écran',
+      readTitle:'LECTURE DE LA GALAXIE',
+      read1:'Ce que montre la galaxie : les 28 entités du débat et leurs 128 cooccurrences documentées sur 7 421 URL uniques.',
+      read2:'Comment lire : la couronne indique la catégorie, la taille du nœud le volume d’URL uniques, l’épaisseur du lien le volume de la relation.',
+      read3:'Ce que la galaxie ne dit pas : l’angle et la distance entre deux nœuds ne signifient rien. Une cooccurrence n’est ni une influence, ni une alliance, ni une causalité, ni une popularité, ni une intention de vote.',
+      read4:'Méthode : URL canoniques uniques dédupliquées, wikipedia.org et wiktionary.org exclus, période 29.07 → 05.08.2026.',
+      ringTopics:'COURONNE 1 · SUJETS', ringLeaders:'COURONNE 2 · LEADERS', ringParties:'COURONNE 3 · PARTIS', ringTones:'COURONNE 4 · TONALITÉS',
+      gxDegree:'Relations documentées', gxWeight:'Poids relationnel cumulé', gxRelList:'RELATIONS DOCUMENTÉES',
+      relInfluence:'Exposition documentée', relAlliance:'Cooccurrence positive', relProximite:'Cooccurrence neutre', relOpposition:'Cooccurrence négative',
+      colDegree:'Relations', colWeight:'Poids cumulé', gxKeyboard:'Clavier : Tab pour atteindre la scène, ← → pour parcourir la couronne, ↑ ↓ pour changer de couronne, Entrée pour sélectionner, Échap pour quitter le plein écran.',
+      gxLimit:'Cette lecture ne mesure ni popularité, ni intention de vote, ni causalité.', focusTitle:'Voisinage documenté'
+    },
+    en: {
+      gxTitle:'Decision galaxy', gxIntro:'Which actors and issues structure the debate, and through which documented relations? Four concentric crowns: issues, leaders, parties, tones. Positions are deterministic and reproducible.',
+      searchLabel:'SEARCH', searchPh:'Search an entity…', noResult:'No matching entity.',
+      modeGalaxy:'GALAXY', modeFocus:'FOCUS MODE', modeTable:'TABLE',
+      gxIn:'Zoom in', gxOut:'Zoom out', gxCenter:'Recenter', gxReset:'Reset', gxFull:'Full screen', gxExit:'Exit full screen',
+      readTitle:'HOW TO READ THE GALAXY',
+      read1:'What the galaxy shows: the 28 entities of the debate and their 128 documented co-occurrences across 7,421 unique URLs.',
+      read2:'How to read it: the crown gives the category, node size the unique-URL volume, link thickness the volume of the relation.',
+      read3:'What the galaxy does not say: angle and distance between two nodes carry no meaning. A co-occurrence is neither influence, nor alliance, nor causality, nor popularity, nor voting intention.',
+      read4:'Method: deduplicated canonical unique URLs, wikipedia.org and wiktionary.org excluded, period 29 Jul → 5 Aug 2026.',
+      ringTopics:'CROWN 1 · ISSUES', ringLeaders:'CROWN 2 · LEADERS', ringParties:'CROWN 3 · PARTIES', ringTones:'CROWN 4 · TONES',
+      gxDegree:'Documented relations', gxWeight:'Cumulated relational weight', gxRelList:'DOCUMENTED RELATIONS',
+      relInfluence:'Documented exposure', relAlliance:'Positive co-occurrence', relProximite:'Neutral co-occurrence', relOpposition:'Negative co-occurrence',
+      colDegree:'Relations', colWeight:'Cumulated weight', gxKeyboard:'Keyboard: Tab to reach the scene, ← → to move along the crown, ↑ ↓ to change crown, Enter to select, Esc to exit full screen.',
+      gxLimit:'This reading measures neither popularity, nor voting intention, nor causality.', focusTitle:'Documented neighbourhood'
+    },
+    ar: {
+      gxTitle:'مجرة القرار', gxIntro:'أي الفاعلين والمواضيع تبني النقاش، وبأي علاقات موثقة؟ أربع حلقات متمركزة: المواضيع، القادة، الأحزاب، النبرات. المواقع محددة وقابلة للتكرار.',
+      searchLabel:'البحث', searchPh:'ابحث عن كيان…', noResult:'لا يوجد كيان مطابق.',
+      modeGalaxy:'المجرة', modeFocus:'وضع التركيز', modeTable:'الجدول',
+      gxIn:'تكبير', gxOut:'تصغير', gxCenter:'إعادة التمركز', gxReset:'إعادة التعيين', gxFull:'ملء الشاشة', gxExit:'الخروج من ملء الشاشة',
+      readTitle:'كيف تُقرأ المجرة',
+      read1:'ما تعرضه المجرة: 28 كيانا في النقاش و128 تزامنا موثقا عبر 7 421 رابطا فريدا.',
+      read2:'كيفية القراءة: الحلقة تحدد الفئة، وحجم العقدة يعبر عن حجم الروابط الفريدة، وسماكة الرابط عن حجم العلاقة.',
+      read3:'ما لا تقوله المجرة: الزاوية والمسافة بين عقدتين لا تعنيان شيئا. التزامن ليس تأثيرا ولا تحالفا ولا سببية ولا شعبية ولا نية تصويت.',
+      read4:'المنهجية: روابط فريدة بعد إزالة التكرار، مع استثناء wikipedia.org و wiktionary.org، الفترة 29.07 → 05.08.2026.',
+      ringTopics:'الحلقة 1 · المواضيع', ringLeaders:'الحلقة 2 · القادة', ringParties:'الحلقة 3 · الأحزاب', ringTones:'الحلقة 4 · النبرات',
+      gxDegree:'علاقات موثقة', gxWeight:'الوزن العلائقي التراكمي', gxRelList:'العلاقات الموثقة',
+      relInfluence:'تعرض موثق', relAlliance:'تزامن إيجابي', relProximite:'تزامن محايد', relOpposition:'تزامن سلبي',
+      colDegree:'العلاقات', colWeight:'الوزن التراكمي', gxKeyboard:'لوحة المفاتيح: Tab للوصول إلى المشهد، ← → للتنقل داخل الحلقة، ↑ ↓ لتغيير الحلقة، Enter للاختيار، Esc للخروج من ملء الشاشة.',
+      gxLimit:'لا تقيس هذه القراءة الشعبية ولا نية التصويت ولا السببية.', focusTitle:'الجوار الموثق'
+    }
+  };
+  Object.keys(copy).forEach(k => Object.assign(copy[k], extraCopy[k], v34Copy[k], gxCopy[k]));
+
   const localizedTopics = {
     en:{'Sebta / migration':'Ceuta / migration','Emploi / chômage':'Employment / unemployment','Eau / sécheresse':'Water / drought','Santé':'Health','Éducation':'Education'},
     ar:{'Sebta / migration':'سبتة / الهجرة','Emploi / chômage':'التشغيل / البطالة','Eau / sécheresse':'الماء / الجفاف','Santé':'الصحة','Éducation':'التعليم','Justice':'العدالة','Corruption':'الفساد'}
@@ -78,7 +129,24 @@
   root.innerHTML = `<div class="ss-head"><div><p class="kicker" data-ss="kicker"></p><h1 data-ss-html="title"></h1><p data-ss="sub"></p></div><p class="ss-period"><strong data-ss="period"></strong><span>${fmt(canonical.graph.documents)} URL</span></p></div>
   <div class="ss-tabs"><button class="active" data-ss-tab="galaxy" data-ss="galaxy"></button><button data-ss-tab="positions" data-ss="footprint"></button><button data-ss-tab="orbits" data-ss="orbits"></button></div>
   <div class="ss-filters"><strong data-ss="filters"></strong>${[['party','parties'],['leader','leaders'],['topic','topics'],['positive','positive'],['neutral','neutral'],['negative','negative']].map(x=>`<button class="ss-filter active" data-ss-filter="${x[0]}" data-ss="${x[1]}"></button>`).join('')}</div>
-  <div class="ss-layout"><div class="ss-stage"><div class="ss-view active" data-ss-view="galaxy"><svg id="ss-galaxy-svg" viewBox="0 0 920 650" aria-label="Strategic Signals"></svg></div>
+  <div class="ss-layout"><div class="ss-stage"><div class="ss-view active" data-ss-view="galaxy"><div class="ss-galaxy">
+  <div class="ss-galaxy-head"><div><h2 data-ss="gxTitle"></h2><p class="ss-lede" data-ss="gxIntro"></p></div>
+  <label class="ss-search"><span data-ss="searchLabel"></span><input type="search" id="ss-gx-search" autocomplete="off"><ul id="ss-gx-results" hidden></ul></label></div>
+  <div class="ss-galaxy-bar"><div class="ss-seg" role="tablist"><button class="active" data-gx-mode="galaxy" data-ss="modeGalaxy"></button><button data-gx-mode="focus" data-ss="modeFocus"></button><button data-gx-mode="table" data-ss="modeTable"></button></div>
+  <div class="ss-galaxy-controls">
+    <button type="button" data-gx-cmd="out" data-ss-title="gxOut"><span aria-hidden="true">−</span><span data-ss="gxOut"></span></button>
+    <button type="button" data-gx-cmd="in" data-ss-title="gxIn"><span aria-hidden="true">+</span><span data-ss="gxIn"></span></button>
+    <button type="button" data-gx-cmd="center" data-ss="gxCenter"></button>
+    <button type="button" data-gx-cmd="reset" data-ss="gxReset"></button>
+    <button type="button" data-gx-cmd="full" id="ss-gx-full" data-ss="gxFull"></button>
+  </div></div>
+  <div class="ss-galaxy-panes" id="ss-gx-panes">
+    <div class="ss-galaxy-pane active" data-gx-pane="scene" id="ss-gx-scene"><svg id="ss-galaxy-svg" viewBox="0 0 1000 1000" role="group" aria-label="Galaxie décisionnelle"></svg></div>
+    <div class="ss-galaxy-pane" data-gx-pane="table"><div class="ss-table-scroll"><table class="ss-table" id="ss-gx-table"></table></div></div>
+  </div>
+  <div class="ss-legend"><p class="kicker" data-ss="readTitle"></p><ul><li data-ss="read1"></li><li data-ss="read2"></li><li data-ss="read3"></li><li data-ss="read4"></li><li data-ss="gxKeyboard"></li></ul></div>
+  </div></div>
+
   <div class="ss-view" data-ss-view="positions"><div class="ss-positions"><h2 data-ss="positionTitle"></h2><p class="ss-lede" data-ss="matrixIntro"></p>
   <div class="ss-matrix-wrap"><span class="ss-axis-title y" data-ss="yAxisNew"></span>
   <div class="ss-yticks" aria-hidden="true">${[100,75,50,25,0].map(v=>`<span>${v}</span>`).join('')}</div>
@@ -107,50 +175,180 @@
   <div class="ss-orbit-pane" data-orbit-pane="table"><div class="ss-table-scroll"><table class="ss-table" id="ss-orbit-table"></table></div></div></div>
   <div class="ss-legend"><p class="kicker" data-ss="orbitLegendTitle"></p><ul><li data-ss="orbitLegend"></li><li data-ss="orbitHint"></li></ul></div></div></div></div>
   <aside class="ss-analysis"><p class="kicker" data-ss="frame"></p><div class="ss-identity"><div class="ss-avatar" id="ss-avatar"></div><div><h2 id="ss-name"></h2><p class="ss-kind" id="ss-kind"></p></div></div>
-  ${[['visibility','ss-vis'],['urls','ss-urls'],['balance','ss-balance'],['mainTopic','ss-main-topic'],['relations','ss-relations']].map(x=>`<div class="ss-metric"><span data-ss="${x[0]}"></span><b id="${x[1]}"></b></div>`).join('')}
+  ${[['visibility','ss-vis'],['urls','ss-urls'],['balance','ss-balance'],['mainTopic','ss-main-topic'],['relations','ss-relations'],['gxDegree','ss-degree'],['gxWeight','ss-weight']].map(x=>`<div class="ss-metric"><span data-ss="${x[0]}"></span><b id="${x[1]}"></b></div>`).join('')}
   <div class="ss-tonebar"><i id="ss-pos"></i><i id="ss-neu"></i><i id="ss-neg"></i></div><div class="ss-tone-labels"><span id="ss-pl"></span><span id="ss-nl"></span><span id="ss-gl"></span></div>
+  <div class="ss-rel-list" id="ss-rel-list"><p class="kicker" data-ss="gxRelList"></p><ul id="ss-rel-items"></ul><p class="ss-limit" data-ss="gxLimit"></p></div>
   <div class="ss-relation-detail" id="ss-relation-detail" hidden><p class="kicker" data-ss="relation"></p><div><strong id="ss-relation-title"></strong><b id="ss-relation-value"></b></div><p id="ss-relation-copy"></p></div>
+
   <div class="ss-reading"><h3 data-ss="reading"></h3><p id="ss-insight"></p><ul><li id="ss-fact-1"></li><li id="ss-fact-2"></li><li id="ss-fact-3"></li></ul></div><p class="ss-method" data-ss="method"></p>
   <section class="ss-detail" id="ss-detail" role="region" aria-labelledby="ss-detail-name" hidden></section></aside></div>`;
 
   const graphNodes = canonical.graph.nodes.map(n => ({...n, kind:n.group==='public'?toneKind(n.name):nodeKind[n.group]}));
-  const graphEdges = edges.map(e => ({ a:e[0], b:e[1], value:e[2], kind:e[3]==='influence'?'topic':e[3]==='alliance'?(toneKind(e[1])==='positive'?'positive':'topic'):e[3]==='proximite'?'neutral':'negative' }));
-  const positionSector = (items, radius, start, end, cx=430, cy=325) => items.map((n,i) => { const a=(start+(end-start)*(items.length===1?.5:i/(items.length-1)))*Math.PI/180; return {...n,x:cx+radius*Math.cos(a),y:cy+radius*Math.sin(a)}; });
-  const galaxyNodes = [
-    ...positionSector(graphNodes.filter(n=>n.kind==='party'),285,120,240),
-    ...positionSector(graphNodes.filter(n=>n.kind==='leader'),205,115,245),
-    ...positionSector(graphNodes.filter(n=>n.kind==='topic'),170,-62,62),
-    ...positionSector(graphNodes.filter(n=>['positive','neutral','negative'].includes(n.kind)),305,-46,46)
-  ];
-  const byName = Object.fromEntries(galaxyNodes.map(n=>[n.name,n]));
+  const graphEdges = edges.map(e => ({ a:e[0], b:e[1], value:e[2], type:e[3], kind:e[3]==='influence'?'topic':e[3]==='alliance'?'positive':e[3]==='proximite'?'neutral':'negative' }));
+  const relTypeLabel = type => t('rel'+type.charAt(0).toUpperCase()+type.slice(1));
+  const degreeOf = name => graphEdges.filter(e=>e.a===name||e.b===name).length;
+  const weightOf = name => graphEdges.filter(e=>e.a===name||e.b===name).reduce((s,e)=>s+e.value,0);
+  const relationsOf = name => graphEdges.filter(e=>e.a===name||e.b===name)
+    .map(e=>({ other:e.a===name?e.b:e.a, type:e.type, value:e.value }))
+    .sort((x,y)=>y.value-x.value);
+
+  /* ---------- Galaxie : couronnes déterministes ---------- */
+  const GX = { cx:500, cy:500, rings:{ topic:190, leader:300, party:400, tone:470 } };
+  const TONE_ANGLES = { positive:-60, neutral:60, negative:180 };
+  const GX_START = { topic:-66, leader:-78, party:-54 };
+  const gxRingOf = kind => ['positive','neutral','negative'].includes(kind) ? GX.rings.tone : GX.rings[kind];
+  function layoutGalaxy() {
+    const visible = n => state.active.has(n.kind);
+    const placed = [];
+    ['topic','leader','party'].forEach(kind => {
+      const items = graphNodes.filter(n=>n.kind===kind&&visible(n)).sort((a,b)=>b.mentions-a.mentions||a.name.localeCompare(b.name));
+      const r = GX.rings[kind], step = items.length ? 360/items.length : 0, s0 = GX_START[kind];
+      items.forEach((n,i)=>{ const deg=s0+i*step, a=deg*Math.PI/180; placed.push({...n,ring:r,angle:deg,x:GX.cx+r*Math.cos(a),y:GX.cy+r*Math.sin(a)}); });
+    });
+    graphNodes.filter(n=>['positive','neutral','negative'].includes(n.kind)&&visible(n)).forEach(n=>{
+      const deg=TONE_ANGLES[n.kind], a=deg*Math.PI/180, r=GX.rings.tone;
+      placed.push({...n,ring:r,angle:deg,x:GX.cx+r*Math.cos(a),y:GX.cy+r*Math.sin(a)});
+    });
+    return placed;
+  }
+  let galaxyNodes = layoutGalaxy();
+  let byName = Object.fromEntries(galaxyNodes.map(n=>[n.name,n]));
   const galaxy = root.querySelector('#ss-galaxy-svg');
+  const gxScene = root.querySelector('#ss-gx-scene');
+  const gxTierBounds = () => {
+    const values = galaxyNodes.map(n=>n.mentions).sort((a,b)=>a-b);
+    const q = p => values.length ? values[Math.min(values.length-1,Math.floor(p*values.length))] : 0;
+    return [q(.25),q(.5),q(.75)];
+  };
+  const gxRadius = (mentions,bounds) => { const tier = mentions<=bounds[0]?1:mentions<=bounds[1]?2:mentions<=bounds[2]?3:4; return 13+tier*5; };
+  const gxWidth = value => Math.max(0.8, Math.min(5, Math.sqrt(value)/6));
+  const arcPath = (a,b) => {
+    const mx=(a.x+b.x)/2, my=(a.y+b.y)/2;
+    const pull = Math.min(0.42, 0.12 + Math.abs(a.ring-b.ring)/1400);
+    const cxp = mx + (GX.cx-mx)*pull, cyp = my + (GX.cy-my)*pull;
+    return `M${a.x.toFixed(1)},${a.y.toFixed(1)} Q${cxp.toFixed(1)},${cyp.toFixed(1)} ${b.x.toFixed(1)},${b.y.toFixed(1)}`;
+  };
+
+  function applyCam(){
+    const cam=galaxy.querySelector('#ss-gx-cam');
+    if(cam) cam.setAttribute('transform',`translate(${state.gxPan.x.toFixed(2)} ${state.gxPan.y.toFixed(2)}) scale(${state.gxZoom.toFixed(3)})`);
+  }
+  function zoomAt(nextZoom, px, py){
+    const z=Math.max(0.6,Math.min(4,nextZoom)), k=z/state.gxZoom;
+    state.gxPan={ x:px-(px-state.gxPan.x)*k, y:py-(py-state.gxPan.y)*k };
+    state.gxZoom=z; applyCam();
+  }
+  const svgPoint = (clientX,clientY) => {
+    const box=galaxy.getBoundingClientRect(), scale=box.width?1000/box.width:1;
+    return { x:(clientX-box.left)*scale, y:(clientY-box.top)*(box.height?1000/box.height:scale) };
+  };
 
   function renderGalaxy() {
-    const visible=n=>state.active.has(n.kind);
-    galaxy.innerHTML=`<circle cx="430" cy="325" r="285" class="ss-orbit"/><circle cx="430" cy="325" r="205" class="ss-orbit"/><circle cx="430" cy="325" r="120" class="ss-orbit"/><text x="430" y="318" text-anchor="middle" class="ss-galaxy-title">STRATEGIC SIGNALS</text><text x="430" y="338" text-anchor="middle" class="ss-galaxy-sub">${fmt(canonical.graph.documents)} URL</text>`+
-      graphEdges.filter(e=>byName[e.a]&&byName[e.b]&&visible(byName[e.a])&&visible(byName[e.b])).map(e=>`<path class="ss-ray ${e.kind}" data-a="${e.a}" data-b="${e.b}" d="M${byName[e.a].x},${byName[e.a].y} Q430,325 ${byName[e.b].x},${byName[e.b].y}" style="--w:${Math.min(4,1+Math.sqrt(e.value)/14)}"/>`).join('')+
-      galaxyNodes.filter(visible).map(n=>{const d=infoFor(n.name),r=n.kind==='topic'?19+Math.sqrt(n.mentions)/5:n.kind==='party'||n.kind==='leader'?16+Math.sqrt(n.mentions):27,content=n.kind==='leader'?`<image href="${leaderPortraits[n.name]}" x="${-r}" y="${-r}" width="${r*2}" height="${r*2}" preserveAspectRatio="xMidYMid slice" clip-path="circle(${r-2}px at center)"/><text class="num leader-num" text-anchor="middle" y="${r+12}">${fmt(d.urls)}</text>`:`<text text-anchor="middle" y="-2">${d.short}</text><text class="num" text-anchor="middle" y="12">${fmt(d.urls)}</text>`;return `<g class="ss-star ${n.kind}" data-name="${n.name}" transform="translate(${n.x} ${n.y})"><circle class="halo" r="${r+7}"/><circle class="core" r="${r}"/>${content}<text class="ss-node-label" text-anchor="middle" y="${r+24}">${label(n.name)}</text></g>`}).join('');
-    galaxy.querySelectorAll('.ss-star').forEach(n=>n.addEventListener('click',()=>select(n.dataset.name)));
-    highlightGalaxy();
+    galaxyNodes = layoutGalaxy();
+    byName = Object.fromEntries(galaxyNodes.map(n=>[n.name,n]));
+    const bounds = gxTierBounds();
+    const focus = state.gxMode==='focus';
+    const neighbours = new Set(focus ? relationsOf(state.selected).map(r=>r.other) : []);
+    const shown = focus ? galaxyNodes.filter(n=>n.name===state.selected||neighbours.has(n.name)) : galaxyNodes;
+    const shownNames = new Set(shown.map(n=>n.name));
+    const links = graphEdges.filter(e=>shownNames.has(e.a)&&shownNames.has(e.b)&&(!focus||e.a===state.selected||e.b===state.selected));
+    const ringLabels = [['topic','ringTopics'],['leader','ringLeaders'],['party','ringParties'],['tone','ringTones']]
+      .map(([k,key])=>{const r=k==='tone'?GX.rings.tone:GX.rings[k];return `<circle cx="${GX.cx}" cy="${GX.cy}" r="${r}" class="ss-orbit"/><text x="${GX.cx}" y="${GX.cy-r-8}" text-anchor="middle" class="ss-ring-label">${t(key)}</text>`;}).join('');
+    galaxy.innerHTML=`<g id="ss-gx-cam">${focus?'':ringLabels}
+      <circle cx="${GX.cx}" cy="${GX.cy}" r="70" class="ss-gx-core"/>
+      <text x="${GX.cx}" y="${GX.cy-4}" text-anchor="middle" class="ss-galaxy-title">${fmt(canonical.graph.documents)} URL</text>
+      <text x="${GX.cx}" y="${GX.cy+16}" text-anchor="middle" class="ss-galaxy-sub">${t('period')}</text>`+
+      links.map(e=>`<path class="ss-ray ${e.kind} ${e.type==='influence'?'solid':'dashed'}" data-a="${e.a}" data-b="${e.b}" d="${arcPath(byName[e.a],byName[e.b])}" style="--w:${gxWidth(e.value).toFixed(2)}"><title>${label(e.a)} × ${label(e.b)} · ${relTypeLabel(e.type)} · ${fmt(e.value)} URL</title></path>`).join('')+
+      shown.map(n=>{
+        const d=infoFor(n.name), r=gxRadius(n.mentions,bounds);
+        const content = n.kind==='leader'
+          ? `<image href="${leaderPortraits[n.name]}" x="${-r}" y="${-r}" width="${r*2}" height="${r*2}" preserveAspectRatio="xMidYMid slice" clip-path="circle(${r-2}px at center)"/>`
+          : `<text text-anchor="middle" y="4">${d.short}</text>`;
+        return `<g class="ss-star ${n.kind}" data-name="${n.name}" data-ring="${n.ring}" tabindex="0" role="button" aria-label="${label(n.name)} · ${d.kind} · ${fmt(d.urls)} URL" transform="translate(${n.x.toFixed(1)} ${n.y.toFixed(1)})"><circle class="halo" r="${r+7}"/><circle class="core" r="${r}"/>${content}<text class="ss-node-label" text-anchor="middle" y="${r+18}">${label(n.name)}</text><title>${label(n.name)} · ${d.kind} · ${fmt(d.urls)} URL</title></g>`;
+      }).join('')+`</g>`;
+    galaxy.querySelectorAll('.ss-star').forEach(n=>{
+      n.addEventListener('click',()=>select(n.dataset.name));
+      n.addEventListener('keydown',e=>{
+        if(e.key==='Enter'||e.key===' '){e.preventDefault();select(n.dataset.name);return;}
+        const arrows=['ArrowRight','ArrowLeft','ArrowUp','ArrowDown'];
+        if(!arrows.includes(e.key))return;
+        e.preventDefault(); moveFocus(n.dataset.name,e.key);
+      });
+    });
+    applyCam(); renderGalaxyTable(); highlightGalaxy();
+  }
+
+  function moveFocus(name,key){
+    const current=byName[name]; if(!current)return;
+    const ringOrder=[GX.rings.topic,GX.rings.leader,GX.rings.party,GX.rings.tone];
+    let targetRing=current.ring;
+    if(key==='ArrowUp'||key==='ArrowDown'){
+      const i=ringOrder.indexOf(current.ring), dir=key==='ArrowDown'?1:-1;
+      for(let step=1;step<=ringOrder.length;step++){
+        const cand=ringOrder[(i+dir*step+ringOrder.length*2)%ringOrder.length];
+        if(galaxyNodes.some(n=>n.ring===cand)){targetRing=cand;break;}
+      }
+      const pool=galaxyNodes.filter(n=>n.ring===targetRing).sort((a,b)=>a.angle-b.angle);
+      const next=pool.reduce((best,n)=>Math.abs(n.angle-current.angle)<Math.abs(best.angle-current.angle)?n:best,pool[0]);
+      if(next)focusNode(next.name);
+      return;
+    }
+    const pool=galaxyNodes.filter(n=>n.ring===current.ring).sort((a,b)=>a.angle-b.angle);
+    const idx=pool.findIndex(n=>n.name===name), dir=key==='ArrowRight'?1:-1;
+    const next=pool[(idx+dir+pool.length)%pool.length];
+    if(next)focusNode(next.name);
+  }
+  function focusNode(name){
+    const el=galaxy.querySelector(`.ss-star[data-name="${CSS.escape(name)}"]`);
+    if(el){el.focus();select(name);}
+  }
+
+  function renderGalaxyTable(){
+    const table=root.querySelector('#ss-gx-table'); if(!table)return;
+    const rows=galaxyNodes.map(n=>{const d=infoFor(n.name);return {name:n.name,kind:n.kind,category:d.kind,urls:d.urls,vis:d.visibility,balance:balanceOf(d),degree:degreeOf(n.name),weight:weightOf(n.name)};});
+    const dir=state.gxSortDir==='asc'?1:-1;
+    const key=state.gxSort;
+    rows.sort((a,b)=>key==='name'?dir*label(a.name).localeCompare(label(b.name),locale()):dir*(a[key]-b[key]));
+
+    const cols=[['name','colEntity'],['category','colCategory'],['urls','urls'],['vis','visibility'],['balance','balance'],['degree','colDegree'],['weight','colWeight']];
+    table.innerHTML=`<thead><tr>${cols.map(([k,label2])=>`<th data-gx-sort="${k==='category'?'name':k}" aria-sort="${state.gxSort===k?(state.gxSortDir==='asc'?'ascending':'descending'):'none'}"><button type="button">${t(label2)}</button></th>`).join('')}</tr></thead><tbody>`+
+      rows.map(r=>`<tr data-name="${r.name}" tabindex="0" class="${r.name===state.selected?'selected':''}"><td>${label(r.name)}</td><td>${r.category}</td><td>${fmt(r.urls)}</td><td>${fmt(r.vis,1)}</td><td>${r.balance>0?'+':''}${fmt(r.balance,1)}</td><td>${fmt(r.degree)}</td><td>${fmt(r.weight)}</td></tr>`).join('')+`</tbody>`;
+    table.querySelectorAll('[data-gx-sort]').forEach(th=>th.addEventListener('click',()=>{
+      const k=th.dataset.gxSort;
+      if(state.gxSort===k)state.gxSortDir=state.gxSortDir==='asc'?'desc':'asc'; else {state.gxSort=k;state.gxSortDir=k==='name'?'asc':'desc';}
+      renderGalaxyTable();
+    }));
+    table.querySelectorAll('tbody tr').forEach(tr=>{
+      tr.addEventListener('click',()=>select(tr.dataset.name));
+      tr.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();select(tr.dataset.name);}});
+    });
   }
 
   function highlightGalaxy() {
     const name=state.selected;
     galaxy.querySelectorAll('.ss-star').forEach(n=>{const near=n.dataset.name===name||graphEdges.some(e=>(e.a===name&&e.b===n.dataset.name)||(e.b===name&&e.a===n.dataset.name));n.classList.toggle('dim',!near);n.classList.toggle('hot',n.dataset.name===name);});
     galaxy.querySelectorAll('.ss-ray').forEach(e=>{const hot=e.dataset.a===name||e.dataset.b===name;e.classList.toggle('hot',hot);e.classList.toggle('dim',!hot);});
+    root.querySelectorAll('#ss-gx-table tbody tr').forEach(tr=>tr.classList.toggle('selected',tr.dataset.name===name));
   }
+
 
   function select(name, relation=null) {
     state.selected=name; state.orbitRelation=relation;
     const d=infoFor(name), total=d.tones.positive+d.tones.neutral+d.tones.negative, balance=balanceOf(d);
     const avatar=root.querySelector('#ss-avatar'),leaderImage=leaderPortraits[d.name];avatar.innerHTML=leaderImage?`<img src="${leaderImage}" alt="" aria-hidden="true">`:d.short; root.querySelector('#ss-name').textContent=label(d.name); root.querySelector('#ss-kind').textContent=d.kind;
     root.querySelector('#ss-vis').textContent=`${fmt(d.visibility,1)} / 100`; root.querySelector('#ss-urls').textContent=fmt(d.urls); root.querySelector('#ss-balance').textContent=`${balance>0?'+':''}${fmt(balance,1)}`; root.querySelector('#ss-main-topic').textContent=label(d.topic); root.querySelector('#ss-relations').textContent=fmt(d.links);
+    root.querySelector('#ss-degree').textContent=fmt(degreeOf(name)); root.querySelector('#ss-weight').textContent=fmt(weightOf(name));
+    const relItems=root.querySelector('#ss-rel-items');
+    if(relItems) relItems.innerHTML=relationsOf(name).slice(0,8).map(r=>`<li><span>${label(r.other)}</span><em>${relTypeLabel(r.type)}</em><b>${fmt(r.value)}</b></li>`).join('') || `<li>${t('unavailable')}</li>`;
+
     [['pos','positive','pl','+ '],['neu','neutral','nl','= '],['neg','negative','gl','− ']].forEach(([id,key,lid,prefix])=>{const pct=total?d.tones[key]/total*100:0;const on=state.active.has(key);root.querySelector('#ss-'+id).style.width=on?pct+'%':'0';root.querySelector('#ss-'+lid).textContent=on?prefix+fmt(pct,1)+'%':'';});
     const facts=relation ? [`${fmt(relation.value)} ${t('docRelations')}.`,`${fmt(relation.share,1)}% ${t('exposure')}.`,lang()==='en'?'This is an observed co-occurrence, not causality.':lang()==='ar'?'هذا تزامن مرصود وليس علاقة سببية.':'Il s’agit d’une cooccurrence observée, pas d’un lien de causalité.'] : d.facts;
     root.querySelector('#ss-insight').textContent=relation ? `${label(name)} × ${label(relation.name)}` : d.type==='tone' ? t('globalTone') : d.type==='topic' ? `${label(d.name)} : ${t('actorTopic')}.` : `${label(d.topic)} · ${t('actorTopic')}.`; facts.forEach((f,i)=>root.querySelector('#ss-fact-'+(i+1)).textContent=f);
     const detail=root.querySelector('#ss-relation-detail'); detail.hidden=!relation;
     if(relation){root.querySelector('#ss-relation-title').textContent=`${label(name)} × ${label(relation.name)}`;root.querySelector('#ss-relation-value').textContent=fmt(relation.value);root.querySelector('#ss-relation-copy').textContent=`${fmt(relation.share,1)}% ${t('exposure')}.`;}
-    highlightGalaxy(); syncSelection();
+    if(state.gxMode==='focus'&&!state.gxRendering){state.gxRendering=true;renderGalaxy();state.gxRendering=false;} else highlightGalaxy();
+    syncSelection();
+
   }
 
   function syncSelection(){
@@ -313,6 +511,86 @@
     choose(nodes[0].index);
   }
 
+  /* ---------- Galaxie : contrôles, recherche, zoom, plein écran ---------- */
+  function setGxMode(mode){
+    state.gxMode=mode;
+    root.querySelectorAll('[data-gx-mode]').forEach(b=>b.classList.toggle('active',b.dataset.gxMode===mode));
+    root.querySelectorAll('[data-gx-pane]').forEach(p=>p.classList.toggle('active',p.dataset.gxPane===(mode==='table'?'table':'scene')));
+    if(mode!=='table')renderGalaxy();
+  }
+  root.querySelectorAll('[data-gx-mode]').forEach(b=>b.addEventListener('click',()=>setGxMode(b.dataset.gxMode)));
+  root.querySelectorAll('[data-gx-cmd]').forEach(b=>b.addEventListener('click',()=>{
+    const cmd=b.dataset.gxCmd;
+    if(cmd==='in')zoomAt(state.gxZoom*1.25,500,500);
+    else if(cmd==='out')zoomAt(state.gxZoom/1.25,500,500);
+    else if(cmd==='center'){const n=byName[state.selected];if(n){state.gxPan={x:500-n.x*state.gxZoom,y:500-n.y*state.gxZoom};applyCam();}}
+    else if(cmd==='reset'){state.gxZoom=1;state.gxPan={x:0,y:0};['party','leader','topic','positive','neutral','negative'].forEach(k=>state.active.add(k));root.querySelectorAll('[data-ss-filter]').forEach(x=>x.classList.add('active'));const s=root.querySelector('#ss-gx-search');if(s)s.value='';root.querySelector('#ss-gx-results').hidden=true;setGxMode('galaxy');applyFilters();select('RNI');}
+    else if(cmd==='full')toggleFullscreen();
+  }));
+  function toggleFullscreen(){
+    const el=root.querySelector('.ss-galaxy'), btn=root.querySelector('#ss-gx-full');
+    const inside=el.classList.contains('is-full')||document.fullscreenElement===el;
+    if(inside){
+      if(document.fullscreenElement)document.exitFullscreen().catch(()=>{});
+      el.classList.remove('is-full'); btn.textContent=t('gxFull');
+    } else {
+      const req=el.requestFullscreen?.bind(el);
+      const fallback=()=>{el.classList.add('is-full');btn.textContent=t('gxExit');};
+      if(req)req().then(()=>{btn.textContent=t('gxExit');}).catch(fallback); else fallback();
+    }
+  }
+  document.addEventListener('fullscreenchange',()=>{
+    const el=root.querySelector('.ss-galaxy'), btn=root.querySelector('#ss-gx-full');
+    if(!document.fullscreenElement&&!el.classList.contains('is-full'))btn.textContent=t('gxFull');
+  });
+  document.addEventListener('keydown',e=>{
+    if(e.key!=='Escape')return;
+    const el=root.querySelector('.ss-galaxy');
+    if(el&&el.classList.contains('is-full')){el.classList.remove('is-full');root.querySelector('#ss-gx-full').textContent=t('gxFull');}
+  });
+  /* zoom molette : listener non passif, delta normalisé, ancrage curseur */
+  gxScene.addEventListener('wheel',e=>{
+    e.preventDefault();
+    const dy=e.deltaY*(e.deltaMode===1?16:e.deltaMode===2?100:1);
+    const p=svgPoint(e.clientX,e.clientY);
+    zoomAt(state.gxZoom*Math.exp(-dy*0.0015),p.x,p.y);
+  },{passive:false});
+  let dragging=null;
+  gxScene.addEventListener('pointerdown',e=>{
+    if(e.target.closest('.ss-star'))return;
+    dragging={id:e.pointerId,x:e.clientX,y:e.clientY,pan:{...state.gxPan}};
+    gxScene.setPointerCapture(e.pointerId); gxScene.classList.add('is-dragging');
+  });
+  gxScene.addEventListener('pointermove',e=>{
+    if(!dragging||e.pointerId!==dragging.id)return;
+    const box=galaxy.getBoundingClientRect(), scale=box.width?1000/box.width:1;
+    state.gxPan={x:dragging.pan.x+(e.clientX-dragging.x)*scale,y:dragging.pan.y+(e.clientY-dragging.y)*scale};
+    applyCam();
+  });
+  ['pointerup','pointercancel'].forEach(ev=>gxScene.addEventListener(ev,()=>{dragging=null;gxScene.classList.remove('is-dragging');}));
+  /* recherche */
+  const gxSearch=root.querySelector('#ss-gx-search'), gxResults=root.querySelector('#ss-gx-results');
+  function runSearch(){
+    const q=gxSearch.value.trim().toLowerCase();
+    if(!q){gxResults.hidden=true;gxResults.innerHTML='';return;}
+    const hits=graphNodes.filter(n=>{const row=rowFor(n.name);return label(n.name).toLowerCase().includes(q)||n.name.toLowerCase().includes(q)||(row?.canonicalName||'').toLowerCase().includes(q);}).slice(0,8);
+    gxResults.innerHTML=hits.length?hits.map(n=>`<li><button type="button" data-gx-hit="${n.name}">${label(n.name)}</button></li>`).join(''):`<li class="empty">${t('noResult')}</li>`;
+    gxResults.hidden=false;
+    gxResults.querySelectorAll('[data-gx-hit]').forEach(b=>b.addEventListener('click',()=>{pickSearch(b.dataset.gxHit);}));
+  }
+  function pickSearch(name){
+    const node=graphNodes.find(n=>n.name===name); if(!node)return;
+    if(!state.active.has(node.kind)){state.active.add(node.kind);root.querySelectorAll('[data-ss-filter]').forEach(b=>b.classList.toggle('active',state.active.has(b.dataset.ssFilter)));applyFilters();}
+    select(name); gxResults.hidden=true; gxSearch.value=label(name);
+    const el=galaxy.querySelector(`.ss-star[data-name="${CSS.escape(name)}"]`); if(el)el.focus();
+  }
+  gxSearch.addEventListener('input',runSearch);
+  gxSearch.addEventListener('keydown',e=>{
+    if(e.key==='Escape'){gxSearch.value='';gxResults.hidden=true;e.stopPropagation();return;}
+    if(e.key==='Enter'){e.preventDefault();const first=gxResults.querySelector('[data-gx-hit]');if(first)pickSearch(first.dataset.gxHit);}
+  });
+
+
   function applyFilters(){renderGalaxy();renderMatrix();renderActorPicker();if(state.tab==='orbits')renderOrbits();const current=graphNodes.find(n=>n.name===state.selected);if(current&&!state.active.has(current.kind)){const next=galaxyNodes.find(n=>state.active.has(n.kind));if(next)select(next.name);}}
   ['#ss-party-pick','#ss-leader-pick'].forEach(selector=>root.querySelector(selector).addEventListener('change',e=>{if(!e.target.value)return;state.orbitActor=e.target.value;state.orbitZoom=1;renderOrbits();}));
   root.querySelector('#ss-rank-sort').addEventListener('change',e=>{state.rankSort=e.target.value;renderMatrix();});
@@ -329,7 +607,7 @@
   }));
   root.querySelectorAll('[data-ss-tab]').forEach(b=>b.addEventListener('click',()=>{state.tab=b.dataset.ssTab;root.querySelectorAll('[data-ss-tab]').forEach(x=>x.classList.toggle('active',x===b));root.querySelectorAll('[data-ss-view]').forEach(x=>x.classList.toggle('active',x.dataset.ssView===state.tab));root.querySelector('#ss-relation-detail').hidden=state.tab!=='orbits'||!state.orbitRelation;if(state.tab==='positions')renderMatrix();if(state.tab==='orbits')renderOrbits();}));
   root.querySelectorAll('[data-ss-filter]').forEach(b=>b.addEventListener('click',()=>{const kind=b.dataset.ssFilter;state.active.has(kind)?state.active.delete(kind):state.active.add(kind);b.classList.toggle('active',state.active.has(kind));applyFilters();}));
-  function translate(){root.querySelectorAll('[data-ss]').forEach(el=>el.textContent=t(el.dataset.ss));root.querySelectorAll('[data-ss-html]').forEach(el=>el.innerHTML=t(el.dataset.ssHtml));renderGalaxy();renderMatrix();renderActorPicker();state.tab==='orbits'?renderOrbits():select(state.selected);}
+  function translate(){root.querySelectorAll('[data-ss]').forEach(el=>el.textContent=t(el.dataset.ss));root.querySelectorAll('[data-ss-title]').forEach(el=>{el.title=t(el.dataset.ssTitle);el.setAttribute('aria-label',t(el.dataset.ssTitle));});root.querySelectorAll('[data-ss-html]').forEach(el=>el.innerHTML=t(el.dataset.ssHtml));renderGalaxy();renderMatrix();renderActorPicker();state.tab==='orbits'?renderOrbits():select(state.selected);}
   new MutationObserver(translate).observe(document.documentElement,{attributes:true,attributeFilter:['lang','dir']});
   window.addEventListener('bf:theme',()=>{renderGalaxy();renderMatrix();if(state.tab==='orbits')renderOrbits();});
   let resizeTimer; window.addEventListener('resize',()=>{clearTimeout(resizeTimer);resizeTimer=setTimeout(()=>{hideTip();renderMatrix();if(state.tab==='orbits')renderOrbits();},180);});
