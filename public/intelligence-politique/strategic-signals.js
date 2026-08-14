@@ -129,7 +129,24 @@
   root.innerHTML = `<div class="ss-head"><div><p class="kicker" data-ss="kicker"></p><h1 data-ss-html="title"></h1><p data-ss="sub"></p></div><p class="ss-period"><strong data-ss="period"></strong><span>${fmt(canonical.graph.documents)} URL</span></p></div>
   <div class="ss-tabs"><button class="active" data-ss-tab="galaxy" data-ss="galaxy"></button><button data-ss-tab="positions" data-ss="footprint"></button><button data-ss-tab="orbits" data-ss="orbits"></button></div>
   <div class="ss-filters"><strong data-ss="filters"></strong>${[['party','parties'],['leader','leaders'],['topic','topics'],['positive','positive'],['neutral','neutral'],['negative','negative']].map(x=>`<button class="ss-filter active" data-ss-filter="${x[0]}" data-ss="${x[1]}"></button>`).join('')}</div>
-  <div class="ss-layout"><div class="ss-stage"><div class="ss-view active" data-ss-view="galaxy"><svg id="ss-galaxy-svg" viewBox="0 0 920 650" aria-label="Strategic Signals"></svg></div>
+  <div class="ss-layout"><div class="ss-stage"><div class="ss-view active" data-ss-view="galaxy"><div class="ss-galaxy">
+  <div class="ss-galaxy-head"><div><h2 data-ss="gxTitle"></h2><p class="ss-lede" data-ss="gxIntro"></p></div>
+  <label class="ss-search"><span data-ss="searchLabel"></span><input type="search" id="ss-gx-search" autocomplete="off"><ul id="ss-gx-results" hidden></ul></label></div>
+  <div class="ss-galaxy-bar"><div class="ss-seg" role="tablist"><button class="active" data-gx-mode="galaxy" data-ss="modeGalaxy"></button><button data-gx-mode="focus" data-ss="modeFocus"></button><button data-gx-mode="table" data-ss="modeTable"></button></div>
+  <div class="ss-galaxy-controls">
+    <button type="button" data-gx-cmd="out" data-ss-title="gxOut"><span aria-hidden="true">−</span><span data-ss="gxOut"></span></button>
+    <button type="button" data-gx-cmd="in" data-ss-title="gxIn"><span aria-hidden="true">+</span><span data-ss="gxIn"></span></button>
+    <button type="button" data-gx-cmd="center" data-ss="gxCenter"></button>
+    <button type="button" data-gx-cmd="reset" data-ss="gxReset"></button>
+    <button type="button" data-gx-cmd="full" id="ss-gx-full" data-ss="gxFull"></button>
+  </div></div>
+  <div class="ss-galaxy-panes" id="ss-gx-panes">
+    <div class="ss-galaxy-pane active" data-gx-pane="scene" id="ss-gx-scene"><svg id="ss-galaxy-svg" viewBox="0 0 1000 1000" role="group" aria-label="Galaxie décisionnelle"></svg></div>
+    <div class="ss-galaxy-pane" data-gx-pane="table"><div class="ss-table-scroll"><table class="ss-table" id="ss-gx-table"></table></div></div>
+  </div>
+  <div class="ss-legend"><p class="kicker" data-ss="readTitle"></p><ul><li data-ss="read1"></li><li data-ss="read2"></li><li data-ss="read3"></li><li data-ss="read4"></li><li data-ss="gxKeyboard"></li></ul></div>
+  </div></div>
+
   <div class="ss-view" data-ss-view="positions"><div class="ss-positions"><h2 data-ss="positionTitle"></h2><p class="ss-lede" data-ss="matrixIntro"></p>
   <div class="ss-matrix-wrap"><span class="ss-axis-title y" data-ss="yAxisNew"></span>
   <div class="ss-yticks" aria-hidden="true">${[100,75,50,25,0].map(v=>`<span>${v}</span>`).join('')}</div>
