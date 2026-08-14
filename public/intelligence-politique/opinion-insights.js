@@ -220,7 +220,7 @@
   }
 
   function cockpit(x) {
-    const W = 760, H = 470, P = { t: 24, r: 26, b: 54, l: 62 };
+    const W = 760, H = 470, P = { t: 48, r: 26, b: 54, l: 62 };
     const px = b => P.l + (b + 100) / 200 * (W - P.l - P.r);
     const py = v => H - P.b - v / 100 * (H - P.t - P.b);
     const list = visible();

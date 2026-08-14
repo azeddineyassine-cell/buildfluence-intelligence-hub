@@ -34,7 +34,7 @@
 .oi-toolbar :focus-visible,.oi-table tr:focus-visible,.oi-dot:focus-visible,.oi-tnode:focus-visible,.oi-syn:focus-visible,.oi-close:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
 
 /* Cockpit + fiche */
-.oi-grid{display:grid;grid-template-columns:minmax(0,1.9fr) minmax(320px,1fr);gap:14px;margin-bottom:14px}
+.oi-grid{display:grid;align-items:start;grid-template-columns:minmax(0,1.9fr) minmax(320px,1fr);gap:14px;margin-bottom:14px}
 .oi-plot{width:100%;height:auto}
 .oi-grid line.oi-grid,.oi-plot .oi-grid{stroke:var(--line);stroke-opacity:.55}
 .oi-plot .oi-axis{stroke:var(--line)}
