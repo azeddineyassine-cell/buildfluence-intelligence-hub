@@ -293,7 +293,13 @@
       <p class="mv-note">${esc(t('ficheNote'))}</p>`;
   };
 
+  const stackFocus = () => {
+    const a = document.activeElement;
+    return a && a.classList?.contains('mv-seg-bar') ? a.dataset.media : null;
+  };
+
   const renderStack = () => {
+    const keep = stackFocus();
     const full = ranking(), total = full.reduce((s,m)=>s+m.urls,0) || 1;
     root.querySelector('#mv-stack').innerHTML = full.map(m=>{
       const share = m.urls/total*100;
@@ -301,6 +307,7 @@
       return `<button type="button" class="mv-seg-bar" style="--c:${m.color};width:${share.toFixed(2)}%" data-media="${esc(m.name)}" aria-pressed="${state.selected===m.name}" aria-label="${esc(label)}" title="${esc(label)}"></button>`;
     }).join('');
     root.querySelector('#mv-legend').innerHTML = full.map(m=>`<span><i style="--c:${m.color}"></i>${bdi(m.name)} · ${fmt(m.urls/total*100,1)} %</span>`).join('');
+    if (keep) root.querySelector(`#mv-stack .mv-seg-bar[data-media="${CSS.escape(keep)}"]`)?.focus();
   };
 
   const paint = () => { renderRows(); renderDetail(); renderStack(); };
@@ -328,7 +335,8 @@
       if (state.selected && window.matchMedia('(max-width:1100px)').matches) root.querySelector('#mv-detail')?.scrollIntoView({behavior:'smooth',block:'center'});
     });
     root.addEventListener('input', e => { if (e.target.id === 'mv-q') { state.query = e.target.value; renderRows(); } });
-    root.addEventListener('keydown', e => { if (e.key==='Escape' && state.selected) { state.selected=null; paint(); } });
+    // Échap : écouté au niveau document (le re-rendu du bandeau peut faire perdre le focus interne)
+    document.addEventListener('keydown', e => { if (e.key==='Escape' && state.selected) { state.selected=null; paint(); } });
   };
 
   function render(){
