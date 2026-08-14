@@ -336,6 +336,10 @@
     const d=infoFor(name), total=d.tones.positive+d.tones.neutral+d.tones.negative, balance=balanceOf(d);
     const avatar=root.querySelector('#ss-avatar'),leaderImage=leaderPortraits[d.name];avatar.innerHTML=leaderImage?`<img src="${leaderImage}" alt="" aria-hidden="true">`:d.short; root.querySelector('#ss-name').textContent=label(d.name); root.querySelector('#ss-kind').textContent=d.kind;
     root.querySelector('#ss-vis').textContent=`${fmt(d.visibility,1)} / 100`; root.querySelector('#ss-urls').textContent=fmt(d.urls); root.querySelector('#ss-balance').textContent=`${balance>0?'+':''}${fmt(balance,1)}`; root.querySelector('#ss-main-topic').textContent=label(d.topic); root.querySelector('#ss-relations').textContent=fmt(d.links);
+    root.querySelector('#ss-degree').textContent=fmt(degreeOf(name)); root.querySelector('#ss-weight').textContent=fmt(weightOf(name));
+    const relItems=root.querySelector('#ss-rel-items');
+    if(relItems) relItems.innerHTML=relationsOf(name).slice(0,8).map(r=>`<li><span>${label(r.other)}</span><em>${relTypeLabel(r.type)}</em><b>${fmt(r.value)}</b></li>`).join('') || `<li>${t('unavailable')}</li>`;
+
     [['pos','positive','pl','+ '],['neu','neutral','nl','= '],['neg','negative','gl','− ']].forEach(([id,key,lid,prefix])=>{const pct=total?d.tones[key]/total*100:0;const on=state.active.has(key);root.querySelector('#ss-'+id).style.width=on?pct+'%':'0';root.querySelector('#ss-'+lid).textContent=on?prefix+fmt(pct,1)+'%':'';});
     const facts=relation ? [`${fmt(relation.value)} ${t('docRelations')}.`,`${fmt(relation.share,1)}% ${t('exposure')}.`,lang()==='en'?'This is an observed co-occurrence, not causality.':lang()==='ar'?'هذا تزامن مرصود وليس علاقة سببية.':'Il s’agit d’une cooccurrence observée, pas d’un lien de causalité.'] : d.facts;
     root.querySelector('#ss-insight').textContent=relation ? `${label(name)} × ${label(relation.name)}` : d.type==='tone' ? t('globalTone') : d.type==='topic' ? `${label(d.name)} : ${t('actorTopic')}.` : `${label(d.topic)} · ${t('actorTopic')}.`; facts.forEach((f,i)=>root.querySelector('#ss-fact-'+(i+1)).textContent=f);
