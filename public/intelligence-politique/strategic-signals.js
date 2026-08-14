@@ -184,31 +184,152 @@
   <section class="ss-detail" id="ss-detail" role="region" aria-labelledby="ss-detail-name" hidden></section></aside></div>`;
 
   const graphNodes = canonical.graph.nodes.map(n => ({...n, kind:n.group==='public'?toneKind(n.name):nodeKind[n.group]}));
-  const graphEdges = edges.map(e => ({ a:e[0], b:e[1], value:e[2], kind:e[3]==='influence'?'topic':e[3]==='alliance'?(toneKind(e[1])==='positive'?'positive':'topic'):e[3]==='proximite'?'neutral':'negative' }));
-  const positionSector = (items, radius, start, end, cx=430, cy=325) => items.map((n,i) => { const a=(start+(end-start)*(items.length===1?.5:i/(items.length-1)))*Math.PI/180; return {...n,x:cx+radius*Math.cos(a),y:cy+radius*Math.sin(a)}; });
-  const galaxyNodes = [
-    ...positionSector(graphNodes.filter(n=>n.kind==='party'),285,120,240),
-    ...positionSector(graphNodes.filter(n=>n.kind==='leader'),205,115,245),
-    ...positionSector(graphNodes.filter(n=>n.kind==='topic'),170,-62,62),
-    ...positionSector(graphNodes.filter(n=>['positive','neutral','negative'].includes(n.kind)),305,-46,46)
-  ];
-  const byName = Object.fromEntries(galaxyNodes.map(n=>[n.name,n]));
+  const graphEdges = edges.map(e => ({ a:e[0], b:e[1], value:e[2], type:e[3], kind:e[3]==='influence'?'topic':e[3]==='alliance'?'positive':e[3]==='proximite'?'neutral':'negative' }));
+  const relTypeLabel = type => t('rel'+type.charAt(0).toUpperCase()+type.slice(1));
+  const degreeOf = name => graphEdges.filter(e=>e.a===name||e.b===name).length;
+  const weightOf = name => graphEdges.filter(e=>e.a===name||e.b===name).reduce((s,e)=>s+e.value,0);
+  const relationsOf = name => graphEdges.filter(e=>e.a===name||e.b===name)
+    .map(e=>({ other:e.a===name?e.b:e.a, type:e.type, value:e.value }))
+    .sort((x,y)=>y.value-x.value);
+
+  /* ---------- Galaxie : couronnes déterministes ---------- */
+  const GX = { cx:500, cy:500, rings:{ topic:190, leader:300, party:400, tone:470 } };
+  const TONE_ANGLES = { positive:-90, neutral:30, negative:150 };
+  const gxRingOf = kind => ['positive','neutral','negative'].includes(kind) ? GX.rings.tone : GX.rings[kind];
+  function layoutGalaxy() {
+    const visible = n => state.active.has(n.kind);
+    const placed = [];
+    ['topic','leader','party'].forEach(kind => {
+      const items = graphNodes.filter(n=>n.kind===kind&&visible(n)).sort((a,b)=>b.mentions-a.mentions||a.name.localeCompare(b.name));
+      const r = GX.rings[kind], step = items.length ? 360/items.length : 0;
+      items.forEach((n,i)=>{ const a=(-90+i*step)*Math.PI/180; placed.push({...n,ring:r,angle:-90+i*step,x:GX.cx+r*Math.cos(a),y:GX.cy+r*Math.sin(a)}); });
+    });
+    graphNodes.filter(n=>['positive','neutral','negative'].includes(n.kind)&&visible(n)).forEach(n=>{
+      const deg=TONE_ANGLES[n.kind], a=deg*Math.PI/180, r=GX.rings.tone;
+      placed.push({...n,ring:r,angle:deg,x:GX.cx+r*Math.cos(a),y:GX.cy+r*Math.sin(a)});
+    });
+    return placed;
+  }
+  let galaxyNodes = layoutGalaxy();
+  let byName = Object.fromEntries(galaxyNodes.map(n=>[n.name,n]));
   const galaxy = root.querySelector('#ss-galaxy-svg');
+  const gxScene = root.querySelector('#ss-gx-scene');
+  const gxTierBounds = () => {
+    const values = galaxyNodes.map(n=>n.mentions).sort((a,b)=>a-b);
+    const q = p => values.length ? values[Math.min(values.length-1,Math.floor(p*values.length))] : 0;
+    return [q(.25),q(.5),q(.75)];
+  };
+  const gxRadius = (mentions,bounds) => { const tier = mentions<=bounds[0]?1:mentions<=bounds[1]?2:mentions<=bounds[2]?3:4; return 13+tier*5; };
+  const gxWidth = value => Math.max(0.8, Math.min(5, Math.sqrt(value)/6));
+  const arcPath = (a,b) => {
+    const mx=(a.x+b.x)/2, my=(a.y+b.y)/2;
+    const pull = Math.min(0.42, 0.12 + Math.abs(a.ring-b.ring)/1400);
+    const cxp = mx + (GX.cx-mx)*pull, cyp = my + (GX.cy-my)*pull;
+    return `M${a.x.toFixed(1)},${a.y.toFixed(1)} Q${cxp.toFixed(1)},${cyp.toFixed(1)} ${b.x.toFixed(1)},${b.y.toFixed(1)}`;
+  };
+
+  function applyCam(){
+    const cam=galaxy.querySelector('#ss-gx-cam');
+    if(cam) cam.setAttribute('transform',`translate(${state.gxPan.x.toFixed(2)} ${state.gxPan.y.toFixed(2)}) scale(${state.gxZoom.toFixed(3)})`);
+  }
+  function zoomAt(nextZoom, px, py){
+    const z=Math.max(0.6,Math.min(4,nextZoom)), k=z/state.gxZoom;
+    state.gxPan={ x:px-(px-state.gxPan.x)*k, y:py-(py-state.gxPan.y)*k };
+    state.gxZoom=z; applyCam();
+  }
+  const svgPoint = (clientX,clientY) => {
+    const box=galaxy.getBoundingClientRect(), scale=box.width?1000/box.width:1;
+    return { x:(clientX-box.left)*scale, y:(clientY-box.top)*(box.height?1000/box.height:scale) };
+  };
 
   function renderGalaxy() {
-    const visible=n=>state.active.has(n.kind);
-    galaxy.innerHTML=`<circle cx="430" cy="325" r="285" class="ss-orbit"/><circle cx="430" cy="325" r="205" class="ss-orbit"/><circle cx="430" cy="325" r="120" class="ss-orbit"/><text x="430" y="318" text-anchor="middle" class="ss-galaxy-title">STRATEGIC SIGNALS</text><text x="430" y="338" text-anchor="middle" class="ss-galaxy-sub">${fmt(canonical.graph.documents)} URL</text>`+
-      graphEdges.filter(e=>byName[e.a]&&byName[e.b]&&visible(byName[e.a])&&visible(byName[e.b])).map(e=>`<path class="ss-ray ${e.kind}" data-a="${e.a}" data-b="${e.b}" d="M${byName[e.a].x},${byName[e.a].y} Q430,325 ${byName[e.b].x},${byName[e.b].y}" style="--w:${Math.min(4,1+Math.sqrt(e.value)/14)}"/>`).join('')+
-      galaxyNodes.filter(visible).map(n=>{const d=infoFor(n.name),r=n.kind==='topic'?19+Math.sqrt(n.mentions)/5:n.kind==='party'||n.kind==='leader'?16+Math.sqrt(n.mentions):27,content=n.kind==='leader'?`<image href="${leaderPortraits[n.name]}" x="${-r}" y="${-r}" width="${r*2}" height="${r*2}" preserveAspectRatio="xMidYMid slice" clip-path="circle(${r-2}px at center)"/><text class="num leader-num" text-anchor="middle" y="${r+12}">${fmt(d.urls)}</text>`:`<text text-anchor="middle" y="-2">${d.short}</text><text class="num" text-anchor="middle" y="12">${fmt(d.urls)}</text>`;return `<g class="ss-star ${n.kind}" data-name="${n.name}" transform="translate(${n.x} ${n.y})"><circle class="halo" r="${r+7}"/><circle class="core" r="${r}"/>${content}<text class="ss-node-label" text-anchor="middle" y="${r+24}">${label(n.name)}</text></g>`}).join('');
-    galaxy.querySelectorAll('.ss-star').forEach(n=>n.addEventListener('click',()=>select(n.dataset.name)));
-    highlightGalaxy();
+    galaxyNodes = layoutGalaxy();
+    byName = Object.fromEntries(galaxyNodes.map(n=>[n.name,n]));
+    const bounds = gxTierBounds();
+    const focus = state.gxMode==='focus';
+    const neighbours = new Set(focus ? relationsOf(state.selected).map(r=>r.other) : []);
+    const shown = focus ? galaxyNodes.filter(n=>n.name===state.selected||neighbours.has(n.name)) : galaxyNodes;
+    const shownNames = new Set(shown.map(n=>n.name));
+    const links = graphEdges.filter(e=>shownNames.has(e.a)&&shownNames.has(e.b)&&(!focus||e.a===state.selected||e.b===state.selected));
+    const ringLabels = [['topic','ringTopics'],['leader','ringLeaders'],['party','ringParties'],['tone','ringTones']]
+      .map(([k,key])=>{const r=k==='tone'?GX.rings.tone:GX.rings[k];return `<circle cx="${GX.cx}" cy="${GX.cy}" r="${r}" class="ss-orbit"/><text x="${GX.cx}" y="${GX.cy-r-8}" text-anchor="middle" class="ss-ring-label">${t(key)}</text>`;}).join('');
+    galaxy.innerHTML=`<g id="ss-gx-cam">${focus?'':ringLabels}
+      <circle cx="${GX.cx}" cy="${GX.cy}" r="70" class="ss-gx-core"/>
+      <text x="${GX.cx}" y="${GX.cy-4}" text-anchor="middle" class="ss-galaxy-title">${fmt(canonical.graph.documents)} URL</text>
+      <text x="${GX.cx}" y="${GX.cy+16}" text-anchor="middle" class="ss-galaxy-sub">${t('period')}</text>`+
+      links.map(e=>`<path class="ss-ray ${e.kind} ${e.type==='influence'?'solid':'dashed'}" data-a="${e.a}" data-b="${e.b}" d="${arcPath(byName[e.a],byName[e.b])}" style="--w:${gxWidth(e.value).toFixed(2)}"><title>${label(e.a)} × ${label(e.b)} · ${relTypeLabel(e.type)} · ${fmt(e.value)} URL</title></path>`).join('')+
+      shown.map(n=>{
+        const d=infoFor(n.name), r=gxRadius(n.mentions,bounds);
+        const content = n.kind==='leader'
+          ? `<image href="${leaderPortraits[n.name]}" x="${-r}" y="${-r}" width="${r*2}" height="${r*2}" preserveAspectRatio="xMidYMid slice" clip-path="circle(${r-2}px at center)"/>`
+          : `<text text-anchor="middle" y="4">${d.short}</text>`;
+        return `<g class="ss-star ${n.kind}" data-name="${n.name}" data-ring="${n.ring}" tabindex="0" role="button" aria-label="${label(n.name)} · ${d.kind} · ${fmt(d.urls)} URL" transform="translate(${n.x.toFixed(1)} ${n.y.toFixed(1)})"><circle class="halo" r="${r+7}"/><circle class="core" r="${r}"/>${content}<text class="ss-node-label" text-anchor="middle" y="${r+18}">${label(n.name)}</text><title>${label(n.name)} · ${d.kind} · ${fmt(d.urls)} URL</title></g>`;
+      }).join('')+`</g>`;
+    galaxy.querySelectorAll('.ss-star').forEach(n=>{
+      n.addEventListener('click',()=>select(n.dataset.name));
+      n.addEventListener('keydown',e=>{
+        if(e.key==='Enter'||e.key===' '){e.preventDefault();select(n.dataset.name);return;}
+        const arrows=['ArrowRight','ArrowLeft','ArrowUp','ArrowDown'];
+        if(!arrows.includes(e.key))return;
+        e.preventDefault(); moveFocus(n.dataset.name,e.key);
+      });
+    });
+    applyCam(); renderGalaxyTable(); highlightGalaxy();
+  }
+
+  function moveFocus(name,key){
+    const current=byName[name]; if(!current)return;
+    const ringOrder=[GX.rings.topic,GX.rings.leader,GX.rings.party,GX.rings.tone];
+    let targetRing=current.ring;
+    if(key==='ArrowUp'||key==='ArrowDown'){
+      const i=ringOrder.indexOf(current.ring), dir=key==='ArrowDown'?1:-1;
+      for(let step=1;step<=ringOrder.length;step++){
+        const cand=ringOrder[(i+dir*step+ringOrder.length*2)%ringOrder.length];
+        if(galaxyNodes.some(n=>n.ring===cand)){targetRing=cand;break;}
+      }
+      const pool=galaxyNodes.filter(n=>n.ring===targetRing).sort((a,b)=>a.angle-b.angle);
+      const next=pool.reduce((best,n)=>Math.abs(n.angle-current.angle)<Math.abs(best.angle-current.angle)?n:best,pool[0]);
+      if(next)focusNode(next.name);
+      return;
+    }
+    const pool=galaxyNodes.filter(n=>n.ring===current.ring).sort((a,b)=>a.angle-b.angle);
+    const idx=pool.findIndex(n=>n.name===name), dir=key==='ArrowRight'?1:-1;
+    const next=pool[(idx+dir+pool.length)%pool.length];
+    if(next)focusNode(next.name);
+  }
+  function focusNode(name){
+    const el=galaxy.querySelector(`.ss-star[data-name="${CSS.escape(name)}"]`);
+    if(el){el.focus();select(name);}
+  }
+
+  function renderGalaxyTable(){
+    const table=root.querySelector('#ss-gx-table'); if(!table)return;
+    const rows=galaxyNodes.map(n=>{const d=infoFor(n.name);return {name:n.name,kind:n.kind,category:d.kind,urls:d.urls,vis:d.visibility,balance:balanceOf(d),degree:degreeOf(n.name),weight:weightOf(n.name)};});
+    const dir=state.gxSortDir==='asc'?1:-1;
+    const key=state.gxSort;
+    rows.sort((a,b)=>key==='name'?dir*label(a.name).localeCompare(label(b.name),locale()):dir*(b[key]-a[key])*-1*-1);
+    if(key!=='name')rows.sort((a,b)=>dir*(b[key]-a[key]));
+    const cols=[['name','colEntity'],['category','colCategory'],['urls','urls'],['vis','visibility'],['balance','balance'],['degree','colDegree'],['weight','colWeight']];
+    table.innerHTML=`<thead><tr>${cols.map(([k,label2])=>`<th data-gx-sort="${k==='category'?'name':k}" aria-sort="${state.gxSort===k?(state.gxSortDir==='asc'?'ascending':'descending'):'none'}"><button type="button">${t(label2)}</button></th>`).join('')}</tr></thead><tbody>`+
+      rows.map(r=>`<tr data-name="${r.name}" tabindex="0" class="${r.name===state.selected?'selected':''}"><td>${label(r.name)}</td><td>${r.category}</td><td>${fmt(r.urls)}</td><td>${fmt(r.vis,1)}</td><td>${r.balance>0?'+':''}${fmt(r.balance,1)}</td><td>${fmt(r.degree)}</td><td>${fmt(r.weight)}</td></tr>`).join('')+`</tbody>`;
+    table.querySelectorAll('[data-gx-sort]').forEach(th=>th.addEventListener('click',()=>{
+      const k=th.dataset.gxSort;
+      if(state.gxSort===k)state.gxSortDir=state.gxSortDir==='asc'?'desc':'asc'; else {state.gxSort=k;state.gxSortDir=k==='name'?'asc':'desc';}
+      renderGalaxyTable();
+    }));
+    table.querySelectorAll('tbody tr').forEach(tr=>{
+      tr.addEventListener('click',()=>select(tr.dataset.name));
+      tr.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();select(tr.dataset.name);}});
+    });
   }
 
   function highlightGalaxy() {
     const name=state.selected;
     galaxy.querySelectorAll('.ss-star').forEach(n=>{const near=n.dataset.name===name||graphEdges.some(e=>(e.a===name&&e.b===n.dataset.name)||(e.b===name&&e.a===n.dataset.name));n.classList.toggle('dim',!near);n.classList.toggle('hot',n.dataset.name===name);});
     galaxy.querySelectorAll('.ss-ray').forEach(e=>{const hot=e.dataset.a===name||e.dataset.b===name;e.classList.toggle('hot',hot);e.classList.toggle('dim',!hot);});
+    root.querySelectorAll('#ss-gx-table tbody tr').forEach(tr=>tr.classList.toggle('selected',tr.dataset.name===name));
   }
+
 
   function select(name, relation=null) {
     state.selected=name; state.orbitRelation=relation;
