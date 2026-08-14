@@ -264,3 +264,10 @@ html[data-theme="dark"] #apropos{--ab-bg:linear-gradient(145deg,#142235,#0D1B2A)
 }
 @media (prefers-reduced-motion:reduce){.ab-ref,.ab-sit,.ab-ref-name,.ab-sit-name,.ab-ref-reveal{transition:none}}
 #apropos [hidden]{display:none!important}
+
+/* ===== Tokens de tonalité unifiés (toute la plateforme) ===== */
+:root{--tone-pos:#4E9A5F;--tone-neu:#7B8490;--tone-neg:#E06D4F;--tone-pos-soft:color-mix(in srgb,var(--tone-pos) 22%,transparent);--tone-neu-soft:color-mix(in srgb,var(--tone-neu) 22%,transparent);--tone-neg-soft:color-mix(in srgb,var(--tone-neg) 22%,transparent)}
+[data-theme=dark]{--tone-pos:#63B379;--tone-neu:#939EAB;--tone-neg:#EA8362}
+.tone-dot.positive{background:var(--tone-pos)!important}
+.tone-dot.neutral{background:var(--tone-neu)!important}
+.tone-dot.negative{background:var(--tone-neg)!important}

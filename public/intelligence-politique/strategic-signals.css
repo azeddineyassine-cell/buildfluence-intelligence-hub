@@ -272,3 +272,6 @@ html[data-theme="light"] .ss-ring-label { fill:#66717b; }
 #ss-gx-scene .ss-star.dim { opacity:.42; }
 #ss-gx-scene .ss-ray.dim { opacity:.07; }
 @media(max-width:680px){ #ss-gx-scene #ss-galaxy-svg { height:auto; aspect-ratio:1/1; } }
+
+/* ===== Tonalités alignées sur les tokens globaux ===== */
+#signals{--ss-positive:var(--tone-pos);--ss-neutral:var(--tone-neu);--ss-negative:var(--tone-neg)}
