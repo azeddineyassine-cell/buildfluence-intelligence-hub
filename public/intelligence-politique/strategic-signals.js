@@ -307,8 +307,8 @@
     const rows=galaxyNodes.map(n=>{const d=infoFor(n.name);return {name:n.name,kind:n.kind,category:d.kind,urls:d.urls,vis:d.visibility,balance:balanceOf(d),degree:degreeOf(n.name),weight:weightOf(n.name)};});
     const dir=state.gxSortDir==='asc'?1:-1;
     const key=state.gxSort;
-    rows.sort((a,b)=>key==='name'?dir*label(a.name).localeCompare(label(b.name),locale()):dir*(b[key]-a[key])*-1*-1);
-    if(key!=='name')rows.sort((a,b)=>dir*(b[key]-a[key]));
+    rows.sort((a,b)=>key==='name'?dir*label(a.name).localeCompare(label(b.name),locale()):dir*(a[key]-b[key]));
+
     const cols=[['name','colEntity'],['category','colCategory'],['urls','urls'],['vis','visibility'],['balance','balance'],['degree','colDegree'],['weight','colWeight']];
     table.innerHTML=`<thead><tr>${cols.map(([k,label2])=>`<th data-gx-sort="${k==='category'?'name':k}" aria-sort="${state.gxSort===k?(state.gxSortDir==='asc'?'ascending':'descending'):'none'}"><button type="button">${t(label2)}</button></th>`).join('')}</tr></thead><tbody>`+
       rows.map(r=>`<tr data-name="${r.name}" tabindex="0" class="${r.name===state.selected?'selected':''}"><td>${label(r.name)}</td><td>${r.category}</td><td>${fmt(r.urls)}</td><td>${fmt(r.vis,1)}</td><td>${r.balance>0?'+':''}${fmt(r.balance,1)}</td><td>${fmt(r.degree)}</td><td>${fmt(r.weight)}</td></tr>`).join('')+`</tbody>`;
