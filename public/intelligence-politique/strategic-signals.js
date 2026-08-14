@@ -11,7 +11,7 @@
   const toneNodeNames = { positive: 'Positive', neutral: 'Neutre', negative: 'Négative' };
   const nodeKind = { parti: 'party', acteur: 'leader', theme: 'topic' };
   const toneKind = name => name === 'Positive' ? 'positive' : name === 'Neutre' ? 'neutral' : 'negative';
-  const state = { active: new Set(['party','leader','topic','positive','neutral','negative']), tab: 'galaxy', selected: 'RNI', orbitActor: 'RNI', orbitRelation: null, rankSort:'visibility', rankCat:'all', detail:null, orbitMode:'graph', orbitZoom:1 };
+  const state = { active: new Set(['party','leader','topic','positive','neutral','negative']), tab: 'galaxy', selected: 'RNI', orbitActor: 'RNI', orbitRelation: null, rankSort:'visibility', rankCat:'all', detail:null, orbitMode:'graph', orbitZoom:1, gxMode:'galaxy', gxZoom:1, gxPan:{x:0,y:0}, gxSort:'urls', gxSortDir:'desc' };
 
   /* Pictogrammes Lucide (tracés officiels, inline — bundle statique hors React) */
   const ICONS = {
