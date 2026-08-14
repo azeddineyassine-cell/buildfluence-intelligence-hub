@@ -39,7 +39,7 @@
 .oi-grid line.oi-grid,.oi-plot .oi-grid{stroke:var(--line);stroke-opacity:.55}
 .oi-plot .oi-axis{stroke:var(--line)}
 .oi-plot .oi-axis0{stroke:var(--gold);stroke-dasharray:4 4;stroke-opacity:.8}
-.oi-plot .oi-tick{fill:var(--muted);font:500 10px var(--cond)}
+.oi-plot .oi-tick{fill:var(--muted);font:500 10px var(--cond);direction:ltr;unicode-bidi:isolate}
 .oi-plot .oi-dotlabel{fill:var(--text);font:700 11px var(--cond)}
 .oi-dot{cursor:pointer;transition:opacity .2s ease}
 .oi-dot circle{stroke-width:1.5}

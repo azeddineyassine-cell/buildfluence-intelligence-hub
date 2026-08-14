@@ -216,7 +216,7 @@
       { k: x.s3, topic: mostPositive, v: signed(mostPositive.balance), extra: fmt(mostPositive.mentions) + ' ' + x.occ, l: x.s3l },
       { k: x.s4, topic: mostConnected, v: fmt(mostConnected.links.length) + ' ' + x.actors, extra: fmt(mostConnected.cooc) + ' ' + x.cooc, l: x.s4l }
     ];
-    return cards.map(c => `<button type="button" class="oi-syn" data-topic="${esc(c.topic.name)}"><small>${esc(c.k)}</small><strong>${bidi(tTopic(c.topic.name))}</strong><b>${esc(c.v)}</b><span>${esc(c.extra)} · 29.07 – 05.08.2026</span><em>${esc(c.l)}</em></button>`).join('');
+    return cards.map(c => `<button type="button" class="oi-syn" data-topic="${esc(c.topic.name)}"><small>${esc(c.k)}</small><strong>${bidi(tTopic(c.topic.name))}</strong><b>${esc(c.v)}</b><span>${esc(c.extra)} · <bdi dir="ltr">29.07 – 05.08.2026</bdi></span><em>${esc(c.l)}</em></button>`).join('');
   }
 
   function cockpit(x) {
@@ -224,7 +224,7 @@
     const px = b => P.l + (b + 100) / 200 * (W - P.l - P.r);
     const py = v => H - P.b - v / 100 * (H - P.t - P.b);
     const list = visible();
-    const grid = [-100, -50, 0, 50, 100].map(b => `<line x1="${px(b)}" y1="${P.t}" x2="${px(b)}" y2="${H - P.b}" class="${b === 0 ? 'oi-axis0' : 'oi-grid'}"/><text x="${px(b)}" y="${H - P.b + 20}" class="oi-tick" text-anchor="middle">${b > 0 ? '+' + b : b}</text>`).join('')
+    const grid = [-100, -50, 0, 50, 100].map(b => `<line x1="${px(b)}" y1="${P.t}" x2="${px(b)}" y2="${H - P.b}" class="${b === 0 ? 'oi-axis0' : 'oi-grid'}"/><text x="${px(b)}" y="${H - P.b + 20}" class="oi-tick" text-anchor="middle">${b > 0 ? '+' + b : b < 0 ? '\u2212' + Math.abs(b) : b}</text>`).join('')
       + [0, 25, 50, 75, 100].map(v => `<line x1="${P.l}" y1="${py(v)}" x2="${W - P.r}" y2="${py(v)}" class="oi-grid"/><text x="${P.l - 10}" y="${py(v) + 4}" class="oi-tick" text-anchor="end">${v}</text>`).join('');
     const dots = list.map(t => {
       const r = 10 + Math.sqrt(t.mentions / maxMentions) * 22;
@@ -255,7 +255,7 @@
     <p class="oi-label">${esc(x.tones)}</p><div class="oi-tonebar">${bar}</div>
     <ul class="oi-tonelist"><li><i style="background:${TONE.pos}"></i>${esc(x.thPos)}<b>${fmt(t.tones.positive)}</b><span>${dec(t.tones.positive / t.toneTotal * 100)} %</span></li><li><i style="background:${TONE.neu}"></i>${esc(x.thNeu)}<b>${fmt(t.tones.neutral)}</b><span>${dec(t.tones.neutral / t.toneTotal * 100)} %</span></li><li><i style="background:${TONE.neg}"></i>${esc(x.thNeg)}<b>${fmt(t.tones.negative)}</b><span>${dec(t.tones.negative / t.toneTotal * 100)} %</span></li></ul>
     <p class="oi-label">${esc(x.assoc)} · ${fmt(t.links.length)}</p>${links}
-    <dl class="oi-kv oi-kv-meta"><div><dt>${esc(x.period)}</dt><dd>29.07 – 05.08.2026</dd></div><div><dt>${esc(x.source)}</dt><dd><bdi dir="ltr">Opinion citoyenne 29.07_05.08</bdi></dd></div><div><dt>${esc(x.method)}</dt><dd>${esc(x.relations)}</dd></div></dl>
+    <dl class="oi-kv oi-kv-meta"><div><dt>${esc(x.period)}</dt><dd><bdi dir="ltr">29.07 – 05.08.2026</bdi></dd></div><div><dt>${esc(x.source)}</dt><dd><bdi dir="ltr">Opinion citoyenne 29.07_05.08</bdi></dd></div><div><dt>${esc(x.method)}</dt><dd>${esc(x.relations)}</dd></div></dl>
     <div class="oi-na-block"><strong>${esc(x.naTitle)}</strong><ul>${x.naItems.map(i => `<li>${esc(i)} : ${esc(x.unavailable)}</li>`).join('')}</ul></div>`;
   }
 
