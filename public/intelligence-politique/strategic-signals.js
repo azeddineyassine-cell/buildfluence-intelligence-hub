@@ -175,7 +175,7 @@
   <div class="ss-orbit-pane" data-orbit-pane="table"><div class="ss-table-scroll"><table class="ss-table" id="ss-orbit-table"></table></div></div></div>
   <div class="ss-legend"><p class="kicker" data-ss="orbitLegendTitle"></p><ul><li data-ss="orbitLegend"></li><li data-ss="orbitHint"></li></ul></div></div></div></div>
   <aside class="ss-analysis"><p class="kicker" data-ss="frame"></p><div class="ss-identity"><div class="ss-avatar" id="ss-avatar"></div><div><h2 id="ss-name"></h2><p class="ss-kind" id="ss-kind"></p></div></div>
-  ${[['visibility','ss-vis'],['urls','ss-urls'],['balance','ss-balance'],['mainTopic','ss-main-topic'],['relations','ss-relations']].map(x=>`<div class="ss-metric"><span data-ss="${x[0]}"></span><b id="${x[1]}"></b></div>`).join('')}
+  ${[['visibility','ss-vis'],['urls','ss-urls'],['balance','ss-balance'],['mainTopic','ss-main-topic'],['relations','ss-relations'],['gxDegree','ss-degree'],['gxWeight','ss-weight']].map(x=>`<div class="ss-metric"><span data-ss="${x[0]}"></span><b id="${x[1]}"></b></div>`).join('')}
   <div class="ss-tonebar"><i id="ss-pos"></i><i id="ss-neu"></i><i id="ss-neg"></i></div><div class="ss-tone-labels"><span id="ss-pl"></span><span id="ss-nl"></span><span id="ss-gl"></span></div>
   <div class="ss-relation-detail" id="ss-relation-detail" hidden><p class="kicker" data-ss="relation"></p><div><strong id="ss-relation-title"></strong><b id="ss-relation-value"></b></div><p id="ss-relation-copy"></p></div>
   <div class="ss-reading"><h3 data-ss="reading"></h3><p id="ss-insight"></p><ul><li id="ss-fact-1"></li><li id="ss-fact-2"></li><li id="ss-fact-3"></li></ul></div><p class="ss-method" data-ss="method"></p>
