@@ -339,7 +339,82 @@
           select(next.dataset.track);
         });
       });
+
+      /* ---- Secteurs : révélation logo (hover/focus desktop, appuis successifs mobile) ---- */
+      const coarse = () => window.matchMedia('(hover:none)').matches || window.innerWidth <= 640;
+      const refs = [...document.querySelectorAll('.ab-ref')];
+      const closeRefs = (except) => refs.forEach(r => { if (r !== except) r.classList.remove('is-open'); });
+      refs.forEach(ref => {
+        ref.addEventListener('click', (e) => {
+          if (!coarse()) return;
+          if (!ref.classList.contains('is-open')) { e.preventDefault(); closeRefs(ref); ref.classList.add('is-open'); }
+        });
+        ref.addEventListener('keydown', (e) => {
+          if (e.key === ' ' || e.key === 'Spacebar') { e.preventDefault(); ref.click(); }
+          if (e.key === 'Escape') ref.classList.remove('is-open');
+        });
+        ref.addEventListener('blur', () => { if (!coarse()) ref.classList.remove('is-open'); });
+      });
+
+      /* ---- Situations traitées : fiche adjacente ---- */
+      const sits = [...document.querySelectorAll('.ab-sit')];
+      const detail = document.getElementById('ab-sit-detail');
+      if (sits.length && detail) {
+        const empty = detail.querySelector('.ab-sit-empty');
+        const card = detail.querySelector('.ab-sit-card');
+        const logo = card.querySelector('.ab-sit-logo');
+        const pict = card.querySelector('.ab-sit-pict');
+        const elSituation = card.querySelector('.ab-sit-situation');
+        const elInter = card.querySelector('.ab-sit-inter');
+        const elResult = card.querySelector('.ab-sit-result');
+        const link = card.querySelector('.ab-sit-link');
+        const tag = card.querySelector('.ab-sit-tag');
+        const closeBtn = card.querySelector('.ab-sit-close');
+        let current = null;
+        const txt = (sit, cls) => (sit.querySelector(cls)?.textContent || '').trim();
+
+        const render = (sit) => {
+          if (!sit) return;
+          current = sit;
+          const conf = sit.dataset.confidential === '1';
+          elSituation.textContent = txt(sit, '.ab-sit-name');
+          elInter.textContent = txt(sit, '.sd-inter');
+          elResult.textContent = txt(sit, '.sd-result');
+          tag.textContent = txt(sit, '.sd-entity') + (conf ? '' : ' · ' + (detail.dataset.tagPublic || 'Référence publique représentative'));
+          link.setAttribute('href', sit.dataset.href);
+          if (conf) {
+            logo.hidden = true; logo.removeAttribute('src'); pict.hidden = false;
+          } else {
+            pict.hidden = true; logo.hidden = false;
+            logo.setAttribute('src', sit.dataset.logo);
+            logo.setAttribute('alt', sit.dataset.alt || '');
+          }
+          empty.hidden = true; card.hidden = false;
+          sits.forEach(s => s.classList.toggle('is-active', s === sit));
+        };
+        const reset = () => {
+          current = null; card.hidden = true; empty.hidden = false;
+          sits.forEach(s => s.classList.remove('is-active'));
+        };
+        detail.dataset.tagPublic = 'Référence publique représentative';
+
+        sits.forEach(sit => {
+          sit.addEventListener('mouseenter', () => { if (!coarse()) render(sit); });
+          sit.addEventListener('focus', () => render(sit));
+          sit.addEventListener('click', () => {
+            if (current === sit) { window.top.location.href = sit.dataset.href; return; }
+            render(sit);
+          });
+          sit.addEventListener('keydown', (e) => { if (e.key === 'Escape') { reset(); sit.blur(); } });
+        });
+        closeBtn.addEventListener('click', reset);
+        document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !card.hidden) reset(); });
+        document.querySelector('.language-switch')?.addEventListener('click', () => {
+          setTimeout(() => { if (current) render(current); }, 0);
+        });
+      }
     });
   </script>
+
 </body>
 </html>
