@@ -30,20 +30,36 @@ Contenu : fiche = identité, catégorie, URL uniques, balance narrative, central
 
 Interactions : survol aperçu, clic sélection persistante, focalisation dédiée, clic lien = explication, Échap ferme, tabulation entre nœuds, focus visible, transitions courtes et `prefers-reduced-motion`.
 
-## LOT 2 — À PROPOS
+## LOT 2 — À PROPOS (Variante A validée, spécification arrêtée)
 
 Question : qui est Buildfluence et pourquoi sa lecture est-elle crédible ?
 
 Audit : 3 cartes génériques (Indépendance, Souveraineté, Responsabilité) + citation. Aucun positionnement, aucune expertise, aucune preuve, aucun fondateur, aucun CTA.
 
-- Variante A « Dossier institutionnel en quatre blocs » : positionnement, 3 expertises convergeant vers Souveraineté décisionnelle, preuves et 3 cas, fondateur + CTA. Avantage : court, hiérarchisé. Limite : peu d'effet.
-- Variante B « Bandeau narratif défilant » : lecture séquencée. Limite : plus long, moins consultable.
+Variante retenue : A « Dossier institutionnel en quatre blocs ». Vue courte, non exhaustive, sans reprise des contenus de buildfluence.ai.
 
-Recommandation : Variante A.
+Bloc 01 — Positionnement. Sovereign Decision Infrastructure (formulation inchangée), une phrase forte sur la construction de la souveraineté décisionnelle des gouvernements, grandes entreprises et institutions internationales, puis quatre capacités : transformer données et signaux en intelligence exploitable ; comprendre rapports de force, risques et dynamiques d'influence ; sécuriser les décisions en environnement complexe ; construire des dispositifs opérationnels de veille, d'analyse et d'intervention.
 
-Blocs : 01 Sovereign Decision Infrastructure (formulation inchangée) + 4 capacités ; 02 Strategic Intelligence / Soft Power & Influence / Deep Due Diligence, une phrase chacune ; 03 preuves vérifiées (depuis 2015, 47 missions sur 4 continents, gouvernements et institutions, 25 ans d'expérience du fondateur distingués des missions Buildfluence) + 3 cas en Situation / Intervention / Résultat vérifié, sélectionnés parmi les Success Stories déjà publiées ; 04 fondateur Azeddine Yassine, Fondateur & Managing Director, bio 60-80 mots, 3 marqueurs, LinkedIn discret, puis CTA or « DÉCOUVRIR BUILDFLUENCE » vers https://buildfluence.ai et lien secondaire Success Stories.
+Bloc 02 — Expertise. Trois expertises seulement (Strategic Intelligence, Soft Power & Influence, Deep Due Diligence), une phrase chacune indiquant ce qu'elle permet de comprendre, le risque ou l'opportunité traité et sa contribution à la décision, convergeant visuellement vers un résultat unique : SOUVERAINETÉ DÉCISIONNELLE. Aucun catalogue de solutions.
 
-Éléments en attente de votre validation avant rédaction : photographie, biographie, marqueurs de crédibilité, toute citation, et les 3 cas retenus.
+Bloc 03 — Track record consolidé, interactif et compact. Aucun nom de client, aucune Success Story individuelle, aucune liste de missions. Quatre entrées commutables dans un même cadre :
+- Chiffres clés : activité depuis 2015 ; 47 missions réalisées sur quatre continents.
+- Zones d'intervention : représentation des quatre continents, sans pays nominatif ajouté, sans chiffre par zone.
+- Secteurs : secteur public, industrie stratégique, santé, finance et investissement, organisations internationales, sport professionnel.
+- Typologies de situations et expertises mobilisées : intelligence stratégique, influence, réputation, gestion de crise, attractivité, due diligence.
+Bandeau de résultats recherchés : visibilité, influence, attractivité, maîtrise du risque, compétitivité, souveraineté décisionnelle. Chaque chiffre reste contextualisé (période, périmètre) ; aucune donnée nouvelle n'est créée. CTA de bloc : « EXPLORER LES SUCCESS STORIES » vers https://buildfluence.ai/success-stories (nouvel onglet).
+
+Bloc 04 — Fondateur puis CTA. Azeddine Yassine, Fondateur & Managing Director : photographie professionnelle (emplacement réservé jusqu'à votre validation du fichier), biographie de 60 à 80 mots, trois marqueurs de crédibilité maximum, lien LinkedIn discret. Aucune citation. Distinction explicite entre l'expérience personnelle du fondateur (plus de 25 ans) et les missions contractuelles de Buildfluence. Puis CTA principal or sur navy « DÉCOUVRIR BUILDFLUENCE » vers https://buildfluence.ai et CTA secondaire discret « EXPLORER LES SUCCESS STORIES ».
+
+Wireframe desktop : bandeau de positionnement pleine largeur (papier #FAF6ED) ; trois colonnes d'expertise avec ligne de convergence or ; cadre track record en deux parties (menu vertical de quatre entrées à gauche, contenu à droite) ; bandeau fondateur en deux colonnes (portrait 1/3, texte et marqueurs 2/3) ; barre de CTA. Mobile : blocs empilés, expertises en accordéon, track record en onglets horizontaux défilants, portrait au-dessus du texte, CTA pleine largeur.
+
+Encodages et interactions : aucune animation décorative, transitions de 200 ms, `prefers-reduced-motion` respecté, navigation clavier sur les entrées du track record, focus visible, radius 2 px, tokens officiels uniquement, parité FR/EN/AR avec RTL et isolation `bdi` des libellés anglais conservés (Sovereign Decision Infrastructure, Strategic Intelligence, Soft Power & Influence, Deep Due Diligence).
+
+Fichiers concernés : `public/intelligence-politique/index.html` (section `#apropos` uniquement), `public/intelligence-politique/styles.css`, `public/intelligence-politique/i18n.js` pour les libellés FR/EN/AR. Éventuellement un fichier image du portrait sous `public/intelligence-politique/assets/`. Aucune donnée canonique, aucun calcul, aucun autre onglet.
+
+Éléments encore attendus de votre part avant écriture définitive : le fichier de la photographie, la validation du texte de biographie (60-80 mots) et des trois marqueurs de crédibilité, que je vous soumettrai en chat avant intégration si vous préférez les rédiger ensemble.
+
+
 
 ## LOT 3 — OPINION
 
