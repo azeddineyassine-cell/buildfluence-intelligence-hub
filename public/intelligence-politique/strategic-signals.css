@@ -271,3 +271,4 @@ html[data-theme="light"] .ss-ring-label { fill:#66717b; }
 /* lisibilité de la galaxie hors sélection */
 #ss-gx-scene .ss-star.dim { opacity:.42; }
 #ss-gx-scene .ss-ray.dim { opacity:.07; }
+@media(max-width:680px){ #ss-gx-scene #ss-galaxy-svg { height:auto; aspect-ratio:1/1; } }
