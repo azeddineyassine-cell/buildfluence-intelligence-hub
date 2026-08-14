@@ -194,15 +194,16 @@
 
   /* ---------- Galaxie : couronnes déterministes ---------- */
   const GX = { cx:500, cy:500, rings:{ topic:190, leader:300, party:400, tone:470 } };
-  const TONE_ANGLES = { positive:-90, neutral:30, negative:150 };
+  const TONE_ANGLES = { positive:-60, neutral:60, negative:180 };
+  const GX_START = { topic:-66, leader:-78, party:-54 };
   const gxRingOf = kind => ['positive','neutral','negative'].includes(kind) ? GX.rings.tone : GX.rings[kind];
   function layoutGalaxy() {
     const visible = n => state.active.has(n.kind);
     const placed = [];
     ['topic','leader','party'].forEach(kind => {
       const items = graphNodes.filter(n=>n.kind===kind&&visible(n)).sort((a,b)=>b.mentions-a.mentions||a.name.localeCompare(b.name));
-      const r = GX.rings[kind], step = items.length ? 360/items.length : 0;
-      items.forEach((n,i)=>{ const a=(-90+i*step)*Math.PI/180; placed.push({...n,ring:r,angle:-90+i*step,x:GX.cx+r*Math.cos(a),y:GX.cy+r*Math.sin(a)}); });
+      const r = GX.rings[kind], step = items.length ? 360/items.length : 0, s0 = GX_START[kind];
+      items.forEach((n,i)=>{ const deg=s0+i*step, a=deg*Math.PI/180; placed.push({...n,ring:r,angle:deg,x:GX.cx+r*Math.cos(a),y:GX.cy+r*Math.sin(a)}); });
     });
     graphNodes.filter(n=>['positive','neutral','negative'].includes(n.kind)&&visible(n)).forEach(n=>{
       const deg=TONE_ANGLES[n.kind], a=deg*Math.PI/180, r=GX.rings.tone;
