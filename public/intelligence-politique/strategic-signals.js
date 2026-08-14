@@ -345,7 +345,9 @@
     root.querySelector('#ss-insight').textContent=relation ? `${label(name)} × ${label(relation.name)}` : d.type==='tone' ? t('globalTone') : d.type==='topic' ? `${label(d.name)} : ${t('actorTopic')}.` : `${label(d.topic)} · ${t('actorTopic')}.`; facts.forEach((f,i)=>root.querySelector('#ss-fact-'+(i+1)).textContent=f);
     const detail=root.querySelector('#ss-relation-detail'); detail.hidden=!relation;
     if(relation){root.querySelector('#ss-relation-title').textContent=`${label(name)} × ${label(relation.name)}`;root.querySelector('#ss-relation-value').textContent=fmt(relation.value);root.querySelector('#ss-relation-copy').textContent=`${fmt(relation.share,1)}% ${t('exposure')}.`;}
-    highlightGalaxy(); syncSelection();
+    if(state.gxMode==='focus'&&!state.gxRendering){state.gxRendering=true;renderGalaxy();state.gxRendering=false;} else highlightGalaxy();
+    syncSelection();
+
   }
 
   function syncSelection(){
