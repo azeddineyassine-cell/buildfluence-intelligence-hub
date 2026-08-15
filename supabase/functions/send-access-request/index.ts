@@ -71,7 +71,12 @@ Deno.serve(async (req) => {
     const phone = String(body.phone ?? '').trim().slice(0, 50)
     const organization = String(body.organization ?? '').trim().slice(0, 200)
     const message = String(body.message ?? '').trim().slice(0, 2000)
-    const langue = body.langue === 'en' ? 'en' : 'fr'
+    const langue = body.langue === 'en' ? 'en' : body.langue === 'ar' ? 'ar' : 'fr'
+    const firstName = String(body.first_name ?? '').trim().slice(0, 120)
+    const lastName = String(body.last_name ?? '').trim().slice(0, 120)
+    const position = String(body.position ?? '').trim().slice(0, 200)
+    const requestType = body.request_type === 'report_download' ? 'report_download' : 'access_request'
+    const reportSlug = String(body.report_slug ?? '').trim().slice(0, 120)
 
     if (!name || !email || !isEmail(email)) {
       return new Response(JSON.stringify({ error: 'invalid_input' }), {
@@ -86,7 +91,19 @@ Deno.serve(async (req) => {
     const admin = createClient(SUPABASE_URL, SERVICE_ROLE)
     const { error: dbErr } = await admin
       .from('access_requests')
-      .insert({ name, email, phone: phone || null, organization: organization || null, message: message || null, langue })
+      .insert({
+        name,
+        email,
+        phone: phone || null,
+        organization: organization || null,
+        message: message || null,
+        langue,
+        first_name: firstName || null,
+        last_name: lastName || null,
+        position: position || null,
+        request_type: requestType,
+        report_slug: reportSlug || null,
+      })
     if (dbErr) console.error('access_requests insert error:', dbErr)
 
     // 2) Send email notification (if Resend configured)
@@ -100,8 +117,10 @@ Deno.serve(async (req) => {
           from: FROM,
           to: [ADMIN_EMAIL],
           reply_to: email,
-          subject: `Buildfluence · Demande d'Accès Premium : ${name}${organization ? ' (' + organization + ')' : ''}`,
-          html: adminHtml({ name, email, phone, organization, message, langue, createdAt }),
+          subject: requestType === 'report_download'
+            ? `Buildfluence · Téléchargement de rapport : ${name}${organization ? ' (' + organization + ')' : ''}`
+            : `Buildfluence · Demande d'Accès Premium : ${name}${organization ? ' (' + organization + ')' : ''}`,
+          html: adminHtml({ name, email, phone, organization, message: message || (requestType === 'report_download' ? `Rapport demandé : ${reportSlug || '-'}${position ? ' · Fonction : ' + position : ''}` : ''), langue, createdAt }),
         })
         emailSent = true
       } catch (e) {
