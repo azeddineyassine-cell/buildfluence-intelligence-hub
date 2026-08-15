@@ -87,8 +87,25 @@
         el.append(` ${text}`);
       } else el.textContent = text;
     });
-    document.querySelectorAll('[data-language]').forEach(button => button.classList.toggle('active', button.dataset.language === lang));
+    document.querySelectorAll('[data-i18n-aria]').forEach(el => {
+      const text = translations[lang][el.dataset.i18nAria];
+      if (text) el.setAttribute('aria-label', text);
+    });
+    document.querySelectorAll('[data-i18n-title]').forEach(el => {
+      const text = translations[lang][el.dataset.i18nTitle];
+      if (text) el.setAttribute('title', text);
+    });
+    document.querySelectorAll('[data-language]').forEach(button => {
+      const isActive = button.dataset.language === lang;
+      button.classList.toggle('active', isActive);
+      if (button.getAttribute('role') === 'menuitemradio') button.setAttribute('aria-checked', String(isActive));
+    });
+    const flag = document.getElementById('globe-flag');
+    if (flag) flag.textContent = FLAGS[lang] || FLAGS.fr;
+    const menu = document.getElementById('globe-menu');
+    if (menu) menu.setAttribute('aria-label', translations[lang].langMenu);
     localStorage.setItem('buildfluence-language', lang);
+    window.dispatchEvent(new CustomEvent('buildfluence-language', { detail: { lang } }));
   }
 
   function applyTheme(theme) {
@@ -99,10 +116,73 @@
     requestAnimationFrame(() => window.dispatchEvent(new Event('resize')));
   }
 
+  function currentLanguage() {
+    return document.documentElement.lang || localStorage.getItem('buildfluence-language') || 'fr';
+  }
+
+  function setupGlobe() {
+    const button = document.getElementById('globe-btn');
+    const menu = document.getElementById('globe-menu');
+    if (!button || !menu) return;
+    const items = [...menu.querySelectorAll('[data-language]')];
+
+    const open = (focusIndex = 0) => {
+      menu.hidden = false;
+      button.setAttribute('aria-expanded', 'true');
+      items[focusIndex]?.focus();
+    };
+    const close = (giveFocus = true) => {
+      menu.hidden = true;
+      button.setAttribute('aria-expanded', 'false');
+      if (giveFocus) button.focus();
+    };
+
+    button.addEventListener('click', () => (menu.hidden ? open() : close()));
+    button.addEventListener('keydown', event => {
+      if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
+        event.preventDefault();
+        open(event.key === 'ArrowDown' ? 0 : items.length - 1);
+      }
+    });
+    items.forEach((item, index) => {
+      item.addEventListener('click', () => { applyLanguage(item.dataset.language); close(); });
+      item.addEventListener('keydown', event => {
+        if (event.key === 'ArrowDown') { event.preventDefault(); items[(index + 1) % items.length].focus(); }
+        else if (event.key === 'ArrowUp') { event.preventDefault(); items[(index - 1 + items.length) % items.length].focus(); }
+        else if (event.key === 'Escape') { event.preventDefault(); close(); }
+        else if (event.key === 'Tab') close(false);
+      });
+    });
+    document.addEventListener('click', event => {
+      if (!menu.hidden && !menu.contains(event.target) && !button.contains(event.target)) close(false);
+    });
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape' && !menu.hidden) close();
+    });
+  }
+
+  function setupReportDownload() {
+    document.addEventListener('click', event => {
+      const trigger = event.target.closest('[data-report-download]');
+      if (!trigger) return;
+      event.preventDefault();
+      const payload = { type: 'ip-report-download-request', lang: currentLanguage() };
+      if (window.parent && window.parent !== window) {
+        window.parent.postMessage(payload, window.location.origin);
+      } else {
+        window.open('/insights-resources/intelligence-politique?report=analyse-strategique-globale', '_self');
+      }
+    });
+  }
+
   addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('[data-language]').forEach(button => button.addEventListener('click', () => applyLanguage(button.dataset.language)));
     document.querySelectorAll('[data-theme-choice]').forEach(button => button.addEventListener('click', () => applyTheme(button.dataset.themeChoice)));
+    setupGlobe();
+    setupReportDownload();
+    const params = new URLSearchParams(window.location.search);
+    const requested = params.get('lang');
     applyTheme(localStorage.getItem('buildfluence-theme') || 'light');
-    applyLanguage(localStorage.getItem('buildfluence-language') || 'fr');
+    applyLanguage(translations[requested] ? requested : (localStorage.getItem('buildfluence-language') || 'fr'));
   });
+
 })();
