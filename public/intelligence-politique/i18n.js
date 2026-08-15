@@ -26,6 +26,37 @@
     }
   };
 
+  // Traçabilité du corpus et téléchargement du rapport — traductions additionnelles.
+  const extraPhrases = {
+    en: {
+      'TRAÇABILITÉ DU CORPUS': 'CORPUS TRACEABILITY',
+      'Du fichier brut aux URL uniques': 'From raw file to unique URLs',
+      '2 540 brutes -> 42 exclues -> 2 498 admissibles -> 438 doublons retirés -> 2 060 URL uniques': '2,540 raw rows -> 42 excluded -> 2,498 eligible -> 438 duplicates removed -> 2,060 unique URLs',
+      'Lignes brutes du fichier source Partis et Leaders.': 'Raw rows from the Parties and Leaders source file.',
+      'Lignes exclues lors du contrôle d’éligibilité des URL.': 'Rows excluded during the URL eligibility check.',
+      'Lignes admissibles après contrôle d’éligibilité.': 'Eligible rows after the eligibility check.',
+      'Doublons retirés parmi les seules lignes admissibles.': 'Duplicates removed from eligible rows only.',
+      'URL uniques retenues pour les Partis et Leaders.': 'Unique URLs retained for Parties and Leaders.',
+      'Règle de contrôle : lignes brutes moins lignes exclues moins doublons retirés égale URL uniques. La publication est bloquée si cette égalité n’est pas vérifiée.': 'Control rule: raw rows minus excluded rows minus duplicates removed equals unique URLs. Publication is blocked if this equality does not hold.',
+      'TÉLÉCHARGER L’ANALYSE GLOBALE': 'DOWNLOAD THE GLOBAL ANALYSIS'
+    },
+    ar: {
+      'TRAÇABILITÉ DU CORPUS': 'تتبع بيانات المدونة',
+      'Du fichier brut aux URL uniques': 'من الملف الخام إلى الروابط الفريدة',
+      '2 540 brutes -> 42 exclues -> 2 498 admissibles -> 438 doublons retirés -> 2 060 URL uniques': '2,540 سطراً خاماً -> استبعاد 42 -> 2,498 سطراً مؤهلاً -> حذف 438 تكراراً -> 2,060 رابطاً فريداً',
+      'Lignes brutes du fichier source Partis et Leaders.': 'الأسطر الخامة من ملف الأحزاب والقادة.',
+      'Lignes exclues lors du contrôle d’éligibilité des URL.': 'أسطر مستبعدة عند مراقبة أهلية الروابط.',
+      'Lignes admissibles après contrôle d’éligibilité.': 'أسطر مؤهلة بعد مراقبة الأهلية.',
+      'Doublons retirés parmi les seules lignes admissibles.': 'تكرارات محذوفة من الأسطر المؤهلة فقط.',
+      'URL uniques retenues pour les Partis et Leaders.': 'روابط فريدة معتمدة للأحزاب والقادة.',
+      'Règle de contrôle : lignes brutes moins lignes exclues moins doublons retirés égale URL uniques. La publication est bloquée si cette égalité n’est pas vérifiée.': 'قاعدة المراقبة: الأسطر الخامة ناقص الأسطر المستبعدة ناقص التكرارات المحذوفة يساوي الروابط الفريدة. ويُمنع النشر إن لم تتحقق هذه المعادلة.',
+      'TÉLÉCHARGER L’ANALYSE GLOBALE': 'تحميل التحليل الشامل'
+    }
+  };
+  Object.keys(extraPhrases).forEach(code => Object.assign(pagePhrases[code], extraPhrases[code]));
+
+  const FLAGS = { fr: '🇫🇷', ar: '🇲🇦', en: '🇬🇧' };
+
   const originalText = new WeakMap();
   function translateTextNodes(lang) {
     const dictionary = pagePhrases[lang] || {};
