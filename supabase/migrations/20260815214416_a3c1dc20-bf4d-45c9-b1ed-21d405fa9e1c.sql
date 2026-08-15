@@ -1,0 +1,1 @@
+DELETE FROM public.access_requests WHERE email = 'qa+report@buildfluence.ai' AND request_type = 'report_download';
