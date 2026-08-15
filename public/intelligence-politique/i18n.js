@@ -1,15 +1,19 @@
 (() => {
   const translations = {
     fr: {
-      themeLabel: 'FOND', light: 'CLAIR', dark: 'SOMBRE', login: 'SE CONNECTER', signup: 'S\u2019INSCRIRE'
+      themeLabel: 'FOND', light: 'CLAIR', dark: 'SOMBRE', login: 'SE CONNECTER', signup: 'S\u2019INSCRIRE',
+      langButton: 'Langue : Français', downloadReport: 'Télécharger l\u2019analyse globale', langMenu: 'Choix de la langue'
     },
     en: {
-      themeLabel: 'THEME', light: 'LIGHT', dark: 'DARK', login: 'SIGN IN', signup: 'REGISTER'
+      themeLabel: 'THEME', light: 'LIGHT', dark: 'DARK', login: 'SIGN IN', signup: 'REGISTER',
+      langButton: 'Language: English', downloadReport: 'Download the global analysis', langMenu: 'Language selection'
     },
     ar: {
-      themeLabel: 'المظهر', light: 'فاتح', dark: 'داكن', login: 'تسجيل الدخول', signup: 'إنشاء حساب'
+      themeLabel: 'المظهر', light: 'فاتح', dark: 'داكن', login: 'تسجيل الدخول', signup: 'إنشاء حساب',
+      langButton: 'اللغة: العربية', downloadReport: 'تحميل التحليل الشامل', langMenu: 'اختيار اللغة'
     }
   };
+
 
   const pagePhrases = {
     en: {
@@ -21,6 +25,37 @@
       "POSITIONNEMENT":"الموقع الاستراتيجي","Buildfluence construit la souveraineté décisionnelle des gouvernements, des grandes entreprises et des institutions internationales.":"تبني Buildfluence السيادة القرارية للحكومات والشركات الكبرى والمؤسسات الدولية.","Transformer les données et les signaux en intelligence exploitable.":"تحويل البيانات والمؤشرات إلى معرفة قابلة للاستخدام.","Comprendre les rapports de force, les risques et les dynamiques d’influence.":"فهم موازين القوى والمخاطر ودينامية التأثير.","Sécuriser les décisions en environnement complexe.":"تأمين القرارات في البيئات المعقدة.","Construire des dispositifs opérationnels de veille, d’analyse et d’intervention.":"بناء أجهزة عملية للرصد والتحليل والتدخل.","EXPERTISE":"الخبرة","Comprendre un environnement, ses acteurs et ses signaux avant qu’ils ne deviennent des contraintes.":"فهم البيئة وفاعليها ومؤشراتها قبل أن تتحول إلى قيود.","Mesurer la perception, structurer un récit et gagner en attractivité durable.":"قياس الإدراك وبناء السردية وتحقيق جاذبية مستدامة.","Documenter une contrepartie, un actif ou une opération pour maîtriser le risque avant l’engagement.":"توثيق الطرف المقابل أو الأصل أو العملية للتحكم في المخاطر قبل الالتزام.","SOUVERAINETÉ DÉCISIONNELLE":"السيادة القرارية","TRACK RECORD CONSOLIDÉ":"سجل الإنجازات المجمع","CHIFFRES CLÉS":"أرقام رئيسية","ZONES D’INTERVENTION":"مناطق التدخل","SECTEURS":"القطاعات","SITUATIONS TRAITÉES":"الحالات المعالجة","Année de démarrage de l’activité":"سنة انطلاق النشاط","Missions réalisées depuis 2015":"مهام منجزة منذ 2015","Continents couverts":"قارات مشمولة","Interventions auprès de gouvernements, de grandes entreprises, d’institutions publiques et d’organisations internationales.":"تدخلات لدى حكومات وشركات كبرى ومؤسسات عمومية ومنظمات دولية.","Afrique":"إفريقيا","Europe":"أوروبا","Moyen-Orient":"الشرق الأوسط","Amérique du Nord":"أمريكا الشمالية","Quatre continents couverts sur l’ensemble des missions. Aucun détail par pays n’est publié.":"أربع قارات مشمولة في مجموع المهام. لا يُنشر أي تفصيل حسب البلد.","Secteur public":"القطاع العمومي","Industrie stratégique":"الصناعة الاستراتيجية","Santé":"الصحة","Finance et investissement":"المالية والاستثمار","Organisations internationales":"المنظمات الدولية","Sport professionnel":"الرياضة الاحترافية","Environnements exigeants, à forte sensibilité institutionnelle et réglementaire.":"بيئات دقيقة ذات حساسية مؤسسية وتنظيمية عالية.","Intelligence stratégique":"الاستطلاع الاستراتيجي","Influence":"التأثير","Réputation":"السمعة","Gestion de crise":"إدارة الأزمات","Attractivité":"الجاذبية","Due diligence":"التدقيق المعمق","Expertises mobilisées selon la situation, sans exposition des clients ni des dossiers.":"خبرات تُجنّد حسب الحالة، دون الكشف عن العملاء أو الملفات.","Visibilité":"الظهور","Maîtrise du risque":"التحكم في المخاطر","Compétitivité":"التنافسية","Souveraineté décisionnelle":"السيادة القرارية","EXPLORER LES SUCCESS STORIES":"استكشاف قصص النجاح","FONDATEUR":"المؤسس","Fondateur & Managing Director":"المؤسس والمدير العام","Il conduit depuis plus de vingt-cinq ans des missions d’intelligence stratégique, d’influence et de maîtrise du risque pour des gouvernements, des grandes entreprises et des organisations internationales. Il a fondé Buildfluence en 2015 pour doter les décideurs d’une infrastructure d’analyse indépendante, documentée et souveraine, capable de transformer des signaux dispersés en décisions tenables dans des environnements complexes et fortement exposés.":"يقود منذ أكثر من خمسة وعشرين عامًا مهام في الاستطلاع الاستراتيجي والتأثير والتحكم في المخاطر لفائدة حكومات وشركات كبرى ومنظمات دولية. أسس Buildfluence سنة 2015 لتمكين أصحاب القرار من بنية تحليل مستقلة وموثقة وسيادية، قادرة على تحويل المؤشرات المتناثرة إلى قرارات صامدة في بيئات معقدة وشديدة التعرض.","Plus de 25 ans d’expérience personnelle en intelligence stratégique":"أكثر من 25 سنة من الخبرة الشخصية في الاستطلاع الاستراتيجي","Missions conduites sur quatre continents":"مهام منجزة في أربع قارات","Interventions auprès d’États, d’entreprises et d’organisations internationales":"تدخلات لدى دول وشركات ومنظمات دولية","DÉCOUVRIR BUILDFLUENCE":"استكشاف Buildfluence","Secteur public":"القطاع العمومي","Industrie stratégique":"الصناعة الاستراتيجية","Santé":"الصحة","Finance et investissement":"المالية والاستثمار","Organisations internationales":"المنظمات الدولية","Sport professionnel":"الرياضة الاحترافية","Référence publique représentative":"مرجع عمومي تمثيلي","Référence confidentielle":"مرجع سري","Environnements exigeants, à forte sensibilité institutionnelle et réglementaire. Références publiques représentatives et non exhaustives, issues de missions documentées.":"بيئات دقيقة ذات حساسية مؤسسية وتنظيمية عالية. مراجع عمومية تمثيلية وغير حصرية، مستمدة من مهام موثقة.","Crise incontrôlée":"أزمة خارجة عن السيطرة","Atteinte à la réputation":"المساس بالسمعة","Décider sans visibilité":"القرار دون رؤية واضحة","Perte d’attractivité":"تراجع الجاذبية","Déficit d’influence":"نقص التأثير","Risque invisible":"مخاطر غير مرئية","Cellule de veille dédiée et contre-narrative documentée":"خلية رصد مخصصة وسردية مضادة موثقة","Crise de deux ans jugulée en trois semaines, +14 % de parts de marché regagnées":"احتواء أزمة استمرت سنتين في ثلاثة أسابيع، واستعادة 14٪ من حصة السوق","Ministère de la Santé":"وزارة الصحة","Dispositif de veille permanent et formation des cadres DICom":"جهاز رصد دائم وتكوين أطر مديرية التواصل","Crise nationale atténuée en deux semaines, solution de veille installée durablement":"تخفيف أزمة وطنية في أسبوعين، وتثبيت حل رصد بشكل مستدام","Plateforme d’aide à la décision déployée sur onze mois":"منصة لدعم القرار تم نشرها على مدى أحد عشر شهرا","Mission de onze mois menée à terme, décision outillée par une plateforme d’analyse":"مهمة من أحد عشر شهرا أُنجزت بالكامل، وقرار مدعوم بمنصة تحليل","Hôpital Universitaire International Mohammed VI":"المركز الاستشفائي الجامعي الدولي محمد السادس","Cartographie des parties prenantes et feuille de route ciblée":"خرائط الأطراف المعنية وخارطة طريق موجهة","Dix-huit recommandations stratégiques opérationnelles, écosystème complet cartographié":"ثماني عشرة توصية استراتيجية عملية، ورسم كامل للمنظومة","Présidence du Sénégal":"رئاسة السنغال","Monitoring narratif continu et alertes décisionnelles":"رصد سردي مستمر وتنبيهات قرارية","Surveillance permanente de la notoriété de l’État, détection en temps réel des signaux faibles":"مراقبة دائمة لسمعة الدولة، وكشف الإشارات الضعيفة في الوقت الحقيقي","Investigation approfondie avant engagement":"تحقيق معمق قبل الالتزام","Valorisation de 400 M$ auditée, code décisionnel à trois niveaux":"تدقيق تقييم بقيمة 400 مليون دولار، ورمز قراري بثلاثة مستويات","Survolez ou sélectionnez une situation pour afficher la référence.":"مرّر المؤشر أو اختر حالة لعرض المرجع.","Intervention":"التدخل","Résultat vérifié":"نتيجة موثقة","Voir la référence ↗":"عرض المرجع ↗","Situations traitées lors de missions documentées. Références publiques représentatives et non exhaustives, présentées sans valeur de recommandation.":"حالات معالجة في إطار مهام موثقة. مراجع عمومية تمثيلية وغير حصرية، تُعرض دون أي قيمة توصية.","Fermer la fiche de référence":"إغلاق بطاقة المرجع"
     }
   };
+
+  // Traçabilité du corpus et téléchargement du rapport — traductions additionnelles.
+  const extraPhrases = {
+    en: {
+      'TRAÇABILITÉ DU CORPUS': 'CORPUS TRACEABILITY',
+      'Du fichier brut aux URL uniques': 'From raw file to unique URLs',
+      '2 540 brutes -> 42 exclues -> 2 498 admissibles -> 438 doublons retirés -> 2 060 URL uniques': '2,540 raw rows -> 42 excluded -> 2,498 eligible -> 438 duplicates removed -> 2,060 unique URLs',
+      'Lignes brutes du fichier source Partis et Leaders.': 'Raw rows from the Parties and Leaders source file.',
+      'Lignes exclues lors du contrôle d’éligibilité des URL.': 'Rows excluded during the URL eligibility check.',
+      'Lignes admissibles après contrôle d’éligibilité.': 'Eligible rows after the eligibility check.',
+      'Doublons retirés parmi les seules lignes admissibles.': 'Duplicates removed from eligible rows only.',
+      'URL uniques retenues pour les Partis et Leaders.': 'Unique URLs retained for Parties and Leaders.',
+      'Règle de contrôle : lignes brutes moins lignes exclues moins doublons retirés égale URL uniques. La publication est bloquée si cette égalité n’est pas vérifiée.': 'Control rule: raw rows minus excluded rows minus duplicates removed equals unique URLs. Publication is blocked if this equality does not hold.',
+      'TÉLÉCHARGER L’ANALYSE GLOBALE': 'DOWNLOAD THE GLOBAL ANALYSIS'
+    },
+    ar: {
+      'TRAÇABILITÉ DU CORPUS': 'تتبع بيانات المدونة',
+      'Du fichier brut aux URL uniques': 'من الملف الخام إلى الروابط الفريدة',
+      '2 540 brutes -> 42 exclues -> 2 498 admissibles -> 438 doublons retirés -> 2 060 URL uniques': '2,540 سطراً خاماً -> استبعاد 42 -> 2,498 سطراً مؤهلاً -> حذف 438 تكراراً -> 2,060 رابطاً فريداً',
+      'Lignes brutes du fichier source Partis et Leaders.': 'الأسطر الخامة من ملف الأحزاب والقادة.',
+      'Lignes exclues lors du contrôle d’éligibilité des URL.': 'أسطر مستبعدة عند مراقبة أهلية الروابط.',
+      'Lignes admissibles après contrôle d’éligibilité.': 'أسطر مؤهلة بعد مراقبة الأهلية.',
+      'Doublons retirés parmi les seules lignes admissibles.': 'تكرارات محذوفة من الأسطر المؤهلة فقط.',
+      'URL uniques retenues pour les Partis et Leaders.': 'روابط فريدة معتمدة للأحزاب والقادة.',
+      'Règle de contrôle : lignes brutes moins lignes exclues moins doublons retirés égale URL uniques. La publication est bloquée si cette égalité n’est pas vérifiée.': 'قاعدة المراقبة: الأسطر الخامة ناقص الأسطر المستبعدة ناقص التكرارات المحذوفة يساوي الروابط الفريدة. ويُمنع النشر إن لم تتحقق هذه المعادلة.',
+      'TÉLÉCHARGER L’ANALYSE GLOBALE': 'تحميل التحليل الشامل'
+    }
+  };
+  Object.keys(extraPhrases).forEach(code => Object.assign(pagePhrases[code], extraPhrases[code]));
+
+  const FLAGS = { fr: '🇫🇷', ar: '🇲🇦', en: '🇬🇧' };
 
   const originalText = new WeakMap();
   function translateTextNodes(lang) {
@@ -52,8 +87,25 @@
         el.append(` ${text}`);
       } else el.textContent = text;
     });
-    document.querySelectorAll('[data-language]').forEach(button => button.classList.toggle('active', button.dataset.language === lang));
+    document.querySelectorAll('[data-i18n-aria]').forEach(el => {
+      const text = translations[lang][el.dataset.i18nAria];
+      if (text) el.setAttribute('aria-label', text);
+    });
+    document.querySelectorAll('[data-i18n-title]').forEach(el => {
+      const text = translations[lang][el.dataset.i18nTitle];
+      if (text) el.setAttribute('title', text);
+    });
+    document.querySelectorAll('[data-language]').forEach(button => {
+      const isActive = button.dataset.language === lang;
+      button.classList.toggle('active', isActive);
+      if (button.getAttribute('role') === 'menuitemradio') button.setAttribute('aria-checked', String(isActive));
+    });
+    const flag = document.getElementById('globe-flag');
+    if (flag) flag.textContent = FLAGS[lang] || FLAGS.fr;
+    const menu = document.getElementById('globe-menu');
+    if (menu) menu.setAttribute('aria-label', translations[lang].langMenu);
     localStorage.setItem('buildfluence-language', lang);
+    window.dispatchEvent(new CustomEvent('buildfluence-language', { detail: { lang } }));
   }
 
   function applyTheme(theme) {
@@ -64,10 +116,73 @@
     requestAnimationFrame(() => window.dispatchEvent(new Event('resize')));
   }
 
+  function currentLanguage() {
+    return document.documentElement.lang || localStorage.getItem('buildfluence-language') || 'fr';
+  }
+
+  function setupGlobe() {
+    const button = document.getElementById('globe-btn');
+    const menu = document.getElementById('globe-menu');
+    if (!button || !menu) return;
+    const items = [...menu.querySelectorAll('[data-language]')];
+
+    const open = (focusIndex = 0) => {
+      menu.hidden = false;
+      button.setAttribute('aria-expanded', 'true');
+      items[focusIndex]?.focus();
+    };
+    const close = (giveFocus = true) => {
+      menu.hidden = true;
+      button.setAttribute('aria-expanded', 'false');
+      if (giveFocus) button.focus();
+    };
+
+    button.addEventListener('click', () => (menu.hidden ? open() : close()));
+    button.addEventListener('keydown', event => {
+      if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
+        event.preventDefault();
+        open(event.key === 'ArrowDown' ? 0 : items.length - 1);
+      }
+    });
+    items.forEach((item, index) => {
+      item.addEventListener('click', () => { applyLanguage(item.dataset.language); close(); });
+      item.addEventListener('keydown', event => {
+        if (event.key === 'ArrowDown') { event.preventDefault(); items[(index + 1) % items.length].focus(); }
+        else if (event.key === 'ArrowUp') { event.preventDefault(); items[(index - 1 + items.length) % items.length].focus(); }
+        else if (event.key === 'Escape') { event.preventDefault(); close(); }
+        else if (event.key === 'Tab') close(false);
+      });
+    });
+    document.addEventListener('click', event => {
+      if (!menu.hidden && !menu.contains(event.target) && !button.contains(event.target)) close(false);
+    });
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape' && !menu.hidden) close();
+    });
+  }
+
+  function setupReportDownload() {
+    document.addEventListener('click', event => {
+      const trigger = event.target.closest('[data-report-download]');
+      if (!trigger) return;
+      event.preventDefault();
+      const payload = { type: 'ip-report-download-request', lang: currentLanguage() };
+      if (window.parent && window.parent !== window) {
+        window.parent.postMessage(payload, window.location.origin);
+      } else {
+        window.open('/insights-resources/intelligence-politique?report=analyse-strategique-globale', '_self');
+      }
+    });
+  }
+
   addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('[data-language]').forEach(button => button.addEventListener('click', () => applyLanguage(button.dataset.language)));
     document.querySelectorAll('[data-theme-choice]').forEach(button => button.addEventListener('click', () => applyTheme(button.dataset.themeChoice)));
+    setupGlobe();
+    setupReportDownload();
+    const params = new URLSearchParams(window.location.search);
+    const requested = params.get('lang');
     applyTheme(localStorage.getItem('buildfluence-theme') || 'light');
-    applyLanguage(localStorage.getItem('buildfluence-language') || 'fr');
+    applyLanguage(translations[requested] ? requested : (localStorage.getItem('buildfluence-language') || 'fr'));
   });
+
 })();

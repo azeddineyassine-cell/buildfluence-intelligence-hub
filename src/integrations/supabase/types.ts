@@ -18,32 +18,47 @@ export type Database = {
         Row: {
           created_at: string
           email: string
+          first_name: string | null
           id: string
           langue: string
+          last_name: string | null
           message: string | null
           name: string
           organization: string | null
           phone: string | null
+          position: string | null
+          report_slug: string | null
+          request_type: string
         }
         Insert: {
           created_at?: string
           email: string
+          first_name?: string | null
           id?: string
           langue?: string
+          last_name?: string | null
           message?: string | null
           name: string
           organization?: string | null
           phone?: string | null
+          position?: string | null
+          report_slug?: string | null
+          request_type?: string
         }
         Update: {
           created_at?: string
           email?: string
+          first_name?: string | null
           id?: string
           langue?: string
+          last_name?: string | null
           message?: string | null
           name?: string
           organization?: string | null
           phone?: string | null
+          position?: string | null
+          report_slug?: string | null
+          request_type?: string
         }
         Relationships: []
       }
