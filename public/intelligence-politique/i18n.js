@@ -1,17 +1,21 @@
 (() => {
   const translations = {
     fr: {
-      themeLabel: 'FOND', light: 'CLAIR', dark: 'SOMBRE', login: 'SE CONNECTER', signup: 'S\u2019INSCRIRE',
-      langButton: 'Langue : Français', downloadReport: 'Télécharger l\u2019analyse globale', langMenu: 'Choix de la langue'
+      themeLabel: 'FOND', light: 'CLAIR', dark: 'SOMBRE', login: 'SE CONNECTER', signup: 'RECEVOIR LES ANALYSES',
+      langButton: 'Langue : Français', downloadReport: 'Télécharger l\u2019analyse globale', langMenu: 'Choix de la langue',
+      previewAnalysis: 'Consulter l\u2019aperçu de l\u2019analyse globale'
     },
     en: {
-      themeLabel: 'THEME', light: 'LIGHT', dark: 'DARK', login: 'SIGN IN', signup: 'REGISTER',
-      langButton: 'Language: English', downloadReport: 'Download the global analysis', langMenu: 'Language selection'
+      themeLabel: 'THEME', light: 'LIGHT', dark: 'DARK', login: 'SIGN IN', signup: 'RECEIVE THE ANALYSES',
+      langButton: 'Language: English', downloadReport: 'Download the global analysis', langMenu: 'Language selection',
+      previewAnalysis: 'Open the preview of the global analysis'
     },
     ar: {
-      themeLabel: 'المظهر', light: 'فاتح', dark: 'داكن', login: 'تسجيل الدخول', signup: 'إنشاء حساب',
-      langButton: 'اللغة: العربية', downloadReport: 'تحميل التحليل الشامل', langMenu: 'اختيار اللغة'
+      themeLabel: 'المظهر', light: 'فاتح', dark: 'داكن', login: 'تسجيل الدخول', signup: 'تلقّي التحليلات',
+      langButton: 'اللغة: العربية', downloadReport: 'تحميل التحليل الشامل', langMenu: 'اختيار اللغة',
+      previewAnalysis: 'الاطلاع على معاينة التحليل الشامل'
     }
+
   };
 
 
