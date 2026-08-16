@@ -126,7 +126,7 @@ const ReportPreviewReader = ({ open, lang, theme, onClose, onUnlock }: Props) =>
     setStatus("loading");
     setPage(1);
     setZoom(1);
-    const task = pdfjs.getDocument(PREVIEW_PATH);
+    const task = pdfjs.getDocument({ url: PREVIEW_PATH });
     task.promise
       .then((doc) => {
         if (cancelled) return;
