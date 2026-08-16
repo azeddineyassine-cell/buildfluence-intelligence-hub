@@ -54,7 +54,7 @@ const leaders=(canonicalMonitoring?.leaders?.length?canonicalMonitoring.leaders:
 function activateView(id){$$('.view').forEach(v=>v.classList.toggle('active',v.id===id));$$('.tabs button').forEach(b=>b.classList.toggle('active',b.dataset.view===id));scrollTo({top:0,behavior:'smooth'});if(id==='dashboard'){drawTrend();setTimeout(drawTrend,50)}if(id==='opinion')setTimeout(drawSentiment,50);if(id==='dynamiques')setTimeout(()=>{resetNetworkView();resizeNetwork()},50)}
 $$('[data-view]').forEach(b=>b.onclick=()=>activateView(b.dataset.view));$$('[data-jump]').forEach(b=>b.onclick=()=>activateView(b.dataset.jump));
 $$('[data-media-jump]').forEach(b=>b.onclick=()=>{activateView('acteurs');const scope=b.dataset.mediaJump;setTimeout(()=>dispatchEvent(new CustomEvent('bf:media-scope',{detail:scope})),0)});
-const modal=$('#access-modal');$$('[data-modal]').forEach(b=>b.onclick=()=>modal.showModal());$('.close',modal).onclick=()=>modal.close();$('#access-form').onsubmit=e=>{e.preventDefault();modal.close();e.target.reset()};
+
 
 function visualFor(x){const initials=x.initials||x.name.slice(0,3),src=x.image||(x.name.includes('.')?`https://www.google.com/s2/favicons?domain=${encodeURIComponent(x.name)}&sz=128`:null);return `<i class="actor-dot" style="--c:${x.color}"><span>${initials}</span>${src?`<img src="${src}" alt="" loading="lazy">`:''}</i>`}
 function miniRows(data){return data.slice(0,5).map((x,i)=>`<div class="mini-row"><span>${i+1}</span>${visualFor(x).replace('actor-dot','badge')}<strong>${x.name}</strong><b>${x.score}</b><em>${x.delta} ment.</em></div>`).join('')}
