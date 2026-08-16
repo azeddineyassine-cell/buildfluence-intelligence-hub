@@ -68,8 +68,8 @@ const InsightsResources = () => {
         "Morocco's First Political Intelligence Platform"
       ),
       subtitle: t(
-        "IBDN® · GRAPHE NARRATIF · PARTIS · LEADERS POLITIQUES",
-        "IBDN® · NARRATIVE GRAPH · PARTIES · POLITICAL LEADERS"
+        "CLASSEMENTS · MÉDIAS · GALAXIE DÉCISIONNELLE · INFLUENCE NARRATIVE",
+        "RANKINGS · MEDIA · DECISION GALAXY · NARRATIVE INFLUENCE"
       ),
       summary: t(
         "Plateforme d'analyse de données sur la dynamique narrative des partis, personnalités et thématiques politiques. Analyse de données, pas de conseil ni d'orientation politique.",

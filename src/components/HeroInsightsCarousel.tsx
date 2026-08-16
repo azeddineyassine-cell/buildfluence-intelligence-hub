@@ -43,8 +43,8 @@ const HeroInsightsCarousel = () => {
         "Morocco's First Political Intelligence Platform"
       ),
       mention: t(
-        "IBDN® · GRAPHE NARRATIF · PARTIS · LEADERS POLITIQUES",
-        "IBDN® · NARRATIVE GRAPH · PARTIES · POLITICAL LEADERS"
+        "CLASSEMENTS · MÉDIAS · GALAXIE DÉCISIONNELLE · INFLUENCE NARRATIVE",
+        "RANKINGS · MEDIA · DECISION GALAXY · NARRATIVE INFLUENCE"
       ),
       href: "/insights-resources/intelligence-politique",
     },

@@ -61,6 +61,21 @@
 
   const FLAGS = { fr: '🇫🇷', ar: '🇲🇦', en: '🇬🇧' };
 
+  Object.assign(pagePhrases.en, {
+    'Trois continents couverts sur l’ensemble des missions. Aucun détail par pays n’est publié.': 'Three continents covered across all assignments. No country-level detail is published.',
+    'Missions conduites sur trois continents': 'Assignments delivered across three continents',
+    'URL uniques dans le graphe relationnel': 'unique URLs in the relational graph',
+    'URL uniques dans le corpus global dédupliqué': 'unique URLs in the deduplicated global corpus',
+    '137 et 596 correspondent aux chevauchements inter-corpus retirés afin qu’une même URL ne soit jamais comptée deux fois.': '137 and 596 are cross-corpus overlaps removed so that the same URL is never counted twice.'
+  });
+  Object.assign(pagePhrases.ar, {
+    'Trois continents couverts sur l’ensemble des missions. Aucun détail par pays n’est publié.': 'ثلاث قارات مشمولة في مجموع المهام. لا يُنشر أي تفصيل حسب البلد.',
+    'Missions conduites sur trois continents': 'مهام منجزة في ثلاث قارات',
+    'URL uniques dans le graphe relationnel': 'رابطاً فريداً في الرسم العلائقي',
+    'URL uniques dans le corpus global dédupliqué': 'رابطاً فريداً في المتن الإجمالي بعد إزالة التكرار',
+    '137 et 596 correspondent aux chevauchements inter-corpus retirés afin qu’une même URL ne soit jamais comptée deux fois.': 'يمثل الرقمان 137 و596 حالات التداخل بين المتون التي أزيلت حتى لا يحتسب الرابط نفسه مرتين.'
+  });
+
   const originalText = new WeakMap();
   function translateTextNodes(lang) {
     const dictionary = pagePhrases[lang] || {};
