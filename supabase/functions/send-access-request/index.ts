@@ -82,12 +82,47 @@ Deno.serve(async (req) => {
     const consent = body.consent === true
 
 
-    if (!name || !email || !isEmail(email)) {
+    // --- Server-side validation, per purpose ---
+    if (!email || !isEmail(email)) {
+      return new Response(JSON.stringify({ error: 'invalid_email' }), {
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+        status: 400,
+      })
+    }
+    if (requestType === 'political_analysis_updates') {
+      if (!consent) {
+        return new Response(JSON.stringify({ error: 'consent_required' }), {
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+          status: 400,
+        })
+      }
+    } else if (requestType === 'political_report_download') {
+      if (!firstName || !lastName || !organization || !position || !phone) {
+        return new Response(JSON.stringify({ error: 'invalid_input' }), {
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+          status: 400,
+        })
+      }
+    } else if (requestType === 'political_platform_contact') {
+      if (!firstName || !lastName || !organization || !position || !phone || !subject || !message) {
+        return new Response(JSON.stringify({ error: 'invalid_input' }), {
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+          status: 400,
+        })
+      }
+    } else if (!name) {
       return new Response(JSON.stringify({ error: 'invalid_input' }), {
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
         status: 400,
       })
     }
+
+    const storedName = name || `${firstName} ${lastName}`.trim() || email
+    const storedMessage = [
+      subject ? `Objet : ${subject}` : '',
+      message,
+      requestType === 'political_analysis_updates' ? 'Consentement explicite recueilli pour recevoir les analyses.' : '',
+    ].filter(Boolean).join('\n')
 
     // 1) Persist to access_requests (never lose a request)
     const SUPABASE_URL = Deno.env.get('SUPABASE_URL')!
@@ -96,11 +131,11 @@ Deno.serve(async (req) => {
     const { error: dbErr } = await admin
       .from('access_requests')
       .insert({
-        name,
+        name: storedName,
         email,
         phone: phone || null,
         organization: organization || null,
-        message: message || null,
+        message: storedMessage || null,
         langue,
         first_name: firstName || null,
         last_name: lastName || null,
@@ -108,12 +143,43 @@ Deno.serve(async (req) => {
         request_type: requestType,
         report_slug: reportSlug || null,
       })
-    if (dbErr) console.error('access_requests insert error:', dbErr)
+    if (dbErr) {
+      console.error('access_requests insert error:', dbErr)
+      return new Response(JSON.stringify({ error: 'not_saved' }), {
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+        status: 500,
+      })
+    }
 
-    // 2) Send email notification (if Resend configured)
+    // 2) Signed URL for the gated full report (private bucket, short-lived)
+    let downloadUrl: string | null = null
+    if (requestType === 'political_report_download') {
+      const { data: signed, error: signErr } = await admin.storage
+        .from('reports-private')
+        .createSignedUrl('Buildfluence_Intelligence_Politique_Analyse_Strategique_Globale.pdf', 120, {
+          download: 'Buildfluence_Intelligence_Politique_Analyse_Strategique_Globale.pdf',
+        })
+      if (signErr || !signed?.signedUrl) {
+        console.error('signed url error:', signErr)
+        return new Response(JSON.stringify({ error: 'report_unavailable' }), {
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+          status: 500,
+        })
+      }
+      downloadUrl = signed.signedUrl
+    }
+
+    // 3) Send email notification (if Resend configured)
     const RESEND_API_KEY = Deno.env.get('RESEND_API_KEY')
     const ADMIN_EMAIL = Deno.env.get('ADMIN_EMAIL')
     let emailSent = false
+    const SUBJECTS: Record<string, string> = {
+      political_report_download: 'Téléchargement du rapport Intelligence Politique',
+      political_analysis_updates: 'Inscription aux prochaines analyses politiques',
+      political_platform_contact: 'Contact plateforme Intelligence Politique',
+      report_download: 'Téléchargement de rapport',
+      access_request: "Demande d'Accès Premium",
+    }
     if (RESEND_API_KEY && ADMIN_EMAIL) {
       const createdAt = new Date().toLocaleString(langue === 'fr' ? 'fr-FR' : 'en-GB', { timeZone: 'Europe/Paris' })
       try {
@@ -121,10 +187,16 @@ Deno.serve(async (req) => {
           from: FROM,
           to: [ADMIN_EMAIL],
           reply_to: email,
-          subject: requestType === 'report_download'
-            ? `Buildfluence · Téléchargement de rapport : ${name}${organization ? ' (' + organization + ')' : ''}`
-            : `Buildfluence · Demande d'Accès Premium : ${name}${organization ? ' (' + organization + ')' : ''}`,
-          html: adminHtml({ name, email, phone, organization, message: message || (requestType === 'report_download' ? `Rapport demandé : ${reportSlug || '-'}${position ? ' · Fonction : ' + position : ''}` : ''), langue, createdAt }),
+          subject: `Buildfluence · ${SUBJECTS[requestType]} : ${storedName}${organization ? ' (' + organization + ')' : ''}`,
+          html: adminHtml({
+            name: storedName,
+            email,
+            phone,
+            organization,
+            message: storedMessage || (reportSlug ? `Rapport demandé : ${reportSlug}` : '-'),
+            langue,
+            createdAt,
+          }),
         })
         emailSent = true
       } catch (e) {
@@ -134,10 +206,11 @@ Deno.serve(async (req) => {
       console.warn('RESEND_API_KEY or ADMIN_EMAIL missing — request saved but no email sent.')
     }
 
-    return new Response(JSON.stringify({ success: true, saved: !dbErr, emailSent }), {
+    return new Response(JSON.stringify({ success: true, saved: true, emailSent, downloadUrl }), {
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
       status: 200,
     })
+
   } catch (error) {
     console.error('send-access-request error:', error)
     return new Response(JSON.stringify({ error: error instanceof Error ? error.message : String(error) }), {
