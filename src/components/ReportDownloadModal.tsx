@@ -3,9 +3,8 @@ import { supabase } from "@/integrations/supabase/client";
 
 export type ReportLang = "fr" | "en" | "ar";
 
-const REPORT_SLUG = "analyse-strategique-globale";
-const REPORT_PATH =
-  "/reports/Buildfluence_Intelligence_Politique_Analyse_Strategique_Globale.pdf";
+const REPORT_SLUG = "analyse-strategique-globale-2026-08-05";
+
 
 const COPY: Record<ReportLang, Record<string, string>> = {
   fr: {
