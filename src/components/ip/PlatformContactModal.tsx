@@ -223,7 +223,7 @@ const PlatformContactModal = ({ open, lang, onClose }: Props) => {
               />
             </label>
             <a
-              href="/politique-confidentialite"
+              href="https://buildfluence.ai/politique-de-confidentialite"
               target="_blank"
               rel="noopener noreferrer"
               className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[#8A7537] underline sm:col-span-2"

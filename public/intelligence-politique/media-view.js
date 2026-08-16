@@ -23,7 +23,7 @@
   const copy = {
     fr: {
       kicker:'PRÉSENCE MÉDIATIQUE DOCUMENTÉE',
-      title:'QUELS MÉDIAS <em>STRUCTURENT</em> LA COUVERTURE ?',
+      title:'Quels médias <em>structurent</em> la couverture ?',
       subtitle:'Lecture de la présence documentée dans le Top 10 national et le Top 10 international, selon le nombre d’URL uniques observées.',
       lede:'Cette vue classe les médias selon une seule métrique documentée : le nombre d’URL uniques associées au corpus étudié. Elle décrit une présence observée dans un corpus délimité, sur une période délimitée. Elle ne mesure ni audience, ni crédibilité, ni qualité éditoriale, ni influence globale.',
       mPeriod:'PÉRIODE ANALYSÉE', mCorpus:'CORPUS PRESSE', mMetric:'MÉTRIQUE DE CLASSEMENT', mData:'DONNÉES DU CORPUS',
@@ -66,7 +66,7 @@
     },
     en: {
       kicker:'DOCUMENTED MEDIA PRESENCE',
-      title:'WHICH OUTLETS <em>SHAPE</em> THE COVERAGE?',
+      title:'Which outlets <em>shape</em> the coverage?',
       subtitle:'A reading of documented presence in the national Top 10 and the international Top 10, based on the number of observed unique URLs.',
       lede:'This view ranks outlets on a single documented metric: the number of unique URLs associated with the studied corpus. It describes observed presence within a defined corpus over a defined period. It does not measure audience, credibility, editorial quality or overall influence.',
       mPeriod:'PERIOD ANALYSED', mCorpus:'PRESS CORPUS', mMetric:'RANKING METRIC', mData:'CORPUS DATA',

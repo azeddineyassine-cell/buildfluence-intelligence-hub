@@ -146,7 +146,8 @@ html[dir="rtl"] .arch-branches .arch-node:after{transform:scaleX(-1)}
 #apropos{display:none}
 #apropos.active{display:grid;gap:14px}
 .ab-block{border:1px solid var(--ab-line);border-radius:2px;background:var(--ab-bg);padding:clamp(20px,2.4vw,34px)}
-.ab-position h1{font:700 clamp(28px,3vw,44px)/1.06 var(--serif);margin:0 0 10px;color:var(--ab-gold)}
+.ab-position h1{font:700 clamp(28px,3vw,44px)/1.06 var(--serif);margin:0 0 10px;color:var(--ab-text)}
+.ab-position h1 em{color:var(--ab-gold);font-style:italic}
 .ab-lead{margin:0;max-width:920px;font:400 clamp(15px,1.3vw,18px)/1.55 var(--sans);color:var(--ab-muted)}
 .ab-caps{list-style:none;margin:22px 0 0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
 .ab-caps li{display:grid;grid-template-columns:34px 1fr;gap:8px;align-items:start;border-top:1px solid var(--ab-line);padding-top:12px}
@@ -295,7 +296,13 @@ html[data-theme="dark"] #apropos{--ab-bg:linear-gradient(145deg,#142235,#0D1B2A)
 .trace-steps b{display:block;color:var(--gold);font:700 20px var(--cond)}
 .trace-steps small{display:block;margin-top:5px;color:var(--muted);font:400 10px/1.45 var(--sans)}
 .trace-rule{margin:14px 0 0;color:var(--muted);font-size:11px;line-height:1.55}
+.trace-global{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+.trace-global p{display:grid;gap:4px;margin:0;padding:13px 14px;border:1px solid var(--line);border-radius:2px;background:color-mix(in srgb,var(--gold) 5%,transparent)}
+.trace-global bdi{color:var(--gold);font:700 16px var(--cond);letter-spacing:.5px}
+.trace-global span{color:var(--text);font-size:12px}
+.trace-global>small{grid-column:1/-1;color:var(--muted);font-size:11px;line-height:1.55}
 @media (max-width:900px){.trace-steps{grid-template-columns:1fr 1fr}}
+@media (max-width:700px){.trace-global{grid-template-columns:1fr}}
 @media (max-width:520px){.trace-steps{grid-template-columns:1fr}.globe-menu{min-width:150px}}
 [dir="rtl"] .trace-steps b{direction:ltr;unicode-bidi:isolate;text-align:right}
 [dir="rtl"] .trace-chain{text-align:right;unicode-bidi:plaintext}
