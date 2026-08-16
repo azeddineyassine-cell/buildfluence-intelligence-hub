@@ -75,8 +75,12 @@ Deno.serve(async (req) => {
     const firstName = String(body.first_name ?? '').trim().slice(0, 120)
     const lastName = String(body.last_name ?? '').trim().slice(0, 120)
     const position = String(body.position ?? '').trim().slice(0, 200)
-    const requestType = body.request_type === 'report_download' ? 'report_download' : 'access_request'
+    const ALLOWED_TYPES = ['access_request', 'report_download', 'political_report_download', 'political_analysis_updates', 'political_platform_contact']
+    const requestType = ALLOWED_TYPES.includes(body.request_type) ? String(body.request_type) : 'access_request'
     const reportSlug = String(body.report_slug ?? '').trim().slice(0, 120)
+    const subject = String(body.subject ?? '').trim().slice(0, 200)
+    const consent = body.consent === true
+
 
     if (!name || !email || !isEmail(email)) {
       return new Response(JSON.stringify({ error: 'invalid_input' }), {
