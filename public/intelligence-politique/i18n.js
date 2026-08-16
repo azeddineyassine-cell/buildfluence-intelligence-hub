@@ -165,16 +165,30 @@
     });
   }
 
-  function setupReportDownload() {
+  const BRIDGE = [
+    ['data-report-preview', 'ip-report-preview-request'],
+    ['data-report-download', 'ip-report-download-request'],
+    ['data-analysis-updates', 'ip-analysis-updates-request'],
+    ['data-platform-contact', 'ip-platform-contact-request']
+  ];
+
+  function setupParentBridge() {
     document.addEventListener('click', event => {
-      const trigger = event.target.closest('[data-report-download]');
-      if (!trigger) return;
-      event.preventDefault();
-      const payload = { type: 'ip-report-download-request', lang: currentLanguage() };
-      if (window.parent && window.parent !== window) {
-        window.parent.postMessage(payload, window.location.origin);
-      } else {
-        window.open('/insights-resources/intelligence-politique?report=analyse-strategique-globale', '_self');
+      for (const [attr, type] of BRIDGE) {
+        const trigger = event.target.closest('[' + attr + ']');
+        if (!trigger) continue;
+        event.preventDefault();
+        const payload = {
+          type,
+          lang: currentLanguage(),
+          theme: document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light'
+        };
+        if (window.parent && window.parent !== window) {
+          window.parent.postMessage(payload, window.location.origin);
+        } else {
+          window.open('/insights-resources/intelligence-politique?report=analyse-strategique-globale-2026-08-05', '_self');
+        }
+        return;
       }
     });
   }
@@ -182,7 +196,8 @@
   addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('[data-theme-choice]').forEach(button => button.addEventListener('click', () => applyTheme(button.dataset.themeChoice)));
     setupGlobe();
-    setupReportDownload();
+    setupParentBridge();
+
     const params = new URLSearchParams(window.location.search);
     const requested = params.get('lang');
     applyTheme(localStorage.getItem('buildfluence-theme') || 'light');
