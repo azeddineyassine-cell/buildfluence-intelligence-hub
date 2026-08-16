@@ -105,10 +105,11 @@ const ReportDownloadModal = ({ open, lang, onClose }: Props) => {
   const set = (key: keyof typeof EMPTY) => (e: React.ChangeEvent<HTMLInputElement>) =>
     setValues((prev) => ({ ...prev, [key]: e.target.value }));
 
-  const triggerDownload = () => {
+  const triggerDownload = (url: string) => {
     const link = document.createElement("a");
-    link.href = REPORT_PATH;
+    link.href = url;
     link.download = "Buildfluence_Intelligence_Politique_Analyse_Strategique_Globale.pdf";
+    link.rel = "noopener noreferrer";
     document.body.appendChild(link);
     link.click();
     link.remove();
@@ -116,6 +117,7 @@ const ReportDownloadModal = ({ open, lang, onClose }: Props) => {
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (status === "sending") return;
     const filled = Object.values(values).every((v) => v.trim().length > 0);
     const validEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email.trim());
     if (!filled || !validEmail) {
@@ -125,7 +127,7 @@ const ReportDownloadModal = ({ open, lang, onClose }: Props) => {
     }
     setStatus("sending");
     setMessage("");
-    const { error } = await supabase.functions.invoke("send-access-request", {
+    const { data, error } = await supabase.functions.invoke("send-access-request", {
       body: {
         name: `${values.firstName.trim()} ${values.lastName.trim()}`.trim(),
         first_name: values.firstName.trim(),
@@ -135,19 +137,21 @@ const ReportDownloadModal = ({ open, lang, onClose }: Props) => {
         phone: values.phone.trim(),
         email: values.email.trim(),
         langue: lang === "en" ? "en" : lang === "ar" ? "ar" : "fr",
-        request_type: "report_download",
+        request_type: "political_report_download",
         report_slug: REPORT_SLUG,
       },
     });
-    if (error) {
+    const payload = data as { success?: boolean; downloadUrl?: string } | null;
+    if (error || !payload?.success || !payload.downloadUrl) {
       setStatus("error");
       setMessage(t.error);
       return;
     }
     setStatus("done");
     setMessage(t.success);
-    triggerDownload();
+    triggerDownload(payload.downloadUrl);
   };
+
 
   return (
     <div
