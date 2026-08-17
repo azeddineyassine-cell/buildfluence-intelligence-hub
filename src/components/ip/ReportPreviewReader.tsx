@@ -8,13 +8,13 @@ pdfjs.GlobalWorkerOptions.workerSrc = workerUrl;
 export type ReaderLang = "fr" | "en" | "ar";
 export type ReaderTheme = "light" | "dark";
 
-const PREVIEW_PATH = "/reports/Buildfluence_Intelligence_Politique_Apercu_Pages_01-08.pdf";
+const PREVIEW_PATH = "/reports/Buildfluence_Intelligence_Politique_Apercu_Pages_01-08.pdf?v=20260817-2";
 const PREVIEW_PAGES = 8;
-const TOTAL_PAGES = 16;
+const TOTAL_PAGES = 17;
 
 const COPY: Record<ReaderLang, Record<string, string>> = {
   fr: {
-    kicker: "APERÇU GRATUIT · 8 PAGES SUR 16",
+    kicker: "APERÇU GRATUIT · 8 PAGES SUR 17",
     title: "Analyse stratégique globale",
     close: "Fermer le lecteur",
     prev: "Page précédente",
@@ -25,17 +25,17 @@ const COPY: Record<ReaderLang, Record<string, string>> = {
     page: "Page",
     of: "sur",
     locked: "Page verrouillée",
-    lockedHint: "Pages 9 à 16 réservées : renseignez le formulaire pour accéder au rapport complet.",
+    lockedHint: "Pages 9 à 17 réservées : renseignez le formulaire pour accéder au rapport complet.",
     endTitle: "Vous avez consulté les 8 premières pages.",
     endBody:
-      "Le rapport complet comprend 16 pages d’analyses, de signaux stratégiques et de précisions méthodologiques.",
+      "Le rapport complet comprend 17 pages d’analyses, de signaux stratégiques et de précisions méthodologiques.",
     endCta: "RECEVOIR ET TÉLÉCHARGER LE RAPPORT COMPLET",
     loading: "Chargement de l’aperçu…",
     error: "L’aperçu n’a pas pu être chargé. Merci de réessayer.",
     pagesNav: "Navigation des pages",
   },
   en: {
-    kicker: "FREE PREVIEW · 8 OF 16 PAGES",
+    kicker: "FREE PREVIEW · 8 OF 17 PAGES",
     title: "Global strategic analysis",
     close: "Close the reader",
     prev: "Previous page",
@@ -46,17 +46,17 @@ const COPY: Record<ReaderLang, Record<string, string>> = {
     page: "Page",
     of: "of",
     locked: "Locked page",
-    lockedHint: "Pages 9 to 16 are restricted: complete the form to access the full report.",
+    lockedHint: "Pages 9 to 17 are restricted: complete the form to access the full report.",
     endTitle: "You have viewed the first 8 pages.",
     endBody:
-      "The complete report contains 16 pages of analysis, strategic signals and methodological details.",
+      "The complete report contains 17 pages of analysis, strategic signals and methodological details.",
     endCta: "GET AND DOWNLOAD THE COMPLETE REPORT",
     loading: "Loading the preview…",
     error: "The preview could not be loaded. Please try again.",
     pagesNav: "Page navigation",
   },
   ar: {
-    kicker: "معاينة مجانية · 8 صفحات من أصل 16",
+    kicker: "معاينة مجانية · 8 صفحات من أصل 17",
     title: "التحليل الاستراتيجي الشامل",
     close: "إغلاق القارئ",
     prev: "الصفحة السابقة",
@@ -67,9 +67,9 @@ const COPY: Record<ReaderLang, Record<string, string>> = {
     page: "صفحة",
     of: "من",
     locked: "صفحة مقفلة",
-    lockedHint: "الصفحات من 9 إلى 16 محجوزة: يرجى إكمال الاستمارة للوصول إلى التقرير الكامل.",
+    lockedHint: "الصفحات من 9 إلى 17 محجوزة: يرجى إكمال الاستمارة للوصول إلى التقرير الكامل.",
     endTitle: "لقد اطلعت على الصفحات الثماني الأولى.",
-    endBody: "يتضمن التقرير الكامل 16 صفحة من التحليلات والإشارات الاستراتيجية والتوضيحات المنهجية.",
+    endBody: "يتضمن التقرير الكامل 17 صفحة من التحليلات والإشارات الاستراتيجية والتوضيحات المنهجية.",
     endCta: "الحصول على التقرير الكامل وتحميله",
     loading: "جارٍ تحميل المعاينة…",
     error: "تعذّر تحميل المعاينة. يرجى المحاولة مرة أخرى.",
@@ -321,7 +321,7 @@ const ReportPreviewReader = ({ open, lang, theme, onClose, onUnlock }: Props) =>
           )}
         </div>
 
-        {/* Footer: 16-page progress */}
+        {/* Footer: 17-page progress */}
         <div className="border-t px-4 py-3" style={{ borderColor: palette.rule }}>
           <div className="flex flex-wrap items-center justify-between gap-3">
             <div className="flex items-center gap-1.5">
