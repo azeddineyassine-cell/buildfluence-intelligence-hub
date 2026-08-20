@@ -23,6 +23,11 @@
 /* Cockpit + fiche */
 .oi-grid{display:grid;align-items:start;grid-template-columns:minmax(0,1.9fr) minmax(320px,1fr);gap:14px;margin-bottom:14px}
 .oi-plot{width:100%;height:auto}
+.oi-quadrant{stroke:none}
+.oi-q-neg-high{fill:color-mix(in srgb,var(--tone-neg) 13%,transparent)}
+.oi-q-pos-high{fill:color-mix(in srgb,var(--tone-pos) 13%,transparent)}
+.oi-q-neg-low{fill:color-mix(in srgb,#C8823F 11%,transparent)}
+.oi-q-pos-low{fill:color-mix(in srgb,#4F7FA0 11%,transparent)}
 .oi-grid line.oi-grid,.oi-plot .oi-grid{stroke:var(--line);stroke-opacity:.55}
 .oi-plot .oi-axis{stroke:var(--line)}
 .oi-plot .oi-axis0{stroke:var(--gold);stroke-dasharray:4 4;stroke-opacity:.8}

@@ -253,8 +253,8 @@
 
   const TONE = { pos: 'var(--tone-pos)', neu: 'var(--tone-neu)', neg: 'var(--tone-neg)' };
   const TONE_MARK = { pos: '▲', neu: '■', neg: '▼' };
-  const TOPIC_COLORS = ['#C9A84C', '#4E6A80', '#9C8437', '#2F5470', '#7A8C99', '#1C3D57', '#B08C57'];
-  const CHANNEL_COLORS = ['#C9A84C', '#2F5470', '#7A8C99', '#9C8437', '#4E6A80'];
+  const TOPIC_COLORS = ['#C9A84C', '#2F6B8A', '#C96A4A', '#527D5A', '#765A8E', '#3F7C78', '#9A7335'];
+  const CHANNEL_COLORS = ['#1F6E8C', '#C96A4A', '#527D5A', '#765A8E', '#C9A84C'];
 
   /* ---------- Camemberts ---------- */
   const arc = (cx, cy, r, a0, a1) => {
@@ -339,13 +339,19 @@
     const list = filtered();
     const grid = [-100, -50, 0, 50, 100].map(b => `<line x1="${px(b)}" y1="${P.t}" x2="${px(b)}" y2="${H - P.b}" class="${b === 0 ? 'oi-axis0' : 'oi-grid'}"/><text x="${px(b)}" y="${H - P.b + 20}" class="oi-tick" text-anchor="middle">${b > 0 ? '+' + b : b < 0 ? '\u2212' + Math.abs(b) : b}</text>`).join('')
       + [0, 25, 50, 75, 100].map(v => `<line x1="${P.l}" y1="${py(v)}" x2="${W - P.r}" y2="${py(v)}" class="oi-grid"/><text x="${P.l - 10}" y="${py(v) + 4}" class="oi-tick" text-anchor="end">${v}</text>`).join('');
+    const quadrants = `<g class="oi-quadrants" aria-hidden="true">
+      <rect class="oi-quadrant oi-q-neg-high" x="${P.l}" y="${P.t}" width="${px(0)-P.l}" height="${py(50)-P.t}"/>
+      <rect class="oi-quadrant oi-q-pos-high" x="${px(0)}" y="${P.t}" width="${W-P.r-px(0)}" height="${py(50)-P.t}"/>
+      <rect class="oi-quadrant oi-q-neg-low" x="${P.l}" y="${py(50)}" width="${px(0)-P.l}" height="${H-P.b-py(50)}"/>
+      <rect class="oi-quadrant oi-q-pos-low" x="${px(0)}" y="${py(50)}" width="${W-P.r-px(0)}" height="${H-P.b-py(50)}"/>
+    </g>`;
     const dots = list.map(t => {
       const r = 10 + Math.sqrt(t.mentions / maxMentions) * 22;
       const on = state.selected === t.name;
       const dim = state.focus && state.selected && !on;
       return `<g class="oi-dot${on ? ' on' : ''}${dim ? ' dim' : ''}" data-topic="${esc(t.name)}" tabindex="0" role="button" aria-pressed="${on}" aria-label="${esc(tTopic(t.name) + ' · ' + x.visibility + ' ' + dec(t.visibility) + ' · ' + x.balance + ' ' + signed(t.balance) + ' · ' + fmt(t.mentions) + ' ' + x.occ)}"><circle cx="${px(t.balance)}" cy="${py(t.visibility)}" r="${r}" fill="${TONE[t.dominant]}" fill-opacity=".28" stroke="${TONE[t.dominant]}"/><text x="${px(t.balance)}" y="${py(t.visibility) + 4}" text-anchor="middle" class="oi-dotmark">${TONE_MARK[t.dominant]}</text><text x="${px(t.balance)}" y="${py(t.visibility) - r - 8}" text-anchor="middle" class="oi-dotlabel">${esc(tTopic(t.name))}</text></g>`;
     }).join('');
-    return `<svg viewBox="0 0 ${W} ${H}" class="oi-plot" role="img" aria-label="${esc(x.cockpit)}" dir="ltr">${grid}<line x1="${P.l}" y1="${H - P.b}" x2="${W - P.r}" y2="${H - P.b}" class="oi-axis"/><line x1="${P.l}" y1="${P.t}" x2="${P.l}" y2="${H - P.b}" class="oi-axis"/>${dots}</svg><div class="oi-axes"><span>${esc(x.axisX)}</span><span>${esc(x.axisY)}</span></div>`;
+    return `<svg viewBox="0 0 ${W} ${H}" class="oi-plot" role="img" aria-label="${esc(x.cockpit)}" dir="ltr">${quadrants}${grid}<line x1="${P.l}" y1="${H - P.b}" x2="${W - P.r}" y2="${H - P.b}" class="oi-axis"/><line x1="${P.l}" y1="${P.t}" x2="${P.l}" y2="${H - P.b}" class="oi-axis"/>${dots}</svg><div class="oi-axes"><span>${esc(x.axisX)}</span><span>${esc(x.axisY)}</span></div>`;
   }
 
   /* ---------- Tableau trié ---------- */

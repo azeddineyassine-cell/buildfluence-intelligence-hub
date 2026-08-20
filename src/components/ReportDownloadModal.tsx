@@ -4,6 +4,7 @@ import { supabase } from "@/integrations/supabase/client";
 export type ReportLang = "fr" | "en" | "ar";
 
 const REPORT_SLUG = "analyse-strategique-globale-2026-08-05";
+const HEYZINE_FR_URL = "https://heyzine.com/flip-book/5576753eea.html";
 
 
 const COPY: Record<ReportLang, Record<string, string>> = {
@@ -18,10 +19,12 @@ const COPY: Record<ReportLang, Record<string, string>> = {
     position: "Fonction",
     phone: "Téléphone",
     email: "Email professionnel",
-    submit: "Recevoir le rapport",
+    submit: "Accéder au rapport",
     sending: "Envoi en cours…",
     close: "Fermer",
-    success: "Demande enregistrée. Le téléchargement démarre.",
+    success: "Demande enregistrée. Vous pouvez feuilleter le rapport ou télécharger le PDF.",
+    interactive: "Feuilleter sur Heyzine",
+    download: "Télécharger le PDF",
     error: "Envoi impossible pour le moment. Merci de réessayer.",
     invalid: "Merci de compléter tous les champs avec un email valide.",
   },
@@ -40,6 +43,8 @@ const COPY: Record<ReportLang, Record<string, string>> = {
     sending: "Sending…",
     close: "Close",
     success: "Request recorded. The download is starting.",
+    interactive: "View interactive report",
+    download: "Download PDF",
     error: "Unable to send right now. Please try again.",
     invalid: "Please complete all fields with a valid email.",
   },
@@ -58,6 +63,8 @@ const COPY: Record<ReportLang, Record<string, string>> = {
     sending: "جارٍ الإرسال…",
     close: "إغلاق",
     success: "تم تسجيل الطلب. سيبدأ التحميل.",
+    interactive: "تصفح التقرير التفاعلي",
+    download: "تحميل ملف PDF",
     error: "تعذّر الإرسال حالياً. يرجى المحاولة مرة أخرى.",
     invalid: "يرجى إكمال جميع الحقول ببريد إلكتروني صحيح.",
   },
@@ -83,12 +90,14 @@ const ReportDownloadModal = ({ open, lang, onClose }: Props) => {
   const [values, setValues] = useState(EMPTY);
   const [status, setStatus] = useState<"idle" | "sending" | "done" | "error">("idle");
   const [message, setMessage] = useState("");
+  const [downloadUrl, setDownloadUrl] = useState("");
   const firstFieldRef = useRef<HTMLInputElement | null>(null);
 
   useEffect(() => {
     if (!open) return;
     setStatus("idle");
     setMessage("");
+    setDownloadUrl("");
     const timer = window.setTimeout(() => firstFieldRef.current?.focus(), 60);
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
@@ -109,6 +118,16 @@ const ReportDownloadModal = ({ open, lang, onClose }: Props) => {
     const link = document.createElement("a");
     link.href = url;
     link.download = "Buildfluence_Intelligence_Politique_Analyse_Strategique_Globale.pdf";
+    link.rel = "noopener noreferrer";
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+  };
+
+  const openHeyzine = () => {
+    const link = document.createElement("a");
+    link.href = HEYZINE_FR_URL;
+    link.target = "_blank";
     link.rel = "noopener noreferrer";
     document.body.appendChild(link);
     link.click();
@@ -149,7 +168,9 @@ const ReportDownloadModal = ({ open, lang, onClose }: Props) => {
     }
     setStatus("done");
     setMessage(t.success);
-    triggerDownload(payload.downloadUrl);
+    setDownloadUrl(payload.downloadUrl);
+    if (lang === "fr") openHeyzine();
+    else triggerDownload(payload.downloadUrl);
   };
 
 
@@ -224,6 +245,28 @@ const ReportDownloadModal = ({ open, lang, onClose }: Props) => {
           >
             {message}
           </p>
+        )}
+        {status === "done" && (
+          <div className="mt-4 flex flex-wrap gap-3">
+            {lang === "fr" && (
+              <button
+                type="button"
+                onClick={openHeyzine}
+                className="h-10 rounded-[2px] bg-[#C9A84C] px-5 text-[11px] font-bold uppercase tracking-[0.14em] text-[#0D1B2A]"
+              >
+                {t.interactive}
+              </button>
+            )}
+            {downloadUrl && (
+              <button
+                type="button"
+                onClick={() => triggerDownload(downloadUrl)}
+                className="h-10 rounded-[2px] border border-[#C9A84C] px-5 text-[11px] font-bold uppercase tracking-[0.14em] text-[#0D1B2A]"
+              >
+                {t.download}
+              </button>
+            )}
+          </div>
         )}
       </div>
     </div>

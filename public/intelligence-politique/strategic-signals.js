@@ -314,7 +314,7 @@
 
     const cols=[['name','colEntity'],['category','colCategory'],['urls','urls'],['vis','visibility'],['balance','balance'],['degree','colDegree'],['weight','colWeight']];
     table.innerHTML=`<thead><tr>${cols.map(([k,label2])=>`<th data-gx-sort="${k==='category'?'name':k}" aria-sort="${state.gxSort===k?(state.gxSortDir==='asc'?'ascending':'descending'):'none'}"><button type="button">${t(label2)}</button></th>`).join('')}</tr></thead><tbody>`+
-      rows.map(r=>`<tr data-name="${r.name}" tabindex="0" class="${r.name===state.selected?'selected':''}"><td>${label(r.name)}</td><td>${r.category}</td><td>${fmt(r.urls)}</td><td>${fmt(r.vis,1)}</td><td>${r.balance>0?'+':''}${fmt(r.balance,1)}</td><td>${fmt(r.degree)}</td><td>${fmt(r.weight)}</td></tr>`).join('')+`</tbody>`;
+      rows.map(r=>`<tr data-name="${r.name}" tabindex="0" class="${r.name===state.selected?'selected':''}"><td>${label(r.name)}</td><td>${r.category}</td><td>${fmt(r.urls)}</td><td>${fmt(r.vis,1)}</td><td><span class="ss-balance ${r.balance>0?'positive':r.balance<0?'negative':'neutral'}">${r.balance>0?'+':''}${fmt(r.balance,1)}</span></td><td>${fmt(r.degree)}</td><td>${fmt(r.weight)}</td></tr>`).join('')+`</tbody>`;
     table.querySelectorAll('[data-gx-sort]').forEach(th=>th.addEventListener('click',()=>{
       const k=th.dataset.gxSort;
       if(state.gxSort===k)state.gxSortDir=state.gxSortDir==='asc'?'desc':'asc'; else {state.gxSort=k;state.gxSortDir=k==='name'?'asc':'desc';}
@@ -434,7 +434,7 @@
     count.textContent = cat==='all' ? fmt(data.length) : `${fmt(filtered.length)} / ${fmt(data.length)}`;
     const rows=filtered.sort((a,b)=>sort==='balance'?b.balance-a.balance:sort==='urls'?b.urls-a.urls:b.vis-a.vis);
     table.innerHTML=`<thead><tr><th>#</th><th>${t('colEntity')}</th><th>${t('colCategory')}</th><th>${t('colQuadrant')}</th><th>${t('visibility')}</th><th>${t('balance')}</th><th>${t('urls')}</th></tr></thead><tbody>`+
-      rows.map((r,i)=>`<tr data-name="${r.d.name}" tabindex="0" aria-label="${label(r.d.name)} — ${t('openDetail')}" class="${r.kind}${r.d.name===state.selected?' selected':''}"><td>${i+1}</td><td><span class="ss-cell-ico">${icon(r.kind,13)}</span>${label(r.d.name)}</td><td>${r.d.kind}</td><td><span class="ss-quad-chip ${r.quad}">${t(r.quad)}</span></td><td>${fmt(r.vis,1)}</td><td>${r.balance>0?'+':''}${fmt(r.balance,1)}</td><td>${fmt(r.urls)}</td></tr>`).join('')+`</tbody>`;
+      rows.map((r,i)=>`<tr data-name="${r.d.name}" tabindex="0" aria-label="${label(r.d.name)} — ${t('openDetail')}" class="${r.kind}${r.d.name===state.selected?' selected':''}"><td>${i+1}</td><td><span class="ss-cell-ico">${icon(r.kind,13)}</span>${label(r.d.name)}</td><td>${r.d.kind}</td><td><span class="ss-quad-chip ${r.quad}">${t(r.quad)}</span></td><td>${fmt(r.vis,1)}</td><td><span class="ss-balance ${r.balance>0?'positive':r.balance<0?'negative':'neutral'}">${r.balance>0?'+':''}${fmt(r.balance,1)}</span></td><td>${fmt(r.urls)}</td></tr>`).join('')+`</tbody>`;
     table.querySelectorAll('tbody tr').forEach(tr=>{
       tr.addEventListener('click',()=>{select(tr.dataset.name);openDetail(tr.dataset.name);});
       tr.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();select(tr.dataset.name);openDetail(tr.dataset.name);}});
