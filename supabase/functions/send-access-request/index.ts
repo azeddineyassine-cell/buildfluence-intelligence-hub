@@ -39,7 +39,7 @@ function adminHtml(d: { name: string; email: string; phone: string; organization
     ['Email', d.email || '-'],
     ['Téléphone', d.phone || '-'],
     ['Société / Organisation', d.organization || '-'],
-    ['Langue', d.langue === 'en' ? 'EN' : 'FR'],
+    ['Langue', d.langue === 'en' ? 'EN' : d.langue === 'ar' ? 'AR' : 'FR'],
     ['Message', (d.message || '-').replace(/\n/g, '<br>')],
     ['Date', d.createdAt],
   ]
@@ -154,10 +154,16 @@ Deno.serve(async (req) => {
     // 2) Signed URL for the gated full report (private bucket, short-lived)
     let downloadUrl: string | null = null
     if (requestType === 'political_report_download') {
+      const reportFiles: Record<string, string> = {
+        fr: 'Buildfluence_Intelligence_Politique_Analyse_Strategique_Globale.pdf',
+        en: 'Buildfluence_Political_Intelligence_Strategic_Analysis_EN.pdf',
+        ar: 'Buildfluence_Intelligence_Politique_Analyse_Strategique_AR.pdf',
+      }
+      const reportFile = reportFiles[langue] ?? reportFiles.fr
       const { data: signed, error: signErr } = await admin.storage
         .from('reports-private')
-        .createSignedUrl('Buildfluence_Intelligence_Politique_Analyse_Strategique_Globale.pdf', 120, {
-          download: 'Buildfluence_Intelligence_Politique_Analyse_Strategique_Globale.pdf',
+        .createSignedUrl(reportFile, 120, {
+          download: reportFile,
         })
       if (signErr || !signed?.signedUrl) {
         console.error('signed url error:', signErr)
