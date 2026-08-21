@@ -6,6 +6,12 @@ export type ReportLang = "fr" | "en" | "ar";
 const REPORT_SLUG = "analyse-strategique-globale-2026-08-05";
 const HEYZINE_FR_URL = "https://heyzine.com/flip-book/5576753eea.html";
 
+const DOWNLOAD_FILENAMES: Record<ReportLang, string> = {
+  fr: "Buildfluence_Intelligence_Politique_Premium_C-Level.pdf",
+  en: "Buildfluence_Political_Intelligence_Strategic_Analysis_EN.pdf",
+  ar: "Buildfluence_Intelligence_Politique_Analyse_Strategique_AR.pdf",
+};
+
 
 const COPY: Record<ReportLang, Record<string, string>> = {
   fr: {
@@ -117,7 +123,7 @@ const ReportDownloadModal = ({ open, lang, onClose }: Props) => {
   const triggerDownload = (url: string) => {
     const link = document.createElement("a");
     link.href = url;
-    link.download = "Buildfluence_Intelligence_Politique_Analyse_Strategique_Globale.pdf";
+    link.download = DOWNLOAD_FILENAMES[lang] ?? DOWNLOAD_FILENAMES.fr;
     link.rel = "noopener noreferrer";
     document.body.appendChild(link);
     link.click();
