@@ -155,7 +155,7 @@ Deno.serve(async (req) => {
     let downloadUrl: string | null = null
     if (requestType === 'political_report_download') {
       const reportFiles: Record<string, string> = {
-        fr: 'Buildfluence_Intelligence_Politique_Analyse_Strategique_Globale.pdf',
+        fr: 'Buildfluence_Intelligence_Politique_Premium_C-Level.pdf',
         en: 'Buildfluence_Political_Intelligence_Strategic_Analysis_EN.pdf',
         ar: 'Buildfluence_Intelligence_Politique_Analyse_Strategique_AR.pdf',
       }
