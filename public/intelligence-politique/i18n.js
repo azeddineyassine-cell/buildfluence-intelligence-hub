@@ -2,22 +2,22 @@
   const translations = {
     fr: {
       themeLabel: 'FOND', light: 'CLAIR', dark: 'SOMBRE', login: 'SE CONNECTER', signup: 'RECEVOIR LES ANALYSES',
-      langButton: 'Langue : Français', downloadReport: 'Télécharger l\u2019analyse globale', langMenu: 'Choix de la langue',
-      previewAnalysis: 'Consulter l\u2019aperçu de l\u2019analyse globale', footerRights: '© 2026 Buildfluence · Tous droits réservés',
+      langButton: 'Langue : Français', downloadReport: 'Recevoir le rapport complet', langMenu: 'Choix de la langue',
+      previewAnalysis: 'Consulter l\u2019aperçu gratuit', footerRights: '© 2026 Buildfluence · Tous droits réservés',
       footerPrivacy: 'Respect des données personnelles conforme à la réglementation marocaine CNDP et, le cas échéant, au RGPD européen.',
       footerOsint: 'Analyses réalisées exclusivement à partir de données ouvertes (OSINT), sans microciblage ni profilage des électeurs.', footerArchitecture: 'Architecture', footerContact: 'Contact'
     },
     en: {
       themeLabel: 'THEME', light: 'LIGHT', dark: 'DARK', login: 'SIGN IN', signup: 'RECEIVE THE ANALYSES',
-      langButton: 'Language: English', downloadReport: 'Download the global analysis', langMenu: 'Language selection',
-      previewAnalysis: 'Open the preview of the global analysis', footerRights: '© 2026 Buildfluence · All rights reserved',
+      langButton: 'Language: English', downloadReport: 'Get the full report', langMenu: 'Language selection',
+      previewAnalysis: 'View the free preview', footerRights: '© 2026 Buildfluence · All rights reserved',
       footerPrivacy: 'Personal data processing complies with Moroccan CNDP regulations and, where applicable, the European GDPR.',
       footerOsint: 'Analyses are based exclusively on open-source data (OSINT), without voter microtargeting or profiling.', footerArchitecture: 'Architecture', footerContact: 'Contact'
     },
     ar: {
       themeLabel: 'المظهر', light: 'فاتح', dark: 'داكن', login: 'تسجيل الدخول', signup: 'تلقّي التحليلات',
-      langButton: 'اللغة: العربية', downloadReport: 'تحميل التحليل الشامل', langMenu: 'اختيار اللغة',
-      previewAnalysis: 'الاطلاع على معاينة التحليل الشامل', footerRights: '© 2026 Buildfluence · جميع الحقوق محفوظة',
+      langButton: 'اللغة: العربية', downloadReport: 'الحصول على التقرير الكامل', langMenu: 'اختيار اللغة',
+      previewAnalysis: 'الاطلاع على المعاينة المجانية', footerRights: '© 2026 Buildfluence · جميع الحقوق محفوظة',
       footerPrivacy: 'تتم معالجة البيانات الشخصية وفق التشريع المغربي وإشراف اللجنة الوطنية لمراقبة حماية المعطيات ذات الطابع الشخصي، وعند الاقتضاء وفق اللائحة الأوروبية العامة لحماية البيانات.',
       footerOsint: 'تُنجز التحليلات حصرا انطلاقا من البيانات مفتوحة المصدر (OSINT)، من دون استهداف دقيق أو تنميط للناخبين.', footerArchitecture: 'الهندسة', footerContact: 'اتصل بنا'
     }
