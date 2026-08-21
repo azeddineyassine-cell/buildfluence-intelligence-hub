@@ -8,7 +8,11 @@ pdfjs.GlobalWorkerOptions.workerSrc = workerUrl;
 export type ReaderLang = "fr" | "en" | "ar";
 export type ReaderTheme = "light" | "dark";
 
-const PREVIEW_PATH = "/reports/Buildfluence_Intelligence_Politique_Apercu_Pages_01-08.pdf?v=20260821-1";
+const PREVIEW_PATHS: Record<ReaderLang, string> = {
+  fr: "/reports/Buildfluence_Intelligence_Politique_Apercu_Pages_01-08.pdf?v=20260821-1",
+  en: "/reports/Buildfluence_Political_Intelligence_Preview_Pages_01-08_EN.pdf?v=20260821-1",
+  ar: "/reports/Buildfluence_Intelligence_Politique_Apercu_Pages_01-08_AR.pdf?v=20260821-1",
+};
 const PREVIEW_PAGES = 8;
 const TOTAL_PAGES = 21;
 
@@ -126,7 +130,7 @@ const ReportPreviewReader = ({ open, lang, theme, onClose, onUnlock }: Props) =>
     setStatus("loading");
     setPage(1);
     setZoom(1);
-    const task = pdfjs.getDocument({ url: PREVIEW_PATH });
+    const task = pdfjs.getDocument({ url: PREVIEW_PATHS[lang] ?? PREVIEW_PATHS.fr });
     task.promise
       .then((doc) => {
         if (cancelled) return;
@@ -141,7 +145,7 @@ const ReportPreviewReader = ({ open, lang, theme, onClose, onUnlock }: Props) =>
       task.destroy().catch(() => undefined);
       docRef.current = null;
     };
-  }, [open]);
+  }, [open, lang]);
 
   /* Render current page */
   const render = useCallback(async () => {
