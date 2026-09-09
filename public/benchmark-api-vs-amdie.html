@@ -3114,7 +3114,7 @@ function renderPlan(){
    ========================================================================= */
 function countUp(){document.querySelectorAll("[data-cu]").forEach(function(e){var target=parseFloat(e.getAttribute("data-cu"));if(!target)return;var cur=0;var step=target/30;var iv=setInterval(function(){cur+=step;if(cur>=target){cur=target;clearInterval(iv);}e.textContent=Number.isInteger(target)?Math.round(cur):cur.toFixed(1);},22);});}
 
-function renderAll(){renderChrome();renderHero();renderMethodo();renderBubble();renderMatrix();renderRadar();renderDuel();renderFoncier();renderAtlas();renderSim();renderCost();renderVerdict();renderPlan();}
+function renderAll(){renderChrome();renderHero();renderMethodo();renderBubble();renderMatrix();renderRadar();renderDuel();renderFoncier();renderAtlas();renderSim();renderCost();renderVerdict();renderPlan();if(typeof LOCKED_PHASES!=="undefined"&&LOCKED_PHASES[currentPhase]&&!getPremiumAccess())renderLockedTeaser(currentPhase);}
 
 function setLang(l){lang=l;renderAll();atoutsSync();}
 function setTheme(th){theme=th;document.documentElement.setAttribute("data-theme",th);el("themeBtn").textContent=theme==="light"?t().theme[0]:t().theme[1];atoutsSync();}
