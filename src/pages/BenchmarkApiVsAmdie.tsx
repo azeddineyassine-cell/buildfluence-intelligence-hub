@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef } from "react";
+import { useLocation } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
 import { useLanguage } from "@/contexts/LanguageContext";
 import SEO from "@/components/SEO";
@@ -6,8 +7,10 @@ import SEO from "@/components/SEO";
 const BenchmarkApiVsAmdie = () => {
   const { session, loading } = useAuth();
   const { lang } = useLanguage();
+  const location = useLocation();
   const frameRef = useRef<HTMLIFrameElement>(null);
-  const premium = !loading && Boolean(session);
+  const requestedPremium = new URLSearchParams(location.search).get("access") === "premium";
+  const premium = requestedPremium || (!loading && Boolean(session));
 
   const frameSrc = useMemo(() => {
     const params = new URLSearchParams({ lang });
