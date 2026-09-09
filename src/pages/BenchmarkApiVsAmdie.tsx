@@ -4,10 +4,10 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import SEO from "@/components/SEO";
 
 const BenchmarkApiVsAmdie = () => {
-  const { role, loading } = useAuth();
+  const { session, loading } = useAuth();
   const { lang } = useLanguage();
   const frameRef = useRef<HTMLIFrameElement>(null);
-  const premium = !loading && role === "premium";
+  const premium = !loading && Boolean(session);
 
   const frameSrc = useMemo(() => {
     const params = new URLSearchParams({ lang });

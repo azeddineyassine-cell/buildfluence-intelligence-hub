@@ -23,7 +23,7 @@ const AccesPremiumDashboard = () => {
     navigate("/acces-premium", { replace: true });
   };
 
-  const benchmarkSrc = `/benchmark-api-interactif.html?lang=${lang}`;
+  const benchmarkSrc = `/benchmark-api-vs-amdie?lang=${lang}`;
 
   const cards: DashboardCard[] = [
     {

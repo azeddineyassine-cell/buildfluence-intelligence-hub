@@ -58,10 +58,10 @@ const HeroInsightsCarousel = () => {
         "Investment Promotion Agencies (IPA) Benchmark"
       ),
       mention: t(
-        "6 AGENCES · 12 CRITÈRES · 6 LEVIERS STRATÉGIQUES",
-        "6 AGENCIES · 12 CRITERIA · 6 STRATEGIC LEVERS"
+        "6 AGENCES · 12 CRITÈRES · 12 LEVIERS STRATÉGIQUES",
+        "6 AGENCIES · 12 CRITERIA · 12 STRATEGIC LEVERS"
       ),
-      href: "/benchmark-api-light.html",
+      href: "/benchmark-api-vs-amdie",
     },
     {
       id: "enquete-isd",
