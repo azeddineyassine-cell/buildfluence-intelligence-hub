@@ -24,6 +24,7 @@ import PolitiqueConfidentialite from "./pages/PolitiqueConfidentialite";
 import EnqueteISD from "./pages/EnqueteISD";
 import IntelligencePolitique from "./pages/IntelligencePolitique";
 import IntelligencePolitiquePage from "./pages/IntelligencePolitiquePage";
+import BenchmarkApiVsAmdie from "./pages/BenchmarkApiVsAmdie";
 
 
 // Situation pages
@@ -75,6 +76,7 @@ const App = () => (
             <Route path="/pourquoi-buildfluence" element={<PourquoiBuildfluence />} />
             <Route path="/success-stories" element={<SuccessStories />} />
             <Route path="/insights-resources" element={<InsightsResources />} />
+            <Route path="/benchmark-api-vs-amdie" element={<BenchmarkApiVsAmdie />} />
             <Route path="/insights-resources/enquete-isd" element={<EnqueteISD />} />
             <Route path="/insights-resources/intelligence-politique" element={<IntelligencePolitiquePage />} />
             <Route path="/insights-resources/intelligence-politique/classements" element={<IntelligencePolitique panel="classements" />} />
