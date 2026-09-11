@@ -2182,7 +2182,7 @@ function renderLockedTeaser(pi){
  el(cfg.grid).innerHTML=(t()[cfg.items]||[]).map(function(it,i){
    return '<div class="teaser-card"><div class="tc-icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5">'+TEASER_ICONS[i%3]+'</svg></div><h3>'+it[0]+'</h3><p>'+it[1]+'</p></div>';
  }).join("");
- el(cfg.cta).innerHTML='<span class="tc-txt">'+t().teaserCtaTxt+'</span><a href="/acces-premium">'+t().teaserCtaBtn+'</a>';
+ el(cfg.cta).innerHTML='<span class="tc-txt">'+t().teaserCtaTxt+'</span><a href="/acces-premium?invite=1" target="_top">'+t().teaserCtaBtn+'</a>';
 }
 function showPhase(pi,targetId){
  currentPhase=pi;
