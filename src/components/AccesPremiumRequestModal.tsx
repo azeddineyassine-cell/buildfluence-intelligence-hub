@@ -71,6 +71,7 @@ const AccesPremiumRequestModal = ({ open, onClose, onLoginClick }: Props) => {
       });
       if (err) throw err;
       setSuccess(true);
+      await supabase.auth.signInWithOtp({ email: form.email, options: { emailRedirectTo: `${window.location.origin}/acces-premium` } });
     } catch (err) {
       console.error(err);
       setError(t("Une erreur est survenue. Réessayez ou écrivez-nous à info@buildfluence.ai.", "Something went wrong. Please retry or email info@buildfluence.ai."));
