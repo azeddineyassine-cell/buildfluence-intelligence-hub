@@ -7,4 +7,3 @@
 - [x] Mettre à jour uniquement la carte Benchmark API de la page d’accueil.
 - [x] Vérifier les accès public/Premium, thèmes, redirection et absence des termes interdits.
 - [ ] Corriger la traduction dynamique FR/EN des panneaux verrouillés dans le fichier fourni. Bloqué par l’interdiction de modifier son contenu interne.
-- [ ] Remplacer uniquement la carte du hero Benchmark API par une carte mondiale vectorielle interactive et vérifier les 14 critères d’acceptation.

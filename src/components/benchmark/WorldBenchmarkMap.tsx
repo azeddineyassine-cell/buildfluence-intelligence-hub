@@ -20,7 +20,7 @@ type BenchmarkTheme = "light" | "dark";
 type BenchmarkLocation = {
   id: string;
   legacyId: string;
-  flag: string;
+  code: string;
   countryFr: string;
   countryEn: string;
   agency: string;
@@ -31,7 +31,7 @@ const benchmarkLocations: BenchmarkLocation[] = [
   {
     id: "morocco",
     legacyId: "morocco",
-    flag: "🇲🇦",
+    code: "MA",
     countryFr: "Maroc",
     countryEn: "Morocco",
     agency: "Morocco Now (AMDIE)",
@@ -40,7 +40,7 @@ const benchmarkLocations: BenchmarkLocation[] = [
   {
     id: "turkiye",
     legacyId: "turkey",
-    flag: "🇹🇷",
+    code: "TR",
     countryFr: "Türkiye",
     countryEn: "Türkiye",
     agency: "Invest.gov.tr",
@@ -49,7 +49,7 @@ const benchmarkLocations: BenchmarkLocation[] = [
   {
     id: "egypt",
     legacyId: "egypt",
-    flag: "🇪🇬",
+    code: "EG",
     countryFr: "Égypte",
     countryEn: "Egypt",
     agency: "GAFI Égypte",
@@ -58,7 +58,7 @@ const benchmarkLocations: BenchmarkLocation[] = [
   {
     id: "india",
     legacyId: "india",
-    flag: "🇮🇳",
+    code: "IN",
     countryFr: "Inde",
     countryEn: "India",
     agency: "Invest India",
@@ -67,7 +67,7 @@ const benchmarkLocations: BenchmarkLocation[] = [
   {
     id: "south-korea",
     legacyId: "korea",
-    flag: "🇰🇷",
+    code: "KR",
     countryFr: "Corée du Sud",
     countryEn: "South Korea",
     agency: "Invest Korea",
@@ -76,7 +76,7 @@ const benchmarkLocations: BenchmarkLocation[] = [
   {
     id: "singapore",
     legacyId: "edb",
-    flag: "🇸🇬",
+    code: "SG",
     countryFr: "Singapour",
     countryEn: "Singapore",
     agency: "Singapore EDB",
@@ -111,6 +111,7 @@ const MAP_STYLES = `
   .bfm-country{fill:var(--bfm-land);stroke:var(--bfm-border);stroke-width:.55;vector-effect:non-scaling-stroke;transition:fill .2s ease}
   .bfm-route{fill:none;stroke:var(--bfm-route);stroke-width:1.1;stroke-dasharray:4 5;stroke-linecap:round;opacity:.72;vector-effect:non-scaling-stroke}
   .bfm-hit{cursor:pointer;outline:none}
+  .bfm-hitarea{fill:transparent;stroke:transparent;stroke-width:44;vector-effect:non-scaling-stroke;pointer-events:all}
   .bfm-hit:focus-visible .bfm-focus{stroke:var(--bfm-ink);stroke-width:3;opacity:1}
   .bfm-focus{fill:none;stroke:var(--bfm-ink);stroke-width:0;opacity:0;vector-effect:non-scaling-stroke}
   .bfm-ring{fill:color-mix(in srgb,var(--bfm-gold) 16%,transparent);stroke:var(--bfm-gold);stroke-width:1.5;vector-effect:non-scaling-stroke;transition:r .18s ease,stroke-width .18s ease,fill .18s ease}
@@ -131,7 +132,7 @@ const MAP_STYLES = `
   .bfm-legend-btn{min-width:44px;height:44px;padding:0 8px;border:1px solid transparent;border-radius:2px;background:transparent;color:var(--bfm-ink);font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:0;cursor:pointer;transition:border-color .18s ease,background .18s ease}
   .bfm-legend-btn:hover,.bfm-legend-btn[data-active="true"]{border-color:var(--bfm-gold);background:color-mix(in srgb,var(--bfm-gold) 12%,transparent)}
   .bfm-legend-btn:focus-visible{outline:2px solid var(--bfm-gold);outline-offset:2px}
-  .bfm-legend-flag{font-size:17px;line-height:1}
+  .bfm-legend-code{display:inline-grid;place-items:center;width:23px;height:17px;border:1px solid var(--bfm-gold);border-radius:2px;color:var(--bfm-ink);font-family:'JetBrains Mono',monospace;font-size:8px;font-weight:700;line-height:1}
   @keyframes bfm-pulse{0%{r:10px;opacity:.7}100%{r:25px;opacity:0}}
   @media(max-width:900px){
     .bfm-shell{min-height:320px}
@@ -139,7 +140,7 @@ const MAP_STYLES = `
     .bfm-legend{position:static;justify-content:center;padding:8px 12px 12px;background:var(--bfm-bg)}
     .bfm-legend-title{text-align:center}
     .bfm-legend-btn{width:44px;padding:0;font-size:0}
-    .bfm-legend-flag{font-size:18px}
+    .bfm-legend-code{width:25px;height:19px;font-size:8px}
   }
   @media(prefers-reduced-motion:reduce){.bfm-pulse{animation:none}.bfm-ring,.bfm-country,.bfm-legend-btn{transition:none}}
 `;
@@ -281,7 +282,7 @@ const WorldBenchmarkMap = ({ hostDocument }: WorldBenchmarkMapProps) => {
                     <circle className="bfm-pulse" r="10" />
                     <circle className="bfm-ring" r={location.id === MOROCCO.id ? 12 : 10} />
                     <circle className="bfm-core" r={markerSize / 2} />
-                    <circle r="22" fill="transparent" />
+                    <circle className="bfm-hitarea" r="2" />
                   </g>
                   {active && (
                     <g className="bfm-tooltip" transform="translate(-82 -67)" role="status">
@@ -328,7 +329,7 @@ const WorldBenchmarkMap = ({ hostDocument }: WorldBenchmarkMapProps) => {
               onBlur={() => setHoveredId(null)}
               onClick={() => selectLocation(location, true)}
             >
-              <span className="bfm-legend-flag" aria-hidden="true">{location.flag}</span>
+              <span className="bfm-legend-code" aria-hidden="true">{location.code}</span>
               <span>{country}</span>
             </button>
           );
