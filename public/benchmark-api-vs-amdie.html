@@ -2267,7 +2267,7 @@ function renderHero(){
  el("heroH1").innerHTML=t().heroH1L1+"<br>"+t().heroH1L2a+"<em>"+t().heroH1w1+"</em>"+t().heroH1L2b+"<br>"+t().heroH1L3+"<br>"+t().heroH1L4a+"<em>"+t().heroH1w2+"</em>"+t().heroH1L4b;
  el("heroSub").textContent=t().heroSub;
  el("statCaption").textContent=t().statCaption;
- el("mapTitle").textContent=t().mapTitle;
+ var mapTitle=el("mapTitle");if(mapTitle)mapTitle.textContent=t().mapTitle;
  el("statstrip").innerHTML=t().stats.map(function(s){var cls=s[2]?(" "+s[2]):"";var pure=/^[0-9]+$/.test(s[0]);return '<div class="stat"><div class="n'+cls+'" data-cu="'+(pure?s[0]:"")+'">'+s[0]+'</div><div class="l">'+s[1]+'</div></div>';}).join("");
  renderWorld();
 }
