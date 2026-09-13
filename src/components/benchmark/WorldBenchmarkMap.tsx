@@ -111,7 +111,7 @@ const MAP_STYLES = `
   .bfm-country{fill:var(--bfm-land);stroke:var(--bfm-border);stroke-width:.55;vector-effect:non-scaling-stroke;transition:fill .2s ease}
   .bfm-route{fill:none;stroke:var(--bfm-route);stroke-width:1.1;stroke-dasharray:4 5;stroke-linecap:round;opacity:.72;vector-effect:non-scaling-stroke}
   .bfm-hit{cursor:pointer;outline:none}
-  .bfm-hitarea{fill:transparent;stroke:transparent;stroke-width:64;vector-effect:non-scaling-stroke;pointer-events:all}
+  .bfm-hitarea{fill:transparent;stroke:none;pointer-events:all}
   .bfm-hit:focus-visible .bfm-focus{stroke:var(--bfm-ink);stroke-width:3;opacity:1}
   .bfm-focus{fill:none;stroke:var(--bfm-ink);stroke-width:0;opacity:0;vector-effect:non-scaling-stroke}
   .bfm-ring{fill:color-mix(in srgb,var(--bfm-gold) 16%,transparent);stroke:var(--bfm-gold);stroke-width:1.5;vector-effect:non-scaling-stroke;transition:r .18s ease,stroke-width .18s ease,fill .18s ease}
@@ -291,7 +291,7 @@ const WorldBenchmarkMap = ({ hostDocument }: WorldBenchmarkMapProps) => {
                       preserveAspectRatio="xMidYMid slice"
                       aria-hidden="true"
                     />
-                    <circle className="bfm-hitarea" r="2" />
+                    <circle className="bfm-hitarea" r="30" />
                   </g>
                   {active && (
                     <g className="bfm-tooltip" transform="translate(-82 -67)" role="status">
