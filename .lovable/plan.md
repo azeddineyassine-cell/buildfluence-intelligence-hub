@@ -1,23 +1,32 @@
-# Intégration du Benchmark API vs AMDIE
+# Carte mondiale interactive du Benchmark API
 
 ## Objectif
-Remplacer l’ancien Benchmark API léger par le fichier interactif fourni, accessible à `/benchmark-api-vs-amdie`, en conservant exactement son contenu et son design.
+Remplacer uniquement la carte décorative du hero de `/benchmark-api-vs-amdie` par une carte mondiale vectorielle précise et interactive, tout en conservant le header, la navigation, les textes, les indicateurs, les données et le verrouillage Premium existants.
 
 ## Mise en œuvre
-- Installer le fichier fourni sous `public/benchmark-api-vs-amdie.html`, sans modifier son contenu interne.
-- Ajouter une page React dédiée qui affiche ce fichier en plein écran dans un cadre isolé.
-- Réutiliser l’état d’authentification existant : accès complet uniquement pour le rôle `premium`.
-- Transmettre cet état au document par `?access=premium` au chargement, puis par `postMessage({ type: "bf-access", premium })` lors des changements de session.
-- Retirer `public/benchmark-api-light.html` une fois la nouvelle page vérifiée.
-- Conserver l’ancienne URL avec une redirection vers `/benchmark-api-vs-amdie`. Sur l’hébergement SPA actuel, cette redirection sera applicative et préservera la destination, mais le navigateur ne recevra pas un statut HTTP 301 serveur.
-- Modifier uniquement la carte Benchmark API de l’accueil : « 12 leviers stratégiques » et nouveau lien.
-- Mettre à jour l’entrée Benchmark de l’espace Premium pour utiliser la nouvelle adresse.
+- Ajouter `react-simple-maps` et créer `WorldBenchmarkMap.tsx` avec une projection Equal Earth, `ZoomableGroup`, six marqueurs géolocalisés, cinq liaisons géodésiques depuis le Maroc, tooltips, sélection, clavier, clic extérieur et contrôles de zoom.
+- Ajouter un fichier géographique mondial optimisé et local au projet, dérivé de Natural Earth. Fusionner géométriquement le Maroc et le Sahara occidental avant intégration afin de produire une seule surface sans frontière intérieure.
+- Remplacer uniquement le SVG décoratif du hero statique par un point de montage. La page React injectera la carte dans ce point de montage à l’intérieur du document intégré, sans déplacer le contenu existant.
+- Synchroniser la carte avec les changements de langue et de thème déjà pilotés par la page Benchmark, sans modifier leurs contrôles ni leur logique.
+- Transformer la légende existante des six pays en commandes accessibles liées aux marqueurs, en conservant son intitulé FR/EN et sa place dans le hero.
+- Conserver les appellations d’agences déjà validées dans le benchmark lorsqu’elles diffèrent du brief, puis signaler toute divergence dans le bilan.
+
+## Design et comportement
+- Appliquer les couleurs Buildfluence demandées en clair et sombre, sans couleurs distinctes par pays.
+- Conserver la composition texte à gauche / carte à droite sur grand écran, puis placer la carte sous le texte sur mobile avec une hauteur minimale de 320 px.
+- Garantir des cibles clavier et tactiles de 44 px, un focus visible, un tooltip contrasté et une animation désactivée avec `prefers-reduced-motion`.
+- Désactiver le zoom à la molette ; proposer zoom avant, zoom arrière et réinitialisation.
+
+## Fichiers prévus
+- Modifier `package.json` et le fichier de verrouillage via l’installation de `react-simple-maps`.
+- Créer `src/components/benchmark/WorldBenchmarkMap.tsx`.
+- Créer `src/assets/maps/world-benchmark.geo.json`.
+- Modifier `src/pages/BenchmarkApiVsAmdie.tsx` pour monter la carte dans le document intégré et synchroniser langue/thème.
+- Modifier uniquement le point de montage et l’ancien rendu cartographique dans `public/benchmark-api-vs-amdie.html`.
 
 ## Vérifications
-- Contrôler les quatre onglets publics sans accès Premium.
-- Contrôler les panneaux verrouillés de Prototypes et Décision sans accès Premium.
-- Contrôler le contenu complet avec `?access=premium`, puis le passage dynamique par message.
-- Vérifier les modes clair/sombre et FR/EN, y compris les panneaux verrouillés.
-- Vérifier la redirection de l’ancienne URL et la carte d’accueil.
-- Confirmer l’absence de « gratuit » et de tiret cadratin dans le fichier intégré.
-- Vérifier que le site compile sans erreur et que le portrait fondateur reste correctement affiché.
+- Vérifier le build et l’absence d’erreurs nouvelles dans la console.
+- Tester thème sombre et clair, langues FR/EN, zoom, déplacement, réinitialisation, hover, clic, Entrée, Espace, Échap, clic extérieur et légende bidirectionnelle.
+- Contrôler visuellement les six positions, l’absence de séparation Maroc-Sahara et l’intégrité du reste de la page.
+- Tester 1440 px, 1024 px, 768 px et 390 px, puis produire les captures desktop sombre, desktop claire et mobile.
+- Fournir le résultat détaillé des 14 tests d’acceptation, les fichiers touchés, la bibliothèque, la source géographique et la méthode de fusion.
