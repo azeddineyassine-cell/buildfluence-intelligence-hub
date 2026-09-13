@@ -1,14 +1,16 @@
-import { useCallback, useEffect, useMemo, useRef } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
 import { useLanguage } from "@/contexts/LanguageContext";
 import SEO from "@/components/SEO";
+import { WorldBenchmarkMapPortal } from "@/components/benchmark/WorldBenchmarkMap";
 
 const BenchmarkApiVsAmdie = () => {
   const { session, loading } = useAuth();
   const { lang } = useLanguage();
   const location = useLocation();
   const frameRef = useRef<HTMLIFrameElement>(null);
+  const [mapMount, setMapMount] = useState<{ node: HTMLElement; document: Document } | null>(null);
   const requestedPremium = new URLSearchParams(location.search).get("access") === "premium";
   const premium = requestedPremium || (!loading && Boolean(session));
 
@@ -24,6 +26,14 @@ const BenchmarkApiVsAmdie = () => {
       window.location.origin,
     );
   }, [premium]);
+
+  const handleFrameLoad = useCallback(() => {
+    syncAccess();
+    const frame = frameRef.current;
+    const document = frame?.contentDocument;
+    const node = document?.getElementById("worldMapRoot");
+    if (document && node) setMapMount({ node, document });
+  }, [syncAccess]);
 
   useEffect(() => {
     syncAccess();
@@ -42,9 +52,10 @@ const BenchmarkApiVsAmdie = () => {
         ref={frameRef}
         src={frameSrc}
         title="Benchmark API vs AMDIE"
-        onLoad={syncAccess}
+        onLoad={handleFrameLoad}
         className="block min-h-screen w-full border-0"
       />
+      {mapMount && <WorldBenchmarkMapPortal mountNode={mapMount.node} hostDocument={mapMount.document} />}
     </>
   );
 };

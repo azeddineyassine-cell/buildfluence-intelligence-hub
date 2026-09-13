@@ -73,10 +73,11 @@ body.hide-hero .hero,body.hide-hero .statstrip,body.hide-hero .stat-caption{disp
  .phase.open .phase-sub{display:block}
 }
 
-.hero{position:relative;overflow:hidden;background:var(--hero-surface);min-height:clamp(360px,48vw,520px);display:flex;flex-direction:column;justify-content:center}
+.hero{position:relative;overflow:hidden;background:var(--hero-surface);min-height:clamp(430px,48vw,520px);display:flex;flex-direction:column;justify-content:center}
 .hero-mapbg{position:absolute;inset:0;width:100%;height:100%;z-index:0}
-.hero-scrim{position:absolute;inset:0;z-index:1;background:linear-gradient(100deg,var(--hero-surface) 0%,var(--hero-surface) 34%,color-mix(in srgb,var(--hero-surface) 78%,transparent) 54%,color-mix(in srgb,var(--hero-surface) 30%,transparent) 78%,transparent 100%)}
-.hero-content{position:relative;z-index:2;padding:clamp(20px,3.2vw,40px) clamp(24px,5vw,64px);max-width:900px}
+.hero-scrim{position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(90deg,var(--hero-surface) 0%,var(--hero-surface) 42%,transparent 58%)}
+.hero-content{position:relative;z-index:2;width:45%;padding:clamp(20px,3.2vw,40px) clamp(24px,3vw,48px);max-width:720px}
+#worldMapRoot{position:absolute;z-index:3;inset:0 0 0 auto;width:55%;min-height:360px}
 .hero-content .kicker{color:var(--gold);opacity:.95;margin-bottom:12px;line-height:1.5}
 .hero-content .hero-h1{font-family:var(--display);font-weight:900;color:var(--hero-ink);font-size:clamp(20px,2.7vw,34px);line-height:1.22;letter-spacing:-.005em}
 .hero-content .hero-h1 em{color:var(--gold);font-style:italic}
@@ -100,7 +101,9 @@ body.hide-hero .hero,body.hide-hero .statstrip,body.hide-hero .stat-caption{disp
 .geo-flag{font-size:15px;pointer-events:none}
 .geo-cap{font-family:var(--mono);font-size:7.5px;fill:color-mix(in srgb,var(--hero-ink) 75%,transparent);pointer-events:none;letter-spacing:.04em}
 @media(max-width:900px){
- .hero-content{max-width:100%}
+ .hero{display:flex;min-height:0}
+ .hero-content{width:100%;max-width:100%;order:1}
+ #worldMapRoot{position:relative;inset:auto;width:100%;min-height:320px;order:2}
  .map-label{position:static;text-align:left;padding:0 20px;margin-bottom:10px}
  .map-legend{padding:14px 20px 18px}
 }
@@ -672,14 +675,13 @@ footer .wrap b{color:var(--gold-deep)}
 <nav class="mininav"><div class="mininav-inner" id="mininav"></div></nav>
 
 <header class="hero">
-  <svg class="hero-mapbg worldsvg" id="worldSvg" viewBox="0 0 1000 480" preserveAspectRatio="xMidYMid slice"></svg>
   <div class="hero-scrim"></div>
-  <div class="map-label"><div class="map-title" id="mapTitle"></div><span class="map-flags">🇸🇬 🇮🇳 🇪🇬 🇰🇷 🇹🇷 🇲🇦</span></div>
   <div class="hero-content reveal">
     <div class="kicker reveal" id="heroKicker"></div>
     <h1 class="hero-h1 reveal" id="heroH1"></h1>
     <p class="hero-sub reveal" id="heroSub"></p>
   </div>
+  <div id="worldMapRoot"><div id="mapTitle"></div></div>
 </header>
 <div class="statstrip reveal" id="statstrip"></div>
 <p class="stat-caption reveal" id="statCaption"></p>
@@ -2270,26 +2272,7 @@ function renderHero(){
  renderWorld();
 }
 function renderWorld(){
- var s=el("worldSvg");var g="";
- // graticule
- for(var lo=-150;lo<=150;lo+=30){g+='<line class="geo-grid" x1="'+projX(lo)+'" y1="0" x2="'+projX(lo)+'" y2="480"/>';}
- for(var la=-60;la<=60;la+=30){g+='<line class="geo-grid" x1="0" y1="'+projY(la)+'" x2="1000" y2="'+projY(la)+'"/>';}
- // continents abstraits (décoratifs, faibles)
-  g+='<g class="geo-land">'+
-    '<path d="M33,48 L69,40 L103,56 L139,48 L178,59 L219,80 L247,104 L264,131 L250,157 L222,173 L206,197 L181,211 L167,237 L145,245 L125,229 L111,205 L86,189 L61,160 L44,125 Z M252,35 L289,24 L324,35 L342,61 L328,91 L294,107 L264,91 L244,64 Z M222,237 L247,245 L269,272 L281,304 L297,328 L300,360 L281,387 L269,424 L247,451 L233,413 L219,376 L208,339 L194,309 L197,272 Z M467,101 L489,83 L519,88 L533,109 L519,125 L497,123 L481,139 L456,131 Z M494,149 L525,131 L553,136 L575,157 L600,171 L611,195 L600,219 L583,237 L575,272 L558,301 L539,333 L519,360 L503,341 L497,304 L481,277 L469,245 L461,211 L469,179 Z M533,104 L572,85 L617,80 L650,61 L694,48 L739,56 L778,75 L819,85 L856,107 L892,123 L928,152 L953,179 L944,205 L919,219 L892,208 L869,224 L842,216 L819,237 L786,229 L758,245 L728,229 L703,203 L678,195 L653,213 L625,203 L606,181 L581,173 L558,149 L533,139 Z M761,237 L783,245 L797,267 L789,288 L769,283 L753,259 Z M836,304 L872,293 L906,304 L928,328 L917,352 L889,365 L858,357 L831,336 Z M939,381 L950,373 L958,389 L947,400 Z"/>'+
-    '</g>';
- // arcs Morocco -> autres
- var m=GEO.morocco;
- ORDER.forEach(function(k){if(k==="morocco")return;var p=GEO[k];var mx=projX(m.lon),my=projY(m.lat),px=projX(p.lon),py=projY(p.lat);var cx=(mx+px)/2,cy=Math.min(my,py)-40;g+='<path class="geo-arc" d="M'+mx+','+my+' Q'+cx+','+cy+' '+px+','+py+'"/>';});
- // nodes
- ORDER.forEach(function(k){var a=AG[k];var p=GEO[k];var x=projX(p.lon),y=projY(p.lat);
-   g+='<g class="geo-node" data-k="'+k+'" tabindex="0">'+
-      '<circle class="ring" cx="'+x+'" cy="'+y+'" r="13" fill="'+a.color+'" fill-opacity="0.18" stroke="'+a.color+'" stroke-width="2"/>'+
-      '<text class="geo-flag" x="'+x+'" y="'+(y+5)+'" text-anchor="middle">'+a.flag+'</text>'+
-      '<text class="geo-cap" x="'+x+'" y="'+(y+26)+'" text-anchor="middle">'+a.short.toUpperCase()+'</text></g>';
- });
- s.innerHTML=g;
- s.querySelectorAll(".geo-node").forEach(function(n){n.addEventListener("click",function(){location.hash="#m1";showBub(n.dataset.k);});n.addEventListener("mouseenter",function(){showBub(n.dataset.k);});});
+ return;
 }
 
 /* =========================================================================
