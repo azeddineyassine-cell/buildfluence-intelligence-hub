@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600" role="img" aria-labelledby="title">
+  <title id="title">Drapeau de Singapour</title>
+  <path fill="#ef3340" d="M0 0h900v300H0z"/>
+  <path fill="#fff" d="M0 300h900v300H0z"/>
+  <circle cx="230" cy="150" r="105" fill="#fff"/>
+  <circle cx="263" cy="150" r="85" fill="#ef3340"/>
+  <g fill="#fff" transform="translate(325 150)">
+    <path d="m0-69 9 27 28-9-23 17 17 23-27-9-9 27-1-28-28 1 26-10-10-26 18 22z" transform="scale(.52)"/>
+    <path d="m0-69 9 27 28-9-23 17 17 23-27-9-9 27-1-28-28 1 26-10-10-26 18 22z" transform="translate(-42 36) scale(.52)"/>
+    <path d="m0-69 9 27 28-9-23 17 17 23-27-9-9 27-1-28-28 1 26-10-10-26 18 22z" transform="translate(42 36) scale(.52)"/>
+    <path d="m0-69 9 27 28-9-23 17 17 23-27-9-9 27-1-28-28 1 26-10-10-26 18 22z" transform="translate(-26 85) scale(.52)"/>
+    <path d="m0-69 9 27 28-9-23 17 17 23-27-9-9 27-1-28-28 1 26-10-10-26 18 22z" transform="translate(26 85) scale(.52)"/>
+  </g>
+</svg>

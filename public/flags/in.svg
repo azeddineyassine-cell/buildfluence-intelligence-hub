@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600" role="img" aria-labelledby="title">
+  <title id="title">Drapeau de l’Inde</title>
+  <path fill="#ff9933" d="M0 0h900v200H0z"/>
+  <path fill="#fff" d="M0 200h900v200H0z"/>
+  <path fill="#138808" d="M0 400h900v200H0z"/>
+  <g transform="translate(450 300)" fill="none" stroke="#000080">
+    <circle r="60" stroke-width="10"/>
+    <circle r="8" fill="#000080" stroke="none"/>
+    <g stroke-width="4">
+      <path d="M0-55V-8M0 8v47M-55 0h47M8 0h47"/>
+      <path d="m-38.9-38.9 33.2 33.2M5.7 5.7l33.2 33.2M38.9-38.9 5.7-5.7M-5.7 5.7l-33.2 33.2"/>
+      <path d="m-21-50.8 18 43.4M3 7.4l18 43.4M21-50.8 3-7.4M-3 7.4l-18 43.4M-50.8-21l43.4 18M7.4 3l43.4 18M-50.8 21l43.4-18M7.4-3l43.4-18"/>
+    </g>
+  </g>
+</svg>

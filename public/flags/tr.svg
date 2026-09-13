@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600" role="img" aria-labelledby="title">
+  <title id="title">Drapeau de la Türkiye</title>
+  <path fill="#e30a17" d="M0 0h900v600H0z"/>
+  <circle cx="383" cy="300" r="150" fill="#fff"/>
+  <circle cx="430" cy="300" r="120" fill="#e30a17"/>
+  <path fill="#fff" d="m542 300 135.2-43.9-83.6 115.1v-142.4l83.6 115.1z"/>
+</svg>
