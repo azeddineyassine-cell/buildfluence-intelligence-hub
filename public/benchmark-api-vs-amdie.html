@@ -13,7 +13,7 @@
   --ink:#23201A; --ink-light:#5A5447; --ink-faint:#8A8170; --muted:#A9A08C;
   --gold:#C9A84C; --gold-deep:#9A7B1E; --gold-pale:#E9DCB4;
   --rule:#E3D9C3; --rule-soft:#EFE7D5;
-  --red:#D6453F; --green:#3B6D11; --blue:#185FA5; --navy:#1F3A5F; --hero-navy:#0D1B2A;
+  --red:#D6453F; --green:#3B6D11; --blue:#185FA5; --navy:#1F3A5F; --hero-navy:#0D1B2A; --hero-surface:var(--paper); --hero-ink:var(--ink); --hero-ink-dim:var(--ink-light);
   --land:#E7DEC9; --grid:#EDE4CF;
   --prio-a:#6FA3C9; --prio-a-deep:#3E7AA3; --prio-b:#DDA92E; --prio-b-deep:#B4841B; --prio-c:#D6453F; --prio-c-deep:#A6332D;
   --shadow:0 18px 40px -28px rgba(80,60,10,.35);
@@ -25,7 +25,7 @@
   --ink:#F2ECDC; --ink-light:#C2BBA8; --ink-faint:#8C9AAC; --muted:#6E7C8E;
   --gold:#D9B65A; --gold-deep:#E2C879; --gold-pale:#3A4255;
   --rule:#27384C; --rule-soft:#1C2C3E;
-  --red:#E24B4A; --green:#5FA32E; --blue:#5B9BD8; --navy:#6BA6DC; --hero-navy:#081120;
+  --red:#E24B4A; --green:#5FA32E; --blue:#5B9BD8; --navy:#6BA6DC; --hero-navy:#081120; --hero-surface:#081120; --hero-ink:#F5F1E8; --hero-ink-dim:color-mix(in srgb,#F5F1E8 75%,transparent);
   --land:#1A2C3F; --grid:#1A2A3C;
   --prio-a:#7FB8E0; --prio-a-deep:#A9D2ED; --prio-b:#E8C24C; --prio-b-deep:#F0D479; --prio-c:#E24B4A; --prio-c-deep:#EC7877;
   --shadow:0 20px 50px -28px rgba(0,0,0,.6);
@@ -73,32 +73,32 @@ body.hide-hero .hero,body.hide-hero .statstrip,body.hide-hero .stat-caption{disp
  .phase.open .phase-sub{display:block}
 }
 
-.hero{position:relative;overflow:hidden;background:var(--hero-navy);min-height:clamp(360px,48vw,520px);display:flex;flex-direction:column;justify-content:center}
+.hero{position:relative;overflow:hidden;background:var(--hero-surface);min-height:clamp(360px,48vw,520px);display:flex;flex-direction:column;justify-content:center}
 .hero-mapbg{position:absolute;inset:0;width:100%;height:100%;z-index:0}
-.hero-scrim{position:absolute;inset:0;z-index:1;background:linear-gradient(100deg,var(--hero-navy) 0%,var(--hero-navy) 34%,color-mix(in srgb,var(--hero-navy) 78%,transparent) 54%,color-mix(in srgb,var(--hero-navy) 30%,transparent) 78%,transparent 100%)}
+.hero-scrim{position:absolute;inset:0;z-index:1;background:linear-gradient(100deg,var(--hero-surface) 0%,var(--hero-surface) 34%,color-mix(in srgb,var(--hero-surface) 78%,transparent) 54%,color-mix(in srgb,var(--hero-surface) 30%,transparent) 78%,transparent 100%)}
 .hero-content{position:relative;z-index:2;padding:clamp(20px,3.2vw,40px) clamp(24px,5vw,64px);max-width:900px}
 .hero-content .kicker{color:var(--gold);opacity:.95;margin-bottom:12px;line-height:1.5}
-.hero-content .hero-h1{font-family:var(--display);font-weight:900;color:var(--ivory,#F5F1E8);font-size:clamp(20px,2.7vw,34px);line-height:1.22;letter-spacing:-.005em}
+.hero-content .hero-h1{font-family:var(--display);font-weight:900;color:var(--hero-ink);font-size:clamp(20px,2.7vw,34px);line-height:1.22;letter-spacing:-.005em}
 .hero-content .hero-h1 em{color:var(--gold);font-style:italic}
-.hero-content .hero-sub{color:color-mix(in srgb,#F5F1E8 82%,transparent);margin-top:8px;font-size:clamp(14px,1.2vw,16px);max-width:56ch}
+.hero-content .hero-sub{color:color-mix(in srgb,var(--hero-ink) 82%,transparent);margin-top:8px;font-size:clamp(14px,1.2vw,16px);max-width:56ch}
 .map-label{position:absolute;z-index:2;top:clamp(20px,3vw,32px);right:clamp(24px,4vw,56px);text-align:right}
-.map-label .map-title{font-family:var(--mono);font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:color-mix(in srgb,var(--ivory,#F5F1E8) 65%,transparent);margin-bottom:6px}
+.map-label .map-title{font-family:var(--mono);font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:color-mix(in srgb,var(--hero-ink) 65%,transparent);margin-bottom:6px}
 .map-label .map-flags{font-size:15px;letter-spacing:3px}
 .map-legend{position:relative;z-index:2;display:flex;gap:clamp(10px,1.6vw,20px);flex-wrap:wrap;padding:10px clamp(24px,5vw,64px) 16px}
-.map-legend span{font-family:var(--mono);font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;color:color-mix(in srgb,var(--ivory,#F5F1E8) 70%,transparent);display:flex;align-items:center;gap:5px}
+.map-legend span{font-family:var(--mono);font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;color:color-mix(in srgb,var(--hero-ink) 70%,transparent);display:flex;align-items:center;gap:5px}
 .map-legend i{width:9px;height:9px;border-radius:50%;display:inline-block}
 .stat-caption{font-size:11px;color:var(--ink-faint);padding:9px clamp(20px,4vw,56px) 0;line-height:1.5;max-width:92ch}
 .kicker{font-family:var(--mono);font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--gold-deep);margin-bottom:18px}
 .kicker .dot{display:inline-block;width:5px;height:5px;background:var(--gold);border-radius:50%;margin:0 8px 2px;vertical-align:middle}
 .worldsvg{width:100%;height:100%;display:block}
-.geo-land{fill:color-mix(in srgb,var(--gold) 14%,var(--hero-navy));opacity:.9}
-.geo-grid{stroke:color-mix(in srgb,var(--ivory,#F5F1E8) 8%,transparent);stroke-width:.6}
+.geo-land{fill:color-mix(in srgb,var(--gold) 14%,var(--hero-surface));opacity:.9}
+.geo-grid{stroke:color-mix(in srgb,var(--hero-ink) 8%,transparent);stroke-width:.6}
 .geo-arc{stroke:var(--gold);stroke-width:1.1;fill:none;stroke-dasharray:3 4;opacity:.6}
 .geo-node{cursor:pointer}
 .geo-node .ring{transition:r .3s,stroke-width .2s}
 .geo-node:hover .ring{stroke-width:3}
 .geo-flag{font-size:15px;pointer-events:none}
-.geo-cap{font-family:var(--mono);font-size:7.5px;fill:color-mix(in srgb,var(--ivory,#F5F1E8) 75%,transparent);pointer-events:none;letter-spacing:.04em}
+.geo-cap{font-family:var(--mono);font-size:7.5px;fill:color-mix(in srgb,var(--hero-ink) 75%,transparent);pointer-events:none;letter-spacing:.04em}
 @media(max-width:900px){
  .hero-content{max-width:100%}
  .map-label{position:static;text-align:left;padding:0 20px;margin-bottom:10px}
@@ -2275,13 +2275,9 @@ function renderWorld(){
  for(var lo=-150;lo<=150;lo+=30){g+='<line class="geo-grid" x1="'+projX(lo)+'" y1="0" x2="'+projX(lo)+'" y2="480"/>';}
  for(var la=-60;la<=60;la+=30){g+='<line class="geo-grid" x1="0" y1="'+projY(la)+'" x2="1000" y2="'+projY(la)+'"/>';}
  // continents abstraits (décoratifs, faibles)
- g+='<g class="geo-land">'+
-   '<path d="M120,150 q40,-60 120,-40 q60,20 40,90 q-20,80 -90,90 q-90,10 -100,-60 q-10,-50 30,-80 Z"/>'+
-   '<path d="M250,300 q30,-30 70,-10 q40,40 10,110 q-30,60 -70,30 q-40,-40 -30,-90 Z"/>'+
-   '<path d="M470,120 q60,-50 150,-25 q40,20 30,70 q-10,40 -70,55 q-30,60 -90,40 q-70,-25 -60,-100 q5,-40 30,-55 Z"/>'+
-   '<path d="M640,150 q120,-50 230,-10 q70,40 40,110 q-50,70 -150,55 q-120,-10 -170,-70 q-30,-50 0,-85 Z"/>'+
-   '<path d="M520,300 q60,-10 90,30 q10,50 -50,70 q-60,10 -70,-40 q-5,-45 30,-60 Z"/>'+
-   '</g>';
+  g+='<g class="geo-land">'+
+    '<path d="M33,48 L69,40 L103,56 L139,48 L178,59 L219,80 L247,104 L264,131 L250,157 L222,173 L206,197 L181,211 L167,237 L145,245 L125,229 L111,205 L86,189 L61,160 L44,125 Z M252,35 L289,24 L324,35 L342,61 L328,91 L294,107 L264,91 L244,64 Z M222,237 L247,245 L269,272 L281,304 L297,328 L300,360 L281,387 L269,424 L247,451 L233,413 L219,376 L208,339 L194,309 L197,272 Z M467,101 L489,83 L519,88 L533,109 L519,125 L497,123 L481,139 L456,131 Z M494,149 L525,131 L553,136 L575,157 L600,171 L611,195 L600,219 L583,237 L575,272 L558,301 L539,333 L519,360 L503,341 L497,304 L481,277 L469,245 L461,211 L469,179 Z M533,104 L572,85 L617,80 L650,61 L694,48 L739,56 L778,75 L819,85 L856,107 L892,123 L928,152 L953,179 L944,205 L919,219 L892,208 L869,224 L842,216 L819,237 L786,229 L758,245 L728,229 L703,203 L678,195 L653,213 L625,203 L606,181 L581,173 L558,149 L533,139 Z M761,237 L783,245 L797,267 L789,288 L769,283 L753,259 Z M836,304 L872,293 L906,304 L928,328 L917,352 L889,365 L858,357 L831,336 Z M939,381 L950,373 L958,389 L947,400 Z"/>'+
+    '</g>';
  // arcs Morocco -> autres
  var m=GEO.morocco;
  ORDER.forEach(function(k){if(k==="morocco")return;var p=GEO[k];var mx=projX(m.lon),my=projY(m.lat),px=projX(p.lon),py=projY(p.lat);var cx=(mx+px)/2,cy=Math.min(my,py)-40;g+='<path class="geo-arc" d="M'+mx+','+my+' Q'+cx+','+cy+' '+px+','+py+'"/>';});
