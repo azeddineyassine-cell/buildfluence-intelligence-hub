@@ -111,11 +111,11 @@ const MAP_STYLES = `
   .bfm-country{fill:var(--bfm-land);stroke:var(--bfm-border);stroke-width:.55;vector-effect:non-scaling-stroke;transition:fill .2s ease}
   .bfm-route{fill:none;stroke:var(--bfm-route);stroke-width:1.1;stroke-dasharray:4 5;stroke-linecap:round;opacity:.72;vector-effect:non-scaling-stroke}
   .bfm-hit{cursor:pointer;outline:none}
-  .bfm-hitarea{fill:transparent;stroke:transparent;stroke-width:44;vector-effect:non-scaling-stroke;pointer-events:all}
+  .bfm-hitarea{fill:transparent;stroke:none;pointer-events:all}
   .bfm-hit:focus-visible .bfm-focus{stroke:var(--bfm-ink);stroke-width:3;opacity:1}
   .bfm-focus{fill:none;stroke:var(--bfm-ink);stroke-width:0;opacity:0;vector-effect:non-scaling-stroke}
   .bfm-ring{fill:color-mix(in srgb,var(--bfm-gold) 16%,transparent);stroke:var(--bfm-gold);stroke-width:1.5;vector-effect:non-scaling-stroke;transition:r .18s ease,stroke-width .18s ease,fill .18s ease}
-  .bfm-core{fill:var(--bfm-gold);stroke:var(--bfm-bg);stroke-width:1.4;vector-effect:non-scaling-stroke}
+  .bfm-flag{pointer-events:none;filter:drop-shadow(0 1px 1px color-mix(in srgb,var(--bfm-ink) 25%,transparent))}
   .bfm-pulse{fill:none;stroke:var(--bfm-gold);stroke-width:1.2;transform-box:fill-box;transform-origin:center;animation:bfm-pulse 2.8s ease-out 2;vector-effect:non-scaling-stroke}
   .bfm-hit:hover .bfm-ring,.bfm-hit[data-active="true"] .bfm-ring{r:14px;stroke-width:2.4;fill:color-mix(in srgb,var(--bfm-gold) 28%,transparent)}
   .bfm-tooltip{pointer-events:none;overflow:visible}
@@ -132,7 +132,7 @@ const MAP_STYLES = `
   .bfm-legend-btn{min-width:44px;height:44px;padding:0 8px;border:1px solid transparent;border-radius:2px;background:transparent;color:var(--bfm-ink);font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:0;cursor:pointer;transition:border-color .18s ease,background .18s ease}
   .bfm-legend-btn:hover,.bfm-legend-btn[data-active="true"]{border-color:var(--bfm-gold);background:color-mix(in srgb,var(--bfm-gold) 12%,transparent)}
   .bfm-legend-btn:focus-visible{outline:2px solid var(--bfm-gold);outline-offset:2px}
-  .bfm-legend-code{display:inline-grid;place-items:center;width:23px;height:17px;border:1px solid var(--bfm-gold);border-radius:2px;color:var(--bfm-ink);font-family:'JetBrains Mono',monospace;font-size:8px;font-weight:700;line-height:1}
+  .bfm-legend-flag{display:inline-block;width:25px;height:17px;border:1px solid var(--bfm-border);border-radius:2px;object-fit:cover;vertical-align:middle}
   @keyframes bfm-pulse{0%{r:10px;opacity:.7}100%{r:25px;opacity:0}}
   @media(max-width:900px){
     .bfm-shell{min-height:320px}
@@ -140,7 +140,7 @@ const MAP_STYLES = `
     .bfm-legend{position:static;justify-content:center;padding:8px 12px 12px;background:var(--bfm-bg)}
     .bfm-legend-title{text-align:center}
     .bfm-legend-btn{width:44px;padding:0;font-size:0}
-    .bfm-legend-code{width:25px;height:19px;font-size:8px}
+    .bfm-legend-flag{width:25px;height:19px}
   }
   @media(prefers-reduced-motion:reduce){.bfm-pulse{animation:none}.bfm-ring,.bfm-country,.bfm-legend-btn{transition:none}}
 `;
@@ -281,8 +281,17 @@ const WorldBenchmarkMap = ({ hostDocument }: WorldBenchmarkMapProps) => {
                     <circle className="bfm-focus" r="20" />
                     <circle className="bfm-pulse" r="10" />
                     <circle className="bfm-ring" r={location.id === MOROCCO.id ? 12 : 10} />
-                    <circle className="bfm-core" r={markerSize / 2} />
-                    <circle className="bfm-hitarea" r="2" />
+                    <image
+                      className="bfm-flag"
+                      href={`/flags/${location.code.toLowerCase()}.svg`}
+                      x={-markerSize}
+                      y={-(markerSize * 0.66)}
+                      width={markerSize * 2}
+                      height={markerSize * 1.32}
+                      preserveAspectRatio="xMidYMid slice"
+                      aria-hidden="true"
+                    />
+                    <circle className="bfm-hitarea" r="30" />
                   </g>
                   {active && (
                     <g className="bfm-tooltip" transform="translate(-82 -67)" role="status">
@@ -329,7 +338,7 @@ const WorldBenchmarkMap = ({ hostDocument }: WorldBenchmarkMapProps) => {
               onBlur={() => setHoveredId(null)}
               onClick={() => selectLocation(location, true)}
             >
-              <span className="bfm-legend-code" aria-hidden="true">{location.code}</span>
+              <img className="bfm-legend-flag" src={`/flags/${location.code.toLowerCase()}.svg`} alt="" aria-hidden="true" />
               <span>{country}</span>
             </button>
           );

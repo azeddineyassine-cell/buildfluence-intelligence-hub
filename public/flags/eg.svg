@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600" role="img" aria-labelledby="title">
+  <title id="title">Drapeau de l’Égypte</title>
+  <path fill="#ce1126" d="M0 0h900v200H0z"/>
+  <path fill="#fff" d="M0 200h900v200H0z"/>
+  <path d="M0 400h900v200H0z"/>
+  <path fill="#c09300" d="M450 232c-31 0-54 27-54 63v71h108v-71c0-36-23-63-54-63zm-31 66h62l-12 18h-38zm2 27h58v29h-58z"/>
+</svg>
