@@ -2820,15 +2820,11 @@ function iatAssetsOf(k){
 }
 function iatBuildAssetReg(){
  if(iatAssetReg)return;
- var svg=el("atlasMap");if(!svg)return;
- var paths={};Array.prototype.forEach.call(svg.querySelectorAll(".iat-reg"),function(p){paths[p.getAttribute("data-k")]=p;});
  iatAssetReg={};
+ var cv=document.createElement("canvas"),ctx=cv.getContext&&cv.getContext("2d");
  ATLAS_POI.forEach(function(p,i){
   var found=null;
-  try{
-   var pt=svg.createSVGPoint();pt.x=p.x;pt.y=p.y;
-   Object.keys(paths).forEach(function(k){if(found)return;var el2=paths[k];if(el2.isPointInFill&&el2.isPointInFill(pt))found=k;});
-  }catch(e){/* isPointInFill indisponible */}
+  try{if(ctx&&window.Path2D)IAT_ORDER.forEach(function(k){if(!found&&ctx.isPointInPath(new Path2D(ATLAS_GEO[k].d),p.x,p.y))found=k;});}catch(e){/* Path2D indisponible */}
   if(!found){var best=null,bd=1e9;IAT_ORDER.forEach(function(k){var g=ATLAS_GEO[k];if(!g)return;var d=(g.cx-p.x)*(g.cx-p.x)+(g.cy-p.y)*(g.cy-p.y);if(d<bd){bd=d;best=k;}});found=best;}
   if(p.n==="Golf Royal Dar Es Salam")found="rsk";
   iatAssetReg[i]=found;
@@ -2868,7 +2864,8 @@ function iatGovHtml(k){
  var T2=iatT(),d=ATLAS_DATA[k];
  var items=IAT_GOVDEF.filter(function(g){return iatActor==="all"||g.k===iatActor;}).map(function(g){
   var o=g[lang]||g.fr;
-  return '<li><b>'+o.n+' · '+iatL(d.nom)+'</b><br>'+o.r+'<span class="iat-src">'+T2.src+' : '+o.s+iatBadge("verified")+'</span><span class="iat-src">'+T2.noSrc+iatBadge("unavailable")+'</span></li>';
+  var icon=g.k==="cri"?"BriefcaseBusiness":(g.k==="cr"?"Landmark":"Building2");
+  return '<li><b>'+icon+' · '+o.n+' · '+iatL(d.nom)+'</b><br>'+o.r+'<span class="iat-src">'+T2.src+' : '+o.s+iatBadge("verified")+'</span><span class="iat-official">'+T2.noSrc+'</span></li>';
  }).join("");
  return iatBlk(T2.govTitle,'<ul>'+items+'</ul>');
 }
@@ -2893,11 +2890,14 @@ function iatIncHtml(k){
 function iatPassport(k){
  var d=ATLAS_DATA[k],T2=iatT();
  var secs=iatSecOf(k).map(function(s){return iatSecLbl(s);}).join(" · ")||T2.todo;
- return '<div class="iat-pass"><div class="ip-eyebrow">'+T2.passport+'</div><div class="ip-name">'+iatL(d.nom)+'</div>'+
+ var promise=iatL(d.eco.atout);
+ var assets=iatAssetsOf(k);
+ var indicators='<div class="iat-kpis"><div><b>'+iatNum(IAT_POP[k])+'</b><span>'+T2.pop+'</span></div><div><b>'+iatSecOf(k).length+'</b><span>'+T2.sectors+'</span></div><div><b>'+assets.length+'</b><span>'+T2.assetsTitle+'</span></div><div><b>'+iatIncLbl(d.prime)+'</b><span>'+T2.incTitle+'</span></div></div>';
+ return '<div class="iat-pass"><div class="ip-eyebrow">'+T2.passport+'</div><div class="ip-name">'+iatL(d.nom)+'</div><p class="iat-promise">'+promise+'</p>'+indicators+
   iatBlk(T2.pop,'<p>'+iatNum(IAT_POP[k])+' hab.'+iatBadge("verified")+'</p><span class="iat-src">'+T2.src+' : '+T2.popSrc+'</span>')+
   iatBlk(T2.sectors,'<p>'+secs+'</p>')+
   iatIncHtml(k)+iatGovHtml(k)+iatAssetsHtml(k)+iatRead(k)+
-  '<button class="iat-cta" id="iatCta" type="button">'+T2.cta+' →</button></div>';
+  '<div class="iat-actions"><button class="iat-linkbtn" id="iatPassportCompare" type="button">'+T2.compare+'</button><button class="iat-linkbtn" id="iatPassportGov" type="button">'+T2.actor+'</button><button class="iat-cta" id="iatCta" type="button">'+T2.cta+' →</button></div></div>';
 }
 function iatAssetCard(i){
  var p=ATLAS_POI[i],T2=iatT();iatBuildAssetReg();
@@ -2912,7 +2912,7 @@ function iatAssetCard(i){
 function iatWelcome(){
  var T2=iatT();
  return '<div class="iat-pass"><div class="ip-eyebrow">'+T2.passport+'</div><div class="ip-name">'+T2.welcomeT+'</div>'+
-  '<div class="iat-blk"><p>'+T2.welcomeP+'</p></div><div class="iat-blk read"><p>'+T2.welcomeH+'</p></div></div>';
+  '<p>'+T2.welcomeP+'</p><div class="iat-discovery"><button type="button" data-discover="region">'+(lang==="fr"?"Explorer par région":"Explore by region")+'</button><button type="button" data-discover="sector">'+(lang==="fr"?"Partir d’un secteur":"Start with a sector")+'</button><button type="button" data-discover="asset">'+(lang==="fr"?"Identifier les meilleurs actifs":"Identify the best assets")+'</button></div><div class="iat-blk read" open><summary class="ib-l">'+T2.readTitle+'</summary><div class="iat-blk-body"><p>'+T2.welcomeH+'</p></div></div></div>';
 }
 function iatFiltersHtml(){
  var T2=iatT();
