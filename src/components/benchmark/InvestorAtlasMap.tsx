@@ -28,7 +28,7 @@ type AtlasLanguage = "fr" | "en";
 type AtlasTheme = "light" | "dark";
 type AtlasRegion = { d: string; cx: number; cy: number };
 type AtlasPoi = { n: string; c: string; t: string; city: string; x: number; y: number };
-type AtlasData = { nom: { fr: string; en: string } };
+type AtlasData = { nom: { fr: string; en: string }; prime?: string; fam?: string; port?: boolean };
 
 type AtlasHost = Window & {
   ATLAS_GEO?: Record<string, AtlasRegion>;
@@ -153,7 +153,7 @@ const InvestorAtlasMap = ({ hostDocument, hostWindow }: InvestorAtlasMapProps) =
         y: region.cy,
       }));
     });
-  }, [hostWindow.atlasAsset, hostWindow.atlasLayer, order, regions, selected, revision]);
+  }, [hostWindow.iatAsset, hostWindow.atlasLayer, order, regions, selected, revision]);
 
   const viewBox = selected && regions[selected]
     ? `${regions[selected].cx - 150} ${regions[selected].cy - 155} 300 310`
@@ -192,6 +192,11 @@ const InvestorAtlasMap = ({ hostDocument, hostWindow }: InvestorAtlasMapProps) =
           if (!region) return null;
           const name = data[key]?.nom?.[language] ?? data[key]?.nom?.fr ?? key;
           const matches = hostWindow.iatMatch?.(key) ?? true;
+          const layer = hostWindow.atlasLayer;
+          const tone = layer === "prime"
+            ? data[key]?.prime === "b" ? 42 : data[key]?.prime === "a" ? 27 : 14
+            : layer === "fam" ? data[key]?.fam === "export" ? 38 : data[key]?.fam === "industry" ? 28 : 18
+            : layer === "gov" ? 12 : data[key]?.port ? 32 : 17;
           return (
             <g key={key}>
               <path
@@ -200,7 +205,7 @@ const InvestorAtlasMap = ({ hostDocument, hostWindow }: InvestorAtlasMapProps) =
                 data-selected={selected === key}
                 data-match={matches}
                 d={region.d}
-                fill={selected === key ? undefined : "color-mix(in srgb,var(--iam-gold) 18%,var(--iam-ivory))"}
+                fill={selected === key ? undefined : `color-mix(in srgb,var(--iam-gold) ${tone}%,var(--iam-ivory))`}
                 role="button"
                 tabIndex={0}
                 aria-label={name}
