@@ -140,6 +140,21 @@ const InvestorAtlasMap = ({ hostDocument, hostWindow }: InvestorAtlasMapProps) =
     return [...groups.entries()];
   }, [visiblePois]);
 
+  const governanceMarkers = useMemo(() => {
+    if (hostWindow.atlasLayer !== "gov") return [];
+    const actorTypes = hostWindow.iatAsset === "all" ? ["cri", "cr", "wilaya"] : [hostWindow.iatAsset];
+    return order.flatMap((key) => {
+      const region = regions[key];
+      if (!region || (selected && selected !== key)) return [];
+      return actorTypes.filter((type) => ["cri", "cr", "wilaya"].includes(type)).map((type, offset) => ({
+        key,
+        type,
+        x: region.cx + (offset - 1) * 22,
+        y: region.cy,
+      }));
+    });
+  }, [hostWindow.atlasAsset, hostWindow.atlasLayer, order, regions, selected, revision]);
+
   const viewBox = selected && regions[selected]
     ? `${regions[selected].cx - 150} ${regions[selected].cy - 155} 300 310`
     : "0 0 600 639";
@@ -209,6 +224,26 @@ const InvestorAtlasMap = ({ hostDocument, hostWindow }: InvestorAtlasMapProps) =
                   <text x="65" y="18" textAnchor="middle">{name}</text>
                 </g>
               )}
+            </g>
+          );
+        })}
+        {hostWindow.atlasLayer === "fam" && order.map((key) => {
+          const region = regions[key];
+          if (!region || (selected && selected !== key)) return null;
+          return (
+            <g key={`eco-${key}`} transform={`translate(${region.cx} ${region.cy})`} pointerEvents="none">
+              <path d="M-24 0H24M0-24V24M-17-17L17 17M17-17L-17 17" stroke="var(--iam-gold)" strokeWidth="1" opacity=".55" />
+              <Network x={-9} y={-9} width={18} height={18} color="var(--iam-navy)" strokeWidth={1.7} aria-hidden="true" />
+            </g>
+          );
+        })}
+        {governanceMarkers.map(({ key, type, x, y }) => {
+          const Icon = icons[type] ?? icons.default;
+          const label = type === "cri" ? "CRI" : type === "cr" ? (language === "fr" ? "Conseil régional" : "Regional Council") : "Wilaya";
+          return (
+            <g key={`${key}-${type}`} className="iam-marker" transform={`translate(${x} ${y})`} role="button" tabIndex={0} aria-label={`${label} · ${data[key]?.nom?.[language] ?? key}`} onClick={() => chooseRegion(key)} onKeyDown={(event) => { if (event.key === "Enter" || event.key === " ") { event.preventDefault(); chooseRegion(key); } }}>
+              <rect className="iam-marker-bg" x="-12" y="-12" width="24" height="24" rx="2" />
+              <foreignObject className="iam-marker-icon" x="-8" y="-8" width="16" height="16"><Icon size={16} strokeWidth={1.8} aria-hidden="true" /></foreignObject>
             </g>
           );
         })}
