@@ -222,6 +222,73 @@ h2.sec-title em{font-style:italic;color:var(--gold-deep)}
 .aw-sig b{color:var(--ink);font-weight:600}
 .aw-prompt{font-family:var(--serif);font-style:italic;color:var(--ink-faint);font-size:13px;margin-top:14px}
 .poi-coord{font-family:var(--mono);font-size:9px;letter-spacing:.05em;color:var(--ink-faint);margin-top:12px}
+/* Investor Atlas · intelligence territoriale */
+.iat-top{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid var(--rule)}
+.iat-modes{display:flex;gap:0;border:1px solid var(--rule);border-radius:2px;overflow:hidden}
+.iat-modes button{font-family:var(--mono);font-size:9.5px;letter-spacing:.11em;text-transform:uppercase;padding:8px 14px;background:var(--card);color:var(--ink-faint);border:none;cursor:pointer;transition:background .15s,color .15s}
+.iat-modes button+button{border-left:1px solid var(--rule)}
+.iat-modes button[aria-pressed=true]{background:var(--navy);color:var(--paper);font-weight:700}
+.iat-modes button:focus-visible,.iat-fbtn:focus-visible,.iat-linkbtn:focus-visible,.iat-cta:focus-visible,.iat-reg:focus-visible,.iat-asset:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.iat-tools{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.iat-count{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint)}
+.iat-count b{color:var(--navy);font-weight:700}
+.iat-linkbtn{font-family:var(--mono);font-size:9px;letter-spacing:.11em;text-transform:uppercase;background:transparent;border:1px solid var(--rule);border-radius:2px;color:var(--ink-light);padding:7px 12px;cursor:pointer}
+.iat-linkbtn:hover{border-color:var(--gold);color:var(--gold-deep)}
+.iat-linkbtn[aria-pressed=true]{background:var(--gold);border-color:var(--gold);color:var(--navy);font-weight:700}
+.iat-filters{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px 18px;margin-bottom:12px}
+.iat-fgrp{display:flex;flex-direction:column;gap:6px}
+.iat-fgrp>.ac-lbl{font-family:var(--mono);font-size:8px;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-faint)}
+.iat-frow{display:flex;flex-wrap:wrap;gap:5px}
+.iat-fbtn{font-family:var(--mono);font-size:9px;letter-spacing:.05em;text-transform:uppercase;padding:5px 9px;border:1px solid var(--rule);border-radius:2px;background:var(--card);color:var(--ink-light);cursor:pointer}
+.iat-fbtn:hover{border-color:var(--gold)}
+.iat-fbtn[aria-pressed=true]{background:var(--navy);border-color:var(--navy);color:var(--paper);font-weight:700}
+.iat-chips{display:flex;flex-wrap:wrap;align-items:center;gap:7px;margin-bottom:14px;min-height:14px}
+.iat-chip{display:inline-flex;align-items:center;gap:6px;font-family:var(--mono);font-size:9px;letter-spacing:.05em;text-transform:uppercase;border:1px solid var(--rule);border-radius:2px;background:var(--paper2);color:var(--ink-light);padding:5px 9px;cursor:pointer}
+.iat-chip:hover{border-color:var(--gold)}
+.iat-chip .x{color:var(--gold-deep);font-weight:700}
+.iat-empty-msg{font-family:var(--serif);font-style:italic;font-size:13px;color:var(--ink-faint)}
+.iat-body{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:26px;align-items:start}
+.iat-mapcol{display:flex;flex-direction:column;align-items:center;gap:14px;min-width:0}
+.iat-mapstage{position:relative;width:100%;display:flex;justify-content:center}
+.iat-sat{width:100%;min-height:300px;border:1px solid var(--rule);border-radius:2px;background:var(--paper2);display:flex;flex-direction:column;justify-content:center;gap:8px;padding:22px;text-align:center}
+.iat-sat .st{font-family:var(--mono);font-size:9px;letter-spacing:.13em;text-transform:uppercase;color:var(--gold-deep)}
+.iat-sat p{font-size:13px;line-height:1.55;color:var(--ink-light);margin:0}
+.iat-reg{cursor:pointer;stroke:var(--paper);stroke-width:1.2;transition:fill-opacity .18s,fill .25s}
+.iat-reg:hover{fill-opacity:.85}
+.iat-reg.sel{stroke:var(--navy);stroke-width:2.4}
+.iat-reg.cmp{stroke:var(--gold);stroke-width:2.4}
+.iat-reg.dim{fill-opacity:.18}
+.iat-asset{cursor:pointer}
+.iat-asset circle{stroke:#fff;stroke-width:1.3}
+.iat-asset.sel circle{stroke:var(--navy);stroke-width:2.4}
+.iat-side{border-left:1px solid var(--rule);padding-left:22px;min-height:260px;min-width:0}
+.iat-pass .ip-eyebrow{font-family:var(--mono);font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-deep);margin-bottom:6px}
+.iat-pass .ip-name{font-family:var(--display);font-size:21px;line-height:1.15;color:var(--navy);margin-bottom:10px}
+.iat-blk{margin:12px 0;padding-top:10px;border-top:1px solid var(--rule)}
+.iat-blk .ib-l{display:block;font-family:var(--mono);font-size:8.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:6px}
+.iat-blk p{font-size:13px;line-height:1.55;color:var(--ink-light);margin:0 0 6px}
+.iat-blk ul{margin:0;padding-left:16px}
+.iat-blk li{font-size:12.5px;line-height:1.5;color:var(--ink-light);margin-bottom:5px}
+.iat-blk.read{background:var(--paper2);border-left:2px solid var(--gold);border-top:none;border-radius:0 2px 2px 0;padding:11px 13px}
+.iat-blk.read p{font-family:var(--serif);font-style:italic;color:var(--ink)}
+.iat-src{font-family:var(--mono);font-size:8.5px;letter-spacing:.05em;color:var(--ink-faint);display:block;margin-top:4px}
+.iat-src a{color:var(--gold-deep)}
+.iat-badge{display:inline-block;font-family:var(--mono);font-size:8px;letter-spacing:.1em;text-transform:uppercase;border:1px solid var(--rule);border-radius:2px;padding:2px 6px;margin-left:6px;color:var(--ink-faint)}
+.iat-badge.verified{color:#0F6E56;border-color:#0F6E56}
+.iat-badge.indicative{color:var(--gold-deep);border-color:var(--gold)}
+.iat-badge.unavailable{color:#8A6A6A;border-color:#B99}
+.iat-cta{display:inline-flex;align-items:center;gap:8px;margin-top:14px;font-family:var(--mono);font-size:9.5px;letter-spacing:.11em;text-transform:uppercase;background:var(--gold);color:var(--navy);border:1px solid var(--gold);border-radius:2px;padding:9px 14px;font-weight:700;cursor:pointer}
+.iat-cta:hover{background:var(--gold-deep);border-color:var(--gold-deep);color:#fff}
+.iat-compare{margin-top:20px;padding-top:18px;border-top:1px solid var(--rule)}
+.iat-cmpsel{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:14px}
+.iat-cmpsel select{font-family:var(--sans);font-size:13px;color:var(--ink);background:var(--paper2);border:1px solid var(--rule);border-radius:2px;padding:8px 10px}
+.iat-cmpgrid{display:grid;grid-template-columns:1.1fr 1fr 1fr;gap:0;border:1px solid var(--rule);border-radius:2px;overflow:hidden}
+.iat-cmpgrid>div{padding:9px 12px;border-bottom:1px solid var(--rule);font-size:12.5px;color:var(--ink-light);min-width:0;overflow-wrap:anywhere}
+.iat-cmpgrid .h{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;background:var(--paper2);color:var(--navy);font-weight:700}
+.iat-cmpgrid .k{font-family:var(--mono);font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint)}
+@media(max-width:1000px){.iat-body{grid-template-columns:1fr}.iat-side{border-left:none;border-top:1px solid var(--rule);padding-left:0;padding-top:18px}.iat-cmpgrid{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){.iat-reg,.iat-asset circle,.iat-modes button{transition:none}}
+
 
 .method-note{margin-top:16px;border:1px solid var(--rule);border-radius:8px;background:var(--paper2);overflow:hidden}
 .method-note>summary{cursor:pointer;list-style:none;padding:12px 16px;font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-light);display:flex;align-items:center;gap:8px;user-select:none}
@@ -829,12 +896,25 @@ footer .wrap b{color:var(--gold-deep)}
   <p class="sec-lead reveal" id="atlasLead"></p>
   <div class="atlas-poc reveal" id="atlasPocBadge"></div>
   <div class="card pad reveal">
-    <div class="atlas-controls" id="atlasCtrl"></div>
-    <div id="atlasSub"></div>
-    <div class="atlas-grid">
-      <div class="atlas-mapwrap"><svg id="atlasMap" preserveAspectRatio="xMidYMid meet"></svg><div class="atlas-legend" id="atlasLegend"></div></div>
-      <div class="atlas-side" id="atlasSide"></div>
+    <div class="iat-top">
+      <div class="iat-modes" id="iatModes" role="group"></div>
+      <div class="iat-tools" id="iatTools"></div>
     </div>
+    <div class="iat-filters" id="iatFilters"></div>
+    <div class="iat-chips" id="iatChips" aria-live="polite"></div>
+    <div class="iat-body">
+      <div class="iat-mapcol">
+        <div class="atlas-controls" id="atlasCtrl"></div>
+        <div id="atlasSub"></div>
+        <div class="iat-mapstage" id="iatStage">
+          <svg id="atlasMap" preserveAspectRatio="xMidYMid meet" role="img"></svg>
+          <div class="iat-sat" id="iatSat" hidden></div>
+        </div>
+        <div class="atlas-legend" id="atlasLegend"></div>
+      </div>
+      <aside class="iat-side atlas-side" id="atlasSide" aria-live="polite"></aside>
+    </div>
+    <div class="iat-compare" id="iatCompare" hidden></div>
   </div>
   <div class="takeaway reveal"><span class="ti" id="atlasTi"></span><p id="atlasNote"></p></div>
 </div></section>
@@ -2081,7 +2161,28 @@ var T={
   cRoiNote:"Le chiffre d'affaires est votre hypothèse: ajustez-le librement. Le régime fiscal pèse fortement: une zone franche (0 % d'IS pendant 5 ans) accélère nettement la récupération. Montée en charge supposée: 50 % en an 1, 80 % en an 2, 100 % ensuite; amortissement sur 8 ans.",
   mxVerify:"Vérifier sur {x} ↗",
   atlasTag:"Investor Atlas · Démonstrateur GIS",atlasTitle:"La carte qui manque à <em>Morocco Now</em>.",
-  atlasLead:"Le Maroc est noté 1/5 sur le critère SIG de la Heatmap. Voici le démonstrateur : 12 régions, des couches activables, une lecture par territoire. Du diagnostic à la preuve.",
+  atlasLead:"Explorez les 12 régions du Maroc, croisez secteurs, incitations, acteurs publics et actifs territoriaux, puis identifiez le territoire le plus pertinent pour votre projet d’investissement.",
+  iat:{
+   modeDec:"Vue décision",modeSat:"Vue satellite",
+   satTitle:"Vue satellite indisponible",
+   satTxt:"Aucune clé cartographique sécurisée n’est configurée pour ce démonstrateur. La vue décision reste la vue de référence : elle repose sur des données publiques citées, sans appel à un service externe.",
+   region:"Régions",sector:"Secteur du projet",actor:"Acteurs publics",asset:"Actifs territoriaux",inc:"Incitations",all:"Tous",
+   reset:"Réinitialiser",compare:"Comparer deux régions",
+   count:"régions retenues",noRes:"Aucune région ne correspond à cette combinaison de filtres. Retirez un critère pour élargir la recherche.",
+   welcomeT:"Choisissez votre point de départ",
+   welcomeP:"Filtrez selon votre projet, puis sélectionnez une région pour ouvrir son passeport : population officielle, incitations applicables, interlocuteurs publics, actifs stratégiques et lecture Buildfluence.",
+   welcomeH:"Chaque donnée affichée porte sa source et son statut : vérifiée, indicative ou à consolider.",
+   passport:"Passeport régional",pop:"Population (RGPH 2024)",popSrc:"HCP · Recensement général de la population et de l’habitat 2024",
+   sectors:"Filières présentes",incTitle:"Incitations mobilisables",incCommon:"Primes communes (Charte de l’investissement)",
+   govTitle:"Interlocuteurs publics",assetsTitle:"Actifs et infrastructures",readTitle:"Lecture Buildfluence",
+   advantage:"Avantage comparatif",fit:"Projets les mieux servis",watch:"Point de vigilance",next:"À vérifier avant décision",
+   cap:"Plafond cumulé : 30% du montant d’investissement.",
+   todo:"Donnée à consolider",statusV:"Vérifiée",statusI:"Indicative",statusU:"À consolider",
+   src:"Source",noSrc:"Source officielle non publiée à ce jour : donnée à consolider auprès de l’administration compétente.",
+   cta:"Poursuivre vers le simulateur des coûts",
+   cmpA:"Région A",cmpB:"Région B",cmpClose:"Fermer la comparaison",
+   cmpPop:"Population",cmpTerr:"Prime territoriale",cmpSect:"Prime sectorielle",cmpFil:"Filières",cmpAss:"Actifs recensés",cmpGov:"Interlocuteurs",cmpRead:"Ce que cela change"
+  },
   atlasPoc:"Proof of concept · données indicatives",atlasLayerLbl:"Couche :",
   atlasL1:"Incitations",atlasL2:"Écosystèmes",atlasL3:"Localisations clés",
   atlasPb:"Jusqu'à 15% (cat. B)",atlasPa:"10% (cat. A)",atlasPm:"Cœur métropolitain",
@@ -2226,7 +2327,28 @@ var T={
   cRoiNote:"Revenue is your own assumption: adjust it freely. The tax regime weighs heavily: a free zone (0% CIT for 5 years) clearly speeds up payback. Assumed ramp-up: 50% in year 1, 80% in year 2, 100% after; amortization over 8 years.",
   mxVerify:"Verify on {x} ↗",
   atlasTag:"Investor Atlas · GIS demonstrator",atlasTitle:"The map <em>Morocco Now</em> is missing.",
-  atlasLead:"Morocco scores 1/5 on the GIS criterion of the Heatmap. Here is the demonstrator: 12 regions, toggleable layers, a read by territory. From diagnosis to proof.",
+  atlasLead:"Explore Morocco’s 12 regions, combine sectors, incentives, public stakeholders and territorial assets, then identify the most relevant location for your investment project.",
+  iat:{
+   modeDec:"Decision view",modeSat:"Satellite view",
+   satTitle:"Satellite view unavailable",
+   satTxt:"No secured mapping key is configured for this demonstrator. The decision view remains the reference: it relies on cited public data, with no call to an external service.",
+   region:"Regions",sector:"Project sector",actor:"Public stakeholders",asset:"Territorial assets",inc:"Incentives",all:"All",
+   reset:"Reset",compare:"Compare two regions",
+   count:"regions selected",noRes:"No region matches this filter combination. Remove one criterion to widen the search.",
+   welcomeT:"Choose your starting point",
+   welcomeP:"Filter by your project, then select a region to open its passport: official population, applicable incentives, public contacts, strategic assets and the Buildfluence read.",
+   welcomeH:"Every figure carries its source and status: verified, indicative or to be consolidated.",
+   passport:"Regional passport",pop:"Population (RGPH 2024)",popSrc:"HCP · General Population and Housing Census 2024",
+   sectors:"Sectors present",incTitle:"Available incentives",incCommon:"Common bonuses (Investment Charter)",
+   govTitle:"Public contacts",assetsTitle:"Assets and infrastructure",readTitle:"Buildfluence read",
+   advantage:"Comparative advantage",fit:"Best-served projects",watch:"Point of caution",next:"To verify before deciding",
+   cap:"Cumulative cap: 30% of the investment amount.",
+   todo:"To be consolidated",statusV:"Verified",statusI:"Indicative",statusU:"To consolidate",
+   src:"Source",noSrc:"No official source published to date: to be consolidated with the competent administration.",
+   cta:"Continue to the cost simulator",
+   cmpA:"Region A",cmpB:"Region B",cmpClose:"Close comparison",
+   cmpPop:"Population",cmpTerr:"Territorial bonus",cmpSect:"Sector bonus",cmpFil:"Sectors",cmpAss:"Assets listed",cmpGov:"Contacts",cmpRead:"What it changes"
+  },
   atlasPoc:"Proof of concept · indicative data",atlasLayerLbl:"Layer:",
   atlasL1:"Incentives",atlasL2:"Ecosystems",atlasL3:"Key locations",
   atlasPb:"Up to 15% (cat. B)",atlasPa:"10% (cat. A)",atlasPm:"Metropolitan core",
@@ -2633,31 +2755,299 @@ function atlasSubHtml(){
  var chips=(POI_ORD[atlasCat]||[]).map(function(tp){var on=poiTypeOn(atlasCat,tp);return '<button class="chip'+(on?" on":"")+'" data-tp="'+tp+'"><span class="chip-dot" style="background:'+POI_COL[tp]+'"></span>'+POI_TLBL[tp][lang]+'</button>';}).join("");
  return '<div class="atlas-sub"><div class="atlas-catrow"><span class="ac-lbl">'+t().atlasCatLbl+'</span>'+cats+'</div><div class="atlas-chiprow"><span class="ac-lbl">'+t().atlasFilterLbl+'</span>'+chips+'</div></div>';
 }
-function renderAtlas(){el("atlasTag").textContent=t().atlasTag;el("atlasTitle").innerHTML=t().atlasTitle;el("atlasLead").innerHTML=t().atlasLead;el("atlasPocBadge").innerHTML='<span class="poc-chip">'+t().atlasPoc+'</span>';el("atlasTi").textContent=t().atlasTi;el("atlasNote").innerHTML=t().atlasNote;
- var layers=[["prime",t().atlasL1],["fam",t().atlasL2],["loc",t().atlasL3]];
- el("atlasCtrl").innerHTML='<span class="ac-lbl">'+t().atlasLayerLbl+'</span>'+layers.map(function(l){return '<button class="ac-btn'+(l[0]===atlasLayer?" on":"")+'" data-l="'+l[0]+'">'+l[1]+'</button>';}).join("");
- Array.prototype.forEach.call(el("atlasCtrl").querySelectorAll(".ac-btn"),function(b){b.addEventListener("click",function(){atlasLayer=b.dataset.l;if(atlasLayer!=="loc")atlasPoiSel=null;renderAtlas();});});
- var sub=el("atlasSub");
- if(atlasLayer==="loc"){
-  sub.innerHTML=atlasSubHtml();
-  Array.prototype.forEach.call(sub.querySelectorAll(".cat-btn"),function(b){b.addEventListener("click",function(){atlasCat=b.dataset.cat;atlasPoiSel=null;renderAtlas();});});
-  Array.prototype.forEach.call(sub.querySelectorAll(".chip"),function(b){b.addEventListener("click",function(){var key=atlasCat+":"+b.dataset.tp;if(atlasTypeOff[key])delete atlasTypeOff[key];else atlasTypeOff[key]=1;renderAtlas();});});
- }else{sub.innerHTML="";}
- var svg=el("atlasMap");svg.setAttribute("viewBox",ATLAS_VB);var parts="";
- Object.keys(ATLAS_GEO).forEach(function(k){var g=ATLAS_GEO[k];parts+='<path class="atlas-reg'+(atlasSel===k?" sel":"")+'" data-k="'+k+'" d="'+g.d+'" fill="'+atlasFill(k)+'"/>';});
- if(atlasLayer==="loc"){
-  if(atlasCat==="infra"&&poiTypeOn("infra","lgv")){parts+='<path class="lgv-line" d="'+LGV_PATH+'"/><path class="lgv-line plan" d="'+LGV_PLAN+'"/>';}
-  ATLAS_POI.forEach(function(p,idx){if(p.c!==atlasCat)return;if(!poiTypeOn(p.c,p.t))return;parts+='<g class="atlas-poi'+(atlasPoiSel===idx?" psel":"")+'" data-i="'+idx+'"><title>'+atlasEsc(p.n)+'</title><circle cx="'+p.x+'" cy="'+p.y+'" r="5" fill="'+POI_COL[p.t]+'"/></g>';});
+/* ===== Investor Atlas · plateforme d'intelligence territoriale (module Atlas uniquement) ===== */
+var IAT_POP={tta:4030222,ori:2294665,fes:4467911,rsk:5132639,bmk:2525801,cs:7688967,mrs:4892393,drt:1655623,ssm:3020431,gon:448685,lsh:451028,dod:219965};
+var IAT_ORDER=["tta","ori","fes","rsk","bmk","cs","mrs","drt","ssm","gon","lsh","dod"];
+var IAT_SECDEF=[
+ {k:"auto",fr:"Automobile",en:"Automotive",re:/automobile/i},
+ {k:"aero",fr:"Aéronautique",en:"Aerospace",re:/aéronautique/i},
+ {k:"pharma",fr:"Pharmacie / santé",en:"Pharma / health",re:/pharmac|santé/i},
+ {k:"agro",fr:"Agro-industrie",en:"Agribusiness",re:/agro|agri/i},
+ {k:"offshore",fr:"Offshoring / services",en:"Offshoring / services",re:/offshor|services/i},
+ {k:"energy",fr:"Énergies renouvelables",en:"Renewable energy",re:/énergie|éolien|solaire/i},
+ {k:"tourisme",fr:"Tourisme",en:"Tourism",re:/tourisme|touristique|balnéaire/i},
+ {k:"mines",fr:"Mines & chimie",en:"Mining & chemicals",re:/mine|phosphate|chimie/i},
+ {k:"logistique",fr:"Logistique & portuaire",en:"Logistics & ports",re:/logistique|portuaire/i},
+ {k:"peche",fr:"Pêche & halieutique",en:"Fisheries",re:/pêche|halieut/i},
+ {k:"textile",fr:"Textile",en:"Textile",re:/textile/i}
+];
+var IAT_INCDEF=[
+ {k:"b",fr:"Prime territoriale 15% (cat. B)",en:"Territorial bonus 15% (cat. B)"},
+ {k:"a",fr:"Prime territoriale 10% (cat. A)",en:"Territorial bonus 10% (cat. A)"},
+ {k:"metro",fr:"Cœur métropolitain (hors prime territoriale)",en:"Metropolitan core (no territorial bonus)"}
+];
+var IAT_COMMON=[
+ {fr:"Bonus emploi : 5%, 7% ou 10% selon le nombre d’emplois stables créés.",en:"Jobs bonus: 5%, 7% or 10% depending on the number of stable jobs created."},
+ {fr:"Bonus genre : 3% si les femmes représentent au moins 30% des emplois créés.",en:"Gender bonus: 3% if women account for at least 30% of jobs created."},
+ {fr:"Bonus métiers d’avenir et montée en gamme : 3%.",en:"Future-skills and upgrading bonus: 3%."},
+ {fr:"Bonus investissement durable : 3%.",en:"Sustainable investment bonus: 3%."},
+ {fr:"Bonus intégration locale : 3%.",en:"Local integration bonus: 3%."},
+ {fr:"Prime territoriale : 10% (catégorie A) ou 15% (catégorie B).",en:"Territorial bonus: 10% (category A) or 15% (category B)."},
+ {fr:"Prime sectorielle : 5% pour les secteurs prioritaires.",en:"Sector bonus: 5% for priority sectors."}
+];
+var IAT_GOVDEF=[
+ {k:"cri",fr:{n:"Centre Régional d’Investissement",r:"Guichet unique de l’investissement : instruction des dossiers, conventions, appui à l’accès au foncier et suivi post-décision.",s:"Loi n° 47-18 portant réforme des Centres Régionaux d’Investissement"},en:{n:"Regional Investment Centre",r:"Single investment window: file processing, agreements, support for land access and post-decision follow-up.",s:"Law no. 47-18 reforming the Regional Investment Centres"}},
+ {k:"cr",fr:{n:"Conseil régional",r:"Collectivité territoriale compétente sur le développement économique régional, les zones d’activités et l’appui aux filières.",s:"Loi organique n° 111-14 relative aux régions"},en:{n:"Regional Council",r:"Territorial authority responsible for regional economic development, activity zones and sector support.",s:"Organic Law no. 111-14 on regions"}},
+ {k:"wilaya",fr:{n:"Wilaya de la région",r:"Autorité déconcentrée de l’État : coordination des services extérieurs, autorisations et arbitrages administratifs.",s:"Organisation administrative déconcentrée de l’État"},en:{n:"Regional Wilaya",r:"Deconcentrated State authority: coordination of state services, permits and administrative arbitration.",s:"Deconcentrated State administrative organisation"}}
+];
+var iatMode="dec",iatRegSel=[],iatSec="all",iatActor="cri",iatAsset="all",iatInc="all",iatCmpOn=false,iatCmpA="cs",iatCmpB="tta",iatAssetSel=null,iatAssetReg=null;
+function iatL(o){return o?(o[lang]||o.fr||""):"";}
+function iatT(){return t().iat||{};}
+function iatSecOf(k){var d=ATLAS_DATA[k];if(!d)return [];var s=iatL(d.eco.sectors)+" "+iatL(d.inc.sect)+" "+(d.eco.sectors.fr||"")+" "+(d.inc.sect.fr||"");return IAT_SECDEF.filter(function(x){return x.re.test(s);}).map(function(x){return x.k;});}
+function iatSecLbl(k){for(var i=0;i<IAT_SECDEF.length;i++){if(IAT_SECDEF[i].k===k)return IAT_SECDEF[i][lang]||IAT_SECDEF[i].fr;}return k;}
+function iatIncLbl(k){for(var i=0;i<IAT_INCDEF.length;i++){if(IAT_INCDEF[i].k===k)return IAT_INCDEF[i][lang]||IAT_INCDEF[i].fr;}return k;}
+function iatNum(n){try{return n.toLocaleString(lang==="fr"?"fr-FR":"en-US");}catch(e){return String(n);}}
+function iatAssetsOf(k){
+ if(!iatAssetReg)return [];
+ var out=[];for(var i=0;i<ATLAS_POI.length;i++){if(iatAssetReg[i]===k)out.push(i);}return out;
+}
+function iatBuildAssetReg(){
+ if(iatAssetReg)return;
+ var svg=el("atlasMap");if(!svg)return;
+ var paths={};Array.prototype.forEach.call(svg.querySelectorAll(".iat-reg"),function(p){paths[p.getAttribute("data-k")]=p;});
+ iatAssetReg={};
+ ATLAS_POI.forEach(function(p,i){
+  var found=null;
+  try{
+   var pt=svg.createSVGPoint();pt.x=p.x;pt.y=p.y;
+   Object.keys(paths).forEach(function(k){if(found)return;var el2=paths[k];if(el2.isPointInFill&&el2.isPointInFill(pt))found=k;});
+  }catch(e){/* isPointInFill indisponible */}
+  if(!found){var best=null,bd=1e9;IAT_ORDER.forEach(function(k){var g=ATLAS_GEO[k];if(!g)return;var d=(g.cx-p.x)*(g.cx-p.x)+(g.cy-p.y)*(g.cy-p.y);if(d<bd){bd=d;best=k;}});found=best;}
+  iatAssetReg[i]=found;
+ });
+}
+function iatMatch(k){
+ var d=ATLAS_DATA[k];if(!d)return false;
+ if(iatRegSel.length&&iatRegSel.indexOf(k)===-1)return false;
+ if(iatSec!=="all"&&iatSecOf(k).indexOf(iatSec)===-1)return false;
+ if(iatInc!=="all"&&d.prime!==iatInc)return false;
+ if(iatAsset!=="all"){
+  iatBuildAssetReg();
+  var has=iatAssetsOf(k).some(function(i){return ATLAS_POI[i].c===iatAsset;});
+  if(!has)return false;
  }
- svg.innerHTML=parts;
- Array.prototype.forEach.call(svg.querySelectorAll(".atlas-reg"),function(pp){pp.addEventListener("click",function(){atlasSel=pp.dataset.k;atlasPoiSel=null;renderAtlas();});});
- Array.prototype.forEach.call(svg.querySelectorAll(".atlas-poi"),function(gn){gn.addEventListener("click",function(){atlasPoiSel=parseInt(gn.dataset.i,10);atlasSel=null;renderAtlas();});});
- el("atlasLegend").innerHTML=atlasLayer==="loc"?"":atlasLegendHtml();
- var side;
- if(atlasLayer==="loc"&&atlasPoiSel!=null&&ATLAS_POI[atlasPoiSel])side=atlasPoiCard(atlasPoiSel);
- else if(atlasSel)side=atlasCard(atlasSel);
- else side=atlasWelcome();
- el("atlasSide").innerHTML=side;
+ return true;
+}
+function iatMatches(){return IAT_ORDER.filter(iatMatch);}
+function iatBadge(status){var T2=iatT();var lbl=status==="verified"?T2.statusV:(status==="indicative"?T2.statusI:T2.statusU);return '<span class="iat-badge '+status+'">'+lbl+'</span>';}
+function iatBlk(lbl,inner,cls){return '<div class="iat-blk'+(cls?" "+cls:"")+'"><span class="ib-l">'+lbl+'</span>'+inner+'</div>';}
+function iatRead(k){
+ var d=ATLAS_DATA[k];var T2=iatT();
+ var watch=d.prime==="metro"
+  ?(lang==="fr"?"Le cœur métropolitain est hors prime territoriale : l’avantage se joue sur l’écosystème et le foncier, pas sur le taux d’aide.":"The metropolitan core is outside the territorial bonus: the advantage lies in the ecosystem and land, not in the aid rate.")
+  :(lang==="fr"?"La catégorie de prime varie d’une province à l’autre à l’intérieur de la région : le taux affiché n’est pas uniforme.":"The bonus category varies from one province to another within the region: the displayed rate is not uniform.");
+ var next=d.port
+  ?(lang==="fr"?"Confirmer la catégorie (A/B) de la province visée, la disponibilité foncière aménagée et les créneaux portuaires auprès du CRI compétent.":"Confirm the province’s category (A/B), serviced land availability and port capacity with the competent Regional Investment Centre.")
+  :(lang==="fr"?"Confirmer la catégorie (A/B) de la province visée, la disponibilité foncière aménagée et les temps de transit vers le port de sortie auprès du CRI compétent.":"Confirm the province’s category (A/B), serviced land availability and transit times to the export port with the competent Regional Investment Centre.");
+ return iatBlk(T2.readTitle,
+  '<p><b>'+T2.advantage+' — </b>'+iatL(d.eco.atout)+'</p>'+
+  '<p><b>'+T2.fit+' — </b>'+iatL(d.eco.sectors)+'</p>'+
+  '<p><b>'+T2.watch+' — </b>'+watch+'</p>'+
+  '<p><b>'+T2.next+' — </b>'+next+'</p>','read');
+}
+function iatGovHtml(k){
+ var T2=iatT(),d=ATLAS_DATA[k];
+ var items=IAT_GOVDEF.filter(function(g){return iatActor==="all"||g.k===iatActor;}).map(function(g){
+  var o=g[lang]||g.fr;
+  return '<li><b>'+o.n+' · '+iatL(d.nom)+'</b><br>'+o.r+'<span class="iat-src">'+T2.src+' : '+o.s+iatBadge("verified")+'</span><span class="iat-src">'+T2.noSrc+iatBadge("unavailable")+'</span></li>';
+ }).join("");
+ return iatBlk(T2.govTitle,'<ul>'+items+'</ul>');
+}
+function iatAssetsHtml(k){
+ var T2=iatT();iatBuildAssetReg();
+ var ids=iatAssetsOf(k).filter(function(i){return iatAsset==="all"||ATLAS_POI[i].c===iatAsset;});
+ if(!ids.length)return iatBlk(T2.assetsTitle,'<p>'+T2.todo+iatBadge("unavailable")+'</p>');
+ var byCat={};ids.forEach(function(i){var c=ATLAS_POI[i].c;(byCat[c]=byCat[c]||[]).push(ATLAS_POI[i].n);});
+ var rows=Object.keys(byCat).map(function(c){return '<li><b>'+poiCatLbl(c)+' ('+byCat[c].length+')</b> · '+byCat[c].map(atlasEsc).join(" · ")+'</li>';}).join("");
+ return iatBlk(T2.assetsTitle,'<ul>'+rows+'</ul><span class="iat-src">'+T2.src+' : ONDA, ANP / Tanger Med, MEDZ, établissements universitaires officiels'+iatBadge("indicative")+'</span>');
+}
+function iatIncHtml(k){
+ var T2=iatT(),d=ATLAS_DATA[k];
+ var common=IAT_COMMON.map(function(x){return '<li>'+iatL(x)+'</li>';}).join("");
+ return iatBlk(T2.incTitle,
+  '<p><b>'+t().incTerrLbl+' — </b>'+iatL(d.inc.terr)+iatBadge("indicative")+'</p>'+
+  '<p><b>'+t().incSectLbl+' — </b>'+iatL(d.inc.sect)+iatBadge("indicative")+'</p>'+
+  '<p><b>'+t().incPlusLbl+' — </b>'+iatL(d.inc.plus)+'</p>'+
+  '<span class="ib-l" style="margin-top:8px">'+T2.incCommon+'</span><ul>'+common+'</ul>'+
+  '<p>'+T2.cap+'</p><span class="iat-src">'+T2.src+' : Charte de l’investissement · textes d’application publiés au Bulletin officiel (SGG)'+iatBadge("verified")+'</span>');
+}
+function iatPassport(k){
+ var d=ATLAS_DATA[k],T2=iatT();
+ var secs=iatSecOf(k).map(function(s){return iatSecLbl(s);}).join(" · ")||T2.todo;
+ return '<div class="iat-pass"><div class="ip-eyebrow">'+T2.passport+'</div><div class="ip-name">'+iatL(d.nom)+'</div>'+
+  iatBlk(T2.pop,'<p>'+iatNum(IAT_POP[k])+' hab.'+iatBadge("verified")+'</p><span class="iat-src">'+T2.src+' : '+T2.popSrc+'</span>')+
+  iatBlk(T2.sectors,'<p>'+secs+'</p>')+
+  iatIncHtml(k)+iatGovHtml(k)+iatAssetsHtml(k)+iatRead(k)+
+  '<button class="iat-cta" id="iatCta" type="button">'+T2.cta+' →</button></div>';
+}
+function iatAssetCard(i){
+ var p=ATLAS_POI[i],T2=iatT();iatBuildAssetReg();
+ var rk=iatAssetReg?iatAssetReg[i]:null;
+ var note=lang==="fr"?(p.nf||""):(p.ne||p.nf||"");
+ return '<div class="iat-pass"><div class="ip-eyebrow">'+poiCatLbl(p.c)+'</div><div class="ip-name">'+atlasEsc(p.n)+'</div>'+
+  iatBlk(t().poiType,'<p>'+POI_TLBL[p.t][lang]+'</p>')+
+  iatBlk(t().poiCity,'<p>'+atlasEsc(p.city)+(rk&&ATLAS_DATA[rk]?' · '+iatL(ATLAS_DATA[rk].nom):'')+'</p>')+
+  (note?iatBlk(T2.readTitle,'<p>'+atlasEsc(note)+'</p>','read'):'')+
+  '<div class="poi-coord">'+p.lat.toFixed(3)+'°N, '+Math.abs(p.lon).toFixed(3)+'°W</div></div>';
+}
+function iatWelcome(){
+ var T2=iatT();
+ return '<div class="iat-pass"><div class="ip-eyebrow">'+T2.passport+'</div><div class="ip-name">'+T2.welcomeT+'</div>'+
+  '<div class="iat-blk"><p>'+T2.welcomeP+'</p></div><div class="iat-blk read"><p>'+T2.welcomeH+'</p></div></div>';
+}
+function iatFiltersHtml(){
+ var T2=iatT();
+ function grp(lbl,rows){return '<div class="iat-fgrp"><span class="ac-lbl">'+lbl+'</span><div class="iat-frow">'+rows+'</div></div>';}
+ var regs=IAT_ORDER.map(function(k){var on=iatRegSel.indexOf(k)!==-1;return '<button class="iat-fbtn" data-f="reg" data-v="'+k+'" aria-pressed="'+on+'">'+iatL(ATLAS_DATA[k].nom)+'</button>';}).join("");
+ var secs='<button class="iat-fbtn" data-f="sec" data-v="all" aria-pressed="'+(iatSec==="all")+'">'+T2.all+'</button>'+IAT_SECDEF.map(function(s){return '<button class="iat-fbtn" data-f="sec" data-v="'+s.k+'" aria-pressed="'+(iatSec===s.k)+'">'+(s[lang]||s.fr)+'</button>';}).join("");
+ var incs='<button class="iat-fbtn" data-f="inc" data-v="all" aria-pressed="'+(iatInc==="all")+'">'+T2.all+'</button>'+IAT_INCDEF.map(function(x){return '<button class="iat-fbtn" data-f="inc" data-v="'+x.k+'" aria-pressed="'+(iatInc===x.k)+'">'+(x[lang]||x.fr)+'</button>';}).join("");
+ var assets='<button class="iat-fbtn" data-f="asset" data-v="all" aria-pressed="'+(iatAsset==="all")+'">'+T2.all+'</button>'+POI_CATS.map(function(c){return '<button class="iat-fbtn" data-f="asset" data-v="'+c[0]+'" aria-pressed="'+(iatAsset===c[0])+'">'+c[1][lang]+'</button>';}).join("");
+ var actors=IAT_GOVDEF.map(function(g){return '<button class="iat-fbtn" data-f="actor" data-v="'+g.k+'" aria-pressed="'+(iatActor===g.k)+'">'+(g[lang]||g.fr).n+'</button>';}).join("")+'<button class="iat-fbtn" data-f="actor" data-v="all" aria-pressed="'+(iatActor==="all")+'">'+T2.all+'</button>';
+ return grp(T2.region,regs)+grp(T2.sector,secs)+grp(T2.inc,incs)+grp(T2.asset,assets)+grp(T2.actor,actors);
+}
+function iatChipsHtml(n){
+ var T2=iatT(),c=[];
+ iatRegSel.forEach(function(k){c.push('<button class="iat-chip" data-c="reg" data-v="'+k+'">'+iatL(ATLAS_DATA[k].nom)+' <span class="x">×</span></button>');});
+ if(iatSec!=="all")c.push('<button class="iat-chip" data-c="sec" data-v="all">'+iatSecLbl(iatSec)+' <span class="x">×</span></button>');
+ if(iatInc!=="all")c.push('<button class="iat-chip" data-c="inc" data-v="all">'+iatIncLbl(iatInc)+' <span class="x">×</span></button>');
+ if(iatAsset!=="all")c.push('<button class="iat-chip" data-c="asset" data-v="all">'+poiCatLbl(iatAsset)+' <span class="x">×</span></button>');
+ if(!n)c.push('<span class="iat-empty-msg">'+T2.noRes+'</span>');
+ return c.join("");
+}
+function iatCompareHtml(){
+ var T2=iatT();
+ var opts=function(sel){return IAT_ORDER.map(function(k){return '<option value="'+k+'"'+(k===sel?" selected":"")+'>'+iatL(ATLAS_DATA[k].nom)+'</option>';}).join("");};
+ var A=ATLAS_DATA[iatCmpA],B=ATLAS_DATA[iatCmpB];
+ iatBuildAssetReg();
+ function row(lbl,a,b){return '<div class="k">'+lbl+'</div><div>'+a+'</div><div>'+b+'</div>';}
+ var grid='<div class="iat-cmpgrid"><div class="h">&nbsp;</div><div class="h">'+iatL(A.nom)+'</div><div class="h">'+iatL(B.nom)+'</div>'+
+  row(T2.cmpPop,iatNum(IAT_POP[iatCmpA]),iatNum(IAT_POP[iatCmpB]))+
+  row(T2.cmpTerr,iatIncLbl(A.prime),iatIncLbl(B.prime))+
+  row(T2.cmpSect,iatL(A.inc.sect),iatL(B.inc.sect))+
+  row(T2.cmpFil,iatSecOf(iatCmpA).map(iatSecLbl).join(" · "),iatSecOf(iatCmpB).map(iatSecLbl).join(" · "))+
+  row(T2.cmpAss,String(iatAssetsOf(iatCmpA).length),String(iatAssetsOf(iatCmpB).length))+
+  row(T2.cmpRead,iatL(A.eco.atout),iatL(B.eco.atout))+'</div>';
+ return '<div class="iat-cmpsel"><label class="ac-lbl">'+T2.cmpA+' <select id="iatCmpA">'+opts(iatCmpA)+'</select></label>'+
+  '<label class="ac-lbl">'+T2.cmpB+' <select id="iatCmpB">'+opts(iatCmpB)+'</select></label>'+
+  '<button class="iat-linkbtn" id="iatCmpClose" type="button">'+T2.cmpClose+'</button></div>'+grid;
+}
+function iatGoSimulator(){
+ var sec=iatSec!=="all"?iatSec:null;
+ if(sec&&typeof cost==="object"){
+  var map={auto:"auto",aero:"aero",pharma:"pharma",agro:"agro",offshore:"offshore"};
+  if(map[sec]){cost.sector=map[sec];if(typeof renderCost==="function")renderCost();}
+ }
+ var target=el("cout");if(target&&target.scrollIntoView)target.scrollIntoView({behavior:"smooth",block:"start"});
+}
+function renderAtlas(){
+ var T2=iatT();
+ var tag=el("atlasTag");if(tag)tag.textContent=t().atlasTag;
+ var ti=el("atlasTitle");if(ti)ti.innerHTML=t().atlasTitle;
+ var ld=el("atlasLead");if(ld)ld.innerHTML=t().atlasLead;
+ var pb=el("atlasPocBadge");if(pb)pb.innerHTML='<span class="poc-chip">'+t().atlasPoc+'</span>';
+ var tti=el("atlasTi");if(tti)tti.textContent=t().atlasTi;
+ var tno=el("atlasNote");if(tno)tno.innerHTML=t().atlasNote;
+ var matches=iatMatches();
+ var modes=el("iatModes");
+ if(modes){
+  modes.innerHTML='<button type="button" data-m="dec" aria-pressed="'+(iatMode==="dec")+'">'+T2.modeDec+'</button><button type="button" data-m="sat" aria-pressed="'+(iatMode==="sat")+'">'+T2.modeSat+'</button>';
+  Array.prototype.forEach.call(modes.querySelectorAll("button"),function(b){b.addEventListener("click",function(){iatMode=b.getAttribute("data-m");renderAtlas();});});
+ }
+ var tools=el("iatTools");
+ if(tools){
+  tools.innerHTML='<span class="iat-count"><b>'+matches.length+'</b> / 12 '+T2.count+'</span>'+
+   '<button class="iat-linkbtn" id="iatCmpBtn" type="button" aria-pressed="'+iatCmpOn+'">'+T2.compare+'</button>'+
+   '<button class="iat-linkbtn" id="iatReset" type="button">'+T2.reset+'</button>';
+  var cb=el("iatCmpBtn");if(cb)cb.addEventListener("click",function(){iatCmpOn=!iatCmpOn;renderAtlas();});
+  var rb=el("iatReset");if(rb)rb.addEventListener("click",function(){iatRegSel=[];iatSec="all";iatInc="all";iatAsset="all";iatActor="cri";atlasSel=null;iatAssetSel=null;renderAtlas();});
+ }
+ var flt=el("iatFilters");
+ if(flt){
+  flt.innerHTML=iatFiltersHtml();
+  Array.prototype.forEach.call(flt.querySelectorAll(".iat-fbtn"),function(b){b.addEventListener("click",function(){
+   var f=b.getAttribute("data-f"),v=b.getAttribute("data-v");
+   if(f==="reg"){var i=iatRegSel.indexOf(v);if(i===-1)iatRegSel.push(v);else iatRegSel.splice(i,1);}
+   else if(f==="sec")iatSec=v;else if(f==="inc")iatInc=v;else if(f==="asset"){iatAsset=v;iatAssetSel=null;}else if(f==="actor")iatActor=v;
+   if(atlasSel&&!iatMatch(atlasSel))atlasSel=null;
+   renderAtlas();
+  });});
+ }
+ var chips=el("iatChips");
+ if(chips){
+  chips.innerHTML=iatChipsHtml(matches.length);
+  Array.prototype.forEach.call(chips.querySelectorAll(".iat-chip"),function(b){b.addEventListener("click",function(){
+   var c=b.getAttribute("data-c"),v=b.getAttribute("data-v");
+   if(c==="reg"){var i=iatRegSel.indexOf(v);if(i!==-1)iatRegSel.splice(i,1);}
+   else if(c==="sec")iatSec="all";else if(c==="inc")iatInc="all";else if(c==="asset")iatAsset="all";
+   renderAtlas();
+  });});
+ }
+ var ctrl=el("atlasCtrl");
+ if(ctrl){
+  var layers=[["prime",t().atlasL1],["fam",t().atlasL2],["loc",t().atlasL3]];
+  ctrl.innerHTML='<span class="ac-lbl">'+t().atlasLayerLbl+'</span>'+layers.map(function(l){return '<button class="ac-btn'+(l[0]===atlasLayer?" on":"")+'" data-l="'+l[0]+'" aria-pressed="'+(l[0]===atlasLayer)+'">'+l[1]+'</button>';}).join("");
+  Array.prototype.forEach.call(ctrl.querySelectorAll(".ac-btn"),function(b){b.addEventListener("click",function(){atlasLayer=b.getAttribute("data-l");if(atlasLayer!=="loc")iatAssetSel=null;renderAtlas();});});
+ }
+ var sub=el("atlasSub");
+ if(sub){
+  if(atlasLayer==="loc"){
+   sub.innerHTML=atlasSubHtml();
+   Array.prototype.forEach.call(sub.querySelectorAll(".cat-btn"),function(b){b.addEventListener("click",function(){atlasCat=b.dataset.cat;iatAssetSel=null;renderAtlas();});});
+   Array.prototype.forEach.call(sub.querySelectorAll(".chip"),function(b){b.addEventListener("click",function(){var key=atlasCat+":"+b.dataset.tp;if(atlasTypeOff[key])delete atlasTypeOff[key];else atlasTypeOff[key]=1;renderAtlas();});});
+  }else sub.innerHTML="";
+ }
+ var svg=el("atlasMap"),sat=el("iatSat");
+ if(svg&&sat){
+  if(iatMode==="sat"){
+   svg.setAttribute("hidden","hidden");sat.removeAttribute("hidden");
+   sat.innerHTML='<span class="st">'+T2.satTitle+'</span><p>'+T2.satTxt+'</p>';
+  }else{
+   sat.setAttribute("hidden","hidden");svg.removeAttribute("hidden");
+   svg.setAttribute("viewBox",ATLAS_VB);
+   var parts="";
+   IAT_ORDER.forEach(function(k){
+    var g=ATLAS_GEO[k];if(!g)return;
+    var cls="iat-reg atlas-reg"+(atlasSel===k?" sel":"")+(iatCmpOn&&(k===iatCmpA||k===iatCmpB)?" cmp":"")+(iatMatch(k)?"":" dim");
+    parts+='<path class="'+cls+'" data-k="'+k+'" d="'+g.d+'" fill="'+atlasFill(k)+'" tabindex="0" role="button" aria-label="'+atlasEsc(iatL(ATLAS_DATA[k].nom))+'"><title>'+atlasEsc(iatL(ATLAS_DATA[k].nom))+'</title></path>';
+   });
+   if(atlasLayer==="loc"){
+    if(atlasCat==="infra"&&poiTypeOn("infra","lgv"))parts+='<path class="lgv-line" d="'+LGV_PATH+'"/><path class="lgv-line plan" d="'+LGV_PLAN+'"/>';
+    ATLAS_POI.forEach(function(p,idx){
+     if(p.c!==atlasCat||!poiTypeOn(p.c,p.t))return;
+     parts+='<g class="iat-asset atlas-poi'+(iatAssetSel===idx?" sel":"")+'" data-i="'+idx+'" tabindex="0" role="button" aria-label="'+atlasEsc(p.n)+'"><title>'+atlasEsc(p.n)+'</title><circle cx="'+p.x+'" cy="'+p.y+'" r="5" fill="'+POI_COL[p.t]+'"/></g>';
+    });
+   }
+   svg.innerHTML=parts;
+   iatAssetReg=null;iatBuildAssetReg();
+   Array.prototype.forEach.call(svg.querySelectorAll(".iat-reg"),function(pp){
+    var pick=function(){atlasSel=pp.getAttribute("data-k");iatAssetSel=null;renderAtlas();};
+    pp.addEventListener("click",pick);
+    pp.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();pick();}});
+   });
+   Array.prototype.forEach.call(svg.querySelectorAll(".iat-asset"),function(gn){
+    var pick=function(){iatAssetSel=parseInt(gn.getAttribute("data-i"),10);atlasSel=null;renderAtlas();};
+    gn.addEventListener("click",pick);
+    gn.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();pick();}});
+   });
+  }
+ }
+ var lg=el("atlasLegend");if(lg)lg.innerHTML=(iatMode==="sat"||atlasLayer==="loc")?"":atlasLegendHtml();
+ var side=el("atlasSide");
+ if(side){
+  if(iatAssetSel!=null&&ATLAS_POI[iatAssetSel])side.innerHTML=iatAssetCard(iatAssetSel);
+  else if(atlasSel&&ATLAS_DATA[atlasSel])side.innerHTML=iatPassport(atlasSel);
+  else side.innerHTML=iatWelcome();
+  var cta=el("iatCta");if(cta)cta.addEventListener("click",iatGoSimulator);
+ }
+ var cmp=el("iatCompare");
+ if(cmp){
+  if(iatCmpOn){
+   cmp.removeAttribute("hidden");cmp.innerHTML=iatCompareHtml();
+   var sa=el("iatCmpA");if(sa)sa.addEventListener("change",function(){iatCmpA=sa.value;renderAtlas();});
+   var sb=el("iatCmpB");if(sb)sb.addEventListener("change",function(){iatCmpB=sb.value;renderAtlas();});
+   var cc=el("iatCmpClose");if(cc)cc.addEventListener("click",function(){iatCmpOn=false;renderAtlas();});
+  }else{cmp.setAttribute("hidden","hidden");cmp.innerHTML="";}
+ }
 }
 
 function renderMatrix(){
