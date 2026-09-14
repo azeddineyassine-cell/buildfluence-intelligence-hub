@@ -361,45 +361,98 @@ tbody tr.hot th,thead th.hot{background:var(--gold-pale)!important;color:var(--i
 .toggle:hover{border-color:var(--gold)} .toggle.locked{cursor:default;border-color:var(--red)}
 
 /* MODULE 4 duel */
-.duel-pick{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px}
-.duel-pick button{font-family:var(--mono);font-size:11px;color:var(--ink-light);background:var(--card);border:1px solid var(--rule);border-radius:4px;padding:10px 14px;cursor:pointer;display:flex;align-items:center;gap:8px;transition:all .2s}
-.duel-pick button .f{font-size:15px}
+.duel-pick{display:flex;gap:10px;margin-bottom:24px;overflow-x:auto;padding-bottom:4px;scrollbar-width:thin}
+.duel-pick button{font-family:var(--sans);font-size:14px;color:var(--ink);background:var(--card);border:1px solid var(--rule);border-radius:2px;padding:10px 14px;min-height:44px;cursor:pointer;display:flex;align-items:center;gap:10px;text-align:left;flex:0 0 auto;transition:background .2s,border-color .2s,color .2s}
 .duel-pick button:hover{border-color:var(--gold)}
-.duel-pick button.active{background:var(--ink);color:var(--paper);border-color:var(--ink)}
-.duel-pick button.active .duel-sub{color:var(--gold)}
-.duel-sub{font-family:var(--mono);font-size:8px;color:var(--muted)}
-.duel-top{display:grid;grid-template-columns:1fr 60px 1fr}
+.duel-pick button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.duel-pick button.active{background:#0D1B2A;color:#F5F1E8;border-color:#0D1B2A}
+.duel-pick button.active .duel-sub,.duel-pick button.active .duel-delta{color:#C9A84C}
+.duel-pick .dpk-flag{width:26px;height:18px;border:1px solid var(--rule);border-radius:2px;object-fit:cover;flex:0 0 auto}
+.duel-pick .dpk-co{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;display:block}
+.duel-pick .dpk-api{font-family:var(--sans);font-size:14px;font-weight:600;display:block}
+.duel-sub{font-family:var(--mono);font-size:11px;color:var(--ink-light)}
+.duel-delta{font-family:var(--mono);font-size:11px;color:var(--gold-deep);font-weight:700}
+.duel-top{display:grid;grid-template-columns:1fr 1fr 1fr;border-bottom:1px solid var(--rule)}
+@media(max-width:1000px){.duel-top{grid-template-columns:1fr 1fr}.duel-mid{grid-column:1 / -1;order:-1}}
 @media(max-width:680px){.duel-top{grid-template-columns:1fr}}
-.duel-side{padding:22px 24px}
-.duel-side.mor{background:color-mix(in srgb,var(--red) 9%,var(--card));border-bottom:3px solid var(--red)}
-.duel-side.opp{background:color-mix(in srgb,var(--gold) 11%,var(--card));border-bottom:3px solid var(--gold);text-align:left}
-.duel-vs{display:flex;align-items:center;justify-content:center;font-family:var(--display);font-style:italic;font-weight:700;font-size:17px;color:var(--muted);background:var(--paper2)}
-@media(max-width:680px){.duel-side.opp{text-align:left}.duel-vs{padding:8px}}
-.duel-flag{font-size:30px}
-.duel-name{font-family:var(--display);font-weight:700;font-size:19px;margin-top:5px}
-.duel-tag{font-family:var(--serif);font-style:italic;font-size:14px;color:var(--ink-light)}
-.duel-big{font-family:var(--display);font-weight:900;font-size:44px;line-height:1;margin-top:12px}
+.duel-side{padding:22px 24px;border-right:1px solid var(--rule)}
+.duel-side:last-child{border-right:none}
+.duel-side.mor{background:color-mix(in srgb,var(--red) 7%,var(--card))}
+.duel-side.opp{background:color-mix(in srgb,var(--gold) 9%,var(--card))}
+.duel-mid{padding:22px 24px;background:var(--paper2);border-right:1px solid var(--rule)}
+.duel-flag{width:38px;height:26px;border:1px solid var(--rule);border-radius:2px;object-fit:cover;display:block}
+.duel-name{font-family:var(--display);font-weight:700;font-size:20px;margin-top:8px}
+.duel-role{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-faint);margin-top:4px}
+.duel-tag{font-family:var(--serif);font-style:italic;font-size:15px;color:var(--ink-light);margin-top:4px}
+.duel-big{font-family:var(--display);font-weight:900;font-size:42px;line-height:1;margin-top:12px}
 .duel-big.mor{color:var(--red)} .duel-big.opp{color:var(--gold-deep)}
 .duel-big small{font-family:var(--mono);font-size:12px;font-weight:400;color:var(--ink-faint)}
-.duel-cmt{margin-top:14px;border-top:1px dashed var(--rule);padding-top:12px;text-align:left}
-.duel-cmt .dcl{font-family:var(--mono);font-size:8px;letter-spacing:.16em;text-transform:uppercase;margin-bottom:6px}
-.duel-side.mor .dcl{color:var(--red)} .duel-side.opp .dcl{color:var(--gold-deep)}
-.duel-cmt .dct{font-family:var(--serif);font-style:italic;font-size:14px;color:var(--ink);line-height:1.5}
+.duel-facts{margin-top:14px;border-top:1px dashed var(--rule);padding-top:12px;display:grid;gap:10px}
+.duel-fact .dfl{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint);display:block;margin-bottom:2px}
+.duel-fact .dft{font-size:14px;color:var(--ink);line-height:1.5}
+.duel-mid h4,.duel-bars h4{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:14px}
+.duel-gap-hero{font-family:var(--display);font-weight:900;font-size:46px;line-height:1;color:var(--gold-deep)}
+.duel-gap-hero.adv{color:var(--green)}
+.duel-gap-sub{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-light);margin-top:4px}
+.duel-kpis{margin-top:16px;display:grid;gap:10px;border-top:1px dashed var(--rule);padding-top:12px}
+.duel-kpi{display:flex;justify-content:space-between;gap:12px;font-size:14px}
+.duel-kpi span:first-child{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint)}
+.duel-kpi span:last-child{color:var(--ink);text-align:right}
 .duel-bars{padding:20px clamp(16px,2vw,26px)}
-.duel-bars h4{font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:14px}
-.dbar{margin-bottom:12px}
-.dbar-top{display:flex;justify-content:space-between;font-family:var(--mono);font-size:10px;color:var(--ink-light);margin-bottom:5px}
-.dbar-top .gap{color:var(--red);font-weight:700}
-.dbar-track{position:relative;height:9px;background:var(--rule-soft);border-radius:5px;overflow:hidden}
-.dbar-opp{position:absolute;left:0;top:0;height:100%;background:linear-gradient(90deg,var(--gold),var(--gold-deep));border-radius:5px;width:0;transition:width 1s cubic-bezier(.2,.8,.2,1)}
-.dbar-mor{position:absolute;left:0;top:0;height:100%;background:var(--red);border-radius:5px;width:0;opacity:.85;transition:width 1s cubic-bezier(.2,.8,.2,1)}
-.dbar-mor::after{content:"";position:absolute;right:-1px;top:-3px;width:2px;height:15px;background:var(--ink)}
-.duel-verdict{padding:0 clamp(16px,2vw,26px) 22px;display:grid;grid-template-columns:1fr 1fr;gap:16px}
-@media(max-width:680px){.duel-verdict{grid-template-columns:1fr}}
-.dv-box{border:1px solid var(--rule);border-radius:5px;padding:15px 17px;background:var(--paper)}
-.dv-box .dvl{font-family:var(--mono);font-size:8.5px;letter-spacing:.18em;text-transform:uppercase;margin-bottom:7px}
-.dv-box.opp .dvl{color:var(--gold-deep)} .dv-box.mor .dvl{color:var(--red)}
-.dv-box .dvt{font-family:var(--serif);font-style:italic;font-size:15px;color:var(--ink);line-height:1.55}
+.duel-tools{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:16px}
+.duel-fbtn{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;background:var(--card);color:var(--ink-light);border:1px solid var(--rule);border-radius:2px;padding:9px 12px;min-height:44px;cursor:pointer;transition:background .2s,border-color .2s,color .2s}
+.duel-fbtn[aria-pressed="true"]{background:#0D1B2A;color:#F5F1E8;border-color:#0D1B2A}
+.duel-fbtn:focus-visible,.duel-sort:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.duel-sort{font-family:var(--sans);font-size:14px;min-height:44px;padding:8px 10px;border:1px solid var(--rule);border-radius:2px;background:var(--card);color:var(--ink);margin-left:auto}
+.duel-legend{font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--ink-faint);display:flex;gap:14px;flex-wrap:wrap;margin-bottom:12px}
+.duel-legend i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:5px;vertical-align:middle}
+.dumb{border-top:1px solid var(--rule-soft)}
+.dumb-row{width:100%;background:transparent;border:none;border-bottom:1px solid var(--rule-soft);text-align:left;cursor:pointer;display:grid;grid-template-columns:minmax(150px,1.1fr) minmax(160px,2fr) 128px 18px;gap:12px;align-items:center;padding:12px 4px;min-height:44px;color:var(--ink);transition:background .2s}
+.dumb-row:hover{background:color-mix(in srgb,var(--gold) 7%,transparent)}
+.dumb-row:focus-visible{outline:2px solid var(--gold);outline-offset:-2px}
+.dumb-row[aria-expanded="true"]{background:color-mix(in srgb,var(--gold) 10%,transparent)}
+.dumb-lbl{font-size:14px;line-height:1.4}
+.dumb-scale{position:relative;height:26px}
+.dumb-axis{position:absolute;left:0;right:0;top:12px;height:2px;background:var(--rule-soft)}
+.dumb-link{position:absolute;top:12px;height:2px;background:var(--gold-dim,var(--gold-deep))}
+.dumb-pt{position:absolute;top:6px;width:14px;height:14px;border-radius:50%;margin-left:-7px;border:2px solid var(--card)}
+.dumb-pt.mor{background:#E06D4F}
+.dumb-pt.opp{background:#C9A84C}
+.dumb-nums{font-family:var(--mono);font-size:11px;color:var(--ink-light);text-align:right;line-height:1.5}
+.dumb-nums b{font-size:13px;color:var(--ink)}
+.dumb-badge{display:inline-block;font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;border:1px solid var(--rule);border-radius:2px;padding:2px 6px;margin-top:3px}
+.dumb-badge.crit{border-color:var(--red);color:var(--red)}
+.dumb-badge.sig{border-color:var(--gold-deep);color:var(--gold-deep)}
+.dumb-badge.mod{border-color:var(--ink-faint);color:var(--ink-light)}
+.dumb-badge.par{border-color:var(--ink-faint);color:var(--ink-light)}
+.dumb-badge.adv{border-color:var(--green);color:var(--green)}
+.dumb-chev{font-family:var(--mono);font-size:13px;color:var(--ink-faint);text-align:center;transition:transform .2s}
+.dumb-row[aria-expanded="true"] .dumb-chev{transform:rotate(90deg)}
+@media(max-width:680px){.dumb-row{grid-template-columns:1fr 18px;grid-template-areas:"lbl chev" "scale scale" "nums nums";row-gap:8px}
+ .dumb-lbl{grid-area:lbl}.dumb-scale{grid-area:scale}.dumb-nums{grid-area:nums;text-align:left}.dumb-chev{grid-area:chev}}
+.dumb-detail{border-bottom:1px solid var(--rule-soft);background:var(--paper2);padding:16px 18px;display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:880px){.dumb-detail{grid-template-columns:1fr}}
+.dumb-detail .ddl{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-deep);display:block;margin-bottom:5px}
+.dumb-detail .ddt{font-size:14px;line-height:1.6;color:var(--ink)}
+.dumb-detail ul{margin:0;padding-left:18px}
+.dumb-detail li{font-size:14px;line-height:1.6}
+.dumb-detail a{color:var(--gold-deep)}
+.duel-verdict{padding:0 clamp(16px,2vw,26px) 22px}
+.duel-verdict h4{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:12px}
+.duel-synth{font-family:var(--serif);font-style:italic;font-size:17px;line-height:1.6;color:var(--ink);border-left:2px solid var(--gold);padding-left:14px;margin-bottom:18px}
+.dv-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+@media(max-width:1000px){.dv-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.dv-grid{grid-template-columns:1fr}}
+.dv-box{border:1px solid var(--rule);border-radius:2px;padding:14px 16px;background:var(--card)}
+.dv-box .dvl{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;margin-bottom:7px;color:var(--gold-deep)}
+.dv-box.mor .dvl{color:var(--red)}
+.dv-box.adv .dvl{color:var(--green)}
+.dv-box .dvt{font-size:14px;color:var(--ink);line-height:1.55}
+.dv-tags{margin-top:16px;display:grid;gap:8px}
+.dv-tag{font-size:14px;color:var(--ink);border-left:2px solid var(--rule);padding-left:12px}
+.dv-tag b{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-deep);display:block}
+@media(prefers-reduced-motion:reduce){.duel-pick button,.dumb-row,.dumb-chev,.duel-fbtn{transition:none}}
+#m4 .takeaway{display:none}
 
 /* SIMULATOR */
 .sim-grid{display:grid;grid-template-columns:1fr 320px;gap:26px;align-items:start}
@@ -1950,9 +2003,31 @@ var T={
   diagLineAsset:"Brique maîtrisée : {c} est opérationnel et fait référence sur le marché.",
   m3tag:"Radar comparatif · superposable",m3title:["Superposez les ","signatures."],m3lead:"Activez ou désactivez les agences pour comparer leurs empreintes sur les 12 critères. Morocco Now reste affichée comme référence : l'écart devient visuel.",
   m3ti:"À retenir",m3note:"<b>Les concurrents dessinent de grands polygones ; Morocco Now reste un petit triangle écrasé au centre.</b> Plus la forme est large et régulière, plus l'agence couvre le parcours investisseur de bout en bout.",
-  m4tag:"Le duel · Morocco Now face au monde",m4title:["Choisissez un ","adversaire."],m4lead:"Confrontez Morocco Now à un concurrent, critère par critère. Le trait noir marque le niveau marocain ; l'or, celui du concurrent. L'espace entre les deux, c'est le retard à combler.",
+  m4tag:"Le duel · Morocco Now face au monde",m4title:["Choisissez un ","adversaire."],m4lead:"Confrontez l'AMDIE (dispositif observé : Morocco Now) à une API de référence, critère par critère. Le point corail marque le niveau marocain, le point or celui de l'API. Cliquez sur un critère pour lire son analyse.",
   m4ti:"À retenir",m4note:"<b>Le retard se concentre sur les outils de décision.</b> Sur l'événementiel et le terrain, l'AMDIE tient le rythme (114 initiatives, 129 délégations en 2024). C'est la traduction numérique de cet effort qui manque sur Morocco Now, pas l'effort lui-même.",
   duelBars:"Écart critère par critère, trié par retard décroissant",duelOppLbl:"Ce que {x} fait, et pas encore le Maroc",duelMorLbl:"Lecture Buildfluence",
+  d2:{pick:"Sélectionner une API de référence",pickAria:"Comparer l'AMDIE à {x} ({y}/5, écart global {z})",
+   face:"Face-à-face exécutif",matrix:"Matrice des écarts · 12 critères, échelle commune 1 à 5",verdict:"Verdict du duel",
+   agency:"Agence",device:"Dispositif observé",maturity:"Niveau de maturité",position:"Positionnement",
+   bestMor:"Meilleur critère AMDIE",closestCrit:"Critère le plus proche",bestOpp:"Meilleur critère de l'API",aheadCount:"Critères où l'API devance l'AMDIE",distinctive:"Avantage distinctif documenté",
+   instant:"Verdict instantané",gapGlobal:"Écart global",gapPts:"points sur 5",advGlobal:"Avantage AMDIE",
+   maxGap:"Écart le plus élevé",minGap:"Écart le plus faible",critCount:"Écarts critiques",parCount:"Proximité ou parité",
+   lvl:{par:"Parité",mod:"Écart modéré",sig:"Écart significatif",crit:"Écart critique",adv:"Avantage AMDIE"},
+   fPrio:"Écarts prioritaires",fAll:"Tous les critères",fClose:"Proximité / parité",
+   sortLbl:"Trier les critères",sort:{gap:"Écart décroissant",order:"Ordre méthodologique",mor:"Score AMDIE",opp:"Score de l'API"},
+   legMor:"AMDIE / Morocco Now",legOpp:"API sélectionnée",empty:"Aucun critère dans ce filtre pour ce duel.",
+   rowAria:"{c} · AMDIE {m} sur 5, {a} {o} sur 5, {l}. Ouvrir l'analyse du critère",
+   dConstat:"Constat chiffré",dRead:"Lecture du critère",dDiff:"Différence observée",dImpact:"Impact investisseur",dImpl:"Implication pour l'AMDIE",dSrc:"Source",
+   noSrc:"Source qualitative non documentée",gapWord:"Écart",
+   read:{crit:"Ce critère constitue l'un des principaux différentiels du duel.",sig:"L'API comparée présente une maturité sensiblement supérieure sur ce critère.",mod:"L'écart reste limité mais révèle une capacité à consolider.",par:"Les deux dispositifs présentent un niveau comparable sur ce critère.",adv:"L'AMDIE dispose ici d'un avantage relatif à préserver et à mieux valoriser."},
+   impl:{crit:"Développer en priorité",sig:"Adapter au contexte marocain",mod:"Consolider",par:"Préserver",adv:"Préserver et mieux valoriser"},
+   lvlMor:"Niveau AMDIE",lvlOpp:"Niveau de l'API",
+   synth:"Face à {api}, le différentiel se concentre principalement sur {c1} et {c2}. L'AMDIE est la plus proche sur {cp}. La priorité consiste à renforcer {cprio} afin de réduire la friction dans le parcours de décision de l'investisseur.",
+   synthAdv:"Face à {api}, l'écart global est de {g} point(s) sur 5. Le différentiel se concentre sur {c1} et {c2}, tandis que l'AMDIE conserve un niveau comparable ou supérieur sur {cp}. La priorité consiste à renforcer {cprio} pour fluidifier le parcours de décision de l'investisseur.",
+   vStruct:"Avantage structurel de la référence",vProx:"Point de proximité",vMor:"Atout marocain",vMove:"Mouvement prioritaire",
+   vMorNone:"Aucun avantage marocain démontré par les scores de ce duel.",
+   tRepro:"À reproduire",tAdapt:"À adapter au Maroc",tPreserve:"À préserver",
+   ptsMor:"AMDIE",ptsOpp:"API"},
   m5tag:"Le maillon foncier · MedZ",m5title:["Le guichet unique ","à parachever."],m5lead:"L'investisseur ne voit pas deux agences : il voit un pays. Le parcours se répartit aujourd'hui entre AMDIE, qui porte la promotion, et MedZ, filiale CDG, qui détient le foncier industriel. Mieux articuler ces deux maillons est une opportunité concrète de fluidité pour l'investisseur.",
   urg:[["15 mois","entre deux éditions · Newsletter MedZ"],["21 mois","en pause · Minute Verte"],["8 ans","depuis le dernier rapport annuel (2016)"]],
   guichet:[{l:"En amont",n:"AMDIE · Morocco Now",d:"Promotion, image, accompagnement. La promesse d'attractivité."},{l:"En aval",n:"MedZ · Groupe CDG",d:"Foncier industriel, parcs, infrastructures. Référence fonctionnelle : JTC Singapour."}],
@@ -2073,9 +2148,31 @@ var T={
   diagLineAsset:"Mastered feature: {c} is operational and sets a market reference.",
   m3tag:"Comparative radar · stackable",m3title:["Overlay the ","signatures."],m3lead:"Toggle agencies on or off to compare their footprints across the 12 criteria. Morocco Now stays on as a reference: the gap becomes visual.",
   m3ti:"Key reading",m3note:"<b>Competitors draw wide polygons; Morocco Now stays a small triangle crushed at the centre.</b> The wider and more regular the shape, the more the agency covers the full investor journey.",
-  m4tag:"The duel · Morocco Now vs the world",m4title:["Pick an ","opponent."],m4lead:"Pit Morocco Now against a competitor, criterion by criterion. The black mark is the Moroccan level; gold is the competitor. The space between is the gap to close.",
+  m4tag:"The duel · Morocco Now vs the world",m4title:["Pick an ","opponent."],m4lead:"Pit AMDIE (observed initiative: Morocco Now) against a reference IPA, criterion by criterion. The coral dot marks the Moroccan level, the gold dot the IPA level. Click a criterion to read its analysis.",
   m4ti:"Key reading",m4note:"<b>The gap concentrates on decision tools.</b> On events and fieldwork, AMDIE keeps pace (114 initiatives, 129 delegations in 2024). What is missing on Morocco Now is the digital translation of that effort, not the effort itself.",
   duelBars:"Gap criterion by criterion, sorted by decreasing lag",duelOppLbl:"What {x} does, and Morocco does not yet",duelMorLbl:"Buildfluence reading",
+  d2:{pick:"Select a reference IPA",pickAria:"Compare AMDIE with {x} ({y}/5, overall gap {z})",
+   face:"Executive face-off",matrix:"Gap matrix · 12 criteria, common 1 to 5 scale",verdict:"Duel verdict",
+   agency:"Agency",device:"Observed initiative",maturity:"Maturity level",position:"Positioning",
+   bestMor:"Best AMDIE criterion",closestCrit:"Closest criterion",bestOpp:"Best criterion of the IPA",aheadCount:"Criteria where the IPA leads AMDIE",distinctive:"Documented distinctive advantage",
+   instant:"Instant verdict",gapGlobal:"Overall gap",gapPts:"points out of 5",advGlobal:"AMDIE advantage",
+   maxGap:"Largest gap",minGap:"Smallest gap",critCount:"Critical gaps",parCount:"Close or at parity",
+   lvl:{par:"Parity",mod:"Moderate gap",sig:"Significant gap",crit:"Critical gap",adv:"AMDIE advantage"},
+   fPrio:"Priority gaps",fAll:"All criteria",fClose:"Close / parity",
+   sortLbl:"Sort criteria",sort:{gap:"Decreasing gap",order:"Methodological order",mor:"AMDIE score",opp:"IPA score"},
+   legMor:"AMDIE / Morocco Now",legOpp:"Selected IPA",empty:"No criterion matches this filter for this duel.",
+   rowAria:"{c} · AMDIE {m} out of 5, {a} {o} out of 5, {l}. Open the criterion analysis",
+   dConstat:"Measured facts",dRead:"Reading of the criterion",dDiff:"Observed difference",dImpact:"Investor impact",dImpl:"Implication for AMDIE",dSrc:"Source",
+   noSrc:"Qualitative source not documented",gapWord:"Gap",
+   read:{crit:"This criterion is one of the main differentials of the duel.",sig:"The compared IPA shows a markedly higher maturity on this criterion.",mod:"The gap stays limited but reveals a capability to consolidate.",par:"Both setups show a comparable level on this criterion.",adv:"AMDIE holds a relative advantage here, to preserve and to showcase better."},
+   impl:{crit:"Develop as a priority",sig:"Adapt to the Moroccan context",mod:"Consolidate",par:"Preserve",adv:"Preserve and showcase better"},
+   lvlMor:"AMDIE level",lvlOpp:"IPA level",
+   synth:"Against {api}, the differential concentrates mainly on {c1} and {c2}. AMDIE is closest on {cp}. The priority is to strengthen {cprio} in order to reduce friction in the investor's decision journey.",
+   synthAdv:"Against {api}, the overall gap is {g} point(s) out of 5. The differential concentrates on {c1} and {c2}, while AMDIE keeps a comparable or higher level on {cp}. The priority is to strengthen {cprio} to smooth the investor's decision journey.",
+   vStruct:"Structural advantage of the reference",vProx:"Point of proximity",vMor:"Moroccan strength",vMove:"Priority move",
+   vMorNone:"No Moroccan advantage demonstrated by the scores of this duel.",
+   tRepro:"To replicate",tAdapt:"To adapt to Morocco",tPreserve:"To preserve",
+   ptsMor:"AMDIE",ptsOpp:"IPA"},
   m5tag:"The land link · MedZ",m5title:["The one-stop shop, ","to complete."],m5lead:"Investors do not see two agencies: they see one country. The journey is today shared between AMDIE, which leads promotion, and MedZ, a CDG subsidiary, which owns the industrial land. Better connecting these two links is a concrete opportunity to smooth the investor journey.",
   urg:[["15 months","between two editions · MedZ Newsletter"],["21 months","on hold · Minute Verte"],["8 years","since the last annual report (2016)"]],
   guichet:[{l:"Upstream",n:"AMDIE · Morocco Now",d:"Promotion, image, support. The promise of attractiveness."},{l:"Downstream",n:"MedZ · CDG Group",d:"Industrial land, parks, infrastructure. Functional reference: JTC Singapore."}],
@@ -2643,27 +2740,161 @@ function renderRadar(){
    MODULE 4 : DUEL
    ========================================================================= */
 var duelCur="turkey";
+var duelFilter="prio";
+var duelSort="gap";
+var duelOpen=null;
+var duelEscBound=false;
+var DUEL_FLAG={edb:"sg",india:"in",egypt:"eg",korea:"kr",turkey:"tr",morocco:"ma"};
+function duelFlagImg(k,cls){return '<img class="'+cls+'" src="/flags/'+DUEL_FLAG[k]+'.svg" alt="" aria-hidden="true">';}
+function duelLevel(d){if(d<0)return "adv";if(d===0)return "par";if(d===1)return "mod";if(d===2)return "sig";return "crit";}
+function duelSigned(d){return (d>0?"+":"")+d;}
+function duelRows(){
+ var oi=ORDER.indexOf(duelCur),mi=ORDER.indexOf("morocco");
+ return MATRIX.map(function(row,i){
+  var mv=row.vals[mi],ov=row.vals[oi],d=ov-mv;
+  return {i:i,label:L(row.label),mv:mv,ov:ov,delta:d,abs:Math.abs(d),lvl:duelLevel(d)};
+ });
+}
 function renderDuel(){
- el("m4tag").textContent=t().m4tag;el("m4title").innerHTML=t().m4title[0]+"<em>"+t().m4title[1]+"</em>";el("m4lead").textContent=t().m4lead;
- el("m4ti").textContent=t().m4ti;el("m4note").innerHTML=t().m4note;
+ if(el("m4tag"))el("m4tag").textContent=t().m4tag;
+ if(el("m4title"))el("m4title").innerHTML=t().m4title[0]+"<em>"+t().m4title[1]+"</em>";
+ if(el("m4lead"))el("m4lead").textContent=t().m4lead;
+ if(el("m4ti"))el("m4ti").textContent=t().m4ti;
+ if(el("m4note"))el("m4note").innerHTML=t().m4note;
+ var pick=el("duelPick");if(!pick)return;
+ var d=t().d2,mor=AG.morocco;
  var opps=ORDER.filter(function(k){return k!=="morocco";});
- el("duelPick").innerHTML=opps.map(function(k){return '<button data-k="'+k+'" class="'+(k===duelCur?"active":"")+'"><span class="f">'+AG[k].flag+'</span><span>'+AG[k].short+'<br><span class="duel-sub">'+AG[k].global.toFixed(1)+'/5</span></span></button>';}).join("");
- el("duelPick").querySelectorAll("button").forEach(function(b){b.addEventListener("click",function(){duelCur=b.dataset.k;el("duelPick").querySelectorAll("button").forEach(function(x){x.classList.remove("active");});b.classList.add("active");drawDuel();});});
+ pick.setAttribute("role","group");pick.setAttribute("aria-label",d.pick);
+ pick.innerHTML=opps.map(function(k){
+  var g=(AG[k].global-mor.global);
+  var aria=d.pickAria.replace("{x}",AG[k].name).replace("{y}",AG[k].global.toFixed(1)).replace("{z}",duelSigned(Number(g.toFixed(1))));
+  return '<button type="button" data-k="'+k+'" aria-pressed="'+(k===duelCur)+'" aria-label="'+aria+'" class="'+(k===duelCur?"active":"")+'">'+
+   duelFlagImg(k,"dpk-flag")+
+   '<span><span class="dpk-co">'+AG[k].short+'</span><span class="dpk-api">'+AG[k].name+'</span>'+
+   '<span class="duel-sub">'+AG[k].global.toFixed(1)+'/5</span> <span class="duel-delta">'+duelSigned(Number(g.toFixed(1)))+'</span></span></button>';
+ }).join("");
+ pick.querySelectorAll("button").forEach(function(b){b.addEventListener("click",function(){
+  duelCur=b.dataset.k;duelOpen=null;
+  pick.querySelectorAll("button").forEach(function(x){x.classList.remove("active");x.setAttribute("aria-pressed","false");});
+  b.classList.add("active");b.setAttribute("aria-pressed","true");drawDuel();
+ });});
+ if(!duelEscBound){duelEscBound=true;document.addEventListener("keydown",function(e){if(e.key==="Escape"&&duelOpen!==null){duelOpen=null;drawDuel();}});}
  drawDuel();
 }
-function drawDuel(){var a=AG[duelCur];var mor=AG.morocco;var oi=ORDER.indexOf(duelCur);var mi=ORDER.indexOf("morocco");
- var rows=MATRIX.map(function(row,ri){return {row:row,gap:row.vals[oi]-row.vals[mi]};}).sort(function(x,y){return y.gap-x.gap;});
- var bars=rows.map(function(o){var ov=o.row.vals[oi],mv=o.row.vals[mi];
-   return '<div class="dbar"><div class="dbar-top"><span>'+L(o.row.label)+'</span><span>'+mv+' vs '+ov+' '+(o.gap>0?'<span class="gap">+'+o.gap+'</span>':'')+'</span></div>'+
-     '<div class="dbar-track"><div class="dbar-opp" data-w="'+(ov/5*100)+'"></div><div class="dbar-mor" data-w="'+(mv/5*100)+'"></div></div></div>';}).join("");
- el("duelCard").innerHTML='<div class="duel-top">'+
-   '<div class="duel-side mor"><div class="duel-flag">'+mor.flag+'</div><div class="duel-name">'+mor.name+'</div><div class="duel-tag">'+L(mor.tagline)+'</div><div class="duel-big mor">'+mor.global.toFixed(1)+'<small> /5</small></div>'+
-     '<div class="duel-cmt"><div class="dcl">'+t().duelMorLbl+'</div><div class="dct">« '+L(a.verdict)+' »</div></div></div>'+
-   '<div class="duel-vs">vs</div>'+
-   '<div class="duel-side opp"><div class="duel-flag">'+a.flag+'</div><div class="duel-name">'+a.name+'</div><div class="duel-tag">'+L(a.tagline)+'</div><div class="duel-big opp">'+a.global.toFixed(1)+'<small> /5</small></div>'+
-     '<div class="duel-cmt"><div class="dcl">'+t().duelOppLbl.replace("{x}",a.short)+'</div><div class="dct">'+L(a.diff)+'.</div></div></div></div>'+
-   '<div class="duel-bars"><h4>'+t().duelBars+'</h4>'+bars+'</div>';
- requestAnimationFrame(function(){el("duelCard").querySelectorAll(".dbar-opp,.dbar-mor").forEach(function(e){e.style.width=e.dataset.w+"%";});});
+function duelDetail(r){
+ var d=t().d2,a=AG[duelCur],src=(SRCURL[duelCur]&&SRCURL[duelCur][r.i])||a.url;
+ var dg=DIAG[r.i]||null;
+ var impact=dg?'<ul>'+L(dg.inv).map(function(x){return '<li>'+x+'</li>';}).join("")+'</ul>':'<div class="ddt">'+d.noSrc+'</div>';
+ var srcHtml=src?('<div class="ddt">'+a.src+' · '+a.name+'<br><a href="'+src+'" target="_blank" rel="noopener noreferrer">'+src+'</a></div>'):('<div class="ddt">'+d.noSrc+'</div>');
+ return '<div class="dumb-detail" id="duelDet'+r.i+'" role="region" aria-label="'+r.label+'">'+
+  '<div><span class="ddl">'+d.dConstat+'</span><div class="ddt">'+d.ptsMor+' '+r.mv+'/5 · '+d.ptsOpp+' '+r.ov+'/5 · '+d.gapWord+' '+duelSigned(r.delta)+' · '+d.lvl[r.lvl]+'</div></div>'+
+  '<div><span class="ddl">'+d.dRead+'</span><div class="ddt">'+d.read[r.lvl]+'</div></div>'+
+  '<div><span class="ddl">'+d.dDiff+'</span><div class="ddt">'+d.lvlOpp+' ('+r.ov+'/5) : '+L(NOTE[r.ov])+'<br>'+d.lvlMor+' ('+r.mv+'/5) : '+L(NOTE[r.mv])+'</div></div>'+
+  '<div><span class="ddl">'+d.dImpact+'</span>'+impact+'</div>'+
+  '<div><span class="ddl">'+d.dImpl+'</span><div class="ddt">'+d.impl[r.lvl]+'</div></div>'+
+  '<div><span class="ddl">'+d.dSrc+'</span>'+srcHtml+'</div></div>';
+}
+function drawDuel(){
+ var card=el("duelCard");if(!card)return;
+ var d=t().d2,a=AG[duelCur],mor=AG.morocco,rows=duelRows();
+ var byGap=rows.slice().sort(function(x,y){return y.delta-x.delta||x.i-y.i;});
+ var byAbs=rows.slice().sort(function(x,y){return x.abs-y.abs||x.i-y.i;});
+ var morBest=rows.slice().sort(function(x,y){return y.mv-x.mv||x.i-y.i;})[0];
+ var oppBest=rows.slice().sort(function(x,y){return y.ov-x.ov||x.i-y.i;})[0];
+ var ahead=rows.filter(function(r){return r.delta>0;}).length;
+ var crit=rows.filter(function(r){return r.delta>=3;}).length;
+ var close=rows.filter(function(r){return r.abs<=1;}).length;
+ var maxR=byGap[0],minR=byAbs[0];
+ var gGlobal=Number((a.global-mor.global).toFixed(1));
+ var view=rows.filter(function(r){
+  if(duelFilter==="prio")return r.delta>=2;
+  if(duelFilter==="close")return r.abs<=1;
+  return true;
+ });
+ if(duelSort==="gap")view.sort(function(x,y){return y.delta-x.delta||x.i-y.i;});
+ else if(duelSort==="mor")view.sort(function(x,y){return y.mv-x.mv||x.i-y.i;});
+ else if(duelSort==="opp")view.sort(function(x,y){return y.ov-x.ov||x.i-y.i;});
+ else view.sort(function(x,y){return x.i-y.i;});
+
+ var pos=function(v){return (v-1)/4*100;};
+ var bars=view.length?view.map(function(r){
+  var p1=Math.min(pos(r.mv),pos(r.ov)),p2=Math.max(pos(r.mv),pos(r.ov));
+  var aria=d.rowAria.replace("{c}",r.label).replace("{m}",r.mv).replace("{a}",a.name).replace("{o}",r.ov).replace("{l}",d.lvl[r.lvl]);
+  var open=duelOpen===r.i;
+  return '<button type="button" class="dumb-row" data-i="'+r.i+'" aria-expanded="'+open+'" aria-controls="duelDet'+r.i+'" aria-label="'+aria+'">'+
+   '<span class="dumb-lbl">'+r.label+'</span>'+
+   '<span class="dumb-scale"><span class="dumb-axis"></span><span class="dumb-link" style="left:'+p1+'%;width:'+(p2-p1)+'%"></span>'+
+    '<span class="dumb-pt mor" style="left:'+pos(r.mv)+'%"></span><span class="dumb-pt opp" style="left:'+pos(r.ov)+'%"></span></span>'+
+   '<span class="dumb-nums"><b>'+r.mv+'</b> · <b>'+r.ov+'</b> · '+duelSigned(r.delta)+'<br><span class="dumb-badge '+r.lvl+'">'+d.lvl[r.lvl]+'</span></span>'+
+   '<span class="dumb-chev" aria-hidden="true">›</span></button>'+(open?duelDetail(r):"");
+ }).join(""):'<div class="ddt" style="padding:14px 4px">'+d.empty+'</div>';
+
+ var c1=byGap[0],c2=byGap[1];
+ var morAdv=rows.filter(function(r){return r.delta<0;}).sort(function(x,y){return x.delta-y.delta;})[0];
+ var morAsset=morAdv||morBest;
+ var tpl=(c1.delta>0&&c2.delta>0)?d.synth:d.synthAdv;
+ var synth=tpl.replace("{api}",a.name).replace("{c1}",c1.label).replace("{c2}",c2.label)
+  .replace("{cp}",minR.label).replace("{cprio}",maxR.label).replace("{g}",duelSigned(gGlobal));
+ var tags="";
+ if(c1.delta>=2&&c1.ov>=4)tags+='<div class="dv-tag"><b>'+d.tRepro+'</b>'+c1.label+' · '+L(NOTE[c1.ov])+'</div>';
+ if(c2.delta>=2&&c2.ov>=4)tags+='<div class="dv-tag"><b>'+d.tAdapt+'</b>'+c2.label+' · '+L(NOTE[c2.ov])+'</div>';
+ if(morAdv||morBest.mv>=3)tags+='<div class="dv-tag"><b>'+d.tPreserve+'</b>'+morAsset.label+' · '+d.ptsMor+' '+morAsset.mv+'/5</div>';
+
+ card.innerHTML='<div class="duel-top">'+
+  '<div class="duel-side mor">'+duelFlagImg("morocco","duel-flag")+
+   '<div class="duel-name">AMDIE</div><div class="duel-role">'+d.agency+'</div>'+
+   '<div class="duel-role">'+d.device+' : Morocco Now</div>'+
+   '<div class="duel-big mor">'+mor.global.toFixed(1)+'<small> /5</small></div>'+
+   '<div class="duel-facts">'+
+    '<div class="duel-fact"><span class="dfl">'+d.maturity+'</span><span class="dft">'+mor.lvl+'/5</span></div>'+
+    '<div class="duel-fact"><span class="dfl">'+d.position+'</span><span class="dft">'+L(mor.tagline)+' — '+L(mor.strat)+'</span></div>'+
+    '<div class="duel-fact"><span class="dfl">'+d.bestMor+'</span><span class="dft">'+morBest.label+' ('+morBest.mv+'/5)</span></div>'+
+    '<div class="duel-fact"><span class="dfl">'+d.closestCrit+'</span><span class="dft">'+minR.label+' ('+d.gapWord+' '+duelSigned(minR.delta)+')</span></div>'+
+   '</div></div>'+
+  '<div class="duel-mid"><h4>'+d.instant+'</h4>'+
+   '<div class="duel-gap-hero'+(gGlobal<0?" adv":"")+'">'+duelSigned(gGlobal)+'</div>'+
+   '<div class="duel-gap-sub">'+(gGlobal<0?d.advGlobal:d.gapGlobal)+' · '+d.gapPts+'</div>'+
+   '<div class="duel-kpis">'+
+    '<div class="duel-kpi"><span>'+d.maxGap+'</span><span>'+maxR.label+' ('+duelSigned(maxR.delta)+')</span></div>'+
+    '<div class="duel-kpi"><span>'+d.minGap+'</span><span>'+minR.label+' ('+duelSigned(minR.delta)+')</span></div>'+
+    '<div class="duel-kpi"><span>'+d.critCount+'</span><span>'+crit+'/12</span></div>'+
+    '<div class="duel-kpi"><span>'+d.parCount+'</span><span>'+close+'/12</span></div>'+
+   '</div></div>'+
+  '<div class="duel-side opp">'+duelFlagImg(duelCur,"duel-flag")+
+   '<div class="duel-name">'+a.name+'</div><div class="duel-role">'+a.short+'</div>'+
+   '<div class="duel-tag">'+L(a.tagline)+'</div>'+
+   '<div class="duel-big opp">'+a.global.toFixed(1)+'<small> /5</small></div>'+
+   '<div class="duel-facts">'+
+    '<div class="duel-fact"><span class="dfl">'+d.position+'</span><span class="dft">'+L(a.strat)+'</span></div>'+
+    '<div class="duel-fact"><span class="dfl">'+d.distinctive+'</span><span class="dft">'+L(a.diff)+'</span></div>'+
+    '<div class="duel-fact"><span class="dfl">'+d.bestOpp+'</span><span class="dft">'+oppBest.label+' ('+oppBest.ov+'/5)</span></div>'+
+    '<div class="duel-fact"><span class="dfl">'+d.aheadCount+'</span><span class="dft">'+ahead+'/12</span></div>'+
+   '</div></div></div>'+
+  '<div class="duel-bars"><h4>'+d.matrix+'</h4>'+
+   '<div class="duel-tools">'+
+    '<button type="button" class="duel-fbtn" data-f="prio" aria-pressed="'+(duelFilter==="prio")+'">'+d.fPrio+'</button>'+
+    '<button type="button" class="duel-fbtn" data-f="all" aria-pressed="'+(duelFilter==="all")+'">'+d.fAll+'</button>'+
+    '<button type="button" class="duel-fbtn" data-f="close" aria-pressed="'+(duelFilter==="close")+'">'+d.fClose+'</button>'+
+    '<select class="duel-sort" id="duelSortSel" aria-label="'+d.sortLbl+'">'+
+     ['gap','order','mor','opp'].map(function(k){return '<option value="'+k+'"'+(duelSort===k?' selected':'')+'>'+d.sort[k]+'</option>';}).join("")+
+    '</select></div>'+
+   '<div class="duel-legend"><span><i style="background:#E06D4F"></i>'+d.legMor+'</span><span><i style="background:#C9A84C"></i>'+d.legOpp+'</span><span>1 → 5</span></div>'+
+   '<div class="dumb">'+bars+'</div></div>'+
+  '<div class="duel-verdict"><h4>'+d.verdict+'</h4><p class="duel-synth">'+synth+'</p>'+
+   '<div class="dv-grid">'+
+    '<div class="dv-box"><div class="dvl">'+d.vStruct+'</div><div class="dvt">'+c1.label+' ('+duelSigned(c1.delta)+') · '+c2.label+' ('+duelSigned(c2.delta)+')</div></div>'+
+    '<div class="dv-box"><div class="dvl">'+d.vProx+'</div><div class="dvt">'+minR.label+' · '+d.ptsMor+' '+minR.mv+'/5 · '+d.ptsOpp+' '+minR.ov+'/5</div></div>'+
+    '<div class="dv-box '+(morAdv?"adv":"mor")+'"><div class="dvl">'+d.vMor+'</div><div class="dvt">'+((morAdv||morBest.mv>=3)?(morAsset.label+' · '+d.ptsMor+' '+morAsset.mv+'/5'+(morAdv?' ('+duelSigned(morAsset.delta)+')':'')):d.vMorNone)+'</div></div>'+
+    '<div class="dv-box mor"><div class="dvl">'+d.vMove+'</div><div class="dvt">'+maxR.label+' · '+d.impl[maxR.lvl]+'</div></div>'+
+   '</div>'+(tags?'<div class="dv-tags">'+tags+'</div>':'')+'</div>';
+
+ card.querySelectorAll(".duel-fbtn").forEach(function(b){b.addEventListener("click",function(){duelFilter=b.dataset.f;duelOpen=null;drawDuel();});});
+ var sel=el("duelSortSel");
+ if(sel)sel.addEventListener("change",function(){duelSort=sel.value;drawDuel();});
+ card.querySelectorAll(".dumb-row").forEach(function(b){b.addEventListener("click",function(){
+  var i=Number(b.dataset.i);duelOpen=(duelOpen===i?null:i);drawDuel();
+  requestAnimationFrame(function(){var n=el("duelCard").querySelector('.dumb-row[data-i="'+i+'"]');if(n)n.focus();});
+ });});
 }
 
 /* =========================================================================
