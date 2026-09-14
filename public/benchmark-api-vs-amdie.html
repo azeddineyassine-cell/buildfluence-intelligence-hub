@@ -897,7 +897,7 @@ footer .wrap b{color:var(--gold-deep)}
   <div class="atlas-poc reveal" id="atlasPocBadge"></div>
   <div class="card pad reveal">
     <div class="iat-top">
-      <div class="iat-modes" id="iatModes" role="group"></div>
+      <div class="iat-eyebrow" id="iatModes"></div>
       <div class="iat-tools" id="iatTools"></div>
     </div>
     <div class="iat-filters" id="iatFilters"></div>
@@ -907,8 +907,7 @@ footer .wrap b{color:var(--gold-deep)}
         <div class="atlas-controls" id="atlasCtrl"></div>
         <div id="atlasSub"></div>
         <div class="iat-mapstage" id="iatStage">
-          <svg id="atlasMap" preserveAspectRatio="xMidYMid meet" role="img"></svg>
-          <div class="iat-sat" id="iatSat" hidden></div>
+          <div id="investorAtlasMapRoot" class="iat-map-root" aria-live="polite"></div>
         </div>
         <div class="atlas-legend" id="atlasLegend"></div>
       </div>
@@ -1156,6 +1155,25 @@ footer .wrap b{color:var(--gold-deep)}
 .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s,transform .6s}
 .reveal.in{opacity:1;transform:none}
 @media (prefers-reduced-motion: reduce){.route,.pulse,.aroute,.apulse{animation:none}.reveal{transition:none;opacity:1;transform:none}}
+
+/* Investor Atlas Smart Map · isolated overrides */
+#atlas>.wrap{width:min(90vw,1720px);max-width:none;margin-inline:auto}
+#atlas .card{background:transparent;border:0;box-shadow:none;padding:0}
+.iat-top{margin-bottom:10px}.iat-eyebrow{font:700 9px var(--mono);letter-spacing:.16em;color:var(--gold-deep)}
+.iat-filters{display:block;margin-bottom:12px}.iat-filterbar{display:grid;grid-template-columns:minmax(260px,1fr) auto auto;gap:8px;margin-bottom:8px}
+.iat-search input{width:100%;height:38px;border:1px solid var(--rule);border-radius:2px;background:var(--card);color:var(--ink);padding:0 12px;font:12px var(--sans)}
+.iat-filter-toggle{display:none}.iat-filter-drawer{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:7px;position:relative}
+.iat-fgrp{position:relative}.iat-ftrigger{width:100%;height:38px;display:flex;align-items:center;justify-content:space-between;gap:7px;border:1px solid var(--rule);border-radius:2px;background:var(--card);color:var(--ink);padding:0 10px;font:700 8px var(--mono);letter-spacing:.1em;text-transform:uppercase;cursor:pointer}
+.iat-ftrigger b{display:grid;place-items:center;min-width:18px;height:18px;background:var(--gold);color:var(--navy);border-radius:2px}.iat-ftrigger i{font-style:normal;color:var(--gold-deep)}
+.iat-fpanel{position:absolute;z-index:20;top:44px;left:0;width:min(360px,70vw);max-height:320px;overflow:auto;padding:10px;border:1px solid var(--rule);border-radius:2px;background:var(--card);box-shadow:var(--shadow-lg)}
+.iat-frow{display:flex;flex-direction:column;align-items:stretch}.iat-fbtn{text-align:left;min-height:34px}
+.iat-body{grid-template-columns:minmax(0,7fr) minmax(330px,3fr);gap:18px}.iat-mapcol{align-items:stretch}.iat-mapstage,.iat-map-root{width:100%;min-height:680px}
+.iat-side{max-height:680px;overflow:auto;border:1px solid var(--rule);border-radius:2px;background:var(--card);padding:20px}
+.iat-blk{margin:8px 0;border:1px solid var(--rule);border-radius:2px;padding:0;background:var(--card)}.iat-blk>summary{display:flex;align-items:center;justify-content:space-between;cursor:pointer;padding:11px;list-style:none;margin:0}.iat-blk>summary:after{content:"+";color:var(--gold-deep)}.iat-blk[open]>summary:after{content:"−"}.iat-blk-body{padding:0 11px 11px}.iat-blk.read{padding:0;border-left:2px solid var(--gold)}
+.iat-promise{font-family:var(--serif);font-size:15px;line-height:1.5;color:var(--ink);border-left:2px solid var(--gold);padding-left:11px}.iat-kpis{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin:14px 0}.iat-kpis>div{min-width:0;border:1px solid var(--rule);padding:9px}.iat-kpis b{display:block;font:700 12px var(--mono);color:var(--navy);overflow-wrap:anywhere}.iat-kpis span{display:block;margin-top:4px;font:8px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint)}.iat-actions{display:flex;flex-wrap:wrap;gap:7px;align-items:center}.iat-actions .iat-cta{margin-top:0}.iat-official{display:block;margin-top:6px;font:8.5px var(--mono);color:var(--ink-faint)}
+.iat-discovery{display:grid;gap:7px;margin-top:12px}.iat-discovery button{min-height:38px;border:1px solid var(--rule);border-radius:2px;background:var(--card);color:var(--ink);font:700 9px var(--mono);text-transform:uppercase;cursor:pointer}.iat-discovery button:hover{border-color:var(--gold)}
+@media(max-width:1100px){.iat-body{grid-template-columns:minmax(0,2fr) minmax(300px,1fr)}.iat-mapstage,.iat-map-root{min-height:580px}.iat-side{max-height:580px}}
+@media(max-width:800px){#atlas>.wrap{width:min(94vw,1720px)}.iat-filterbar{grid-template-columns:1fr auto}.iat-filter-toggle{display:block;border:1px solid var(--rule);border-radius:2px;background:var(--navy);color:var(--paper);font:700 9px var(--mono);text-transform:uppercase;padding:0 12px}.iat-filterbar .iat-linkbtn{grid-column:1/-1}.iat-filter-drawer{display:none;grid-template-columns:1fr;padding:10px;border:1px solid var(--rule);background:var(--card)}.iat-filter-drawer.open{display:grid}.iat-fpanel{position:static;width:100%;max-height:260px;box-shadow:none}.iat-body{grid-template-columns:1fr}.iat-side{max-height:none}.iat-mapstage,.iat-map-root{min-height:510px}}
 </style>
 </head>
 <body>
@@ -2184,7 +2202,7 @@ var T={
    cmpPop:"Population",cmpTerr:"Prime territoriale",cmpSect:"Prime sectorielle",cmpFil:"Filières",cmpAss:"Actifs recensés",cmpGov:"Interlocuteurs",cmpRead:"Ce que cela change"
   },
   atlasPoc:"Proof of concept · données indicatives",atlasLayerLbl:"Couche :",
-  atlasL1:"Incitations",atlasL2:"Écosystèmes",atlasL3:"Localisations clés",
+  atlasL1:"Incitations",atlasL2:"Écosystèmes",atlasL3:"Actifs stratégiques",
   atlasPb:"Jusqu'à 15% (cat. B)",atlasPa:"10% (cat. A)",atlasPm:"Cœur métropolitain",
   famInd:"Industrie & automobile",famEnergy:"Énergie verte",famAgri:"Agro & pêche",famTour:"Tourisme & artisanat",famServ:"Services & finance",
   atlasPort:"Région portuaire",atlasInland:"Intérieure",
@@ -2350,7 +2368,7 @@ var T={
    cmpPop:"Population",cmpTerr:"Territorial bonus",cmpSect:"Sector bonus",cmpFil:"Sectors",cmpAss:"Assets listed",cmpGov:"Contacts",cmpRead:"What it changes"
   },
   atlasPoc:"Proof of concept · indicative data",atlasLayerLbl:"Layer:",
-  atlasL1:"Incentives",atlasL2:"Ecosystems",atlasL3:"Key locations",
+  atlasL1:"Incentives",atlasL2:"Ecosystems",atlasL3:"Strategic assets",
   atlasPb:"Up to 15% (cat. B)",atlasPa:"10% (cat. A)",atlasPm:"Metropolitan core",
   famInd:"Industry & automotive",famEnergy:"Green energy",famAgri:"Agri & fishing",famTour:"Tourism & crafts",famServ:"Services & finance",
   atlasPort:"Port region",atlasInland:"Inland",
@@ -2790,7 +2808,7 @@ var IAT_GOVDEF=[
  {k:"cr",fr:{n:"Conseil régional",r:"Collectivité territoriale compétente sur le développement économique régional, les zones d’activités et l’appui aux filières.",s:"Loi organique n° 111-14 relative aux régions"},en:{n:"Regional Council",r:"Territorial authority responsible for regional economic development, activity zones and sector support.",s:"Organic Law no. 111-14 on regions"}},
  {k:"wilaya",fr:{n:"Wilaya de la région",r:"Autorité déconcentrée de l’État : coordination des services extérieurs, autorisations et arbitrages administratifs.",s:"Organisation administrative déconcentrée de l’État"},en:{n:"Regional Wilaya",r:"Deconcentrated State authority: coordination of state services, permits and administrative arbitration.",s:"Deconcentrated State administrative organisation"}}
 ];
-var iatMode="dec",iatRegSel=[],iatSec="all",iatActor="cri",iatAsset="all",iatInc="all",iatCmpOn=false,iatCmpA="cs",iatCmpB="tta",iatAssetSel=null,iatAssetReg=null;
+var iatRegSel=[],iatSec="all",iatActor="all",iatAsset="all",iatInc="all",iatCmpOn=false,iatCmpA="cs",iatCmpB="tta",iatAssetSel=null,iatAssetReg=null,iatSearch="",iatOpenFilter=null;
 function iatL(o){return o?(o[lang]||o.fr||""):"";}
 function iatT(){return t().iat||{};}
 function iatSecOf(k){var d=ATLAS_DATA[k];if(!d)return [];var s=iatL(d.eco.sectors)+" "+iatL(d.inc.sect)+" "+(d.eco.sectors.fr||"")+" "+(d.inc.sect.fr||"");return IAT_SECDEF.filter(function(x){return x.re.test(s);}).map(function(x){return x.k;});}
@@ -2803,22 +2821,20 @@ function iatAssetsOf(k){
 }
 function iatBuildAssetReg(){
  if(iatAssetReg)return;
- var svg=el("atlasMap");if(!svg)return;
- var paths={};Array.prototype.forEach.call(svg.querySelectorAll(".iat-reg"),function(p){paths[p.getAttribute("data-k")]=p;});
  iatAssetReg={};
+ var cv=document.createElement("canvas"),ctx=cv.getContext&&cv.getContext("2d");
  ATLAS_POI.forEach(function(p,i){
   var found=null;
-  try{
-   var pt=svg.createSVGPoint();pt.x=p.x;pt.y=p.y;
-   Object.keys(paths).forEach(function(k){if(found)return;var el2=paths[k];if(el2.isPointInFill&&el2.isPointInFill(pt))found=k;});
-  }catch(e){/* isPointInFill indisponible */}
+  try{if(ctx&&window.Path2D)IAT_ORDER.forEach(function(k){if(!found&&ctx.isPointInPath(new Path2D(ATLAS_GEO[k].d),p.x,p.y))found=k;});}catch(e){/* Path2D indisponible */}
   if(!found){var best=null,bd=1e9;IAT_ORDER.forEach(function(k){var g=ATLAS_GEO[k];if(!g)return;var d=(g.cx-p.x)*(g.cx-p.x)+(g.cy-p.y)*(g.cy-p.y);if(d<bd){bd=d;best=k;}});found=best;}
+  if(p.n==="Golf Royal Dar Es Salam")found="rsk";
   iatAssetReg[i]=found;
  });
 }
 function iatMatch(k){
  var d=ATLAS_DATA[k];if(!d)return false;
  if(iatRegSel.length&&iatRegSel.indexOf(k)===-1)return false;
+ if(iatSearch&&((iatL(d.nom)+" "+iatL(d.eco.sectors)+" "+iatL(d.eco.atout)).toLowerCase().indexOf(iatSearch.toLowerCase())===-1))return false;
  if(iatSec!=="all"&&iatSecOf(k).indexOf(iatSec)===-1)return false;
  if(iatInc!=="all"&&d.prime!==iatInc)return false;
  if(iatAsset!=="all"){
@@ -2830,7 +2846,7 @@ function iatMatch(k){
 }
 function iatMatches(){return IAT_ORDER.filter(iatMatch);}
 function iatBadge(status){var T2=iatT();var lbl=status==="verified"?T2.statusV:(status==="indicative"?T2.statusI:T2.statusU);return '<span class="iat-badge '+status+'">'+lbl+'</span>';}
-function iatBlk(lbl,inner,cls){return '<div class="iat-blk'+(cls?" "+cls:"")+'"><span class="ib-l">'+lbl+'</span>'+inner+'</div>';}
+function iatBlk(lbl,inner,cls){return '<details class="iat-blk'+(cls?" "+cls:"")+'"><summary class="ib-l">'+lbl+'</summary><div class="iat-blk-body">'+inner+'</div></details>';}
 function iatRead(k){
  var d=ATLAS_DATA[k];var T2=iatT();
  var watch=d.prime==="metro"
@@ -2849,7 +2865,8 @@ function iatGovHtml(k){
  var T2=iatT(),d=ATLAS_DATA[k];
  var items=IAT_GOVDEF.filter(function(g){return iatActor==="all"||g.k===iatActor;}).map(function(g){
   var o=g[lang]||g.fr;
-  return '<li><b>'+o.n+' · '+iatL(d.nom)+'</b><br>'+o.r+'<span class="iat-src">'+T2.src+' : '+o.s+iatBadge("verified")+'</span><span class="iat-src">'+T2.noSrc+iatBadge("unavailable")+'</span></li>';
+  var icon=g.k==="cri"?"BriefcaseBusiness":(g.k==="cr"?"Landmark":"Building2");
+  return '<li><b>'+icon+' · '+o.n+' · '+iatL(d.nom)+'</b><br>'+o.r+'<span class="iat-src">'+T2.src+' : '+o.s+iatBadge("verified")+'</span><span class="iat-official">'+T2.noSrc+'</span></li>';
  }).join("");
  return iatBlk(T2.govTitle,'<ul>'+items+'</ul>');
 }
@@ -2874,11 +2891,14 @@ function iatIncHtml(k){
 function iatPassport(k){
  var d=ATLAS_DATA[k],T2=iatT();
  var secs=iatSecOf(k).map(function(s){return iatSecLbl(s);}).join(" · ")||T2.todo;
- return '<div class="iat-pass"><div class="ip-eyebrow">'+T2.passport+'</div><div class="ip-name">'+iatL(d.nom)+'</div>'+
+ var promise=iatL(d.eco.atout);
+ var assets=iatAssetsOf(k);
+ var indicators='<div class="iat-kpis"><div><b>'+iatNum(IAT_POP[k])+'</b><span>'+T2.pop+'</span></div><div><b>'+iatSecOf(k).length+'</b><span>'+T2.sectors+'</span></div><div><b>'+assets.length+'</b><span>'+T2.assetsTitle+'</span></div><div><b>'+iatIncLbl(d.prime)+'</b><span>'+T2.incTitle+'</span></div></div>';
+ return '<div class="iat-pass"><div class="ip-eyebrow">'+T2.passport+'</div><div class="ip-name">'+iatL(d.nom)+'</div><p class="iat-promise">'+promise+'</p>'+indicators+
   iatBlk(T2.pop,'<p>'+iatNum(IAT_POP[k])+' hab.'+iatBadge("verified")+'</p><span class="iat-src">'+T2.src+' : '+T2.popSrc+'</span>')+
   iatBlk(T2.sectors,'<p>'+secs+'</p>')+
   iatIncHtml(k)+iatGovHtml(k)+iatAssetsHtml(k)+iatRead(k)+
-  '<button class="iat-cta" id="iatCta" type="button">'+T2.cta+' →</button></div>';
+  '<div class="iat-actions"><button class="iat-linkbtn" id="iatPassportCompare" type="button">'+T2.compare+'</button><button class="iat-linkbtn" id="iatPassportGov" type="button">'+T2.actor+'</button><button class="iat-cta" id="iatCta" type="button">'+T2.cta+' →</button></div></div>';
 }
 function iatAssetCard(i){
  var p=ATLAS_POI[i],T2=iatT();iatBuildAssetReg();
@@ -2893,17 +2913,18 @@ function iatAssetCard(i){
 function iatWelcome(){
  var T2=iatT();
  return '<div class="iat-pass"><div class="ip-eyebrow">'+T2.passport+'</div><div class="ip-name">'+T2.welcomeT+'</div>'+
-  '<div class="iat-blk"><p>'+T2.welcomeP+'</p></div><div class="iat-blk read"><p>'+T2.welcomeH+'</p></div></div>';
+  '<p>'+T2.welcomeP+'</p><div class="iat-discovery"><button type="button" data-discover="region">'+(lang==="fr"?"Explorer par région":"Explore by region")+'</button><button type="button" data-discover="sector">'+(lang==="fr"?"Partir d’un secteur":"Start with a sector")+'</button><button type="button" data-discover="asset">'+(lang==="fr"?"Identifier les meilleurs actifs":"Identify the best assets")+'</button></div><div class="iat-blk read" open><summary class="ib-l">'+T2.readTitle+'</summary><div class="iat-blk-body"><p>'+T2.welcomeH+'</p></div></div></div>';
 }
 function iatFiltersHtml(){
  var T2=iatT();
- function grp(lbl,rows){return '<div class="iat-fgrp"><span class="ac-lbl">'+lbl+'</span><div class="iat-frow">'+rows+'</div></div>';}
+ function count(f){if(f==="reg")return iatRegSel.length;if(f==="sec")return iatSec==="all"?0:1;if(f==="inc")return iatInc==="all"?0:1;if(f==="asset")return iatAsset==="all"?0:1;if(f==="actor")return iatActor==="all"?0:1;return 0;}
+ function grp(key,lbl,rows){var n=count(key);return '<div class="iat-fgrp"><button class="iat-ftrigger" type="button" data-open="'+key+'" aria-expanded="'+(iatOpenFilter===key)+'"><span>'+lbl+'</span>'+(n?'<b>'+n+'</b>':'')+'<i>+</i></button><div class="iat-fpanel" '+(iatOpenFilter===key?'':'hidden')+'><div class="iat-frow">'+rows+'</div></div></div>';}
  var regs=IAT_ORDER.map(function(k){var on=iatRegSel.indexOf(k)!==-1;return '<button class="iat-fbtn" data-f="reg" data-v="'+k+'" aria-pressed="'+on+'">'+iatL(ATLAS_DATA[k].nom)+'</button>';}).join("");
- var secs='<button class="iat-fbtn" data-f="sec" data-v="all" aria-pressed="'+(iatSec==="all")+'">'+T2.all+'</button>'+IAT_SECDEF.map(function(s){return '<button class="iat-fbtn" data-f="sec" data-v="'+s.k+'" aria-pressed="'+(iatSec===s.k)+'">'+(s[lang]||s.fr)+'</button>';}).join("");
- var incs='<button class="iat-fbtn" data-f="inc" data-v="all" aria-pressed="'+(iatInc==="all")+'">'+T2.all+'</button>'+IAT_INCDEF.map(function(x){return '<button class="iat-fbtn" data-f="inc" data-v="'+x.k+'" aria-pressed="'+(iatInc===x.k)+'">'+(x[lang]||x.fr)+'</button>';}).join("");
- var assets='<button class="iat-fbtn" data-f="asset" data-v="all" aria-pressed="'+(iatAsset==="all")+'">'+T2.all+'</button>'+POI_CATS.map(function(c){return '<button class="iat-fbtn" data-f="asset" data-v="'+c[0]+'" aria-pressed="'+(iatAsset===c[0])+'">'+c[1][lang]+'</button>';}).join("");
- var actors=IAT_GOVDEF.map(function(g){return '<button class="iat-fbtn" data-f="actor" data-v="'+g.k+'" aria-pressed="'+(iatActor===g.k)+'">'+(g[lang]||g.fr).n+'</button>';}).join("")+'<button class="iat-fbtn" data-f="actor" data-v="all" aria-pressed="'+(iatActor==="all")+'">'+T2.all+'</button>';
- return grp(T2.region,regs)+grp(T2.sector,secs)+grp(T2.inc,incs)+grp(T2.asset,assets)+grp(T2.actor,actors);
+ var secs=IAT_SECDEF.map(function(x){return '<button class="iat-fbtn" data-f="sec" data-v="'+x.k+'" aria-pressed="'+(iatSec===x.k)+'">'+(x[lang]||x.fr)+'</button>';}).join("");
+ var incs=IAT_INCDEF.map(function(x){return '<button class="iat-fbtn" data-f="inc" data-v="'+x.k+'" aria-pressed="'+(iatInc===x.k)+'">'+(x[lang]||x.fr)+'</button>';}).join("");
+ var assets=POI_CATS.map(function(c){return '<button class="iat-fbtn" data-f="asset" data-v="'+c[0]+'" aria-pressed="'+(iatAsset===c[0])+'">'+c[1][lang]+'</button>';}).join("");
+ var actors=IAT_GOVDEF.map(function(g){return '<button class="iat-fbtn" data-f="actor" data-v="'+g.k+'" aria-pressed="'+(iatActor===g.k)+'">'+(g[lang]||g.fr).n+'</button>';}).join("");
+ return '<div class="iat-filterbar"><label class="iat-search"><span class="sr-only">'+(lang==="fr"?"Rechercher":"Search")+'</span><input id="iatSearch" value="'+atlasEsc(iatSearch)+'" placeholder="'+(lang==="fr"?"Rechercher un territoire, un secteur ou un actif":"Search a territory, sector or asset")+'"></label><button class="iat-filter-toggle" id="iatFilterToggle" type="button" aria-expanded="false">'+(lang==="fr"?"Filtres":"Filters")+'</button><button class="iat-linkbtn" id="iatClear" type="button">'+(lang==="fr"?"Effacer":"Clear")+'</button></div><div class="iat-filter-drawer" id="iatFilterDrawer">'+grp("reg",T2.region,regs)+grp("sec",T2.sector,secs)+grp("inc",T2.inc,incs)+grp("asset",T2.asset,assets)+grp("actor",T2.actor,actors)+'</div>';
 }
 function iatChipsHtml(n){
  var T2=iatT(),c=[];
@@ -2945,25 +2966,26 @@ function renderAtlas(){
  var ti=el("atlasTitle");if(ti)ti.innerHTML=t().atlasTitle;
  var ld=el("atlasLead");if(ld)ld.innerHTML=t().atlasLead;
  var pb=el("atlasPocBadge");if(pb)pb.innerHTML='<span class="poc-chip">'+t().atlasPoc+'</span>';
- var tti=el("atlasTi");if(tti)tti.textContent=t().atlasTi;
- var tno=el("atlasNote");if(tno)tno.innerHTML=t().atlasNote;
+ var tti=el("atlasTi");if(tti)tti.textContent=lang==="fr"?"De la lecture territoriale à la présélection d’implantation":"From territorial intelligence to investment-location shortlisting";
+ var tno=el("atlasNote");if(tno)tno.textContent=lang==="fr"?"L’Investor Atlas croise les caractéristiques du projet, les capacités territoriales, les incitations applicables et les interlocuteurs publics. Il transforme la carte en première étape d’un parcours d’investissement documenté et activable.":"The Investor Atlas cross-references project characteristics, territorial capabilities, applicable incentives and public-sector contacts. It turns the map into the first step of a documented, actionable investment journey.";
  var matches=iatMatches();
  var modes=el("iatModes");
- if(modes){
-  modes.innerHTML='<button type="button" data-m="dec" aria-pressed="'+(iatMode==="dec")+'">'+T2.modeDec+'</button><button type="button" data-m="sat" aria-pressed="'+(iatMode==="sat")+'">'+T2.modeSat+'</button>';
-  Array.prototype.forEach.call(modes.querySelectorAll("button"),function(b){b.addEventListener("click",function(){iatMode=b.getAttribute("data-m");renderAtlas();});});
- }
+ if(modes)modes.textContent=lang==="fr"?"SMART MAP · VUE DÉCISIONNELLE":"SMART MAP · DECISION VIEW";
  var tools=el("iatTools");
  if(tools){
   tools.innerHTML='<span class="iat-count"><b>'+matches.length+'</b> / 12 '+T2.count+'</span>'+
    '<button class="iat-linkbtn" id="iatCmpBtn" type="button" aria-pressed="'+iatCmpOn+'">'+T2.compare+'</button>'+
    '<button class="iat-linkbtn" id="iatReset" type="button">'+T2.reset+'</button>';
   var cb=el("iatCmpBtn");if(cb)cb.addEventListener("click",function(){iatCmpOn=!iatCmpOn;renderAtlas();});
-  var rb=el("iatReset");if(rb)rb.addEventListener("click",function(){iatRegSel=[];iatSec="all";iatInc="all";iatAsset="all";iatActor="cri";atlasSel=null;iatAssetSel=null;renderAtlas();});
+  var rb=el("iatReset");if(rb)rb.addEventListener("click",function(){iatRegSel=[];iatSec="all";iatInc="all";iatAsset="all";iatActor="all";iatSearch="";iatOpenFilter=null;atlasSel=null;iatAssetSel=null;renderAtlas();});
  }
  var flt=el("iatFilters");
  if(flt){
   flt.innerHTML=iatFiltersHtml();
+  var si=el("iatSearch");if(si)si.addEventListener("input",function(){iatSearch=si.value;renderAtlas();});
+  var ft=el("iatFilterToggle"),fd=el("iatFilterDrawer");if(ft&&fd)ft.addEventListener("click",function(){var open=fd.classList.toggle("open");ft.setAttribute("aria-expanded",String(open));});
+  var clr=el("iatClear");if(clr)clr.addEventListener("click",function(){iatRegSel=[];iatSec="all";iatInc="all";iatAsset="all";iatActor="all";iatSearch="";renderAtlas();});
+  Array.prototype.forEach.call(flt.querySelectorAll(".iat-ftrigger"),function(b){b.addEventListener("click",function(){iatOpenFilter=iatOpenFilter===b.dataset.open?null:b.dataset.open;renderAtlas();});});
   Array.prototype.forEach.call(flt.querySelectorAll(".iat-fbtn"),function(b){b.addEventListener("click",function(){
    var f=b.getAttribute("data-f"),v=b.getAttribute("data-v");
    if(f==="reg"){var i=iatRegSel.indexOf(v);if(i===-1)iatRegSel.push(v);else iatRegSel.splice(i,1);}
@@ -2984,7 +3006,7 @@ function renderAtlas(){
  }
  var ctrl=el("atlasCtrl");
  if(ctrl){
-  var layers=[["prime",t().atlasL1],["fam",t().atlasL2],["loc",t().atlasL3]];
+  var layers=[["prime",t().atlasL1],["fam",t().atlasL2],["loc",lang==="fr"?"Actifs stratégiques":"Strategic assets"],["gov",lang==="fr"?"Gouvernance":"Governance"]];
   ctrl.innerHTML='<span class="ac-lbl">'+t().atlasLayerLbl+'</span>'+layers.map(function(l){return '<button class="ac-btn'+(l[0]===atlasLayer?" on":"")+'" data-l="'+l[0]+'" aria-pressed="'+(l[0]===atlasLayer)+'">'+l[1]+'</button>';}).join("");
   Array.prototype.forEach.call(ctrl.querySelectorAll(".ac-btn"),function(b){b.addEventListener("click",function(){atlasLayer=b.getAttribute("data-l");if(atlasLayer!=="loc")iatAssetSel=null;renderAtlas();});});
  }
@@ -2996,48 +3018,19 @@ function renderAtlas(){
    Array.prototype.forEach.call(sub.querySelectorAll(".chip"),function(b){b.addEventListener("click",function(){var key=atlasCat+":"+b.dataset.tp;if(atlasTypeOff[key])delete atlasTypeOff[key];else atlasTypeOff[key]=1;renderAtlas();});});
   }else sub.innerHTML="";
  }
- var svg=el("atlasMap"),sat=el("iatSat");
- if(svg&&sat){
-  if(iatMode==="sat"){
-   svg.setAttribute("hidden","hidden");sat.removeAttribute("hidden");
-   sat.innerHTML='<span class="st">'+T2.satTitle+'</span><p>'+T2.satTxt+'</p>';
-  }else{
-   sat.setAttribute("hidden","hidden");svg.removeAttribute("hidden");
-   svg.setAttribute("viewBox",ATLAS_VB);
-   var parts="";
-   IAT_ORDER.forEach(function(k){
-    var g=ATLAS_GEO[k];if(!g)return;
-    var cls="iat-reg atlas-reg"+(atlasSel===k?" sel":"")+(iatCmpOn&&(k===iatCmpA||k===iatCmpB)?" cmp":"")+(iatMatch(k)?"":" dim");
-    parts+='<path class="'+cls+'" data-k="'+k+'" d="'+g.d+'" fill="'+atlasFill(k)+'" tabindex="0" role="button" aria-label="'+atlasEsc(iatL(ATLAS_DATA[k].nom))+'"><title>'+atlasEsc(iatL(ATLAS_DATA[k].nom))+'</title></path>';
-   });
-   if(atlasLayer==="loc"){
-    if(atlasCat==="infra"&&poiTypeOn("infra","lgv"))parts+='<path class="lgv-line" d="'+LGV_PATH+'"/><path class="lgv-line plan" d="'+LGV_PLAN+'"/>';
-    ATLAS_POI.forEach(function(p,idx){
-     if(p.c!==atlasCat||!poiTypeOn(p.c,p.t))return;
-     parts+='<g class="iat-asset atlas-poi'+(iatAssetSel===idx?" sel":"")+'" data-i="'+idx+'" tabindex="0" role="button" aria-label="'+atlasEsc(p.n)+'"><title>'+atlasEsc(p.n)+'</title><circle cx="'+p.x+'" cy="'+p.y+'" r="5" fill="'+POI_COL[p.t]+'"/></g>';
-    });
-   }
-   svg.innerHTML=parts;
-   iatAssetReg=null;iatBuildAssetReg();
-   Array.prototype.forEach.call(svg.querySelectorAll(".iat-reg"),function(pp){
-    var pick=function(){atlasSel=pp.getAttribute("data-k");iatAssetSel=null;renderAtlas();};
-    pp.addEventListener("click",pick);
-    pp.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();pick();}});
-   });
-   Array.prototype.forEach.call(svg.querySelectorAll(".iat-asset"),function(gn){
-    var pick=function(){iatAssetSel=parseInt(gn.getAttribute("data-i"),10);atlasSel=null;renderAtlas();};
-    gn.addEventListener("click",pick);
-    gn.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();pick();}});
-   });
-  }
- }
- var lg=el("atlasLegend");if(lg)lg.innerHTML=(iatMode==="sat"||atlasLayer==="loc")?"":atlasLegendHtml();
+ var mapRoot=el("investorAtlasMapRoot");
+ iatAssetReg=null;
+ if(mapRoot){try{window.dispatchEvent(new CustomEvent("bf-atlas-update"));}catch(e){}}
+ var lg=el("atlasLegend");if(lg)lg.innerHTML=atlasLayer==="loc"?"":atlasLegendHtml();
  var side=el("atlasSide");
  if(side){
   if(iatAssetSel!=null&&ATLAS_POI[iatAssetSel])side.innerHTML=iatAssetCard(iatAssetSel);
   else if(atlasSel&&ATLAS_DATA[atlasSel])side.innerHTML=iatPassport(atlasSel);
   else side.innerHTML=iatWelcome();
   var cta=el("iatCta");if(cta)cta.addEventListener("click",iatGoSimulator);
+  var pc=el("iatPassportCompare");if(pc)pc.addEventListener("click",function(){iatCmpOn=true;renderAtlas();});
+  var pg=el("iatPassportGov");if(pg)pg.addEventListener("click",function(){atlasLayer="gov";iatActor="all";renderAtlas();});
+  Array.prototype.forEach.call(side.querySelectorAll("[data-discover]"),function(b){b.addEventListener("click",function(){var f=b.getAttribute("data-discover");iatOpenFilter=f==="region"?"reg":(f==="sector"?"sec":"asset");renderAtlas();});});
  }
  var cmp=el("iatCompare");
  if(cmp){
@@ -3049,6 +3042,8 @@ function renderAtlas(){
   }else{cmp.setAttribute("hidden","hidden");cmp.innerHTML="";}
  }
 }
+
+if(!window.__iatDismissBound){window.__iatDismissBound=true;document.addEventListener("keydown",function(e){if(e.key==="Escape"&&iatOpenFilter){iatOpenFilter=null;renderAtlas();}});document.addEventListener("pointerdown",function(e){var f=el("iatFilters");if(iatOpenFilter&&f&&!f.contains(e.target)){iatOpenFilter=null;renderAtlas();}});}
 
 function renderMatrix(){
  el("m2tag").textContent=t().m2tag;el("m2title").innerHTML=t().m2title[0]+"<em>"+t().m2title[1]+"</em>";el("m2lead").textContent=t().m2lead;

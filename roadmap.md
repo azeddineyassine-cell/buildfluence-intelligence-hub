@@ -7,4 +7,4 @@
 - [x] Mettre à jour uniquement la carte Benchmark API de la page d’accueil.
 - [x] Vérifier les accès public/Premium, thèmes, redirection et absence des termes interdits.
 - [ ] Corriger la traduction dynamique FR/EN des panneaux verrouillés dans le fichier fourni. Bloqué par l’interdiction de modifier son contenu interne.
-- [ ] Compléter puis faire approuver le plan de correction UX/UI de l’Investor Atlas avant toute implémentation.
+- [x] Compléter, faire approuver et implémenter la correction UX/UI de l’Investor Atlas.
