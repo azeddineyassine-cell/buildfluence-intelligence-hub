@@ -82,6 +82,7 @@ const styles = `
   .iam-shell{position:relative;width:100%;height:100%;background:var(--iam-paper,#FAF6ED);background-image:repeating-radial-gradient(circle at 28% 32%,rgba(13,27,42,.04) 0 1px,transparent 1px 9px)}
   .iam-shell[data-theme=dark]{--iam-paper:#142235;--iam-ivory:#142235;--iam-navy:#F5F1E8;--iam-line:#415064;background-image:repeating-radial-gradient(circle at 28% 32%,rgba(245,241,232,.04) 0 1px,transparent 1px 9px)}
   .iam-map{display:block;width:100%;height:100%}
+  .iam-view{transform-box:view-box!important;transform-origin:0 0!important}
   .iam-region{cursor:pointer;stroke:var(--iam-paper,#FAF6ED);stroke-width:1.1;vector-effect:non-scaling-stroke;transition:fill .2s ease,opacity .2s ease}
   .iam-region:hover,.iam-region:focus-visible{fill:var(--iam-gold-soft,#D4B866);outline:none}
   .iam-region[data-selected=true]{fill:var(--iam-navy,#0D1B2A);stroke:var(--iam-gold,#C9A84C);stroke-width:2.4}
@@ -146,7 +147,7 @@ const InvestorAtlasMap = ({ hostDocument, hostWindow }: Props) => {
           </pattern>
         </defs>
         <motion.g
-          style={{ transformOrigin: "0px 0px" }}
+          className="iam-view"
           animate={{ x: -view.x * scale, y: -view.y * scale, scale }}
           transition={{ duration, ease: "easeOut" }}
         >
