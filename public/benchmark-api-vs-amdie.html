@@ -2202,7 +2202,7 @@ var T={
    cmpPop:"Population",cmpTerr:"Prime territoriale",cmpSect:"Prime sectorielle",cmpFil:"Filières",cmpAss:"Actifs recensés",cmpGov:"Interlocuteurs",cmpRead:"Ce que cela change"
   },
   atlasPoc:"Proof of concept · données indicatives",atlasLayerLbl:"Couche :",
-  atlasL1:"Incitations",atlasL2:"Écosystèmes",atlasL3:"Localisations clés",
+  atlasL1:"Incitations",atlasL2:"Écosystèmes",atlasL3:"Actifs stratégiques",
   atlasPb:"Jusqu'à 15% (cat. B)",atlasPa:"10% (cat. A)",atlasPm:"Cœur métropolitain",
   famInd:"Industrie & automobile",famEnergy:"Énergie verte",famAgri:"Agro & pêche",famTour:"Tourisme & artisanat",famServ:"Services & finance",
   atlasPort:"Région portuaire",atlasInland:"Intérieure",
@@ -2368,7 +2368,7 @@ var T={
    cmpPop:"Population",cmpTerr:"Territorial bonus",cmpSect:"Sector bonus",cmpFil:"Sectors",cmpAss:"Assets listed",cmpGov:"Contacts",cmpRead:"What it changes"
   },
   atlasPoc:"Proof of concept · indicative data",atlasLayerLbl:"Layer:",
-  atlasL1:"Incentives",atlasL2:"Ecosystems",atlasL3:"Key locations",
+  atlasL1:"Incentives",atlasL2:"Ecosystems",atlasL3:"Strategic assets",
   atlasPb:"Up to 15% (cat. B)",atlasPa:"10% (cat. A)",atlasPm:"Metropolitan core",
   famInd:"Industry & automotive",famEnergy:"Green energy",famAgri:"Agri & fishing",famTour:"Tourism & crafts",famServ:"Services & finance",
   atlasPort:"Port region",atlasInland:"Inland",
@@ -3028,6 +3028,9 @@ function renderAtlas(){
   else if(atlasSel&&ATLAS_DATA[atlasSel])side.innerHTML=iatPassport(atlasSel);
   else side.innerHTML=iatWelcome();
   var cta=el("iatCta");if(cta)cta.addEventListener("click",iatGoSimulator);
+  var pc=el("iatPassportCompare");if(pc)pc.addEventListener("click",function(){iatCmpOn=true;renderAtlas();});
+  var pg=el("iatPassportGov");if(pg)pg.addEventListener("click",function(){atlasLayer="gov";iatActor="all";renderAtlas();});
+  Array.prototype.forEach.call(side.querySelectorAll("[data-discover]"),function(b){b.addEventListener("click",function(){var f=b.getAttribute("data-discover");iatOpenFilter=f==="region"?"reg":(f==="sector"?"sec":"asset");renderAtlas();});});
  }
  var cmp=el("iatCompare");
  if(cmp){
