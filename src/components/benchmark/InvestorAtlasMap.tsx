@@ -30,7 +30,7 @@ type AtlasRegion = { d: string; cx: number; cy: number };
 type AtlasPoi = { n: string; c: string; t: string; city: string; x: number; y: number };
 type AtlasData = { nom: { fr: string; en: string }; prime?: string; fam?: string; port?: boolean };
 
-type AtlasHost = Window & {
+export type InvestorAtlasHost = Window & {
   ATLAS_GEO?: Record<string, AtlasRegion>;
   ATLAS_DATA?: Record<string, AtlasData>;
   ATLAS_POI?: AtlasPoi[];
@@ -97,7 +97,7 @@ const styles = `
 
 interface InvestorAtlasMapProps {
   hostDocument: Document;
-  hostWindow: AtlasHost;
+  hostWindow: InvestorAtlasHost;
 }
 
 const InvestorAtlasMap = ({ hostDocument, hostWindow }: InvestorAtlasMapProps) => {
