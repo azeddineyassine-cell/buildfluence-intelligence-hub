@@ -4,7 +4,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { useLanguage } from "@/contexts/LanguageContext";
 import SEO from "@/components/SEO";
 import { WorldBenchmarkMapPortal } from "@/components/benchmark/WorldBenchmarkMap";
-import { InvestorAtlasMapPortal, type InvestorAtlasHost } from "@/components/benchmark/InvestorAtlasMap";
+
 
 const BenchmarkApiVsAmdie = () => {
   const { session, loading } = useAuth();
