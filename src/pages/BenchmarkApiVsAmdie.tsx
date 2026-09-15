@@ -12,7 +12,7 @@ const BenchmarkApiVsAmdie = () => {
   const location = useLocation();
   const frameRef = useRef<HTMLIFrameElement>(null);
   const [mapMount, setMapMount] = useState<{ node: HTMLElement; document: Document } | null>(null);
-  const [atlasMount, setAtlasMount] = useState<{ node: HTMLElement; document: Document; hostWindow: InvestorAtlasHost } | null>(null);
+  
   const requestedPremium = new URLSearchParams(location.search).get("access") === "premium";
   const premium = requestedPremium || (!loading && Boolean(session));
 
