@@ -35,9 +35,6 @@ const BenchmarkApiVsAmdie = () => {
     const document = frame?.contentDocument;
     const node = document?.getElementById("worldMapRoot");
     if (document && node) setMapMount({ node, document });
-    const atlasNode = document?.getElementById("investorAtlasMapRoot");
-    const hostWindow = frame?.contentWindow;
-    if (document && atlasNode && hostWindow) setAtlasMount({ node: atlasNode, document, hostWindow: hostWindow as InvestorAtlasHost });
   }, [syncAccess]);
 
   useEffect(() => {
