@@ -51,6 +51,26 @@ Pour la grille des critères :
 - préserver la note, le diagnostic, les impacts, la solution, le gain et la source dans le détail latéral ;
 - rendre l’échelle 1 à 5 plus lisible sans modifier sa définition.
 
+Pour le Radar comparatif `#m3` :
+- le conserver immédiatement après la Heatmap `#m2`, comme troisième grille de la séquence ;
+- conserver l’eyebrow **03 · RADAR COMPARATIF · SUPERPOSABLE** ;
+- utiliser le titre **Comparer les signatures fonctionnelles** ;
+- utiliser l’introduction : **La Heatmap localise les écarts critère par critère. Le Radar en révèle la structure générale : couverture homogène, spécialisation ou rupture dans le parcours investisseur. Morocco Now reste affiché comme référence afin de rendre immédiatement visible la distance avec chaque concurrent.** ;
+- expliciter son rôle analytique : étendue de la couverture fonctionnelle, régularité ou déséquilibre du parcours, spécialisations concurrentes, zones de rupture de Morocco Now et distance avec les dispositifs les plus complets ;
+- préserver `renderRadar()` et son dessin fondé sur `MATRIX`, `ORDER` et `AG` ;
+- maintenir Morocco Now toujours visible ;
+- conserver l’activation individuelle des cinq concurrents et ajouter les commandes **Tout afficher** et **Morocco Now uniquement** ;
+- rendre chaque axe accessible au survol et au focus clavier avec le critère, le pays et la note correspondante ;
+- fournir dans la légende des états sélectionné/désactivé explicites par le texte, la forme et le contraste, sans dépendre uniquement de la couleur ;
+- ne pas ajouter d’animation décorative permanente ;
+- ajouter après le Radar le bandeau suivant :
+  - **Ce que montre la grille** : Les concurrents les plus avancés couvrent une surface fonctionnelle plus large et plus régulière, tandis que Morocco Now demeure concentré sur un nombre limité de fonctions.
+  - **Ce que cela signifie** : L’écart ne tient pas à une fonctionnalité isolée, mais à la continuité du parcours proposé à l’investisseur.
+  - **Risque pour le Maroc** : Une rupture sur quelques fonctions décisives oblige l’investisseur à chercher ailleurs les informations et services nécessaires à son implantation.
+  - **Décision à instruire** : Prioriser les fonctions qui agrandissent et rééquilibrent la couverture du parcours, plutôt que multiplier les contenus promotionnels.
+
+Ces quatre formulations sont soutenues par la matrice existante : elles décrivent la distribution relative des 12 notes et les lacunes déjà documentées, sans ajouter de donnée, de score ou de causalité nouvelle.
+
 ### 3. Synthèse décisionnelle
 
 Ajouter après le radar la synthèse fournie, puis les priorités **Territorialiser / Objectiver / Convertir**. Elle sera présentée comme une interprétation éditoriale, jamais comme une nouvelle mesure.
@@ -66,17 +86,32 @@ Ajouter après le radar la synthèse fournie, puis les priorités **Territoriali
 - Différencier la fiche Maroc et reprendre exactement le cap demandé.
 - Gérer survol avec maintien vers la fiche, clic verrouillé/déverrouillé, toucher, bouton de fermeture, Tab, Entrée, Espace, Échap et focus visible.
 
+## Ordre final garanti
+
+1. cadrage exécutif ;
+2. carte de maturité `#m1` ;
+3. interprétation `#m1` ;
+4. Heatmap 6 × 12 `#m2` ;
+5. interprétation `#m2` ;
+6. Radar comparatif `#m3` ;
+7. interprétation `#m3` ;
+8. synthèse décisionnelle ;
+9. carte mondiale vectorielle interactive finale.
+
 ## Données garanties inchangées
 
 Aucune modification de valeur ou de méthodologie dans `AG`, `MATRIX`, `DIAG`, `NOTE`, `SRCURL`, `ORDER` ou les coordonnées géographiques. Aucun score, critère, pays, source, date, unité ou calcul ne sera ajouté ou recalculé.
 
 Les textes d’interprétation spécifiques aux trois grilles et aux fiches pays seront dérivés uniquement des formulations déjà présentes dans le benchmark. En cas d’absence documentaire, la mention de consolidation sera utilisée.
 
+Les valeurs du Radar resteront strictement inchangées : aucun changement dans `MATRIX`, `ORDER`, `AG`, les notes, scores, axes ou couleurs d’identification existantes. Aucune des trois grilles ne sera supprimée.
+
 ## Validation après implémentation
 
 - Vérifier les 17 contrôles demandés, avec un résultat explicite pour chacun.
 - Tester FR/EN et clair/sombre.
 - Tester souris, toucher simulé et clavier.
+- Confirmer spécifiquement que `#m3` reste après `#m2`, que `renderRadar()` et ses interactions sont conservés, que Morocco Now reste toujours visible et que la carte mondiale vient après le Radar et la synthèse.
 - Contrôler l’absence d’erreurs dans la console et l’intégrité des autres onglets.
 - Capturer les rendus à 1440, 1024, 768 et 390 px.
 - Ne rien publier.
