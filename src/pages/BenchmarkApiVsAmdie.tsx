@@ -58,7 +58,7 @@ const BenchmarkApiVsAmdie = () => {
         className="block min-h-screen w-full border-0"
       />
       {mapMount && <WorldBenchmarkMapPortal mountNode={mapMount.node} hostDocument={mapMount.document} />}
-      {atlasMount && <InvestorAtlasMapPortal mountNode={atlasMount.node} hostDocument={atlasMount.document} hostWindow={atlasMount.hostWindow} />}
+      
     </>
   );
 };
