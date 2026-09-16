@@ -77,7 +77,9 @@ body.hide-hero .hero,body.hide-hero .statstrip,body.hide-hero .stat-caption{disp
 .hero-mapbg{position:absolute;inset:0;width:100%;height:100%;z-index:0}
 .hero-scrim{position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(90deg,var(--hero-surface) 0%,var(--hero-surface) 42%,transparent 58%)}
 .hero-content{position:relative;z-index:2;width:45%;padding:clamp(20px,3.2vw,40px) clamp(24px,3vw,48px);max-width:720px}
-#worldMapRoot{position:absolute;z-index:3;inset:0 0 0 auto;width:55%;min-height:360px}
+#worldMapRoot{position:relative;width:100%;min-height:460px}
+.hero-content{width:100%;max-width:none}
+.hero-scrim{background:linear-gradient(90deg,var(--hero-surface) 0%,var(--hero-surface) 74%,transparent 100%)}
 .hero-content .kicker{color:var(--gold);opacity:.95;margin-bottom:12px;line-height:1.5}
 .hero-content .hero-h1{font-family:var(--display);font-weight:900;color:var(--hero-ink);font-size:clamp(20px,2.7vw,34px);line-height:1.22;letter-spacing:-.005em}
 .hero-content .hero-h1 em{color:var(--gold);font-style:italic}
@@ -103,7 +105,7 @@ body.hide-hero .hero,body.hide-hero .statstrip,body.hide-hero .stat-caption{disp
 @media(max-width:900px){
  .hero{display:flex;min-height:0}
  .hero-content{width:100%;max-width:100%;order:1}
- #worldMapRoot{position:relative;inset:auto;width:100%;min-height:320px;order:2}
+ #worldMapRoot{min-height:340px}
  .map-label{position:static;text-align:left;padding:0 20px;margin-bottom:10px}
  .map-legend{padding:14px 20px 18px}
 }
