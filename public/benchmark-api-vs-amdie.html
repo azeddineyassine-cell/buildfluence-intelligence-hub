@@ -3390,7 +3390,124 @@ function renderPlan(){
    ========================================================================= */
 function countUp(){document.querySelectorAll("[data-cu]").forEach(function(e){var target=parseFloat(e.getAttribute("data-cu"));if(!target)return;var cur=0;var step=target/30;var iv=setInterval(function(){cur+=step;if(cur>=target){cur=target;clearInterval(iv);}e.textContent=Number.isInteger(target)?Math.round(cur):cur.toFixed(1);},22);});}
 
-function renderAll(){renderChrome();renderHero();renderMethodo();renderBubble();renderMatrix();renderRadar();renderDuel();renderFoncier();renderAtlas();renderSim();renderCost();renderVerdict();renderPlan();if(typeof LOCKED_PHASES!=="undefined"&&LOCKED_PHASES[currentPhase]&&!getPremiumAccess())renderLockedTeaser(currentPhase);}
+/* =========================================================================
+   POSITIONNEMENT : couche éditoriale (cadrage, interprétation, synthèse)
+   Aucune donnée, note, score, axe ou couleur n'est modifié ici.
+   ========================================================================= */
+var POS={
+ fr:{
+  execEyebrow:"TROIS GRILLES · UNE DÉCISION",
+  execTitle:"De la visibilité à la décision : où Morocco Now perd-il l’investisseur ?",
+  execLead:"Trois lectures complémentaires permettent de situer Morocco Now, d’identifier les écarts qui structurent le parcours investisseur et de hiérarchiser les leviers de transformation.",
+  facts:[["POSITION","Morocco Now conserve une logique principalement promotionnelle."],
+         ["ÉCART","Les références les plus avancées combinent contenus, données et outils d’aide à la décision."],
+         ["PRIORITÉ","Transformer la visibilité internationale en parcours continu jusqu’à l’implantation."]],
+  intro1:["01","Où se situe Morocco Now entre visibilité et capacité d’action ?","La grille croise la maturité numérique d’aide à la décision et la capacité marketing à transformer l’intérêt en projet, pour chacune des six agences comparées."],
+  axes1:[["MATURITÉ TECH / DATA","capacité numérique d’aide à la décision"],
+         ["MARKETING INVESTISSEUR","capacité à transformer l’intérêt en projet"]],
+  quad1:[["QUADRANT","Vitrine institutionnelle"],["QUADRANT","Promotion active mais peu outillée"],["QUADRANT","Outils numériques sans conversion"],["QUADRANT","Plateforme d’investissement intégrée"]],
+  read1:[["CE QUE MONTRE LA GRILLE","Morocco Now se situe au niveau le plus bas des deux dimensions mesurées, loin des dispositifs les plus outillés."],
+         ["CE QUE CELA SIGNIFIE","Le dispositif reste une vitrine : il informe sans permettre de qualifier une décision."],
+         ["RISQUE POUR LE MAROC","L’intérêt suscité ne trouve pas d’outil pour se transformer en projet documenté."],
+         ["DÉCISION À INSTRUIRE","Doter le dispositif de capacités numériques de décision avant d’élargir la promotion."]],
+  intro2:["02","Sur quels critères l’écart se creuse-t-il précisément ?","La grille compare les six dispositifs sur les 12 critères du benchmark, notés de 1 à 5, et localise les fonctions manquantes."],
+  journey2:[["ATTIRER","Le dispositif rend-il l’offre du pays visible et compréhensible ?"],
+            ["CONVAINCRE","Permet-il de comparer, qualifier et sécuriser une option ?"],
+            ["CONVERTIR","Permet-il de passer à une démarche concrète sans rupture de parcours ?"]],
+  read2:[["CE QUE MONTRE LA GRILLE","Les notes les plus faibles de Morocco Now se concentrent sur les fonctions outillées : cartographie, simulation, données exploitables."],
+         ["CE QUE CELA SIGNIFIE","L’écart est fonctionnel et non éditorial : ce sont des services qui manquent, pas des contenus."],
+         ["RISQUE POUR LE MAROC","L’investisseur doit reconstituer lui-même les informations nécessaires à son implantation."],
+         ["DÉCISION À INSTRUIRE","Prioriser les critères où la note reste la plus basse et l’usage investisseur le plus fréquent."]],
+  intro3:["03","Quelle est la structure générale de chaque dispositif ?","La Heatmap localise les écarts critère par critère. Le Radar en révèle la structure générale : couverture homogène, spécialisation ou rupture dans le parcours investisseur. Morocco Now reste affiché comme référence afin de rendre immédiatement visible la distance avec chaque concurrent."],
+  role3:[["ÉTENDUE","surface fonctionnelle couverte par le dispositif"],
+         ["RÉGULARITÉ","équilibre ou déséquilibre du parcours investisseur"],
+         ["SPÉCIALISATION","fonctions sur lesquelles un concurrent se distingue"],
+         ["RUPTURE","zones où Morocco Now décroche du parcours"]],
+  read3:[["CE QUE MONTRE LA GRILLE","Les concurrents les plus avancés couvrent une surface fonctionnelle plus large et plus régulière, tandis que Morocco Now demeure concentré sur un nombre limité de fonctions."],
+         ["CE QUE CELA SIGNIFIE","L’écart ne tient pas à une fonctionnalité isolée, mais à la continuité du parcours proposé à l’investisseur."],
+         ["RISQUE POUR LE MAROC","Une rupture sur quelques fonctions décisives oblige l’investisseur à chercher ailleurs les informations et services nécessaires à son implantation."],
+         ["DÉCISION À INSTRUIRE","Prioriser les fonctions qui agrandissent et rééquilibrent la couverture du parcours, plutôt que multiplier les contenus promotionnels."]],
+  radarAll:"Tout afficher",radarMa:"Morocco Now uniquement",
+  synthEyebrow:"LECTURE DÉCISIONNELLE",
+  synthTitle:"Le véritable retard n’est pas promotionnel. Il est transactionnel.",
+  synthText:"Morocco Now remplit sa fonction de visibilité internationale, mais laisse encore l’investisseur reconstruire une partie importante de son parcours : identifier un territoire, comparer les conditions, vérifier les infrastructures, qualifier le foncier et trouver le bon interlocuteur. Les dispositifs les plus avancés transforment ces étapes en services numériques continus. La priorité n’est donc pas d’ajouter davantage de contenu, mais d’organiser une chaîne de décision exploitable, depuis la première recherche jusqu’à l’implantation.",
+  prio:[["01 · TERRITORIALISER","Rendre l’offre régionale, les infrastructures et les opportunités directement explorables."],
+        ["02 · OBJECTIVER","Permettre la comparaison des coûts, des conditions et des facteurs d’implantation à partir de données vérifiables."],
+        ["03 · CONVERTIR","Relier sans rupture l’information, l’interlocuteur institutionnel et le passage à l’action."]],
+  mapEyebrow:"SYNTHÈSE GÉOSTRATÉGIQUE",
+  mapTitle:"Six modèles mondiaux, une décision pour le Maroc",
+  mapLead:"Les trois grilles ont établi la position, les écarts et les priorités de Morocco Now. La carte restitue le paysage concurrentiel : ce que chaque dispositif maîtrise, ce qu’il laisse de côté et les enseignements que le Maroc peut adapter sans reproduire mécaniquement un modèle étranger."
+ },
+ en:{
+  execEyebrow:"THREE GRIDS · ONE DECISION",
+  execTitle:"From visibility to decision: where does Morocco Now lose the investor?",
+  execLead:"Three complementary readings locate Morocco Now, identify the gaps that shape the investor journey and rank the levers of transformation.",
+  facts:[["POSITION","Morocco Now still operates on a mainly promotional logic."],
+         ["GAP","The most advanced benchmarks combine content, data and decision-support tools."],
+         ["PRIORITY","Turn international visibility into a continuous journey up to establishment."]],
+  intro1:["01","Where does Morocco Now stand between visibility and capacity to act?","The grid crosses digital decision-support maturity with the marketing capacity to turn interest into a project, for each of the six benchmarked agencies."],
+  axes1:[["TECH / DATA MATURITY","digital decision-support capacity"],
+         ["INVESTOR MARKETING","capacity to turn interest into a project"]],
+  quad1:[["QUADRANT","Institutional showcase"],["QUADRANT","Active promotion, few tools"],["QUADRANT","Digital tools without conversion"],["QUADRANT","Integrated investment platform"]],
+  read1:[["WHAT THE GRID SHOWS","Morocco Now sits at the lowest level on both measured dimensions, far from the most equipped platforms."],
+         ["WHAT IT MEANS","The platform remains a showcase: it informs without allowing a decision to be qualified."],
+         ["RISK FOR MOROCCO","Interest generated finds no tool to become a documented project."],
+         ["DECISION TO EXAMINE","Equip the platform with digital decision capabilities before widening promotion."]],
+  intro2:["02","On which criteria exactly does the gap widen?","The grid compares the six platforms across the 12 benchmark criteria, scored 1 to 5, and locates the missing functions."],
+  journey2:[["ATTRACT","Does the platform make the country offer visible and understandable?"],
+            ["CONVINCE","Does it allow comparing, qualifying and securing an option?"],
+            ["CONVERT","Does it allow moving to concrete action without a break in the journey?"]],
+  read2:[["WHAT THE GRID SHOWS","Morocco Now’s lowest scores cluster on tooled functions: mapping, simulation, usable data."],
+         ["WHAT IT MEANS","The gap is functional rather than editorial: services are missing, not content."],
+         ["RISK FOR MOROCCO","The investor must reassemble alone the information required to establish operations."],
+         ["DECISION TO EXAMINE","Prioritise the criteria where the score is lowest and investor usage most frequent."]],
+  intro3:["03","What is the overall structure of each platform?","The heatmap locates gaps criterion by criterion. The radar reveals the overall structure: even coverage, specialisation or a break in the investor journey. Morocco Now stays visible as the reference so the distance to each competitor is immediately readable."],
+  role3:[["EXTENT","functional surface covered by the platform"],
+         ["EVENNESS","balance or imbalance of the investor journey"],
+         ["SPECIALISATION","functions where a competitor stands out"],
+         ["BREAK","areas where Morocco Now drops out of the journey"]],
+  read3:[["WHAT THE GRID SHOWS","The most advanced competitors cover a wider and more even functional surface, while Morocco Now remains concentrated on a limited number of functions."],
+         ["WHAT IT MEANS","The gap is not one isolated feature but the continuity of the journey offered to the investor."],
+         ["RISK FOR MOROCCO","A break on a few decisive functions forces the investor to look elsewhere for the information and services needed to establish operations."],
+         ["DECISION TO EXAMINE","Prioritise the functions that widen and rebalance journey coverage rather than multiplying promotional content."]],
+  radarAll:"Show all",radarMa:"Morocco Now only",
+  synthEyebrow:"DECISION READING",
+  synthTitle:"The real lag is not promotional. It is transactional.",
+  synthText:"Morocco Now fulfils its international visibility function, but still leaves the investor to rebuild a significant part of the journey: identifying a territory, comparing conditions, checking infrastructure, qualifying land and finding the right counterpart. The most advanced platforms turn these steps into continuous digital services. The priority is therefore not to add more content, but to organise a usable decision chain, from the first search to establishment.",
+  prio:[["01 · TERRITORIALISE","Make the regional offer, infrastructure and opportunities directly explorable."],
+        ["02 · OBJECTIFY","Allow comparison of costs, conditions and location factors from verifiable data."],
+        ["03 · CONVERT","Connect information, institutional counterpart and action without a break."]],
+  mapEyebrow:"GEOSTRATEGIC SYNTHESIS",
+  mapTitle:"Six global models, one decision for Morocco",
+  mapLead:"The three grids established Morocco Now’s position, gaps and priorities. The map restores the competitive landscape: what each platform masters, what it leaves aside and the lessons Morocco can adapt without mechanically copying a foreign model."
+ }
+};
+function posKeys(id,rows){var n=el(id);if(!n)return;n.innerHTML=rows.map(function(r){return '<div class="pos-key"><b>'+r[0]+'</b>'+r[1]+'</div>';}).join("");}
+function posRead(id,rows){var n=el(id);if(!n)return;n.innerHTML=rows.map(function(r){return '<div><b>'+r[0]+'</b><p>'+r[1]+'</p></div>';}).join("");}
+function posIntro(id,d){var n=el(id);if(!n)return;n.innerHTML='<span class="pn">'+d[0]+'</span><span class="pq">'+d[1]+'</span><span class="pm">'+d[2]+'</span>';}
+function renderPositionnement(){
+ var P=POS[lang];if(!P)return;
+ var set=function(id,v,html){var n=el(id);if(n){if(html)n.innerHTML=v;else n.textContent=v;}};
+ set("posExecEyebrow",P.execEyebrow);set("posExecTitle",P.execTitle);set("posExecLead",P.execLead);
+ var f=el("posExecFacts");if(f)f.innerHTML=P.facts.map(function(r){return '<div class="pos-fact"><b>'+r[0]+'</b><span>'+r[1]+'</span></div>';}).join("");
+ posIntro("posIntro1",P.intro1);posKeys("posAxes1",P.axes1);posKeys("posQuad1",P.quad1);posRead("posRead1",P.read1);
+ posIntro("posIntro2",P.intro2);posKeys("posJourney2",P.journey2);posRead("posRead2",P.read2);
+ posIntro("posIntro3",P.intro3);posKeys("posRole3",P.role3);posRead("posRead3",P.read3);
+ set("posSynthEyebrow",P.synthEyebrow);set("posSynthTitle",P.synthTitle);set("posSynthText",P.synthText);
+ var pr=el("posSynthPrio");if(pr)pr.innerHTML=P.prio.map(function(r){return '<div><b>'+r[0]+'</b><span>'+r[1]+'</span></div>';}).join("");
+ set("posMapEyebrow",P.mapEyebrow);set("posMapTitle",P.mapTitle);set("posMapLead",P.mapLead);
+ var ctrl=el("posRadarCtrl");
+ if(ctrl){
+  ctrl.innerHTML='<button type="button" data-pos-radar="all">'+P.radarAll+'</button><button type="button" data-pos-radar="ma">'+P.radarMa+'</button>';
+  ctrl.querySelectorAll("button").forEach(function(b){b.addEventListener("click",function(){
+    var all=b.getAttribute("data-pos-radar")==="all";
+    ORDER.forEach(function(k){if(k!=="morocco")radarState[k]=all;});
+    radarState.morocco=true;renderRadar();renderPositionnement();
+  });});
+ }
+}
+
+function renderAll(){renderChrome();renderHero();renderMethodo();renderBubble();renderMatrix();renderRadar();renderPositionnement();renderDuel();renderFoncier();renderAtlas();renderSim();renderCost();renderVerdict();renderPlan();if(typeof LOCKED_PHASES!=="undefined"&&LOCKED_PHASES[currentPhase]&&!getPremiumAccess())renderLockedTeaser(currentPhase);}
 
 function setLang(l){lang=l;renderAll();atoutsSync();}
 function setTheme(th){theme=th;document.documentElement.setAttribute("data-theme",th);el("themeBtn").textContent=theme==="light"?t().theme[0]:t().theme[1];atoutsSync();}
