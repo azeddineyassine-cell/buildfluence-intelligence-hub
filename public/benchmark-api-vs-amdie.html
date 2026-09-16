@@ -774,7 +774,6 @@ footer .wrap b{color:var(--gold-deep)}
     <h1 class="hero-h1 reveal" id="heroH1"></h1>
     <p class="hero-sub reveal" id="heroSub"></p>
   </div>
-  <div id="worldMapRoot"></div>
 </header>
 <div class="statstrip reveal" id="statstrip"></div>
 <p class="stat-caption reveal" id="statCaption"></p>
@@ -790,29 +789,33 @@ footer .wrap b{color:var(--gold-deep)}
 </div></section>
 
 <section class="section" id="m1"><div class="wrap">
+  <div class="pos-exec reveal">
+    <div class="pos-eyebrow" id="posExecEyebrow"></div>
+    <h2 class="pos-title" id="posExecTitle"></h2>
+    <p class="pos-lead" id="posExecLead"></p>
+    <div class="pos-facts" id="posExecFacts"></div>
+  </div>
   <div class="sec-head reveal"><span class="sec-num">01</span><span class="sec-tag" id="m1tag"></span></div>
   <h2 class="sec-title reveal" id="m1title"></h2>
   <p class="sec-lead reveal" id="m1lead"></p>
-  <div class="bmap-wrap reveal">
-    <div class="bmap-head" id="bmapHead"></div>
-    <div class="bmap-frame">
-      <img class="bmap-img" id="bmapImg" alt="">
-      <svg class="bmap-ov" id="bmapOv" viewBox="0 0 1000 557" preserveAspectRatio="none" role="img"></svg>
-    </div>
-    <div class="bmap-note" id="bmapNote"></div>
-  </div>
+  <div class="pos-intro reveal" id="posIntro1"></div>
+  <div class="pos-keys reveal" id="posAxes1"></div>
   <div class="card pad reveal"><div class="bubble-grid">
     <div class="bub-left"><svg class="chart-svg" id="bubbleSvg" viewBox="0 0 760 560" preserveAspectRatio="xMidYMid meet"></svg>
       <div class="takeaway bub-take"><span class="ti" id="m1ti"></span><p id="m1note"></p></div>
     </div>
     <div class="bub-info" id="bubInfo"></div>
   </div></div>
+  <div class="pos-keys reveal" id="posQuad1"></div>
+  <div class="pos-read reveal" id="posRead1"></div>
 </div></section>
 
 <section class="section" id="m2"><div class="wrap">
   <div class="sec-head reveal"><span class="sec-num">02</span><span class="sec-tag" id="m2tag"></span></div>
   <h2 class="sec-title reveal" id="m2title"></h2>
   <p class="sec-lead reveal" id="m2lead"></p>
+  <div class="pos-intro reveal" id="posIntro2"></div>
+  <div class="pos-keys reveal" id="posJourney2"></div>
   <div class="matrix-method reveal" id="m2method"></div>
   <div class="scale-legend reveal" id="scaleLegend"></div>
   <div class="card reveal pad">
@@ -822,6 +825,7 @@ footer .wrap b{color:var(--gold-deep)}
     </div>
   </div>
   <div class="takeaway reveal"><span class="ti" id="m2ti"></span><p id="m2note"></p></div>
+  <div class="pos-read reveal" id="posRead2"></div>
   <details class="method-note reveal" id="m2methodo"></details>
 </div></section>
 
@@ -829,11 +833,31 @@ footer .wrap b{color:var(--gold-deep)}
   <div class="sec-head reveal"><span class="sec-num">03</span><span class="sec-tag" id="m3tag"></span></div>
   <h2 class="sec-title reveal" id="m3title"></h2>
   <p class="sec-lead reveal" id="m3lead"></p>
+  <div class="pos-intro reveal" id="posIntro3"></div>
+  <div class="pos-keys reveal" id="posRole3"></div>
   <div class="card pad reveal"><div class="radar-grid">
     <div><svg class="radar-svg" id="radarSvg" viewBox="0 0 520 520" preserveAspectRatio="xMidYMid meet"></svg></div>
-    <div class="toggle-list" id="toggleList"></div>
+    <div>
+      <div class="toggle-list" id="toggleList"></div>
+      <div class="pos-radar-ctrl" id="posRadarCtrl"></div>
+    </div>
   </div></div>
   <div class="takeaway reveal"><span class="ti" id="m3ti"></span><p id="m3note"></p></div>
+  <div class="pos-read reveal" id="posRead3"></div>
+
+  <div class="pos-synth reveal">
+    <div class="pos-eyebrow" id="posSynthEyebrow"></div>
+    <h3 id="posSynthTitle"></h3>
+    <p id="posSynthText"></p>
+    <div class="pos-prio" id="posSynthPrio"></div>
+  </div>
+
+  <div class="pos-mapblock reveal">
+    <div class="pos-eyebrow" id="posMapEyebrow"></div>
+    <h3 id="posMapTitle" style="font-family:var(--serif,'Playfair Display',serif);font-size:clamp(19px,2.2vw,28px);line-height:1.24;color:var(--ink);margin:0 0 12px"></h3>
+    <p id="posMapLead" style="font-family:'Cormorant Garamond',serif;font-size:clamp(15px,1.5vw,19px);line-height:1.55;color:var(--ink-light);margin:0;max-width:82ch"></p>
+    <div class="pos-mapshell"><div id="worldMapRoot" style="min-height:460px"></div></div>
+  </div>
 </div></section>
 
 <section class="section" id="m4"><div class="wrap">
