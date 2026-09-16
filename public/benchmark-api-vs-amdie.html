@@ -77,7 +77,9 @@ body.hide-hero .hero,body.hide-hero .statstrip,body.hide-hero .stat-caption{disp
 .hero-mapbg{position:absolute;inset:0;width:100%;height:100%;z-index:0}
 .hero-scrim{position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(90deg,var(--hero-surface) 0%,var(--hero-surface) 42%,transparent 58%)}
 .hero-content{position:relative;z-index:2;width:45%;padding:clamp(20px,3.2vw,40px) clamp(24px,3vw,48px);max-width:720px}
-#worldMapRoot{position:absolute;z-index:3;inset:0 0 0 auto;width:55%;min-height:360px}
+#worldMapRoot{position:relative;width:100%;min-height:460px}
+.hero-content{width:100%;max-width:none}
+.hero-scrim{background:linear-gradient(90deg,var(--hero-surface) 0%,var(--hero-surface) 74%,transparent 100%)}
 .hero-content .kicker{color:var(--gold);opacity:.95;margin-bottom:12px;line-height:1.5}
 .hero-content .hero-h1{font-family:var(--display);font-weight:900;color:var(--hero-ink);font-size:clamp(20px,2.7vw,34px);line-height:1.22;letter-spacing:-.005em}
 .hero-content .hero-h1 em{color:var(--gold);font-style:italic}
@@ -103,7 +105,7 @@ body.hide-hero .hero,body.hide-hero .statstrip,body.hide-hero .stat-caption{disp
 @media(max-width:900px){
  .hero{display:flex;min-height:0}
  .hero-content{width:100%;max-width:100%;order:1}
- #worldMapRoot{position:relative;inset:auto;width:100%;min-height:320px;order:2}
+ #worldMapRoot{min-height:340px}
  .map-label{position:static;text-align:left;padding:0 20px;margin-bottom:10px}
  .map-legend{padding:14px 20px 18px}
 }
@@ -715,6 +717,46 @@ footer .wrap b{color:var(--gold-deep)}
 .bmlab.hl{fill:#F4DC93;font-weight:700;font-size:10px}
 .bhot{fill:transparent;cursor:pointer}
 @media (prefers-reduced-motion: reduce){.broute,.bpulse{animation:none}}
+
+/* ---- Positionnement : couche éditoriale (cadrage, interprétation, synthèse) ---- */
+.pos-eyebrow{font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
+.pos-exec{border:1px solid var(--rule);border-radius:2px;background:var(--card);padding:clamp(16px,2vw,26px);margin-bottom:26px}
+.pos-exec .pos-title{font-family:var(--serif,'Playfair Display',serif);font-size:clamp(20px,2.4vw,30px);line-height:1.22;color:var(--ink);margin:0 0 12px}
+.pos-exec .pos-lead{font-family:'Cormorant Garamond',serif;font-size:clamp(15px,1.5vw,19px);line-height:1.55;color:var(--ink-light);margin:0 0 18px;max-width:78ch}
+.pos-facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.pos-fact{border-top:2px solid var(--gold);padding-top:10px}
+.pos-fact b{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-dim,var(--gold));margin-bottom:6px}
+.pos-fact span{font-size:13px;line-height:1.5;color:var(--ink-light)}
+.pos-intro{border-left:2px solid var(--gold);padding:2px 0 2px 14px;margin:0 0 16px}
+.pos-intro .pn{font-family:var(--mono);font-size:9px;letter-spacing:.18em;color:var(--gold);display:block;margin-bottom:6px}
+.pos-intro .pq{font-family:var(--serif,'Playfair Display',serif);font-size:clamp(16px,1.8vw,21px);line-height:1.3;color:var(--ink);display:block;margin-bottom:6px}
+.pos-intro .pm{font-size:12.5px;line-height:1.55;color:var(--ink-faint);display:block;max-width:80ch}
+.pos-keys{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 16px}
+.pos-key{border:1px solid var(--rule);border-radius:2px;padding:8px 11px;font-size:12px;color:var(--ink-light);background:var(--card)}
+.pos-key b{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-dim,var(--gold));margin-right:7px}
+.pos-read{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;border:1px solid var(--rule);border-radius:2px;margin-top:18px;background:var(--card)}
+.pos-read div{padding:14px 15px;border-right:1px solid var(--rule)}
+.pos-read div:last-child{border-right:0}
+.pos-read b{display:block;font-family:var(--mono);font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:7px}
+.pos-read p{margin:0;font-size:12.5px;line-height:1.55;color:var(--ink-light)}
+.pos-radar-ctrl{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 0}
+.pos-radar-ctrl button{border:1px solid var(--rule);border-radius:2px;background:transparent;color:var(--ink-light);font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:9px 12px;min-height:40px;cursor:pointer}
+.pos-radar-ctrl button:hover{border-color:var(--gold);color:var(--ink)}
+.pos-radar-ctrl button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.pos-synth{border:1px solid var(--rule);border-top:2px solid var(--gold);border-radius:2px;background:var(--card);padding:clamp(16px,2vw,26px);margin-top:30px}
+.pos-synth h3{font-family:var(--serif,'Playfair Display',serif);font-size:clamp(19px,2.2vw,28px);line-height:1.24;color:var(--ink);margin:0 0 12px}
+.pos-synth p{font-size:14px;line-height:1.7;color:var(--ink-light);margin:0 0 18px;max-width:82ch}
+.pos-prio{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.pos-prio div{border-top:1px solid var(--rule);padding-top:10px}
+.pos-prio b{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
+.pos-prio span{font-size:12.5px;line-height:1.55;color:var(--ink-light)}
+.pos-mapblock{margin-top:30px}
+.pos-mapshell{border:1px solid var(--rule);border-radius:2px;overflow:hidden;background:var(--card);margin-top:16px}
+@media (max-width:900px){
+ .pos-facts,.pos-read,.pos-prio{grid-template-columns:1fr}
+ .pos-read div{border-right:0;border-bottom:1px solid var(--rule)}
+ .pos-read div:last-child{border-bottom:0}
+}
 </style>
 </head>
 <body>
@@ -734,7 +776,6 @@ footer .wrap b{color:var(--gold-deep)}
     <h1 class="hero-h1 reveal" id="heroH1"></h1>
     <p class="hero-sub reveal" id="heroSub"></p>
   </div>
-  <div id="worldMapRoot"></div>
 </header>
 <div class="statstrip reveal" id="statstrip"></div>
 <p class="stat-caption reveal" id="statCaption"></p>
@@ -750,29 +791,33 @@ footer .wrap b{color:var(--gold-deep)}
 </div></section>
 
 <section class="section" id="m1"><div class="wrap">
+  <div class="pos-exec reveal">
+    <div class="pos-eyebrow" id="posExecEyebrow"></div>
+    <h2 class="pos-title" id="posExecTitle"></h2>
+    <p class="pos-lead" id="posExecLead"></p>
+    <div class="pos-facts" id="posExecFacts"></div>
+  </div>
   <div class="sec-head reveal"><span class="sec-num">01</span><span class="sec-tag" id="m1tag"></span></div>
   <h2 class="sec-title reveal" id="m1title"></h2>
   <p class="sec-lead reveal" id="m1lead"></p>
-  <div class="bmap-wrap reveal">
-    <div class="bmap-head" id="bmapHead"></div>
-    <div class="bmap-frame">
-      <img class="bmap-img" id="bmapImg" alt="">
-      <svg class="bmap-ov" id="bmapOv" viewBox="0 0 1000 557" preserveAspectRatio="none" role="img"></svg>
-    </div>
-    <div class="bmap-note" id="bmapNote"></div>
-  </div>
+  <div class="pos-intro reveal" id="posIntro1"></div>
+  <div class="pos-keys reveal" id="posAxes1"></div>
   <div class="card pad reveal"><div class="bubble-grid">
     <div class="bub-left"><svg class="chart-svg" id="bubbleSvg" viewBox="0 0 760 560" preserveAspectRatio="xMidYMid meet"></svg>
       <div class="takeaway bub-take"><span class="ti" id="m1ti"></span><p id="m1note"></p></div>
     </div>
     <div class="bub-info" id="bubInfo"></div>
   </div></div>
+  <div class="pos-keys reveal" id="posQuad1"></div>
+  <div class="pos-read reveal" id="posRead1"></div>
 </div></section>
 
 <section class="section" id="m2"><div class="wrap">
   <div class="sec-head reveal"><span class="sec-num">02</span><span class="sec-tag" id="m2tag"></span></div>
   <h2 class="sec-title reveal" id="m2title"></h2>
   <p class="sec-lead reveal" id="m2lead"></p>
+  <div class="pos-intro reveal" id="posIntro2"></div>
+  <div class="pos-keys reveal" id="posJourney2"></div>
   <div class="matrix-method reveal" id="m2method"></div>
   <div class="scale-legend reveal" id="scaleLegend"></div>
   <div class="card reveal pad">
@@ -782,6 +827,7 @@ footer .wrap b{color:var(--gold-deep)}
     </div>
   </div>
   <div class="takeaway reveal"><span class="ti" id="m2ti"></span><p id="m2note"></p></div>
+  <div class="pos-read reveal" id="posRead2"></div>
   <details class="method-note reveal" id="m2methodo"></details>
 </div></section>
 
@@ -789,11 +835,31 @@ footer .wrap b{color:var(--gold-deep)}
   <div class="sec-head reveal"><span class="sec-num">03</span><span class="sec-tag" id="m3tag"></span></div>
   <h2 class="sec-title reveal" id="m3title"></h2>
   <p class="sec-lead reveal" id="m3lead"></p>
+  <div class="pos-intro reveal" id="posIntro3"></div>
+  <div class="pos-keys reveal" id="posRole3"></div>
   <div class="card pad reveal"><div class="radar-grid">
     <div><svg class="radar-svg" id="radarSvg" viewBox="0 0 520 520" preserveAspectRatio="xMidYMid meet"></svg></div>
-    <div class="toggle-list" id="toggleList"></div>
+    <div>
+      <div class="toggle-list" id="toggleList"></div>
+      <div class="pos-radar-ctrl" id="posRadarCtrl"></div>
+    </div>
   </div></div>
   <div class="takeaway reveal"><span class="ti" id="m3ti"></span><p id="m3note"></p></div>
+  <div class="pos-read reveal" id="posRead3"></div>
+
+  <div class="pos-synth reveal">
+    <div class="pos-eyebrow" id="posSynthEyebrow"></div>
+    <h3 id="posSynthTitle"></h3>
+    <p id="posSynthText"></p>
+    <div class="pos-prio" id="posSynthPrio"></div>
+  </div>
+
+  <div class="pos-mapblock reveal">
+    <div class="pos-eyebrow" id="posMapEyebrow"></div>
+    <h3 id="posMapTitle" style="font-family:var(--serif,'Playfair Display',serif);font-size:clamp(19px,2.2vw,28px);line-height:1.24;color:var(--ink);margin:0 0 12px"></h3>
+    <p id="posMapLead" style="font-family:'Cormorant Garamond',serif;font-size:clamp(15px,1.5vw,19px);line-height:1.55;color:var(--ink-light);margin:0;max-width:82ch"></p>
+    <div class="pos-mapshell"><div id="worldMapRoot" style="min-height:460px"></div></div>
+  </div>
 </div></section>
 
 <section class="section" id="m4"><div class="wrap">
@@ -3324,7 +3390,124 @@ function renderPlan(){
    ========================================================================= */
 function countUp(){document.querySelectorAll("[data-cu]").forEach(function(e){var target=parseFloat(e.getAttribute("data-cu"));if(!target)return;var cur=0;var step=target/30;var iv=setInterval(function(){cur+=step;if(cur>=target){cur=target;clearInterval(iv);}e.textContent=Number.isInteger(target)?Math.round(cur):cur.toFixed(1);},22);});}
 
-function renderAll(){renderChrome();renderHero();renderMethodo();renderBubble();renderMatrix();renderRadar();renderDuel();renderFoncier();renderAtlas();renderSim();renderCost();renderVerdict();renderPlan();if(typeof LOCKED_PHASES!=="undefined"&&LOCKED_PHASES[currentPhase]&&!getPremiumAccess())renderLockedTeaser(currentPhase);}
+/* =========================================================================
+   POSITIONNEMENT : couche éditoriale (cadrage, interprétation, synthèse)
+   Aucune donnée, note, score, axe ou couleur n'est modifié ici.
+   ========================================================================= */
+var POS={
+ fr:{
+  execEyebrow:"TROIS GRILLES · UNE DÉCISION",
+  execTitle:"De la visibilité à la décision : où Morocco Now perd-il l’investisseur ?",
+  execLead:"Trois lectures complémentaires permettent de situer Morocco Now, d’identifier les écarts qui structurent le parcours investisseur et de hiérarchiser les leviers de transformation.",
+  facts:[["POSITION","Morocco Now conserve une logique principalement promotionnelle."],
+         ["ÉCART","Les références les plus avancées combinent contenus, données et outils d’aide à la décision."],
+         ["PRIORITÉ","Transformer la visibilité internationale en parcours continu jusqu’à l’implantation."]],
+  intro1:["01","Où se situe Morocco Now entre visibilité et capacité d’action ?","La grille croise la maturité numérique d’aide à la décision et la capacité marketing à transformer l’intérêt en projet, pour chacune des six agences comparées."],
+  axes1:[["MATURITÉ TECH / DATA","capacité numérique d’aide à la décision"],
+         ["MARKETING INVESTISSEUR","capacité à transformer l’intérêt en projet"]],
+  quad1:[["QUADRANT","Vitrine institutionnelle"],["QUADRANT","Promotion active mais peu outillée"],["QUADRANT","Outils numériques sans conversion"],["QUADRANT","Plateforme d’investissement intégrée"]],
+  read1:[["CE QUE MONTRE LA GRILLE","Morocco Now se situe au niveau le plus bas des deux dimensions mesurées, loin des dispositifs les plus outillés."],
+         ["CE QUE CELA SIGNIFIE","Le dispositif reste une vitrine : il informe sans permettre de qualifier une décision."],
+         ["RISQUE POUR LE MAROC","L’intérêt suscité ne trouve pas d’outil pour se transformer en projet documenté."],
+         ["DÉCISION À INSTRUIRE","Doter le dispositif de capacités numériques de décision avant d’élargir la promotion."]],
+  intro2:["02","Sur quels critères l’écart se creuse-t-il précisément ?","La grille compare les six dispositifs sur les 12 critères du benchmark, notés de 1 à 5, et localise les fonctions manquantes."],
+  journey2:[["ATTIRER","Le dispositif rend-il l’offre du pays visible et compréhensible ?"],
+            ["CONVAINCRE","Permet-il de comparer, qualifier et sécuriser une option ?"],
+            ["CONVERTIR","Permet-il de passer à une démarche concrète sans rupture de parcours ?"]],
+  read2:[["CE QUE MONTRE LA GRILLE","Les notes les plus faibles de Morocco Now se concentrent sur les fonctions outillées : cartographie, simulation, données exploitables."],
+         ["CE QUE CELA SIGNIFIE","L’écart est fonctionnel et non éditorial : ce sont des services qui manquent, pas des contenus."],
+         ["RISQUE POUR LE MAROC","L’investisseur doit reconstituer lui-même les informations nécessaires à son implantation."],
+         ["DÉCISION À INSTRUIRE","Prioriser les critères où la note reste la plus basse et l’usage investisseur le plus fréquent."]],
+  intro3:["03","Quelle est la structure générale de chaque dispositif ?","La Heatmap localise les écarts critère par critère. Le Radar en révèle la structure générale : couverture homogène, spécialisation ou rupture dans le parcours investisseur. Morocco Now reste affiché comme référence afin de rendre immédiatement visible la distance avec chaque concurrent."],
+  role3:[["ÉTENDUE","surface fonctionnelle couverte par le dispositif"],
+         ["RÉGULARITÉ","équilibre ou déséquilibre du parcours investisseur"],
+         ["SPÉCIALISATION","fonctions sur lesquelles un concurrent se distingue"],
+         ["RUPTURE","zones où Morocco Now décroche du parcours"]],
+  read3:[["CE QUE MONTRE LA GRILLE","Les concurrents les plus avancés couvrent une surface fonctionnelle plus large et plus régulière, tandis que Morocco Now demeure concentré sur un nombre limité de fonctions."],
+         ["CE QUE CELA SIGNIFIE","L’écart ne tient pas à une fonctionnalité isolée, mais à la continuité du parcours proposé à l’investisseur."],
+         ["RISQUE POUR LE MAROC","Une rupture sur quelques fonctions décisives oblige l’investisseur à chercher ailleurs les informations et services nécessaires à son implantation."],
+         ["DÉCISION À INSTRUIRE","Prioriser les fonctions qui agrandissent et rééquilibrent la couverture du parcours, plutôt que multiplier les contenus promotionnels."]],
+  radarAll:"Tout afficher",radarMa:"Morocco Now uniquement",
+  synthEyebrow:"LECTURE DÉCISIONNELLE",
+  synthTitle:"Le véritable retard n’est pas promotionnel. Il est transactionnel.",
+  synthText:"Morocco Now remplit sa fonction de visibilité internationale, mais laisse encore l’investisseur reconstruire une partie importante de son parcours : identifier un territoire, comparer les conditions, vérifier les infrastructures, qualifier le foncier et trouver le bon interlocuteur. Les dispositifs les plus avancés transforment ces étapes en services numériques continus. La priorité n’est donc pas d’ajouter davantage de contenu, mais d’organiser une chaîne de décision exploitable, depuis la première recherche jusqu’à l’implantation.",
+  prio:[["01 · TERRITORIALISER","Rendre l’offre régionale, les infrastructures et les opportunités directement explorables."],
+        ["02 · OBJECTIVER","Permettre la comparaison des coûts, des conditions et des facteurs d’implantation à partir de données vérifiables."],
+        ["03 · CONVERTIR","Relier sans rupture l’information, l’interlocuteur institutionnel et le passage à l’action."]],
+  mapEyebrow:"SYNTHÈSE GÉOSTRATÉGIQUE",
+  mapTitle:"Six modèles mondiaux, une décision pour le Maroc",
+  mapLead:"Les trois grilles ont établi la position, les écarts et les priorités de Morocco Now. La carte restitue le paysage concurrentiel : ce que chaque dispositif maîtrise, ce qu’il laisse de côté et les enseignements que le Maroc peut adapter sans reproduire mécaniquement un modèle étranger."
+ },
+ en:{
+  execEyebrow:"THREE GRIDS · ONE DECISION",
+  execTitle:"From visibility to decision: where does Morocco Now lose the investor?",
+  execLead:"Three complementary readings locate Morocco Now, identify the gaps that shape the investor journey and rank the levers of transformation.",
+  facts:[["POSITION","Morocco Now still operates on a mainly promotional logic."],
+         ["GAP","The most advanced benchmarks combine content, data and decision-support tools."],
+         ["PRIORITY","Turn international visibility into a continuous journey up to establishment."]],
+  intro1:["01","Where does Morocco Now stand between visibility and capacity to act?","The grid crosses digital decision-support maturity with the marketing capacity to turn interest into a project, for each of the six benchmarked agencies."],
+  axes1:[["TECH / DATA MATURITY","digital decision-support capacity"],
+         ["INVESTOR MARKETING","capacity to turn interest into a project"]],
+  quad1:[["QUADRANT","Institutional showcase"],["QUADRANT","Active promotion, few tools"],["QUADRANT","Digital tools without conversion"],["QUADRANT","Integrated investment platform"]],
+  read1:[["WHAT THE GRID SHOWS","Morocco Now sits at the lowest level on both measured dimensions, far from the most equipped platforms."],
+         ["WHAT IT MEANS","The platform remains a showcase: it informs without allowing a decision to be qualified."],
+         ["RISK FOR MOROCCO","Interest generated finds no tool to become a documented project."],
+         ["DECISION TO EXAMINE","Equip the platform with digital decision capabilities before widening promotion."]],
+  intro2:["02","On which criteria exactly does the gap widen?","The grid compares the six platforms across the 12 benchmark criteria, scored 1 to 5, and locates the missing functions."],
+  journey2:[["ATTRACT","Does the platform make the country offer visible and understandable?"],
+            ["CONVINCE","Does it allow comparing, qualifying and securing an option?"],
+            ["CONVERT","Does it allow moving to concrete action without a break in the journey?"]],
+  read2:[["WHAT THE GRID SHOWS","Morocco Now’s lowest scores cluster on tooled functions: mapping, simulation, usable data."],
+         ["WHAT IT MEANS","The gap is functional rather than editorial: services are missing, not content."],
+         ["RISK FOR MOROCCO","The investor must reassemble alone the information required to establish operations."],
+         ["DECISION TO EXAMINE","Prioritise the criteria where the score is lowest and investor usage most frequent."]],
+  intro3:["03","What is the overall structure of each platform?","The heatmap locates gaps criterion by criterion. The radar reveals the overall structure: even coverage, specialisation or a break in the investor journey. Morocco Now stays visible as the reference so the distance to each competitor is immediately readable."],
+  role3:[["EXTENT","functional surface covered by the platform"],
+         ["EVENNESS","balance or imbalance of the investor journey"],
+         ["SPECIALISATION","functions where a competitor stands out"],
+         ["BREAK","areas where Morocco Now drops out of the journey"]],
+  read3:[["WHAT THE GRID SHOWS","The most advanced competitors cover a wider and more even functional surface, while Morocco Now remains concentrated on a limited number of functions."],
+         ["WHAT IT MEANS","The gap is not one isolated feature but the continuity of the journey offered to the investor."],
+         ["RISK FOR MOROCCO","A break on a few decisive functions forces the investor to look elsewhere for the information and services needed to establish operations."],
+         ["DECISION TO EXAMINE","Prioritise the functions that widen and rebalance journey coverage rather than multiplying promotional content."]],
+  radarAll:"Show all",radarMa:"Morocco Now only",
+  synthEyebrow:"DECISION READING",
+  synthTitle:"The real lag is not promotional. It is transactional.",
+  synthText:"Morocco Now fulfils its international visibility function, but still leaves the investor to rebuild a significant part of the journey: identifying a territory, comparing conditions, checking infrastructure, qualifying land and finding the right counterpart. The most advanced platforms turn these steps into continuous digital services. The priority is therefore not to add more content, but to organise a usable decision chain, from the first search to establishment.",
+  prio:[["01 · TERRITORIALISE","Make the regional offer, infrastructure and opportunities directly explorable."],
+        ["02 · OBJECTIFY","Allow comparison of costs, conditions and location factors from verifiable data."],
+        ["03 · CONVERT","Connect information, institutional counterpart and action without a break."]],
+  mapEyebrow:"GEOSTRATEGIC SYNTHESIS",
+  mapTitle:"Six global models, one decision for Morocco",
+  mapLead:"The three grids established Morocco Now’s position, gaps and priorities. The map restores the competitive landscape: what each platform masters, what it leaves aside and the lessons Morocco can adapt without mechanically copying a foreign model."
+ }
+};
+function posKeys(id,rows){var n=el(id);if(!n)return;n.innerHTML=rows.map(function(r){return '<div class="pos-key"><b>'+r[0]+'</b>'+r[1]+'</div>';}).join("");}
+function posRead(id,rows){var n=el(id);if(!n)return;n.innerHTML=rows.map(function(r){return '<div><b>'+r[0]+'</b><p>'+r[1]+'</p></div>';}).join("");}
+function posIntro(id,d){var n=el(id);if(!n)return;n.innerHTML='<span class="pn">'+d[0]+'</span><span class="pq">'+d[1]+'</span><span class="pm">'+d[2]+'</span>';}
+function renderPositionnement(){
+ var P=POS[lang];if(!P)return;
+ var set=function(id,v,html){var n=el(id);if(n){if(html)n.innerHTML=v;else n.textContent=v;}};
+ set("posExecEyebrow",P.execEyebrow);set("posExecTitle",P.execTitle);set("posExecLead",P.execLead);
+ var f=el("posExecFacts");if(f)f.innerHTML=P.facts.map(function(r){return '<div class="pos-fact"><b>'+r[0]+'</b><span>'+r[1]+'</span></div>';}).join("");
+ posIntro("posIntro1",P.intro1);posKeys("posAxes1",P.axes1);posKeys("posQuad1",P.quad1);posRead("posRead1",P.read1);
+ posIntro("posIntro2",P.intro2);posKeys("posJourney2",P.journey2);posRead("posRead2",P.read2);
+ posIntro("posIntro3",P.intro3);posKeys("posRole3",P.role3);posRead("posRead3",P.read3);
+ set("posSynthEyebrow",P.synthEyebrow);set("posSynthTitle",P.synthTitle);set("posSynthText",P.synthText);
+ var pr=el("posSynthPrio");if(pr)pr.innerHTML=P.prio.map(function(r){return '<div><b>'+r[0]+'</b><span>'+r[1]+'</span></div>';}).join("");
+ set("posMapEyebrow",P.mapEyebrow);set("posMapTitle",P.mapTitle);set("posMapLead",P.mapLead);
+ var ctrl=el("posRadarCtrl");
+ if(ctrl){
+  ctrl.innerHTML='<button type="button" data-pos-radar="all">'+P.radarAll+'</button><button type="button" data-pos-radar="ma">'+P.radarMa+'</button>';
+  ctrl.querySelectorAll("button").forEach(function(b){b.addEventListener("click",function(){
+    var all=b.getAttribute("data-pos-radar")==="all";
+    ORDER.forEach(function(k){if(k!=="morocco")radarState[k]=all;});
+    radarState.morocco=true;renderRadar();renderPositionnement();
+  });});
+ }
+}
+
+function renderAll(){renderChrome();renderHero();renderMethodo();renderBubble();renderMatrix();renderRadar();renderPositionnement();renderDuel();renderFoncier();renderAtlas();renderSim();renderCost();renderVerdict();renderPlan();if(typeof LOCKED_PHASES!=="undefined"&&LOCKED_PHASES[currentPhase]&&!getPremiumAccess())renderLockedTeaser(currentPhase);}
 
 function setLang(l){lang=l;renderAll();atoutsSync();}
 function setTheme(th){theme=th;document.documentElement.setAttribute("data-theme",th);el("themeBtn").textContent=theme==="light"?t().theme[0]:t().theme[1];atoutsSync();}
