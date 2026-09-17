@@ -13,7 +13,7 @@ type Step = {
   Icon: typeof MapPinned;
 };
 
-const content: Record<Language, { steps: Step[]; cta: string; secondary: string }> = {
+const content: Record<Language, { steps: Step[]; cta: string }> = {
   fr: {
     steps: [
       {
