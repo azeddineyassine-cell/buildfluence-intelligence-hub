@@ -65,8 +65,8 @@ const content: Record<Language, { steps: Step[]; cta: string }> = {
         Icon: MousePointerClick,
       },
     ],
-    cta: "Open the Simulator",
-    secondary: "Continue to the Geostrategic Synthesis",
+    cta: "Open the Simulator ↗",
+
   },
 };
 
