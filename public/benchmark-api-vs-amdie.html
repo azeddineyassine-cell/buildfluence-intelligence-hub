@@ -53,6 +53,7 @@ body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:
 body.hide-hero .hero,body.hide-hero .statstrip,body.hide-hero .stat-caption{display:none}
 .mininav-inner{display:flex;width:100%}
 .phase{position:relative;flex:1;border-right:1px solid rgba(255,255,255,.08);min-width:0}
+.phase.open{z-index:70}
 .phase:last-child{border-right:none}
 .phase-btn{display:flex;flex-direction:column;align-items:flex-start;gap:5px;width:100%;padding:13px clamp(12px,1.6vw,22px);border:none;background:none;cursor:pointer;text-align:left;text-decoration:none;box-shadow:inset 0 -2px 0 transparent;transition:box-shadow .2s}
 .phase-btn .lbl-row{display:flex;align-items:center;gap:6px;font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);white-space:nowrap}
@@ -64,6 +65,8 @@ body.hide-hero .hero,body.hide-hero .statstrip,body.hide-hero .stat-caption{disp
 .phase:hover .phase-sub,.phase.open .phase-sub{opacity:1;visibility:visible;transform:translateY(0)}
 .phase-sub a{display:block;font-family:var(--sans);font-size:12.5px;color:color-mix(in srgb,var(--ivory,#F5F1E8) 88%,transparent);text-decoration:none;padding:10px 12px;border-radius:4px;transition:background .15s}
 .phase-sub a:hover{background:rgba(255,255,255,.07);color:var(--gold)}
+.phase-sub a.active{color:var(--gold);background:rgba(255,255,255,.07);box-shadow:inset 2px 0 0 var(--gold)}
+.phase-sub-group{font-family:var(--mono);font-size:8px;letter-spacing:.18em;text-transform:uppercase;color:color-mix(in srgb,var(--ivory,#F5F1E8) 48%,transparent);padding:9px 12px 3px}
 @media(max-width:900px){
  .mininav-inner{flex-wrap:wrap}
  .phase{flex:1 1 33%;border-bottom:1px solid rgba(255,255,255,.08)}
@@ -279,6 +282,9 @@ h2.sec-title em{font-style:italic;color:var(--gold-deep)}
 .bubble-grid{display:grid;grid-template-columns:1fr 290px;gap:22px;align-items:stretch}
 .bub-left{display:flex;flex-direction:column}
 .bub-left .chart-svg{flex:0 0 auto}
+.bub-quadrant-row{display:grid;grid-template-columns:1fr 1fr;gap:18px;padding-left:8.5%;padding-right:4%;font-family:var(--mono);font-size:9.5px;font-weight:700;line-height:1.35;letter-spacing:0;text-transform:uppercase;color:var(--ink-light)}
+.bub-quadrant-row.top{margin:0 0 8px}.bub-quadrant-row.bottom{margin:8px 0 0}
+.bub-quadrant-row span:nth-child(2){text-align:right}
 .bub-take{margin-top:auto;border-left:3px solid var(--gold);margin-top:18px}
 @media(max-width:840px){.bubble-grid{grid-template-columns:1fr}}
 .chart-svg{width:100%;height:auto;display:block;font-family:var(--mono)}
@@ -288,7 +294,6 @@ h2.sec-title em{font-style:italic;color:var(--gold-deep)}
 .bubble-node:hover{transform:scale(1.06)}
 .bubble-flag{font-size:16px;pointer-events:none}
 .bubble-name{font-family:var(--mono);font-size:8px;letter-spacing:.04em;fill:var(--ink);pointer-events:none}
-.bub-quadrant{font-family:var(--mono);font-size:9.5px;letter-spacing:0;text-transform:uppercase;fill:var(--ink-light);font-weight:700;paint-order:stroke;stroke:var(--card);stroke-width:3px;stroke-linejoin:round}
 .bub-info{border-left:2px solid var(--gold);padding:6px 0 6px 18px;align-self:start}
 .bub-info .bi-head{display:flex;align-items:center;gap:14px}
 .bub-info .bi-logo{height:34px;width:auto;max-width:120px;object-fit:contain;border-radius:4px;background:#fff;padding:4px 6px;border:1px solid var(--rule);flex:0 0 auto}
@@ -753,19 +758,18 @@ footer .wrap b{color:var(--gold-deep)}
 .pos-synth{border:1px solid var(--rule);border-top:2px solid var(--gold);border-radius:2px;background:var(--card);padding:clamp(16px,2vw,26px);margin-top:30px}
 .pos-synth h3{font-family:var(--serif,'Playfair Display',serif);font-size:clamp(19px,2.2vw,28px);line-height:1.24;color:var(--ink);margin:0 0 12px}
 .pos-synth p{font-size:14px;line-height:1.7;color:var(--ink-light);margin:0 0 18px;max-width:82ch}
-.pos-prio{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
-.pos-prio div{border-top:1px solid var(--rule);padding-top:10px}
-.pos-prio b{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
-.pos-prio span{font-size:12.5px;line-height:1.55;color:var(--ink-light)}
-.pos-mapblock{margin-top:30px}
+.pos-synth{display:flex;flex-direction:column;justify-content:center;padding-block:clamp(32px,5vh,56px);scroll-margin-top:132px}
+.pos-synth p{max-width:72ch}
+.pos-mapblock{margin-top:30px;scroll-margin-top:132px;width:min(96vw,1760px);margin-left:calc((min(96vw,1760px) - 100%)/-2)}
 .pos-mapshell{border:1px solid var(--rule);border-radius:2px;overflow:hidden;background:var(--card);margin-top:16px}
+#positionnement-maturite,#positionnement-matrice,#positionnement-radar{scroll-margin-top:132px}
 @media (max-width:1100px){#posRole3{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:900px){
- .pos-facts,.pos-read,.pos-prio,#posJourney2{grid-template-columns:1fr}
+ .pos-facts,.pos-read,#posJourney2{grid-template-columns:1fr}
  .pos-read div{border-right:0;border-bottom:1px solid var(--rule)}
  .pos-read div:last-child{border-bottom:0}
 }
-@media (max-width:620px){#posRole3{grid-template-columns:1fr}}
+@media (max-width:620px){#posRole3{grid-template-columns:1fr}.bub-quadrant-row{font-size:8px;gap:10px;padding-left:11%;padding-right:4%}.pos-synth{min-height:0}.pos-mapblock{width:auto;margin-left:0}}
 </style>
 </head>
 <body>
@@ -802,7 +806,7 @@ footer .wrap b{color:var(--gold-deep)}
   </div>
 </div></section>
 
-<section class="section" id="m1"><div class="wrap">
+<section class="section" id="m1"><div class="wrap"><div id="positionnement-maturite">
   <div class="pos-exec reveal">
     <div class="pos-eyebrow" id="posExecEyebrow"></div>
     <h2 class="pos-title" id="posExecTitle"></h2>
@@ -815,19 +819,18 @@ footer .wrap b{color:var(--gold-deep)}
   <div class="pos-intro reveal" id="posIntro1"></div>
   <div class="pos-keys reveal" id="posAxes1"></div>
   <div class="card pad reveal"><div class="bubble-grid">
-    <div class="bub-left"><svg class="chart-svg" id="bubbleSvg" viewBox="0 0 760 560" preserveAspectRatio="xMidYMid meet"></svg>
+    <div class="bub-left"><div class="bub-quadrant-row top" id="quadTopLabels"></div><svg class="chart-svg" id="bubbleSvg" viewBox="0 0 760 560" preserveAspectRatio="xMidYMid meet"></svg><div class="bub-quadrant-row bottom" id="quadBottomLabels"></div>
       <div class="takeaway bub-take"><span class="ti" id="m1ti"></span><p id="m1note"></p></div>
     </div>
     <div class="bub-info" id="bubInfo"></div>
   </div></div>
   <div class="pos-read reveal" id="posRead1"></div>
-</div></section>
+</div></div></section>
 
-<section class="section" id="m2"><div class="wrap">
+<section class="section" id="m2"><div class="wrap"><div id="positionnement-matrice">
   <div class="sec-head reveal"><span class="sec-num">02</span><span class="sec-tag" id="m2tag"></span></div>
   <h2 class="sec-title reveal" id="m2title"></h2>
   <p class="sec-lead reveal" id="m2lead"></p>
-  <div class="pos-intro reveal" id="posIntro2"></div>
   <div class="pos-keys reveal" id="posJourney2"></div>
   <div class="scale-legend reveal" id="scaleLegend"></div>
   <div class="card reveal pad">
@@ -839,9 +842,9 @@ footer .wrap b{color:var(--gold-deep)}
   <div class="takeaway reveal"><span class="ti" id="m2ti"></span><p id="m2note"></p></div>
   <div class="pos-read reveal" id="posRead2"></div>
   <details class="method-note reveal" id="m2methodo"></details>
-</div></section>
+</div></div></section>
 
-<section class="section" id="m3"><div class="wrap">
+<section class="section" id="m3"><div class="wrap"><div id="positionnement-radar">
   <div class="sec-head reveal"><span class="sec-num">03</span><span class="sec-tag" id="m3tag"></span></div>
   <h2 class="sec-title reveal" id="m3title"></h2>
   <p class="sec-lead reveal" id="m3lead"></p>
@@ -856,20 +859,20 @@ footer .wrap b{color:var(--gold-deep)}
   </div></div>
   <div class="pos-read reveal" id="posRead3"></div>
 
-  <div class="pos-synth reveal">
+  <div class="pos-synth reveal" id="verdict-buildfluence">
     <div class="pos-eyebrow" id="posSynthEyebrow"></div>
     <h3 id="posSynthTitle"></h3>
     <p id="posSynthText"></p>
-    <div class="pos-prio" id="posSynthPrio"></div>
+    <div id="positioningTrajectoryRoot"></div>
   </div>
 
-  <div class="pos-mapblock reveal">
+  <div class="pos-mapblock reveal" id="synthese-geostrategique">
     <div class="pos-eyebrow" id="posMapEyebrow"></div>
     <h3 id="posMapTitle" style="font-family:var(--serif,'Playfair Display',serif);font-size:clamp(19px,2.2vw,28px);line-height:1.24;color:var(--ink);margin:0 0 12px"></h3>
     <p id="posMapLead" style="font-family:'Cormorant Garamond',serif;font-size:clamp(15px,1.5vw,19px);line-height:1.55;color:var(--ink-light);margin:0;max-width:82ch"></p>
     <div class="pos-mapshell"><div id="synthesisWorldMapRoot" style="min-height:460px"></div></div>
   </div>
-</div></section>
+</div></div></section>
 
 <section class="section" id="m4"><div class="wrap">
   <div class="sec-head reveal"><span class="sec-num">04</span><span class="sec-tag" id="m4tag"></span></div>
@@ -1853,9 +1856,13 @@ var WHY_GRADIENT=["#5C7A94","#75838C","#8D8C85","#A6957D","#BE9E75","#C9A84C"];
 var NAVPHASES=[
  {icon:"why",label:{fr:"Pourquoi ce Benchmark",en:"Why"},sub:{fr:"Pourquoi agir maintenant ?",en:"Why act now?"},id:"methodo"},
  {icon:"position",label:{fr:"Positionnement",en:"Positioning"},sub:{fr:"Où se situe le Maroc ?",en:"Where does Morocco stand?"},items:[
-   {label:{fr:"Positionnement · carte de maturité",en:"Positioning · maturity map"},id:"m1"},
-   {label:{fr:"Heatmap · 6×12",en:"Heatmap · 6×12"},id:"m2"},
-   {label:{fr:"Radar comparatif · superposable",en:"Comparative radar · overlay"},id:"m3"}
+    {group:{fr:"ANALYSES",en:"ANALYSES"}},
+    {label:{fr:"1. Carte de maturité",en:"1. Maturity map"},id:"positionnement-maturite"},
+    {label:{fr:"2. Matrice comparative",en:"2. Comparative matrix"},id:"positionnement-matrice"},
+    {label:{fr:"3. Radar comparatif",en:"3. Comparative radar"},id:"positionnement-radar"},
+    {group:{fr:"DÉCISION",en:"DECISION"}},
+    {label:{fr:"4. Verdict Buildfluence · Lecture décisionnelle",en:"4. Buildfluence verdict · Decision reading"},id:"verdict-buildfluence"},
+    {label:{fr:"5. Synthèse géostratégique",en:"5. Geostrategic synthesis"},id:"synthese-geostrategique"}
  ]},
  {icon:"duel",label:{fr:"Le duel",en:"The duel"},sub:{fr:"Qui fait mieux, et comment ?",en:"Who does it better, and how?"},id:"m4"},
  {icon:"foncier",label:{fr:"Foncier",en:"Land"},sub:{fr:"Comment relier promotion et foncier ?",en:"How to link promotion and land?"},id:"foncier"},
@@ -2032,7 +2039,7 @@ var cost={mode:"taille",sector:"pharma",regime:"zai",horizon:5,currency:"MAD",su
 var T={
  fr:{
   brand:"Buildfluence · Renseignements d'affaires",
-  nav:["Pourquoi","Positionnement","Heatmap","Radar","Le duel","Foncier","Investor Atlas","Simulateur","Comparateur","Scénarios","Verdict","Recommandations"],
+  nav:["Pourquoi","Positionnement","Matrice comparative","Radar","Le duel","Foncier","Investor Atlas","Simulateur","Comparateur","Scénarios","Verdict","Recommandations"],
   navIds:["methodo","m1","m2","m3","m4","foncier","atlas","cout","atouts","sim","verdict","plan"],
   count:"Fenêtre sur la CdM 2030 : <b>{d}</b> jours",
   theme:["Mode sombre","Mode clair"],
@@ -2065,7 +2072,7 @@ var T={
   biGlobal:"Score global",biTech:"Tech / Data",biMarket:"Marketing",biSource:"Source officielle ↗",
   biStrat:"Stratégie",biTools:"Outils",biSector:"Secteur de prédilection",biFig:"Investissement 2025",biDiff:"Particularité différenciante",biVerdict:"Verdict Buildfluence",
   axX:"Maturité Tech / Data →",axY:"Marketing investisseur →",quadTop:"Cockpits · leaders",quadBot:"Vitrines · retard",quadLabels:{topLeft:"Promotion active mais peu outillée",topRight:"Plateforme d’investissement intégrée",bottomLeft:"Vitrine institutionnelle",bottomRight:"Outils numériques sans conversion"},
-  m2tag:"Heatmap · 6 × 12",m2title:["La grille qui ","ne ment pas."],m2lead:"72 évaluations, de 1 (absent) à 5 (best practice) : 21 best practices mondiales recensées sur l'ensemble de la grille. Cliquez n'importe quelle case pour le détail. La colonne marocaine se lit d'un coup d'œil.",
+  m2tag:"02 · MATRICE COMPARATIVE",m2title:["Sur quels critères l’écart se creuse-t-il ?",""],m2lead:"12 critères pour comparer les six dispositifs de promotion de l’investissement.",
   m2ti:"À retenir",m2note:"<b>La colonne Morocco Now est rouge sur 7 critères sur 12.</b> Ce n'est pas une faiblesse ponctuelle mais un trou systémique sur tout l'axe Tech/Data : ni SIG, ni simulateur, ni comparateur, ni licences en ligne.",
   mdPlaceholder:"Cliquez une case de la grille pour révéler le détail.",
   scaleLbl:{1:"Absent",2:"Faible",3:"En transition",4:"Avancé",5:"Best practice"},scaleTitle:"Échelle :",
@@ -2177,7 +2184,7 @@ var T={
  },
  en:{
   brand:"Buildfluence · Business Intelligence",
-  nav:["Why","Positioning","Heatmap","Radar","The duel","Land","Investor Atlas","Simulator","Comparator","Scenarios","Verdict","Recommendations"],
+  nav:["Why","Positioning","Comparative matrix","Radar","The duel","Land","Investor Atlas","Simulator","Comparator","Scenarios","Verdict","Recommendations"],
   navIds:["methodo","m1","m2","m3","m4","foncier","atlas","cout","atouts","sim","verdict","plan"],
   count:"FIFA 2030 window: <b>{d}</b> days",
   theme:["Dark mode","Light mode"],
@@ -2210,7 +2217,7 @@ var T={
   biGlobal:"Global score",biTech:"Tech / Data",biMarket:"Marketing",biSource:"Official source ↗",
   biStrat:"Strategy",biTools:"Tools",biSector:"Flagship sectors",biFig:"Investment 2025",biDiff:"Differentiator",biVerdict:"Buildfluence verdict",
   axX:"Tech / Data maturity →",axY:"Investor marketing →",quadTop:"Cockpits · leaders",quadBot:"Showcases · lagging",quadLabels:{topLeft:"Active promotion, limited tooling",topRight:"Integrated investment platform",bottomLeft:"Institutional showcase",bottomRight:"Digital tools without conversion"},
-  m2tag:"Heatmap · 6 × 12",m2title:["The grid that ","does not lie."],m2lead:"72 assessments, from 1 (absent) to 5 (best practice): 21 world best practices identified across the grid. Click any cell for the detail. The Moroccan column reads at a glance.",
+  m2tag:"02 · COMPARATIVE MATRIX",m2title:["Which criteria create the widest gap?",""],m2lead:"12 criteria for comparing the six investment promotion systems.",
   m2ti:"Key reading",m2note:"<b>The Morocco Now column is red on 7 of 12 criteria.</b> Not a one-off weakness but a systemic hole across the whole Tech/Data axis: no GIS, no simulator, no comparator, no online licences.",
   mdPlaceholder:"Click a cell in the grid to reveal the detail.",
   scaleLbl:{1:"Absent",2:"Weak",3:"In transition",4:"Advanced",5:"Best practice"},scaleTitle:"Scale:",
@@ -2335,7 +2342,8 @@ function projY(lat){return (90-lat)/180*480;}
 /* =========================================================================
    RENDER : CHROME
    ========================================================================= */
-var PHASE_SECTIONS=NAVPHASES.map(function(ph){return ph.items?ph.items.map(function(it){return it.id;}):[ph.id];});
+var PHASE_SECTIONS=NAVPHASES.map(function(ph){return ph.items?ph.items.map(function(it){return it.id;}).filter(Boolean):[ph.id];});
+PHASE_SECTIONS[1]=["m1","m2","m3"];
 var currentPhase=0;
 var hasBooted=false;
 var LOCKED_PHASES={4:{teaserId:"prototypesTeaser",tag:"protTeaserTag",title:"protTeaserTitle",lead:"protTeaserLead",grid:"protTeaserGrid",cta:"protTeaserCta",items:"protTeasers"},5:{teaserId:"decisionTeaser",tag:"decTeaserTag",title:"decTeaserTitle",lead:"decTeaserLead",grid:"decTeaserGrid",cta:"decTeaserCta",items:"decTeasers"}};
@@ -2389,7 +2397,7 @@ function buildPhaseNav(){
  var html=NAVPHASES.map(function(ph,pi){
    var rows='<span class="lbl-row">'+navIconSvg(ph.icon)+'<span>'+L(ph.label)+'</span></span><span class="sub-row">'+L(ph.sub)+'</span>';
    if(ph.items){
-     var subLinks=ph.items.map(function(it){return '<a href="#'+it.id+'" data-target="'+it.id+'">'+L(it.label)+'</a>';}).join("");
+      var subLinks=ph.items.map(function(it){return it.group?'<div class="phase-sub-group">'+L(it.group)+'</div>':'<a href="#'+it.id+'" data-target="'+it.id+'">'+L(it.label)+'</a>';}).join("");
      return '<div class="phase" data-pi="'+pi+'">'+
        '<button type="button" class="phase-btn">'+rows+'</button>'+
        '<div class="phase-sub">'+subLinks+'</div></div>';
@@ -2422,6 +2430,15 @@ function buildPhaseNav(){
      showPhase(pi,a.getAttribute("data-target"));
      document.querySelectorAll(".phase.open").forEach(function(p){p.classList.remove("open");});
    });
+  var positionLinks=[].slice.call(document.querySelectorAll('.phase[data-pi="1"] .phase-sub a'));
+  if(positionLinks.length&&"IntersectionObserver" in window){
+    var activeObserver=new IntersectionObserver(function(entries){
+      var visible=entries.filter(function(entry){return entry.isIntersecting;}).sort(function(a,b){return b.intersectionRatio-a.intersectionRatio;})[0];
+      if(!visible)return;
+      positionLinks.forEach(function(link){link.classList.toggle("active",link.getAttribute("data-target")===visible.target.id);});
+    },{rootMargin:"-132px 0px -55% 0px",threshold:[0,.15,.4]});
+    positionLinks.forEach(function(link){var target=el(link.getAttribute("data-target"));if(target)activeObserver.observe(target);});
+  }
  });
  document.addEventListener("click",function(ev){
    if(!ev.target.closest(".phase")){document.querySelectorAll(".phase.open").forEach(function(p){p.classList.remove("open");});}
@@ -2532,10 +2549,8 @@ function renderBubble(){
  parts+='<line x1="'+mx+'" y1="30" x2="'+mx+'" y2="'+(H-P)+'" stroke="var(--rule)" stroke-dasharray="3 4"/><line x1="'+P+'" y1="'+my+'" x2="'+(W-30)+'" y2="'+my+'" stroke="var(--rule)" stroke-dasharray="3 4"/>';
  for(var g=0;g<=100;g+=25){parts+='<line x1="'+x(g)+'" y1="30" x2="'+x(g)+'" y2="'+(H-P)+'" stroke="var(--rule-soft)"/><line x1="'+P+'" y1="'+y(g)+'" x2="'+(W-30)+'" y2="'+y(g)+'" stroke="var(--rule-soft)"/>';}
   var quad=t().quadLabels;
-  parts+='<text class="bub-quadrant" x="'+(P+12)+'" y="'+(my-14)+'">'+quad.topLeft+'</text>';
-  parts+='<text class="bub-quadrant" x="'+(W-36)+'" y="'+(my-14)+'" text-anchor="end">'+quad.topRight+'</text>';
-  parts+='<text class="bub-quadrant" x="'+(P+12)+'" y="'+(H-P-10)+'">'+quad.bottomLeft+'</text>';
-  parts+='<text class="bub-quadrant" x="'+(W-36)+'" y="'+(H-P-10)+'" text-anchor="end">'+quad.bottomRight+'</text>';
+  el("quadTopLabels").innerHTML='<span>'+quad.topLeft+'</span><span>'+quad.topRight+'</span>';
+  el("quadBottomLabels").innerHTML='<span>'+quad.bottomLeft+'</span><span>'+quad.bottomRight+'</span>';
  parts+='<text class="bubble-axis-label" x="'+(W/2)+'" y="'+(H-18)+'" text-anchor="middle">'+t().axX+'</text>';
  parts+='<text class="bubble-axis-label" x="18" y="'+(H/2)+'" text-anchor="middle" transform="rotate(-90 18 '+(H/2)+')">'+t().axY+'</text>';
  // anti-chevauchement : décalage vertical des labels proches
@@ -3427,7 +3442,7 @@ var POS={
          ["CE QUE CELA SIGNIFIE","L’écart est fonctionnel et non éditorial : ce sont des services qui manquent, pas des contenus."],
          ["RISQUE POUR LE MAROC","L’investisseur doit reconstituer lui-même les informations nécessaires à son implantation."],
          ["DÉCISION À INSTRUIRE","Prioriser les critères où la note reste la plus basse et l’usage investisseur le plus fréquent."]],
-  intro3:["03","Quelle est la structure générale de chaque dispositif ?","La Heatmap localise les écarts critère par critère. Le Radar en révèle la structure générale : couverture homogène, spécialisation ou rupture dans le parcours investisseur. Morocco Now reste affiché comme référence afin de rendre immédiatement visible la distance avec chaque concurrent."],
+   intro3:["03","Quelle est la structure générale de chaque dispositif ?","La matrice comparative localise les écarts critère par critère. Le Radar en révèle la structure générale : couverture homogène, spécialisation ou rupture dans le parcours investisseur. Morocco Now reste affiché comme référence afin de rendre immédiatement visible la distance avec chaque concurrent."],
   role3:[["ÉTENDUE","Quelle surface du parcours investisseur le dispositif couvre-t-il ?"],
          ["RÉGULARITÉ","La couverture est-elle équilibrée ou présente-t-elle des ruptures ?"],
          ["SPÉCIALISATION","Sur quelles fonctions le dispositif se distingue-t-il réellement ?"],
@@ -3437,7 +3452,7 @@ var POS={
          ["RISQUE POUR LE MAROC","Une rupture sur quelques fonctions décisives oblige l’investisseur à chercher ailleurs les informations et services nécessaires à son implantation."],
          ["DÉCISION À INSTRUIRE","Prioriser les fonctions qui agrandissent et rééquilibrent la couverture du parcours, plutôt que multiplier les contenus promotionnels."]],
   radarAll:"Tout afficher",radarMa:"Morocco Now uniquement",
-  synthEyebrow:"LECTURE DÉCISIONNELLE",
+   synthEyebrow:"VERDICT BUILDFLUENCE · LECTURE DÉCISIONNELLE",
   synthTitle:"Le véritable retard n’est pas promotionnel. Il est transactionnel.",
   synthText:"Morocco Now remplit sa fonction de visibilité internationale, mais laisse encore l’investisseur reconstruire une partie importante de son parcours : identifier un territoire, comparer les conditions, vérifier les infrastructures, qualifier le foncier et trouver le bon interlocuteur. Les dispositifs les plus avancés transforment ces étapes en services numériques continus. La priorité n’est donc pas d’ajouter davantage de contenu, mais d’organiser une chaîne de décision exploitable, depuis la première recherche jusqu’à l’implantation.",
   prio:[["01 · TERRITORIALISER","Rendre l’offre régionale, les infrastructures et les opportunités directement explorables."],
@@ -3469,7 +3484,7 @@ var POS={
          ["WHAT IT MEANS","The gap is functional rather than editorial: services are missing, not content."],
          ["RISK FOR MOROCCO","The investor must reassemble alone the information required to establish operations."],
          ["DECISION TO EXAMINE","Prioritise the criteria where the score is lowest and investor usage most frequent."]],
-  intro3:["03","What is the overall structure of each platform?","The heatmap locates gaps criterion by criterion. The radar reveals the overall structure: even coverage, specialisation or a break in the investor journey. Morocco Now stays visible as the reference so the distance to each competitor is immediately readable."],
+   intro3:["03","What is the overall structure of each platform?","The comparative matrix locates gaps criterion by criterion. The radar reveals the overall structure: even coverage, specialisation or a break in the investor journey. Morocco Now stays visible as the reference so the distance to each competitor is immediately readable."],
   role3:[["EXTENT","How much of the investor journey does the platform cover?"],
          ["EVENNESS","Is coverage balanced, or does it reveal breaks?"],
          ["SPECIALISATION","On which functions does the platform truly stand out?"],
@@ -3479,7 +3494,7 @@ var POS={
          ["RISK FOR MOROCCO","A break on a few decisive functions forces the investor to look elsewhere for the information and services needed to establish operations."],
          ["DECISION TO EXAMINE","Prioritise the functions that widen and rebalance journey coverage rather than multiplying promotional content."]],
   radarAll:"Show all",radarMa:"Morocco Now only",
-  synthEyebrow:"DECISION READING",
+   synthEyebrow:"BUILDFLUENCE VERDICT · DECISION READING",
   synthTitle:"The real lag is not promotional. It is transactional.",
   synthText:"Morocco Now fulfils its international visibility function, but still leaves the investor to rebuild a significant part of the journey: identifying a territory, comparing conditions, checking infrastructure, qualifying land and finding the right counterpart. The most advanced platforms turn these steps into continuous digital services. The priority is therefore not to add more content, but to organise a usable decision chain, from the first search to establishment.",
   prio:[["01 · TERRITORIALISE","Make the regional offer, infrastructure and opportunities directly explorable."],
