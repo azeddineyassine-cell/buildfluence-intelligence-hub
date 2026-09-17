@@ -1861,7 +1861,7 @@ var NAVPHASES=[
     {label:{fr:"2. Matrice comparative",en:"2. Comparative matrix"},id:"positionnement-matrice"},
     {label:{fr:"3. Radar comparatif",en:"3. Comparative radar"},id:"positionnement-radar"},
     {group:{fr:"DÉCISION",en:"DECISION"}},
-    {label:{fr:"4. Verdict Buildfluence · Lecture décisionnelle",en:"4. Buildfluence verdict · Decision reading"},id:"verdict-buildfluence"},
+    {label:{fr:"4. Verdict Buildfluence",en:"4. Buildfluence Verdict"},id:"verdict-buildfluence"},
     {label:{fr:"5. Synthèse géostratégique",en:"5. Geostrategic synthesis"},id:"synthese-geostrategique"}
  ]},
  {icon:"duel",label:{fr:"Le duel",en:"The duel"},sub:{fr:"Qui fait mieux, et comment ?",en:"Who does it better, and how?"},id:"m4"},
@@ -3562,6 +3562,7 @@ window.addEventListener("message",function(e){var d=e.data||{};var l=null;
 try{var _qp=new URLSearchParams(location.search).get("lang");if(_qp&&_qp.toLowerCase().indexOf("en")===0){lang="en";}}catch(e){}
 renderAll();
 showPhase(0,null);
+try{var _focus=new URLSearchParams(location.search).get("focus");if(_focus==="cout"){showPhase(4,"cout");}}catch(e){}
 hasBooted=true;
 var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target);if(e.target.id==="statstrip"){countUp();}}});},{threshold:.12});
 document.querySelectorAll(".reveal").forEach(function(el2,i){el2.style.transitionDelay=(Math.min(i,6)*55)+"ms";io.observe(el2);});
