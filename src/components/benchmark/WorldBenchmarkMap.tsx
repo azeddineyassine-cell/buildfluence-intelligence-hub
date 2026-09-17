@@ -166,10 +166,12 @@ const copy = {
 };
 
 const MAP_STYLES = `
-  .bfm-shell{--bfm-bg:#FAF6ED;--bfm-land:#D9CFBC;--bfm-border:rgba(13,27,42,.16);--bfm-route:#8A7537;--bfm-gold:#C9A84C;--bfm-ink:#0D1B2A;--bfm-muted:rgba(13,27,42,.68);--bfm-tip:#0D1B2A;--bfm-tip-ink:#F5F1E8;position:relative;width:100%;height:100%;min-height:360px;background:var(--bfm-bg);color:var(--bfm-ink);overflow:hidden}
+  .bfm-shell{--bfm-bg:#FAF6ED;--bfm-land:#D9CFBC;--bfm-border:rgba(13,27,42,.16);--bfm-route:#8A7537;--bfm-gold:#C9A84C;--bfm-ink:#0D1B2A;--bfm-muted:rgba(13,27,42,.68);--bfm-tip:#0D1B2A;--bfm-tip-ink:#F5F1E8;position:relative;width:100%;min-height:360px;background:var(--bfm-bg);color:var(--bfm-ink);overflow:hidden}
   .bfm-shell[data-map-theme="dark"]{--bfm-bg:#08111C;--bfm-land:#142235;--bfm-border:rgba(245,241,232,.12);--bfm-ink:#F5F1E8;--bfm-muted:rgba(245,241,232,.68);--bfm-tip:#F5F1E8;--bfm-tip-ink:#0D1B2A}
-  .bfm-stage{position:relative;height:calc(100% - 76px);min-height:290px;touch-action:pan-y;background:var(--bfm-bg)}
-  .bfm-shell[data-map-mode="landing"] .bfm-stage{height:100%;min-height:360px}
+  .bfm-body{display:grid;grid-template-columns:minmax(0,7fr) minmax(300px,3fr);min-height:460px;border-top:1px solid var(--bfm-border)}
+  .bfm-stage{position:relative;min-height:460px;touch-action:pan-y;background:var(--bfm-bg)}
+  .bfm-shell[data-map-mode="landing"] .bfm-body{display:block;min-height:310px}
+  .bfm-shell[data-map-mode="landing"] .bfm-stage{min-height:310px}
   .bfm-svg{display:block;width:100%;height:100%;outline:none}
   .bfm-country{fill:var(--bfm-land);stroke:var(--bfm-border);stroke-width:.55;vector-effect:non-scaling-stroke;transition:fill .2s ease}
   .bfm-route{fill:none;stroke:var(--bfm-route);stroke-width:1.1;stroke-dasharray:4 5;stroke-linecap:round;opacity:.72;vector-effect:non-scaling-stroke}
@@ -190,15 +192,13 @@ const MAP_STYLES = `
   .bfm-control:hover{border-color:var(--bfm-gold)!important;background:var(--bfm-bg)!important}
   .bfm-control:focus-visible{outline:2px solid var(--bfm-gold)!important;outline-offset:2px!important}
   .bfm-control svg{width:16px!important;height:16px!important}
-  .bfm-legend{position:absolute;left:16px;right:16px;bottom:12px;z-index:4;display:flex;align-items:center;justify-content:flex-end;gap:7px;flex-wrap:wrap}
-  .bfm-shell[data-map-mode="landing"] .bfm-legend{top:14px;right:auto;bottom:auto;max-width:250px;justify-content:flex-start;background:color-mix(in srgb,var(--bfm-bg) 88%,transparent);border:1px solid var(--bfm-border);padding:8px}
-  .bfm-legend-title{width:100%;font-family:'JetBrains Mono',monospace;font-size:9px;line-height:1.3;letter-spacing:.16em;text-align:right;text-transform:uppercase;color:var(--bfm-muted)}
-  .bfm-shell[data-map-mode="landing"] .bfm-legend-title{text-align:left}
-  .bfm-legend-btn{min-width:44px;height:44px;padding:0 8px;border:1px solid transparent;border-radius:2px;background:transparent;color:var(--bfm-ink);font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:0;cursor:pointer;transition:border-color .18s ease,background .18s ease}
+  .bfm-legend{position:relative;z-index:4;display:flex;align-items:center;justify-content:flex-start;gap:6px;flex-wrap:nowrap;overflow-x:auto;padding:10px 12px;background:var(--bfm-bg);scrollbar-width:thin}
+  .bfm-legend-title{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+  .bfm-legend-btn{flex:0 0 auto;min-width:max-content;height:38px;padding:0 9px;border:1px solid transparent;border-radius:2px;background:transparent;color:var(--bfm-ink);font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:0;cursor:pointer;transition:border-color .18s ease,background .18s ease}
   .bfm-legend-btn:hover,.bfm-legend-btn[data-active="true"]{border-color:var(--bfm-gold);background:color-mix(in srgb,var(--bfm-gold) 12%,transparent)}
   .bfm-legend-btn:focus-visible{outline:2px solid var(--bfm-gold);outline-offset:2px}
   .bfm-legend-flag{display:inline-block;width:25px;height:17px;border:1px solid var(--bfm-border);border-radius:2px;object-fit:cover;vertical-align:middle}
-  .bfm-detail{position:absolute;right:16px;top:16px;z-index:6;width:min(380px,calc(100% - 32px));max-height:calc(100% - 32px);overflow:auto;border:1px solid var(--bfm-gold);border-radius:2px;background:#0D1B2A;color:#F5F1E8;padding:16px 17px;box-shadow:0 22px 50px -24px rgba(0,0,0,.68)}
+  .bfm-detail{position:relative;z-index:2;width:100%;max-height:460px;overflow:auto;border-left:1px solid var(--bfm-gold);border-radius:0;background:#0D1B2A;color:#F5F1E8;padding:16px 17px;box-shadow:none}
   .bfm-detail-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;border-bottom:1px solid rgba(201,168,76,.36);padding-bottom:10px;margin-bottom:12px}
   .bfm-detail-country{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:#C9A84C;margin-bottom:4px}
   .bfm-detail-agency{font-family:'Cormorant Garamond',serif;font-size:21px;line-height:1.1;color:#F5F1E8}
@@ -215,15 +215,13 @@ const MAP_STYLES = `
   @keyframes bfm-pulse{0%{r:10px;opacity:.7}100%{r:25px;opacity:0}}
   @media(max-width:900px){
     .bfm-shell{min-height:320px}
-    .bfm-stage{height:245px;min-height:245px}
-    .bfm-shell[data-map-mode="landing"] .bfm-stage{height:320px;min-height:320px}
-    .bfm-legend{position:static;justify-content:center;padding:8px 12px 12px;background:var(--bfm-bg)}
-    .bfm-shell[data-map-mode="landing"] .bfm-legend{position:absolute;top:10px;left:10px;right:auto;bottom:auto;padding:7px;max-width:220px}
-    .bfm-legend-title{text-align:center}
-    .bfm-shell[data-map-mode="landing"] .bfm-legend-title{text-align:left}
-    .bfm-legend-btn{width:44px;padding:0;font-size:0}
+    .bfm-body{grid-template-columns:1fr;min-height:0}
+    .bfm-stage{height:340px;min-height:340px}
+    .bfm-shell[data-map-mode="landing"] .bfm-stage{height:300px;min-height:300px}
+    .bfm-legend{padding:8px 10px}
+    .bfm-legend-btn{width:auto;padding:0 8px;font-size:11px}
     .bfm-legend-flag{width:25px;height:19px}
-    .bfm-detail{position:absolute;left:12px;right:12px;top:auto;bottom:12px;width:auto;max-height:52%}
+    .bfm-detail{position:relative;max-height:none;border-left:0;border-top:1px solid var(--bfm-gold)}
   }
   @media(prefers-reduced-motion:reduce){.bfm-pulse{animation:none}.bfm-ring,.bfm-country,.bfm-legend-btn{transition:none}}
 `;
@@ -334,7 +332,7 @@ const WorldBenchmarkMap = ({ hostDocument, mode = "synthesis" }: WorldBenchmarkM
     };
   }, [hostDocument]);
 
-  const visibleId = selectedId ?? hoveredId;
+  const visibleId = selectedId ?? hoveredId ?? (mode === "synthesis" ? MOROCCO.id : null);
   const labels = copy[language];
   const activeLocation = useMemo(
     () => benchmarkLocations.find((location) => location.id === visibleId),
@@ -389,7 +387,33 @@ const WorldBenchmarkMap = ({ hostDocument, mode = "synthesis" }: WorldBenchmarkM
   return (
     <div ref={shellRef} className="bfm-shell" data-map-theme={theme} data-map-mode={mode} data-selected={selectedId ?? ""}>
       <style>{MAP_STYLES}</style>
-      <div className="bfm-stage">
+      <div className="bfm-legend" aria-label={mapTitle}>
+        <div className="bfm-legend-title" id={mode === "landing" ? "landingMapTitle" : "synthesisMapTitle"}>{mapTitle}</div>
+        {benchmarkLocations.map((location) => {
+          const country = language === "fr" ? location.countryFr : location.countryEn;
+          return (
+            <button
+              key={location.id}
+              className="bfm-legend-btn"
+              data-legend-location={location.id}
+              data-active={visibleId === location.id}
+              type="button"
+              aria-label={`${country}, ${location.agency}`}
+              aria-pressed={selectedId === location.id}
+              onMouseEnter={() => holdHover(location.id)}
+              onMouseLeave={releaseHover}
+              onFocus={() => holdHover(location.id)}
+              onBlur={releaseHover}
+              onClick={() => selectLocation(location, true)}
+            >
+              <img className="bfm-legend-flag" src={`/flags/${location.code.toLowerCase()}.svg`} alt="" aria-hidden="true" />
+              <span>{country}</span>
+            </button>
+          );
+        })}
+      </div>
+      <div className="bfm-body">
+        <div className="bfm-stage">
         <ComposableMap
           className="bfm-svg"
           width={1000}
@@ -496,20 +520,15 @@ const WorldBenchmarkMap = ({ hostDocument, mode = "synthesis" }: WorldBenchmarkM
           </div>
         )}
 
+        </div>
         {mode === "synthesis" && activeLocation && activeAnalysis && (
-          <aside
-            className="bfm-detail"
-            role="dialog"
-            aria-label={`${language === "fr" ? activeLocation.countryFr : activeLocation.countryEn} · ${activeLocation.agency}`}
-            onMouseEnter={() => holdHover(activeLocation.id)}
-            onMouseLeave={releaseHover}
-          >
+          <aside className="bfm-detail" aria-live="polite" aria-label={`${language === "fr" ? activeLocation.countryFr : activeLocation.countryEn} · ${activeLocation.agency}`}>
             <div className="bfm-detail-head">
               <div>
                 <div className="bfm-detail-country">{language === "fr" ? activeLocation.countryFr : activeLocation.countryEn}</div>
                 <div className="bfm-detail-agency">{activeLocation.agency}</div>
               </div>
-              <Button className="bfm-detail-close" variant="ghost" size="icon" type="button" title={labels.close} aria-label={labels.close} onClick={() => setSelectedId(null)}>
+              <Button className="bfm-detail-close" variant="ghost" size="icon" type="button" title={labels.close} aria-label={labels.close} onClick={() => { setSelectedId(null); setHoveredId(null); }}>
                 <X aria-hidden="true" />
               </Button>
             </div>
@@ -526,32 +545,6 @@ const WorldBenchmarkMap = ({ hostDocument, mode = "synthesis" }: WorldBenchmarkM
             </div>
           </aside>
         )}
-      </div>
-
-      <div className="bfm-legend" aria-label={mapTitle}>
-        <div className="bfm-legend-title" id={mode === "landing" ? "landingMapTitle" : "synthesisMapTitle"}>{mapTitle}</div>
-        {benchmarkLocations.map((location) => {
-          const country = language === "fr" ? location.countryFr : location.countryEn;
-          return (
-            <button
-              key={location.id}
-              className="bfm-legend-btn"
-              data-legend-location={location.id}
-              data-active={visibleId === location.id}
-              type="button"
-              aria-label={`${country}, ${location.agency}`}
-              aria-pressed={selectedId === location.id}
-              onMouseEnter={() => holdHover(location.id)}
-              onMouseLeave={releaseHover}
-              onFocus={() => holdHover(location.id)}
-              onBlur={releaseHover}
-              onClick={() => selectLocation(location, true)}
-            >
-              <img className="bfm-legend-flag" src={`/flags/${location.code.toLowerCase()}.svg`} alt="" aria-hidden="true" />
-              <span>{country}</span>
-            </button>
-          );
-        })}
       </div>
     </div>
   );

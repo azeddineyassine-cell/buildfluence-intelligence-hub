@@ -4,6 +4,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { useLanguage } from "@/contexts/LanguageContext";
 import SEO from "@/components/SEO";
 import { WorldBenchmarkMapPortal } from "@/components/benchmark/WorldBenchmarkMap";
+import { PositioningDecisionTrajectoryPortal } from "@/components/benchmark/PositioningDecisionTrajectory";
 
 
 const BenchmarkApiVsAmdie = () => {
@@ -11,7 +12,7 @@ const BenchmarkApiVsAmdie = () => {
   const { lang } = useLanguage();
   const location = useLocation();
   const frameRef = useRef<HTMLIFrameElement>(null);
-  const [mapMounts, setMapMounts] = useState<{ landing?: HTMLElement; synthesis?: HTMLElement; document: Document } | null>(null);
+  const [mounts, setMounts] = useState<{ landing?: HTMLElement; synthesis?: HTMLElement; trajectory?: HTMLElement; document: Document } | null>(null);
   
   const requestedPremium = new URLSearchParams(location.search).get("access") === "premium";
   const premium = requestedPremium || (!loading && Boolean(session));
@@ -36,7 +37,8 @@ const BenchmarkApiVsAmdie = () => {
     if (document) {
       const landing = document.getElementById("landingWorldMapRoot") ?? undefined;
       const synthesis = document.getElementById("synthesisWorldMapRoot") ?? undefined;
-      if (landing || synthesis) setMapMounts({ landing, synthesis, document });
+      const trajectory = document.getElementById("positioningTrajectoryRoot") ?? undefined;
+      if (landing || synthesis || trajectory) setMounts({ landing, synthesis, trajectory, document });
     }
   }, [syncAccess]);
 
@@ -60,11 +62,14 @@ const BenchmarkApiVsAmdie = () => {
         onLoad={handleFrameLoad}
         className="block min-h-screen w-full border-0"
       />
-      {mapMounts?.landing && (
-        <WorldBenchmarkMapPortal mountNode={mapMounts.landing} hostDocument={mapMounts.document} mode="landing" />
+      {mounts?.landing && (
+        <WorldBenchmarkMapPortal mountNode={mounts.landing} hostDocument={mounts.document} mode="landing" />
       )}
-      {mapMounts?.synthesis && (
-        <WorldBenchmarkMapPortal mountNode={mapMounts.synthesis} hostDocument={mapMounts.document} mode="synthesis" />
+      {mounts?.synthesis && (
+        <WorldBenchmarkMapPortal mountNode={mounts.synthesis} hostDocument={mounts.document} mode="synthesis" />
+      )}
+      {mounts?.trajectory && (
+        <PositioningDecisionTrajectoryPortal mountNode={mounts.trajectory} hostDocument={mounts.document} />
       )}
       
     </>
