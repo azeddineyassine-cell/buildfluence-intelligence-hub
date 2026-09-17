@@ -3078,11 +3078,13 @@ function renderCost(){
      _cr.dataset.bound="1";
      _cr.addEventListener("click",function(ev){
        ev.preventDefault();
+       try{window.parent.postMessage({type:"bf-close-tab"},window.location.origin);}catch(e){}
        try{window.close();}catch(e){}
        setTimeout(function(){
          if(!window.closed){showPhase(1,"synthese-geostrategique");}
-       },200);
+       },300);
      });
+
    }
  }
 
