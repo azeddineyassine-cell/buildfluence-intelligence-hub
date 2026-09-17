@@ -38,8 +38,8 @@ const content: Record<Language, { steps: Step[]; cta: string }> = {
         Icon: MousePointerClick,
       },
     ],
-    cta: "Ouvrir le Simulateur",
-    secondary: "Poursuivre vers la Synthèse géostratégique",
+    cta: "Ouvrir le Simulateur ↗",
+
   },
   en: {
     steps: [
