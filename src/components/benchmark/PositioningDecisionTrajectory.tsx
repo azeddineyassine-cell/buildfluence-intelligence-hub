@@ -116,17 +116,14 @@ const PositioningDecisionTrajectory = ({ hostDocument }: PositioningDecisionTraj
     return () => observer.disconnect();
   }, [hostDocument]);
 
-  const openSimulatorInNewTab = () => {
+  const openSimulator = () => {
     const params = new URLSearchParams(window.location.search);
     params.set("tab", "cout");
     window.open(`${window.location.pathname}?${params.toString()}`, "_blank", "noopener,noreferrer");
+    const target = hostDocument.getElementById("synthese-geostrategique");
+    target?.scrollIntoView({ behavior: "auto", block: "start" });
   };
 
-  const goToSynthesis = () => {
-    const target = hostDocument.getElementById("synthese-geostrategique");
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    target?.scrollIntoView({ behavior: reduced ? "auto" : "smooth", block: "start" });
-  };
 
   return (
     <div className="pdt-root">
