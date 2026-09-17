@@ -63,7 +63,7 @@ body.hide-hero .hero,body.hide-hero .statstrip,body.hide-hero .stat-caption{disp
 .phase.active .phase-btn .sub-row,.phase:hover .phase-btn .sub-row{color:var(--ivory,#F5F1E8)}
 .phase-sub{position:absolute;top:100%;left:0;min-width:260px;background:var(--hero-navy);border:1px solid rgba(255,255,255,.12);border-top:none;box-shadow:0 20px 34px -18px rgba(0,0,0,.5);padding:6px;opacity:0;visibility:hidden;transform:translateY(-4px);transition:all .18s;z-index:60}
 .phase:hover .phase-sub,.phase.open .phase-sub{opacity:1;visibility:visible;transform:translateY(0)}
-.phase-sub a{display:block;font-family:var(--sans);font-size:12.5px;color:color-mix(in srgb,var(--ivory,#F5F1E8) 88%,transparent);text-decoration:none;padding:10px 12px;border-radius:4px;transition:background .15s}
+.phase-sub a{display:block;font-family:var(--sans);font-size:12.5px;color:color-mix(in srgb,var(--ivory,#F5F1E8) 88%,transparent);text-decoration:none;padding:10px 12px;border-radius:4px;transition:background .15s;white-space:nowrap}
 .phase-sub a:hover{background:rgba(255,255,255,.07);color:var(--gold)}
 .phase-sub a.active{color:var(--gold);background:rgba(255,255,255,.07);box-shadow:inset 2px 0 0 var(--gold)}
 .phase-sub-group{font-family:var(--mono);font-size:8px;letter-spacing:.18em;text-transform:uppercase;color:color-mix(in srgb,var(--ivory,#F5F1E8) 48%,transparent);padding:9px 12px 3px}
@@ -1861,7 +1861,7 @@ var NAVPHASES=[
     {label:{fr:"2. Matrice comparative",en:"2. Comparative matrix"},id:"positionnement-matrice"},
     {label:{fr:"3. Radar comparatif",en:"3. Comparative radar"},id:"positionnement-radar"},
     {group:{fr:"DÉCISION",en:"DECISION"}},
-    {label:{fr:"4. Verdict Buildfluence · Lecture décisionnelle",en:"4. Buildfluence verdict · Decision reading"},id:"verdict-buildfluence"},
+    {label:{fr:"4. Verdict Buildfluence",en:"4. Buildfluence Verdict"},id:"verdict-buildfluence"},
     {label:{fr:"5. Synthèse géostratégique",en:"5. Geostrategic synthesis"},id:"synthese-geostrategique"}
  ]},
  {icon:"duel",label:{fr:"Le duel",en:"The duel"},sub:{fr:"Qui fait mieux, et comment ?",en:"Who does it better, and how?"},id:"m4"},
@@ -3562,6 +3562,7 @@ window.addEventListener("message",function(e){var d=e.data||{};var l=null;
 try{var _qp=new URLSearchParams(location.search).get("lang");if(_qp&&_qp.toLowerCase().indexOf("en")===0){lang="en";}}catch(e){}
 renderAll();
 showPhase(0,null);
+try{var _focus=new URLSearchParams(location.search).get("focus");if(_focus==="cout"){showPhase(4,"cout");}}catch(e){}
 hasBooted=true;
 var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target);if(e.target.id==="statstrip"){countUp();}}});},{threshold:.12});
 document.querySelectorAll(".reveal").forEach(function(el2,i){el2.style.transitionDelay=(Math.min(i,6)*55)+"ms";io.observe(el2);});
