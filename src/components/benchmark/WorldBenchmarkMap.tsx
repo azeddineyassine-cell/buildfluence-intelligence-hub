@@ -320,7 +320,10 @@ const WorldBenchmarkMap = ({ hostDocument, mode = "synthesis" }: WorldBenchmarkM
       if (shellRef.current && !shellRef.current.contains(event.target as Node)) setSelectedId(null);
     };
     const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setSelectedId(null);
+      if (event.key === "Escape") {
+        setSelectedId(null);
+        setHoveredId(null);
+      }
     };
     hostDocument.addEventListener("pointerdown", onPointerDown);
     hostDocument.addEventListener("keydown", onKeyDown);
@@ -517,8 +520,8 @@ const WorldBenchmarkMap = ({ hostDocument, mode = "synthesis" }: WorldBenchmarkM
               <div className="bfm-detail-block"><span className="bfm-detail-label">{labels.investorEffect}</span><p className="bfm-detail-text">{activeAnalysis.investorEffect}</p></div>
               <div className="bfm-detail-block"><span className="bfm-detail-label">{activeLocation.id === "morocco" ? labels.cap : labels.lesson}</span><p className="bfm-detail-text">{activeAnalysis.lesson}</p></div>
               <div className="bfm-detail-meta">
-                <span>{labels.score}<br /><b>{activeAnalysis.score}/5</b></span>
-                {activeAnalysis.sourceUrl ? <a className="bfm-source" href={activeAnalysis.sourceUrl} target="_blank" rel="noopener noreferrer">{labels.source}<br />{activeAnalysis.sourceLabel}</a> : <span>{labels.source}<br />{activeAnalysis.sourceLabel}</span>}
+                <span><span className="bfm-detail-label">{labels.score}</span><b>{activeAnalysis.score}/5</b></span>
+                {activeAnalysis.sourceUrl ? <a className="bfm-source" href={activeAnalysis.sourceUrl} target="_blank" rel="noopener noreferrer"><span className="bfm-detail-label">{labels.source}</span>{activeAnalysis.sourceLabel}</a> : <span><span className="bfm-detail-label">{labels.source}</span>{activeAnalysis.sourceLabel}</span>}
               </div>
             </div>
           </aside>

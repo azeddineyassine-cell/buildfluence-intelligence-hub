@@ -2209,7 +2209,7 @@ var T={
   m1ti:"Key reading",m1note:"<b>Morocco Now sits alone in the « showcase » corner.</b> Leaders (Türkiye, Singapore) occupy the top-right self-service cockpit quadrant. The gap is not one of degree but of nature: a site that informs versus platforms that let you decide.",
   biGlobal:"Global score",biTech:"Tech / Data",biMarket:"Marketing",biSource:"Official source ↗",
   biStrat:"Strategy",biTools:"Tools",biSector:"Flagship sectors",biFig:"Investment 2025",biDiff:"Differentiator",biVerdict:"Buildfluence verdict",
-  axX:"Tech / Data maturity →",axY:"Investor marketing →",quadTop:"Cockpits · leaders",quadBot:"Showcases · lagging",
+  axX:"Tech / Data maturity →",axY:"Investor marketing →",quadTop:"Cockpits · leaders",quadBot:"Showcases · lagging",quadLabels:{topLeft:"Active promotion, limited tooling",topRight:"Integrated investment platform",bottomLeft:"Institutional showcase",bottomRight:"Digital tools without conversion"},
   m2tag:"Heatmap · 6 × 12",m2title:["The grid that ","does not lie."],m2lead:"72 assessments, from 1 (absent) to 5 (best practice): 21 world best practices identified across the grid. Click any cell for the detail. The Moroccan column reads at a glance.",
   m2ti:"Key reading",m2note:"<b>The Morocco Now column is red on 7 of 12 criteria.</b> Not a one-off weakness but a systemic hole across the whole Tech/Data axis: no GIS, no simulator, no comparator, no online licences.",
   mdPlaceholder:"Click a cell in the grid to reveal the detail.",
@@ -2531,8 +2531,11 @@ function renderBubble(){
  parts+='<rect x="'+P+'" y="'+my+'" width="'+(mx-P)+'" height="'+((H-P)-my)+'" fill="'+AG.morocco.color+'" fill-opacity=".05"/>';
  parts+='<line x1="'+mx+'" y1="30" x2="'+mx+'" y2="'+(H-P)+'" stroke="var(--rule)" stroke-dasharray="3 4"/><line x1="'+P+'" y1="'+my+'" x2="'+(W-30)+'" y2="'+my+'" stroke="var(--rule)" stroke-dasharray="3 4"/>';
  for(var g=0;g<=100;g+=25){parts+='<line x1="'+x(g)+'" y1="30" x2="'+x(g)+'" y2="'+(H-P)+'" stroke="var(--rule-soft)"/><line x1="'+P+'" y1="'+y(g)+'" x2="'+(W-30)+'" y2="'+y(g)+'" stroke="var(--rule-soft)"/>';}
- parts+='<text class="bub-quadrant" x="'+(W-36)+'" y="46" text-anchor="end">'+t().quadTop+'</text>';
- parts+='<text class="bub-quadrant" x="'+(P+8)+'" y="'+(H-P-8)+'">'+t().quadBot+'</text>';
+  var quad=t().quadLabels;
+  parts+='<text class="bub-quadrant" x="'+(P+12)+'" y="'+(my-14)+'">'+quad.topLeft+'</text>';
+  parts+='<text class="bub-quadrant" x="'+(W-36)+'" y="'+(my-14)+'" text-anchor="end">'+quad.topRight+'</text>';
+  parts+='<text class="bub-quadrant" x="'+(P+12)+'" y="'+(H-P-10)+'">'+quad.bottomLeft+'</text>';
+  parts+='<text class="bub-quadrant" x="'+(W-36)+'" y="'+(H-P-10)+'" text-anchor="end">'+quad.bottomRight+'</text>';
  parts+='<text class="bubble-axis-label" x="'+(W/2)+'" y="'+(H-18)+'" text-anchor="middle">'+t().axX+'</text>';
  parts+='<text class="bubble-axis-label" x="18" y="'+(H/2)+'" text-anchor="middle" transform="rotate(-90 18 '+(H/2)+')">'+t().axY+'</text>';
  // anti-chevauchement : décalage vertical des labels proches
