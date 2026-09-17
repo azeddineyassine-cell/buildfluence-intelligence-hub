@@ -152,11 +152,9 @@ const PositioningDecisionTrajectory = ({ hostDocument }: PositioningDecisionTraj
                   <h4 className="pdt-subtitle">{step.subtitle}</h4>
                   <p className="pdt-body">{step.body}</p>
                   {index === 2 && (
-                    <>
-                      <Button className="pdt-cta" type="button" onClick={openSimulatorInNewTab}>{content[language].cta}</Button>
-                      <button className="pdt-secondary" type="button" onClick={goToSynthesis}>{content[language].secondary}</button>
-                    </>
+                    <Button className="pdt-cta" type="button" onClick={openSimulator}>{content[language].cta}</Button>
                   )}
+
                 </div>
               )}
             </article>
