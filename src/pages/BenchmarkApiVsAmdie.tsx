@@ -20,8 +20,9 @@ const BenchmarkApiVsAmdie = () => {
   const frameSrc = useMemo(() => {
     const params = new URLSearchParams({ lang });
     if (premium) params.set("access", "premium");
+    if (new URLSearchParams(location.search).get("tab") === "cout") params.set("focus", "cout");
     return `/benchmark-api-vs-amdie.html?${params.toString()}`;
-  }, [lang, premium]);
+  }, [lang, premium, location.search]);
 
   const syncAccess = useCallback(() => {
     frameRef.current?.contentWindow?.postMessage(
