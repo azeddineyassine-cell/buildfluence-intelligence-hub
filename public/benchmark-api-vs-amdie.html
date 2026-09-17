@@ -3495,7 +3495,7 @@ function renderPositionnement(){
  var set=function(id,v,html){var n=el(id);if(n){if(html)n.innerHTML=v;else n.textContent=v;}};
  set("posExecEyebrow",P.execEyebrow);set("posExecTitle",P.execTitle);set("posExecLead",P.execLead);
  var f=el("posExecFacts");if(f)f.innerHTML=P.facts.map(function(r){return '<div class="pos-fact"><b>'+r[0]+'</b><span>'+r[1]+'</span></div>';}).join("");
- posIntro("posIntro1",P.intro1);posKeys("posAxes1",P.axes1);posKeys("posQuad1",P.quad1);posRead("posRead1",P.read1);
+  posIntro("posIntro1",P.intro1);posKeys("posAxes1",P.axes1);posRead("posRead1",P.read1);
  posIntro("posIntro2",P.intro2);posKeys("posJourney2",P.journey2);posRead("posRead2",P.read2);
  posIntro("posIntro3",P.intro3);posKeys("posRole3",P.role3);posRead("posRead3",P.read3);
  set("posSynthEyebrow",P.synthEyebrow);set("posSynthTitle",P.synthTitle);set("posSynthText",P.synthText);

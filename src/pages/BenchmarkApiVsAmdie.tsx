@@ -60,7 +60,12 @@ const BenchmarkApiVsAmdie = () => {
         onLoad={handleFrameLoad}
         className="block min-h-screen w-full border-0"
       />
-      {mapMount && <WorldBenchmarkMapPortal mountNode={mapMount.node} hostDocument={mapMount.document} />}
+      {mapMounts?.landing && (
+        <WorldBenchmarkMapPortal mountNode={mapMounts.landing} hostDocument={mapMounts.document} mode="landing" />
+      )}
+      {mapMounts?.synthesis && (
+        <WorldBenchmarkMapPortal mountNode={mapMounts.synthesis} hostDocument={mapMounts.document} mode="synthesis" />
+      )}
       
     </>
   );
