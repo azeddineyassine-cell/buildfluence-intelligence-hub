@@ -11,7 +11,7 @@ const BenchmarkApiVsAmdie = () => {
   const { lang } = useLanguage();
   const location = useLocation();
   const frameRef = useRef<HTMLIFrameElement>(null);
-  const [mapMount, setMapMount] = useState<{ node: HTMLElement; document: Document } | null>(null);
+  const [mapMounts, setMapMounts] = useState<{ landing?: HTMLElement; synthesis?: HTMLElement; document: Document } | null>(null);
   
   const requestedPremium = new URLSearchParams(location.search).get("access") === "premium";
   const premium = requestedPremium || (!loading && Boolean(session));
@@ -33,8 +33,11 @@ const BenchmarkApiVsAmdie = () => {
     syncAccess();
     const frame = frameRef.current;
     const document = frame?.contentDocument;
-    const node = document?.getElementById("worldMapRoot");
-    if (document && node) setMapMount({ node, document });
+    if (document) {
+      const landing = document.getElementById("landingWorldMapRoot") ?? undefined;
+      const synthesis = document.getElementById("synthesisWorldMapRoot") ?? undefined;
+      if (landing || synthesis) setMapMounts({ landing, synthesis, document });
+    }
   }, [syncAccess]);
 
   useEffect(() => {
