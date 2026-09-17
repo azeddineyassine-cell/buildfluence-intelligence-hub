@@ -3583,7 +3583,7 @@ window.addEventListener("message",function(e){var d=e.data||{};var l=null;
 try{var _qp=new URLSearchParams(location.search).get("lang");if(_qp&&_qp.toLowerCase().indexOf("en")===0){lang="en";}}catch(e){}
 renderAll();
 showPhase(0,null);
-try{var _focus=new URLSearchParams(location.search).get("focus");if(_focus==="cout"){showPhase(4,"cout");}}catch(e){}
+try{var _focus=new URLSearchParams(location.search).get("focus");if(_focus==="cout"){showPhase(4,"cout");[120,400,900,1600].forEach(function(ms){setTimeout(function(){var c=document.getElementById("cout");if(c&&c.classList.contains("page-active"))c.scrollIntoView({behavior:"auto",block:"start"});},ms);});}}catch(e){}
 hasBooted=true;
 var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target);if(e.target.id==="statstrip"){countUp();}}});},{threshold:.12});
 document.querySelectorAll(".reveal").forEach(function(el2,i){el2.style.transitionDelay=(Math.min(i,6)*55)+"ms";io.observe(el2);});
