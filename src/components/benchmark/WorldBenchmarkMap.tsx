@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
-import { Minus, Plus, RotateCcw } from "lucide-react";
+import { Minus, Plus, RotateCcw, X } from "lucide-react";
 import {
   ComposableMap,
   Geographies,
@@ -16,6 +16,8 @@ import type { GeoJsonObject } from "geojson";
 
 type BenchmarkLanguage = "fr" | "en";
 type BenchmarkTheme = "light" | "dark";
+type BenchmarkMapMode = "landing" | "synthesis";
+type LocalizedText = string | { fr?: string; en?: string };
 
 type BenchmarkLocation = {
   id: string;
@@ -25,6 +27,44 @@ type BenchmarkLocation = {
   countryEn: string;
   agency: string;
   coordinates: [number, number];
+};
+
+type HostAgency = {
+  name?: string;
+  short?: string;
+  tagline?: LocalizedText;
+  diff?: LocalizedText;
+  strat?: LocalizedText;
+  tools?: LocalizedText;
+  sector?: LocalizedText;
+  fig?: LocalizedText;
+  src?: string;
+  verdict?: LocalizedText;
+  global?: number;
+  url?: string;
+};
+
+type HostMatrixRow = {
+  label?: LocalizedText;
+  vals?: number[];
+};
+
+type HostBenchmarkWindow = Window & {
+  AG?: Record<string, HostAgency>;
+  ORDER?: string[];
+  MATRIX?: HostMatrixRow[];
+  SRCURL?: Record<string, Record<number, string>>;
+};
+
+type CountryAnalysis = {
+  model: string;
+  strengths: string[];
+  limits: string[];
+  investorEffect: string;
+  lesson: string;
+  sourceLabel: string;
+  sourceUrl: string;
+  score: string;
 };
 
 const benchmarkLocations: BenchmarkLocation[] = [
@@ -91,15 +131,37 @@ const MAX_ZOOM = 4;
 const copy = {
   fr: {
     mapTitle: "Les 6 pays du benchmark",
+    mapFinalTitle: "Carte finale interactive",
     zoomIn: "Zoom avant",
     zoomOut: "Zoom arrière",
     reset: "Réinitialiser la vue",
+    close: "Fermer la fiche",
+    model: "Modèle dominant",
+    strengths: "Ce que le dispositif maîtrise",
+    limits: "Ce qu’il maîtrise moins",
+    investorEffect: "Effet pour l’investisseur",
+    lesson: "Enseignement pour le Maroc",
+    cap: "Cap à atteindre pour le Maroc",
+    score: "Score global existant",
+    source: "Source officielle",
+    fallback: "Information à consolider",
   },
   en: {
     mapTitle: "The 6 benchmark countries",
+    mapFinalTitle: "Final interactive map",
     zoomIn: "Zoom in",
     zoomOut: "Zoom out",
     reset: "Reset view",
+    close: "Close profile",
+    model: "Dominant model",
+    strengths: "What the system masters",
+    limits: "What it masters less",
+    investorEffect: "Investor effect",
+    lesson: "Lesson for Morocco",
+    cap: "Target for Morocco",
+    score: "Existing global score",
+    source: "Official source",
+    fallback: "Information to be consolidated",
   },
 };
 
@@ -107,6 +169,7 @@ const MAP_STYLES = `
   .bfm-shell{--bfm-bg:#FAF6ED;--bfm-land:#D9CFBC;--bfm-border:rgba(13,27,42,.16);--bfm-route:#8A7537;--bfm-gold:#C9A84C;--bfm-ink:#0D1B2A;--bfm-muted:rgba(13,27,42,.68);--bfm-tip:#0D1B2A;--bfm-tip-ink:#F5F1E8;position:relative;width:100%;height:100%;min-height:360px;background:var(--bfm-bg);color:var(--bfm-ink);overflow:hidden}
   .bfm-shell[data-map-theme="dark"]{--bfm-bg:#08111C;--bfm-land:#142235;--bfm-border:rgba(245,241,232,.12);--bfm-ink:#F5F1E8;--bfm-muted:rgba(245,241,232,.68);--bfm-tip:#F5F1E8;--bfm-tip-ink:#0D1B2A}
   .bfm-stage{position:relative;height:calc(100% - 76px);min-height:290px;touch-action:pan-y;background:var(--bfm-bg)}
+  .bfm-shell[data-map-mode="landing"] .bfm-stage{height:100%;min-height:360px}
   .bfm-svg{display:block;width:100%;height:100%;outline:none}
   .bfm-country{fill:var(--bfm-land);stroke:var(--bfm-border);stroke-width:.55;vector-effect:non-scaling-stroke;transition:fill .2s ease}
   .bfm-route{fill:none;stroke:var(--bfm-route);stroke-width:1.1;stroke-dasharray:4 5;stroke-linecap:round;opacity:.72;vector-effect:non-scaling-stroke}
@@ -128,28 +191,110 @@ const MAP_STYLES = `
   .bfm-control:focus-visible{outline:2px solid var(--bfm-gold)!important;outline-offset:2px!important}
   .bfm-control svg{width:16px!important;height:16px!important}
   .bfm-legend{position:absolute;left:16px;right:16px;bottom:12px;z-index:4;display:flex;align-items:center;justify-content:flex-end;gap:7px;flex-wrap:wrap}
+  .bfm-shell[data-map-mode="landing"] .bfm-legend{top:14px;right:auto;bottom:auto;max-width:250px;justify-content:flex-start;background:color-mix(in srgb,var(--bfm-bg) 88%,transparent);border:1px solid var(--bfm-border);padding:8px}
   .bfm-legend-title{width:100%;font-family:'JetBrains Mono',monospace;font-size:9px;line-height:1.3;letter-spacing:.16em;text-align:right;text-transform:uppercase;color:var(--bfm-muted)}
+  .bfm-shell[data-map-mode="landing"] .bfm-legend-title{text-align:left}
   .bfm-legend-btn{min-width:44px;height:44px;padding:0 8px;border:1px solid transparent;border-radius:2px;background:transparent;color:var(--bfm-ink);font-family:'DM Sans',sans-serif;font-size:11px;letter-spacing:0;cursor:pointer;transition:border-color .18s ease,background .18s ease}
   .bfm-legend-btn:hover,.bfm-legend-btn[data-active="true"]{border-color:var(--bfm-gold);background:color-mix(in srgb,var(--bfm-gold) 12%,transparent)}
   .bfm-legend-btn:focus-visible{outline:2px solid var(--bfm-gold);outline-offset:2px}
   .bfm-legend-flag{display:inline-block;width:25px;height:17px;border:1px solid var(--bfm-border);border-radius:2px;object-fit:cover;vertical-align:middle}
+  .bfm-detail{position:absolute;right:16px;top:16px;z-index:6;width:min(380px,calc(100% - 32px));max-height:calc(100% - 32px);overflow:auto;border:1px solid var(--bfm-gold);border-radius:2px;background:#0D1B2A;color:#F5F1E8;padding:16px 17px;box-shadow:0 22px 50px -24px rgba(0,0,0,.68)}
+  .bfm-detail-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;border-bottom:1px solid rgba(201,168,76,.36);padding-bottom:10px;margin-bottom:12px}
+  .bfm-detail-country{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:#C9A84C;margin-bottom:4px}
+  .bfm-detail-agency{font-family:'Cormorant Garamond',serif;font-size:21px;line-height:1.1;color:#F5F1E8}
+  .bfm-detail-close{width:32px!important;height:32px!important;min-width:32px!important;padding:0!important;border:1px solid rgba(201,168,76,.45)!important;border-radius:2px!important;background:transparent!important;color:#F5F1E8!important;box-shadow:none!important}
+  .bfm-detail-grid{display:grid;gap:11px}
+  .bfm-detail-block{border-top:1px solid rgba(245,241,232,.12);padding-top:9px}
+  .bfm-detail-label{display:block;font-family:'JetBrains Mono',monospace;font-size:8.5px;letter-spacing:.15em;text-transform:uppercase;color:#C9A84C;margin-bottom:5px}
+  .bfm-detail-text,.bfm-detail-list li{font-family:'DM Sans',sans-serif;font-size:12.5px;line-height:1.5;color:rgba(245,241,232,.86)}
+  .bfm-detail-list{margin:0;padding-left:16px;display:grid;gap:4px}
+  .bfm-detail-meta{display:flex;align-items:center;justify-content:space-between;gap:14px;border-top:1px solid rgba(201,168,76,.36);padding-top:11px;margin-top:2px;font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(245,241,232,.78)}
+  .bfm-detail-meta b{font-family:'Cormorant Garamond',serif;font-size:22px;color:#C9A84C}
+  .bfm-source{color:#C9A84C;text-decoration:none;border-bottom:1px solid rgba(201,168,76,.55)}
+  .bfm-source:hover{text-decoration:none;border-bottom-color:#F5F1E8}
   @keyframes bfm-pulse{0%{r:10px;opacity:.7}100%{r:25px;opacity:0}}
   @media(max-width:900px){
     .bfm-shell{min-height:320px}
     .bfm-stage{height:245px;min-height:245px}
+    .bfm-shell[data-map-mode="landing"] .bfm-stage{height:320px;min-height:320px}
     .bfm-legend{position:static;justify-content:center;padding:8px 12px 12px;background:var(--bfm-bg)}
+    .bfm-shell[data-map-mode="landing"] .bfm-legend{position:absolute;top:10px;left:10px;right:auto;bottom:auto;padding:7px;max-width:220px}
     .bfm-legend-title{text-align:center}
+    .bfm-shell[data-map-mode="landing"] .bfm-legend-title{text-align:left}
     .bfm-legend-btn{width:44px;padding:0;font-size:0}
     .bfm-legend-flag{width:25px;height:19px}
+    .bfm-detail{position:absolute;left:12px;right:12px;top:auto;bottom:12px;width:auto;max-height:52%}
   }
   @media(prefers-reduced-motion:reduce){.bfm-pulse{animation:none}.bfm-ring,.bfm-country,.bfm-legend-btn{transition:none}}
 `;
 
+const localize = (value: LocalizedText | undefined, language: BenchmarkLanguage) => {
+  if (!value) return "";
+  if (typeof value === "string") return value;
+  return value[language] ?? value.fr ?? value.en ?? "";
+};
+
+const getHostWindow = (hostDocument: Document): HostBenchmarkWindow | null => {
+  const hostWindow = hostDocument.defaultView;
+  return hostWindow ? (hostWindow as HostBenchmarkWindow) : null;
+};
+
+const splitDocumentedItems = (value: string) =>
+  value
+    .split(/;|\.|,/)
+    .map((item) => item.trim())
+    .filter((item) => item.length > 0)
+    .slice(0, 2);
+
+const buildCountryAnalysis = (
+  hostDocument: Document,
+  location: BenchmarkLocation,
+  language: BenchmarkLanguage,
+): CountryAnalysis => {
+  const labels = copy[language];
+  const hostWindow = getHostWindow(hostDocument);
+  const agency = hostWindow?.AG?.[location.legacyId];
+  const order = hostWindow?.ORDER ?? [];
+  const matrix = hostWindow?.MATRIX ?? [];
+  const orderIndex = order.indexOf(location.legacyId);
+  const fallback = labels.fallback;
+
+  const model = localize(agency?.tagline, language) || localize(agency?.strat, language) || fallback;
+  const strengthCandidates = [localize(agency?.tools, language), localize(agency?.diff, language)]
+    .map((item) => item.trim())
+    .filter(Boolean);
+  const strengths = strengthCandidates.length ? strengthCandidates.slice(0, 2) : [fallback];
+  const rankedCriteria = matrix
+    .map((row, index) => ({
+      label: localize(row.label, language),
+      score: typeof row.vals?.[orderIndex] === "number" ? row.vals[orderIndex] : undefined,
+      index,
+    }))
+    .filter((item): item is { label: string; score: number; index: number } => Boolean(item.label) && typeof item.score === "number")
+    .sort((a, b) => a.score - b.score || a.index - b.index);
+  const limits = rankedCriteria.slice(0, 2).map((item) => `${item.label} (${item.score}/5) · ${fallback}`);
+  const sourceRows = hostWindow?.SRCURL?.[location.legacyId];
+  const firstSourceUrl = sourceRows ? Object.values(sourceRows).find((url) => typeof url === "string" && url.length > 0) : undefined;
+  const score = typeof agency?.global === "number" ? agency.global.toFixed(1) : fallback;
+
+  return {
+    model,
+    strengths,
+    limits: limits.length ? limits : [fallback],
+    investorEffect: localize(agency?.verdict, language) || fallback,
+    lesson: location.id === "morocco" ? localize(agency?.tools, language) || fallback : localize(agency?.diff, language) || fallback,
+    sourceLabel: agency?.src ?? fallback,
+    sourceUrl: firstSourceUrl ?? agency?.url ?? "",
+    score,
+  };
+};
+
 interface WorldBenchmarkMapProps {
   hostDocument: Document;
+  mode?: BenchmarkMapMode;
 }
 
-const WorldBenchmarkMap = ({ hostDocument }: WorldBenchmarkMapProps) => {
+const WorldBenchmarkMap = ({ hostDocument, mode = "synthesis" }: WorldBenchmarkMapProps) => {
   const [language, setLanguage] = useState<BenchmarkLanguage>(hostDocument.documentElement.lang === "en" ? "en" : "fr");
   const [theme, setTheme] = useState<BenchmarkTheme>(hostDocument.documentElement.dataset.theme === "dark" ? "dark" : "light");
   const [hoveredId, setHoveredId] = useState<string | null>(null);
@@ -157,6 +302,7 @@ const WorldBenchmarkMap = ({ hostDocument }: WorldBenchmarkMapProps) => {
   const [center, setCenter] = useState<[number, number]>([35, 18]);
   const [zoom, setZoom] = useState(1);
   const shellRef = useRef<HTMLDivElement>(null);
+  const hoverClearRef = useRef<number | null>(null);
 
   useEffect(() => {
     const root = hostDocument.documentElement;
@@ -174,27 +320,56 @@ const WorldBenchmarkMap = ({ hostDocument }: WorldBenchmarkMapProps) => {
       if (shellRef.current && !shellRef.current.contains(event.target as Node)) setSelectedId(null);
     };
     const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setSelectedId(null);
+      if (event.key === "Escape") {
+        setSelectedId(null);
+        setHoveredId(null);
+      }
     };
     hostDocument.addEventListener("pointerdown", onPointerDown);
     hostDocument.addEventListener("keydown", onKeyDown);
     return () => {
       hostDocument.removeEventListener("pointerdown", onPointerDown);
       hostDocument.removeEventListener("keydown", onKeyDown);
+      if (hoverClearRef.current) window.clearTimeout(hoverClearRef.current);
     };
   }, [hostDocument]);
 
   const visibleId = selectedId ?? hoveredId;
   const labels = copy[language];
+  const activeLocation = useMemo(
+    () => benchmarkLocations.find((location) => location.id === visibleId),
+    [visibleId],
+  );
+  const activeAnalysis = useMemo(
+    () => (activeLocation ? buildCountryAnalysis(hostDocument, activeLocation, language) : null),
+    [activeLocation, hostDocument, language],
+  );
+
+  const clearPendingHover = useCallback(() => {
+    if (hoverClearRef.current) {
+      window.clearTimeout(hoverClearRef.current);
+      hoverClearRef.current = null;
+    }
+  }, []);
+
+  const holdHover = useCallback((id: string) => {
+    clearPendingHover();
+    setHoveredId(id);
+  }, [clearPendingHover]);
+
+  const releaseHover = useCallback(() => {
+    clearPendingHover();
+    hoverClearRef.current = window.setTimeout(() => setHoveredId(null), 140);
+  }, [clearPendingHover]);
 
   const selectLocation = useCallback((location: BenchmarkLocation, shouldCenter = false) => {
     setSelectedId(location.id);
     setHoveredId(location.id);
-    if (shouldCenter) {
+    if (shouldCenter && mode === "synthesis") {
       setCenter(location.coordinates);
       setZoom(2.2);
     }
-  }, []);
+  }, [mode]);
 
   const resetView = useCallback(() => {
     setCenter([35, 18]);
@@ -209,9 +384,10 @@ const WorldBenchmarkMap = ({ hostDocument }: WorldBenchmarkMapProps) => {
   }, []);
 
   const routes = useMemo(() => benchmarkLocations.filter((location) => location.id !== MOROCCO.id), []);
+  const mapTitle = mode === "landing" ? labels.mapTitle : labels.mapFinalTitle;
 
   return (
-    <div ref={shellRef} className="bfm-shell" data-map-theme={theme} data-selected={selectedId ?? ""}>
+    <div ref={shellRef} className="bfm-shell" data-map-theme={theme} data-map-mode={mode} data-selected={selectedId ?? ""}>
       <style>{MAP_STYLES}</style>
       <div className="bfm-stage">
         <ComposableMap
@@ -219,18 +395,18 @@ const WorldBenchmarkMap = ({ hostDocument }: WorldBenchmarkMapProps) => {
           width={1000}
           height={500}
           projection="geoEqualEarth"
-          projectionConfig={{ center: [35, 18], scale: 154 }}
+          projectionConfig={{ center: [35, 18], scale: mode === "landing" ? 142 : 154 }}
           preserveAspectRatio="xMidYMid meet"
           role="img"
-          aria-label={labels.mapTitle}
+          aria-label={mapTitle}
         >
           <ZoomableGroup
             center={center}
-            zoom={zoom}
+            zoom={mode === "landing" ? 1 : zoom}
             minZoom={MIN_ZOOM}
             maxZoom={MAX_ZOOM}
-            filterZoomEvent={(event) => event.type !== "wheel"}
-            onMoveEnd={onMoveEnd}
+            filterZoomEvent={(event) => mode === "synthesis" && event.type !== "wheel"}
+            onMoveEnd={mode === "synthesis" ? onMoveEnd : undefined}
           >
             <Geographies geography={worldGeography as GeoJsonObject}>
               {({ geographies }) =>
@@ -263,10 +439,10 @@ const WorldBenchmarkMap = ({ hostDocument }: WorldBenchmarkMapProps) => {
                     tabIndex={0}
                     aria-label={`${country}, ${location.agency}`}
                     aria-pressed={selectedId === location.id}
-                    onMouseEnter={() => setHoveredId(location.id)}
-                    onMouseLeave={() => setHoveredId(null)}
-                    onFocus={() => setHoveredId(location.id)}
-                    onBlur={() => setHoveredId(null)}
+                    onMouseEnter={() => holdHover(location.id)}
+                    onMouseLeave={releaseHover}
+                    onFocus={() => holdHover(location.id)}
+                    onBlur={releaseHover}
                     onClick={(event) => {
                       event.stopPropagation();
                       selectLocation(location);
@@ -295,9 +471,9 @@ const WorldBenchmarkMap = ({ hostDocument }: WorldBenchmarkMapProps) => {
                   </g>
                   {active && (
                     <g className="bfm-tooltip" transform="translate(-82 -67)" role="status">
-                      <rect className="bfm-tipbox" width="164" height="48" rx="2" />
+                      <rect className="bfm-tipbox" width="164" height={mode === "landing" ? "30" : "48"} rx="2" />
                       <text className="bfm-tipcountry" x="10" y="19">{country.toUpperCase()}</text>
-                      <text className="bfm-tipagency" x="10" y="36">{location.agency}</text>
+                      {mode === "synthesis" && <text className="bfm-tipagency" x="10" y="36">{location.agency}</text>}
                     </g>
                   )}
                 </Marker>
@@ -306,21 +482,54 @@ const WorldBenchmarkMap = ({ hostDocument }: WorldBenchmarkMapProps) => {
           </ZoomableGroup>
         </ComposableMap>
 
-        <div className="bfm-controls" aria-label={labels.mapTitle}>
-          <Button className="bfm-control" variant="outline" size="icon" type="button" title={labels.zoomIn} aria-label={labels.zoomIn} onClick={() => setZoom((value) => Math.min(MAX_ZOOM, value + 0.5))}>
-            <Plus aria-hidden="true" />
-          </Button>
-          <Button className="bfm-control" variant="outline" size="icon" type="button" title={labels.zoomOut} aria-label={labels.zoomOut} onClick={() => setZoom((value) => Math.max(MIN_ZOOM, value - 0.5))}>
-            <Minus aria-hidden="true" />
-          </Button>
-          <Button className="bfm-control" variant="outline" size="icon" type="button" title={labels.reset} aria-label={labels.reset} onClick={resetView}>
-            <RotateCcw aria-hidden="true" />
-          </Button>
-        </div>
+        {mode === "synthesis" && (
+          <div className="bfm-controls" aria-label={mapTitle}>
+            <Button className="bfm-control" variant="outline" size="icon" type="button" title={labels.zoomIn} aria-label={labels.zoomIn} onClick={() => setZoom((value) => Math.min(MAX_ZOOM, value + 0.5))}>
+              <Plus aria-hidden="true" />
+            </Button>
+            <Button className="bfm-control" variant="outline" size="icon" type="button" title={labels.zoomOut} aria-label={labels.zoomOut} onClick={() => setZoom((value) => Math.max(MIN_ZOOM, value - 0.5))}>
+              <Minus aria-hidden="true" />
+            </Button>
+            <Button className="bfm-control" variant="outline" size="icon" type="button" title={labels.reset} aria-label={labels.reset} onClick={resetView}>
+              <RotateCcw aria-hidden="true" />
+            </Button>
+          </div>
+        )}
+
+        {mode === "synthesis" && activeLocation && activeAnalysis && (
+          <aside
+            className="bfm-detail"
+            role="dialog"
+            aria-label={`${language === "fr" ? activeLocation.countryFr : activeLocation.countryEn} · ${activeLocation.agency}`}
+            onMouseEnter={() => holdHover(activeLocation.id)}
+            onMouseLeave={releaseHover}
+          >
+            <div className="bfm-detail-head">
+              <div>
+                <div className="bfm-detail-country">{language === "fr" ? activeLocation.countryFr : activeLocation.countryEn}</div>
+                <div className="bfm-detail-agency">{activeLocation.agency}</div>
+              </div>
+              <Button className="bfm-detail-close" variant="ghost" size="icon" type="button" title={labels.close} aria-label={labels.close} onClick={() => setSelectedId(null)}>
+                <X aria-hidden="true" />
+              </Button>
+            </div>
+            <div className="bfm-detail-grid">
+              <div className="bfm-detail-block"><span className="bfm-detail-label">{labels.model}</span><p className="bfm-detail-text">{activeAnalysis.model}</p></div>
+              <div className="bfm-detail-block"><span className="bfm-detail-label">{labels.strengths}</span><ul className="bfm-detail-list">{activeAnalysis.strengths.map((item) => <li key={item}>{item}</li>)}</ul></div>
+              <div className="bfm-detail-block"><span className="bfm-detail-label">{labels.limits}</span><ul className="bfm-detail-list">{activeAnalysis.limits.map((item) => <li key={item}>{item}</li>)}</ul></div>
+              <div className="bfm-detail-block"><span className="bfm-detail-label">{labels.investorEffect}</span><p className="bfm-detail-text">{activeAnalysis.investorEffect}</p></div>
+              <div className="bfm-detail-block"><span className="bfm-detail-label">{activeLocation.id === "morocco" ? labels.cap : labels.lesson}</span><p className="bfm-detail-text">{activeAnalysis.lesson}</p></div>
+              <div className="bfm-detail-meta">
+                <span><span className="bfm-detail-label">{labels.score}</span><b>{activeAnalysis.score}/5</b></span>
+                {activeAnalysis.sourceUrl ? <a className="bfm-source" href={activeAnalysis.sourceUrl} target="_blank" rel="noopener noreferrer"><span className="bfm-detail-label">{labels.source}</span>{activeAnalysis.sourceLabel}</a> : <span><span className="bfm-detail-label">{labels.source}</span>{activeAnalysis.sourceLabel}</span>}
+              </div>
+            </div>
+          </aside>
+        )}
       </div>
 
-      <div className="bfm-legend" aria-label={labels.mapTitle}>
-        <div className="bfm-legend-title" id="mapTitle">{labels.mapTitle}</div>
+      <div className="bfm-legend" aria-label={mapTitle}>
+        <div className="bfm-legend-title" id={mode === "landing" ? "landingMapTitle" : "synthesisMapTitle"}>{mapTitle}</div>
         {benchmarkLocations.map((location) => {
           const country = language === "fr" ? location.countryFr : location.countryEn;
           return (
@@ -332,10 +541,10 @@ const WorldBenchmarkMap = ({ hostDocument }: WorldBenchmarkMapProps) => {
               type="button"
               aria-label={`${country}, ${location.agency}`}
               aria-pressed={selectedId === location.id}
-              onMouseEnter={() => setHoveredId(location.id)}
-              onMouseLeave={() => setHoveredId(null)}
-              onFocus={() => setHoveredId(location.id)}
-              onBlur={() => setHoveredId(null)}
+              onMouseEnter={() => holdHover(location.id)}
+              onMouseLeave={releaseHover}
+              onFocus={() => holdHover(location.id)}
+              onBlur={releaseHover}
               onClick={() => selectLocation(location, true)}
             >
               <img className="bfm-legend-flag" src={`/flags/${location.code.toLowerCase()}.svg`} alt="" aria-hidden="true" />
@@ -352,7 +561,7 @@ interface WorldBenchmarkMapPortalProps extends WorldBenchmarkMapProps {
   mountNode: HTMLElement;
 }
 
-export const WorldBenchmarkMapPortal = ({ mountNode, hostDocument }: WorldBenchmarkMapPortalProps) =>
-  createPortal(<WorldBenchmarkMap hostDocument={hostDocument} />, mountNode);
+export const WorldBenchmarkMapPortal = ({ mountNode, hostDocument, mode = "synthesis" }: WorldBenchmarkMapPortalProps) =>
+  createPortal(<WorldBenchmarkMap hostDocument={hostDocument} mode={mode} />, mountNode);
 
 export { benchmarkLocations };
