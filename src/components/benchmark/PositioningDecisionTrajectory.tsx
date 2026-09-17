@@ -89,9 +89,6 @@ const STYLES = `
   .pdt-body{font-size:13px;line-height:1.65;color:var(--ink-light)}
   .pdt-cta{width:100%!important;margin-top:16px!important;min-height:44px!important;border:1px solid var(--gold)!important;border-radius:2px!important;background:var(--gold)!important;color:#0D1B2A!important;font-family:'JetBrains Mono',monospace!important;font-size:9px!important;font-weight:700!important;letter-spacing:.1em!important;white-space:normal!important;text-transform:uppercase!important}
   .pdt-cta:hover{background:var(--gold-hover,var(--gold-soft))!important}
-  .pdt-secondary{display:block;width:100%;margin-top:10px;padding:8px 4px;border:0;background:transparent;color:var(--ink-light);font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.08em;text-align:center;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
-  .pdt-secondary:hover{color:var(--gold)}
-  .pdt-secondary:focus-visible{outline:2px solid var(--gold);outline-offset:1px}
   @media(max-width:760px){
     .pdt-track{left:21px;right:auto;top:26px;bottom:26px;width:2px;height:auto;transform:none}
     .pdt-grid{grid-template-columns:1fr;gap:10px}
