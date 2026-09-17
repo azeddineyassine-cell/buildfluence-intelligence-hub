@@ -3071,6 +3071,21 @@ function renderCost(){
  el("mctag").textContent=t().mctag;
  el("mctitle").innerHTML=t().mctitle[0]+"<em>"+t().mctitle[1]+"</em>";
  el("mclead").textContent=t().mclead;
+ var _cr=el("costReturn");
+ if(_cr){
+   _cr.textContent=lang==="en"?"CLOSE THE SIMULATOR AND RETURN TO THE GEOSTRATEGIC SYNTHESIS":"FERMER LE SIMULATEUR ET REVENIR À LA SYNTHÈSE GÉOSTRATÉGIQUE";
+   if(!_cr.dataset.bound){
+     _cr.dataset.bound="1";
+     _cr.addEventListener("click",function(ev){
+       ev.preventDefault();
+       try{window.close();}catch(e){}
+       setTimeout(function(){
+         if(!window.closed){showPhase(1,"synthese-geostrategique");}
+       },200);
+     });
+   }
+ }
+
  var secOpts=SECTORS.map(function(x){return '<option value="'+x.key+'"'+(x.key===cost.sector?" selected":"")+'>'+L(x.name)+'</option>';}).join("");
  var regOpts=REGIMES.map(function(x){return '<option value="'+x.key+'"'+(x.key===cost.regime?" selected":"")+'>'+L(x.name)+'</option>';}).join("");
  var curOpts=["MAD","EUR","USD","GBP"].map(function(c){return '<option value="'+c+'"'+(c===cost.currency?" selected":"")+'>'+c+'</option>';}).join("");
