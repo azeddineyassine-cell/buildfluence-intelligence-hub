@@ -13,7 +13,7 @@ type Step = {
   Icon: typeof MapPinned;
 };
 
-const content: Record<Language, { steps: Step[]; cta: string; secondary: string }> = {
+const content: Record<Language, { steps: Step[]; cta: string }> = {
   fr: {
     steps: [
       {
@@ -38,8 +38,8 @@ const content: Record<Language, { steps: Step[]; cta: string; secondary: string 
         Icon: MousePointerClick,
       },
     ],
-    cta: "Ouvrir le Simulateur",
-    secondary: "Poursuivre vers la Synthèse géostratégique",
+    cta: "Ouvrir le Simulateur ↗",
+
   },
   en: {
     steps: [
@@ -65,8 +65,8 @@ const content: Record<Language, { steps: Step[]; cta: string; secondary: string 
         Icon: MousePointerClick,
       },
     ],
-    cta: "Open the Simulator",
-    secondary: "Continue to the Geostrategic Synthesis",
+    cta: "Open the Simulator ↗",
+
   },
 };
 
@@ -89,9 +89,6 @@ const STYLES = `
   .pdt-body{font-size:13px;line-height:1.65;color:var(--ink-light)}
   .pdt-cta{width:100%!important;margin-top:16px!important;min-height:44px!important;border:1px solid var(--gold)!important;border-radius:2px!important;background:var(--gold)!important;color:#0D1B2A!important;font-family:'JetBrains Mono',monospace!important;font-size:9px!important;font-weight:700!important;letter-spacing:.1em!important;white-space:normal!important;text-transform:uppercase!important}
   .pdt-cta:hover{background:var(--gold-hover,var(--gold-soft))!important}
-  .pdt-secondary{display:block;width:100%;margin-top:10px;padding:8px 4px;border:0;background:transparent;color:var(--ink-light);font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.08em;text-align:center;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
-  .pdt-secondary:hover{color:var(--gold)}
-  .pdt-secondary:focus-visible{outline:2px solid var(--gold);outline-offset:1px}
   @media(max-width:760px){
     .pdt-track{left:21px;right:auto;top:26px;bottom:26px;width:2px;height:auto;transform:none}
     .pdt-grid{grid-template-columns:1fr;gap:10px}
@@ -116,17 +113,14 @@ const PositioningDecisionTrajectory = ({ hostDocument }: PositioningDecisionTraj
     return () => observer.disconnect();
   }, [hostDocument]);
 
-  const openSimulatorInNewTab = () => {
+  const openSimulator = () => {
     const params = new URLSearchParams(window.location.search);
     params.set("tab", "cout");
     window.open(`${window.location.pathname}?${params.toString()}`, "_blank", "noopener,noreferrer");
+    const target = hostDocument.getElementById("synthese-geostrategique");
+    target?.scrollIntoView({ behavior: "auto", block: "start" });
   };
 
-  const goToSynthesis = () => {
-    const target = hostDocument.getElementById("synthese-geostrategique");
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    target?.scrollIntoView({ behavior: reduced ? "auto" : "smooth", block: "start" });
-  };
 
   return (
     <div className="pdt-root">
@@ -155,11 +149,9 @@ const PositioningDecisionTrajectory = ({ hostDocument }: PositioningDecisionTraj
                   <h4 className="pdt-subtitle">{step.subtitle}</h4>
                   <p className="pdt-body">{step.body}</p>
                   {index === 2 && (
-                    <>
-                      <Button className="pdt-cta" type="button" onClick={openSimulatorInNewTab}>{content[language].cta}</Button>
-                      <button className="pdt-secondary" type="button" onClick={goToSynthesis}>{content[language].secondary}</button>
-                    </>
+                    <Button className="pdt-cta" type="button" onClick={openSimulator}>{content[language].cta}</Button>
                   )}
+
                 </div>
               )}
             </article>
