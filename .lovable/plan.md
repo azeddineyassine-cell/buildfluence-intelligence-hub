@@ -21,7 +21,8 @@ Buildfluence). Aucun code couleur codé en dur de la maquette n'est recopié.
    Les dates remplacent tout compteur de retard.
 4. **04 · BENCHMARK FONCTIONNEL** — matrice MedZ × JTC à cinq capacités et
    quatre colonnes (Capacité / Observation MedZ / Référence JTC / Priorité),
-   avec la note explicite : aucun score global affiché.
+   avec les logos MedZ et JTC en en-tête et la note explicite :
+   aucun score global affiché.
 5. **05 · LE GUICHET INVESTISSEUR** — parcours en quatre temps
    (Rechercher, Comparer, Simuler, Engager) et vignette « Cockpit foncier ».
 6. **06 · DÉCISION** — trois chantiers prioritaires avec leur livrable, puis
