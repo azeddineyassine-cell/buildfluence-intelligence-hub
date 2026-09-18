@@ -482,41 +482,105 @@ input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;bac
 .sim-note{font-family:var(--serif);font-style:italic;font-size:13px;color:color-mix(in srgb,var(--paper) 72%,transparent);margin-top:12px;line-height:1.45}
 .sim-reset{margin-top:14px;font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;background:transparent;border:1px solid color-mix(in srgb,var(--paper) 30%,transparent);color:var(--paper);padding:8px 16px;border-radius:4px;cursor:pointer}
 
-/* FONCIER / MedZ vs JTC */
-.urgency{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:26px}
-@media(max-width:620px){.urgency{grid-template-columns:1fr}}
-.urg{background:var(--card);border:1px solid var(--rule);border-top:3px solid var(--red);border-radius:5px;padding:20px;text-align:center}
-.urg .un{font-family:var(--display);font-weight:900;font-size:40px;color:var(--red);line-height:1}
-.urg .ul{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);margin-top:8px}
-.guichet{display:grid;grid-template-columns:1fr 70px 1fr;gap:0;margin-bottom:26px;align-items:stretch}
-@media(max-width:620px){.guichet{grid-template-columns:1fr}}
-.gx{background:var(--card);border:1px solid var(--rule);border-radius:6px;padding:18px 20px}
-.gx .gxl{font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-deep);margin-bottom:6px}
-.gx .gxn{font-family:var(--display);font-weight:700;font-size:18px}
-.gx .gxd{font-size:13px;color:var(--ink-light);margin-top:6px;line-height:1.45}
-.gx-gap{display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:10px;color:var(--gold-deep);position:relative}
-.gx-gap::before{content:"⇄";font-size:22px}
-.jtc-table{border-collapse:collapse;width:100%;min-width:560px}
-.jtc-table th{font-family:var(--mono);font-size:8.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-light);background:var(--paper2);padding:11px 12px;text-align:left;border-bottom:1px solid var(--rule)}
-.jtc-table td{padding:13px 12px;border-bottom:1px solid var(--rule-soft);vertical-align:top;font-size:13px;color:var(--ink-light);line-height:1.45}
-.jtc-table tr:hover td{background:var(--paper2)}
-.jtc-gap{font-weight:600;color:var(--ink)}
-.jtc-stars{color:#FFC400;font-size:14px;letter-spacing:1px;white-space:nowrap;-webkit-text-stroke:0.6px #C99A00}
-.jtc-stars .off{color:#BDB6A6;-webkit-text-stroke:0}
-.jtc-table tfoot td{padding:14px 12px;border-top:2px solid var(--rule);font-family:var(--mono);font-size:13px;font-weight:700;color:var(--ink);background:var(--paper2);white-space:nowrap}
-.jtc-table tfoot .tt{display:inline-block;font-size:8px;letter-spacing:.14em;color:var(--gold-deep);margin-right:5px;vertical-align:middle}
-.jtc-table .jtc-data{cursor:pointer}
-.jtc-table .jtc-data.active>td{background:color-mix(in srgb,var(--gold) 8%,var(--card))}
-.jtc-table .jtc-vrow>td{padding:0;border-bottom:none}
-.jtc-table .jtc-vrow:hover td{background:transparent}
-.jtc-vwrap{max-height:0;overflow:hidden;transition:max-height .35s ease,padding .3s ease;display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 12px;padding:0 12px;background:color-mix(in srgb,var(--gold) 8%,var(--card))}
-.jtc-vrow.open .jtc-vwrap{max-height:160px;padding:11px 12px;border-bottom:1px solid var(--gold-pale)}
-.jtc-vlbl{font-family:var(--mono);font-size:8.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--gold-deep);flex:0 0 auto}
-.jtc-vtxt{font-family:var(--serif);font-style:italic;font-size:13.5px;color:var(--ink);line-height:1.5;flex:1 1 240px}
-.provoc{background:linear-gradient(135deg,var(--red),#9E2A26);color:#fff;border-radius:8px;padding:clamp(22px,3vw,36px);margin-top:26px}
-.provoc .pl{font-family:var(--mono);font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.7)}
-.provoc p{font-family:var(--display);font-weight:700;font-size:clamp(18px,2.4vw,26px);line-height:1.25;margin-top:10px}
-.provoc p em{font-style:italic;color:#FFE0A0}
+/* FONCIER / MedZ × JTC */
+.fon+.fon{margin-top:clamp(44px,5vw,74px)}
+.fon-head{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(18px,3vw,46px);align-items:end;margin-bottom:20px}
+@media(max-width:860px){.fon-head{grid-template-columns:1fr;align-items:start}}
+.fon-eyebrow{font-family:var(--mono);font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-deep)}
+.fon-head h3{font-family:var(--display);font-weight:700;font-size:clamp(21px,2.7vw,33px);line-height:1.14;margin-top:9px;color:var(--ink)}
+.fon-head>div>p,.fon-head>p{font-size:13px;line-height:1.65;color:var(--ink-light)}
+.fon-note{font-family:var(--mono);font-size:9.5px;letter-spacing:.06em;line-height:1.7;color:var(--ink-faint);margin-top:14px}
+.logo-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:14px 0 12px}
+.logo-chip{background:#FFFFFF;border:1px solid var(--rule);border-radius:2px;height:46px;padding:7px 12px;display:flex;align-items:center;justify-content:center}
+.logo-chip img{display:block;height:28px;width:auto;max-width:118px;object-fit:contain}
+.logo-word{font-family:var(--display);font-weight:700;font-size:17px;color:#0D1B2A;white-space:nowrap}
+.logo-word em{color:#9A7B1E;font-style:italic}
+.logo-sep{font-family:var(--mono);font-size:8.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint)}
+/* 01 chaîne d'implantation */
+.chain{display:grid;grid-template-columns:1fr .62fr 1fr;gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:2px;overflow:hidden}
+@media(max-width:860px){.chain{grid-template-columns:1fr}}
+.chain article{background:var(--card);padding:clamp(18px,2.4vw,30px)}
+.chain small{display:block;font-family:var(--mono);font-size:8.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-deep)}
+.chain article p{font-size:13px;line-height:1.6;color:var(--ink-light);margin-top:4px}
+.chain .handoff{background:var(--hero-navy);color:var(--ivory,#F5F1E8);padding:clamp(18px,2.2vw,26px);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:12px}
+.chain .handoff b{font-family:var(--mono);font-size:8.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+.chain .handoff strong{font-family:var(--serif);font-style:italic;font-weight:400;font-size:16px;line-height:1.4;color:var(--gold)}
+.chain .handoff i{font-style:normal;font-size:18px;color:var(--gold)}
+.chain .handoff span{font-size:11.5px;line-height:1.6;color:color-mix(in srgb,var(--ivory,#F5F1E8) 72%,transparent)}
+/* 02 preuve attendue */
+.qgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:2px;overflow:hidden}
+@media(max-width:1000px){.qgrid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.qgrid{grid-template-columns:1fr}}
+.qgrid article{background:var(--card);padding:clamp(18px,2.2vw,26px)}
+.qgrid .qn{font-family:var(--serif);font-style:italic;font-size:26px;color:var(--gold-deep);line-height:1}
+.qgrid b{display:block;font-family:var(--mono);font-size:8.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint);margin-top:14px}
+.qgrid h4{font-family:var(--display);font-weight:700;font-size:17px;color:var(--ink);margin:8px 0 6px}
+.qgrid p{font-size:12.5px;line-height:1.6;color:var(--ink-light)}
+/* 03 observations datées */
+.evid{display:grid;grid-template-columns:.9fr 1.1fr;gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:2px;overflow:hidden}
+@media(max-width:860px){.evid{grid-template-columns:1fr}}
+.evid-tabs{background:var(--card);display:flex;flex-direction:column}
+.evid-tabs button{appearance:none;border:0;border-bottom:1px solid var(--rule-soft);background:transparent;cursor:pointer;text-align:left;padding:18px 20px;display:flex;align-items:center;justify-content:space-between;gap:14px;transition:background .2s,color .2s}
+.evid-tabs button:last-child{border-bottom:0}
+.evid-tabs button:hover{background:var(--paper2)}
+.evid-tabs button[aria-expanded="true"]{background:color-mix(in srgb,var(--gold) 10%,var(--card));box-shadow:inset 3px 0 var(--gold)}
+.evid-tabs .ed{display:block;font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-deep)}
+.evid-tabs .et{display:block;font-size:13px;color:var(--ink-light);margin-top:5px;line-height:1.45}
+.evid-tabs .ea{font-family:var(--mono);font-size:13px;color:var(--gold-deep);flex:0 0 auto}
+.evid-detail{background:var(--paper2);padding:clamp(20px,2.6vw,32px)}
+.evid-detail strong{display:block;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-deep);margin-top:12px}
+.evid-detail h4{font-family:var(--display);font-weight:700;font-size:19px;color:var(--ink);margin:8px 0 10px}
+.evid-detail p{font-size:13.5px;line-height:1.65;color:var(--ink-light)}
+.evid-detail small{display:block;font-family:var(--mono);font-size:9.5px;line-height:1.7;color:var(--ink-faint);margin-top:16px}
+/* 04 benchmark fonctionnel */
+.bmatrix{width:100%;border-collapse:collapse;min-width:640px}
+.bmatrix th{font-family:var(--mono);font-size:8.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-light);background:var(--paper2);padding:12px;text-align:left;border-bottom:1px solid var(--rule)}
+.bmatrix td{padding:14px 12px;border-bottom:1px solid var(--rule-soft);vertical-align:top;font-size:13px;line-height:1.5;color:var(--ink-light)}
+.bmatrix tr:hover td{background:var(--paper2)}
+.bmatrix .bcap{font-weight:600;color:var(--ink)}
+.bmatrix .bjtc::before{content:"✓";color:var(--green);margin-right:6px;font-weight:700}
+.bmatrix .bprio{font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-deep);white-space:nowrap}
+@media(max-width:700px){
+ .bmatrix{min-width:0}
+ .bmatrix thead{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+ .bmatrix tr{display:block;border-bottom:1px solid var(--rule);padding:4px 0 10px}
+ .bmatrix td{display:block;border:none;padding:6px 12px}
+ .bmatrix td::before{content:attr(data-label);display:block;font-family:var(--mono);font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:3px}
+ .bmatrix .bjtc::before{content:attr(data-label);color:var(--ink-faint);margin-right:0;font-weight:400}
+ .bmatrix .bcap{font-size:14px}
+}
+/* 05 guichet investisseur */
+.cockpit{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:2px;overflow:hidden}
+@media(max-width:900px){.cockpit{grid-template-columns:1fr}}
+.cockpit-copy{background:var(--card);padding:clamp(20px,2.6vw,34px)}
+.cockpit-copy h3{font-family:var(--display);font-weight:700;font-size:clamp(20px,2.4vw,28px);line-height:1.15;color:var(--ink);margin:9px 0 10px}
+.cockpit-copy>p{font-size:13px;line-height:1.65;color:var(--ink-light)}
+.csteps{list-style:none;margin-top:18px;display:grid;gap:10px}
+.csteps li{font-size:13px;line-height:1.55;color:var(--ink-light);padding-left:16px;position:relative}
+.csteps li::before{content:"";position:absolute;left:0;top:7px;width:6px;height:6px;background:var(--gold)}
+.csteps li b{color:var(--ink);font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase}
+.cmock{background:var(--hero-navy);padding:clamp(18px,2.4vw,28px);display:flex;flex-direction:column;gap:16px}
+.cmock-top{display:flex;align-items:center;justify-content:space-between;gap:12px;font-family:var(--mono);font-size:8.5px;letter-spacing:.14em;text-transform:uppercase}
+.cmock-top span{color:var(--gold)}
+.cmock-top b{color:color-mix(in srgb,var(--ivory,#F5F1E8) 55%,transparent);font-weight:400}
+.cmock-body{display:grid;gap:12px}
+.cmock-cities{display:flex;flex-wrap:wrap;gap:8px}
+.cmock-cities span{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:color-mix(in srgb,var(--ivory,#F5F1E8) 78%,transparent);border:1px solid color-mix(in srgb,var(--ivory,#F5F1E8) 26%,transparent);border-radius:2px;padding:7px 10px;display:flex;align-items:center;gap:7px}
+.cmock-cities span::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--gold)}
+.cmock-sel{border:1px solid color-mix(in srgb,var(--ivory,#F5F1E8) 22%,transparent);border-radius:2px;padding:16px;display:grid;gap:7px}
+.cmock-sel small{font-family:var(--mono);font-size:8.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+.cmock-sel b{font-family:var(--display);font-weight:700;font-size:17px;color:var(--ivory,#F5F1E8)}
+.cmock-sel i{font-style:normal;font-size:12px;color:color-mix(in srgb,var(--ivory,#F5F1E8) 68%,transparent)}
+.cmock-sel span{margin-top:8px;justify-self:start;font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;background:var(--gold);color:#0D1B2A;padding:10px 16px;border-radius:2px;font-weight:700}
+/* 06 décision */
+.prios{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:2px;overflow:hidden}
+@media(max-width:860px){.prios{grid-template-columns:1fr}}
+.prios article{background:var(--card);padding:clamp(18px,2.3vw,28px)}
+.prios .pn{font-family:var(--serif);font-style:italic;font-size:26px;color:var(--gold-deep);line-height:1}
+.prios h4{font-family:var(--display);font-weight:700;font-size:18px;color:var(--ink);margin:12px 0 8px}
+.prios p{font-size:12.5px;line-height:1.6;color:var(--ink-light)}
+.prios small{display:block;font-family:var(--mono);font-size:8.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-deep);margin-top:14px;border-top:1px solid var(--rule-soft);padding-top:12px}
+@media(prefers-reduced-motion:reduce){.evid-tabs button{transition:none}}
 
 /* VERDICT */
 .vtable{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--rule);border-radius:6px;overflow:hidden;margin-bottom:24px}
@@ -882,15 +946,16 @@ footer .wrap b{color:var(--gold-deep)}
   <div class="card reveal" style="overflow:hidden" id="duelCard"></div>
   <div class="takeaway reveal"><span class="ti" id="m4ti"></span><p id="m4note"></p></div>
 </div></section>
-
 <section class="section" id="foncier"><div class="wrap">
   <div class="sec-head reveal"><span class="sec-num">05</span><span class="sec-tag" id="m5tag"></span></div>
   <h2 class="sec-title reveal" id="m5title"></h2>
   <p class="sec-lead reveal" id="m5lead"></p>
-  <div class="urgency reveal" id="urgency"></div>
-  <div class="guichet reveal" id="guichet"></div>
-  <div class="card reveal" style="overflow:hidden;padding:0"><div style="overflow-x:auto"><table class="jtc-table" id="jtcTable"></table></div></div>
-  <div class="provoc reveal" id="provoc"></div>
+  <div class="fon reveal" id="fonPassage"></div>
+  <div class="fon reveal" id="fonPreuve"></div>
+  <div class="fon reveal" id="fonObs"></div>
+  <div class="fon reveal" id="fonBench"></div>
+  <div class="fon reveal" id="fonCockpit"></div>
+  <div class="fon reveal" id="fonDec"></div>
 </div></section>
 
 <section class="section" id="prototypesTeaser"><div class="wrap">
@@ -2114,14 +2179,38 @@ var T={
    vMorNone:"Aucun avantage marocain démontré par les scores de ce duel.",
    tRepro:"À reproduire",tAdapt:"À adapter au Maroc",tPreserve:"À préserver",
    ptsMor:"AMDIE",ptsOpp:"API"},
-  m5tag:"Le maillon foncier · MedZ",m5title:["Le guichet unique ","à parachever."],m5lead:"L'investisseur ne voit pas deux agences : il voit un pays. Le parcours se répartit aujourd'hui entre AMDIE, qui porte la promotion, et MedZ, filiale CDG, qui détient le foncier industriel. Mieux articuler ces deux maillons est une opportunité concrète de fluidité pour l'investisseur.",
-  urg:[["15 mois","entre deux éditions · Newsletter MedZ"],["21 mois","en pause · Minute Verte"],["8 ans","depuis le dernier rapport annuel (2016)"]],
-  guichet:[{l:"En amont",n:"AMDIE · Morocco Now",d:"Promotion, image, accompagnement. La promesse d'attractivité."},{l:"En aval",n:"MedZ · Groupe CDG",d:"Foncier industriel, parcs, infrastructures. Référence fonctionnelle : JTC Singapour."}],
-  guichetGap:"À relier",
-  jtcHead:["Point à renforcer · MedZ","Impact","Référence JTC (Singapour)","Impact JTC"],
-  jtcTotalLabel:"Total impact",
-  jtcVerdictLabel:"Verdict Buildfluence",
-  provocL:"L'enjeu",provoc:"Un investisseur international compare le Maroc à <em>Singapour</em>, pas à lui-même. JTC publie ses données en temps réel depuis 55 ans ; le dernier rapport annuel public de MedZ remonte à <em>2016</em>. La transparence des données est devenue un standard attendu, et une réelle occasion de différenciation pour l'AMDIE.",
+  m5tag:"Chaîne d'implantation · AMDIE × MedZ",m5title:["Du territoire promu ","au foncier activable."],m5lead:"L'investisseur ne distingue pas les institutions. Il évalue la continuité entre la promesse territoriale, la disponibilité du foncier et la mise en œuvre de son projet.",
+  fonc:{
+   passage:{eyebrow:"01 · Le passage critique",h2:"Un investisseur, un projet, mais deux portes institutionnelles.",lead:"Aujourd'hui, le même projet passe de la promotion du Maroc à la recherche de foncier auprès d'un second interlocuteur. Cette rupture oblige l'investisseur à reformuler son besoin, retrouver la bonne information et reconstruire une partie de son parcours.",
+    a:{label:"Interlocuteur 01 · Promouvoir",desc:"Rendre le Maroc visible, qualifier l'intérêt et accompagner le projet d'investissement."},
+    b:{label:"Interlocuteur 02 · Implanter",desc:"Donner accès au foncier industriel, aux parcs, aux infrastructures et aux conditions d'exécution."},
+    friction:{label:"Friction actuelle",strong:"Deux agences, deux interlocuteurs, un seul projet",note:"Le contexte, les données et la prochaine action ne suivent pas encore automatiquement l'investisseur."}},
+   preuve:{eyebrow:"02 · La preuve attendue",h2:"Quatre questions avant toute implantation.",lead:"Une preuve activable est une information que l'investisseur peut vérifier et utiliser immédiatement pour décider ou engager l'étape suivante : disponibilité, prix, délai, statut ou interlocuteur.",
+    items:[{k:"Localisation",q:"Où puis-je m'implanter ?",d:"Parc, parcelle, vocation sectorielle et disponibilité."},
+     {k:"Coût",q:"À quel coût complet ?",d:"Foncier, raccordements, délais et coût total d'occupation."},
+     {k:"Preuve",q:"Avec quel niveau de preuve ?",d:"Statut juridique, infrastructures, services et données datées."},
+     {k:"Relais",q:"Qui prend le relais ?",d:"Interlocuteur compétent, pièces requises et prochaine action."}]},
+   obs:{eyebrow:"03 · Observations datées sur MedZ",h2:"Ce que les publications accessibles de MedZ laissent aujourd'hui sans réponse.",lead:"Ces constats concernent MedZ et son dispositif public d'information. Ils proviennent d'une étude indépendante Buildfluence réalisée dans le cadre d'une offre adressée à MedZ. Périmètre : publications accessibles examinées en janvier 2026.",
+    detailLabel:"Constat documenté",footnote:"À revérifier avant toute publication externe ou mise à jour du site.",
+    items:[{date:"Sept. 2024",title:"Dernière newsletter identifiée",text:"Le corpus relève six mois entre les numéros 17 et 18. La date remplace tout compteur de retard devenu périssable."},
+     {date:"Mars 2023",title:"Dernière Minute Verte identifiée",text:"Le numéro 11 constitue le dernier exemplaire retrouvé dans le périmètre de l'étude."},
+     {date:"2016",title:"Dernier rapport annuel identifié",text:"Ce constat porte sur les publications accessibles dans le périmètre audité, sans préjuger de documents internes."}]},
+   bench:{eyebrow:"04 · Benchmark fonctionnel",h2:"JTC comme standard de service, pas comme modèle institutionnel.",compared:"comparé à",lead:"JTC est l'agence publique singapourienne chargée du développement des infrastructures et espaces industriels. La comparaison porte uniquement sur sa capacité à informer et outiller l'investisseur, sans assimiler les mandats ni les cadres réglementaires.",
+    head:["Capacité","MedZ · Observation","JTC · Référence","Priorité"],
+    rows:[["Cadence éditoriale","Publication discontinue","Flux thématiques réguliers","Rétablir"],
+     ["Preuve institutionnelle","Dernier rapport identifié en 2016","Rapports institutionnels récurrents","Documenter"],
+     ["Données investisseurs","Indicateurs difficiles à repérer","Portail statistique public","Publier"],
+     ["Lecture sectorielle","Actualité principalement institutionnelle","Analyses et récits sectoriels","Orienter"],
+     ["Aide à la décision","Supports majoritairement statiques","Exploration interactive des données","Activer"]],
+    note:"Aucun score global n'est affiché tant qu'une méthode reproductible, des sources datées et une règle d'agrégation ne sont pas publiées."},
+   cockpit:{eyebrow:"05 · Le guichet investisseur",h2:"Le foncier devient activable quand la preuve conduit à l'action.",lead:"Le futur service ne doit pas seulement présenter des parcs. Il doit guider l'investisseur jusqu'à la prochaine décision institutionnelle.",
+    steps:[["01 · Rechercher","un territoire et une vocation sectorielle."],["02 · Comparer","les sites sur des critères communs."],["03 · Simuler","le coût et le délai d'implantation."],["04 · Engager","la démarche avec le bon interlocuteur."]],
+    mockTop:"Cockpit foncier",mockTag:"Prototype de parcours",cities:["Tanger","Kénitra","Casablanca","Agadir"],
+    sel:{label:"Site présélectionné",name:"Parc industriel",status:"Disponibilité à confirmer",cta:"Qualifier le projet →"}},
+   dec:{eyebrow:"06 · Décision",h2:"Mieux articuler promotion et implantation.",lead:"Relier clairement les deux maillons constitue une opportunité concrète de fluidifier le parcours investisseur : une information qui suit le projet, un passage de relais explicite et une prochaine action immédiatement identifiable.",
+    items:[{h:"Socle de preuve foncière",p:"Structurer et dater les données indispensables : disponibilité, prix, raccordement, statut et délai.",liv:"Livrable · Fiche parc normalisée"},
+     {h:"Rendez-vous de transparence",p:"Installer une cadence vérifiable pour les indicateurs, les publications sectorielles et la performance des parcs.",liv:"Livrable · Pack trimestriel"},
+     {h:"Cockpit investisseur",p:"Relier exploration territoriale, simulation économique, qualification du projet et contact institutionnel.",liv:"Livrable · Parcours numérique unifié"}]}},
   m6tag:"Six scénarios · projection illustrative",m6title:["Et si l'AMDIE passait ","à l'action ?"],m6lead:"Activez les leviers de transformation et voyez la trajectoire potentielle du score global, et le déplacement de la bulle marocaine vers le quadrant des cockpits. Projection illustrative, fondée sur la grille de notation.",
   simPanelLabel:"Score global projeté",simFrom:"Aujourd'hui : 1.2 / 5",simNote:"Glissez les curseurs : chaque levier active une brique numérique manquante.",simReset:"Réinitialiser",
   m7tag:"Verdict Buildfluence",m7title:["Elles ont changé de ","métier."],m7lead:"Le constat central, expliqué : ce qui sépare une marque d'attractivité d'une plateforme d'intelligence investisseur.",
@@ -2259,14 +2348,38 @@ var T={
    vMorNone:"No Moroccan advantage demonstrated by the scores of this duel.",
    tRepro:"To replicate",tAdapt:"To adapt to Morocco",tPreserve:"To preserve",
    ptsMor:"AMDIE",ptsOpp:"IPA"},
-  m5tag:"The land link · MedZ",m5title:["The one-stop shop, ","to complete."],m5lead:"Investors do not see two agencies: they see one country. The journey is today shared between AMDIE, which leads promotion, and MedZ, a CDG subsidiary, which owns the industrial land. Better connecting these two links is a concrete opportunity to smooth the investor journey.",
-  urg:[["15 months","between two editions · MedZ Newsletter"],["21 months","on hold · Minute Verte"],["8 years","since the last annual report (2016)"]],
-  guichet:[{l:"Upstream",n:"AMDIE · Morocco Now",d:"Promotion, image, support. The promise of attractiveness."},{l:"Downstream",n:"MedZ · CDG Group",d:"Industrial land, parks, infrastructure. Functional reference: JTC Singapore."}],
-  guichetGap:"To connect",
-  jtcHead:["To strengthen · MedZ","Impact","JTC reference (Singapore)","Impact JTC"],
-  jtcTotalLabel:"Total impact",
-  jtcVerdictLabel:"Buildfluence verdict",
-  provocL:"The stakes",provoc:"An international investor compares Morocco to <em>Singapore</em>, not to itself. JTC has published real-time data for 55 years; MedZ's last public annual report dates back to <em>2016</em>. Data transparency has become an expected standard, and a real opportunity for AMDIE to stand out.",
+  m5tag:"Location chain · AMDIE × MedZ",m5title:["From promoted territory ","to activable land."],m5lead:"Investors do not tell institutions apart. They assess the continuity between the territorial promise, land availability and the execution of their project.",
+  fonc:{
+   passage:{eyebrow:"01 · The critical handover",h2:"One investor, one project, but two institutional doors.",lead:"Today the same project moves from the promotion of Morocco to a land search with a second counterpart. This break forces investors to restate their need, find the right information again and rebuild part of their journey.",
+    a:{label:"Counterpart 01 · Promote",desc:"Make Morocco visible, qualify interest and support the investment project."},
+    b:{label:"Counterpart 02 · Locate",desc:"Give access to industrial land, parks, infrastructure and execution conditions."},
+    friction:{label:"Current friction",strong:"Two agencies, two counterparts, one single project",note:"Context, data and the next action do not yet follow the investor automatically."}},
+   preuve:{eyebrow:"02 · The expected proof",h2:"Four questions before any location decision.",lead:"Activable proof is information investors can verify and use immediately to decide or trigger the next step: availability, price, lead time, legal status or counterpart.",
+    items:[{k:"Location",q:"Where can I set up?",d:"Park, plot, sector vocation and availability."},
+     {k:"Cost",q:"At what full cost?",d:"Land, connections, lead times and total cost of occupancy."},
+     {k:"Proof",q:"With what level of proof?",d:"Legal status, infrastructure, services and dated data."},
+     {k:"Handover",q:"Who takes over?",d:"Competent counterpart, required documents and next action."}]},
+   obs:{eyebrow:"03 · Dated observations on MedZ",h2:"What MedZ's accessible publications leave unanswered today.",lead:"These observations concern MedZ and its public information system. They come from an independent Buildfluence study carried out as part of an offer addressed to MedZ. Scope: accessible publications reviewed in January 2026.",
+    detailLabel:"Documented observation",footnote:"To be re-checked before any external publication or website update.",
+    items:[{date:"Sep. 2024",title:"Last newsletter identified",text:"The corpus shows six months between issues 17 and 18. The date replaces any delay counter, which would quickly become obsolete."},
+     {date:"Mar. 2023",title:"Last Minute Verte identified",text:"Issue 11 is the last copy found within the scope of the study."},
+     {date:"2016",title:"Last annual report identified",text:"This observation covers publications accessible within the audited scope, without prejudging internal documents."}]},
+   bench:{eyebrow:"04 · Functional benchmark",h2:"JTC as a service standard, not as an institutional model.",compared:"compared to",lead:"JTC is the Singaporean public agency in charge of developing industrial infrastructure and estates. The comparison only covers its ability to inform and equip investors, without equating mandates or regulatory frameworks.",
+    head:["Capability","MedZ · Observation","JTC · Reference","Priority"],
+    rows:[["Editorial cadence","Discontinuous publishing","Regular thematic streams","Restore"],
+     ["Institutional proof","Last report identified in 2016","Recurring institutional reports","Document"],
+     ["Investor data","Indicators hard to locate","Public statistical portal","Publish"],
+     ["Sector reading","Mainly institutional news","Sector analyses and narratives","Orient"],
+     ["Decision support","Mostly static materials","Interactive data exploration","Activate"]],
+    note:"No overall score is displayed until a reproducible method, dated sources and an aggregation rule are published."},
+   cockpit:{eyebrow:"05 · The investor desk",h2:"Land becomes activable when proof leads to action.",lead:"The future service must not merely showcase parks. It must guide investors through to the next institutional decision.",
+    steps:[["01 · Search","a territory and a sector vocation."],["02 · Compare","sites on common criteria."],["03 · Simulate","the cost and lead time of setting up."],["04 · Engage","the process with the right counterpart."]],
+    mockTop:"Land cockpit",mockTag:"Journey prototype",cities:["Tangier","Kénitra","Casablanca","Agadir"],
+    sel:{label:"Shortlisted site",name:"Industrial park",status:"Availability to be confirmed",cta:"Qualify the project →"}},
+   dec:{eyebrow:"06 · Decision",h2:"Better articulating promotion and location.",lead:"Clearly connecting the two links is a concrete opportunity to smooth the investor journey: information that follows the project, an explicit handover and an immediately identifiable next action.",
+    items:[{h:"Land proof base",p:"Structure and date the essential data: availability, price, connection, status and lead time.",liv:"Deliverable · Standardised park factsheet"},
+     {h:"Transparency milestones",p:"Set a verifiable cadence for indicators, sector publications and park performance.",liv:"Deliverable · Quarterly pack"},
+     {h:"Investor cockpit",p:"Connect territorial exploration, economic simulation, project qualification and institutional contact.",liv:"Deliverable · Unified digital journey"}]}},
   m6tag:"Six scenarios · illustrative projection",m6title:["What if AMDIE ","acted?"],m6lead:"Activate the transformation levers and watch the potential trajectory of the global score, and the Moroccan bubble moving toward the cockpit quadrant. Illustrative projection, based on the scoring grid.",
   simPanelLabel:"Projected global score",simFrom:"Today: 1.2 / 5",simNote:"Drag the sliders: each lever activates a missing digital feature.",simReset:"Reset",
   m7tag:"Buildfluence verdict",m7title:["They changed ","jobs."],m7lead:"The core finding, explained: what separates an attractiveness brand from an investor intelligence platform.",
@@ -2995,31 +3108,66 @@ function drawDuel(){
 /* =========================================================================
    MODULE 5 : FONCIER (MedZ vs JTC)
    ========================================================================= */
+var fonEvidence=0;
+function fonHead(b,rightExtra){
+ return '<div class="fon-head"><div><p class="fon-eyebrow">'+b.eyebrow+'</p><h3>'+b.h2+'</h3></div><div>'+(rightExtra||'')+'<p>'+b.lead+'</p></div></div>';
+}
+function fonLogo(src,alt){return '<span class="logo-chip"><img src="'+src+'" alt="'+alt+'" loading="lazy"></span>';}
 function renderFoncier(){
  el("m5tag").textContent=t().m5tag;el("m5title").innerHTML=t().m5title[0]+"<em>"+t().m5title[1]+"</em>";el("m5lead").textContent=t().m5lead;
- el("urgency").innerHTML=t().urg.map(function(u){return '<div class="urg"><div class="un">'+u[0]+'</div><div class="ul">'+u[1]+'</div></div>';}).join("");
- var gx=t().guichet;
- el("guichet").innerHTML='<div class="gx"><div class="gxl">'+gx[0].l+'</div><div class="gxn">'+gx[0].n+'</div><div class="gxd">'+gx[0].d+'</div></div>'+
-   '<div class="gx-gap">'+t().guichetGap+'</div>'+
-   '<div class="gx"><div class="gxl">'+gx[1].l+'</div><div class="gxn">'+gx[1].n+'</div><div class="gxd">'+gx[1].d+'</div></div>';
- var h=t().jtcHead;
- var head='<thead><tr><th>'+h[0]+'</th><th>'+h[1]+'</th><th>'+h[2]+'</th><th>'+h[3]+'</th></tr></thead><tbody>';
- function fstars(n){var x="";for(var i=1;i<=5;i++){x+=(i<=n?'★':'<span class="off">★</span>');}return x;}
- var medzTot=0,jtcTot=0,mx=MEDZ.length*5;
- var body=MEDZ.map(function(r,ri){medzTot+=r.medz;jtcTot+=r.score;
-   return '<tr class="jtc-data" data-i="'+ri+'"><td class="jtc-gap">'+L(r.gap)+'</td>'+
-     '<td>'+L(r.impact)+'<div class="jtc-stars" style="margin-top:7px">'+fstars(r.medz)+'</div></td>'+
-     '<td>'+L(r.jtc)+'</td>'+
-     '<td><div class="jtc-stars">'+fstars(r.score)+'</div></td></tr>'+
-     '<tr class="jtc-vrow" data-i="'+ri+'"><td colspan="4"><div class="jtc-vwrap"><span class="jtc-vlbl">'+t().jtcVerdictLabel+' ↗</span><span class="jtc-vtxt">'+L(r.verdict)+'</span></div></td></tr>';}).join("");
- var foot='<tr class="jtc-total"><td>'+t().jtcTotalLabel+'</td>'+
-   '<td><span class="tt">MedZ</span> '+medzTot+' / '+mx+'</td><td></td>'+
-   '<td><span class="tt">JTC</span> '+jtcTot+' / '+mx+'</td></tr>';
- el("jtcTable").innerHTML=head+body+'</tbody><tfoot>'+foot+'</tfoot>';
- var jt=el("jtcTable");
- function openV(i){jt.querySelectorAll(".jtc-vrow").forEach(function(v){v.classList.toggle("open",+v.getAttribute("data-i")===i);});jt.querySelectorAll(".jtc-data").forEach(function(d){d.classList.toggle("active",+d.getAttribute("data-i")===i);});}
- jt.querySelectorAll(".jtc-data").forEach(function(d){var i=+d.getAttribute("data-i");d.addEventListener("mouseenter",function(){openV(i);});d.addEventListener("click",function(){openV(i);});});
- el("provoc").innerHTML='<div class="pl">'+t().provocL+'</div><p>'+t().provoc+'</p>';
+ var f=t().fonc;
+
+ /* 01 · chaîne d'implantation */
+ var p=f.passage;
+ el("fonPassage").innerHTML=fonHead(p)+
+  '<div class="chain">'+
+   '<article><small>'+p.a.label+'</small><div class="logo-row">'+fonLogo("/logos/amdie.png","AMDIE")+fonLogo("/morocco-now-logo.png","Morocco Now")+'</div><p>'+p.a.desc+'</p></article>'+
+   '<div class="handoff"><b>'+p.friction.label+'</b><strong>'+p.friction.strong+'</strong><i aria-hidden="true">→</i><span>'+p.friction.note+'</span></div>'+
+   '<article><small>'+p.b.label+'</small><div class="logo-row">'+fonLogo("/logos/medz.png","MedZ")+'</div><p>'+p.b.desc+'</p></article>'+
+  '</div>';
+
+ /* 02 · preuve attendue */
+ var q=f.preuve;
+ el("fonPreuve").innerHTML=fonHead(q)+'<div class="qgrid">'+q.items.map(function(it,i){
+   return '<article><div class="qn">0'+(i+1)+'</div><b>'+it.k+'</b><h4>'+it.q+'</h4><p>'+it.d+'</p></article>';}).join("")+'</div>';
+
+ /* 03 · observations datées */
+ var o=f.obs;
+ el("fonObs").innerHTML=fonHead(o)+
+  '<div class="evid"><div class="evid-tabs" id="fonEvidTabs">'+o.items.map(function(it,i){
+    return '<button type="button" data-i="'+i+'" aria-expanded="'+(i===fonEvidence?'true':'false')+'" aria-controls="fonEvidDetail"><span><span class="ed">'+it.date+'</span><span class="et">'+it.title+'</span></span><span class="ea" aria-hidden="true">→</span></button>';}).join("")+
+   '</div><article class="evid-detail" id="fonEvidDetail" aria-live="polite"><p class="fon-eyebrow">'+o.detailLabel+'</p><strong id="fonEvidDate"></strong><h4 id="fonEvidTitle"></h4><p id="fonEvidText"></p><small>'+o.footnote+'</small></article></div>';
+ function fonShow(i){
+  fonEvidence=i;var it=o.items[i];
+  el("fonEvidDate").textContent=it.date;el("fonEvidTitle").textContent=it.title;el("fonEvidText").textContent=it.text;
+  el("fonEvidTabs").querySelectorAll("button").forEach(function(b){b.setAttribute("aria-expanded",+b.dataset.i===i?"true":"false");});
+ }
+ el("fonEvidTabs").querySelectorAll("button").forEach(function(b){
+  b.addEventListener("click",function(){fonShow(+b.dataset.i);});
+ });
+ fonShow(Math.min(fonEvidence,o.items.length-1));
+
+ /* 04 · benchmark fonctionnel */
+ var b=f.bench;
+ var logos='<div class="logo-row">'+fonLogo("/logos/medz.png","MedZ")+'<span class="logo-sep">'+b.compared+'</span>'+fonLogo("/logos/jtc.png","JTC Singapore")+'</div>';
+ el("fonBench").innerHTML=fonHead(b,logos)+
+  '<div class="card" style="overflow:hidden;padding:0"><div style="overflow-x:auto"><table class="bmatrix"><thead><tr>'+
+   b.head.map(function(h){return '<th scope="col">'+h+'</th>';}).join("")+'</tr></thead><tbody>'+
+   b.rows.map(function(r){return '<tr><td class="bcap" data-label="'+b.head[0]+'">'+r[0]+'</td><td data-label="'+b.head[1]+'">'+r[1]+'</td><td class="bjtc" data-label="'+b.head[2]+'">'+r[2]+'</td><td class="bprio" data-label="'+b.head[3]+'">'+r[3]+'</td></tr>';}).join("")+
+  '</tbody></table></div></div><p class="fon-note">'+b.note+'</p>';
+
+ /* 05 · guichet investisseur */
+ var c=f.cockpit;
+ el("fonCockpit").innerHTML='<div class="cockpit"><div class="cockpit-copy"><p class="fon-eyebrow">'+c.eyebrow+'</p><h3>'+c.h2+'</h3><p>'+c.lead+'</p>'+
+   '<ol class="csteps">'+c.steps.map(function(s){return '<li><b>'+s[0]+'</b> '+s[1]+'</li>';}).join("")+'</ol></div>'+
+  '<div class="cmock" aria-hidden="true"><div class="cmock-top"><span>'+c.mockTop+'</span><b>'+c.mockTag+'</b></div>'+
+   '<div class="cmock-body"><div class="cmock-cities">'+c.cities.map(function(x){return '<span>'+x+'</span>';}).join("")+'</div>'+
+   '<div class="cmock-sel"><small>'+c.sel.label+'</small><b>'+c.sel.name+'</b><i>'+c.sel.status+'</i><span>'+c.sel.cta+'</span></div></div></div></div>';
+
+ /* 06 · décision */
+ var d=f.dec;
+ el("fonDec").innerHTML=fonHead(d)+'<div class="prios">'+d.items.map(function(it,i){
+   return '<article><div class="pn">0'+(i+1)+'</div><h4>'+it.h+'</h4><p>'+it.p+'</p><small>'+it.liv+'</small></article>';}).join("")+'</div>';
 }
 
 /* =========================================================================
