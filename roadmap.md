@@ -10,4 +10,4 @@
 - [x] Compléter, faire approuver et implémenter la correction UX/UI de l’Investor Atlas.
 - [x] Faire approuver puis implémenter l’amélioration éditoriale et UX strictement ciblée de Positionnement, incluant le Radar #m3 enrichi et la carte mondiale finale.
 - [x] Implémenter et valider l’amélioration ciblée de Positionnement (navigation, Verdict, cartes et matrice).
-- [ ] Mettre à jour le plan Simulateur avec la contrainte de mode sombre : réutiliser les tokens existants pour l’interface et conserver les couleurs data-visualisation identiques.
+- [x] Mettre à jour le plan Simulateur avec la contrainte de mode sombre : réutiliser les tokens existants pour l’interface et conserver les couleurs data-visualisation identiques.
