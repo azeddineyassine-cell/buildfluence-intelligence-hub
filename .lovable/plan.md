@@ -31,6 +31,8 @@ Aucun autre fichier ne sera modifié, sauf si une contrainte bloquante apparaît
 - Titres Playfair Display, texte DM Sans, chiffres JetBrains Mono.
 - Chrome de marque strictement navy / or.
 - Vert et rouge uniquement dans la data-visualisation.
+- Mode sombre : réutiliser les tokens de couleur déjà définis ailleurs sur le site pour les fonds, textes et bordures de l'interface du simulateur. Ne pas inventer de nouvelle palette sombre.
+- Les couleurs de data-visualisation restent identiques en mode clair et sombre : barres de classement, structure des coûts, graphe empilé, courbe de trésorerie et repères positif/négatif.
 - Aucun tiret cadratin dans le texte ajouté.
 - Mot « gratuit » interdit.
 - Pas de refonte des autres modules.
