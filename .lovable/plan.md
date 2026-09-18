@@ -51,11 +51,19 @@ nouvelle route, pas de backend.
   et respectent `prefers-reduced-motion`.
 - Ancre `#foncier`, entrée de sous-menu et numérotation `05` conservées.
 
-## Limite connue
+## Logos institutionnels
 
-Il n'existe pas de logo JTC dans le projet et je n'en fabriquerai pas : la
-colonne JTC utilise un traitement typographique (mention « JTC · Singapour »).
-Si vous fournissez le logo officiel, je l'intègre ensuite.
+Quatre logos réels, aucun redessiné ni retouché :
+AMDIE (`/logos/amdie.png`), Morocco Now (`/morocco-now-logo.png`),
+MedZ (`/logos/medz.png`) et le logo officiel JTC que vous venez de fournir,
+enregistré tel quel sous `/logos/jtc.png`.
+
+- Hauteur d'affichage homogène, ratio conservé (`object-fit: contain`), aucune
+  déformation.
+- Texte alternatif « JTC Singapore » pour le logo JTC.
+- Lisibilité garantie en clair comme en sombre : les logos sont posés sur une
+  pastille de fond neutre claire constante, indépendante du thème, de sorte que
+  le bleu JTC et le fond ne se confondent jamais.
 
 ## Contrôles après implémentation
 
