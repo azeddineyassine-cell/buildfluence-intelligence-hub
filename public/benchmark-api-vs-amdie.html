@@ -3153,7 +3153,7 @@ function renderFoncier(){
  el("fonBench").innerHTML=fonHead(b,logos)+
   '<div class="card" style="overflow:hidden;padding:0"><div style="overflow-x:auto"><table class="bmatrix"><thead><tr>'+
    b.head.map(function(h){return '<th scope="col">'+h+'</th>';}).join("")+'</tr></thead><tbody>'+
-   b.rows.map(function(r){return '<tr><td class="bcap">'+r[0]+'</td><td>'+r[1]+'</td><td class="bjtc">'+r[2]+'</td><td class="bprio">'+r[3]+'</td></tr>';}).join("")+
+   b.rows.map(function(r){return '<tr><td class="bcap" data-label="'+b.head[0]+'">'+r[0]+'</td><td data-label="'+b.head[1]+'">'+r[1]+'</td><td class="bjtc" data-label="'+b.head[2]+'">'+r[2]+'</td><td class="bprio" data-label="'+b.head[3]+'">'+r[3]+'</td></tr>';}).join("")+
   '</tbody></table></div></div><p class="fon-note">'+b.note+'</p>';
 
  /* 05 · guichet investisseur */
