@@ -47,15 +47,6 @@ const BenchmarkApiVsAmdie = () => {
     syncAccess();
   }, [syncAccess]);
 
-  useEffect(() => {
-    const onMessage = (event: MessageEvent) => {
-      if (event.origin !== window.location.origin) return;
-      if ((event.data as { type?: string } | null)?.type === "bf-close-tab") window.close();
-    };
-    window.addEventListener("message", onMessage);
-    return () => window.removeEventListener("message", onMessage);
-  }, []);
-
 
   return (
     <>
