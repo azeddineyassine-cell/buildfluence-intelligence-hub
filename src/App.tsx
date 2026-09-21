@@ -2,7 +2,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 import { ThemeProvider } from "@/contexts/ThemeContext";
@@ -50,6 +50,11 @@ import StrategicCommandCenter from "./pages/capacites/StrategicCommandCenter";
 import CompetitiveVelocityEngine from "./pages/capacites/CompetitiveVelocityEngine";
 
 const queryClient = new QueryClient();
+
+const RouteAwareCookieConsent = () => {
+  const { pathname } = useLocation();
+  return pathname === "/carte-azeddine" ? null : <CookieConsent />;
+};
 
 const App = () => (
   <HelmetProvider>
@@ -117,7 +122,7 @@ const App = () => (
 
             <Route path="*" element={<NotFound />} />
           </Routes>
-          <CookieConsent />
+          <RouteAwareCookieConsent />
         </BrowserRouter>
       </TooltipProvider>
     </QueryClientProvider>
