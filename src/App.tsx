@@ -2,7 +2,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 import { ThemeProvider } from "@/contexts/ThemeContext";
@@ -25,6 +25,7 @@ import EnqueteISD from "./pages/EnqueteISD";
 import IntelligencePolitique from "./pages/IntelligencePolitique";
 import IntelligencePolitiquePage from "./pages/IntelligencePolitiquePage";
 import BenchmarkApiVsAmdie from "./pages/BenchmarkApiVsAmdie";
+import CarteAzeddine from "./pages/CarteAzeddine";
 
 
 // Situation pages
@@ -50,6 +51,11 @@ import CompetitiveVelocityEngine from "./pages/capacites/CompetitiveVelocityEngi
 
 const queryClient = new QueryClient();
 
+const RouteAwareCookieConsent = () => {
+  const { pathname } = useLocation();
+  return pathname === "/carte-azeddine" ? null : <CookieConsent />;
+};
+
 const App = () => (
   <HelmetProvider>
   <LanguageProvider>
@@ -62,6 +68,7 @@ const App = () => (
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Index />} />
+            <Route path="/carte-azeddine" element={<CarteAzeddine />} />
             <Route path="/acces-premium" element={<AccesPremium />} />
             <Route
               path="/acces-premium/dashboard"
@@ -115,7 +122,7 @@ const App = () => (
 
             <Route path="*" element={<NotFound />} />
           </Routes>
-          <CookieConsent />
+          <RouteAwareCookieConsent />
         </BrowserRouter>
       </TooltipProvider>
     </QueryClientProvider>
