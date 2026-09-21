@@ -106,22 +106,17 @@ const CTAFooter = () => {
                 Sovereign Decision Infrastructure
               </p>
               <a
-                href="https://claude.ai/artifact/RsEu6b1LU5c6UuTfV4YMsq"
-                target="_blank"
-                rel="noopener"
+                href="/carte-azeddine"
                 className="mt-4 inline-block"
               >
                 <img
                   src="/qr-azeddine.png"
-                  alt="Ma carte de visite digitale"
+                  alt="QR code"
                   width={72}
                   height={72}
                   style={{ width: 72, height: 72, borderRadius: 6, border: '1px solid hsl(var(--gold))', display: 'block' }}
                 />
               </a>
-              <p className="mt-2 text-[10px]" style={{ color: 'rgba(255,255,255,0.35)' }}>
-                {t("Ma carte de visite digitale", "My digital business card")}
-              </p>
             </div>
 
             {/* Link columns */}

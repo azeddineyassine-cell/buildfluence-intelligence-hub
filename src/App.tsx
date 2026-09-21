@@ -25,6 +25,7 @@ import EnqueteISD from "./pages/EnqueteISD";
 import IntelligencePolitique from "./pages/IntelligencePolitique";
 import IntelligencePolitiquePage from "./pages/IntelligencePolitiquePage";
 import BenchmarkApiVsAmdie from "./pages/BenchmarkApiVsAmdie";
+import CarteAzeddine from "./pages/CarteAzeddine";
 
 
 // Situation pages
@@ -62,6 +63,7 @@ const App = () => (
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Index />} />
+            <Route path="/carte-azeddine" element={<CarteAzeddine />} />
             <Route path="/acces-premium" element={<AccesPremium />} />
             <Route
               path="/acces-premium/dashboard"
