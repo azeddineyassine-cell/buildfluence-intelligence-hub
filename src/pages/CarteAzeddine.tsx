@@ -131,16 +131,16 @@ const CarteAzeddine = () => (
         <img className="azeddine-photo" src="/intelligence-politique/assets/azeddine-yassine.png" alt="Azeddine Yassine" />
         <h1 className="azeddine-name">Azeddine Yassine</h1>
         <p className="azeddine-role">Founder &amp; CEO</p>
-        <p className="azeddine-tagline">Buildfluence · Sovereign Investment Intelligence</p>
+        <p className="azeddine-tagline">Buildfluence · Sovereign Decision Infrastructure</p>
       </header>
 
       <address className="azeddine-contacts">
-        <a href="tel:+212661227474">+212661227474</a>
+        <a href="tel:+212661227474">+212 6 61 22 74 74</a>
         <a href="mailto:azeddine.yassine@buildfluence.ai">azeddine.yassine@buildfluence.ai</a>
         <a href="https://www.buildfluence.ai">https://www.buildfluence.ai</a>
       </address>
 
-      <p className="azeddine-label">Explore our intelligence solutions</p>
+      <p className="azeddine-label">Solutions</p>
       <div className="azeddine-solutions">
         {solutions.map((solution) => (
           <a className="azeddine-solution" href={solution.href} key={solution.number}>
