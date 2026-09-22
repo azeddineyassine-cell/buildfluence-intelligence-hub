@@ -2177,8 +2177,8 @@ var T={
   protTeaserTag:"Prototypes · accès Premium",protTeaserTitle:"À quoi ressemble <em>la solution.</em>",protTeaserLead:"Trois outils fonctionnels traduisent le diagnostic en aide à la décision. Réservés aux clients Premium.",
   protTeasers:[["Investor Atlas","Cartographie interactive : 69 points d'intérêt, filtrables par catégorie, pour visualiser l'écosystème d'attractivité."],["Simulateur d'implantations","L'investisseur saisit son secteur et son montant, obtient primes, exonérations et taux d'IS applicables."],["Comparateur de compétitivité","Le Maroc face à ses concurrents sur coûts, délais et incitations, critère par critère."]],
   decTeaserTag:"Décision · accès Premium",decTeaserTitle:"Que faut-il <em>engager.</em>",decTeaserLead:"La synthèse et la feuille de route qui transforment le diagnostic en plan d'action. Réservées aux clients Premium.",
-  decTeasers:[["Six scénarios","Projection illustrative de la trajectoire selon différents niveaux d'investissement dans la transformation."],["Verdict Buildfluence","La position assumée de Buildfluence sur l'état de la compétitivité digitale marocaine."],["Plan de transformation","12 leviers priorisés sur 3 axes, avec durée, phasage, avantages et best practice sourcée pour chacun."]],
-  teaserCtaTxt:"L'analyse complète, les 3 prototypes et les 12 leviers du plan de transformation sont réservés aux clients de l'Espace Premium.",teaserCtaBtn:"Accéder à l'Espace Premium →",
+  decTeasers:[["Six scénarios","Projection illustrative de la trajectoire selon différents niveaux d'investissement dans la transformation."],["Verdict Buildfluence","La position assumée de Buildfluence sur l'état de la compétitivité digitale marocaine."],["Plan de transformation","13 leviers priorisés sur 3 axes, avec durée, phasage, avantages et best practice sourcée pour chacun."]],
+  teaserCtaTxt:"L'analyse complète, les 3 prototypes et les 13 leviers du plan de transformation sont réservés aux clients de l'Espace Premium.",teaserCtaBtn:"Accéder à l'Espace Premium →",
   whySummaryH:"Une méthode, pas une opinion.",
   whySummary:"Ce benchmark interactif décrypte, mesure et teste, critère par critère, les capacités numériques observées. Il articule un diagnostic comparatif, présenté dans les quatre premiers onglets, et des solutions pragmatiques, développées dans les deux derniers.<br><br>Finalité : concevoir et déployer une plateforme d'intelligence décisionnelle adaptée aux besoins des acteurs publics, territoriaux et financiers.",
   m0:[
@@ -3396,7 +3396,7 @@ function buildPlanWheel(){
  svg+='<g class="pw-hub-hit" id="planHubHit">';
  svg+='<circle cx="'+cx+'" cy="'+cy+'" r="'+hubR+'" fill="var(--paper2)" stroke="var(--rule)"/>';
  t().m8hub.forEach(function(ln,i){svg+='<text class="pw-hub-title" x="'+cx+'" y="'+(cy-40+i*13)+'" text-anchor="middle">'+ln+'</text>';});
- svg+='<text class="pw-hub-n" x="'+cx+'" y="'+(cy+22)+'" text-anchor="middle" font-size="38">12</text>';
+ svg+='<text class="pw-hub-n" x="'+cx+'" y="'+(cy+22)+'" text-anchor="middle" font-size="38">13</text>';
  svg+='<text class="pw-hub-sub" x="'+cx+'" y="'+(cy+42)+'" text-anchor="middle">'+t().m8hubSub+'</text>';
  svg+="</g>";
  el("planWheel").innerHTML=svg;
