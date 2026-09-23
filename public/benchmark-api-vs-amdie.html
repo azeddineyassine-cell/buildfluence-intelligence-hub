@@ -657,7 +657,7 @@ input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;bac
 .plan-wheel-hint{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;text-align:center;color:var(--gold-deep);margin-top:12px;min-height:12px}
 .pw-axis-dim{opacity:.22;pointer-events:none}
 .pw-hub-hit{cursor:pointer}
-.pw-hub-title{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;fill:var(--ink-light);font-weight:600}
+.pw-hub-title{font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;fill:var(--ink-light);font-weight:800}
 .pw-hub-n{font-family:var(--display);font-weight:900;fill:var(--gold-deep)}
 .pw-hub-sub{font-family:var(--mono);font-size:8.5px;letter-spacing:.16em;text-transform:uppercase;fill:var(--ink-faint)}
 .pw-arc-lbl{font-family:var(--mono);font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;font-weight:800;pointer-events:none;paint-order:stroke;stroke:rgba(255,255,255,.75);stroke-width:3px;stroke-linejoin:round}
@@ -2274,7 +2274,7 @@ var T={
   baroIntro:"À relier au Baromètre d'investissement Buildfluence :",
   baro:[{n:"06",t:"Boussole des investisseurs",u:"https://buildfluence.ai/barometre?lang=fr"},{n:"07",t:"Jeux d'influence des concurrents (Vietnam : l'arme numérique)",u:"https://buildfluence.ai/barometre?lang=fr"}],
   m8tag:"Plan de transformation · 12 mois",m8title:["De la vitrine à la ","plateforme."],m8lead:"Les recommandations du Benchmark API et du Baromètre d'investissement, fusionnées en trois axes et treize leviers, avant que la fenêtre CdM 2030 ne se referme.",
-  m8viewAxis:"Par axe",m8viewPrio:"Par priorité",m8hub:["Global","Investment","Monitor"],m8hubSub:"12 mois",
+  m8viewAxis:"Par axe",m8viewPrio:"Par priorité",m8hub:["Global","Investment","Intelligence"],m8hubSub:"leviers",
   m8resetHint:"Cliquez au centre pour réafficher les 13 leviers",
   m8manifesto:"Développer des capacités, prioriser leur mise en œuvre et faire converger l'ensemble vers un objectif unique : offrir un parcours investisseur fluide, fondé sur la donnée, l'intelligence territoriale et l'aide à la décision.",
   pdLanding:"Chaque recommandation répond à un écart objectivement identifié par le benchmark et aide l'AMDIE à faire évoluer Morocco Now d'une logique de promotion institutionnelle vers une véritable plateforme d'intelligence investisseur.",
@@ -2443,7 +2443,7 @@ var T={
   baroIntro:"To connect with the Buildfluence Investment Barometer:",
   baro:[{n:"06",t:"Investor compass",u:"https://buildfluence.ai/barometre?lang=en"},{n:"07",t:"Competitors' influence games (Vietnam: the digital weapon)",u:"https://buildfluence.ai/barometre?lang=en"}],
   m8tag:"Transformation plan · 12 months",m8title:["From showcase to ","platform."],m8lead:"The recommendations of the IPA Benchmark and the Investment Barometer, merged into three axes and thirteen levers, before the FIFA 2030 window closes.",
-  m8viewAxis:"By axis",m8viewPrio:"By priority",m8hub:["Global","Investment","Monitor"],m8hubSub:"12 months",
+  m8viewAxis:"By axis",m8viewPrio:"By priority",m8hub:["Global","Investment","Intelligence"],m8hubSub:"levers",
   m8resetHint:"Click the center to show all 13 levers again",
   m8manifesto:"Build capabilities, prioritise their rollout, and converge everything toward a single goal: a smooth investor journey grounded in data, territorial intelligence and decision support.",
   pdLanding:"Each recommendation answers a gap objectively identified by the benchmark, and helps AMDIE move Morocco Now from institutional promotion toward a genuine investor-intelligence platform.",
@@ -3395,7 +3395,7 @@ function buildPlanWheel(){
  });
  svg+='<g class="pw-hub-hit" id="planHubHit">';
  svg+='<circle cx="'+cx+'" cy="'+cy+'" r="'+hubR+'" fill="var(--paper2)" stroke="var(--rule)"/>';
- t().m8hub.forEach(function(ln,i){svg+='<text class="pw-hub-title" x="'+cx+'" y="'+(cy-40+i*13)+'" text-anchor="middle">'+ln+'</text>';});
+ t().m8hub.forEach(function(ln,i){svg+='<text class="pw-hub-title" x="'+cx+'" y="'+(cy-42+i*15)+'" text-anchor="middle">'+ln+'</text>';});
  svg+='<text class="pw-hub-n" x="'+cx+'" y="'+(cy+22)+'" text-anchor="middle" font-size="38">13</text>';
  svg+='<text class="pw-hub-sub" x="'+cx+'" y="'+(cy+42)+'" text-anchor="middle">'+t().m8hubSub+'</text>';
  svg+="</g>";
