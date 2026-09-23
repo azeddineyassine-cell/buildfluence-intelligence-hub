@@ -644,7 +644,7 @@ input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;bac
 .plan-wheel-wrap{display:grid;grid-template-columns:minmax(340px,640px) 1fr;gap:clamp(20px,3vw,40px);align-items:start}
 @media(max-width:960px){.plan-wheel-wrap{grid-template-columns:1fr}}
 .plan-wheel-card{background:var(--card);border:1px solid var(--rule);border-radius:10px;padding:clamp(10px,2vw,20px);box-shadow:var(--shadow)}
-.plan-wheel{width:100%;height:auto;display:block;overflow:visible}
+.plan-wheel{width:100%;height:auto;display:block;overflow:visible;transition:opacity .5s}
 .pw-band{cursor:default;transition:opacity .25s}
 .pw-spoke{stroke-width:1;opacity:.35;transition:opacity .25s,stroke-width .25s}
 .pw-node-hit{cursor:pointer}
@@ -1980,34 +1980,34 @@ var AXES=[
   prio:{fr:"Quick Wins",en:"Quick Wins"},
   sub:{fr:"Rendre l'offre lisible, comparable et exploitable par l'investisseur lui-même.",en:"Make the offer readable, comparable and usable by the investor."},
    items:[
-    {n:{fr:"Strategic Intelligence Lab",en:"Strategic Intelligence Lab"},
-     sub:{fr:"Installer le radar avant d'écrire la lettre.",en:"Install the radar before writing the letter."},
-     detail:{fr:"Un dispositif de veille et d'analyse en temps réel qui joue le rôle de radar stratégique : capter les signaux faibles, identifier les secteurs porteurs et anticiper les disruptions, avant toute production éditoriale. À ne pas confondre avec un agrégateur de presse : une architecture de collecte, de scoring et d'alerte, pas un fil d'actualités.",en:"A real-time monitoring and analysis system acting as a strategic radar: capturing weak signals, identifying promising sectors and anticipating disruptions, before any editorial output. Not to be confused with a press aggregator: a collection, scoring and alert architecture, not a news feed."},
+    {n:{fr:"Strategic Intelligence Lab",en:"Strategic Intelligence Lab"},rank:1,
+     sub:{fr:"Comprendre le terrain, puis ne plus le perdre de vue.",en:"Understand the ground, then never lose sight of it."},
+     detail:{fr:"Une étude approfondie de l'environnement du client : cartographie des acteurs qui comptent, lecture des rapports de force, identification des secteurs porteurs et des opportunités encore peu visibles. Ce diagnostic se prolonge par un dispositif de veille qui capte en continu les signaux faibles et anticipe les disruptions : une architecture de collecte, d'analyse et d'alerte, pas un fil d'actualités.",en:"An in-depth study of the client's environment: mapping the actors that matter, reading the balance of power, identifying promising sectors and opportunities still under the radar. This diagnosis extends into a monitoring system that continuously captures weak signals and anticipates disruptions: a collection, analysis and alert architecture, not a news feed."},
      duration:{fr:"3 mois",en:"3 months"},
-     phases:[{p:{fr:"Cadrage technique : expression de besoin, cahier des charges",en:"Technical scoping: needs assessment, specification"},m:"M1"},{p:{fr:"Développement : requêtes, axes de la plateforme, tests",en:"Development: queries, platform axes, testing"},m:"M2"},{p:{fr:"Validation, mise en production, livraison et formation",en:"Validation, go-live, delivery & training"},m:"M3"}],
-     benefits:[{fr:"Un radar stratégique opérationnel avant la moindre publication",en:"An operational strategic radar before any publication"},{fr:"Signaux faibles captés en continu, pas au coup par coup",en:"Weak signals captured continuously, not on an ad hoc basis"},{fr:"Alimente en amont tous les leviers éditoriaux du plan : Insight Monitor, dashboards, études sectorielles",en:"Feeds every editorial lever of the plan upstream: Insight Monitor, dashboards, sector studies"}],
-     objective:{fr:"Installer la brique de collecte et d'analyse qui manque avant de produire le moindre contenu : sans radar, une newsletter reste un exercice de communication, pas de la veille.",en:"Install the missing collection and analysis layer before producing any content: without a radar, a newsletter is a communication exercise, not intelligence."},
+     phases:[{p:{fr:"Immersion et cadrage : enjeux, périmètre, acteurs",en:"Immersion and scoping: stakes, scope, actors"},m:"M1"},{p:{fr:"Cartographie des acteurs et analyse des secteurs porteurs",en:"Actor mapping and analysis of promising sectors"},m:"M2"},{p:{fr:"Restitution du diagnostic et mise en service de la veille",en:"Diagnosis debrief and monitoring go-live"},m:"M3"}],
+     benefits:[{fr:"Un diagnostic partagé avant toute décision",en:"A shared diagnosis before any decision"},{fr:"Les acteurs clés et leurs liens cartographiés",en:"Key actors and their connections mapped"},{fr:"Signaux faibles captés en continu, pas au coup par coup",en:"Weak signals captured continuously, not on an ad hoc basis"}],
+     objective:{fr:"Poser le diagnostic qui manque, puis le tenir à jour : sans compréhension fine du terrain ni veille continue, chaque action reste un pari.",en:"Establish the missing diagnosis, then keep it current: without a fine understanding of the ground and continuous monitoring, every action remains a bet."},
      bp:{label:{fr:"Buildfluence · Strategic Intelligence Lab, radar stratégique propriétaire",en:"Buildfluence · Strategic Intelligence Lab, proprietary strategic radar"},url:"https://buildfluence.ai/solutions/strategic-intelligence-lab"},
-     topics:["Data Intelligence","Veille","Radar stratégique"]},
-    {n:{fr:"Insight Monitor",en:"Insight Monitor"},
-     sub:{fr:"Transformer les signaux captés en connaissance publiable.",en:"Turning captured signals into publishable knowledge."},
-     detail:{fr:"Une lettre mensuelle datée et archivée, alimentée par le radar du Strategic Intelligence Lab plutôt que rédigée à vide. C'est un espace que les trois institutions marocaines chargées de la promotion des investissements et du foncier économique n'occupent pas encore : MedZ, dont la newsletter est restée 15 mois sans nouvelle édition au moment du constat, AMDIE, dont les publications se limitent à un rapport annuel (le dernier daté de 2024) et à un Guide des Affaires au Maroc de 207 pages datant de 2022, un format dense plus adapté à une consultation ponctuelle qu'à un usage courant investisseur, et MoroccoNow.ma. Chaque numéro de l'Insight Monitor passe par le dispositif de légitimation éditoriale de Buildfluence avant diffusion : sourcé, daté, validé.",en:"A monthly, dated and archived letter, fed by the Strategic Intelligence Lab's radar rather than written from a blank page. This is ground the three Moroccan institutions in charge of investment promotion and economic land development have not yet claimed: MedZ, whose newsletter went 15 months without a new edition at the time of this review, AMDIE, whose publications are limited to an annual report (the latest dated 2024) and a 207-page Guide des Affaires au Maroc from 2022, a dense format better suited to occasional reference than day-to-day investor use, and MoroccoNow.ma. Every Insight Monitor issue goes through Buildfluence's editorial legitimation process before release: sourced, dated, validated."},
+     topics:["Diagnostic","Cartographie des acteurs","Veille"]},
+    {n:{fr:"Légitimation éditoriale",en:"Editorial Legitimation"},rank:5,
+     sub:{fr:"Publier moins, mais publier ce qui fait autorité.",en:"Publish less, but publish what carries authority."},
+     detail:{fr:"Une lettre régulière, datée et archivée, nourrie par les enseignements du Strategic Intelligence Lab plutôt que rédigée à vide. Les supports institutionnels actuels, rapports annuels et guides de référence, documentent l'offre marocaine avec sérieux ; leur format se prête toutefois davantage à une consultation ponctuelle qu'au suivi régulier qu'attend un investisseur. La Légitimation éditoriale comble cet intervalle : chaque numéro est sourcé, daté et validé avant diffusion, pour faire de la parole institutionnelle une référence citée plutôt qu'un contenu de plus.",en:"A regular, dated and archived letter, informed by the Strategic Intelligence Lab's findings rather than written from a blank page. Existing institutional materials, annual reports and reference guides, document Morocco's offer rigorously; their format, however, lends itself more to occasional consultation than to the regular follow-up an investor expects. Editorial Legitimation fills that gap: every issue is sourced, dated and validated before release, turning the institutional voice into a cited reference rather than one more piece of content."},
      duration:{fr:"3 mois",en:"3 months"},
-     phases:[{p:{fr:"Cadrage éditorial",en:"Editorial scoping"},m:"M1"},{p:{fr:"Premier numéro",en:"First issue"},m:"M2"},{p:{fr:"Rythme mensuel installé",en:"Monthly cadence in place"},m:"M3"}],
-     benefits:[{fr:"Présence régulière dans la boîte mail des investisseurs",en:"Regular presence in investors' inboxes"},{fr:"Historique archivé, consultable, citable",en:"Archived, searchable, citable history"},{fr:"Chaque numéro validé par le dispositif de légitimation éditoriale, pas une simple compilation",en:"Every issue validated by the editorial legitimation process, not a simple compilation"}],
-     objective:{fr:"Installer un rendez-vous mensuel fiable et légitimé, sur un terrain que MedZ, AMDIE et MoroccoNow.ma n'occupent pas encore aujourd'hui.",en:"Establish a reliable, legitimized monthly touchpoint, on ground that MedZ, AMDIE and MoroccoNow.ma have not yet claimed today."},
+     phases:[{p:{fr:"Cadrage éditorial",en:"Editorial scoping"},m:"M1"},{p:{fr:"Premier numéro",en:"First issue"},m:"M2"},{p:{fr:"Rythme régulier installé",en:"Regular cadence in place"},m:"M3"}],
+     benefits:[{fr:"Présence régulière dans la boîte mail des investisseurs",en:"Regular presence in investors' inboxes"},{fr:"Historique archivé, consultable, citable",en:"Archived, searchable, citable history"},{fr:"Chaque numéro sourcé, daté et validé, pas une simple compilation",en:"Every issue sourced, dated and validated, not a simple compilation"}],
+     objective:{fr:"Installer un rendez-vous régulier et fiable, qui fasse de l'institution une source que les investisseurs citent.",en:"Establish a reliable, regular touchpoint that makes the institution a source investors cite."},
      bp:{label:{fr:"Invest India · newsletter mensuelle archivée",en:"Invest India · archived monthly newsletter"},url:"https://www.investindia.gov.in"},
-     topics:["Insight Monitor","Légitimation éditoriale","Investisseurs"]},
-    {n:{fr:"KPI Trimestriels & Dashboards",en:"Quarterly KPIs & Dashboards"},
+     topics:["Légitimation éditoriale","Lettre régulière","Investisseurs"]},
+    {n:{fr:"KPI Trimestriels & Dashboards",en:"Quarterly KPIs & Dashboards"},rank:8,
      sub:{fr:"Rendre visible la performance, trimestre après trimestre.",en:"Make performance visible, quarter after quarter."},
-     detail:{fr:"Des tableaux de bord publics rafraîchis chaque trimestre : flux d'IDE, emplois créés, taux d'occupation des parcs, chaque chiffre passé par le même dispositif de légitimation éditoriale que l'Insight Monitor avant mise en ligne. La référence mondiale : stats.jtc.gov.sg.",en:"Public dashboards refreshed each quarter: FDI inflows, jobs created, park occupancy rates, every figure cleared through the same editorial legitimation process as the Insight Monitor before going live. The world reference: stats.jtc.gov.sg."},
+     detail:{fr:"Des tableaux de bord publics rafraîchis chaque trimestre : flux d'IDE, emplois créés, taux d'occupation des parcs, chaque chiffre passé par le dispositif de Légitimation éditoriale avant mise en ligne. La référence mondiale : stats.jtc.gov.sg.",en:"Public dashboards refreshed each quarter: FDI inflows, jobs created, park occupancy rates, every figure cleared through the Editorial Legitimation process before going live. The world reference: stats.jtc.gov.sg."},
      duration:{fr:"2 mois",en:"2 months"},
      phases:[{p:{fr:"Cadrage indicateurs et intégration data",en:"Scoping indicators & data integration"},m:"M1"},{p:{fr:"Mise en ligne",en:"Go-live"},m:"M2"}],
      benefits:[{fr:"Transparence immédiate pour l'investisseur",en:"Immediate transparency for the investor"},{fr:"Aucune dépendance à un rapport annuel figé",en:"No dependency on a frozen annual report"},{fr:"Chiffres validés par le dispositif de légitimation éditoriale avant mise en ligne",en:"Figures cleared by the editorial legitimation process before going live"}],
      objective:{fr:"Passer d'un discours d'attractivité déclaratif à une preuve chiffrée, actualisée en continu.",en:"Move from a declarative attractiveness narrative to continuously updated, quantified proof."},
      bp:{label:{fr:"JTC Corporation, Singapour · dashboards publics trimestriels",en:"JTC Corporation, Singapore · quarterly public dashboards"},url:"https://stats.jtc.gov.sg"},
      topics:["KPI","Dashboard","Data","Transparence"]},
-    {n:{fr:"Études sectorielles courtes",en:"Short sector studies"},
+    {n:{fr:"Études sectorielles courtes",en:"Short sector studies"},rank:7,
      sub:{fr:"Deux pages qu'un investisseur peut citer dans son business case.",en:"Two pages an investor can cite in a business case."},
      detail:{fr:"Des notes de deux pages par filière (auto, aéro, pharma), actualisées, citables dans un dossier d'investissement.",en:"Two-page notes per industry (auto, aero, pharma), kept current, citable in an investment file."},
      duration:{fr:"3 mois",en:"3 months"},
@@ -2016,16 +2016,16 @@ var AXES=[
      objective:{fr:"Fournir, filière par filière, la preuve chiffrée que réclame un comité d'investissement.",en:"Provide, industry by industry, the quantified proof an investment committee requires."},
      bp:{label:{fr:"OCDE · Investment Promotion and the Digital Economy (2021)",en:"OECD · Investment Promotion and the Digital Economy (2021)"},url:"https://www.oecd.org/content/dam/oecd/en/publications/reports/2021/12/investment-insights-investment-promotion-digital-economy-oecd_ebc6c769/5c840788-en.pdf"},
      topics:["Etudes","Sectoriel","Preuve"]},
-    {n:{fr:"Success Stories sectorielles",en:"Sector success stories"},
+    {n:{fr:"Success Stories sectorielles",en:"Sector success stories"},rank:6,
      sub:{fr:"Des cas chiffrés, pas du storytelling vague.",en:"Quantified cases, not vague storytelling."},
-     detail:{fr:"Des cas chiffrés (montant investi, emplois, délai) avec le nom de l'investisseur, jamais du storytelling vague. Chaque cas passe par le même dispositif de légitimation éditoriale que l'Insight Monitor avant publication : chiffres vérifiés, jamais déclaratifs.",en:"Quantified cases (amount invested, jobs, lead time) with the investor's name, never vague storytelling. Every case goes through the same editorial legitimation process as the Insight Monitor before publication: figures verified, never self-reported."},
+     detail:{fr:"Des cas chiffrés (montant investi, emplois, délai) avec le nom de l'investisseur, jamais du storytelling vague. Chaque cas passe par le dispositif de Légitimation éditoriale avant publication : chiffres vérifiés, jamais déclaratifs.",en:"Quantified cases (amount invested, jobs, lead time) with the investor's name, never vague storytelling. Every case goes through the Editorial Legitimation process before publication: figures verified, never self-reported."},
      duration:{fr:"2 mois",en:"2 months"},
      phases:[{p:{fr:"Identification des cas",en:"Case identification"},m:"M1"},{p:{fr:"Validation et chiffrage",en:"Validation & figures"},m:"M2"},{p:{fr:"Publication",en:"Publication"},m:"M2–M3"}],
      benefits:[{fr:"Preuve sociale vérifiable",en:"Verifiable social proof"},{fr:"Chaque cas validé avant publication, pas une déclaration d'agence",en:"Every case validated before publication, not an agency self-declaration"},{fr:"Alimente l'Insight Monitor",en:"Feeds the Insight Monitor"}],
      objective:{fr:"Remplacer l'anecdote par la preuve : montant investi, emplois créés, délai réel.",en:"Replace anecdote with proof: amount invested, jobs created, actual lead time."},
      bp:{label:{fr:"Invest Korea · success stories chiffrées par secteur",en:"Invest Korea · quantified success stories by sector"},url:"https://www.investkorea.org"},
      topics:["Success story","Preuve sociale"]},
-    {n:{fr:"Strategic Flipbook",en:"Strategic Flipbook"},
+    {n:{fr:"Strategic Flipbook",en:"Strategic Flipbook"},rank:13,
      sub:{fr:"Le livre blanc devient un objet de diffusion léger, par axe stratégique.",en:"The white paper becomes a light distribution object, per strategic axis."},
      detail:{fr:"Un document de référence annuel, feuilletable et partageable, qui installe le Maroc en voix d'autorité sur un axe précis, par exemple le hub batteries pour véhicules électriques.",en:"An annual, browsable and shareable reference document positioning Morocco as an authority on a specific axis, for example the EV battery hub."},
      duration:{fr:"4 mois",en:"4 months"},
@@ -2040,7 +2040,7 @@ var AXES=[
   prio:{fr:"Self-Service",en:"Self-Service"},
   sub:{fr:"Passer de la brochure au flux de preuves régulier et sourcé, en libre-service.",en:"Move from brochure to a regular, sourced, self-service stream of evidence."},
   items:[
-   {n:{fr:"Simulateur d'implantations",en:"Location simulator"},
+   {n:{fr:"Simulateur d'implantations",en:"Location simulator"},rank:2,
     sub:{fr:"L'investisseur saisit son projet, obtient primes, exonérations, taux d'IS.",en:"The investor enters a project and gets grants, exemptions, and the applicable CIT rate."},
     detail:{fr:"L'investisseur saisit son secteur et son montant, et obtient primes, exonérations et taux d'IS applicables. C'est le simulateur prototypé au module 08.",en:"The investor enters sector and amount and gets applicable grants, exemptions and CIT rate. This is the simulator prototyped in module 08."},
     duration:{fr:"6 mois",en:"6 months"},
@@ -2049,7 +2049,7 @@ var AXES=[
     objective:{fr:"Faire du simulateur l'entrée en matière self-service afin d'accélérer toute décision d'implantation.",en:"Make the simulator the self-service entry point to accelerate every location decision."},
     bp:{label:{fr:"invest.gov.tr · simulateur d'incitations en libre-service",en:"invest.gov.tr · self-service incentives simulator"},url:"https://www.invest.gov.tr"},
     topics:["Simulateur","Incitations","IS"]},
-   {n:{fr:"Comparateur de compétitivité",en:"Competitiveness comparator"},
+   {n:{fr:"Comparateur de compétitivité",en:"Competitiveness comparator"},rank:3,
     sub:{fr:"Le Maroc face à ses concurrents : coûts, délais, incitations.",en:"Morocco versus its competitors: costs, lead times, incentives."},
     detail:{fr:"Un comparateur Maroc contre pays concurrents sur les coûts, délais et incitations. C'est ce que fait invest.gov.tr en libre-service.",en:"A comparator of Morocco versus competitor countries on costs, lead times and incentives. invest.gov.tr already offers exactly this, self-service."},
     duration:{fr:"6 mois",en:"6 months"},
@@ -2058,7 +2058,7 @@ var AXES=[
     objective:{fr:"Donner à l'investisseur l'outil décisionnel self-service qui positionne le Maroc face à ses concurrents.",en:"Give the investor the self-service decision tool that positions Morocco against its competitors."},
     bp:{label:{fr:"invest.gov.tr · comparateur pays en libre-service",en:"invest.gov.tr · self-service country comparator"},url:"https://www.invest.gov.tr"},
     topics:["Comparateur","Benchmark","Scoring"]},
-   {n:{fr:"Smart Map & Parcs Mapping",en:"Smart Map & Park Mapping"},
+   {n:{fr:"Smart Map & Parcs Mapping",en:"Smart Map & Park Mapping"},rank:4,
     sub:{fr:"Une carte où l'investisseur filtre les parcs par région, surface et prix.",en:"A map where the investor filters parks by region, size and price."},
     detail:{fr:"Fusion du SIG investisseur et du mapping des parcs industriels : filtrage par région, surface, prix, téléchargement de la fiche technique. Prototypé dans l'Investor Atlas avec 69 POI sur quatre catégories.",en:"A merger of investor GIS and industrial-park mapping: filtering by region, size, price, downloadable fact sheet. Prototyped in the Investor Atlas with 69 POIs across four categories."},
     duration:{fr:"8 mois",en:"8 months"},
@@ -2073,16 +2073,16 @@ var AXES=[
   prio:{fr:"Transformation",en:"Transformation"},
   sub:{fr:"Transformer la vitrine en cockpit, avant ET après la signature.",en:"Turn the showcase into a cockpit, before AND after signing."},
   items:[
-   {n:{fr:"Expérience multi-profils (UX)",en:"Multi-profile experience (UX)"},
-    sub:{fr:"Trois parcours distincts : investisseur, partenaire, institution.",en:"Three distinct journeys: investor, partner, institution."},
-    detail:{fr:"Trois parcours distincts et interactifs : investisseur, partenaire, institution, chacun avec ses outils décisionnels et ses particularités, au lieu d'un parcours vitrine généraliste.",en:"Three distinct, interactive journeys: investor, partner, institution, each with its own decision-making tools and specifics, instead of a single generic showcase journey."},
+   {n:{fr:"Expérience multi-profils (UX)",en:"Multi-profile experience (UX)"},rank:10,
+    sub:{fr:"Deux parcours distincts : investisseurs et territoires.",en:"Two distinct journeys: investors and territories."},
+    detail:{fr:"Deux parcours distincts et interactifs, l'un pour les investisseurs, l'autre pour les territoires, chacun avec ses outils décisionnels et ses particularités, au lieu d'un parcours vitrine généraliste.",en:"Two distinct, interactive journeys, one for investors, one for territories, each with its own decision-making tools and specifics, instead of a single generic showcase journey."},
     duration:{fr:"10 mois",en:"10 months"},
     phases:[{p:{fr:"Architecture des parcours",en:"Journey architecture"},m:"M1–M3"},{p:{fr:"Refonte UX/UI",en:"UX/UI redesign"},m:"M4–M7"},{p:{fr:"Déploiement progressif",en:"Phased rollout"},m:"M8–M10"}],
     benefits:[{fr:"Chaque profil trouve ses outils sans naviguer à l'aveugle",en:"Each profile finds its tools without navigating blind"},{fr:"Prépare le guichet unique et l'aftercare",en:"Paves the way for the one-stop shop and aftercare"},{fr:"Réduit le taux de rebond sur le site actuel",en:"Reduces the bounce rate on the current site"}],
     objective:{fr:"Passer d'un site vitrine unique à une plateforme qui s'adapte au profil de son visiteur.",en:"Move from a single showcase site to a platform that adapts to its visitor's profile."},
     bp:{label:{fr:"Invest Korea · parcours différenciés par profil investisseur",en:"Invest Korea · journeys differentiated by investor profile"},url:"https://www.investkorea.org"},
     topics:["UX","Plateforme","Parcours"]},
-   {n:{fr:"Parcours Investisseur unifié",en:"Unified Investor Journey"},
+   {n:{fr:"Parcours Investisseur unifié",en:"Unified Investor Journey"},rank:9,
     sub:{fr:"Un seul interlocuteur, pas deux agences cloisonnées.",en:"A single point of contact, not two siloed agencies."},
     detail:{fr:"Un guichet unique où l'investisseur ne voit qu'une seule interface proposant des réponses à ses questions de bout en bout, pas deux agences et plusieurs interlocuteurs.",en:"A one-stop shop where the investor sees a single interface answering their questions end to end, not two agencies and multiple points of contact."},
     duration:{fr:"12 mois",en:"12 months"},
@@ -2091,7 +2091,7 @@ var AXES=[
     objective:{fr:"Faire du foncier un maillon fluide du parcours investisseur, sans changer d'interlocuteur ni multiplier les structures : à défaut, il reste l'angle mort de l'investissement.",en:"Make land a seamless link in the investor journey, with no change of contact and no added structures: otherwise, it remains investment's blind spot."},
     bp:{label:{fr:"Guichet unique AMDIE × MedZ · chantier de coordination institutionnelle",en:"AMDIE × MedZ one-stop shop · institutional coordination workstream"},url:""},
     topics:["Guichet unique","AMDIE","MedZ"]},
-   {n:{fr:"Aftercare & Ombudsman",en:"Aftercare & Ombudsman"},
+   {n:{fr:"Aftercare & Ombudsman",en:"Aftercare & Ombudsman"},rank:11,
     sub:{fr:"Un suivi post-implantation et un médiateur en ligne.",en:"Post-setup tracking and an online mediator."},
     detail:{fr:"Un espace de suivi post-implantation et un médiateur en ligne. Invest Korea dispose d'un Ombudsman numérique dédié.",en:"A post-setup tracking space and an online mediator. Invest Korea runs a dedicated digital Ombudsman."},
     duration:{fr:"9 mois",en:"9 months"},
@@ -2100,7 +2100,7 @@ var AXES=[
     objective:{fr:"Prolonger la relation après la signature, pas seulement jusqu'à elle.",en:"Extend the relationship after signing, not just up to it."},
     bp:{label:{fr:"Invest Korea · Ombudsman numérique dédié",en:"Invest Korea · dedicated digital Ombudsman"},url:"https://www.investkorea.org"},
     topics:["Aftercare","Ombudsman","Fidélisation"]},
-   {n:{fr:"Influence Map",en:"Influence Map"},
+   {n:{fr:"Influence Map",en:"Influence Map"},rank:12,
     sub:{fr:"Cartographier les récits et les relais d'influence.",en:"Mapping narratives and influence relays."},
     detail:{fr:"Une cartographie des récits et des relais d'influence, pour occuper le terrain narratif avant les concurrents.",en:"A map of narratives and influence relays, to own the narrative ground before competitors do."},
     duration:{fr:"9 mois",en:"9 months"},
@@ -2171,7 +2171,7 @@ var T={
   statCaption:"2 axes (Tech/Data & Marketing) couvrant les 12 critères évalués. Les 21 bonnes pratiques sont vérifiables et associées à leurs sources. Les 3 prototypes traduisent les enseignements du benchmark en outils d'aide à la décision.",
   mapTitle:"Les 6 pays du benchmark",
   lvlNames:{5:"Niveau 5 · Leader",4:"Niveau 4 · Avancé",3:"Niveau 3 · En transition",2:"Niveau 2 · Faible",1:"Niveau 1 · Vitrine"},
-  stats:[["6","Agences analysées"],["12","Critères évalués"],["72","Évaluations"],["21","Best practices"],["3","Prototypes","win"],["12","Leviers stratégiques","win"]],
+  stats:[["6","Agences analysées"],["12","Critères évalués"],["72","Évaluations"],["21","Best practices"],["3","Prototypes","win"],["13","Leviers stratégiques","win"]],
   m0tag:"Avant-propos · pourquoi et comment",m0title:["Pourquoi ce ","benchmark ?"],m0lead:"Cette étude ne porte aucun jugement de valeur sur les agences et les plateformes analysées. Elle évalue, critère par critère, les capacités numériques et les dispositifs déployés pour attirer, informer, convaincre et accompagner les investisseurs. L'analyse repose exclusivement sur des faits publics, observables et vérifiables. L'objectif final est d'identifier les pratiques et les solutions les plus pertinentes, puis d'évaluer leur transposition et leur adaptation au contexte marocain.",
   whyPrompt:"Cliquez sur une raison pour l'explorer.",whyReasonTag:"Raison",whyGoalTag:"Objectif",whyHubTag:"Raisons",
   protTeaserTag:"Prototypes · accès Premium",protTeaserTitle:"À quoi ressemble <em>la solution.</em>",protTeaserLead:"Trois outils fonctionnels traduisent le diagnostic en aide à la décision. Réservés aux clients Premium.",
@@ -2278,7 +2278,7 @@ var T={
   m8resetHint:"Cliquez au centre pour réafficher les 13 leviers",
   m8manifesto:"Développer des capacités, prioriser leur mise en œuvre et faire converger l'ensemble vers un objectif unique : offrir un parcours investisseur fluide, fondé sur la donnée, l'intelligence territoriale et l'aide à la décision.",
   pdLanding:"Chaque recommandation répond à un écart objectivement identifié par le benchmark et aide l'AMDIE à faire évoluer Morocco Now d'une logique de promotion institutionnelle vers une véritable plateforme d'intelligence investisseur.",
-  pdEmpty:"Cliquez sur un levier de la roue pour afficher le contenu.",pdPriority:"Priorité",pdAxis:"Axe",pdDetail:"Détail",pdDuration:"Durée · jalons 12 mois",pdPhases:"Phasages",pdBenefits:"Avantages",pdObjective:"Objectif",pdBestPractice:"Best practice",pdTopics:"Topics & mots-clés",pdPrev:"← Précédent",pdNext:"Suivant →",
+  pdEmpty:"Cliquez sur un levier de la roue pour afficher le contenu.",pdPriority:"Priorité",pdPriorityNo:"Priorité n°{n}",pdAxis:"Axe",pdDetail:"Détail",pdDuration:"Durée · jalons 12 mois",pdPhases:"Phasages",pdBenefits:"Avantages",pdObjective:"Objectif",pdBestPractice:"Best practice",pdTopics:"Topics & mots-clés",pdPrev:"← Précédent",pdNext:"Suivant →",
   ctaH:["Le benchmark montre l'écart.","L'échange stratégique trace la sortie."],ctaP:"Buildfluence transforme ce diagnostic en feuille de route : priorisation des leviers, maquettes d'outils, jalons sur 12 mois.",ctaBtn:"Demander mon échange stratégique →",
   mctag:"Simulateur d'investissement",
   mctitle:["Combien coûte une ","implantation au Maroc ?"],
@@ -2340,7 +2340,7 @@ var T={
   statCaption:"2 axes (Tech/Data & Marketing) covering the 12 evaluated criteria. The 21 best practices are verifiable and sourced. The 3 prototypes translate the benchmark's findings into decision-support tools.",
   mapTitle:"The 6 benchmark countries",
   lvlNames:{5:"Level 5 · Leader",4:"Level 4 · Advanced",3:"Level 3 · In transition",2:"Level 2 · Weak",1:"Level 1 · Showcase"},
-  stats:[["6","Agencies analysed"],["12","Criteria evaluated"],["72","Evaluations"],["21","Best practices"],["3","Prototypes","win"],["12","Strategic levers","win"]],
+  stats:[["6","Agencies analysed"],["12","Criteria evaluated"],["72","Evaluations"],["21","Best practices"],["3","Prototypes","win"],["13","Strategic levers","win"]],
   m0tag:"Foreword · why and how",m0title:["Why this ","benchmark?"],m0lead:"Before the charts, the method. This study does not judge a brand: it measures a digital capability, criterion by criterion, on public and verifiable facts.",
   whyPrompt:"Click a reason to explore it.",whyReasonTag:"Reason",whyGoalTag:"Goal",whyHubTag:"Reasons",
   protTeaserTag:"Prototypes · Premium access",protTeaserTitle:"What the solution <em>looks like.</em>",protTeaserLead:"Three working tools translate the diagnosis into decision support. Reserved for Premium clients.",
@@ -2447,7 +2447,7 @@ var T={
   m8resetHint:"Click the center to show all 13 levers again",
   m8manifesto:"Build capabilities, prioritise their rollout, and converge everything toward a single goal: a smooth investor journey grounded in data, territorial intelligence and decision support.",
   pdLanding:"Each recommendation answers a gap objectively identified by the benchmark, and helps AMDIE move Morocco Now from institutional promotion toward a genuine investor-intelligence platform.",
-  pdEmpty:"Click a lever on the wheel to display its content.",pdPriority:"Priority",pdAxis:"Axis",pdDetail:"Detail",pdDuration:"Duration · 12-month milestones",pdPhases:"Phasing",pdBenefits:"Benefits",pdObjective:"Objective",pdBestPractice:"Best practice",pdTopics:"Topics & keywords",pdPrev:"← Previous",pdNext:"Next →",
+  pdEmpty:"Click a lever on the wheel to display its content.",pdPriority:"Priority",pdPriorityNo:"Priority No. {n}",pdAxis:"Axis",pdDetail:"Detail",pdDuration:"Duration · 12-month milestones",pdPhases:"Phasing",pdBenefits:"Benefits",pdObjective:"Objective",pdBestPractice:"Best practice",pdTopics:"Topics & keywords",pdPrev:"← Previous",pdNext:"Next →",
   ctaH:["The benchmark shows the gap.","The strategic exchange charts the way out."],ctaP:"Buildfluence turns this diagnosis into a roadmap: lever prioritisation, tool mock-ups, milestones over 12 months.",ctaBtn:"Request my strategic exchange →",
   mctag:"Investment Simulator",
   mctitle:["How much does a Morocco ","setup cost?"],
@@ -3328,12 +3328,21 @@ function renderVerdict(){
 var planView="axis";       /* "axis" | "priority" */
 var planSelected=null;     /* id du levier sélectionné, ex "A0" */
 var planAxisFilter=null;   /* clé d'axe isolé via la légende, ex "A", ou null */
+var PLAN_TIERS=[
+ {from:1,to:4,color:"prio-a",label:{fr:"Urgent",en:"Urgent"}},
+ {from:5,to:9,color:"prio-b",label:{fr:"Structurant",en:"Structuring"}},
+ {from:10,to:13,color:"prio-c",label:{fr:"Transformant",en:"Transformative"}}
+];
 
 function planFlatList(){
  var out=[];
  AXES.forEach(function(ax,ai){ax.items.forEach(function(it,ii){out.push({id:ax.key+ii,ai:ai,ii:ii,ax:ax,it:it});});});
  return out;
 }
+function planRankList(){return planFlatList().slice().sort(function(a,b){return a.it.rank-b.it.rank;});}
+function planCurrentList(){return planView==="priority"?planRankList():planFlatList();}
+function planPriorityTier(rank){return PLAN_TIERS.filter(function(tier){return rank>=tier.from&&rank<=tier.to;})[0]||PLAN_TIERS[0];}
+function planPriorityText(rank){var tier=planPriorityTier(rank);return t().pdPriorityNo.replace("{n}",rank)+" · "+L(tier.label);}
 function planPolar(cx,cy,r,deg){var rad=deg*Math.PI/180;return [cx+r*Math.sin(rad),cy-r*Math.cos(rad)];}
 function planArcPath(cx,cy,r1,r2,a0,a1){
  var large=(a1-a0)>180?1:0;
@@ -3352,47 +3361,72 @@ function planWrapLabel(x,y,text,anchor){
  out+='</text>';
  return out;
 }
+function planArcLabel(svg,idx,cx,cy,r,a0,a1,text,color){
+ var mid=(a0+a1)/2,largeText=(a1-a0)>180?1:0,bottomHalf=(mid>90&&mid<270);
+ var pA=planPolar(cx,cy,r,a0),pB=planPolar(cx,cy,r,a1);
+ var pathD=bottomHalf?
+   ("M"+pB[0].toFixed(1)+","+pB[1].toFixed(1)+" A"+r+","+r+" 0 "+largeText+" 0 "+pA[0].toFixed(1)+","+pA[1].toFixed(1)):
+   ("M"+pA[0].toFixed(1)+","+pA[1].toFixed(1)+" A"+r+","+r+" 0 "+largeText+" 1 "+pB[0].toFixed(1)+","+pB[1].toFixed(1));
+ svg+='<path id="planArcP'+idx+'" d="'+pathD+'" fill="none" style="visibility:hidden"/>';
+ svg+='<text class="pw-arc-lbl" fill="var(--'+color+'-deep)"><textPath href="#planArcP'+idx+'" startOffset="50%" text-anchor="middle">'+text+'</textPath></text>';
+ return svg;
+}
+function planDrawNode(svg,found,mid,num,cx,cy,R1,R2,nodeR,labelR,hubR){
+ var ax=found.ax,it=found.it,id=found.id;
+ var dim=planAxisFilter&&planAxisFilter!==ax.key;
+ var p=planPolar(cx,cy,nodeR,mid),hubP=planPolar(cx,cy,hubR,mid),lp=planPolar(cx,cy,labelR,mid);
+ var sinv=Math.sin(mid*Math.PI/180),anchor=sinv<-0.05?"end":(sinv>0.05?"start":"middle");
+ var on=planSelected===id;
+ var circFill=on?"var(--card)":"var(--"+ax.color+")";
+ var circStroke=on?"var(--"+ax.color+"-deep)":"var(--card)";
+ var numFill=on?"var(--"+ax.color+"-deep)":(planView==="priority"?"var(--paper)":"#fff");
+ svg+='<g class="'+(dim?"pw-axis-dim":"")+'">';
+ svg+='<line class="pw-spoke" x1="'+hubP[0].toFixed(1)+'" y1="'+hubP[1].toFixed(1)+'" x2="'+p[0].toFixed(1)+'" y2="'+p[1].toFixed(1)+'" stroke="var(--'+ax.color+')"/>';
+ svg+='<g class="pw-node-hit'+(on?" on":"")+'" data-id="'+id+'">';
+ svg+='<circle class="pw-node-c" cx="'+p[0].toFixed(1)+'" cy="'+p[1].toFixed(1)+'" r="'+(on?13:10)+'" fill="'+circFill+'" stroke="'+circStroke+'" style="stroke-width:'+(on?2.5:2)+'"/>';
+ svg+='<text class="pw-node-n" x="'+p[0].toFixed(1)+'" y="'+(p[1]+3.5).toFixed(1)+'" text-anchor="middle" font-size="9.5" fill="'+numFill+'">'+num+'</text>';
+ svg+=planWrapLabel(lp[0],lp[1],L(it.n),anchor);
+ svg+='</g></g>';
+ return svg;
+}
 
 function buildPlanWheel(){
- var cx=360,cy=360,R1=215,R2=258,nodeR=(R1+R2)/2,labelR=300,hubR=128,arcLblR=(hubR+R1)/2,gap=5,axisSpan=(360-3*gap)/3;
- var svg="";
- AXES.forEach(function(ax,ai){
-   var a0=ai*(axisSpan+gap),a1=a0+axisSpan,mid=(a0+a1)/2;
-   var dim=planAxisFilter&&planAxisFilter!==ax.key;
-   svg+='<g class="'+(dim?"pw-axis-dim":"")+'">';
-   svg+='<path class="pw-band" d="'+planArcPath(cx,cy,R1,R2,a0,a1)+'" fill="var(--'+ax.color+')" opacity="0.88"/>';
-   var largeText=(a1-a0)>180?1:0;
-   var bottomHalf=(mid>90&&mid<270);
-   var pA=planPolar(cx,cy,arcLblR,a0),pB=planPolar(cx,cy,arcLblR,a1);
-   var pathD=bottomHalf?
-     ("M"+pB[0].toFixed(1)+","+pB[1].toFixed(1)+" A"+arcLblR+","+arcLblR+" 0 "+largeText+" 0 "+pA[0].toFixed(1)+","+pA[1].toFixed(1)):
-     ("M"+pA[0].toFixed(1)+","+pA[1].toFixed(1)+" A"+arcLblR+","+arcLblR+" 0 "+largeText+" 1 "+pB[0].toFixed(1)+","+pB[1].toFixed(1));
-   svg+='<path id="planArcP'+ai+'" d="'+pathD+'" fill="none" style="visibility:hidden"/>';
-   svg+='<text class="pw-arc-lbl" fill="var(--'+ax.color+'-deep)"><textPath href="#planArcP'+ai+'" startOffset="50%" text-anchor="middle">'+
-     (planView==="axis"?L(ax.axis):L(ax.prio))+'</textPath></text>';
-   svg+="</g>";
- });
- AXES.forEach(function(ax,ai){
-   var a0=ai*(axisSpan+gap),a1=a0+axisSpan,n=ax.items.length;
-   var dim=planAxisFilter&&planAxisFilter!==ax.key;
-   svg+='<g class="'+(dim?"pw-axis-dim":"")+'">';
-   ax.items.forEach(function(it,ii){
-     var mid=a0+(ii+0.5)*(axisSpan/n),id=ax.key+ii;
-     var p=planPolar(cx,cy,nodeR,mid),hubP=planPolar(cx,cy,hubR,mid),lp=planPolar(cx,cy,labelR,mid);
-     var sinv=Math.sin(mid*Math.PI/180),anchor=sinv<-0.05?"end":(sinv>0.05?"start":"middle");
-     var on=planSelected===id;
-     var circFill=on?"var(--card)":"var(--"+ax.color+")";
-     var circStroke=on?"var(--"+ax.color+"-deep)":"var(--card)";
-     var numFill=on?"var(--"+ax.color+"-deep)":"#fff";
-     svg+='<line class="pw-spoke" x1="'+hubP[0].toFixed(1)+'" y1="'+hubP[1].toFixed(1)+'" x2="'+p[0].toFixed(1)+'" y2="'+p[1].toFixed(1)+'" stroke="var(--'+ax.color+')"/>';
-     svg+='<g class="pw-node-hit'+(on?" on":"")+'" data-id="'+id+'">';
-     svg+='<circle class="pw-node-c" cx="'+p[0].toFixed(1)+'" cy="'+p[1].toFixed(1)+'" r="'+(on?13:10)+'" fill="'+circFill+'" stroke="'+circStroke+'" style="stroke-width:'+(on?2.5:2)+'"/>';
-     svg+='<text class="pw-node-n" x="'+p[0].toFixed(1)+'" y="'+(p[1]+3.5).toFixed(1)+'" text-anchor="middle" font-size="9.5" fill="'+numFill+'">'+(ii+1)+'</text>';
-     svg+=planWrapLabel(lp[0],lp[1],L(it.n),anchor);
-     svg+="</g>";
-   });
-   svg+="</g>";
- });
+ var wheel=el("planWheel");
+ if(wheel)wheel.style.opacity=".58";
+ var cx=360,cy=360,R1=215,R2=258,nodeR=(R1+R2)/2,labelR=300,hubR=128,arcLblR=(hubR+R1)/2,gap=5,svg="";
+ if(planView==="priority"){
+  var ranked=planRankList(),total=ranked.length,cursor=0,usable=360-PLAN_TIERS.length*gap;
+  PLAN_TIERS.forEach(function(tier,ti){
+    var tierItems=ranked.filter(function(o){return o.it.rank>=tier.from&&o.it.rank<=tier.to;});
+    var span=usable*(tierItems.length/total),a0=cursor,a1=a0+span;
+    svg=planArcLabel(svg,"prio"+ti,cx,cy,arcLblR,a0,a1,L(tier.label),tier.color);
+    tierItems.forEach(function(found,ii){
+      var seg0=a0+ii*(span/tierItems.length),seg1=a0+(ii+1)*(span/tierItems.length),mid=(seg0+seg1)/2;
+      var dim=planAxisFilter&&planAxisFilter!==found.ax.key;
+      svg+='<g class="'+(dim?"pw-axis-dim":"")+'"><path class="pw-band" d="'+planArcPath(cx,cy,R1,R2,seg0,seg1)+'" fill="var(--'+found.ax.color+')" opacity="0.88"/></g>';
+      svg=planDrawNode(svg,found,mid,found.it.rank,cx,cy,R1,R2,nodeR,labelR,hubR);
+    });
+    cursor=a1+gap;
+  });
+ }else{
+  var axisSpan=(360-3*gap)/3;
+  AXES.forEach(function(ax,ai){
+    var a0=ai*(axisSpan+gap),a1=a0+axisSpan,mid=(a0+a1)/2;
+    var dim=planAxisFilter&&planAxisFilter!==ax.key;
+    svg+='<g class="'+(dim?"pw-axis-dim":"")+'">';
+    svg+='<path class="pw-band" d="'+planArcPath(cx,cy,R1,R2,a0,a1)+'" fill="var(--'+ax.color+')" opacity="0.88"/>';
+    svg=planArcLabel(svg,ai,cx,cy,arcLblR,a0,a1,L(ax.axis),ax.color);
+    svg+="</g>";
+  });
+  AXES.forEach(function(ax,ai){
+    var a0=ai*(axisSpan+gap),n=ax.items.length;
+    ax.items.forEach(function(it,ii){
+      var found={id:ax.key+ii,ai:ai,ii:ii,ax:ax,it:it};
+      var mid=a0+(ii+0.5)*(axisSpan/n);
+      svg=planDrawNode(svg,found,mid,ii+1,cx,cy,R1,R2,nodeR,labelR,hubR);
+    });
+  });
+ }
  svg+='<g class="pw-hub-hit" id="planHubHit">';
  svg+='<circle cx="'+cx+'" cy="'+cy+'" r="'+hubR+'" fill="var(--paper2)" stroke="var(--rule)"/>';
  t().m8hub.forEach(function(ln,i){svg+='<text class="pw-hub-title" x="'+cx+'" y="'+(cy-42+i*15)+'" text-anchor="middle">'+ln+'</text>';});
@@ -3400,6 +3434,7 @@ function buildPlanWheel(){
  svg+='<text class="pw-hub-sub" x="'+cx+'" y="'+(cy+42)+'" text-anchor="middle">'+t().m8hubSub+'</text>';
  svg+="</g>";
  el("planWheel").innerHTML=svg;
+ if(wheel)requestAnimationFrame(function(){wheel.style.opacity="1";});
  document.querySelectorAll("#planWheel .pw-node-hit").forEach(function(g){
    g.addEventListener("click",function(){planSelected=g.getAttribute("data-id");renderPlan();});
  });
@@ -3408,7 +3443,7 @@ function buildPlanWheel(){
 }
 
 function planNav(dir){
- var list=planFlatList(),i=list.findIndex(function(o){return o.id===planSelected;});
+ var list=planCurrentList(),i=list.findIndex(function(o){return o.id===planSelected;});
  if(i<0)i=0;else i=(i+dir+list.length)%list.length;
  planSelected=list[i].id;
  renderPlan();
@@ -3418,15 +3453,16 @@ function renderPlanDetail(){
  if(!planSelected){el("planDetail").innerHTML='<div class="pd-landing"><p class="pd-landing-text">'+t().pdLanding+'</p><p class="pd-landing-prompt">'+t().pdEmpty+'</p></div>';return;}
  var found=planFlatList().filter(function(o){return o.id===planSelected;})[0];
  if(!found){el("planDetail").innerHTML='<div class="pd-landing"><p class="pd-landing-text">'+t().pdLanding+'</p><p class="pd-landing-prompt">'+t().pdEmpty+'</p></div>';return;}
- var ax=found.ax,it=found.it;
- var primary=planView==="axis"?L(ax.axis):L(ax.prio);
- var secondaryLbl=planView==="axis"?t().pdPriority:t().pdAxis;
- var secondary=planView==="axis"?L(ax.prio):L(ax.axis);
+ var ax=found.ax,it=found.it,tier=planPriorityTier(it.rank),priority=planPriorityText(it.rank);
+ var primary=planView==="axis"?L(ax.axis):priority;
+ var secondary=planView==="axis"?priority:(t().pdAxis+" · "+L(ax.axis));
+ var chipColor=planView==="axis"?ax.color:tier.color;
+ var counter=planView==="axis"?(ax.key+(found.ii+1)+' / '+ax.items.length):(it.rank+' / '+planFlatList().length);
  el("planDetail").innerHTML=
   '<div class="pd-head"><div class="pd-tags">'+
-    '<span class="pd-chip prio" style="background:var(--'+ax.color+')">'+primary+'</span>'+
-    '<span class="pd-chip axis">'+secondaryLbl+' · '+secondary+'</span>'+
-  '</div><span class="pd-num">'+ax.key+(found.ii+1)+' / '+ax.items.length+'</span></div>'+
+    '<span class="pd-chip prio" style="background:var(--'+chipColor+')">'+primary+'</span>'+
+    '<span class="pd-chip axis">'+secondary+'</span>'+
+  '</div><span class="pd-num">'+counter+'</span></div>'+
   '<h3 class="pd-title">'+L(it.n)+'</h3>'+
   '<div class="pd-sub">'+L(it.sub)+'</div>'+
   '<div class="pd-detail">'+L(it.detail)+'</div>'+
@@ -3455,7 +3491,7 @@ function renderPlan(){
    return '<span class="'+(isOff?"off":"")+(isOn?" active":"")+'" data-axis-key="'+ax.key+'" style="color:var(--'+ax.color+'-deep)"><i style="background:var(--'+ax.color+')"></i>'+
      '<span class="'+(axisDim?"lg-dim":"")+'">'+L(ax.axis)+'</span> · <span class="'+(prioDim?"lg-dim":"")+'">'+L(ax.prio)+'</span></span>';
  }).join("");
- document.querySelectorAll("#planLegend span").forEach(function(s){
+ document.querySelectorAll("#planLegend > span").forEach(function(s){
    s.addEventListener("click",function(){
      var k=s.getAttribute("data-axis-key");
      if(planAxisFilter===k){planAxisFilter=null;planSelected=null;}
