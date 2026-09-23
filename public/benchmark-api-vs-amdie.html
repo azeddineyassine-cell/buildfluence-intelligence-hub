@@ -3431,8 +3431,7 @@ function renderPlanDetail(){
   '<div class="pd-sub">'+L(it.sub)+'</div>'+
   '<div class="pd-detail">'+L(it.detail)+'</div>'+
   '<div class="pd-grid">'+
-   '<div class="pd-block"><span class="pd-lbl">'+t().pdDuration+'</span><div class="pd-obj">'+L(it.duration)+'</div></div>'+
-   '<div class="pd-block"><span class="pd-lbl">'+t().pdObjective+'</span><div class="pd-obj">'+L(it.objective)+'</div></div>'+
+   '<div class="pd-block full"><span class="pd-lbl">'+t().pdObjective+'</span><div class="pd-obj">'+L(it.objective)+'</div></div>'+
    '<div class="pd-block full"><span class="pd-lbl">'+t().pdPhases+'</span><div class="pd-phases">'+
      it.phases.map(function(ph){return '<div class="pd-phase"><span class="pm">'+ph.m+'</span><span>'+L(ph.p)+'</span></div>';}).join("")+
    '</div></div>'+
