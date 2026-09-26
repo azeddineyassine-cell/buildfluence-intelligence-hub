@@ -349,12 +349,26 @@ tbody tr.hot th,thead th.hot{background:var(--gold-pale)!important;color:var(--i
 .md-placeholder{font-family:var(--serif);font-style:italic;font-size:16px;color:var(--ink-faint)}
 .scale-legend{display:block;margin-top:16px}
 .scale-legend .scale-title{font-family:var(--mono);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:9px}
-.scale-cards{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
-.scard{border-radius:7px;padding:12px 13px 13px;box-shadow:0 1px 3px rgba(13,27,42,.12);display:flex;flex-direction:column;min-height:104px}
+.scale-cards{display:grid;grid-template-columns:repeat(6,1fr);gap:10px}
+.scard{position:relative;border-radius:7px;padding:12px 13px 13px;box-shadow:0 1px 3px rgba(13,27,42,.12);display:flex;flex-direction:column;min-height:104px;cursor:pointer;transition:transform .12s,box-shadow .12s,opacity .12s;outline:none}
+.scard:hover{transform:translateY(-2px)}
+.scard:focus-visible{box-shadow:0 0 0 3px var(--ink),0 1px 3px rgba(13,27,42,.12)}
+.scard.active{box-shadow:0 0 0 3px var(--ink) inset,0 1px 3px rgba(13,27,42,.12);transform:translateY(-2px)}
+.scard.active::after{content:"\2713";position:absolute;top:9px;right:10px;font-weight:700;font-size:13px}
+.scale-cards.filtering .scard{opacity:.45}
+.scale-cards.filtering .scard.active{opacity:1}
+.scard-all{background:var(--hero-navy);color:#F5F1E8;border:1px solid var(--gold-deep)}
+.scard-all .scard-lbl{color:var(--gold)}
+.scard-all .scard-desc{color:#F5F1E8;opacity:.85}
+.scard-all.active{box-shadow:0 0 0 3px var(--gold) inset,0 1px 3px rgba(13,27,42,.12);transform:translateY(-2px)}
+.scale-hint{font-family:var(--mono);font-size:9.5px;letter-spacing:.04em;color:var(--ink-faint);margin-top:8px}
 .scard-n{font-family:var(--display);font-weight:700;font-size:21px;line-height:1}
 .scard-lbl{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;font-weight:600;margin:5px 0 7px;opacity:.95}
 .scard-desc{font-family:var(--serif);font-style:italic;font-size:12.5px;line-height:1.32;opacity:.92;margin-top:auto}
+.cell.dim{opacity:.15;filter:grayscale(.5)}
+.cell.match{box-shadow:0 0 0 2px var(--gold);z-index:2}
 @media(max-width:720px){.scale-cards{grid-template-columns:repeat(2,1fr)}.scard{min-height:0}}
+@media(max-width:920px) and (min-width:721px){.scale-cards{grid-template-columns:repeat(3,1fr)}}
 
 /* MODULE 3 radar */
 .radar-grid{display:grid;grid-template-columns:1fr 250px;gap:28px;align-items:center}
@@ -532,23 +546,18 @@ input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;bac
 .evid-detail h4{font-family:var(--display);font-weight:700;font-size:19px;color:var(--ink);margin:8px 0 10px}
 .evid-detail p{font-size:13.5px;line-height:1.65;color:var(--ink-light)}
 .evid-detail small{display:block;font-family:var(--mono);font-size:9.5px;line-height:1.7;color:var(--ink-faint);margin-top:16px}
-/* 04 benchmark fonctionnel */
-.bmatrix{width:100%;border-collapse:collapse;min-width:640px}
-.bmatrix th{font-family:var(--mono);font-size:8.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-light);background:var(--paper2);padding:12px;text-align:left;border-bottom:1px solid var(--rule)}
-.bmatrix td{padding:14px 12px;border-bottom:1px solid var(--rule-soft);vertical-align:top;font-size:13px;line-height:1.5;color:var(--ink-light)}
-.bmatrix tr:hover td{background:var(--paper2)}
-.bmatrix .bcap{font-weight:600;color:var(--ink)}
-.bmatrix .bjtc::before{content:"✓";color:var(--green);margin-right:6px;font-weight:700}
-.bmatrix .bprio{font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-deep);white-space:nowrap}
-@media(max-width:700px){
- .bmatrix{min-width:0}
- .bmatrix thead{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
- .bmatrix tr{display:block;border-bottom:1px solid var(--rule);padding:4px 0 10px}
- .bmatrix td{display:block;border:none;padding:6px 12px}
- .bmatrix td::before{content:attr(data-label);display:block;font-family:var(--mono);font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:3px}
- .bmatrix .bjtc::before{content:attr(data-label);color:var(--ink-faint);margin-right:0;font-weight:400}
- .bmatrix .bcap{font-size:14px}
-}
+/* 04 benchmark fonctionnel — accordéon, même famille visuelle que le duel (.dumb-row/.dumb-detail) */
+.bstar-row{display:inline-flex;gap:2px;cursor:default}
+.bstar{font-size:15px;line-height:1;color:var(--muted)}
+.bstar.on{color:var(--gold)}
+.bscore{display:inline-flex;align-items:center;justify-content:center;min-width:30px;padding:3px 9px;border-radius:2px;font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.02em}
+.bscore-total{background:transparent;border:1px solid #C9A84C;color:#C9A84C}
+.fbn-scale{height:auto;min-height:26px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.fbn-slabel{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint)}
+.fbn-total{background:#0D1B2A;border-top:2px solid #C9A84C;border-bottom:none;cursor:default}
+.fbn-total:hover{background:#0D1B2A}
+.fbn-total .dumb-lbl{color:#F5F1E8;font-weight:700}
+@media(max-width:700px){.fbn-scale{gap:12px 20px}}
 /* 05 guichet investisseur */
 .cockpit{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--rule);border:1px solid var(--rule);border-radius:2px;overflow:hidden}
 @media(max-width:900px){.cockpit{grid-template-columns:1fr}}
@@ -1910,13 +1919,13 @@ var SCALE={1:"#B5201E",2:"#BD5A28",3:"#E8A07A",4:"#7F90A6",5:"#8DBE7B"};
 var SCALE_TXT={1:"#fff",2:"#fff",3:"#5A3320",4:"#fff",5:"#22401B"};
 /* MedZ vs JTC (depuis le draft Buildfluence) */
 var MEDZ=[
- {gap:{fr:"Newsletter : dernière édition sept. 2024, 6 mois entre n°17 et n°18",en:"Newsletter: last edition Sep 2024, 6 months between #17 and #18"},impact:{fr:"Fréquence irrégulière",en:"Irregular frequency"},jtc:{fr:"« News & Stories » régulière et thématique, publications hebdomadaires, feature stories sectorielles",en:"Regular, thematic « News & Stories », weekly posts, sector feature stories"},medz:1,score:5,verdict:{fr:"Reprendre une cadence éditoriale fixe est le geste le moins coûteux et le plus visible : la régularité prouve qu'un guichet est vivant.",en:"Restoring a fixed editorial cadence is the cheapest, most visible move: regularity proves a one-stop shop is alive."}},
- {gap:{fr:"Minute Verte n°11 (mars 2023) puis abandon",en:"Minute Verte #11 (Mar 2023) then abandoned"},impact:{fr:"Continuité éditoriale à renforcer sur un sujet ESG décisif",en:"Editorial continuity to strengthen on a decisive ESG topic"},jtc:{fr:"Infos industrielles ciblées (Aerospace, Automotive, Biomedical) + Sustainability Reports annuels",en:"Targeted industrial info (Aerospace, Automotive, Biomedical) + annual Sustainability Reports"},medz:1,score:5,verdict:{fr:"Sur l'ESG, la continuité compte autant que l'ambition : mieux vaut une série courte mais régulière qu'un format ambitieux mis en pause.",en:"On ESG, continuity matters as much as ambition: a short but regular series beats an ambitious format put on hold."}},
- {gap:{fr:"Dernier rapport annuel : 2016",en:"Last annual report: 2016"},impact:{fr:"Lisibilité limitée de l'activité et de la performance",en:"Limited visibility on activity and performance"},jtc:{fr:"Rapports d'activité et états financiers annuels : transparence et crédibilité institutionnelle",en:"Annual activity reports and financials: institutional transparency and credibility"},medz:1,score:4,verdict:{fr:"Huit ans sans rapport public limitent la lisibilité de l'activité. Un rapport annuel, même synthétique, renforcerait la crédibilité institutionnelle.",en:"Eight years without a public report limit the visibility of activity. An annual report, even concise, would strengthen institutional credibility."}},
- {gap:{fr:"Contenu institutionnel (actualités internes MedZ)",en:"Institutional content (internal MedZ news)"},impact:{fr:"Valeur décisionnelle limitée pour investisseurs et partenaires",en:"Limited decision value for investors and partners"},jtc:{fr:"Données exclusives et analyses sectorielles : forte valeur décisionnelle",en:"Exclusive data and sector analyses: high decision value"},medz:2,score:5,verdict:{fr:"L'investisseur attend surtout des données qui éclairent sa décision, plus que des actualités institutionnelles. Orienter le contenu vers le projet d'investissement en démultiplie la valeur.",en:"Investors mainly look for data that informs their decision, more than institutional news. Orienting content toward the investment project multiplies its value."}},
- {gap:{fr:"Absence de données chiffrées publiques",en:"No public figures or KPIs"},impact:{fr:"Pas de KPI accessible, évaluation externe difficile",en:"No accessible KPI, external evaluation difficult"},jtc:{fr:"Tableaux de bord publics et interactifs en temps réel",en:"Public, interactive, real-time dashboards"},medz:1,score:5,verdict:{fr:"Sans KPI publics, l'évaluation externe reste difficile : la donnée ouverte est la première brique d'un cockpit, pas une option.",en:"Without public KPIs, external evaluation stays difficult: open data is the first building block of a cockpit, not an option."}},
- {gap:{fr:"Veille concurrentielle absente",en:"No competitive intelligence"},impact:{fr:"Vision isolée du positionnement territorial",en:"Isolated view of territorial positioning"},jtc:{fr:"Benchmark régional et international systématique",en:"Systematic regional and international benchmark"},medz:1,score:5,verdict:{fr:"Un territoire qui se compare régulièrement transforme une posture défensive en argument de vente.",en:"A territory that benchmarks itself regularly turns a defensive stance into a selling point."}},
- {gap:{fr:"Format peu engageant (PDF statique)",en:"Low-engagement format (static PDF)"},impact:{fr:"Pas de narratif d'influence data-driven, image figée",en:"No data-driven influence narrative, frozen image"},jtc:{fr:"Plateforme interactive avec choix des critères, DataViz orientée décision",en:"Interactive platform with criteria selection, decision-oriented DataViz"},medz:1,score:5,verdict:{fr:"Le PDF informe, la plateforme convainc. Passer à l'interactif, c'est laisser l'investisseur manipuler les critères et s'approprier la décision.",en:"A PDF informs, a platform convinces. Going interactive lets investors manipulate the criteria and own the decision."}}
+ {label:{fr:"Newsletter (fréquence et régularité)",en:"Newsletter (frequency and regularity)"},gap:{fr:"Newsletter : dernière édition sept. 2024, 6 mois entre n°17 et n°18",en:"Newsletter: last edition Sep 2024, 6 months between #17 and #18"},impact:{fr:"Fréquence irrégulière",en:"Irregular frequency"},jtc:{fr:"« News & Stories » régulière et thématique, publications hebdomadaires, feature stories sectorielles",en:"Regular, thematic « News & Stories », weekly posts, sector feature stories"},medz:1,score:5,verdict:{fr:"Reprendre une cadence éditoriale fixe est le geste le moins coûteux et le plus visible : la régularité prouve qu'un guichet est vivant.",en:"Restoring a fixed editorial cadence is the cheapest, most visible move: regularity proves a one-stop shop is alive."}},
+ {label:{fr:"Minute Verte · continuité éditoriale ESG",en:"Minute Verte · ESG editorial continuity"},gap:{fr:"Minute Verte n°11 (mars 2023), dernier numéro retrouvé à ce jour",en:"Minute Verte #11 (Mar 2023), latest issue found to date"},impact:{fr:"Continuité éditoriale à renforcer sur un sujet ESG décisif",en:"Editorial continuity to strengthen on a decisive ESG topic"},jtc:{fr:"Infos industrielles ciblées (Aerospace, Automotive, Biomedical) + Sustainability Reports annuels",en:"Targeted industrial info (Aerospace, Automotive, Biomedical) + annual Sustainability Reports"},medz:1,score:5,verdict:{fr:"Sur l'ESG, la continuité compte autant que l'ambition : mieux vaut une série courte mais régulière qu'un format ambitieux mis en pause.",en:"On ESG, continuity matters as much as ambition: a short but regular series beats an ambitious format put on hold."}},
+ {label:{fr:"Rapport annuel (transparence et fraîcheur)",en:"Annual report (transparency and freshness)"},gap:{fr:"Dernier rapport annuel : 2016",en:"Last annual report: 2016"},impact:{fr:"Lisibilité limitée de l'activité et de la performance",en:"Limited visibility on activity and performance"},jtc:{fr:"Rapports d'activité et états financiers annuels : transparence et crédibilité institutionnelle",en:"Annual activity reports and financials: institutional transparency and credibility"},medz:1,score:5,verdict:{fr:"Huit ans sans rapport public limitent la lisibilité de l'activité. Un rapport annuel, même synthétique, renforcerait la crédibilité institutionnelle.",en:"Eight years without a public report limit the visibility of activity. An annual report, even concise, would strengthen institutional credibility."}},
+ {label:{fr:"Contenu institutionnel (valeur décisionnelle)",en:"Institutional content (decision value)"},gap:{fr:"Contenu institutionnel (actualités internes MedZ)",en:"Institutional content (internal MedZ news)"},impact:{fr:"Valeur décisionnelle limitée pour investisseurs et partenaires",en:"Limited decision value for investors and partners"},jtc:{fr:"Données exclusives et analyses sectorielles : forte valeur décisionnelle",en:"Exclusive data and sector analyses: high decision value"},medz:2,score:4,verdict:{fr:"L'investisseur attend surtout des données qui éclairent sa décision, plus que des actualités institutionnelles. Orienter le contenu vers le projet d'investissement en démultiplie la valeur.",en:"Investors mainly look for data that informs their decision, more than institutional news. Orienting content toward the investment project multiplies its value."}},
+ {label:{fr:"Données chiffrées publiques (KPI accessibles)",en:"Public figures (accessible KPIs)"},gap:{fr:"Absence de données chiffrées publiques",en:"No public figures or KPIs"},impact:{fr:"Pas de KPI accessible, évaluation externe difficile",en:"No accessible KPI, external evaluation difficult"},jtc:{fr:"Tableaux de bord publics et interactifs en temps réel",en:"Public, interactive, real-time dashboards"},medz:1,score:5,verdict:{fr:"Sans KPI publics, l'évaluation externe reste difficile : la donnée ouverte est la première brique d'un cockpit, pas une option.",en:"Without public KPIs, external evaluation stays difficult: open data is the first building block of a cockpit, not an option."}},
+ {label:{fr:"Veille concurrentielle et positionnement",en:"Competitive intelligence and positioning"},gap:{fr:"Veille concurrentielle absente",en:"No competitive intelligence"},impact:{fr:"Vision isolée du positionnement territorial",en:"Isolated view of territorial positioning"},jtc:{fr:"Benchmark régional et international systématique",en:"Systematic regional and international benchmark"},medz:1,score:5,verdict:{fr:"Un territoire qui se compare régulièrement transforme une posture défensive en argument de vente.",en:"A territory that benchmarks itself regularly turns a defensive stance into a selling point."}},
+ {label:{fr:"Format et interactivité (data-driven)",en:"Format and interactivity (data-driven)"},gap:{fr:"Format peu engageant (PDF statique)",en:"Low-engagement format (static PDF)"},impact:{fr:"Pas de narratif d'influence data-driven, image figée",en:"No data-driven influence narrative, frozen image"},jtc:{fr:"Plateforme interactive avec choix des critères, DataViz orientée décision",en:"Interactive platform with criteria selection, decision-oriented DataViz"},medz:1,score:5,verdict:{fr:"Le PDF informe, la plateforme convainc. Passer à l'interactif, c'est laisser l'investisseur manipuler les critères et s'approprier la décision.",en:"A PDF informs, a platform convinces. Going interactive lets investors manipulate the criteria and own the decision."}}
 ];
 /* leviers transformation (simulateur) */
 var SIMLEVERS=[
@@ -2021,7 +2030,7 @@ var AXES=[
      detail:{fr:"Des cas chiffrés (montant investi, emplois, délai) avec le nom de l'investisseur, jamais du storytelling vague. Chaque cas passe par le dispositif de Légitimation éditoriale avant publication : chiffres vérifiés, jamais déclaratifs.",en:"Quantified cases (amount invested, jobs, lead time) with the investor's name, never vague storytelling. Every case goes through the Editorial Legitimation process before publication: figures verified, never self-reported."},
      duration:{fr:"2 mois",en:"2 months"},
      phases:[{p:{fr:"Identification des cas",en:"Case identification"},m:"M1"},{p:{fr:"Validation et chiffrage",en:"Validation & figures"},m:"M2"},{p:{fr:"Publication",en:"Publication"},m:"M2–M3"}],
-     benefits:[{fr:"Preuve sociale vérifiable",en:"Verifiable social proof"},{fr:"Chaque cas validé avant publication, pas une déclaration d'agence",en:"Every case validated before publication, not an agency self-declaration"},{fr:"Alimente l'Insight Monitor",en:"Feeds the Insight Monitor"}],
+     benefits:[{fr:"Preuve sociale vérifiable",en:"Verifiable social proof"},{fr:"Chaque cas validé avant publication, pas une déclaration d'agence",en:"Every case validated before publication, not an agency self-declaration"},{fr:"Alimente la Légitimation éditoriale",en:"Feeds Editorial Legitimation"}],
      objective:{fr:"Remplacer l'anecdote par la preuve : montant investi, emplois créés, délai réel.",en:"Replace anecdote with proof: amount invested, jobs created, actual lead time."},
      bp:{label:{fr:"Invest Korea · success stories chiffrées par secteur",en:"Invest Korea · quantified success stories by sector"},url:"https://www.investkorea.org"},
      topics:["Success story","Preuve sociale"]},
@@ -2042,11 +2051,11 @@ var AXES=[
   items:[
    {n:{fr:"Simulateur d'implantations",en:"Location simulator"},rank:2,
     sub:{fr:"L'investisseur saisit son projet, obtient primes, exonérations, taux d'IS.",en:"The investor enters a project and gets grants, exemptions, and the applicable CIT rate."},
-    detail:{fr:"L'investisseur saisit son secteur et son montant, et obtient primes, exonérations et taux d'IS applicables. C'est le simulateur prototypé au module 08.",en:"The investor enters sector and amount and gets applicable grants, exemptions and CIT rate. This is the simulator prototyped in module 08."},
+    detail:{fr:"L'investisseur saisit son secteur et son montant, et obtient primes, exonérations et taux d'IS applicables. C'est le simulateur prototypé au module 07.",en:"The investor enters sector and amount and gets applicable grants, exemptions and CIT rate. This is the simulator prototyped in module 07."},
     duration:{fr:"6 mois",en:"6 months"},
     phases:[{p:{fr:"Cadrage réglementaire",en:"Regulatory scoping"},m:"M1–M2"},{p:{fr:"Prototype : Simulateur",en:"Simulator prototype"},m:"M3–M4"},{p:{fr:"Ouverture au public",en:"Public launch"},m:"M5–M6"}],
     benefits:[{fr:"Réponse immédiate sans échange humain préalable",en:"Immediate answer without a prior human exchange"},{fr:"Filtre qualifiant les prospects sérieux",en:"Filters and qualifies serious prospects"},{fr:"Base commune avec le Comparateur",en:"Shared foundation with the Comparator"}],
-    objective:{fr:"Faire du simulateur l'entrée en matière self-service afin d'accélérer toute décision d'implantation.",en:"Make the simulator the self-service entry point to accelerate every location decision."},
+    objective:{fr:"Faire du simulateur l'entrée en matière Cockpit Self-Service afin d'accélérer toute décision d'implantation.",en:"Make the simulator the self-service entry point to accelerate every location decision."},
     bp:{label:{fr:"invest.gov.tr · simulateur d'incitations en libre-service",en:"invest.gov.tr · self-service incentives simulator"},url:"https://www.invest.gov.tr"},
     topics:["Simulateur","Incitations","IS"]},
    {n:{fr:"Comparateur de compétitivité",en:"Competitiveness comparator"},rank:3,
@@ -2055,7 +2064,7 @@ var AXES=[
     duration:{fr:"6 mois",en:"6 months"},
     phases:[{p:{fr:"Sélection pays concurrents",en:"Competitor selection"},m:"M1–M2"},{p:{fr:"Modèle de scoring",en:"Scoring model"},m:"M3–M4"},{p:{fr:"Mise en ligne",en:"Go-live"},m:"M5–M6"}],
     benefits:[{fr:"Objective le positionnement du Maroc",en:"Objectivises Morocco's positioning"},{fr:"Réutilise la Heatmap du benchmark",en:"Reuses the benchmark's Heatmap"},{fr:"Renforce le Simulateur avec une mise en perspective",en:"Reinforces the Simulator with added perspective"}],
-    objective:{fr:"Donner à l'investisseur l'outil décisionnel self-service qui positionne le Maroc face à ses concurrents.",en:"Give the investor the self-service decision tool that positions Morocco against its competitors."},
+    objective:{fr:"Donner à l'investisseur l'outil décisionnel Cockpit Self-Service qui positionne le Maroc face à ses concurrents.",en:"Give the investor the self-service decision tool that positions Morocco against its competitors."},
     bp:{label:{fr:"invest.gov.tr · comparateur pays en libre-service",en:"invest.gov.tr · self-service country comparator"},url:"https://www.invest.gov.tr"},
     topics:["Comparateur","Benchmark","Scoring"]},
    {n:{fr:"Smart Map & Parcs Mapping",en:"Smart Map & Park Mapping"},rank:4,
@@ -2190,14 +2199,14 @@ var T={
    {q:["L'","objectif final"],a:"Ne pas s'arrêter au diagnostic : démontrer la solution. Trois POC fonctionnels sont déjà développés : Investor Atlas, Simulateur d'implantation et Comparateur de compétitivité.<br><br>Ils préfigurent une plateforme d'intelligence investisseur modulaire, adaptable aux besoins de différents acteurs et déployable au Maroc comme à l'international. Un plan de transformation opérationnel sur 12 mois en organise la mise en œuvre."}
   ],
   m1tag:"Positionnement · carte de maturité",m1title:["Tech/Data contre ","marketing opérationnel."],m1lead:"Chaque agence est placée selon sa maturité technologique (axe horizontal) et sa puissance de marketing investisseur (axe vertical). La taille de la bulle traduit le score global.",
-  m1ti:"À retenir",m1note:"<b>Morocco Now est seule dans le coin « vitrine ».</b> Les leaders (Türkiye, Singapore) occupent le quadrant haut-droit des cockpits self-service. L'écart n'est pas de degré, il est de nature : un site qui informe contre des plateformes qui font décider.",
+  m1ti:"À retenir",m1note:"<b>Morocco Now est seule dans le coin « vitrine ».</b> Les leaders (Türkiye, Singapore) occupent le quadrant haut-droit des cockpits Self-Service. L'écart n'est pas de degré, il est de nature : un site qui informe contre des plateformes qui font décider.",
   biGlobal:"Score global",biTech:"Tech / Data",biMarket:"Marketing",biSource:"Source officielle ↗",
   biStrat:"Stratégie",biTools:"Outils",biSector:"Secteur de prédilection",biFig:"Investissement 2025",biDiff:"Particularité différenciante",biVerdict:"Verdict Buildfluence",
   axX:"Maturité Tech / Data →",axY:"Marketing investisseur →",quadTop:"Cockpits · leaders",quadBot:"Vitrines · retard",quadLabels:{topLeft:"Promotion active mais peu outillée",topRight:"Plateforme d’investissement intégrée",bottomLeft:"Vitrine institutionnelle",bottomRight:"Outils numériques sans conversion"},
   m2tag:"02 · MATRICE COMPARATIVE",m2title:["Sur quels critères l’écart se creuse-t-il ?",""],m2lead:"12 critères pour comparer les six dispositifs de promotion de l’investissement.",
   m2ti:"À retenir",m2note:"<b>La colonne Morocco Now est rouge sur 7 critères sur 12.</b> Ce n'est pas une faiblesse ponctuelle mais un trou systémique sur tout l'axe Tech/Data : ni SIG, ni simulateur, ni comparateur, ni licences en ligne.",
   mdPlaceholder:"Cliquez une case de la grille pour révéler le détail.",
-  scaleLbl:{1:"Absent",2:"Faible",3:"En transition",4:"Avancé",5:"Best practice"},scaleTitle:"Échelle :",
+  scaleLbl:{1:"Absent",2:"Faible",3:"En transition",4:"Avancé",5:"Best practice"},scaleTitle:"Échelle :",scaleFilterHint:"Cliquez sur une note pour isoler les critères correspondants sur la matrice. Cliquez à nouveau pour réinitialiser.",scaleAllLbl:"Tous",scaleAllDesc:"Afficher les 5 échelles",
   scaleDesc:{1:"Critère inexistant ou introuvable sur le site de l'API",2:"Outil peu exploitable ou obsolète",3:"Outil partiel ou pas complètement opérationnel",4:"Outil déployé et fonctionnel avec quelques bugs mineurs",5:"Outil exploitable et opérationnel de bout en bout"},
   m2method:"<b>Mode de notation :</b> chaque brique est évaluée de 1 à 5 selon sa maturité réelle pour l'investisseur : 1 = absente, 2 = symbolique, 3 = en transition, 4 = avancée, 5 = best practice exploitable de bout en bout. Un score élevé suppose une brique mature, en libre-service et activable sans contact humain.",
   diagTitle:"Diagnostic",diagInv:"Impact investisseur",diagApi:"Impact agence (API)",diagPays:"Impact attractivité pays",diagSol:"Solution Buildfluence",diagPrio:"Priorité",diagGain:"Gain potentiel attendu",methodoSum:"Méthodologie · Gain potentiel attendu",methodoHtml:"<p>Le « gain potentiel attendu » n'est pas un taux mesuré sur le terrain marocain : c'est une estimation de potentiel, calibrée par famille de leviers à partir de la littérature de référence. Chaque critère est rattaché à un type de levier, puis associé à une fourchette d'amélioration de la conversion cohérente avec ces travaux.</p><ul class='mn-tiers'><li><b>Leviers décisionnels</b> (parcours digital, simulateurs, guichet de licences, SIG, comparateur) : <b>+24 % à +30 %</b>. Ils réduisent la perception du risque et les coûts de transaction.</li><li><b>Information</b> (données FDI, aftercare numérique) : <b>+18 % à +22 %</b>.</li><li><b>Contenu et outreach</b> (contenu sectoriel, événements, newsletter) : <b>+14 % à +17 %</b>.</li><li><b>Notoriété</b> (success stories, LinkedIn) : <b>+12 % à +13 %</b>.</li></ul><p class='mn-cav'>La littérature valide le sens de l'effet (positif) et son ordre de grandeur (environ 10 % à 30 % selon le levier), pas un chiffre exact par pays.</p><div class='mn-refs'><span class='mn-rlbl'>Sources</span><ul><li>Harding &amp; Javorcik (2012), via Banque mondiale (Policy Research WP) : qualité du site et traitement des demandes corrélés aux flux d'IDE. <a href='https://documents1.worldbank.org/curated/en/099144501132320106/pdf/IDU0db197ce406d740471308edd040f4f19f6f35.pdf' target='_blank' rel='noopener'>Lien ↗</a></li><li>Banque mondiale, <i>Global Investment Promotion Best Practices</i> (GIPB) : revue des sites et sollicitations « client mystère » ; rôle des outils interactifs. <a href='https://documents1.worldbank.org/curated/en/532231468343733823/pdf/907580WP0v20Bo0n0Best0Practices0web.pdf' target='_blank' rel='noopener'>Lien ↗</a></li><li>OCDE (2021), <i>Investment Promotion and the Digital Economy</i> : digitalisation de la prospection et du servicing. <a href='https://www.oecd.org/content/dam/oecd/en/publications/reports/2021/12/investment-insights-investment-promotion-digital-economy-oecd_ebc6c769/5c840788-en.pdf' target='_blank' rel='noopener'>Lien ↗</a></li><li>Banque mondiale &amp; WAIPA (2019) : enquête conjointe auprès de 91 agences. <a href='https://documents1.worldbank.org/curated/en/099144501132320106/pdf/IDU0db197ce406d740471308edd040f4f19f6f35.pdf' target='_blank' rel='noopener'>Lien ↗</a></li></ul></div>",diagDone:"Maîtrisé",diagGainDone:"Potentiel capté",diagGainSrc:"Estimation indicative calibrée sur des sources de référence : Banque mondiale, WAIPA, OCDE (digitalisation des agences de promotion et impact sur la conversion).",
@@ -2248,14 +2257,12 @@ var T={
     items:[{date:"Sept. 2024",title:"Dernière newsletter identifiée",text:"Le corpus relève six mois entre les numéros 17 et 18. La date remplace tout compteur de retard devenu périssable."},
      {date:"Mars 2023",title:"Dernière Minute Verte identifiée",text:"Le numéro 11 constitue le dernier exemplaire retrouvé dans le périmètre de l'étude."},
      {date:"2016",title:"Dernier rapport annuel identifié",text:"Ce constat porte sur les publications accessibles dans le périmètre audité, sans préjuger de documents internes."}]},
-   bench:{eyebrow:"04 · Benchmark fonctionnel",h2:"JTC comme standard de service, pas comme modèle institutionnel.",compared:"comparé à",lead:"JTC est l'agence publique singapourienne chargée du développement des infrastructures et espaces industriels. La comparaison porte uniquement sur sa capacité à informer et outiller l'investisseur, sans assimiler les mandats ni les cadres réglementaires.",
-    head:["Capacité","MedZ · Observation","JTC · Référence","Priorité"],
-    rows:[["Cadence éditoriale","Publication discontinue","Flux thématiques réguliers","Rétablir"],
-     ["Preuve institutionnelle","Dernier rapport identifié en 2016","Rapports institutionnels récurrents","Documenter"],
-     ["Données investisseurs","Indicateurs difficiles à repérer","Portail statistique public","Publier"],
-     ["Lecture sectorielle","Actualité principalement institutionnelle","Analyses et récits sectoriels","Orienter"],
-     ["Aide à la décision","Supports majoritairement statiques","Exploration interactive des données","Activer"]],
-    note:"Aucun score global n'est affiché tant qu'une méthode reproductible, des sources datées et une règle d'agrégation ne sont pas publiées."},
+   bench:{eyebrow:"04 · Benchmark fonctionnel",h2:"JTC comme standard de service, pas comme modèle institutionnel.",compared:"comparé à",lead:"JTC est l'agence publique singapourienne chargée du développement des infrastructures et espaces industriels. La comparaison porte uniquement sur sa capacité à informer et outiller l'investisseur, sans assimiler les mandats ni les cadres réglementaires. 7 écarts documentés, notés de 1 à 5.",
+    head:["Capacité évaluée","MedZ · Score /5","JTC · Score /5"],
+    tipGap:"Écart constaté côté MedZ",tipImpact:"Impact pour l'investisseur",tipRef:"La pratique JTC (Singapour)",tipVerdict:"Lecture Buildfluence",
+    constat:"Constat chiffré",gapWord:"Écart",lvl:{par:"Parité",mod:"Écart modéré",sig:"Écart significatif",crit:"Écart critique",adv:"Avantage MedZ"},
+    totalLabel:"Total (grille 1 à 5)",medzTotal:8,jtcTotal:34,totalMax:35,
+    note:"Chaque écart est noté par Buildfluence de 1 à 5 selon une grille méthodologique explicite : 1 pour un critère inexistant, 5 pour la meilleure pratique mondiale observée. Une notation assumée comme un jugement d'expert sur des faits vérifiables, pas une mesure automatisée. Cliquez sur une ligne pour voir le fait qui justifie la note."},
    cockpit:{eyebrow:"05 · Le guichet investisseur",h2:"Le foncier devient activable quand la preuve conduit à l'action.",lead:"Le futur service ne doit pas seulement présenter des parcs. Il doit guider l'investisseur jusqu'à la prochaine décision institutionnelle.",
     steps:[["01 · Rechercher","un territoire et une vocation sectorielle."],["02 · Comparer","les sites sur des critères communs."],["03 · Simuler","le coût et le délai d'implantation."],["04 · Engager","la démarche avec le bon interlocuteur."]],
     mockTop:"Cockpit foncier",mockTag:"Prototype de parcours",cities:["Tanger","Kénitra","Casablanca","Agadir"],
@@ -2297,7 +2304,7 @@ var T={
   cHyp:"Hypothèses (modifiables)",
   cHypIntro:"Estimation simplifiée. Les paramètres ci-dessous sont des hypothèses illustratives, à calibrer avec vos données réelles.",
   cSrc:"Ancrages publics : IS 2026 (DGI, loi de finances 50-25), SMIG 2026 à 17,92 DH/h soit environ 3 422 DH/mois (décret 2.25.983). Foncier, énergie et matières : hypothèses sectorielles indicatives.",
-  cDisc:"Estimation pédagogique et non contractuelle. C'est exactement le type d'outil self-service que les agences de promotion les plus avancées offrent à l'investisseur, et que ce benchmark identifie comme manquant chez Morocco Now.",
+  cDisc:"Estimation pédagogique et non contractuelle. C'est exactement le type de Cockpit Self-Service que les agences de promotion les plus avancées offrent à l'investisseur, et que ce benchmark identifie comme manquant chez Morocco Now.",
   cRevenue:"Chiffre d'affaires annuel (à maturité)",
   cRoiTitle:"Rentabilité et retour sur investissement",
   cBreakEven:"1er résultat net positif",
@@ -2366,7 +2373,7 @@ var T={
   m2tag:"02 · COMPARATIVE MATRIX",m2title:["Which criteria create the widest gap?",""],m2lead:"12 criteria for comparing the six investment promotion systems.",
   m2ti:"Key reading",m2note:"<b>The Morocco Now column is red on 7 of 12 criteria.</b> Not a one-off weakness but a systemic hole across the whole Tech/Data axis: no GIS, no simulator, no comparator, no online licences.",
   mdPlaceholder:"Click a cell in the grid to reveal the detail.",
-  scaleLbl:{1:"Absent",2:"Weak",3:"In transition",4:"Advanced",5:"Best practice"},scaleTitle:"Scale:",
+  scaleLbl:{1:"Absent",2:"Weak",3:"In transition",4:"Advanced",5:"Best practice"},scaleTitle:"Scale:",scaleFilterHint:"Click a score to isolate the matching criteria on the matrix. Click again to reset.",scaleAllLbl:"All",scaleAllDesc:"Show all 5 scales",
   scaleDesc:{1:"Criterion missing or not found on the IPA website",2:"Tool barely usable or obsolete",3:"Partial or not fully operational tool",4:"Deployed, working tool with minor bugs",5:"Tool usable and operational end to end"},
   m2method:"<b>Scoring method:</b> each feature is rated 1 to 5 by its real maturity for the investor: 1 = absent, 2 = token, 3 = in transition, 4 = advanced, 5 = end-to-end usable best practice. A high score implies a mature, self-service feature usable without human contact.",
   diagTitle:"Diagnostic",diagInv:"Investor impact",diagApi:"Agency impact (IPA)",diagPays:"Country attractiveness impact",diagSol:"Buildfluence solution",diagPrio:"Priority",diagGain:"Expected potential gain",methodoSum:"Methodology · Expected potential gain",methodoHtml:"<p>The « expected potential gain » is not a rate measured on the Moroccan ground: it is a potential estimate, calibrated by lever family from the reference literature. Each criterion is mapped to a lever type, then tied to a conversion-uplift range consistent with that research.</p><ul class='mn-tiers'><li><b>Decision levers</b> (digital journey, simulators, licensing desk, GIS, comparator): <b>+24% to +30%</b>. They cut risk perception and transaction costs.</li><li><b>Information</b> (FDI data, digital aftercare): <b>+18% to +22%</b>.</li><li><b>Content and outreach</b> (sector content, events, newsletter): <b>+14% to +17%</b>.</li><li><b>Awareness</b> (success stories, LinkedIn): <b>+12% to +13%</b>.</li></ul><p class='mn-cav'>The literature validates the direction of the effect (positive) and its order of magnitude (about 10% to 30% by lever), not an exact figure per country.</p><div class='mn-refs'><span class='mn-rlbl'>Sources</span><ul><li>Harding &amp; Javorcik (2012), via World Bank (Policy Research WP): website quality and inquiry handling correlated with FDI flows. <a href='https://documents1.worldbank.org/curated/en/099144501132320106/pdf/IDU0db197ce406d740471308edd040f4f19f6f35.pdf' target='_blank' rel='noopener'>Link ↗</a></li><li>World Bank, <i>Global Investment Promotion Best Practices</i> (GIPB): website review and « mystery shopper » inquiries; role of interactive tools. <a href='https://documents1.worldbank.org/curated/en/532231468343733823/pdf/907580WP0v20Bo0n0Best0Practices0web.pdf' target='_blank' rel='noopener'>Link ↗</a></li><li>OECD (2021), <i>Investment Promotion and the Digital Economy</i>: digitalisation of outreach and servicing. <a href='https://www.oecd.org/content/dam/oecd/en/publications/reports/2021/12/investment-insights-investment-promotion-digital-economy-oecd_ebc6c769/5c840788-en.pdf' target='_blank' rel='noopener'>Link ↗</a></li><li>World Bank &amp; WAIPA (2019): joint survey of 91 agencies. <a href='https://documents1.worldbank.org/curated/en/099144501132320106/pdf/IDU0db197ce406d740471308edd040f4f19f6f35.pdf' target='_blank' rel='noopener'>Link ↗</a></li></ul></div>",diagDone:"Mastered",diagGainDone:"Potential captured",diagGainSrc:"Indicative estimate calibrated on reference sources: World Bank, WAIPA, OECD (investment-promotion agency digitalisation and its impact on conversion).",
@@ -2417,14 +2424,12 @@ var T={
     items:[{date:"Sep. 2024",title:"Last newsletter identified",text:"The corpus shows six months between issues 17 and 18. The date replaces any delay counter, which would quickly become obsolete."},
      {date:"Mar. 2023",title:"Last Minute Verte identified",text:"Issue 11 is the last copy found within the scope of the study."},
      {date:"2016",title:"Last annual report identified",text:"This observation covers publications accessible within the audited scope, without prejudging internal documents."}]},
-   bench:{eyebrow:"04 · Functional benchmark",h2:"JTC as a service standard, not as an institutional model.",compared:"compared to",lead:"JTC is the Singaporean public agency in charge of developing industrial infrastructure and estates. The comparison only covers its ability to inform and equip investors, without equating mandates or regulatory frameworks.",
-    head:["Capability","MedZ · Observation","JTC · Reference","Priority"],
-    rows:[["Editorial cadence","Discontinuous publishing","Regular thematic streams","Restore"],
-     ["Institutional proof","Last report identified in 2016","Recurring institutional reports","Document"],
-     ["Investor data","Indicators hard to locate","Public statistical portal","Publish"],
-     ["Sector reading","Mainly institutional news","Sector analyses and narratives","Orient"],
-     ["Decision support","Mostly static materials","Interactive data exploration","Activate"]],
-    note:"No overall score is displayed until a reproducible method, dated sources and an aggregation rule are published."},
+   bench:{eyebrow:"04 · Functional benchmark",h2:"JTC as a service standard, not as an institutional model.",compared:"compared to",lead:"JTC is the Singaporean public agency in charge of developing industrial infrastructure and estates. The comparison only covers its ability to inform and equip investors, without equating mandates or regulatory frameworks. 7 documented gaps, rated from 1 to 5.",
+    head:["Capability assessed","MedZ · Score /5","JTC · Score /5"],
+    tipGap:"Gap observed on the MedZ side",tipImpact:"Impact for the investor",tipRef:"JTC practice (Singapore)",tipVerdict:"Buildfluence reading",
+    constat:"Measured facts",gapWord:"Gap",lvl:{par:"Parity",mod:"Moderate gap",sig:"Significant gap",crit:"Critical gap",adv:"MedZ advantage"},
+    totalLabel:"Total (1-to-5 scale)",medzTotal:8,jtcTotal:34,totalMax:35,
+    note:"Each gap is rated by Buildfluence from 1 to 5 using an explicit methodology: 1 for a non-existent capability, 5 for the best global practice observed. A rating treated as an expert judgment on verifiable facts, not an automated measure. Click a row to see the fact behind the score."},
    cockpit:{eyebrow:"05 · The investor desk",h2:"Land becomes activable when proof leads to action.",lead:"The future service must not merely showcase parks. It must guide investors through to the next institutional decision.",
     steps:[["01 · Search","a territory and a sector vocation."],["02 · Compare","sites on common criteria."],["03 · Simulate","the cost and lead time of setting up."],["04 · Engage","the process with the right counterpart."]],
     mockTop:"Land cockpit",mockTag:"Journey prototype",cities:["Tangier","Kénitra","Casablanca","Agadir"],
@@ -2923,6 +2928,7 @@ function renderAtlas(){el("atlasTag").textContent=t().atlasTag;el("atlasTitle").
  el("atlasSide").innerHTML=side;
 }
 
+var matrixFilterVal=null;
 function renderMatrix(){
  el("m2tag").textContent=t().m2tag;el("m2title").innerHTML=t().m2title[0]+"<em>"+t().m2title[1]+"</em>";el("m2lead").textContent=t().m2lead;
  el("m2ti").textContent=t().m2ti;el("m2note").innerHTML=t().m2note;
@@ -2964,7 +2970,20 @@ function renderMatrix(){
  tbl.addEventListener("mouseleave",clearHot);
  if(cells[0])cells[0].classList.add("sel");
  showMx(0,0);
- el("scaleLegend").innerHTML='<div class="scale-title">'+t().scaleTitle+'</div><div class="scale-cards">'+[1,2,3,4,5].map(function(v){return '<div class="scard" style="background:'+SCALE[v]+';color:'+SCALE_TXT[v]+'"><div class="scard-n">'+v+'</div><div class="scard-lbl">'+t().scaleLbl[v]+'</div><div class="scard-desc">'+t().scaleDesc[v]+'</div></div>';}).join("")+'</div>';
+ el("scaleLegend").innerHTML='<div class="scale-title">'+t().scaleTitle+'</div><div class="scale-cards">'+[1,2,3,4,5].map(function(v){return '<div class="scard" data-v="'+v+'" tabindex="0" role="button" aria-pressed="'+(matrixFilterVal===v?"true":"false")+'" style="background:'+SCALE[v]+';color:'+SCALE_TXT[v]+'"><div class="scard-n">'+v+'</div><div class="scard-lbl">'+t().scaleLbl[v]+'</div><div class="scard-desc">'+t().scaleDesc[v]+'</div></div>';}).join("")+'<div class="scard scard-all" data-v="all" tabindex="0" role="button" aria-pressed="'+(matrixFilterVal===null?"true":"false")+'"><div class="scard-n">5/5</div><div class="scard-lbl">'+t().scaleAllLbl+'</div><div class="scard-desc">'+t().scaleAllDesc+'</div></div></div><p class="scale-hint">'+t().scaleFilterHint+'</p>';
+ var legendEl=el("scaleLegend");
+ var scards=[].slice.call(legendEl.querySelectorAll(".scard"));
+ function applyMatrixFilter(){
+   var cardsWrap=legendEl.querySelector(".scale-cards");
+   if(cardsWrap)cardsWrap.classList.toggle("filtering",matrixFilterVal!==null);
+   scards.forEach(function(sc){var raw=sc.dataset.v;var active=(raw==="all")?(matrixFilterVal===null):(matrixFilterVal===+raw);sc.classList.toggle("active",active);sc.setAttribute("aria-pressed",active?"true":"false");});
+   cells.forEach(function(c){var v=+c.dataset.v;if(matrixFilterVal===null){c.classList.remove("dim","match");}else if(v===matrixFilterVal){c.classList.add("match");c.classList.remove("dim");}else{c.classList.add("dim");c.classList.remove("match");}});
+ }
+ scards.forEach(function(sc){
+   sc.addEventListener("click",function(){if(sc.dataset.v==="all"){matrixFilterVal=null;}else{var v=+sc.dataset.v;matrixFilterVal=(matrixFilterVal===v)?null:v;}applyMatrixFilter();});
+   sc.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();sc.click();}});
+ });
+ applyMatrixFilter();
 }
 
 /* =========================================================================
@@ -3162,10 +3181,54 @@ function drawDuel(){
    MODULE 5 : FONCIER (MedZ vs JTC)
    ========================================================================= */
 var fonEvidence=0;
+var fonOpen=null;
+var fonEscBound=false;
 function fonHead(b,rightExtra){
  return '<div class="fon-head"><div><p class="fon-eyebrow">'+b.eyebrow+'</p><h3>'+b.h2+'</h3></div><div>'+(rightExtra||'')+'<p>'+b.lead+'</p></div></div>';
 }
 function fonLogo(src,alt){return '<span class="logo-chip"><img src="'+src+'" alt="'+alt+'" loading="lazy"></span>';}
+function fonTxt(x){return x&&typeof x==="object"?(x[lang]||x.fr||x.en||""):(x||"");}
+function fonStars(n){var s="";for(var i=1;i<=5;i++){s+='<span class="bstar'+(i<=n?" on":"")+'">★</span>';}return '<span class="bstar-row" role="img" aria-label="'+n+'/5" title="'+n+'/5">'+s+'</span>';}
+function fonLevel(d){if(d<0)return "adv";if(d===0)return "par";if(d===1)return "mod";if(d===2)return "sig";return "crit";}
+function fonSigned(d){return (d>0?"+":"")+d;}
+function fonDetail(b,x){
+ var r=x.r;
+ return '<div class="dumb-detail" id="fonDet'+x.i+'" role="region" aria-label="'+fonTxt(r.label)+'">'+
+  '<div><span class="ddl">'+b.constat+'</span><div class="ddt">MedZ '+r.medz+'/5 · JTC '+r.score+'/5 · '+b.gapWord+' '+fonSigned(x.delta)+' · '+b.lvl[x.lvl]+'</div></div>'+
+  '<div><span class="ddl">'+b.tipRef+'</span><div class="ddt">'+fonTxt(r.jtc)+'</div></div>'+
+  '<div><span class="ddl">'+b.tipGap+'</span><div class="ddt">'+fonTxt(r.gap)+'</div></div>'+
+  '<div><span class="ddl">'+b.tipImpact+'</span><div class="ddt">'+fonTxt(r.impact)+'</div></div>'+
+  (r.verdict?'<div style="grid-column:1/-1"><span class="ddl">'+b.tipVerdict+'</span><div class="ddt">'+fonTxt(r.verdict)+'</div></div>':'')+
+ '</div>';
+}
+function drawFonBench(){
+ var host=el("fonBench");if(!host)return;
+ var b=t().fonc.bench;
+ var logos='<div class="logo-row">'+fonLogo("/logos/medz.png","MedZ")+'<span class="logo-sep">'+b.compared+'</span>'+fonLogo("/logos/jtc.png","JTC Singapore")+'</div>';
+ var rows=MEDZ.map(function(r,i){var d=r.score-r.medz;return {i:i,r:r,delta:d,lvl:fonLevel(d)};});
+ var bars=rows.map(function(x){
+  var r=x.r,open=fonOpen===x.i;
+  var aria=fonTxt(r.label)+' · MedZ '+r.medz+'/5 · JTC '+r.score+'/5 · '+b.lvl[x.lvl];
+  return '<button type="button" class="dumb-row" data-i="'+x.i+'" aria-expanded="'+open+'" aria-controls="fonDet'+x.i+'" aria-label="'+aria+'">'+
+   '<span class="dumb-lbl">'+fonTxt(r.label)+'</span>'+
+   '<span class="dumb-scale fbn-scale"><span class="fbn-slabel">MedZ</span>'+fonStars(r.medz)+'<span class="fbn-slabel">JTC</span>'+fonStars(r.score)+'</span>'+
+   '<span class="dumb-nums"><span class="dumb-badge '+x.lvl+'">'+b.lvl[x.lvl]+' '+fonSigned(x.delta)+'</span></span>'+
+   '<span class="dumb-chev" aria-hidden="true">›</span></button>'+(open?fonDetail(b,x):"");
+ }).join("");
+ host.innerHTML=fonHead(b,logos)+
+  '<div class="dumb">'+bars+
+   '<div class="dumb-row fbn-total"><span class="dumb-lbl">'+b.totalLabel+'</span>'+
+    '<span class="dumb-scale fbn-scale"><span class="bscore bscore-total">MedZ '+b.medzTotal+' / '+b.totalMax+'</span><span class="bscore bscore-total">JTC '+b.jtcTotal+' / '+b.totalMax+'</span></span>'+
+    '<span></span><span></span></div>'+
+  '</div><p class="fon-note">'+b.note+'</p>';
+ host.querySelectorAll(".dumb-row[data-i]").forEach(function(btn){
+  btn.addEventListener("click",function(){
+   var i=Number(btn.dataset.i);fonOpen=(fonOpen===i?null:i);drawFonBench();
+   requestAnimationFrame(function(){var n=el("fonBench").querySelector('.dumb-row[data-i="'+i+'"]');if(n)n.focus();});
+  });
+ });
+ if(!fonEscBound){fonEscBound=true;document.addEventListener("keydown",function(e){if(e.key==="Escape"&&fonOpen!==null){fonOpen=null;drawFonBench();}});}
+}
 function renderFoncier(){
  el("m5tag").textContent=t().m5tag;el("m5title").innerHTML=t().m5title[0]+"<em>"+t().m5title[1]+"</em>";el("m5lead").textContent=t().m5lead;
  var f=t().fonc;
@@ -3201,13 +3264,7 @@ function renderFoncier(){
  fonShow(Math.min(fonEvidence,o.items.length-1));
 
  /* 04 · benchmark fonctionnel */
- var b=f.bench;
- var logos='<div class="logo-row">'+fonLogo("/logos/medz.png","MedZ")+'<span class="logo-sep">'+b.compared+'</span>'+fonLogo("/logos/jtc.png","JTC Singapore")+'</div>';
- el("fonBench").innerHTML=fonHead(b,logos)+
-  '<div class="card" style="overflow:hidden;padding:0"><div style="overflow-x:auto"><table class="bmatrix"><thead><tr>'+
-   b.head.map(function(h){return '<th scope="col">'+h+'</th>';}).join("")+'</tr></thead><tbody>'+
-   b.rows.map(function(r){return '<tr><td class="bcap" data-label="'+b.head[0]+'">'+r[0]+'</td><td data-label="'+b.head[1]+'">'+r[1]+'</td><td class="bjtc" data-label="'+b.head[2]+'">'+r[2]+'</td><td class="bprio" data-label="'+b.head[3]+'">'+r[3]+'</td></tr>';}).join("")+
-  '</tbody></table></div></div><p class="fon-note">'+b.note+'</p>';
+ drawFonBench();
 
  /* 05 · guichet investisseur */
  var c=f.cockpit;
