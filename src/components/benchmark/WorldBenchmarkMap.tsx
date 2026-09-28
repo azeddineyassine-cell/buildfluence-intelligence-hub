@@ -198,7 +198,7 @@ const MAP_STYLES = `
   .bfm-legend-btn:hover,.bfm-legend-btn[data-active="true"]{border-color:var(--bfm-gold);background:color-mix(in srgb,var(--bfm-gold) 12%,transparent)}
   .bfm-legend-btn:focus-visible{outline:2px solid var(--bfm-gold);outline-offset:2px}
   .bfm-legend-flag{display:inline-block;width:25px;height:17px;border:1px solid var(--bfm-border);border-radius:2px;object-fit:cover;vertical-align:middle}
-  .bfm-detail{position:relative;z-index:2;width:100%;max-height:460px;overflow:auto;border-left:1px solid var(--bfm-gold);border-radius:0;background:#0D1B2A;color:#F5F1E8;padding:16px 17px;box-shadow:none}
+  .bfm-detail{position:relative;z-index:2;width:100%;border-left:1px solid var(--bfm-gold);border-radius:0;background:#0D1B2A;color:#F5F1E8;padding:16px 17px;box-shadow:none}
   .bfm-detail-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;border-bottom:1px solid rgba(201,168,76,.36);padding-bottom:10px;margin-bottom:12px}
   .bfm-detail-country{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:#C9A84C;margin-bottom:4px}
   .bfm-detail-agency{font-family:'Cormorant Garamond',serif;font-size:21px;line-height:1.1;color:#F5F1E8}
