@@ -710,6 +710,52 @@ input[type=range]::-moz-range-thumb{width:16px;height:16px;border-radius:50%;bac
 .pd-nav button{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;background:transparent;border:1px solid var(--rule);color:var(--ink-light);border-radius:4px;padding:8px 13px;cursor:pointer;transition:all .2s}
 .pd-nav button:hover{border-color:var(--gold);color:var(--gold-deep)}
 
+/* PLANIFICATION DES TACHES - Gantt */
+.gantt-lead{font-family:var(--serif);font-style:italic;font-size:clamp(14.5px,1.5vw,16.5px);color:var(--ink-light);line-height:1.6;max-width:74ch;margin-bottom:22px}
+.gantt-legend{display:flex;gap:18px;flex-wrap:wrap;margin-bottom:18px}
+.gantt-legend span{font-family:var(--mono);font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;display:flex;align-items:center;gap:7px;color:var(--ink-light)}
+.gantt-legend i{width:10px;height:10px;border-radius:3px;display:inline-block;box-shadow:0 0 0 1px rgba(0,0,0,.08)}
+.gantt-card{position:relative;background:var(--card);border:1px solid var(--rule);border-radius:10px;padding:clamp(18px,2.4vw,26px);box-shadow:var(--shadow)}
+.gantt-tooltip{display:none;position:absolute;z-index:10;background:var(--hero-navy);color:var(--paper);border:1px solid color-mix(in srgb,var(--gold) 25%,transparent);border-radius:2px;padding:10px 13px;min-width:190px;max-width:280px;box-shadow:0 18px 40px -18px rgba(0,0,0,.68);pointer-events:none}
+.gantt-tooltip .tip-head{font-family:var(--mono);font-size:9.5px;font-weight:700;color:var(--gold);margin-bottom:5px;letter-spacing:.06em}
+.gantt-tooltip .tip-body{font-size:12px;line-height:1.45;color:color-mix(in srgb,var(--paper) 88%,transparent)}
+.gantt-scale-caption{font-family:var(--mono);font-size:8.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:10px}
+.gantt-desktop{overflow-x:auto}
+.gantt-scale,.gantt-row{display:grid;grid-template-columns:minmax(170px,240px) 1fr 74px;gap:14px;align-items:center;min-width:640px}
+.gantt-scale{margin-bottom:8px}
+.gantt-scale-track{position:relative;height:16px}
+.gantt-tick{position:absolute;top:0;font-family:var(--mono);font-size:8.5px;letter-spacing:.06em;color:var(--ink-faint);transform:translateX(-4px)}
+.gantt-tick::after{content:"";position:absolute;left:0;top:13px;width:1px;height:6px;background:var(--rule)}
+.gantt-axis-head{display:flex;align-items:center;gap:8px;font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:14px 0 9px;border-top:1px solid var(--rule)}
+.gantt-axis-head:first-child{border-top:none;padding-top:2px}
+.gantt-axis-head i{width:10px;height:10px;border-radius:3px;display:inline-block;flex:0 0 auto}
+.gantt-axis-note{font-family:var(--serif);font-style:italic;font-size:11.5px;color:var(--ink-faint);margin:-3px 0 9px;padding-left:18px}
+.gantt-row{padding:8px 0;border-bottom:1px solid var(--rule-soft)}
+.gantt-row:last-child{border-bottom:none}
+.gantt-row-name{font-size:12.5px;color:var(--ink);line-height:1.35;display:flex;align-items:baseline;gap:7px}
+.gantt-row-name i{width:8px;height:8px;border-radius:2px;flex:0 0 auto;box-shadow:0 0 0 1px rgba(0,0,0,.08)}
+.gantt-row-rank{font-family:var(--mono);font-size:9px;color:var(--ink-faint);flex:0 0 auto}
+.gantt-track{position:relative;height:20px;background:var(--paper2);border-radius:4px}
+.gantt-seg{position:absolute;top:0;height:100%;cursor:pointer;transition:filter .15s}
+.gantt-seg:first-child{border-radius:4px 0 0 4px}
+.gantt-seg:last-child{border-radius:0 4px 4px 0}
+.gantt-seg+.gantt-seg{border-left:1px solid var(--card)}
+.gantt-seg:hover,.gantt-seg:focus-visible{filter:brightness(1.1)}
+.gantt-seg:focus-visible{outline:2px solid var(--gold);outline-offset:-2px}
+.gantt-row-dur{font-family:var(--mono);font-size:10px;color:var(--ink-light);text-align:right;white-space:nowrap}
+.gantt-mobile{display:none}
+.gantt-m-axis-head{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:14px 0 9px;border-top:1px solid var(--rule)}
+.gantt-m-axis-head:first-child{border-top:none;padding-top:0}
+.gantt-m-axis-note{font-family:var(--serif);font-style:italic;font-size:11.5px;color:var(--ink-faint);margin:-4px 0 10px}
+.gantt-m-card{border:1px solid var(--rule);border-radius:8px;padding:14px 16px;margin-bottom:10px;background:var(--paper2)}
+.gantt-m-head{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-bottom:8px}
+.gantt-m-name{font-size:13px;color:var(--ink);font-weight:700;line-height:1.3}
+.gantt-m-dur{font-family:var(--mono);font-size:10px;color:var(--gold-deep);white-space:nowrap}
+.gantt-m-phases{display:flex;flex-direction:column;gap:5px}
+.gantt-m-phase{display:flex;align-items:baseline;gap:9px;font-size:12px;color:var(--ink-light);line-height:1.4}
+.gantt-m-pm{font-family:var(--mono);font-size:9.5px;color:var(--ink-faint);flex:0 0 auto;min-width:44px}
+@media(max-width:900px){.gantt-desktop{display:none}.gantt-mobile{display:block}}
+
 .cta{margin-top:36px;background:linear-gradient(135deg,#23201A,#2E2920);border-radius:8px;padding:clamp(28px,4vw,46px);text-align:center;color:#FAF6ED}
 .cta h3{font-family:var(--display);font-weight:700;font-size:clamp(21px,3vw,30px);line-height:1.15;color:#fff}
 .cta h3 em{font-style:italic;color:var(--gold)}
@@ -1820,8 +1866,22 @@ setTimeout(postH,250);setTimeout(postH,1000);setTimeout(postH,2000);
   </div>
 </div></section>
 
+<section class="section" id="gantt"><div class="wrap">
+  <div class="sec-head reveal"><span class="sec-num">11</span><span class="sec-tag" id="m9tag"></span></div>
+  <h2 class="sec-title reveal" id="m9title"></h2>
+  <p class="gantt-lead reveal" id="m9lead"></p>
+  <blockquote class="plan-manifesto reveal" id="m9manifesto"></blockquote>
+  <div class="gantt-legend reveal" id="ganttLegend"></div>
+  <div class="gantt-card reveal">
+    <div class="gantt-scale-caption" id="m9scale"></div>
+    <div class="gantt-desktop" id="ganttDesktop"></div>
+    <div class="gantt-mobile" id="ganttMobile"></div>
+    <div class="gantt-tooltip" id="ganttTooltip"></div>
+  </div>
+</div></section>
+
 <section class="section" id="verdict"><div class="wrap">
-  <div class="sec-head reveal"><span class="sec-num">11</span><span class="sec-tag" id="m7tag"></span></div>
+  <div class="sec-head reveal"><span class="sec-num">12</span><span class="sec-tag" id="m7tag"></span></div>
   <h2 class="sec-title reveal" id="m7title"></h2>
   <p class="sec-lead reveal" id="m7lead"></p>
   <div class="vtable reveal" id="vtable"></div>
@@ -1971,7 +2031,8 @@ var NAVPHASES=[
  ]},
  {icon:"decision",label:{fr:"Décision",en:"Decision"},sub:{fr:"Que faut-il engager ?",en:"What needs to be committed?"},items:[
    {label:{fr:"Six scénarios · projection illustrative",en:"Six scenarios · illustrative projection"},id:"sim"},
-   {label:{fr:"Plan de transformation · 12 mois",en:"Transformation plan · 12 months"},id:"plan"},
+   {label:{fr:"Plan de transformation · {n} mois",en:"Transformation plan · {n} months"},id:"plan"},
+   {label:{fr:"Planification des tâches",en:"Task planning"},id:"gantt"},
    {label:{fr:"Verdict Buildfluence",en:"Buildfluence verdict"},id:"verdict"}
  ]}
 ];
@@ -2198,7 +2259,7 @@ var T={
    {q:["Le choix des ","critères"],a:"12 critères regroupés en 2 axes couvrent le parcours investisseur complet : trouver (SIG, données), décider (simulateurs, comparateur, licences) et se projeter (newsletter, success stories, aftercare, contenu)."},
    {q:["La ","rigueur du scoring"],a:"Chaque critère est évalué de 1 à 5, de l'absence de dispositif à la meilleure pratique observée. Le score mesure un niveau de maturité réel, observable et vérifiable, et non une intention déclarée."},
    {q:["La ","grille de notation"],a:"Elle repose exclusivement sur des éléments publics, observables et vérifiables : présence et fonctionnement des outils, fraîcheur des données à la date du relevé, niveau d'interactivité et régularité éditoriale. Aucune opinion, uniquement des faits traçables."},
-   {q:["L'","objectif final"],a:"Ne pas s'arrêter au diagnostic : démontrer la solution. Trois POC fonctionnels sont déjà développés : Investor Atlas, Simulateur d'implantation et Comparateur de compétitivité.<br><br>Ils préfigurent une plateforme d'intelligence investisseur modulaire, adaptable aux besoins de différents acteurs et déployable au Maroc comme à l'international. Un plan de transformation opérationnel sur 12 mois en organise la mise en œuvre."}
+   {q:["L'","objectif final"],a:"Ne pas s'arrêter au diagnostic : démontrer la solution. Trois POC fonctionnels sont déjà développés : Investor Atlas, Simulateur d'implantation et Comparateur de compétitivité.<br><br>Ils préfigurent une plateforme d'intelligence investisseur modulaire, adaptable aux besoins de différents acteurs et déployable au Maroc comme à l'international. Un plan de transformation opérationnel sur {n} mois en organise la mise en œuvre."}
   ],
   m1tag:"Positionnement · carte de maturité",m1title:["Tech/Data contre ","marketing opérationnel."],m1lead:"Chaque agence est placée selon sa maturité technologique (axe horizontal) et sa puissance de marketing investisseur (axe vertical). La taille de la bulle traduit le score global.",
   m1ti:"À retenir",m1note:"<b>Morocco Now est seule dans le coin « vitrine ».</b> Les leaders (Türkiye, Singapore) occupent le quadrant haut-droit des cockpits Self-Service. L'écart n'est pas de degré, il est de nature : un site qui informe contre des plateformes qui font décider.",
@@ -2280,16 +2341,17 @@ var T={
   vB:{h:"Les 5 autres · le modèle plateforme",items:["Une plateforme d'intelligence : l'investisseur décide seul","Cartes, simulateurs, comparateurs, licences en ligne","La donnée est publique, fraîche, exploitable","La relation se prolonge en aftercare numérique"]},
   verdictQuote:"L'AMDIE fait encore fonctionner Morocco Now comme une <em>marque d'attractivité</em> (posture institutionnelle). Les API les plus avancées fonctionnent désormais comme des <em>plateformes d'intelligence investisseur</em>. Le centre de gravité mondial s'est déplacé de la communication institutionnelle vers l'<em>ingénierie décisionnelle</em>. Et l'AMDIE n'a pas encore fait prendre ce virage à Morocco Now.",
   verdictSrc:"Verdict Buildfluence · Benchmark API Mondial 2026",
-  verdictClose:"Le Maroc dispose déjà de la réponse. Investor Atlas, le Simulateur d'implantation et le Comparateur de compétitivité, présentés dans ce document, démontrent qu'une plateforme d'intelligence investisseur est réalisable dès aujourd'hui. Les treize leviers du plan de transformation ci-dessus en organisent le déploiement sur douze mois. La question n'est plus technique, elle est décisionnelle.",
+  verdictClose:"Le Maroc dispose déjà de la réponse. Investor Atlas, le Simulateur d'implantation et le Comparateur de compétitivité, présentés dans ce document, démontrent qu'une plateforme d'intelligence investisseur est réalisable dès aujourd'hui. Les treize leviers du plan de transformation ci-dessus en organisent le déploiement sur {n} mois. La question n'est plus technique, elle est décisionnelle.",
   baroIntro:"À relier au Baromètre d'investissement Buildfluence :",
   baro:[{n:"06",t:"Boussole des investisseurs",u:"https://buildfluence.ai/barometre?lang=fr"},{n:"07",t:"Jeux d'influence des concurrents (Vietnam : l'arme numérique)",u:"https://buildfluence.ai/barometre?lang=fr"}],
-  m8tag:"Plan de transformation · 12 mois",m8title:["De la vitrine à la ","plateforme."],m8lead:"Les recommandations du Benchmark API et du Baromètre d'investissement, fusionnées en trois axes et treize leviers, avant que la fenêtre CdM 2030 ne se referme.",
+  m8tag:"Plan de transformation · {n} mois",m8title:["De la vitrine à la ","plateforme."],m8lead:"Les recommandations du Benchmark API et du Baromètre d'investissement, fusionnées en trois axes et treize leviers, avant que la fenêtre CdM 2030 ne se referme.",
   m8viewAxis:"Par axe",m8viewPrio:"Par priorité",m8hub:["Global","Investment","Intelligence"],m8hubSub:"leviers",
   m8resetHint:"Cliquez au centre pour réafficher les 13 leviers",
   m8manifesto:"Développer des capacités, prioriser leur mise en œuvre et faire converger l'ensemble vers un objectif unique : offrir un parcours investisseur fluide, fondé sur la donnée, l'intelligence territoriale et l'aide à la décision.",
+  m9tag:"Planification des tâches · Gantt",m9title:["Treize leviers, un ","planning."],m9lead:"Le même plan de transformation, replacé cette fois sur un planning d'exécution phase par phase, dans l'esprit d'un pilotage de projet.",m9explain:"Strategic Intelligence Lab est le diagnostic préalable : cartographie des acteurs, analyse des secteurs porteurs. Les leviers d'Aide à la décision et d'Expérience investisseur s'appuient sur ce travail et ne démarrent qu'à son issue. Au total, les treize leviers se déploient sur un planning de {n} mois.",m9scale:"Mois depuis le lancement du plan de transformation",m9offsetNote:"Démarre après le diagnostic Strategic Intelligence Lab (fin M{n})",
   pdLanding:"Chaque recommandation répond à un écart objectivement identifié par le benchmark et aide l'AMDIE à faire évoluer Morocco Now d'une logique de promotion institutionnelle vers une véritable plateforme d'intelligence investisseur.",
   pdEmpty:"Cliquez sur un levier de la roue pour afficher le contenu.",pdPriority:"Priorité",pdPriorityNo:"Priorité n°{n}",pdAxis:"Axe",pdDetail:"Détail",pdDuration:"Durée · jalons 12 mois",pdPhases:"Phasages",pdBenefits:"Avantages",pdObjective:"Objectif",pdBestPractice:"Best practice",pdTopics:"Topics & mots-clés",pdPrev:"← Précédent",pdNext:"Suivant →",
-  ctaH:["Le benchmark montre l'écart.","L'échange stratégique trace la sortie."],ctaP:"Buildfluence transforme ce diagnostic en feuille de route : priorisation des leviers, maquettes d'outils, jalons sur 12 mois.",ctaBtn:"Demander mon échange stratégique →",
+  ctaH:["Le benchmark montre l'écart.","L'échange stratégique trace la sortie."],ctaP:"Buildfluence transforme ce diagnostic en feuille de route : priorisation des leviers, maquettes d'outils, jalons sur {n} mois.",ctaBtn:"Demander mon échange stratégique →",
   mctag:"Simulateur d'investissement",
   mctitle:["Combien coûte une ","implantation au Maroc ?"],
   mclead:"Mettez-vous à la place d'un investisseur étranger. Choisissez un secteur, décrivez le projet (par taille ou par budget), et obtenez une estimation simplifiée des coûts: foncier, RH, charges fixes et variables, sur 1, 3 ou 5 ans.",
@@ -2448,16 +2510,17 @@ var T={
   vB:{h:"The other 5 · the platform model",items:["An intelligence platform: the investor decides alone","Maps, simulators, comparators, online licences","Data is public, fresh, usable","The relationship extends into digital aftercare"]},
   verdictQuote:"AMDIE still runs Morocco Now as an <em>attractiveness brand</em> (an institutional posture). The most advanced IPAs now operate as <em>investor intelligence platforms</em>. The world's centre of gravity has shifted from institutional communication toward <em>decision engineering</em>. And AMDIE has not yet made that turn with Morocco Now.",
   verdictSrc:"Buildfluence verdict · Global IPA Benchmark 2026",
-  verdictClose:"Morocco already has the answer. Investor Atlas, the Investment Simulator and the Competitiveness Comparator, presented in this document, prove that an investor intelligence platform is achievable today. The thirteen levers of the transformation plan above organise its rollout over twelve months. The question is no longer technical, it is decisional.",
+  verdictClose:"Morocco already has the answer. Investor Atlas, the Investment Simulator and the Competitiveness Comparator, presented in this document, prove that an investor intelligence platform is achievable today. The thirteen levers of the transformation plan above organise its rollout over {n} months. The question is no longer technical, it is decisional.",
   baroIntro:"To connect with the Buildfluence Investment Barometer:",
   baro:[{n:"06",t:"Investor compass",u:"https://buildfluence.ai/barometre?lang=en"},{n:"07",t:"Competitors' influence games (Vietnam: the digital weapon)",u:"https://buildfluence.ai/barometre?lang=en"}],
-  m8tag:"Transformation plan · 12 months",m8title:["From showcase to ","platform."],m8lead:"The recommendations of the IPA Benchmark and the Investment Barometer, merged into three axes and thirteen levers, before the FIFA 2030 window closes.",
+  m8tag:"Transformation plan · {n} months",m8title:["From showcase to ","platform."],m8lead:"The recommendations of the IPA Benchmark and the Investment Barometer, merged into three axes and thirteen levers, before the FIFA 2030 window closes.",
   m8viewAxis:"By axis",m8viewPrio:"By priority",m8hub:["Global","Investment","Intelligence"],m8hubSub:"levers",
   m8resetHint:"Click the center to show all 13 levers again",
   m8manifesto:"Build capabilities, prioritise their rollout, and converge everything toward a single goal: a smooth investor journey grounded in data, territorial intelligence and decision support.",
+  m9tag:"Task planning · Gantt",m9title:["Thirteen levers, one ","timeline."],m9lead:"The same transformation plan, placed this time on a phase-by-phase execution timeline, in the spirit of project management.",m9explain:"Strategic Intelligence Lab is the upfront diagnostic: actor mapping, promising-sector analysis. The Decision Support and Investor Experience levers build on this work and only start once it is complete. In total, the thirteen levers unfold over a {n}-month timeline.",m9scale:"Months from the transformation plan's kickoff",m9offsetNote:"Starts after the Strategic Intelligence Lab diagnostic (end of M{n})",
   pdLanding:"Each recommendation answers a gap objectively identified by the benchmark, and helps AMDIE move Morocco Now from institutional promotion toward a genuine investor-intelligence platform.",
   pdEmpty:"Click a lever on the wheel to display its content.",pdPriority:"Priority",pdPriorityNo:"Priority No. {n}",pdAxis:"Axis",pdDetail:"Detail",pdDuration:"Duration · 12-month milestones",pdPhases:"Phasing",pdBenefits:"Benefits",pdObjective:"Objective",pdBestPractice:"Best practice",pdTopics:"Topics & keywords",pdPrev:"← Previous",pdNext:"Next →",
-  ctaH:["The benchmark shows the gap.","The strategic exchange charts the way out."],ctaP:"Buildfluence turns this diagnosis into a roadmap: lever prioritisation, tool mock-ups, milestones over 12 months.",ctaBtn:"Request my strategic exchange →",
+  ctaH:["The benchmark shows the gap.","The strategic exchange charts the way out."],ctaP:"Buildfluence turns this diagnosis into a roadmap: lever prioritisation, tool mock-ups, milestones over {n} months.",ctaBtn:"Request my strategic exchange →",
   mctag:"Investment Simulator",
   mctitle:["How much does a Morocco ","setup cost?"],
   mclead:"Step into a foreign investor's shoes. Pick a sector, describe the project (by size or by budget), and get a simplified cost estimate: land, HR, fixed and variable charges, over 1, 3 or 5 years.",
@@ -2576,7 +2639,7 @@ function buildPhaseNav(){
  var html=NAVPHASES.map(function(ph,pi){
    var rows='<span class="lbl-row">'+navIconSvg(ph.icon)+'<span>'+L(ph.label)+'</span></span><span class="sub-row">'+L(ph.sub)+'</span>';
    if(ph.items){
-      var subLinks=ph.items.map(function(it){return it.group?'<div class="phase-sub-group">'+L(it.group)+'</div>':'<a href="#'+it.id+'" data-target="'+it.id+'">'+L(it.label)+'</a>';}).join("");
+      var subLinks=ph.items.map(function(it){return it.group?'<div class="phase-sub-group">'+L(it.group)+'</div>':'<a href="#'+it.id+'" data-target="'+it.id+'">'+L(it.label).replace("{n}",ganttMax())+'</a>';}).join("");
      return '<div class="phase" data-pi="'+pi+'">'+
        '<button type="button" class="phase-btn">'+rows+'</button>'+
        '<div class="phase-sub">'+subLinks+'</div></div>';
@@ -2699,7 +2762,7 @@ function renderWhyDetail(){
  var x=t().m0[whySelected],n=t().m0.length,isFinal=whySelected===n-1;
  var tag=isFinal?t().whyGoalTag:t().whyReasonTag+" "+(whySelected+1);
  var html='<div class="wd-head"><span class="wd-tag" style="background:'+WHY_GRADIENT[whySelected]+'">'+tag+'</span><span class="wd-num">'+(whySelected+1)+' / '+n+'</span></div>'+
-   '<div class="wd-q">'+x.q[0]+'<span>'+x.q[1]+'</span></div><div class="wd-a">'+x.a+'</div>'+
+   '<div class="wd-q">'+x.q[0]+'<span>'+x.q[1]+'</span></div><div class="wd-a">'+x.a.replace("{n}",ganttMax())+'</div>'+
    '<div class="wd-nav"><button id="wdPrevBtn">'+t().pdPrev+'</button><button id="wdNextBtn">'+t().pdNext+'</button></div>';
  var cur=el("whyDetail");
  cur.className="why-detail";
@@ -3414,7 +3477,7 @@ function renderVerdict(){
  el("vtable").innerHTML='<div class="vcol a"><div class="vh">'+t().vA.h+'</div><ul>'+t().vA.items.map(function(x){return '<li>'+x+'</li>';}).join("")+'</ul></div>'+
    '<div class="vcol b"><div class="vh">'+t().vB.h+'</div><ul>'+t().vB.items.map(function(x){return '<li>'+x+'</li>';}).join("")+'</ul></div>';
  el("verdictQuote").innerHTML='<p>'+t().verdictQuote+'</p><div class="src">'+t().verdictSrc+'</div>';
- el("verdictClose").innerHTML='<p>'+t().verdictClose+'</p>';
+ el("verdictClose").innerHTML='<p>'+t().verdictClose.replace("{n}",ganttMax())+'</p>';
 }
 
 /* =========================================================================
@@ -3578,7 +3641,7 @@ function renderPlanDetail(){
 }
 
 function renderPlan(){
- el("m8tag").textContent=t().m8tag;el("m8title").innerHTML=t().m8title[0]+"<em>"+t().m8title[1]+"</em>";
+ el("m8tag").textContent=t().m8tag.replace("{n}",ganttMax());el("m8title").innerHTML=t().m8title[0]+"<em>"+t().m8title[1]+"</em>";
  el("m8manifesto").textContent=t().m8manifesto;
  el("planLegend").innerHTML=AXES.map(function(ax){
    var isOff=planAxisFilter&&planAxisFilter!==ax.key,isOn=planAxisFilter===ax.key;
@@ -3602,8 +3665,128 @@ function renderPlan(){
  el("planHint").textContent=planAxisFilter?t().m8resetHint:"";
  buildPlanWheel();
  renderPlanDetail();
- el("cta").innerHTML='<h3>'+t().ctaH[0]+'<br><em>'+t().ctaH[1]+'</em></h3><p>'+t().ctaP+'</p><a href="/acces-premium?invite=1" target="_top">'+t().ctaBtn+'</a>';
+ el("cta").innerHTML='<h3>'+t().ctaH[0]+'<br><em>'+t().ctaH[1]+'</em></h3><p>'+t().ctaP.replace("{n}",ganttMax())+'</p><a href="/acces-premium?invite=1" target="_top">'+t().ctaBtn+'</a>';
  el("footer").innerHTML='<span><a href="https://buildfluence.ai" target="_blank" rel="noopener"><b>Buildfluence Intel</b></a>'+t().footL.replace("Buildfluence Intel","")+'</span><span>'+t().copyright+'</span><span>'+t().footR+'</span><span class="foot-qr"><a href="/carte-azeddine" target="_top"><img src="/qr-azeddine.png" alt="QR code" width="56" height="56"></a></span>';
+}
+
+/* =========================================================================
+   MODULE 9 : PLANIFICATION DES TACHES - vue Gantt des 13 leviers
+   Reprend les donnees existantes (duration, phases) des AXES, sans rien
+   inventer. Regroupement par axe, tri par rang dans chaque axe.
+   ========================================================================= */
+function ganttEsc(s){return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
+function ganttParseSpan(m){
+ var parts=String(m).split(/[–-]/);
+ var s=parseInt(parts[0].replace(/[^0-9]/g,""),10)||1;
+ var e=parts.length>1?(parseInt(parts[1].replace(/[^0-9]/g,""),10)||s):s;
+ return {s:s,e:e};
+}
+/* Strategic Intelligence Lab est le diagnostic prealable : Aide a la decision et
+   Experience investisseur ne demarrent qu'a l'issue de ce diagnostic, jamais
+   en meme temps. Le decalage est calcule depuis la duree reelle du lever
+   (donnee existante), jamais une valeur en dur. */
+function ganttSilEnd(){
+ var max=3,found=false;
+ AXES.forEach(function(ax){ax.items.forEach(function(it){
+   if(it.n&&it.n.fr==="Strategic Intelligence Lab"){found=true;
+     it.phases.forEach(function(ph){var sp=ganttParseSpan(ph.m);if(sp.e>max)max=sp.e;});
+   }
+ });});
+ return found?max:3;
+}
+function ganttAxisOffset(axKey){return axKey==="A"?0:ganttSilEnd();}
+function ganttMax(){
+ var max=1;
+ AXES.forEach(function(ax){var off=ganttAxisOffset(ax.key);ax.items.forEach(function(it){it.phases.forEach(function(ph){var sp=ganttParseSpan(ph.m);if(sp.e+off>max)max=sp.e+off;});});});
+ return max;
+}
+function ganttTicks(max){
+ var out=[1];
+ for(var m=3;m<max;m+=3)out.push(m);
+ if(out[out.length-1]!==max)out.push(max);
+ return out;
+}
+function ganttGroups(){
+ return AXES.map(function(ax){
+   var rows=ax.items.map(function(it,ii){return {ax:ax,it:it,id:ax.key+ii};}).sort(function(a,b){return a.it.rank-b.it.rank;});
+   return {ax:ax,rows:rows,offset:ganttAxisOffset(ax.key)};
+ });
+}
+function ganttMLabel(m,offset){
+ if(!offset)return m;
+ var sp=ganttParseSpan(m);
+ return sp.e!==sp.s?("M"+(sp.s+offset)+"–M"+(sp.e+offset)):("M"+(sp.s+offset));
+}
+function ganttSegHTML(ax,phases,max,offset){
+ return phases.map(function(ph,i){
+   var sp=ganttParseSpan(ph.m);
+   var left=((sp.s-1+offset)/max*100).toFixed(2),width=((sp.e-sp.s+1)/max*100).toFixed(2);
+   var tone=i===0?"var(--"+ax.color+")":(i===1?"var(--"+ax.color+"-deep)":"color-mix(in srgb,var(--"+ax.color+") 50%,var(--"+ax.color+"-deep) 50%)");
+   var head=ganttEsc(ganttMLabel(ph.m,offset)),body=ganttEsc(L(ph.p));
+   return '<span class="gantt-seg" tabindex="0" role="button" style="left:'+left+'%;width:'+width+'%;background:'+tone+'" data-tip-head="'+head+'" data-tip-body="'+body+'" aria-label="'+head+' · '+body+'"></span>';
+ }).join("");
+}
+var GANTT_TIP_BOUND=false;
+function ganttShowTip(e,seg){
+ var tip=el("ganttTooltip");if(!tip)return;
+ tip.innerHTML='<div class="tip-head">'+seg.getAttribute("data-tip-head")+'</div><div class="tip-body">'+seg.getAttribute("data-tip-body")+'</div>';
+ tip.style.display="block";
+ ganttMoveTip(e||{currentTarget:seg});
+}
+function ganttMoveTip(e){
+ var tip=el("ganttTooltip");if(!tip)return;
+ var outer=tip.closest(".gantt-card");if(!outer)return;
+ var parent=outer.getBoundingClientRect();
+ var rect=(e&&e.currentTarget&&e.currentTarget.getBoundingClientRect)?e.currentTarget.getBoundingClientRect():parent;
+ var left=Math.min(Math.max(rect.left-parent.left,8),Math.max(parent.width-290,8));
+ tip.style.left=left+"px";
+ tip.style.top=Math.max(rect.bottom-parent.top+8,8)+"px";
+}
+function ganttHideTip(){var tip=el("ganttTooltip");if(tip)tip.style.display="none";}
+function ganttBindTip(container){
+ container.querySelectorAll(".gantt-seg").forEach(function(seg){
+   var show=function(e){ganttShowTip(e,seg);};
+   seg.onmouseenter=show;seg.onfocus=show;seg.onmousemove=ganttMoveTip;seg.onmouseleave=ganttHideTip;seg.onblur=ganttHideTip;
+   seg.onclick=function(e){e.stopPropagation();show(e);};
+ });
+ if(!GANTT_TIP_BOUND){GANTT_TIP_BOUND=true;document.addEventListener("click",function(e){if(!e.target.closest(".gantt-seg"))ganttHideTip();});}
+}
+function renderGantt(){
+ if(!el("m9tag"))return;
+ el("m9tag").textContent=t().m9tag;
+ el("m9title").innerHTML=t().m9title[0]+"<em>"+t().m9title[1]+"</em>";
+ el("m9lead").textContent=t().m9lead;
+ el("m9scale").textContent=t().m9scale;
+ el("ganttLegend").innerHTML=AXES.map(function(ax){
+   return '<span style="color:var(--'+ax.color+'-deep)"><i style="background:var(--'+ax.color+')"></i>'+ganttEsc(L(ax.axis))+'</span>';
+ }).join("");
+ var max=ganttMax(),ticks=ganttTicks(max),groups=ganttGroups(),silEnd=ganttSilEnd();
+ el("m9manifesto").textContent=t().m9explain.replace("{n}",max);
+ var offsetNote=t().m9offsetNote.replace("{n}",silEnd);
+ var scaleHtml='<div class="gantt-scale"><div></div><div class="gantt-scale-track">'+ticks.map(function(m){
+   return '<span class="gantt-tick" style="left:'+((m-1)/max*100).toFixed(2)+'%">M'+m+'</span>';
+ }).join("")+'</div><div></div></div>';
+ var rowsHtml=groups.map(function(g){
+   var head='<div class="gantt-axis-head" style="color:var(--'+g.ax.color+'-deep)"><i style="background:var(--'+g.ax.color+')"></i>'+ganttEsc(L(g.ax.axis))+' · '+ganttEsc(L(g.ax.prio))+'</div>'+
+     (g.offset?'<div class="gantt-axis-note">'+ganttEsc(offsetNote)+'</div>':'');
+   var rows=g.rows.map(function(r){
+     return '<div class="gantt-row"><span class="gantt-row-name"><i style="background:var(--'+r.ax.color+')"></i>'+ganttEsc(L(r.it.n))+'</span>'+
+       '<span class="gantt-track">'+ganttSegHTML(r.ax,r.it.phases,max,g.offset)+'</span>'+
+       '<span class="gantt-row-dur">'+ganttEsc(L(r.it.duration))+'</span></div>';
+   }).join("");
+   return head+rows;
+ }).join("");
+ el("ganttDesktop").innerHTML=scaleHtml+rowsHtml;
+ ganttBindTip(el("ganttDesktop"));
+ el("ganttMobile").innerHTML=groups.map(function(g){
+   var head='<div class="gantt-m-axis-head" style="color:var(--'+g.ax.color+'-deep)">'+ganttEsc(L(g.ax.axis))+' · '+ganttEsc(L(g.ax.prio))+'</div>'+
+     (g.offset?'<div class="gantt-m-axis-note">'+ganttEsc(offsetNote)+'</div>':'');
+   var cards=g.rows.map(function(r){
+     var phases=r.it.phases.map(function(ph){return '<div class="gantt-m-phase"><span class="gantt-m-pm">'+ganttEsc(ganttMLabel(ph.m,g.offset))+'</span><span>'+ganttEsc(L(ph.p))+'</span></div>';}).join("");
+     return '<div class="gantt-m-card"><div class="gantt-m-head"><span class="gantt-m-name">'+ganttEsc(L(r.it.n))+'</span><span class="gantt-m-dur">'+ganttEsc(L(r.it.duration))+'</span></div><div class="gantt-m-phases">'+phases+'</div></div>';
+   }).join("");
+   return head+cards;
+ }).join("");
 }
 
 /* =========================================================================
@@ -3726,7 +3909,7 @@ function renderPositionnement(){
  }
 }
 
-function renderAll(){renderChrome();renderHero();renderMethodo();renderBubble();renderMatrix();renderRadar();renderPositionnement();renderDuel();renderFoncier();renderAtlas();renderSim();renderCost();renderVerdict();renderPlan();if(typeof LOCKED_PHASES!=="undefined"&&LOCKED_PHASES[currentPhase]&&!getPremiumAccess())renderLockedTeaser(currentPhase);}
+function renderAll(){renderChrome();renderHero();renderMethodo();renderBubble();renderMatrix();renderRadar();renderPositionnement();renderDuel();renderFoncier();renderAtlas();renderSim();renderCost();renderVerdict();renderPlan();renderGantt();if(typeof LOCKED_PHASES!=="undefined"&&LOCKED_PHASES[currentPhase]&&!getPremiumAccess())renderLockedTeaser(currentPhase);}
 
 function setLang(l){lang=l;renderAll();atoutsSync();}
 function setTheme(th){theme=th;document.documentElement.setAttribute("data-theme",th);el("themeBtn").textContent=theme==="light"?t().theme[0]:t().theme[1];atoutsSync();}
