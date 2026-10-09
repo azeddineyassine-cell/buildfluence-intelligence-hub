@@ -6,19 +6,19 @@
 <title>Benchmark API Mondial · Interactif · Buildfluence Intelligence · 2026</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700;1,900&family=Cormorant+Garamond:ital,wght@0,500;1,400;1,500;1,600&family=JetBrains+Mono:wght@400;500;700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --paper:#FAF6ED; --paper2:#F3ECDC; --card:#FFFDF8;
-  --ink:#23201A; --ink-light:#5A5447; --ink-faint:#8A8170; --muted:#A9A08C;
-  --gold:#C9A84C; --gold-deep:#9A7B1E; --gold-pale:#E9DCB4;
+  --paper:#FAF8F3; --paper2:#F3EEE4; --card:#FFFDF8;
+  --ink:#0C2435; --ink-light:#183A4B; --ink-faint:#526674; --muted:#A9A08C;
+  --gold:#C9A84C; --gold-deep:#89671F; --gold-pale:#E9DCB4;
   --rule:#E3D9C3; --rule-soft:#EFE7D5;
-  --red:#D6453F; --green:#3B6D11; --blue:#185FA5; --navy:#1F3A5F; --hero-navy:#0D1B2A; --hero-surface:var(--paper); --hero-ink:var(--ink); --hero-ink-dim:var(--ink-light);
+  --red:#D6453F; --green:#3B6D11; --blue:#185FA5; --navy:#0C2435; --hero-navy:#0D1B2A; --hero-surface:var(--paper); --hero-ink:var(--ink); --hero-ink-dim:var(--ink-light);
   --land:#E7DEC9; --grid:#EDE4CF;
-  --prio-a:#6FA3C9; --prio-a-deep:#3E7AA3; --prio-b:#DDA92E; --prio-b-deep:#B4841B; --prio-c:#D6453F; --prio-c-deep:#A6332D;
+  --prio-a:#C9A84C; --prio-a-deep:#89671F; --prio-b:#1F3A5F; --prio-b-deep:#0C2435; --prio-c:#E06D4F; --prio-c-deep:#B5523A;
   --shadow:0 18px 40px -28px rgba(80,60,10,.35);
-  --display:'Playfair Display',serif; --serif:'Cormorant Garamond',serif;
-  --mono:'JetBrains Mono',monospace; --sans:'DM Sans',sans-serif;
+  --display:Georgia,'Times New Roman',serif; --serif:Georgia,'Times New Roman',serif;
+  --mono:'JetBrains Mono',monospace; --sans:'Segoe UI',system-ui,-apple-system,Roboto,Arial,sans-serif;
 }
 [data-theme="dark"]{
   --paper:#0D1B2A; --paper2:#102234; --card:#13263A;
@@ -878,15 +878,15 @@ footer .wrap a{color:inherit;text-decoration:none}
 /* ---- Positionnement : couche éditoriale (cadrage, interprétation, synthèse) ---- */
 .pos-eyebrow{font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
 .pos-exec{border:1px solid var(--rule);border-radius:2px;background:var(--card);padding:clamp(16px,2vw,26px);margin-bottom:26px}
-.pos-exec .pos-title{font-family:var(--serif,'Playfair Display',serif);font-size:clamp(20px,2.4vw,30px);line-height:1.22;color:var(--ink);margin:0 0 12px}
-.pos-exec .pos-lead{font-family:'Cormorant Garamond',serif;font-size:clamp(15px,1.5vw,19px);line-height:1.55;color:var(--ink-light);margin:0 0 18px;max-width:78ch}
+.pos-exec .pos-title{font-family:var(--serif,Georgia,serif);font-size:clamp(20px,2.4vw,30px);line-height:1.22;color:var(--ink);margin:0 0 12px}
+.pos-exec .pos-lead{font-family:Georgia,'Times New Roman',serif;font-size:clamp(15px,1.5vw,19px);line-height:1.55;color:var(--ink-light);margin:0 0 18px;max-width:78ch}
 .pos-facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
 .pos-fact{border-top:2px solid var(--gold);padding-top:10px}
 .pos-fact b{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-dim,var(--gold));margin-bottom:6px}
 .pos-fact span{font-size:13px;line-height:1.5;color:var(--ink-light)}
 .pos-intro{border-left:2px solid var(--gold);padding:2px 0 2px 14px;margin:0 0 16px}
 .pos-intro .pn{font-family:var(--mono);font-size:9px;letter-spacing:.18em;color:var(--gold);display:block;margin-bottom:6px}
-.pos-intro .pq{font-family:var(--serif,'Playfair Display',serif);font-size:clamp(16px,1.8vw,21px);line-height:1.3;color:var(--ink);display:block;margin-bottom:6px}
+.pos-intro .pq{font-family:var(--serif,Georgia,serif);font-size:clamp(16px,1.8vw,21px);line-height:1.3;color:var(--ink);display:block;margin-bottom:6px}
 .pos-intro .pm{font-size:12.5px;line-height:1.55;color:var(--ink-faint);display:block;max-width:80ch}
 .pos-keys{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin:0 0 16px}
 #posJourney2{grid-template-columns:repeat(3,minmax(0,1fr))}
@@ -904,7 +904,7 @@ footer .wrap a{color:inherit;text-decoration:none}
 .pos-radar-ctrl button:hover{border-color:var(--gold);color:var(--ink)}
 .pos-radar-ctrl button:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
 .pos-synth{border:1px solid var(--rule);border-top:2px solid var(--gold);border-radius:2px;background:var(--card);padding:clamp(16px,2vw,26px);margin-top:30px}
-.pos-synth h3{font-family:var(--serif,'Playfair Display',serif);font-size:clamp(19px,2.2vw,28px);line-height:1.24;color:var(--ink);margin:0 0 12px}
+.pos-synth h3{font-family:var(--serif,Georgia,serif);font-size:clamp(19px,2.2vw,28px);line-height:1.24;color:var(--ink);margin:0 0 12px}
 .pos-synth p{font-size:16px;line-height:1.65;color:var(--ink-light);margin:0 0 18px;max-width:82ch}
 .pos-synth{display:flex;flex-direction:column;justify-content:center;padding-block:clamp(32px,5vh,56px);scroll-margin-top:132px}
 .pos-synth p{max-width:72ch}
@@ -919,7 +919,7 @@ footer .wrap a{color:inherit;text-decoration:none}
 }
 @media (max-width:620px){#posRole3{grid-template-columns:1fr}.bub-quadrant-row{font-size:8px;gap:10px;padding-left:11%;padding-right:4%}.pos-synth{min-height:0}.pos-mapblock{width:auto;margin-left:0}}
 </style>
-</head>
+<style id="gii-charte">h1,h2,h3,h4,.sec-title,.hero-title{font-weight:400!important;letter-spacing:-.005em}h1 em,h2 em,h3 em,.sec-title em{color:var(--gold-deep)}</style></head>
 <body>
 <div class="topbar"><div class="wrap">
   <div class="brand" id="brand"></div>
@@ -1016,8 +1016,8 @@ footer .wrap a{color:inherit;text-decoration:none}
 
   <div class="pos-mapblock reveal" id="synthese-geostrategique">
     <div class="pos-eyebrow" id="posMapEyebrow"></div>
-    <h3 id="posMapTitle" style="font-family:var(--serif,'Playfair Display',serif);font-size:clamp(19px,2.2vw,28px);line-height:1.24;color:var(--ink);margin:0 0 12px"></h3>
-    <p id="posMapLead" style="font-family:'Cormorant Garamond',serif;font-size:clamp(15px,1.5vw,19px);line-height:1.55;color:var(--ink-light);margin:0;max-width:82ch"></p>
+    <h3 id="posMapTitle" style="font-family:var(--serif,Georgia,serif);font-size:clamp(19px,2.2vw,28px);line-height:1.24;color:var(--ink);margin:0 0 12px"></h3>
+    <p id="posMapLead" style="font-family:Georgia,'Times New Roman',serif;font-size:clamp(15px,1.5vw,19px);line-height:1.55;color:var(--ink-light);margin:0;max-width:82ch"></p>
     <div class="pos-mapshell"><div id="synthesisWorldMapRoot" style="min-height:460px"></div></div>
   </div>
 </div></div></section>
@@ -1076,18 +1076,18 @@ footer .wrap a{color:inherit;text-decoration:none}
 <title>Atouts Maroc vs Pays · Buildfluence Intelligence · 2026</title>
 <link rel=&quot;preconnect&quot; href=&quot;https://fonts.googleapis.com&quot;>
 <link rel=&quot;preconnect&quot; href=&quot;https://fonts.gstatic.com&quot; crossorigin>
-<link href=&quot;https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700;1,900&amp;family=Cormorant+Garamond:ital,wght@0,500;1,400;1,500;1,600&amp;family=JetBrains+Mono:wght@400;500;700&amp;family=DM+Sans:wght@400;500;600&amp;display=swap&quot; rel=&quot;stylesheet&quot;>
+<link href=&quot;https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&amp;display=swap&quot; rel=&quot;stylesheet&quot;>
 <style>
 :root{
-  --paper:#FAF6ED; --paper2:#F3ECDC; --card:#FFFDF8;
-  --ink:#23201A; --ink-light:#5A5447; --ink-faint:#8A8170; --muted:#A9A08C;
-  --gold:#C9A84C; --gold-deep:#9A7B1E; --gold-pale:#E9DCB4;
+  --paper:#FAF8F3; --paper2:#F3EEE4; --card:#FFFDF8;
+  --ink:#0C2435; --ink-light:#183A4B; --ink-faint:#526674; --muted:#A9A08C;
+  --gold:#C9A84C; --gold-deep:#89671F; --gold-pale:#E9DCB4;
   --rule:#E3D9C3; --rule-soft:#EFE7D5;
   --red:#D6453F; --green:#3B6D11; --blue:#185FA5;
   --sea:#EAF0F0; --land:#E7DEC9; --coast:#CBBF9F; --grat:#DCEAEA;
   --shadow:0 18px 40px -28px rgba(80,60,10,.35);
-  --display:'Playfair Display',serif; --serif:'Cormorant Garamond',serif;
-  --mono:'JetBrains Mono',monospace; --sans:'DM Sans',sans-serif;
+  --display:Georgia,'Times New Roman',serif; --serif:Georgia,'Times New Roman',serif;
+  --mono:'JetBrains Mono',monospace; --sans:'Segoe UI',system-ui,-apple-system,Roboto,Arial,sans-serif;
 }
 [data-theme=&quot;dark&quot;]{
   --paper:#0D1B2A; --paper2:#102234; --card:#13263A;
@@ -2048,11 +2048,11 @@ function navIconSvg(key){return '<svg viewBox="0 0 20 20" fill="none" stroke="cu
 
 var AXES=[
  {key:"A",color:"prio-a",
-  axis:{fr:"Attractivité Territoriale",en:"Territorial Attractiveness"},
+  axis:{fr:"Attractivité territoriale",en:"Territorial Attractiveness"},
   prio:{fr:"Quick Wins",en:"Quick Wins"},
   sub:{fr:"Rendre l'offre lisible, comparable et exploitable par l'investisseur lui-même.",en:"Make the offer readable, comparable and usable by the investor."},
    items:[
-    {n:{fr:"Strategic Intelligence Lab",en:"Strategic Intelligence Lab"},rank:1,
+    {n:{fr:"Territorial Intelligence Lab",en:"Territorial Intelligence Lab"},rank:1,
      sub:{fr:"Comprendre le terrain, puis ne plus le perdre de vue.",en:"Understand the ground, then never lose sight of it."},
      detail:{fr:"Une étude approfondie de l'environnement du client : cartographie des acteurs qui comptent, lecture des rapports de force, identification des secteurs porteurs et des opportunités encore peu visibles. Ce diagnostic se prolonge par un dispositif de veille qui capte en continu les signaux faibles et anticipe les disruptions : une architecture de collecte, d'analyse et d'alerte, pas un fil d'actualités.",en:"An in-depth study of the client's environment: mapping the actors that matter, reading the balance of power, identifying promising sectors and opportunities still under the radar. This diagnosis extends into a monitoring system that continuously captures weak signals and anticipates disruptions: a collection, analysis and alert architecture, not a news feed."},
      duration:{fr:"3 mois",en:"3 months"},
@@ -2063,14 +2063,14 @@ var AXES=[
      topics:["Diagnostic","Cartographie des acteurs","Veille"]},
     {n:{fr:"Légitimation éditoriale",en:"Editorial Legitimation"},rank:5,
      sub:{fr:"Publier moins, mais publier ce qui fait autorité.",en:"Publish less, but publish what carries authority."},
-     detail:{fr:"Une lettre régulière, datée et archivée, nourrie par les enseignements du Strategic Intelligence Lab plutôt que rédigée à vide. Les supports institutionnels actuels, rapports annuels et guides de référence, documentent l'offre marocaine avec sérieux ; leur format se prête toutefois davantage à une consultation ponctuelle qu'au suivi régulier qu'attend un investisseur. La Légitimation éditoriale comble cet intervalle : chaque numéro est sourcé, daté et validé avant diffusion, pour faire de la parole institutionnelle une référence citée plutôt qu'un contenu de plus.",en:"A regular, dated and archived letter, informed by the Strategic Intelligence Lab's findings rather than written from a blank page. Existing institutional materials, annual reports and reference guides, document Morocco's offer rigorously; their format, however, lends itself more to occasional consultation than to the regular follow-up an investor expects. Editorial Legitimation fills that gap: every issue is sourced, dated and validated before release, turning the institutional voice into a cited reference rather than one more piece of content."},
+     detail:{fr:"Une lettre régulière, datée et archivée, nourrie par les enseignements du Territorial Intelligence Lab plutôt que rédigée à vide. Les supports institutionnels actuels, rapports annuels et guides de référence, documentent l'offre marocaine avec sérieux ; leur format se prête toutefois davantage à une consultation ponctuelle qu'au suivi régulier qu'attend un investisseur. La Légitimation éditoriale comble cet intervalle : chaque numéro est sourcé, daté et validé avant diffusion, pour faire de la parole institutionnelle une référence citée plutôt qu'un contenu de plus.",en:"A regular, dated and archived letter, informed by the Territorial Intelligence Lab's findings rather than written from a blank page. Existing institutional materials, annual reports and reference guides, document Morocco's offer rigorously; their format, however, lends itself more to occasional consultation than to the regular follow-up an investor expects. Editorial Legitimation fills that gap: every issue is sourced, dated and validated before release, turning the institutional voice into a cited reference rather than one more piece of content."},
      duration:{fr:"3 mois",en:"3 months"},
      phases:[{p:{fr:"Cadrage éditorial",en:"Editorial scoping"},m:"M1"},{p:{fr:"Premier numéro",en:"First issue"},m:"M2"},{p:{fr:"Rythme régulier installé",en:"Regular cadence in place"},m:"M3"}],
      benefits:[{fr:"Présence régulière dans la boîte mail des investisseurs",en:"Regular presence in investors' inboxes"},{fr:"Historique archivé, consultable, citable",en:"Archived, searchable, citable history"},{fr:"Chaque numéro sourcé, daté et validé, pas une simple compilation",en:"Every issue sourced, dated and validated, not a simple compilation"}],
      objective:{fr:"Installer un rendez-vous régulier et fiable, qui fasse de l'institution une source que les investisseurs citent.",en:"Establish a reliable, regular touchpoint that makes the institution a source investors cite."},
      bp:{label:{fr:"Invest India · newsletter mensuelle archivée",en:"Invest India · archived monthly newsletter"},url:"https://www.investindia.gov.in"},
      topics:["Légitimation éditoriale","Lettre régulière","Investisseurs"]},
-    {n:{fr:"KPI Trimestriels & Dashboards",en:"Quarterly KPIs & Dashboards"},rank:8,
+    {n:{fr:"KPI trimestriels et dashboards",en:"Quarterly KPIs & Dashboards"},rank:8,
      sub:{fr:"Rendre visible la performance, trimestre après trimestre.",en:"Make performance visible, quarter after quarter."},
      detail:{fr:"Des tableaux de bord publics rafraîchis chaque trimestre : flux d'IDE, emplois créés, taux d'occupation des parcs, chaque chiffre passé par le dispositif de Légitimation éditoriale avant mise en ligne. La référence mondiale : stats.jtc.gov.sg.",en:"Public dashboards refreshed each quarter: FDI inflows, jobs created, park occupancy rates, every figure cleared through the Editorial Legitimation process before going live. The world reference: stats.jtc.gov.sg."},
      duration:{fr:"2 mois",en:"2 months"},
@@ -2108,11 +2108,11 @@ var AXES=[
      topics:["Flipbook","Livre blanc","Diffusion"]}
    ]},
  {key:"C",color:"prio-c",
-  axis:{fr:"Expérience Investisseur",en:"Investor Experience"},
+  axis:{fr:"Expérience investisseur",en:"Investor Experience"},
   prio:{fr:"Transformation",en:"Transformation"},
   sub:{fr:"Transformer la vitrine en cockpit, avant ET après la signature.",en:"Turn the showcase into a cockpit, before AND after signing."},
   items:[
-   {n:{fr:"Expérience multi-profils (UX)",en:"Multi-profile experience (UX)"},rank:10,
+   {n:{fr:"Expérience multi-profils",en:"Multi-profile experience (UX)"},rank:10,
     sub:{fr:"Deux parcours distincts : investisseurs et territoires.",en:"Two distinct journeys: investors and territories."},
     detail:{fr:"Deux parcours distincts et interactifs, l'un pour les investisseurs, l'autre pour les territoires, chacun avec ses outils décisionnels et ses particularités, au lieu d'un parcours vitrine généraliste.",en:"Two distinct, interactive journeys, one for investors, one for territories, each with its own decision-making tools and specifics, instead of a single generic showcase journey."},
     duration:{fr:"10 mois",en:"10 months"},
@@ -2121,7 +2121,7 @@ var AXES=[
     objective:{fr:"Passer d'un site vitrine unique à une plateforme qui s'adapte au profil de son visiteur.",en:"Move from a single showcase site to a platform that adapts to its visitor's profile."},
     bp:{label:{fr:"Invest Korea · parcours différenciés par profil investisseur",en:"Invest Korea · journeys differentiated by investor profile"},url:"https://www.investkorea.org"},
     topics:["UX","Plateforme","Parcours"]},
-   {n:{fr:"Parcours Investisseur unifié",en:"Unified Investor Journey"},rank:9,
+   {n:{fr:"Parcours investisseur unifié",en:"Unified Investor Journey"},rank:9,
     sub:{fr:"Un seul interlocuteur, pas deux agences cloisonnées.",en:"A single point of contact, not two siloed agencies."},
     detail:{fr:"Un guichet unique où l'investisseur ne voit qu'une seule interface proposant des réponses à ses questions de bout en bout, pas deux agences et plusieurs interlocuteurs.",en:"A one-stop shop where the investor sees a single interface answering their questions end to end, not two agencies and multiple points of contact."},
     duration:{fr:"12 mois",en:"12 months"},
@@ -2130,7 +2130,7 @@ var AXES=[
     objective:{fr:"Faire du foncier un maillon fluide du parcours investisseur, sans changer d'interlocuteur ni multiplier les structures : à défaut, il reste l'angle mort de l'investissement.",en:"Make land a seamless link in the investor journey, with no change of contact and no added structures: otherwise, it remains investment's blind spot."},
     bp:{label:{fr:"Guichet unique AMDIE × MedZ · chantier de coordination institutionnelle",en:"AMDIE × MedZ one-stop shop · institutional coordination workstream"},url:""},
     topics:["Guichet unique","AMDIE","MedZ"]},
-   {n:{fr:"Aftercare & Ombudsman",en:"Aftercare & Ombudsman"},rank:11,
+   {n:{fr:"Aftercare et Ombudsman",en:"Aftercare & Ombudsman"},rank:11,
     sub:{fr:"Un suivi post-implantation et un médiateur en ligne.",en:"Post-setup tracking and an online mediator."},
     detail:{fr:"Un espace de suivi post-implantation et un médiateur en ligne. Invest Korea dispose d'un Ombudsman numérique dédié.",en:"A post-setup tracking space and an online mediator. Invest Korea runs a dedicated digital Ombudsman."},
     duration:{fr:"9 mois",en:"9 months"},
@@ -2150,7 +2150,7 @@ var AXES=[
     topics:["Influence Map","Narratif","Veille"]}
   ]},
  {key:"B",color:"prio-b",
-  axis:{fr:"Aide à la Décision",en:"Decision Support"},
+  axis:{fr:"Aide à la décision",en:"Decision Support"},
   prio:{fr:"Self-Service",en:"Self-Service"},
   sub:{fr:"Passer de la brochure au flux de preuves régulier et sourcé, en libre-service.",en:"Move from brochure to a regular, sourced, self-service stream of evidence."},
   items:[
@@ -2172,7 +2172,7 @@ var AXES=[
     objective:{fr:"Donner à l'investisseur l'outil décisionnel Cockpit Self-Service qui positionne le Maroc face à ses concurrents.",en:"Give the investor the self-service decision tool that positions Morocco against its competitors."},
     bp:{label:{fr:"invest.gov.tr · comparateur pays en libre-service",en:"invest.gov.tr · self-service country comparator"},url:"https://www.invest.gov.tr"},
     topics:["Comparateur","Benchmark","Scoring"]},
-   {n:{fr:"Smart Map & Parcs Mapping",en:"Smart Map & Park Mapping"},rank:4,
+   {n:{fr:"Smart Map et cartographie des parcs",en:"Smart Map & Park Mapping"},rank:4,
     sub:{fr:"Une carte où l'investisseur filtre les parcs par région, surface et prix.",en:"A map where the investor filters parks by region, size and price."},
     detail:{fr:"Fusion du SIG investisseur et du mapping des parcs industriels : filtrage par région, surface, prix, téléchargement de la fiche technique. Prototypé dans l'Investor Atlas avec 69 POI sur quatre catégories.",en:"A merger of investor GIS and industrial-park mapping: filtering by region, size, price, downloadable fact sheet. Prototyped in the Investor Atlas with 69 POIs across four categories."},
     duration:{fr:"8 mois",en:"8 months"},
@@ -2348,7 +2348,7 @@ var T={
   m8viewAxis:"Par axe",m8viewPrio:"Par priorité",m8hub:["Global","Investment","Intelligence"],m8hubSub:"leviers",
   m8resetHint:"Cliquez au centre pour réafficher les 13 leviers",
   m8manifesto:"Développer des capacités, prioriser leur mise en œuvre et faire converger l'ensemble vers un objectif unique : offrir un parcours investisseur fluide, fondé sur la donnée, l'intelligence territoriale et l'aide à la décision.",
-  m9tag:"Planification des tâches · Gantt",m9title:["Treize leviers, un ","planning."],m9lead:"Le même plan de transformation, replacé cette fois sur un planning d'exécution phase par phase, dans l'esprit d'un pilotage de projet.",m9explain:"Strategic Intelligence Lab est le diagnostic préalable : cartographie des acteurs, analyse des secteurs porteurs. Les leviers d'Expérience investisseur et d'Aide à la décision s'appuient sur ce travail et ne démarrent qu'à son issue. Au total, les treize leviers se déploient sur un planning de {n} mois.",m9scale:"Mois depuis le lancement du plan de transformation",m9offsetNote:"Démarre après le diagnostic Strategic Intelligence Lab (fin M{n})",
+  m9tag:"Planification des tâches · Gantt",m9title:["Treize leviers, un ","planning."],m9lead:"Le même plan de transformation, replacé cette fois sur un planning d'exécution phase par phase, dans l'esprit d'un pilotage de projet.",m9explain:"Territorial Intelligence Lab est le diagnostic préalable : cartographie des acteurs, analyse des secteurs porteurs. Les leviers d'Expérience investisseur et d'Aide à la décision s'appuient sur ce travail et ne démarrent qu'à son issue. Au total, les treize leviers se déploient sur un planning de {n} mois.",m9scale:"Mois depuis le lancement du plan de transformation",m9offsetNote:"Démarre après le diagnostic Territorial Intelligence Lab (fin M{n})",
   pdLanding:"Chaque recommandation répond à un écart objectivement identifié par le benchmark et aide l'AMDIE à faire évoluer Morocco Now d'une logique de promotion institutionnelle vers une véritable plateforme d'intelligence investisseur.",
   pdEmpty:"Cliquez sur un levier de la roue pour afficher le contenu.",pdPriority:"Priorité",pdPriorityNo:"Priorité n°{n}",pdAxis:"Axe",pdDetail:"Détail",pdDuration:"Durée · jalons 12 mois",pdPhases:"Phasages",pdBenefits:"Avantages",pdObjective:"Objectif",pdBestPractice:"Best practice",pdTopics:"Topics & mots-clés",pdPrev:"← Précédent",pdNext:"Suivant →",
   ctaH:["Le benchmark montre l'écart.","L'échange stratégique trace la sortie."],ctaP:"Buildfluence transforme ce diagnostic en feuille de route : priorisation des leviers, maquettes d'outils, jalons sur {n} mois.",ctaBtn:"Demander mon échange stratégique →",
@@ -2517,7 +2517,7 @@ var T={
   m8viewAxis:"By axis",m8viewPrio:"By priority",m8hub:["Global","Investment","Intelligence"],m8hubSub:"levers",
   m8resetHint:"Click the center to show all 13 levers again",
   m8manifesto:"Build capabilities, prioritise their rollout, and converge everything toward a single goal: a smooth investor journey grounded in data, territorial intelligence and decision support.",
-  m9tag:"Task planning · Gantt",m9title:["Thirteen levers, one ","timeline."],m9lead:"The same transformation plan, placed this time on a phase-by-phase execution timeline, in the spirit of project management.",m9explain:"Strategic Intelligence Lab is the upfront diagnostic: actor mapping, promising-sector analysis. The Investor Experience and Decision Support levers build on this work and only start once it is complete. In total, the thirteen levers unfold over a {n}-month timeline.",m9scale:"Months from the transformation plan's kickoff",m9offsetNote:"Starts after the Strategic Intelligence Lab diagnostic (end of M{n})",
+  m9tag:"Task planning · Gantt",m9title:["Thirteen levers, one ","timeline."],m9lead:"The same transformation plan, placed this time on a phase-by-phase execution timeline, in the spirit of project management.",m9explain:"Territorial Intelligence Lab is the upfront diagnostic: actor mapping, promising-sector analysis. The Investor Experience and Decision Support levers build on this work and only start once it is complete. In total, the thirteen levers unfold over a {n}-month timeline.",m9scale:"Months from the transformation plan's kickoff",m9offsetNote:"Starts after the Territorial Intelligence Lab diagnostic (end of M{n})",
   pdLanding:"Each recommendation answers a gap objectively identified by the benchmark, and helps AMDIE move Morocco Now from institutional promotion toward a genuine investor-intelligence platform.",
   pdEmpty:"Click a lever on the wheel to display its content.",pdPriority:"Priority",pdPriorityNo:"Priority No. {n}",pdAxis:"Axis",pdDetail:"Detail",pdDuration:"Duration · 12-month milestones",pdPhases:"Phasing",pdBenefits:"Benefits",pdObjective:"Objective",pdBestPractice:"Best practice",pdTopics:"Topics & keywords",pdPrev:"← Previous",pdNext:"Next →",
   ctaH:["The benchmark shows the gap.","The strategic exchange charts the way out."],ctaP:"Buildfluence turns this diagnosis into a roadmap: lever prioritisation, tool mock-ups, milestones over {n} months.",ctaBtn:"Request my strategic exchange →",
@@ -3576,13 +3576,27 @@ function buildPlanWheel(){
     svg=planArcLabel(svg,ai,cx,cy,arcLblR,a0,a1,L(ax.axis),ax.color);
     svg+="</g>";
   });
+  /* Numérotation continue 01 à 13 et accolades extérieures, alignées sur GII :
+     Competitive Velocity Engine (03 à 06) et Investment Intelligence Lab (11 à 13). */
+  var gnum=0,braces={};
   AXES.forEach(function(ax,ai){
     var a0=ai*(axisSpan+gap),n=ax.items.length;
     ax.items.forEach(function(it,ii){
       var found={id:ax.key+ii,ai:ai,ii:ii,ax:ax,it:it};
       var mid=a0+(ii+0.5)*(axisSpan/n);
-      svg=planDrawNode(svg,found,mid,ii+1,cx,cy,R1,R2,nodeR,labelR,hubR);
+      gnum++;
+      var grp=(ax.key==="A"&&ii>=2&&ii<=5)?"cve":(ax.key==="B"?"iil":null);
+      if(grp){var s0=a0+ii*(axisSpan/n)+1.5,s1=a0+(ii+1)*(axisSpan/n)-1.5;if(!braces[grp])braces[grp]={s:s0,e:s1};else{braces[grp].s=Math.min(braces[grp].s,s0);braces[grp].e=Math.max(braces[grp].e,s1);}}
+      svg=planDrawNode(svg,found,mid,gnum,cx,cy,R1,R2,nodeR,labelR,hubR);
     });
+  });
+  var bpol=function(r,a){var t=(a-90)*Math.PI/180;return [cx+r*Math.cos(t),cy+r*Math.sin(t)];};
+  var barc=function(r,a0,a1,rev){var p0=bpol(r,rev?a1:a0),p1=bpol(r,rev?a0:a1),lg=Math.abs(a1-a0)>180?1:0;return "M"+p0[0].toFixed(1)+" "+p0[1].toFixed(1)+"A"+r+" "+r+" 0 "+lg+" "+(rev?0:1)+" "+p1[0].toFixed(1)+" "+p1[1].toFixed(1);};
+  [["cve","COMPETITIVE VELOCITY ENGINE"],["iil","INVESTMENT INTELLIGENCE LAB"]].forEach(function(b){
+    var B=braces[b[0]];if(!B)return;var mid=(B.s+B.e)/2,bot=mid>90&&mid<270,rb=R2+9,q1=bpol(rb-4,B.s),q2=bpol(rb+4,B.s),q3=bpol(rb-4,B.e),q4=bpol(rb+4,B.e);
+    svg+='<path d="'+barc(rb,B.s,B.e)+'" fill="none" stroke="var(--gold)" stroke-width="1.2"/>';
+    svg+='<line x1="'+q1[0]+'" y1="'+q1[1]+'" x2="'+q2[0]+'" y2="'+q2[1]+'" stroke="var(--gold)" stroke-width="1.2"/><line x1="'+q3[0]+'" y1="'+q3[1]+'" x2="'+q4[0]+'" y2="'+q4[1]+'" stroke="var(--gold)" stroke-width="1.2"/>';
+    svg+='<path id="pwb-'+b[0]+'" d="'+barc(bot?rb+15:rb+7,B.s,B.e,bot)+'" fill="none"/><text font-family="JetBrains Mono" font-size="8" letter-spacing="2" font-weight="700" fill="var(--gold-deep)"><textPath href="#pwb-'+b[0]+'" startOffset="50%" text-anchor="middle">'+b[1]+'</textPath></text>';
   });
  }
  svg+='<g class="pw-hub-hit" id="planHubHit">';
@@ -3681,14 +3695,14 @@ function ganttParseSpan(m){
  var e=parts.length>1?(parseInt(parts[1].replace(/[^0-9]/g,""),10)||s):s;
  return {s:s,e:e};
 }
-/* Strategic Intelligence Lab est le diagnostic prealable : Aide a la decision et
+/* Territorial Intelligence Lab est le diagnostic prealable : Aide a la decision et
    Experience investisseur ne demarrent qu'a l'issue de ce diagnostic, jamais
    en meme temps. Le decalage est calcule depuis la duree reelle du lever
    (donnee existante), jamais une valeur en dur. */
 function ganttSilEnd(){
  var max=3,found=false;
  AXES.forEach(function(ax){ax.items.forEach(function(it){
-   if(it.n&&it.n.fr==="Strategic Intelligence Lab"){found=true;
+   if(it.n&&it.n.fr==="Territorial Intelligence Lab"){found=true;
      it.phases.forEach(function(ph){var sp=ganttParseSpan(ph.m);if(sp.e>max)max=sp.e;});
    }
  });});
