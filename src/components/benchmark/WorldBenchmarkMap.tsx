@@ -122,6 +122,24 @@ const benchmarkLocations: BenchmarkLocation[] = [
     agency: "Singapore EDB",
     coordinates: [103.8198, 1.3521],
   },
+  {
+    id: "vietnam",
+    legacyId: "vietnam",
+    code: "VN",
+    countryFr: "Vietnam",
+    countryEn: "Vietnam",
+    agency: "Invest Vietnam (FIA)",
+    coordinates: [105.8342, 21.0278],
+  },
+  {
+    id: "romania",
+    legacyId: "romania",
+    code: "RO",
+    countryFr: "Roumanie",
+    countryEn: "Romania",
+    agency: "InvestRomania (ARICE)",
+    coordinates: [26.1025, 44.4268],
+  },
 ];
 
 const MOROCCO = benchmarkLocations[0];
@@ -130,7 +148,7 @@ const MAX_ZOOM = 4;
 
 const copy = {
   fr: {
-    mapTitle: "Les 6 pays du benchmark",
+    mapTitle: "Les 8 pays du benchmark",
     mapFinalTitle: "Carte finale interactive",
     zoomIn: "Zoom avant",
     zoomOut: "Zoom arrière",
@@ -147,7 +165,7 @@ const copy = {
     fallback: "Information à consolider",
   },
   en: {
-    mapTitle: "The 6 benchmark countries",
+    mapTitle: "The 8 benchmark countries",
     mapFinalTitle: "Final interactive map",
     zoomIn: "Zoom in",
     zoomOut: "Zoom out",
